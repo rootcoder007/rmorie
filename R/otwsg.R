@@ -18,6 +18,8 @@
 #'   \code{bures_sq}, \code{d}.
 #' @references Olkin, I. and Pukelsheim, F. (1982). Linear Algebra and its
 #'   Applications 48:257-263. \doi{10.1016/0024-3795(82)90112-4}.
+#' @examples
+#' Otwsg(mu1 = c(0, 0), Sigma1 = diag(2), mu2 = c(3, 4), Sigma2 = diag(2))$W2   # 5: covariances agree
 #' @export
 Otwsg <- function(mu1, Sigma1, mu2, Sigma2) {
   a <- as.numeric(mu1)

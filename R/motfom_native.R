@@ -28,6 +28,10 @@
 #'   occurrences of a given motif, Bioinformatics 27(7), 1017-1018 (score and
 #'   dynamic-programming p-values, Methods). Staden, R. (1994), Searching for motifs in
 #'   nucleic acid sequences, Methods in Molecular Biology 25, 93-102.
+#' @examples
+#' pwm <- rbind(c(0.9, 0.05, 0.03, 0.02), c(0.05, 0.9, 0.03, 0.02), c(0.02, 0.03, 0.9, 0.05))
+#' m <- Motfom("TTACGTTAACGA", pwm)
+#' c(m$best_position, m$best_pvalue)
 #' @export
 Motfom <- function(sequence, pwm, background = NULL, pseudocount = 0,
                    scale = 1000L) {

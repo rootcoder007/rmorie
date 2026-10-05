@@ -36,6 +36,13 @@
 #'   423-447. VanRaden, P. M. (2008). Journal of Dairy Science 91(11), 4414-4423, via
 #'   Montesinos-Lopez et al. (2022) Multivariate Statistical Machine Learning Methods
 #'   for Genomic Prediction, Springer, sec. 2.4 and ch. 5.2 (local split PDFs).
+#' @examples
+#' set.seed(14)
+#' M <- matrix(rbinom(50 * 20, 2, 0.4), 50, 20)
+#' u <- rnorm(20, sd = 0.3)
+#' y <- as.numeric(10 + scale(M, scale = FALSE) %*% u + rnorm(50))
+#' s <- Snpblr(y, M, h2 = 0.5)
+#' cor(s$estimate, scale(M, scale = FALSE) %*% u)
 #' @export
 Snpblr <- function(y, M, lam = NULL, h2 = NULL, freq = NULL) {
   y <- as.numeric(y)

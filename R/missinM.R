@@ -31,6 +31,11 @@
 #' @references Daniels and Hogan (2008), Missing Data in Longitudinal
 #'   Studies, Chapman and Hall/CRC. The mean and tipping point above are
 #'   elementary consequences of the shift equation and are stated in full.
+#' @examples
+#' set.seed(4)
+#' Y <- rnorm(100, 5); R <- rbinom(100, 1, 0.7); Y[R == 0] <- NA
+#' m <- MissinM(Y, R, delta_grid = seq(-3, 3, by = 1), reference = 5)
+#' m$means
 #' @export
 MissinM <- function(Y, R, delta_grid, reference = 0) {
   r <- .t1_vec(R)

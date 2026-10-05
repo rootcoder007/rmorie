@@ -331,6 +331,9 @@ morie_sentpc <- morie_sentpc_escape_whitespace
 #' @param text See Usage.
 #' @param model See Usage.
 #' @param add_prefix See Usage.
+#' @examples
+#' bpe <- train_bpe(c("low lower lowest", "new newer newest"), vocab_size = 30)
+#' encode_bpe("lowest newer", bpe)
 #' @export
 encode_bpe <- function(text, model, add_prefix = TRUE) {
   esc <- .escape_whitespace(text, add_prefix)
@@ -362,6 +365,8 @@ encode_bpe <- function(text, model, add_prefix = TRUE) {
 #' Escape whitespace as U+2581, optionally prefixing the marker
 #' @param text See Usage.
 #' @param add_prefix See Usage.
+#' @examples
+#' escape_whitespace("a b\tc")
 #' @export
 escape_whitespace <- function(text, add_prefix = TRUE) {
   .escape_whitespace(text, add_prefix)
@@ -399,6 +404,9 @@ unescape_whitespace <- function(text, strip_prefix = TRUE) {
 #' @param text See Usage.
 #' @param piece_logp See Usage.
 #' @param add_prefix See Usage.
+#' @examples
+#' lp <- list(h = -3, e = -3, l = -3, o = -3, he = -2, ll = -2, hello = -1.5)
+#' viterbi_segment("hello", lp, add_prefix = FALSE)$pieces   # the whole word beats he + ll + o
 #' @export
 viterbi_segment <- function(text, piece_logp, add_prefix = TRUE) {
   s <- .escape_whitespace(text, add_prefix)

@@ -27,6 +27,16 @@
 #'   verified in the CRAN package tmle 2.1.1 (Gruber & van der Laan), with
 #'   the clever covariate's denominator extended from g_a(W) to
 #'   g_a(W) h_m(A, W) as the CDE identification requires.
+#' @examples
+#' set.seed(1)
+#' n <- 400
+#' A <- rbinom(n, 1, 0.5); M <- rbinom(n, 1, 0.3 + 0.3 * A)
+#' Y <- rbinom(n, 1, plogis(-0.5 + 0.8 * A + 0.6 * M))
+#' p <- function(a, m) plogis(-0.5 + 0.8 * a + 0.6 * m)
+#' pm <- function(a) 0.3 + 0.3 * a
+#' r <- Tmlecde(Y, A, M, QAM = p(A, M), Q1m = rep(p(1, 1), n), Q0m = rep(p(0, 1), n),
+#'              g1W = rep(0.5, n), hmW = ifelse(M == 1, pm(A), 1 - pm(A)), m = 1)
+#' c(r$estimate, p(1, 1) - p(0, 1))
 #' @export
 Tmlecde <- function(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1,
                     gbound = 0.025, level = 0.95) {

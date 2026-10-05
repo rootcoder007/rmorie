@@ -22,6 +22,13 @@
 #'   \doi{10.1093/bioinformatics/14.9.755}; Krogh, Brown, Mian,
 #'   Sjolander and Haussler (1994), Journal of Molecular Biology
 #'   235(5):1501-1531. \doi{10.1006/jmbi.1994.1104}
+#' @examples
+#' # a 2-position DNA profile (A, C, G, T = 0..3) that prefers "AC"
+#' tr <- list(mm = 0.9, mi = 0.05, md = 0.05, im = 0.9, ii = 0.1, dm = 0.9, dd = 0.1)
+#' profile <- list(match = rbind(c(0.85, 0.05, 0.05, 0.05), c(0.05, 0.85, 0.05, 0.05)),
+#'                 insert = rep(0.25, 4), trans = tr)
+#' Hmmprf(c(0, 1), profile)$log_odds         # high for the consensus
+#' Hmmprf(c(3, 2), profile)$log_odds
 #' @export
 Hmmprf <- function(seq, profile) {
   xs <- as.integer(.s03vec(seq))

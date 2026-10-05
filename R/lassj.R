@@ -21,6 +21,10 @@
 #' lambda >= |b| -- which is sign(b) max(|b| - lambda, 0).  ``soft`` reports that
 #' operator applied to the supplied coefficients.  Read from the chapter PDF, not
 #' recalled.
+#' @examples
+#' X <- cbind(c(1, 2, 3, 4), c(0, 1, 0, 1))
+#' y <- c(1.1, 2.3, 2.9, 4.2)
+#' Lassoobj(X, y, beta = c(0.1, 1, 0.2), lam = 0.5)[c("prss", "rss", "penalty")]
 #' @export
 Lassoobj <- function(X, y, beta, lam, add_intercept = TRUE) {
   Xm <- .t1_mat(X)

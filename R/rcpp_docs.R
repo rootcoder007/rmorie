@@ -407,6 +407,11 @@ NULL
 #' @param order Passed to \code{.Call}.
 #' @param mu Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' set.seed(2)
+#' x <- rnorm(300)
+#' d <- stats::filter(x, c(0.6, -0.2), sides = 1); d[is.na(d)] <- 0
+#' str(morie_dsp_lms_cpp(x, as.numeric(d), 2L, 0.05))
 #' @export
 #' @name morie_dsp_lms_cpp
 #' @rdname morie_dsp_lms_cpp
@@ -445,6 +450,11 @@ NULL
 #' @param lam Passed to \code{.Call}.
 #' @param delta Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' set.seed(5)
+#' x <- rnorm(200)
+#' d <- stats::filter(x, c(0.6, -0.2), sides = 1); d[is.na(d)] <- 0
+#' str(morie_dsp_rls_cpp(x, as.numeric(d), 2L, 0.99, 100))
 #' @export
 #' @name morie_dsp_rls_cpp
 #' @rdname morie_dsp_rls_cpp
@@ -459,6 +469,10 @@ NULL
 #' @param y Passed to \code{.Call}.
 #' @param max_lag Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' x <- sin(1:50); y <- c(0, 0, sin(1:48))     # y is x delayed by 2
+#' r <- morie_dsp_cross_correlation_cpp(x, y, 4L)
+#' r
 #' @export
 #' @name morie_dsp_cross_correlation_cpp
 #' @rdname morie_dsp_cross_correlation_cpp
@@ -544,6 +558,9 @@ NULL
 #' @param x Passed to \code{.Call}.
 #' @param y Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' x <- c(1, 2, 3, 4, 5); y <- c(2, 1, 4, 3, 5)
+#' c(morie_cor_pearson_cpp(x, y), cor(x, y))
 #' @export
 #' @name morie_cor_pearson_cpp
 #' @rdname morie_cor_pearson_cpp
@@ -620,6 +637,9 @@ NULL
 #' @param alpha Passed to \code{.Call}.
 #' @param beta Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_hawkes_ll_gamma_const_cpp(t = c(0.5, 1.2, 2.0, 3.1), T_horizon = 4, a0 = 0.8,
+#'                                 eta = 0.3, alpha = 2, beta = 1.5)
 #' @export
 #' @name morie_hawkes_ll_gamma_const_cpp
 #' @rdname morie_hawkes_ll_gamma_const_cpp
@@ -650,6 +670,9 @@ NULL
 #' @param kind Passed to \code{.Call}.
 #' @param psi Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_hawkes_kernel_cdf_cpp(c(0.5, 1, 2), "exponential", 1.5)
+#' 1 - exp(-1.5 * c(0.5, 1, 2))
 #' @export
 #' @name morie_hawkes_kernel_cdf_cpp
 #' @rdname morie_hawkes_kernel_cdf_cpp
@@ -681,6 +704,8 @@ NULL
 #' @param alpha Passed to \code{.Call}.
 #' @param n_grid Passed to \code{.Call}. Defaults to \code{0L}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_hawkes_baseline_integral_cpp(T_horizon = 10, alpha = c(1, 0.2, 0.1, 0.5))
 #' @export
 #' @name morie_hawkes_baseline_integral_cpp
 #' @rdname morie_hawkes_baseline_integral_cpp
@@ -782,6 +807,9 @@ NULL
 #' @param X_c Passed to \code{.Call}.
 #' @param S_inv Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' X_t <- rbind(c(0, 0), c(1, 1)); X_c <- rbind(c(0, 1), c(2, 2), c(1, 0))
+#' morie_matching_mahalanobis_pairs_cpp(X_t, X_c, S_inv = diag(2))   # Euclidean when S = I
 #' @export
 #' @name morie_matching_mahalanobis_pairs_cpp
 #' @rdname morie_matching_mahalanobis_pairs_cpp
@@ -795,6 +823,9 @@ NULL
 #' @param X_t Passed to \code{.Call}.
 #' @param X_c Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' X_t <- rbind(c(0, 0), c(1, 1)); X_c <- rbind(c(0, 1), c(2, 2), c(1, 0))
+#' morie_matching_euclidean_pairs_cpp(X_t, X_c)
 #' @export
 #' @name morie_matching_euclidean_pairs_cpp
 #' @rdname morie_matching_euclidean_pairs_cpp
@@ -845,6 +876,9 @@ NULL
 #' @param treated_pos Passed to \code{.Call}.
 #' @param control_pos Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' y <- c(3, 5, 2, 4, 6); t <- c(1, 1, 0, 0, 0)
+#' morie_matching_abadie_imbens_kernel_cpp(y, t, treated_pos = c(0L, 1L), control_pos = c(2L, 3L))
 #' @export
 #' @name morie_matching_abadie_imbens_kernel_cpp
 #' @rdname morie_matching_abadie_imbens_kernel_cpp
@@ -1028,6 +1062,11 @@ NULL
 #' @param d Passed to \code{.Call}.
 #' @param votes Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' set.seed(3)
+#' votes <- matrix(sample(c(-1, 1), 30, TRUE), 6, 5)   # legislators x roll calls
+#' morie_spatial_emirt_theta_update_cpp(theta = matrix(rnorm(6), 6, 1), a = matrix(1, 5, 1),
+#'                                      d = rep(0, 5), votes = votes)
 #' @export
 #' @name morie_spatial_emirt_theta_update_cpp
 #' @rdname morie_spatial_emirt_theta_update_cpp
@@ -1042,6 +1081,11 @@ NULL
 #' @param D Passed to \code{.Call}.
 #' @param W Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' D <- as.matrix(dist(cbind(c(0, 1, 0, 1), c(0, 0, 1, 1))))
+#' set.seed(20)
+#' X <- matrix(rnorm(8), 4, 2)
+#' morie_spatial_smacof_step_cpp(X, D, W = matrix(1, 4, 4) - diag(4))
 #' @export
 #' @name morie_spatial_smacof_step_cpp
 #' @rdname morie_spatial_smacof_step_cpp

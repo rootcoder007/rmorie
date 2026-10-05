@@ -23,6 +23,8 @@
 #' @references Hagan, P. S., Kumar, D., Lesniewski, A. S. and
 #'   Woodward, D. E. (2002). Managing smile risk. Wilmott Magazine,
 #'   September, 84-108.
+#' @examples
+#' morie_volsabr(K = 100, f = 100, T = 1, alpha = 0.2, beta = 1, rho = 0, nu = 0)$estimate   # = alpha when nu = 0, beta = 1
 #' @export
 morie_volsabr <- function(K, f, T, alpha, beta, rho, nu) {
   K <- as.numeric(K)

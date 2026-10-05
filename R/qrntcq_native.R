@@ -315,6 +315,9 @@ efficacy_test_and_release <- function(t_Q, t_T, t_R, false_negative,
 #' @param t_max Maximum time when \code{grid} is \code{NULL}.
 #' @param n Number of grid points.
 #' @return A list with \code{t} and \code{density}.
+#' @examples
+#' gt <- gamma_generation_time()
+#' sum(gt$density * diff(gt$t)[1])   # the density integrates to one on its grid
 #' @export
 gamma_generation_time <- function(shape = 2.83, scale = 1.86, grid = NULL,
                                   t_max = 30.0, n = 3001L) {
@@ -493,6 +496,8 @@ relative_utility <- function(t_R_a, t_R_b, t_Q = 3.0,
 #' @param efficacy Numeric efficacy.
 #' @param days_in_quarantine Positive number of days.
 #' @return Numeric.
+#' @examples
+#' utility(efficacy = 0.9, days_in_quarantine = 14)
 #' @export
 utility <- function(efficacy, days_in_quarantine) {
   d <- as.numeric(days_in_quarantine)

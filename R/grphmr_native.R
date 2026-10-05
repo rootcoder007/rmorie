@@ -261,6 +261,10 @@ morie_grphmr <- graphormer_attention
 #' @param directed Logical; if TRUE uses in/out degree separately.
 #' @return A list with \code{encoding}, \code{degrees},
 #'   \code{note}.
+#' @examples
+#' adj <- list(c(2, 3), c(1), c(1))         # a star: node 1 has degree 2
+#' z_in <- list(c(0, 0), c(1, 0), c(0, 1))  # one vector per degree 0, 1, 2
+#' morie_grphmr_centrality(adj, n = 3, z_in = z_in)$encoding
 #' @export
 morie_grphmr_centrality <- function(adj, n, z_in, z_out = NULL,
                                     directed = FALSE) {
@@ -313,6 +317,11 @@ morie_grphmr_centrality <- function(adj, n, z_in, z_out = NULL,
 #' @param w_table Length-K numeric vector of step weights.
 #' @return A list with \code{edge_bias} (named numeric vector),
 #'   \code{note}.
+#' @examples
+#' # each path is the list of edges walked from i to j
+#' paths <- list(`1,3` = list(c(1, 2), c(2, 3)))
+#' ef <- list(`1,2` = c(1, 0), `2,3` = c(0, 1))
+#' morie_grphmr_edge(paths, ef, w_table = c(0.5, 0.5))$edge_bias
 #' @export
 morie_grphmr_edge <- function(paths, edge_features, w_table) {
   out <- list()
@@ -353,6 +362,9 @@ morie_grphmr_edge <- function(paths, edge_features, w_table) {
 #' @param n Number of nodes.
 #' @return A list with \code{distance} (N x N integer matrix),
 #'   \code{unreachable}, \code{n_unreachable}.
+#' @examples
+#' adj <- list(c(2), c(1, 3), c(2), numeric(0))   # path 1-2-3 plus an isolated node 4
+#' morie_grphmr_sp(adj, n = 4)$distance
 #' @export
 morie_grphmr_sp <- function(adj, n) {
   N <- as.integer(n)
@@ -396,6 +408,9 @@ morie_grphmr_sp <- function(adj, n) {
 #'   \code{-10}.
 #' @return A list with \code{bias}, \code{unreachable_bias},
 #'   \code{note}.
+#' @examples
+#' D <- matrix(c(0, 1, 2, 1, 0, 1, 2, 1, 0), 3)
+#' morie_grphmr_spatial(D, b_table = c(0.5, 0.2, -0.1))$bias
 #' @export
 morie_grphmr_spatial <- function(distance, b_table, unreachable_bias = -10) {
   D <- matrix(as.integer(distance), nrow = nrow(distance))

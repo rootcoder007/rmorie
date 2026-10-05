@@ -318,6 +318,9 @@ morie_gtrf_attention <- function(H, adj, WQ, WK, WV, edge_bias = NULL) {
 #' @param normalized Use the symmetric normalised Laplacian.
 #' @return Square numeric matrix.
 #' @references Belkin, M. and Niyogi, P. (2003).
+#' @examples
+#' adj <- list(`0` = 1L, `1` = c(0L, 2L), `2` = 1L)   # path graph, 0-based ids
+#' morie_gtrf_laplacian(adj, n = 3, normalized = FALSE)
 #' @export
 morie_gtrf_laplacian <- function(adj, n, normalized = TRUE) {
   N <- as.integer(n)
@@ -361,6 +364,9 @@ morie_gtrf_laplacian <- function(adj, n, normalized = TRUE) {
 #' @return A list with \code{encoding} (n x dim), \code{eigenvalues}
 #'   and the sign caveat.
 #' @references Dwivedi, V. P. and Bresson, X. (2020).
+#' @examples
+#' adj <- list(`0` = 1L, `1` = c(0L, 2L), `2` = c(1L, 3L), `3` = 2L)   # path graph, 0-based
+#' round(morie_gtrf_lap_pe(adj, n = 4, dim = 2L)$encoding, 3)
 #' @export
 morie_gtrf_lap_pe <- function(adj, n, dim = 2L, normalized = TRUE) {
   L <- morie_gtrf_laplacian(adj, n, normalized)
@@ -428,6 +434,10 @@ morie_gtrf_layer <- function(H, adj, WQ, WK, WV, W1, W2,
 #' @param rng Generator environment (shared with the Python arm).
 #' @return Sign-flipped encoding.
 #' @references Dwivedi, V. P. and Bresson, X. (2020).
+#' @examples
+#' set.seed(4)
+#' pe <- matrix(1:6, 3, 2)
+#' morie_gtrf_sign_flip(pe, rng = rmorie:::.ghc_rng(1))
 #' @export
 morie_gtrf_sign_flip <- function(pe, rng) {
   d <- ncol(pe)

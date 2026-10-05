@@ -702,6 +702,9 @@ morie_andmnh <- andrews_monahan_hac
 #' SVD cap on the prewhitening matrix
 #' @param a See Usage.
 #' @param cap See Usage.
+#' @examples
+#' A <- diag(c(1e8, 1, 1e-3))
+#' singular_value_adjust(A)
 #' @export
 singular_value_adjust <- function(a, cap = .EIGENVALUE_CAP) {
   cap <- as.numeric(cap)

@@ -286,6 +286,8 @@ morie_ocrwit <- word_patch_alignment
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(ocrwit_cheatsheet())
 #' @export
 ocrwit_cheatsheet <- function() {
   paste("ocrwit: document models pre-trained text and image with ",
@@ -311,6 +313,8 @@ ocrwit_cheatsheet <- function() {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param block Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{masked}, \code{kept}, \code{rate}, \code{block}, \code{note}.
+#' @examples
+#' ocrwit_mask_units(n_units = 10, rate = 0.3, seed = 1)$masked
 #' @export
 ocrwit_mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
   n <- as.integer(n_units)

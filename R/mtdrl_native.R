@@ -257,6 +257,8 @@ mtdrl_cheatsheet <- function() {
 #' @param history A vector; its length is taken and its elements indexed.
 #' @param n_arms Numeric; combined arithmetically in the body.
 #' @return The value of \code{feat}, as built in the body.
+#' @examples
+#' mtdrl_history_features(history = list(list(action = 1, reward = 1), list(action = 2, reward = 0)), n_arms = 2)
 #' @export
 mtdrl_history_features <- function(history, n_arms) {
   feat <- rep(0, n_arms + 2L)
@@ -287,6 +289,11 @@ mtdrl_history_features <- function(history, n_arms) {
 #' \code{regret}, \code{reward_by_step}, \code{optimal_action_rate},
 #' \code{episode_reward}, \code{n_episodes}, \code{episode_length}, \code{n_arms},
 #' \code{method}.
+#' @examples
+#' tasks <- mtdrl_bandit_tasks(n_arms = 2, n_tasks = 5, seed = 1)
+#' ag <- mtdrl_TabularHistoryAgent(n_arms = 2)
+#' r <- mtdrl_run(tasks, ag, episode_length = 50, n_arms = 2, seed = 1)
+#' r$optimal_action_rate
 #' @export
 mtdrl_run <- function(tasks, agent, episode_length = 100, n_arms = NULL,
                       seed = 0, reset_between_episodes = TRUE) {

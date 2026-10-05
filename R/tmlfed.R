@@ -17,6 +17,13 @@
 #' @references Vo, van der Laan & Petersen (2023), federated targeted
 #'   learning; the pooling rule is the standard influence-curve-weighted
 #'   combination.
+#' @examples
+#' set.seed(18)
+#' n <- 600
+#' X <- matrix(rnorm(n), n)
+#' D <- rbinom(n, 1, plogis(X[, 1]))
+#' y <- 1 + D + X[, 1] + rnorm(n)
+#' Tmlfed(y, D, X, site = rep(1:3, each = 200))[c("estimate", "se", "site_psi")]
 #' @export
 Tmlfed <- function(y, D, X, site) {
   yv <- as.numeric(y)

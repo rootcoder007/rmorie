@@ -28,6 +28,10 @@
 #' @references Hill, W. G. and Robertson, A. (1968). Linkage
 #'   disequilibrium in finite populations. Theoretical and Applied
 #'   Genetics, 38, 226-231.
+#' @examples
+#' a <- c(1, 1, 0, 0, 1, 0, 1, 0); b <- c(1, 1, 0, 0, 1, 1, 0, 0)
+#' morie_ld(a, b)$statistic
+#' cor(a, b)^2
 #' @export
 morie_ld <- function(locus_a, locus_b) {
   a <- as.numeric(locus_a)

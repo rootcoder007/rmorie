@@ -20,6 +20,9 @@
 #'   \code{n}, \code{method}.
 #' @references Greenwood (1926), The natural duration of cancer, Reports
 #'   on Public Health and Medical Subjects 33:1-26, HMSO.
+#' @examples
+#' fit <- list(time = c(2, 3, 5, 8), n_risk = c(10, 9, 7, 4), n_event = c(1, 1, 2, 1))
+#' Kpmnci(fit, alpha = 0.05)[c("surv", "lower", "upper")]
 #' @export
 Kpmnci <- function(fit, alpha) {
   rt <- .kpm_risk_table(fit)

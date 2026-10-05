@@ -107,6 +107,9 @@ morie_digest <- function(object, algo = c("md5", "sha1", "crc32", "sha256", "sha
 #' Coerce to raw the way digest::makeRaw does
 #' @param object raw, character, hex digest (class `digest`), or numeric bytes.
 #' @return a raw vector.
+#' @examples
+#' morie_make_raw("abc")
+#' morie_make_raw(c(1, 255))
 #' @export
 morie_make_raw <- function(object) {
   if (is.raw(object)) return(object)

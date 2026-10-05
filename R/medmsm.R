@@ -20,6 +20,14 @@
 #' @references VanderWeele & Vansteelandt (2010) Am J Epidemiol
 #'   172:1339-1348; Robins, Hernan & Brumback (2000) Epidemiology
 #'   11:550-560.
+#' @examples
+#' set.seed(4)
+#' n <- 500
+#' H <- rnorm(n)
+#' A <- rbinom(n, 1, plogis(H))
+#' M <- 0.5 * A + 0.3 * H + rnorm(n)
+#' y <- 0.4 * A + 0.6 * M + H + rnorm(n)
+#' Medmsm(y, A, M, matrix(H))[c("nie", "total")]
 #' @export
 Medmsm <- function(y, A, M, H) {
   yv <- as.numeric(y)

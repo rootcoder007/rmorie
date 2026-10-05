@@ -58,6 +58,10 @@
 #' @references Sabeti, P. C. et al. (2002). Detecting recent positive
 #'   selection in the human genome from haplotype structure. Nature,
 #'   419, 832-837.
+#' @examples
+#' set.seed(21)
+#' hap <- matrix(rbinom(20 * 7, 1, 0.5), 20, 7)
+#' morie_ehhdec(hap, core = 3)$ehh1
 #' @export
 morie_ehhdec <- function(hap, core, positions = NULL) {
   H <- as.matrix(hap)

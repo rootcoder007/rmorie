@@ -69,6 +69,10 @@
 #'   Sec. 17.3.2.  Friedman, J., Hastie, T. and Tibshirani, R.
 #'   (2008). Biostatistics, 9, 432-441.  Epskamp, S., Borsboom, D.
 #'   and Fried, E. I. (2018). Behavior Research Methods, 50, 195-212.
+#' @examples
+#' set.seed(8)
+#' X <- matrix(rnorm(200 * 4), 200, 4); X[, 2] <- X[, 1] + rnorm(200, sd = 0.5)
+#' morie_netcms(data = X, lam = 0.1)$adjacency
 #' @export
 morie_netcms <- function(data = NULL, S = NULL, lam = 0.1,
                          tol = 1e-8, maxit = 500) {

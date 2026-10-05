@@ -19,6 +19,14 @@
 #' doi:10.1007/978-3-030-89010-0. Chapter 5, Eq. (5.4) p. 150. The two random terms are
 #' stacked into one Z = \[Z_L Z_EL\] with a block-diagonal Sigma and solved as Eq.
 #' (5.1).
+#' @examples
+#' set.seed(5)
+#' nl <- 4; ne <- 2
+#' G <- crossprod(matrix(rnorm(16), 4)) / 4 + diag(0.1, 4)
+#' Z_L <- kronecker(matrix(1, ne, 1), diag(nl)); X_E <- kronecker(diag(ne), matrix(1, nl, 1))
+#' Z_EL <- diag(nl * ne)
+#' y <- rnorm(nl * ne, 10)
+#' Gxeblup(y, X_E, Z_L, Z_EL, G, sigma2_g = 1, Sigma_E = diag(ne))$beta
 #' @export
 Gxeblup <- function(y, X_E, Z_L, Z_EL, G, sigma2_g, Sigma_E, sigma2_e = 1) {
   out <- morie_gxe_blup(y, X_E, Z_L, Z_EL, G, as.numeric(sigma2_g),

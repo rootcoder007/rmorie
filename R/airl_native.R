@@ -385,6 +385,14 @@ morie_soft_value_iteration <- function(states, actions, step, reward,
 #' @return List with reward (line 6 of Algorithm 1), g, h, f_policy,
 #'   f_expert, D_policy, D_expert, accuracy, log_likelihood, gamma,
 #'   state_only, method.
+#' @examples
+#' \donttest{
+#' set.seed(19)
+#' es <- sample(0:3, 50, TRUE); ea <- rep(1, 50); en <- pmin(es + 1, 3)
+#' ps <- sample(0:3, 50, TRUE); pa <- rep(0, 50); pn <- pmax(ps - 1, 0)
+#' r <- airl(es, ea, en, rep(log(0.5), 50), ps, pa, pn, rep(log(0.5), 50), epochs = 200L)
+#' r$accuracy
+#' }
 #' @export
 airl <- function(expert_states, expert_actions, expert_next,
                  expert_log_policy, policy_states, policy_actions,

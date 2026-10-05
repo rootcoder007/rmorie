@@ -20,6 +20,12 @@
 #'   \code{method}.
 #' @references Holland & Wainer (1993), Differential Item Functioning,
 #'   Erlbaum; Dorans & Holland (1993), ibid., ch. 3.
+#' @examples
+#' set.seed(11)
+#' X <- matrix(rbinom(200 * 4, 1, 0.6), 200, 4)
+#' grp <- rep(1:2, each = 100)
+#' X[grp == 1, 2] <- rbinom(100, 1, 0.3)       # item 2 harder for the focal group
+#' round(Difpst(X, grp, focal = 1)$p_diff, 2)
 #' @export
 Difpst <- function(X, group, focal = 1) {
   M <- .s03mat(X)

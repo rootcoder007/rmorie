@@ -102,6 +102,8 @@ morie_turboquant_angle_quantization <- morie_tqang
 #' @param a See Usage.
 #' @param b See Usage.
 #' @return Numeric scalar.
+#' @examples
+#' morie_tqang_angular_difference(0.1, 2 * pi - 0.1)   # 0.2, not 0.2 - 2 pi
 #' @export
 morie_tqang_angular_difference <- function(a, b) {
   morie_tqang_wrap_angle(as.numeric(a) - as.numeric(b))

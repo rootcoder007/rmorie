@@ -428,6 +428,8 @@ offlrl_as_dist <- function(d, S, A, name) {
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(offlrl_cheatsheet())
 #' @export
 offlrl_cheatsheet <- function() {
   paste("offlrl: CQL (Kumar 2020). Fitted Q plus alpha*(push DOWN ",
@@ -466,6 +468,9 @@ offlrl_logsumexp <- function(v) {
 #' @param s Passed to \code{paste0}.
 #' @param a Passed to \code{paste0}.
 #' @return The value of \code{[[}.
+#' @examples
+#' mat <- list(`0|1` = 0.25, `1|1` = 0.75)
+#' offlrl_lookup(mat, 1, 1)
 #' @export
 offlrl_lookup <- function(mat, s, a) {
   mat[[paste0(s, "|", a)]]
@@ -481,6 +486,9 @@ offlrl_lookup <- function(mat, s, a) {
 #' @param s Passed to \code{paste0}.
 #' @param A A vector; indexed elementwise.
 #' @return The value of \code{best_a}, as built in the body.
+#' @examples
+#' q <- list(`0|0` = 0.2, `0|1` = 0.7)
+#' offlrl_safe_max_key(q, 0, A = c(0, 1))
 #' @export
 offlrl_safe_max_key <- function(qmap, s, A) {
   best_v <- -Inf
@@ -501,6 +509,9 @@ offlrl_safe_max_key <- function(qmap, s, A) {
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
+#' @examples
+#' offlrl_softmax(c(1, 2, 3))
+#' exp(1:3) / sum(exp(1:3))
 #' @export
 offlrl_softmax <- function(v) {
   m <- max(v)

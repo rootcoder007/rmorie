@@ -197,6 +197,9 @@ morie_gsplat <- alpha_composite
 #' @return A list with \code{colour}, \code{transmittance},
 #'   \code{coverage} and \code{note}.
 #' @references Kerbl, B. et al. (2023); Mildenhall, B. et al. (2020).
+#' @examples
+#' cols <- rbind(c(1, 0, 0), c(0, 0, 1))
+#' morie_gsplat_composite(cols, alphas = c(0.6, 0.5))$colour   # red in front of blue
 #' @export
 morie_gsplat_composite <- function(colours, alphas, depths = NULL) {
   C <- apply(colours, c(1L, 2L), as.numeric)
@@ -234,6 +237,9 @@ morie_gsplat_composite <- function(colours, alphas, depths = NULL) {
 #' @return A list with \code{covariance}, \code{rotation},
 #'   \code{scale} and \code{note}.
 #' @references Kerbl, B. et al. (2023).
+#' @examples
+#' c <- morie_gsplat_covariance(scale = c(1, 2, 3), quaternion = c(1, 0, 0, 0))
+#' c$covariance   # identity rotation: diag(scale^2)
 #' @export
 morie_gsplat_covariance <- function(scale, quaternion) {
   s <- as.numeric(scale)
@@ -278,6 +284,9 @@ morie_gsplat_covariance <- function(scale, quaternion) {
 #' @return A list with \code{clone}, \code{split}, \code{prune},
 #'   \code{n_before} and \code{n_after}.
 #' @references Kerbl, B. et al. (2023).
+#' @examples
+#' morie_gsplat_density(gradients = c(1e-3, 1e-3, 1e-5), scales = c(0.001, 0.1, 0.05),
+#'                      opacities = c(0.8, 0.7, 0.001))[c("clone", "split", "prune")]
 #' @export
 morie_gsplat_density <- function(gradients, scales, opacities,
                                  grad_threshold = 2e-4,
@@ -320,6 +329,10 @@ morie_gsplat_density <- function(gradients, scales, opacities,
 #' @param J 2x3 Jacobian of the perspective projection.
 #' @return A list with \code{projected} (2x2) and \code{dim}.
 #' @references Zwicker, M. et al. (2001); Kerbl, B. et al. (2023).
+#' @examples
+#' S <- diag(c(1, 2, 3))
+#' J <- rbind(c(1, 0, 0), c(0, 1, 0))
+#' morie_gsplat_project(S, W = diag(3), J = J)$projected   # drops the depth axis
 #' @export
 morie_gsplat_project <- function(S, W, J) {
   C <- apply(S, c(1L, 2L), as.numeric)

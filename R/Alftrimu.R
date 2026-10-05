@@ -23,6 +23,11 @@
 #' @return A list with the updated pair tensor \code{z}, its mean
 #'   \code{estimate}, \code{n}, \code{mode} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 11-12
+#' @examples
+#' set.seed(13)
+#' z <- array(rnorm(3 * 3 * 2), c(3, 3, 2))
+#' w <- function() matrix(rnorm(4, sd = 0.5), 2, 2)
+#' dim(Alftrimu(z, w(), w(), w(), w(), w(), w(), mode = "outgoing")$z)
 #' @export
 Alftrimu <- function(z, wag, wav, wbg, wbv, wg, wo, mode = "outgoing",
                      layernorm = TRUE) {

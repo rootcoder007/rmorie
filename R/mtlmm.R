@@ -19,6 +19,12 @@
 #' book notes on p. 153 that when Sigma_T and R_T are diagonal this is equivalent to
 #' fitting each trait separately. The solution is in the stacked ordering (line 1
 #' traits, line 2 traits, ...).
+#' @examples
+#' set.seed(9)
+#' J <- 6; nT <- 2
+#' G <- crossprod(matrix(rnorm(J * J), J)) / J
+#' Y <- matrix(rnorm(J * nT, 5), J, nT)
+#' Mtlmmfit(Y, Z = diag(J), G = G, Sigma_T = diag(nT), R_T = diag(nT))$mu
 #' @export
 Mtlmmfit <- function(Y, Z, G, Sigma_T, R_T, X = NULL) {
   out <- morie_multitrait(Y, Z, G, Sigma_T, R_T, X = X)

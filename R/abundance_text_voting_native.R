@@ -668,6 +668,16 @@ morie_backdoor_sets <- function(adj, treatment, outcome, max_size = NULL) {
 #'   `refutations_passed`, `warnings`.
 #' @references Pearl J (2009) \emph{Causality}, 2nd ed., Sec 3.3.
 #'   Sharma A, Kiciman E (2020) arXiv:2011.04216.
+#' @examples
+#' \donttest{
+#' set.seed(13)
+#' n <- 500
+#' Z <- rnorm(n); T <- rbinom(n, 1, plogis(Z)); Y <- 1 + 2 * T + Z + rnorm(n)
+#' dag <- matrix(FALSE, 3, 3, dimnames = list(c("Z", "T", "Y"), c("Z", "T", "Y")))
+#' dag["Z", "T"] <- dag["Z", "Y"] <- dag["T", "Y"] <- TRUE
+#' r <- morie_identify_estimate_refute(dag, data.frame(Z, T, Y), treatment = 2, outcome = 3, n_refute = 20L)
+#' r[c("estimate", "adjustment_set", "refutations_passed")]
+#' }
 #' @export
 morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
                                            adjustment = NULL, n_refute = 100L,

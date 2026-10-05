@@ -33,6 +33,8 @@
 #'   Behavioral Research 30(1), 41-62, doi:10.1207/s15327906mbr3001_3;
 #'   full text verified at
 #'   https://pmc.ncbi.nlm.nih.gov/articles/PMC2821114/
+#' @examples
+#' Propme(a = 0.5, b = 0.4, c_prime = 0.3)[c("estimate", "indirect", "total", "ratio")]
 #' @export
 Propme <- function(a, b, c_prime,
                    se_a = NULL, se_b = NULL, se_c_prime = NULL) {

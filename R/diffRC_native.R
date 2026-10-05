@@ -213,6 +213,10 @@ morie_diffRC <- morie_diffRC_noise_schedule
 #' @param schedule Schedule list from \code{noise_schedule}.
 #' @param t_start Starting timestep; defaults to the last step.
 #' @return A list mirroring the Python \code{RichResult} payload.
+#' @examples
+#' s <- noise_schedule(T = 10, scale = 0)
+#' x <- c(1, 2, 3)
+#' identical(denoise(x, model = function(x, t) x, schedule = s)$x0, x)   # scale 0: the identity
 #' @export
 #' @aliases diffusion_rec diffusionrec diffusionrecommender
 denoise <- function(x_t, model, schedule, t_start = NULL) {
@@ -279,6 +283,8 @@ forward_corrupt <- function(x0, alpha_bar_t, e = NULL) {
 #' @param smoothing Additive constant in the square-root.
 #' @return A list with \code{weights}, \code{uniform},
 #'   \code{effective_steps} (and \code{note} for the importance path).
+#' @examples
+#' importance_weights(step_losses = c(0.9, 0.5, 0.2, 0.1, 0.05))$weights
 #' @export
 importance_weights <- function(step_losses, uniform = FALSE,
                                 smoothing = 0.1) {
@@ -343,6 +349,9 @@ noise_schedule <- function(T, scale = 0.001, beta_min = 0.0001,
 #' @param beta_t \code{beta} at \code{t}.
 #' @return A list with \code{mean}, \code{coef_x0}, \code{coef_xt},
 #'   \code{degenerate}.
+#' @examples
+#' posterior_mean(x_t = c(0.5, -0.2), x0_hat = c(0.6, -0.1), alpha_bar_t = 0.8,
+#'                alpha_bar_prev = 0.9, beta_t = 0.1)$mean
 #' @export
 posterior_mean <- function(x_t, x0_hat, alpha_bar_t, alpha_bar_prev,
                             beta_t) {

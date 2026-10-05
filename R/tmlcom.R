@@ -26,6 +26,15 @@
 #'   Aitchison (1986), Chapters 2 and 4, matching the sibling modules
 #'   aitclr and aitprt. No source combining the two was found; the
 #'   combination is documented here as this package's own.
+#' @examples
+#' set.seed(7)
+#' n <- 300
+#' A <- rbinom(n, 1, 0.5)
+#' Yc <- t(sapply(A, function(a) { p <- c(0.5, 0.3, 0.2) * if (a == 1) c(1.5, 1, 1) else 1; p / sum(p) }))
+#' clr <- function(p) log(p) - mean(log(p))
+#' Q1 <- matrix(clr(c(0.75, 0.3, 0.2) / 1.25), n, 3, byrow = TRUE); Q0 <- matrix(clr(c(0.5, 0.3, 0.2)), n, 3, byrow = TRUE)
+#' r <- Comptml(Yc, A, Q1, Q0, g1W = rep(0.5, n))
+#' round(c(r$effect, sum = r$sum_effect), 3)   # clr effects sum to zero
 #' @export
 Comptml <- function(Yc, A, Q1, Q0, g1W, gbound = 0.025, level = 0.95) {
   Yc <- as.matrix(Yc)

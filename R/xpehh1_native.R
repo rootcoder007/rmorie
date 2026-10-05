@@ -31,6 +31,11 @@
 #' @references Sabeti, P. C. et al. (2007). Genome-wide detection and
 #'   characterization of positive selection in human populations.
 #'   Nature, 449, 913-918.
+#' @examples
+#' set.seed(3)
+#' hapA <- matrix(c(rep(1, 20), rbinom(20 * 9, 1, 0.1)), 20)   # one long haplotype in A
+#' hapB <- matrix(rbinom(200, 1, 0.5), 20)
+#' morie_xpehh1(hapA, hapB, core = 0)$estimate                 # positive: longer haplotypes in A
 #' @export
 morie_xpehh1 <- function(hapA, hapB, core, positions = NULL,
                          min_ehh = 0.05, standardize = NULL) {

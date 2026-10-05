@@ -903,6 +903,8 @@ morie_tmledynamicregime <- morie_tmldyn
 #' Compact one-line summary of the tmldyn recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_tmldyn_cheatsheet()
 #' @export
 morie_tmldyn_cheatsheet <- function() {
   paste("tmldyn: two time points. Backward induction (Thm 22.1):",
@@ -933,6 +935,16 @@ morie_tmldyn_cheatsheet <- function() {
 #' @return A list with the mean outcome, SE, CI, the rule, blips, and
 #'   the four static comparators.
 #' @references Luedtke, A. R. & van der Laan, M. J. (2018).
+#' @examples
+#' \donttest{
+#' set.seed(11)
+#' n <- 400
+#' L0 <- rnorm(n); A0 <- rbinom(n, 1, 0.5)
+#' L1 <- L0 + rnorm(n); A1 <- rbinom(n, 1, 0.5)
+#' y <- L1 + A1 * L1 + A0 * 0.5 + rnorm(n)
+#' r <- morie_tmle_dynamic_regime(y, cbind(A0, A1), list(matrix(L0), matrix(L1)), n_folds = 5)
+#' r$estimate
+#' }
 #' @export
 morie_tmle_dynamic_regime <- function(y, treatment_history,
                                       covariate_history, regime = "optimal",

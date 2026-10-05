@@ -65,6 +65,13 @@
 #'   \code{seed}, \code{method}.
 #' @references van der Maaten, L. and Hinton, G. (2008).
 #'   Visualizing data using t-SNE. JMLR, 9, 2579-2605.
+#' @examples
+#' \donttest{
+#' set.seed(19)
+#' X <- rbind(matrix(rnorm(40, 0), 20, 2), matrix(rnorm(40, 6), 20, 2))
+#' e <- morie_sctsne(X, perplexity = 5, T = 200, seed = 1)
+#' c(e$kl_initial, e$kl)
+#' }
 #' @export
 morie_sctsne <- function(X, dim = 2, perplexity = 10, T = 300,
                          eta = 100, seed = 0) {

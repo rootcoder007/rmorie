@@ -208,6 +208,8 @@ morie_mpfn_messagepassing <- morie_mpfn_message_passing
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(mpfn_cheatsheet())
 #' @export
 mpfn_cheatsheet <- function() {
   paste(paste0(
@@ -276,6 +278,8 @@ mpfn_is_permutation_invariant <- function(H, adj, edge_features, perm, T = 3,
 #' @param e_vw A vector; its length is taken and its elements indexed.
 #' @param A Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
+#' @examples
+#' mpfn_message(h_v = c(1, 0), h_w = c(0.5, 2), e_vw = 2)
 #' @export
 mpfn_message <- function(h_v, h_w, e_vw, A = NULL) {
   hw <- as.numeric(h_w)
@@ -300,6 +304,10 @@ mpfn_message <- function(h_v, h_w, e_vw, A = NULL) {
 #' @param A Passed to \code{mpfn_message}.
 #' @param update Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{H}, as built in the body.
+#' @examples
+#' H <- list(c(1, 0), c(0, 1), c(1, 1))
+#' adj <- list(`1` = c(2L, 3L), `2` = 1L, `3` = 1L)
+#' mpfn_message_passing(H, adj, edge_features = list(), T = 2)
 #' @export
 mpfn_message_passing <- function(H0, adj, edge_features, T = 3, A = NULL,
                                  update = NULL) {
@@ -405,6 +413,10 @@ mpfn_sig <- function(x) {
 #' @param Wh Passed to \code{lin}.
 #' @param Uh Passed to \code{lin}.
 #' @return A numeric value.
+#' @examples
+#' set.seed(13)
+#' mk <- function() matrix(rnorm(4, sd = 0.5), 2, 2)
+#' mpfn_update_gru(h = c(0, 0), m = c(1, -1), mk(), mk(), mk(), mk(), mk(), mk())
 #' @export
 mpfn_update_gru <- function(h, m, Wz, Uz, Wr, Ur, Wh, Uh) {
   n <- length(h)

@@ -308,6 +308,8 @@ morie_topological_torsions <- function(elements, bonds, common_types = NULL) {
 #' Compact one-line summary of the toptor recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_toptor_cheatsheet()
 #' @export
 morie_toptor_cheatsheet <- function() {
   paste("toptor: topological torsion (Nilakantan 1987). Four",
@@ -348,6 +350,10 @@ morie_torsion_similarity <- function(t1, t2) {
 #' @return A list with the vector, descriptors, length, null mean and
 #'   sd, and the z-score.
 #' @references Nilakantan, R. et al. (1987).
+#' @examples
+#' sets <- list(list(a = 2, b = 1), list(a = 1, c = 1), list(b = 2, c = 1), list(a = 3))
+#' tv <- morie_trend_vector(sets, activities = c(5, 3, 1, 6), permutations = 30, seed = 1)
+#' tv$vector
 #' @export
 morie_trend_vector <- function(torsion_sets, activities,
                                 permutations = 40, seed = 0) {

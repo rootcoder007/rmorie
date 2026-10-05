@@ -24,6 +24,10 @@
 #'   -- the first statement of linear programming duality. Gale, Kuhn &
 #'   Tucker (1951), Linear programming and the theory of games, 317-329,
 #'   for the first published proof.
+#' @examples
+#' # maximise 3 x1 + 5 x2 s.t. x1 <= 4, 2 x2 <= 12, 3 x1 + 2 x2 <= 18; optimum x = (2, 6), y = (0, 1.5, 1)
+#' A <- rbind(c(1, 0), c(0, 2), c(3, 2))
+#' Lpdual(A, b = c(4, 12, 18), c = c(3, 5), x = c(2, 6), y = c(0, 1.5, 1))[c("gap", "optimal")]
 #' @export
 Lpdual <- function(A, b, c, x = NULL, y = NULL) {
   A <- as.matrix(A)

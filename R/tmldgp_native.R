@@ -290,6 +290,11 @@ morie_tmle_doubly_robust_pen <- morie_tmldgp
 #' @return A list with \code{beta}, \code{intercept}, \code{support},
 #'   \code{lambda}.
 #' @references Belloni, A. & Chernozhukov, V. (2013).
+#' @examples
+#' set.seed(17)
+#' X <- matrix(rnorm(100 * 4), 100, 4)
+#' y <- 1 + X %*% c(2, 0, 0, -1) + rnorm(100, sd = 0.1)
+#' morie_lasso_path(X, as.numeric(y), lam = 0.1)$support
 #' @export
 morie_lasso_path <- function(X, y, lam, iters = 500L, tol = 1e-9) {
   rows <- as.matrix(X)
@@ -346,6 +351,13 @@ morie_lasso_path <- function(X, y, lam, iters = 500L, tol = 1e-9) {
 #' @return A list with the estimate, SE, CI, EIC, and support.
 #' @references Belloni, A. & Chernozhukov, V. (2013); van der Laan,
 #'   M. J. & Gruber, S. (2016).
+#' @examples
+#' set.seed(11)
+#' n <- 300
+#' X <- matrix(rnorm(n * 5), n)
+#' D <- rbinom(n, 1, plogis(X[, 1]))
+#' y <- plogis(-0.3 + 0.5 * D + X[, 1] + rnorm(n, sd = 0.3))
+#' morie_penalised_tmle(y, D, X, penalty = 0.05)$estimate
 #' @export
 morie_penalised_tmle <- function(y, D, X, penalty = 0.05, iters = 100) {
   yv <- as.numeric(y)
@@ -411,6 +423,12 @@ morie_penalised_tmle <- function(y, D, X, penalty = 0.05, iters = 100) {
 #' @return A list with \code{support}, \code{coef}, \code{intercept},
 #'   \code{predict}, and the underlying lasso \code{beta}.
 #' @references Belloni, A. & Chernozhukov, V. (2013).
+#' @examples
+#' set.seed(12)
+#' X <- matrix(rnorm(100 * 4), 100, 4)
+#' y <- 1 + X %*% c(2, 0, 0, -1) + rnorm(100, sd = 0.1)
+#' pl <- morie_post_lasso(X, as.numeric(y), lam = 0.2)
+#' round(pl$coef, 2)
 #' @export
 morie_post_lasso <- function(X, y, lam) {
   rows <- as.matrix(X)

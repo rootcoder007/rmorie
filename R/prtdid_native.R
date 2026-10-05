@@ -34,6 +34,14 @@
 #'   NBER Working Paper 25018;
 #' @seealso \code{\link{Gbtcom}} for the three-way composition by
 #'   comparison type.
+#' @examples
+#' set.seed(21)
+#' d <- expand.grid(time = 1:6, unit = 1:30)
+#' first <- rep(c(3, 5, Inf), each = 10)[d$unit]
+#' d$D <- as.integer(d$time >= first)
+#' d$y <- d$unit / 10 + d$time / 5 + 1.5 * d$D + rnorm(nrow(d), sd = 0.2)
+#' p <- Prtdid(d, "y", "D", "unit", "time")
+#' p$overall_estimate
 #' @export
 Prtdid <- function(data, outcome, treatment, unit, time) {
   morie_did_bacon_decomposition(data, outcome, treatment, unit, time)

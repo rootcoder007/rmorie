@@ -403,6 +403,8 @@ morie_tmlediffkernel <- morie_tmldyk
 #' @param g_min Propensity truncation bound.
 #' @param y_range Range of the outcome.
 #' @return A list with the sensitivity and a few related quantities.
+#' @examples
+#' morie_ate_sensitivity(n = 1000, g_min = 0.05)$sensitivity   # 2 / (1000 * 0.05)
 #' @export
 morie_ate_sensitivity <- function(n, g_min, y_range = 1.0) {
   nn <- as.integer(n)
@@ -423,6 +425,8 @@ morie_ate_sensitivity <- function(n, g_min, y_range = 1.0) {
 #' @param epsilons Numeric vector of positive epsilons.
 #' @return A list with the total epsilon, the number of releases, and
 #'   a note.
+#' @examples
+#' morie_composition_budget(c(0.5, 0.25, 0.25))
 #' @export
 morie_composition_budget <- function(epsilons) {
   e <- as.numeric(epsilons)
@@ -438,6 +442,9 @@ morie_composition_budget <- function(epsilons) {
 #' @param scale Positive scale parameter.
 #' @param rng Environment produced by \code{.ghc_rng}.
 #' @return A numeric value.
+#' @examples
+#' rng <- rmorie:::.ghc_rng(1)
+#' morie_laplace_noise(2, rng)
 #' @export
 morie_laplace_noise <- function(scale, rng) {
   b <- as.numeric(scale)
@@ -459,6 +466,8 @@ morie_laplace_noise <- function(scale, rng) {
 #' @return A list with \code{estimate}, \code{se_private},
 #'   \code{se_sampling}, \code{ci}, \code{width_ratio},
 #'   \code{epsilon}.
+#' @examples
+#' morie_private_ci(value = 42.3, sensitivity = 1, epsilon = 0.5, se = 1.2, seed = 1)[c("se_private", "se_sampling", "ci")]
 #' @export
 morie_private_ci <- function(value, sensitivity, epsilon, se, seed = 0,
                              level = 1.96) {
@@ -485,6 +494,8 @@ morie_private_ci <- function(value, sensitivity, epsilon, se, seed = 0,
 #' @param seed Seed for the shared generator.
 #' @return A list with the released value, the noise, the scale, the
 #'   noise variance, and the epsilon.
+#' @examples
+#' morie_private_release(value = 120, sensitivity = 1, epsilon = 0.5, seed = 1)[c("released", "scale")]
 #' @export
 morie_private_release <- function(value, sensitivity, epsilon, seed = 0) {
   eps <- as.numeric(epsilon)

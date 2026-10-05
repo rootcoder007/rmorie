@@ -21,6 +21,10 @@
 #' @references Amari (1985), Differential-Geometrical Methods in
 #'   Statistics, Lecture Notes in Statistics 28, Springer.
 #'   \doi{10.1007/978-1-4612-5056-2}
+#' @examples
+#' # N(theta, 1): Fisher information 1 for the mean
+#' x <- seq(-8, 8, length.out = 2001)
+#' Infgnt(function(x, th) dnorm(x, th, 1, log = TRUE), theta = 0, support = x, discrete = FALSE)$estimate
 #' @export
 Infgnt <- function(log_p, theta, support, discrete = TRUE, h = 1e-5) {
   th <- .s03vec(theta)

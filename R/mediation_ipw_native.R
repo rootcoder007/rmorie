@@ -159,6 +159,15 @@
 #' @references Huber, M. (2014). Identifying causal mechanisms
 #'   (primarily) based on inverse probability weighting. \emph{Journal
 #'   of Applied Econometrics}, 29(6), 920-943.
+#' @examples
+#' set.seed(2)
+#' n <- 1000
+#' x <- matrix(rnorm(n), n)
+#' d <- rbinom(n, 1, pnorm(0.5 * x[, 1]))
+#' m <- 0.5 * d + 0.5 * x[, 1] + rnorm(n)
+#' y <- 0.3 * d + 0.4 * m + x[, 1] + rnorm(n)
+#' r <- morie_causal_mediation(y, d, m, x)
+#' round(c(total = r$total_effect, direct = r$direct_treated, indirect = r$indirect_treated), 3)
 #' @export
 morie_causal_mediation <- function(y, d, m, x, link = c("probit", "logit"),
                                    trim = 0, boot = 0L, seed = NULL) {

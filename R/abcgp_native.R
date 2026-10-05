@@ -1604,6 +1604,9 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param seed Random seed.
 #' @param bootstrap Number of bootstrap replications for the nugget.
 #' @return List \code{log_lik, nugget_variance}.
+#' @examples
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' gabc_log_likelihood(sim, obs = c(0.5, 1, 1.5), theta = 1, n_sim = 5L, epsilon = 0.5)$log_lik
 #' @export
 gabc_log_likelihood <- function(sim, obs, theta, n_sim = 50L, epsilon = 1.0,
                                 summary = NULL, kernel = "gaussian",
@@ -1750,6 +1753,13 @@ gp_predict <- function(fit, theta) {
 #' @param delta_s See Usage.
 #' @param n_alpha See Usage.
 #' @param max_sim See Usage.
+#' @examples
+#' \donttest{
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' r <- gps_abc(sim, obs = c(0.5, 1, 1.5), log_prior = function(th) dnorm(th, 0, 5, log = TRUE),
+#'              theta0 = 0, n_iter = 60L, n_sim = 5L, epsilon = 0.5)
+#' names(r)
+#' }
 #' @export
 gps_abc <- function(sim, obs, log_prior, theta0, n_iter = 200L, n_sim = 10L,
                     epsilon = 0, proposal_sd = 0.5, summary = NULL,
@@ -1845,6 +1855,10 @@ history_match <- function(sim, obs, prior_ppf, n_waves = 3L, n_design = 32L,
 #' @param theta See Usage.
 #' @param threshold See Usage.
 #' @param n_sd See Usage.
+#' @examples
+#' fit <- gp_fit(design = seq(0, 1, length.out = 6), values = -20 * (seq(0, 1, length.out = 6) - 0.5)^2)
+#' implausible(fit, theta = 0.5)    # near the peak: not ruled out
+#' implausible(fit, theta = 0.98)
 #' @export
 implausible <- function(fit, theta, threshold = 10, n_sd = 3) {
   pr <- gp_predict(fit, theta)
@@ -1865,6 +1879,8 @@ implausible <- function(fit, theta, threshold = 10, n_sd = 3) {
 #' @param skip Drop that many leading points.
 #' @return Numeric matrix with \code{n} rows and \code{dim} columns.
 #' @references Sobol, I. M. (1967). Bratley, P. & Fox, B. L. (1988).
+#' @examples
+#' sobol_sequence(4, dim = 2)
 #' @export
 sobol_sequence <- function(n, dim, skip = 0L) {
   n <- as.integer(n)

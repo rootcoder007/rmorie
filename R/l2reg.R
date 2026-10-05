@@ -13,6 +13,8 @@
 #' doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.7.3 p. 403: L(w, lambda) = L(w) +
 #' 0.5 * lambda * E_P, with E_P = w'w for the ridge (weight decay, L2) penalty.  Read
 #' from the chapter PDF, not recalled.
+#' @examples
+#' L2pen(loss = 1.2, w = c(0.5, -1), lam = 0.1)$penalized_loss   # 1.2 + 0.05 * 1.25
 #' @export
 L2pen <- function(loss, w, lam) {
   w <- .t1_vec(w)

@@ -17,6 +17,10 @@
 #' @return The list returned by \code{\link{morie_bndest}}.
 #' @references Manski, C. F. (2007). Identification for Prediction and
 #'   Decision. Harvard University Press.
+#' @examples
+#' set.seed(12)
+#' y <- runif(60); D <- rbinom(60, 1, 0.5)
+#' morie_manskif(y, observed = NULL, support = c(0, 1), treatment = D)
 #' @export
 morie_manskif <- function(y, observed, support, treatment = NULL) {
   morie_bndest(y, observed, support, treatment = treatment)

@@ -36,6 +36,12 @@
 #' @references Browne, C. B. et al. (2012). A survey of Monte Carlo
 #'   tree search methods. IEEE Transactions on Computational
 #'   Intelligence and AI in Games, 4(1), 1-43.
+#' @examples
+#' # a race to 5: add 1 or 2 per move; the reward is 1 for landing exactly on 5
+#' r <- morie_mctsr(root_state = 0, actions = function(s) c(1, 2), step = function(s, a) s + a,
+#'                  reward = function(s) as.numeric(s == 5), is_terminal = function(s) s >= 5,
+#'                  n_iter = 300, seed = 1)
+#' r$action
 #' @export
 morie_mctsr <- function(root_state, actions, step, reward, is_terminal,
                         n_iter = 200, c = 1 / sqrt(2), seed = 0,

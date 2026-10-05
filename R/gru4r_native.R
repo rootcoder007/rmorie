@@ -288,6 +288,8 @@ morie_gru4r_gru <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
 #' @param target Target item id.
 #' @param kk Cutoff.
 #' @return Scalar.
+#' @examples
+#' morie_gru4r_mrr(c(5L, 2L, 9L, 1L), target = 9L, kk = 3)   # 1/3
 #' @export
 morie_gru4r_mrr <- function(ranked, target, kk = 20) {
   top <- as.integer(ranked)[seq_len(min(as.integer(kk),
@@ -327,6 +329,8 @@ morie_gru4r_recall <- function(ranked, target, kk = 20) {
 #' @param r_negatives Numeric vector of negative-item scores.
 #' @param regularize Include the sigma(r_j^2) regulariser.
 #' @return Scalar loss.
+#' @examples
+#' morie_gru4r_top1(r_target = 2, r_negatives = c(0.5, 1, -1))
 #' @export
 morie_gru4r_top1 <- function(r_target, r_negatives, regularize = TRUE) {
   neg <- as.numeric(r_negatives)

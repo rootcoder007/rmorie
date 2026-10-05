@@ -25,6 +25,11 @@
 #'   mtr_upper, empty, n, d.
 #' @references Manski and Pepper (2000), Econometrica 68(4), 997-1010.
 #'   Standard published form; see \code{bdmnsl} for the availability note.
+#' @examples
+#' set.seed(2)
+#' D <- sample(0:2, 300, TRUE)
+#' y <- pmin(pmax(0.2 + 0.2 * D + rnorm(300, sd = 0.1), 0), 1)
+#' Mtsmtv(y, D, y_min = 0, y_max = 1, d = 2)[c("lower", "upper", "empty")]
 #' @export
 Mtsmtv <- function(y, D, y_min, y_max, d = NULL) {
   yv <- .t1_vec(y)

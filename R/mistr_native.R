@@ -302,6 +302,8 @@ morie_mistr <- morie_mistr_mistral_block
 #' @param theta Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param base Passed to \code{mistr_rope_angles}. Defaults to \code{10000}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' mistr_apply_rope(c(1, 0, 1, 0), pos = 3)
 #' @export
 mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
   d <- length(x)
@@ -372,6 +374,10 @@ mistr_cheatsheet <- function() {
 #' @param positions Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param base Passed to \code{mistr_apply_rope}. Defaults to \code{10000}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' set.seed(11)
+#' Q <- matrix(rnorm(16), 4, 4); K <- matrix(rnorm(8), 4, 2); V <- matrix(rnorm(8), 4, 2)
+#' dim(mistr_grouped_query_attention(Q, K, V, n_heads = 2, n_kv_heads = 1))
 #' @export
 mistr_grouped_query_attention <- function(Q, K, V, n_heads, n_kv_heads,
                                           mask = NULL, positions = NULL,
@@ -507,6 +513,8 @@ mistr_mistral_block <- function(X, Wq, Wk, Wv, Wo, W1, W2, W3,
 #' @param weight Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return A numeric value.
+#' @examples
+#' mistr_rms_norm(c(3, 4))   # divides by sqrt(mean(x^2)) = sqrt(12.5)
 #' @export
 mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
   d <- length(x)
@@ -532,6 +540,8 @@ mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
 #' @param d Numeric; combined arithmetically in the body.
 #' @param base Numeric; combined arithmetically in the body. Defaults to \code{10000}.
 #' @return A numeric value.
+#' @examples
+#' mistr_rope_angles(d = 8)
 #' @export
 mistr_rope_angles <- function(d, base = 10000) {
   if (d %% 2L != 0L) {
@@ -578,6 +588,10 @@ mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
 #' @param W2 A matrix; passed to \code{crossprod}.
 #' @param W3 A matrix; passed to \code{crossprod}.
 #' @return A vector, from \code{as.numeric}.
+#' @examples
+#' set.seed(1)
+#' x <- matrix(rnorm(4), 1, 4)
+#' mistr_swiglu(x, W1 = matrix(rnorm(24), 4, 6), W2 = matrix(rnorm(24), 6, 4), W3 = matrix(rnorm(24), 4, 6))
 #' @export
 mistr_swiglu <- function(x, W1, W2, W3) {
   x <- as.numeric(x)

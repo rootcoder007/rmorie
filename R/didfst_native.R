@@ -359,6 +359,14 @@ morie_didfst <- morie_didfst_panel_differences
 #' @param horizon Optional event-time cap for \code{"event"}.
 #' @return A list with \code{estimate}, \code{scheme} (and
 #'   \code{profile} for the by-event-time and by-cohort schemes).
+#' @examples
+#' set.seed(8)
+#' n <- 30; Tn <- 5
+#' first <- rep(c(3, 4, Inf), each = 10)
+#' Y <- matrix(rnorm(n * Tn), n, Tn)
+#' for (i in seq_len(n)) if (is.finite(first[i])) Y[i, first[i]:Tn] <- Y[i, first[i]:Tn] + 1
+#' gt <- group_time_att(Y, first, comparison = "never-treated")
+#' aggregate_att(gt, scheme = "event")$profile
 #' @export
 aggregate_att <- function(gt, scheme = "simple", horizon = NULL) {
   if (!(scheme %in% c("simple", "event", "cohort")))
@@ -398,6 +406,10 @@ aggregate_att <- function(gt, scheme = "simple", horizon = NULL) {
 #' @return A list with \code{estimate}, \code{treated_change},
 #'   \code{control_change}, \code{treated_weight},
 #'   \code{control_weight}.
+#' @examples
+#' delta <- c(1.2, 0.9, 1.4, 0.2, 0.1, 0.3)
+#' D <- c(1, 1, 1, 0, 0, 0)
+#' did_estimate(delta, D)$estimate   # mean(1.2, 0.9, 1.4) - mean(0.2, 0.1, 0.3)
 #' @export
 did_estimate <- function(delta, D, weights = NULL) {
   d <- as.numeric(delta)

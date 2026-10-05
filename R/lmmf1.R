@@ -21,6 +21,10 @@
 #' conditional mean given the random effects is E(Y|u) = X beta + Z u.  The marginal
 #' variance Z Sigma Z' + R is the V that Sect. 2.2 uses for the BLUE and BLUP.  Read from
 #' the chapter PDF, not recalled.
+#' @examples
+#' X <- cbind(1, c(0, 1, 0, 1)); Z <- cbind(c(1, 1, 0, 0), c(0, 0, 1, 1))
+#' r <- Lmmform(X, beta = c(2, 1), Z = Z, u = c(0.5, -0.5), Sigma = diag(0.25, 2))
+#' r$V
 #' @export
 Lmmform <- function(X, beta, Z, u, Sigma, R = NULL) {
   Xm <- .t1_mat(X)

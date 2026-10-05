@@ -21,6 +21,12 @@
 #'   Two-way fixed effects estimators with heterogeneous treatment
 #'   effects. American Economic Review 110(9), 2964-2996; working paper
 #'   arXiv:1803.08807, page 16.
+#' @examples
+#' set.seed(12)
+#' d <- expand.grid(time = 1:4, unit = 1:20)
+#' d$D <- as.integer(d$unit <= 10 & d$time >= 3)
+#' d$y <- d$unit / 10 + d$time / 5 + 2 * d$D + rnorm(nrow(d), sd = 0.1)
+#' Doctide(d$y, d$D, d$unit, d$time)$estimate   # close to 2
 #' @export
 Doctide <- function(y, D, unit, time) {
   yv <- .s03vec(y)

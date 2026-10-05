@@ -402,6 +402,8 @@ morie_minimum_spanning_tree <- function(edges, n_vertices, weights = NULL) {
 #' @param left_n,right_n Side sizes.
 #' @param edges List of (left, right) pairs, numbered from 1.
 #' @return A list with `size`, `pairs`, `match_right`.
+#' @examples
+#' morie_bipartite_matching(3, 3, list(c(1, 1), c(1, 2), c(2, 1), c(3, 3)))$size
 #' @export
 morie_bipartite_matching <- function(left_n, right_n, edges) {
   ln <- as.integer(left_n)

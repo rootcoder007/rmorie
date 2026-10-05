@@ -20,6 +20,11 @@
 #'   \code{n_supp}, \code{d}, \code{K}, \code{iters}.
 #' @references Cuturi, M. and Doucet, A. (2014). Proceedings of Machine
 #'   Learning Research 32:685-693 (ICML).
+#' @examples
+#' set.seed(9)
+#' X1 <- matrix(rnorm(20, -2), 10, 2); X2 <- matrix(rnorm(20, 2), 10, 2)
+#' b <- Otbarfree(list(X1, X2), weights = c(0.5, 0.5), n_supp = 5)
+#' round(colMeans(b$Y), 2)   # near the midpoint (0, 0)
 #' @export
 Otbarfree <- function(X_list, weights, n_supp, max_iter = 20) {
   clouds <- lapply(X_list, as.matrix)

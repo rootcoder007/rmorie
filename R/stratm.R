@@ -22,6 +22,10 @@
 #'   Chapter 5 read from the scanned original. Cross-checked against the
 #'   reference implementation in the CRAN package samplingbook 1.2.4,
 #'   whose stratamean forms sum(Meanh\*wh) and sum(Varh\*wh^2).
+#' @examples
+#' y <- c(10, 12, 11, 30, 32, 31, 29)
+#' h <- c(1, 1, 1, 2, 2, 2, 2)
+#' Stratmean(y, h, Nh = c(600, 400))[c("estimate", "se", "unweighted_mean")]
 #' @export
 Stratmean <- function(y, h, Nh, level = 0.95) {
   y <- .t1_vec(y)

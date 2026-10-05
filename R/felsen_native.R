@@ -63,6 +63,10 @@
 #' @references Felsenstein, J. (1981). Evolutionary trees from DNA
 #'   sequences: a maximum likelihood approach. Journal of Molecular
 #'   Evolution, 17(6), 368-376.
+#' @examples
+#' tree <- list(list("A", 0.1), list(list(list("B", 0.2), list("C", 0.2)), 0.1))
+#' sites <- list(list(A = "A", B = "A", C = "G"), list(A = "C", B = "C", C = "C"))
+#' morie_felsen(tree, sites)$loglik
 #' @export
 morie_felsen <- function(tree, sites, pi = NULL) {
   if (is.null(pi)) pi <- rep(0.25, 4)

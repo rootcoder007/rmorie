@@ -28,6 +28,13 @@
 #' @return A list with `prediction`, `mspe`, `prediction_error`,
 #'   `inverse_link_prediction`, `pseudo_scale_prediction` and `mspe_is_for`.
 #' @references Schabenberger Ch 6, Sec 6.3.6, eqs (6.87)-(6.91)
+#' @examples
+#' set.seed(15)
+#' coords <- matrix(runif(10), 5, 2)
+#' Sig <- exp(-as.matrix(dist(coords)) / 0.5)
+#' s0 <- exp(-sqrt(colSums((t(coords) - c(0.5, 0.5))^2)) / 0.5)
+#' X <- cbind(1, coords[, 1])
+#' spglmk(nu = log(c(3, 5, 2, 4, 6)), Sigma_nu = Sig, sigma_0 = s0, X = X, x0 = c(1, 0.5), mu0 = 4)$prediction
 #' @export
 spglmk <- function(nu, Sigma_nu, sigma_0, X, x0, mu0, link_kind = "log",
                    beta = NULL) {

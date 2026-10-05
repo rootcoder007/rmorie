@@ -191,6 +191,9 @@ morie_seckdf <- morie_seckdf_extract
 #' @param contexts See Usage.
 #' @param salt See Usage.
 #' @param length See Usage.
+#' @examples
+#' k <- derive_context_keys(as.raw(1:32), contexts = c("records", "audit-log"))
+#' names(k$keys)
 #' @export
 derive_context_keys <- function(ikm, contexts, salt = NULL,
                                 length = 32L) {
@@ -242,6 +245,9 @@ derive_context_keys <- function(ikm, contexts, salt = NULL,
 #' @param prk See Usage.
 #' @param info See Usage.
 #' @param length See Usage.
+#' @examples
+#' prk <- extract(as.raw(rep(0x0b, 22)), as.raw(0:12))$prk
+#' expand(prk, info = as.raw(0xf0:0xf9), length = 42L)$okm   # RFC 5869 test case 1
 #' @export
 expand <- function(prk, info = raw(0), length = 32L) {
   L <- as.integer(length)
@@ -295,6 +301,10 @@ extract <- function(ikm, salt = NULL) {
 #' @param info See Usage.
 #' @param length See Usage.
 #' @param skip_extract See Usage.
+#' @examples
+#' # RFC 5869 test case 1 OKM: 3cb25f25faacd57a90434f64d0362f2a...
+#' okm <- hkdf(as.raw(rep(0x0b, 22)), salt = as.raw(0:12), info = as.raw(0xf0:0xf9), length = 42L)
+#' okm$okm_hex
 #' @export
 hkdf <- function(ikm, salt = NULL, info = raw(0), length = 32L,
                  skip_extract = FALSE) {

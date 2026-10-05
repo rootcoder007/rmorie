@@ -678,6 +678,9 @@ mqtmpl_cim_one <- function(y, left, right, r_left, r_right, cofactors) {
 #' @param r_left Numeric; combined arithmetically in the body.
 #' @param r_right Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
+#' @examples
+#' # Haldane recombination fractions to the flanking markers
+#' mqtmpl_genotype_probabilities(s_left = 0, s_right = 1, r_left = 0.05, r_right = 0.1)
 #' @export
 mqtmpl_genotype_probabilities <- function(s_left, s_right, r_left, r_right) {
   # Backcross coding, 0/1 at each flanking marker, no interference: the
@@ -873,6 +876,8 @@ mqtmpl_lod_support_interval <- function(scan_result, drop = 1.5) {
 #'
 #' @param method Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{method}, \code{available}, \code{reason}.
+#' @examples
+#' mqtmpl_method_status("em")
 #' @export
 mqtmpl_method_status <- function(method = NULL) {
   if (is.null(method)) {
@@ -934,6 +939,10 @@ mqtmpl_permutation_threshold <- function(y, markers, positions, n_perm = 100,
 #' @param error_rate Passed to \code{mqtmpl_hmm_genotype_probabilities}. Defaults to \code{0}.
 #' @param seed Passed to \code{set.seed}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' g <- mqtmpl_sample_genotypes(genotypes = list(c(0, NA, 1), c(1, 1, 0)), positions = c(0, 0.1, 0.2),
+#'                              grid = c(0.05, 0.15), n_imp = 4, seed = 1)
+#' str(g, max.level = 1)
 #' @export
 mqtmpl_sample_genotypes <- function(genotypes, positions, grid, n_imp = 16,
                                     error_rate = 0, seed = 0) {
@@ -1076,6 +1085,12 @@ mqtmpl_scan_imp <- function(y, markers, positions, step, n_imp,
 #' @return A list with \code{estimate}, \code{peak_lod}, \code{peak_position},
 #' \code{position}, \code{lod}, \code{method_used}, \code{n_covariates},
 #' \code{error_rate}, \code{method}.
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' mqtmpl_scanone(y, list(m1, m2), c(0, 0.1), method = "mr")$peak_lod
 #' @export
 mqtmpl_scanone <- function(y, markers, positions, method = "em", step = 0.02,
                            covariates = list(), error_rate = 0) {

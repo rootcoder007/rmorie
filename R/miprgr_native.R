@@ -603,6 +603,9 @@ miprgr_cheatsheet <- function() {
 #' @param upper Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param maximise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{value}, \code{x}, \code{note}.
+#' @examples
+#' A <- matrix(c(6, 4, 1, 2), 2, byrow = TRUE)
+#' miprgr_enumerate_integer(A, b = c(24, 6), c = c(5, 4), integer_vars = c(1, 2), upper = 6)[c("value", "x")]
 #' @export
 miprgr_enumerate_integer <- function(A, b, c, integer_vars, upper = 10,
                                      maximise = TRUE) {
@@ -862,6 +865,9 @@ miprgr_simplex <- function(A, b, c, tol = 1e-9, max_iter = 20000) {
 #' @param maximise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param solver Compared against \code{"simplex"}. Defaults to \code{"simplex"}.
 #' @return A list with \code{feasible}, \code{x}, \code{value}, \code{note}.
+#' @examples
+#' A <- rbind(c(1, 0), c(0, 2), c(3, 2))
+#' miprgr_solve_relaxation(A, b = c(4, 12, 18), c = c(3, 5))[c("x", "value")]
 #' @export
 miprgr_solve_relaxation <- function(A, b, c, bounds = list(),
                                     n = NULL, maximise = TRUE,

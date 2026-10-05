@@ -25,6 +25,11 @@
 #'   interior-point filter line-search algorithm for large-scale
 #'   nonlinear programming, Mathematical Programming 106(1):25-57.
 #'   \doi{10.1007/s10107-004-0559-y}
+#' @examples
+#' # minimise (x - 2)^2 + (y - 1)^2 subject to x + y <= 2
+#' f <- function(z) (z[1] - 2)^2 + (z[2] - 1)^2
+#' r <- Ipfsfa(f, list(function(z) z[1] + z[2] - 2), x0 = c(0, 0))
+#' round(r$x, 3)   # (1.5, 0.5)
 #' @export
 Ipfsfa <- function(f, constraints, x0, mu0 = 1, outer = 8, inner = 30) {
   x <- .s03vec(x0)

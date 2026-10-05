@@ -16,6 +16,10 @@
 #' doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.6.1 p. 81: PRSS_lambda(beta) =
 #' RSS(beta) + lambda beta'D beta with D = diag(0, 1, ..., 1), so the intercept is not
 #' penalized.  Read from the chapter PDF, not recalled.
+#' @examples
+#' X <- cbind(c(1, 2, 3, 4), c(0, 1, 0, 1))
+#' y <- c(1.1, 2.3, 2.9, 4.2)
+#' Ridgeobj(X, y, beta = c(0.1, 1, 0.2), lam = 0.5)[c("prss", "rss", "penalty")]
 #' @export
 Ridgeobj <- function(X, y, beta, lam, add_intercept = TRUE) {
   Xm <- .t1_mat(X)

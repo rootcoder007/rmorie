@@ -493,6 +493,10 @@ cgnonl_cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
 #' @param max_cubic A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
 #' @return A list with \code{t}, \code{x}, \code{f}, \code{g}, \code{n_eval}.
+#' @examples
+#' f <- function(x) sum((x - 1)^2); g <- function(x) 2 * (x - 1)
+#' x <- c(0, 0); p <- -g(x)
+#' cgnonl_line_search_fr(f, g, x, p, f0 = f(x), g0 = g(x))$t   # exact step 0.5
 #' @export
 cgnonl_line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
                                   max_double = 60L, max_cubic = 40L,
@@ -609,6 +613,11 @@ cgnonl_line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #' \code{n_restart}, \code{n_feval}, \code{converged}, \code{betas}, \code{path},
 #' \code{beta_rule}, \code{line_search}, \code{restart_every}, \code{method},
 #' \code{note}.
+#' @examples
+#' f <- function(x) sum((x - c(1, -2))^2) + x[1]^2 * x[2]^2 / 10
+#' g <- function(x) c(2 * (x[1] - 1) + x[1] * x[2]^2 / 5, 2 * (x[2] + 2) + x[1]^2 * x[2] / 5)
+#' r <- cgnonl_nonlinear_cg(f, g, x0 = c(0, 0), beta = "polak-ribiere")
+#' c(r$x, r$converged)
 #' @export
 cgnonl_nonlinear_cg <- function(f, grad, x0, beta = "fletcher-reeves",
                                 restart = NULL, max_iter = NULL,

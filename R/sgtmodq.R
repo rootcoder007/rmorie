@@ -15,6 +15,10 @@
 #' @references Newman, M. E. J. & Girvan, M. (2004). Finding and
 #'   evaluating community structure in networks. Physical Review E 69,
 #'   026113. \doi{10.1103/PhysRevE.69.026113}.
+#' @examples
+#' A <- matrix(0, 6, 6); A[1:3, 1:3] <- 1; A[4:6, 4:6] <- 1; A[3, 4] <- A[4, 3] <- 1; diag(A) <- 0
+#' Sgtmodq(A, labels = c(1, 1, 1, 2, 2, 2))$Q
+#' Sgtmodq(A, labels = rep(1, 6))$Q   # one community: exactly 0
 #' @export
 Sgtmodq <- function(A, labels) {
   M <- as.matrix(A)

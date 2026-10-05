@@ -238,6 +238,8 @@ morie_lloyd_max_codebook <- morie_tqlld
 # -- restored: morie-only definition kept through the rmorie sync --
 #' One-line rationale mirroring the Python cheatsheet
 #' @return Character.
+#' @examples
+#' morie_tqlld_cheatsheet()
 #' @export
 morie_tqlld_cheatsheet <- function() {
   paste0("tqlld: Lloyd-Max, boundaries b_k = (y_k + y_k+1)/2 and ",
@@ -364,6 +366,11 @@ morie_tqlld_lloyd_max_codebook <- function(levels = 4L,
 #' @param codebook See Usage.
 #' @return A list with \code{estimate}, \code{indices}, \code{values},
 #'   \code{mse}, \code{levels}, \code{method}.
+#' @examples
+#' set.seed(3)
+#' cb <- morie_tqlld_lloyd_max_codebook(levels = 4L)$codebook
+#' q <- morie_tqlld_quantize_with_codebook(rnorm(1000), cb)
+#' q$mse   # close to the Lloyd-Max distortion 0.1175
 #' @export
 morie_tqlld_quantize_with_codebook <- function(x, codebook) {
   cb <- as.numeric(codebook)

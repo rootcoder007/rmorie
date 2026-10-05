@@ -21,6 +21,13 @@
 #' @references Verified against the CRAN package tmle 2.1.1 (Gruber & van
 #'   der Laan), whose calcParameters sets OR$psi <-
 #'   mu1/(1-mu1)/(mu0/(1-mu0)) and builds IC.logOR on the log scale.
+#' @examples
+#' set.seed(16)
+#' n <- 400
+#' A <- rbinom(n, 1, 0.5)
+#' Y <- rbinom(n, 1, plogis(-0.5 + A))
+#' Q1 <- rep(plogis(0.5), n); Q0 <- rep(plogis(-0.5), n)
+#' Tmleor(Y, A, QAW = ifelse(A == 1, Q1, Q0), Q1W = Q1, Q0W = Q0, g1W = rep(0.5, n))[c("estimate", "ci_lower", "ci_upper")]
 #' @export
 Tmleor <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95) {
   Y <- .t1_vec(Y)

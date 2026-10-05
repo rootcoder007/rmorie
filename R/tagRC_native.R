@@ -296,6 +296,11 @@ morie_tagRC <- function(triples, focus, d = 0.7, weight = 0.9,
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @return A list with \code{w}, \code{ranking}.
+#' @examples
+#' triples <- list(c("u1", "jazz", "i1"), c("u1", "live", "i2"), c("u2", "jazz", "i2"))
+#' g <- tagRC_tripartite_graph(triples)
+#' pr <- tagRC_adapted_pagerank(g$adjacency, g$nodes)
+#' head(pr$ranking, 3)
 #' @export
 tagRC_adapted_pagerank <- function(adjacency, nodes, p = NULL,
                                    d = 0.7, iters = 200,
@@ -391,6 +396,8 @@ tagRC_cheatsheet <- function() {
 #' @param focus Coerced to character by the body, with \code{as.character}.
 #' @param weight Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9}.
 #' @return A list with \code{p}, \code{focus}, \code{mass}.
+#' @examples
+#' tagRC_preference_vector(nodes = c("u1", "u2", "jazz", "i1"), focus = "u1")$p
 #' @export
 tagRC_preference_vector <- function(nodes, focus, weight = 0.9) {
   N <- as.list(nodes)
@@ -424,6 +431,10 @@ tagRC_preference_vector <- function(nodes, focus, weight = 0.9) {
 #' @param triples See Usage.
 #' @return A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples},
 #' \code{note}.
+#' @examples
+#' triples <- list(c("u1", "jazz", "i1"), c("u1", "live", "i2"), c("u2", "jazz", "i2"))
+#' g <- tagRC_tripartite_graph(triples)
+#' g$n_nodes
 #' @export
 tagRC_tripartite_graph <- function(triples) {
   nodes <- character(0)

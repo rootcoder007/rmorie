@@ -233,6 +233,8 @@ morie_jsonlt_base64url_enc <- function(input) {
 }
 
 #' @rdname morie_jsonlt_base64_dec
+#' @examples
+#' rawToChar(morie_jsonlt_base64url_dec(morie_jsonlt_base64url_enc("hello?world")))
 #' @export
 morie_jsonlt_base64url_dec <- function(input) {
   text <- gsub("[\r\n]", "", chartr("-_", "+/", input))[[1]]
@@ -1082,12 +1084,20 @@ morie_jsonlt_parse_json <- function(json, simplifyVector = FALSE, ...) {
 #' @param simplifyVector as in jsonlite (`FALSE` by default for files).
 #' @param ... options of [morie_jsonlt_from_json()] / [morie_jsonlt_to_json()].
 #' @return `read_json`: the parsed object; `write_json`: `path`, invisibly.
+#' @examples
+#' f <- tempfile(fileext = ".json")
+#' writeLines('{"a": 1, "b": [1, 2, 3]}', f)
+#' str(morie_jsonlt_read_json(f, simplifyVector = TRUE))
 #' @export
 morie_jsonlt_read_json <- function(path, simplifyVector = FALSE, ...) {
   morie_jsonlt_from_json(file(path), simplifyVector = simplifyVector, ...)
 }
 #' @rdname morie_jsonlt_read_json
 #' @param x object to write.
+#' @examples
+#' f <- tempfile(fileext = ".json")
+#' morie_jsonlt_write_json(list(a = 1, b = "x"), f)
+#' readLines(f)
 #' @export
 morie_jsonlt_write_json <- function(x, path, ...) {
   json <- morie_jsonlt_to_json(x, ...)
@@ -1371,6 +1381,9 @@ morie_jsonlt_flatten <- function(x, recursive = TRUE) {
 #' @param ... passed to the simplifier / encoder.
 #' @return `stream_in`: a data.frame of all records (or nothing with a
 #'   handler); `stream_out`: invisible.
+#' @examples
+#' con <- textConnection(c('{"a":1,"b":"x"}', '{"a":2,"b":"y"}'))
+#' morie_jsonlt_stream_in(con, verbose = FALSE)
 #' @export
 morie_jsonlt_stream_in <- function(con, handler = NULL, pagesize = 500, verbose = TRUE, ...) {
   if (!inherits(con, "connection")) stop("Argument 'con' must be a connection.", call. = FALSE)

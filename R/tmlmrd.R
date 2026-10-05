@@ -24,6 +24,12 @@
 #'   calcParameters influence curves. That package is van der Laan's
 #'   group's own software for van der Laan & Rose (2011), Targeted
 #'   Learning.
+#' @examples
+#' set.seed(17)
+#' n <- 400
+#' A <- rbinom(n, 1, 0.5)
+#' Y <- rbinom(n, 1, 0.3 + 0.2 * A)
+#' Tmlerd(Y, A, QAW = ifelse(A == 1, 0.5, 0.3), Q1W = rep(0.5, n), Q0W = rep(0.3, n), g1W = rep(0.5, n))[c("estimate", "se")]
 #' @export
 Tmlerd <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95) {
   Y <- .t1_vec(Y)

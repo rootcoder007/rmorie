@@ -27,6 +27,12 @@
 #' @return A list with \code{z}, \code{m1}, the distance matrix \code{d},
 #'   \code{estimate}, \code{n}, \code{ncycle} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 30, 32
+#' @examples
+#' set.seed(18)
+#' m1 <- matrix(rnorm(6), 3, 2); z <- array(rnorm(18), c(3, 3, 2))
+#' x <- rbind(c(0, 0, 0), c(3.8, 0, 0), c(7.6, 0, 0))
+#' r <- Alfrecyc(m1, z, x, wd = matrix(rnorm(2 * 15), 2, 15))
+#' round(r$d, 2)
 #' @export
 Alfrecyc <- function(m1, z, x, wd, bins = NULL, ncycle = 1) {
   if (is.null(bins)) bins <- 3.375 + (21.375 - 3.375) / 14 * (seq_len(15) - 1)

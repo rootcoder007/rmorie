@@ -22,6 +22,14 @@
 #' @references Verified against the CRAN package tmle 2.1.1 (Gruber & van
 #'   der Laan); the multi-level extension applies the same fluctuation per
 #'   level, as in van der Laan & Rose (2011), Targeted Learning, Chapter 4.
+#' @examples
+#' set.seed(13)
+#' n <- 300
+#' A <- sample(1:3, n, TRUE)
+#' Y <- rbinom(n, 1, c(0.3, 0.5, 0.6)[A])
+#' Q <- matrix(rep(c(0.3, 0.5, 0.6), each = n), n)       # initial fits per level
+#' G <- matrix(1 / 3, n, 3)
+#' Tmlecat(Y, A, Q, G)$psi
 #' @export
 Tmlecat <- function(Y, A, Q, G, ref = 1, gbound = 0.025, level = 0.95) {
   Y <- .t1_vec(Y)

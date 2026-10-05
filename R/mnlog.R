@@ -17,6 +17,11 @@
 #' doi:10.1007/978-3-030-89010-0. Chapter 7, Eq. (7.7) p. 226 for the ridge penalty and
 #' Eq. (7.10) p. 227 for the lasso penalty. The book states on p. 226 that only the
 #' slopes are penalized, never the intercepts.
+#' @examples
+#' set.seed(4)
+#' X <- matrix(rnorm(40), 20, 2)
+#' y <- sample(1:3, 20, TRUE)
+#' Mnpenlik(X, y, beta0 = c(0, 0, 0), beta = matrix(0, 3, 2), lam = 1)$penalized_loglik   # 20 log(1/3) at zero
 #' @export
 Mnpenlik <- function(X, y, beta0, beta, lam, penalty = "ridge") {
   out <- morie_penalized_multinomial(X, as.integer(y) - 1L, beta0, beta,

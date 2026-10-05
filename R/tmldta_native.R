@@ -800,6 +800,8 @@ morie_tmledataadaptive <- morie_tmldta
 #' Compact one-line summary of the tmldta recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_tmldta_cheatsheet()
 #' @export
 morie_tmldta_cheatsheet <- function() {
   paste(

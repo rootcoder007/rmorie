@@ -15,6 +15,8 @@
 #' (P0 - Pe)/(1 - Pe) with P0 the proportion correctly classified and Pe as written
 #' above; the book attributes it to Cohen (1960).  Read from the chapter PDF, not
 #' recalled.
+#' @examples
+#' Kappacoef(tp = 40, fp = 10, fn = 5, tn = 45)$kappa
 #' @export
 Kappacoef <- function(tp, fp, fn, tn) {
   tp <- as.numeric(tp)

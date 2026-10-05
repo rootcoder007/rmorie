@@ -402,6 +402,9 @@ morie_sechsh <- morie_sechsh_chain_entry
 #' @param entries See Usage.
 #' @param key See Usage.
 #' @param genesis See Usage.
+#' @examples
+#' ch <- build_chain(list("open", "write", "close"))
+#' ch$head_hex
 #' @export
 build_chain <- function(entries, key = NULL, genesis = .GENESIS) {
   prev <- .sechsh_as_bytes(genesis)
@@ -423,6 +426,9 @@ build_chain <- function(entries, key = NULL, genesis = .GENESIS) {
 #' @param previous_hash See Usage.
 #' @param entry See Usage.
 #' @param key See Usage.
+#' @examples
+#' e <- chain_entry(raw(32), "first entry")
+#' e$hash_hex
 #' @export
 chain_entry <- function(previous_hash, entry, key = NULL) {
   p <- .sechsh_as_bytes(previous_hash)
@@ -494,6 +500,10 @@ chain_entry <- function(previous_hash, entry, key = NULL) {
 #' Build an inclusion proof (audit path) for the given leaf
 #' @param leaves See Usage.
 #' @param index See Usage.
+#' @examples
+#' leaves <- lapply(c("a", "b", "c", "d"), charToRaw)
+#' p <- inclusion_proof(leaves, 2L)
+#' p$path_hex
 #' @export
 inclusion_proof <- function(leaves, index) {
   L <- lapply(leaves, .sechsh_as_bytes)
@@ -546,6 +556,11 @@ merkle_root <- function(leaves) {
 #' @param hashes See Usage.
 #' @param key See Usage.
 #' @param genesis See Usage.
+#' @examples
+#' entries <- list("open", "write", "close")
+#' h <- build_chain(entries)$hashes
+#' verify_chain(entries, h)$intact
+#' verify_chain(list("open", "WRITE", "close"), h)$first_bad   # 0-based index of the edit
 #' @export
 verify_chain <- function(entries, hashes, key = NULL,
                          genesis = .GENESIS) {

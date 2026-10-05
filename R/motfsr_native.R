@@ -627,6 +627,10 @@ motfsr_lambda_grid <- function(n_starts_total, n_seqs, w, lambda0) {
 #' @param w A count; the body uses it as \code{seq_len(...)}.
 #' @param comp Passed to \code{==}.
 #' @return The value of \code{tot}, as built in the body.
+#' @examples
+#' # theta: background distribution, then one distribution per motif position
+#' theta <- list(rep(0.25, 4), c(0.7, 0.1, 0.1, 0.1), c(0.1, 0.7, 0.1, 0.1))
+#' motfsr_log_component(theta, coded = list(c(0, 1, 2, 3)), i = 1, j = 1, w = 2, comp = 1)   # log(0.7) + log(0.7)
 #' @export
 motfsr_log_component <- function(theta, coded, i, j, w, comp) {
   tot <- 0
@@ -648,6 +652,8 @@ motfsr_log_component <- function(theta, coded, i, j, w, comp) {
 #' @param motif Iterated over elementwise, with \code{lapply}.
 #' @param background A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' motfsr_log_odds_matrix(motif = list(c(0.7, 0.1, 0.1, 0.1), c(0.1, 0.7, 0.1, 0.1)), background = rep(0.25, 4))
 #' @export
 motfsr_log_odds_matrix <- function(motif, background) {
   out <- lapply(motif, function(row) {
@@ -681,6 +687,12 @@ motfsr_log_odds_matrix <- function(motif, background) {
 #' @return A list with \code{theta}, \code{motif}, \code{background}, \code{lambda1},
 #' \code{z}, \code{log_likelihood}, \code{log_likelihood_trace}, \code{n_iter},
 #' \code{converged}, \code{alphabet}, \code{w}.
+#' @examples
+#' \donttest{
+#' seqs <- c("ACGTACGTAC", "TGCAACGTTG", "ACGTTGCAAC", "GGACGTACGT")
+#' f <- motfsr_mm_fit(seqs, w = 4)
+#' c(f$converged, round(f$lambda1, 3))
+#' }
 #' @export
 motfsr_mm_fit <- function(sequences, w, alphabet = NULL, theta0 = NULL,
                           lambda0 = NULL, beta = 0.01, erasing = NULL,
@@ -806,6 +818,8 @@ motfsr_mm_fit <- function(sequences, w, alphabet = NULL, theta0 = NULL,
 #' @param coded See Usage.
 #' @param L A count; the body uses it as \code{numeric(...)}.
 #' @return A numeric value.
+#' @examples
+#' motfsr_mu(coded = list(c(0, 1, 2, 3, 0)), L = 4)   # letter frequencies
 #' @export
 motfsr_mu <- function(coded, L) {
   c_ <- numeric(L)
@@ -930,6 +944,12 @@ motfsr_prepare <- function(sequences, w, alphabet) {
 #' @param loss Passed to \code{motfsr_bayes_threshold}.
 #' @return A list with \code{estimate}, \code{motifs}, \code{alphabet}, \code{w},
 #' \code{n_subsequences}, \code{erasing}, \code{method}.
+#' @examples
+#' \donttest{
+#' seqs <- c("ACGTACGTAC", "TGCAACGTTG", "ACGTTGCAAC", "GGACGTACGT")
+#' r <- motfsr_run(seqs, w = 4, n_motifs = 1)
+#' r$motifs[[1]]$consensus
+#' }
 #' @export
 motfsr_run <- function(sequences, w, alphabet = NULL, n_motifs = 1,
                        beta = 0.01, lambda0 = NULL, max_iter = 1000,
@@ -1096,6 +1116,8 @@ motfsr_score_sequence <- function(spec, sequence, alphabet, threshold = NULL) {
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param weight Numeric; combined arithmetically in the body.
 #' @return The value of \code{theta}, as built in the body.
+#' @examples
+#' motfsr_theta_from_subsequence(coded = c(0, 1, 2, 3, 0, 1), i = 1, j = 0, w = 3, L = 4, mu = 0.5, weight = 1)
 #' @export
 motfsr_theta_from_subsequence <- function(coded, i, j, w, L, mu, weight) {
   theta <- list(as.numeric(mu))

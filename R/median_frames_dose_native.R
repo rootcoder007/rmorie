@@ -389,6 +389,9 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
 #'   `se_delta`, and dose-scale versions when `log_scale`.
 #' @references Fieller EC (1954) \emph{JRSS B} 16(2):175-185,
 #'   \doi{10.1111/j.2517-6161.1954.tb00159.x}.
+#' @examples
+#' # probit fit on log10 dose; ED50 = -intercept / slope
+#' morie_effective_dose(intercept = -2, slope = 1.5, cov = matrix(c(0.04, -0.01, -0.01, 0.02), 2))[c("ed", "lower", "upper")]
 #' @export
 morie_effective_dose <- function(intercept, slope, cov, level = 0.5,
                                  alpha = 0.05, link = c("probit", "logit"),

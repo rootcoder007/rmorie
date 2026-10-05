@@ -300,6 +300,9 @@ morie_tmle_effective_pi <- morie_tmlefp
 #'
 #' @param gamma Threshold, must be at least 4.
 #' @return A numeric value in (0, 1/2].
+#' @examples
+#' morie_alpha_from_gamma(4)     # gamma = 4 gives alpha = 1/2
+#' morie_alpha_from_gamma(100)   # alpha (1 - alpha) = 1/100
 #' @export
 morie_alpha_from_gamma <- function(gamma) {
   gamma <- as.numeric(gamma)
@@ -322,6 +325,10 @@ morie_alpha_from_gamma <- function(gamma) {
 #' @return A list with \code{alpha}, \code{gamma}, \code{keep},
 #'   \code{trim}, \code{no_trimming}, \code{k}.
 #' @references Crump, R. K. et al. (2009). Theorem 5.2.
+#' @examples
+#' set.seed(22)
+#' ps <- plogis(rnorm(1000, 0, 2))
+#' morie_optimal_alpha(ps)[c("alpha", "gamma")]
 #' @export
 morie_optimal_alpha <- function(pscore, sigma2_treated = NULL,
                                 sigma2_control = NULL, tol = 1e-12,
@@ -419,6 +426,8 @@ morie_optimal_alpha_att <- function(pscore, treated, tol = 1e-12,
 #' @param sigma2_treated,sigma2_control Optional conditional variances.
 #' @return A numeric vector of weights, one per observation.
 #' @references Crump, R. K. et al. (2009). Theorem 5.4, Corollary 5.2.
+#' @examples
+#' morie_owate_weights(pscore = c(0.1, 0.5, 0.9))   # e (1 - e): largest at 0.5
 #' @export
 morie_owate_weights <- function(pscore, sigma2_treated = NULL,
                                 sigma2_control = NULL) {

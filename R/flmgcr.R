@@ -19,6 +19,11 @@
 #'   \code{morie_geron_flamingo_cross_modal_attn}, plus \code{estimate}
 #'   (mean of the updated hidden states), \code{n} and \code{method}.
 #' @references Alayrac et al (2022), NeurIPS 35:23716-23736 (Flamingo).
+#' @examples
+#' set.seed(5)
+#' x <- matrix(rnorm(12), 3, 4); v <- matrix(rnorm(8), 2, 4)
+#' identical(Flmgcr(x, v, gate = 0)$h, x)        # tanh(0) = 0: the identity
+#' Flmgcr(x, v, gate = 1)$estimate
 #' @export
 Flmgcr <- function(x, vision, gate, weights = NULL, mask = NULL) {
   X <- if (is.matrix(x)) x else matrix(as.numeric(x), nrow = 1L)

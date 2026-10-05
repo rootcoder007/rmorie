@@ -250,6 +250,10 @@ momento_cheatsheet <- function() {
 #' @param normalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{batch}, \code{meta}, \code{n_series}, \code{n_patches},
 #' \code{patch_len}, \code{note}.
+#' @examples
+#' s <- list(sin(1:24), cos(1:10))
+#' h <- momento_harmonise(s, patch_len = 8)
+#' c(h$n_series, h$n_patches)
 #' @export
 momento_harmonise <- function(series_list, patch_len, normalise = TRUE) {
   P <- as.integer(patch_len)
@@ -386,6 +390,15 @@ momento_mask_patches <- function(patches, mask_idx, fill = 0) {
 #' @param rates See Usage.
 #' @param seed Passed to \code{set.seed}. Defaults to \code{0}.
 #' @return A list with \code{curve}, \code{n_patches}, \code{rates}, \code{mse}.
+#' @examples
+#' set.seed(9)
+#' p <- lapply(1:8, function(i) rnorm(4))
+#' # a naive reconstructor: fill every masked patch with the mean of the visible ones
+#' fill_mean <- function(masked, mask) {
+#'   m <- Reduce(`+`, masked[mask == 0]) / sum(mask == 0)
+#'   lapply(seq_along(masked), function(i) if (mask[i] == 1) m else masked[[i]])
+#' }
+#' momento_reconstruction_curve(p, fill_mean, rates = c(0.25, 0.5), seed = 1)$mse
 #' @export
 momento_reconstruction_curve <- function(patches, reconstructor, rates, seed = 0) {
   P <- lapply(patches, as.numeric)
@@ -418,6 +431,8 @@ momento_reconstruction_curve <- function(patches, reconstructor, rates, seed = 0
 #' @param start Optional; may be \code{NULL}. Coerced to integer by the body, with
 #' \code{as.integer}.
 #' @return The value of \code{seq.int}.
+#' @examples
+#' momento_task_mask(n_patches = 8, task = "forecast", span = 2)   # the last two patches
 #' @export
 momento_task_mask <- function(n_patches, task = "forecast", span = 1, start = NULL) {
   n <- as.integer(n_patches)

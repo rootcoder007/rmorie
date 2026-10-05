@@ -309,6 +309,9 @@ morie_prphet <- morie_prphet_piecewise_trend
 #' @param period Positive period.
 #' @param order Integer, number of harmonics.
 #' @return A list of rows, each \code{2 * order} long.
+#' @examples
+#' f <- fourier_terms(t = c(0, 7, 14), period = 7, order = 1)
+#' f   # identical rows: exactly periodic
 #' @export
 fourier_terms <- function(t, period, order) {
   if (period <= 0)
@@ -373,6 +376,8 @@ holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
 #' @param deltas Numeric vector of rate adjustments, one per changepoint.
 #' @param cps Numeric vector of changepoints.
 #' @return Numeric vector of trend values.
+#' @examples
+#' piecewise_trend(t = 0:6, k_rate = 1, m_off = 0, deltas = -1, cps = 3)   # flat after t = 3
 #' @export
 piecewise_trend <- function(t, k_rate, m_off, deltas, cps) {
   out <- numeric(length(t))
@@ -395,6 +400,9 @@ piecewise_trend <- function(t, k_rate, m_off, deltas, cps) {
 #' @param holidays Optional named list of dates per holiday.
 #' @param holiday_window \code{c(lower, upper)} window around each date.
 #' @return A list with \code{X} (list of rows), \code{cols}, \code{hn}.
+#' @examples
+#' d <- prophet_design(t = 1:10, cps = 5, seasonalities = list(list("weekly", 7, 1)))
+#' d$cols
 #' @export
 prophet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
                            holiday_window = c(0, 0)) {
@@ -483,6 +491,8 @@ prphet_cheatsheet <- function() {
 #' @param t Numeric vector of times.
 #' @param cps Numeric vector of changepoints.
 #' @return A list of rows, each a numeric vector.
+#' @examples
+#' trend_matrix(t = c(0, 1, 2, 3), cps = 1.5)
 #' @export
 trend_matrix <- function(t, cps) {
   rows <- list()

@@ -27,6 +27,10 @@
 #'   \code{n_episodes} and \code{method}.
 #' @references van Hasselt, H. (2010). Double Q-learning. Advances in
 #'   Neural Information Processing Systems, 23, 2613-2621.
+#' @examples
+#' P <- list(matrix(c(0.9, 0.1, 0, 1), 2, byrow = TRUE), matrix(c(0.1, 0.9, 0, 1), 2, byrow = TRUE))
+#' R <- matrix(c(0, 1, 0, 0), 2, 2)
+#' morie_ddqn(P, R, gamma = 0.9, n_episodes = 50L, terminal = 1L)$policy
 #' @export
 morie_ddqn <- function(P, R, gamma, alpha = 0.1, epsilon = 0.1,
                        n_episodes = 100L, start = 0L, terminal = c(),

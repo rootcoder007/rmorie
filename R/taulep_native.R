@@ -47,6 +47,11 @@
 #' @references Gillespie, D. T. (2001). Approximate accelerated
 #'   stochastic simulation of chemically reacting systems. Journal of
 #'   Chemical Physics, 115(4), 1716-1733.
+#' @examples
+#' # immigration-death: 0 -> X at rate 10, X -> 0 at rate 0.1 X; equilibrium near 100
+#' nu <- matrix(c(1, -1), 2, 1)
+#' r <- morie_taulep(nu, function(x) c(10, 0.1 * x[1]), x0 = 0, tau = 0.5, n_steps = 200, seed = 1)
+#' tail(r$path[, 1], 3)
 #' @export
 morie_taulep <- function(nu, propensity, x0, tau, n_steps, seed = 0) {
   nu <- as.matrix(nu)

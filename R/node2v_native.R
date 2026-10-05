@@ -317,6 +317,8 @@ node2v_alpha_pq <- function(d_tx, p, q) {
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(node2v_cheatsheet())
 #' @export
 node2v_cheatsheet <- function() {
   paste("node2v: graph as document, walk as sentence, skip-gram on ",
@@ -395,6 +397,9 @@ node2v_skipgram_pairs <- function(walks, window = 2) {
 #' @param q Passed to \code{node2v_alpha_pq}.
 #' @param weights Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{nodes}, \code{probabilities}, \code{unnormalized}, \code{Z}.
+#' @examples
+#' adj <- list(`1` = c(2, 3), `2` = c(1, 3), `3` = c(1, 2, 4), `4` = 3)
+#' node2v_transition_probabilities(adj, t = 1, v = 3, p = 2, q = 0.5)$probabilities
 #' @export
 node2v_transition_probabilities <- function(adj, t, v, p, q,
                                             weights = NULL) {
@@ -444,6 +449,10 @@ node2v_transition_probabilities <- function(adj, t, v, p, q,
 #' @param rng Optional; may be \code{NULL}. Passed to \code{.ghc_unif}.
 #' @param weights Passed to \code{node2v_transition_probabilities}.
 #' @return The value of \code{path}, as built in the body.
+#' @examples
+#' adj <- list(`1` = c(2, 3), `2` = c(1, 3), `3` = c(1, 2, 4), `4` = 3)
+#' set.seed(1)
+#' node2v_walk(adj, start = 1, length = 6, p = 1, q = 0.5)
 #' @export
 node2v_walk <- function(adj, start, length, p = 1, q = 1, rng = NULL,
                         weights = NULL) {

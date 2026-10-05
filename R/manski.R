@@ -22,6 +22,10 @@
 #'   80(2):319-323. Molinari, F. (2021), Microeconometrics with Partial
 #'   Identification, Handbook of Econometrics 7A, eq. (2.11) and p. 18
 #'   (arXiv:2004.11751).
+#' @examples
+#' set.seed(16)
+#' y <- runif(80); D <- rbinom(80, 1, 0.5)
+#' Manski(y, D, y_min = 0, y_max = 1)[c("ate_lower", "ate_upper", "ate_width")]   # width 1
 #' @export
 Manski <- function(y, D, y_min, y_max) {
   morie_bnd_manski(y, NULL, c(y_min, y_max), treatment = D)

@@ -366,6 +366,10 @@ chronos_dequantize <- function(tokens, bins) {
 #' @param bins Passed to \code{chronos_dequantize}.
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
+#' @examples
+#' bins <- chronos_uniform_bins(lo = -3, hi = 3, n_bins = 12L)
+#' tok <- chronos_tokenize(c(10, 12, 9), bins)
+#' chronos_detokenize(tok$tokens, bins, scale = tok$scale)
 #' @export
 chronos_detokenize <- function(tokens, bins, scale) {
   chronos_dequantize(tokens, bins) * as.numeric(scale)
@@ -383,6 +387,10 @@ chronos_detokenize <- function(tokens, bins, scale) {
 #' @param quantiles Coerced to numeric by the body, with \code{as.numeric}. Defaults to
 #' \code{c(0.1, 0.5, 0.9)}.
 #' @return A list with \code{mean}, \code{quantiles}, \code{mode}, \code{note}.
+#' @examples
+#' bins <- chronos_uniform_bins(lo = -3, hi = 3, n_bins = 7L)
+#' p <- c(0, 0.05, 0.2, 0.5, 0.2, 0.05, 0)
+#' chronos_forecast_summary(p, bins)[c("mean", "mode")]
 #' @export
 chronos_forecast_summary <- function(token_probs, bins,
                                      quantiles = c(0.1, 0.5, 0.9)) {
@@ -428,6 +436,8 @@ chronos_forecast_summary <- function(token_probs, bins,
 #' \code{as.integer}.
 #' @return A list with \code{scaled}, \code{scale}, \code{degenerate}, \code{context},
 #' \code{preserves_zero}.
+#' @examples
+#' chronos_mean_scale(c(10, 12, 9, 11))$scale   # mean absolute value
 #' @export
 chronos_mean_scale <- function(x, context = NULL) {
   v <- as.numeric(x)
@@ -531,6 +541,9 @@ chronos_quantize <- function(x, bins) {
 #' \code{as.integer}.
 #' @return A list with \code{estimate}, \code{tokens}, \code{scale}, \code{n_clipped},
 #' \code{clipped_fraction}, \code{vocab_size}, \code{method}, \code{ignores}.
+#' @examples
+#' bins <- chronos_uniform_bins(lo = -15, hi = 15, n_bins = 64L)
+#' chronos_tokenize(c(10, 12, 9, 11, 13), bins)$tokens
 #' @export
 chronos_tokenize <- function(x, bins, context = NULL, add_eos = TRUE,
                              pad_to = NULL) {

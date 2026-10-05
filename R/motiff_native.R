@@ -153,6 +153,12 @@
 #' @references Milo, R. et al. (2002). Network motifs: simple
 #'   building blocks of complex networks. Science, 298(5594),
 #'   824-827.
+#' @examples
+#' \donttest{
+#' set.seed(22)
+#' A <- matrix(rbinom(15 * 15, 1, 0.15), 15); diag(A) <- 0
+#' morie_motiff(A, motif = "ffl", n_random = 30, seed = 1)[c("count", "z_score")]
+#' }
 #' @export
 morie_motiff <- function(adjacency, motif = "ffl", n_random = 100,
                          seed = 0, swaps = NULL, preserve_mutual = TRUE) {

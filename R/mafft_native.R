@@ -1522,6 +1522,9 @@ morie_mafft <- function(op, ...) {
 #'
 #' @param chain A matrix; indexed by row and column.
 #' @return The value of \code{mapply}.
+#' @examples
+#' chain <- rbind(c(1, 10, 3), c(20, 30, 4))   # rows: start in a, start in b, length
+#' mafft_anchors_from(chain)
 #' @export
 mafft_anchors_from <- function(chain) {
   if (!is.matrix(chain) || nrow(chain) == 0L) {
@@ -1546,6 +1549,8 @@ mafft_anchors_from <- function(chain) {
 #' @param seqs Passed to \code{unlist}.
 #' @param seq_type Optional; may be \code{NULL}. One of \code{"aa"}, \code{"nt"}.
 #' @return A list with \code{seqs}, \code{seq_type}.
+#' @examples
+#' mafft_clean(c("acgt-", "AC GT"))
 #' @export
 mafft_clean <- function(seqs, seq_type = NULL) {
   out <- as.character(toupper(unlist(seqs)))
@@ -1595,6 +1600,8 @@ mafft_default_raw <- function(seq_type, which = "jtt200") {
 #'
 #' @param group A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{vapply}.
+#' @examples
+#' mafft_degap(c("MK-LA", "M--LA"))
 #' @export
 mafft_degap <- function(group) .mafft_degap(group)
 
@@ -1607,6 +1614,8 @@ mafft_degap <- function(group) .mafft_degap(group)
 #' @param group A vector; its length is taken and its elements indexed.
 #' @param weights A vector; indexed elementwise.
 #' @return A list with \code{gs}, \code{ge}.
+#' @examples
+#' mafft_gap_profiles(group = c("MK-LA", "MKVLA"), weights = c(1, 1))
 #' @export
 mafft_gap_profiles <- function(group, weights) .mafft_gap_profiles(group, weights)
 
@@ -1617,6 +1626,9 @@ mafft_gap_profiles <- function(group, weights) .mafft_gap_profiles(group, weight
 #' See the file header for the source the module follows.
 #'
 #' @return A list with \code{S}, \code{f}.
+#' @examples
+#' j <- mafft_jtt_exchangeability()
+#' dim(j$S); sum(j$f)
 #' @export
 mafft_jtt_exchangeability <- function() {
   f <- .MAFFT_JTT_FREQ
@@ -1690,6 +1702,8 @@ mafft_nw <- function(g1, g2, M, w1, w2, s_op) {
 #' @param c Numeric; passed to \code{order}.
 #' @param n_peaks Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{[}.
+#' @examples
+#' mafft_peaks(lags = -3:3, c = c(0.1, 0.5, 0.2, 0.9, 0.3, 0.8, 0.0), n_peaks = 2)
 #' @export
 mafft_peaks <- function(lags, c, n_peaks) .mafft_peaks(lags, c, n_peaks)
 
@@ -1741,6 +1755,8 @@ mafft_weights <- function(k) rep(1.0 / k, k)
 #' @param b A vector; its length is taken and its elements indexed.
 #' @param size A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' mafft_xcorr_direct(c(1, 2, 3), c(0, 1, 0.5), size = 5)
 #' @export
 mafft_xcorr_direct <- function(a, b, size) {
   out <- rep(0.0, size)

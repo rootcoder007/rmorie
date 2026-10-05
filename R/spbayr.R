@@ -37,6 +37,10 @@
 #'   `rank_deficiency`, `n_constraints` and `constraint_matrix`.
 #' @references Schabenberger Ch 6, Sec 6.4, eqs (6.99)-(6.104); Tonui,
 #'   Mwalili and Wanjoya (2018), Open Journal of Statistics 8:811-830
+#' @examples
+#' A <- matrix(0, 4, 4); A[cbind(1:3, 2:4)] <- 1; A <- A + t(A)
+#' r <- spbayr(counts = c(5, 8, 12, 4), expected = c(6, 7, 9, 6), adjacency = A, spatial_prior = "lcar", rho = 0.5)
+#' r$smr
 #' @export
 spbayr <- function(counts, expected, adjacency, spatial_prior = "lcar",
                    rho = 0.5, n_time = NULL, temporal_prior = "none",

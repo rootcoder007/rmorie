@@ -19,6 +19,8 @@
 #'   \code{d_crit}, \code{d_fill}, \code{k}.
 #' @references Orwin, R. G. (1983). Journal of Educational Statistics
 #'   8(2):157-159. \doi{10.2307/1164923}.
+#' @examples
+#' Maorw(d_obs = 0.5, d_crit = 0.2, d_filldraw = 0, k = 10)$Nfs   # 10 (0.5 - 0.2) / 0.2 = 15
 #' @export
 Maorw <- function(d_obs, d_crit, d_filldraw, k) {
   do <- as.numeric(d_obs)

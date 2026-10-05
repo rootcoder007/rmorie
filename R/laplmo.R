@@ -17,6 +17,10 @@
 #' @references Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.2, which writes
 #'   Lcal as an operator on functions g : V -> R and works with its harmonic
 #'   eigenfunctions.
+#' @examples
+#' W <- matrix(0, 6, 6); W[1:3, 1:3] <- 1; W[4:6, 4:6] <- 1; W[3, 4] <- W[4, 3] <- 0.1; diag(W) <- 0
+#' e <- Lapeig(W, k = 2)
+#' sign(e$fiedler)   # splits the two triangles
 #' @export
 #' @rdname Lapeig-laplmo
 Lapeig <- function(W, k = 2, tol = 1e-10) {
