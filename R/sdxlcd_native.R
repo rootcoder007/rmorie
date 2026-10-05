@@ -293,7 +293,7 @@ morie_sdxlcd_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_sdxlcd_sdxlconditioning <- morie_sdxlcd_condition_vector
 
 # public names resolved by fn/_lazy_map.json

@@ -399,7 +399,7 @@ value_distribution_iteration <- function(reward_atoms, reward_probs, gamma,
                    shift = shift))
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 categoricalprojection <- categorical_projection
 
 # public names resolved by fn/_lazy_map.json

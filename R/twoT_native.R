@@ -373,7 +373,7 @@ morie_twoT_cheatsheet <- function() {
         "directions.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_twoT <- morie_twoT_retrieve
 
 # public names resolved by fn/_lazy_map.json

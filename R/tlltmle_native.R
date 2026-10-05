@@ -307,7 +307,7 @@ tlltmle_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 tlltmle_longitudinaltmle <- tlltmle_ltmle
 
 morie_tlltmle <- list(

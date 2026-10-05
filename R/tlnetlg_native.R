@@ -372,7 +372,7 @@ morie_tlnetlg_cheatsheet <- function() {
         "covariance of CONNECTED pairs.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_tlnetlg_networklongitudinal <- morie_tlnetlg_longitudinal_network_gcomp
 
 # Main entry point

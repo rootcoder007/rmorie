@@ -391,7 +391,7 @@ score_separation <- function(normal_scores, anomalous_scores) {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 anogan <- morie_gan_an
 
 # public names resolved by fn/_lazy_map.json

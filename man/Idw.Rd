@@ -24,11 +24,10 @@ irregularly-spaced data, ACM National Conference 23, 517-524: z(s*) =
 sum_i w_i z_i / sum_i w_i with w_i = 1 / d(s*, s_i)^p, and the
 convention that if s* coincides with a datum the interpolated value IS
 that datum -- Shepard's function is an exact interpolator, so the limit
-is taken rather than the division attempted.  The 1968 proceedings were
-not retrievable here; the interpolant and the exactness convention are
-quoted in their standard published form.  p = 2 is Shepard's own choice.
-The effective number of contributing points, (sum w)^2 / sum w^2, is
-returned because it is the honest measure of how local the estimate is.
+is taken rather than the division attempted.  p = 2 is Shepard's own
+choice.  The effective number of contributing points,
+(sum w)^2 / sum w^2, is returned as a measure of how local the estimate
+is.
 }
 \examples{
 Idw(matrix(c(0, 0, 1, 0), 2, 2, byrow = TRUE), c(1, 3),

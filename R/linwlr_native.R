@@ -398,5 +398,5 @@ morie_linwlr_cheatsheet <- function() {
          "double-robustness claimed without an outcome model.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_linwlr_linearweightedlearner <- morie_linwlr

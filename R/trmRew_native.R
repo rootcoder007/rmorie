@@ -876,5 +876,5 @@ morie_trmRew_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_trmRew <- morie_trmRew_term_rewriting

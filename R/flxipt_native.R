@@ -632,7 +632,7 @@ iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
          "with g from the ensemble (Pirracchio 2015 eq. 3).")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 flexibleiptw <- flexible_iptw
 
 # house entry point: the package exports one morie_<module>

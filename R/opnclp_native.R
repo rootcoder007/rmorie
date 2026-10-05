@@ -289,7 +289,7 @@ infonce <- function(image_embeddings, text_embeddings,
         "beyond the fitted range a prediction reaches.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 openclipscaling <- fit_power_law
 
 # public names resolved by fn/_lazy_map.json

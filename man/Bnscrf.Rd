@@ -16,11 +16,10 @@ The payload of \code{Bndfre}, with \code{method} naming this
 entry point.
 }
 \description{
-The stub set carried two module names for one construction:
-"frequentist bound with valid coverage" and "confidence interval for a
+"Frequentist bound with valid coverage" and "confidence interval for a
 partially identified parameter" are both the Imbens-Manski (2004)
-equation (6) interval. This name is kept working and forwards to
-\code{Bndfre}; it is not a second implementation.
+equation (6) interval. This name forwards to \code{Bndfre}; it is not a
+second implementation.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -15,6 +15,8 @@ Bnscnf(theta_grid, moments, alpha = 0.05)
 }
 \value{
 The payload of \code{Bndinf}.
+
+The payload of \code{Bndinf}.
 }
 \description{
 "Confidence set for partial ID" and "inference for partially identified
@@ -29,9 +31,8 @@ Bnscnf(V, D)
 }
 \references{
 Imbens, G. W. and Manski, C. F. (2004). Confidence intervals
-for partially identified parameters. Econometrica 72(6), 1845-1857 --
-the stub's attribution; the set reported is the criterion level set of
-Chernozhukov, Hong and Tamer (2007) as given in equation (4.10) of
-Molinari, F. (2021), Handbook of Econometrics 7A (arXiv:2004.11751
-p. 97).
+for partially identified parameters. Econometrica 72(6), 1845-1857.
+The set reported is the criterion level set of Chernozhukov, Hong and
+Tamer (2007) as given in equation (4.10) of Molinari, F. (2021),
+Handbook of Econometrics 7A (arXiv:2004.11751 p. 97).
 }

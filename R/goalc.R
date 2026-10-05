@@ -7,9 +7,7 @@
 #' in that paper and in Andrychowicz et al. (2017), Hindsight experience
 #' replay (arXiv:1707.01495), is the sparse indicator r_g(s) = 0 if s == g
 #' and -1 otherwise, so V(s, g) is the negated expected number of steps to
-#' reach g.  The ICML version is free but was not retrievable here; the
-#' definition is quoted in its standard published form and is reproduced
-#' identically in both papers.
+#' reach g.
 #'
 #' On a deterministic transition list the values are exact, computed by a
 #' backward breadth-first sweep from each goal -- value iteration

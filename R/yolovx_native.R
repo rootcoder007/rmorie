@@ -356,7 +356,7 @@ morie_yolovx_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_yolovx_yoloxhead <- morie_yolovx_simota_assign
 # public names resolved by fn/_lazy_map.json
 morie_yolovx_yolo_decoupled_head <- morie_yolovx_simota_assign

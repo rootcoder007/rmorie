@@ -434,5 +434,5 @@ morie_tmlcmp <- function(time, event_type, D, X, times = NULL,
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 tmlecompetingrisks <- morie_tmlcmp

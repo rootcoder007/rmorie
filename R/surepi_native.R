@@ -406,7 +406,7 @@ surepi_cheatsheet <- function() {
         "is an aberration, not an outbreak.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 surepi_earssignal <- surepi_ears_detect
 
 # public names resolved by fn/_lazy_map.json

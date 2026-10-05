@@ -295,7 +295,7 @@ density_is_view_independent <- function(model, point, directions,
         "a PDF.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 neuralradiancefield <- volume_render
 
 # public names resolved by fn/_lazy_map.json

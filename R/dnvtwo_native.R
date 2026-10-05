@@ -373,7 +373,7 @@ self_distillation_loss <- function(student, teacher, temperature_s = 0.1,
          "send it to infinity.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 dinov2 <- self_distillation_loss
 
 # public names resolved by fn/_lazy_map.json

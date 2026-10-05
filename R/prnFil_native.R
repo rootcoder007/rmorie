@@ -253,7 +253,7 @@
          "dominates every forecast.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 .prnFil_selectchangepoints <- .prnFil_select_changepoints
 
 # public names resolved by fn/_lazy_map.json

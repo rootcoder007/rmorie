@@ -334,7 +334,7 @@ sse4r_cheatsheet <- function() {
          "observed rate is p(1-1/n), not p.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 ssept <- morie_sse4r
 
 # public names resolved by fn/_lazy_map.json

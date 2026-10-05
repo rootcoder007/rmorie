@@ -812,7 +812,7 @@ morie_secaead_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_secaead_chacha20poly1305 <- morie_secaead_aead_encrypt
 # public names resolved by fn/_lazy_map.json
 morie_secaead_aead_chacha20poly1305 <- morie_secaead_aead_encrypt

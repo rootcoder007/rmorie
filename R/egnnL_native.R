@@ -336,8 +336,8 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
          "matters.")
 }
 
-# compact alias per ledger/NAMING.md
-#' Compact alias per ledger/NAMING.md
+# compact alias
+#' Compact alias
 #'
 #' A step of the egnnL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

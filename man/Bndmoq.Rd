@@ -20,6 +20,7 @@ within-stratum interval alongside the pooled one.}
 List with \code{lower}, \code{upper}, \code{width},
 \code{estimate}, \code{max_width}, \code{n_strata}, \code{p_observed},
 \code{n}.
+\code{n}.
 }
 \description{
 Quantiles behave better than means under selection. The mean bound is
@@ -37,7 +38,7 @@ Formula, with \code{q(p)} the type-1 quantile among the observed and
 otherwise.
 }
 \section{Note}{
- the stub this replaced attributed the construction to
+ this construction is sometimes attributed to
 Chernozhukov and Hansen (2005), which is the instrumental-variable
 quantile regression model, a different object. The bound evaluated
 here is Manski's and is cited as such.

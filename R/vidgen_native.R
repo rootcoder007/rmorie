@@ -429,7 +429,7 @@ morie_vidgen_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_vidgen_videodiffusion <- morie_vidgen_reconstruction_guidance
 
 # public names resolved by fn/_lazy_map.json

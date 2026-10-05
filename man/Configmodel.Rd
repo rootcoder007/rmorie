@@ -13,6 +13,8 @@ Configmodel(degrees, seed = 1)
 }
 \value{
 List with \code{edges}, \code{degree} (realised), \code{self_loops}, \code{multi_edges}, \code{n}.
+
+List with \code{edges}, \code{degree} (realised), \code{self_loops}, \code{multi_edges}, \code{n}.
 }
 \description{
 Formula: attach half-edges (stubs) uniformly at random in pairs; every vertex ends
@@ -26,6 +28,5 @@ Configmodel(V)
 Bender and Canfield (1978), The asymptotic number of labeled graphs with
 given degree sequences, JCTA 24:296-307; Molloy and Reed (1995), A critical point for
 random graphs with a given degree sequence, Random Structures and Algorithms
-6:161-180. Neither is held locally; uniform stub pairing is the standard published
-construction.
+6:161-180. Uniform stub pairing is the standard published construction.
 }

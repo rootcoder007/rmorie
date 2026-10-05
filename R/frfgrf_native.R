@@ -411,7 +411,7 @@
     "beta_min = 1 - (1 + (d/pi) log(1/alpha)/log(1/(1-alpha)))^-1."))
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 .frfgrf_forestfitcheck <- .frfgrf_forest_fit_check
 
 # public names resolved by fn/_lazy_map.json

@@ -321,7 +321,7 @@ temporal_combination <- function(y, levels, horizon = 1L, method = "tsb",
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 adidaforecast <- morie_adida
 
 # public names resolved by fn/_lazy_map.json

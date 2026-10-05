@@ -323,7 +323,7 @@ phmmsr_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 hmmersearch <- phmmsr_search_pipeline
 
 # public names resolved by fn/_lazy_map.json

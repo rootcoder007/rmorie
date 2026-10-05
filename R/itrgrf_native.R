@@ -303,5 +303,5 @@ morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 itrforest <- morie_itrgrf

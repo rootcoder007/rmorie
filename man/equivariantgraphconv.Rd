@@ -2,7 +2,7 @@
 % Please edit documentation in R/egcn_native.R
 \name{equivariantgraphconv}
 \alias{equivariantgraphconv}
-\title{Compact alias per ledger/NAMING.md}
+\title{Compact alias}
 \usage{
 equivariantgraphconv(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 }

@@ -443,7 +443,7 @@ trclrn_cheatsheet <- function() {
     "(Tao & Wang 2017) and survives either model being wrong."))
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 trclrn_treeoptimalregime <- trclrn_fit_tree
 
 # public names resolved by fn/_lazy_map.json

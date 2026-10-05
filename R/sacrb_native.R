@@ -442,7 +442,7 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
          "comparable only when their signatures match.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_sacrb_sacrebleu <- morie_sacrb_bleu
 
 #' @rdname morie_sacrb_bleu

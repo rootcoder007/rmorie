@@ -337,7 +337,7 @@ morie_lda_variational_em <- .morie_lda_variational_em
 morie_lda_topic_words <- .morie_lda_topic_words
 morie_lda_cheatsheet <- .morie_lda_cheatsheet
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_lda_latentdirichlet <- .morie_lda_variational_em
 morie_lda_lda_topic <- .morie_lda_variational_em
 morie_lda_ldatopic <- .morie_lda_variational_em

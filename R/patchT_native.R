@@ -310,7 +310,7 @@ patchtst_encode <- function(X, patch_len, stride = NULL,
         "projection and is permutation-INVARIANT instead.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 patchtst <- patchtst_encode
 
 # public names resolved by fn/_lazy_map.json

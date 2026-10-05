@@ -463,7 +463,7 @@ morie_survnnr_cheatsheet <- function() {
         "supplies it when an absolute survival curve is wanted.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_survnnr_deep_surv <- morie_survnnr_fit
 
 # entry point

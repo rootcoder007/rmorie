@@ -293,7 +293,7 @@ ngcf_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 neuralgraphcf <- ngcf_stack_layers
 
 # public names resolved by fn/_lazy_map.json

@@ -2,7 +2,7 @@
 % Please edit documentation in R/elmo_native.R
 \name{elmorepresentation}
 \alias{elmorepresentation}
-\title{Compact alias per ledger/NAMING.md}
+\title{Compact alias}
 \usage{
 elmorepresentation(X, layers, raw_weights = NULL, gamma = 1)
 }

@@ -337,7 +337,7 @@ integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 inla <- integrate_marginals
 inla_spatial <- integrate_marginals
 inlaspatial <- integrate_marginals

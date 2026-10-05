@@ -382,5 +382,5 @@
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_tlsate <- .tlsate_sate_tmle

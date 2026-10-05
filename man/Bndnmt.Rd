@@ -17,6 +17,7 @@ Bndnmt(y, D, Z)
 List with \code{lower}, \code{upper}, \code{width},
 \code{estimate}, \code{wald}, \code{pi_net}, \code{pi_c_max},
 \code{pi_d_max}, \code{itt_y}, \code{n}.
+\code{pi_d_max}, \code{itt_y}, \code{n}.
 }
 \description{
 The first stage identifies only the NET complier share,
@@ -37,8 +38,6 @@ Derivation: \code{ITT_y = pi_c E[D | c] - pi_d E[D | d]} with
 \references{
 de Chaisemartin, C. (2017). Tolerating defiance? Local
 average treatment effects without monotonicity. Quantitative
-Economics 8(2), 367-396. \doi{10.3982/QE601} -- the stub's
-attribution, for the problem; the paper was not accessible, so the
-interval above is the elementary mixture bound, derived here rather
-than taken from it.
+Economics 8(2), 367-396. \doi{10.3982/QE601}, for the problem; the
+interval above is the elementary mixture bound, derived in Details.
 }

@@ -12,12 +12,11 @@
 #' The paper's own choice of rho, and the one its proofs are for, is the
 #' Kolmogorov sup distance sup_x |F(x) - G(x)|; that is what is used here.
 #'
-#' The stub this replaces labelled the method "min-volatility", which is a
-#' different rule (Politis, Romano and Wolf 1999, the standard deviation of
-#' interval endpoints over a window of neighbouring m).  The citation on the
-#' stub is Bickel and Sakov, so the Bickel-Sakov rule is what is implemented;
-#' the vol_curve key is kept and carries the KS discrepancies
-#' rho(L_j, L_(j+1)), which is the quantity the rule minimises.
+#' This is the Bickel-Sakov rule.  It is distinct from the
+#' "min-volatility" rule (Politis, Romano and Wolf 1999, the standard
+#' deviation of interval endpoints over a window of neighbouring m); the
+#' vol_curve key carries the KS discrepancies rho(L_j, L_(j+1)), which is
+#' the quantity the Bickel-Sakov rule minimises.
 #'
 #' The law compared is that of the root sqrt(m)(theta*_m - theta_hat).  Ties
 #' are broken toward the largest m exactly as the paper directs.  Anchor: on a

@@ -397,7 +397,7 @@ morie_se3T_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_se3T_se3transformer <- morie_se3T_se3_attention
 
 # public names resolved by fn/_lazy_map.json

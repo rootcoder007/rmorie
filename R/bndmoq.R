@@ -22,7 +22,8 @@
 #' @return List with \code{lower}, \code{upper}, \code{width},
 #'   \code{estimate}, \code{max_width}, \code{n_strata}, \code{p_observed},
 #'   \code{n}.
-#' @section Note: the stub this replaced attributed the construction to
+#'   \code{n}.
+#' @section Note: this construction is sometimes attributed to
 #'   Chernozhukov and Hansen (2005), which is the instrumental-variable
 #'   quantile regression model, a different object. The bound evaluated
 #'   here is Manski's and is cited as such.

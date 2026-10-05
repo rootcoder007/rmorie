@@ -642,7 +642,7 @@ morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
          "st Delta=1.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_tmlecensoring <- morie_tmle_censoring
 
 #' @rdname morie_coarsen_interval

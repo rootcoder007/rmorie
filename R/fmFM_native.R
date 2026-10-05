@@ -228,7 +228,7 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
          "encoding.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 factorizationmachine <- fit_fm
 
 # public names resolved by fn/_lazy_map.json

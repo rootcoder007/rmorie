@@ -400,7 +400,7 @@ morie_wenge_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_wenge_weightbasedmediation <- morie_wenge_weight_based_mediation
 
 #' @rdname morie_wenge_weight_based_mediation

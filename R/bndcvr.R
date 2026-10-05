@@ -16,11 +16,11 @@
 #' @param alpha Nominal miss probability, default 0.05.
 #' @return List with \code{coverage}, \code{nominal}, \code{n_covered},
 #'   \code{R}, \code{p_value}, \code{reject}, \code{mean_width}.
+#'   \code{R}, \code{p_value}, \code{reject}, \code{mean_width}.
 #' @references The coverage requirements distinguished here are equations
 #'   (4.11) to (4.14) of Molinari, F. (2021), Handbook of Econometrics 7A
-#'   (arXiv:2004.11751 pp. 97-100). Andrews, D. W. K. and Soares, G.
-#'   (2010), Econometrica 78(1), 119-157, \doi{10.3982/ECTA7502}, is the
-#'   stub's attribution.
+#'   (arXiv:2004.11751 pp. 97-100). See also Andrews, D. W. K. and Soares, G.
+#'   (2010), Econometrica 78(1), 119-157, \doi{10.3982/ECTA7502}.
 #' @export
 #' @examples
 #' Bndcvr(lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8),

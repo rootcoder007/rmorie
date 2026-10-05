@@ -17,6 +17,7 @@ Bnsipv(y, D, Z)
 List with \code{lower}, \code{upper}, \code{width},
 \code{estimate}, \code{iv_lower}, \code{iv_upper}, \code{mtr_lower},
 \code{mtr_upper}, \code{refuted}, \code{n}.
+\code{mtr_upper}, \code{refuted}, \code{n}.
 }
 \description{
 The two assumptions restrict different things -- the instrument
@@ -37,9 +38,9 @@ r <- Bnsipv(y = rnorm(10), D = rbinom(10, 1, 0.5), Z = rnorm(10)); TRUE
 \references{
 Mogstad, M., Santos, A. and Torgovitsky, A. (2018). Using
 instrumental variables for inference about policy relevant treatment
-parameters. Econometrica 86(5), 1589-1619. \doi{10.3982/ECTA15463} --
-the stub's attribution; their general linear-programming machinery
-already ships as \code{morie_bnd_lp} and is not duplicated here. The
-component bounds are equations (2.15) and (2.13) of Molinari, F.
-(2021), Handbook of Econometrics 7A (arXiv:2004.11751 pp. 18-19).
+parameters. Econometrica 86(5), 1589-1619. \doi{10.3982/ECTA15463};
+their general linear-programming machinery ships as
+\code{morie_bnd_lp}. The component bounds are equations (2.15) and
+(2.13) of Molinari, F. (2021), Handbook of Econometrics 7A
+(arXiv:2004.11751 pp. 18-19).
 }

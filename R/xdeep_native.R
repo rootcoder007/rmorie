@@ -289,7 +289,7 @@ xdeep_cheatsheet <- function() {
         "interactions coexist.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 xdeep_xdeepfm <- xdeep_cin
 
 # entry point

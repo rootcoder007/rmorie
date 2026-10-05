@@ -277,7 +277,7 @@ word_patch_alignment <- function(text_boxes, masked_patches, width,
         "SEGMENT-level 2D position.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 layoutlmv3 <- word_patch_alignment
 
 # public names resolved by fn/_lazy_map.json

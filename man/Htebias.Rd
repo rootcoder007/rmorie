@@ -11,10 +11,9 @@ Htebias(y, D, tau_hat, y_hat = NULL, w_hat = NULL)
 
 \item{D}{Numeric treatment assignment of length n.}
 
-\item{tau_hat}{Out-of-fold CATE predictions, one per unit.  The third
-argument of the pasted stub was called X; it is the CATE prediction
-vector the best linear predictor is calibrated against, not a
-covariate matrix.}
+\item{tau_hat}{Out-of-fold CATE predictions, one per unit: the vector
+the best linear predictor is calibrated against, not a covariate
+matrix.}
 
 \item{y_hat}{Optional out-of-fold predictions of E[Y|X]; defaults to
 \code{mean(y)}.}

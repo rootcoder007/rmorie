@@ -276,7 +276,7 @@
          "global feature, ONE estimator, and no autoregression.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 .infmax_deepinfomax <- .infmax_local_objective
 
 # public names resolved by fn/_lazy_map.json

@@ -634,7 +634,7 @@ morie_surxgb_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_surxgb_survival_xgboost <- morie_surxgb_boost
 
 #' @rdname morie_surxgb_boost

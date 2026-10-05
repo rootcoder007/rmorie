@@ -1200,7 +1200,7 @@ morie_vepan_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_vepan_vepannotation <- morie_vepan_vep_annotation
 
 #' @rdname morie_vepan_vep_annotation

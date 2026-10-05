@@ -21,6 +21,7 @@ the two language arms evaluating the same map.}
 \value{
 List with \code{lower}, \code{upper}, \code{width},
 \code{estimate}, \code{gap}, \code{n_strata}, \code{n}.
+\code{estimate}, \code{gap}, \code{n_strata}, \code{n}.
 }
 \description{
 Mean bounds are not invariant under a monotone transform: the
@@ -44,9 +45,8 @@ Bndtfm(y = y, D = rbinom(40, 1, 0.5), X = rbinom(40, 1, 0.5),
 \references{
 Chernozhukov, V., Lee, S. and Rosen, A. M. (2013).
 Intersection bounds: estimation and inference. Econometrica 81(2),
-667-737. \doi{10.3982/ECTA8718}, the stub's attribution. The
-invariance evaluated here is the quantile bound of Manski (2003)
-Section 1.3 as printed on pp. 12-13 of Molinari, F. (2021), Handbook
-of Econometrics 7A (arXiv:2004.11751); the mean bound is equation
-(2.11) of the same.
+667-737. \doi{10.3982/ECTA8718}. The invariance evaluated here is the
+quantile bound of Manski (2003) Section 1.3 as printed on pp. 12-13 of
+Molinari, F. (2021), Handbook of Econometrics 7A (arXiv:2004.11751);
+the mean bound is equation (2.11) of the same.
 }

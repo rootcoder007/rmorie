@@ -376,7 +376,7 @@ pate <- function(teacher_predicts, queries, gamma = 0.05,
         "noiseless plurality is NOT private.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 private_aggregation <- pate
 
 # name carried over from the generated stub this replaced

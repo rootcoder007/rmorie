@@ -271,5 +271,5 @@ morie_sdne_cheatsheet <- function() {
          "all-zero output wins, so put beta > 1 on the edges.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_structuraldeepnetwork <- morie_sdne

@@ -261,7 +261,7 @@ scan_depth <- function(length) {
 }
 
 
-# compact alias per ledger/NAMING.md
+# compact alias
 parallelscan <- parallel_scan
 
 # public names resolved by fn/_lazy_map.json

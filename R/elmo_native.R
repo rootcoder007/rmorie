@@ -277,8 +277,8 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
          "meaning token k, and the shapes will not tell you.")
 }
 
-# compact alias per ledger/NAMING.md
-#' Compact alias per ledger/NAMING.md
+# compact alias
+#' Compact alias
 #'
 #' A step of the elmo_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

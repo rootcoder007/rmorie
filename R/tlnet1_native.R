@@ -352,7 +352,7 @@ network_influence_variance <- function(ic, friends) {
          "effects are reported separately.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 networksingletimepoint <- policy_mean
 
 # module entry point

@@ -601,5 +601,5 @@ tmle_cdrs <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #' @export
 morie_tmlcds <- tmle_cdrs
 
-# compact alias per ledger/NAMING.md
+# compact alias
 tmlecdrs <- tmle_cdrs

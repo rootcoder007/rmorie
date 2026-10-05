@@ -267,5 +267,5 @@ morie_tlsieve <- function(F_vac_matched, F_pla_matched, F_vac_mismatched,
 }
 
 
-# compact alias per ledger/NAMING.md
+# compact alias
 vaccinesieve <- morie_tlsieve

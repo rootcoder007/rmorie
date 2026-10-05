@@ -258,7 +258,7 @@ rRD <- function(protected, step = 10, normalize = TRUE) {
          "the minority.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 fairranking <- rND
 
 # public names resolved by fn/_lazy_map.json

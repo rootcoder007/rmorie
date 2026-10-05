@@ -489,5 +489,5 @@ morie_polkrn <- function(y, A_history, H_history, degree = 2,
   "polkrn: MSM on a flexible function of cumulative exposure (Hernan-Brumback-Robins 2002). polynomial degree D or RBF with quantile centres; weights are the Sec.21.2 product. summary = cumulative | final | duration."
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 polynomialkernelmsm <- morie_polkrn

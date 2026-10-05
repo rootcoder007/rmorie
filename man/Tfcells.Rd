@@ -29,11 +29,6 @@ tail-free prior has independent partition-level masses, the vector of
 cell counts at each level is what the posterior update consumes.
 Nothing is estimated here; this is a count.
 }
-\details{
-The pasted stub previously returned a Kolmogorov-Smirnov statistic
-against a fitted normal -- a number in [0, 1] where an integer count
-was expected, with no relationship to a partition cell.
-}
 \examples{
 Tfcells(c(0.1, 0.4, 0.6, 0.9), list(c(0, 0.5), c(0.5, 1)))$N_epsilon
 }

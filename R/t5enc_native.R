@@ -303,7 +303,7 @@ t5enc_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 t5encoder <- t5enc_span_corruption
 
 # public names resolved by fn/_lazy_map.json

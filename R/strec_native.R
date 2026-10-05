@@ -399,7 +399,7 @@ strec_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 strec_stamp <- strec_stamp_scores
 
 # Entry point

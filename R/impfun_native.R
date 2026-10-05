@@ -385,7 +385,7 @@ concordance <- function(imputed, truth) {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 impute2 <- copying_model
 
 # public names resolved by fn/_lazy_map.json

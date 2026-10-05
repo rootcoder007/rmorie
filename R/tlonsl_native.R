@@ -270,7 +270,7 @@ morie_tlonsl_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_tlonsl_onlinesuperlearner <- morie_tlonsl_online_super_learner
 
 #' @rdname morie_tlonsl_online_super_learner

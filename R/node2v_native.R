@@ -228,7 +228,7 @@ generate_walks <- function(adj, num_walks = 10, length = 10, p = 1.0,
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 node2vec <- generate_walks
 
 #' skipgram_pairs

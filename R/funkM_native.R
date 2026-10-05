@@ -467,7 +467,7 @@ morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
         "residual, which is what makes the recipe distinct.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 funk_svd <- morie_funkM
 # public names resolved by fn/_lazy_map.json
 funksvd  <- morie_funkM

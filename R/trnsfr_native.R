@@ -473,7 +473,7 @@ morie_trnsfr_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_trnsfr_transferlearningmsm <- morie_trnsfr_transfer_msm
 morie_trnsfr_transfer_learning_msm <- morie_trnsfr_transfer_msm
 

@@ -300,7 +300,7 @@ online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 onlinetimeseriestmle <- online_tmle_series
 
 # Module entry point

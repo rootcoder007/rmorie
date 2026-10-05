@@ -582,7 +582,7 @@ morie_sccsno_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_sccsno_sccsnoevent <- morie_sccsno_fit
 morie_sccsno_sccs_no_replacement <- morie_sccsno_fit
 

@@ -356,7 +356,7 @@ morie_ncfRS_cheatsheet <- function() {
          "data, so log loss with sampled negatives.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_ncfRS_neuralcollaborativefiltering <- morie_ncfRS_fit_gmf
 
 # public names resolved by fn/_lazy_map.json

@@ -4,10 +4,8 @@
 #'
 #' Formula: h <- h + tanh(g) * CrossAttn(h, vision).
 #'
-#' DUPLICATE: the same method already ships as
-#' \code{morie_geron_flamingo_cross_modal_attn}.  Per
-#' ledger/wave2/DUPMAP.tsv this is a thin alias, not a second copy of the
-#' arithmetic.  When \code{weights} is omitted the three projections
+#' The same method as \code{morie_geron_flamingo_cross_modal_attn}; this
+#' is a thin alias.  When \code{weights} is omitted the three projections
 #' default to the identity, making the gated branch plain scaled
 #' dot-product cross-attention on the raw features.
 #'

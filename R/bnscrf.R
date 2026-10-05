@@ -1,11 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Confidence interval for a partially identified parameter (alias)
 #'
-#' The stub set carried two module names for one construction:
-#' "frequentist bound with valid coverage" and "confidence interval for a
+#' "Frequentist bound with valid coverage" and "confidence interval for a
 #' partially identified parameter" are both the Imbens-Manski (2004)
-#' equation (6) interval. This name is kept working and forwards to
-#' \code{Bndfre}; it is not a second implementation.
+#' equation (6) interval. This name forwards to \code{Bndfre}; it is not a
+#' second implementation.
 #'
 #' @param lower,upper Replicated estimates of the two bounds.
 #' @param alpha Miss probability, default 0.05.

@@ -272,7 +272,7 @@ morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
         "of 500 is a one-observation estimator.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 ipwforest <- morie_ipwgrf
 
 # public names resolved by fn/_lazy_map.json

@@ -354,7 +354,7 @@ morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
         sep = " ")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_dqnv_deepqnetwork <- morie_dqnv
 
 # public names resolved by fn/_lazy_map.json

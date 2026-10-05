@@ -353,7 +353,7 @@ optimise_branch <- function(make_tree, seqs, pi = NULL, u = 1.0, lo = 1e-6, hi =
   ))
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 maximum_likelihood_phylogeny <- morie_phylml
 
 # public names resolved by fn/_lazy_map.json

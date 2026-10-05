@@ -17,11 +17,11 @@
 #' @return List with \code{lower}, \code{upper}, \code{width},
 #'   \code{estimate}, \code{p1_lower}, \code{p1_upper}, \code{p0_lower},
 #'   \code{p0_upper}, \code{n_strata}, \code{n}.
-#' @references Robins, J. M. (2002) is the stub's attribution. The risk
-#'   bounds used are Manski's worst case, equation (2.11) of Molinari, F.
-#'   (2021), Handbook of Econometrics 7A (arXiv:2004.11751 p. 17); the
-#'   corner argument is written out here rather than copied, because the
-#'   attributed source could not be obtained.
+#'   \code{p0_upper}, \code{n_strata}, \code{n}.
+#' @references Robins, J. M. (2002), for the problem. The risk bounds used
+#'   are Manski's worst case, equation (2.11) of Molinari, F. (2021),
+#'   Handbook of Econometrics 7A (arXiv:2004.11751 p. 17); the corner
+#'   argument is written out in Details.
 #' @export
 Bndlgt <- function(y, D, X) {
   z <- .bnd_yd(y, D, "Bndlgt")

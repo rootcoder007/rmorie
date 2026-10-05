@@ -1214,7 +1214,7 @@ morie_tmlcic_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_tmlcic_tmleclusteric <- morie_tmlcic_tmle_cluster_ic
 
 #' @rdname morie_tmlcic_tmle_cluster_ic

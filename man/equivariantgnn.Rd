@@ -2,7 +2,7 @@
 % Please edit documentation in R/egnnL_native.R
 \name{equivariantgnn}
 \alias{equivariantgnn}
-\title{Compact alias per ledger/NAMING.md}
+\title{Compact alias}
 \usage{
 equivariantgnn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 }

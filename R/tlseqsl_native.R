@@ -403,5 +403,5 @@ morie_tlseqsl_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_tlseqsl_sequentialsuperlearner <- morie_tlseqsl_sequential_super_learner

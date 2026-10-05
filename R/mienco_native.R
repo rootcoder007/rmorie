@@ -214,7 +214,7 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
          "information is stored.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 deepinfomax <- morie_mienco
 
 # public names resolved by fn/_lazy_map.json

@@ -23,12 +23,10 @@ list: estimate, pred, var, alpha, lam, method.
 \description{
 Saunders, Gammerman and Vovk (1998), Ridge regression learning
 algorithm in dual variables, ICML 15, 515-521: alpha = (K + lambda
-I)^-1 y and fhat(x) = sum_i alpha_i k(x_i, x).  The 1998 proceedings
-were not retrievable here; both are quoted in their standard published
-form.  The identity worth stating is that this is exactly the posterior
-mean of a GP with covariance k and noise variance lambda (Rasmussen and
-Williams 2006, eq. 2.23) -- the two differ only in that the GP also
-returns a variance, which is returned here too.
+I)^-1 y and fhat(x) = sum_i alpha_i k(x_i, x).  This is exactly the
+posterior mean of a GP with covariance k and noise variance lambda
+(Rasmussen and Williams 2006, eq. 2.23) -- the two differ only in that
+the GP also returns a variance, which is returned here too.
 }
 \examples{
 Krrdual(matrix(c(0, 1, 2), 3, 1), c(0, 1, 0))$pred

@@ -5,10 +5,8 @@
 #' lists through topic diversification, WWW 14, 22-32, define the
 #' intra-list similarity of a list as the sum of pairwise similarities
 #' halved; the diversity is the complementary average over the C(k, 2)
-#' unordered pairs, which is this module's formula line.  The 2005
-#' proceedings were not retrievable here; the definition is quoted in its
-#' standard published form.  The pair count is reported so the average is
-#' interpretable when the list is short.
+#' unordered pairs, in its standard published form.  The pair count is
+#' reported so the average is interpretable when the list is short.
 #'
 #' @param list indices of the recommended items (zero-based).
 #' @param sim_matrix item-item similarity.

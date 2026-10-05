@@ -494,5 +494,5 @@ morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
          "(Hirano-Imbens 2004). Reports finite_variance.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_gentmt_compact <- morie_gentmt

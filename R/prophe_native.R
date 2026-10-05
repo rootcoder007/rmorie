@@ -191,7 +191,7 @@ morie_prophe <- function(t, y, seasonalities = NULL, holidays = NULL,
                              holiday_window = holiday_window, ...)
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 additivecomponents <- prophe_additive_components
 
 # public names resolved by fn/_lazy_map.json

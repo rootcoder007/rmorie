@@ -10,10 +10,6 @@
 #' cell counts at each level is what the posterior update consumes.
 #' Nothing is estimated here; this is a count.
 #'
-#' The pasted stub previously returned a Kolmogorov-Smirnov statistic
-#' against a fitted normal -- a number in \[0, 1\] where an integer count
-#' was expected, with no relationship to a partition cell.
-#'
 #' @param X_i Numeric sample.
 #' @param A_epsilon A cell, or a list of cells.  A cell is either a
 #'   predicate function or a \code{c(lo, hi)} pair read as the half-open

@@ -344,7 +344,7 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 unet <- valid_output_size
 unet_backbone <- valid_output_size
 unetbackbone <- valid_output_size

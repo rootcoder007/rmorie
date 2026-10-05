@@ -7,12 +7,11 @@
 #' relation over the common items gives A = mean(a_F) / mean(a_R) and
 #' B = mean(b_R) - A mean(b_F).
 #'
-#' DOCSTRING ERRATUM: the generated stub printed A = mean(a_R)/mean(a_F),
-#' the reciprocal.  Discrimination is inversely proportional to the scale
-#' factor -- stretching the ability metric by A flattens the item
-#' characteristic curve by the same factor -- so the ratio must be a_F
-#' over a_R.  The stub's B was already correct and the two are mutually
-#' consistent only with A as written here.
+#' Note the orientation: A = mean(a_F)/mean(a_R), not its reciprocal.
+#' Discrimination is inversely proportional to the scale factor --
+#' stretching the ability metric by A flattens the item characteristic
+#' curve by the same factor -- so the ratio must be a_F over a_R, and only
+#' then is A consistent with B.
 #'
 #' @param y Scores on the Form F metric to place on the Form R metric.
 #' @param a_R,b_R Common-item discriminations and difficulties on the

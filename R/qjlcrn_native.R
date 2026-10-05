@@ -276,5 +276,5 @@ distortion <- function(A, E) {
   ))
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 johnson_lindenstrauss <- morie_qjlcrn

@@ -321,7 +321,7 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
         "is SMALLER, not larger.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 painnnet <- gated_update
 
 # public names resolved by fn/_lazy_map.json

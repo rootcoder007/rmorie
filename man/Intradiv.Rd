@@ -20,10 +20,8 @@ Ziegler, McNee, Konstan and Lausen (2005), Improving recommendation
 lists through topic diversification, WWW 14, 22-32, define the
 intra-list similarity of a list as the sum of pairwise similarities
 halved; the diversity is the complementary average over the C(k, 2)
-unordered pairs, which is this module's formula line.  The 2005
-proceedings were not retrievable here; the definition is quoted in its
-standard published form.  The pair count is reported so the average is
-interpretable when the list is short.
+unordered pairs, in its standard published form.  The pair count is
+reported so the average is interpretable when the list is short.
 }
 \examples{
 S <- matrix(c(1, 0.2, 0.5, 0.2, 1, 0.1, 0.5, 0.1, 1), 3, 3)

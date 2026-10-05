@@ -32,7 +32,7 @@ morie_timesf <- function(history, predictor, horizon, input_patch_len,
                 output_patch_len)
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 .timesf_foundation <- morie_timesf
 
 # public name resolved by fn/_lazy_map.json

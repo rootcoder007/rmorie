@@ -355,5 +355,5 @@ morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
          "makes nu the outlier fraction. C >= 1 gives the exact MEB.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_support_vector_data_description <- morie_svdd

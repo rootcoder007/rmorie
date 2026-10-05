@@ -314,7 +314,7 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
   ))
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 implicitfeedback <- morie_impFB
 
 # public names resolved by fn/_lazy_map.json
