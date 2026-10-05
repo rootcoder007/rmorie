@@ -279,9 +279,7 @@ test_that("tutorial --dry-run, generate-template, exec and verify-earth-engine",
 })
 
 test_that("crypto keygen/encrypt/decrypt round-trip through files and the keystore", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_liboqs_available(), error = function(e) FALSE)) &&
-                isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE)),
-              "ML-KEM needs liboqs and ChaCha20 needs libsodium")
+  # native ML-KEM, ChaCha20-Poly1305 and keystore: no liboqs or libsodium needed
   expect_equal(.capture("crypto")$status, 2L)
   d <- withr::local_tempdir()
   withr::local_envvar(HOME = d, MORIE_KEYSTORE_PASSWORD = "pw-test")

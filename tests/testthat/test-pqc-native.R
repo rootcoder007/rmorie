@@ -46,26 +46,18 @@ test_that("PQC inventory reports all three families", {
   expect_identical(inv$available[inv$primitive == "HQC-128"], hqc_ok)
 })
 
-test_that("SLH-DSA + HQC roundtrip when liboqs provides them", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_liboqs_available(),
-                              error = function(e) FALSE)),
-              "liboqs not available")
-  kp <- tryCatch(morie_crypto_slhdsa_keygen(), error = function(e) NULL)
-  if (!is.null(kp)) {
-    sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
-    expect_true(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
-    expect_false(morie_crypto_slhdsa_verify(kp$pk, "tampered", sig))
-  } else {
-    skip("this liboqs build lacks SLH-DSA/SPHINCS+")
-  }
+test_that("SLH-DSA and HQC round-trip natively, with or without liboqs", {
+  kp <- morie_crypto_slhdsa_keygen()
+  sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
+  expect_true(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
+  expect_false(morie_crypto_slhdsa_verify(kp$pk, "tampered", sig))
+  h <- morie_crypto_hqc_keygen()
+  e <- morie_crypto_hqc_encaps(h$pk)
+  expect_identical(morie_crypto_hqc_decaps(h$sk, e$ct), e$shared_secret)
 })
 
-test_that("HQC-128 KEM shared secrets agree", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_liboqs_available(),
-                              error = function(e) FALSE)),
-              "liboqs not available")
-  kp <- tryCatch(morie_crypto_hqc_keygen(), error = function(e) NULL)
-  if (is.null(kp)) skip("this liboqs build lacks HQC")
+test_that("HQC-128 KEM shared secrets agree (native, no liboqs needed)", {
+  kp <- morie_crypto_hqc_keygen()
   enc <- morie_crypto_hqc_encaps(kp$pk)
   ss <- morie_crypto_hqc_decaps(kp$sk, enc$ct)
   expect_identical(ss, enc$shared_secret)
