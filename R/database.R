@@ -128,12 +128,34 @@
 #' @noRd
 .morie_atomic_write <- function(path, writer) {
   tmp <- paste0(path, ".tmp", Sys.getpid())
+  on.exit(if (file.exists(tmp)) unlink(tmp), add = TRUE)
   writer(tmp)
-  if (!file.rename(tmp, path)) {
-    file.copy(tmp, path, overwrite = TRUE)
-    unlink(tmp)
+  # an unwritable directory: say which, instead of a later "cannot open the connection"
+  if (!file.exists(tmp)) stop(sprintf("cannot write %s (the directory is not writable)", dirname(path)), call. = FALSE)
+  if (!suppressWarnings(file.rename(tmp, path)) && !file.copy(tmp, path, overwrite = TRUE)) {
+    stop(sprintf("cannot write %s", path), call. = FALSE)
   }
   invisible(path)
+}
+
+# The cache a loader fills on the way is optional: a read-only or full home directory (HPC,
+# containers) must not stop the data from reaching the caller or `pull --out`. Say so once and
+# return the data; morie_cache_store() itself still fails when called on purpose.
+#' Internal helper: best-effort cache store
+#' @noRd
+.morie_cache_store_soft <- function(data, table_name, db_path = NULL, con = NULL) {
+  tryCatch(
+    withCallingHandlers(
+      morie_cache_store(data, table_name, db_path = db_path, con = con),
+      warning = function(w) invokeRestart("muffleWarning")
+    ),
+    error = function(e) {
+      dir <- if (is.null(db_path) && is.null(con)) morie_cache_dir("fscache") else (db_path %||% "the database")
+      message(sprintf("cache skipped for %s (%s is not writable); the data are returned uncached",
+                      table_name, dir))
+      invisible(0L)
+    }
+  )
 }
 
 #' morie cache contract
@@ -974,7 +996,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     } else {
       stop("Unsupported format: ", ext, call. = FALSE)
     }
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
 
@@ -1007,7 +1029,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
            ") opens with your MORIE key: run `rmorie login` (GitHub) or `rmorie login --email you@example.com` once.", call. = FALSE)
     }
     data <- morie_load_hosted_dataset(entry$hosted_key, db_path = db_path, refresh = refresh)
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     data
   }
 
@@ -1022,7 +1044,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       con = con,
       portal = if (has("ckan_portal")) entry$ckan_portal else NULL
     )
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
 
@@ -1032,7 +1054,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       stop(matched, " ships in the rmoriedata package: install.packages(\"rmoriedata\")", call. = FALSE)
     }
     data <- as.data.frame(rmoriedata::morie_data_load(entry$rmoriedata))
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
 
@@ -1041,7 +1063,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     message("Fetching ", matched, " via ", entry$fetcher, "() ...")
     fetcher <- get(entry$fetcher, envir = asNamespace(utils::packageName()))
     data <- do.call(fetcher, .morie_parse_fetcher_args(if (has("fetcher_args")) entry$fetcher_args else ""))
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
 
@@ -1067,7 +1089,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       }
       stop(data)
     }
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
   if (has("hosted_key")) {
@@ -1078,7 +1100,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   if (has("arcgis_url")) {
     message("Querying ", matched, " from the ArcGIS layer ...")
     data <- morie_fetch_arcgis(entry$arcgis_url, label = matched)
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
 
@@ -1251,7 +1273,7 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
       if (nzchar(entry$ckan_resource_id)) {
         data <- morie_fetch_ckan(key, limit = limit, db_path = db_path, con = con,
                                  resource_id = entry$ckan_resource_id)
-        morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+        .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
         data
       } else {
         morie_load_dataset(key, db_path = db_path, con = con)
