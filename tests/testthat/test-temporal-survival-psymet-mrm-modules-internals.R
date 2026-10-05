@@ -215,7 +215,7 @@ test_that(".morie_wrapping_key returns 32-byte raw via HKDF when openssl present
   }
   kem_ct <- as.raw(rep(0x01, 32L))
   pk     <- as.raw(rep(0x02, 32L))
-  out <- rmorie:::.morie_wrapping_key(kem_ct, pk)
+  out <- rmorie:::.morie_wrapping_key(as.raw(rep(0x03, 32L)), kem_ct, pk)
   expect_true(is.raw(out))
   expect_length(out, 32L)
 })

@@ -685,24 +685,70 @@
   .cli_readline("Keystore password: ")
 }
 
+# Key files written by rmorie / morie 1.4.0 start with a marker, so the two arms read each
+# other's keys; a bare 1,184 / 2,400-byte file is a 1.3.x key, refused for encryption (morie
+# 1.3.x key generation was not FIPS 203) and read for decryption of old files only.
+.morie_pk_magic <- c(charToRaw("MORIEPK"), as.raw(2L))
+.morie_sk_magic <- c(charToRaw("MORIESK"), as.raw(2L))
+
+.cli_read_key_file <- function(path, magic) {
+  raw <- readBin(path, "raw", file.info(path)$size)
+  starts <- function(m) length(raw) >= length(m) && identical(raw[seq_along(m)], m)
+  if (starts(magic)) return(list(key = raw[-seq_along(magic)], legacy = FALSE))
+  if (identical(magic, .morie_pk_magic) && starts(.morie_sk_magic)) {
+    stop(path, " is a secret key; encrypt to the public key (.moriepk) instead", call. = FALSE)
+  }
+  if (identical(magic, .morie_sk_magic) && starts(.morie_pk_magic)) {
+    stop(path, " is a public key; decrypt needs the secret key (.moriesk)", call. = FALSE)
+  }
+  list(key = raw, legacy = TRUE)
+}
+
 .cli_crypto <- function(rest, flag, out) {
   sub <- if (length(rest)) rest[[1L]] else ""
-  usage <- paste0("usage: rmorie crypto keygen [--name NAME] [--output DIR]\n",
-                  "       rmorie crypto encrypt FILE --to PKFILE|KEYNAME\n",
-                  "       rmorie crypto decrypt FILE --key KEYNAME\n",
-                  "Keys live in ~/.morie/keys/keystore.json (password: prompt or MORIE_KEYSTORE_PASSWORD).\n")
+  force <- "--force" %in% rest
+  usage <- paste0("usage: rmorie crypto keygen [--name NAME] [--output DIR] [--force]\n",
+                  "       rmorie crypto encrypt FILE --to PKFILE|KEYNAME [--out NAME] [--force]\n",
+                  "       rmorie crypto decrypt FILE --key SKFILE|KEYNAME [--out NAME] [--force]\n",
+                  "Keys live in ~/.morie/keys/keystore.json (password: prompt or MORIE_KEYSTORE_PASSWORD),\n",
+                  "or in files: keygen --output DIR writes DIR/NAME.moriepk and DIR/NAME.moriesk.\n")
+  is_path <- function(x, ext) grepl("[/\\\\]", x) || endsWith(x, ext)
+  refuse_existing <- function(dest) {
+    if (file.exists(dest) && !force) {
+      out(sprintf("%s already exists; pass --out NAME to write elsewhere or --force to replace it\n", dest))
+      return(TRUE)
+    }
+    FALSE
+  }
   if (identical(sub, "keygen")) {
     name <- flag("--name") %||% "default"
-    k <- morie_crypto_hybrid_keygen()
+    if (!grepl("^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$", name)) {
+      out(sprintf("--name '%s': a key name is letters, digits, '.', '_' or '-' (up to 64, not starting with '.')\n", name))
+      return(2L)
+    }
     od <- flag("--output")
     if (!is.null(od)) {
+      pk_path <- file.path(od, paste0(name, ".moriepk"))
+      sk_path <- file.path(od, paste0(name, ".moriesk"))
+      if (file.exists(sk_path) && !force) {
+        out(sprintf("%s already exists; files encrypted to it would become undecryptable. Pass --force to replace it.\n",
+                    sk_path))
+        return(1L)
+      }
+      k <- morie_crypto_hybrid_keygen()
       dir.create(od, recursive = TRUE, showWarnings = FALSE)
-      writeBin(k$pk, file.path(od, paste0(name, ".moriepk")))
-      writeBin(k$sk, file.path(od, paste0(name, ".moriesk")))
-      out(sprintf("Public key:  %s\nSecret key:  %s\n", file.path(od, paste0(name, ".moriepk")),
-                  file.path(od, paste0(name, ".moriesk"))))
+      writeBin(c(.morie_pk_magic, k$pk), pk_path)
+      # a secret key is owner-only: create it empty with mode 600, then write it
+      old <- Sys.umask("077")
+      on.exit(Sys.umask(old), add = TRUE)
+      if (file.exists(sk_path)) unlink(sk_path)
+      file.create(sk_path)
+      Sys.chmod(sk_path, "0600", use_umask = FALSE)
+      writeBin(c(.morie_sk_magic, k$sk), sk_path)
+      out(sprintf("Public key:  %s\nSecret key:  %s\n", pk_path, sk_path))
       return(0L)
     }
+    k <- morie_crypto_hybrid_keygen()
     ks <- .cli_keystore_path()
     pw <- .cli_keystore_password()
     if (!file.exists(ks)) {
@@ -725,11 +771,28 @@
       out(sprintf("File not found: %s\n", f))
       return(1L)
     }
-    pk <- if (file.exists(rcpt)) readBin(rcpt, "raw", file.info(rcpt)$size) else {
-      morie_crypto_keystore_public_key(rcpt, path = .cli_keystore_path())  # no password: public keys are in the clear
+    if (file.exists(rcpt) && !dir.exists(rcpt)) {
+      kf <- tryCatch(.cli_read_key_file(rcpt, .morie_pk_magic), error = function(e) e)
+      if (inherits(kf, "error")) {
+        out(paste0(conditionMessage(kf), "\n"))
+        return(1L)
+      }
+      if (kf$legacy) {
+        out(sprintf(paste0("%s was written by morie 1.3.x, whose key generation was not FIPS 203; a file ",
+                           "encrypted to it could not be opened. Ask the key's owner to run `rmorie crypto ",
+                           "keygen` (or morie's) with 1.4.0 and share the new .moriepk\n"), rcpt))
+        return(1L)
+      }
+      pk <- kf$key
+    } else if (is_path(rcpt, ".moriepk")) {
+      out(sprintf("%s: no such public key file\n", rcpt))
+      return(1L)
+    } else {
+      pk <- morie_crypto_keystore_public_key(rcpt, path = .cli_keystore_path())  # public keys are in the clear
     }
+    dest <- flag("--out") %||% paste0(f, ".morieenc")
+    if (refuse_existing(dest)) return(1L)
     ct <- morie_crypto_hybrid_encrypt(readBin(f, "raw", file.info(f)$size), pk)
-    dest <- paste0(f, ".morieenc")
     writeBin(ct, dest)
     out(sprintf("Encrypted: %s\n", dest))
     return(0L)
@@ -745,9 +808,40 @@
       out(sprintf("File not found: %s\n", f))
       return(1L)
     }
-    sk <- morie_crypto_keystore_load(kn, .cli_keystore_password(), path = .cli_keystore_path())$sk
-    pt <- morie_crypto_hybrid_decrypt(readBin(f, "raw", file.info(f)$size), sk)
-    dest <- if (endsWith(f, ".morieenc")) sub("\\.morieenc$", "", f) else paste0(f, ".dec")
+    ctx <- readBin(f, "raw", file.info(f)$size)
+    if (file.exists(kn) && !dir.exists(kn)) {  # a secret key written by `keygen --output DIR`
+      kf <- tryCatch(.cli_read_key_file(kn, .morie_sk_magic), error = function(e) e)
+      if (inherits(kf, "error")) {
+        out(paste0(conditionMessage(kf), "\n"))
+        return(1L)
+      }
+      if (kf$legacy && morie_crypto_hybrid_container_version(ctx) == 2L) {
+        out(sprintf(paste0("%s was encrypted by 1.4.0 to a key pair that this 1.3.x secret key did not make ",
+                           "(a 1.4.0 key pair carries a marker). Encrypt it again to a key pair from ",
+                           "`rmorie crypto keygen`.\n"), f))
+        return(1L)
+      }
+      sk <- kf$key
+    } else if (is_path(kn, ".moriesk")) {
+      out(sprintf("%s: no such key file\n", kn))
+      return(1L)
+    } else {
+      sk <- morie_crypto_keystore_load(kn, .cli_keystore_password(), path = .cli_keystore_path())$sk
+    }
+    dest <- flag("--out") %||% (if (endsWith(f, ".morieenc")) sub("\\.morieenc$", "", f) else paste0(f, ".dec"))
+    if (refuse_existing(dest)) return(1L)
+    notes <- character()
+    pt <- tryCatch(withCallingHandlers(morie_crypto_hybrid_decrypt(ctx, sk),
+                                       warning = function(w) {
+                                         notes <<- c(notes, conditionMessage(w))
+                                         invokeRestart("muffleWarning")
+                                       }),
+                   error = function(e) e)
+    for (n in notes) out(sprintf("note: %s\n", n))
+    if (inherits(pt, "error")) {
+      out(sprintf("decrypt failed: %s (wrong key, or the file is not a morie ciphertext)\n", conditionMessage(pt)))
+      return(1L)
+    }
     writeBin(pt, dest)
     out(sprintf("Decrypted: %s\n", dest))
     return(0L)

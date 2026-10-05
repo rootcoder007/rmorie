@@ -52,8 +52,8 @@ test_that("hybrid keygen/encrypt/decrypt round-trips", {
   pt <- charToRaw("the quick brown fox jumps over the lazy dog")
   ct <- morie_crypto_hybrid_encrypt(pt, kp$pk)
   expect_true(is.raw(ct))
-  # container: 4 + 1088 + 12 + 32 + 16 + 12 + len(pt) + 16
-  expect_equal(length(ct), 1180L + length(pt))
+  # container: marker 9 + 4 + 1088 + 12 + 32 + 16 + 12 + len(pt) + 16
+  expect_equal(length(ct), 1189L + length(pt))
   expect_identical(morie_crypto_hybrid_decrypt(ct, kp$sk), pt)
   # string input accepted
   ct2 <- morie_crypto_hybrid_encrypt("hi", kp$pk)
@@ -79,6 +79,6 @@ test_that("hybrid encrypt/decrypt validate inputs", {
 
 test_that(".morie_wrapping_key produces 32 bytes", {
   set.seed(1)
-  out <- rmorie:::.morie_wrapping_key(as.raw(1:8), as.raw(9:16))
+  out <- rmorie:::.morie_wrapping_key(as.raw(1:32), as.raw(1:8), as.raw(9:16))
   expect_equal(length(out), 32L)
 })

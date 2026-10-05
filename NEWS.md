@@ -1,5 +1,19 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* **Security: `morie_crypto_hybrid_encrypt()` and `rmorie crypto encrypt` now keep files private.**
+  The R arm still wrote the 1.3.x container, whose wrapping key was derived from the KEM ciphertext
+  and the public key alone (the shared secret was computed and discarded), so anyone holding the
+  file and the PUBLIC key could open it. The wrapping key now comes from
+  `HKDF(shared_secret || kem_ct || pk)` behind the 1.4.0 marker `MORIEHYB 0x02`, the same bytes
+  morie writes: rmorie and morie open each other's files, and a 1.3.x file still opens, with a
+  warning to encrypt it again. Files encrypted with rmorie 1.3.x or an earlier 1.4.0 build should
+  be encrypted again. `morie_crypto_hybrid_container_version()` tells the two apart.
+* `rmorie crypto keygen --output DIR` writes marked key files (`MORIEPK`/`MORIESK`, as morie) and
+  the secret key owner-only (mode 600; it was world-readable), and refuses to replace an existing
+  secret key without `--force`. `decrypt --key` takes a `.moriesk` file as well as a keystore name
+  (a key pair from `keygen --output` could not decrypt anything); `encrypt` and `decrypt` take
+  `--out` and refuse to overwrite an existing file without `--force`; the wrong kind of key file,
+  a missing one and a 1.3.x public key are each refused with their own message.
 * `morie_mrm_estimate_causal_effect()`'s consensus standard error is the weighted mean of the
   estimators' standard errors. It pooled them as independent studies (`sqrt(1 / sum(w))`), but all
   four run on the same rows, so the interval was about half as wide as it should be: in 300

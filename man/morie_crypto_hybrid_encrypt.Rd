@@ -16,12 +16,13 @@ morie_crypto_hybrid_encrypt(plaintext, recipient_pk)
 Raw vector container.
 }
 \description{
-Mirrors \code{morie.crypto.hybrid_encrypt} byte-for-byte. Encapsulates
-under the recipient's ML-KEM-768 public key, derives a wrapping key
-from \code{HKDF(kem_ct || pk)}, wraps a random 32-byte symmetric key with
-ChaCha20-Poly1305, then encrypts the payload under that symmetric
-key. Container format (big-endian lengths):
-\code{len(kem_ct)[4] || kem_ct || wrap_nonce[12] || wrapped_key[32] || wrap_tag[16] || payload_nonce[12] || aead_ct || payload_tag[16]}.
+The same container as \code{morie.crypto.hybrid_encrypt} (morie 1.4.0), so
+either arm opens the other's files. Encapsulates under the recipient's
+ML-KEM-768 public key, derives the wrapping key from
+\code{HKDF(shared_secret || kem_ct || pk)} (the KEM shared secret is what
+keeps it private), wraps a random 32-byte symmetric key with
+ChaCha20-Poly1305, then encrypts the payload under that symmetric key.
+Container format (big-endian lengths): \verb{"MORIEHYB" 0x02 || len(kem_ct)[4] || kem_ct || wrap_nonce[12] || wrapped_key[32] || wrap_tag[16] || payload_nonce[12] || aead_ct || payload_tag[16]}.
 }
 \examples{
 kp <- morie_crypto_hybrid_keygen()

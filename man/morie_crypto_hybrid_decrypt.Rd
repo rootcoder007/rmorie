@@ -16,11 +16,13 @@ morie_crypto_hybrid_decrypt(ciphertext, recipient_sk)
 Raw vector of decrypted plaintext.
 }
 \description{
-Inverse of \code{\link[=morie_crypto_hybrid_encrypt]{morie_crypto_hybrid_encrypt()}}. The wrapping key is
-re-derived from \code{HKDF(kem_ct || pk)} using the public key embedded
-in the ML-KEM-768 secret key (bytes 1153..2336), matching the
-Python \code{morie.crypto.hybrid_decrypt} exactly, so no decapsulation
-round-trip is required.
+Inverse of \code{\link[=morie_crypto_hybrid_encrypt]{morie_crypto_hybrid_encrypt()}}, and of morie's
+\code{hybrid_encrypt}: decapsulates the KEM ciphertext with the secret key and
+re-derives the wrapping key from the shared secret, the ciphertext and
+the public key embedded in the ML-KEM-768 secret key (bytes 1153..2336).
+A 1.3.x container (no marker) still opens, with a warning: its wrapping
+key needed no secret, so anyone with the file and the public key can
+open it too; encrypt it again.
 }
 \examples{
 kp <- morie_crypto_hybrid_keygen()
