@@ -16,12 +16,12 @@
 
 test_that("method status, checking, Haldane and the flanking-marker formula", {
   st <- morie_mqtmpl_method_status()
-  expect_identical(st$available, c("em", "mr", "imp"))
-  expect_false(morie_mqtmpl_method_status("hk")$available)
-  expect_match(morie_mqtmpl_method_status("hk")$reason, "Haley")
+  expect_identical(st$available, c("em", "mr", "hk", "imp"))
+  expect_true(morie_mqtmpl_method_status("hk")$available)
+  expect_identical(morie_mqtmpl_method_status("hk")$reason, "")
   expect_identical(mqtmpl_method_status("em")$available, TRUE)
   expect_error(morie_mqtmpl_method_status("lm"), "method must be one of")
-  expect_error(mqtmpl_check_method("hk"), "not implemented")
+  expect_null(mqtmpl_check_method("hk"))
   expect_error(mqtmpl_check_method("xx"), "method must be one of")
   expect_null(mqtmpl_check_method("mr"))
   expect_equal(mqtmpl_haldane(c(0, 10, 50)), .qhal(c(0, 10, 50)), tolerance = 1e-12)
@@ -30,7 +30,7 @@ test_that("method status, checking, Haldane and the flanking-marker formula", {
   p <- mqtmpl_genotype_probabilities(1, 0, rl, rr)
   expect_equal(p, c((1 - rl) * rr, rl * (1 - rr)) / ((1 - rl) * rr + rl * (1 - rr)), tolerance = 1e-12)
   expect_identical(mqtmpl_kw_n_imp(list()), 64L)
-  expect_error(mqtmpl_kw_n_imp(list(1)), "covariates are not implemented")
+  expect_identical(mqtmpl_kw_n_imp(list(1)), 64L)
   expect_match(mqtmpl_cheatsheet(), "forward-backward HMM")
 })
 
@@ -113,7 +113,23 @@ test_that("marker-regression and EM scans agree with (n/2) log10(RSS0/RSS1) at t
   f <- mqtmpl_cim_em(q$y, q$g[, 1], q$g[, 2], 0, .qhal(20))
   expect_equal(f$lod, lod[1], tolerance = 1e-9)
   expect_equal(mqtmpl_cim_one(q$y, q$g[, 1], q$g[, 2], 0, .qhal(20), list())$lod, f$lod, tolerance = 1e-12)
-  expect_error(morie_mqtmpl_scanone(q$y, q$markers, q$pos, method = "hk"), "not implemented")
+  # Haley-Knott: at a fully typed marker E[g | markers] is the genotype
+  # itself, so the regression LOD is the marker-regression LOD
+  hk <- morie_mqtmpl_scanone(q$y, q$markers, q$pos, method = "hk", step = 10)
+  expect_equal(hk$lod[match(q$pos, hk$position)], lod, tolerance = 1e-10)
+  expect_equal(hk$position, c(0, 10, 20, 30, 40, 50))
+  # between markers it regresses on P(g = 1) from the HMM
+  p30 <- vapply(morie_mqtmpl_hmm_genotype_probabilities(
+    lapply(1:n, function(i) c(q$g[i, 1:2], NA, q$g[i, 3])), c(0, 20, 30, 50)),
+    function(m) m[3, 2], 1)
+  r1 <- sum(stats::lm.fit(cbind(1, p30), q$y)$residuals^2)
+  expect_equal(hk$lod[hk$position == 30],
+               0.5 * n * log10(sum((q$y - mean(q$y))^2) / r1), tolerance = 1e-10)
+  hkc <- morie_mqtmpl_scanone(q$y, q$markers, q$pos, method = "hk", step = 10,
+                              covariates = list(cv))
+  expect_equal(hkc$lod[hkc$position == 20], 0.5 * n * log10(r0 /
+    sum(stats::lm.fit(cbind(1, cv, q$g[, 2]), q$y)$residuals^2)), tolerance = 1e-10)
+  expect_identical(hkc$n_covariates, 1L)
   expect_error(morie_mqtmpl_scanone(q$y[-1], q$markers, q$pos), "typed on all")
 })
 
@@ -132,7 +148,21 @@ test_that("the imputation scan is the log-mean-exp of the draw weights", {
   expect_identical(sc$n_imputations, 64L)
   si <- mqtmpl_scan_imp(q$y, q$markers, q$pos, 25, 8L, 0, 2)
   expect_equal(si$position, c(0, 25, 50))
-  expect_error(morie_mqtmpl_scanone(q$y, q$markers, q$pos, method = "imp", covariates = list(1:12)), "covariates are not implemented")
+  # additive covariates enter both the null and every imputed model
+  cv <- c(0.5, 1, 0.2, 0.9, 0.1, 0.4, 0.8, 0.3, 0.6, 0.7, 0.05, 0.95)
+  sc2 <- morie_mqtmpl_scanone(q$y, q$markers, q$pos, method = "imp", step = 25,
+                              covariates = list(cv))
+  rs <- function(X) sum(stats::lm.fit(X, q$y)$residuals^2)
+  null2 <- -0.5 * 2 * log(n) - 0.5 * n * log(rs(cbind(1, cv)))
+  ref2 <- vapply(1:3, function(gi) {
+    w <- vapply(draws, function(dr) {
+      g <- vapply(dr, function(r) r[gi], 1)
+      -0.5 * 3 * log(n) - 0.5 * n * log(rs(if (length(unique(g)) > 1) cbind(1, cv, g) else cbind(1, cv)))
+    }, 1)
+    (log(mean(exp(w - max(w)))) + max(w) - null2) / log(10)
+  }, 1)
+  expect_equal(sc2$lod, ref2, tolerance = 1e-12)
+  expect_identical(sc2$n_covariates, 1L)
 })
 
 test_that("permutation threshold is the ceil((1 - alpha) B)-th null maximum and is seeded", {

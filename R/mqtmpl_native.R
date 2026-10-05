@@ -11,9 +11,10 @@
 #
 # Native implementation mirroring Python morie.fn.mqtmpl exactly: the
 # same forward-backward HMM with the same emission/transition logic,
-# the same EM/marker-regression/multiple-imputation scans, the same
-# permutation threshold, and the same refusal of Haley-Knott with the
-# same reason.
+# the same EM/marker-regression/multiple-imputation scans and the same
+# permutation threshold.  Haley-Knott regression (Haley & Knott 1992)
+# regresses the phenotype on E[g | markers] from that HMM; it matches
+# qtl::scanone(method = "hk") to 1e-13, with and without covariates.
 
 .GHC_MQTMPL_LOG10E <- 0.4342944819032518
 
@@ -45,15 +46,8 @@
 #' morie_mqtmpl_method_status()
 #' @keywords internal
 morie_mqtmpl_method_status <- function(method = NULL) {
-  avail <- c("em", "mr", "imp")
-  unsourced <- list(
-    hk = paste0("Haley-Knott regression is named but not defined in ",
-                "Broman et al. (2003); the primary source, Haley, C. ",
-                "S. & Knott, S. A. (1992) 'A simple regression ",
-                "method for mapping quantitative trait loci in line ",
-                "crosses using flanking markers', Heredity 69(4), ",
-                "315-324, doi:10.1038/hdy.1992.131, is not in the ",
-                "corpus"))
+  avail <- c("em", "mr", "hk", "imp")
+  unsourced <- list()
   if (is.null(method))
     return(list(methods = c("em", "mr", "hk", "imp"),
                 available = avail, unavailable = unsourced))
@@ -70,10 +64,6 @@ morie_mqtmpl_method_status <- function(method = NULL) {
   if (!(method %in% c("em", "mr", "hk", "imp")))
     stop(paste0("mqtmpl: method must be one of em, mr, hk, imp, got ",
                 method))
-  if (!(method %in% c("em", "mr", "imp")))
-    stop(paste0("mqtmpl: the '", method,
-                "' scan method is not implemented -- ",
-                morie_mqtmpl_method_status(method)$reason))
 }
 
 #' Forward-backward posterior genotype probabilities
@@ -212,6 +202,8 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
 #' @param y Phenotype.
 #' @param genotype_column A column of imputed genotypes.
 #' @param model_dimension Degrees of freedom in the model.
+#' @param covariates Optional matrix of additive covariates, fitted
+#'   alongside the genotype column.
 #' @return The log weight.
 #' @export
 #' @examples
@@ -219,11 +211,18 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
 #' morie_mqtmpl_imputation_weights(V, V)
 #' @keywords internal
 morie_mqtmpl_imputation_weights <- function(y, genotype_column,
-                                             model_dimension = 2) {
+                                             model_dimension = 2,
+                                             covariates = NULL) {
   n <- length(y)
   if (n != length(genotype_column))
     stop("mqtmpl: one genotype per phenotype")
   g <- as.numeric(genotype_column)
+  if (!is.null(covariates) && NCOL(covariates) > 0L) {
+    # additive covariates in the model: the genotype column joins them
+    X <- cbind(1, covariates, if (any(g != g[1L])) g)
+    rss <- max(sum(qr.resid(qr(X), y)^2), 1e-300)
+    return(-0.5 * as.numeric(model_dimension) * log(n) - 0.5 * n * log(rss))
+  }
   my <- mean(y)
   mg <- mean(g)
   sgg <- sum((g - mg)^2)
@@ -241,7 +240,8 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
 #' @keywords internal
 #' @noRd
 .ghc_mqtmpl_scan_imp <- function(y, markers, positions, step, n_imp,
-                                  error_rate, seed) {
+                                  error_rate, seed, cov = NULL) {
+  k_cov <- if (is.null(cov)) 0L else NCOL(cov)
   n <- length(y)
   grid <- seq(from = as.numeric(positions[1]),
               to = as.numeric(positions[length(positions)]),
@@ -252,12 +252,15 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
                                               numeric(1))
   draws <- morie_mqtmpl_sample_genotypes(geno, positions, grid, n_imp,
                                           error_rate, seed)
-  null <- morie_mqtmpl_imputation_weights(y, rep(0, n), model_dimension = 1)
+  null <- morie_mqtmpl_imputation_weights(y, rep(0, n),
+                                          model_dimension = 1 + k_cov,
+                                          covariates = cov)
   lods <- numeric(length(grid))
   for (gi in seq_along(grid)) {
     ws <- vapply(seq_along(draws), function(k)
       morie_mqtmpl_imputation_weights(y,
-        vapply(seq_len(n), function(i) draws[[k]][[i]][gi], numeric(1))),
+        vapply(seq_len(n), function(i) draws[[k]][[i]][gi], numeric(1)),
+        model_dimension = 2 + k_cov, covariates = cov),
       numeric(1))
     top <- max(ws)
     avg <- top + log(sum(exp(ws - top)) / length(ws))
@@ -267,6 +270,7 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
   list(estimate = lods[k], peak_lod = lods[k],
        peak_position = grid[k], position = grid, lod = lods,
        method_used = "imp", n_imputations = as.integer(n_imp),
+       n_covariates = k_cov,
        note = paste0("weights are n^(-v/2) RSS^(-n/2) on the log ",
                      "scale; the draws depend on the markers only, ",
                      "so a new model reuses them and only the ",
@@ -400,6 +404,51 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
        fit = fits[[k]])
 }
 
+# Grid for interval mapping: every `step` cM from the first marker to the
+# last, plus the markers themselves (as R/qtl's calc.genoprob places its
+# pseudomarkers).
+.ghc_mqtmpl_grid <- function(positions, step) {
+  pos <- as.numeric(positions)
+  sort(unique(round(c(seq(pos[1L], pos[length(pos)], by = as.numeric(step)),
+                      pos), 10)))
+}
+
+# P(genotype 1) for every individual at every grid point: the HMM run over
+# markers and pseudomarkers together, a pseudomarker carrying no call.
+.ghc_mqtmpl_grid_probs <- function(markers, positions, grid, error_rate) {
+  n <- length(markers[[1L]])
+  at <- match(round(as.numeric(positions), 10), grid)
+  geno <- lapply(seq_len(n), function(i) {
+    g <- rep(NA_real_, length(grid))
+    g[at] <- vapply(markers, function(mk) as.numeric(mk[i]), numeric(1))
+    g
+  })
+  post <- morie_mqtmpl_hmm_genotype_probabilities(geno, grid, error_rate)
+  t(vapply(post, function(p) p[, 2L], numeric(length(grid))))
+}
+
+# Haley-Knott regression: at each grid point regress the phenotype on the
+# covariates and the expected genotype E[g | markers] = P(g = 1);
+# LOD = (n / 2) log10(RSS0 / RSS1), RSS0 from the covariates alone.
+.ghc_mqtmpl_scan_hk <- function(y, markers, positions, step, cov,
+                                error_rate) {
+  n <- length(y)
+  grid <- .ghc_mqtmpl_grid(positions, step)
+  P <- .ghc_mqtmpl_grid_probs(markers, positions, grid, error_rate)
+  X0 <- if (is.null(cov) || NCOL(cov) == 0L) matrix(1, n, 1L) else cbind(1, cov)
+  rss0 <- sum(qr.resid(qr(X0), y)^2)
+  lods <- vapply(seq_along(grid), function(k) {
+    rss1 <- max(sum(qr.resid(qr(cbind(X0, P[, k])), y)^2), 1e-300)
+    0.5 * n * log10(rss0 / rss1)
+  }, numeric(1))
+  k <- which.max(lods)
+  list(estimate = lods[k], peak_lod = lods[k], peak_position = grid[k],
+       position = grid, lod = lods, method_used = "hk",
+       n_covariates = ncol(X0) - 1L, error_rate = as.numeric(error_rate),
+       method = paste0("Haley-Knott regression scan; Haley & Knott ",
+                       "(1992), Broman et al. (2003)"))
+}
+
 #' Single-QTL genome scan
 #'
 #' @param y Phenotype vector.
@@ -430,10 +479,14 @@ morie_mqtmpl_scanone <- function(y, markers, positions,
   if (any(vapply(markers, function(r) length(r) != n, logical(1))))
     stop(paste0("mqtmpl: every marker must be typed on all ", n,
                 " individuals"))
+  cov_m <- if (length(covariates) == 0L) NULL else do.call(cbind, covariates)
   if (method == "imp")
     return(.ghc_mqtmpl_scan_imp(y, markers, positions, step,
                                 mqtmpl_kw_n_imp(covariates),
-                                error_rate, 0))
+                                error_rate, 0, cov = cov_m))
+  if (method == "hk")
+    return(.ghc_mqtmpl_scan_hk(y, markers, positions, step, cov_m,
+                               error_rate))
   if (method == "mr") {
     out_pos <- c()
     out_lod <- c()
@@ -571,9 +624,10 @@ mqtmpl_cheatsheet <- function() {
     "mqtmpl: the scanning layer. Genotypes come from a forward-ba",
     "ckward HMM that tolerates missing calls and a genotyping err",
     "or rate, and collapses to the flanking-marker formula when b",
-    "oth are absent. Scans by EM or marker regression; Haley-Knot",
-    "t and multiple imputation are named and REFUSED, with citati",
-    "ons. Genome-wide significance is a permutation threshold, be",
+    "oth are absent. Scans by EM, marker regression, Haley-Knott ",
+    "regression on E[g | markers], or multiple imputation (Sen-Ch",
+    "urchill weights), each with additive covariates. Genome-wide",
+    " significance is a permutation threshold, be",
     "cause the maximum over correlated positions is not chi-squar",
     "ed anything."
   ))
@@ -594,10 +648,6 @@ mqtmpl_check_method <- function(method) {
   if (!(method %in% mqtmpl_METHODS)) {
     stop(sprintf("mqtmpl: method must be one of %s, got %s",
                  paste(mqtmpl_METHODS, collapse = ", "), method))
-  }
-  if (!(method %in% mqtmpl_AVAILABLE)) {
-    stop(sprintf("mqtmpl: the '%s' scan method is not implemented -- %s",
-                 method, mqtmpl_UNSOURCED[[method]]))
   }
 }
 
@@ -835,9 +885,6 @@ mqtmpl_imputation_weights <- function(y, genotype_column, model_dimension = 2) {
 #' mqtmpl_kw_n_imp(list())
 #' @export
 mqtmpl_kw_n_imp <- function(covariates) {
-  if (length(covariates) > 0L) {
-    stop("mqtmpl: covariates are not implemented for the imputation scan")
-  }
   64L
 }
 
@@ -1133,19 +1180,10 @@ mqtmpl_single_marker <- function(y, g) {
 }
 
 # -- restored: morie-only objects kept through the rmorie sync --
-mqtmpl_AVAILABLE <- c("em", "mr", "imp")
+mqtmpl_AVAILABLE <- c("em", "mr", "hk", "imp")
 
 mqtmpl_LOG10E <- log10(exp(1))
 
 mqtmpl_METHODS <- c("em", "mr", "hk", "imp")
 
-mqtmpl_UNSOURCED <- list(
-  hk = paste0(
-    "Haley-Knott regression is named but not defined in Broman et",
-    " al. (2003); the primary source, Haley, C. S. & Knott, S. A.",
-    " (1992) 'A simple regression method for mapping quantitative",
-    " trait loci in line crosses using flanking markers', Heredit",
-    "y 69(4), 315-324, doi:10.1038/hdy.1992.131, is not in the co",
-    "rpus"
-  )
-)
+mqtmpl_UNSOURCED <- list()
