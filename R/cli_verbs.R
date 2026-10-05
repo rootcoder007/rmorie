@@ -956,22 +956,22 @@
   2L
 }
 
-.cli_download_bootstrap <- function(flag, out) {
+.cli_download_bootstrap <- function(flag, out, has = function(x) FALSE) {
   survey <- flag("--survey")
   if (is.null(survey)) {
     # hundreds of MB per file: never start without being told which one
-    out(paste0("usage: rmorie download-bootstrap --survey KEY|all\n",
+    out(paste0("usage: rmorie download-bootstrap --survey KEY|all [--refresh]\n",
                "  The bootstrap-weight files are large (hundreds of MB each) and are cached under the morie cache directory.\n",
                "  Keys: ocs22bt, ocs24bt, cu20bt, cu23bt (or csads_2021, csads_2023, csus_2019, csus_2023)\n"))
     return(2L)
   }
   # the R function's own route and key resolution, so the verb and the function cannot disagree
-  r <- tryCatch(morie_download_bootstrap(survey), error = function(e) e)
+  r <- tryCatch(morie_download_bootstrap(survey, refresh = has("--refresh")), error = function(e) e)
   if (inherits(r, "error")) {
     out(sprintf("%s\n", conditionMessage(r)))
     return(1L)
   }
-  out(sprintf("%d bootstrap file(s) cached\n", r))
+  out(sprintf("%d bootstrap file(s) cached (a cached one is kept; --refresh downloads it again)\n", r))
   0L
 }
 

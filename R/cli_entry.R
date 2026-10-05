@@ -336,7 +336,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       update = status <- .cli_update(has, out),
       crypto = status <- .cli_crypto(rest, flag, out),
       ingest = status <- .cli_ingest(rest, flag, has, out),
-      `download-bootstrap` = status <- .cli_download_bootstrap(flag, out),
+      `download-bootstrap` = status <- .cli_download_bootstrap(flag, out, has),
       exec = status <- .cli_exec(rest, flag, out),
       edit = status <- .cli_edit(rest, out),
       percysuits = status <- .cli_percysuits(flag, has, out),

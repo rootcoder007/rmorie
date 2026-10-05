@@ -759,15 +759,24 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
         "%s?resource_id=%s&limit=%d&offset=%d",
         ckan_base, rid, page, fetched
       )
-      raw <- tryCatch(suppressWarnings(readLines(url(api_url), warn = FALSE)), error = function(e) e)
-      if (inherits(raw, "error")) {
-        if (fetched > 0L) stop("CKAN datastore failed after ", fetched, " rows: ", conditionMessage(raw), call. = FALSE)
-        # the datastore API is down or slow: the resource file is the route,
-        # live or from its Wayback Machine snapshot (the Python arm does the same)
-        message("CKAN datastore unreachable (", conditionMessage(raw), "); reading the resource file instead")
+      # status-aware: a server that answered (a datastore query it refuses, HTTP 4xx/5xx) is not an
+      # unreachable one, and the message says which
+      resp <- tryCatch(.morie_http_get_with_status(api_url, timeout_s = 120L), error = function(e) e)
+      why <- if (inherits(resp, "error")) {
+        sprintf("CKAN datastore unreachable (%s)", conditionMessage(resp))
+      } else if (!identical(as.integer(resp$status_code), 200L)) {
+        sprintf("the CKAN datastore answered HTTP %d to the query (limit=%d, offset=%d)",
+                as.integer(resp$status_code), page, fetched)
+      }
+      if (!is.null(why)) {
+        if (fetched > 0L) stop(why, " after ", fetched, " rows", call. = FALSE)
+        # the resource file is the route then, live or from its Wayback Machine snapshot (the
+        # Python arm does the same)
+        message(why, "; reading the resource file instead")
         fallback <- TRUE
         break
       }
+      raw <- resp$body
       payload <- .morie_from_json(paste(raw, collapse = ""))
       recs <- payload$result$records
       if (is.null(recs) || NROW(recs) == 0L) break
@@ -1240,15 +1249,20 @@ morie_userguide <- function(name = NULL) {
 #' @param limit Max records per CKAN request (default 32000).
 #' @param db_path Optional path to a SQLite/DuckDB file (default backend).
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
-#' @return Invisibly, the number of CSV files successfully downloaded.
+#' @param refresh Download again even when the table is already cached (default
+#'   \code{FALSE}: a cached table is reported and kept).
+#' @return Invisibly, the number of surveys available (downloaded or already cached).
 #' @examples
+#' # the bootstrap tables and their keys
+#' cat_ <- morie_dataset_catalog()
+#' cat_[cat_$type == "bootstrap", c("key", "name")]
 #' \donttest{
-#' # the CSADS 2021 bootstrap weights (376 MB), cached for later survey work
-#' morie_download_bootstrap(survey = "csads_2021")
+#' # the CSADS 2021 bootstrap weights are 376 MB: fetched once, then read from the cache
+#' if (interactive()) morie_download_bootstrap(survey = "csads_2021")
 #' }
 #' @export
 morie_download_bootstrap <- function(survey = "all", limit = 32000L,
-                                     db_path = NULL, con = NULL) {
+                                     db_path = NULL, con = NULL, refresh = FALSE) {
   targets <- .morie_bootstrap_targets(survey)
   catalog <- morie_dataset_catalog()
   n_ok <- 0L
@@ -1269,6 +1283,18 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
       next
     }
 
+    # already cached (as `pull` would find it): not fetched again unless refresh = TRUE
+    if (!isTRUE(refresh)) {
+      cached <- tryCatch(morie_cache_load(entry$table_name, db_path = db_path, con = con),
+                         error = function(e) NULL)
+      if (is.data.frame(cached) && nrow(cached)) {
+        message(sprintf("  %s: %s rows already cached as %s (refresh = TRUE to download again)",
+                        key, format(nrow(cached), big.mark = ","), entry$table_name))
+        n_ok <- n_ok + 1L
+        next
+      }
+    }
+
     # The datastore when the catalogue names a CKAN resource (honours `limit`), else the
     # catalogue's own download route, the one `rmorie pull` takes.
     message("Downloading ", key, " (", entry$name, ") ...")
@@ -1277,6 +1303,8 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
         data <- morie_fetch_ckan(key, limit = limit, db_path = db_path, con = con,
                                  resource_id = entry$ckan_resource_id)
         .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
+        # morie_fetch_ckan keeps its own "<key>_raw" copy: one cached copy of a 230 MB table
+        if (!identical(paste0(key, "_raw"), entry$table_name)) .morie_cache_drop(paste0(key, "_raw"), db_path, con)
         data
       } else {
         morie_load_dataset(key, db_path = db_path, con = con)
@@ -1375,4 +1403,12 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
   env <- Sys.getenv("MORIE_DATA_DIR", "")
   if (nzchar(env)) return(path.expand(env))
   tools::R_user_dir("morie", which = "data")
+}
+
+# Remove one table from the default file cache (a no-op for a database cache or a missing file).
+.morie_cache_drop <- function(table_name, db_path = NULL, con = NULL) {
+  h <- tryCatch(.morie_db_handle(con, db_path), error = function(e) NULL)
+  if (is.null(h) || !h$type %in% c("rds", "parquet")) return(invisible(FALSE))
+  p <- .morie_cache_fs_path(h$dir, table_name, h$type)
+  invisible(file.exists(p) && unlink(p) == 0L)
 }
