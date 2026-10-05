@@ -1,5 +1,47 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* `morie_estimate_ate()` (and the MRM "ipw ate" row) reports the HC3 sandwich standard error of the
+  weighted regression `y ~ t` whose coefficient its Hajek estimate is, as morie's Python does. It
+  used the Horvitz-Thompson influence function, which is not centred on the group means: the
+  standard error ran 45-57% above Python's and 69% above the sampling SD in simulation (95%
+  intervals that covered the truth 100% of the time). The two arms now agree to 1e-12.
+* `morie_estimate_double_ml()` cross-fits both nuisances on one sample split, its folds drawn from
+  the splitmix64 uniforms rmoriebricklayer and morie's Python share (R's `sample()` and numpy's
+  permutation never agreed, so one seed gave different folds in the two languages).
+* `morie_kendall_tau()` and `morie_wilcoxon_signed_rank_test()` use base R's default p-values (exact
+  below 50 pairs without ties), as morie's Python does; they forced the normal approximation.
+  `exact =` chooses.
+* `morie_hawkes_fit()` fits 50 events or more with `rmoriebricklayer::core_hawkes_fit()` (bounded,
+  analytic gradient): 1,083 Weibull or Lomax events take under a second instead of 32-38 s, and a
+  Lomax fit that tends to its exponential limit stops at the bound with a note that its shape is not
+  identified, instead of reporting alpha = 4.8e8. The result also carries `at_bound`.
+* `morie_tps_hawkes_advanced_fit()` refuses a kernel/method pair no fit can serve (`soe` on a kernel
+  that is not completely monotone, `inar` with a sinusoidal baseline) with an error, as Python does;
+  it returned an empty result with the reason in `$warnings`.
+* `rmorie analyze tps` runs: `'{"datasets":["Assault"],"nrows":5000}'` (names as `morie_tps_load()`
+  takes) or `'{"data":"FILE.csv"}'`; without either it exits 1 with the usage (it exited 0 with
+  "not_available").
+* `morie_datasets_ckan_package()` read no package (the resource list arrives as a data frame) and
+  now returns every CSV, a bilingual package's English and French copies under "(en)" and "(fr)";
+  CKAN CSVs in Windows-1252 (Ontario's library statistics) are read instead of stopping on "invalid
+  multibyte string".
+* A read-only or full home directory no longer stops `pull --out` or a loader: the cache is skipped
+  with a message naming the directory, and the data are returned; a failed cache write names the path
+  instead of a later "cannot open the connection".
+* `pull cihi820b` and the other CIHI workbooks: a jurisdiction merged down its block is carried to
+  every row (112 of 133 rows were blank), Excel's number noise (`51.959413779999998`) is written as
+  the workbook's digits, and `pull` writes CSV as morie's Python does (quotes only where needed, an
+  empty field for a missing value), so the two arms' files compare equal. The progress line names the
+  dataset, one line each.
+* `download-bootstrap` keeps a table that is already cached (`--refresh` downloads again), keeps one
+  copy instead of two 230 MB files, and says "the CKAN datastore answered HTTP 500" rather than
+  "unreachable" when the server answered.
+* `spwkth()` computes its integrated density in milliseconds (the omega integral is exact, not a
+  20,001-point quadrature: 37 s before). Slow examples were trimmed and the `morie_entheo_*` examples
+  say how to get the DMT_Imaging data instead of printing an error.
+* DESCRIPTION requires rmoriedata (>= 0.3.4) and pins Remotes to rmoriebricklayer@v0.5.5 and
+  rmoriedata@v0.3.4; the README installs both from r-universe (CRAN carries older versions) and
+  describes the 0.3.4 SIU corpus (4,613 reports, 66 columns, English and French).
 * **Security: `morie_crypto_hybrid_encrypt()` and `rmorie crypto encrypt` now keep files private.**
   The R arm still wrote the 1.3.x container, whose wrapping key was derived from the KEM ciphertext
   and the public key alone (the shared secret was computed and discarded), so anyone holding the
