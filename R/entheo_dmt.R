@@ -140,7 +140,12 @@ morie_entheo_available_subjects <- function() {
 #' @return numeric matrix of shape (112, 840).
 #' @examples
 #' \donttest{
-#' try(morie_entheo_load_fmri_subject(1L, "DMT"))
+#' root <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", file.path(morie_cache_dir(), "DMT_Imaging"))
+#' if (dir.exists(root)) {
+#'   morie_entheo_load_fmri_subject(1L, "DMT")
+#' } else {
+#'   message("needs the DMT_Imaging data: git clone https://github.com/timmer500/DMT_Imaging.git ", root)
+#' }
 #' }
 #' @export
 morie_entheo_load_fmri_subject <- function(subject_id, condition = "DMT") {
@@ -178,7 +183,12 @@ morie_entheo_load_fmri_subject <- function(subject_id, condition = "DMT") {
 #'   (14 subj, 840 TRs, 5 bands).
 #' @examples
 #' \donttest{
-#' try(morie_entheo_load_eeg_region("Frontal"))
+#' root <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", file.path(morie_cache_dir(), "DMT_Imaging"))
+#' if (dir.exists(root)) {
+#'   morie_entheo_load_eeg_region("Frontal")
+#' } else {
+#'   message("needs the DMT_Imaging data: git clone https://github.com/timmer500/DMT_Imaging.git ", root)
+#' }
 #' }
 #' @export
 morie_entheo_load_eeg_region <- function(region) {
@@ -211,7 +221,12 @@ morie_entheo_load_eeg_region <- function(region) {
 #'   \code{interpretation}, \code{payload}.
 #' @examples
 #' \donttest{
-#' try(morie_entheo_dataset_overview())
+#' root <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", file.path(morie_cache_dir(), "DMT_Imaging"))
+#' if (dir.exists(root)) {
+#'   morie_entheo_dataset_overview()
+#' } else {
+#'   message("needs the DMT_Imaging data: git clone https://github.com/timmer500/DMT_Imaging.git ", root)
+#' }
 #' }
 #' @export
 morie_entheo_dataset_overview <- function() {

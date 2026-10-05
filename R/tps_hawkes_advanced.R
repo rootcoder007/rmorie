@@ -701,7 +701,7 @@ morie_tps_compare_hawkes_kernels <- function(df,
 #'
 #' @examples
 #' \donttest{
-#'   df <- morie_tps_load_tps_dataset("Assault", nrows = 500)
+#'   df <- morie_tps_load_tps_dataset("Assault", nrows = 200)
 #'   rr <- morie_tps_hawkes_markovian_vs_nonmarkovian(df,
 #'                                                     ds_name = "Assault")
 #' }
