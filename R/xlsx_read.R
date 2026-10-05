@@ -41,6 +41,7 @@
   names(body) <- make.unique(new)
   rownames(body) <- NULL
   body[] <- lapply(body, function(v) if (is.character(v)) utils::type.convert(trimws(v), as.is = TRUE) else v)
+  body <- .morie_xlsx_fill_merged(body)
   attr(body, "morie_sheet") <- attr(df, "morie_sheet")
   .morie_xlsx_one_line_names(body)
 }
@@ -52,7 +53,30 @@
 #' whole sheet in memory: the 93 MB CIHI indicator library needs more than 5 GB).
 #' @noRd
 .morie_xlsx_data_sheet <- function(path, ...) {
-  .morie_xlsx_promote_header(.morie_xlsx_data_sheet_raw(path, ...))
+  .morie_xlsx_tidy_numbers(.morie_xlsx_promote_header(.morie_xlsx_data_sheet_raw(path, ...)))
+}
+
+# Numbers a reader left as text (a column readxl typed as text because of a title row, or one
+# holding a "#" rank marker): Excel's binary approximation "51.959413779999998" becomes the 15
+# significant digits R and Python print ("51.95941378"), and a column that is all numbers
+# becomes numeric.
+.morie_xlsx_tidy_numbers <- function(df) {
+  num_re <- "^-?([0-9]+\\.?[0-9]*|\\.[0-9]+)([eE][-+]?[0-9]+)?$"
+  for (j in which(vapply(df, is.character, logical(1)))) {
+    v <- trimws(df[[j]])
+    filled <- !is.na(v) & nzchar(v)
+    isnum <- filled & grepl(num_re, v)
+    if (!any(isnum)) next
+    if (all(isnum[filled])) {
+      x <- rep(NA_real_, length(v))
+      x[filled] <- as.numeric(v[filled])
+      df[[j]] <- if (all(is.na(x) | x == round(x)) && all(abs(x) < .Machine$integer.max, na.rm = TRUE)) as.integer(x) else x
+    } else {
+      v[isnum] <- as.character(as.numeric(v[isnum]))
+      df[[j]] <- v
+    }
+  }
+  df
 }
 
 # filled cells, not the rectangle: a stray note far to the right widens a sheet
@@ -115,7 +139,8 @@
 #' The intermediate CSV goes to the user cache (a download sits in tempdir(), which on some
 #' systems is RAM) and is removed once read; the caller caches the table itself.
 #' @noRd
-.morie_xlsx_stream <- function(path, sheet_name = NULL) {
+.morie_xlsx_stream <- function(path, sheet_name = NULL,
+                               label = getOption("morie.xlsx.label", basename(path))) {
   dir.create(morie_cache_dir("xlsx"), recursive = TRUE, showWarnings = FALSE)
   csv <- file.path(morie_cache_dir("xlsx"), sub("\\.xlsx$", ".csv", basename(path), ignore.case = TRUE))
   on.exit(unlink(csv), add = TRUE)
@@ -204,6 +229,10 @@
       is_i <- grepl('t="inlineStr"', head, fixed = TRUE)
       val[is_i] <- gsub("<[^>]+>", "", sub("(?s)^.*?<is>(.*?)</is>.*$", "\\1", cells[is_i], perl = TRUE))
       val[!is_s] <- unxml(val[!is_s])
+      # a number cell holds Excel's binary approximation ("51.959413779999998"): the 15
+      # significant digits R and Python print, the workbook's own ("51.95941378")
+      num <- !is_s & !is_i & !grepl('t="(str|b|e)"', head) & grepl("^-?[0-9.]+([eE][-+]?[0-9]+)?$", val)
+      if (any(num)) val[num] <- as.character(as.numeric(val[num]))
       if (is.na(ncol_max)) ncol_max <- max(col)  # the header row fixes the width
       keep <- col <= ncol_max
       rows <- sort(unique(row))
@@ -212,11 +241,11 @@
       q <- matrix(paste0('"', gsub('"', '""', enc2utf8(m), fixed = TRUE), '"'), nrow(m))
       writeLines(do.call(paste, c(asplit(q, 2L), sep = ",")), out, useBytes = TRUE)
       done <- done + length(rows)
-      if (isTRUE(getOption("morie.progress"))) message(sprintf("\r%s: %s rows to CSV", basename(path), format(done, big.mark = ",")), appendLF = FALSE)
+      if (isTRUE(getOption("morie.progress"))) message(sprintf("\r%s: %s rows to CSV", label, format(done, big.mark = ",")), appendLF = FALSE)
     }
     if (eof) break
   }
-  if (isTRUE(getOption("morie.progress"))) message("")
+  if (isTRUE(getOption("morie.progress"))) message(sprintf("\r%s: %s rows to CSV", label, format(done, big.mark = ",")))
   close(out)
   close(con)
   open_cons <- FALSE
@@ -248,4 +277,22 @@
   nm <- sub('^.*name="([^"]+)".*$', "\\1", tags)
   nm <- gsub("&amp;", "&", gsub("&apos;", "'", nm, fixed = TRUE), fixed = TRUE)
   stats::setNames(as.list(ids), nm)
+}
+
+
+# A label column merged down its block (CIHI: the jurisdiction once per province, on the
+# block's first row) reads as blanks below the first row; each row is "jurisdiction x item",
+# so carry the label down. Only the first column, only when it is text, starts filled, and is
+# blank on rows that hold data.
+.morie_xlsx_fill_merged <- function(df) {
+  if (ncol(df) < 2L || nrow(df) < 2L || !is.character(df[[1L]])) return(df)
+  v <- df[[1L]]
+  blank <- is.na(v) | !nzchar(trimws(v))
+  if (blank[1L] || !any(blank)) return(df)
+  other <- Reduce(`|`, lapply(df[-1L], function(x) !is.na(x) & nzchar(trimws(as.character(x)))))
+  if (!any(blank & other)) return(df)
+  last <- v[1L]
+  for (i in seq_along(v)) if (blank[i] && other[i]) v[i] <- last else if (!blank[i]) last <- v[i]
+  df[[1L]] <- v
+  df
 }

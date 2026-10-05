@@ -249,7 +249,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
             if (inherits(r, "error")) {
               out(sprintf("  %-12s FAILED: %s\n", k, conditionMessage(r)))
             } else {
-              utils::write.csv(r, file.path(od, paste0(k, ".csv")), row.names = FALSE)
+              .morie_write_csv_minimal(r, file.path(od, paste0(k, ".csv")))
               out(sprintf("  %-12s %s rows -> %s\n", k, format(nrow(r), big.mark = ","), file.path(od, paste0(k, ".csv"))))
             }
           }
@@ -277,7 +277,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
                         rest[[1L]], length(ls(df)), dest, dest, rest[[1L]]))
           } else {
           wrote <- tryCatch({
-            suppressWarnings(utils::write.csv(df, dest, row.names = FALSE))
+            .morie_write_csv_minimal(df, dest)
             TRUE
           }, error = function(e) {
             out(sprintf("cannot write %s: %s\n", dest, conditionMessage(e)))
@@ -509,4 +509,30 @@ install_cli <- function(dir = file.path(path.expand("~"), ".local", "bin"), name
   message(sprintf("Installed %s%s", target,
                   if (on_path) "" else sprintf("; add %s to your PATH", dir)))
   invisible(target)
+}
+
+# The CSV `pull` writes, as morie's Python writes it (pandas' to_csv): a field is quoted only
+# when it holds a comma, a quote or a line break, a missing value is an empty field, numbers in
+# R's 15 significant digits, UTF-8. write.csv quoted every text field and wrote NA, so the two
+# arms' files for one dataset did not compare equal.
+.morie_write_csv_minimal <- function(df, path) {
+  df <- as.data.frame(df, stringsAsFactors = FALSE)
+  q <- function(v) {
+    v <- enc2utf8(as.character(v))
+    need <- !is.na(v) & grepl("[,\"\r\n]", v)
+    v[need] <- paste0("\"", gsub("\"", "\"\"", v[need], fixed = TRUE), "\"")
+    v[is.na(v)] <- ""
+    v
+  }
+  cols <- lapply(df, function(v) {
+    if (is.factor(v)) v <- as.character(v)
+    if (inherits(v, c("Date", "POSIXt"))) v <- format(v)
+    q(v)
+  })
+  lines <- c(paste(q(names(df)), collapse = ","),
+             if (nrow(df)) do.call(paste, c(unname(cols), sep = ",")))
+  con <- file(path, open = "wb")
+  on.exit(close(con), add = TRUE)
+  writeLines(lines, con, sep = "\n", useBytes = TRUE)
+  invisible(path)
 }

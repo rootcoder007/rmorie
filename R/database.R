@@ -899,6 +899,9 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @export
 morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
                                con = NULL) {
+  # a workbook streamed to CSV reports progress under the dataset key, not a temp file name
+  op <- options(morie.xlsx.label = key)
+  on.exit(options(op), add = TRUE)
   df <- .morie_load_dataset_raw(key, db_path = db_path, refresh = refresh, con = con)
   # the published SIU corpus holds page text cut at the wrong place in this column: the few
   # real categories (morie.data._post_load does the same), missing kept missing
