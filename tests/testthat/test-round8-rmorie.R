@@ -96,7 +96,7 @@ test_that("analyze tps runs on files and is an error without datasets", {
     seen <<- dfs
     list(ok = TRUE)
   }, .package = "rmorie")
-  capture.output(cli_main("tps", sprintf("{\"data\":\"%s\"}", f)))
+  capture.output(cli_main("tps", sprintf("{\"data\":\"%s\"}", normalizePath(f, winslash = "/"))))  # forward slashes: a Windows path's backslashes are JSON escapes
   expect_identical(names(seen), tools::file_path_sans_ext(basename(f)))
   expect_identical(seen[[1]]$MCI_CATEGORY, "Assault")
 })
