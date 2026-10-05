@@ -42,7 +42,6 @@ A list with \code{R_eff}, \code{R0}, \code{fraction_before_isolation},
 \description{
 A step of the ttrace_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- effective_reproduction_number(R0 = 2.5, si_mean = 5, si_sd = 1.9,

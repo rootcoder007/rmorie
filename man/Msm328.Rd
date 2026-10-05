@@ -16,6 +16,9 @@ The list returned by \code{Msm327()}.
 The same method as \code{Msm327()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+Msm328(theta_hat = 0.6, mu_hat = 1)$estimate
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

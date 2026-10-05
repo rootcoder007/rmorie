@@ -22,5 +22,4 @@ Nothing; this branch always raises.
 \description{
 A step of the survival_more implementation. Called by \code{.ms_fit_lls}.
 See the file header for the source the module follows.
-source it follows.
 }

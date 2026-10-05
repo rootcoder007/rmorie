@@ -31,7 +31,6 @@ A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method},
 A step of the egnnL_native implementation. Called by \code{e_gcn}, \code{egnn_layer},
 \code{egnnlayer} and 5 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

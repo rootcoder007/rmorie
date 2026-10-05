@@ -42,7 +42,6 @@ A list with \code{lam}, \code{K}, \code{K_upper}, \code{K_lower}, \code{C},
 \description{
 A step of the blstn_native implementation. Called by \code{morie_blstn}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_karlin_altschul()

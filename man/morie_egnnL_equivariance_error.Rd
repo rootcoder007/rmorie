@@ -42,7 +42,6 @@ A list with \code{coordinate_error}, \code{feature_error}, \code{equivariant},
 \description{
 A step of the egnnL_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

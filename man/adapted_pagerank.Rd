@@ -25,7 +25,6 @@ A list with \code{w}, \code{ranking}.
 \description{
 A step of the tagRC_native implementation. Called by \code{folkrank}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

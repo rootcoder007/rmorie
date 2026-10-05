@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the helpers_ot implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

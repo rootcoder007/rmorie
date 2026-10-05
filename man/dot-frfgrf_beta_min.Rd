@@ -19,7 +19,6 @@ A numeric value.
 \description{
 A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .frfgrf_beta_min(d = 3L)

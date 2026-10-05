@@ -24,5 +24,4 @@ A list with \code{equivalent}, \code{max_deviation}, \code{aggregated},
 \description{
 A step of the resnxt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

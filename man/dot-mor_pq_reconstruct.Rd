@@ -17,5 +17,4 @@ The value of \code{r}, as built in the body.
 \description{
 A step of the polqnt_native implementation. Called by \code{morie_polqnt}.
 See the file header for the source the module follows.
-source it follows.
 }

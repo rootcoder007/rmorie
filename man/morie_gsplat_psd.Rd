@@ -19,6 +19,10 @@ A list with \code{eigenvalues}, \code{min_eigenvalue} and
 Computes the eigenvalues of a symmetric matrix and tests the
 smallest against a tolerance.
 }
+\examples{
+morie_gsplat_psd(diag(c(1, 2, 3)))$psd
+morie_gsplat_psd(matrix(c(1, 2, 0, 2, 1, 0, 0, 0, 1), 3))$psd
+}
 \references{
 Kerbl, B. et al. (2023).
 }

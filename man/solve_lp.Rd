@@ -41,7 +41,6 @@ A list with \code{estimate}, \code{x}, \code{y}, \code{s}, \code{mu},
 \description{
 A step of the mehtad_native implementation. Called by \code{morie_mehtad}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 A <- matrix(c(1, 1, 1, 0, 0, 1, 0, 1), 2, 4, byrow = TRUE)

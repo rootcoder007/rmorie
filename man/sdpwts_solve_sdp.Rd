@@ -31,7 +31,6 @@ A list with \code{estimate}, \code{x}, \code{objective}, \code{gap},
 \description{
 A step of the sdpwts_native implementation. Called by \code{sdpwts_min_eigenvalue_sdp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # min x s.t. [[x, 1], [1, x]] >= 0: the optimum is x = 1

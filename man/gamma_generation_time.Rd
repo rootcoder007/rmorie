@@ -30,3 +30,7 @@ A list with \code{t} and \code{density}.
 Defaults are a shape/scale pair in the range reported for
 SARS-CoV-2; they are a placeholder, not the paper's fit.
 }
+\examples{
+gt <- gamma_generation_time()
+sum(gt$density * diff(gt$t)[1])   # the density integrates to one on its grid
+}

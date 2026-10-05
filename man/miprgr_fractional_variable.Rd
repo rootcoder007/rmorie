@@ -19,5 +19,7 @@ A list with \code{index}, \code{fractionality}, \code{integral}.
 \description{
 A step of the miprgr_native implementation. Called by \code{miprgr_branch_and_bound}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+miprgr_fractional_variable(c(1, 2.4, 3.5), integer_vars = c(1, 2, 3))
 }

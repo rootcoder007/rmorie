@@ -15,5 +15,8 @@ The value of \code{repeat}.
 \description{
 A step of the muzero_native implementation. Called by \code{muzero_add_noise}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(5)
+mean(replicate(2000, muzero_gamma_rv(2)))
 }

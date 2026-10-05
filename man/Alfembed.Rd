@@ -51,6 +51,17 @@ nothing beyond that is distinguished.  That is deliberate: it
 de-emphasises primary sequence distance and lets the network run on
 chains longer than those it was trained on.
 }
+\examples{
+set.seed(15)
+n <- 4; ctf <- 3; cz <- 2; cm <- 2; cmf <- 3
+tf <- matrix(rnorm(n * ctf), n, ctf)
+msa <- array(rnorm(2 * n * cmf), c(2, n, cmf))
+r <- Alfembed(tf, residue_index = 1:n, msa_feat = msa,
+              wa = matrix(rnorm(cz * ctf), cz, ctf), wb = matrix(rnorm(cz * ctf), cz, ctf),
+              wrel = matrix(rnorm(cz * 65), cz, 65), wmsa = matrix(rnorm(cm * cmf), cm, cmf),
+              wtgt = matrix(rnorm(cm * ctf), cm, ctf))
+dim(r$z); dim(r$m)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 3-5
 }

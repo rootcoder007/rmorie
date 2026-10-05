@@ -21,5 +21,4 @@ A vector, from \code{c}.
 \description{
 A step of the helpers_bnd implementation. Called by \code{Bndtfm}, \code{Bnscbo}.
 See the file header for the source the module follows.
-source it follows.
 }

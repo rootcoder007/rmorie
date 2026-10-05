@@ -20,7 +20,6 @@ The value of \code{rows}, as built in the body.
 A step of the prphet_native implementation. Called by \code{morie_prphet_design},
 \code{prophe_additive_components}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_prphet_fourier_terms(t = c(1, 2, 3, 4, 5, 6, 7, 8), period = 5L, order = 5L)

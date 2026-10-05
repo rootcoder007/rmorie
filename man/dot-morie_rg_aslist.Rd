@@ -16,7 +16,6 @@ A vector, from \code{as.numeric}.
 A step of the rangayyan_ch3 implementation. Called by \code{ContConv}, \code{CovXY},
 \code{DeltaDecomp} and 10 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

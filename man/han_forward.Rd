@@ -45,7 +45,6 @@ A list with \code{estimate}, \code{embeddings}, \code{semantic_weights},
 \description{
 A step of the hetgnn_native implementation. Called by \code{morie_hetgnn}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

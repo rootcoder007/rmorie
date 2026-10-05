@@ -27,6 +27,11 @@ resolved to the LCA of the tied leaves. No hits leaves the query
 unclassified (taxon 0). Kraken 2 applies the same classification
 step to minimizer-based LCA hits.
 }
+\examples{
+# taxonomy 1 (root) -> 2 -> 3 and 2 -> 4; most k-mers hit 3
+parent <- c(`1` = 1, `2` = 1, `3` = 2, `4` = 2)
+Taxass(kmer_taxa = c(3, 3, 3, 4, 0, 2), parent = parent)$taxon
+}
 \references{
 Wood, D. E. and Salzberg, S. L. (2014), Kraken:
 ultrafast metagenomic sequence classification using exact

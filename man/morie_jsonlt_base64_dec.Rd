@@ -18,3 +18,7 @@ a raw vector.
 \description{
 Base64 decode to a raw vector
 }
+\examples{
+rawToChar(morie_jsonlt_base64_dec("aGVsbG8gd29ybGQ="))
+rawToChar(morie_jsonlt_base64url_dec(morie_jsonlt_base64url_enc("hello?world")))
+}

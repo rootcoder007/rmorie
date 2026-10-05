@@ -18,7 +18,6 @@ A list with \code{node}, \code{path}.
 A step of the hntfst_native implementation. Called by \code{.hntfst_tree_predict},
 \code{forest_weights}, \code{morie_clrgrf}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

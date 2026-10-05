@@ -27,7 +27,6 @@ A list with \code{means}, \code{loglik}.
 \description{
 A step of the prtcl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_prtcl_kalman_filter_1d(y = c(1, 2, 3, 4, 5, 6, 7, 8), a = 0.9, q = 0.5, c = 1, r = 0.25)

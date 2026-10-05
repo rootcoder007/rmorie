@@ -32,6 +32,13 @@ similarity.  The projection weights come from the deterministic
 stream rather than trained checkpoints, so the geometry is exact and
 reproducible but the semantics are not learned.
 }
+\examples{
+\donttest{
+img <- matrix(runif(32 * 32), 32, 32)
+e <- Clipxi(img, backbone = "vit-b/32")
+c(e$n_patches, length(e$embedding))
+}
+}
 \references{
 Radford et al. (2021), ICML 139:8748-8763;
 Dosovitskiy et al. (2021), ICLR 2021.

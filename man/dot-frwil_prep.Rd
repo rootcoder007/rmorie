@@ -17,5 +17,4 @@ A list with \code{C}, \code{y}, \code{k}.
 \description{
 A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}.
 See the file header for the source the module follows.
-source it follows.
 }

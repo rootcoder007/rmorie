@@ -19,7 +19,6 @@ The value of \code{g}, as built in the body.
 A step of the prsLL_native implementation. Called by
 \code{.prsLL_remove_left_recursion}, \code{morie_prsLL}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):

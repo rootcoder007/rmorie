@@ -16,7 +16,6 @@ A list with \code{symbol}, \code{children}.
 A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd},
 \code{.prsLL_parse_table}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 .prsLL_leaf("id")

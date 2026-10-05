@@ -15,5 +15,4 @@ The value of \code{function}.
 \description{
 A step of the rmrl_native implementation. Called by \code{morie_rmrl_reward_machine}.
 See the file header for the source the module follows.
-source it follows.
 }

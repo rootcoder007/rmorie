@@ -16,7 +16,6 @@ A vector, from \code{as.numeric}.
 A step of the tlroad_native implementation. Called by \code{.tlroad_eic_ate},
 \code{.tlroad_plugin}, \code{.tlroad_score_spans_eic}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

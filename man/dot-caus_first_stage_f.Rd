@@ -17,7 +17,6 @@ A numeric value.
 \description{
 A step of the caus_native implementation. Called by \code{morie_caus_iv_2sls}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)

@@ -20,6 +20,5 @@ A list with \code{corrected}, \code{raw}, \code{shift}, \code{note}.
 A step of the twoT_native implementation. Called by
 \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

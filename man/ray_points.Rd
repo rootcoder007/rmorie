@@ -35,7 +35,6 @@ A list with \code{t}, \code{points}, \code{direction}.
 \description{
 A step of the nrfrad_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- ray_points(origin = c(0, 0, 0), direction = c(0, 0, 1),

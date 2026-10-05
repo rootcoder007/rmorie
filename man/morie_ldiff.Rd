@@ -46,6 +46,11 @@ The reported \code{c_min} is the largest r_1 / (r_l + ... + r_m)
 over blocks, so the release is recursive (c, l)-diverse exactly
 when \code{c_min < c}.
 }
+\examples{
+qi <- cbind(age = c(30, 30, 30, 40, 40, 40), zip = c(1, 1, 1, 2, 2, 2))
+s <- c("flu", "cold", "flu", "cancer", "flu", "cold")
+morie_ldiff(X = seq_len(6), quasi_ids = qi, sensitive = s, l = 2)[c("distinct_l", "satisfies_distinct")]
+}
 \references{
 Machanavajjhala, A., Kifer, D., Gehrke, J. and
 Venkitasubramaniam, M. (2007). l-diversity: privacy beyond

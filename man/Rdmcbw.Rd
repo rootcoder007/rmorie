@@ -49,6 +49,12 @@ the worked example, which reproduces the paper's reported numbers;
 without the two the density comes out at 1.79 and the reported
 \code{h_opt = 0.2649} is not recoverable.
 }
+\examples{
+set.seed(8)
+x <- runif(800, -1, 1)
+y <- 0.4 * (x >= 0) + x + rnorm(800, sd = 0.3)
+Rdmcbw(y, x, cutoff = 0)$estimate
+}
 \references{
 Imbens, G. & Kalyanaraman, K. (2012). Optimal bandwidth
 choice for the regression discontinuity estimator. Review of

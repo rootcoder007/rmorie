@@ -25,5 +25,9 @@ A list with \code{out1}, \code{out2}.
 \description{
 A step of the mafft_native implementation. Called by \code{group_align}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+sc <- normalized_similarity_matrix(seq_type = "aa")
+r <- mafft_nw("MKVLA", "MKLA", sc$M, 1, 1, s_op = -1.53)
+unlist(r)
 }

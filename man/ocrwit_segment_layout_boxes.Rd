@@ -23,5 +23,8 @@ A list with \code{segment_boxes}, \code{per_token}, \code{n_segments}, \code{not
 \description{
 A step of the ocrwit_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+boxes <- list(c(10, 10, 50, 20), c(60, 10, 90, 20), c(10, 40, 80, 50))
+ocrwit_segment_layout_boxes(boxes, segment_ids = list(1, 1, 2), width = 100, height = 60)$segment_boxes
 }

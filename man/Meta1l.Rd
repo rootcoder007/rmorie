@@ -35,6 +35,14 @@ by OLS of the outcome residual on the treatment residual times the
 design (Robinson residualization). On a saturated linear DGP all
 four reduce to differences of OLS fits and agree exactly.
 }
+\examples{
+set.seed(8)
+n <- 300
+X <- matrix(rnorm(n * 2), n, 2)
+w <- rbinom(n, 1, 0.5)
+y <- X[, 1] + w * (1 + X[, 2]) + rnorm(n)
+Meta1l(y, w, X)$estimate
+}
 \references{
 Kunzel, S. R., Sekhon, J. S., Bickel, P. J. and Yu, B. (2019),
 Metalearners for estimating heterogeneous treatment effects using machine learning,

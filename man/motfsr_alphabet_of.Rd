@@ -18,5 +18,7 @@ A vector, from \code{sort}.
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_prepare}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+motfsr_alphabet_of(c("ACGT", "TTGA"), alphabet = NULL)
 }

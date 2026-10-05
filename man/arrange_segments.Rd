@@ -16,7 +16,6 @@ A vector, from \code{rev}.
 A step of the mafft_native implementation. Called by \code{iterative_refine},
 \code{morie_mafft}, \code{progressive_align}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 segs <- list(c(0L, 0L, 4L, 5L), c(5L, 6L, 3L, 3L), c(2L, 1L, 2L, 4L))

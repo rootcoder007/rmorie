@@ -55,6 +55,11 @@ Because the table that selects the action is not the table that
 evaluates it, the positive bias of the single \eqn{\max} in
 \code{\link{morie_qlearn}} is removed (van Hasselt 2010).
 }
+\examples{
+P <- list(matrix(c(0.9, 0.1, 0, 1), 2, byrow = TRUE), matrix(c(0.1, 0.9, 0, 1), 2, byrow = TRUE))
+R <- matrix(c(0, 1, 0, 0), 2, 2)
+morie_ddqn(P, R, gamma = 0.9, n_episodes = 50L, terminal = 1L)$policy
+}
 \references{
 van Hasselt, H. (2010). Double Q-learning. Advances in
 Neural Information Processing Systems, 23, 2613-2621.

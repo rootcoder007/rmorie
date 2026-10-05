@@ -24,6 +24,13 @@ List with \code{loglik}, \code{beta}, \code{n}, \code{p}, \code{q}.
 Formula: l_R(theta; y) = -0.5 log|X'V^-1 X| - 0.5 log|V| - 0.5 (y - X betatilde)' V^-1
 (y - X betatilde)
 }
+\examples{
+set.seed(21)
+g <- rep(1:10, each = 5)
+X <- cbind(1, rnorm(50)); Z <- model.matrix(~ factor(g) - 1)
+y <- X \%*\% c(1, 2) + Z \%*\% rnorm(10) + rnorm(50)
+Remlik(X, Z, as.numeric(y), D = diag(10))$loglik
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,

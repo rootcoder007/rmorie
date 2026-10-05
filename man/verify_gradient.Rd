@@ -27,7 +27,6 @@ A list with \code{derivative}, \code{inner_product}, \code{difference},
 \description{
 A step of the tlheic_native implementation. Called by \code{morie_tlheic}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 if (requireNamespace("ranger", quietly = TRUE)) {

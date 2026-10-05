@@ -26,7 +26,12 @@ and Cov(eps, b) = 0, so E(Y) = X beta and Var(Y) = Z D Z' + R. Returns the
 GLS/BLUE of beta, the BLUP of b and the marginal variance.
 }
 \examples{
-Msm010(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
+set.seed(11)
+g <- rep(1:5, each = 4)
+X <- cbind(1, rnorm(20)); Z <- model.matrix(~ factor(g) - 1)
+y <- as.numeric(X \%*\% c(2, 1) + Z \%*\% rnorm(5, sd = 0.7) + rnorm(20))
+f <- Msm010(X, Z, y, D = diag(0.5, 5))
+f$beta
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

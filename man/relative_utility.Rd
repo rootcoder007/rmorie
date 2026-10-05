@@ -33,3 +33,6 @@ The infected fraction cancels in the ratio for standard
 quarantine; \code{infected_fraction} is accepted only to
 demonstrate the cancellation.
 }
+\examples{
+relative_utility(t_R_a = 7, t_R_b = 14, t_Q = 3)$relative_utility
+}

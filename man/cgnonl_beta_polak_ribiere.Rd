@@ -19,5 +19,8 @@ One of two values, depending on the branch taken.
 \description{
 A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+cgnonl_beta_polak_ribiere(g_new = c(0.5, -0.2), g_old = c(1, 0.3))
+cgnonl_beta_polak_ribiere(g_new = c(0.5, -0.2), g_old = c(1, 0.3), plus = TRUE)
 }

@@ -15,7 +15,6 @@ The value of \code{f}, as built in the body.
 \description{
 A step of the birl_native implementation. Called by \code{policy_walk}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .rng(seed = 1L)

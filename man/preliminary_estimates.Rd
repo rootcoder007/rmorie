@@ -18,7 +18,6 @@ A list with \code{estimate}, \code{theta}, \code{Theta}, \code{r_1},
 \description{
 A step of the sarima_native implementation. Called by \code{.sarima_fit}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

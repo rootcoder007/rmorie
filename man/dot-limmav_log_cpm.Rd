@@ -22,5 +22,4 @@ A list with \code{y}, \code{R}.
 \description{
 A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}.
 See the file header for the source the module follows.
-source it follows.
 }

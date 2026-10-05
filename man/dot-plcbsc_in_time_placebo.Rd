@@ -26,5 +26,4 @@ A list with \code{weights}, \code{gaps}, \code{placebo_effect},
 \description{
 A step of the plcbsc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

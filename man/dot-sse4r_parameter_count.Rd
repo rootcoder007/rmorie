@@ -22,5 +22,4 @@ A list with \code{user_params}, \code{item_params}, \code{total},
 \description{
 A step of the sse4r_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

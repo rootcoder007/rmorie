@@ -38,7 +38,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the gentmt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # A continuous dose that depends on the covariate but is not a

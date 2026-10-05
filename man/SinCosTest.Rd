@@ -28,7 +28,6 @@ A list with \code{x}, \code{t}, \code{n}, \code{fs}, \code{f1}, \code{f2},
 \description{
 A step of the rangayyan_ccf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 SinCosTest()

@@ -16,5 +16,4 @@ A vector, from \code{c}.
 A step of the alfomg_native implementation. Called by \code{morie_alfomg},
 \code{morie_alfomg_opm}, \code{morie_alfomg_row_attention}.
 See the file header for the source the module follows.
-source it follows.
 }

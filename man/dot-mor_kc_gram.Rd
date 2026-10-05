@@ -19,5 +19,4 @@ A list with \code{K}, \code{bw}.
 \description{
 A step of the kcusum_native implementation. Called by \code{morie_kcusum}.
 See the file header for the source the module follows.
-source it follows.
 }

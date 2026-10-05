@@ -36,6 +36,11 @@ of the three.  All three are reported because they disagree: the
 paper's Figure 4 is 3-diverse in the distinct sense and 2.8-diverse
 in the entropy sense.
 }
+\examples{
+qi <- cbind(age = c(30, 30, 30, 40, 40, 40), zip = c(1, 1, 1, 2, 2, 2))
+s <- c("flu", "cold", "flu", "cancer", "flu", "cold")
+Dpld(seq_len(6), qi, s, l = 2)[c("distinct_l", "entropy_l", "satisfies_distinct")]
+}
 \references{
 Machanavajjhala, A., Kifer, D., Gehrke, J. and
 Venkitasubramaniam, M. (2007). l-diversity: privacy beyond

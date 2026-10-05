@@ -25,7 +25,6 @@ A list with \code{n_events}, \code{n_events_ceiling}, \code{rho}, \code{A},
 \description{
 A step of the smatch_native implementation. Called by \code{morie_smatch_power}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_smatch_sample_size(log_ri = log(2), r = 0.1, p_exposed = 0.8)

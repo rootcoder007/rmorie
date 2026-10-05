@@ -48,6 +48,15 @@ the bootstrap variance is (1/B) sum_b (theta*_b - theta_hat)^2
 non-negative; for n_h = 2 a selected cluster doubles and the other
 zeroes, as printed in the paper.
 }
+\examples{
+set.seed(1)
+strata <- rep(1:2, each = 12)
+clusters <- rep(1:8, each = 3)
+y <- rnorm(24, 10)
+w <- rep(c(5, 8), each = 12)
+b <- morie_bootss(y, w, strata, clusters, B = 100, seed = 1)
+c(b$estimate, b$se)
+}
 \references{
 Rao, J. N. K., Wu, C. F. J. and Yue, K. (1992). Some
 recent work on resampling methods for complex surveys. Survey

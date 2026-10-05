@@ -37,7 +37,6 @@ A list with \code{estimate}, \code{loss}, \code{second_order},
 \description{
 A step of the sdne_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_sdne(adjacency = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),

@@ -17,7 +17,6 @@ The value of \code{.prsLR_build_tables}.
 \description{
 A step of the prsLR_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 g <- list(rules = list(list("E", list("E", "+", "T")),

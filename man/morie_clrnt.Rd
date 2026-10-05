@@ -59,7 +59,6 @@ The value of \code{clrnt}.
 \description{
 A step of the clrnt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- morie_clrnt(clint_in_vitro = 15, cl_h = 12, fu_blood = 0.1,

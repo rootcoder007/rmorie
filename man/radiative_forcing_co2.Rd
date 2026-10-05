@@ -32,7 +32,6 @@ A list with \code{estimate}, \code{sarf}, \code{alpha_prime},
 \description{
 A step of the co2RF_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 radiative_forcing_co2(C = 420)

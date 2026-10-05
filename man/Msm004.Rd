@@ -16,6 +16,9 @@ The list returned by \code{Msm003()}.
 The same method as \code{Msm003()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+Msm004(list(c(4.1, 4.5, 3.9), c(5.2, 5.0, 5.6), c(4.8, 4.4, 4.9)))$beta
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

@@ -21,5 +21,9 @@ A vector, from \code{as.numeric}.
 \description{
 A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(1)
+x <- matrix(rnorm(4), 1, 4)
+mistr_swiglu(x, W1 = matrix(rnorm(24), 4, 6), W2 = matrix(rnorm(24), 6, 4), W3 = matrix(rnorm(24), 4, 6))
 }

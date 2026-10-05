@@ -27,3 +27,7 @@ A step of the chronos_native implementation. Called by \code{morie_chronos}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+bins <- chronos_uniform_bins(lo = -15, hi = 15, n_bins = 64L)
+chronos_tokenize(c(10, 12, 9, 11, 13), bins)$tokens
+}

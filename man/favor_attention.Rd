@@ -40,7 +40,6 @@ A list with \code{estimate}, \code{output}, \code{n_features}, \code{kind},
 \description{
 A step of the perfat_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 favor_attention(Q = c(1, 2, 3, 4, 5, 6, 7, 8), K = c(1, 2, 3, 4, 5, 6, 7, 8),

@@ -9,7 +9,7 @@ momento_reconstruction_curve(patches, reconstructor, rates, seed = 0)
 \arguments{
 \item{patches}{Iterated over elementwise, with \code{lapply}.}
 
-\item{reconstructor}{Accepted by the signature and not used anywhere in the body.}
+\item{reconstructor}{Function \code{(masked, mask)} returning the reconstructed patches.}
 
 \item{rates}{See Usage.}
 
@@ -22,4 +22,14 @@ A list with \code{curve}, \code{n_patches}, \code{rates}, \code{mse}.
 A step of the momento_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 the source it follows.
+}
+\examples{
+set.seed(9)
+p <- lapply(1:8, function(i) rnorm(4))
+# a naive reconstructor: fill every masked patch with the mean of the visible ones
+fill_mean <- function(masked, mask) {
+  m <- Reduce(`+`, masked[mask == 0]) / sum(mask == 0)
+  lapply(seq_along(masked), function(i) if (mask[i] == 1) m else masked[[i]])
+}
+momento_reconstruction_curve(p, fill_mean, rates = c(0.25, 0.5), seed = 1)$mse
 }

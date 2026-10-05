@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the rangayyan_ccf implementation. Called by \code{Glr}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -22,5 +22,4 @@ A list with \code{b}, \code{nv}, \code{m}, \code{sg}, \code{n}.
 A step of the hiatus_native implementation. Called by \code{.hiatus_simulate},
 \code{derivatives}.
 See the file header for the source the module follows.
-source it follows.
 }

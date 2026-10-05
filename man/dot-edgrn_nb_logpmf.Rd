@@ -19,5 +19,4 @@ The value of \code{(}.
 \description{
 A step of the edgrn_native implementation. Called by \code{edgrn_exact_test}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -22,5 +22,4 @@ A numeric value.
 A step of the pibmd_native implementation. Called by
 \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 See the file header for the source the module follows.
-source it follows.
 }

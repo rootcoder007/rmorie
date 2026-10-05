@@ -23,7 +23,6 @@ A list with \code{segment_boxes}, \code{per_token}, \code{n_segments}, \code{not
 \description{
 A step of the ocrwit_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 boxes <- matrix(c(10, 10, 60, 30, 70, 10, 110, 30), 2, 4, byrow = TRUE)

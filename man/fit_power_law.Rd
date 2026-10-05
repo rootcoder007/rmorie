@@ -18,7 +18,6 @@ A list with \code{alpha}, \code{beta}, \code{slope}, \code{r_squared},
 \description{
 A step of the opnclp_native implementation. Called by \code{compare_scaling}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

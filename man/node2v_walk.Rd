@@ -27,5 +27,9 @@ The value of \code{path}, as built in the body.
 \description{
 A step of the node2v_native implementation. Called by \code{morie_node2v}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+adj <- list(`1` = c(2, 3), `2` = c(1, 3), `3` = c(1, 2, 4), `4` = 3)
+set.seed(1)
+node2v_walk(adj, start = 1, length = 6, p = 1, q = 0.5)
 }

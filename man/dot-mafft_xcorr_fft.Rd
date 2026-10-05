@@ -17,7 +17,6 @@ A list with \code{out}, \code{size}.
 \description{
 A step of the mafft_native implementation. Called by \code{correlation}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)

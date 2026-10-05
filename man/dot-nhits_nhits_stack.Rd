@@ -21,5 +21,4 @@ A list with \code{total}, \code{resid}, \code{trace}.
 \description{
 A step of the nhits_native implementation. Called by \code{morie_nhits}.
 See the file header for the source the module follows.
-source it follows.
 }

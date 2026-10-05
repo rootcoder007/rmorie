@@ -35,6 +35,12 @@ marginals are the given histograms; solved by
 \code{u_s <- u_s a_s / marg_s(P)} -- Peyre and Cuturi (2019)
 eq. (10.1)-(10.2), p. 159; Benamou et al. (2015) Section 5.
 }
+\examples{
+m <- list(c(0.5, 0.5), c(0.5, 0.5), c(0.5, 0.5))
+C <- as.numeric(aperm(array(c(0, 1, 1, 2, 1, 2, 2, 3), c(2, 2, 2)), 3:1))   # sum of indices
+r <- Otmot(m, C, epsilon = 0.1)
+r$marg_err
+}
 \references{
 Benamou, J.-D., Carlier, G., Cuturi, M., Nenna, L. and
 Peyre, G. (2015). SIAM Journal on Scientific Computing

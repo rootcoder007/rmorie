@@ -19,5 +19,4 @@ A numeric value.
 \description{
 A step of the pibmd_native implementation. Called by \code{.pibmd_kl_kde}.
 See the file header for the source the module follows.
-source it follows.
 }

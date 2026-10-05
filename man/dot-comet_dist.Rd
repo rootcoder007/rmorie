@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the comet_native implementation. Called by \code{triplet_loss}.
 See the file header for the source the module follows.
-source it follows.
 }

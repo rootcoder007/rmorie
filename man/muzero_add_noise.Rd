@@ -21,5 +21,7 @@ A numeric value.
 \description{
 A step of the muzero_native implementation. Called by \code{muzero_search}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+muzero_add_noise(prior = c(0.5, 0.3, 0.2), alpha = 0.3, frac = 0.25, seed = 1)
 }

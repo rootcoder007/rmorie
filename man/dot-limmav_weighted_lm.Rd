@@ -21,5 +21,4 @@ A list with \code{est}, \code{se}, \code{t}, \code{df}, \code{sd}, \code{v_un}.
 \description{
 A step of the limmav_native implementation. Called by \code{morie_limmav}.
 See the file header for the source the module follows.
-source it follows.
 }

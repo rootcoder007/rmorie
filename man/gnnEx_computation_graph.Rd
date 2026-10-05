@@ -19,7 +19,6 @@ A list with \code{nodes}, \code{edges}, \code{hops}, \code{size}.
 \description{
 A step of the gnnEx_native implementation. Called by \code{gnnEx_explain_node}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 adj <- list("1" = c(2L, 3L), "2" = c(1L, 4L), "3" = 1L, "4" = 2L)

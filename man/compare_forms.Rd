@@ -22,7 +22,6 @@ A list with \code{cvm}, \code{ks}, \code{ratio_ks_over_cvm},
 \description{
 A step of the bnskmt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

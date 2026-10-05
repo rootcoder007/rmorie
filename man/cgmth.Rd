@@ -25,7 +25,6 @@ The value of \code{x}, as built in the body.
 \description{
 A step of the cgmth_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 cgmth(function(x) sum(x^2), function(x) 2 * x, x0 = c(1, 1))

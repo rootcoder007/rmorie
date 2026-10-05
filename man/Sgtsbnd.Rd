@@ -29,6 +29,10 @@ carried an extra \code{1/(k-1)}, which is correct only at k = 2;
 equation (44) on page 14 of arXiv:1109.3041 was read from a rendered
 page image.
 }
+\examples{
+Sgtsbnd(a = 5, b = 1)$detectable    # (a - b)^2 = 16 > k (a + b) = 12
+Sgtsbnd(a = 3, b = 2)$detectable
+}
 \references{
 Decelle, A., Krzakala, F., Moore, C. & Zdeborova, L.
 (2011). Asymptotic analysis of the stochastic block model for

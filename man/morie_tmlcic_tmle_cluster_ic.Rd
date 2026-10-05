@@ -71,7 +71,6 @@ A list with \code{estimate}, \code{se}, \code{n}, \code{ci}, \code{level},
 \description{
 A step of the tmlcic_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(4)

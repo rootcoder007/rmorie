@@ -17,5 +17,7 @@ A list with \code{c}, \code{size}.
 \description{
 A step of the mafft_native implementation. Called by \code{correlation}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mafft_xcorr_fft(c(1, 2, 3), c(0, 1, 0.5))$c
 }

@@ -24,3 +24,6 @@ A list with \code{estimate}, \code{se_private},
 Combines the sampling variance with the noise variance of the
 Laplace mechanism.
 }
+\examples{
+morie_private_ci(value = 42.3, sensitivity = 1, epsilon = 0.5, se = 1.2, seed = 1)[c("se_private", "se_sampling", "ci")]
+}

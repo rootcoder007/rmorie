@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the robust_native implementation. Called by \code{.rob_s_scale}, \code{morie_rob_tau}.
 See the file header for the source the module follows.
-source it follows.
 }

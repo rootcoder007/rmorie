@@ -24,7 +24,6 @@ The value of \code{out}, as built in the body.
 A step of the prphet_native implementation. Called by
 \code{.prnFil_simulate_future_trend}, \code{morie_prphet_fit}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # growth rate 1 with offset 0, bending by -0.5 at t = 3 and +0.25 at t = 6

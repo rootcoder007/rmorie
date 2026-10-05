@@ -17,5 +17,4 @@ A list with \code{yl}, \code{yu}.
 \description{
 A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}.
 See the file header for the source the module follows.
-source it follows.
 }

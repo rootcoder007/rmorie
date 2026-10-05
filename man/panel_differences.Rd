@@ -18,3 +18,8 @@ Numeric vector of length n.
 The differenced outcome \code{Delta_i} of eq. (13.7) under the
 block-adoption design.
 }
+\examples{
+Y <- matrix(c(1, 2, 4, 5,
+              2, 2, 3, 3), 2, byrow = TRUE)
+panel_differences(Y, event_time = 3)   # mean(post) - mean(pre) per unit
+}

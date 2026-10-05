@@ -21,7 +21,6 @@ A list with \code{m}, \code{fraction}, \code{n}, \code{r}, \code{exponent}, \cod
 \description{
 A step of the meglt_native implementation. Called by \code{morie_meglt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sample_bound(n = 5L, r = 5L)

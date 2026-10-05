@@ -34,3 +34,8 @@ The maximum-entropy \eqn{V^*} of eq. Q(s, a) = r(s) + gamma V(s'),
 V(s) = log sum_a exp Q(s, a). Provided so callers can validate
 AIRL's recovered reward independently of the fit.
 }
+\examples{
+step <- function(s, a) min(max(s + a, 0), 3)
+v <- soft_value_iteration(states = 0:3, actions = c(-1, 1), step = step, reward = function(s) as.numeric(s == 3))
+v
+}

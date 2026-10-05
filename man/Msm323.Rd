@@ -21,8 +21,8 @@ response are general nonparametric functions estimated by two random
 forests rather than linear predictors.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Msm323(V, V)
+# forest predictions on the log-mean and logit scales
+Msm323(mu_pred = log(c(1.5, 3, 0.8)), theta_pred = qlogis(c(0.2, 0.5, 0.7)))
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

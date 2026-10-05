@@ -19,5 +19,4 @@ A list with \code{p_value}, \code{z}, \code{method}.
 \description{
 A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
 See the file header for the source the module follows.
-source it follows.
 }

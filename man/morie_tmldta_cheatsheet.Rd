@@ -12,3 +12,6 @@ A character string.
 \description{
 Compact one-line summary of the tmldta recipe
 }
+\examples{
+morie_tmldta_cheatsheet()
+}

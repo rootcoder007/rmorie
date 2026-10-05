@@ -41,3 +41,12 @@ synthetic_abc(
 \description{
 Synthetic-likelihood ABC, Meeds & Welling Algorithm 1
 }
+\examples{
+\donttest{
+sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+log_prior <- function(theta) dnorm(theta, 0, 5, log = TRUE)
+r <- synthetic_abc(sim, obs = c(0.5, 1, 1.5), log_prior = log_prior, theta0 = 0,
+                   n_iter = 100L, n_sim = 5L, epsilon = 0.5)
+names(r)
+}
+}

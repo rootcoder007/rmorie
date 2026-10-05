@@ -27,7 +27,6 @@ A list with \code{index}, \code{level}, \code{note}.
 \description{
 A step of the smoopt_native implementation. Called by \code{smo_platt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 second_choice(i1 = 1L, alpha = c(0.5, 0.2, 0, 0.8), y = c(1, -1, 1, -1),

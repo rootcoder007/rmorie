@@ -16,5 +16,4 @@ A vector, from \code{c}.
 \description{
 A step of the frfgrf_native implementation. Called by \code{.frfgrf_honesty_test}.
 See the file header for the source the module follows.
-source it follows.
 }

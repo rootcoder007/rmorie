@@ -4,49 +4,54 @@
 \alias{morie_spatial_voting_aldrich_mckelvey}
 \title{Aldrich-McKelvey scaling}
 \usage{
-morie_spatial_voting_aldrich_mckelvey(
-  Z,
-  n_dims = 1L,
-  max_iter = 100L,
-  tol = 1e-06
-)
+morie_spatial_voting_aldrich_mckelvey(Z, n_dims = 1L)
 }
 \arguments{
 \item{Z}{A respondent-by-stimulus numeric matrix of perceptual
 placements.  \code{NA} entries are treated as missing.}
 
-\item{n_dims}{Number of latent dimensions (typically 1).}
-
-\item{max_iter}{Maximum EM iterations for the fallback solver.}
-
-\item{tol}{Convergence tolerance on the stimulus configuration.}
+\item{n_dims}{Number of latent dimensions (must be 1).}
 }
 \value{
 A list with components \code{zhat} (stimulus positions), \code{alpha},
-\code{beta}, \code{weights}, \code{iterations}, \code{converged}, and \code{engine}
-("basicspace" or "fallback").
+\code{beta}, \code{weights}, \code{iterations} (\code{NA}, the solution is closed form),
+\code{converged}, and \code{engine} ("basicspace" or "native").
 }
 \description{
 Recovers latent stimulus positions from perceptual placement data by
 estimating respondent-specific intercepts \eqn{a_i} and slopes
 \eqn{b_i} in the model
 \deqn{z_{ij} = a_i + b_i \hat{z}_j + \epsilon_{ij}.}{z_ij = a_i + b_i z_hat_j + epsilon_ij.}
-The stimulus positions come from \code{basicspace::aldmck} when the
-\code{basicspace} package is installed (standardised to mean 0, sd 1);
-otherwise from a hand-rolled EM/least-squares fallback. The respondent
-intercepts and slopes are, on either path, the per-respondent least
-squares regression of the reported placements on those positions, so
-they are defined for every respondent with at least two placements
-(\code{basicspace} itself reports them only for respondents it scales
-against a self-placement, which this function does not take).
+The stimulus positions are Aldrich and McKelvey's least-squares
+solution: each respondent's placements are mapped onto the common
+scale by the best affine transformation, and \eqn{\hat z} minimises
+the total squared error
+\eqn{\sum_i \lVert X_i c_i - \hat z \rVert^2}, \eqn{X_i = [1, z_i]},
+subject to \eqn{\hat z^\top \hat z = 1} and \eqn{1^\top \hat z = 0}.
+Concentrating out \eqn{c_i} leaves
+\eqn{\hat z^\top \sum_i (I - P_i) \hat z} with \eqn{P_i} the
+projection onto the columns of \eqn{X_i}, so \eqn{\hat z} is the
+eigenvector of \eqn{\sum_i (I - P_i)} with the smallest eigenvalue
+orthogonal to the constant.  Respondents with a missing placement, or
+who place every stimulus at the same point, are left out, as
+\code{basicspace::aldmck} does; with \code{basicspace} installed it computes the
+stimuli, otherwise the same closed form is evaluated here (the two agree
+to rounding).  Positions are standardised to mean 0 and sd 1 and the
+first stimulus is put on the left.  The respondent intercepts and slopes
+are, on either path, the per-respondent least squares regression of the
+reported placements on those positions, so they are defined for every
+respondent with at least two placements (\code{basicspace} itself reports
+them only for respondents it scales against a self-placement, which
+this function does not take).
 }
 \examples{
-if (requireNamespace("basicspace", quietly = TRUE)) {
-  set.seed(1)
-  Z <- matrix(rnorm(20 * 5), 20, 5)
-  fit <- morie_spatial_voting_aldrich_mckelvey(Z)
-  fit$zhat
-}
+set.seed(1)
+truth <- c(-1.2, -0.4, 0.1, 0.9, 1.5)
+Z <- t(sapply(1:40, function(i) 4 + rnorm(1, 0, 0.3) +
+  runif(1, 0.6, 1.4) * truth + rnorm(5, 0, 0.3)))
+fit <- morie_spatial_voting_aldrich_mckelvey(Z)
+round(fit$zhat, 2)
+round((truth - mean(truth)) / sd(truth), 2)
 }
 \references{
 Aldrich, J. H. and McKelvey, R. D. (1977). "A Method of Scaling with

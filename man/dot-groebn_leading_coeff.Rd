@@ -17,7 +17,6 @@ The value of \code{[[}.
 \description{
 A step of the groebn_native implementation. Called by \code{.groebn_reduce_basis}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 fn <- function(v) sum(v^2)

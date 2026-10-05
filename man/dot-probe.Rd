@@ -22,5 +22,4 @@ The value of \code{fn}.
 A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_and_},
 \code{morie_prsPEG_choice}, \code{morie_prsPEG_not_} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

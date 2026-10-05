@@ -17,7 +17,6 @@ The value of \code{switch}.
 \description{
 A step of the lyapun_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 y <- sin(2 * pi * (1:400) / 25)

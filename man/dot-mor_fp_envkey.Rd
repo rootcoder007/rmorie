@@ -15,5 +15,4 @@ A character value.
 \description{
 A step of the ecfp4_native implementation. Called by \code{.mor_fp_morgan}.
 See the file header for the source the module follows.
-source it follows.
 }

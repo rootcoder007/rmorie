@@ -16,3 +16,7 @@ chain_entry(previous_hash, entry, key = NULL)
 \description{
 One step of the hash chain
 }
+\examples{
+e <- chain_entry(raw(32), "first entry")
+e$hash_hex
+}

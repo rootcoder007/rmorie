@@ -40,6 +40,14 @@ reduces to the plain mean of Y over the subjects who follow the rule.
 It is NOT true in general that the weights collapse merely because
 everyone follows.
 }
+\examples{
+set.seed(7)
+n <- 300; Tn <- 2
+H <- matrix(rnorm(n * Tn), n, Tn)
+D <- matrix(rbinom(n * Tn, 1, plogis(H)), n, Tn)
+y <- rowSums(D * H) + rnorm(n)
+Dyntmt(y, D, H, regime_fn = function(h) as.integer(h > 0))[c("estimate", "naive_mean", "ess")]
+}
 \references{
 Robins, J. M., Orellana, L. and Rotnitzky, A. (2008).
 Estimation and extrapolation of optimal treatment and testing

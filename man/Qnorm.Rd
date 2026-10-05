@@ -21,7 +21,6 @@ A numeric value.
 \description{
 A step of the dist_native implementation. Called by \code{Rnorm}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 Qnorm(p = 0.5)

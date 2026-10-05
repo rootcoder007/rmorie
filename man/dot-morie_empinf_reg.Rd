@@ -18,5 +18,4 @@ A vector, from \code{as.numeric}.
 \description{
 A step of the boot_native implementation. Called by \code{.morie_ci_bca}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -36,6 +36,10 @@ under-reconstruction (clone); with a large Gaussian it means
 over-reconstruction (split). Near-transparent Gaussians are
 pruned. The Gaussian count is not fixed in advance.
 }
+\examples{
+morie_gsplat_density(gradients = c(1e-3, 1e-3, 1e-5), scales = c(0.001, 0.1, 0.05),
+                     opacities = c(0.8, 0.7, 0.001))[c("clone", "split", "prune")]
+}
 \references{
 Kerbl, B. et al. (2023).
 }

@@ -24,5 +24,4 @@ The value of \code{.morie_rg_quad}.
 A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt},
 \code{PdfMean} and 3 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

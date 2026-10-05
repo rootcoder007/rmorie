@@ -30,5 +30,4 @@ A list with \code{beta}, \code{se}, \code{z}, \code{p_value},
 A step of the cox_native implementation. Called by
 \code{morie_breslow_tie_correction}, \code{morie_efron_tie_correction}.
 See the file header for the source the module follows.
-source it follows.
 }

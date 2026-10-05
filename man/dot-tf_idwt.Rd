@@ -21,5 +21,4 @@ The value of \code{cur}, as built in the body.
 \description{
 A step of the rangayyan_tf implementation. Called by \code{Mra}, \code{SwtDen}, \code{WtThresh}.
 See the file header for the source the module follows.
-source it follows.
 }

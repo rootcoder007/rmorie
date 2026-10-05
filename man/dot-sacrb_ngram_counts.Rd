@@ -17,5 +17,4 @@ The value of \code{c}, as built in the body.
 \description{
 A step of the sacrb_native implementation. Called by \code{.sacrb_modified_precision}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -18,7 +18,6 @@ The value of \code{out}, as built in the body.
 A step of the sentpc_native implementation. Called by \code{encode_bpe},
 \code{escape_whitespace}, \code{train_bpe} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 txt <- c('alpha', 'beta', 'gamma', 'delta')

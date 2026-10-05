@@ -24,7 +24,6 @@ A list with \code{loss}, \code{source_term}, \code{reference_term},
 \description{
 A step of the comet_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 triplet_loss(better = c(1, 2, 3, 4, 5, 6, 7, 8), worse = c(1, 2, 3, 4, 5, 6, 7, 8),

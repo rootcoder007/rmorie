@@ -32,5 +32,10 @@ A list with \code{w}, \code{ranking}.
 \description{
 A step of the tagRC_native implementation. Called by \code{morie_tagRC}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+triples <- list(c("u1", "jazz", "i1"), c("u1", "live", "i2"), c("u2", "jazz", "i2"))
+g <- tagRC_tripartite_graph(triples)
+pr <- tagRC_adapted_pagerank(g$adjacency, g$nodes)
+head(pr$ranking, 3)
 }

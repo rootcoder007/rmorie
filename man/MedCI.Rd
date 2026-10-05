@@ -35,6 +35,9 @@ Section 3. The draws are a two-dimensional Halton sequence (van der
 Corput in bases 2 and 3, pushed through AS 241), so the interval is the
 same number every time and in both language arms.
 }
+\examples{
+MedCI(a = 0.3, b = 0.4, sa = 0.1, sb = 0.12, n_sim = 5000)[c("estimate", "ci_lo", "ci_hi", "sobel_lo", "sobel_hi")]
+}
 \references{
 MacKinnon, D. P., Lockwood, C. M. and Williams, J. (2004).
 Multivariate Behavioral Research 39(1):99-128.

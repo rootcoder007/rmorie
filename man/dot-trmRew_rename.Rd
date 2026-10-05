@@ -17,5 +17,4 @@ The value of \code{.trmRew_app}.
 \description{
 A step of the trmRew_native implementation. Called by \code{.trmRew_overlap}.
 See the file header for the source the module follows.
-source it follows.
 }

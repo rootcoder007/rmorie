@@ -40,7 +40,6 @@ A list with \code{estimate}, \code{lower}, \code{upper},
 \description{
 A step of the snmtst_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)

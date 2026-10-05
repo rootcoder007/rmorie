@@ -2,41 +2,92 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_dynamic_irt}
 \alias{morie_spatial_voting_dynamic_irt}
-\title{Dynamic IRT, fitted period by period (EM-IRT approximation)}
+\title{Dynamic IRT: ideal points that drift by a random walk (Martin and Quinn 2002)}
 \usage{
 morie_spatial_voting_dynamic_irt(
   votes,
   time_periods,
   n_samples = 500L,
   burn_in = 100L,
-  seed = 42L
+  seed = 42L,
+  thin = 1L,
+  tau2 = 1,
+  c0 = -1,
+  d0 = -1,
+  e0 = 0,
+  E0 = 1,
+  a0 = 0,
+  A0 = 0.1,
+  b0 = 0,
+  B0 = 0.1,
+  anchor = NULL
 )
 }
 \arguments{
-\item{votes}{Vote matrix.}
+\item{votes}{Legislators-by-roll-calls matrix of 0/1 votes (-1/1 is read as
+0/1); \code{NA} for absent.}
 
-\item{time_periods}{Per-vote period indices.}
+\item{time_periods}{Period of each roll call (one entry per column).}
 
-\item{n_samples}{MCMC samples.}
+\item{n_samples}{Posterior draws kept.}
 
-\item{burn_in}{Burn-in length.}
+\item{burn_in}{Sweeps discarded first.}
 
 \item{seed}{RNG seed.}
+
+\item{thin}{Keep every \code{thin}-th sweep.}
+
+\item{tau2}{Evolution variance (the starting value when it is estimated).}
+
+\item{c0, d0}{Inverse-gamma prior on \eqn{\tau^2}; \eqn{\tau^2} is held at
+\code{tau2} unless both are positive.}
+
+\item{e0, E0}{Prior mean and variance of the initial ideal point.}
+
+\item{a0, A0, b0, B0}{Prior means and precisions of \eqn{\alpha} and \eqn{\beta}.}
+
+\item{anchor}{Legislator (row index) whose ideal point is kept positive; the
+largest first principal-component score by default.}
 }
 \value{
-List of per-period ideal-point matrices with an \code{engine}
-tag flagging the per-period EM approximation.
+A list with \code{theta} (legislators by periods, posterior means),
+\code{theta_sd}, \code{alpha}, \code{beta}, \code{tau2},
+\code{per_period} (one entry per period with its \code{ideal_points}),
+\code{periods}, \code{n_periods}, \code{n_legislators}, \code{n_samples},
+\code{anchor} and \code{engine}.
 }
 \description{
-Time-series IRT where ideal points evolve via a random walk:
-\eqn{\phi_{i,t} \sim N(\phi_{i,t-1}, \tau^2)}{phi_i,t ~ N(phi_i,t-1, tau^2)}.
+The one-dimensional dynamic item response model of Martin and Quinn (2002),
+fitted by their Gibbs sampler: a vote is cast when the latent utility
+\eqn{z_{jk} = -\alpha_k + \beta_k \theta_{j,t(k)} + \varepsilon_{jk}}
+is positive, \eqn{\varepsilon \sim N(0, 1)}; the ideal points follow a
+random walk, \eqn{\theta_{j,0} \sim N(e_0, E_0)},
+\eqn{\theta_{j,t} \sim N(\theta_{j,t-1}, \tau^2_j)}; and the roll-call
+parameters have normal priors \eqn{\alpha_k \sim N(a_0, 1/A_0)},
+\eqn{\beta_k \sim N(b_0, 1/B_0)}. Each sweep draws the latent utilities
+(truncated normals), every roll call's \eqn{(\alpha, \beta)} (conjugate
+normal), every legislator's whole path by forward filtering and backward
+sampling, and, when \code{c0} and \code{d0} are positive, the evolution
+variances from \eqn{IG((c_0 + T)/2, (d_0 + SS)/2)}. The sign is fixed by
+reflecting a draw whenever the \code{anchor} legislator's mean ideal point
+is negative. This is the model of \code{MCMCpack::MCMCdynamicIRT1d}, with
+the same default priors; both recover the same paths on simulated data.
 }
 \examples{
-\donttest{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
-# dynamic-IRT random-walk prior on ideal points.
+\donttest{
+set.seed(7)
+N <- 12; Tn <- 3; kper <- 15
+period <- rep(1:Tn, each = kper)
+truth <- t(sapply(rnorm(N), function(s) s + cumsum(c(0, rnorm(Tn - 1, 0, 0.3)))))
+a <- rnorm(Tn * kper, 0, 0.5); b <- rnorm(Tn * kper, 1.5, 0.5)
+p <- pnorm(-rep(a, each = N) + rep(b, each = N) * truth[, period])
+V <- matrix(rbinom(length(p), 1, p), N)
+fit <- morie_spatial_voting_dynamic_irt(V, period, n_samples = 400, burn_in = 100)
+abs(cor(as.numeric(fit$theta), as.numeric(truth)))   # the paths are recovered
+}
 }
 \references{
-Martin, A. D. and Quinn, K. M. (2002). "Dynamic Ideal Point
-Estimation via Markov Chain Monte Carlo for the U.S. Supreme Court,
-1953-1999." \emph{Political Analysis}, 10(2).
+Martin, A. D. and Quinn, K. M. (2002). Dynamic ideal point
+estimation via Markov chain Monte Carlo for the U.S. Supreme Court,
+1953-1999. \emph{Political Analysis} 10(2), 134-153.
 }

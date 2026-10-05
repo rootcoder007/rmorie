@@ -17,5 +17,4 @@ A list with \code{u}, \code{v}.
 \description{
 A step of the copula_native implementation. Called by \code{morie_copula_cdf}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -41,7 +41,6 @@ A list with \code{propensity}, \code{weights}, \code{estimate},
 \description{
 A step of the flxipt_native implementation. Called by \code{iptw_ate}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

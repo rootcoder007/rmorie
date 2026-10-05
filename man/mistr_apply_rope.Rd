@@ -21,5 +21,7 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the mistr_native implementation. Called by \code{mistr_grouped_query_attention}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mistr_apply_rope(c(1, 0, 1, 0), pos = 3)
 }

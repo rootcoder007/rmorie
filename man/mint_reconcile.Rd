@@ -35,7 +35,6 @@ A list with \code{estimate}, \code{reconciled}, \code{bottom}, \code{base},
 \description{
 A step of the hierF_native implementation. Called by \code{morie_hierF}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

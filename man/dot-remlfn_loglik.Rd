@@ -21,5 +21,4 @@ A list with \code{loglik}, \code{mu}.
 \description{
 A step of the remlfn_native implementation. Called by \code{morie_remlfn}.
 See the file header for the source the module follows.
-source it follows.
 }

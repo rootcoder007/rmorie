@@ -16,3 +16,7 @@ viterbi_segment(text, piece_logp, add_prefix = TRUE)
 \description{
 Unigram LM segmentation by Viterbi over the split lattice
 }
+\examples{
+lp <- list(h = -3, e = -3, l = -3, o = -3, he = -2, ll = -2, hello = -1.5)
+viterbi_segment("hello", lp, add_prefix = FALSE)$pieces   # the whole word beats he + ll + o
+}

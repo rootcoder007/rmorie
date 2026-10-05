@@ -20,6 +20,9 @@ Scalar loss.
 Sec. 3.2 of Hamilton et al. 2017: nearby nodes agree, sampled
 negatives disagree.
 }
+\examples{
+morie_gsageemd_loss(z_u = c(1, 0), z_v = c(0.9, 0.1), z_negatives = list(c(-1, 0), c(0, -1)))
+}
 \references{
 Hamilton, W. L. et al. (2017).
 }

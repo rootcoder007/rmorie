@@ -41,6 +41,17 @@ effect; \code{min_denominator} exists for that reason.
 Formula: H_a = 1\{A = a, M = m\} / (g_a(W) h_m(A, W));
 psi = E[Q*(1, m, W)] - E[Q*(0, m, W)]
 }
+\examples{
+set.seed(1)
+n <- 400
+A <- rbinom(n, 1, 0.5); M <- rbinom(n, 1, 0.3 + 0.3 * A)
+Y <- rbinom(n, 1, plogis(-0.5 + 0.8 * A + 0.6 * M))
+p <- function(a, m) plogis(-0.5 + 0.8 * a + 0.6 * m)
+pm <- function(a) 0.3 + 0.3 * a
+r <- Tmlecde(Y, A, M, QAM = p(A, M), Q1m = rep(p(1, 1), n), Q0m = rep(p(0, 1), n),
+             g1W = rep(0.5, n), hmW = ifelse(M == 1, pm(A), 1 - pm(A)), m = 1)
+c(r$estimate, p(1, 1) - p(0, 1))
+}
 \references{
 van der Laan & Petersen (2008), International Journal of
 Biostatistics 4(1), Article 23 -- the row's own citation. That paper

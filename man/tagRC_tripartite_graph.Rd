@@ -16,5 +16,9 @@ A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples},
 \description{
 A step of the tagRC_native implementation. Called by \code{morie_tagRC}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+triples <- list(c("u1", "jazz", "i1"), c("u1", "live", "i2"), c("u2", "jazz", "i2"))
+g <- tagRC_tripartite_graph(triples)
+g$n_nodes
 }

@@ -15,7 +15,6 @@ The value of \code{as.integer}.
 \description{
 A step of the poltrx_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 poltrx_eps_from_key(key = 5L)

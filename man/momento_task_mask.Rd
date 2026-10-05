@@ -24,3 +24,6 @@ A step of the momento_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+momento_task_mask(n_patches = 8, task = "forecast", span = 2)   # the last two patches
+}

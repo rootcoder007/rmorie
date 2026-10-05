@@ -19,7 +19,6 @@ A list with \code{A}, \code{B}, \code{rho}, \code{sigma}, \code{neighbours}, \co
 \description{
 A step of the scumap_native implementation. Called by \code{morie_scumap_umap_singlecell}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

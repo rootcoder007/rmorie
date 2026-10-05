@@ -22,3 +22,8 @@ A step of the chronos_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+bins <- chronos_uniform_bins(lo = -3, hi = 3, n_bins = 7L)
+p <- c(0, 0.05, 0.2, 0.5, 0.2, 0.05, 0)
+chronos_forecast_summary(p, bins)[c("mean", "mode")]
+}

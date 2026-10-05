@@ -37,7 +37,6 @@ A list with \code{estimate}, \code{blocks}, \code{n_blocks}, \code{level0},
 \description{
 A step of the regmlm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

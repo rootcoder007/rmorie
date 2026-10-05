@@ -42,6 +42,5 @@ A numeric value.
 \description{
 A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

@@ -28,5 +28,4 @@ The value of \code{.morie_aft_result}.
 A step of the aft_native implementation. Called by \code{morie_aft_generalized_gamma},
 \code{morie_aft_log_logistic}, \code{morie_aft_weibull}.
 See the file header for the source the module follows.
-source it follows.
 }

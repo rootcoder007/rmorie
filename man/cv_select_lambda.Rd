@@ -25,7 +25,6 @@ A list with \code{lambda}, \code{cv_risks}, \code{note}.
 \description{
 A step of the tlhal_native implementation. Called by \code{morie_tlhal}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

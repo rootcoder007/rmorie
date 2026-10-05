@@ -17,5 +17,4 @@ A list with \code{items}, \code{n}, \code{a}, \code{b}, \code{note}.
 \description{
 A step of the ucfR_native implementation. Called by \code{.ucfR_pearson}.
 See the file header for the source the module follows.
-source it follows.
 }

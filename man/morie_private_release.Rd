@@ -23,3 +23,6 @@ noise variance, and the epsilon.
 Returns \code{f(D) + Lap(sensitivity/epsilon)} from the shared
 generator so the R and Python arms produce the same noise.
 }
+\examples{
+morie_private_release(value = 120, sensitivity = 1, epsilon = 0.5, seed = 1)[c("released", "scale")]
+}

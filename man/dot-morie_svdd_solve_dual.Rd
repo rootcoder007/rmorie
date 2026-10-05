@@ -23,5 +23,4 @@ The value of \code{alpha}, as built in the body.
 \description{
 A step of the svdd_native implementation. Called by \code{morie_svdd}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -16,7 +16,6 @@ A numeric value.
 A step of the funkM_native implementation. Called by \code{morie_funkM},
 \code{morie_funkM_imputed_svd_error}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 R <- .funkM_as_ratings(data.frame(u = 0:2, i = 0:2, r = c(1, 2, 6)))

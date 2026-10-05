@@ -16,7 +16,6 @@ The value of \code{D}, as built in the body.
 A step of the mafft_native implementation. Called by \code{iterative_refine},
 \code{mafft_alignment}, \code{morie_mafft} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 seqs <- c("MKVLA", "MKVLG", "MRVLA")

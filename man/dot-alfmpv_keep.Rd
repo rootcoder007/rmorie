@@ -21,5 +21,4 @@ The value of \code{which}.
 \description{
 A step of the alfmpv_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

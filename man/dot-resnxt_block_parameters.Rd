@@ -19,5 +19,4 @@ A list with \code{parameters}, \code{cardinality}, \code{bottleneck}, \code{widt
 \description{
 A step of the resnxt_native implementation. Called by \code{.resnxt_match_complexity}.
 See the file header for the source the module follows.
-source it follows.
 }

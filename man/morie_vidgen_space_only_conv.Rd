@@ -17,7 +17,6 @@ A list with \code{video}, \code{frames}, \code{note}.
 \description{
 A step of the vidgen_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 video <- list(matrix(1:9, 3), matrix(9:1, 3))   # two 3 x 3 frames

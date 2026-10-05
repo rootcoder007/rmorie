@@ -25,6 +25,12 @@ representation between invariant point attention and the backbone
 update, followed by layer normalisation.  Unlike the Evoformer
 transitions this one keeps the channel width constant.
 }
+\examples{
+set.seed(20)
+s <- matrix(rnorm(6), 3, 2)
+w <- function() matrix(rnorm(4, sd = 0.3), 2, 2)
+round(Alfstrtr(s, w(), w(), w())$s, 3)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 20
 }

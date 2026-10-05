@@ -15,7 +15,6 @@ A numeric value.
 \description{
 A step of the andmnh_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 quadratic_spectral_kernel(x = 5L)

@@ -21,6 +21,9 @@ List with \code{kappa}, \code{p0}, \code{pe}, \code{n}.
 \description{
 Formula: kappa = (P0 - Pe) / (1 - Pe),  Pe = (tp+fn)/n*(tp+fp)/n + (fp+tn)/n*(fn+tn)/n
 }
+\examples{
+Kappacoef(tp = 40, fp = 10, fn = 5, tn = 45)$kappa
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,

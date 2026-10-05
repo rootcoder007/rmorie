@@ -30,6 +30,10 @@ band.
 \details{
 Formula: Var[S(t)] = S(t)^2 sum_\{t_j <= t\} d_j / (n_j (n_j - d_j)).
 }
+\examples{
+fit <- list(time = c(2, 3, 5, 8), n_risk = c(10, 9, 7, 4), n_event = c(1, 1, 2, 1))
+Kpmnci(fit, alpha = 0.05)[c("surv", "lower", "upper")]
+}
 \references{
 Greenwood (1926), The natural duration of cancer, Reports
 on Public Health and Medical Subjects 33:1-26, HMSO.

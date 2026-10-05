@@ -24,7 +24,6 @@ A list with \code{estimate}, \code{statistic}, \code{flag}, \code{n_flagged},
 A step of the surepi_native implementation. Called by \code{surepi_c1_mild},
 \code{surepi_c2_medium}, \code{surepi_c3_ultra}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

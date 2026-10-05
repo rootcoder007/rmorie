@@ -38,6 +38,10 @@ bracket until an accepted point is found.  Unlike
 Metropolis-Hastings there is no rejection and no acceptance rate to
 tune; \code{width} only affects efficiency, not correctness.
 }
+\examples{
+s <- morie_slice(function(x) dnorm(x, 2, 1, log = TRUE), n_iter = 3000L, seed = 1)
+c(mean(s$samples), sd(s$samples))
+}
 \references{
 Neal, R. M. (2003). Slice sampling. Annals of
 Statistics, 31(3), 705-767.

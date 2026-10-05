@@ -21,5 +21,4 @@ A list with \code{estimate}, \code{value}, \code{unconstrained_value},
 \description{
 A step of the tloilr_native implementation. Called by \code{morie_tloilr}.
 See the file header for the source the module follows.
-source it follows.
 }

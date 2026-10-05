@@ -27,5 +27,4 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the plrgrf_native implementation. Called by \code{local_centering}.
 See the file header for the source the module follows.
-source it follows.
 }

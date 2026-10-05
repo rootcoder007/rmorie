@@ -26,7 +26,6 @@ The value of \code{.clpopt_report}.
 \description{
 A step of the clpopt_native implementation. Called by \code{morie_clpopt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sf <- standard_form(c = c(-3, -5), A_ub = rbind(c(1, 0), c(0, 2),

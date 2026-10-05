@@ -18,5 +18,4 @@ A list with \code{estimate}, \code{log_sum_exp}, \code{negative_variance},
 \description{
 A step of the infmax_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -27,8 +27,8 @@ Formula: \code{jaro = (m/|s1| + m/|s2| + (m - t)/m)/3},
 \code{jw = jaro + l p (1 - jaro)}.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Jarow(V, V)
+# Winkler's (1990) example pair: Jaro-Winkler similarity 0.961
+Jarow("MARTHA", "MARHTA")$estimate
 }
 \references{
 Winkler, W. E. (1990). Proc Surv Res Meth Sect ASA

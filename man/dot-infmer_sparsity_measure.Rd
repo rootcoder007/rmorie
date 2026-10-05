@@ -18,7 +18,6 @@ The value of \code{m_scores}, as built in the body.
 A step of the infmer_native implementation. Called by \code{.infmer_select_queries},
 \code{morie_infmer}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .infmer_sparsity_measure(q = 0.5, k = 3L)

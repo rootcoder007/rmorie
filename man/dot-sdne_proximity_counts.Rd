@@ -16,5 +16,4 @@ A list with \code{first_order_pairs}, \code{second_order_pairs},
 \description{
 A step of the sdne_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -2,39 +2,75 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_bayesian_am}
 \alias{morie_spatial_voting_bayesian_am}
-\title{Bayesian Aldrich-McKelvey scaling}
+\title{Bayesian Aldrich-McKelvey scaling (Hare et al. 2015)}
 \usage{
 morie_spatial_voting_bayesian_am(
   Z,
   n_samples = 1000L,
   burn_in = 200L,
-  prior_sd = 10
+  polarity = 1L,
+  seed = 42L
 )
 }
 \arguments{
-\item{Z}{Perceptual placement matrix.}
+\item{Z}{Respondent-by-stimulus placement matrix; \code{NA} marks a
+missing placement and rows with no placements are dropped.}
 
-\item{n_samples}{MCMC samples.}
+\item{n_samples}{Retained draws.}
 
-\item{burn_in}{Burn-in length.}
+\item{burn_in}{Sweeps discarded first.}
 
-\item{prior_sd}{Prior SD on stimulus positions.}
+\item{polarity}{Column index of the stimulus placed on the left.}
+
+\item{seed}{RNG seed.}
 }
 \value{
-List: \code{zeta_mean}, \code{zeta_sd} (posterior stimulus
-positions), \code{sigma2}, \code{n_samples}, \code{engine}.
+List: \code{zeta_mean}, \code{zeta_sd} and
+\code{zeta_interval} (central 95\\%) for the stimuli, \code{a} and
+\code{b} (posterior mean shifts and stretches), \code{tau_stimulus},
+\code{draws} (retained \eqn{\hat z}, one row per draw),
+\code{n_samples}, \code{engine}.
 }
 \description{
-Bayesian Aldrich-McKelvey scaling
+Respondent \eqn{i} places stimulus \eqn{j} at
+\deqn{z_{ij} \sim N(a_i + b_i \hat z_j,\; 1 / (\tau_i \tau_j)),}
+a respondent-specific shift and stretch of the common stimulus
+positions \eqn{\hat z} plus noise whose precision factors into a
+respondent and a stimulus part.  Priors follow the authors' JAGS
+template: \eqn{a_i, b_i \sim U(-100, 100)},
+\eqn{\tau_j \sim G(0.1, 0.1)}, \eqn{\tau_i \sim G(g_a, g_b)} with
+\eqn{g_a, g_b \sim G(0.1, 0.1)}, and \eqn{\hat z} the standardised
+version of \eqn{z^* \sim N(0, 1)}, with the \code{polarity} stimulus
+restricted to the left (\eqn{z^* \le 0}).  Standardising fixes the
+location and scale, the polarity restriction the reflection.
+}
+\details{
+Gibbs sampling: \eqn{a_i \mid b_i} and \eqn{b_i \mid a_i} are truncated
+normals, \eqn{\tau_j}, \eqn{\tau_i} and \eqn{g_b} conjugate gammas, and
+\eqn{g_a} and each \eqn{z^*_j} are slice sampled (Neal 2003); every
+\eqn{z^*_j} enters every \eqn{\hat z} through the mean and standard
+deviation, so the stimuli are updated one at a time against the full
+likelihood.  On 150 simulated respondents and five stimuli the
+posterior means and standard deviations agree with the JAGS model run
+through \code{asmcjr::BAM} to the third decimal.
 }
 \examples{
 set.seed(1)
-if (requireNamespace("basicspace", quietly = TRUE)) {
-  \donttest{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
-}
+zt <- c(-1, -0.3, 0.4, 1.2)
+Z <- rnorm(40, 0, 0.5) + outer(runif(40, 0.5, 1.5), zt) +
+  matrix(rnorm(160, 0, 0.3), 40, 4)
+fit <- morie_spatial_voting_bayesian_am(Z, n_samples = 200L,
+                                        burn_in = 100L)
+round(fit$zeta_mean, 2)
+# the true positions, standardised the same way
+round((zt - mean(zt)) / sd(zt), 2)
 }
 \references{
-Hare, C., Armstrong, D. A., Bakker, R., Carroll, R., and Poole, K. T.
-(2015). "Using Bayesian Aldrich-McKelvey Scaling to Study Citizens'
-Ideological Preferences and Perceptions." \emph{AJPS}, 59(3).
+Hare, C., Armstrong, D. A., Bakker, R., Carroll, R. and Poole, K. T.
+(2015). Using Bayesian Aldrich-McKelvey scaling to study citizens'
+ideological preferences and perceptions. \emph{American Journal of
+Political Science} 59(3), 759-774.
+
+Neal, R. M. (2003). Slice sampling. \emph{Annals of Statistics}
+31(3), 705-767.
 }

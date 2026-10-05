@@ -15,7 +15,6 @@ A list with \code{method}, \code{order_sensitive}, \code{note}.
 \description{
 A step of the hybRC_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 is_order_sensitive("mixed")

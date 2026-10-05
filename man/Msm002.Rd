@@ -16,8 +16,8 @@ List with estimate, beta, sd_residual, method.
 Formula: GY_ij = beta + e_ij (eq. 1.2), one grand mean for all levels.
 }
 \examples{
-D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-Msm002(D)
+# one grand mean for every level of the factor
+Msm002(list(c(4.1, 4.5, 3.9), c(5.2, 5.0, 5.6), c(4.8, 4.4, 4.9)))$beta
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

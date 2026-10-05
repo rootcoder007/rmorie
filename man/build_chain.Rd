@@ -16,3 +16,7 @@ build_chain(entries, key = NULL, genesis = .GENESIS)
 \description{
 Build a complete chain from a list of entries
 }
+\examples{
+ch <- build_chain(list("open", "write", "close"))
+ch$head_hex
+}

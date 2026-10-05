@@ -19,7 +19,6 @@ Invisibly,the value of \code{x}, as built in the body.
 \description{
 A step of the andmnh_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

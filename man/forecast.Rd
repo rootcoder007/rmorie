@@ -20,7 +20,6 @@ A list with \code{estimate}, \code{forecast}, \code{variance}, \code{se},
 \description{
 A step of the sarima_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 y <- c(1, 0.5, 0.25, 0.125, 0.0625, 0.03125)

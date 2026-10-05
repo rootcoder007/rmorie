@@ -14,3 +14,8 @@ inclusion_proof(leaves, index)
 \description{
 Build an inclusion proof (audit path) for the given leaf
 }
+\examples{
+leaves <- lapply(c("a", "b", "c", "d"), charToRaw)
+p <- inclusion_proof(leaves, 2L)
+p$path_hex
+}

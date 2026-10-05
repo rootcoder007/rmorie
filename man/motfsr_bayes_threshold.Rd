@@ -17,5 +17,7 @@ A numeric value.
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_run}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+motfsr_bayes_threshold(lambda1 = 0.05)
 }

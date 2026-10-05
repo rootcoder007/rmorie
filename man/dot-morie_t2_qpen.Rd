@@ -21,5 +21,4 @@ A numeric value.
 \description{
 A step of the tail2_t03 implementation. Called by \code{PenaltyMin}.
 See the file header for the source the module follows.
-source it follows.
 }

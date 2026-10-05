@@ -41,6 +41,14 @@ value satisfying \eqn{1 / (alpha (1 - alpha)) <=
 deterministic ascending scan over the observed propensities. The
 propensity is fitted by logistic regression of \code{A} on \code{H}.
 }
+\examples{
+set.seed(7)
+n <- 400
+H <- matrix(rnorm(n * 2), n, 2)
+A <- rbinom(n, 1, plogis(H[, 1]))
+y <- 1 + A + H[, 1] + rnorm(n)
+Ocmtmd(y, A, H)$t_stat
+}
 \references{
 Crump, R. K., Hotz, V. J., Imbens, G. W. & Mitnik, O. A.
 (2009). Dealing with limited overlap in estimation of average

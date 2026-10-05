@@ -16,3 +16,7 @@ train_bpe(corpus, vocab_size, add_prefix = TRUE)
 \description{
 Train a BPE model: merge the most frequent adjacent pair greedily
 }
+\examples{
+bpe <- train_bpe(c("low lower lowest", "new newer newest"), vocab_size = 30)
+names(bpe)
+}

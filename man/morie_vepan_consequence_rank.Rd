@@ -16,7 +16,6 @@ One of two values, depending on the branch taken.
 A step of the vepan_native implementation. Called by \code{.vepan_pick_key},
 \code{morie_vepan_annotate}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_vepan_consequence_rank(term = 5L)

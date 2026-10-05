@@ -16,6 +16,9 @@ The list returned by \code{Msm325()}.
 The same method as \code{Msm325()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+Msm326(y_positive = c(1, 2, 1, 3, 4, 2, 6, 5))$estimate
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

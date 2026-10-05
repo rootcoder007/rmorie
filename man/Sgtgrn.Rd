@@ -29,6 +29,10 @@ a node forgetting itself at every step.
 Formula: \code{X^(k+1) = sigma(A_hat X^(k) W^(k))},
 \code{A_hat = Dt^-1/2 (A + I) Dt^-1/2}.
 }
+\examples{
+A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3)
+Sgtgrn(A, X = diag(3), W = matrix(1, 3, 2))$X_next
+}
 \references{
 Kipf, T. N. & Welling, M. (2017). ICLR 2017, equation (2).
 }

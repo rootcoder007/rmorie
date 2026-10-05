@@ -21,5 +21,4 @@ The value of \code{sweep}.
 \description{
 A step of the psycho_native implementation. Called by \code{.psy_info}.
 See the file header for the source the module follows.
-source it follows.
 }

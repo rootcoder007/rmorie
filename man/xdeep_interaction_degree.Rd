@@ -15,7 +15,6 @@ A list with \code{layer}, \code{degree}, \code{note}.
 \description{
 A step of the xdeep_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 xdeep_interaction_degree(layer_index = 5L)

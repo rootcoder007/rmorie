@@ -45,6 +45,5 @@ A list with \code{estimate}, \code{labels}, \code{clean_labels}, \code{votes},
 \description{
 A step of the pate_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

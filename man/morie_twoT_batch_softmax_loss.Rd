@@ -27,7 +27,6 @@ A list with \code{loss}, \code{per_example}, \code{corrected}.
 \description{
 A step of the twoT_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

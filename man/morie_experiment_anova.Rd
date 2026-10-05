@@ -20,5 +20,9 @@ design with treatment and block effects (9.13). Mirrors ca9e5 to
 ca9e7, ca9e12, ca9e13.
 }
 \examples{
-morie_experiment_anova()
+# one-way ANOVA on three groups
+r <- morie_experiment_anova(groups = list(c(4.1, 5.0, 4.6),
+                                          c(6.2, 5.8, 6.6),
+                                          c(5.1, 4.9, 5.5)))
+c(F = r$f, df1 = r$df1, df2 = r$df2)
 }

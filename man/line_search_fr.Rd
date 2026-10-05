@@ -44,7 +44,6 @@ A list with \code{t}, \code{x_new}, \code{f_new}, \code{g_new}, \code{n_eval}.
 \description{
 A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 f <- function(x) sum((x - c(1, 2))^2)

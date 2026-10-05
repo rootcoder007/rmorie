@@ -15,7 +15,6 @@ One of two values, depending on the branch taken.
 \description{
 A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

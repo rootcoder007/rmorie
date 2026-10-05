@@ -19,5 +19,4 @@ The value of \code{.karpv_tnode}.
 \description{
 A step of the karpV_native implementation. Called by \code{.karpv_grow}.
 See the file header for the source the module follows.
-source it follows.
 }

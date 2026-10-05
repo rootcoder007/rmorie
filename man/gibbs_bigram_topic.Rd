@@ -49,7 +49,6 @@ A list with \code{estimate}, \code{z}, \code{topic_posterior}, \code{theta},
 \description{
 A step of the bigtm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 docs <- list(c(0, 1, 2, 0), c(1, 2, 0, 1), c(2, 0, 1, 2))

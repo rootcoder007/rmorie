@@ -23,5 +23,4 @@ A list with \code{s}, \code{lambda}, \code{why}.
 \description{
 A step of the trupek_native implementation. Called by \code{.trupek_sub}.
 See the file header for the source the module follows.
-source it follows.
 }

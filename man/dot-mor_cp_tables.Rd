@@ -15,7 +15,6 @@ A list with \code{cs}, \code{css}.
 \description{
 A step of the pelt_native implementation. Called by \code{.mor_pelt_core}, \code{morie_binseg}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

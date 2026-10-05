@@ -17,3 +17,7 @@ A numeric value.
 \description{
 One draw from Lap(0, b) by inverse transform
 }
+\examples{
+rng <- rmorie:::.ghc_rng(1)
+morie_laplace_noise(2, rng)
+}

@@ -18,3 +18,8 @@ a base64 string; \code{NA_character_} for \code{NULL}.
 \description{
 Base64 encode a raw vector or character string
 }
+\examples{
+morie_jsonlt_base64_enc("hello world")
+morie_jsonlt_base64_enc(as.raw(c(0, 255, 16)))
+morie_jsonlt_base64url_enc("hello?world")
+}

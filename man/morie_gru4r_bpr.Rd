@@ -18,3 +18,6 @@ Scalar loss.
 \eqn{-1/N_S \\sum_j \\log\\sigma(r_i - r_j)}, with the
 log floored at 1e-12 for numerical stability.
 }
+\examples{
+morie_gru4r_bpr(r_target = 2, r_negatives = c(0.5, 1, -1))
+}

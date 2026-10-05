@@ -21,5 +21,4 @@ The value of \code{ls}, as built in the body.
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}.
 See the file header for the source the module follows.
-source it follows.
 }

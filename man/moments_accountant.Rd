@@ -31,7 +31,6 @@ A list with \code{epsilon}, \code{lambda}, \code{alpha}, \code{delta},
 \description{
 A step of the pate_native implementation. Called by \code{pate}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 moments_accountant(vote_counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5, delta = 0.5)

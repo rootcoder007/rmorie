@@ -19,5 +19,7 @@ A numeric value.
 \description{
 A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mistr_rms_norm(c(3, 4))   # divides by sqrt(mean(x^2)) = sqrt(12.5)
 }

@@ -40,7 +40,6 @@ A list with \code{estimate}, \code{a}, \code{a.star}, \code{route},
 A step of the randIE_native implementation. Called by
 \code{morie_randIE_randomized_interventional_effect}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

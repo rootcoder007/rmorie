@@ -34,7 +34,6 @@ A list with \code{estimate}, \code{relative_incidence}, \code{log_ri},
 \description{
 A step of the smatch_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 cases <- list(

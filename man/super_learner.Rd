@@ -45,7 +45,6 @@ A list with \code{fitted}, \code{estimate}, \code{weights},
 \description{
 A step of the flxipt_native implementation. Called by \code{flexible_iptw}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

@@ -24,7 +24,6 @@ A vector, from \code{sapply}.
 \description{
 A step of the cdaeRC_native implementation. Called by \code{fit_cdae}, \code{recommend}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 decode(z = c(1, 2, 3, 4, 5, 6, 7, 8), Wp = c(1, 2, 3, 4, 5, 6, 7, 8),

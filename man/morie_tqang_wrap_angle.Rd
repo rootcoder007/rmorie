@@ -15,3 +15,6 @@ Numeric scalar in \code{[-pi, pi)}.
 \description{
 Wrap an angle to \code{[-pi, pi)}
 }
+\examples{
+morie_tqang_wrap_angle(3 * pi / 2)   # -pi/2
+}

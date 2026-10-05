@@ -36,6 +36,13 @@ fit, so both language arms land on the same numbers exactly.
 \code{sigma2_e = MSW}, \code{sigma2_l = max(0, (MSB - MSW) / n0)},
 \code{n0 = (N - sum n_i^2 / N) / (k - 1)}.
 }
+\examples{
+set.seed(1)
+cl <- rep(1:20, each = 10)
+x <- rnorm(200)
+y <- 1 + 0.8 * x + rnorm(20)[cl] + rnorm(200)
+Niccgg(y, X = matrix(x), cluster = cl)[c("r2_marginal", "r2_conditional", "icc")]
+}
 \references{
 Nakagawa, S. & Schielzeth, H. (2013). A general and
 simple method for obtaining R^2 from generalized linear

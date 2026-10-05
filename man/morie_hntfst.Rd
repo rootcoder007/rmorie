@@ -56,7 +56,6 @@ The value of \code{honest_forest}.
 \description{
 A step of the hntfst_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(3)

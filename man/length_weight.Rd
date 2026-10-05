@@ -20,7 +20,6 @@ A list with \code{weight}, \code{length}, \code{below_minimum}.
 A step of the metabd_native implementation. Called by \code{composite_distance},
 \code{morie_metabd}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 length_weight(length = 5L)

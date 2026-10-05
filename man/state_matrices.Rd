@@ -18,7 +18,6 @@ A list with \code{w}, \code{fmat}, \code{g}.
 A step of the bats_native implementation. Called by \code{all_eigenvalues},
 \code{spectral_radius}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 spec <- BatsSpec()

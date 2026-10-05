@@ -17,7 +17,6 @@ A list with \code{gap}, \code{t}, \code{m}, \code{note}.
 \description{
 A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sdpwts_central_path_gap(t = 5L, m = 5L)

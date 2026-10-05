@@ -21,5 +21,4 @@ A vector, from \code{rev}.
 \description{
 A step of the avalon_native implementation. Called by \code{morie_avalon_rings}.
 See the file header for the source the module follows.
-source it follows.
 }

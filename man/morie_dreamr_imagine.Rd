@@ -33,7 +33,6 @@ A list with \code{estimate}, \code{states}, \code{actions}, \code{rewards},
 \description{
 A step of the dreamr_native implementation. Called by \code{morie_dreamr}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 am <- function(s) 1

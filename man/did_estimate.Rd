@@ -22,3 +22,8 @@ A list with \code{estimate}, \code{treated_change},
 With no weights the estimator is the textbook difference of group
 means; passing forest weights turns it into a local estimate.
 }
+\examples{
+delta <- c(1.2, 0.9, 1.4, 0.2, 0.1, 0.3)
+D <- c(1, 1, 1, 0, 0, 0)
+did_estimate(delta, D)$estimate   # mean(1.2, 0.9, 1.4) - mean(0.2, 0.1, 0.3)
+}

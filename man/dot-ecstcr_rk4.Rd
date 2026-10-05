@@ -31,5 +31,4 @@ A vector, from \code{c}.
 \description{
 A step of the ecsTCR_native implementation. Called by \code{.ecstcr_analytic}.
 See the file header for the source the module follows.
-source it follows.
 }

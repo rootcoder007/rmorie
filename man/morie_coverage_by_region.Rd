@@ -35,7 +35,6 @@ A list with \code{marginal_coverage}, \code{subset_coverage},
 \description{
 A step of the bndpcb_native implementation. Called by \code{morie_bet_violation}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 \donttest{

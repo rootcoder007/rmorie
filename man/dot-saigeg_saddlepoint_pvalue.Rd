@@ -22,5 +22,4 @@ A list with \code{p_value}, \code{t_hat}, \code{w}, \code{v}, \code{K},
 \description{
 A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
 See the file header for the source the module follows.
-source it follows.
 }

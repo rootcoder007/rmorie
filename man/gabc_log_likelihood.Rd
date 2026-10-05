@@ -42,3 +42,7 @@ List \code{log_lik, nugget_variance}.
 Monte Carlo estimate of the GABC likelihood of Wilkinson (2014)
 eq. (1) and the bootstrap variance that is used as the GP's nugget.
 }
+\examples{
+sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+gabc_log_likelihood(sim, obs = c(0.5, 1, 1.5), theta = 1, n_sim = 5L, epsilon = 0.5)$log_lik
+}

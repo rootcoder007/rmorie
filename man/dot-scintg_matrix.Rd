@@ -16,7 +16,6 @@ The value of \code{Z}, as built in the body.
 A step of the scintg_native implementation. Called by \code{.scintg_correct_batch},
 \code{.scintg_maximum_diversity_clustering}, \code{morie_scintg}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))

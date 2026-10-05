@@ -21,6 +21,10 @@ A list with \code{colour}, \code{transmittance},
 Same image formation as volume rendering, which is why the two
 representations are interchangeable at the pixel.
 }
+\examples{
+cols <- rbind(c(1, 0, 0), c(0, 0, 1))
+morie_gsplat_composite(cols, alphas = c(0.6, 0.5))$colour   # red in front of blue
+}
 \references{
 Kerbl, B. et al. (2023); Mildenhall, B. et al. (2020).
 }

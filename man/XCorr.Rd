@@ -26,7 +26,6 @@ A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{n},
 \description{
 A step of the rangayyan_ccf implementation. Called by \code{CorrConv}, \code{XCorrProc}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

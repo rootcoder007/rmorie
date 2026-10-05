@@ -26,6 +26,13 @@ List with \code{mu}, \code{beta}, \code{b}, \code{J}, \code{T}.
 Formula: Y = (1 (x) I_T) mu + X beta + Z b + eps,  b ~ N(0, G (x) Sigma_T),  eps ~
 N(0, I_J (x) R_T)
 }
+\examples{
+set.seed(9)
+J <- 6; nT <- 2
+G <- crossprod(matrix(rnorm(J * J), J)) / J
+Y <- matrix(rnorm(J * nT, 5), J, nT)
+Mtlmmfit(Y, Z = diag(J), G = G, Sigma_T = diag(nT), R_T = diag(nT))$mu
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,

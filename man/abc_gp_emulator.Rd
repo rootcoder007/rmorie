@@ -79,3 +79,11 @@ abc_gp_emulator(
 Wilkinson (2014) history matching + GP-emulated log-posterior on a
 grid, or one of the Meeds & Welling (2014) samplers.
 }
+\examples{
+\donttest{
+sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+obs <- c(0.5, 1, 1.5)
+fit <- abc_gp_emulator(sim, obs, prior_ppf = list(-2, 4), n_waves = 2L, n_design = 12L, n_sim = 5L)
+names(fit)
+}
+}

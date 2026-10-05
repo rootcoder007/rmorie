@@ -15,5 +15,9 @@ The value of \code{env}, as built in the body.
 \description{
 A step of the muzero_native implementation. Called by \code{muzero_search}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+nd <- muzero_Node(prior = 0.4)
+nd$value_sum <- 3; nd$visits <- 2
+c(nd$prior, nd$value(), nd$expanded)
 }

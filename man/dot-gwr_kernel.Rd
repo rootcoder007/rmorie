@@ -19,5 +19,4 @@ One of two values, depending on the branch taken.
 \description{
 A step of the gwrcal_native implementation. Called by \code{.gwr_cv_score}, \code{.gwr_fit}.
 See the file header for the source the module follows.
-source it follows.
 }

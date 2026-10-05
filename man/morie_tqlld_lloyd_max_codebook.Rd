@@ -42,3 +42,6 @@ The uniform source has a closed form; the Gaussian and empirical
 sources iterate the nearest-neighbour and centroid conditions
 until both hold.
 }
+\examples{
+morie_tqlld_lloyd_max_codebook(levels = 4L, source = "gaussian")$codebook
+}

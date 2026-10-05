@@ -21,5 +21,15 @@ The value of \code{for}.
 \description{
 A step of the muzero_native implementation. Called by \code{muzero_search}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+node <- function(reward) {
+  e <- new.env(); e$value_sum <- 0; e$visits <- 0; e$reward <- reward
+  e$value <- function() if (e$visits == 0) 0 else e$value_sum / e$visits
+  e
+}
+root <- node(0); child <- node(1)
+mm <- muzero_MinMax()
+muzero_backup(list(root, child), value = 0.5, gamma = 0.9, mm = mm)
+c(child$value(), root$value())   # 0.5, then 1 + 0.9 * 0.5
 }

@@ -21,5 +21,4 @@ The value of \code{ctr}, as built in the body.
 \description{
 A step of the rng_native implementation. Called by \code{.morie_random_uniform}.
 See the file header for the source the module follows.
-source it follows.
 }

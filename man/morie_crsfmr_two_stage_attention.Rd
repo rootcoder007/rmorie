@@ -21,6 +21,10 @@ operation counts.
 Cross-time then cross-dimension.
 }
 \examples{
-morie_crsfmr_two_stage_attention(Z = 5L)
+# 4 time segments of 3 series, each embedded in 2 dimensions
+set.seed(1)
+Z <- lapply(1:4, function(t) lapply(1:3, function(d) rnorm(2)))
+r <- morie_crsfmr_two_stage_attention(Z, n_router = 2)
+r$complexity
 }
 \keyword{internal}

@@ -19,7 +19,6 @@ The value of \code{.grace_drop_edges}.
 \description{
 A step of the grace_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 rng <- rmorie:::.ghc_rng(1L)

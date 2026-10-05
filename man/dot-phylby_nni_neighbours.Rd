@@ -16,5 +16,4 @@ The value of \code{uniq}, as built in the body.
 A step of the phylby_native implementation. Called by \code{.phylby_step},
 \code{morie_phylby_nni_neighbours}.
 See the file header for the source the module follows.
-source it follows.
 }

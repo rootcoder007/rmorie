@@ -22,5 +22,4 @@ A matrix, from \code{matrix}.
 A step of the helpers_vit implementation. Called by \code{Vaean}, \code{Vaeber},
 \code{Vaecf} and 4 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

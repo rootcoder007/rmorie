@@ -16,7 +16,6 @@ The value of \code{qnorm}.
 A step of the helpers_s03 implementation. Called by \code{.drbsze_tquant},
 \code{Btbca}, \code{Btcicor} and 20 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .s03qnorm(p = 0.5)

@@ -15,7 +15,6 @@ The value of \code{qnorm}.
 \description{
 A step of the smatch_native implementation. Called by \code{morie_smatch_sample_size}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .smatch_qnorm(p = 0.5)

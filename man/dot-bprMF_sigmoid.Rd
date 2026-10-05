@@ -16,5 +16,4 @@ A numeric value.
 A step of the bprMF_native implementation. Called by \code{.bprMF_bpr_opt},
 \code{.bprMF_learn_bpr}, \code{bpr_sigmoid}.
 See the file header for the source the module follows.
-source it follows.
 }

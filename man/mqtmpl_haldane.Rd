@@ -17,5 +17,8 @@ A step of the mqtmpl_native implementation. Called by
 \code{mqtmpl_hmm_genotype_probabilities}, \code{mqtmpl_sample_genotypes},
 \code{mqtmpl_scan_cim}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mqtmpl_haldane(c(0.05, 0.1, 0.5))
+0.5 * (1 - exp(-2 * c(0.05, 0.1, 0.5)))
 }

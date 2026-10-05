@@ -14,5 +14,8 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+X_t <- rbind(c(0, 0), c(1, 1)); X_c <- rbind(c(0, 1), c(2, 2), c(1, 0))
+morie_matching_euclidean_pairs_cpp(X_t, X_c)
 }

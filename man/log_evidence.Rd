@@ -29,7 +29,6 @@ The value of \code{.log_evidence}.
 \description{
 A step of the bigtm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 docs <- list(c(0L, 1L, 2L, 1L), c(2L, 2L, 0L, 1L))   # word ids of two documents

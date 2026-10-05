@@ -17,5 +17,4 @@ The value of \code{\%*\%}.
 \description{
 A step of the robpca_native implementation. Called by \code{morie_robpca}.
 See the file header for the source the module follows.
-source it follows.
 }

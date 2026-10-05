@@ -24,6 +24,10 @@ The smallest non-trivial eigenvectors of the Laplacian: on a path
 graph these are sinusoids, so the NLP positional encoding is the
 special case.
 }
+\examples{
+adj <- list(`0` = 1L, `1` = c(0L, 2L), `2` = c(1L, 3L), `3` = 2L)   # path graph, 0-based
+round(morie_gtrf_lap_pe(adj, n = 4, dim = 2L)$encoding, 3)
+}
 \references{
 Dwivedi, V. P. and Bresson, X. (2020).
 }

@@ -17,5 +17,4 @@ A list with \code{grid}, \code{vals}.
 \description{
 A step of the copula_native implementation. Called by \code{morie_copula_survival}.
 See the file header for the source the module follows.
-source it follows.
 }

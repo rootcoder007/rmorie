@@ -24,7 +24,6 @@ A list with \code{in_box}, \code{in_center}, \code{candidates},
 \description{
 A step of the yolovx_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_yolovx_center_sampling(box = c(1, 1, 5, 4), grid_w = 8L, grid_h = 6L)$n_candidates

@@ -17,5 +17,4 @@ The value of \code{b}, as built in the body.
 \description{
 A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}.
 See the file header for the source the module follows.
-source it follows.
 }

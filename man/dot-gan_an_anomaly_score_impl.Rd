@@ -23,5 +23,4 @@ A list with \code{score}, \code{residual}, \code{discrimination}, \code{lambda}.
 \description{
 A step of the gan_an_native implementation. Called by \code{anomaly_score}, \code{morie_gan_an}.
 See the file header for the source the module follows.
-source it follows.
 }

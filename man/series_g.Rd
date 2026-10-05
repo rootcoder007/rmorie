@@ -15,7 +15,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the sarima_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 series_g()

@@ -21,7 +21,6 @@ One of two values, depending on the branch taken.
 \description{
 A step of the strec_native implementation. Called by \code{strec_stamp_scores}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 W <- matrix(c(1, 0, 0.5, -1, 0.2, 0.3), nrow = 2)   # two outputs from three inputs

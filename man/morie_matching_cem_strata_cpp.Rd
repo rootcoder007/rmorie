@@ -12,5 +12,9 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+X_binned <- matrix(c(1, 1, 2, 2, 1,
+                     3, 3, 1, 1, 3), 5, 2)   # coarsened covariates, one row per unit
+morie_matching_cem_strata_cpp(X_binned)
 }

@@ -22,5 +22,4 @@ The value of \code{out}, as built in the body.
 A step of the frns_metrics implementation. Called by
 \code{morie_fairness_average_odds_difference}, \code{morie_fairness_equalized_odds}.
 See the file header for the source the module follows.
-source it follows.
 }

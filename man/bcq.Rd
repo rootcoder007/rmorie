@@ -49,7 +49,6 @@ A list with \code{estimate}, \code{q}, \code{policy}, \code{allowed},
 \description{
 A step of the bcq_native implementation. Called by \code{morie_bcq}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

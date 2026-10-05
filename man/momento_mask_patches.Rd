@@ -22,3 +22,7 @@ A step of the momento_native implementation. Called by \code{momento_reconstruct
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+p <- list(c(1, 2), c(3, 4), c(5, 6), c(7, 8))
+momento_mask_patches(p, mask_idx = c(1, 3))$masked   # 0-based patch indices
+}

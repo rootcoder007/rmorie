@@ -19,7 +19,6 @@ A numeric value.
 \description{
 A step of the pate_native implementation. Called by \code{pate}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 epsilon_data_independent(T = 5L, gamma = 0.5, delta = 0.5)

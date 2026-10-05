@@ -19,5 +19,4 @@ The value of \code{tot}, as built in the body.
 \description{
 A step of the fairRC_native implementation. Called by \code{.measure}, \code{normalizer}.
 See the file header for the source the module follows.
-source it follows.
 }

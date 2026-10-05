@@ -26,7 +26,6 @@ A list with \code{scalar_error}, \code{vector_error},
 \description{
 A step of the painn_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

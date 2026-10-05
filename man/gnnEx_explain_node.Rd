@@ -52,6 +52,5 @@ A list with \code{estimate}, \code{edges_ranked}, \code{edge_mask},
 \description{
 A step of the gnnEx_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

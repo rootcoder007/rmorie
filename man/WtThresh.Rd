@@ -33,7 +33,6 @@ A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed},
 \description{
 A step of the rangayyan_tf implementation. Called by \code{PpgWtDen}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(7)

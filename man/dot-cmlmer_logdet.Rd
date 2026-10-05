@@ -15,5 +15,4 @@ A numeric value.
 \description{
 A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at}.
 See the file header for the source the module follows.
-source it follows.
 }

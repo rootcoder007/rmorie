@@ -19,5 +19,8 @@ The value of \code{best_a}, as built in the body.
 \description{
 A step of the offlrl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+q <- list(`0|0` = 0.2, `0|1` = 0.7)
+offlrl_safe_max_key(q, 0, A = c(0, 1))
 }

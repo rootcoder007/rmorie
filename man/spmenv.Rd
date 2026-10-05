@@ -35,6 +35,11 @@ is missing a bracket: \eqn{n} multiplies the whole first group,
 book's own Example 1.7 confirms (sd 0.0732 against the literal reading's
 0.0740; the Gaussian column reproduces the printed 0.0731 exactly).
 }
+\examples{
+w <- matrix(0, 5, 5); w[cbind(1:4, 2:5)] <- 1; w <- w + t(w)
+s <- spmenv(x = c(1, 2, 3, 5, 8), w = w)
+c(s$I, s$expectation, s$sd_normal)
+}
 \references{
 Schabenberger Ch 1, Sec 1.3.2, eqs (1.14)-(1.15), pp. 21-23;
 Example 1.7 p. 22; Problem 1.8 p. 39, quoting Cliff and Ord (1981),

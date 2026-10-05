@@ -21,7 +21,6 @@ A list with \code{estimate}, \code{ranking}, \code{n_scored}, \code{method}.
 \description{
 A step of the sasRec_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 E <- rbind(c(1, 0), c(0, 1), c(0.7, 0.7))   # three item embeddings

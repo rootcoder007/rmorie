@@ -18,5 +18,4 @@ A vector, from \code{vapply}.
 A step of the rangayyan_cep implementation. Called by \code{CCepstrum},
 \code{Cepstrum}, \code{HomDeconv} and 4 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

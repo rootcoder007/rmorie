@@ -18,5 +18,4 @@ The value of \code{x}, as built in the body.
 A step of the sgflrt_native implementation. Called by \code{.sgflrt_inv},
 \code{.sgflrt_laplace}, \code{morie_sgflrt_spatial_glmm_fit}.
 See the file header for the source the module follows.
-source it follows.
 }

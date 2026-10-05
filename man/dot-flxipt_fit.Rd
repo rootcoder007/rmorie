@@ -25,5 +25,4 @@ A list with \code{pred}, \code{b}.
 \description{
 A step of the flxipt_native implementation. Called by \code{super_learner}.
 See the file header for the source the module follows.
-source it follows.
 }

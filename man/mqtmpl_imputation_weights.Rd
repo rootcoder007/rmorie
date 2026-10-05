@@ -19,5 +19,9 @@ A numeric value.
 \description{
 A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scan_imp}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(8)
+g <- rbinom(30, 1, 0.5)
+mqtmpl_imputation_weights(y = 1 + g + rnorm(30), genotype_column = g)
 }

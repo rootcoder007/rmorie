@@ -16,5 +16,7 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{.tps_hwka_baseline_integral}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+morie_hawkes_baseline_integral_cpp(T_horizon = 10, alpha = c(1, 0.2, 0.1, 0.5))
 }

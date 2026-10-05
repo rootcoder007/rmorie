@@ -18,7 +18,6 @@ A vector, from \code{as.numeric}.
 A step of the sschin_native implementation. Called by \code{.sschin_cox_breslow},
 \code{.sschin_ols}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)

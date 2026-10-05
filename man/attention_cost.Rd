@@ -25,7 +25,6 @@ A list with \code{n_patches}, \code{pointwise}, \code{patched},
 \description{
 A step of the patchT_native implementation. Called by \code{patchtst_encode}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 attention_cost(L = 5L, patch_len = 5L)

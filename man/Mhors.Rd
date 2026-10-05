@@ -33,6 +33,10 @@ variance of its logarithm is the Robins-Breslow-Greenland expression
 / n^2}, \code{R = sum (b+c) b c / n^2}, \code{S = sum a d / n},
 \code{T = sum b c / n}.
 }
+\examples{
+tables <- rbind(c(a = 10, b = 20, c = 5, d = 25), c(a = 8, b = 12, c = 6, d = 24))
+Mhors(tables)[c("estimate", "ci_lower", "ci_upper")]
+}
 \references{
 Mantel, N. and Haenszel, W. (1959). Journal of the National
 Cancer Institute 22(4):719-748. \doi{10.1093/jnci/22.4.719}. Robins,

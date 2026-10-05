@@ -15,5 +15,7 @@ A list with \code{method}, \code{available}, \code{reason}.
 \description{
 A step of the mqtmpl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mqtmpl_method_status("em")
 }

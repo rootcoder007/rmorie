@@ -24,6 +24,12 @@ latent variable with a flat prior on the environment effects and a
 BRR/BayesA/BayesB/BayesC/BL prior on the marker and marker-by-environment
 effects. Blocks are stacked in the order printed in Table 7.6.
 }
+\examples{
+set.seed(16)
+XE <- model.matrix(~ factor(rep(1:2, 5)) - 1)
+X <- matrix(rnorm(20), 10, 2)
+Msm092(n = 10, X_E = XE, X = X)$widths
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

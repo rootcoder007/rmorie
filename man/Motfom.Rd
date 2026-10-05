@@ -33,6 +33,11 @@ zero-order background. Scores are converted to p-values
 distribution of the discretized score (integer grid of 1/scale
 bits), as in FIMO. Scanning is single-strand.
 }
+\examples{
+pwm <- rbind(c(0.9, 0.05, 0.03, 0.02), c(0.05, 0.9, 0.03, 0.02), c(0.02, 0.03, 0.9, 0.05))
+m <- Motfom("TTACGTTAACGA", pwm)
+c(m$best_position, m$best_pvalue)
+}
 \references{
 Grant, C. E., Bailey, T. L. and Noble, W. S. (2011), FIMO: scanning for
 occurrences of a given motif, Bioinformatics 27(7), 1017-1018 (score and

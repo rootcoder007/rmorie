@@ -16,6 +16,12 @@ The list returned by \code{Msm042()}.
 The same method as \code{Msm042()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+set.seed(13)
+X <- matrix(rnorm(60), 30, 2)
+y <- 1 + X \%*\% c(0.5, -1) + rnorm(30)
+Msm060(X, as.numeric(y), add_intercept = TRUE)$ig_shape
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

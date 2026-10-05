@@ -41,5 +41,4 @@ A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter},
 A step of the recur_native implementation. Called by \code{Agrec}, \code{Pwpgt},
 \code{Shfrm} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

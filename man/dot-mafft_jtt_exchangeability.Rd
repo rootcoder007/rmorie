@@ -12,7 +12,6 @@ A list with \code{S}, \code{f}.
 \description{
 A step of the mafft_native implementation. Called by \code{jtt_matrix}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .mafft_jtt_exchangeability()

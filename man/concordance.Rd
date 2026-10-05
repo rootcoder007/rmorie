@@ -18,7 +18,6 @@ A list with \code{estimate}, \code{concordance}, \code{mean_absolute_error},
 \description{
 A step of the impfun_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

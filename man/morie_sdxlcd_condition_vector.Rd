@@ -34,7 +34,6 @@ A list with \code{estimate}, \code{vector}, \code{width}, \code{c_size},
 \description{
 A step of the sdxlcd_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_sdxlcd_condition_vector(h_original = 5L, w_original = 5L)

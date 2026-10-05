@@ -21,5 +21,4 @@ A vector, from \code{vapply}.
 \description{
 A step of the qpdual_native implementation. Called by \code{morie_qpdual}.
 See the file header for the source the module follows.
-source it follows.
 }

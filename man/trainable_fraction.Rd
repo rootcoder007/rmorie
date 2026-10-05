@@ -20,7 +20,6 @@ A list with \code{trainable}, \code{total}, \code{fraction},
 \description{
 A step of the blip2v_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 trainable_fraction(1e6, 3e8, 7e9)

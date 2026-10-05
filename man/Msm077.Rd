@@ -16,6 +16,9 @@ The list returned by \code{Msm043()}.
 The same method as \code{Msm043()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+Msm077(sigma2 = 4)$density
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

@@ -12,3 +12,6 @@ Character.
 \description{
 One-line rationale mirroring the Python cheatsheet
 }
+\examples{
+morie_tqlld_cheatsheet()
+}

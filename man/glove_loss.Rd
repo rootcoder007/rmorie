@@ -27,7 +27,6 @@ The value of \code{total}, as built in the body.
 \description{
 A step of the glove_native implementation. Called by \code{morie_glove}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

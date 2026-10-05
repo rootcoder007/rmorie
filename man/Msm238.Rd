@@ -16,6 +16,9 @@ The list returned by \code{Msm003()}.
 The same method as \code{Msm003()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+Msm238(list(c(1.1, 1.3), c(2.0, 2.4)))$sd_residual
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

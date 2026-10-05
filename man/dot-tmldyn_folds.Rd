@@ -17,5 +17,4 @@ The value of \code{lapply}.
 \description{
 A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
 See the file header for the source the module follows.
-source it follows.
 }

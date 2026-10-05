@@ -21,5 +21,4 @@ A logical value.
 \description{
 A step of the esl_native0 implementation. Called by \code{.esl_grow}.
 See the file header for the source the module follows.
-source it follows.
 }

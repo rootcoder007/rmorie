@@ -17,7 +17,6 @@ A list with \code{mass_at_zero}, \code{exceptional}, \code{n_at_zero}, \code{not
 \description{
 A step of the tloilr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .tloilr_exceptional_law(B = 3L)

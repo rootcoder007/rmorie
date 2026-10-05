@@ -63,7 +63,6 @@ A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{z},
 \description{
 A step of the sgflrt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_sgflrt_spatial_glmm_fit(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),

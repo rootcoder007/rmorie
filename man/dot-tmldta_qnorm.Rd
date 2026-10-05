@@ -15,7 +15,6 @@ The value of \code{qnorm}.
 \description{
 A step of the tmldta_native implementation. Called by \code{morie_tmle_data_adaptive}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .tmldta_qnorm(p = 0.5)

@@ -21,7 +21,6 @@ The value of \code{morie_rdrobu}.
 \description{
 A step of the rdrobu_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

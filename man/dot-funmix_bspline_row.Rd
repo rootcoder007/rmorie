@@ -23,5 +23,4 @@ The value of \code{[}.
 \description{
 A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
 See the file header for the source the module follows.
-source it follows.
 }

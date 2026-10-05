@@ -20,7 +20,6 @@ A list with \code{vol}, \code{pol}.
 \description{
 A step of the mafft_native implementation. Called by \code{correlation}, \code{morie_mafft}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

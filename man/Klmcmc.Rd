@@ -31,6 +31,11 @@ rather than smoothed away.
 \details{
 Formula: D(p || q) = sum_k p_k log(p_k / q_k) over equal-width bins.
 }
+\examples{
+set.seed(5)
+chain <- rnorm(5000)
+Klmcmc(chain, target = dnorm, bins = 20)$kl    # near 0 for a well-mixed chain
+}
 \references{
 Brooks and Gelman (1998), General methods for monitoring
 convergence of iterative simulations, Journal of Computational and

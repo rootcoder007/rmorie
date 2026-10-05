@@ -17,6 +17,5 @@ The value of \code{resolved}, as built in the body.
 \description{
 A step of the synthetic implementation. Called by \code{morie_generate_synthetic_data}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

@@ -40,6 +40,5 @@ A list with \code{estimate}, \code{gaps}, \code{weights}, \code{fit_loss},
 \description{
 A step of the plcbsc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

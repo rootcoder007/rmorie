@@ -21,5 +21,4 @@ A numeric value.
 \description{
 A step of the helpers_ot implementation. Called by \code{Otmxh}, \code{Otwsg}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -12,7 +12,6 @@ A character value.
 \description{
 A step of the hiatus_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .hiatus_cheatsheet()

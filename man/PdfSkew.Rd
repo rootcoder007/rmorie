@@ -21,7 +21,6 @@ A vector, from \code{c}.
 \description{
 A step of the rangayyan_ch3 implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 xg <- seq(0, 20, by = 0.01)

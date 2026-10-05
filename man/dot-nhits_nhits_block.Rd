@@ -32,5 +32,4 @@ A list with \code{backcast}, \code{forecast}, \code{knots}, \code{pooled}.
 \description{
 A step of the nhits_native implementation. Called by \code{.nhits_nhits_stack}.
 See the file header for the source the module follows.
-source it follows.
 }

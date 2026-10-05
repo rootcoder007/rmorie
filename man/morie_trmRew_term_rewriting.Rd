@@ -27,7 +27,6 @@ A list with \code{estimate}, \code{normal_form}, \code{steps}, \code{trace},
 \description{
 A step of the trmRew_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- morie_unifAlg_var("x")

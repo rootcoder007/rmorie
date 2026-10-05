@@ -17,7 +17,6 @@ The value of \code{Qgamma}.
 \description{
 A step of the dist_native implementation. Called by \code{.rsconsistency}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

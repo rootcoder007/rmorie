@@ -21,7 +21,6 @@ A list with \code{Abar}, \code{Bbar}.
 \description{
 A step of the mambss_native implementation. Called by \code{selective_ssm_step}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 discretize_zoh(delta = 0.5, A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8))

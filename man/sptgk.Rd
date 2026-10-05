@@ -33,6 +33,14 @@ with mean squared prediction error eq (5.59),
 \eqn{m_Y} enters with the sign convention of eq (5.20); a flipped
 multiplier would move every prediction with no other symptom.
 }
+\examples{
+set.seed(23)
+coords <- matrix(runif(20), 10, 2)
+z <- rnorm(10, 1, 0.3)                    # Y scale; Z = exp(Y) is lognormal
+gam <- function(h) 0.09 * (1 - exp(-h / 0.3))
+sptgk(coords, z, target = c(0.5, 0.5), phi = exp, dphi = exp, d2phi = exp,
+      semivariogram_fn = gam)[c("prediction", "naive_prediction", "correction")]
+}
 \references{
 Schabenberger Ch 5, Sec 5.6.2
 }

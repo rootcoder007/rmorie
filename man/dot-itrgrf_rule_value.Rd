@@ -25,5 +25,4 @@ A list with \code{value}, \code{se}, \code{scores}.
 \description{
 A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}.
 See the file header for the source the module follows.
-source it follows.
 }

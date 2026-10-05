@@ -44,5 +44,9 @@ A list with \code{t}, \code{x}, \code{f}, \code{g}, \code{n_eval}.
 \description{
 A step of the cgnonl_native implementation. Called by \code{cgnonl_nonlinear_cg}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+f <- function(x) sum((x - 1)^2); g <- function(x) 2 * (x - 1)
+x <- c(0, 0); p <- -g(x)
+cgnonl_line_search_fr(f, g, x, p, f0 = f(x), g0 = g(x))$t   # exact step 0.5
 }

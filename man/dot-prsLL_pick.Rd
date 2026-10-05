@@ -20,7 +20,6 @@ The value of \code{[[}.
 A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd},
 \code{.prsLL_parse_table}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):

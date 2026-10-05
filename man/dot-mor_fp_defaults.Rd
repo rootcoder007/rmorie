@@ -23,5 +23,4 @@ A list with \code{numhs}, \code{charge}, \code{inring}, \code{isotope_delta}.
 \description{
 A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}.
 See the file header for the source the module follows.
-source it follows.
 }

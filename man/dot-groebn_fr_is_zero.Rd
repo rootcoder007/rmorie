@@ -16,7 +16,6 @@ A logical value.
 A step of the groebn_native implementation. Called by \code{.groebn_add},
 \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .groebn_fr_is_zero(p = 0.5)

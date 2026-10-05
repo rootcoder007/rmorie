@@ -18,5 +18,4 @@ A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width},
 \description{
 A step of the sse4r_native implementation. Called by \code{morie_sse4r}.
 See the file header for the source the module follows.
-source it follows.
 }

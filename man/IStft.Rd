@@ -20,7 +20,6 @@ A list with \code{signal}, \code{n}, \code{hop}, \code{valid_start},
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)

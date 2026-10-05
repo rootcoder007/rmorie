@@ -25,7 +25,6 @@ A list with \code{embedding}, \code{alpha}, \code{neighbours}.
 \description{
 A step of the hetgnn_native implementation. Called by \code{han_forward}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

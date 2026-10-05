@@ -30,5 +30,4 @@ A list with \code{w}, \code{n_common}, \code{degenerate}, \code{significance_app
 \description{
 A step of the ucfR_native implementation. Called by \code{.ucfR_neighbours}.
 See the file header for the source the module follows.
-source it follows.
 }

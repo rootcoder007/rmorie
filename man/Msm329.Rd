@@ -22,7 +22,8 @@ ZAPC_RF converts the probability to a zero rather than to a binary label,
 and the 0.5 threshold is used because it assumes no prior information.
 }
 \examples{
-Msm329(theta_hat = 5L, mu_hat = c(1, 2, 3, 4, 5, 6, 7, 8))
+# classified as a structural zero when theta-hat exceeds the threshold
+c(Msm329(theta_hat = 0.7, mu_hat = 2)$estimate, Msm329(theta_hat = 0.2, mu_hat = 2)$estimate)
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

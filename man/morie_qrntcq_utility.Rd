@@ -17,7 +17,6 @@ A numeric value.
 \description{
 A step of the qrntcq_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_qrntcq_utility(efficacy = c(1, 2, 3, 4, 5, 6, 7, 8), days.in.quarantine = 5L)

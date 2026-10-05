@@ -21,7 +21,6 @@ A numeric value.
 \description{
 A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 d <- list("5" = 0.25, "-4" = 0.75)

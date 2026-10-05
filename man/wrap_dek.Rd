@@ -20,3 +20,8 @@ wrap_dek(dek, kek, nonce, kek_id = "kek-1", aad = raw(0))
 \description{
 Wrap a DEK under a KEK
 }
+\examples{
+dek <- as.raw(1:32); kek <- as.raw(32:1); nonce <- as.raw(1:12)
+w <- wrap_dek(dek, kek, nonce, kek_id = "kek-2026")
+identical(unwrap_dek(w, kek)$dek, dek)
+}

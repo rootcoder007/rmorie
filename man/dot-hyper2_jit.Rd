@@ -18,5 +18,4 @@ The value of \code{K}, as built in the body.
 A step of the hyper2_native implementation. Called by \code{morie_hyper2},
 \code{morie_hyper2_logml}.
 See the file header for the source the module follows.
-source it follows.
 }

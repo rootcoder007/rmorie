@@ -23,5 +23,4 @@ One of two values, depending on the branch taken.
 \description{
 A step of the nashq_native implementation. Called by \code{morie_nashq}.
 See the file header for the source the module follows.
-source it follows.
 }

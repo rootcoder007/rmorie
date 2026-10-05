@@ -32,6 +32,13 @@ Shazeer (2022), Switch Transformers, JMLR 23(120), arXiv:2101.03961,
 Eqs 4-6: aux = alpha N sum_i f_i P_i; uniform routing gives exactly
 alpha (the anchor).
 }
+\examples{
+set.seed(6)
+x <- matrix(rnorm(8 * 4), 8, 4)
+experts <- lapply(1:3, function(i) matrix(rnorm(4 * 2), 4, 2))
+r <- Moetop(x, W_g = matrix(rnorm(4 * 3), 4, 3), experts = experts, k = 2L)
+r$aux_loss
+}
 \references{
 Lepikhin, D. et al. (2021), arXiv:2006.16668, Sec 2.1;
 Fedus, W., Zoph, B. and Shazeer, N. (2022), JMLR 23(120),

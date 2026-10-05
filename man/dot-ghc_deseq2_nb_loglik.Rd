@@ -19,5 +19,4 @@ The value of \code{tot}, as built in the body.
 \description{
 A step of the deseq2_native implementation. Called by \code{cox_reid_loglik}.
 See the file header for the source the module follows.
-source it follows.
 }

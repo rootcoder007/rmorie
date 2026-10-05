@@ -26,6 +26,10 @@ then correct it. Both are returned.
 \details{
 Formula: n_0 = z^2 S^2 / e^2; n = n_0 / (1 + n_0/N), rounded up
 }
+\examples{
+Nsamp(e = 2, S = 10)$n
+Nsamp(e = 2, S = 10, N = 500)$n
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 4: n_0 = z^2 S^2 / e^2 with the correction n = n_0/(1 + n_0/N).

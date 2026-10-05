@@ -22,7 +22,6 @@ A list with \code{loco}, \code{chromosomes}, \code{note}.
 \description{
 A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

@@ -24,7 +24,6 @@ A list with \code{psd}, \code{freqs}, \code{n_segments},
 \description{
 A step of the rangayyan_sig implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 n <- 100

@@ -18,5 +18,4 @@ A list with \code{nS}, \code{nA}.
 A step of the birl_native implementation. Called by \code{birl},
 \code{policy_iteration}, \code{policy_values} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

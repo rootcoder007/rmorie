@@ -38,7 +38,6 @@ The value of \code{.phylby_log_posterior}.
 \description{
 A step of the phylby_native implementation. Called by \code{morie_phylby}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_phylby_log_posterior(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"))

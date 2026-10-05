@@ -20,5 +20,4 @@ A numeric value.
 A step of the slbpdg_native implementation. Called by \code{morie_slbpdg},
 \code{morie_slbpdg_density}.
 See the file header for the source the module follows.
-source it follows.
 }

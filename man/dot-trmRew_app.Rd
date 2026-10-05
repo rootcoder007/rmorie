@@ -18,5 +18,4 @@ The value of \code{do.call}.
 A step of the trmRew_native implementation. Called by \code{.trmRew_rename},
 \code{morie_trmRew_replace_at}.
 See the file header for the source the module follows.
-source it follows.
 }

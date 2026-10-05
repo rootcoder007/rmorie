@@ -17,5 +17,4 @@ A list with \code{nn}, \code{d0}.
 \description{
 A step of the lyapun_native implementation. Called by \code{divergence_curve}.
 See the file header for the source the module follows.
-source it follows.
 }

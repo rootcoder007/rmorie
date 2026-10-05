@@ -74,6 +74,5 @@ A list with \code{estimate}, \code{embedding}, \code{graph},
 \description{
 A step of the scumap_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

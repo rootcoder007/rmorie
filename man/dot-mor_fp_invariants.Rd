@@ -27,5 +27,4 @@ The value of \code{inv}, as built in the body.
 \description{
 A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}.
 See the file header for the source the module follows.
-source it follows.
 }

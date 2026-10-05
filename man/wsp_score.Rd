@@ -22,7 +22,6 @@ The value of \code{total}, as built in the body.
 A step of the mafft_native implementation. Called by \code{iterative_refine},
 \code{mafft_alignment}, \code{morie_mafft}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sc <- normalized_similarity_matrix(seq_type = "aa")

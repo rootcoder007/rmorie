@@ -26,6 +26,12 @@ List with \code{loglik}, \code{penalty}, \code{penalized_loglik}, \code{n}.
 Formula: l_p = l(beta; y) - lambda sum_c beta_c'beta_c (ridge)  or  - lambda sum_c
 sum_j |beta_cj| (lasso)
 }
+\examples{
+set.seed(4)
+X <- matrix(rnorm(40), 20, 2)
+y <- sample(1:3, 20, TRUE)
+Mnpenlik(X, y, beta0 = c(0, 0, 0), beta = matrix(0, 3, 2), lam = 1)$penalized_loglik   # 20 log(1/3) at zero
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,

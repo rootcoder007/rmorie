@@ -23,7 +23,6 @@ The value of \code{[}.
 \description{
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_refine_breakpoint}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_sv_dl_kmer_diagonals(read = 5L, ref = c(1, 2, 3, 4, 5, 6, 7, 8))

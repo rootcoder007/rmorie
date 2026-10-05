@@ -21,5 +21,7 @@ A vector, from \code{as.numeric}.
 \description{
 A step of the mpfn_native implementation. Called by \code{mpfn_message_passing}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mpfn_message(h_v = c(1, 0), h_w = c(0.5, 2), e_vw = 2)
 }

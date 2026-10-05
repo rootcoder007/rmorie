@@ -15,5 +15,4 @@ A vector, from \code{vapply}.
 \description{
 A step of the rangayyan_sig implementation. Called by \code{BartlettPSD}.
 See the file header for the source the module follows.
-source it follows.
 }

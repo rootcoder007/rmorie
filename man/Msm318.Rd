@@ -16,6 +16,9 @@ The list returned by \code{Msm002()}.
 The same method as \code{Msm002()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+Msm318(list(c(1, 2, 3), c(2, 3, 4)))$beta
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

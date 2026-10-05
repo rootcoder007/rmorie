@@ -34,7 +34,6 @@ A numeric value.
 \description{
 A step of the clrnt_native implementation. Called by \code{clrnt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 scale_to_liver(clint_in_vitro = 15, fu_incubation = 0.8,

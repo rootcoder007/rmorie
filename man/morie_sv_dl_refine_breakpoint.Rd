@@ -50,6 +50,5 @@ A list with \code{start}, \code{end}, \code{size}, \code{split_support},
 \description{
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_structural_variant}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

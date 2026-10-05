@@ -16,7 +16,6 @@ One of two values, depending on the branch taken.
 A step of the varcal_native implementation. Called by \code{.varcal_norm_reads},
 \code{morie_varcal}, \code{varcal_encode_pileup} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

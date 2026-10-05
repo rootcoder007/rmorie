@@ -50,7 +50,6 @@ The value of \code{.timeRS_predict_time}.
 \description{
 A step of the timeRS_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

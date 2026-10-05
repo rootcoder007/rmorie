@@ -17,5 +17,4 @@ A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 \description{
 A step of the mdppol_native implementation. Called by \code{morie_mdppol}.
 See the file header for the source the module follows.
-source it follows.
 }

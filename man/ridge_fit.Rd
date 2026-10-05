@@ -20,7 +20,6 @@ A list with \code{beta}, \code{fitted}, \code{lam}.
 A step of the regmlm_native implementation. Called by \code{level0_predictors},
 \code{level1_stack}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

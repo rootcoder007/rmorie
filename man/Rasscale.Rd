@@ -21,6 +21,11 @@ List with \code{M}, \code{u}, \code{v}, \code{row_error}, \code{col_error}, \cod
 \description{
 Formula: M = diag(u) K diag(v) with u <- r / (K v) and v <- c / (K' u), alternated
 }
+\examples{
+K <- matrix(c(2, 1, 1, 3), 2)
+M <- Rasscale(K, row_target = c(4, 6), col_target = c(5, 5))
+M$estimate
+}
 \references{
 Bregman (1967), The relaxation method of finding the common point of
 convex sets, USSR Computational Mathematics and Mathematical Physics 7:200-217. Not

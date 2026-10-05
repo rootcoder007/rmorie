@@ -18,5 +18,4 @@ The value of \code{D}, as built in the body.
 A step of the avalon_native implementation. Called by \code{morie_avalon_features},
 \code{morie_scfhop_cats}.
 See the file header for the source the module follows.
-source it follows.
 }

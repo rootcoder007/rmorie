@@ -18,7 +18,6 @@ The value of \code{.morie_jo_solve}.
 A step of the ts_joseph implementation. Called by \code{.morie_jo_fitpred},
 \code{morie_adfur}, \code{morie_quantreg}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 if (morie_crypto_liboqs_available()) {

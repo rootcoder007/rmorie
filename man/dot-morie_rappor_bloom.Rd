@@ -21,5 +21,4 @@ A vector, from \code{sort}.
 \description{
 A step of the rappor_native implementation. Called by \code{morie_rappor}.
 See the file header for the source the module follows.
-source it follows.
 }

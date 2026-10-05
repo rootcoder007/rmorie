@@ -26,5 +26,4 @@ The value of \code{ifelse}.
 A step of the ghosal_native implementation. Called by \code{morie_polya_tree_density},
 \code{morie_polya_tree_mixture}.
 See the file header for the source the module follows.
-source it follows.
 }

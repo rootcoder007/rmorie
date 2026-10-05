@@ -36,7 +36,6 @@ libsvm); stops when the KKT violation is below tol. Deterministic:
 max_passes and seed are kept for compatibility and unused. Called by
 \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

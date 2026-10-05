@@ -19,5 +19,4 @@ A list with \code{query}, \code{target}, \code{evalue}, \code{score},
 A step of the funcal_native implementation. Called by \code{morie_funcal},
 \code{morie_funcal_seed_orthologs}.
 See the file header for the source the module follows.
-source it follows.
 }

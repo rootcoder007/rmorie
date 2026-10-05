@@ -17,7 +17,6 @@ A step of the dp_native implementation. Called by \code{morie_approx_dp},
 \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in
 the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .morie_dp_seed(seed = 1L)

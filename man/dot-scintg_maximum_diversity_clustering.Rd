@@ -44,5 +44,4 @@ A list with \code{R}, \code{Y}, \code{K}, \code{objective}.
 \description{
 A step of the scintg_native implementation. Called by \code{morie_scintg}.
 See the file header for the source the module follows.
-source it follows.
 }

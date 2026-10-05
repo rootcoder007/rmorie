@@ -20,7 +20,6 @@ A list with \code{loglik}, \code{sigma2}, \code{n}, \code{exact_ssq}, \code{sum_
 A step of the sarima_native implementation. Called by \code{.gwasem_reml_delta},
 \code{.sarima_fit}, \code{morie_glm_nb} and 4 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

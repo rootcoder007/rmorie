@@ -22,5 +22,4 @@ A numeric value.
 A step of the pratt_native implementation. Called by \code{.pratt_document_vector},
 \code{.pratt_sentence_vector}.
 See the file header for the source the module follows.
-source it follows.
 }

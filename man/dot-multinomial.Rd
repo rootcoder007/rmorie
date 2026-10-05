@@ -17,5 +17,4 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -18,7 +18,6 @@ The value of \code{.groebn_add}.
 A step of the groebn_native implementation. Called by \code{.groebn_divide},
 \code{.groebn_spoly}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 fn <- function(v) sum(v^2)

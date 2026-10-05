@@ -20,5 +20,4 @@ A matrix, from \code{solve}.
 A step of the tmldyn_native implementation. Called by \code{.fit_q1}, \code{.fit_q2},
 \code{.project}.
 See the file header for the source the module follows.
-source it follows.
 }

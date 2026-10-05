@@ -28,6 +28,5 @@ A list with \code{estimate}, \code{psi}, \code{path}, \code{se}, \code{ci},
 \description{
 A step of the tlonts_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

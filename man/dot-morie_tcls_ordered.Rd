@@ -17,7 +17,6 @@ A numeric value.
 \description{
 A step of the tcls_native implementation. Called by \code{morie_emd}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .morie_tcls_ordered(p = 0.5, q = 0.5)

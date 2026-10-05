@@ -75,7 +75,6 @@ A list with \code{estimate}, \code{trees}, \code{eta}, \code{lam},
 \description{
 A step of the surxgb_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_surxgb_boost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y_lower = c(1, 2, 3, 4, 5, 6, 7, 8),

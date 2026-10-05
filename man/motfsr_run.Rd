@@ -61,5 +61,11 @@ A list with \code{estimate}, \code{motifs}, \code{alphabet}, \code{w},
 \description{
 A step of the motfsr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+\donttest{
+seqs <- c("ACGTACGTAC", "TGCAACGTTG", "ACGTTGCAAC", "GGACGTACGT")
+r <- motfsr_run(seqs, w = 4, n_motifs = 1)
+r$motifs[[1]]$consensus
+}
 }

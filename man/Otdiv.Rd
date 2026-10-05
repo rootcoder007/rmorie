@@ -35,6 +35,13 @@ Formula: \eqn{S_eps(mu,nu) = OT_eps(mu,nu) - 0.5 (OT_eps(mu,mu) +
 OT_eps(nu,nu))} with \eqn{OT_eps(mu,nu) = <T*,C> + eps KL(T* | mu x
 nu)} -- Genevay, Peyre and Cuturi (2018) eq. (3)-(4).
 }
+\examples{
+x <- 1:4
+C <- outer(x, x, function(a, b) (a - b)^2)
+a <- c(0.4, 0.3, 0.2, 0.1)
+Otdiv(a, a, C, C, C, epsilon = 0.5)$S_eps              # 0 for identical measures
+Otdiv(a, rev(a), C, C, C, epsilon = 0.5)$S_eps
+}
 \references{
 Genevay, A., Peyre, G. and Cuturi, M. (2018). Proceedings
 of Machine Learning Research 84:1608-1617 (AISTATS).

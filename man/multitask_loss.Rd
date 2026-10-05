@@ -19,7 +19,6 @@ A list with \code{total}, \code{cls}, \code{box}, \code{mask}, \code{note}.
 \description{
 A step of the masrcn_native implementation. Called by \code{morie_masrcn}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 multitask_loss(l_cls = c(1, 2, 3, 4, 5, 6, 7, 8), l_box = c(1, 2, 3, 4, 5, 6, 7, 8),

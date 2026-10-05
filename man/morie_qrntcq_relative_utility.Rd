@@ -31,7 +31,6 @@ A list with \code{relative.utility}, \code{utility.a}, \code{utility.b},
 \description{
 A step of the qrntcq_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_qrntcq_relative_utility(t.R.a = 5L, t.R.b = 5L)

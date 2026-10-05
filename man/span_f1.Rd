@@ -18,7 +18,6 @@ A list with \code{precision}, \code{recall}, \code{f1}, \code{true_positives},
 \description{
 A step of the benRea_native implementation. Called by \code{ner_decode}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

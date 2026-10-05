@@ -18,7 +18,6 @@ A list with \code{expected_total_features}, \code{harmonic},
 \description{
 A step of the ibpfa_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 expected_features(n = 5L, alpha = 0.5)

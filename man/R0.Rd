@@ -32,6 +32,10 @@ land on the same digits.
 \details{
 Formula: \code{R0 = beta / gamma}; or solve \code{1 - AR = exp(-R0 AR)}.
 }
+\examples{
+R0(beta = 0.3, gamma = 0.1)$estimate
+R0(attack_rate = 0.8)$estimate
+}
 \references{
 Diekmann, O., Heesterbeek, J. A. P. & Metz, J. A. J.
 (1990). On the definition and the computation of the basic

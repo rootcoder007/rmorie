@@ -32,6 +32,9 @@ Formula: \code{Delta = (m1 - m2)/s_ctrl} with
 being the control group -- Glass, McGaw and Smith (1981), Chapter 5;
 variance from Hedges and Olkin (1985) eq. (5.10).
 }
+\examples{
+Magsd(m1 = 12, m2 = 10, s_ctrl = 4, n1 = 50, n2 = 50)[c("delta", "ci_lo", "ci_hi")]
+}
 \references{
 Glass, G. V., McGaw, B. and Smith, M. L. (1981).
 Meta-Analysis in Social Research. Sage, Chapter 5. Hedges, L. V. and

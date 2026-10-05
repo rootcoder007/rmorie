@@ -15,3 +15,6 @@ one data.frame; missing columns are filled with NA.
 \description{
 Row-bind a list of data.frames with differing columns (jsonlite's rbind_pages)
 }
+\examples{
+morie_jsonlt_rbind_pages(list(data.frame(a = 1:2), data.frame(a = 3, b = "x")))
+}

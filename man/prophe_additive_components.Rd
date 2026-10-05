@@ -34,7 +34,6 @@ A list with \code{estimate}, \code{components}, \code{total}, \code{fitted},
 \description{
 A step of the prophe_native implementation. Called by \code{morie_prophe}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

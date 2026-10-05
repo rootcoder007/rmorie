@@ -57,5 +57,13 @@ A list with \code{estimate}, \code{policy}, \code{action}, \code{value},
 \description{
 A step of the muzero_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+# a one-step deterministic game: action 1 pays 1, action 0 pays 0
+rep_fn <- function(obs) obs
+dyn <- function(h, a) list(state = h, reward = as.numeric(a == 1))
+pred <- function(h) list(policy = c(0.5, 0.5), value = 0)
+s <- muzero_search(0, actions = c(0, 1), representation = rep_fn, dynamics = dyn,
+                   prediction = pred, simulations = 30, seed = 1)
+s$action
 }

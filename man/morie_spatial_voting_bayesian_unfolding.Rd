@@ -2,42 +2,65 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_bayesian_unfolding}
 \alias{morie_spatial_voting_bayesian_unfolding}
-\title{Bayesian unfolding -- Bakker & Poole sampler}
+\title{Bayesian unfolding (Bakker and Poole 2013)}
 \usage{
 morie_spatial_voting_bayesian_unfolding(
   D,
   n_dims = 2L,
   n_samples = 1000L,
-  burn_in = 200L
+  burn_in = 200L,
+  seed = 42L
 )
 }
 \arguments{
-\item{D}{Respondent-stimulus dissimilarity matrix.}
+\item{D}{Respondent-by-stimulus dissimilarity matrix.}
 
 \item{n_dims}{Latent dimensions.}
 
-\item{n_samples}{MCMC samples.}
+\item{n_samples}{Retained draws.}
 
-\item{burn_in}{Burn-in length.}
+\item{burn_in}{Sweeps discarded first.}
+
+\item{seed}{RNG seed.}
 }
 \value{
-List with respondent/stimulus configurations and an
-\code{engine} tag (smacof deterministic mode, or the native
-Metropolis sampler when smacof is absent).
+List: \code{stimuli} (aligned posterior mean),
+\code{stimuli_sd}, \code{ideal_points}, \code{distance_mean}
+(posterior mean respondent-stimulus distances), \code{sigma},
+\code{tau}, \code{n_samples}, \code{engine}.
 }
 \description{
-Bayesian unfolding -- Bakker & Poole sampler
+The lognormal model of \code{\link{morie_spatial_voting_bayesian_mds}}
+for a respondent-by-stimulus matrix: respondent \eqn{i} and stimulus
+\eqn{j} get their own coordinates and
+\deqn{\log \delta_{ij} \sim N(\log \lVert x_i - z_j \rVert, 1 / \tau),}
+with \eqn{N(0, 10^2)} priors on every coordinate and
+\eqn{\tau \sim U(0, 10)}.  Feeling thermometers \eqn{T} on 0-100 enter
+as \eqn{\delta = (100 - T) / 50}, the transformation of Bakker and
+Poole; zero or missing dissimilarities are left out.
+}
+\details{
+Given the stimuli the respondents are independent, and given the
+respondents the stimuli are, so each block is slice sampled as one
+vector per dimension (the same chain law as one at a time), and
+\eqn{\tau} is drawn exactly.  Draws are aligned (translation and
+rotation) on the stimuli.  On 150 simulated respondents and ten
+stimuli the posterior mean respondent-stimulus distances agree with a
+JAGS encoding of the same model to within 0.018, and \eqn{\tau} to the
+third decimal.  (The C sampler shipped with \pkg{asmcjr} could not be
+used for the comparison: its \code{.C} interface keeps pointers to
+freed R memory and crashes.)
 }
 \examples{
-if (requireNamespace("smacof", quietly = TRUE)) {
-  \donttest{
-  # Random positive respondent-stimulus dissimilarities; an all-zero
-  # matrix is degenerate for the unfolding transform.
-  set.seed(1)
-  morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
-  }
-}
+set.seed(1)
+S <- matrix(runif(8, -0.5, 0.5), 4, 2)
+R <- matrix(runif(60, -0.5, 0.5), 30, 2)
+D <- sqrt(outer(R[, 1], S[, 1], "-")^2 + outer(R[, 2], S[, 2], "-")^2)
+fit <- morie_spatial_voting_bayesian_unfolding(D, n_samples = 100L,
+                                               burn_in = 100L)
+cor(as.numeric(fit$distance_mean), as.numeric(D))
 }
 \references{
-Bakker, R. and Poole, K. T. (2013).
+Bakker, R. and Poole, K. T. (2013). Bayesian metric
+multidimensional scaling. \emph{Political Analysis} 21(1), 125-140.
 }

@@ -17,5 +17,4 @@ A logical value.
 \description{
 A step of the sarima_native implementation. Called by \code{.sarima_fit}, \code{.sarimax_fit}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -46,7 +46,6 @@ A list with \code{estimate}, \code{se}, \code{intercept}, \code{coef},
 \description{
 A step of the lggvls_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_lggvls(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5)

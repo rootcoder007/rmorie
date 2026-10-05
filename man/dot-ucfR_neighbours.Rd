@@ -30,5 +30,4 @@ A list with \code{neighbours}, \code{n}, \code{note}.
 \description{
 A step of the ucfR_native implementation. Called by \code{.ucfR_predict_rating}.
 See the file header for the source the module follows.
-source it follows.
 }

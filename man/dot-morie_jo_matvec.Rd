@@ -18,5 +18,4 @@ A vector, from \code{as.numeric}.
 A step of the ts_joseph implementation. Called by \code{.morie_jo_glu},
 \code{.morie_jo_resblock}, \code{morie_itrans} and 4 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

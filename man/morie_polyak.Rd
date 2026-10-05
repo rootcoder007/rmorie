@@ -17,7 +17,6 @@ A list with \code{average}, \code{n_averaged}, \code{burn_in}.
 \description{
 A step of the polyak_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

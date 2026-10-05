@@ -24,3 +24,10 @@ New hidden state.
 Update gate, reset gate, candidate, and the convex combination
 \code{(1 - z) h + z hh} that defines a GRU.
 }
+\examples{
+set.seed(5)
+d <- 3; nh <- 2
+mk <- function(r, c) matrix(rnorm(r * c, sd = 0.5), r, c)
+morie_gru4r_gru(x = rnorm(d), h = rep(0, nh), Wz = mk(nh, d), Uz = mk(nh, nh),
+                Wr = mk(nh, d), Ur = mk(nh, nh), Wh = mk(nh, d), Uh = mk(nh, nh))
+}

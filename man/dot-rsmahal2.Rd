@@ -21,5 +21,4 @@ The value of \code{out}, as built in the body.
 A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fastm},
 \code{Mvedet}.
 See the file header for the source the module follows.
-source it follows.
 }

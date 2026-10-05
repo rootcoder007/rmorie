@@ -32,7 +32,6 @@ A list with \code{score}, \code{qstart}, \code{sstart}, \code{length}.
 \description{
 A step of the blstn_native implementation. Called by \code{morie_estimate_gumbel}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

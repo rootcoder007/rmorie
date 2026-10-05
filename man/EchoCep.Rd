@@ -25,6 +25,5 @@ A list with \code{y_hat}, \code{n}, \code{impulses}, \code{n_impulses},
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

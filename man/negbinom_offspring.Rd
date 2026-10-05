@@ -19,7 +19,6 @@ The value of \code{.poisson_draw}.
 \description{
 A step of the ttrace_native implementation. Called by \code{simulate_outbreak}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 e <- rmorie:::.ghc_rng(1)

@@ -40,7 +40,6 @@ A list with \code{estimate}, \code{intercept}, \code{coef}, \code{weights},
 \description{
 A step of the trnsfr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(3)

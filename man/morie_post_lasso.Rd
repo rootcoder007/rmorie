@@ -20,6 +20,13 @@ A list with \code{support}, \code{coef}, \code{intercept},
 \description{
 Refit by OLS on the lasso's selected support
 }
+\examples{
+set.seed(12)
+X <- matrix(rnorm(100 * 4), 100, 4)
+y <- 1 + X \%*\% c(2, 0, 0, -1) + rnorm(100, sd = 0.1)
+pl <- morie_post_lasso(X, as.numeric(y), lam = 0.2)
+round(pl$coef, 2)
+}
 \references{
 Belloni, A. & Chernozhukov, V. (2013).
 }

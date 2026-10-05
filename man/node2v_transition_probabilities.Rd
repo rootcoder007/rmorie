@@ -25,5 +25,8 @@ A list with \code{nodes}, \code{probabilities}, \code{unnormalized}, \code{Z}.
 \description{
 A step of the node2v_native implementation. Called by \code{node2v_walk}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+adj <- list(`1` = c(2, 3), `2` = c(1, 3), `3` = c(1, 2, 4), `4` = 3)
+node2v_transition_probabilities(adj, t = 1, v = 3, p = 2, q = 0.5)$probabilities
 }

@@ -34,6 +34,11 @@ is reported per constraint and per variable.
 Formula: primal max c'x s.t. A x <= b, x >= 0;
 dual min b'y s.t. A'y >= c, y >= 0; weak duality c'x <= b'y
 }
+\examples{
+# maximise 3 x1 + 5 x2 s.t. x1 <= 4, 2 x2 <= 12, 3 x1 + 2 x2 <= 18; optimum x = (2, 6), y = (0, 1.5, 1)
+A <- rbind(c(1, 0), c(0, 2), c(3, 2))
+Lpdual(A, b = c(4, 12, 18), c = c(3, 5), x = c(2, 6), y = c(0, 1.5, 1))[c("gap", "optimal")]
+}
 \references{
 von Neumann, J. (1947), Discussion of a maximum problem,
 Institute for Advanced Study, reprinted in Collected Works VI, 89-95

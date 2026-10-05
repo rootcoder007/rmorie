@@ -38,6 +38,13 @@ stratum bounds, which is valid only under the extra assumption of a
 common effect across strata; it is reported separately and flagged
 empty when the strata disagree.
 }
+\examples{
+set.seed(12)
+X <- rep(c("a", "b"), each = 50)
+D <- rbinom(100, 1, 0.5)
+y <- runif(100)
+Mskbnd2(y, D, X, y_min = 0, y_max = 1)[c("lower", "upper")]
+}
 \references{
 Manski (1990), AER P&P 80(2), 319-323; Manski (2003),
 Partial Identification of Probability Distributions, Springer.

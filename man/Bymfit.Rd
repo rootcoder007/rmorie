@@ -32,6 +32,10 @@ y_i ~ Poisson(E_i exp(x_i'beta + u_i + v_i)) with an ICAR prior
 p(u) propto exp(-(tau_u/2) sum_\{i~j\}(u_i - u_j)^2) and v_i ~ N(0,
 1/tau_v).  The ICAR normalising rank is n - 1.
 }
+\examples{
+A <- matrix(0, 4, 4); A[cbind(1:3, 2:4)] <- 1; A <- A + t(A)
+Bymfit(y = c(5, 8, 12, 4), E = c(6, 7, 9, 6), A = A, u = rep(0, 4), v = rep(0, 4))$logpost
+}
 \references{
 Besag, York and Mollie (1991), Ann. Inst. Statist. Math.
 43(1), 1-20; Besag (1974), JRSS B 36(2), 192-236.  Standard

@@ -30,6 +30,14 @@ variances (Eq. 1), symmetrized p_ij = (p_\{j|i\}+p_\{i|j\})/(2n),
 Student-t map affinities (Eq. 4), gradient descent with the
 paper's Eq. 5 gradient and momentum schedule (0.5 then 0.8).
 }
+\examples{
+\donttest{
+set.seed(19)
+X <- rbind(matrix(rnorm(40, 0), 20, 2), matrix(rnorm(40, 6), 20, 2))
+e <- morie_sctsne(X, perplexity = 5, T = 200, seed = 1)
+c(e$kl_initial, e$kl)
+}
+}
 \references{
 van der Maaten, L. and Hinton, G. (2008).
 Visualizing data using t-SNE. JMLR, 9, 2579-2605.

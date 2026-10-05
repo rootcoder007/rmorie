@@ -15,7 +15,6 @@ A list with \code{mx}, \code{mn}.
 \description{
 A step of the rangayyan_tf implementation. Called by \code{.tf_emd}, \code{.tf_sift}, \code{Imf}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

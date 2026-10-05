@@ -16,7 +16,6 @@ A vector, from \code{as.numeric}.
 A step of the pratt_native implementation. Called by \code{.pratt_attention},
 \code{morie_pratt}, \code{morie_pratt_attention_entropy}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

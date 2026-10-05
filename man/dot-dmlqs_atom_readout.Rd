@@ -20,5 +20,4 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 See the file header for the source the module follows.
-source it follows.
 }

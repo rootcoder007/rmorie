@@ -19,5 +19,4 @@ A list with \code{weights}, \code{scale}, \code{n_replicates},
 \description{
 A step of the replwt_native implementation. Called by \code{morie_replwt}.
 See the file header for the source the module follows.
-source it follows.
 }

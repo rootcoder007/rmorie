@@ -35,6 +35,14 @@ Derivation: \code{ITT_y = pi_c E[D | c] - pi_d E[D | d]} with
 \code{LATE in [(ITT_y - pi_d R) / pi_c, (ITT_y + pi_d R) / pi_c]} at
 \code{pi_c = pi_c_max}.
 }
+\examples{
+set.seed(1)
+n <- 500
+Z <- rbinom(n, 1, 0.5)
+D <- rbinom(n, 1, 0.2 + 0.5 * Z)
+y <- 1 + D + rnorm(n)
+Bndnmt(y, D, Z)[c("lower", "upper", "wald")]
+}
 \references{
 de Chaisemartin, C. (2017). Tolerating defiance? Local
 average treatment effects without monotonicity. Quantitative

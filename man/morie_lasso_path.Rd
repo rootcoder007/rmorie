@@ -25,6 +25,12 @@ A list with \code{beta}, \code{intercept}, \code{support},
 Returns the L1-penalised least squares fit at a single
 \code{lambda}, with intercept and the selected support.
 }
+\examples{
+set.seed(17)
+X <- matrix(rnorm(100 * 4), 100, 4)
+y <- 1 + X \%*\% c(2, 0, 0, -1) + rnorm(100, sd = 0.1)
+morie_lasso_path(X, as.numeric(y), lam = 0.1)$support
+}
 \references{
 Belloni, A. & Chernozhukov, V. (2013).
 }

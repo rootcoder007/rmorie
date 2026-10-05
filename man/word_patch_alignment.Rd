@@ -33,7 +33,6 @@ A list with \code{estimate}, \code{labels}, \code{patches}, \code{n_examples},
 \description{
 A step of the ocrwit_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 text_boxes <- list(c(10, 10, 60, 30), c(70, 10, 120, 30))

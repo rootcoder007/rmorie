@@ -17,5 +17,4 @@ A list with \code{ratio}, \code{var_full}, \code{var_naive}, \code{n_variants}.
 \description{
 A step of the saigeg_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

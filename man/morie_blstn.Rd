@@ -66,7 +66,6 @@ A list with \code{estimate}, \code{hsps}, \code{best_score}, \code{n_hsps},
 \description{
 A step of the blstn_native implementation. Called by \code{morie_blast}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_blstn(query = 5L, subjects = c(1, 2, 3, 4, 5, 6, 7, 8))

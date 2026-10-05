@@ -29,6 +29,5 @@ The value of \code{b}, as built in the body.
 \description{
 A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

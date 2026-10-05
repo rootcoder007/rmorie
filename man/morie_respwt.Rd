@@ -24,6 +24,12 @@ of the selected sample in class c); respondent weights are
 multiplied by 1/phi_hat_c, so adjusted class totals equal the
 original full-sample class totals exactly.
 }
+\examples{
+w <- c(10, 10, 20, 20, 15, 15)
+r <- c(TRUE, FALSE, TRUE, TRUE, FALSE, TRUE)
+cls <- c("a", "a", "b", "b", "c", "c")
+morie_respwt(w, r, cls)$adjusted
+}
 \references{
 Lohr, S. L. (2010). Sampling: Design and Analysis,
 2nd ed. Brooks/Cole, Sec. 8.5.1.

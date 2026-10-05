@@ -17,7 +17,6 @@ A matrix, from \code{crossprod}.
 \description{
 A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .fgam_diff_penalty(n = 3L)

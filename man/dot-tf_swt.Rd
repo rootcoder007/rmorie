@@ -19,5 +19,4 @@ A list with \code{approx}, \code{details}, \code{approxes}.
 \description{
 A step of the rangayyan_tf implementation. Called by \code{Swt}, \code{WtVar}, \code{WtXcor}.
 See the file header for the source the module follows.
-source it follows.
 }

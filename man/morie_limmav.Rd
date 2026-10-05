@@ -40,6 +40,5 @@ A list with \code{estimate}, \code{log_fold_change}, \code{se}, \code{t},
 \description{
 A step of the limmav_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

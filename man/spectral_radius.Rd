@@ -20,7 +20,6 @@ One of two values, depending on the branch taken.
 A step of the bats_native implementation. Called by \code{.fit_spec},
 \code{is_forecastable}, \code{morie_bats}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 spec <- BatsSpec()

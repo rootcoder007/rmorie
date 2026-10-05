@@ -62,7 +62,6 @@ A list with \code{out}, \code{weights}.
 \description{
 A step of the berte_native implementation. Called by \code{bert_encoder}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

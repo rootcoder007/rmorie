@@ -21,7 +21,6 @@ A list with \code{feature_shift}, \code{input_pixel_shift}, \code{stride}, \code
 \description{
 A step of the masrcn_native implementation. Called by \code{morie_masrcn}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 features <- matrix(as.numeric(1:36), 6, 6)

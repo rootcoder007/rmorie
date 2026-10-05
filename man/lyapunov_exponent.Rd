@@ -46,7 +46,6 @@ A list with \code{estimate}, \code{lambda1}, \code{rosenstein}, \code{sato},
 \description{
 A step of the lyapun_native implementation. Called by \code{morie_lyapun}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r0 <- 3.9; x <- numeric(400); x[1] <- 0.4

@@ -15,6 +15,9 @@ A numeric similarity in \code{[0, 1]}.
 \description{
 The paper's similarity score S = 2 D / (d_i + d_j)
 }
+\examples{
+morie_torsion_similarity(c("a", "b", "c"), c("a", "b", "d"))
+}
 \references{
 Nilakantan, R. et al. (1987).
 }

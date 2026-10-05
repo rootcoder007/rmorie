@@ -23,7 +23,6 @@ A numeric value.
 \description{
 A step of the andmnh_native implementation. Called by \code{andrews_monahan_hac}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 kernel_hac(v = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)

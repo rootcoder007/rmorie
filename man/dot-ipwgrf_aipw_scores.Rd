@@ -25,5 +25,4 @@ A list with \code{g}, \code{weights}.
 \description{
 A step of the ipwgrf_native implementation. Called by \code{morie_ipwgrf}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -19,5 +19,4 @@ The value of \code{v}, as built in the body.
 \description{
 A step of the ocrwit_native implementation. Called by \code{normalise_bbox}.
 See the file header for the source the module follows.
-source it follows.
 }

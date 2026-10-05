@@ -17,7 +17,6 @@ A vector, from \code{c}.
 \description{
 A step of the hapblk_native implementation. Called by \code{morie_hapblk}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # haplotype counts AB, Ab, aB, ab

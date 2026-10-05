@@ -18,7 +18,6 @@ A character value.
 A step of the snpeff_native implementation. Called by \code{.vepan_coding_terms},
 \code{annotate_variant}, \code{snpeff}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 S <- c("a", "b", "c")

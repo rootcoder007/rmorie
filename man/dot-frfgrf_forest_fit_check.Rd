@@ -48,5 +48,4 @@ A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty},
 \description{
 A step of the frfgrf_native implementation. Called by \code{morie_frfgrf}.
 See the file header for the source the module follows.
-source it follows.
 }

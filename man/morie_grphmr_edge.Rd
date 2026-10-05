@@ -24,3 +24,9 @@ For each pair the edge features along the path are weighted by
 type is a property of neither endpoint, so it has to enter the
 model here.
 }
+\examples{
+# each path is the list of edges walked from i to j
+paths <- list(`1,3` = list(c(1, 2), c(2, 3)))
+ef <- list(`1,2` = c(1, 0), `2,3` = c(0, 1))
+morie_grphmr_edge(paths, ef, w_table = c(0.5, 0.5))$edge_bias
+}

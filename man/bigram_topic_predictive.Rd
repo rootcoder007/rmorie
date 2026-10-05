@@ -23,7 +23,6 @@ A list with \code{predictive}, \code{prior}, \code{smoothed_by}.
 \description{
 A step of the bigtm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 bigram_topic_predictive(N_ijk = c(1, 2, 3, 4, 5, 6, 7, 8), N_jk = c(1, 2, 3, 4, 5, 6, 7, 8),

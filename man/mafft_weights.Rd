@@ -16,5 +16,7 @@ The value of \code{rep}.
 A step of the mafft_native implementation. Called by \code{iterative_refine},
 \code{progressive_align}, \code{wsp_score}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mafft_weights(3)
 }

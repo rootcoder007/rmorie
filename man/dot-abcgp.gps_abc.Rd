@@ -56,5 +56,4 @@ The value of \code{.abcgp.mw_sampler}.
 \description{
 A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
 See the file header for the source the module follows.
-source it follows.
 }

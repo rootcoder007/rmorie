@@ -48,6 +48,12 @@ test reports the largest \eqn{i} for which the \eqn{i}-th extreme
 deviate exceeds its critical value, so the anomalies are those
 removed up to that point.
 }
+\examples{
+set.seed(30)
+x <- sin(2 * pi * (1:140) / 7) + rnorm(140, sd = 0.2)
+x[c(40, 100)] <- x[c(40, 100)] + 4
+morie_ttsAn(x, period = 7)$anomalies   # 40 and 100
+}
 \references{
 Hochenbaum, J., Vallis, O. S. and Kejariwal, A. (2017).
 Automatic anomaly detection in the cloud via statistical

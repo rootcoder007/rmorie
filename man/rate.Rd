@@ -20,7 +20,6 @@ A list with \code{estimate}, \code{weight}, \code{curve}, \code{n}.
 A step of the slvgrf_native implementation. Called by \code{autoc},
 \code{qini_coefficient}, \code{rate_test}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

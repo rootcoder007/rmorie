@@ -50,7 +50,6 @@ A list with \code{y}, \code{estimate}, \code{state}, \code{delta}, \code{L},
 \description{
 A step of the mambss_native implementation. Called by \code{morie_mambss}, \code{s6_layer}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

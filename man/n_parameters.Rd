@@ -21,7 +21,6 @@ One of two values, depending on the branch taken.
 \description{
 A step of the ffmFM_native implementation. Called by \code{fit_ffm}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 n_parameters(n_features = c(1, 2, 3, 4, 5, 6, 7, 8), n_fields = c(1, 2, 3, 4, 5, 6, 7, 8),

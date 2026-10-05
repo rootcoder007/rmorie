@@ -29,3 +29,7 @@ A list with \code{X} (list of rows), \code{cols}, \code{hn}.
 \description{
 Stack trend, seasonality and holiday columns into one design
 }
+\examples{
+d <- prophet_design(t = 1:10, cps = 5, seasonalities = list(list("weekly", 7, 1)))
+d$cols
+}

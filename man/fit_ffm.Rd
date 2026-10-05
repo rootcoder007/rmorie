@@ -46,7 +46,6 @@ A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss},
 A step of the ffmFM_native implementation. Called by \code{field_aware_fm},
 \code{fieldawarefm}, \code{morie_ffmFM}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(3)

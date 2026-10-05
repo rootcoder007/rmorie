@@ -73,6 +73,12 @@ be. It does not change the arithmetic; it is carried into the result
 because the same numbers mean different things for each, and because the
 text notes two of them can be indistinguishable from the data alone.
 }
+\examples{
+set.seed(22)
+pts <- matrix(runif(120), 60, 2)
+s <- spstp(pts, region = c(0, 1, 0, 1), time_interval = c(0, 10), times = runif(60, 0, 10))
+c(s$intensity, s$p_value)
+}
 \references{
 Schabenberger Ch 9, Sec 9.5, eqs (9.20)-(9.23); Sec 3.3 eq (3.3)
 }

@@ -23,5 +23,10 @@ The value of \code{best_a}, as built in the body.
 \description{
 A step of the muzero_native implementation. Called by \code{muzero_search}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mm <- muzero_MinMax(); mm$update(0); mm$update(1)
+root <- muzero_Node(1); root$visits <- 3
+root$expand(state = 0, prior = c(0.7, 0.3), actions = c("0", "1"))
+muzero_select(root, A_keys = c("0", "1"), mm = mm, c1 = 1.25, c2 = 19652)
 }

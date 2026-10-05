@@ -22,7 +22,6 @@ A list with \code{Y}, \code{echo_factor}, \code{z}, \code{H}, \code{a},
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 EchoZ(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, z = c(1, 2, 3, 4, 5, 6, 7, 8))

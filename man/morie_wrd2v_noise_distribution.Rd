@@ -17,7 +17,6 @@ The value of \code{stats::setNames}.
 \description{
 A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_wrd2v_noise_distribution(counts = c(the = 100, cat = 20, sat = 5),

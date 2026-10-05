@@ -20,7 +20,6 @@ The value of \code{out}, as built in the body.
 A step of the prsLL_native implementation. Called by \code{.prsLL_first_of},
 \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):

@@ -29,6 +29,14 @@ silent, so their recursion consumes no residue.
 Formula: seven transitions mm, mi, md, im, ii, dm, dd; forward sums
 and Viterbi maximises over the three state types.
 }
+\examples{
+# a 2-position DNA profile (A, C, G, T = 0..3) that prefers "AC"
+tr <- list(mm = 0.9, mi = 0.05, md = 0.05, im = 0.9, ii = 0.1, dm = 0.9, dd = 0.1)
+profile <- list(match = rbind(c(0.85, 0.05, 0.05, 0.05), c(0.05, 0.85, 0.05, 0.05)),
+                insert = rep(0.25, 4), trans = tr)
+Hmmprf(c(0, 1), profile)$log_odds         # high for the consensus
+Hmmprf(c(3, 2), profile)$log_odds
+}
 \references{
 Eddy (1998), Profile hidden Markov models,
 Bioinformatics 14(9):755-763,

@@ -26,7 +26,6 @@ A list with \code{estimate}, \code{P_z}, \code{P_d_given_z},
 \description{
 A step of the plsa_native implementation. Called by \code{probabilisticlsa}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

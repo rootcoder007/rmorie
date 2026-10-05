@@ -36,6 +36,15 @@ equations at once. \code{min_g} exposes levels with almost no support.
 Formula: for each level a, fluctuate logit Q(a,W) on
 H_a = 1\{A = a\}/g_a(W); psi_a = mean(Q*(a,W))
 }
+\examples{
+set.seed(13)
+n <- 300
+A <- sample(1:3, n, TRUE)
+Y <- rbinom(n, 1, c(0.3, 0.5, 0.6)[A])
+Q <- matrix(rep(c(0.3, 0.5, 0.6), each = n), n)       # initial fits per level
+G <- matrix(1 / 3, n, 3)
+Tmlecat(Y, A, Q, G)$psi
+}
 \references{
 Verified against the CRAN package tmle 2.1.1 (Gruber & van
 der Laan); the multi-level extension applies the same fluctuation per

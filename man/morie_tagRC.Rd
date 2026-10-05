@@ -23,7 +23,6 @@ The value of \code{folkrank}.
 \description{
 A step of the tagRC_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 triples <- list(c("u1", "t1", "r1"), c("u1", "t2", "r2"),

@@ -25,5 +25,4 @@ A list with \code{ll}, \code{beta}, \code{s2e}, \code{L}.
 \description{
 A step of the hibrid_native implementation. Called by \code{morie_hibrid_hibrid_prediction}.
 See the file header for the source the module follows.
-source it follows.
 }

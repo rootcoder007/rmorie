@@ -43,6 +43,11 @@ solved by \code{T^{l+1} = argmin <T, -Cx T^l Cy> - eps H(T)} -- Peyre
 and Cuturi (2019) eq. (10.27)-(10.28), p. 176; Peyre, Cuturi and
 Solomon (2016)
 }
+\examples{
+Cx <- as.matrix(dist(1:3)); Cy <- as.matrix(dist(c(10, 11, 12)))
+r <- Otgws(Cx, Cy, a = rep(1 / 3, 3), b = rep(1 / 3, 3), epsilon = 0.05)
+round(r$T, 3)   # the identity coupling: same pattern of distances
+}
 \references{
 Peyre, G., Cuturi, M. and Solomon, J. (2016). Proceedings
 of Machine Learning Research 48:2664-2672 (ICML).

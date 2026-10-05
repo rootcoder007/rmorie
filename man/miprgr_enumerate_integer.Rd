@@ -25,5 +25,8 @@ A list with \code{value}, \code{x}, \code{note}.
 \description{
 A step of the miprgr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+A <- matrix(c(6, 4, 1, 2), 2, byrow = TRUE)
+miprgr_enumerate_integer(A, b = c(24, 6), c = c(5, 4), integer_vars = c(1, 2), upper = 6)[c("value", "x")]
 }

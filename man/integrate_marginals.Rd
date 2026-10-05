@@ -20,7 +20,6 @@ A list with \code{estimate}, \code{mean}, \code{sd}, \code{density}, \code{x},
 \description{
 A step of the inlasm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 xs <- seq(-4, 6, by = 0.1)

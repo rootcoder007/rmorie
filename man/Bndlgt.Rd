@@ -31,6 +31,13 @@ Formula: \code{OR = odds(p_1) / odds(p_0)}, so
 \code{OR_low = odds(p_1^L) / odds(p_0^U)} and
 \code{OR_high = odds(p_1^U) / odds(p_0^L)}.
 }
+\examples{
+set.seed(9)
+X <- rep(c("a", "b"), each = 50)
+D <- rbinom(100, 1, 0.5)
+y <- rbinom(100, 1, 0.3 + 0.2 * D)
+Bndlgt(y, D, X)[c("lower", "upper")]
+}
 \references{
 Robins, J. M. (2002), for the problem. The risk bounds used
 are Manski's worst case, equation (2.11) of Molinari, F. (2021),

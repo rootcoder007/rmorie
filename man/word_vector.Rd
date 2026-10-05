@@ -38,7 +38,6 @@ A list with \code{v}, \code{hit}.
 \description{
 A step of the fastxt_native implementation. Called by \code{fasttext}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 word_vector(word = 5L, Z = c(1, 2, 3, 4, 5, 6, 7, 8),

@@ -20,5 +20,4 @@ A list with \code{paths}, \code{totters}, \code{fraction}, \code{excluded_revers
 \description{
 A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 See the file header for the source the module follows.
-source it follows.
 }

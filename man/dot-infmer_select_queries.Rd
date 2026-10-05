@@ -19,7 +19,6 @@ A vector, from \code{sort}.
 \description{
 A step of the infmer_native implementation. Called by \code{morie_infmer}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .infmer_select_queries(q = 0.5, k = 3L)

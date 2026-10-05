@@ -16,7 +16,6 @@ A list with \code{person_means}, \code{within}, \code{between_variance},
 \description{
 A step of the tmlcll_native implementation. Called by \code{morie_ri_clpm_coefficients}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

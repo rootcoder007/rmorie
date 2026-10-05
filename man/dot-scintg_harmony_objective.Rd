@@ -26,5 +26,4 @@ A list with \code{total}, \code{fit}, \code{entropy}, \code{kl}.
 A step of the scintg_native implementation. Called by
 \code{.scintg_maximum_diversity_clustering}.
 See the file header for the source the module follows.
-source it follows.
 }

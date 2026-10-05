@@ -22,7 +22,6 @@ A list with \code{marginal_beta}, \code{marginal_p}, \code{conditional_beta},
 \description{
 A step of the genemt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_genemt_conditional_set_test(z_scores = c(1, 2, 3, 4, 5, 6, 7, 8),

@@ -23,5 +23,4 @@ A list with \code{w}, \code{info}.
 \description{
 A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
 See the file header for the source the module follows.
-source it follows.
 }

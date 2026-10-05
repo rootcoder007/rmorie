@@ -34,6 +34,5 @@ A list with \code{estimate}, \code{mask}, \code{logits}, \code{shape},
 \description{
 A step of the samdec_native implementation. Called by \code{morie_samdec}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

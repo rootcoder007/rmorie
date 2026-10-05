@@ -15,5 +15,4 @@ A character value.
 \description{
 A step of the metsem_native implementation. Called by \code{morie_metsem_unitigs}.
 See the file header for the source the module follows.
-source it follows.
 }

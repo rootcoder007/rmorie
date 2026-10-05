@@ -20,3 +20,8 @@ A step of the chronos_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+set.seed(28)
+b <- chronos_quantile_bins(rnorm(500), n_bins = 8L)
+round(b$edges, 2)
+}

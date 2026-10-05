@@ -45,5 +45,4 @@ A step of the timeRS_native implementation. Called by \code{morie_timeRS},
 \code{morie_timeRS_fit_time_bias}, \code{morie_timeRS_timesvd} and 1 others in the
 module.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -35,5 +35,8 @@ A list with \code{feasible}, \code{x}, \code{value}, \code{note}.
 \description{
 A step of the miprgr_native implementation. Called by \code{miprgr_branch_and_bound}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+A <- rbind(c(1, 0), c(0, 2), c(3, 2))
+miprgr_solve_relaxation(A, b = c(4, 12, 18), c = c(3, 5))[c("x", "value")]
 }

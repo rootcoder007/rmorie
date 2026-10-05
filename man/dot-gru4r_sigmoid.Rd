@@ -16,7 +16,6 @@ The value of \code{ifelse}.
 A step of the gru4r_native implementation. Called by \code{morie_gru4r_bpr},
 \code{morie_gru4r_gru}, \code{morie_gru4r_top1}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

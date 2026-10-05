@@ -16,6 +16,9 @@ The list returned by \code{Msm323()}.
 The same method as \code{Msm323()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+Msm324(mu_pred = log(c(2, 4)), theta_pred = qlogis(c(0.3, 0.6)))
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

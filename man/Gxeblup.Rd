@@ -30,6 +30,15 @@ List with \code{beta}, \code{b_lines}, \code{b_gxe}, \code{n}.
 Formula: Y = 1 mu + X_E beta_E + Z_L b_1 + Z_EL b_2 + eps,  b_1 ~ N(0, sigma2_g G),
 b_2 ~ N(0, Sigma_E (x) G)
 }
+\examples{
+set.seed(5)
+nl <- 4; ne <- 2
+G <- crossprod(matrix(rnorm(16), 4)) / 4 + diag(0.1, 4)
+Z_L <- kronecker(matrix(1, ne, 1), diag(nl)); X_E <- kronecker(diag(ne), matrix(1, nl, 1))
+Z_EL <- diag(nl * ne)
+y <- rnorm(nl * ne, 10)
+Gxeblup(y, X_E, Z_L, Z_EL, G, sigma2_g = 1, Sigma_E = diag(ne))$beta
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,

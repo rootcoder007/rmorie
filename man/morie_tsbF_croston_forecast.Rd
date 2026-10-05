@@ -36,7 +36,6 @@ The value of \code{result}, as built in the body.
 A step of the tsbF_native implementation. Called by
 \code{morie_tsbF_intermittent_forecast}, \code{morie_tsbF_sba_forecast}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

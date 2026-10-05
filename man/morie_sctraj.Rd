@@ -47,7 +47,6 @@ A list with \code{estimate}, \code{pseudotime}, \code{weights},
 \description{
 A step of the sctraj_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(3)

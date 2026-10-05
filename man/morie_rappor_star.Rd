@@ -15,3 +15,6 @@ List with \code{q_star} and \code{p_star}.
 \description{
 RAPPOR effective report probabilities (Lemma 1)
 }
+\examples{
+morie_rappor_star(f = 0.5, p = 0.5, q = 0.75)
+}

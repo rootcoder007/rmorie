@@ -23,5 +23,4 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the alfbnp_native implementation. Called by \code{morie_alfbnp_af3_sample}.
 See the file header for the source the module follows.
-source it follows.
 }

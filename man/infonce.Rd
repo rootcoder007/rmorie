@@ -21,7 +21,6 @@ A list with \code{loss}, \code{image_to_text}, \code{text_to_image},
 \description{
 A step of the opnclp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)

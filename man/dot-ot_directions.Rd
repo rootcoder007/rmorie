@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsd}, \code{Otsw}.
 See the file header for the source the module follows.
-source it follows.
 }

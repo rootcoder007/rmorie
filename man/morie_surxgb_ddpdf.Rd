@@ -17,7 +17,6 @@ A numeric value.
 \description{
 A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

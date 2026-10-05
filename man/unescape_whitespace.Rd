@@ -14,3 +14,6 @@ unescape_whitespace(text, strip_prefix = TRUE)
 \description{
 Invert the whitespace escape
 }
+\examples{
+unescape_whitespace(escape_whitespace("a b\tc"))
+}

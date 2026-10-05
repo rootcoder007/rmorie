@@ -17,5 +17,4 @@ A vector, from \code{as.numeric}.
 \description{
 A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
 See the file header for the source the module follows.
-source it follows.
 }

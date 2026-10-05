@@ -19,5 +19,4 @@ A list with \code{action}, \code{goto}, \code{states}, \code{n_states},
 A step of the prsLR_native implementation. Called by \code{.prsLR_parse},
 \code{morie_build_tables}, \code{morie_conflicts} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -25,5 +25,4 @@ A list with \code{tot}, \code{idx}, \code{sq}.
 \description{
 A step of the helpers_rouss implementation. Called by \code{Ltsreg}.
 See the file header for the source the module follows.
-source it follows.
 }

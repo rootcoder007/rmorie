@@ -29,6 +29,12 @@ non-overlapping M x M window, with B (M^2 x M^2) looked up from the
 parameterised (2M-1) x (2M-1) table by the tokens' relative
 position along each axis.
 }
+\examples{
+set.seed(6)
+x <- array(rnorm(4 * 4 * 2), c(4, 4, 2))
+r <- Swinmw(x, window_size = 2)
+c(r$n_windows, r$tokens_per_window)
+}
 \references{
 Liu, Z. et al. (2021), ICCV 2021, arXiv:2103.14030, Section 3.2, Eq 4.
 }

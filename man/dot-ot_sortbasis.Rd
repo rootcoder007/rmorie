@@ -15,5 +15,4 @@ The value of \code{[}.
 \description{
 A step of the helpers_ot implementation. Called by \code{.ot_complete_tree}, \code{.ot_emd}.
 See the file header for the source the module follows.
-source it follows.
 }

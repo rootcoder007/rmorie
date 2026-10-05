@@ -23,7 +23,6 @@ A list with \code{p_value}, \code{logFC}, \code{dispersion}, \code{note}.
 \description{
 A step of the edgrn_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 edgrn_exact_test(10, 25, 1000, 1000, 0.1)

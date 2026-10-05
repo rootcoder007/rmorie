@@ -17,5 +17,4 @@ A vector, from \code{as.numeric}.
 \description{
 A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}.
 See the file header for the source the module follows.
-source it follows.
 }

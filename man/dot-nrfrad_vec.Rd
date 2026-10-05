@@ -17,7 +17,6 @@ A step of the nrfrad_native implementation. Called by
 \code{density_is_view_independent}, \code{positional_encoding}, \code{ray_points} and
 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .nrfrad_vec(p = 0.5)

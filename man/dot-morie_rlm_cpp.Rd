@@ -20,5 +20,4 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{morie_rlm}.
 See the file header for the source the module follows.
-source it follows.
 }

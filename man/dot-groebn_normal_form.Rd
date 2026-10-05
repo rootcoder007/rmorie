@@ -20,7 +20,6 @@ The value of \code{$}.
 A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
 \code{.groebn_ideal_member}, \code{.groebn_reduce_basis}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # over <x - 1, y - 2> the normal form of f is the constant f(1, 2)

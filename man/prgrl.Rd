@@ -47,6 +47,5 @@ A list with \code{estimate}, \code{curriculum_error}, \code{baseline_error},
 \description{
 A step of the prgrl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

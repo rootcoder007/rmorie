@@ -28,6 +28,15 @@ Callaway and Sant'Anna (2021), Sec. 4.  Standard errors come from
 the influence functions of the constituent cells, so they account
 for the estimation of every cell that enters an aggregate.
 }
+\examples{
+set.seed(17)
+nu <- 30; Tn <- 5
+g <- rep(c(3, 4, Inf), each = 10)
+Y <- matrix(rnorm(nu * Tn), nu, Tn)
+for (i in seq_len(nu)) if (is.finite(g[i])) Y[i, g[i]:Tn] <- Y[i, g[i]:Tn] + 1
+gt <- morie_grouptimeatt(Y, g)
+morie_aggregateatt(gt, g, n_units = nu)$overall
+}
 \references{
 Callaway, B. and Sant'Anna, P. H. C. (2021). Journal of
 Econometrics, 225(2), 200-230, Section 4.

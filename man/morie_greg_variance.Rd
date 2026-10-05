@@ -40,5 +40,8 @@ mc_variance (as supplied).
 Equations 10.13, 10.14, 10.17, 10.18, 10.25, 10.42 of Brus (2022).
 }
 \examples{
-morie_greg_variance()
+# variance of a GREG total from 20 sampled residuals out of N = 500
+set.seed(1)
+e <- rnorm(20)
+morie_greg_variance(e, n = 20, n_population = 500)$variance
 }

@@ -17,7 +17,6 @@ The value of \code{switch}.
 \description{
 A step of the meglt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

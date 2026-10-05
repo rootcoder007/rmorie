@@ -25,6 +25,11 @@ Conditional likelihoods combine by postorder traversal
 likelihood L = sum_s pi_s L_s(root); substitution
 P_ij(t) = e^\{-t\} delta_ij + (1 - e^\{-t\}) pi_j.
 }
+\examples{
+tree <- list(list("A", 0.1), list(list(list("B", 0.2), list("C", 0.2)), 0.1))
+sites <- list(list(A = "A", B = "A", C = "G"), list(A = "C", B = "C", C = "C"))
+morie_felsen(tree, sites)$loglik
+}
 \references{
 Felsenstein, J. (1981). Evolutionary trees from DNA
 sequences: a maximum likelihood approach. Journal of Molecular

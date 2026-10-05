@@ -23,7 +23,6 @@ A list with \code{rows}, \code{labels}, \code{classes}.
 \description{
 A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

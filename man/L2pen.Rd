@@ -19,6 +19,9 @@ List with \code{penalized_loss}, \code{penalty}, \code{ep}, \code{lambda}, \code
 \description{
 Formula: L(w, lambda) = L(w) + 0.5 * lambda * w'w
 }
+\examples{
+L2pen(loss = 1.2, w = c(0.5, -1), lam = 0.1)$penalized_loss   # 1.2 + 0.05 * 1.25
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,

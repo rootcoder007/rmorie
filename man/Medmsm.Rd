@@ -31,6 +31,15 @@ Formula: weights \code{1/P(A|H)}, then weighted
 giving \code{NDE = th1 + th3(b0 + b1 a*)} and
 \code{NIE = b1(th2 + th3 a)}.
 }
+\examples{
+set.seed(4)
+n <- 500
+H <- rnorm(n)
+A <- rbinom(n, 1, plogis(H))
+M <- 0.5 * A + 0.3 * H + rnorm(n)
+y <- 0.4 * A + 0.6 * M + H + rnorm(n)
+Medmsm(y, A, M, matrix(H))[c("nie", "total")]
+}
 \references{
 VanderWeele & Vansteelandt (2010) Am J Epidemiol
 172:1339-1348; Robins, Hernan & Brumback (2000) Epidemiology

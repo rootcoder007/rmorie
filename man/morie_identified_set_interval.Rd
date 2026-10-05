@@ -17,7 +17,6 @@ A list with \code{lower}, \code{upper}, \code{width}, \code{phi_hat}.
 \description{
 A step of the bndbye_native implementation. Called by \code{morie_compare_sets}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_identified_set_interval(phi_hat = c(1, 2, 3, 4, 5, 6, 7, 8), half_width = 5L)

@@ -28,6 +28,10 @@ Carlo error.
 Formula: \code{P(j | i) = A_ij / k_i}; the returned vector is
 \code{e_start P^steps}.
 }
+\examples{
+G <- matrix(c(0, 1, 1, 1, 0, 0, 1, 0, 0), 3)   # a star centred on node 1
+Randwk(G, start = 1L, steps = 2L)$p
+}
 \references{
 Lovasz, L. (1996). Random walks on graphs: a survey. In
 Combinatorics, Paul Erdos is Eighty, Vol. 2, pages 1-46, Janos

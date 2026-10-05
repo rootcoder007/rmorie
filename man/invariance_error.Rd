@@ -22,7 +22,6 @@ A list with \code{energy_error}, \code{force_error}, \code{energy_invariant},
 \description{
 A step of the schN_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

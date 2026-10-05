@@ -15,5 +15,4 @@ A vector, from \code{sort}.
 \description{
 A step of the causal_molak implementation. Called by \code{morie_collider}, \code{morie_mectest}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -27,7 +27,6 @@ The value of \code{res}, as built in the body.
 \description{
 A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 X <- rbind(c(0, 2, 0, 2, 0), c(1, 1, 0, 1, 2), c(2, 0, 2, 2, 0))   # X-chromosome genotypes

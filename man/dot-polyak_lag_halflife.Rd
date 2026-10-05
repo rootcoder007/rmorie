@@ -15,7 +15,6 @@ A list with \code{halflife}, \code{approx}, \code{tau}, \code{note}.
 \description{
 A step of the polyak_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .polyak_lag_halflife(tau = 0.5)

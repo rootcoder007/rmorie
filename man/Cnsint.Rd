@@ -33,6 +33,15 @@ transformation.  Any drift between the two groups' anchor
 difficulties is therefore an estimate of anchor instability rather
 than of scale.
 }
+\examples{
+set.seed(20)
+n <- 200; k <- 6
+theta <- c(rnorm(100, 0), rnorm(100, 0.5))
+b <- seq(-1, 1, length.out = k)
+y <- matrix(rbinom(n * k, 1, plogis(outer(theta, b, "-"))), n, k)
+r <- Cnsint(y, group = rep(c("F", "R"), each = 100), anchor = 0:2)
+r$theta_mean_focal - r$theta_mean_reference
+}
 \references{
 Wingersky & Lord (1984), Applied Psychological
 Measurement 8(3):347-364; Kolen & Brennan (2014), Test Equating,

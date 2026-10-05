@@ -20,3 +20,9 @@ verify_inclusion(leaf, index, size, path, root)
 \description{
 Recompute the root from a leaf and an audit path
 }
+\examples{
+leaves <- lapply(c("a", "b", "c", "d"), charToRaw)
+root <- merkle_root(leaves)
+p <- inclusion_proof(leaves, 2L)
+verify_inclusion(leaves[[3]], 2L, 4L, p$path, root)
+}

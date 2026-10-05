@@ -2,7 +2,7 @@
 % Please edit documentation in R/adida_native.R
 \name{intermittent_forecast}
 \alias{intermittent_forecast}
-\title{TSB intermittent-demand forecaster}
+\title{Base forecaster for ADIDA}
 \usage{
 intermittent_forecast(
   y,
@@ -15,30 +15,33 @@ intermittent_forecast(
 \arguments{
 \item{y}{Numeric series of non-negative demand.}
 
-\item{method}{Method name; only "tsb" is implemented.}
+\item{method}{"tsb", "croston" or "sba".}
 
-\item{alpha}{Smoothing for the demand size.}
+\item{alpha}{Smoothing for the demand size (and, for Croston and SBA,
+the interval).}
 
-\item{beta}{Smoothing for the demand probability.}
+\item{beta}{Smoothing for the demand probability (TSB only).}
 
-\item{horizon}{Forecast horizon; only horizon = 1 is used by ADIDA.}
+\item{horizon}{Forecast horizon; ADIDA calls it with 1.}
 }
 \value{
 Named list with \code{forecast}.
 }
 \description{
-Default base forecaster used by \code{morie_adida}, implementing
-the Teunter-Syntetos-Babai update so the same numbers come out
-under the same RNG stream as the Python arm. Only the "tsb"
-method is implemented here; the default and the one the ADIDA
-cheatsheet references. Other methods are not ported because they
-are not needed to mirror the Python arm's defaults.
+The forecaster \code{morie_adida} applies to the aggregated series:
+\code{\link{morie_tsbF_intermittent_forecast}} with its defaults
+(Teunter-Syntetos-Babai, Croston or SBA, initialised from the mean
+positive demand and the demand rate), the dispatch the Python arm's
+ADIDA calls.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-rmorie:::intermittent_forecast(V)
+V <- c(0, 3, 0, 0, 5, 0, 2, 0, 0, 0, 4, 1)
+rmorie:::intermittent_forecast(V)$forecast
+rmorie:::intermittent_forecast(V, method = "croston")$forecast
 }
 \references{
 Teunter, R. H., Syntetos, A. A. & Babai, M. Z. (2011).
+Intermittent demand: linking forecasting to inventory obsolescence.
+European Journal of Operational Research 214(3), 606-615.
 }
 \keyword{internal}

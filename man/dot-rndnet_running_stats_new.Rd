@@ -15,7 +15,6 @@ The value of \code{e}, as built in the body.
 \description{
 A step of the rndnet_native implementation. Called by \code{morie_rndnet}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .rndnet_running_stats_new(n = 3L)

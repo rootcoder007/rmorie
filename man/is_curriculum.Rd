@@ -21,7 +21,6 @@ A list with \code{is_curriculum}, \code{entropy_increasing},
 \description{
 A step of the prgrl_native implementation. Called by \code{prgrl}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 is_curriculum(list(c(1, 1, 1), c(1, 1, 0), c(1, 0, 0)))

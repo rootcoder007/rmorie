@@ -22,7 +22,6 @@ A list with \code{indices}, \code{scores}, \code{all_scores}, \code{metric},
 \description{
 A step of the ragRet_native implementation. Called by \code{morie_ragRet_ivf_search}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_ragRet_top_k(query = 5L, corpus = c(1, 2, 3, 4, 5, 6, 7, 8))

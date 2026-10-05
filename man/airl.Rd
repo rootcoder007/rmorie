@@ -46,3 +46,12 @@ state_only, method.
 Fit the AIRL discriminator and return the recovered reward,
 following Fu, Luo & Levine (2018) eq. 4 and Algorithm 1.
 }
+\examples{
+\donttest{
+set.seed(19)
+es <- sample(0:3, 50, TRUE); ea <- rep(1, 50); en <- pmin(es + 1, 3)
+ps <- sample(0:3, 50, TRUE); pa <- rep(0, 50); pn <- pmax(ps - 1, 0)
+r <- airl(es, ea, en, rep(log(0.5), 50), ps, pa, pn, rep(log(0.5), 50), epochs = 200L)
+r$accuracy
+}
+}

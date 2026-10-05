@@ -12,7 +12,6 @@ A vector, from \code{c}.
 \description{
 A step of the synthetic implementation. Called by \code{resolve_synthetic_name_map}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 synthetic_required_keys()

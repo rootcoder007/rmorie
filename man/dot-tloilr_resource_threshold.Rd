@@ -18,5 +18,4 @@ A list with \code{tau}, \code{quantile}, \code{kappa}, \code{binding},
 \description{
 A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_rule}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -16,7 +16,6 @@ A numeric value.
 A step of the smcsam_native implementation. Called by \code{Drvst},
 \code{morie_att_weights}, \code{smcsam}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

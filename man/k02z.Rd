@@ -16,7 +16,6 @@ The value of \code{stats::qnorm}.
 A step of the k02util implementation. Called by \code{mabay}, \code{macum},
 \code{mafix} and 9 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 k02z(c(0.025, 0.5, 0.975))

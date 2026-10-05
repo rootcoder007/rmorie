@@ -21,7 +21,6 @@ A list with \code{masked}, \code{kept}, \code{rate}, \code{block}, \code{note}.
 \description{
 A step of the ocrwit_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 mask_units(n_units = 5L)

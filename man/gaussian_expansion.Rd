@@ -24,7 +24,6 @@ A numeric value.
 \description{
 A step of the schN_native implementation. Called by \code{cfconv}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 gaussian_expansion(r = 2.5, n_gaussians = 5)

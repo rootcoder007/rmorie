@@ -49,6 +49,13 @@ Formula: for a set with one case, \eqn{L_s(beta) = exp(beta x_case) /
 sum_j exp(beta x_j)}; the maximum is found by Newton-Raphson --
 Breslow and Day (1980), Chapter 7.
 }
+\examples{
+set.seed(10)
+sets <- rep(1:60, each = 3)
+cases <- rep(c(1, 0, 0), 60)
+exposure <- rbinom(180, 1, ifelse(cases == 1, 0.5, 0.3))
+Matccd(cases, NULL, sets, exposure)$estimate
+}
 \references{
 Breslow, N. E. and Day, N. E. (1980). Statistical Methods
 in Cancer Research, Volume I. IARC Scientific Publications No. 32,

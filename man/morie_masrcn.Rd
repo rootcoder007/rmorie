@@ -17,7 +17,6 @@ The value of \code{switch}.
 \description{
 A step of the masrcn_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 features <- matrix(as.numeric(1:36), 6, 6)

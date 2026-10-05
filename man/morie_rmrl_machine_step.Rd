@@ -20,7 +20,6 @@ A list with \code{u}, \code{reward}.
 A step of the rmrl_native implementation. Called by \code{morie_rmrl},
 \code{morie_rmrl_qlearn_flat}, \code{morie_rmrl_reward_machine_run}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_rmrl_machine_step(machine = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), u = 5L,

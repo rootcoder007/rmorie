@@ -21,7 +21,6 @@ One of two values, depending on the branch taken.
 \description{
 A step of the fairRC_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))

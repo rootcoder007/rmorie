@@ -17,5 +17,4 @@ A vector, from \code{vapply}.
 \description{
 A step of the ts_joseph implementation. Called by \code{morie_nhitsnet}.
 See the file header for the source the module follows.
-source it follows.
 }

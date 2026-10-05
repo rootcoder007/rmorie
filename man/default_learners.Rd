@@ -17,7 +17,6 @@ The value of \code{lib}, as built in the body.
 \description{
 A step of the flxipt_native implementation. Called by \code{super_learner}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 default_learners(p = 0.5)

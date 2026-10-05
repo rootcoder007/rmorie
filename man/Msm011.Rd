@@ -31,7 +31,12 @@ the log is returned. With restricted = TRUE the REML objective of p.146 is
 returned instead, adding the -1/2 log|X'V^-1X| term that removes the ML bias.
 }
 \examples{
-Msm011(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
+set.seed(11)
+g <- rep(1:5, each = 4)
+X <- cbind(1, rnorm(20)); Z <- model.matrix(~ factor(g) - 1)
+y <- as.numeric(X \%*\% c(2, 1) + Z \%*\% rnorm(5, sd = 0.7) + rnorm(20))
+c(ML = Msm011(X, Z, y, D = diag(0.5, 5))$loglik,
+  REML = Msm011(X, Z, y, D = diag(0.5, 5), restricted = TRUE)$loglik)
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

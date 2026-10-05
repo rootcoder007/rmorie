@@ -23,7 +23,6 @@ A list with \code{output}, \code{input}, \code{border_lost},
 \description{
 A step of the unetbk_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 valid_output_size(572L, depth = 4L)

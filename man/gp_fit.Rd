@@ -30,3 +30,7 @@ gp_fit(
 Wilkinson (2014) Sec. 2.1: quadratic mean, conjugate improper
 \eqn{1/tau^2} prior on \eqn{(beta, tau^2)}, plug-in MLE length-scale.
 }
+\examples{
+fit <- gp_fit(design = seq(0, 1, length.out = 6), values = cos(3 * seq(0, 1, length.out = 6)))
+names(fit)
+}

@@ -21,7 +21,6 @@ A vector, from \code{sort}.
 \description{
 A step of the ocrwit_native implementation. Called by \code{word_patch_alignment}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 patch_of_box(box = c(12, 3, 18, 8), width = 280, height = 140)

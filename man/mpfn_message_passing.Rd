@@ -25,5 +25,9 @@ The value of \code{H}, as built in the body.
 \description{
 A step of the mpfn_native implementation. Called by \code{mpfn_is_permutation_invariant}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+H <- list(c(1, 0), c(0, 1), c(1, 1))
+adj <- list(`1` = c(2L, 3L), `2` = 1L, `3` = 1L)
+mpfn_message_passing(H, adj, edge_features = list(), T = 2)
 }

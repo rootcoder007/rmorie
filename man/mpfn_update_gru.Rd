@@ -29,5 +29,9 @@ A numeric value.
 \description{
 A step of the mpfn_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(13)
+mk <- function() matrix(rnorm(4, sd = 0.5), 2, 2)
+mpfn_update_gru(h = c(0, 0), m = c(1, -1), mk(), mk(), mk(), mk(), mk(), mk())
 }

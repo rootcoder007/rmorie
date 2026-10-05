@@ -16,6 +16,12 @@ The list returned by \code{Msm332()}.
 The same method as \code{Msm332()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+set.seed(29)
+X <- matrix(rnorm(60), 30, 2)
+y <- 1 + X \%*\% c(2, -1) + rnorm(30, sd = 0.1)
+Msm333(X, as.numeric(y))$estimate
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

@@ -15,7 +15,6 @@ A numeric value.
 \description{
 A step of the alf_core implementation. Called by \code{Alffape}, \code{Alfipa}, \code{Alfrecyc}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

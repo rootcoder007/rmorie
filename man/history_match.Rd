@@ -51,3 +51,11 @@ history_match(
 Wilkinson (2014) Sec. 3: waves of design, emulate, rule out,
 redesign. Returns the GP fit and a list of per-wave summaries.
 }
+\examples{
+\donttest{
+sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+hm <- history_match(sim, obs = c(0.5, 1, 1.5), prior_ppf = list(-2, 4), n_waves = 2L,
+                    n_design = 12L, n_sim = 5L)
+names(hm)
+}
+}

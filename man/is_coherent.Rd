@@ -19,7 +19,6 @@ A logical value.
 \description{
 A step of the hierF_native implementation. Called by \code{mint_reconcile}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 S <- summing_matrix(list(c(0L, 1L)), 2L)

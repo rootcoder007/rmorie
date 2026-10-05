@@ -18,3 +18,8 @@ seal_record(plaintext, dek, nonce, aad = raw(0))
 \description{
 Seal a record under its DEK
 }
+\examples{
+dek <- as.raw(1:32)
+s <- seal_record(charToRaw("visit 2026-10-05"), dek, nonce = as.raw(1:12), aad = charToRaw("record-7"))
+rawToChar(open_record(s, dek))
+}

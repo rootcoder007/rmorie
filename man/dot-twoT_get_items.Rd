@@ -17,5 +17,4 @@ A vector, from \code{integer}.
 \description{
 A step of the twoT_native implementation. Called by \code{morie_twoT_streaming_frequency}.
 See the file header for the source the module follows.
-source it follows.
 }

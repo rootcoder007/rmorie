@@ -27,6 +27,14 @@ eps ~ N(0, I_J (x) R_nT) (eq. 5.5). Sigma_T is the genetic covariance
 between traits. When Sigma_T and R are diagonal the fit is equivalent to
 fitting a univariate GBLUP per trait.
 }
+\examples{
+set.seed(12)
+J <- 6; nT <- 2
+G <- crossprod(matrix(rnorm(J * J), J)) / J
+Y <- matrix(rnorm(J * nT, 5), J, nT)
+f <- Msm026(Y, Z = diag(J), G = G, Sigma_T = diag(nT), R_T = diag(nT))
+f$mu
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

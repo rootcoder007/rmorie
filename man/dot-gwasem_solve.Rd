@@ -18,7 +18,6 @@ A vector, from \code{as.numeric}.
 A step of the gwasem_native implementation. Called by \code{.gwasem_loglik},
 \code{.gwasem_reml_delta}, \code{morie_gwasem} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)

@@ -16,5 +16,4 @@ A numeric value.
 A step of the dpoF_native implementation. Called by \code{.dpoF_plackett_luce},
 \code{optimal_policy}.
 See the file header for the source the module follows.
-source it follows.
 }

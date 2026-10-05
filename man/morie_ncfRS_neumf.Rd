@@ -27,7 +27,6 @@ A list with \code{score}, \code{gmf_part}, \code{mlp_part}, \code{note}.
 \description{
 A step of the ncfRS_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

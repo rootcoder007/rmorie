@@ -19,7 +19,6 @@ A step of the fauzi_native implementation. Called by \code{.fz_cs_common},
 \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_conditions_c1_c6} and 7 others
 in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

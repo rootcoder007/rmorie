@@ -19,7 +19,6 @@ A list with \code{quotients}, \code{remainder}.
 \description{
 A step of the groebn_native implementation. Called by \code{.groebn_normal_form}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 f <- .groebn_poly(list("2_1" = 3, "1_2" = 5, "0_0" = -2))

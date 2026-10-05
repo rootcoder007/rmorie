@@ -17,3 +17,6 @@ Numeric vector of the same length.
 \description{
 Prox of \code{tau * |.|_1}, applied elementwise.
 }
+\examples{
+soft_threshold(c(-3, -0.5, 0, 0.5, 3), tau = 1)
+}

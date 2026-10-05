@@ -15,7 +15,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the tail2_t03 implementation. Called by \code{CoxPL}, \code{CramerRao}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 if (requireNamespace("metafor", quietly = TRUE)) {

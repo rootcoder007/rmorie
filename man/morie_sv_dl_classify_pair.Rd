@@ -24,7 +24,6 @@ Nothing; the function is called for its effect.
 \description{
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 p <- list(chrom1 = "chr1", pos1 = 1000, strand1 = "+",

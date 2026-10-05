@@ -16,6 +16,13 @@ The list returned by \code{Msm010()}.
 The same method as \code{Msm010()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+set.seed(11)
+g <- rep(1:5, each = 4)
+X <- cbind(1, rnorm(20)); Z <- model.matrix(~ factor(g) - 1)
+y <- as.numeric(X \%*\% c(2, 1) + Z \%*\% rnorm(5, sd = 0.7) + rnorm(20))
+Msm013(X, Z, y, D = diag(0.5, 5))$beta
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

@@ -41,7 +41,6 @@ A list with \code{estimate}, \code{type1_deviation}, \code{type0_deviation},
 \description{
 A step of the se3T_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

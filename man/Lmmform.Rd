@@ -27,6 +27,11 @@ List with \code{mean_marginal}, \code{mean_conditional}, \code{signal}, \code{V}
 Formula: Y = X beta + Z u + e,  u ~ N(0, Sigma), e ~ N(0, R);  E(Y) = X beta, E(Y|u) =
 X beta + Z u, Var(Y) = Z Sigma Z' + R
 }
+\examples{
+X <- cbind(1, c(0, 1, 0, 1)); Z <- cbind(c(1, 1, 0, 0), c(0, 0, 1, 1))
+r <- Lmmform(X, beta = c(2, 1), Z = Z, u = c(0.5, -0.5), Sigma = diag(0.25, 2))
+r$V
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,

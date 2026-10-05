@@ -15,7 +15,6 @@ A list with \code{Z}, \code{order}, \code{note}.
 \description{
 A step of the ibpfa_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 left_ordered_form(Z = 5L)

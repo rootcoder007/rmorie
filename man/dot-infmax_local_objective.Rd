@@ -27,5 +27,4 @@ A list with \code{estimate}, \code{objective}, \code{estimator},
 \description{
 A step of the infmax_native implementation. Called by \code{morie_infmax}.
 See the file header for the source the module follows.
-source it follows.
 }

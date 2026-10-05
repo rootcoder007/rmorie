@@ -17,3 +17,6 @@ A list with \code{size}, \code{pairs}, \code{match_right}.
 \description{
 Maximum bipartite matching by augmenting paths
 }
+\examples{
+morie_bipartite_matching(3, 3, list(c(1, 1), c(1, 2), c(2, 1), c(3, 3)))$size
+}

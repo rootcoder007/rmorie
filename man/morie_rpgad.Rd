@@ -44,6 +44,9 @@ Applies Mironov (2017) Proposition 3 at every supplied Renyi order
 and returns the minimum, since the bound holds for all of them.
 Mirrors Python \code{morie.fn.rpgad}.
 }
+\examples{
+morie_rpgad(alpha = c(2, 4, 8, 16, 32), mechanism = "gaussian", sigma = 2)$epsilon
+}
 \references{
 Mironov, I. (2017). Renyi differential privacy. 30th IEEE
 Computer Security Foundations Symposium, 263-275.

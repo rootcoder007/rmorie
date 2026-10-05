@@ -20,3 +20,7 @@ BFS from every node; pairs with no path are assigned
 \code{UNREACHABLE} so they can take a special bias rather than
 producing NaNs downstream.
 }
+\examples{
+adj <- list(c(2), c(1, 3), c(2), numeric(0))   # path 1-2-3 plus an isolated node 4
+morie_grphmr_sp(adj, n = 4)$distance
+}

@@ -20,7 +20,6 @@ A numeric value.
 A step of the bnskmt_native implementation. Called by \code{cvm_statistic},
 \code{ks_critical_value}, \code{ks_statistic}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

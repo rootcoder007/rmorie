@@ -18,7 +18,6 @@ The value of \code{rowSums}.
 \description{
 A step of the polkrn_native implementation. Called by \code{morie_polkrn}, \code{Tmlspl}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

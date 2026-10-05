@@ -26,7 +26,6 @@ A list with \code{qrsdurms}, \code{qrswide}, \code{lbbbdur}, \code{rbbbdur},
 \description{
 A step of the rangayyan_qrs implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 EcgWaveShp(qrsdur = 5L, stdev = 5L)

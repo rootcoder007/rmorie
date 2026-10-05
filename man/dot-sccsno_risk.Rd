@@ -20,5 +20,4 @@ A numeric value.
 \description{
 A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}.
 See the file header for the source the module follows.
-source it follows.
 }

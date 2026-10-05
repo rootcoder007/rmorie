@@ -18,3 +18,10 @@ set_transformer(X = NULL, k = NULL, S = NULL, params = NULL)
 \description{
 Back-compatible wrapper over \code{setT} (old name)
 }
+\examples{
+set.seed(3)
+d <- 2
+params <- list(Wq = diag(d), Wk = diag(d), Wv = diag(d), W1 = diag(d), b1 = rep(0, d),
+               W2 = diag(d), b2 = rep(0, d))
+set_transformer(X = matrix(rnorm(10), 5, d), S = matrix(0, 1, d), params = params)$output
+}

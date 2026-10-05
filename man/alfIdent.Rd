@@ -12,7 +12,6 @@ A list with \code{R}, \code{t}.
 \description{
 A step of the alf_core implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 alfIdent()

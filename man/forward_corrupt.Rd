@@ -22,3 +22,6 @@ A list with \code{x_t}, \code{mean}, \code{std},
 Mean \code{sqrt(alpha_bar_t) * x_0}, variance \code{1 - alpha_bar_t}.
 No simulation is needed to check it.
 }
+\examples{
+forward_corrupt(x0 = c(1, 2, 3), alpha_bar_t = 0.81)$mean
+}

@@ -16,3 +16,6 @@ rotation_cost(n_records, mean_record_bytes, dek_bytes = 32L)
 \description{
 Cost model: single-key vs envelope rotation
 }
+\examples{
+rotation_cost(n_records = 1e6, mean_record_bytes = 2048)
+}

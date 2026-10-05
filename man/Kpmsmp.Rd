@@ -29,6 +29,10 @@ holds simultaneously over t, so it is strictly wider.
 \details{
 Formula: P(sup|B| > h) = 2 sum_k (-1)^\{k+1\} exp(-2 k^2 h^2) = alpha.
 }
+\examples{
+fit <- list(time = c(2, 3, 5, 8), n_risk = c(10, 9, 7, 4), n_event = c(1, 1, 2, 1))
+Kpmsmp(fit, alpha = 0.05)[c("surv", "lower", "upper", "h")]
+}
 \references{
 Hall and Wellner (1980), Confidence bands for a survival
 curve from censored data, Biometrika 67(1):133-143.

@@ -37,5 +37,10 @@ A list with \code{estimate}, \code{mean_reward}, \code{total_reward},
 \description{
 A step of the mtdrl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+tasks <- mtdrl_bandit_tasks(n_arms = 2, n_tasks = 5, seed = 1)
+ag <- mtdrl_TabularHistoryAgent(n_arms = 2)
+r <- mtdrl_run(tasks, ag, episode_length = 50, n_arms = 2, seed = 1)
+r$optimal_action_rate
 }

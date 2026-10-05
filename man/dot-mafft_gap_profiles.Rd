@@ -17,5 +17,4 @@ A list with \code{gs}, \code{ge}.
 \description{
 A step of the mafft_native implementation. Called by \code{.mafft_nw}.
 See the file header for the source the module follows.
-source it follows.
 }

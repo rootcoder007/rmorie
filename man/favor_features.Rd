@@ -22,7 +22,6 @@ The value of \code{out}, as built in the body.
 A step of the perfat_native implementation. Called by \code{favor_attention},
 \code{kernel_estimate}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)

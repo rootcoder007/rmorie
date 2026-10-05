@@ -17,6 +17,9 @@ A numeric vector of weights, one per observation.
 \description{
 Theorem 5.4 / Corollary 5.2 OWATE weights
 }
+\examples{
+morie_owate_weights(pscore = c(0.1, 0.5, 0.9))   # e (1 - e): largest at 0.5
+}
 \references{
 Crump, R. K. et al. (2009). Theorem 5.4, Corollary 5.2.
 }

@@ -21,5 +21,4 @@ A numeric value.
 A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias},
 \code{.timeRS_user_bias}, \code{morie_timeRS_deviation}.
 See the file header for the source the module follows.
-source it follows.
 }

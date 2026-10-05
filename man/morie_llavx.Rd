@@ -17,7 +17,6 @@ The value of \code{switch}.
 \description{
 A step of the llavx_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- morie_llavx("training_stage", 2)

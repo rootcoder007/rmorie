@@ -36,6 +36,5 @@ A list with \code{nodes}, \code{edges}, \code{sizes}, \code{label}.
 \description{
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

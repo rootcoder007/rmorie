@@ -14,3 +14,9 @@ extract(ikm, salt = NULL)
 \description{
 HKDF Extract: PRK = HMAC(salt, IKM)
 }
+\examples{
+# RFC 5869 test case 1: PRK = 077709362c2e32df0ddc3f0dc47bba6390b6c73bb50f9c3122ec844ad7c2b3e5
+ikm <- as.raw(rep(0x0b, 22))
+salt <- as.raw(0:12)
+extract(ikm, salt)$prk
+}

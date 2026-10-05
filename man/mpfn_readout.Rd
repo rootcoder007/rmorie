@@ -23,5 +23,9 @@ The value of \code{acc}, as built in the body.
 \description{
 A step of the mpfn_native implementation. Called by \code{mpfn_is_permutation_invariant}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+H <- list(c(1, 2), c(3, 4), c(5, 6))
+mpfn_readout(H, how = "sum")
+mpfn_readout(H, how = "mean")
 }

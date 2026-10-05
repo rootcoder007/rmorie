@@ -16,7 +16,6 @@ The value of \code{cbind}.
 A step of the caus_native implementation. Called by \code{.caus_first_stage_f},
 \code{morie_caus_iv_2sls}, \code{morie_caus_iv_liml}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

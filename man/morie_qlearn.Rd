@@ -57,6 +57,11 @@ Barto (2018), Eq. (6.8),
 \eqn{Q(s,a) \leftarrow Q(s,a) + \alpha[r + \gamma \max_{a'}
 Q(s',a') - Q(s,a)]}.
 }
+\examples{
+P <- list(matrix(c(0.9, 0.1, 0, 1), 2, byrow = TRUE), matrix(c(0.1, 0.9, 0, 1), 2, byrow = TRUE))
+R <- matrix(c(0, 1, 0, 0), 2, 2)
+morie_qlearn(P, R, gamma = 0.9, n_episodes = 50L, terminal = 1L)$policy
+}
 \references{
 Watkins, C. J. C. H. and Dayan, P. (1992). Q-learning.
 Machine Learning, 8, 279-292.

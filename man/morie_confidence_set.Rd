@@ -42,6 +42,5 @@ A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds},
 \description{
 A step of the bndsmw_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

@@ -28,5 +28,4 @@ A list with \code{steps}, \code{data}, \code{model}, \code{target},
 \description{
 A step of the tlroad_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

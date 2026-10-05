@@ -29,6 +29,11 @@ support, differenced for the ATE. This function forwards to
 The ATE interval always has width exactly \eqn{y_{max} - y_{min}}
 and therefore always contains zero.
 }
+\examples{
+set.seed(16)
+y <- runif(80); D <- rbinom(80, 1, 0.5)
+Manski(y, D, y_min = 0, y_max = 1)[c("ate_lower", "ate_upper", "ate_width")]   # width 1
+}
 \references{
 Manski, C. F. (1990), Nonparametric Bounds on Treatment
 Effects, American Economic Review Papers and Proceedings

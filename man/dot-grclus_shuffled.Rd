@@ -17,7 +17,6 @@ The value of \code{idx}, as built in the body.
 \description{
 A step of the grclus_native implementation. Called by \code{.grclus_match_vertices}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .grclus_shuffled(n = 3L, seed = 1L)

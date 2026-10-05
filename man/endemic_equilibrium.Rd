@@ -21,7 +21,6 @@ A list with \code{R0}, \code{S}, \code{I}.
 \description{
 A step of the hiatus_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 endemic_equilibrium(beta = 0.5, nu = 0.5, mu = 5L)

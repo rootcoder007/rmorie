@@ -47,7 +47,6 @@ A list with \code{estimate}, \code{transitions}, \code{n_transitions},
 \description{
 A step of the hindsr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

@@ -1058,7 +1058,7 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
     if (inherits(pr, "error")) {
       # a pair whose columns the frame lacks is skipped, not fatal (the bundled frame has no segregation days)
       why <- conditionMessage(pr)
-      if (grepl("undefined columns selected", why, fixed = TRUE)) {
+      if (grepl("undefined columns selected|is missing column", why)) {
         lacking <- setdiff(needed[[label]], names(df))
         why <- sprintf("the frame lacks %s", if (length(lacking)) paste(lacking, collapse = ", ") else "the columns this pair needs")
       }

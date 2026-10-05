@@ -16,7 +16,6 @@ One of two values, depending on the branch taken.
 A step of the pratt_native implementation. Called by \code{.pratt_attention},
 \code{.pratt_document_vector}, \code{.pratt_sentence_vector}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .pratt_mat(H = 0.5)

@@ -15,7 +15,6 @@ The value of \code{[}.
 \description{
 A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_vepan_most_severe_consequence(c("missense_variant",

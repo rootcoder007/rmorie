@@ -19,7 +19,6 @@ A list with \code{observations}, \code{reference}, \code{depth}.
 \description{
 A step of the varcal_native implementation. Called by \code{varcal_find_candidates}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 reads <- list(list(pos = 0L, seq = "ACGTACGT"),

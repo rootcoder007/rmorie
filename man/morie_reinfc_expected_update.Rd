@@ -23,7 +23,6 @@ The value of \code{list}.
 \description{
 A step of the reinfc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # For a Bernoulli-logistic unit the expected update is

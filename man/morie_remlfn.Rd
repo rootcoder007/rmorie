@@ -25,7 +25,6 @@ A list with \code{sigma2_a}, \code{sigma2_e}, \code{mu}, \code{loglik},
 \description{
 A step of the remlfn_native implementation. Called by \code{morie_vcomp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

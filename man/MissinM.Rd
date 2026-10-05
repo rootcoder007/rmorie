@@ -42,6 +42,12 @@ differ by delta* for this to reverse". With nothing missing there is
 no such delta and the field is \code{NaN}, not infinity: the
 conclusion cannot be tipped at all.
 }
+\examples{
+set.seed(4)
+Y <- rnorm(100, 5); R <- rbinom(100, 1, 0.7); Y[R == 0] <- NA
+m <- MissinM(Y, R, delta_grid = seq(-3, 3, by = 1), reference = 5)
+m$means
+}
 \references{
 Daniels and Hogan (2008), Missing Data in Longitudinal
 Studies, Chapman and Hall/CRC. The mean and tipping point above are

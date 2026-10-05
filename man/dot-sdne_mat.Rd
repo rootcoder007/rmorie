@@ -16,7 +16,6 @@ The value of \code{out}, as built in the body.
 A step of the sdne_native implementation. Called by \code{.sdne_first_order_loss},
 \code{.sdne_penalty_matrix}, \code{.sdne_proximity_counts} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

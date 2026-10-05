@@ -46,6 +46,12 @@ negates the whole linear predictor.
 Nothing restricts this to two dimensions: \code{a} sets the dimension,
 and \code{Mirt3} is this function with three slopes and no guessing.
 }
+\examples{
+set.seed(16)
+theta <- matrix(rnorm(200), 100, 2)
+y <- rbinom(100, 1, plogis(theta \%*\% c(1, 0.5) - 0.2))
+Mirt2(y, theta, a = c(1, 0.5), d = -0.2)$loglik
+}
 \references{
 Chalmers (2012), Journal of Statistical Software 48(6),
 1-29, \doi{10.18637/jss.v048.i06}, eq. (1) p.3. Reckase (2009),

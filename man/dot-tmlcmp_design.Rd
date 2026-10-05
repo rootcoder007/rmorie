@@ -17,5 +17,4 @@ The value of \code{cbind}.
 \description{
 A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
 See the file header for the source the module follows.
-source it follows.
 }

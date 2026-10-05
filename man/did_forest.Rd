@@ -52,3 +52,15 @@ A list mirroring the Python \code{RichResult} payload.
 \description{
 Heterogeneous ATT: DiD taken locally under forest weights
 }
+\examples{
+\donttest{
+set.seed(4)
+n <- 200
+X <- matrix(rnorm(n * 2), n, 2)
+D <- rbinom(n, 1, 0.5)
+Y <- matrix(rnorm(n * 4), n, 4)
+Y[, 3:4] <- Y[, 3:4] + D * (1 + X[, 1])
+f <- did_forest(Y, D, X, event_time = 3, n_trees = 50L)
+names(f)
+}
+}

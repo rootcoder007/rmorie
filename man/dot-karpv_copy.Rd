@@ -15,5 +15,4 @@ The value of \code{.karpv_fnode}.
 \description{
 A step of the karpV_native implementation. Called by \code{.karpv_replace}, \code{morie_karpV}.
 See the file header for the source the module follows.
-source it follows.
 }

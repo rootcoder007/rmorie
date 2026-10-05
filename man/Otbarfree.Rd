@@ -32,6 +32,12 @@ Formula: alternate \code{T_k = argmin <T, C(Y, X_k)>} and
 \code{Y <- n sum_k w_k T_k X_k} -- Cuturi and Doucet (2014) Section 4.
 Uniform weights are kept on the support throughout.
 }
+\examples{
+set.seed(9)
+X1 <- matrix(rnorm(20, -2), 10, 2); X2 <- matrix(rnorm(20, 2), 10, 2)
+b <- Otbarfree(list(X1, X2), weights = c(0.5, 0.5), n_supp = 5)
+round(colMeans(b$Y), 2)   # near the midpoint (0, 0)
+}
 \references{
 Cuturi, M. and Doucet, A. (2014). Proceedings of Machine
 Learning Research 32:685-693 (ICML).

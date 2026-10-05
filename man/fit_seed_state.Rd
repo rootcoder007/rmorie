@@ -21,7 +21,6 @@ A vector, from \code{as.numeric}.
 \description{
 A step of the bats_native implementation. Called by \code{.fit_spec}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

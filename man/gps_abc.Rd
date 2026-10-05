@@ -53,3 +53,11 @@ gps_abc(
 \description{
 GPS-ABC adaptive sampler, Meeds & Welling Algorithm 2
 }
+\examples{
+\donttest{
+sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+r <- gps_abc(sim, obs = c(0.5, 1, 1.5), log_prior = function(th) dnorm(th, 0, 5, log = TRUE),
+             theta0 = 0, n_iter = 60L, n_sim = 5L, epsilon = 0.5)
+names(r)
+}
+}

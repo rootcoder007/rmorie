@@ -48,7 +48,6 @@ The value of \code{payload}, as built in the body.
 \description{
 A step of the tmlcic_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(5)

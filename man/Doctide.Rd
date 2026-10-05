@@ -29,6 +29,13 @@ donor sets is empty, as the paper prescribes.  The aggregate is
 \code{DID_M = sum_t (N10_t/NS DID_{+,t} + N01_t/NS DID_{-,t})} with
 \code{NS = sum_t (N10_t + N01_t)}.
 }
+\examples{
+set.seed(12)
+d <- expand.grid(time = 1:4, unit = 1:20)
+d$D <- as.integer(d$unit <= 10 & d$time >= 3)
+d$y <- d$unit / 10 + d$time / 5 + 2 * d$D + rnorm(nrow(d), sd = 0.1)
+Doctide(d$y, d$D, d$unit, d$time)$estimate   # close to 2
+}
 \references{
 de Chaisemartin, C. and D'Haultfoeuille, X. (2020).
 Two-way fixed effects estimators with heterogeneous treatment

@@ -19,5 +19,4 @@ The value of \code{repeat}.
 \description{
 A step of the ttrace_native implementation. Called by \code{negbinom_offspring}.
 See the file header for the source the module follows.
-source it follows.
 }

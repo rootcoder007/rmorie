@@ -26,3 +26,8 @@ A list mirroring the Python \code{RichResult} payload.
 Walks the schedule from \code{t} back to 0. With \code{scale = 0}
 the schedule is the identity and this returns its input unchanged.
 }
+\examples{
+s <- noise_schedule(T = 10, scale = 0)
+x <- c(1, 2, 3)
+identical(denoise(x, model = function(x, t) x, schedule = s)$x0, x)   # scale 0: the identity
+}

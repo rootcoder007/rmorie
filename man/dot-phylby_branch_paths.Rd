@@ -18,5 +18,4 @@ The value of \code{out}, as built in the body.
 A step of the phylby_native implementation. Called by \code{.phylby_log_posterior},
 \code{.phylby_step}.
 See the file header for the source the module follows.
-source it follows.
 }

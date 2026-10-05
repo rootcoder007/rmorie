@@ -17,5 +17,4 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the surepi_native implementation. Called by \code{surepi_compound_smoothing}.
 See the file header for the source the module follows.
-source it follows.
 }

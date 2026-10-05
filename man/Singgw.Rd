@@ -40,6 +40,12 @@ The inverse is the sparse update of their eq. (8) (eq. 6 at w = 0):
 Limiting cases exercised in the tests: G = A11 gives H = A exactly;
 with every individual genotyped, H = Gw.
 }
+\examples{
+A <- diag(4); A[1, 2] <- A[2, 1] <- 0.5
+G <- matrix(c(1, 0.45, 0.45, 1.05), 2)
+r <- Singgw(A, G, genotyped = c(1, 2), w = 0.05)
+round(r$estimate, 3)
+}
 \references{
 Christensen, O. F. and Lund, M. S. (2010). Genomic prediction when some
 animals are not genotyped. Genetics Selection Evolution 42, 2; eqs. (4), (6), (8),

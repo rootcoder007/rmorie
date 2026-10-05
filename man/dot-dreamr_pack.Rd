@@ -17,5 +17,4 @@ A list with \code{estimate}, \code{returns}, \code{n}, \code{method}.
 \description{
 A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_return}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -48,5 +48,4 @@ A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u},
 \description{
 A step of the svdpp_native implementation. Called by \code{.svdpp_fit}.
 See the file header for the source the module follows.
-source it follows.
 }

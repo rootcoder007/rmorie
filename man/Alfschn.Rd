@@ -37,6 +37,17 @@ the caller-supplied literature tables, so only the torsions are free.
 This implements the algebra, not the amino-acid tables: the idealised
 geometry is an argument, never baked in.
 }
+\examples{
+rot <- function(a) { q <- c(1, a) / sqrt(1 + sum(a^2))
+  rbind(c(1 - 2 * (q[3]^2 + q[4]^2), 2 * (q[2] * q[3] - q[1] * q[4]), 2 * (q[2] * q[4] + q[1] * q[3])),
+        c(2 * (q[2] * q[3] + q[1] * q[4]), 1 - 2 * (q[2]^2 + q[4]^2), 2 * (q[3] * q[4] - q[1] * q[2])),
+        c(2 * (q[2] * q[4] - q[1] * q[3]), 2 * (q[3] * q[4] + q[1] * q[2]), 1 - 2 * (q[2]^2 + q[3]^2))) }
+fr <- list(list(R = rot(c(0.1, 0, 0.2)), t = c(1, 0, 0)))
+lit <- list(list(R = diag(3), t = c(0, 1, 0)), list(R = rot(c(0.2, 0, 0)), t = c(1, 1, 0)))
+ang <- array(c(1, 0.6, 0, 0.8), c(1, 2, 2))      # (cos, sin) per torsion
+sc <- Alfschn(fr, ang, lit, parent = c(0, 1), litx = rbind(c(1, 0, 0), c(0, 1, 1)), frameof = c(1, 2))
+round(sc$x[1, , ], 3)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 24-25
 }

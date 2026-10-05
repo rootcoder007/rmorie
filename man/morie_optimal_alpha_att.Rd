@@ -20,6 +20,11 @@ A list with \code{alpha_t}, \code{keep}, \code{trim},
 \description{
 Homoskedastic, as in the paper.
 }
+\examples{
+set.seed(11)
+ps <- runif(500, 0.02, 0.98)
+morie_optimal_alpha_att(ps, rbinom(500, 1, ps))$alpha_t
+}
 \references{
 Crump, R. K. et al. (2009). Theorem 5.3.
 }

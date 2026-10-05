@@ -41,5 +41,4 @@ A vector, from \code{c}.
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 See the file header for the source the module follows.
-source it follows.
 }

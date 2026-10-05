@@ -15,5 +15,4 @@ A numeric value.
 \description{
 A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -17,7 +17,6 @@ The value of \code{result}, as built in the body.
 \description{
 A step of the stahdo_native implementation. Called by \code{.stahdo_subsample_dirs}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .stahdo_combn(n = 4L, p = 2L)

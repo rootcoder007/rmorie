@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}.
 See the file header for the source the module follows.
-source it follows.
 }

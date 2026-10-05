@@ -17,7 +17,6 @@ The value of \code{seq}.
 \description{
 A step of the fairRC_native implementation. Called by \code{.measure}, \code{.raw}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 cutoffs(45, step = 10)

@@ -15,5 +15,4 @@ The value of \code{list}.
 \description{
 A step of the rouge_native implementation. Called by \code{morie_rouge_l}, \code{morie_rouge_w}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -17,7 +17,6 @@ One of two values, depending on the branch taken.
 \description{
 A step of the schN_native implementation. Called by \code{cfconv}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 cosine_cutoff(r = 5L)

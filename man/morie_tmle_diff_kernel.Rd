@@ -36,3 +36,12 @@ The propensity score is truncated at \code{g_min} -- which bounds
 the sensitivity and is therefore part of the privacy guarantee, not
 a numerical convenience.
 }
+\examples{
+set.seed(14)
+n <- 400
+X <- matrix(rnorm(n), n)
+D <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+y <- rbinom(n, 1, plogis(-0.5 + D + X[, 1]))
+r <- morie_tmle_diff_kernel(y, D, X, epsilon = 1, seed = 1)
+names(r)
+}

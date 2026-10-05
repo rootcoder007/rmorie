@@ -23,7 +23,6 @@ A list with \code{estimate}, \code{tokens}, \code{D}, \code{n_patches},
 \description{
 A step of the patchT_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 patchtst_encode(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)

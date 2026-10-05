@@ -21,7 +21,6 @@ A list with \code{tiles}, \code{n_tiles}, \code{output_size}, \code{note}.
 \description{
 A step of the unetbk_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 overlap_tiles(height = 100L, width = 100L, tile = 32L, border = 8L)

@@ -39,7 +39,6 @@ A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}.
 \description{
 A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

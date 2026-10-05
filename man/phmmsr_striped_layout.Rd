@@ -17,7 +17,6 @@ A list with \code{order}, \code{segments}, \code{width}, \code{note}.
 \description{
 A step of the phmmsr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 phmmsr_striped_layout(length = 5L)

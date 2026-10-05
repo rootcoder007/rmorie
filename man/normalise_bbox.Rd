@@ -22,7 +22,6 @@ A vector, from \code{c}.
 A step of the ocrwit_native implementation. Called by \code{patch_of_box},
 \code{segment_layout_boxes}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 normalise_bbox(box = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L, height = 5L)

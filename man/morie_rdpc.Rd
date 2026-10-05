@@ -25,6 +25,9 @@ Renyi differential privacy budget at order \eqn{\alpha} of adding
 budget curve is linear in \eqn{\alpha}, which is what makes RDP
 compose by simple addition.
 }
+\examples{
+morie_rdpc(alpha = 2, sigma = 1)$epsilon_rdp   # 2 * 1 / 2
+}
 \references{
 Mironov, I. (2017). Renyi differential privacy. IEEE
 Computer Security Foundations Symposium, 263-275.

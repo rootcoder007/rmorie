@@ -38,3 +38,6 @@ Averaged over those who test negative and are released at
 \code{t_R} and those who test positive and are detained until
 \code{t_R_positive}.
 }
+\examples{
+efficacy_test_and_release(t_Q = 3, t_T = 6, t_R = 7, false_negative = 0.2)$efficacy
+}

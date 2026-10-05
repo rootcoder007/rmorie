@@ -23,7 +23,6 @@ A numeric value.
 \description{
 A step of the phylml_native implementation. Called by \code{morie_phylml}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 site_likelihood(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"),

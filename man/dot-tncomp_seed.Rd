@@ -17,5 +17,4 @@ The value of \code{which.max}.
 \description{
 A step of the tncomp_native implementation. Called by \code{.tncomp_select}.
 See the file header for the source the module follows.
-source it follows.
 }

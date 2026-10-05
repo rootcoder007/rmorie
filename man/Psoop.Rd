@@ -41,6 +41,10 @@ Formula: \code{v <- w v + c1 r1 (p_best - x) + c2 r2 (g_best - x)},
 \code{x <- clip(x + v, lo, hi)}, with \code{r1}, \code{r2} from the
 low-discrepancy stream instead of a uniform generator.
 }
+\examples{
+rosen <- function(x) (1 - x[1])^2 + 100 * (x[2] - x[1]^2)^2
+Psoop(rosen, bounds = list(c(-2, 2), c(-1, 3)), n_particles = 30, maxiter = 150)$x
+}
 \references{
 Kennedy, J. & Eberhart, R. (1995). Particle swarm
 optimization. Proceedings of ICNN'95, volume 4, pages 1942-1948.

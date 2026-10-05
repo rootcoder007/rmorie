@@ -17,7 +17,6 @@ A list with \code{p}, \code{q}.
 \description{
 A step of the node2v_native implementation. Called by \code{alpha_pq}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 node2v_check_pq(p = 0.5, q = 0.5)

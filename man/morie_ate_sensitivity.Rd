@@ -21,3 +21,6 @@ The bound carries \eqn{1/g_{\min}}, so it is
 \eqn{2R/(n g_{\min})} and NOT \eqn{O(1/n)}. Truncating the
 propensity score is part of the privacy guarantee.
 }
+\examples{
+morie_ate_sensitivity(n = 1000, g_min = 0.05)$sensitivity   # 2 / (1000 * 0.05)
+}

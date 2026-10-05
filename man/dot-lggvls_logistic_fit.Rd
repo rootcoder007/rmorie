@@ -21,7 +21,6 @@ A list with \code{beta}, \code{p_hat}, \code{converged}.
 \description{
 A step of the lggvls_native implementation. Called by \code{.lggvls_ip_weights}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

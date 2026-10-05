@@ -36,7 +36,6 @@ A list with \code{estimate}, \code{policy}, \code{q}, \code{n_improve},
 \description{
 A step of the mdppol_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 P <- list(matrix(c(0.7, 0.3, 0.4, 0.6), nrow = 2, byrow = TRUE),

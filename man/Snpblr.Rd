@@ -41,6 +41,14 @@ from the VanRaden variance split
 \eqn{\sigma_g^2 = 2 \sum_j p_j (1-p_j) \sigma_u^2}:
 \eqn{\lambda = ((1-h^2)/h^2) \, 2 \sum_j p_j (1-p_j)}.
 }
+\examples{
+set.seed(14)
+M <- matrix(rbinom(50 * 20, 2, 0.4), 50, 20)
+u <- rnorm(20, sd = 0.3)
+y <- as.numeric(10 + scale(M, scale = FALSE) \%*\% u + rnorm(50))
+s <- Snpblr(y, M, h2 = 0.5)
+cor(s$estimate, scale(M, scale = FALSE) \%*\% u)
+}
 \references{
 Meuwissen, T. H. E., Hayes, B. J. and Goddard, M. E. (2001). Prediction
 of total genetic value using genome-wide dense marker maps. Genetics 157(4),

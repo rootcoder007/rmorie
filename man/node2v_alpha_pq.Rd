@@ -19,5 +19,8 @@ Nothing; this branch always raises.
 \description{
 A step of the node2v_native implementation. Called by \code{node2v_transition_probabilities}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+node2v_alpha_pq(d_tx = 0, p = 2, q = 0.5)   # return to the previous node: 1/p
+node2v_alpha_pq(d_tx = 2, p = 2, q = 0.5)   # move outward: 1/q
 }

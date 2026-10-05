@@ -37,6 +37,12 @@ are the only lines that differ between the two algorithms.
 All weights are supplied by the caller, so the result is a fixed
 function of its arguments.
 }
+\examples{
+set.seed(13)
+z <- array(rnorm(3 * 3 * 2), c(3, 3, 2))
+w <- function() matrix(rnorm(4, sd = 0.5), 2, 2)
+dim(Alftrimu(z, w(), w(), w(), w(), w(), w(), mode = "outgoing")$z)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 11-12
 }

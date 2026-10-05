@@ -50,7 +50,6 @@ The value of \code{.tmlcen_RichResult}.
 \description{
 A step of the tmlcen_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_tmle_censoring(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(1, 2, 3, 4, 5, 6, 7, 8),

@@ -19,7 +19,6 @@ The value of \code{arg}, as built in the body.
 \description{
 A step of the pate_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 noisy_argmax(counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)

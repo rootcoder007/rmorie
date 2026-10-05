@@ -17,7 +17,6 @@ A vector, from \code{sort}.
 \description{
 A step of the bats_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 spec <- BatsSpec()

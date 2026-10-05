@@ -18,5 +18,4 @@ The value of \code{out}, as built in the body.
 A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq},
 \code{.morie_spx_sarneg2}, \code{MantelZ} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -23,5 +23,4 @@ The value of \code{cols}, as built in the body.
 \description{
 A step of the lggvls_native implementation. Called by \code{lagged_design}, \code{morie_lggvls}.
 See the file header for the source the module follows.
-source it follows.
 }

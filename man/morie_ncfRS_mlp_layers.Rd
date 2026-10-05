@@ -21,7 +21,6 @@ The value of \code{z}, as built in the body.
 \description{
 A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_neumf}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

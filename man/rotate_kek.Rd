@@ -29,3 +29,9 @@ rotate_kek(
 \description{
 Rotate the KEK: re-wrap every DEK, no record ciphertext touched
 }
+\examples{
+old <- as.raw(32:1); new <- as.raw(1:32)
+w <- list(wrap_dek(as.raw(1:32), old, as.raw(1:12)), wrap_dek(as.raw(33:64), old, as.raw(13:24)))
+r <- rotate_kek(w, old, new, new_nonces = list(as.raw(25:36), as.raw(37:48)))
+identical(unwrap_dek(r$wrapped[[2]], new)$dek, as.raw(33:64))
+}

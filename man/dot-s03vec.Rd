@@ -16,7 +16,6 @@ A vector, from \code{as.numeric}.
 A step of the helpers_s03 implementation. Called by \code{.bkw_influence},
 \code{.ch_ols_se}, \code{.icc_balanced} and 343 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

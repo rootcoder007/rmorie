@@ -25,7 +25,6 @@ A list with \code{estimate}, \code{ranking}, \code{difference},
 \description{
 A step of the tagRC_native implementation. Called by \code{morie_tagRC}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 triples <- list(c("u1", "t1", "r1"), c("u1", "t2", "r2"),

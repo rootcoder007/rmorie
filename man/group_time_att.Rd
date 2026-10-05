@@ -23,3 +23,12 @@ A list with \code{att} (named list keyed by \code{(g,t)}),
 \description{
 Group-time ATT(g,t) under staggered adoption
 }
+\examples{
+set.seed(10)
+n <- 30; Tn <- 5
+first <- rep(c(3, 4, Inf), each = 10)
+Y <- matrix(rnorm(n * Tn), n, Tn)
+for (i in seq_len(n)) if (is.finite(first[i])) Y[i, first[i]:Tn] <- Y[i, first[i]:Tn] + 1
+g <- group_time_att(Y, first, comparison = "never-treated")
+g$estimate
+}

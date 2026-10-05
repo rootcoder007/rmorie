@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the slowdp_native implementation. Called by \code{stick_breaking}.
 See the file header for the source the module follows.
-source it follows.
 }

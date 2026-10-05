@@ -15,7 +15,6 @@ Nothing; this branch always raises.
 \description{
 A step of the groebn_native implementation. Called by \code{.groebn_poly}, \code{.groebn_scale}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 .groebn_as_fr(5L)

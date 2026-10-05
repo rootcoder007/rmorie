@@ -25,5 +25,4 @@ The value of \code{best}, as built in the body.
 \description{
 A step of the hntfst_native implementation. Called by \code{honest_tree}.
 See the file header for the source the module follows.
-source it follows.
 }

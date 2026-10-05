@@ -12,7 +12,6 @@ A character value.
 \description{
 A step of the mafft_native implementation. Called by \code{morie_mafft}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .mafft_cheatsheet()

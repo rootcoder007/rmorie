@@ -34,7 +34,6 @@ A list with \code{reference_row}, \code{read_rows}, \code{n_reads},
 \description{
 A step of the varcal_native implementation. Called by \code{morie_varcal}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 reads <- c(

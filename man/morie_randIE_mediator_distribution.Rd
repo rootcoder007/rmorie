@@ -21,7 +21,6 @@ A list with \code{p}, \code{levels}, \code{strata}, \code{arms}, \code{n}.
 \description{
 A step of the randIE_native implementation. Called by \code{morie_randIE_interventional_mean}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

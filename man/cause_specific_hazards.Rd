@@ -32,7 +32,6 @@ A list with \code{hazards}, \code{types}, \code{times}, \code{n}.
 \description{
 A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 cause_specific_hazards(time = c(1, 2, 3, 4, 5, 6, 7, 8),

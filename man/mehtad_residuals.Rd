@@ -26,7 +26,6 @@ A list with \code{primal}, \code{dual}, \code{mu}, \code{primal_norm},
 \description{
 A step of the mehtad_native implementation. Called by \code{morie_mehtad}, \code{solve_lp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 mehtad_residuals(A = matrix(c(1, 1, 1, 2), 2), b = c(3, 4), c = c(1, 2),

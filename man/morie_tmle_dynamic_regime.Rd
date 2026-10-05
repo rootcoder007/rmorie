@@ -52,6 +52,17 @@ the four static comparators.
 \description{
 Mean outcome under the (V-)optimal dynamic treatment rule
 }
+\examples{
+\donttest{
+set.seed(11)
+n <- 400
+L0 <- rnorm(n); A0 <- rbinom(n, 1, 0.5)
+L1 <- L0 + rnorm(n); A1 <- rbinom(n, 1, 0.5)
+y <- L1 + A1 * L1 + A0 * 0.5 + rnorm(n)
+r <- morie_tmle_dynamic_regime(y, cbind(A0, A1), list(matrix(L0), matrix(L1)), n_folds = 5)
+r$estimate
+}
+}
 \references{
 Luedtke, A. R. & van der Laan, M. J. (2018).
 }

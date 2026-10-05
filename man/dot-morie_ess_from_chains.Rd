@@ -17,5 +17,4 @@ A step of the mcmc_native implementation. Called by
 \code{morie_effective_sample_size_bayes}, \code{morie_effective_sample_size_bulk},
 \code{morie_effective_sample_size_tail}.
 See the file header for the source the module follows.
-source it follows.
 }

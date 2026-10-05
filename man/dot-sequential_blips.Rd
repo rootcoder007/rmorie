@@ -30,5 +30,4 @@ A list with \code{blip1}, \code{blip2}, \code{d0}, \code{d1}, \code{q2},
 \description{
 A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
 See the file header for the source the module follows.
-source it follows.
 }

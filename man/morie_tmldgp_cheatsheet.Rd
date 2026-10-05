@@ -12,3 +12,6 @@ A character string.
 \description{
 Compact one-line summary of the tmldgp recipe
 }
+\examples{
+morie_tmldgp_cheatsheet()
+}

@@ -12,3 +12,6 @@ A character string.
 \description{
 Compact one-line summary of the tmldyn recipe
 }
+\examples{
+morie_tmldyn_cheatsheet()
+}

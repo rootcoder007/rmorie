@@ -12,7 +12,6 @@ A character value.
 \description{
 A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 t5enc_cheatsheet()

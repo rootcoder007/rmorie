@@ -47,7 +47,6 @@ The value of \code{nonlinear_cg}.
 \description{
 A step of the cgnonl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 f <- function(x) sum((x - c(1, 2))^2)

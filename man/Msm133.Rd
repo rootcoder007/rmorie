@@ -16,6 +16,10 @@ The list returned by \code{Msm128()}.
 The same method as \code{Msm128()}, re-exported under this name; both run the same
 code.
 }
+\examples{
+xx <- seq(0, 1, length.out = 8); K <- exp(-outer(xx, xx, "-")^2 / 0.1)
+Msm133(K, cos(2 * pi * xx), lam = 0.5)$estimate
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

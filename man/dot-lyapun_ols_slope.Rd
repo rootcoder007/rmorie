@@ -17,5 +17,4 @@ A list with \code{slope}, \code{intercept}, \code{se}, \code{r2}.
 \description{
 A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}.
 See the file header for the source the module follows.
-source it follows.
 }

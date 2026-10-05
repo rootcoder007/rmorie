@@ -16,7 +16,6 @@ The value of \code{\%*\%}.
 A step of the evt_coles implementation. Called by \code{morie_evt_gev_mle},
 \code{morie_evt_gpd_mle}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 MASS_ginv_fallback(H = 0.5)

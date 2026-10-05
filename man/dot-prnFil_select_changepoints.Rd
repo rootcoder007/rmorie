@@ -38,5 +38,4 @@ A list with \code{estimate}, \code{selected}, \code{selected_index},
 \description{
 A step of the prnFil_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

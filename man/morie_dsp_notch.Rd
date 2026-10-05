@@ -19,9 +19,8 @@ morie_dsp_notch(x, freq, fs, q = 30)
 Filtered vector, length(x).
 }
 \description{
-Native IIR notch (module 20); previously wrapped the signal package's
-\code{iirnotch} / \code{filtfilt}. Falls back to a stop with \code{NotYetPorted} if
-\code{signal} is unavailable.
+Native IIR notch (module 20), zero-phase by forward-backward filtering;
+no dependency on the signal package.
 }
 \examples{
 fs <- 1000

@@ -56,6 +56,13 @@ rewards in [0, 1].  Both survey backups are provided: "sum"
 Both final-move criteria: "robust" (most-visited root child,
 default) and "max" (highest mean reward).
 }
+\examples{
+# a race to 5: add 1 or 2 per move; the reward is 1 for landing exactly on 5
+r <- morie_mctsr(root_state = 0, actions = function(s) c(1, 2), step = function(s, a) s + a,
+                 reward = function(s) as.numeric(s == 5), is_terminal = function(s) s >= 5,
+                 n_iter = 300, seed = 1)
+r$action
+}
 \references{
 Browne, C. B. et al. (2012). A survey of Monte Carlo
 tree search methods. IEEE Transactions on Computational

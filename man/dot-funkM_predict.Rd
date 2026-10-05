@@ -24,7 +24,6 @@ A numeric value.
 A step of the funkM_native implementation. Called by \code{.funkM_sgd_epoch},
 \code{morie_funkM_rmse}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # the bias model plus the factor dot product

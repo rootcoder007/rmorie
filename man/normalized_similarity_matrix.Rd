@@ -33,7 +33,6 @@ A list with \code{matrix}, \code{s_a}, \code{alphabet}, \code{average1},
 \description{
 A step of the mafft_native implementation. Called by \code{mafft_alignment}, \code{morie_mafft}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 normalized_similarity_matrix()

@@ -20,7 +20,6 @@ A list with \code{Z}, \code{K}, \code{counts}, \code{alpha}, \code{n},
 \description{
 A step of the ibpfa_native implementation. Called by \code{morie_ibpfa}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sample_ibp(n = 5L, alpha = 0.5)

@@ -19,7 +19,6 @@ A list with \code{logits}, \code{probability}, \code{weights}, \code{note}.
 \description{
 A step of the samdec_native implementation. Called by \code{decode_mask}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 grid <- matrix(c(1, 0, 0, 1, 1, 1), nrow = 3)   # three grid cells, two channels

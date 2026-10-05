@@ -24,7 +24,6 @@ A list with \code{estimate}, \code{top_k}, \code{scores}, \code{context},
 \description{
 A step of the sse4r_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_sse4r(sequence = c(1, 2, 3, 4, 5, 6, 7, 8), user_embedding = TRUE,

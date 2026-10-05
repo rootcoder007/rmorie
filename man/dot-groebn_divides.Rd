@@ -18,7 +18,6 @@ A logical value.
 A step of the groebn_native implementation. Called by \code{.groebn_divide},
 \code{.groebn_reduce_basis}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)

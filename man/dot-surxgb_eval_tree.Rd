@@ -19,5 +19,4 @@ The value of \code{$}.
 A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost},
 \code{morie_surxgb_predict}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -58,5 +58,14 @@ A list with \code{estimate}, \code{output}, \code{attention_mask}, \code{L},
 \description{
 A step of the mistr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(15)
+L <- 4; d <- 4; dff <- 6
+X <- matrix(rnorm(L * d), L, d)
+mk <- function(r, c) matrix(rnorm(r * c, sd = 0.3), r, c)
+b <- mistr_mistral_block(X, Wq = mk(d, d), Wk = mk(d, d / 2), Wv = mk(d, d / 2), Wo = mk(d, d),
+                         W1 = mk(d, dff), W2 = mk(dff, d), W3 = mk(d, dff),
+                         n_heads = 2, n_kv_heads = 1, window = 2)
+dim(b$output)
 }

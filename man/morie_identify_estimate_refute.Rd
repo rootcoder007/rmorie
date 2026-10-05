@@ -50,6 +50,17 @@ conditioning on a collider CREATES an association where none existed.
 Both are flagged and the estimate still returned, so the damage is
 visible rather than merely warned about.
 }
+\examples{
+\donttest{
+set.seed(13)
+n <- 500
+Z <- rnorm(n); T <- rbinom(n, 1, plogis(Z)); Y <- 1 + 2 * T + Z + rnorm(n)
+dag <- matrix(FALSE, 3, 3, dimnames = list(c("Z", "T", "Y"), c("Z", "T", "Y")))
+dag["Z", "T"] <- dag["Z", "Y"] <- dag["T", "Y"] <- TRUE
+r <- morie_identify_estimate_refute(dag, data.frame(Z, T, Y), treatment = 2, outcome = 3, n_refute = 20L)
+r[c("estimate", "adjustment_set", "refutations_passed")]
+}
+}
 \references{
 Pearl J (2009) \emph{Causality}, 2nd ed., Sec 3.3.
 Sharma A, Kiciman E (2020) arXiv:2011.04216.

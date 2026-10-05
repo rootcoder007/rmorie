@@ -25,7 +25,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the bnshrt_native implementation. Called by \code{morie_in_identified_set}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- matrix(c(0.5, -0.2, 0.1, 0.4), 2, 2)

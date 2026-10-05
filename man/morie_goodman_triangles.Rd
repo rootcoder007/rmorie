@@ -32,6 +32,11 @@ least \eqn{20 - 18 = 2}: every colouring of \eqn{K_6} contains not
 one monochromatic triangle but two. At \eqn{n = 5} the bound gives
 zero and the five-cycle attains it.
 }
+\examples{
+set.seed(6)
+col <- matrix(rbinom(36, 1, 0.5), 6); col[lower.tri(col)] <- t(col)[lower.tri(col)]; diag(col) <- 0
+morie_goodman_triangles(col, brute_force = TRUE)[c("monochromatic", "identity_residual")]
+}
 \references{
 Goodman AW (1959) \emph{American Mathematical Monthly}
 66(9):778-783.

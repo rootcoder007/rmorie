@@ -35,5 +35,10 @@ A list with \code{invariant}, \code{max_deviation}, \code{readout}.
 \description{
 A step of the mpfn_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+H <- list(c(1, 0), c(0, 1), c(1, 1))
+adj <- list(`1` = c(2L, 3L), `2` = 1L, `3` = 1L)        # 1-based node labels
+ef <- list(`1,2` = 0.5, `1,3` = 2)                      # edge features keyed "v,w"
+mpfn_is_permutation_invariant(H, adj, ef, perm = c(3L, 1L, 2L))$invariant
 }

@@ -22,5 +22,7 @@ A vector, from \code{c}.
 A step of the ocrwit_native implementation. Called by \code{ocrwit_patch_of_box},
 \code{ocrwit_segment_layout_boxes}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+ocrwit_normalise_bbox(c(10, 20, 110, 70), width = 200, height = 100)
 }

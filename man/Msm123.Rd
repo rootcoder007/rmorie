@@ -30,7 +30,11 @@ and ||f||_H^2 measures model complexity. The objective is evaluated at a
 given (eta_0, beta).
 }
 \examples{
-Msm123(K = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+set.seed(19)
+xx <- seq(0, 1, length.out = 8)
+K <- exp(-outer(xx, xx, "-")^2 / 0.1)
+y <- sin(2 * pi * xx)
+Msm123(K, y, beta = rep(0, 8), lam = 0.1)$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

@@ -15,5 +15,4 @@ The value of \code{w}, as built in the body.
 \description{
 A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
 See the file header for the source the module follows.
-source it follows.
 }

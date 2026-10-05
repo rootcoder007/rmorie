@@ -19,3 +19,8 @@ synthetic_log_likelihood(draws, obs, epsilon = 0, summary = NULL)
 Returns \code{log_lik, mu, cov} per Wilkinson eq. (2) and
 Meeds & Welling eq. (9).
 }
+\examples{
+set.seed(11)
+draws <- replicate(100, rnorm(2), simplify = FALSE)
+synthetic_log_likelihood(draws, obs = c(0.1, -0.2))$log_lik
+}

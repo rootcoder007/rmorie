@@ -59,7 +59,6 @@ A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci},
 \description{
 A step of the hntfst_native implementation. Called by \code{morie_hntfst}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

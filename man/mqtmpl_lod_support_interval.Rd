@@ -17,5 +17,9 @@ A list with \code{peak}, \code{lower}, \code{upper}, \code{drop}, \code{peak_lod
 \description{
 A step of the mqtmpl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+scan <- list(position = seq(0, 1, by = 0.1),
+             lod = c(0.2, 0.5, 1.4, 2.9, 4.1, 3.6, 2.2, 1.0, 0.4, 0.2, 0.1))
+mqtmpl_lod_support_interval(scan, drop = 1.5)
 }

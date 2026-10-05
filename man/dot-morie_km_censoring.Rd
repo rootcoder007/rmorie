@@ -17,5 +17,4 @@ The value of \code{function}.
 \description{
 A step of the twostg_native implementation. Called by \code{Twostg}.
 See the file header for the source the module follows.
-source it follows.
 }

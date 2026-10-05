@@ -38,7 +38,6 @@ The value of \code{.cnvlfc_coupled_logistic}.
 \description{
 A step of the cnvlfc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 cnvlfc_coupled_logistic(n = 5L)

@@ -30,5 +30,4 @@ A list with \code{weights}, \code{per_time}.
 \description{
 A step of the tdcvar_native implementation. Called by \code{morie_tdcvar}.
 See the file header for the source the module follows.
-source it follows.
 }

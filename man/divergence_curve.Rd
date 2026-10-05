@@ -35,7 +35,6 @@ A list with \code{time}, \code{log_divergence}, \code{log_ratio},
 A step of the lyapun_native implementation. Called by \code{lyapunov_exponent},
 \code{morie_lyapun}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r0 <- 3.9; x <- numeric(300); x[1] <- 0.4

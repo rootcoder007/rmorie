@@ -20,7 +20,6 @@ A list with \code{tokens}, \code{n_patches}, \code{n_tokens_total},
 \description{
 A step of the patchT_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 channel_mixed_tokens(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)

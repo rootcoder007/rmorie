@@ -42,7 +42,6 @@ A list with \code{estimate}, \code{P}, \code{Q}, \code{h},
 \description{
 A step of the ncfRS_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

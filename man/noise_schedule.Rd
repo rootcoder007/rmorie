@@ -23,3 +23,7 @@ A list with \code{beta}, \code{alpha_bar}, \code{T},
 At image-diffusion scales the personal history is destroyed. The
 \code{scale} knob keeps it recoverable.
 }
+\examples{
+s <- noise_schedule(T = 50)
+c(min(s$alpha_bar), s$signal_retained)
+}

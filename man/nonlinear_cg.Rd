@@ -52,7 +52,6 @@ A list with \code{x}, \code{fun}, \code{grad}, \code{gnorm}, \code{n_iter},
 \description{
 A step of the cgnonl_native implementation. Called by \code{morie_cgnonl}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 f <- function(x) sum((x - c(1, 2))^2) + 0.5 * x[1]^2 * x[2]^2

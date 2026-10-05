@@ -15,7 +15,6 @@ The value of \code{.sarima_invert_rho}.
 \description{
 A step of the sarima_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 moment_estimate(rho = 0.5)

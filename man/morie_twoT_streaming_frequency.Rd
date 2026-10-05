@@ -21,7 +21,6 @@ A list with \code{B}, \code{probability}, \code{n_items}, \code{note}.
 \description{
 A step of the twoT_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 hits <- list(c(1L, 2L), c(2L), c(2L, 3L))   # the items seen at each of three steps

@@ -17,7 +17,6 @@ The value of \code{[}.
 \description{
 A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 tree <- list(adjacency = list("1" = c("2", "3"), "2" = c("4"),

@@ -19,7 +19,6 @@ A numeric value.
 \description{
 A step of the surxgb_native implementation. Called by \code{.surxgb_build}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_surxgb_leaf_weight(G = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5)

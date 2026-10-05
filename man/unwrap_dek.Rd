@@ -16,3 +16,9 @@ unwrap_dek(wrapped, kek, audit_log = NULL)
 \description{
 Unwrap a DEK, optionally logging the call
 }
+\examples{
+dek <- as.raw(1:32); kek <- as.raw(32:1)
+w <- wrap_dek(dek, kek, as.raw(1:12))
+log_env <- new.env(); log_env$entries <- list()
+identical(unwrap_dek(w, kek)$dek, dek)
+}

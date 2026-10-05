@@ -15,5 +15,4 @@ The value of \code{as.integer}.
 \description{
 A step of the fastxt_native implementation. Called by \code{.gram_slot}.
 See the file header for the source the module follows.
-source it follows.
 }

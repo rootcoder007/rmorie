@@ -15,5 +15,4 @@ One of two values, depending on the branch taken.
 \description{
 A step of the helpers_rouss implementation. Called by \code{Lmsreg}.
 See the file header for the source the module follows.
-source it follows.
 }

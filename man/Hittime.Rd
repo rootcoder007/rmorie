@@ -30,6 +30,10 @@ is solved only over the vertices that can reach it.  Hitting time is
 not symmetric, which is why the commute time H(i,j) + H(j,i) is the
 quantity with metric behaviour.
 }
+\examples{
+G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3)   # path 0 - 1 - 2
+Hittime(G, start = 0L, target = 2L)$estimate   # 4 = (n - 1)^2 steps on a path
+}
 \references{
 Lovasz (1996), Random walks on graphs: a survey, in Combinatorics, Paul
 Erdos is Eighty, vol. 2, pp. 353-398.  This is the standard first-step recurrence.

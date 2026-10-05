@@ -21,7 +21,6 @@ Nothing; this branch always raises.
 \description{
 A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -28,6 +28,11 @@ Rather than carry a second implementation -- which would agree with
 the first at 1e-9 forever while doubling the surface -- this function
 forwards to \code{\link{morie_bnd_manski}}.
 }
+\examples{
+set.seed(7)
+y <- runif(50); obs <- runif(50) > 0.2
+Manskif(y, obs, support = c(0, 1))
+}
 \references{
 Manski, C. F. (1989), Anatomy of the Selection Problem,
 Journal of Human Resources 24(3):343-360. Manski, C. F. (1990),

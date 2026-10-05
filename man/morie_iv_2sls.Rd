@@ -29,6 +29,9 @@ morie_iv_2sls(
 \value{
 Object of class \code{"morie_iv"}: estimate (NA when the
 gate refuses), std.error, conf.int, first_stage_F, stock_yogo_10,
+effective_F and mop_critical_10 (the heteroskedasticity-robust
+Montiel Olea-Pflueger effective F and its TSLS critical value at
+tau = 10 percent),
 weak_instruments, ar_confidence_set, method, n, call.
 }
 \description{

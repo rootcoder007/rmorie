@@ -21,7 +21,6 @@ A step of the cdaeRC_native implementation. Called by
 \code{.plcbsc_synthetic_control}, \code{.tlroad_score_spans_eic}, \code{fit_cdae} and
 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

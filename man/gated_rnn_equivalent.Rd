@@ -19,7 +19,6 @@ A list with \code{h}, \code{g}.
 \description{
 A step of the mambss_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 gated_rnn_equivalent(x = c(1, 2, 3, 4), w = 0.5, b = 0)

@@ -20,3 +20,7 @@ error, the sector width \code{delta}, \code{half_delta}, the
 theoretical MSE bound \code{Delta^2/12}, the \code{bits} and
 \code{levels}.
 }
+\examples{
+q <- morie_tqang_quantize_angles(c(0.1, 1.2, -2.5, 3), bits = 3L)
+q$mse
+}

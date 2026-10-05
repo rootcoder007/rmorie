@@ -15,7 +15,6 @@ A list with \code{sd}, \code{relative}, \code{ranked}, \code{note}.
 \description{
 A step of the prophe_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

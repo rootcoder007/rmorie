@@ -33,6 +33,5 @@ A list with \code{estimate}, \code{masks}, \code{conditioned},
 \description{
 A step of the sam2vd_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

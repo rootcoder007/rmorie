@@ -15,5 +15,4 @@ A numeric value.
 \description{
 A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
 See the file header for the source the module follows.
-source it follows.
 }

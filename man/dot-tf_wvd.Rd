@@ -19,5 +19,4 @@ A list with \code{tfd}, \code{freqs}.
 \description{
 A step of the rangayyan_tf implementation. Called by \code{Gtfd}, \code{WvDist}.
 See the file header for the source the module follows.
-source it follows.
 }
