@@ -1778,6 +1778,13 @@ gps_abc <- function(sim, obs, log_prior, theta0, n_iter = 200L, n_sim = 10L,
 #' @param kernel See Usage.
 #' @param accept_kernel See Usage.
 #' @param seed See Usage.
+#' @examples
+#' \donttest{
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' hm <- history_match(sim, obs = c(0.5, 1, 1.5), prior_ppf = list(-2, 4), n_waves = 2L,
+#'                     n_design = 12L, n_sim = 5L)
+#' names(hm)
+#' }
 #' @export
 history_match <- function(sim, obs, prior_ppf, n_waves = 3L, n_design = 32L,
                           n_sim = 50L, epsilon = 1, summary = NULL,

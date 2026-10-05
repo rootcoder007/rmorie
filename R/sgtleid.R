@@ -21,6 +21,10 @@
 #' @references Traag, V. A., Waltman, L. & van Eck, N. J. (2019). From
 #'   Louvain to Leiden: guaranteeing well-connected communities.
 #'   Scientific Reports 9:5233. Open access.
+#' @examples
+#' A <- matrix(0, 6, 6)
+#' A[1:3, 1:3] <- 1; A[4:6, 4:6] <- 1; A[3, 4] <- A[4, 3] <- 1; diag(A) <- 0
+#' Sgtleid(A, labels = c(1, 1, 1, 2, 2, 2))$n_communities
 #' @export
 Sgtleid <- function(A, labels, gamma = 1) {
   A <- as.matrix(A)

@@ -170,6 +170,8 @@ morie_tqang_quantize_angles <- function(theta, bits = 4L) {
 #' Wrap an angle to \code{[-pi, pi)}
 #' @param theta Numeric scalar.
 #' @return Numeric scalar in \code{[-pi, pi)}.
+#' @examples
+#' morie_tqang_wrap_angle(3 * pi / 2)   # -pi/2
 #' @export
 morie_tqang_wrap_angle <- function(theta) {
   t <- (as.numeric(theta) + pi) %% .tqang_two_pi

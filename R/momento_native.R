@@ -346,6 +346,9 @@ momento_masked_loss <- function(truth, reconstruction, mask) {
 #' @param fill A count; the body uses it as \code{rep(...)}. Defaults to \code{0}.
 #' @return A list with \code{masked}, \code{mask}, \code{mask_idx}, \code{mask_rate},
 #' \code{n_patches}.
+#' @examples
+#' p <- list(c(1, 2), c(3, 4), c(5, 6), c(7, 8))
+#' momento_mask_patches(p, mask_idx = c(1, 3))$masked   # 0-based patch indices
 #' @export
 momento_mask_patches <- function(patches, mask_idx, fill = 0) {
   n <- length(patches)

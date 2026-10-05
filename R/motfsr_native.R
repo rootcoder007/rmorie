@@ -512,6 +512,8 @@ morie_motfsr_motifmeme <- morie_motfsr
 #' @param alphabet Optional; may be \code{NULL}. Coerced to character by the body, with
 #' \code{as.character}.
 #' @return A vector, from \code{sort}.
+#' @examples
+#' motfsr_alphabet_of(c("ACGT", "TTGA"), alphabet = NULL)
 #' @export
 motfsr_alphabet_of <- function(seqs, alphabet) {
   if (!is.null(alphabet)) {
@@ -564,6 +566,8 @@ motfsr_bayes_threshold <- function(lambda1, loss = NULL) {
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(motfsr_cheatsheet())
 #' @export
 motfsr_cheatsheet <- function() {
   paste(paste0(
@@ -818,6 +822,8 @@ motfsr_mu <- function(coded, L) {
 #' @param w A count; the body uses it as \code{seq_len(...)}.
 #' @param max_sweeps A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
 #' @return The value of \code{z}, as built in the body.
+#' @examples
+#' motfsr_normalise_windows(z = c(0.6, 0.6, 0.1, 0.9, 0.2), w = 2)
 #' @export
 motfsr_normalise_windows <- function(z, w, max_sweeps = 100) {
   if (w < 2L) return(z)
@@ -1046,6 +1052,12 @@ motfsr_run <- function(sequences, w, alphabet = NULL, n_motifs = 1,
 #' @param alphabet A vector; its length is taken.
 #' @param threshold Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{scores}, \code{hits}.
+#' @examples
+#' # log-odds against a uniform background, one vector over A, C, G, T per motif position
+#' pwm <- list(c(0.9, 0.05, 0.025, 0.025), c(0.05, 0.9, 0.025, 0.025), c(0.05, 0.05, 0.85, 0.05))
+#' spec <- lapply(pwm, function(p) log2(p / 0.25))
+#' s <- motfsr_score_sequence(spec, "TTACGTT", alphabet = c("A", "C", "G", "T"), threshold = 3)
+#' s$hits   # 0-based start of "ACG"
 #' @export
 motfsr_score_sequence <- function(spec, sequence, alphabet, threshold = NULL) {
   idx <- setNames(seq_along(alphabet) - 1L, alphabet)
@@ -1105,6 +1117,8 @@ motfsr_theta_from_subsequence <- function(coded, i, j, w, L, mu, weight) {
 #' @param L Accepted by the signature and not used anywhere in the body.
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{theta}, as built in the body.
+#' @examples
+#' motfsr_uniform_theta(w = 3, L = 10, mu = 0.5)
 #' @export
 motfsr_uniform_theta <- function(w, L, mu) {
   theta <- vector("list", w + 1L)

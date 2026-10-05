@@ -15,6 +15,9 @@
 #' @references Wasserman (2004), All of Statistics, Definition 10.21 and Theorem 10.22,
 #'   under which lambda converges to chi^2 with r - q degrees of freedom, "the dimension
 #'   of Theta minus the dimension of Theta_0".
+#' @examples
+#' # nested normal models: the full model frees one mean
+#' Lrtest(loglik_full = -140.2, loglik_null = -143.9, df = 1)
 #' @export
 Lrtest <- function(loglik_full, loglik_null, df) {
   lf <- as.numeric(loglik_full)

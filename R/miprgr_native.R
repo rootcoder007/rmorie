@@ -472,6 +472,11 @@ morie_miprgr <- morie_miprgr_branch_and_bound
 #' @return A list with \code{estimate}, \code{value}, \code{x}, \code{feasible},
 #' \code{nodes}, \code{pruned}, \code{pruning}, \code{max_list_length},
 #' \code{root_bound}, \code{truncated}, \code{method}, \code{note}.
+#' @examples
+#' # maximise 5 x1 + 4 x2 subject to 6 x1 + 4 x2 <= 24, x1 + 2 x2 <= 6, integer x
+#' A <- matrix(c(6, 4, 1, 2), 2, byrow = TRUE)
+#' r <- miprgr_branch_and_bound(A, b = c(24, 6), c = c(5, 4), integer_vars = c(1, 2))
+#' c(r$value, r$x)
 #' @export
 miprgr_branch_and_bound <- function(A, b, c, integer_vars, maximise = TRUE,
                                     prune = TRUE, max_nodes = 5000,

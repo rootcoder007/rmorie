@@ -9,5 +9,7 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer. DOI 10.1007/978-3-030-89010-0.
+#' @examples
+#' Msm047(sigma2 = 2)$log_density
 #' @export
 Msm047 <- function(...) Msm043(...)

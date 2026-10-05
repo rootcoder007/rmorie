@@ -22,6 +22,12 @@
 #'   are Manski's worst case, equation (2.11) of Molinari, F. (2021),
 #'   Handbook of Econometrics 7A (arXiv:2004.11751 p. 17); the corner
 #'   argument is written out in Details.
+#' @examples
+#' set.seed(9)
+#' X <- rep(c("a", "b"), each = 50)
+#' D <- rbinom(100, 1, 0.5)
+#' y <- rbinom(100, 1, 0.3 + 0.2 * D)
+#' Bndlgt(y, D, X)[c("lower", "upper")]
 #' @export
 Bndlgt <- function(y, D, X) {
   z <- .bnd_yd(y, D, "Bndlgt")

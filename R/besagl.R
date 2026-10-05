@@ -20,6 +20,9 @@
 #'   43(1), 1-20; Besag (1974), JRSS B 36(2), 192-236.  Standard
 #'   published form; neither article is in the local corpus and neither
 #'   was read.
+#' @examples
+#' A <- matrix(0, 4, 4); A[cbind(1:3, 2:4)] <- 1; A <- A + t(A)
+#' Bymfit(y = c(5, 8, 12, 4), E = c(6, 7, 9, 6), A = A, u = rep(0, 4), v = rep(0, 4))$logpost
 #' @export
 Bymfit <- function(y, E, A, u, v, taus = 1, tauv = 1, X = NULL,
                    beta = NULL) {

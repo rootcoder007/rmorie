@@ -242,6 +242,8 @@ prxgms_cheatsheet <- function() {
 #' @param v Numeric vector.
 #' @param tau Non-negative threshold.
 #' @return Numeric vector of the same length.
+#' @examples
+#' soft_threshold(c(-3, -0.5, 0, 0.5, 3), tau = 1)
 #' @export
 soft_threshold <- function(v, tau) {
   v <- as.numeric(v)

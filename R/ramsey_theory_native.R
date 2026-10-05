@@ -260,6 +260,10 @@ morie_ramsey_lower_bound_probabilistic <- function(k) {
 #'   `total_triangles`, `goodman_minimum`, `identity_residual`.
 #' @references Goodman AW (1959) \emph{American Mathematical Monthly}
 #'   66(9):778-783.
+#' @examples
+#' set.seed(6)
+#' col <- matrix(rbinom(36, 1, 0.5), 6); col[lower.tri(col)] <- t(col)[lower.tri(col)]; diag(col) <- 0
+#' morie_goodman_triangles(col, brute_force = TRUE)[c("monochromatic", "identity_residual")]
 #' @export
 morie_goodman_triangles <- function(colouring, brute_force = FALSE) {
   A <- as.matrix(colouring)

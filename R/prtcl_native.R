@@ -248,6 +248,11 @@ effective_sample_size <- function(weights) {
 #' @param m0 Initial state mean.
 #' @param p0 Initial state variance.
 #' @return A list with \code{filtered_mean} and \code{loglik}.
+#' @examples
+#' set.seed(15)
+#' x <- cumsum(rnorm(30, sd = 0.3)); y <- x + rnorm(30, sd = 0.5)
+#' k <- kalman_filter_1d(y, a = 1, q = 0.09, c = 1, r = 0.25)
+#' c(k$loglik, tail(k$filtered_mean, 1))
 #' @export
 kalman_filter_1d <- function(y, a, q, c, r, m0 = 0.0, p0 = 1.0) {
   m <- as.numeric(m0)

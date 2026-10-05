@@ -34,6 +34,14 @@
 #'   Methodology, 18(2), 209-217.  Rao, J. N. K. and Wu, C. F. J.
 #'   (1988). Resampling inference with complex survey data. JASA,
 #'   83, 231-241.
+#' @examples
+#' set.seed(1)
+#' strata <- rep(1:2, each = 12)
+#' clusters <- rep(1:8, each = 3)
+#' y <- rnorm(24, 10)
+#' w <- rep(c(5, 8), each = 12)
+#' b <- morie_bootss(y, w, strata, clusters, B = 100, seed = 1)
+#' c(b$estimate, b$se)
 #' @export
 morie_bootss <- function(y, weights, strata, clusters,
                          statistic = NULL, B = 200, m = NULL,

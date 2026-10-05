@@ -1577,6 +1577,8 @@ mafft_clean <- function(seqs, seq_type = NULL) {
 #' @param seq_type Compared against \code{"nt"}.
 #' @param which Compared against \code{"grantham"}. Defaults to \code{"jtt200"}.
 #' @return A list with \code{M}, \code{f}.
+#' @examples
+#' str(mafft_default_raw("nt"), max.level = 1)
 #' @export
 mafft_default_raw <- function(seq_type, which = "jtt200") {
   # the module's own raw matrix: "a|b" keys, the whole alphabet (the
@@ -1665,6 +1667,10 @@ mafft_lookup <- function(M, a, b) {
 #' @param w2 Passed to \code{mafft_gap_profiles}.
 #' @param s_op Numeric; combined arithmetically in the body.
 #' @return A list with \code{out1}, \code{out2}.
+#' @examples
+#' sc <- normalized_similarity_matrix(seq_type = "aa")
+#' r <- mafft_nw("MKVLA", "MKLA", sc$M, 1, 1, s_op = -1.53)
+#' unlist(r)
 #' @export
 mafft_nw <- function(g1, g2, M, w1, w2, s_op) {
   # the module's recursion: the copy kept here read ge[i] where the
@@ -1702,6 +1708,9 @@ mafft_peaks <- function(lags, c, n_peaks) .mafft_peaks(lags, c, n_peaks)
 #' @param i Character; passed to \code{substr}.
 #' @param j Character; passed to \code{substr}.
 #' @return The value of \code{tot}, as built in the body.
+#' @examples
+#' sc <- normalized_similarity_matrix(seq_type = "aa")
+#' mafft_site_score(sc$M, list("MKV"), list("MRV"), 1, 1, 2L, 2L)
 #' @export
 mafft_site_score <- function(M, ga, gb, wa, wb, i, j) {
   .mafft_site_score(M, ga, gb, wa, wb, i, j)

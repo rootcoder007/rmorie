@@ -795,6 +795,10 @@ mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions, error_rate =
 #' @param genotype_column A vector; its length is taken.
 #' @param model_dimension Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
+#' @examples
+#' set.seed(8)
+#' g <- rbinom(30, 1, 0.5)
+#' mqtmpl_imputation_weights(y = 1 + g + rnorm(30), genotype_column = g)
 #' @export
 mqtmpl_imputation_weights <- function(y, genotype_column, model_dimension = 2) {
   n <- length(y)

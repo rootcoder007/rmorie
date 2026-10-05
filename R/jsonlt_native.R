@@ -192,6 +192,8 @@ morie_jsonlt_base64_enc <- function(input) {
 #'
 #' @param input base64 text (character, joined by newlines) or raw.
 #' @return a raw vector.
+#' @examples
+#' rawToChar(morie_jsonlt_base64_dec("aGVsbG8gd29ybGQ="))
 #' @export
 morie_jsonlt_base64_dec <- function(input) {
   if (is.character(input)) input <- charToRaw(paste(input, collapse = "\n"))

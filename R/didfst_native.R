@@ -439,6 +439,17 @@ did_estimate <- function(delta, D, weights = NULL) {
 #' @param kind Forest subsampling scheme passed to \code{hntfst}.
 #' @param clusters Optional cluster IDs.
 #' @return A list mirroring the Python \code{RichResult} payload.
+#' @examples
+#' \donttest{
+#' set.seed(4)
+#' n <- 200
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' D <- rbinom(n, 1, 0.5)
+#' Y <- matrix(rnorm(n * 4), n, 4)
+#' Y[, 3:4] <- Y[, 3:4] + D * (1 + X[, 1])
+#' f <- did_forest(Y, D, X, event_time = 3, n_trees = 50L)
+#' names(f)
+#' }
 #' @export
 #' @aliases didforest
 did_forest <- function(Y, D, X, event_time, x_eval = NULL,
@@ -514,6 +525,14 @@ did_forest <- function(Y, D, X, event_time, x_eval = NULL,
 #' @return A list with \code{att} (named list keyed by \code{(g,t)}),
 #'   \code{cohorts}, \code{T}, \code{n}, \code{comparison},
 #'   \code{estimate}, \code{method}.
+#' @examples
+#' set.seed(10)
+#' n <- 30; Tn <- 5
+#' first <- rep(c(3, 4, Inf), each = 10)
+#' Y <- matrix(rnorm(n * Tn), n, Tn)
+#' for (i in seq_len(n)) if (is.finite(first[i])) Y[i, first[i]:Tn] <- Y[i, first[i]:Tn] + 1
+#' g <- group_time_att(Y, first, comparison = "never-treated")
+#' g$estimate
 #' @export
 group_time_att <- function(Y, first_treated, comparison = "not-yet-treated") {
   pp <- .ghc_didfst_panel(Y)
@@ -575,6 +594,10 @@ group_time_att <- function(Y, first_treated, comparison = "not-yet-treated") {
 #' @param Y Balanced n-by-T panel.
 #' @param event_time \code{H}, in 1-based period numbers.
 #' @return Numeric vector of length n.
+#' @examples
+#' Y <- matrix(c(1, 2, 4, 5,
+#'               2, 2, 3, 3), 2, byrow = TRUE)
+#' panel_differences(Y, event_time = 3)   # mean(post) - mean(pre) per unit
 #' @export
 panel_differences <- function(Y, event_time) {
   pp <- .ghc_didfst_panel(Y)

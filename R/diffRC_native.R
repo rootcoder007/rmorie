@@ -312,6 +312,9 @@ importance_weights <- function(step_losses, uniform = FALSE,
 #' @param beta_max Upper endpoint of the unscaled linear schedule.
 #' @return A list with \code{beta}, \code{alpha_bar}, \code{T},
 #'   \code{scale}, \code{signal_retained}, \code{note}.
+#' @examples
+#' s <- noise_schedule(T = 50)
+#' c(min(s$alpha_bar), s$signal_retained)
 #' @export
 noise_schedule <- function(T, scale = 0.001, beta_min = 0.0001,
                            beta_max = 0.02) {

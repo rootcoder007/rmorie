@@ -236,6 +236,11 @@ mpfn_cheatsheet <- function() {
 #' @param how Passed to \code{mpfn_readout}. Defaults to \code{"sum"}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{invariant}, \code{max_deviation}, \code{readout}.
+#' @examples
+#' H <- list(c(1, 0), c(0, 1), c(1, 1))
+#' adj <- list(`1` = c(2L, 3L), `2` = 1L, `3` = 1L)        # 1-based node labels
+#' ef <- list(`1,2` = 0.5, `1,3` = 2)                      # edge features keyed "v,w"
+#' mpfn_is_permutation_invariant(H, adj, ef, perm = c(3L, 1L, 2L))$invariant
 #' @export
 mpfn_is_permutation_invariant <- function(H, adj, edge_features, perm, T = 3,
                                           how = "sum", tol = 1e-9) {

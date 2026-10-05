@@ -423,6 +423,12 @@ NULL
 #' @param mu Passed to \code{.Call}.
 #' @param eps Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' set.seed(5)
+#' x <- rnorm(200)
+#' d <- stats::filter(x, c(0.5, -0.3), sides = 1); d[is.na(d)] <- 0
+#' w <- morie_dsp_nlms_cpp(x, as.numeric(d), 2L, 0.5, 1e-6)
+#' str(w)
 #' @export
 #' @name morie_dsp_nlms_cpp
 #' @rdname morie_dsp_nlms_cpp
@@ -554,6 +560,9 @@ NULL
 #' @param eta Passed to \code{.Call}.
 #' @param beta Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_hawkes_ll_exp_const_cpp(t = c(0.5, 1.2, 2.0, 3.1), T_horizon = 4, a0 = 0.8,
+#'                               eta = 0.3, beta = 1.5)
 #' @export
 #' @name morie_hawkes_ll_exp_const_cpp
 #' @rdname morie_hawkes_ll_exp_const_cpp
@@ -571,6 +580,9 @@ NULL
 #' @param alpha Passed to \code{.Call}.
 #' @param lam Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_hawkes_ll_weibull_const_cpp(t = c(0.5, 1.2, 2.0, 3.1), T_horizon = 4, a0 = 0.8,
+#'                                   eta = 0.3, alpha = 1.5, lam = 1)
 #' @export
 #' @name morie_hawkes_ll_weibull_const_cpp
 #' @rdname morie_hawkes_ll_weibull_const_cpp
@@ -796,6 +808,10 @@ NULL
 #' @param caliper Passed to \code{.Call}.
 #' @param n_neighbors Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' D <- matrix(c(0.1, 0.5, 0.9,
+#'               0.4, 0.2, 0.8), 2, byrow = TRUE)   # treated x control distances
+#' morie_matching_nn_select_cpp(D, FALSE, Inf, 1L)
 #' @export
 #' @name morie_matching_nn_select_cpp
 #' @rdname morie_matching_nn_select_cpp

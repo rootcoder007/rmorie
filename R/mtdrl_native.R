@@ -232,6 +232,8 @@ mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100, seed = 0,
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(mtdrl_cheatsheet())
 #' @export
 mtdrl_cheatsheet <- function() {
   paste(paste0(

@@ -272,6 +272,8 @@ morie_qrntcq <- morie_qrntcq_gamma_generation_time
 #' @return A list with \code{efficacy}, \code{efficacy_detained},
 #'   \code{efficacy_released}, \code{false_negative}, \code{t_T},
 #'   \code{t_R}, \code{bound}, \code{note}.
+#' @examples
+#' efficacy_test_and_release(t_Q = 3, t_T = 6, t_R = 7, false_negative = 0.2)$efficacy
 #' @export
 #' @aliases testandrelease
 efficacy_test_and_release <- function(t_Q, t_T, t_R, false_negative,

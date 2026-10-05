@@ -534,6 +534,14 @@ morie_tmldyk_cheatsheet <- function() {
 #' @param g,Q1,Q0 Optional pre-fitted nuisances.
 #' @return A list with the private estimate, the non-private TMLE for
 #'   comparison, the sensitivity, and the private interval.
+#' @examples
+#' set.seed(14)
+#' n <- 400
+#' X <- matrix(rnorm(n), n)
+#' D <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+#' y <- rbinom(n, 1, plogis(-0.5 + D + X[, 1]))
+#' r <- morie_tmle_diff_kernel(y, D, X, epsilon = 1, seed = 1)
+#' names(r)
 #' @export
 morie_tmle_diff_kernel <- function(y, D, X, epsilon = 1.0, g_min = 0.05,
                                    seed = 0, g = NULL, Q1 = NULL,

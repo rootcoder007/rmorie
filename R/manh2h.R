@@ -23,6 +23,12 @@
 #'   \code{k_indirect}.
 #' @references Dias, S., Welton, N. J., Caldwell, D. M. and Ades, A. E.
 #'   (2010). Statistics in Medicine 29(7-8):932-944. \doi{10.1002/sim.3767}.
+#' @examples
+#' # three trials of 1 vs 2, one of 1 vs 3, one of 2 vs 3 (integer treatment labels)
+#' yi <- c(0.30, 0.25, 0.35, 0.50, 0.20)
+#' vi <- c(0.02, 0.03, 0.02, 0.04, 0.03)
+#' design <- rbind(c(1, 2), c(1, 2), c(1, 2), c(1, 3), c(2, 3))
+#' Manh2h(yi, vi, design, edge = c(1, 3))[c("direct", "indirect", "p")]
 #' @export
 Manh2h <- function(yi, vi, design, edge) {
   y <- as.numeric(yi)
