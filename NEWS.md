@@ -1,5 +1,22 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* The 19 OTIS Ruhela-formulation analyses that returned a "not yet ported" placeholder run:
+  `morie_otis_analyze_{a01,b01,b02}_ruhela_formulations()` (the ten-estimator DLRM with the IRM-DML
+  standard-error comparison and the Naive arm), the per-year driver and its a01/b01 forms, the a01,
+  b01 and b02 alternative-treatment and gender-subgroup formulations, and
+  `morie_otis_analyze_a01_with_csi_context()` (TPS tables passed as `tps_data=` or loaded). New
+  estimators behind them: `morie_otis_gcomputation()`, `morie_otis_atc()`, `morie_otis_balance()`
+  and `morie_otis_per_year_irm_dml()`. An aggregate analysis given a table without its columns says
+  which columns are missing.
+* Weak-instrument tests computed from the data: `morie_iv_montiel_olea_pflueger()` (effective F,
+  robust to heteroskedasticity, clustering and serial correlation, with Patnaik critical values for
+  the simplified, TSLS and LIML tests) and a native `morie_iv_kleibergen_paap()` (rk statistic and rk
+  Wald F by the Kleibergen-Paap SVD, robust or clustered; it returned the Cragg-Donald statistic).
+  `morie_iv_2sls()` reports the effective F and its critical value beside the iid quantities, and
+  `morie_iv_stock_yogo()` outside its rows points to both instead of "TODO: extend".
+* Without DBI, a cache given as `db_path=` keeps its files beside that path; every such cache shared
+  one directory, so a table cached for one database was read back for another.
+
 * `morie_estimate_ate()` (and the MRM "ipw ate" row) reports the HC3 sandwich standard error of the
   weighted regression `y ~ t` whose coefficient its Hajek estimate is, as morie's Python does. It
   used the Horvitz-Thompson influence function, which is not centred on the group means: the

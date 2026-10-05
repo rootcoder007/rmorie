@@ -465,17 +465,29 @@ morie_iv_cragg_donald <- function(data, endogenous, instruments,
                         outcome_used = if (is.null(outcome)) endogenous[1] else outcome))
 }
 
-#' Stock-Yogo critical values
-#' @inheritParams morie_iv_params
-#' @return A named \code{list} of Stock-Yogo weak-instrument critical values.
+#' Stock-Yogo critical values (TSLS maximal size, one endogenous regressor)
+#'
+#' The first-stage F thresholds of Stock and Yogo (2005, Table 5.2) for a
+#' nominal 5 percent TSLS Wald test whose actual size is at most 10, 15, 20 or
+#' 25 percent, for one endogenous regressor and one to three instruments: the
+#' rows widely reprinted in textbooks. They assume iid errors. Outside those
+#' rows, or with heteroskedastic, clustered or serially correlated errors, use
+#' \code{\link{morie_iv_montiel_olea_pflueger}} (effective F with critical
+#' values computed from the data) or \code{\link{morie_iv_kleibergen_paap}}
+#' (rk Wald F, rule of thumb 10).
+#'
+#' @param n_endogenous Number of endogenous regressors.
+#' @param n_instruments Number of excluded instruments.
+#' @return A named \code{list} of critical values (\code{10pct} ...
+#'   \code{25pct}).
+#' @references Stock, J. H. and Yogo, M. (2005). Testing for weak instruments
+#'   in linear IV regression. In Andrews and Stock (eds), \emph{Identification
+#'   and Inference for Econometric Models}, Cambridge University Press, 80-108.
 #' @examples
 #' out <- morie_iv_stock_yogo(n_endogenous = 1, n_instruments = 1)
 #' out
 #' @export
 morie_iv_stock_yogo <- function(n_endogenous = 1, n_instruments = 1) {
-  # TODO: ship full Stock & Yogo (2005, Table 5.2) lookup table -- currently
-  # only the 10/15/20/25 percent maximal-bias thresholds for the leading
-  # 1-endogenous case are reproduced.  Replicates iv.py:stock_yogo_critical_values.
   tab <- list("1_1" = c(`10pct` = 16.38, `15pct` = 8.96,
                         `20pct` = 6.66, `25pct` = 5.53),
               "1_2" = c(`10pct` = 19.93, `15pct` = 11.59,
@@ -483,29 +495,15 @@ morie_iv_stock_yogo <- function(n_endogenous = 1, n_instruments = 1) {
               "1_3" = c(`10pct` = 22.30, `15pct` = 12.83,
                         `20pct` = 9.54, `25pct` = 7.80))
   key <- paste(n_endogenous, n_instruments, sep = "_")
-  if (!key %in% names(tab))
-    stop("Stock-Yogo: combination not in shipped table. TODO: extend.")
+  if (!key %in% names(tab)) {
+    stop(sprintf(paste0(
+      "Stock-Yogo critical values are included here only for 1 endogenous ",
+      "regressor and 1-3 instruments (asked: %s and %s). Use ",
+      "morie_iv_montiel_olea_pflueger() for computed critical values, or ",
+      "morie_iv_kleibergen_paap() against the rule of thumb of 10."),
+      n_endogenous, n_instruments), call. = FALSE)
+  }
   as.list(tab[[key]])
-}
-
-#' Kleibergen-Paap rank statistic
-#' @inheritParams morie_iv_params
-#' @return A named list with elements \code{statistic}, \code{p_value}, \code{name}, \code{details}.
-#' @examples
-#' set.seed(1)
-#' n <- 300
-#' z <- rbinom(n, 1, 0.5); u <- rnorm(n)
-#' d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
-#' y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
-#' df <- data.frame(y, d, z)
-#' out <- morie_iv_kleibergen_paap(df, "d", "z")
-#' out$statistic
-#' @export
-morie_iv_kleibergen_paap <- function(data, endogenous, instruments,
-                                     exogenous = NULL) {
-  # TODO: native non-i.i.d. KP rank test (Kleibergen & Paap, 2006).  For now
-  # delegate to ivreg's weak-instrument diagnostic, which uses KP under HC.
-  morie_iv_cragg_donald(data, endogenous, instruments, exogenous)
 }
 
 #' Anderson-Rubin (AR) weak-IV-robust test
