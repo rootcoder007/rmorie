@@ -203,15 +203,17 @@ morie_iv_kleibergen_paap <- function(data, endogenous, instruments,
   max(abs((base - min(ev)) / den), abs((base - max(ev)) / den))
 }
 
-# The supremum over beta: widen [-b, b] until both ends are within eps of the
+# The supremum over beta: widen [-b, b] (doubling) until both ends are within eps of the
 # beta -> +-infinity limit, scan 10,000 points, then polish the best point
 # with a one-dimensional search between its grid neighbours (weakivtest uses
 # Nelder-Mead from the best grid point).
 #' @noRd
 .ivw_sup_beta <- function(f, limit, eps = 1e-3, points = 10000L) {
   off <- function(b) max(abs(f(b) / limit - 1), abs(f(-b) / limit - 1))
+  # weakivtest widens the bracket one unit at a time; doubling reaches the same
+  # eps-tolerance bracket in a few dozen evaluations instead of tens of thousands
   b <- 1
-  while (off(b) > eps && b < 1e6) b <- b + 1
+  while (off(b) > eps && b < 1e8) b <- 2 * b
   grid <- seq(-b, b, length.out = points + 1L)
   vals <- vapply(grid, f, numeric(1))
   i <- which.max(vals)
