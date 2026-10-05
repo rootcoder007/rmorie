@@ -1068,126 +1068,194 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
 # 8. Bayesian methods (native samplers in spatial_voting_bayes_native.R)
 # ===========================================================================
 
-#' Bayesian Aldrich-McKelvey scaling
+#' Bayesian Aldrich-McKelvey scaling (Hare et al. 2015)
 #'
-#' @param Z Perceptual placement matrix.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
-#' @param prior_sd Prior SD on stimulus positions.
-#' @return List: `zeta_mean`, `zeta_sd` (posterior stimulus
-#'   positions), `sigma2`, `n_samples`, `engine`.
+#' Respondent \eqn{i} places stimulus \eqn{j} at
+#' \deqn{z_{ij} \sim N(a_i + b_i \hat z_j,\; 1 / (\tau_i \tau_j)),}
+#' a respondent-specific shift and stretch of the common stimulus
+#' positions \eqn{\hat z} plus noise whose precision factors into a
+#' respondent and a stimulus part.  Priors follow the authors' JAGS
+#' template: \eqn{a_i, b_i \sim U(-100, 100)},
+#' \eqn{\tau_j \sim G(0.1, 0.1)}, \eqn{\tau_i \sim G(g_a, g_b)} with
+#' \eqn{g_a, g_b \sim G(0.1, 0.1)}, and \eqn{\hat z} the standardised
+#' version of \eqn{z^* \sim N(0, 1)}, with the \code{polarity} stimulus
+#' restricted to the left (\eqn{z^* \le 0}).  Standardising fixes the
+#' location and scale, the polarity restriction the reflection.
+#'
+#' Gibbs sampling: \eqn{a_i \mid b_i} and \eqn{b_i \mid a_i} are truncated
+#' normals, \eqn{\tau_j}, \eqn{\tau_i} and \eqn{g_b} conjugate gammas, and
+#' \eqn{g_a} and each \eqn{z^*_j} are slice sampled (Neal 2003); every
+#' \eqn{z^*_j} enters every \eqn{\hat z} through the mean and standard
+#' deviation, so the stimuli are updated one at a time against the full
+#' likelihood.  On 150 simulated respondents and five stimuli the
+#' posterior means and standard deviations agree with the JAGS model run
+#' through \code{asmcjr::BAM} to the third decimal.
+#'
+#' @param Z Respondent-by-stimulus placement matrix; \code{NA} marks a
+#'   missing placement and rows with no placements are dropped.
+#' @param n_samples Retained draws.
+#' @param burn_in Sweeps discarded first.
+#' @param polarity Column index of the stimulus placed on the left.
+#' @param seed RNG seed.
+#' @return List: \code{zeta_mean}, \code{zeta_sd} and
+#'   \code{zeta_interval} (central 95\%) for the stimuli, \code{a} and
+#'   \code{b} (posterior mean shifts and stretches), \code{tau_stimulus},
+#'   \code{draws} (retained \eqn{\hat z}, one row per draw),
+#'   \code{n_samples}, \code{engine}.
 #' @references
-#'   Hare, C., Armstrong, D. A., Bakker, R., Carroll, R., and Poole, K. T.
-#'   (2015). "Using Bayesian Aldrich-McKelvey Scaling to Study Citizens'
-#'   Ideological Preferences and Perceptions." *AJPS*, 59(3).
+#'   Hare, C., Armstrong, D. A., Bakker, R., Carroll, R. and Poole, K. T.
+#'   (2015). Using Bayesian Aldrich-McKelvey scaling to study citizens'
+#'   ideological preferences and perceptions. \emph{American Journal of
+#'   Political Science} 59(3), 759-774.
+#'
+#'   Neal, R. M. (2003). Slice sampling. \emph{Annals of Statistics}
+#'   31(3), 705-767.
 #' @examples
 #' set.seed(1)
-#' if (requireNamespace("basicspace", quietly = TRUE)) {
-#'   \donttest{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
-#' }
+#' zt <- c(-1, -0.3, 0.4, 1.2)
+#' Z <- rnorm(40, 0, 0.5) + outer(runif(40, 0.5, 1.5), zt) +
+#'   matrix(rnorm(160, 0, 0.3), 40, 4)
+#' fit <- morie_spatial_voting_bayesian_am(Z, n_samples = 200L,
+#'                                         burn_in = 100L)
+#' round(fit$zeta_mean, 2)
+#' # the true positions, standardised the same way
+#' round((zt - mean(zt)) / sd(zt), 2)
 #' @export
 morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
                                              burn_in = 200L,
-                                             prior_sd = 10.0) {
+                                             polarity = 1L,
+                                             seed = 42L) {
+  .morie_arg(Z, "mNA")
   Z <- as.matrix(Z)
   mode(Z) <- "numeric"
-  if (requireNamespace("basicspace", quietly = TRUE) &&
-        .sv_basicspace_shape_ok(Z)) {
-    # basicspace::aldmck rejects `missing = NA` (it expects integer
-    # sentinels). Letting it default + casting to numeric is the
-    # safe path for arbitrary floating-point input matrices.
-    out <- try(basicspace::aldmck(Z, respondent = 0, polarity = 1),
-               silent = TRUE)
-    if (!inherits(out, "try-error")) {
-      return(list(
-        zeta_mean = as.numeric(out$stimuli),
-        engine    = "basicspace (deterministic AM; full Bayesian not ported)"
-      ))
-    }
+  if (sum(colSums(is.finite(Z)) > 0L) < 2L) {
+    stop("Bayesian Aldrich-McKelvey scaling needs placements of at ",
+         "least two stimuli (columns).", call. = FALSE)
   }
-  .morie_sv_bayes_am(Z, n_samples = n_samples, burn_in = burn_in,
-                     prior_sd = prior_sd)
+  if (!any(is.finite(Z[, polarity]))) {
+    stop("The `polarity` stimulus has no placements.", call. = FALSE)
+  }
+  .rmorie_local_seed(as.integer(seed))
+  .morie_sv_bayes_am(Z, n_samples = as.integer(n_samples),
+                     burn_in = as.integer(burn_in),
+                     polarity = as.integer(polarity))
 }
 
-#' Bayesian MDS -- log-normal distances via Metropolis
-#' @param D Distance matrix.
+#' Bayesian metric multidimensional scaling (Bakker and Poole 2013)
+#'
+#' Each observed dissimilarity is lognormal about the distance between the
+#' two objects' coordinates,
+#' \deqn{\log \delta_{ij} \sim N(\log d_{ij}, 1 / \tau), \quad
+#' d_{ij} = \lVert x_i - x_j \rVert,}
+#' with \eqn{x_{ik} \sim N(0, 10^2)} and \eqn{\tau \sim U(0, 10)}, the
+#' priors of the authors' JAGS code (\code{asmcjr::BMDS}).  The upper
+#' bound on \eqn{\tau} keeps \eqn{\sigma = \tau^{-1/2}} at or above 0.316,
+#' so dissimilarities measured more precisely than that are fitted with
+#' \eqn{\sigma} near the bound.  Zero, negative or missing
+#' dissimilarities are left out of the likelihood.
+#'
+#' Coordinates are slice sampled one at a time (Neal 2003) and \eqn{\tau}
+#' is drawn exactly from its truncated gamma full conditional.  The
+#' likelihood is invariant to translation, rotation and reflection, so
+#' the chain runs unconstrained and every draw is then aligned
+#' (translation and rotation, no rescaling) onto the posterior mean
+#' configuration.  The JAGS code instead pins one object at the origin and
+#' a second to an axis; pinning that second object adds an implicit
+#' \eqn{1/d} prior on its distance to the first, so distances involving
+#' those two objects differ slightly between the two programs.  On a
+#' simulated set of 12 objects the posterior mean distances among the
+#' other ten agree with JAGS to within 0.05 (mean distance 2.0), the
+#' size of the Monte Carlo error.
+#'
+#' @param D Symmetric dissimilarity matrix.
 #' @param n_dims Dimensions.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
-#' @param sigma_init Initial sigma.
-#' @return List: `positions`/`coords` (posterior-mean or modal
-#'   configuration), fit diagnostics, and an `engine` tag.
-#' @references Oh & Raftery (2001) JASA 96(455).
+#' @param n_samples Retained draws.
+#' @param burn_in Sweeps discarded first.
+#' @param sigma_init Starting value of \eqn{\sigma}.
+#' @param seed RNG seed.
+#' @return List: \code{positions} (aligned posterior mean),
+#'   \code{positions_sd}, \code{distance_mean} (posterior mean of every
+#'   pairwise distance, invariant to the alignment), \code{sigma},
+#'   \code{tau}, \code{draws} (aligned draws, draw index first),
+#'   \code{n_samples}, \code{engine}.
+#' @references Bakker, R. and Poole, K. T. (2013). Bayesian metric
+#'   multidimensional scaling. \emph{Political Analysis} 21(1), 125-140.
 #' @examples
-#' if (requireNamespace("smacof", quietly = TRUE)) {
-#'   \donttest{
-#'   # A real dissimilarity matrix (the all-zero matrix is degenerate
-#'   # and makes the stress majorizer divide by zero).
-#'   set.seed(1)
-#'   X <- matrix(rnorm(30), 10, 3)
-#'   morie_spatial_voting_bayesian_mds(as.matrix(dist(X)))
-#'   }
-#' }
+#' set.seed(1)
+#' X <- matrix(rnorm(16), 8, 2)
+#' D <- as.matrix(dist(X))
+#' fit <- morie_spatial_voting_bayesian_mds(D, n_samples = 150L,
+#'                                          burn_in = 100L)
+#' # posterior mean distances against the true ones
+#' cor(fit$distance_mean[upper.tri(D)], D[upper.tri(D)])
 #' @export
 morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
                                               n_samples = 1000L,
                                               burn_in = 200L,
-                                              sigma_init = 1.0) {
-  # smacof::mds is a deterministic stress-minimiser that finds the
-  # posterior mode of the Oh & Raftery (2001) lognormal-distance MDS
-  # model under a flat prior. We expose it here under bayesian_mds as
-  # the standing R-side implementation pending a full MCMC port.
-  if (requireNamespace("smacof", quietly = TRUE)) {
-    fit <- smacof::mds(stats::as.dist(D), ndim = n_dims,
-                       type = "ratio", verbose = FALSE)
-    return(list(
-      coords = unname(as.matrix(fit$conf)),
-      stress = as.numeric(fit$stress),
-      n_dims = n_dims,
-      engine = "smacof (deterministic MDS; full Bayesian not ported)"
-    ))
+                                              sigma_init = 1.0,
+                                              seed = 42L) {
+  .morie_arg(D, "mNA")
+  D <- as.matrix(D)
+  if (nrow(D) != ncol(D)) {
+    stop("`D` must be a square dissimilarity matrix.", call. = FALSE)
   }
-  .morie_sv_bayes_mds(D, n_dims = n_dims, n_samples = n_samples,
-                      burn_in = burn_in, sigma_init = sigma_init)
+  .rmorie_local_seed(as.integer(seed))
+  .morie_sv_bayes_mds(D, n_dims = as.integer(n_dims),
+                      n_samples = as.integer(n_samples),
+                      burn_in = as.integer(burn_in), sigma_init = sigma_init)
 }
 
-#' Bayesian unfolding -- Bakker & Poole sampler
-#' @param D Respondent-stimulus dissimilarity matrix.
+#' Bayesian unfolding (Bakker and Poole 2013)
+#'
+#' The lognormal model of \code{\link{morie_spatial_voting_bayesian_mds}}
+#' for a respondent-by-stimulus matrix: respondent \eqn{i} and stimulus
+#' \eqn{j} get their own coordinates and
+#' \deqn{\log \delta_{ij} \sim N(\log \lVert x_i - z_j \rVert, 1 / \tau),}
+#' with \eqn{N(0, 10^2)} priors on every coordinate and
+#' \eqn{\tau \sim U(0, 10)}.  Feeling thermometers \eqn{T} on 0-100 enter
+#' as \eqn{\delta = (100 - T) / 50}, the transformation of Bakker and
+#' Poole; zero or missing dissimilarities are left out.
+#'
+#' Given the stimuli the respondents are independent, and given the
+#' respondents the stimuli are, so each block is slice sampled as one
+#' vector per dimension (the same chain law as one at a time), and
+#' \eqn{\tau} is drawn exactly.  Draws are aligned (translation and
+#' rotation) on the stimuli.  On 150 simulated respondents and ten
+#' stimuli the posterior mean respondent-stimulus distances agree with a
+#' JAGS encoding of the same model to within 0.018, and \eqn{\tau} to the
+#' third decimal.  (The C sampler shipped with \pkg{asmcjr} could not be
+#' used for the comparison: its \code{.C} interface keeps pointers to
+#' freed R memory and crashes.)
+#'
+#' @param D Respondent-by-stimulus dissimilarity matrix.
 #' @param n_dims Latent dimensions.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
-#' @return List with respondent/stimulus configurations and an
-#'   `engine` tag (smacof deterministic mode, or the native
-#'   Metropolis sampler when smacof is absent).
-#' @references Bakker, R. and Poole, K. T. (2013).
+#' @param n_samples Retained draws.
+#' @param burn_in Sweeps discarded first.
+#' @param seed RNG seed.
+#' @return List: \code{stimuli} (aligned posterior mean),
+#'   \code{stimuli_sd}, \code{ideal_points}, \code{distance_mean}
+#'   (posterior mean respondent-stimulus distances), \code{sigma},
+#'   \code{tau}, \code{n_samples}, \code{engine}.
+#' @references Bakker, R. and Poole, K. T. (2013). Bayesian metric
+#'   multidimensional scaling. \emph{Political Analysis} 21(1), 125-140.
 #' @examples
-#' if (requireNamespace("smacof", quietly = TRUE)) {
-#'   \donttest{
-#'   # Random positive respondent-stimulus dissimilarities; an all-zero
-#'   # matrix is degenerate for the unfolding transform.
-#'   set.seed(1)
-#'   morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
-#'   }
-#' }
+#' set.seed(1)
+#' S <- matrix(runif(8, -0.5, 0.5), 4, 2)
+#' R <- matrix(runif(60, -0.5, 0.5), 30, 2)
+#' D <- sqrt(outer(R[, 1], S[, 1], "-")^2 + outer(R[, 2], S[, 2], "-")^2)
+#' fit <- morie_spatial_voting_bayesian_unfolding(D, n_samples = 100L,
+#'                                                burn_in = 100L)
+#' cor(as.numeric(fit$distance_mean), as.numeric(D))
 #' @export
 morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,
                                                     n_samples = 1000L,
-                                                    burn_in = 200L) {
-  # smacof::unfolding is the deterministic-mode equivalent of the
-  # Bakker & Poole (2013) sampler under a flat prior.
-  if (requireNamespace("smacof", quietly = TRUE)) {
-    fit <- smacof::unfolding(as.matrix(D), ndim = n_dims,
-                             verbose = FALSE)
-    return(list(
-      coords_r = unname(as.matrix(fit$conf.row)),
-      coords_s = unname(as.matrix(fit$conf.col)),
-      stress   = as.numeric(fit$stress),
-      n_dims   = n_dims,
-      engine   = "smacof::unfolding (deterministic; full Bayesian not ported)"
-    ))
-  }
-  .morie_sv_bayes_unfold(D, n_dims = n_dims, n_samples = n_samples,
-                         burn_in = burn_in)
+                                                    burn_in = 200L,
+                                                    seed = 42L) {
+  .morie_arg(D, "mNA")
+  .rmorie_local_seed(as.integer(seed))
+  .morie_sv_bayes_unfold(as.matrix(D), n_dims = as.integer(n_dims),
+                         n_samples = as.integer(n_samples),
+                         burn_in = as.integer(burn_in))
 }
 
 #' Clinton-Jackman-Rivers Bayesian IRT by Gibbs sampling

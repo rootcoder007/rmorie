@@ -285,43 +285,31 @@ test_that("morie_spatial_voting_ordered_oc runs on ordinal vote matrix", {
 # These typically delegate to optional packages (rstan/MCMCpack). They
 # may error cleanly when the optional dep is absent; skip gracefully.
 
-test_that("morie_spatial_voting_bayesian_am runs or skips on missing Stan", {
+test_that("morie_spatial_voting_bayesian_am returns standardised stimuli", {
   skip_heavy()
   Z <- matrix(stats::rnorm(20L * 5L), 20L, 5L)
-  out <- tryCatch(
-    morie_spatial_voting_bayesian_am(Z, n_samples = 20L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("bayesian_am: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_bayesian_am(Z, n_samples = 20L, burn_in = 5L)
+  expect_length(out$zeta_mean, 5L)
+  expect_equal(apply(out$draws, 1L, stats::sd), rep(1, 20L), tolerance = 1e-12)
 })
 
-test_that("morie_spatial_voting_bayesian_mds runs or skips on missing Stan", {
+test_that("morie_spatial_voting_bayesian_mds returns a configuration", {
   skip_heavy()
   D <- make_synthetic_distance_matrix(10L, 2L, seed = 131L)
-  out <- tryCatch(
-    morie_spatial_voting_bayesian_mds(D, n_dims = 2L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("bayesian_mds: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_bayesian_mds(D, n_dims = 2L, n_samples = 30L,
+                                           burn_in = 10L)
+  expect_equal(dim(out$positions), c(10L, 2L))
+  expect_true(all(is.finite(out$distance_mean)))
 })
 
-test_that("morie_spatial_voting_bayesian_unfolding runs or skips on missing Stan", {
+test_that("morie_spatial_voting_bayesian_unfolding returns both configurations", {
   skip_heavy()
   D <- make_synthetic_unfolding_matrix(10L, 4L, 2L, seed = 132L)
-  out <- tryCatch(
-    morie_spatial_voting_bayesian_unfolding(D, n_dims = 2L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("bayesian_unfolding: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_bayesian_unfolding(D, n_dims = 2L,
+                                                 n_samples = 30L,
+                                                 burn_in = 10L)
+  expect_equal(dim(out$stimuli), c(4L, 2L))
+  expect_equal(dim(out$ideal_points), c(10L, 2L))
 })
 
 test_that("morie_spatial_voting_cjr_irt runs or skips on missing Stan", {

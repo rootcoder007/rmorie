@@ -1,59 +1,113 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# spatial_voting_bayes_native.R -- native MCMC backends for the five
-# Bayesian spatial-voting estimators that previously stopped with
-# NotYetPorted when their optional accelerator package was absent.
-# Each sampler is deliberately simple (conjugate Gibbs where the
-# model admits it, random-walk Metropolis elsewhere) and returns
-# posterior means plus acceptance/trace diagnostics.
+# spatial_voting_bayes_native.R -- native MCMC samplers for the Bayesian
+# spatial-voting estimators: Bayesian Aldrich-McKelvey, Bayesian metric
+# MDS and unfolding, Clinton-Jackman-Rivers and ordinal IRT, Martin-Quinn
+# dynamic IRT and alpha-NOMINATE.  Conjugate Gibbs steps where the model
+# admits them, slice sampling (Neal 2003) elsewhere.
 
-# --- Aldrich-McKelvey (Hare et al. 2015) ------------------------------------
-# Z[i, j] = a_i + b_i * zeta_j + eps_ij, eps ~ N(0, sigma2).
-# Gibbs: (a_i, b_i) | zeta conjugate normal per respondent;
-# zeta_j | a, b conjugate normal per stimulus; sigma2 inverse gamma.
+# Draw from N(mu, sd^2) truncated to [lo, hi] by inverting the CDF.
+.morie_rtnorm <- function(mu, sd, lo, hi) {
+  pl <- stats::pnorm(lo, mu, sd)
+  ph <- stats::pnorm(hi, mu, sd)
+  u <- pl + stats::runif(length(mu)) * (ph - pl)
+  out <- stats::qnorm(u, mu, sd)
+  out[!is.finite(out)] <- pmin(pmax(mu, lo), hi)[!is.finite(out)]
+  pmin(pmax(out, lo), hi)
+}
+
+# --- Bayesian Aldrich-McKelvey (Hare et al. 2015) ----------------------------
+# The model of the authors' JAGS template (asmcjr, BAM_JAGScode.bug):
+#   z_ij ~ N(a_i + b_i zhat_j, 1 / (taui_i tauj_j)),
+#   a_i, b_i ~ U(-100, 100), tauj_j ~ G(0.1, 0.1), taui_i ~ G(ga, gb),
+#   ga, gb ~ G(0.1, 0.1), zstar_j ~ N(0, 1) truncated to (-100, 100) and to
+#   (-100, 0) for the polarity stimulus, zhat = (zstar - mean) / sd.
+# Gibbs: a | b and b | a truncated normal, tauj, taui and gb conjugate
+# gamma, ga and each zstar_j by slice sampling (zhat couples every zstar
+# through the mean and sd, so they are updated one at a time).
 #' Internal helper: native Bayesian Aldrich-McKelvey sampler
 #' @noRd
 .morie_sv_bayes_am <- function(Z, n_samples = 1000L, burn_in = 200L,
-                               prior_sd = 10.0) {
+                               polarity = 1L, thin = 1L) {
   Z <- as.matrix(Z)
-  n <- nrow(Z)
-  m <- ncol(Z)
+  Z <- Z[rowSums(is.finite(Z)) > 0L, , drop = FALSE]
+  N <- nrow(Z)
+  q <- ncol(Z)
   obs <- is.finite(Z)
-  zeta <- as.numeric(scale(colMeans(Z, na.rm = TRUE)))
+  Z0 <- Z
+  Z0[!obs] <- 0
+  lower <- rep(-100, q)
+  upper <- rep(100, q)
+  upper[polarity] <- 0
+  zs <- as.numeric(scale(colMeans(Z, na.rm = TRUE)))
+  zs[!is.finite(zs)] <- 0
+  if (zs[polarity] > 0) zs <- -zs
+  zs <- pmin(pmax(zs, lower + 1e-8), upper - 1e-8)
+  std <- function(v) (v - mean(v)) / stats::sd(v)
   a <- rowMeans(Z, na.rm = TRUE)
-  b <- rep(1, n)
-  sigma2 <- stats::var(as.numeric(Z[obs]))
-  keep <- matrix(0, n_samples, m)
-  tau0 <- 1 / prior_sd^2
-  for (it in seq_len(burn_in + n_samples)) {
-    for (i in seq_len(n)) {
-      j <- which(obs[i, ])
-      if (length(j) < 2L) next
-      Xr <- cbind(1, zeta[j])
-      V <- solve(crossprod(Xr) / sigma2 + diag(tau0, 2))
-      mu <- V %*% (crossprod(Xr, Z[i, j]) / sigma2)
-      ab <- as.numeric(mu + t(chol(V)) %*% stats::rnorm(2))
-      a[i] <- ab[1]
-      b[i] <- ab[2]
+  b <- rep(1, N)
+  taui <- rep(1, N)
+  tauj <- rep(1, q)
+  ga <- 1
+  gb <- 1
+  n_i <- rowSums(obs)
+  n_j <- colSums(obs)
+  n_iter <- burn_in + n_samples * thin
+  keep <- seq.int(burn_in + thin, n_iter, by = thin)
+  S <- length(keep)
+  out_z <- matrix(NA_real_, S, q)
+  out_a <- out_b <- matrix(NA_real_, S, N)
+  out_tj <- matrix(NA_real_, S, q)
+  s <- 0L
+  for (it in seq_len(n_iter)) {
+    zh <- std(zs)
+    W <- outer(taui, tauj) * obs
+    ZH <- matrix(zh, N, q, byrow = TRUE)
+    sw <- rowSums(W)
+    a <- .morie_rtnorm(rowSums(W * (Z0 - b * ZH)) / sw, 1 / sqrt(sw),
+                       -100, 100)
+    swz <- rowSums(W * ZH^2)
+    b <- .morie_rtnorm(rowSums(W * ZH * (Z0 - a)) / swz, 1 / sqrt(swz),
+                       -100, 100)
+    R2 <- (Z0 - a - b * ZH)^2 * obs
+    tauj <- stats::rgamma(q, 0.1 + n_j / 2, 0.1 + colSums(taui * R2) / 2)
+    taui <- stats::rgamma(N, ga + n_i / 2,
+                          gb + rowSums(R2 * matrix(tauj, N, q,
+                                                   byrow = TRUE)) / 2)
+    gb <- stats::rgamma(1L, 0.1 + N * ga, 0.1 + sum(taui))
+    slt <- sum(log(taui))
+    ga <- .morie_slice_vec(function(g) {
+      -0.9 * log(g) - 0.1 * g + N * g * log(gb) - N * lgamma(g) +
+        (g - 1) * slt
+    }, ga, 8, lower = 0)
+    lsd <- 0.5 * log(outer(taui, tauj))
+    for (j in seq_len(q)) {
+      zs[j] <- .morie_slice_vec(function(v) {
+        vapply(v, function(vv) {
+          zz <- zs
+          zz[j] <- vv
+          m <- a + outer(b, std(zz))
+          stats::dnorm(vv, log = TRUE) +
+            sum((lsd - 0.5 * exp(2 * lsd) * (Z0 - m)^2)[obs])
+        }, 0)
+      }, zs[j], 8, lower = lower[j], upper = upper[j])
     }
-    for (j in seq_len(m)) {
-      i <- which(obs[, j])
-      if (!length(i)) next
-      prec <- sum(b[i]^2) / sigma2 + tau0
-      mu <- sum(b[i] * (Z[i, j] - a[i])) / sigma2 / prec
-      zeta[j] <- stats::rnorm(1, mu, sqrt(1 / prec))
+    if (it %in% keep) {
+      s <- s + 1L
+      out_z[s, ] <- std(zs)
+      out_a[s, ] <- a
+      out_b[s, ] <- b
+      out_tj[s, ] <- tauj
     }
-    # identification: centre and scale zeta, fix polarity
-    zeta <- as.numeric(scale(zeta))
-    if (zeta[1] > 0) zeta <- -zeta
-    resid <- Z - (a + outer(b, zeta))
-    sigma2 <- 1 / stats::rgamma(1, sum(obs) / 2 + 2,
-                                sum(resid[obs]^2) / 2 + 1)
-    if (it > burn_in) keep[it - burn_in, ] <- zeta
   }
-  list(zeta_mean = colMeans(keep), zeta_sd = apply(keep, 2, stats::sd),
-       sigma2 = sigma2, n_samples = n_samples,
-       engine = "native Gibbs (Aldrich-McKelvey)")
+  list(zeta_mean = colMeans(out_z),
+       zeta_sd = apply(out_z, 2L, stats::sd),
+       zeta_interval = apply(out_z, 2L, stats::quantile, c(0.025, 0.975),
+                             names = FALSE),
+       a = colMeans(out_a), b = colMeans(out_b),
+       tau_stimulus = colMeans(out_tj),
+       draws = out_z, n_samples = S,
+       engine = "native Gibbs (Bayesian Aldrich-McKelvey, Hare et al. 2015)")
 }
 
 # --- classical MDS (Torgerson-Gower), native ---------------------------------
@@ -97,7 +151,31 @@
   X
 }
 
-# --- Bayesian MDS (Oh & Raftery 2001 lognormal distances) -------------------
+# Draw the lognormal precision tau from its full conditional under the
+# U(0, 10) prior of Bakker and Poole (2013): Gamma(n/2 + 1, SSE/2)
+# truncated to (0, 10).
+.morie_bp_tau <- function(n, sse) {
+  shape <- n / 2 + 1
+  rate <- sse / 2
+  stats::qgamma(stats::runif(1L) * stats::pgamma(10, shape, rate), shape, rate)
+}
+
+# Rigid alignment (translation + orthogonal rotation) of the rows of X onto
+# target T; returns the function that applies it.
+.morie_rigid_align <- function(X, T) {
+  mx <- colMeans(X)
+  mt <- colMeans(T)
+  Q <- .morie_procrustes_rot(sweep(X, 2L, mx), sweep(T, 2L, mt))
+  function(A) sweep(sweep(A, 2L, mx) %*% Q, 2L, mt, "+")
+}
+
+# --- Bayesian metric MDS (Bakker and Poole 2013) -----------------------------
+# log delta_ij ~ N(log d_ij, 1 / tau) for i < j, with d_ij the Euclidean
+# distance between rows i and j of the configuration; coordinates
+# N(0, 10^2), tau ~ U(0, 10) -- the model of the authors' JAGS code
+# (asmcjr::BMDS).  Non-positive or missing dissimilarities are left out.
+# Each coordinate is slice sampled in turn, tau drawn exactly; the draws
+# are aligned (translation and rotation) onto the posterior mean.
 #' Internal helper: native Bayesian MDS sampler
 #' @noRd
 .morie_sv_bayes_mds <- function(D, n_dims = 2L, n_samples = 1000L,
@@ -105,54 +183,67 @@
   D <- as.matrix(D)
   m <- nrow(D)
   lower <- D[lower.tri(D)]
-  if (any(!is.finite(log(lower[lower > 0]))) || all(lower <= 0)) {
+  if (!any(is.finite(lower) & lower > 0)) {
     stop("morie_spatial_voting_bayesian_mds: D must contain positive ",
          "distances.", call. = FALSE)
   }
-  X <- .morie_sv_cmdscale(D, k = n_dims)
-  if (!is.matrix(X)) X <- matrix(X, ncol = n_dims)
-  sigma <- sigma_init
-  step <- 0.05 * stats::sd(X)
-  keep <- array(0, c(n_samples, m, n_dims))
-  acc <- 0L
-  tot <- 0L
-  ll <- function(X, sigma) {
-    delta <- as.matrix(stats::dist(X))
-    dl <- delta[lower.tri(delta)]
-    dl[dl <= 0] <- .Machine$double.eps
-    ok <- lower > 0
-    sum(stats::dnorm(log(lower[ok]), log(dl[ok]), sigma, log = TRUE))
+  ok <- is.finite(D) & D > 0 & upper.tri(D)
+  ok <- ok | t(ok)
+  LD <- matrix(0, m, m)
+  LD[ok] <- log(D[ok])
+  n_obs <- sum(ok) / 2
+  X <- .morie_sv_cmdscale(ifelse(is.finite(D), D, 0), k = n_dims)
+  X <- X + matrix(stats::rnorm(m * n_dims, 0, 1e-3), m, n_dims)
+  tau <- 1 / sigma_init^2
+  ld <- function(X) {
+    d <- sqrt(.morie_sqdist(X, X))
+    log(pmax(d, 1e-12))
   }
-  cur <- ll(X, sigma)
+  keep <- array(NA_real_, c(n_samples, m, n_dims))
+  ktau <- numeric(n_samples)
   for (it in seq_len(burn_in + n_samples)) {
     for (i in seq_len(m)) {
-      Xp <- X
-      Xp[i, ] <- X[i, ] + stats::rnorm(n_dims, 0, step)
-      prop <- ll(Xp, sigma) +
-        sum(stats::dnorm(Xp[i, ], 0, 10, log = TRUE)) -
-        sum(stats::dnorm(X[i, ], 0, 10, log = TRUE))
-      tot <- tot + 1L
-      if (log(stats::runif(1)) < prop - cur) {
-        X <- Xp
-        cur <- prop
-        acc <- acc + 1L
+      oi <- ok[i, ]
+      for (k in seq_len(n_dims)) {
+        rest <- colSums((t(X[oi, -k, drop = FALSE]) - X[i, -k])^2)
+        X[i, k] <- .morie_slice_vec(function(v) {
+          vapply(v, function(vv) {
+            lhat <- 0.5 * log(pmax(rest + (X[oi, k] - vv)^2, 1e-24))
+            -0.5 * tau * sum((LD[i, oi] - lhat)^2) - vv^2 / 200
+          }, 0)
+        }, X[i, k], 1)
       }
     }
-    # sigma via random-walk on log scale
-    sp <- sigma * exp(stats::rnorm(1, 0, 0.1))
-    lp <- ll(X, sp) - log(sp)
-    if (log(stats::runif(1)) < lp - (cur - log(sigma))) {
-      sigma <- sp
-      cur <- ll(X, sigma)
+    sse <- sum(((LD - ld(X))[ok])^2) / 2
+    tau <- .morie_bp_tau(n_obs, sse)
+    if (it > burn_in) {
+      keep[it - burn_in, , ] <- X
+      ktau[it - burn_in] <- tau
     }
-    if (it > burn_in) keep[it - burn_in, , ] <- X
   }
-  list(positions = apply(keep, c(2, 3), mean), sigma = sigma,
-       acceptance = acc / tot, n_samples = n_samples,
-       engine = "native Metropolis (Oh-Raftery MDS)")
+  draw <- function(s) matrix(keep[s, , ], ncol = n_dims)
+  target <- draw(n_samples)
+  for (pass in 1:2) {
+    for (s in seq_len(n_samples)) {
+      keep[s, , ] <- .morie_rigid_align(draw(s), target)(draw(s))
+    }
+    target <- apply(keep, c(2L, 3L), mean)
+  }
+  dmean <- Reduce(`+`, lapply(seq_len(n_samples), function(s) {
+    sqrt(.morie_sqdist(draw(s), draw(s)))
+  })) / n_samples
+  list(positions = target,
+       positions_sd = matrix(apply(keep, c(2L, 3L), stats::sd), ncol = n_dims),
+       distance_mean = dmean, sigma = mean(1 / sqrt(ktau)),
+       tau = mean(ktau), draws = keep, n_samples = n_samples,
+       engine = "native slice-within-Gibbs (Bakker-Poole Bayesian MDS)")
 }
 
-# --- Bayesian unfolding (ideal points + stimuli from preferences) -----------
+# --- Bayesian unfolding (Bakker and Poole 2013) ------------------------------
+# The same lognormal model for a respondent-by-stimulus matrix:
+# log delta_ij ~ N(log ||x_i - z_j||, 1 / tau).  Given the stimuli the
+# respondents are independent, and given the respondents the stimuli are,
+# so each block is slice sampled as one vector.
 #' Internal helper: native Bayesian unfolding sampler
 #' @noRd
 .morie_sv_bayes_unfold <- function(P, n_dims = 2L, n_samples = 1000L,
@@ -160,53 +251,63 @@
   P <- as.matrix(P)
   n <- nrow(P)
   m <- ncol(P)
-  Pz <- scale(P)
-  Pz[!is.finite(Pz)] <- 0
-  # init from double-centred SVD
-  sv <- svd(Pz, nu = n_dims, nv = n_dims)
-  Xi <- sv$u %*% diag(sqrt(sv$d[seq_len(n_dims)]), n_dims)
-  Zj <- sv$v %*% diag(sqrt(sv$d[seq_len(n_dims)]), n_dims)
-  sigma <- 1
-  step <- 0.1
-  ll <- function(Xi, Zj, sigma) {
-    D2 <- outer(rowSums(Xi^2), rowSums(Zj^2), "+") - 2 * Xi %*% t(Zj)
-    mu <- -D2
-    mu <- scale(mu) # preferences are interval-scale up to affine
-    mu[!is.finite(mu)] <- 0
-    sum(stats::dnorm(Pz, mu, sigma, log = TRUE))
+  ok <- is.finite(P) & P > 0
+  if (!any(ok)) {
+    stop("morie_spatial_voting_bayesian_unfolding: D must contain ",
+         "positive dissimilarities.", call. = FALSE)
   }
-  cur <- ll(Xi, Zj, sigma)
-  keepZ <- array(0, c(n_samples, m, n_dims))
-  acc <- 0L
-  tot <- 0L
+  LP <- matrix(0, n, m)
+  LP[ok] <- log(P[ok])
+  Pz <- P
+  Pz[!ok] <- mean(P[ok])
+  sv <- svd(scale(Pz, scale = FALSE), nu = n_dims, nv = n_dims)
+  X <- sv$u %*% diag(sqrt(sv$d[seq_len(n_dims)]), n_dims) / sqrt(n)
+  Zs <- sv$v %*% diag(sqrt(sv$d[seq_len(n_dims)]), n_dims) / sqrt(m)
+  tau <- 1
+  ll <- function(D2) (LP - 0.5 * log(pmax(D2, 1e-24)))^2 * ok
+  keepX <- array(NA_real_, c(n_samples, n, n_dims))
+  keepZ <- array(NA_real_, c(n_samples, m, n_dims))
+  ktau <- numeric(n_samples)
+  dsum <- matrix(0, n, m)
   for (it in seq_len(burn_in + n_samples)) {
-    for (j in seq_len(m)) {
-      Zp <- Zj
-      Zp[j, ] <- Zj[j, ] + stats::rnorm(n_dims, 0, step)
-      prop <- ll(Xi, Zp, sigma)
-      tot <- tot + 1L
-      if (log(stats::runif(1)) < prop - cur) {
-        Zj <- Zp
-        cur <- prop
-        acc <- acc + 1L
-      }
+    for (k in seq_len(n_dims)) {
+      base <- .morie_sqdist(X, Zs) - outer(X[, k], Zs[, k], "-")^2
+      X[, k] <- .morie_slice_vec(function(v) {
+        -0.5 * tau * rowSums(ll(base + outer(v, Zs[, k], "-")^2)) - v^2 / 200
+      }, X[, k], 1)
     }
-    for (i in seq_len(n)) {
-      Xp <- Xi
-      Xp[i, ] <- Xi[i, ] + stats::rnorm(n_dims, 0, step)
-      prop <- ll(Xp, Zj, sigma)
-      tot <- tot + 1L
-      if (log(stats::runif(1)) < prop - cur) {
-        Xi <- Xp
-        cur <- prop
-        acc <- acc + 1L
-      }
+    for (k in seq_len(n_dims)) {
+      base <- .morie_sqdist(X, Zs) - outer(X[, k], Zs[, k], "-")^2
+      Zs[, k] <- .morie_slice_vec(function(v) {
+        -0.5 * tau * colSums(ll(base + outer(X[, k], v, "-")^2)) - v^2 / 200
+      }, Zs[, k], 1)
     }
-    if (it > burn_in) keepZ[it - burn_in, , ] <- Zj
+    tau <- .morie_bp_tau(sum(ok), sum(ll(.morie_sqdist(X, Zs))))
+    if (it > burn_in) {
+      keepX[it - burn_in, , ] <- X
+      keepZ[it - burn_in, , ] <- Zs
+      ktau[it - burn_in] <- tau
+      dsum <- dsum + sqrt(.morie_sqdist(X, Zs))
+    }
   }
-  list(stimuli = apply(keepZ, c(2, 3), mean), ideal_points = Xi,
-       acceptance = acc / tot, n_samples = n_samples,
-       engine = "native Metropolis (Bayesian unfolding)")
+  dX <- function(s) matrix(keepX[s, , ], ncol = n_dims)
+  dZ <- function(s) matrix(keepZ[s, , ], ncol = n_dims)
+  target <- dZ(n_samples)
+  for (pass in 1:2) {
+    for (s in seq_len(n_samples)) {
+      f <- .morie_rigid_align(dZ(s), target)
+      keepX[s, , ] <- f(dX(s))
+      keepZ[s, , ] <- f(dZ(s))
+    }
+    target <- apply(keepZ, c(2L, 3L), mean)
+  }
+  list(stimuli = target,
+       stimuli_sd = matrix(apply(keepZ, c(2L, 3L), stats::sd), ncol = n_dims),
+       ideal_points = apply(keepX, c(2L, 3L), mean),
+       distance_mean = dsum / n_samples,
+       sigma = mean(1 / sqrt(ktau)), tau = mean(ktau),
+       n_samples = n_samples,
+       engine = "native slice-within-Gibbs (Bakker-Poole Bayesian unfolding)")
 }
 
 # --- Clinton-Jackman-Rivers binary IRT (Albert-Chib Gibbs) ------------------
