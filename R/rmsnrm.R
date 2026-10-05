@@ -20,7 +20,7 @@
 #' Rmsnorm(c(1, -2, 3))$rms
 #' @export
 Rmsnorm <- function(y, x = NULL, g = NULL, eps = 0, p = 1, b = NULL) {
-  .morie_arg(y, "n")
+  if (!is.null(y)) .morie_arg(y, "n")
   a <- .s03vec(if (!is.null(x)) x else y)
   n <- length(a)
   kp <- as.integer(n * as.numeric(p))

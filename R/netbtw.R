@@ -22,7 +22,7 @@
 #' res <- Netbtw(A = A)
 #' res
 Netbtw <- function(A, node = 0) {
-  .morie_arg(A, "m")
+  .morie_arg(A, "m0")
   M <- .t1_mat(A)
   n <- nrow(M)
   if (n == 0L) stop("Netbtw: adjacency matrix is empty")

@@ -15,7 +15,7 @@
 #' dwnmn(x = rnorm(50))
 #' @export
 dwnmn <- function(x, sigma_w = 0.1) {
-  .morie_arg(x, "n")
+  .morie_arg(x, "n0")
   if (is.matrix(x)) {
     n <- nrow(x)
     n_t <- ncol(x)

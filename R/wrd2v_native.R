@@ -199,7 +199,8 @@ morie_wrd2v_noise_distribution <- function(counts, power = 0.75) {
 #' morie_wrd2v_subsample_probability(V)
 #' @keywords internal
 morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
-  .morie_arg(counts, "n")
+  # counts may be a named list of word counts, as the trainer passes them
+  .morie_arg(unlist(counts), "n0", "counts")
   # Discard probability 1 - sqrt(t / f(w)) (2013b eq. 5). Clamped at 0.
   total <- sum(unlist(counts))
   if (total <= 0.0) {

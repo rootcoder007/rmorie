@@ -334,7 +334,9 @@ mrm_tps_neighbourhood_recurrence_km <- function(
 #' }
 mrm_tps_load_hawkes_refit <- function(manifest_path) {
   .morie_arg(manifest_path, "c1")
-  stopifnot(file.exists(manifest_path))
+  if (!file.exists(manifest_path)) {
+    stop(sprintf("No Hawkes refit manifest at %s.", manifest_path), call. = FALSE)
+  }
   d <- .morie_from_json(manifest_path, simplifyVector = FALSE)
   cats <- names(d)
   rows <- lapply(cats, function(c) {

@@ -2110,7 +2110,7 @@ morie_geron_span_corrupt <- function(tokens, noise_density = 0.15, mean_span = 3
     used <- c(used, rng_idx)
     if (sum(sapply(chosen, `[`, 2)) >= n_noise) break
   }
-  ord <- order(sapply(chosen, `[`, 1))
+  ord <- order(vapply(chosen, `[`, numeric(1), 1))
   chosen <- chosen[ord]
 
   inputs <- character(0)
@@ -2193,7 +2193,7 @@ morie_geron_t5 <- function(src, tgt = NULL, noise_density = 0.15, mean_span = 3,
     t2t <- c(trimws(paste(prefix, paste(toks, collapse = " "))), paste(tgt_toks, collapse = " "))
   }
 
-  n_masked <- sum(sapply(spans, `[`, 2))
+  n_masked <- sum(vapply(spans, `[`, numeric(1), 2))
 
   list(
     encoder_input = enc, decoder_target = dec, spans = spans, restored = rebuilt, lossless = lossless,

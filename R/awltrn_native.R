@@ -372,7 +372,7 @@ fit_aol <- function(R, A, H, propensity = NULL, method = "aol",
 #' str(r, max.level = 1)
 #' @keywords internal
 fit_stages <- function(stages, propensity = NULL, ridge = 1e-6) {
-  .morie_arg(stages, "l")
+  .morie_arg(stages, "l0")
   if (length(stages) == 0L)
     stop("awltrn: no stages given")
   K <- length(stages)

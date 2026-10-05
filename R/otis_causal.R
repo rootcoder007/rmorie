@@ -927,6 +927,7 @@ morie_otis_make_pair_b <- function(df) {
               "Region_MostRecentPlacement",
               "MentalHealth_Alert", "SuicideRisk_Alert",
               "SuicideWatch_Alert", "Number_Of_Placements")
+  .otis_require_cols(df, needed, "b01")
   base <- df[, needed, drop = FALSE]
   base <- base[stats::complete.cases(base), , drop = FALSE]
   a1 <- .otis_binarise(base$MentalHealth_Alert)

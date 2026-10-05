@@ -1705,7 +1705,7 @@ File,Line,Status,Version,Context
 ./man/Gkcov.Rd,76,STALE_OR_DEP,2.1.7,"(Kyushu University Institutional Repository; \code{math0257}); Theorem 2.1.7 --"
 ./man/Gkcov.Rd,94,STALE_OR_DEP,2.1.7,"doctoral thesis; Theorem 2.1.7."
 ./man/GlmStdRes.Rd,29,STALE_OR_DEP,5.2.1,"Data with R; 2nd ed. Sec 5.2.1."
-./man/Glpopt.Rd,43,STALE_OR_DEP,2.2.103,"\doi{10.1287/moor.2.2.103}"
+./man/Glpopt.Rd,54,STALE_OR_DEP,2.2.103,"\doi{10.1287/moor.2.2.103}; Dantzig; Orden and Wolfe (1955); Pacific"
 ./man/Gpkern.Rd,42,STALE_OR_DEP,4.2.4,"for Machine Learning; MIT Press; sect. 4.2.4."
 ./man/HClust.Rd,5,STALE_OR_DEP,10.5.1,"\title{Section 10.5.1.  Single linkage CHAINS -- it will string distant}"
 ./man/Hcoreg.Rd,37,STALE_OR_DEP,3.6.5,"BOTH go.  Then E[Z(S)] = alpha lambda mu(S); eq. (3.6.5) p. 48; with"

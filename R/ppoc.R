@@ -28,7 +28,7 @@ Ppoclip <- function(env, policy = NULL, clip_eps = 0.2, ratio = NULL,
                     adv = NULL, logp_new = NULL, logp_old = NULL,
                     v_pred = NULL, v_targ = NULL, entropy = NULL,
                     c1 = 0.5, c2 = 0.01) {
-  .morie_arg(env, "data")
+  if (!is.null(env)) .morie_arg(env, "data")
   a <- .s03vec(if (!is.null(adv)) adv else env)
   if (!is.null(ratio)) {
     r <- .s03vec(ratio)

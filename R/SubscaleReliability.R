@@ -104,7 +104,7 @@ subscale_ee_composite_rel <- function(data, items = NULL) .srel_fit(data, items,
 #' @rdname subscale_ea_ave
 #' @export
 subscale_er_ave <- function(data, items = NULL) {
-  .morie_arg(data, "m")
+  .morie_arg(data, "mNA")
   .srel_fit(data, items, "ER", "ave")
 }
 

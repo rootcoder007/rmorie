@@ -224,8 +224,14 @@ mrm_clt_demo <- function(base_distribution = "unif",
                          sample_size = 30L,
                          seed = 42L, ...) {
   .morie_arg(base_distribution, "c1")
+  rname <- paste0("r", base_distribution)
+  if (!exists(rname, envir = asNamespace("stats"), inherits = FALSE)) {
+    stop(sprintf("`base_distribution` must name a stats random generator without its r ",
+                 "(\"unif\", \"exp\", \"pois\", ...); stats has no %s().", rname),
+         call. = FALSE)
+  }
   .rmorie_local_seed(seed)
-  rfun <- get(paste0("r", base_distribution), envir = asNamespace("stats"))
+  rfun <- get(rname, envir = asNamespace("stats"))
   means <- vapply(
     seq_len(n_samples),
     function(i) mean(rfun(sample_size, ...)),

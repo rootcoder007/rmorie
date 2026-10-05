@@ -318,6 +318,7 @@ morie_impute_column <- function(x, method = c(
 #   n1 one number         i1 one whole number    n numeric vector, no NA
 #   n0 numeric, may be empty   nNA numeric, NA allowed   iv whole numbers
 #   m numeric matrix/array/vector or all-numeric data frame   mNA the same, NA allowed
+#   m0 numeric matrix, may be empty   l0 list, may be empty
 #   df data frame         l non-empty list       lnull list or NULL
 #   c character vector    c1 one string          c1null one string or NULL
 #   lg logical, no NA     lg1 TRUE or FALSE      r raw vector   f function
@@ -360,6 +361,11 @@ morie_impute_column <- function(x, method = c(
             else is_num(x) && length(x) > 0L && !all(is.na(x))
       if (!ok) need("a numeric matrix")
     },
+    m0 = {
+      ok <- if (is.data.frame(x)) all(vapply(x, is.numeric, logical(1))) else is_num(x)
+      if (!ok || anyNA(as.matrix(x))) need("a numeric matrix without missing values")
+    },
+    l0 = if (!is.list(x)) need("a list"),
     df = if (!is.data.frame(x)) need("a data frame"),
     l = if (!is.list(x) || !length(x)) need("a non-empty list"),
     lnull = if (!is.null(x) && !is.list(x)) need("a list"),
