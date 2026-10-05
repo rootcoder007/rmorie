@@ -10,7 +10,9 @@ test_that("ingest_cihi_xlsx validates url", {
 })
 
 test_that("ingest_cihi_xlsx says the download failed when the host is unreachable", {
-  # a refused local port, no Wayback fallback: the native client fails at once
+  # a refused local port, no Wayback fallback: the native client fails at once (the readxl check is
+  # mocked: readxl is absent in the minimal-deps jobs, and this test is about the download)
+  testthat::local_mocked_bindings(morie_ensure_extras = function(...) invisible(TRUE), .package = "rmorie")
   expect_error(morie_ingest_cihi_xlsx("http://127.0.0.1:9/a.xlsx", wayback_url = ""), "download failed")
 })
 

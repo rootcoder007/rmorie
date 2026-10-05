@@ -130,6 +130,8 @@ test_that("morie_ingest_cihi_xlsx errors on non-string url", {
 test_that("morie_ingest_cihi_xlsx errors cleanly when the download fails", {
   testthat::with_mocked_bindings(
     .morie_dataset_http_bytes = function(url, ...) stop("could not reach example.com (offline)"),
+    # the download path, not the readxl check: readxl is absent in the minimal-deps jobs
+    morie_ensure_extras = function(...) invisible(TRUE),
     .package = "rmorie",
     {
       expect_error(
