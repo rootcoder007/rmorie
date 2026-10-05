@@ -45,7 +45,7 @@ test_that("morie_mrm_estimate_causal_effect composes native estimators", {
     methods = c("matching", "ate", "aipw", "dml"))
   expect_s3_class(eff, "morie_mrm_effect")
   expect_gte(nrow(eff$results), 3L)
-  expect_true(all(abs(eff$results$estimate - 0.8) < 0.4))
+  expect_true(all(abs(eff$results$estimate - 0.8) < 0.25))  # the bound morie's test sets
   expect_true(all(eff$results$p_adjusted >= eff$results$p_value - 1e-12))
   expect_equal(eff$consensus$estimate, 0.8, tolerance = 0.25)
   expect_match(eff$citation, "Ruhela")

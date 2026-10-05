@@ -223,12 +223,11 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
   run <- function(fn) tryCatch(fn(), error = function(e) e)
   if ("matching" %in% methods) {
     r <- run(function() {
-      m <- morie_matching_nearest_neighbor(data, treatment, covariates)
-      md <- m$matched_data
-      tt <- stats::t.test(md[[outcome]][md[[treatment]] == 1],
-                          md[[outcome]][md[[treatment]] == 0])
-      list(estimate = unname(diff(rev(tt$estimate))),
-           se = unname(tt$stderr), p = tt$p.value,
+      # with replacement: without it, scarce controls are all used up and nothing is balanced
+      m <- morie_matching_nearest_neighbor(data, treatment, covariates, replace = TRUE)
+      a <- morie_matching_att_matched(data, outcome, treatment, m$match_pairs)
+      list(estimate = a$estimate, se = a$std_error,
+           p = 2 * stats::pnorm(-abs(a$estimate / a$std_error)),
            diag = list(n_pairs = nrow(m$match_pairs)))
     })
     rows[["matching (rmorie native)"]] <- r

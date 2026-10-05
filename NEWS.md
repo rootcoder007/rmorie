@@ -1,5 +1,13 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* `morie_mrm_estimate_causal_effect()`'s matching estimate matches with replacement and takes the
+  ATT from the matched pairs. Without replacement, when controls were no more numerous than treated
+  units, nearly every control was used and nothing was balanced: on the package's own simulated
+  design (true effect 0.8) it returned the unadjusted difference, 1.13, while IPW, AIPW and DML gave
+  0.85. It now gives 0.92, the same ATT and standard error as morie to ten decimals.
+* SIU `police_service` is the service of the subject officials, read from the director's analysis
+  (rmorie's own copy of the SIU core, as in rmoriebricklayer 0.5.5), not the force that notified the
+  SIU.
 * Without jsonlite, JSON is read by rmoriebricklayer's port of jsonlite's reader, so every caller
   sees the same object either way: the Socrata by-id loaders returned `list()` on the default
   install, because rows carrying a nested location object were left a bare list of records.
