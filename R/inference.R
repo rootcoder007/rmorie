@@ -161,6 +161,9 @@ morie_chi_square_test <- function(observed, expected = NULL, correct = TRUE) {
   }
   mn <- function(p) if (p == 0) lo else if (is.infinite(p)) hi else sum(s * dn(p))
   pn <- function(q, p, upper = FALSE) {
+    # fisher.test's pnhyper: the degenerate ncp = 0 / Inf distributions sit at lo / hi
+    if (p == 0) return(as.numeric(if (upper) q <= lo else q >= lo))
+    if (is.infinite(p)) return(as.numeric(if (upper) q <= hi else q >= hi))
     if (upper) sum(dn(p)[s >= q]) else sum(dn(p)[s <= q])
   }
   bis <- function(f, a, b) {
