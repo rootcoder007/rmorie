@@ -1985,69 +1985,83 @@ morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
                           burn_in = burn_in)
 }
 
-#' Dynamic IRT, fitted period by period (EM-IRT approximation)
+#' Dynamic IRT: ideal points that drift by a random walk (Martin and Quinn 2002)
 #'
-#' Time-series IRT where ideal points evolve via a random walk:
-#' \eqn{\phi_{i,t} \sim N(\phi_{i,t-1}, \tau^2)}{phi_i,t ~ N(phi_i,t-1, tau^2)}.
+#' The one-dimensional dynamic item response model of Martin and Quinn (2002),
+#' fitted by their Gibbs sampler: a vote is cast when the latent utility
+#' \eqn{z_{jk} = -\alpha_k + \beta_k \theta_{j,t(k)} + \varepsilon_{jk}}
+#' is positive, \eqn{\varepsilon \sim N(0, 1)}; the ideal points follow a
+#' random walk, \eqn{\theta_{j,0} \sim N(e_0, E_0)},
+#' \eqn{\theta_{j,t} \sim N(\theta_{j,t-1}, \tau^2_j)}; and the roll-call
+#' parameters have normal priors \eqn{\alpha_k \sim N(a_0, 1/A_0)},
+#' \eqn{\beta_k \sim N(b_0, 1/B_0)}. Each sweep draws the latent utilities
+#' (truncated normals), every roll call's \eqn{(\alpha, \beta)} (conjugate
+#' normal), every legislator's whole path by forward filtering and backward
+#' sampling, and, when \code{c0} and \code{d0} are positive, the evolution
+#' variances from \eqn{IG((c_0 + T)/2, (d_0 + SS)/2)}. The sign is fixed by
+#' reflecting a draw whenever the \code{anchor} legislator's mean ideal point
+#' is negative. This is the model of \code{MCMCpack::MCMCdynamicIRT1d}, with
+#' the same default priors; both recover the same paths on simulated data.
 #'
-#' @param votes Vote matrix.
-#' @param time_periods Per-vote period indices.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
+#' @param votes Legislators-by-roll-calls matrix of 0/1 votes (-1/1 is read as
+#'   0/1); \code{NA} for absent.
+#' @param time_periods Period of each roll call (one entry per column).
+#' @param n_samples Posterior draws kept.
+#' @param burn_in Sweeps discarded first.
 #' @param seed RNG seed.
-#' @return List of per-period ideal-point matrices with an `engine`
-#'   tag flagging the per-period EM approximation.
-#' @references Martin, A. D. and Quinn, K. M. (2002). "Dynamic Ideal Point
-#'   Estimation via Markov Chain Monte Carlo for the U.S. Supreme Court,
-#'   1953-1999." *Political Analysis*, 10(2).
-#' @examples \donttest{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
-#' # dynamic-IRT random-walk prior on ideal points.
+#' @param thin Keep every \code{thin}-th sweep.
+#' @param tau2 Evolution variance (the starting value when it is estimated).
+#' @param c0,d0 Inverse-gamma prior on \eqn{\tau^2}; \eqn{\tau^2} is held at
+#'   \code{tau2} unless both are positive.
+#' @param e0,E0 Prior mean and variance of the initial ideal point.
+#' @param a0,A0,b0,B0 Prior means and precisions of \eqn{\alpha} and \eqn{\beta}.
+#' @param anchor Legislator (row index) whose ideal point is kept positive; the
+#'   largest first principal-component score by default.
+#' @return A list with \code{theta} (legislators by periods, posterior means),
+#'   \code{theta_sd}, \code{alpha}, \code{beta}, \code{tau2},
+#'   \code{per_period} (one entry per period with its \code{ideal_points}),
+#'   \code{periods}, \code{n_periods}, \code{n_legislators}, \code{n_samples},
+#'   \code{anchor} and \code{engine}.
+#' @references Martin, A. D. and Quinn, K. M. (2002). Dynamic ideal point
+#'   estimation via Markov chain Monte Carlo for the U.S. Supreme Court,
+#'   1953-1999. \emph{Political Analysis} 10(2), 134-153.
+#' @examples
+#' \donttest{
+#' set.seed(7)
+#' N <- 12; Tn <- 3; kper <- 15
+#' period <- rep(1:Tn, each = kper)
+#' truth <- t(sapply(rnorm(N), function(s) s + cumsum(c(0, rnorm(Tn - 1, 0, 0.3)))))
+#' a <- rnorm(Tn * kper, 0, 0.5); b <- rnorm(Tn * kper, 1.5, 0.5)
+#' p <- pnorm(-rep(a, each = N) + rep(b, each = N) * truth[, period])
+#' V <- matrix(rbinom(length(p), 1, p), N)
+#' fit <- morie_spatial_voting_dynamic_irt(V, period, n_samples = 400, burn_in = 100)
+#' abs(cor(as.numeric(fit$theta), as.numeric(truth)))   # the paths are recovered
+#' }
 #' @export
 morie_spatial_voting_dynamic_irt <- function(votes, time_periods,
                                              n_samples = 500L,
                                              burn_in = 100L,
-                                             seed = 42L) {
-  # 3MMM.27 (2026-05-25): emIRT::dynIRT's prior shape contract varies
-  # across releases. Until we wire a stable adapter we run EM-IRT
-  # period-by-period (Imai, Lo & Olmsted 2016 closed-form) and return
-  # a list of per-period ideal-points matrices. This loses the
-  # Brownian-motion smoothing across periods (the whole point of
-  # Martin-Quinn dynamic-IRT) but each per-period fit is itself a
-  # valid IRT estimate, so the call returns instead of raising
-  # NotYetPorted. Engine tag flags the approximation.
-  .rmorie_local_seed(as.integer(seed))
+                                             seed = 42L, thin = 1L, tau2 = 1,
+                                             c0 = -1, d0 = -1, e0 = 0, E0 = 1,
+                                             a0 = 0, A0 = 0.1, b0 = 0, B0 = 0.1,
+                                             anchor = NULL) {
+  .morie_arg(votes, "mNA")
   votes <- as.matrix(votes)
-  time_periods <- as.integer(time_periods)
   if (length(time_periods) != ncol(votes)) {
-    stop("time_periods length must equal ncol(votes)")
+    stop("time_periods must give one period per roll call (ncol(votes) = ",
+         ncol(votes), ", got ", length(time_periods), ")", call. = FALSE)
   }
-  periods <- sort(unique(time_periods))
-  per_period <- lapply(periods, function(p) {
-    cols <- which(time_periods == p)
-    if (length(cols) < 1L) {
-      return(list(period = p, ideal_points = NULL))
-    }
-    sub <- votes[, cols, drop = FALSE]
-    fit <- morie_spatial_voting_em_irt(sub, n_dims = 1L)
-    list(period = p,
-         ideal_points = fit$ideal_points,
-         discrimination = fit$discrimination,
-         difficulty = fit$difficulty,
-         n_votes_in_period = length(cols))
-  })
-  names(per_period) <- as.character(periods)
-  list(
-    per_period = per_period,
-    periods = periods,
-    n_periods = length(periods),
-    n_legislators = nrow(votes),
-    n_samples_target = as.integer(n_samples),
-    burn_in_target = as.integer(burn_in),
-    engine = paste0("morie_spatial_voting_em_irt per-period ",
-                    "(deterministic EM approximation; full Martin-Quinn ",
-                    "dynamic-IRT with Brownian-motion smoothing not yet ",
-                    "ported -- see Martin & Quinn 2002)")
-  )
+  fit <- .morie_sv_dynamic_irt_gibbs(votes, time_periods, n_samples = as.integer(n_samples),
+                                     burn_in = as.integer(burn_in), thin = as.integer(thin),
+                                     seed = seed, tau2 = tau2, e0 = e0, E0 = E0, a0 = a0,
+                                     A0 = A0, b0 = b0, B0 = B0, c0 = c0, d0 = d0, anchor = anchor)
+  per_period <- lapply(seq_along(fit$periods), function(t) list(
+    period = fit$periods[t], ideal_points = fit$theta[, t, drop = FALSE],
+    n_votes_in_period = sum(time_periods == fit$periods[t])))
+  names(per_period) <- as.character(fit$periods)
+  c(fit, list(per_period = per_period, n_periods = length(fit$periods),
+              n_legislators = nrow(votes),
+              engine = "native Gibbs sampler (Martin and Quinn 2002)"))
 }
 
 # ===========================================================================

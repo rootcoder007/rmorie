@@ -349,3 +349,93 @@
        n_samples = n_samples,
        engine = "native Albert-Chib Gibbs (ordinal probit IRT)")
 }
+
+# Martin and Quinn (2002) dynamic one-dimensional IRT by Gibbs sampling, the
+# model of MCMCpack::MCMCdynamicIRT1d: z_jk = -alpha_k + beta_k theta_{j,t(k)} + e,
+# theta_{j,0} ~ N(e0, E0), theta_{j,t} ~ N(theta_{j,t-1}, tau2_j) for t = 1, ..., T, alpha_k ~
+# N(a0, 1/A0), beta_k ~ N(b0, 1/B0), tau2_j ~ IG(c0/2, d0/2) (held at tau2
+# when c0 or d0 is not positive). Each sweep: (1) truncated-normal latent
+# utilities, (2) a conjugate normal draw of each roll call's (alpha, beta),
+# (3) a forward-filter backward-sample draw of every legislator's path,
+# (4) the evolution variances. The sign is fixed by reflecting a draw
+# (theta, beta) -> (-theta, -beta), which leaves the likelihood unchanged,
+# whenever the anchor legislator's mean ideal point comes out negative.
+#' @noRd
+.morie_sv_dynamic_irt_gibbs <- function(votes, period, n_samples = 500L, burn_in = 100L,
+                                        thin = 1L, seed = 42L, tau2 = 1, e0 = 0, E0 = 1,
+                                        a0 = 0, A0 = 0.1, b0 = 0, B0 = 0.1, c0 = -1, d0 = -1,
+                                        anchor = NULL) {
+  Y <- as.matrix(votes)
+  Y[!is.na(Y) & Y < 0] <- 0                       # -1/1 coding read as 0/1
+  if (any(!is.na(Y) & !Y %in% c(0, 1))) stop("votes must be 0/1 (or -1/1) with NA for missing", call. = FALSE)
+  N <- nrow(Y); K <- ncol(Y)
+  per <- as.integer(factor(period))
+  Tn <- max(per)
+  obs <- !is.na(Y)
+  .rmorie_local_seed(seed)
+  # start: first principal component of the vote matrix, scaled
+  Yc <- Y; Yc[!obs] <- 0.5
+  pc <- prcomp(Yc, center = TRUE)$x[, 1]
+  pc <- if (stats::sd(pc) > 0) as.numeric(scale(pc)) else rep(0, N)
+  if (is.null(anchor)) anchor <- which.max(pc)
+  theta <- matrix(pc, N, Tn)
+  alpha <- rep(0, K); beta <- rep(1, K)
+  t2 <- rep(tau2, length.out = N)
+  est_tau <- all(c0 > 0) && all(d0 > 0)
+  keep <- seq.int(burn_in + thin, burn_in + n_samples * thin, by = thin)
+  S_th <- S_th2 <- matrix(0, N, Tn); S_a <- S_b <- numeric(K); S_t2 <- numeric(N); m <- 0L
+  lo <- ifelse(obs & Y == 1, 0, -Inf); hi <- ifelse(obs & Y == 0, 0, Inf)
+  Z <- matrix(0, N, K)
+  for (it in seq_len(burn_in + n_samples * thin)) {
+    # (1) latent utilities, truncated by the observed vote
+    mu <- sweep(theta[, per, drop = FALSE] * rep(beta, each = N), 2L, alpha)
+    pl <- stats::pnorm(lo - mu); ph <- stats::pnorm(hi - mu)
+    u <- stats::runif(N * K)
+    Z[] <- mu + stats::qnorm(pmin(pmax(pl + u * (ph - pl), 1e-12), 1 - 1e-12))
+    # (2) roll-call parameters: regress z_.k on (-1, theta_.t(k))
+    for (k in seq_len(K)) {
+      x <- theta[, per[k]]
+      XtX <- matrix(c(N, -sum(x), -sum(x), sum(x^2)), 2) + diag(c(A0, B0))
+      Xtz <- c(-sum(Z[, k]), sum(x * Z[, k])) + c(A0 * a0, B0 * b0)
+      V <- solve(XtX)
+      draw <- as.numeric(V %*% Xtz + t(chol(V)) %*% stats::rnorm(2))
+      alpha[k] <- draw[1]; beta[k] <- draw[2]
+    }
+    # (3) ideal-point paths by forward filtering, backward sampling
+    prec_obs <- matrix(0, N, Tn); lin_obs <- matrix(0, N, Tn)
+    for (t in seq_len(Tn)) {
+      ks <- which(per == t)
+      prec_obs[, t] <- sum(beta[ks]^2)
+      lin_obs[, t] <- as.numeric((Z[, ks, drop = FALSE] + rep(alpha[ks], each = N)) %*% beta[ks])
+    }
+    mf <- Pf <- matrix(0, N, Tn)
+    m_prev <- rep(e0, N); P_prev <- rep(E0, N)
+    for (t in seq_len(Tn)) {
+      Pp <- P_prev + t2   # theta_{j,0} ~ N(e0, E0); period 1 is one step of the walk on
+      Pf[, t] <- 1 / (1 / Pp + prec_obs[, t])
+      mf[, t] <- Pf[, t] * (m_prev / Pp + lin_obs[, t])
+      m_prev <- mf[, t]; P_prev <- Pf[, t]
+    }
+    theta[, Tn] <- mf[, Tn] + sqrt(Pf[, Tn]) * stats::rnorm(N)
+    if (Tn > 1L) for (t in (Tn - 1L):1L) {
+      G <- Pf[, t] / (Pf[, t] + t2)
+      mb <- mf[, t] + G * (theta[, t + 1L] - mf[, t])
+      vb <- Pf[, t] * (1 - G)
+      theta[, t] <- mb + sqrt(vb) * stats::rnorm(N)
+    }
+    # (4) evolution variances
+    if (est_tau && Tn > 1L) {
+      ss <- rowSums((theta[, -1L, drop = FALSE] - theta[, -Tn, drop = FALSE])^2)
+      t2 <- 1 / stats::rgamma(N, shape = (c0 + Tn - 1) / 2, rate = (d0 + ss) / 2)
+    }
+    if (mean(theta[anchor, ]) < 0) { theta <- -theta; beta <- -beta }
+    if (it %in% keep) {
+      S_th <- S_th + theta; S_th2 <- S_th2 + theta^2
+      S_a <- S_a + alpha; S_b <- S_b + beta; S_t2 <- S_t2 + t2; m <- m + 1L
+    }
+  }
+  th <- S_th / m
+  list(theta = th, theta_sd = sqrt(pmax(S_th2 / m - th^2, 0)), alpha = S_a / m,
+       beta = S_b / m, tau2 = S_t2 / m, periods = sort(unique(period)),
+       n_samples = m, anchor = anchor)
+}
