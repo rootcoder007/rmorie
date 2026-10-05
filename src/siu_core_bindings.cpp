@@ -37,8 +37,12 @@ siu::audit::Granularity granularity(const std::string& g) {
 
 }  // namespace
 
+// Every string handed back to R is UTF-8 and marked as such: wrapping a std::string leaves it
+// "native", which a C locale reads as bytes ("Rivi\303\250reville" is not "Rivi\u00e8reville").
+static Rcpp::String u8(const std::string& s) { return Rcpp::String(s, CE_UTF8); }
+
 // [[Rcpp::export(.siu_core_html_to_text)]]
-std::string siu_core_html_to_text(const std::string& html) { return siu::html_to_text(html); }
+Rcpp::String siu_core_html_to_text(const std::string& html) { return u8(siu::html_to_text(html)); }
 
 // [[Rcpp::export(.siu_core_parse_html)]]
 Rcpp::CharacterVector siu_core_parse_html(const std::string& html) {
@@ -47,8 +51,8 @@ Rcpp::CharacterVector siu_core_parse_html(const std::string& html) {
     Rcpp::CharacterVector names(fields.size());
     R_xlen_t i = 0;
     for (const auto& kv : fields) {
-        names[i] = kv.first;
-        out[i] = kv.second;
+        names[i] = u8(kv.first);
+        out[i] = u8(kv.second);
         ++i;
     }
     out.attr("names") = names;
@@ -56,10 +60,10 @@ Rcpp::CharacterVector siu_core_parse_html(const std::string& html) {
 }
 
 // [[Rcpp::export(.siu_core_to_iso_date)]]
-std::string siu_core_to_iso_date(const std::string& human) { return siu::to_iso_date(human); }
+Rcpp::String siu_core_to_iso_date(const std::string& human) { return u8(siu::to_iso_date(human)); }
 
 // [[Rcpp::export(.siu_core_strip_boilerplate)]]
-std::string siu_core_strip_boilerplate(const std::string& text) { return siu::strip_boilerplate(text); }
+Rcpp::String siu_core_strip_boilerplate(const std::string& text) { return u8(siu::strip_boilerplate(text)); }
 
 // [[Rcpp::export(.siu_core_resolve_so)]]
 Rcpp::List siu_core_resolve_so(const std::string& text) {
@@ -67,7 +71,7 @@ Rcpp::List siu_core_resolve_so(const std::string& text) {
     return Rcpp::List::create(
         Rcpp::Named("count") = res.count.has_value() ? Rcpp::IntegerVector::create(*res.count)
                                                      : Rcpp::IntegerVector::create(NA_INTEGER),
-        Rcpp::Named("reason") = res.reason);
+        Rcpp::Named("reason") = u8(res.reason));
 }
 
 // [[Rcpp::export(.siu_core_schema)]]
@@ -77,9 +81,9 @@ Rcpp::DataFrame siu_core_schema() {
     Rcpp::CharacterVector name(n), desc(n);
     Rcpp::LogicalVector is_count(n);
     for (R_xlen_t i = 0; i < n; ++i) {
-        name[i] = fields[static_cast<size_t>(i)].name;
+        name[i] = u8(fields[static_cast<size_t>(i)].name);
         is_count[i] = fields[static_cast<size_t>(i)].is_count;
-        desc[i] = fields[static_cast<size_t>(i)].desc;
+        desc[i] = u8(fields[static_cast<size_t>(i)].desc);
     }
     return Rcpp::DataFrame::create(Rcpp::Named("name") = name, Rcpp::Named("is_count") = is_count,
                                    Rcpp::Named("description") = desc,
@@ -87,8 +91,8 @@ Rcpp::DataFrame siu_core_schema() {
 }
 
 // [[Rcpp::export(.siu_core_get)]]
-std::string siu_core_get(const std::string& url, double timeout_s) {
-    return siu::http::get(url, static_cast<long>(timeout_s));
+Rcpp::String siu_core_get(const std::string& url, double timeout_s) {
+    return u8(siu::http::get(url, static_cast<long>(timeout_s)));
 }
 
 // [[Rcpp::export(.siu_core_backend)]]
@@ -101,23 +105,25 @@ Rcpp::List siu_core_backend(const std::string& api, const std::string& base, con
 // [[Rcpp::export(.siu_core_models)]]
 Rcpp::CharacterVector siu_core_models(const std::string& api, const std::string& base, const std::string& key) {
     const auto ms = siu::llm::list_models(make_backend(api, base, key, 300, 0));
-    return Rcpp::CharacterVector(ms.begin(), ms.end());
+    Rcpp::CharacterVector out(ms.size());
+    for (size_t i = 0; i < ms.size(); ++i) out[static_cast<R_xlen_t>(i)] = u8(ms[i]);
+    return out;
 }
 
 // [[Rcpp::export(.siu_core_chat)]]
-std::string siu_core_chat(const std::string& api, const std::string& base, const std::string& key,
-                          const std::string& model, const std::string& prompt, double timeout_s,
-                          double temperature) {
-    return siu::llm::chat(make_backend(api, base, key, timeout_s, temperature), model, prompt);
+Rcpp::String siu_core_chat(const std::string& api, const std::string& base, const std::string& key,
+                           const std::string& model, const std::string& prompt, double timeout_s,
+                           double temperature) {
+    return u8(siu::llm::chat(make_backend(api, base, key, timeout_s, temperature), model, prompt));
 }
 
 // [[Rcpp::export(.siu_core_default_model)]]
-std::string siu_core_default_model(const std::string& api, const std::string& base, const std::string& key) {
-    return siu::audit::default_model(siu::llm::resolve(make_backend(api, base, key, 300, 0)));
+Rcpp::String siu_core_default_model(const std::string& api, const std::string& base, const std::string& key) {
+    return u8(siu::audit::default_model(siu::llm::resolve(make_backend(api, base, key, 300, 0))));
 }
 
 // [[Rcpp::export(.siu_core_panel)]]
-std::string siu_core_panel(const std::string& report_text, const std::string& parsed_json, int mode,
+Rcpp::String siu_core_panel(const std::string& report_text, const std::string& parsed_json, int mode,
                            std::vector<std::string> readers, std::vector<std::string> auditors,
                            int num_readers, int num_auditors, int reader_concurrency,
                            bool auditor_sequential, const std::string& reader_granularity,
@@ -146,5 +152,5 @@ std::string siu_core_panel(const std::string& report_text, const std::string& pa
         };
         cfg.backend.thread_safe = false;
     }
-    return siu::audit::run_panel(report_text, parsed_json, cfg);
+    return u8(siu::audit::run_panel(report_text, parsed_json, cfg));
 }

@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
+// Canonical home of the SIU parse/resolve core. rmorie (src/siu/) and morie
+// (morie.siu.native) carry ports of these sources; edit here first, then port.
 #include "siu/resolve.hpp"
 
 #include <algorithm>
@@ -57,8 +59,91 @@ std::string strip_boilerplate(const std::string& t) {
     return std::regex_replace(out, kGlossary, " ");
 }
 
+// French reports (UES): the subject official is the "agent impliqu\xc3\xa9" ("AI no 1"), the witness
+// official the "agent t\xc3\xa9moin" ("AT no 1"). The same rules as the English ones, in that vocabulary.
+static SoResolution resolve_fr(const std::string& text) {
+    // the definition notes ("[ Remarque : Un agent impliqu\xc3\xa9 est un agent ... ]") are not cues
+    // and neither are the privacy paragraph ("le nom d'un agent impliqu\xc3\xa9, d'un agent t\xc3\xa9moin ...",
+    // "y compris des t\xc3\xa9moins civils et des agents impliqu\xc3\xa9s"), the definitions ("On entend par
+    // \xc2\xab agent impliqu\xc3\xa9 \xc2\xbb ...", "... n'est pas un agent impliqu\xc3\xa9") or the law ("les agents
+    // impliqu\xc3\xa9s sont invit\xc3\xa9s \xc3\xa0 participer \xc3\xa0 une entrevue")
+    static const std::regex kNote("Remarque\\s*:\\s*Un agent (?:impliqu|t\xc3\xa9moin)[^\\]\\n]*\\]?", std::regex::icase);
+    static const std::regex kLegal(
+        "[^.;\\n]*(?:sont invit\xc3\xa9s|y compris des|le nom (?:d(?:'|\xe2\x80\x99)un|de tout)|On entend par|"
+        "n(?:'|\xe2\x80\x99)est pas un agent impliqu|n(?:'|\xe2\x80\x99)y sont pas)[^.;\\n]*[.;]?",
+        std::regex::icase);
+    const std::string body = std::regex_replace(std::regex_replace(text, kNote, " "), kLegal, " ");
+    // "AI no 1", "AI n o 1", "agent impliqu\xc3\xa9 n o 1", "l'agent(e) impliqu\xc3\xa9(e) n o 1"
+    static const std::regex kOrd("(?:\\bAI|agent(?:\\(e\\)|e)?\\s+impliqu\xc3\xa9(?:\\(e\\)|e)?)\\s*(?:#|n\\s?o\\.?|n\xc2[\xb0\xba])\\s*(\\d{1,2})\\b");
+    // 0. The "Agent(s) impliqu\xc3\xa9(s)" section lists one entry per official ("AI no 1 A particip\xc3\xa9 \xc3\xa0
+    //    une entrevue", or a lone "AI N'a pas consenti ..."): authoritative, as the English roster
+    {
+        static const std::regex kHead("(?:^|\\n)[ \\t]*Agents? impliqu\xc3\xa9(?:e|s|es)?[ \\t]*(?:\\([ \\t]*AI[ \\t]*\\))?[ \\t]*\\n");
+        static const std::regex kNext("\\n[ \\t]*(?:Agents? t\xc3\xa9moins?|T\xc3\xa9moins? civils?|\xc3\x89l\xc3\xa9ments de preuve|Remarque|En vertu)");
+        static const std::regex kEntry("(?:^|\\n)[ \\t]*AI\\b(?:\\s*(?:#|n\\s?o\\.?|n\xc2[\xb0\xba])\\s*(\\d{1,2}))?");
+        size_t start = std::string::npos;
+        for (auto it = std::sregex_iterator(body.begin(), body.end(), kHead); it != std::sregex_iterator(); ++it)
+            start = static_cast<size_t>(it->position(0) + it->length(0));
+        if (start != std::string::npos) {
+            std::string win = body.substr(start, 2500);
+            std::smatch nx;
+            if (std::regex_search(win, nx, kNext)) win = win.substr(0, static_cast<size_t>(nx.position(0)));
+            int entries = 0, ord = 0;
+            for (auto it = std::sregex_iterator(win.begin(), win.end(), kEntry); it != std::sregex_iterator(); ++it) {
+                ++entries;
+                if ((*it)[1].matched) ord = std::max(ord, std::stoi((*it)[1].str()));
+            }
+            const int n = std::max(entries, ord);
+            if (n > 0) return {n, "section: max(ordinal " + std::to_string(ord) + ", entries " + std::to_string(entries) + ")"};
+        }
+    }
+    int mo = 0;
+    bool one = false;
+    for (auto it = std::sregex_iterator(body.begin(), body.end(), kOrd); it != std::sregex_iterator(); ++it) {
+        const int k = std::stoi((*it)[1].str());
+        mo = std::max(mo, k);
+        one = one || k == 1;
+    }
+    static const std::unordered_map<std::string, int> kFrNum = {
+        {"un", 1}, {"une", 1}, {"deux", 2}, {"trois", 3}, {"quatre", 4}, {"cinq", 5},
+        {"six", 6}, {"sept", 7}, {"huit", 8}, {"neuf", 9}, {"dix", 10}};
+    auto num = [&](std::string tok) {
+        std::transform(tok.begin(), tok.end(), tok.begin(), ::tolower);
+        const auto w = kFrNum.find(tok);
+        return w != kFrNum.end() ? w->second : std::stoi(tok);
+    };
+    std::smatch m;
+    if (mo > 0 && one) {
+        return {mo, "max ordinal AI no " + std::to_string(mo)};
+    }
+    static const std::regex kPlural(
+        "\\b(\\d{1,2}|deux|trois|quatre|cinq|six|sept|huit|neuf|dix)\\s+agent(?:e)?s\\s+impliqu", std::regex::icase);
+    if (std::regex_search(body, m, kPlural)) return {num(m[1].str()), "plural cue '" + m[0].str() + "'"};
+    static const std::regex kZero("\\baucun(?:e)?\\s+agent(?:e)?\\s+impliqu", std::regex::icase);
+    if (std::regex_search(body, kZero)) return {0, "zero: 'aucun agent impliqu\xc3\xa9'"};
+    static const std::regex kThe("\\bl(?:'|\xe2\x80\x99)\\s*(?:AI\\b|agent(?:e)?\\s+impliqu)", std::regex::icase);
+    static const std::regex kPl("\\bles\\s+AI\\b|\\bagent(?:e)?s\\s+impliqu", std::regex::icase);
+    const int the = count_matches(body, kThe);
+    if (the >= 1 && !std::regex_search(body, kPl)) {
+        return {1, "singular present: 'l'AI / l'agent impliqu\xc3\xa9'x" + std::to_string(the)};
+    }
+    static const std::regex kAt("\\bAT\\s*(?:#|n\\s?o\\.?|n\xc2[\xb0\xba])\\s*\\d|\\bagent(?:e)?s?\\s+t\xc3\xa9moin", std::regex::icase);
+    static const std::regex kAnyAi("\\bAI\\b|agent(?:e)?s?\\s+impliqu", std::regex::icase);
+    if (std::regex_search(body, kAt) && !std::regex_search(body, kAnyAi)) {
+        return {0, "zero: witness officials only, no agent impliqu\xc3\xa9 named"};
+    }
+    return {std::nullopt, "UNRESOLVED (fr): 'l'AI'x" + std::to_string(the)};
+}
+
 SoResolution resolve_subject_officials(const std::string& report_text) {
     const std::string body = strip_boilerplate(report_text);
+    {
+        static const std::regex kUes("\\bUES\\b"), kSiu("\\bSIU\\b");
+        static const std::regex kFrRole("agent(?:\\(e\\)|e)?s?\\s+impliqu"), kEnRole("subject offic", std::regex::icase), kEnTag("\\bSOs?\\b");
+        if (count_matches(body, kUes) > count_matches(body, kSiu) ||
+            (std::regex_search(body, kFrRole) && !std::regex_search(body, kEnRole) && !std::regex_search(body, kEnTag)))
+            return resolve_fr(body);
+    }
 
     // Ordinal scanners. "SO" is case-strict with a left word boundary and
     // "#" is REQUIRED: an icase optional-# variant matched "...also 59..."
@@ -126,9 +211,10 @@ SoResolution resolve_subject_officials(const std::string& report_text) {
         return {max_ord, "max ordinal SO #" + std::to_string(max_ord)};
     }
 
-    // 2. Spelled-out / numeric plural: "the two subject officials".
+    // 2. Spelled-out / numeric plural: "the two subject officials", "Two subject officials were
+    //    designated", "designated two subject officers".
     static const std::regex kPlural(
-        R"(\bthe\s+(\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)\s+subject offic(?:er|ial)s\b)",
+        R"(\b(?:the\s+)?(\d{1,2}|two|three|four|five|six|seven|eight|nine|ten)\s+subject offic(?:er|ial)s\b)",
         std::regex::icase);
     std::smatch m;
     if (std::regex_search(body, m, kPlural)) {
@@ -158,11 +244,12 @@ SoResolution resolve_subject_officials(const std::string& report_text) {
     }
 
     // 4. Explicitly ZERO subject officers (witness-officer-only cases).
-    static const std::array<std::regex, 2> kZero = {
+    static const std::array<std::regex, 3> kZero = {
         std::regex(R"(no subject offic(?:er|ial)s?\b)", std::regex::icase),
         std::regex(
             R"((?:did not|not|never)\s+designate[d]?\s+(?:a\s+|any\s+)?subject offic)",
-            std::regex::icase)};
+            std::regex::icase),
+        std::regex(R"(\bno (?:police )?(?:official|officer) was (?:a |the )?subject offic)", std::regex::icase)};
     // NOTE: "undesignated officer" and "is/was not a subject official" were
     // removed as zero cues -- both match incidental prose (bystander
     // officers, one-of-several negations) in reports with real subject
@@ -171,6 +258,14 @@ SoResolution resolve_subject_officials(const std::string& report_text) {
         if (std::regex_search(body, re)) {
             return {0, "zero: witness-officer-only / 'not a subject official'"};
         }
+    }
+
+    // 4b. Witness officials and no subject official anywhere (the boilerplate is gone): none
+    //     was designated -- "WO #1 Interviewed / WO #2 Interviewed" and nothing else
+    static const std::regex kWo(R"(\bWO\s*#\s*\d|\bwitness offic(?:er|ial)s?\b)", std::regex::icase);
+    static const std::regex kAnySo(R"(\bSOs?\b|subject offic)", std::regex::icase);
+    if (std::regex_search(body, kWo) && !std::regex_search(body, kAnySo)) {
+        return {0, "zero: witness officials only, no subject official named"};
     }
 
     // 5. Needs a human read.

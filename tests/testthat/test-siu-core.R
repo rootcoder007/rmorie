@@ -17,6 +17,11 @@ skip_unless_bricklayer_subject_rule <- function() {
   skip_if_not(identical(morie_siu_parse_report(probe, engine = "bricklayer")[["police_service"]],
                         "Hillcrest Police Service"),
               "installed rmoriebricklayer predates the subject-officials rule")
+  # and the round-8 parser (French subject officials, sentence-level incident dates): the native
+  # core carries it, a bricklayer from before it parses differently
+  fr <- "Unit\u00e9 des enqu\u00eates sp\u00e9ciales (UES)\nAgents impliqu\u00e9s\nAI n o 1 A particip\u00e9\nAI n o 2 A particip\u00e9\n"
+  skip_if_not(identical(rmoriebricklayer::bricklayer_siu_resolve_so(fr)$count, 2L),
+              "installed rmoriebricklayer predates the round-8 SIU parser")
 }
 
 test_that("native core parses the synthetic report", {

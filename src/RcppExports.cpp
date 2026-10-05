@@ -1194,7 +1194,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_html_to_text
-std::string siu_core_html_to_text(const std::string& html);
+Rcpp::String siu_core_html_to_text(const std::string& html);
 RcppExport SEXP _rmorie_siu_core_html_to_text(SEXP htmlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1216,7 +1216,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_to_iso_date
-std::string siu_core_to_iso_date(const std::string& human);
+Rcpp::String siu_core_to_iso_date(const std::string& human);
 RcppExport SEXP _rmorie_siu_core_to_iso_date(SEXP humanSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1227,7 +1227,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_strip_boilerplate
-std::string siu_core_strip_boilerplate(const std::string& text);
+Rcpp::String siu_core_strip_boilerplate(const std::string& text);
 RcppExport SEXP _rmorie_siu_core_strip_boilerplate(SEXP textSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1259,7 +1259,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_get
-std::string siu_core_get(const std::string& url, double timeout_s);
+Rcpp::String siu_core_get(const std::string& url, double timeout_s);
 RcppExport SEXP _rmorie_siu_core_get(SEXP urlSEXP, SEXP timeout_sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1297,7 +1297,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_chat
-std::string siu_core_chat(const std::string& api, const std::string& base, const std::string& key, const std::string& model, const std::string& prompt, double timeout_s, double temperature);
+Rcpp::String siu_core_chat(const std::string& api, const std::string& base, const std::string& key, const std::string& model, const std::string& prompt, double timeout_s, double temperature);
 RcppExport SEXP _rmorie_siu_core_chat(SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP, SEXP modelSEXP, SEXP promptSEXP, SEXP timeout_sSEXP, SEXP temperatureSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1314,7 +1314,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_default_model
-std::string siu_core_default_model(const std::string& api, const std::string& base, const std::string& key);
+Rcpp::String siu_core_default_model(const std::string& api, const std::string& base, const std::string& key);
 RcppExport SEXP _rmorie_siu_core_default_model(SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1327,7 +1327,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_panel
-std::string siu_core_panel(const std::string& report_text, const std::string& parsed_json, int mode, std::vector<std::string> readers, std::vector<std::string> auditors, int num_readers, int num_auditors, int reader_concurrency, bool auditor_sequential, const std::string& reader_granularity, const std::string& auditor_granularity, bool health_check, const std::string& api, const std::string& base, const std::string& key, double timeout_s, double temperature, SEXP chat_fn);
+Rcpp::String siu_core_panel(const std::string& report_text, const std::string& parsed_json, int mode, std::vector<std::string> readers, std::vector<std::string> auditors, int num_readers, int num_auditors, int reader_concurrency, bool auditor_sequential, const std::string& reader_granularity, const std::string& auditor_granularity, bool health_check, const std::string& api, const std::string& base, const std::string& key, double timeout_s, double temperature, SEXP chat_fn);
 RcppExport SEXP _rmorie_siu_core_panel(SEXP report_textSEXP, SEXP parsed_jsonSEXP, SEXP modeSEXP, SEXP readersSEXP, SEXP auditorsSEXP, SEXP num_readersSEXP, SEXP num_auditorsSEXP, SEXP reader_concurrencySEXP, SEXP auditor_sequentialSEXP, SEXP reader_granularitySEXP, SEXP auditor_granularitySEXP, SEXP health_checkSEXP, SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP, SEXP timeout_sSEXP, SEXP temperatureSEXP, SEXP chat_fnSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
