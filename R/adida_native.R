@@ -115,62 +115,36 @@ disaggregate <- function(aggregate_value, m, profile = NULL) {
   as.numeric(aggregate_value) * w
 }
 
-#' TSB intermittent-demand forecaster
+#' Base forecaster for ADIDA
 #'
-#' Default base forecaster used by \code{morie_adida}, implementing
-#' the Teunter-Syntetos-Babai update so the same numbers come out
-#' under the same RNG stream as the Python arm. Only the "tsb"
-#' method is implemented here; the default and the one the ADIDA
-#' cheatsheet references. Other methods are not ported because they
-#' are not needed to mirror the Python arm's defaults.
+#' The forecaster \code{morie_adida} applies to the aggregated series:
+#' \code{\link{morie_tsbF_intermittent_forecast}} with its defaults
+#' (Teunter-Syntetos-Babai, Croston or SBA, initialised from the mean
+#' positive demand and the demand rate), the dispatch the Python arm's
+#' ADIDA calls.
 #'
 #' @param y Numeric series of non-negative demand.
-#' @param method Method name; only "tsb" is implemented.
-#' @param alpha Smoothing for the demand size.
-#' @param beta Smoothing for the demand probability.
-#' @param horizon Forecast horizon; only horizon = 1 is used by ADIDA.
+#' @param method "tsb", "croston" or "sba".
+#' @param alpha Smoothing for the demand size (and, for Croston and SBA,
+#'   the interval).
+#' @param beta Smoothing for the demand probability (TSB only).
+#' @param horizon Forecast horizon; ADIDA calls it with 1.
 #' @return Named list with \code{forecast}.
 #' @references Teunter, R. H., Syntetos, A. A. & Babai, M. Z. (2011).
+#'   Intermittent demand: linking forecasting to inventory obsolescence.
+#'   European Journal of Operational Research 214(3), 606-615.
 #' @keywords internal
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' rmorie:::intermittent_forecast(V)
+#' V <- c(0, 3, 0, 0, 5, 0, 2, 0, 0, 0, 4, 1)
+#' rmorie:::intermittent_forecast(V)$forecast
+#' rmorie:::intermittent_forecast(V, method = "croston")$forecast
 intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
                                   beta = 0.05, horizon = 1L) {
   yv <- as.numeric(y)
   if (length(yv) == 0L) stop("adida: empty series")
-  if (!identical(method, "tsb")) {
-    stop(sprintf(
-      "adida: method '%s' is not implemented in the R arm",
-      method
-    ))
-  }
-  if (as.integer(horizon) != 1L) {
-    stop("adida: intermittent_forecast is called with horizon = 1")
-  }
-  # Initialisation matches the conventional TSB seed: z_0 is the first
-  # positive demand observed, p_0 is the empirical rate of positive
-  # demand over the history. The Python tsbF initialisation should be
-  # checked against this; the rest of the update is the published TSB
-  # recursion, identical in both arms.
-  pos <- yv[yv > 0]
-  if (length(pos) == 0L) {
-    z <- 0
-    p <- 0
-  } else {
-    z <- pos[1L]
-    p <- length(pos) / length(yv)
-  }
-  for (t in seq_along(yv)) {
-    if (yv[t] > 0) {
-      z <- (1 - alpha) * z + alpha * yv[t]
-      p <- (1 - beta) * p + beta
-    } else {
-      z <- z
-      p <- (1 - beta) * p
-    }
-  }
-  list(forecast = z * p)
+  f <- morie_tsbF_intermittent_forecast(yv, method = method, alpha = alpha,
+                                        beta = beta, horizon = horizon)
+  list(forecast = f$forecast)
 }
 
 #' ADIDA forecast: aggregate, forecast, disaggregate
