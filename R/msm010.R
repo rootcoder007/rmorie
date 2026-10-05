@@ -14,9 +14,14 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (5.1) p.141. DOI 10.1007/978-3-030-89010-0.
-#' @export
 #' @examples
-#' Msm010(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
+#' set.seed(11)
+#' g <- rep(1:5, each = 4)
+#' X <- cbind(1, rnorm(20)); Z <- model.matrix(~ factor(g) - 1)
+#' y <- as.numeric(X %*% c(2, 1) + Z %*% rnorm(5, sd = 0.7) + rnorm(20))
+#' f <- Msm010(X, Z, y, D = diag(0.5, 5))
+#' f$beta
+#' @export
 Msm010 <- function(X, Z, y, D, R = NULL) {
   bb <- .gpblueblup(X, Z, y, D, R)
   V <- .gplmmV(Z, D, R)

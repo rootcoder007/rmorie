@@ -13,9 +13,10 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (6.2) p.172. DOI 10.1007/978-3-030-89010-0.
-#' @export
 #' @examples
-#' Msm043(sigma2 = 5L)
+#' # the improper prior p(beta, sigma2) proportional to 1 / sigma2
+#' Msm043(sigma2 = c(0.5))$density
+#' @export
 Msm043 <- function(sigma2, beta = NULL) {
   s2 <- as.numeric(sigma2)
   if (s2 <= 0) stop("sigma2 must be positive")
