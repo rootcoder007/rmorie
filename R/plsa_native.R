@@ -385,16 +385,20 @@ e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 #'   post = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), K = 5L)
 #' @keywords internal
 m_step <- function(n_dw, post, K) .plsa_m_step(n_dw, post, K)
-#' .plsa_log_likelihood
+#' Log-likelihood of a PLSA model
 #'
-#' Internal helper in plsa_native.R; see the file header for
-#' the source the module follows.
+#' \eqn{\sum_{d,w} n(d,w) \log \sum_z P(z) P(d|z) P(w|z)} for the aspect model
+#' of Hofmann (1999).
 #'
-#' @param n_dw Passed to \code{.plsa_check}.
-#' @param Pz Passed to \code{.plsa_joint_probability}.
-#' @param Pd_z Passed to \code{.plsa_joint_probability}.
-#' @param Pw_z Passed to \code{.plsa_joint_probability}.
-#' @return The value of \code{sum}.
+#' @param n_dw Document-by-word count matrix.
+#' @param Pz Topic probabilities \eqn{P(z)}.
+#' @param Pd_z Documents-by-topics matrix of \eqn{P(d|z)}.
+#' @param Pw_z Words-by-topics matrix of \eqn{P(w|z)}.
+#' @return The log-likelihood.
+#' @examples
+#' n_dw <- matrix(c(2, 0, 1, 3), 2)       # 2 documents x 2 words
+#' Pz <- c(0.5, 0.5); Pd_z <- matrix(0.5, 2, 2); Pw_z <- matrix(c(0.7, 0.3, 0.2, 0.8), 2)
+#' log_likelihood(n_dw, Pz, Pd_z, Pw_z)
 #' @export
 # the public alias the reference arm exports; the old line re-bound
 # the INTERNAL name to itself, clobbering the real helper with

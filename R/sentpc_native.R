@@ -236,7 +236,8 @@ morie_sentpc_viterbi_segment <- function(text, piece_logp,
     Lmax <- min(maxlen, i - 1L)
     for (L in 1:Lmax) {
       piece <- substr(s, i - L, i - 1L)
-      lp <- piece_logp[[piece]]
+      # a named list or a named numeric vector; an unknown piece is simply absent
+      lp <- if (piece %in% names(piece_logp)) piece_logp[[piece]]
       if (is.null(lp)) next
       cand <- best[i - L] + lp
       if (cand > best[i]) {
@@ -420,7 +421,8 @@ viterbi_segment <- function(text, piece_logp, add_prefix = TRUE) {
   for (i in 2:(n + 1L)) {
     for (L in seq_len(min(maxlen, i - 1L))) {
       piece <- substr(s, i - L, i - 1L)
-      lp <- piece_logp[[piece]]
+      # a named list or a named numeric vector; an unknown piece is simply absent
+      lp <- if (piece %in% names(piece_logp)) piece_logp[[piece]]
       if (is.null(lp)) next
       if (best[i - L] + lp > best[i]) {
         best[i] <- best[i - L] + lp

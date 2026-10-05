@@ -386,7 +386,7 @@ momento_mask_patches <- function(patches, mask_idx, fill = 0) {
 #' the source it follows.
 #'
 #' @param patches Iterated over elementwise, with \code{lapply}.
-#' @param reconstructor Accepted by the signature and not used anywhere in the body.
+#' @param reconstructor Function \code{(masked, mask)} returning the reconstructed patches.
 #' @param rates See Usage.
 #' @param seed Passed to \code{set.seed}. Defaults to \code{0}.
 #' @return A list with \code{curve}, \code{n_patches}, \code{rates}, \code{mse}.
