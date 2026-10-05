@@ -119,6 +119,7 @@ morie_crypto_mlkem768_encaps <- function(pk) {
 #' }
 #' @export
 morie_crypto_mlkem768_decaps <- function(sk, ct) {
+  .morie_arg(sk, "r")
   stopifnot(is.raw(sk), is.raw(ct))
   if (length(sk) != 2400L || length(ct) != 1088L) {
     stop("ML-KEM-768 size mismatch: sk must be 2400 bytes and ct 1088 bytes", call. = FALSE)

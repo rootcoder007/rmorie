@@ -82,6 +82,7 @@
 #' Gpreg(matrix(c(0, 1, 2), 3, 1), c(0, 1, 0.5), matrix(c(0.5), 1, 1))$estimate
 #' @export
 Gpreg <- function(X, y, X_test, kernel = NULL, noise = 0) {
+  .morie_arg(X, "m")
   A <- .b2mat(X)
   B <- .b2mat(X_test)
   yv <- as.numeric(y)
@@ -220,6 +221,7 @@ Gpresid <- function(X, y, y_pred, kernel = NULL, noise = 0) {
 #' Srfintp(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 Srfintp <- function(coords, values, grid, method = "gp", kernel = NULL, noise = 0) {
+  .morie_arg(coords, "m")
   if (!(method %in% c("gp", "kriging"))) stop("method must be 'gp' or 'kriging'", call. = FALSE)
   g <- Gpreg(coords, values, grid, kernel, noise)
   list(estimate = g$estimate, variance = g$variance, method_used = method,

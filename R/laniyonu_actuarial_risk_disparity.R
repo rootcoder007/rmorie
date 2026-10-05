@@ -507,6 +507,7 @@ morie_laniyonu_actuarial_risk_disparity <- function(
   bootstrap_replicates = 200L,
   random_state = 20260513L
 ) {
+  .morie_arg(df, "df")
   stopifnot(is.data.frame(df), is.character(outcome), length(outcome) == 1L)
   if (is.null(control_cols)) control_cols <- character(0)
 

@@ -299,6 +299,7 @@ CountModelIc <- function(loglik, k, n) {
 #' @rdname SarPoisson
 #' @export
 BymVarianceFraction <- function(var_spatial, var_unstructured, Q = NULL) {
+  .morie_arg(var_spatial, "n")
   s <- 1
   if (!is.null(Q)) {
     Q <- as.matrix(Q)

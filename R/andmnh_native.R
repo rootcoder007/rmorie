@@ -707,6 +707,7 @@ morie_andmnh <- andrews_monahan_hac
 #' singular_value_adjust(A)
 #' @export
 singular_value_adjust <- function(a, cap = .EIGENVALUE_CAP) {
+  .morie_arg(a, "m")
   cap <- as.numeric(cap)
   if (!(cap > 0 && cap < 1)) {
     stop("andmnh: cap must lie strictly between 0 and 1")

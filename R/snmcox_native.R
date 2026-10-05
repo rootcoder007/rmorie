@@ -38,6 +38,7 @@
 #'   psi = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
 morie_snmcox_blip_down <- function(time, treat_times, psi) {
+  .morie_arg(time, "n")
   T <- as.numeric(time)
   if (T < 0) stop("snmcox: a failure time cannot be negative")
   p <- as.numeric(psi)

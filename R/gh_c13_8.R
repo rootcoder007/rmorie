@@ -20,6 +20,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ghosalntrdef(V)
 Ghosalntrdef <- function(increments, seed = 42) {
+  .morie_arg(increments, "n")
   inc <- as.numeric(increments)
   if (length(inc) == 0L) stop("increments must be non-empty")
   if (any(inc < 0)) stop("increments must be nonnegative")

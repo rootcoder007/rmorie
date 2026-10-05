@@ -126,6 +126,7 @@ morie_crypto_hqc_keygen <- function() {
 #' str(enc)
 #' @export
 morie_crypto_hqc_encaps <- function(pk) {
+  .morie_arg(pk, "r")
   stopifnot(is.raw(pk))
   if (.morie_pqc_native()) {
     key <- structure(list(public = .morie_pqc_r2h(pk), level = 1L), class = c("bricklayer_hqc_public_key", "list"))

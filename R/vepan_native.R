@@ -1043,6 +1043,7 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
 #' str(morie_vepan_pick(recs), max.level = 1)
 #' @keywords internal
 morie_vepan_pick <- function(records, per_gene = FALSE) {
+  .morie_arg(records, "l")
   # --pick (one record) or --per_gene (one per gene).
   rs <- records
   if (length(rs) == 0L) {

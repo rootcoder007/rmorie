@@ -284,6 +284,7 @@ KrigeCV <- function(z, coords, model, X = NULL, beta = NULL, folds = NULL, nmax 
 #' KrigeLognormal(c(1, 3, 2), rbind(c(0, 0), c(2, 0), c(0, 2)), rbind(c(1, 1)), m)$prediction
 #' @export
 KrigeLognormal <- function(z, coords, new_coords, model, beta = NULL) {
+  .morie_arg(z, "n")
   if (any(z <= 0)) stop("lognormal kriging needs positive z")
   r <- Krige(log(z), coords, new_coords, model, beta = beta)
   adj <- if (is.null(beta)) vapply(r$lagrange, `[`, 0, 1) else 0

@@ -333,6 +333,7 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 #' sasimi_nearest_neighbours(V, V)
 #' @keywords internal
 sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimoto") {
+  .morie_arg(query, "c1")
   if (as.integer(k) < 1L) {
     stop("sasimi: k must be at least 1")
   }

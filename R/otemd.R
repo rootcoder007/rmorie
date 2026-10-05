@@ -24,6 +24,7 @@
 #' @examples
 #' Otemd(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8))
 Otemd <- function(a, b, C) {
+  .morie_arg(a, "n")
   aa <- .ot_hist(a)
   bb <- .ot_hist(b)
   r <- .ot_emd(aa, bb, as.matrix(C))

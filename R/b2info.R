@@ -367,6 +367,7 @@ Predcomp <- function(model, data, base = 2) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dpineq(V)
 Dpineq <- function(pxyz, cdf = NULL, base = 2) {
+  .morie_arg(pxyz, "data")
   a <- .b2as3d(pxyz)
   a <- a / sum(a)
   hx <- .b2ent(as.numeric(apply(a, 1, sum)), base)

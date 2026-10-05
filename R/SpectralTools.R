@@ -80,6 +80,7 @@ HistogramTransform <- function(values, target) {
 #' @export
 CoherentFields <- function(coords, cov_model = "exponential", cov_params = list(), coherence = 0.5,
                            n_sims = 1L, seed = 1L) {
+  .morie_arg(coords, "m")
   if (abs(coherence) > 1) stop("coherence must lie in [-1, 1]")
   z1 <- SpectralGRF(coords, cov_model, cov_params, n_sims = n_sims, seed = seed)$simulations
   z2 <- SpectralGRF(coords, cov_model, cov_params, n_sims = n_sims, seed = seed + 1L)$simulations

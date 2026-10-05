@@ -76,6 +76,7 @@
 #' MlFac(X, 1)$uniqueness
 #' @export
 MlFac <- function(X, n_factors = NULL, max_iter = 500, tol = 1e-12, scale = TRUE) {
+  .morie_arg(X, "m")
   X <- as.matrix(X)
   n <- nrow(X)
   p <- ncol(X)

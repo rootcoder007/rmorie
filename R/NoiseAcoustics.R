@@ -263,6 +263,7 @@ NoiseZones <- function(levels, breaks = c(55, 60, 65, 70, 75), population = NULL
 #' @export
 CrtnRoadNoise <- function(flow, speed = 75, heavy_pct = 0, gradient_pct = 0, distance = 10, receiver_height = 1.5,
                           soft_ground = 0, angle = 180, facade = FALSE, period = "hour") {
+  .morie_arg(flow, "n")
   basic <- (if (period == "hour") 42.2 else 29.1) + 10 * log10(flow)
   c_speed <- 33 * log10(speed + 40 + 500 / speed) + 10 * log10(1 + 5 * heavy_pct / speed) - 68.8
   c_dist <- -10 * log10(sqrt((distance + 3.5)^2 + (receiver_height - 0.5)^2) / 13.5)

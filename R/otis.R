@@ -415,6 +415,7 @@ morie_otis_rctrnd <- function(df,
                                id_col = "unique_individual_id",
                                year_col = "end_fiscal_year",
                                region_col = "region_at_time_of_placement") {
+  .morie_arg(df, "df")
   stopifnot(is.data.frame(df))
   needed <- c(id_col, year_col, region_col)
   if (!all(needed %in% names(df))) {

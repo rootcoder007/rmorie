@@ -23,6 +23,7 @@
 #' spcsr(matrix(runif(400), 200, 2) * 10, region = c(0, 0, 10, 10))$clark_evans
 #' @export
 spcsr <- function(points, region = NULL) {
+  .morie_arg(points, "m")
   p <- as.matrix(points)
   reg <- .sp_region(region, p)
   area <- (reg[3] - reg[1]) * (reg[4] - reg[2])

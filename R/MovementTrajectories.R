@@ -92,6 +92,7 @@ FirstPassageTime <- function(track, times, radius) {
 #' @export
 SimulateWalk <- function(n_steps, kind = "correlated", step = 1, rho = 0.8, mu = 2, target = c(0, 0), bias = 0.5,
                          start = c(0, 0), seed = 1L) {
+  .morie_arg(n_steps, "i1")
   if (!kind %in% c("correlated", "biased", "levy")) stop("kind must be correlated, biased or levy")
   U1 <- .morie_random_uniform(n_steps, seed = seed, stream = 0)
   U2 <- .morie_random_uniform(n_steps, seed = seed, stream = 1)

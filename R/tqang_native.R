@@ -60,6 +60,7 @@ angular_difference <- function(a, b) wrap_angle(as.numeric(a) - as.numeric(b))
 #' is.list(q) || is.numeric(q)
 #' @keywords internal
 morie_tqang <- function(theta, bits = 4) {
+  .morie_arg(theta, "n")
   b <- as.integer(bits)
   if (!(b >= 1L && b <= 30L))
     stop("quantize_angles: bits must lie in 1..30")

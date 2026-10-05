@@ -168,6 +168,7 @@ morie_pmpfit_expected <- function(n, alpha, theta) {
 #' morie_pmpfit_tail(n = 5L)
 #' @keywords internal
 morie_pmpfit_tail <- function(n, theta = 1.0, alphas = c(0.0, 0.3, 0.6)) {
+  .morie_arg(n, "i1")
   th <- as.numeric(theta)
   N <- as.integer(n)
   out <- list()

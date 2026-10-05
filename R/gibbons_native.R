@@ -344,6 +344,7 @@ morie_rank_tie_variance <- function(x = NULL, y = NULL, groups = NULL) {
 #' morie_rank_exact_null(5, "spearman")$var
 #' @export
 morie_rank_exact_null <- function(n, statistic = "kendall") {
+  .morie_arg(n, "i1")
   statistic <- match.arg(statistic, c("kendall", "spearman"))
   n <- as.integer(n)
   if (n < 2L || n > 8L) {

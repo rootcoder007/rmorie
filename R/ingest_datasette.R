@@ -70,6 +70,7 @@
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasette_databases <- function(base_url = NULL, timeout = 60) {
+  .morie_arg(base_url, "c1null")
   base <- .morie_datasette_base(base_url)
   out <- .morie_datasette_get_json(paste0(base, "/-/databases.json"),
                                    timeout = timeout)

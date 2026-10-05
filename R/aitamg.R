@@ -19,6 +19,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Amalgam(V, V)
 Amalgam <- function(x, parts, total = 1) {
+  .morie_arg(x, "n")
   x <- .t1_vec(x)
   if (any(x <= 0)) stop("compositions must be strictly positive")
   D <- length(x)

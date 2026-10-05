@@ -94,6 +94,7 @@ morie_haldane <- function(distance) {
 #' morie_inverse_haldane(morie_haldane(0.2))
 #' @keywords internal
 morie_inverse_haldane <- function(r) {
+  .morie_arg(r, "n")
   r <- as.numeric(r)
   if (r < 0 || r >= 0.5)
     stop(sprintf("rqtmpl: a recombination fraction must lie in [0, 0.5), got %s", r))

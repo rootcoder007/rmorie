@@ -384,7 +384,10 @@ e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 #' m_step(n_dw = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   post = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), K = 5L)
 #' @keywords internal
-m_step <- function(n_dw, post, K) .plsa_m_step(n_dw, post, K)
+m_step <- function(n_dw, post, K) {
+  .morie_arg(n_dw, "m")
+  .plsa_m_step(n_dw, post, K)
+}
 #' Log-likelihood of a PLSA model
 #'
 #' \eqn{\sum_{d,w} n(d,w) \log \sum_z P(z) P(d|z) P(w|z)} for the aspect model

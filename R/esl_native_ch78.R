@@ -31,6 +31,7 @@ morie_esl_cross_entropy <- function(y, p) {
 #' morie_esl_aic_score(-16.17, 3)$estimate
 #' @export
 morie_esl_aic_score <- function(loglik, d) {
+  .morie_arg(loglik, "n")
   list(estimate = -2 * loglik + 2 * d, loglik = loglik, d = d)
 }
 

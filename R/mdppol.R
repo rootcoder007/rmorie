@@ -37,6 +37,7 @@
 #' @export
 Mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000L,
                    max_improve = 1000L, pi0 = NULL) {
+  .morie_arg(P, "l")
   ar <- .w505_mdp_args(P, R)
   Pm <- ar$P
   R <- ar$R

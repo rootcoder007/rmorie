@@ -185,6 +185,7 @@
 #' @keywords internal
 morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
                        seed = 0, fast = TRUE) {
+  .morie_arg(R, "m")
   M <- as.matrix(R)
   storage.mode(M) <- "double"
   m <- nrow(M)

@@ -22,6 +22,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tukeyw(V)
 Tukeyw <- function(y, c = 4.685, n_iter = 20) {
+  .morie_arg(y, "n")
   v <- as.numeric(unlist(y))
   n <- length(v)
   mu <- .s4_median(v)

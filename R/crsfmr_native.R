@@ -216,6 +216,7 @@ morie_crsfmr_cross_dimension_stage <- function(Z, router = NULL,
 #' @keywords internal
 morie_crsfmr_two_stage_attention <- function(Z, n_router = NULL,
                                              router = NULL) {
+  .morie_arg(Z, "l")
   zt <- morie_crsfmr_cross_time_stage(Z)
   zd <- morie_crsfmr_cross_dimension_stage(zt, router = router,
                                             n_router = n_router)

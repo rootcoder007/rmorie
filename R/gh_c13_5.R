@@ -21,6 +21,7 @@
 #' @examples
 #' Ghosalbpcont()
 Ghosalbpcont <- function(c = 2, t_max = 1, n_grid = 2000) {
+  .morie_arg(c, "n1")
   n_grid <- as.integer(n_grid)
   if (c <= 0) stop("c must be positive")
   if (n_grid < 1L) stop("n_grid must be positive")

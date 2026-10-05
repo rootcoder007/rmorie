@@ -1198,6 +1198,7 @@ BwPoles <- function(Omega_c, N, k = NULL) {
 #' BwAnalog(Omega_c = 5L, N = 5L)
 #' @keywords internal
 BwAnalog <- function(Omega_c, N, G = NULL, s = NULL) {
+  .morie_arg(Omega_c, "n1")
   # eq (3.138): built from the N LEFT-half-plane poles only.  With no gain
   # given, G normalizes the DC gain to unity, which makes it Omega_c^N.
   # The denominator coefficients are real to rounding because the poles
@@ -1558,6 +1559,7 @@ BwDirect <- function(omega, omega_c, N) {
 #' BwLpDft(16, kc = 4, N = 2)
 #' @keywords internal
 BwLpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
+  .morie_arg(K, "i1")
   # eq (3.146), valid for k = 0..K/2 with the upper half a reflection,
   # H(k) = H(K-k).  The book defines kc = ceil(K wc/ws) and that CEILING
   # matters: rounding down puts the realized cutoff below the request.
@@ -1674,6 +1676,7 @@ BwHpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
 #' Notch60(1000, 60)
 #' @keywords internal
 Notch60 <- function(fs, f0 = 60, z = NULL) {
+  .morie_arg(fs, "n1")
   # A conjugate pair of zeros AT the interference frequency, so the gain
   # there is exactly nought.  With zeros alone the notch is wide, which is
   # why the book goes on to add poles just inside them.
@@ -2199,6 +2202,7 @@ HammingW <- function(N) {
 #' HannW(N = 5L)
 #' @keywords internal
 HannW <- function(N) {
+  .morie_arg(N, "i1")
   # w(n) = 0.5[1 - cos(2 pi n/(N-1))].  Reaches exactly zero at both ends,
   # so overlapped Hann windows add to a constant at 50 per cent overlap --
   # the property that makes it the default for overlap-add analysis.
@@ -2284,6 +2288,7 @@ BlackmanW <- function(N) {
 #' WindowFn(N = 5L)
 #' @keywords internal
 WindowFn <- function(N, window_type = "hamming") {
+  .morie_arg(N, "i1")
   # Section 3.4.  Truncating a record IS multiplying it by a rectangle,
   # whose transform has sidelobes that leak energy from strong components
   # into neighbouring bins; a tapered window trades a wider main lobe for

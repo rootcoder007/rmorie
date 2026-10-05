@@ -34,6 +34,7 @@
 #'                         5, 3, byrow = TRUE)
 #' Keggp(genes, kegg_pathways)
 Keggp <- function(genes, kegg_pathways, alpha = 0.05) {
+  .morie_arg(genes, "n")
   g <- .s03vec(genes)
   N <- length(g)
   if (N == 0L) stop("kegg_pathway: genes is empty")

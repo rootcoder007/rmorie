@@ -203,6 +203,7 @@ morie_logit_link <- function(p = 0.5, xb = 0, b = 0) {
 morie_logistic_effects <- function(ybar, b, se, n_correct, n_total,
                                    neg2ll_null, neg2ll_full,
                                    neg2ll_reduced = NA, n = NA) {
+  .morie_arg(ybar, "n1")
   stopifnot(ybar > 0, ybar < 1, se > 0)
   chi2 <- neg2ll_null - neg2ll_full
   out <- list(
@@ -441,6 +442,7 @@ morie_rct_tests <- function(r_yt = NA, r_yx = NA, r_tx = NA, s_y = NA,
 #' morie_experiment_anova()
 morie_experiment_anova <- function(groups = NULL, y = NULL,
                                    treatment = NULL, block = NULL) {
+  .morie_arg(groups, "l")
   out <- list()
   if (!is.null(groups)) {
     groups <- lapply(groups, as.numeric)

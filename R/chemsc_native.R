@@ -209,6 +209,7 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 #' @keywords internal
 morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
                                par = NULL) {
+  .morie_arg(r, "n")
   p <- .chemsc_par(.CHEMSC_HBOND, par)
   v <- .chemsc_B(r - p$R_IDEAL, p$DELTA_R_IDEAL, p$DELTA_R_MAX,
                  p$HBOND_R_SIGMA, smoothing)

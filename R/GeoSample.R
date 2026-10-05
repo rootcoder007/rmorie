@@ -74,6 +74,7 @@ RhumbLine <- function(lat1, lon1, lat2, lon2, radius = 6378137, method = "shorte
 #' @rdname RhumbLine
 #' @export
 GeodeticToEcef <- function(lat, lon, h, ellipsoid = "WGS84") {
+  .morie_arg(lat, "n")
   af <- .gs_ell(ellipsoid)
   e2 <- af[2] * (2 - af[2])
   p <- lat * pi / 180

@@ -1172,6 +1172,7 @@ morie_alammar_tokenizer_vocab_overlap <- function(vocab_a, vocab_b) {
 morie_alammar_recursive_chunking <- function(text, separators = NULL,
                                              target_size = 200,
                                              overlap = 0) {
+  .morie_arg(text, "c1")
   s <- as.character(text)
   seps <- if (is.null(separators)) {
     c("\n\n", "\n", ". ", " ")
@@ -1330,6 +1331,7 @@ morie_alammar_chosen_rejected_template <- function(prompts, chosen,
 #' @keywords internal
 morie_alammar_instruction_data_template <- function(records,
                                                     template = NULL) {
+  .morie_arg(records, "l")
   tmpl <- if (is.null(template)) {
     "### Instruction:\n{instruction}\n### Input:\n{input}\n### Response:\n"
   } else {

@@ -471,6 +471,7 @@ morie_tps_local_morans_i <- function(df,
                                       top_n = 20L,
                                       lat_col = "LAT_WGS84",
                                       lon_col = "LONG_WGS84") {
+  .morie_arg(df, "df")
   stopifnot(is.data.frame(df), is.character(hood_col))
   call <- sprintf(
     "morie_tps_local_morans_i(df=<%dr>, hood_col=%s, k=%d)",

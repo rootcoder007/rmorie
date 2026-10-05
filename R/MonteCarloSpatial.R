@@ -161,6 +161,7 @@ McControlVariate <- function(y, g, g_mean) {
 #' @rdname McIntegrate
 #' @export
 McConvergence <- function(samples, batches = 20) {
+  .morie_arg(samples, "n")
   x <- samples
   n <- length(x)
   run <- cumsum(x) / seq_len(n)

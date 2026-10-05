@@ -77,6 +77,7 @@
 #' @keywords internal
 morie_longrd_align <- function(a, b, match = 1, mismatch = -1,
                                gap = -2) {
+  .morie_arg(a, "c1")
   av <- if (nchar(a)) strsplit(a, "")[[1]] else character(0)
   bv <- if (nchar(b)) strsplit(b, "")[[1]] else character(0)
   n <- length(av)

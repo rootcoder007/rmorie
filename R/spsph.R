@@ -18,6 +18,7 @@
 #' spsph(h = c(0, 0.5, 1, 2), nugget = 0.1, sill = 1, range = 1)
 #' @export
 spsph <- function(h, nugget = 0, sill = 1, range = 1) {
+  .morie_arg(h, "n")
   g <- .sp_semivariogram(h, nugget, sill, range, "spherical")
   list(gamma = g, nugget = as.numeric(nugget), sill = as.numeric(sill),
        range = as.numeric(range), model = "spherical")

@@ -858,6 +858,7 @@ morie_spatial_voting_smacof_unfolding <- function(D,
                                                   n_dims   = 2L,
                                                   max_iter = 300L,
                                                   tol      = 1e-6) {
+  .morie_arg(D, "m")
   D <- as.matrix(D)
   n_r <- nrow(D)
   n_s <- ncol(D)

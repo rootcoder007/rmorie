@@ -125,6 +125,7 @@
 #' Kvmse(V)
 #' @keywords internal
 Kvmse <- function(K, b = 2, seed = 1) {
+  .morie_arg(K, "m")
   K <- as.matrix(K)
   n <- nrow(K)
   d <- ncol(K)

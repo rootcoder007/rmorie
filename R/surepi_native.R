@@ -144,6 +144,7 @@ surepi_c2_medium <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
 #' surepi_c3_ultra(c(rpois(20, 5), rpois(6, 20)))
 #' @keywords internal
 surepi_c3_ultra <- function(counts, threshold = 2.0, sigma_floor = 1.0) {
+  .morie_arg(counts, "n")
   surepi_ears_detect(counts, method = "C3", threshold = threshold,
                      sigma_floor = sigma_floor)
 }

@@ -720,6 +720,7 @@ morie_geron_1cycle_schedule <- function(eta_min, eta_max, t, T, mom_max = 0.95,
 morie_geron_batch_size_heuristic <- function(n_train,
                                              steps_per_epoch_target = 10,
                                              memory_limit = NULL) {
+  .morie_arg(n_train, "i1")
   n <- as.integer(n_train)
   .morie_gr_need(n >= 1L, "geron_batch_size_heuristic: n_train must be >= 1")
   target <- as.integer(steps_per_epoch_target)
@@ -1466,6 +1467,7 @@ morie_geron_batch_gradient_descent <- function(X, y, theta, eta, n_iter) {
 #' morie_geron_conv_output_size(V, V)
 morie_geron_conv_output_size <- function(in_size, kernel, padding = 0,
                                          stride = 1, dilation = 1) {
+  .morie_arg(in_size, "n")
   vec <- function(v, name, nd = NULL) {
     a <- as.numeric(v)
     .morie_gr_need(all(a == floor(a)), paste0(name, " must contain whole numbers."))

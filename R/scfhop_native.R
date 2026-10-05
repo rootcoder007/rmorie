@@ -376,6 +376,7 @@ morie_scfhop_signature <- function(smiles, rounds = 3L) {
 morie_scfhop <- function(lead_smiles, scaffold_db, maxdist = 9L,
                          scaling = "type", metric = "tanimoto",
                          rounds = 3L, threshold = 0) {
+  .morie_arg(lead_smiles, "c1")
   lead <- morie_scfhop_cats(lead_smiles, maxdist, scaling)
   lsig <- morie_scfhop_signature(lead_smiles, rounds)
   lmk <- morie_scfhop_murcko(lead_smiles)

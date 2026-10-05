@@ -199,6 +199,7 @@ group_privacy <- function(rho, k) {
 #' to_approx_dp(rho = 0.5, delta = 0.5)
 #' @keywords internal
 to_approx_dp <- function(rho, delta) {
+  .morie_arg(rho, "n1")
   rho <- .zfmech_check_rho(rho)
   delta <- as.numeric(delta)
   if (!is.finite(delta) || !(delta > 0) || !(delta < 1))

@@ -44,6 +44,7 @@ morie_sentpc_escape_whitespace <- function(text, add_prefix = TRUE) {
 #' @keywords internal
 morie_sentpc_unescape_whitespace <- function(text,
                                               strip_prefix = TRUE) {
+  .morie_arg(text, "c")
   s <- as.character(text)
   if (isTRUE(strip_prefix) && startsWith(s, .SENT_SPACE)) s <- substr(s, 2L, nchar(s))
   gsub(.SENT_SPACE, " ", s, fixed = TRUE)

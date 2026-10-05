@@ -28,6 +28,7 @@
 #' c(r$mass_a, r$mass_b, r$mass)   # unequal totals: mass is created and destroyed at a KL price
 #' @export
 Otunbal <- function(a, b, C, epsilon, lam, max_iter = 200) {
+  .morie_arg(a, "n")
   aa <- .ot_hist(a)
   bb <- .ot_hist(b)
   Cm <- as.matrix(C)

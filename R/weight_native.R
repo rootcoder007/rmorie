@@ -212,6 +212,7 @@ morie_weight_cbps <- function(data, treatment, covariates,
 #' morie_weight_ow(d, "t", "x")
 #' @export
 morie_weight_ow <- function(data, treatment, covariates) {
+  .morie_arg(data, "df")
   stopifnot(is.data.frame(data))
   t01 <- as.numeric(data[[treatment]])
   ps <- .fit_propensity(data, treatment, covariates)

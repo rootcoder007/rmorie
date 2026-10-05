@@ -93,6 +93,7 @@ CorrelatedRandomWalk <- function(steps, step_length = 1, kappa = 2, nwalk = 1L, 
 #' @rdname LatticeRandomWalk
 #' @export
 BrownianMotion <- function(n, dt, sigma = 1, nwalk = 1L, seed = 1) {
+  .morie_arg(n, "i1")
   paths <- lapply(seq_len(nwalk) - 1, function(w) {
     z <- matrix(.morie_random_normal(2 * n, seed = seed, stream = w), n, 2, byrow = TRUE)
     rbind(c(0, 0), apply(sigma * sqrt(dt) * z, 2, cumsum))

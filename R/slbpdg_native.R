@@ -75,6 +75,7 @@
 #' morie_slbpdg_weights(V)
 #' @keywords internal
 morie_slbpdg_weights <- function(v) {
+  .morie_arg(v, "n")
   n <- length(v)
   w <- numeric(n)
   rest <- 1

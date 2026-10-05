@@ -229,6 +229,7 @@ ArFit <- function(x, order, fs = 1, nfreq = 256) {
 #' FpeOrder(errors = 5L, n_samples = 5L)
 #' @keywords internal
 FpeOrder <- function(errors, n_samples) {
+  .morie_arg(errors, "n")
   # Akaike (1970): FPE(p) = sigma_p^2 (N+p+1)/(N-p-1).  The residual
   # variance falls monotonically with p (eq 7.39), so without a penalty
   # the criterion would always pick the largest order offered.

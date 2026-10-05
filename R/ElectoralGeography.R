@@ -61,6 +61,7 @@ DistrictCompetitiveness <- function(votes_a, votes_b, threshold = 0.05) {
 #' @rdname PartisanGerrymanderMeasures
 #' @export
 Disproportionality <- function(votes, seats) {
+  .morie_arg(votes, "n")
   pv <- 100 * votes / sum(votes)
   ps <- 100 * seats / sum(seats)
   list(loosemore_hanby = sum(abs(pv - ps)) / 2, gallagher = sqrt(sum((pv - ps)^2) / 2),

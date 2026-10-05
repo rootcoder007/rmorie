@@ -321,6 +321,7 @@ efficacy_test_and_release <- function(t_Q, t_T, t_R, false_negative,
 #' @export
 gamma_generation_time <- function(shape = 2.83, scale = 1.86, grid = NULL,
                                   t_max = 30.0, n = 3001L) {
+  .morie_arg(shape, "n1")
   if (as.numeric(shape) <= 0 || as.numeric(scale) <= 0)
     stop("qrntcq: the gamma shape and scale must be positive")
   if (is.null(grid)) {
@@ -474,6 +475,7 @@ quarantine_efficacy <- function(t_Q, t_R, generation_time = NULL,
 relative_utility <- function(t_R_a, t_R_b, t_Q = 3.0,
                              generation_time = NULL,
                              infected_fraction = NULL) {
+  .morie_arg(t_R_a, "n1")
   g <- if (is.null(generation_time)) gamma_generation_time()
        else generation_time
   ea <- quarantine_efficacy(t_Q, t_R_a, g)$efficacy

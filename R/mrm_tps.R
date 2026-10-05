@@ -333,6 +333,7 @@ mrm_tps_neighbourhood_recurrence_km <- function(
 #'   mrm_tps_load_hawkes_refit("paper_hawkes_refit.json")
 #' }
 mrm_tps_load_hawkes_refit <- function(manifest_path) {
+  .morie_arg(manifest_path, "c1")
   stopifnot(file.exists(manifest_path))
   d <- .morie_from_json(manifest_path, simplifyVector = FALSE)
   cats <- names(d)

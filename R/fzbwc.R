@@ -27,6 +27,7 @@
 #' Qbwcheck(h = 0.05, n = 1000)
 #' @export
 Qbwcheck <- function(h, n, eps = 0.05) {
+  .morie_arg(h, "n")
   if (h <= 0) stop("bandwidth must be positive.")
   if (n < 2) stop("sample size must be at least 2.")
   cap <- n^-0.25

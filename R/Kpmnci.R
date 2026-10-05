@@ -25,6 +25,7 @@
 #' Kpmnci(fit, alpha = 0.05)[c("surv", "lower", "upper")]
 #' @export
 Kpmnci <- function(fit, alpha) {
+  .morie_arg(fit, "l")
   rt <- .kpm_risk_table(fit)
   a <- as.numeric(alpha)
   if (!(a > 0 && a < 1)) stop("km_pointwise_ci: alpha must lie in (0, 1)")

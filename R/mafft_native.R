@@ -1382,6 +1382,7 @@ mafft_alignment <- function(sequences, method = "FFT-NS-2", seq_type = NULL,
                             s_op = 2.4, matrix = "normalized",
                             window = 30L, n_peaks = 20L, threshold = 0.7,
                             max_len = 150L, max_iterate = 16L) {
+  .morie_arg(sequences, "c")
   if (!(method %in% .MAFFT_METHODS)) {
     stop("mafft: method must be one of ", paste(.MAFFT_METHODS, collapse = ", "))
   }

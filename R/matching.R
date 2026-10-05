@@ -217,6 +217,7 @@ morie_matching_trim_propensity <- function(ps, lower = 0.01, upper = 0.99) {
 morie_matching_common_support <- function(data, treatment,
                                           ps_col = "propensity_score",
                                           method = "minmax") {
+  .morie_arg(data, "df")
   df <- data
   ps_t <- df[[ps_col]][df[[treatment]] == 1]
   ps_c <- df[[ps_col]][df[[treatment]] == 0]

@@ -15,6 +15,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Hillq(V)
 Hillq <- function(x, q = 1) {
+  .morie_arg(x, "n")
   x <- .t1_vec(x)
   D <- length(x)
   if (D == 0) stop("x must be non-empty")

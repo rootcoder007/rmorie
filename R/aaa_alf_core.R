@@ -56,6 +56,7 @@ alfRelu <- function(x) ifelse(x > 0, x, 0)
 #' alfSmax(V)
 #' @keywords internal
 alfSmax <- function(v) {
+  .morie_arg(v, "n")
   e <- exp(v - max(v))
   e / sum(e)
 }
@@ -153,7 +154,10 @@ alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
 #' Tf <- list(R = diag(2), t = c(1, -1))
 #' alfRap(Tf, c(2, 3))
 #' @keywords internal
-alfRap <- function(Tf, x) as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
+alfRap <- function(Tf, x) {
+  .morie_arg(Tf, "l")
+  as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
+}
 
 #' alfRinv
 #'

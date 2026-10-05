@@ -306,6 +306,7 @@ ZonalStatistics <- function(grid, zones, fun = "mean") {
 #' @rdname RasterAggregate
 #' @export
 RasterMask <- function(grid, mask, maskvalue = NULL, inverse = FALSE) {
+  .morie_arg(grid, "m")
   G <- as.matrix(grid) + 0
   M <- as.matrix(mask)
   hit <- if (is.null(maskvalue)) is.na(M) else (!is.na(M) & M == maskvalue)

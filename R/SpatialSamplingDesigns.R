@@ -95,6 +95,7 @@ RandomSpatialSample <- function(n, polygon, seed = 1) {
 #' @rdname RandomSpatialSample
 #' @export
 HexagonalGridSample <- function(polygon, cellsize, offset = c(0.5, 0.5)) {
+  .morie_arg(polygon, "m")
   poly <- as.matrix(polygon)
   ll <- c(min(poly[, 1]), min(poly[, 2]))
   ur <- c(max(poly[, 1]), max(poly[, 2]))

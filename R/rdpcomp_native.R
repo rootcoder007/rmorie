@@ -24,6 +24,7 @@
 #' @examples
 #' morie_rdp_sampled_gaussian(2, 0.01, 1.0)
 morie_rdp_sampled_gaussian <- function(alpha, q, sigma) {
+  .morie_arg(alpha, "n1")
   a <- as.numeric(alpha)[1]
   if (a != floor(a))
     stop("morie_rdp_sampled_gaussian: alpha must be an integer -- the ",

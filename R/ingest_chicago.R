@@ -327,6 +327,7 @@ morie_ingest_chicago_crime_bigquery <- function(where = NULL,
                                                 page_size = 10000L,
                                                 max_rows = Inf,
                                                 quiet = TRUE) {
+  .morie_arg(where, "c1null")
   clause <- where
   if (is.null(clause) && !is.null(year)) {
     yr <- suppressWarnings(as.integer(year))

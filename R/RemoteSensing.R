@@ -149,6 +149,7 @@ TasseledCap <- function(bands, sensor = "landsat8oli") {
 #' @rdname TasseledCap
 #' @export
 BandPca <- function(bands, spca = FALSE, n_comp = NULL) {
+  .morie_arg(bands, "l")
   G <- .rs_grids(bands)
   P <- .rs_pixels(G)
   n <- nrow(P)
@@ -289,6 +290,7 @@ EstimateHaze <- function(dn, dark_prop = 0.01, max_slope = TRUE) {
 RadiometricCorrection <- function(dn, gain, offset, method = "apref", esun = NULL, sun_elevation = 90, distance = 1,
                                   haze_dn = NULL, haze_band = 1L, wavelengths = NULL, atmosphere = NULL,
                                   radiometric_bits = 8, clamp = TRUE, view_zenith = 1) {
+  .morie_arg(dn, "data")
   G <- .rs_grids(dn)
   k <- length(G)
   if (method == "rad") {
@@ -430,6 +432,7 @@ KmeansClassify <- function(bands, centers, max_iter = 100L) {
 #' @rdname TasseledCap
 #' @export
 AtgpEndmembers <- function(bands, n) {
+  .morie_arg(bands, "l")
   G <- .rs_grids(bands)
   P <- .rs_pixels(G)
   idx <- integer(0)

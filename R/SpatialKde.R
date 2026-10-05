@@ -27,6 +27,7 @@
 #' SpatialKde(pts, n = 3)$z
 #' @export
 SpatialKde <- function(data, method = "nrd", h = NULL, n = 25, lims = NULL) {
+  .morie_arg(data, "m")
   data <- as.matrix(data)
   x <- as.numeric(data[, 1])
   y <- as.numeric(data[, 2])

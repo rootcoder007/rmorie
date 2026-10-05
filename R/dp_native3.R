@@ -182,6 +182,7 @@ morie_dp_adam <- function(grads, C = 1, sigma = 1, lr = 1e-3,
 #' @export
 morie_dp_kmeans <- function(X, k = 3, epsilon = 1, n_iter = 5, bounds = NULL,
                             seed = NULL) {
+  .morie_arg(X, "m")
   eps <- .morie_dp_check_budget(epsilon)$epsilon
   X <- as.matrix(X)
   storage.mode(X) <- "double"

@@ -17,6 +17,7 @@
 #' c(Msm329(theta_hat = 0.7, mu_hat = 2)$estimate, Msm329(theta_hat = 0.2, mu_hat = 2)$estimate)
 #' @export
 Msm329 <- function(theta_hat, mu_hat, threshold = 0.5) {
+  .morie_arg(theta_hat, "n")
   v <- .gpzapcpredict(theta_hat, mu_hat, threshold = threshold)
   list(estimate = v, y_hat = v, is_zero = v == 0,
        method = "ZAPC_RF prediction (MVSML 2022 eq. 15.4)")

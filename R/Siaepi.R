@@ -33,6 +33,7 @@
 #' G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 #' Siaepi(G, beta = 0.3, gamma = 0.1, initial = c(1, 0, 0))
 Siaepi <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
+  .morie_arg(G, "m")
   A <- .s03mat(G)
   n <- nrow(A)
   if (n == 0L || ncol(A) != n) stop("sir_epidemic: G must be a square adjacency matrix")

@@ -1402,6 +1402,7 @@ morie_boot_run <- function(data, statistic, R = 2000L, strata = NULL, ...) {
 morie_boot_basic_ci <- function(boot_obj,
                                 type = c("perc", "bca", "basic", "norm"),
                                 conf = 0.95) {
+  .morie_arg(boot_obj, "l")
   type <- match.arg(type, several.ok = TRUE)
   morie_boot_ci(boot_obj, conf = conf, type = type)
 }

@@ -370,6 +370,7 @@ morie_funcal <- function(hits, groups, annotations, taxa = NULL,
                         sources = NULL, evalue = 1e-3, score = 60.0,
                         query_cov = 0.2, target_cov = 0.2,
                         min_support = 1, searcher = "diamond") {
+  .morie_arg(hits, "data")
   seeds <- morie_funcal_seed_orthologs(hits, evalue, score, query_cov,
                                        target_cov, searcher)
   assigned <- morie_funcal_assign_orthologs(seeds, groups, taxa,

@@ -17,6 +17,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tqorth(V)
 Tqorth <- function(S_mat) {
+  .morie_arg(S_mat, "m")
   Sm <- as.matrix(S_mat)
   m <- nrow(Sm)
   d <- ncol(Sm)

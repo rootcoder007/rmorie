@@ -290,6 +290,7 @@ morie_greg_variance <- function(e = NULL, n = NA, n_population = NA,
                                 x_k = NA, xbar_true = NA, xbar_sample = NA,
                                 s2_x = NA, g = NULL, pi = NULL,
                                 ratio = FALSE) {
+  .morie_arg(e, "n")
   out <- list()
   if (!is.null(e)) {
     ev <- as.numeric(e)

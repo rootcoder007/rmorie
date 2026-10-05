@@ -429,6 +429,7 @@ morie_dsp_homomorphic <- function(x, cutoff = 0.1, fs = 1) {
 #' str(morie_dsp_complex_cepstrum(x), max.level = 1)
 #' @export
 morie_dsp_complex_cepstrum <- function(x) {
+  .morie_arg(x, "n")
   X <- stats::fft(x)
   log_X <- log(Mod(X) + 1e-10) + 1i * .unwrap_d(Arg(X))
   cep <- Re(stats::fft(log_X, inverse = TRUE) / length(log_X))

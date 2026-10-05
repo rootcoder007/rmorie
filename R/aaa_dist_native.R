@@ -393,6 +393,7 @@ Rnorm <- function(n, mean = 0, sd = 1, seed = 0, stream = 0) {
 #' Dexp(V)
 #' @keywords internal
 Dexp <- function(x, rate = 1, log = FALSE) {
+  .morie_arg(x, "nNA")
   if (rate <= 0) stop("rate must be positive")
   lg <- ifelse(x < 0, -Inf, log(rate) - rate * x)
   if (log) lg else exp(lg)
@@ -431,6 +432,7 @@ Pexp <- function(q, rate = 1, lower_tail = TRUE) {
 #' Qexp(p = 0.5)
 #' @keywords internal
 Qexp <- function(p, rate = 1) {
+  .morie_arg(p, "n")
   if (rate <= 0) stop("rate must be positive")
   if (any(p < 0 | p >= 1)) stop("p must lie in [0, 1)")
   -log1p(-p) / rate

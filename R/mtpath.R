@@ -19,6 +19,7 @@
 #' Metapath(A, c("A", "P"), c("A", "P"))$estimate
 #' @export
 Metapath <- function(G, node_types = NULL, metapath = NULL) {
+  .morie_arg(G, "m")
   W <- .s03mat(G)
   n <- nrow(W)
   ty <- if (!is.null(node_types)) as.character(node_types) else rep("0", n)

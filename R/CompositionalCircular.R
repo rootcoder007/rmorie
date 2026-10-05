@@ -60,6 +60,7 @@ CompositionalMad <- function(X) {
 #' @rdname AitchisonClrCovariance
 #' @export
 CompositionalPielou <- function(x) {
+  .morie_arg(x, "n")
   p <- .cd_closure(x)
   -sum(p * log(p)) / log(length(p))
 }
@@ -76,6 +77,7 @@ CompositionalQuantileDist <- function(X) {
 #' @rdname AitchisonClrCovariance
 #' @export
 AitchisonBiplot <- function(X) {
+  .morie_arg(X, "m")
   C <- t(apply(as.matrix(X), 1, .cd_clr))
   s <- svd(sweep(C, 2, colMeans(C)))
   for (k in seq_along(s$d)) {

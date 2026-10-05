@@ -2177,6 +2177,7 @@ morie_geron_t5_restore <- function(inputs, target) {
 #' morie_geron_t5(V)
 morie_geron_t5 <- function(src, tgt = NULL, noise_density = 0.15, mean_span = 3, seed = 0,
                            prefix = "translate:") {
+  .morie_arg(src, "c")
   toks <- .morie_w4d_tokens(src)
   sc <- morie_geron_span_corrupt(toks, noise_density, mean_span, seed)
   enc <- sc$inputs
@@ -2539,6 +2540,7 @@ morie_geron_encoder_params <- function(d_model, d_ff, n_layers) {
 #' morie_geron_transformer(X, n_heads = 2, n_layers = 1)$total_params
 morie_geron_transformer <- function(X, n_heads = 2, d_model = NULL, n_layers = 2, d_ff = NULL,
                                     seed = 0, mask = NULL) {
+  .morie_arg(X, "m")
   Xa <- as.matrix(X)
   d <- if (is.null(d_model)) ncol(Xa) else as.integer(d_model)
   h <- as.integer(n_heads)
@@ -3537,6 +3539,7 @@ morie_geron_quantize <- function(z_e, codebook) {
 #' morie_geron_vq_vae(V)
 morie_geron_vq_vae <- function(X, codebook_size = 4, latent_dim = 2, epochs = 200, lr = 0.05,
                                beta = 0.25, seed = 0) {
+  .morie_arg(X, "m")
   A <- as.matrix(X)
   n <- nrow(A)
   d <- ncol(A)

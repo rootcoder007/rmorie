@@ -13,6 +13,7 @@
 #' Msm003(list(c(4.1, 4.5, 3.9), c(5.2, 5.0, 5.6), c(4.8, 4.4, 4.9)))$beta
 #' @export
 Msm003 <- function(groups) {
+  .morie_arg(groups, "l")
   s <- .gponeway(groups)
   list(estimate = s$group_means[1L], beta = s$group_means,
        sd_residual = s$sd_residual,

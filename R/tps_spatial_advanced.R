@@ -266,6 +266,7 @@ morie_tps_getis_ord_g_star <- function(df,
                                         top_n = 20L,
                                         lat_col = "LAT_WGS84",
                                         lon_col = "LONG_WGS84") {
+  .morie_arg(df, "df")
   stopifnot(is.data.frame(df))
   call <- sprintf(
     "morie_tps_getis_ord_g_star(df=<%dr>, hood_col=%s, k=%d)",

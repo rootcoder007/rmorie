@@ -264,6 +264,7 @@ morie_karpV_evaluate <- function(node, env) {
 #' morie_karpV_depth(tree)
 #' @keywords internal
 morie_karpV_depth <- function(node) {
+  .morie_arg(node, "lnull")
   if (.karpv_is_term(node)) return(1L)
   1L + max(vapply(node$args, morie_karpV_depth, integer(1)))
 }

@@ -3804,6 +3804,7 @@ morie_kamath_ch9_ldm_loss <- function(epsilon, z_t, H_X, eps_net = NULL,
 #' morie_kamath_ch9_flamingo_factorized(c(0.5, 0.25))
 morie_kamath_ch9_flamingo_factorized <- function(y, x = NULL, L = NULL,
                                                  model = NULL) {
+  .morie_arg(y, "n")
   if (!is.null(model)) {
     if (!is.function(model)) stop("model must be a function or NULL.",
                                   call. = FALSE)

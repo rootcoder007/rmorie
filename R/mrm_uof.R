@@ -584,6 +584,7 @@ mrm_uof_yoy_change <- function(dfs_by_year = NULL, df = NULL,
 #' res$title
 #' @export
 mrm_uof_region_locality <- function(df, region_at_col, region_now_col) {
+  .morie_arg(df, "df")
   stopifnot(is.data.frame(df))
   warnings <- character(0)
 

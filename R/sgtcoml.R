@@ -93,6 +93,7 @@
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' sgtcoml(M)
 sgtcoml <- function(A) {
+  .morie_arg(A, "m")
   a <- as.matrix(A)
   dimnames(a) <- NULL
   n <- nrow(a)

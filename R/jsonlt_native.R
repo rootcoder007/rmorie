@@ -1115,6 +1115,7 @@ morie_jsonlt_write_json <- function(x, path, ...) {
 #' res <- morie_jsonlt_validate(txt = txt)
 #' res
 morie_jsonlt_validate <- function(txt) {
+  .morie_arg(txt, "c")
   stopifnot(is.character(txt))
   txt <- paste(txt, collapse = "\n")
   if (startsWith(txt, "\ufeff"))

@@ -84,6 +84,7 @@ SampleVariogramNd <- function(z, coords, boundaries, estimator = "classical", di
 #' @rdname SampleVariogramNd
 #' @export
 AnisotropicLag <- function(h, azimuth = 0, dip = 0, rake = 0, ratio1 = 1, ratio2 = 1) {
+  .morie_arg(h, "n")
   a <- (90 - azimuth) * pi / 180
   b <- -dip * pi / 180
   t <- rake * pi / 180

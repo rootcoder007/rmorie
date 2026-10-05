@@ -213,6 +213,7 @@ PolarTransform <- function(x, inverse = FALSE) {
 #' @rdname PollardRho
 #' @export
 PanterDiteBound <- function(bits, sigma2 = 1) {
+  .morie_arg(bits, "n")
   mse <- sqrt(3) * pi / 2 * sigma2 * 2^(-2 * bits)
   list(mse = mse, snr_db = 10 * log10(sigma2 / mse))
 }

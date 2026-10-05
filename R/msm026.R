@@ -25,6 +25,7 @@
 #' f$mu
 #' @export
 Msm026 <- function(Y, Z, G, Sigma_T, R_T) {
+  .morie_arg(Y, "m")
   f <- .gpmultitrait(Y, Z, G, Sigma_T, R_T)
   list(estimate = f$mu[1L], mu = f$mu, b = f$b, b_by_line = f$b_by_line,
        method = "multi-trait genomic LMM (MVSML 2022 eq. 5.5)")

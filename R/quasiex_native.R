@@ -182,6 +182,7 @@ print.morie_did <- function(x, ...) {
 #' @export
 morie_iv_2sls <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, alpha = 0.05) {
+  .morie_arg(data, "df")
   stopifnot(is.data.frame(data), length(endogenous) == 1L)
   need <- c(outcome, endogenous, instruments, exogenous)
   missing_cols <- setdiff(need, names(data))

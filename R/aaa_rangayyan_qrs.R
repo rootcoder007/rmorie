@@ -2570,6 +2570,7 @@ QrsLPassDf <- function(x) {
 #' QrsHpLpTf(V)
 #' @keywords internal
 QrsHpLpTf <- function(freq, fs = 200) {
+  .morie_arg(freq, "n")
   # eq (4.9): Hlp(z) = (1 - z^-32)/(1 - z^-1), a running sum of 32 samples.
   # Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.
   fs <- .morie_qrs_fs(fs)

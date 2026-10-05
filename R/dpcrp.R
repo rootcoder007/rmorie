@@ -23,6 +23,7 @@
 #' @examples
 #' Crp(n = 5L)
 Crp <- function(n, alpha = 1, u = NULL, seed = 1) {
+  .morie_arg(n, "i1")
   n <- as.integer(n)
   a <- as.numeric(alpha)
   if (a <= 0) stop("alpha must be positive")

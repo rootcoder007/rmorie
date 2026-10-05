@@ -572,6 +572,7 @@ TwidCS <- function(npoints, n, k) {
 #' DftRI(V)
 #' @keywords internal
 DftRI <- function(x) {
+  .morie_arg(x, "n")
   # eq (3.85): the real part is the projection onto the k-th cosine, the
   # imaginary part is MINUS the projection onto the corresponding sine.
   xs <- as.numeric(x)

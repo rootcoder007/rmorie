@@ -1077,6 +1077,7 @@ BiDomain <- function(n_nodes = 100, dx_cm = 0.02, duration_ms = 60,
                      Sv = 1000, I_ion = NULL, stim_nodes = 5, I_stim = 50,
                      stim_ms = 1, v_rest = -85, v_peak = 20,
                      I_ion_peak = 10, threshold_frac = 0.25) {
+  .morie_arg(n_nodes, "i1")
   n <- as.integer(n_nodes)
   if (n < 5L) stop("n_nodes must be at least 5")
   dx <- as.numeric(dx_cm)

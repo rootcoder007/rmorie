@@ -499,6 +499,7 @@ morie_steiner_triple_system <- function(v, construct = TRUE) {
 #' @examples
 #' morie_latin_square(n = 5L)
 morie_latin_square <- function(n, method = c("cyclic", "shifted")) {
+  .morie_arg(n, "i1")
   method <- match.arg(method)
   n <- as.integer(n)
   if (n < 1L) stop(sprintf("n must be at least 1; got %d", n), call. = FALSE)

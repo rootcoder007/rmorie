@@ -19,6 +19,7 @@
 #' Voronoi(matrix(c(0, 0, 1, 0, 0, 1), 3, 2, byrow = TRUE))$areas
 #' @export
 Voronoi <- function(coords, bbox = NULL, values = NULL) {
+  .morie_arg(coords, "m")
   clip <- function(poly, a, b, cc) {
     out <- list()
     n <- length(poly)

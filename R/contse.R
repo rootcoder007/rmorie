@@ -23,6 +23,7 @@
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' Contse(M)
 Contse <- function(sentences, tau = 0.05, dropout = 0.1, seed = 42) {
+  .morie_arg(sentences, "m")
   H <- .s03mat(sentences)
   n <- nrow(H)
   if (n == 0L) stop("empty input: sentences has no rows")

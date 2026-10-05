@@ -249,6 +249,7 @@ OccupancyModel <- function(y, psi_covariates = NULL, p_covariates = NULL) {
 #' @rdname McpHomeRange
 #' @export
 NmixtureModel <- function(y, lambda_covariates = NULL, p_covariates = NULL, K = NULL) {
+  .morie_arg(y, "nNA")
   Y <- as.matrix(y)
   n <- nrow(Y)
   Xl <- .wl_design(lambda_covariates, n)
@@ -381,6 +382,7 @@ ResistanceFromSuitability <- function(suitability, c = 8) {
 #' @rdname McpHomeRange
 #' @export
 HabitatSuitabilityIndex <- function(indices, method = "geometric", weights = NULL) {
+  .morie_arg(indices, "l")
   method <- match.arg(method, c("geometric", "arithmetic", "minimum"))
   S <- do.call(cbind, lapply(indices, as.numeric))
   w <- if (is.null(weights)) rep(1, ncol(S)) else weights

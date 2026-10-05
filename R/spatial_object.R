@@ -135,6 +135,7 @@ morie_spatial_crs <- function(x) {
 #' morie_spatial_transform(s, 3857)
 #' @export
 morie_spatial_transform <- function(x, to_crs) {
+  .morie_arg(x, "cls:morie_spatial")
   stopifnot(inherits(x, "morie_spatial"))
   R <- 6378137
   xy <- x$coords
@@ -301,6 +302,7 @@ morie_spatial_sample <- function(x, size, by_density = TRUE, seed = 42L) {
 #' morie_spatial_cluster(morie_spatial(expand.grid(lon = 1:6, lat = 1:6)), k = 3)
 #' @export
 morie_spatial_cluster <- function(x, k = 3L) {
+  .morie_arg(x, "cls:morie_spatial")
   stopifnot(inherits(x, "morie_spatial"))
   # coordinates carry no case labels by construction: label positionally
   cl <- morie_cluster(as.data.frame(x$coords), k = k,

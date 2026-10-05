@@ -1248,6 +1248,7 @@ morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_aci(V)
 morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
+  .morie_arg(inside, "lg")
   seqv <- as.logical(inside)
   if (length(seqv) == 0L) stop("inside must be non-empty.", call. = FALSE)
   alpha <- as.numeric(alpha)

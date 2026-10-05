@@ -24,6 +24,7 @@
 morie_trfbl_transformer_block <- function(x, num_heads = 2L, d_ff = NULL,
                                     seed = 0L,
                                     deterministic_seed = NULL) {
+  .morie_arg(x, "m")
   x <- as.matrix(x)
   seq_len <- nrow(x)
   d_model <- ncol(x)

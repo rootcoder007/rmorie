@@ -275,6 +275,7 @@ morie_trmRew_rewrite_step <- function(t, rules, strategy = "innermost") {
 #' @keywords internal
 morie_trmRew_normal_form <- function(t, rules, strategy = "innermost",
                                      max_steps = 10000) {
+  .morie_arg(t, "l")
   # Rewrite to exhaustion. Raises if the step budget runs out.
   cur <- t
   trace <- list()

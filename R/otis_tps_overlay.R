@@ -223,6 +223,7 @@ morie_otis_tps_yoy_correlation <- function(otis_b01, tps_datasets) {
 #' res$payload$by_region
 #' @export
 morie_otis_tps_per_region_rollup <- function(otis_b01) {
+  .morie_arg(otis_b01, "df")
   stopifnot(is.data.frame(otis_b01))
   if (!("Region_AtTimeOfPlacement" %in% names(otis_b01))) {
     return(.otis_overlay_wrap(

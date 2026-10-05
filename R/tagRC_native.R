@@ -203,6 +203,7 @@ adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
 #' folkrank(triples, focus = "t:t1")
 #' @keywords internal
 folkrank <- function(triples, focus, d = 0.7, weight = 0.9, iters = 200) {
+  .morie_arg(triples, "l")
   g <- tripartite_graph(triples)
   N <- g$nodes
   pv <- preference_vector(N, focus, weight)

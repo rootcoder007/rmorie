@@ -40,6 +40,7 @@ morie_identified_set_interval <- function(phi_hat, half_width) {
 #' str(r, max.level = 1)
 #' @keywords internal
 morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
+  .morie_arg(theta_set, "l")
   lo <- as.numeric(theta_set$lower)
   hi <- as.numeric(theta_set$upper)
   if (hi < lo) stop("bndbye: the identified set is empty")

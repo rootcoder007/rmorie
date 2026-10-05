@@ -921,6 +921,7 @@ morie_otis_make_pair_a <- function(df) {
 #'   }
 #' }
 morie_otis_make_pair_b <- function(df) {
+  .morie_arg(df, "df")
   needed <- c("UniqueIndividual_ID", "EndFiscalYear", "Gender",
               "Age_Category", "Region_AtTimeOfPlacement",
               "Region_MostRecentPlacement",

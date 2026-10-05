@@ -125,7 +125,10 @@ morie_mad <- function(x) {
 
 #' @rdname morie_mad
 #' @export
-morie_madn <- function(x) morie_mad(x) / 0.6745
+morie_madn <- function(x) {
+  .morie_arg(x, "n")
+  morie_mad(x) / 0.6745
+}
 
 #' @rdname morie_mad
 #' @export

@@ -98,6 +98,7 @@
 #' matern52(V, V)
 #' @keywords internal
 matern52 <- function(a, b, amplitude = 1, length_scale = 1) {
+  .morie_arg(a, "n")
   d <- length(a)
   ls <- .lengths(length_scale, d)
   r2 <- .r2(a, b, ls)

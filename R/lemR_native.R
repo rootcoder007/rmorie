@@ -22,6 +22,7 @@
 #' LemR(blocks)$labels
 #' @export
 LemR <- function(A, resolution = 1, quality = "modularity", max_iter = 20L, seed = 0) {
+  .morie_arg(A, "m")
   Leidenclus(A, resolution = resolution, quality = quality, max_iter = max_iter, seed = seed)
 }
 

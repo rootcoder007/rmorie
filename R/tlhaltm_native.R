@@ -46,6 +46,7 @@ morie_tlhaltm <- function(rate_Q = NULL, rate_g = NULL, n = NULL,
                           donsker = TRUE,
                           mode = c("rate", "remainder",
                                    "efficiency", "split")) {
+  .morie_arg(rate_Q, "n1")
   mode <- match.arg(mode)
   if (mode == "rate") return(rate_condition(rate_Q, rate_g, n))
   if (mode == "remainder")

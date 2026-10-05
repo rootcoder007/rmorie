@@ -82,6 +82,7 @@ morie_poissp_car_precision <- function(W, tau = 1.0, rho = 1.0) {
 #' morie_poissp_rho_bounds(W)
 #' @keywords internal
 morie_poissp_rho_bounds <- function(W) {
+  .morie_arg(W, "m")
   A <- .poissp_adjacency(W)
   n <- nrow(A)
   d <- rowSums(A)

@@ -615,6 +615,7 @@ morie_unclr_alr <- function(x) log(x[-length(x)] / x[length(x)])
 #' morie_unclr_alr_inv(z = c(0.5, -0.2), total = 100)
 #' @keywords internal
 morie_unclr_alr_inv <- function(z, total) {
+  .morie_arg(z, "n")
   e <- c(exp(z), 1)
   total * e / sum(e)
 }

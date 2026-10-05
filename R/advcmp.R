@@ -34,6 +34,7 @@
 #' Advcmp(0.1, 1e-6, 100, 1e-5)$epsilon_total
 #' @export
 Advcmp <- function(epsilon, delta = 0, k = 1, delta_prime = 1e-6) {
+  .morie_arg(epsilon, "n1")
   e <- as.numeric(epsilon)
   if (!(e > 0)) stop("advanced_composition: epsilon must be positive")
   d <- as.numeric(delta)

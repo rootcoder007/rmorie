@@ -156,6 +156,7 @@ morie_momento_masked_loss <- function(truth, reconstruction, mask) {
 #' @keywords internal
 morie_momento_task_mask <- function(n_patches, task = "forecast",
                                      span = 1, start = NULL) {
+  .morie_arg(n_patches, "i1")
   n <- as.integer(n_patches)
   s <- as.integer(span)
   if (!(task %in% .GHC_MOM_TASKS))

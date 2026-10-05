@@ -106,6 +106,7 @@ morie_dsp_waveform_length <- function(x) {
 #' morie_dsp_waveform_length_norm(c(0, 1, 0, 1, 0))
 #' @export
 morie_dsp_waveform_length_norm <- function(x) {
+  .morie_arg(x, "n")
   morie_dsp_waveform_length(x) / length(x)
 }
 
@@ -147,6 +148,7 @@ morie_dsp_turns_count <- function(x, threshold = 0) {
 #' morie_dsp_slope_sign_changes(x, threshold = 0)
 #' @export
 morie_dsp_slope_sign_changes <- function(x, threshold = 0) {
+  .morie_arg(x, "n")
   d <- diff(x)
   if (length(d) < 2L) {
     return(0L)
@@ -188,6 +190,7 @@ morie_dsp_willison_amplitude <- function(x, threshold = NULL) {
 #' morie_dsp_myopulse_rate(x)
 #' @export
 morie_dsp_myopulse_rate <- function(x, threshold = NULL) {
+  .morie_arg(x, "n")
   if (is.null(threshold)) threshold <- 2 * stats::sd(x)
   mean(abs(x) > threshold)
 }
@@ -263,6 +266,7 @@ morie_dsp_hjorth_complexity <- function(x) {
 #' out$activity # equals var(x)
 #' @export
 morie_dsp_hjorth <- function(x) {
+  .morie_arg(x, "n")
   list(
     activity   = morie_dsp_hjorth_activity(x),
     mobility   = morie_dsp_hjorth_mobility(x),

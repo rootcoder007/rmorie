@@ -141,6 +141,7 @@
 #' morie_genemt_ld_principal_components(V)
 #' @keywords internal
 morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
+  .morie_arg(G, "m")
   M <- as.matrix(G)
   storage.mode(M) <- "numeric"
   n <- nrow(M)
