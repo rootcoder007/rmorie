@@ -169,7 +169,20 @@ test_that("Glpopt solves min c'x, Ax <= b, x >= 0 with its duals", {
   expect_equal(r$status, "optimal")
   u <- Glpopt(c(-1, 0), rbind(c(0, 1)), 3)
   expect_equal(u$status, "unbounded")
-  expect_error(Glpopt(cv, A, c(-1, 1, 1)), "b >= 0")
+  # a negative right-hand side goes through phase one: x1 + x2 >= 2,
+  # x1 <= 5, min x1 + 3 x2 has its optimum at the vertex (2, 0)
+  p1 <- Glpopt(c(1, 3), rbind(c(-1, -1), c(1, 0)), c(-2, 5))
+  expect_equal(p1$status, "optimal")
+  expect_equal(p1$x, c(2, 0), tolerance = 1e-12)
+  expect_equal(p1$objective, 2, tolerance = 1e-12)
+  expect_equal(p1$dual_objective, p1$objective, tolerance = 1e-12)
+  expect_true(all(p1$dual <= 1e-12))
+  # x1 >= 3 and x1 <= 2 cannot both hold
+  inf <- Glpopt(c(1, 1), rbind(c(-1, 0), c(1, 0)), c(-3, 2))
+  expect_equal(inf$status, "infeasible")
+  expect_true(all(is.na(inf$x)))
+  # hitting the cap is reported, not passed off as an optimum
+  expect_equal(Glpopt(cv, A, b, max_iter = 1)$status, "iteration_limit")
   expect_error(Glpopt(cv, A, b[-1]), "row counts")
 })
 
