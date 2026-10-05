@@ -497,6 +497,10 @@ airl <- function(expert_states, expert_actions, expert_next,
 #' @param gamma See Usage.
 #' @param iters See Usage.
 #' @param tol See Usage.
+#' @examples
+#' step <- function(s, a) min(max(s + a, 0), 3)
+#' v <- soft_value_iteration(states = 0:3, actions = c(-1, 1), step = step, reward = function(s) as.numeric(s == 3))
+#' v
 #' @export
 soft_value_iteration <- function(states, actions, step, reward, gamma = 0.9,
                                  iters = 2000L, tol = 1e-14) {

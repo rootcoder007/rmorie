@@ -18,6 +18,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, Example 11.15 and
 #'   Definition 11.12, eq. (11.8).
+#' @examples
+#' S <- matrix(c(2, 0.5, 0.5, 1), 2)
+#' Ghosalgpdefrkhs(S, a = c(1, 0), b = c(0, 1))$estimate   # = a' Sigma b = 0.5
 #' @export
 Ghosalgpdefrkhs <- function(Sigma, a, b) {
   S <- as.matrix(Sigma)

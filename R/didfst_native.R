@@ -601,6 +601,12 @@ panel_differences <- function(Y, event_time) {
 #' @param event_time \code{H}.
 #' @param split Pre-period split point.
 #' @return A list mirroring the Python \code{RichResult} payload.
+#' @examples
+#' set.seed(3)
+#' Y <- matrix(rnorm(40 * 6), 40, 6)  # 40 units, 6 periods
+#' D <- rep(0:1, each = 20)
+#' Y[D == 1, 5:6] <- Y[D == 1, 5:6] + 1
+#' placebo_did(Y, D, event_time = 4)$estimate
 #' @export
 placebo_did <- function(Y, D, event_time, split = NULL) {
   pp <- .ghc_didfst_panel(Y)

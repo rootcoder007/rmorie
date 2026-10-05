@@ -415,6 +415,9 @@ qrntcq_cheatsheet <- function() {
 #'   \code{remaining_mass}, \code{t_Q}, \code{t_R}, \code{max_attainable},
 #'   \code{pre_quarantine_mass} (and a \code{note} if no transmission
 #'   remains).
+#' @examples
+#' gt <- gamma_generation_time()
+#' quarantine_efficacy(t_Q = 3, t_R = 10, generation_time = gt)$efficacy
 #' @export
 #' @aliases quarantineefficacy
 quarantine_efficacy <- function(t_Q, t_R, generation_time = NULL,
@@ -460,6 +463,8 @@ quarantine_efficacy <- function(t_Q, t_R, generation_time = NULL,
 #' @return A list with \code{relative_utility}, \code{utility_a},
 #'   \code{utility_b}, \code{efficacy_a}, \code{efficacy_b},
 #'   \code{independent_of_infected_fraction}, \code{note}.
+#' @examples
+#' relative_utility(t_R_a = 7, t_R_b = 14, t_Q = 3)$relative_utility
 #' @export
 relative_utility <- function(t_R_a, t_R_b, t_Q = 3.0,
                              generation_time = NULL,

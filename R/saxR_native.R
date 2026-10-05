@@ -107,6 +107,10 @@ morie_saxR <- function(x, window, alphabet, eps = 1e-8) {
 #' @return The MINDIST value.
 #' @references Lin, J., Keogh, E., Lonardi, S. and Chiu, B. (2003). A
 #'   symbolic representation of time series. DMKD 2003.
+#' @examples
+#' # SAX words are strings over the first `alphabet` letters
+#' morie_sax_mindist("abcd", "acdd", n = 32, alphabet = 4)
+#' morie_sax_mindist("abcd", "abcd", n = 32, alphabet = 4)   # identical words: 0
 #' @export
 morie_sax_mindist <- function(word1, word2, n, alphabet) {
   s1 <- strsplit(as.character(word1), "")[[1]]

@@ -448,6 +448,10 @@ morie_post_lasso <- function(X, y, lam) {
 #' @param ridge Optional ridge on \code{epsilon}.
 #' @return A list with the would-be \code{epsilon}, the updated fit,
 #'   and the un-targeted mean score.
+#' @examples
+#' set.seed(13)
+#' Q <- runif(50); H <- rnorm(50); Y <- Q + 0.1 * H + rnorm(50, sd = 0.1)
+#' morie_shrunk_targeting_unsafe(Q, H, Y, ridge = 10)$epsilon
 #' @export
 morie_shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1.0) {
   q <- as.numeric(Q)

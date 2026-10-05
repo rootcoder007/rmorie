@@ -22,6 +22,9 @@
 #' Erdos is Eighty, vol. 2, pp. 353-398.  This is the standard first-step recurrence.
 #' It is checked on the cycle C_n, where the classical closed form H(i,j) = d(n-d) with
 #' d the cyclic distance holds exactly and is independent of this code.
+#' @examples
+#' G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3)   # path 0 - 1 - 2
+#' Hittime(G, start = 0L, target = 2L)$estimate   # 4 = (n - 1)^2 steps on a path
 #' @export
 Hittime <- function(G, start = NULL, target = 0L) {
   W <- as.matrix(G)

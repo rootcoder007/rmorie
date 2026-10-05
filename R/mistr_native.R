@@ -459,6 +459,15 @@ mistr_grouped_query_attention <- function(Q, K, V, n_heads, n_kv_heads,
 #' @return A list with \code{estimate}, \code{output}, \code{attention_mask}, \code{L},
 #' \code{d}, \code{n_heads}, \code{n_kv_heads}, \code{window}, \code{kv_cache_entries},
 #' \code{method}.
+#' @examples
+#' set.seed(15)
+#' L <- 4; d <- 4; dff <- 6
+#' X <- matrix(rnorm(L * d), L, d)
+#' mk <- function(r, c) matrix(rnorm(r * c, sd = 0.3), r, c)
+#' b <- mistr_mistral_block(X, Wq = mk(d, d), Wk = mk(d, d / 2), Wv = mk(d, d / 2), Wo = mk(d, d),
+#'                          W1 = mk(d, dff), W2 = mk(dff, d), W3 = mk(d, dff),
+#'                          n_heads = 2, n_kv_heads = 1, window = 2)
+#' dim(b$output)
 #' @export
 mistr_mistral_block <- function(X, Wq, Wk, Wv, Wo, W1, W2, W3,
                                 n_heads, n_kv_heads, window,
@@ -539,6 +548,8 @@ mistr_rope_angles <- function(d, base = 10000) {
 #' @param window Passed to \code{<}.
 #' @param causal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{mask}, as built in the body.
+#' @examples
+#' mistr_sliding_window_mask(L = 5, window = 2)
 #' @export
 mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
   if (window < 1L) {

@@ -264,6 +264,8 @@ morie_tqlld_cheatsheet <- function() {
 #' @param tol Convergence tolerance on codeword shift and distortion
 #'   change.
 #' @param n_grid Number of quadrature points for the Gaussian source.
+#' @examples
+#' morie_tqlld_lloyd_max_codebook(levels = 4L, source = "gaussian")$codebook
 #' @export
 #' @aliases morie_tqlld_tqlld morie_tqlld_turboquant_lloyd_max_codebook
 morie_tqlld_lloyd_max_codebook <- function(levels = 4L,

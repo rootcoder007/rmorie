@@ -17,6 +17,12 @@
 #' ML log-likelihood of Eq. (5.2) by the -0.5 log|X'V^-1 X| term, which is what removes
 #' the downward bias of the ML variance estimate; betatilde is the generalized least
 #' squares estimator.
+#' @examples
+#' set.seed(21)
+#' g <- rep(1:10, each = 5)
+#' X <- cbind(1, rnorm(50)); Z <- model.matrix(~ factor(g) - 1)
+#' y <- X %*% c(1, 2) + Z %*% rnorm(10) + rnorm(50)
+#' Remlik(X, Z, as.numeric(y), D = diag(10))$loglik
 #' @export
 Remlik <- function(X, Z, y, D, R = NULL) {
   out <- morie_reml_loglik(X, Z, y, D, R = R)

@@ -362,6 +362,10 @@ generate_dek <- function(master_seed, record_id, salt = NULL) {
 #' Open a sealed record
 #' @param sealed See Usage.
 #' @param dek See Usage.
+#' @examples
+#' dek <- as.raw(1:32); nonce <- as.raw(1:12)
+#' sealed <- seal_record(charToRaw("visit 2026-10-05"), dek, nonce)
+#' rawToChar(open_record(sealed, dek))
 #' @export
 open_record <- function(sealed, dek) {
   r <- .secrtt_aead_decrypt(dek, sealed$nonce, sealed$ciphertext,

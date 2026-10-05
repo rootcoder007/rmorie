@@ -376,6 +376,8 @@ mpfn_readout <- function(H, how = "sum", H0 = NULL, i_fn = NULL, j_fn = NULL) {
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
+#' @examples
+#' mpfn_sig(c(-2, 0, 3))
 #' @export
 mpfn_sig <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input

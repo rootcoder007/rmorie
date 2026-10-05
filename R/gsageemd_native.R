@@ -316,6 +316,8 @@ morie_gsageemd_layer <- function(H, adj, W, how = "mean", sizes = NULL,
 #' @param z_negatives List of negative embeddings.
 #' @return Scalar loss.
 #' @references Hamilton, W. L. et al. (2017).
+#' @examples
+#' morie_gsageemd_loss(z_u = c(1, 0), z_v = c(0.9, 0.1), z_negatives = list(c(-1, 0), c(0, -1)))
 #' @export
 morie_gsageemd_loss <- function(z_u, z_v, z_negatives) {
   dot <- function(a, b) sum(a * b)

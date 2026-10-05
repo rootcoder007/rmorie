@@ -27,6 +27,12 @@
 #' @references Breslow, N. E. and Day, N. E. (1980). Statistical Methods
 #'   in Cancer Research, Volume I. IARC Scientific Publications No. 32,
 #'   Lyon, Chapter 7.
+#' @examples
+#' set.seed(10)
+#' sets <- rep(1:60, each = 3)
+#' cases <- rep(c(1, 0, 0), 60)
+#' exposure <- rbinom(180, 1, ifelse(cases == 1, 0.5, 0.3))
+#' Matccd(cases, NULL, sets, exposure)$estimate
 #' @export
 Matccd <- function(cases, controls, matching_id, exposure, level = 0.95,
                    max_iter = 100, tol = 1e-12) {

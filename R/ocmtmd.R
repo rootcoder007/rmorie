@@ -33,6 +33,13 @@
 #'   doi:10.1093/biomet/asn055 Robins, J. M., Hernan, M. A. &
 #'   Brumback, B. (2000). Marginal structural models and causal
 #'   inference in epidemiology. Epidemiology, 11(5), 550-560.
+#' @examples
+#' set.seed(7)
+#' n <- 400
+#' H <- matrix(rnorm(n * 2), n, 2)
+#' A <- rbinom(n, 1, plogis(H[, 1]))
+#' y <- 1 + A + H[, 1] + rnorm(n)
+#' Ocmtmd(y, A, H)$t_stat
 #' @export
 Ocmtmd <- function(y, A, H, Q = NULL) {
   yv <- as.numeric(y)

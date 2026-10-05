@@ -293,6 +293,9 @@ morie_node2v <- generate_walks
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @param q Coerced to numeric by the body, with \code{as.numeric}.
 #' @return Nothing; this branch always raises.
+#' @examples
+#' node2v_alpha_pq(d_tx = 0, p = 2, q = 0.5)   # return to the previous node: 1/p
+#' node2v_alpha_pq(d_tx = 2, p = 2, q = 0.5)   # move outward: 1/q
 #' @export
 node2v_alpha_pq <- function(d_tx, p, q) {
   d <- as.integer(d_tx)

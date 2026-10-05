@@ -704,6 +704,9 @@ mqtmpl_genotype_probabilities <- function(s_left, s_right, r_left, r_right) {
 #'
 #' @param d Numeric; combined arithmetically in the body.
 #' @return A numeric value.
+#' @examples
+#' mqtmpl_haldane(c(0.05, 0.1, 0.5))
+#' 0.5 * (1 - exp(-2 * c(0.05, 0.1, 0.5)))
 #' @export
 mqtmpl_haldane <- function(d) {
   d <- as.numeric(d)
@@ -819,6 +822,8 @@ mqtmpl_imputation_weights <- function(y, genotype_column, model_dimension = 2) {
 #'
 #' @param covariates A vector; its length is taken.
 #' @return A numeric value.
+#' @examples
+#' mqtmpl_kw_n_imp(list())
 #' @export
 mqtmpl_kw_n_imp <- function(covariates) {
   if (length(covariates) > 0L) {
@@ -889,6 +894,15 @@ mqtmpl_method_status <- function(method = NULL) {
 #' @param ... Passed through.
 #' @return A list with \code{estimate}, \code{threshold}, \code{alpha}, \code{n_perm},
 #' \code{null_maxima}, \code{median_null}, \code{method}.
+#' @examples
+#' \donttest{
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' thr <- mqtmpl_permutation_threshold(y, list(m1, m2), c(0, 0.1), n_perm = 20, method = "mr")
+#' thr$threshold
+#' }
 #' @export
 mqtmpl_permutation_threshold <- function(y, markers, positions, n_perm = 100,
                                          alpha = 0.05, method = "em",
@@ -933,6 +947,12 @@ mqtmpl_sample_genotypes <- function(genotypes, positions, grid, n_imp = 16,
 #' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.02}.
 #' @return A list with \code{estimate}, \code{peak_lod}, \code{peak_position},
 #' \code{position}, \code{lod}, \code{fit}.
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' mqtmpl_scan_cim(y, list(m1, m2), c(0, 0.1), step = 0.05)$peak_position
 #' @export
 mqtmpl_scan_cim <- function(y, markers, positions, cofactors = list(),
                             window = 0, step = 0.02) {
@@ -993,6 +1013,12 @@ mqtmpl_scan_cim <- function(y, markers, positions, cofactors = list(),
 #' @return A list with \code{estimate}, \code{peak_lod}, \code{peak_position},
 #' \code{position}, \code{lod}, \code{method_used}, \code{n_imputations}, \code{note},
 #' \code{method}.
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' mqtmpl_scan_imp(y, list(m1, m2), c(0, 0.1), step = 0.05, n_imp = 8, error_rate = 0.01, seed = 1)$peak_position
 #' @export
 mqtmpl_scan_imp <- function(y, markers, positions, step, n_imp,
                             error_rate, seed) {

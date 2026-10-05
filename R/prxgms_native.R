@@ -175,6 +175,11 @@ morie_prxgms <- morie_prxgms_soft_threshold
 #' @return A list with \code{estimate}, \code{x}, \code{fun},
 #'   \code{objective}, \code{iterations}, \code{L}, \code{accelerated},
 #'   \code{converged}, \code{method}, \code{lambda}, \code{L}.
+#' @examples
+#' set.seed(4)
+#' A <- matrix(rnorm(100 * 5), 100, 5)
+#' b <- A %*% c(2, 0, 0, -1, 0) + rnorm(100, sd = 0.1)
+#' round(lasso_fista(A, as.numeric(b), lam = 5)$x, 3)
 #' @export
 lasso_fista <- function(A, b, lam, max_iter = 500L, tol = 1e-10,
                         accelerate = TRUE) {

@@ -355,6 +355,9 @@ mtdrl_run <- function(tasks, agent, episode_length = 100, n_arms = NULL,
 #' @param epsilon Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @param optimistic Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{agent}, as built in the body.
+#' @examples
+#' ag <- mtdrl_TabularHistoryAgent(n_arms = 3)
+#' names(ag)
 #' @export
 mtdrl_TabularHistoryAgent <- function(n_arms, epsilon = 0.1, optimistic = 1) {
   agent <- new.env(parent = emptyenv())

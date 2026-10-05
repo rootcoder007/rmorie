@@ -26,6 +26,13 @@
 #' @references Halloran, M. E. & Hudgens, M. G. (2016). Dependent
 #'   happenings: a recent methodological review. Current Epidemiology
 #'   Reports, 3(4), 297-305. doi:10.1007/s40471-016-0086-4
+#' @examples
+#' set.seed(19)
+#' n <- 100
+#' net <- matrix(rbinom(n * n, 1, 0.05), n); net <- (net + t(net) > 0) * 1
+#' e <- rbinom(n, 1, 0.3)
+#' y <- 1 + 2 * e + 0.5 * as.numeric(net %*% e) / pmax(rowSums(net), 1) + rnorm(n)
+#' Netparf(y, e, net)[c("paf_direct", "paf_spillover")]
 #' @export
 Netparf <- function(y, exposure, network) {
   yv <- as.numeric(y)

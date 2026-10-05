@@ -337,6 +337,9 @@ fourier_terms <- function(t, period, order) {
 #' @param upper Integer, days after the holiday to flag.
 #' @return A list with \code{matrix} (list of rows) and \code{names}
 #'   (sorted holiday names).
+#' @examples
+#' h <- holiday_matrix(t = 1:10, holidays = list(canada = 3, boxing = 8), lower = 1, upper = 1)
+#' h$names
 #' @export
 holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
   names_ <- sort(names(holidays))
@@ -431,6 +434,13 @@ prophet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
 #' @param holidays Same as for the fit.
 #' @param holiday_window Same as for the fit.
 #' @return Numeric vector of forecasts.
+#' @examples
+#' set.seed(20)
+#' t <- 1:60
+#' y <- 0.1 * t + sin(2 * pi * t / 7) + rnorm(60, sd = 0.1)
+#' seas <- list(list(name = "weekly", period = 7, order = 2))
+#' fit <- morie_prphet_fit(t, y, seasonalities = seas)
+#' prophet_predict(fit, t_new = 61:63, seasonalities = seas)
 #' @export
 prophet_predict <- function(fit, t_new, seasonalities = NULL,
                             holidays = NULL, holiday_window = c(0, 0)) {

@@ -219,6 +219,12 @@ Sett <- morie_setT
 #' @param Z See Usage.
 #' @param S See Usage.
 #' @param params See Usage.
+#' @examples
+#' set.seed(14)
+#' d <- 2
+#' params <- list(Wq = diag(d), Wk = diag(d), Wv = diag(d), W1 = diag(d), b1 = rep(0, d),
+#'                W2 = diag(d), b2 = rep(0, d))
+#' setT(Z = matrix(rnorm(10), 5, d), S = matrix(0, 1, d), params = params)$output
 #' @export
 setT <- function(Z, S, params) {
   Za <- as.matrix(Z)

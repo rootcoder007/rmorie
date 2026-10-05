@@ -568,6 +568,8 @@ miprgr_branch_and_bound <- function(A, b, c, integer_vars, maximise = TRUE,
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(miprgr_cheatsheet())
 #' @export
 miprgr_cheatsheet <- function() {
   paste("miprgr: the LP relaxation is easy and usually FRACTIONAL,",
@@ -674,6 +676,9 @@ miprgr_fractional_variable <- function(x, integer_vars, tol = 1e-7) {
 #' @param b A vector; indexed elementwise.
 #' @param integer_vars See Usage.
 #' @return A list with \code{x}, \code{feasible}, \code{violations}, \code{note}.
+#' @examples
+#' A <- matrix(c(1, 1, 1, -1), 2, byrow = TRUE)
+#' miprgr_round_relaxation(c(1.4, 2.6), A, b = c(4, 1), integer_vars = c(1, 2))
 #' @export
 miprgr_round_relaxation <- function(x, A, b, integer_vars) {
   xr <- as.numeric(x)

@@ -28,6 +28,10 @@
 #'   algorithm (RTL scoring, tie to LCA), p. 8 and Figure 1. Wood,
 #'   D. E., Lu, J. and Langmead, B. (2019), Improved metagenomic
 #'   analysis with Kraken 2, Genome Biology 20, 257, Methods.
+#' @examples
+#' # taxonomy 1 (root) -> 2 -> 3 and 2 -> 4; most k-mers hit 3
+#' parent <- c(`1` = 1, `2` = 1, `3` = 2, `4` = 2)
+#' Taxass(kmer_taxa = c(3, 3, 3, 4, 0, 2), parent = parent)$taxon
 #' @export
 Taxass <- function(kmer_taxa, parent) {
   hits <- as.integer(kmer_taxa)

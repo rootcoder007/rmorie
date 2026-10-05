@@ -331,6 +331,10 @@ muzero_gamma_rv <- function(alpha) {
 #' See the file header for the source the module follows.
 #'
 #' @return The value of \code{env}, as built in the body.
+#' @examples
+#' mm <- muzero_MinMax()
+#' mm$update(2); mm$update(6)
+#' mm$normalize(4)
 #' @export
 muzero_MinMax <- function() {
   env <- new.env(parent = emptyenv())

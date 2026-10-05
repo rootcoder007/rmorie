@@ -378,6 +378,8 @@ ocrwit_normalise_bbox <- function(box, width, height, scale = 1000) {
 #' @param height Passed to \code{ocrwit_normalise_bbox}.
 #' @param patch_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{14}.
 #' @return A vector, from \code{sort}.
+#' @examples
+#' ocrwit_patch_of_box(c(10, 10, 60, 40), width = 100, height = 100)
 #' @export
 ocrwit_patch_of_box <- function(box, width, height, patch_grid = 14) {
   # the restored copy rounded the corners onto the patch grid, which
@@ -398,6 +400,9 @@ ocrwit_patch_of_box <- function(box, width, height, patch_grid = 14) {
 #' @param height Passed to \code{ocrwit_normalise_bbox}.
 #' @param scale Passed to \code{ocrwit_normalise_bbox}. Defaults to \code{1000}.
 #' @return A list with \code{segment_boxes}, \code{per_token}, \code{n_segments}, \code{note}.
+#' @examples
+#' boxes <- list(c(10, 10, 50, 20), c(60, 10, 90, 20), c(10, 40, 80, 50))
+#' ocrwit_segment_layout_boxes(boxes, segment_ids = list(1, 1, 2), width = 100, height = 60)$segment_boxes
 #' @export
 ocrwit_segment_layout_boxes <- function(boxes, segment_ids, width, height,
                                          scale = 1000) {

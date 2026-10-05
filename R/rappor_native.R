@@ -14,6 +14,8 @@
 #'
 #' @param f,p,q RAPPOR parameters.
 #' @return List with \code{q_star} and \code{p_star}.
+#' @examples
+#' morie_rappor_star(f = 0.5, p = 0.5, q = 0.75)
 #' @export
 morie_rappor_star <- function(f, p, q) {
   if (f < 0 || f > 1) stop("morie_rappor: f must lie in [0, 1]")

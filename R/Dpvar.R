@@ -47,6 +47,10 @@
 #'   differentially private confidence intervals. ITCS 2018;
 #'   arXiv:1711.03908, Sections 1.5 and 2.  Dwork, C., McSherry, F.,
 #'   Nissim, K. and Smith, A. (2006). TCC, LNCS 3876, 265-284.
+#' @examples
+#' set.seed(22)
+#' x <- rnorm(1000, 5, 2)
+#' Dpvar(x, a = 0, b = 10, epsilon = 1)[c("var_dp", "var_true")]
 #' @export
 Dpvar <- function(x, a, b, epsilon, seed = 42L) {
   xv <- .s03vec(x)

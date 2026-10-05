@@ -33,6 +33,13 @@
 #'   effects, Biometrika 108(2), 299-319, doi:10.1093/biomet/asaa076, Eq. 4. Curth, A.
 #'   and van der Schaar, M. (2021), Nonparametric estimation of heterogeneous treatment
 #'   effects: From theory to learning algorithms, AISTATS 130, arXiv:2101.10943.
+#' @examples
+#' set.seed(8)
+#' n <- 300
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' w <- rbinom(n, 1, 0.5)
+#' y <- X[, 1] + w * (1 + X[, 2]) + rnorm(n)
+#' Meta1l(y, w, X)$estimate
 #' @export
 Meta1l <- function(y, w, X, ps = NULL) {
   yv <- as.numeric(y)

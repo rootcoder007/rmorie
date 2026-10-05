@@ -535,6 +535,8 @@ motfsr_alphabet_of <- function(seqs, alphabet) {
 #' @param lambda1 Numeric; combined arithmetically in the body.
 #' @param loss Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A numeric value.
+#' @examples
+#' motfsr_bayes_threshold(lambda1 = 0.05)
 #' @export
 motfsr_bayes_threshold <- function(lambda1, loss = NULL) {
   lambda1 <- as.numeric(lambda1)

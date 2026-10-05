@@ -466,6 +466,8 @@ NULL
 #' @param x Passed to \code{.Call}.
 #' @param kernel_size Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_dsp_median_filter_cpp(c(1, 9, 2, 3, 100, 4, 5), 3L)
 #' @export
 #' @name morie_dsp_median_filter_cpp
 #' @rdname morie_dsp_median_filter_cpp

@@ -1141,6 +1141,8 @@ abc_gp_emulator <- function(sim, obs, X_grid = NULL, kernel = "sqexp",
 #' @param skip Drop that many leading Sobol points (default 1, so the
 #'   origin is not sent to the prior corner).
 #' @return Numeric matrix with \code{n} rows.
+#' @examples
+#' design_from_prior(5, list(c(0, -1), c(1, 1)))
 #' @export
 design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
   if (is.list(prior_ppf) && length(prior_ppf) == 2L &&
@@ -1652,6 +1654,9 @@ gabc_log_likelihood <- function(sim, obs, theta, n_sim = 50L, epsilon = 1.0,
 #' @param lengthscale See Usage.
 #' @param kernel See Usage.
 #' @param tau2 See Usage.
+#' @examples
+#' fit <- gp_fit(design = seq(0, 1, length.out = 6), values = cos(3 * seq(0, 1, length.out = 6)))
+#' names(fit)
 #' @export
 gp_fit <- function(design, values, nugget = NULL, lengthscale = NULL,
                    kernel = "sqexp", tau2 = NULL) {

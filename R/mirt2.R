@@ -35,6 +35,11 @@
 #'   Multidimensional Item Response Theory, Springer, which Chalmers
 #'   cites for D; the book was not in the local corpus and was not
 #'   consulted.
+#' @examples
+#' set.seed(16)
+#' theta <- matrix(rnorm(200), 100, 2)
+#' y <- rbinom(100, 1, plogis(theta %*% c(1, 0.5) - 0.2))
+#' Mirt2(y, theta, a = c(1, 0.5), d = -0.2)$loglik
 #' @export
 Mirt2 <- function(y, theta, a, d, c = 0, D = 1) {
   av <- .t1_vec(a)

@@ -377,6 +377,10 @@ morie_optimal_alpha <- function(pscore, sigma2_treated = NULL,
 #' @return A list with \code{alpha_t}, \code{keep}, \code{trim},
 #'   \code{no_trimming}.
 #' @references Crump, R. K. et al. (2009). Theorem 5.3.
+#' @examples
+#' set.seed(11)
+#' ps <- runif(500, 0.02, 0.98)
+#' morie_optimal_alpha_att(ps, rbinom(500, 1, ps))$alpha_t
 #' @export
 morie_optimal_alpha_att <- function(pscore, treated, tol = 1e-12,
                                     max_iter = 200) {

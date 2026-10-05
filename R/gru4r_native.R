@@ -232,6 +232,8 @@ morie_gru4r <- session_parallel_batches
 #' @param r_target Score of the target item.
 #' @param r_negatives Numeric vector of negative-item scores.
 #' @return Scalar loss.
+#' @examples
+#' morie_gru4r_bpr(r_target = 2, r_negatives = c(0.5, 1, -1))
 #' @export
 morie_gru4r_bpr <- function(r_target, r_negatives) {
   neg <- as.numeric(r_negatives)
@@ -253,6 +255,12 @@ morie_gru4r_bpr <- function(r_target, r_negatives) {
 #' @param Wr,Ur Reset-gate linear maps.
 #' @param Wh,Uh Candidate-h linear maps.
 #' @return New hidden state.
+#' @examples
+#' set.seed(5)
+#' d <- 3; nh <- 2
+#' mk <- function(r, c) matrix(rnorm(r * c, sd = 0.5), r, c)
+#' morie_gru4r_gru(x = rnorm(d), h = rep(0, nh), Wz = mk(nh, d), Uz = mk(nh, nh),
+#'                 Wr = mk(nh, d), Ur = mk(nh, nh), Wh = mk(nh, d), Uh = mk(nh, nh))
 #' @export
 morie_gru4r_gru <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
   x <- as.numeric(x)

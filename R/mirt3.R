@@ -17,6 +17,11 @@
 #' @return As \code{Mirt2}: estimate, loglik, p, pbar, deviance, n, m.
 #' @references Chalmers (2012), Journal of Statistical Software 48(6),
 #'   1-29, \doi{10.18637/jss.v048.i06}, eq. (1) p.3, with gamma = 0.
+#' @examples
+#' set.seed(18)
+#' theta <- matrix(rnorm(300), 100, 3)
+#' y <- rbinom(100, 1, plogis(theta %*% c(1, 0.5, 0.8)))
+#' Mirt3(y, theta, a = c(1, 0.5, 0.8), d = 0)$loglik
 #' @export
 Mirt3 <- function(y, theta, a, d, D = 1) {
   if (length(.t1_vec(a)) != 3L) {

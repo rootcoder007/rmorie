@@ -486,6 +486,9 @@ chronos_quantile_bins <- function(samples, n_bins = 4096L) {
 #' @param bins A list; the body reads \code{$centers}, \code{$edges} from it.
 #' @return A list with \code{tokens}, \code{n_clipped}, \code{clipped_fraction},
 #' \code{in_range}, \code{note}.
+#' @examples
+#' bins <- chronos_uniform_bins(lo = -3, hi = 3, n_bins = 12L)
+#' chronos_quantize(c(-2.5, 0, 0.4, 5), bins)$tokens
 #' @export
 chronos_quantize <- function(x, bins) {
   v <- as.numeric(x)
@@ -550,6 +553,8 @@ chronos_tokenize <- function(x, bins, context = NULL, add_eos = TRUE,
 #' @param hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{15}.
 #' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4096L}.
 #' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}.
+#' @examples
+#' str(chronos_uniform_bins(lo = -1, hi = 1, n_bins = 5L))
 #' @export
 chronos_uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
   B <- as.integer(n_bins)

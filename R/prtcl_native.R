@@ -297,6 +297,8 @@ prtcl_cheatsheet <- function() {
 #' @param u Optional fixed offset in \code{[0, 1)}; if \code{NULL} one
 #'   uniform is drawn from the shared generator.
 #' @return Integer vector of indices.
+#' @examples
+#' systematic_resample(c(0.1, 0.2, 0.3, 0.4), u = 0.5)
 #' @export
 systematic_resample <- function(weights, u = NULL) {
   J <- length(weights)

@@ -1643,6 +1643,9 @@ mafft_jtt_exchangeability <- function() {
 #' @param a Passed to \code{paste0}.
 #' @param b Passed to \code{paste0}.
 #' @return One of two values, depending on the branch taken.
+#' @examples
+#' M <- list(`A|A` = 1, `A|C` = -1)
+#' mafft_lookup(M, "A", "C")
 #' @export
 mafft_lookup <- function(M, a, b) {
   # "a|b" is the key every matrix in this module carries
@@ -1754,6 +1757,8 @@ mafft_xcorr_direct <- function(a, b, size) {
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
 #' @return A list with \code{c}, \code{size}.
+#' @examples
+#' mafft_xcorr_fft(c(1, 2, 3), c(0, 1, 0.5))$c
 #' @export
 mafft_xcorr_fft <- function(a, b) {
   n <- length(a)

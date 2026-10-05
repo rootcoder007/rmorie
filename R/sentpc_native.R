@@ -372,6 +372,9 @@ escape_whitespace <- function(text, add_prefix = TRUE) {
 #' @param corpus See Usage.
 #' @param vocab_size See Usage.
 #' @param add_prefix See Usage.
+#' @examples
+#' bpe <- train_bpe(c("low lower lowest", "new newer newest"), vocab_size = 30)
+#' names(bpe)
 #' @export
 train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
   # the string-keyed version re-split every merged word into single
