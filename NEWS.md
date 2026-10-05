@@ -14,6 +14,22 @@
   Wald F by the Kleibergen-Paap SVD, robust or clustered; it returned the Cragg-Donald statistic).
   `morie_iv_2sls()` reports the effective F and its critical value beside the iid quantities, and
   `morie_iv_stock_yogo()` outside its rows points to both instead of "TODO: extend".
+* The spatial-voting estimators that returned a substitute run their own models, each checked
+  against its reference implementation: `morie_spatial_voting_alpha_nominate()` (Carroll et al.
+  2013 slice sampler; it returned an EM-IRT fit; agrees with anominate on alpha, beta and the ideal
+  points, r = 0.9998), `morie_spatial_voting_bayesian_am()` (Hare et al. 2015; it returned
+  basicspace's deterministic AM; matches the authors' JAGS model to the third decimal),
+  `morie_spatial_voting_bayesian_mds()` and `morie_spatial_voting_bayesian_unfolding()` (Bakker and
+  Poole 2013 lognormal model; they returned smacof's stress solution), `morie_spatial_voting_ordinal_irt()`
+  (Quinn 2004 with item cutpoints; it reported MCMCpack's loadings as ideal points, and its fallback
+  shared one set of cutpoints across items and rescaled the draws every sweep) and
+  `morie_spatial_voting_dynamic_irt()` (Martin and Quinn 2002 Gibbs sampler). Without basicspace,
+  `morie_spatial_voting_aldrich_mckelvey()` computes Aldrich and McKelvey's closed form (it fitted a
+  different regression) and `morie_spatial_voting_blackbox()` fits the observed cells only (it filled
+  missing cells with zeros); both now match basicspace, which `morie_spatial_voting_blackbox()`
+  never reached because it passed `missing = NA`.
+* Every exported function has a runnable example, and a bad first argument (wrong type, shape or
+  missing values) stops with a plain-language message naming the argument.
 * Without DBI, a cache given as `db_path=` keeps its files beside that path; every such cache shared
   one directory, so a table cached for one database was read back for another.
 
