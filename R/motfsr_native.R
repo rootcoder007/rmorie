@@ -861,6 +861,8 @@ motfsr_normalise_windows <- function(z, w, max_sweeps = 100) {
 #' @param w Numeric; combined arithmetically in the body.
 #' @param alphabet Passed to \code{motfsr_alphabet_of}.
 #' @return A list with \code{coded}, \code{alpha}, \code{starts}.
+#' @examples
+#' str(motfsr_prepare(c("ACGTAC", "CGTACG"), w = 3, alphabet = NULL))
 #' @export
 motfsr_prepare <- function(sequences, w, alphabet) {
   seqs <- as.character(sequences)

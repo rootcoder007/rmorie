@@ -389,6 +389,12 @@ morie_gtrf_lap_pe <- function(adj, n, dim = 2L, normalized = TRUE) {
 #' @param norm "batch", "layer" or "none".
 #' @return New node feature matrix.
 #' @references Dwivedi, V. P. and Bresson, X. (2020).
+#' @examples
+#' set.seed(14)
+#' H <- matrix(rnorm(8), 4, 2)
+#' adj <- list(`0` = 1L, `1` = c(0L, 2L), `2` = c(1L, 3L), `3` = 2L)  # 0-based node ids
+#' I2 <- diag(2)
+#' dim(morie_gtrf_layer(H, adj, I2, I2, I2, I2, I2, norm = "layer"))
 #' @export
 morie_gtrf_layer <- function(H, adj, WQ, WK, WV, W1, W2,
                              edge_bias = NULL, norm = "batch") {

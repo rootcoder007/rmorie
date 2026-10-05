@@ -1713,6 +1713,8 @@ mafft_site_score <- function(M, ga, gb, wa, wb, i, j) {
 #'
 #' @param k A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{rep}.
+#' @examples
+#' mafft_weights(3)
 #' @export
 mafft_weights <- function(k) rep(1.0 / k, k)
 

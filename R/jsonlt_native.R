@@ -220,6 +220,8 @@ morie_jsonlt_base64_dec <- function(input) {
 }
 
 #' @rdname morie_jsonlt_base64_enc
+#' @examples
+#' morie_jsonlt_base64url_enc("hello?world")
 #' @export
 morie_jsonlt_base64url_enc <- function(input) {
   sub("=+$", "", chartr("+/", "-_", morie_jsonlt_base64_enc(input)))
@@ -1461,6 +1463,8 @@ morie_jsonlt_stream_out <- function(x, con = stdout(), pagesize = 500, verbose =
 #'
 #' @param pages a list of data.frames (NULL entries are dropped).
 #' @return one data.frame; missing columns are filled with NA.
+#' @examples
+#' morie_jsonlt_rbind_pages(list(data.frame(a = 1:2), data.frame(a = 3, b = "x")))
 #' @export
 morie_jsonlt_rbind_pages <- function(pages) {
   stopifnot(is.list(pages))

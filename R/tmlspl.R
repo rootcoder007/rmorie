@@ -52,6 +52,13 @@
 #' @references Aronow, P. M. & Samii, C. (2017). Annals of Applied
 #'   Statistics 11(4):1912-1947; Sofrygin, O. & van der Laan, M. J.
 #'   (2017). Journal of Causal Inference 5(1).
+#' @examples
+#' set.seed(13)
+#' n <- 120
+#' network <- matrix(rbinom(n * n, 1, 0.03), n); network <- (network + t(network) > 0) * 1; diag(network) <- 0
+#' X <- matrix(rnorm(n), n); D <- rbinom(n, 1, 0.5)
+#' y <- D + 0.5 * as.numeric(network %*% D) / pmax(rowSums(network), 1) + X[, 1] + rnorm(n)
+#' Tmlspl(y, D, X, network)$estimate
 #' @export
 Tmlspl <- function(y, D, X, network, exposure_summary = NULL) {
   yv <- as.numeric(y)

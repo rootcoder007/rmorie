@@ -26,6 +26,8 @@
 #' @references Oster, E. (2019). Unobservable selection and coefficient
 #'   stability: theory and evidence. Journal of Business & Economic
 #'   Statistics, 37(2), 187-204. doi:10.1080/07350015.2016.1227711
+#' @examples
+#' Ovbnk(beta_short = 1.0, beta_long = 0.8, R_short = 0.1, R_long = 0.3)$beta_star
 #' @export
 Ovbnk <- function(beta_short, beta_long, R_short, R_long,
                   R_max = 1, delta = 1) {

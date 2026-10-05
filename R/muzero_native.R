@@ -304,6 +304,9 @@ muzero_cheatsheet <- function() {
 #'
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{repeat}.
+#' @examples
+#' set.seed(5)
+#' mean(replicate(2000, muzero_gamma_rv(2)))
 #' @export
 muzero_gamma_rv <- function(alpha) {
   if (alpha < 1) {

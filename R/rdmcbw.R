@@ -146,6 +146,11 @@
 #'   Economic Studies 79(3):933-959. \doi{10.1093/restud/rdr043}.
 #'   Equations and worked example read from the NBER working paper w14726
 #'   version, pp.8-10 and pp.15-16.
+#' @examples
+#' set.seed(8)
+#' x <- runif(800, -1, 1)
+#' y <- 0.4 * (x >= 0) + x + rnorm(800, sd = 0.3)
+#' Rdmcbw(y, x, cutoff = 0)$estimate
 #' @export
 Rdmcbw <- function(y, x, cutoff = 0, kernel_constant = 3.4375) {
   y <- as.numeric(unlist(y))

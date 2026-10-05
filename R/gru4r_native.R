@@ -297,6 +297,9 @@ morie_gru4r_mrr <- function(ranked, target, kk = 20) {
 #' @param target Target item id.
 #' @param kk Cutoff.
 #' @return 0 or 1.
+#' @examples
+#' morie_gru4r_recall(c(5L, 2L, 9L, 1L), target = 9L, kk = 3)
+#' morie_gru4r_recall(c(5L, 2L, 9L, 1L), target = 1L, kk = 3)
 #' @export
 morie_gru4r_recall <- function(ranked, target, kk = 20) {
   top <- as.integer(ranked)[seq_len(min(as.integer(kk),

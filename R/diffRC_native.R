@@ -250,6 +250,8 @@ denoise <- function(x_t, model, schedule, t_start = NULL) {
 #'   \code{std == 0}, no sample is drawn.
 #' @return A list with \code{x_t}, \code{mean}, \code{std},
 #'   \code{sampled}.
+#' @examples
+#' forward_corrupt(x0 = c(1, 2, 3), alpha_bar_t = 0.81)$mean
 #' @export
 forward_corrupt <- function(x0, alpha_bar_t, e = NULL) {
   x <- as.numeric(x0)

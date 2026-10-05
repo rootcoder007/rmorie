@@ -29,6 +29,13 @@
 #'   \code{n_path}, \code{n}.
 #' @references Miles, C. H. et al. (2017). JASA 112(520):1443-1452;
 #'   Avin, C., Shpitser, I. & Pearl, J. (2005). IJCAI-05, 357-363.
+#' @examples
+#' set.seed(4)
+#' n <- 300; X <- matrix(rnorm(n), n)
+#' D <- rbinom(n, 1, 0.5)
+#' M1 <- 0.5 * D + rnorm(n); M2 <- 0.3 * D + 0.2 * M1 + rnorm(n)
+#' y <- D + M1 + M2 + X[, 1] + rnorm(n)
+#' Tmlpse(y, D, M_chain = cbind(M1, M2), X = X, path = c(1, 0))$estimate
 #' @export
 Tmlpse <- function(y, D, M_chain, X, path) {
   yv <- as.numeric(y)

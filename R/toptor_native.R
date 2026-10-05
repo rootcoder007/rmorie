@@ -264,6 +264,9 @@ morie_topological_torsion <- morie_toptor
 #'   kept as themselves; everything else becomes \code{"Y"}.
 #' @return A named list mapping canonical codes to integer counts.
 #' @references Nilakantan, R. et al. (1987).
+#' @examples
+#' # pentan-1-ol skeleton; bonds use 0-based atom indices
+#' morie_topological_torsions(c("C", "C", "C", "C", "O"), list(c(0, 1), c(1, 2), c(2, 3), c(3, 4)))
 #' @export
 morie_topological_torsions <- function(elements, bonds, common_types = NULL) {
   els <- as.character(elements)
@@ -324,6 +327,8 @@ morie_toptor_cheatsheet <- function() {
 #' @param t1,t2 Either torsion dictionaries or iterables of codes.
 #' @return A numeric similarity in \code{[0, 1]}.
 #' @references Nilakantan, R. et al. (1987).
+#' @examples
+#' morie_torsion_similarity(c("a", "b", "c"), c("a", "b", "d"))
 #' @export
 morie_torsion_similarity <- function(t1, t2) {
   s1 <- if (is.list(t1) && !is.null(names(t1))) names(t1) else as.character(t1)

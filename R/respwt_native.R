@@ -19,6 +19,11 @@
 #'   \code{balance_error}, \code{n}, \code{method}.
 #' @references Lohr, S. L. (2010). Sampling: Design and Analysis,
 #'   2nd ed. Brooks/Cole, Sec. 8.5.1.
+#' @examples
+#' w <- c(10, 10, 20, 20, 15, 15)
+#' r <- c(TRUE, FALSE, TRUE, TRUE, FALSE, TRUE)
+#' cls <- c("a", "a", "b", "b", "c", "c")
+#' morie_respwt(w, r, cls)$adjusted
 #' @export
 morie_respwt <- function(weights, responded, classes) {
   w <- as.numeric(weights)

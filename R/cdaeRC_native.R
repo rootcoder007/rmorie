@@ -358,6 +358,8 @@ morie_cdaeRC <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 #' \code{as.integer}.
 #' @param activation Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' morie_cdaeRC_decode(z = c(0.5, -0.5), Wp = matrix(1, 3, 2), bp = c(0, 0, 0))
 #' @export
 morie_cdaeRC_decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
   idx <- if (is.null(items)) seq_along(bp) else as.integer(items)

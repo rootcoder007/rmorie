@@ -393,6 +393,10 @@ Otcostlp <- function(X, Y, p = 2) {
 #' @return Named list with `estimate`, `primal`, `dual_pairing`,
 #'   `entropy`, `epsilon`, `method`.
 #' @references Peyre & Cuturi (2019), eq. (4.30)-(4.32).
+#' @examples
+#' a <- c(0.5, 0.5); b <- c(0.5, 0.5)
+#' C <- matrix(c(0, 1, 1, 0), 2)
+#' Otfreeen(T = diag(0.5, 2), C = C, a = a, b = b, f = c(0, 0), g = c(0, 0), epsilon = 0.1)$estimate
 #' @export
 Otfreeen <- function(T, C, a, b, f, g, epsilon) {
   eps <- as.numeric(epsilon)

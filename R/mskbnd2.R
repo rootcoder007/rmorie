@@ -28,6 +28,12 @@
 #'   Partial Identification of Probability Distributions, Springer.
 #'   Standard published form; neither source was available locally, so the
 #'   bound is stated in full above for checking.
+#' @examples
+#' set.seed(12)
+#' X <- rep(c("a", "b"), each = 50)
+#' D <- rbinom(100, 1, 0.5)
+#' y <- runif(100)
+#' Mskbnd2(y, D, X, y_min = 0, y_max = 1)[c("lower", "upper")]
 #' @export
 Mskbnd2 <- function(y, D, X, y_min, y_max) {
   yv <- .t1_vec(y)

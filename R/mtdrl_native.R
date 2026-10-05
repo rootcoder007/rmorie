@@ -199,6 +199,8 @@ morie_mtdrl_metarl <- morie_mtdrl
 #' @param seed Passed to \code{set.seed}. Defaults to \code{0}.
 #' @param structure One of \code{"independent"}, \code{"paired"}. Defaults to \code{"independent"}.
 #' @return The value of \code{tasks}, as built in the body.
+#' @examples
+#' str(mtdrl_bandit_tasks(n_arms = 2, n_tasks = 3, seed = 1))
 #' @export
 mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100, seed = 0,
                                structure = "independent") {

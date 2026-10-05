@@ -454,6 +454,8 @@ cgnonl_beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 #' @param fb Numeric; combined arithmetically in the body.
 #' @param db Numeric; combined arithmetically in the body.
 #' @return The value of \code{t}, as built in the body.
+#' @examples
+#' cgnonl_cubic_interpolate(ta = 0, fa = 1, da = -1, tb = 1, fb = 0.5, db = 0.5)
 #' @export
 cgnonl_cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
   h <- tb - ta

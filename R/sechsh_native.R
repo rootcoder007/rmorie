@@ -526,6 +526,8 @@ inclusion_proof <- function(leaves, index) {
 # -- restored: morie-only definition kept through the rmorie sync --
 #' RFC 6962 Merkle Tree Hash
 #' @param leaves See Usage.
+#' @examples
+#' merkle_root(lapply(c("a", "b", "c"), charToRaw))
 #' @export
 merkle_root <- function(leaves) {
   L <- lapply(leaves, .sechsh_as_bytes)
@@ -580,6 +582,11 @@ verify_chain <- function(entries, hashes, key = NULL,
 #' @param size See Usage.
 #' @param path See Usage.
 #' @param root See Usage.
+#' @examples
+#' leaves <- lapply(c("a", "b", "c", "d"), charToRaw)
+#' root <- merkle_root(leaves)
+#' p <- inclusion_proof(leaves, 2L)
+#' verify_inclusion(leaves[[3]], 2L, 4L, p$path, root)
 #' @export
 verify_inclusion <- function(leaf, index, size, path, root) {
   m <- as.integer(index)

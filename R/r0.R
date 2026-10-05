@@ -22,6 +22,9 @@
 #'   reproduction ratio R0 in models for infectious diseases in
 #'   heterogeneous populations. Journal of Mathematical Biology
 #'   28(4):365-382. \doi{10.1007/BF00178324}.
+#' @examples
+#' R0(beta = 0.3, gamma = 0.1)$estimate
+#' R0(attack_rate = 0.8)$estimate
 #' @export
 R0 <- function(beta = NULL, gamma = NULL, attack_rate = NULL,
                tol = 1e-8, max_iter = 100) {

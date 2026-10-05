@@ -475,6 +475,8 @@ morie_shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1.0) {
 #' Compact one-line summary of the tmldgp recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_tmldgp_cheatsheet()
 #' @export
 morie_tmldgp_cheatsheet <- function() {
   paste("tmldgp: in high dimensions regularise the NUISANCES and",

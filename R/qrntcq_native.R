@@ -350,6 +350,9 @@ gamma_generation_time <- function(shape = 2.83, scale = 1.86, grid = NULL,
 #' @return A list with \code{estimate}, \code{optimal_t_R},
 #'   \code{efficacy_at_optimum}, \code{utility_at_optimum}, \code{curve},
 #'   \code{t_Q}, \code{method}.
+#' @examples
+#' gt <- gamma_generation_time()
+#' optimal_duration(t_Q = 3, generation_time = gt)$optimal_t_R
 #' @export
 optimal_duration <- function(t_Q = 3.0, generation_time = NULL,
                               t_max = 20.0, step = 0.25) {

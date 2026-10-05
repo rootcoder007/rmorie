@@ -17,6 +17,10 @@
 #' @return List with \code{path}, \code{estimate}, \code{T}, \code{K}.
 #' @references Viterbi, A. J. (1967). IEEE Trans Inform Theory
 #'   13:260-269.
+#' @examples
+#' trans <- matrix(c(0.7, 0.3, 0.4, 0.6), 2, byrow = TRUE)
+#' emit <- matrix(c(0.9, 0.1, 0.2, 0.8), 2, byrow = TRUE)
+#' Viterb(obs = c(0, 0, 1, 1, 0), trans = trans, emit = emit)$path
 #' @export
 Viterb <- function(obs, trans, emit, init = NULL) {
   o <- as.integer(round(as.numeric(obs))) + 1L

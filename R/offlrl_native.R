@@ -392,6 +392,10 @@ morie_offlrl <- offlrl
 #' @param A See Usage.
 #' @param name Passed to \code{stop}.
 #' @return A list with \code{matrix}, \code{lookup}.
+#' @examples
+#' d <- function(s, a) if (a == 0) 0.25 else 0.75
+#' pi_b <- offlrl_as_dist(d, S = c(0, 1), A = c(0, 1), name = "behaviour")
+#' pi_b$lookup(1, 1)
 #' @export
 offlrl_as_dist <- function(d, S, A, name) {
   if (is.null(d)) return(NULL)
@@ -443,6 +447,9 @@ offlrl_cheatsheet <- function() {
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
+#' @examples
+#' offlrl_logsumexp(c(1000, 1000))
+#' log(2) + 1000
 #' @export
 offlrl_logsumexp <- function(v) {
   m <- max(v)

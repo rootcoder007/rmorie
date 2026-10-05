@@ -335,6 +335,10 @@ mpfn_message_passing <- function(H0, adj, edge_features, T = 3, A = NULL,
 #' @param i_fn The body requires: mpfn: the gated readout needs H0, i_fn and j_fn.
 #' @param j_fn The body requires: mpfn: the gated readout needs H0, i_fn and j_fn.
 #' @return The value of \code{acc}, as built in the body.
+#' @examples
+#' H <- list(c(1, 2), c(3, 4), c(5, 6))
+#' mpfn_readout(H, how = "sum")
+#' mpfn_readout(H, how = "mean")
 #' @export
 mpfn_readout <- function(H, how = "sum", H0 = NULL, i_fn = NULL, j_fn = NULL) {
   if (!(how %in% c("sum", "mean", "gated"))) {

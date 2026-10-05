@@ -275,6 +275,11 @@ morie_gsageemd <- morie_gsageemd_embed
 #' @param normalize L2-normalise the output.
 #' @return Matrix of new node representations.
 #' @references Hamilton, W. L. et al. (2017).
+#' @examples
+#' H <- diag(3)
+#' adj <- list(`0` = 1L, `1` = c(0L, 2L), `2` = 1L)  # 0-based node ids
+#' W <- matrix(0.5, 2, 6)
+#' morie_gsageemd_layer(H, adj, W)
 #' @export
 morie_gsageemd_layer <- function(H, adj, W, how = "mean", sizes = NULL,
                                  rng = NULL, normalize = TRUE) {

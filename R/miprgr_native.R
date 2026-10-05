@@ -645,6 +645,8 @@ miprgr_enumerate_integer <- function(A, b, c, integer_vars, upper = 10,
 #' @param integer_vars See Usage.
 #' @param tol Passed to \code{>}. Defaults to \code{1e-07}.
 #' @return A list with \code{index}, \code{fractionality}, \code{integral}.
+#' @examples
+#' miprgr_fractional_variable(c(1, 2.4, 3.5), integer_vars = c(1, 2, 3))
 #' @export
 miprgr_fractional_variable <- function(x, integer_vars, tol = 1e-7) {
   best <- NA_integer_

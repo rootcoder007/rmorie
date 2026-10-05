@@ -336,6 +336,10 @@ node2v_cheatsheet <- function() {
 #' @param t Coerced to character by the body, with \code{as.character}.
 #' @param x Passed to \code{==}.
 #' @return A numeric value.
+#' @examples
+#' adj <- list(`1` = c(2, 3), `2` = c(1), `3` = c(1))
+#' node2v_dist(adj, t = 1, x = 2)
+#' node2v_dist(adj, t = 1, x = 1)
 #' @export
 node2v_dist <- function(adj, t, x) {
   if (isTRUE(t == x)) return(0L)
@@ -354,6 +358,8 @@ node2v_dist <- function(adj, t, x) {
 #' @param walks See Usage.
 #' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @return The value of \code{pairs}, as built in the body.
+#' @examples
+#' node2v_skipgram_pairs(list(c(1, 2, 3, 4)), window = 1)
 #' @export
 node2v_skipgram_pairs <- function(walks, window = 2) {
   w <- as.integer(window)

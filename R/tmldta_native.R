@@ -830,6 +830,12 @@ morie_tmldta_cheatsheet <- function() {
 #' @return A list with \code{estimate}, \code{se}, \code{ci}, the
 #'   per-split levels and estimates, and the separation diagnostics.
 #' @references Hubbard, A. E. et al. (2018).
+#' @examples
+#' set.seed(10)
+#' n <- 300; X <- matrix(rnorm(n), n)
+#' D <- sample(0:2, n, TRUE)
+#' y <- 0.5 * D + X[, 1] + rnorm(n)
+#' morie_tmle_data_adaptive(y, D, X, n_folds = 5)$estimate
 #' @export
 morie_tmle_data_adaptive <- function(y, D, X, candidate_strata = NULL,
                                      method = "cv-tmle", n_folds = 10,

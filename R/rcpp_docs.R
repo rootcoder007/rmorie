@@ -480,6 +480,9 @@ NULL
 #' @param mean Passed to \code{.Call}.
 #' @param sd Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_normal_pdf_cpp(c(-1, 0, 1), 0, 1)
+#' dnorm(c(-1, 0, 1))
 #' @export
 #' @name morie_normal_pdf_cpp
 #' @rdname morie_normal_pdf_cpp
@@ -583,6 +586,9 @@ NULL
 #' @param alpha Passed to \code{.Call}.
 #' @param c Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_hawkes_ll_lomax_const_cpp(t = c(0.5, 1.2, 2.0, 3.1), T_horizon = 4, a0 = 0.8,
+#'                                 eta = 0.3, alpha = 2.5, c = 1)
 #' @export
 #' @name morie_hawkes_ll_lomax_const_cpp
 #' @rdname morie_hawkes_ll_lomax_const_cpp
@@ -614,6 +620,8 @@ NULL
 #' @param kind Passed to \code{.Call}.
 #' @param psi Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_hawkes_kernel_density_cpp(c(0.5, 1, 2), "exponential", 1.5)
 #' @export
 #' @name morie_hawkes_kernel_density_cpp
 #' @rdname morie_hawkes_kernel_density_cpp
@@ -1015,6 +1023,9 @@ NULL
 #' @param D Passed to \code{.Call}.
 #' @param n_dims Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' D <- as.matrix(dist(cbind(c(0, 1, 0, 1), c(0, 0, 1, 1))))
+#' morie_spatial_classical_mds_cpp(D, 2L)
 #' @export
 #' @name morie_spatial_classical_mds_cpp
 #' @rdname morie_spatial_classical_mds_cpp
@@ -1031,6 +1042,11 @@ NULL
 #' @param beta Passed to \code{.Call}.
 #' @param omega Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' set.seed(15)
+#' dtm <- matrix(rpois(12, 3), 3, 4)  # 3 documents x 4 words
+#' morie_spatial_wordfish_omega_update_cpp(dtm, psi = rep(1, 3), alpha = rep(0, 4),
+#'                                         beta = c(-0.5, 0, 0.2, 0.5), omega = c(-1, 0, 1))
 #' @export
 #' @name morie_spatial_wordfish_omega_update_cpp
 #' @rdname morie_spatial_wordfish_omega_update_cpp

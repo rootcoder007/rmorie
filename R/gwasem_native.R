@@ -534,6 +534,9 @@ morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
 #' @param genotypes n x m minor-allele-count matrix.
 #' @return n x n symmetric numeric matrix.
 #' @references Kang, H. M. et al. (2010).
+#' @examples
+#' g <- rbind(c(0, 1, 2, 1), c(0, 1, 2, 2), c(2, 1, 0, 0))
+#' morie_gwasem_kinship_ibs(g)
 #' @export
 morie_gwasem_kinship_ibs <- function(genotypes) {
   G <- apply(genotypes, c(1L, 2L), as.numeric)

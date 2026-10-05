@@ -348,6 +348,8 @@ ocrwit_mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
 #' @param height Coerced to numeric by the body, with \code{as.numeric}.
 #' @param scale Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000}.
 #' @return A vector, from \code{c}.
+#' @examples
+#' ocrwit_normalise_bbox(c(10, 20, 110, 70), width = 200, height = 100)
 #' @export
 ocrwit_normalise_bbox <- function(box, width, height, scale = 1000) {
   x0 <- as.numeric(box[[1]])

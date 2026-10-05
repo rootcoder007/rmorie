@@ -1056,6 +1056,13 @@ morie_abcgp <- function(sim, obs, X_grid = NULL, kernel = "sqexp",
 #' @param delta_s See Usage.
 #' @param n_alpha See Usage.
 #' @param seed See Usage.
+#' @examples
+#' \donttest{
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' obs <- c(0.5, 1, 1.5)
+#' fit <- abc_gp_emulator(sim, obs, prior_ppf = list(-2, 4), n_waves = 2L, n_design = 12L, n_sim = 5L)
+#' names(fit)
+#' }
 #' @export
 #' @aliases abcgpemulator
 abc_gp_emulator <- function(sim, obs, X_grid = NULL, kernel = "sqexp",
@@ -1696,6 +1703,9 @@ gp_fit <- function(design, values, nugget = NULL, lengthscale = NULL,
 #' Posterior mean and sd at theta
 #' @param fit See Usage.
 #' @param theta See Usage.
+#' @examples
+#' fit <- gp_fit(design = c(0, 0.25, 0.5, 0.75, 1), values = sin(2 * pi * c(0, 0.25, 0.5, 0.75, 1)))
+#' gp_predict(fit, theta = 0.6)
 #' @export
 gp_predict <- function(fit, theta) {
   X <- fit$design
@@ -1917,6 +1927,10 @@ synthetic_abc <- function(sim, obs, log_prior, theta0, n_iter = 200L,
 #' @param obs See Usage.
 #' @param epsilon See Usage.
 #' @param summary See Usage.
+#' @examples
+#' set.seed(11)
+#' draws <- replicate(100, rnorm(2), simplify = FALSE)
+#' synthetic_log_likelihood(draws, obs = c(0.1, -0.2))$log_lik
 #' @export
 synthetic_log_likelihood <- function(draws, obs, epsilon = 0, summary = NULL) {
   rows <- lapply(draws, function(z) .gp_summarise(z, summary))

@@ -505,6 +505,8 @@ morie_private_release <- function(value, sensitivity, epsilon, seed = 0) {
 #' Compact one-line summary of the tmldyk recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_tmldyk_cheatsheet()
 #' @export
 morie_tmldyk_cheatsheet <- function() {
   paste("tmldyk: epsilon-DP by the LAPLACE mechanism -- add",

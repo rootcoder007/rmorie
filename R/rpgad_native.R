@@ -74,6 +74,8 @@ morie_rdp_laplace <- function(alpha, lam, sensitivity = 1) {
 #'   attaining it, and the per-order curves.
 #' @references Mironov, I. (2017). Renyi differential privacy. 30th IEEE
 #'   Computer Security Foundations Symposium, 263-275.
+#' @examples
+#' morie_rpgad(alpha = c(2, 4, 8, 16, 32), mechanism = "gaussian", sigma = 2)$epsilon
 #' @export
 morie_rpgad <- function(alpha, epsilon_R = NULL, delta = 1e-5,
                         mechanism = NULL, sigma = NULL, lam = NULL,

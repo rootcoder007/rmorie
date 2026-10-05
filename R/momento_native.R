@@ -307,6 +307,8 @@ momento_harmonise <- function(series_list, patch_len, normalise = TRUE) {
 #' @param reconstruction A vector; its length is taken and its elements indexed.
 #' @param mask A vector; its length is taken and its elements indexed.
 #' @return A list with \code{mse}, \code{n_scored}, \code{scored}.
+#' @examples
+#' momento_masked_loss(truth = c(1, 2, 3, 4), reconstruction = c(1.1, 2, 2.5, 4), mask = c(0, 1, 1, 0))$mse
 #' @export
 momento_masked_loss <- function(truth, reconstruction, mask) {
   n <- length(truth)

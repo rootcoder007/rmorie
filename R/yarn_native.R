@@ -25,6 +25,9 @@
 #'   \code{scale}, \code{estimate}, \code{n}, \code{method}.
 #' @references Peng, B., Quesnelle, J., Fan, H. and Shippole, E. (2023),
 #'   arXiv:2309.00071, Sections 3.2-3.4, Eqs 17/18/20/22.
+#' @examples
+#' y <- Yarn(base = 10000, s = 4, d = 64, L = 4096)
+#' y$temperature
 #' @export
 Yarn <- function(base, s, d, L, beta_fast = 32, beta_slow = 1) {
   d <- as.integer(d)

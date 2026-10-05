@@ -17,6 +17,15 @@
 #' @return A list with \code{z}, \code{attn}, \code{estimate}, \code{n},
 #'   \code{ntempl} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 17
+#' @examples
+#' set.seed(7)
+#' n <- 3; nt <- 2; ct <- 4; cz <- 4; c <- 2
+#' t <- array(rnorm(nt * n * n * ct), c(nt, n, n, ct))
+#' z <- array(rnorm(n * n * cz), c(n, n, cz))
+#' wq <- list(matrix(rnorm(c * cz), c, cz))
+#' wk <- list(matrix(rnorm(c * ct), c, ct)); wv <- list(matrix(rnorm(c * ct), c, ct))
+#' wo <- matrix(rnorm(cz * c), cz, c)
+#' dim(Alftmpl(t, z, wq, wk, wv, wo)$z)
 #' @export
 Alftmpl <- function(t, z, wq, wk, wv, wo) {
   nt <- dim(t)[1]

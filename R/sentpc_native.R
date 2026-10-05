@@ -384,6 +384,8 @@ train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
 #' Invert the whitespace escape
 #' @param text See Usage.
 #' @param strip_prefix See Usage.
+#' @examples
+#' unescape_whitespace(escape_whitespace("a b\tc"))
 #' @export
 unescape_whitespace <- function(text, strip_prefix = TRUE) {
   .unescape_whitespace(text, strip_prefix)

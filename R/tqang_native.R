@@ -110,6 +110,8 @@ morie_tqang_angular_difference <- function(a, b) {
 # -- restored: morie-only definition kept through the rmorie sync --
 #' One-line rationale mirroring the Python cheatsheet
 #' @return Character.
+#' @examples
+#' morie_tqang_cheatsheet()
 #' @export
 morie_tqang_cheatsheet <- function() {
   paste0("tqang: 2^b equal sectors, delta = 2pi/2^b, codeword ",
@@ -127,6 +129,9 @@ morie_tqang_cheatsheet <- function() {
 #' \code{levels}.
 #' @param theta Numeric vector of angles.
 #' @param bits Bits per symbol (1..30).
+#' @examples
+#' q <- morie_tqang_quantize_angles(c(0.1, 1.2, -2.5, 3), bits = 3L)
+#' q$mse
 #' @export
 #' @aliases morie_tqang_tqang morie_tqang_turboquant_angle_quantization
 morie_tqang_quantize_angles <- function(theta, bits = 4L) {

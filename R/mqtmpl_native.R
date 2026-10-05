@@ -585,6 +585,8 @@ mqtmpl_cheatsheet <- function() {
 #'
 #' @param method Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
+#' @examples
+#' mqtmpl_check_method("em")
 #' @export
 mqtmpl_check_method <- function(method) {
   if (!(method %in% mqtmpl_METHODS)) {
@@ -718,6 +720,9 @@ mqtmpl_haldane <- function(d) {
 #' @param positions A vector; its length is taken and its elements indexed.
 #' @param error_rate Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' # backcross calls coded 0/1; two individuals, three markers (cM); NA is a missing call
+#' mqtmpl_hmm_genotype_probabilities(genotypes = list(c(0, NA, 1), c(1, 1, 0)), positions = c(0, 10, 20))
 #' @export
 mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions, error_rate = 0) {
   e <- as.numeric(error_rate)
