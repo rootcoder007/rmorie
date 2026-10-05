@@ -491,6 +491,7 @@ morie_tps_hawkes_advanced_fit <- function(df,
   if (!(baseline %in% .TPS_HAWKES_BASELINES)) {
     stop(sprintf("unknown baseline: %s", baseline))
   }
+  .tps_hwka_check_method(method, kernel, baseline)
   if (!any(c("OCC_DATE", "REPORT_DATE") %in% colnames(df))) {
     return(.tps_hwka_result(
       title = sprintf("Hawkes-%s/%s -- %s", kernel, baseline, ds_name),
@@ -715,4 +716,21 @@ morie_tps_hawkes_markovian_vs_nonmarkovian <- function(df,
     df, ds_name = ds_name, max_n = max_n,
     kernels = c("exponential", "gamma"),
     baselines = c("constant", "sinusoidal"), method = method, eps = eps)
+}
+
+# A request no fit can serve is an error, as in morie's Python (ValueError), not an empty
+# result with the reason in $warnings: a loop over methods cannot tell that from a fit.
+.tps_hwka_check_method <- function(method, kernel, baseline) {
+  ok <- c("auto", "exact", "soe", "truncate", "em", "inar")
+  if (!is.character(method) || length(method) != 1L || !method %in% ok) {
+    stop(sprintf("method must be one of %s", paste0("\"", ok, "\"", collapse = ", ")), call. = FALSE)
+  }
+  if (method == "soe" && !kernel %in% c("lomax", "gamma")) {
+    stop("method = \"soe\" applies to completely monotone kernels: \"lomax\", and \"gamma\" with shape < 1 ",
+         "(a gamma kernel with shape >= 1 is truncated at eps); use \"exact\" or \"truncate\"", call. = FALSE)
+  }
+  if (method == "inar" && baseline != "constant") {
+    stop("method = \"inar\" assumes a stationary process: use baseline = \"constant\"", call. = FALSE)
+  }
+  invisible(TRUE)
 }

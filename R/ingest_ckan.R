@@ -111,22 +111,35 @@
 # Internal: read a downloaded resource path into a data.frame by format.
 #' Internal helper: Morie Ckan Read Path
 #' @noRd
+# The text encoding of a downloaded file: UTF-8 when its bytes are valid UTF-8, else
+# Windows-1252 (Ontario and federal open-data CSVs are often cp1252: a 0x92 apostrophe made
+# R stop with "invalid multibyte string").
+.morie_text_encoding <- function(path) {
+  b <- readBin(path, "raw", n = file.size(path))
+  if (length(b) >= 3L && identical(b[1:3], as.raw(c(0xef, 0xbb, 0xbf)))) return("UTF-8")
+  b <- b[b != as.raw(0L)]
+  if (!length(b) || validUTF8(rawToChar(b))) "UTF-8" else "windows-1252"
+}
+
+.morie_ckan_read_delim <- function(path, sep = ",") {
+  enc <- .morie_text_encoding(path)
+  if (requireNamespace("readr", quietly = TRUE)) {
+    loc <- readr::locale(encoding = enc)
+    df <- if (identical(sep, ",")) {
+      readr::read_csv(path, show_col_types = FALSE, progress = FALSE, guess_max = Inf, locale = loc)
+    } else {
+      readr::read_tsv(path, show_col_types = FALSE, progress = FALSE, guess_max = Inf, locale = loc)
+    }
+    return(as.data.frame(df))
+  }
+  utils::read.csv(path, sep = sep, stringsAsFactors = FALSE, fileEncoding = enc,
+                  check.names = TRUE)
+}
+
 .morie_ckan_read_path <- function(path, fmt) {
   fmt <- tolower(fmt)
-  if (fmt %in% c("csv")) {
-    if (requireNamespace("readr", quietly = TRUE)) {
-      df <- readr::read_csv(path, show_col_types = FALSE, progress = FALSE, guess_max = Inf)
-      return(as.data.frame(df))
-    }
-    return(utils::read.csv(path, stringsAsFactors = FALSE))
-  }
-  if (fmt %in% c("tsv", "tab")) {
-    if (requireNamespace("readr", quietly = TRUE)) {
-      df <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE, guess_max = Inf)
-      return(as.data.frame(df))
-    }
-    return(utils::read.delim(path, sep = "\t", stringsAsFactors = FALSE))
-  }
+  if (fmt %in% c("csv")) return(.morie_ckan_read_delim(path, ","))
+  if (fmt %in% c("tsv", "tab")) return(.morie_ckan_read_delim(path, "\t"))
   if (fmt %in% c("xlsx", "xls")) {
     if (!requireNamespace("readxl", quietly = TRUE)) {
       stop("Reading CKAN Excel resources requires the 'readxl' package. ",
@@ -145,11 +158,7 @@
   }
   # Unknown extension: most open-data resources are CSV with bad MIME
   # types, so try CSV as a last resort (matches Python behaviour).
-  if (requireNamespace("readr", quietly = TRUE)) {
-    df <- readr::read_csv(path, show_col_types = FALSE, progress = FALSE, guess_max = Inf)
-    return(as.data.frame(df))
-  }
-  utils::read.csv(path, stringsAsFactors = FALSE)
+  .morie_ckan_read_delim(path, ",")
 }
 
 #' Search a CKAN portal for packages (raw)

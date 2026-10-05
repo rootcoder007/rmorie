@@ -14,8 +14,7 @@
                                       random_state = 42L) {
   n <- nrow(X)
   p <- ncol(X)
-  .rmorie_local_seed(random_state)
-  folds <- sample(rep(seq_len(n_folds), length.out = n))
+  folds <- .morie_dml_folds(n, n_folds, random_state)
   pred <- numeric(n)
   grid <- 10^seq(-3, 3, length.out = 13)
   Xs <- scale(X)
@@ -55,8 +54,7 @@
 #' @noRd
 .morie_dml_xfit_logit <- function(X, d, n_folds = 5L, random_state = 42L) {
   n <- nrow(X)
-  .rmorie_local_seed(random_state)
-  folds <- sample(rep(seq_len(n_folds), length.out = n))
+  folds <- .morie_dml_folds(n, n_folds, random_state)
   ps <- numeric(n)
   for (k in seq_len(n_folds)) {
     te <- which(folds == k)
@@ -78,8 +76,10 @@
 #' Internal helper: PLR single repetition
 #' @noRd
 .morie_dml_plr_once <- function(X, y, d, n_folds, seed) {
+  # one sample split for both nuisances (DoubleML's cross-fitting): the same folds for the
+  # outcome and the treatment regression
   ml_y <- .morie_dml_xfit_ridge_gcv(X, y, n_folds, seed)
-  ml_d <- .morie_dml_xfit_ridge_gcv(X, d, n_folds, seed + 1L)
+  ml_d <- .morie_dml_xfit_ridge_gcv(X, d, n_folds, seed)
   u <- y - ml_y
   v <- d - ml_d
   denom <- sum(v * v)
@@ -131,8 +131,7 @@
     )
   }
   n <- nrow(X)
-  .rmorie_local_seed(random_state)
-  folds <- sample(rep(seq_len(n_folds), length.out = n))
+  folds <- .morie_dml_folds(n, n_folds, random_state)
   mu1 <- numeric(n)
   mu0 <- numeric(n)
   ps <- .morie_dml_xfit_logit(X, d, n_folds, random_state)
@@ -191,4 +190,15 @@
     }
   }
   as.numeric(Zs %*% beta) + yc
+}
+
+# Cross-fitting folds from the splitmix64 uniforms rmoriebricklayer::core_uniforms() and morie's
+# Python arm share: units in the order of their uniforms, dealt round-robin into the folds, so
+# the same seed gives the same split in both languages (R's sample() and numpy's permutation do
+# not agree).
+.morie_dml_folds <- function(n, n_folds, seed) {
+  perm <- order(rmoriebricklayer::core_uniforms(n, seed), method = "radix")
+  folds <- integer(n)
+  folds[perm] <- rep_len(seq_len(n_folds), n)
+  folds
 }

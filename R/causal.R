@@ -459,6 +459,20 @@ morie_estimate_propensity_scores <- function(data, treatment, covariates,
 # ATE -- Hajek IPW
 # ---------------------------------------------------------------------------
 
+# HC3 standard error of the slope in the weighted regression y ~ t (statsmodels' WLS with
+# cov_type = "HC3": OLS on sqrt(w)-scaled rows, residuals and leverages of the scaled design).
+.ipw_hc3_se <- function(y, t, w) {
+  sw <- sqrt(w)
+  X <- cbind(sw, sw * t)
+  yw <- sw * y
+  bread <- solve(crossprod(X))
+  b <- bread %*% crossprod(X, yw)
+  e <- as.numeric(yw - X %*% b)
+  h <- rowSums((X %*% bread) * X)
+  meat <- crossprod(X * (e / (1 - h)))
+  sqrt((bread %*% meat %*% bread)[2L, 2L])
+}
+
 #' Estimate the Average Treatment Effect (ATE) via Hajek IPW
 #'
 #' The Hajek estimator uses stabilised IPW weights:
@@ -528,15 +542,14 @@ morie_estimate_ate <- function(data, treatment, outcome, covariates,
   w <- t / ps + (1 - t) / (1 - ps)
   w <- .mor_trim_weights(w, weight_trim, weight_trim_side)
   ate <- .hajek_diff(y[t == 1], w[t == 1], y[t == 0], w[t == 0])
-  # Standard IPW influence-function SE (Hernan-Robins, "What If" Ch 12.6):
-  # psi_i = t*y/ps - (1-t)*y/(1-ps) - ATE. Divides by sqrt(total n).
-  # NB: This is the "known propensity score" form. When ps is estimated
-  # (the default path via morie_estimate_propensity_scores), this SE is
-  # conservative -- it ignores the PS-estimation step and slightly
-  # over-estimates variance. Standard for IPW packages; bootstrap or
-  # WeightIt / survey for the efficient sandwich correction.
-  if_vec <- t * y / ps - (1 - t) * y / (1 - ps) - ate
-  se <- stats::sd(if_vec) / sqrt(length(y))
+  # The Hajek estimate is the coefficient of t in the weighted regression y ~ t; its standard
+  # error is that regression's HC3 sandwich (heteroskedasticity-robust, the leverage-adjusted
+  # form), as morie's Python arm computes it with statsmodels. The earlier formula, the
+  # Horvitz-Thompson influence function t*y/ps - (1-t)*y/(1-ps) - ATE, belongs to the
+  # unnormalised estimator: it is not centred on the group means, so it grew with the level of y
+  # and ran 45-57% above this one (69% above the sampling SD in simulation). Like any
+  # plug-in SE it treats the propensity scores as known, which errs on the conservative side.
+  se <- .ipw_hc3_se(y, t, w)
   ci <- .wald_ci(ate, se)
   ess <- (sum(w)^2) / sum(w^2)
 

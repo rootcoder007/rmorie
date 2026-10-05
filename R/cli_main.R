@@ -21,9 +21,10 @@
 #'   \item \code{"cpd"} -- Chicago Police Department; runs
 #'     \code{\link{morie_cpd_all_analyses}} (bundled samples offline).
 #' }
-#' The \code{"tps"} subject is recognised by the CLI but needs an explicit
-#' dataset selection, so it returns a structured, non-crashing message
-#' pointing at the R API.
+#' The \code{"tps"} subject runs \code{\link{morie_tps_analyze_all}} on the
+#' datasets named in \code{\{"datasets": [...], "nrows": N\}} (as
+#' \code{\link{morie_tps_load}} takes them) or read from \code{\{"data": FILE\}};
+#' without either it returns an error status (exit code 1 from the CLI).
 #'
 #' @param subject Character scalar naming the analysis subject.
 #' @param json Character scalar: a JSON object of options forwarded from the
@@ -54,13 +55,6 @@ cli_main <- function(subject, json = "{}") {
     args[intersect(names(args), names(formals(fn)))]
   }
 
-  not_wired <- function(subj, hint) {
-    list(
-      subject = subj, status = "not_available",
-      message = hint
-    )
-  }
-
   result <- tryCatch(
     switch(subject,
       otis = {
@@ -88,13 +82,30 @@ cli_main <- function(subject, json = "{}") {
         }
         do.call(morie_cpd_all_analyses, keep(morie_cpd_all_analyses, opts))
       },
-      tps = not_wired(
-        "tps",
-        paste0(
-          "`analyze tps` requires selecting TPS datasets first; use the ",
-          "R API: morie_tps_load(<name>) then morie_tps_analyze_all(dfs)."
-        )
-      ),
+      tps = {
+        # the TPS feeds are many datasets: name them ({"datasets":["Assault"],"nrows":5000})
+        # or give files ({"data":"FILE.csv"} or a list of files)
+        dfs <- if (!is.null(opts$data)) {
+          files <- as.character(unlist(opts$data))
+          stats::setNames(lapply(files, function(f) {
+            if (!file.exists(f)) stop(sprintf("analyze tps: no such file: %s", f), call. = FALSE)
+            utils::read.csv(f, stringsAsFactors = FALSE, check.names = FALSE)
+          }), tools::file_path_sans_ext(basename(files)))
+        } else if (!is.null(opts$datasets) || !is.null(opts$dataset)) {
+          nm <- as.character(unlist(opts$datasets %||% opts$dataset))
+          nr <- if (is.null(opts$nrows)) NULL else as.integer(opts$nrows)
+          stats::setNames(lapply(nm, function(n) morie_tps_load(n, nrows = nr)), nm)
+        }
+        if (is.null(dfs)) {
+          list(
+            subject = "tps", status = "error",
+            message = paste0("analyze tps needs the datasets: '{\"datasets\":[\"Assault\"],\"nrows\":5000}' ",
+                             "(names as morie_tps_load() takes) or '{\"data\":\"FILE.csv\"}'")
+          )
+        } else {
+          morie_tps_analyze_all(dfs)
+        }
+      },
       stop(sprintf(
         "unknown analysis subject: '%s' (expected one of otis, siu, tps, nypd, cpd)",
         subject

@@ -379,7 +379,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  pip install morie   then   morie cheatsheet\n")),
       analyze = {
         if (!length(rest)) {
-          out("usage: rmorie analyze SUBJECT [JSON]   (subjects: otis, siu, tps, nypd, cpd; JSON keys: otis {\"data\":FILE,\"year\":2023,\"sex\":\"Male\"}, siu {\"data\":FILE})\n")
+          out("usage: rmorie analyze SUBJECT [JSON]   (subjects: otis, siu, tps, nypd, cpd; JSON keys: otis {\"data\":FILE,\"year\":2023,\"sex\":\"Male\"}, siu {\"data\":FILE}, tps {\"datasets\":[\"Assault\"],\"nrows\":5000} or {\"data\":FILE})\n")
           status <- 2L
         } else if (length(rest) > 1L && !.cli_json_object(rest[[2L]])) {
           out(sprintf("rmorie analyze: the second argument must be a JSON object, e.g. '{\"data\":\"FILE.csv\"}'; got: %s\n", rest[[2L]]))

@@ -1494,16 +1494,36 @@ morie_datasets_ckan_package <- function(portal, package_id) {
   url <- paste0(sub("/$", "", portal), "/api/3/action/package_show")
   body <- .morie_dataset_http_json(url, query = list(id = package_id))
   resources <- body$result$resources
+  # the JSON reader simplifies the resource array to a data frame (one row per resource)
+  if (is.data.frame(resources)) {
+    resources <- lapply(seq_len(nrow(resources)), function(i) as.list(resources[i, , drop = FALSE]))
+  }
+  field <- function(res, key) {
+    v <- unlist(res[[key]])
+    if (length(v) && !is.na(v[1L])) as.character(v[1L]) else ""
+  }
+  is_csv <- vapply(resources, function(r) identical(tolower(field(r, "format")), "csv"), logical(1))
+  plain <- vapply(resources, function(r) field(r, "name"), character(1))
+  # a bilingual portal publishes the English and French copy under one name: keep both
+  clash <- plain %in% plain[is_csv][duplicated(plain[is_csv])]
   out <- list()
   for (i in seq_along(resources)) {
     res <- resources[[i]]
-    fmt <- tolower(as.character(res$format %||% ""))
-    if (identical(fmt, "csv") && nzchar(res$url %||% "")) {
-      name <- as.character(res$name %||% paste0("resource_", i))
-      out[[name]] <- tryCatch(
-        utils::read.csv(res$url, stringsAsFactors = FALSE),
-        error = function(e) NULL
-      )
+    url <- field(res, "url")
+    if (is_csv[i] && nzchar(url)) {
+      name <- if (nzchar(plain[i])) plain[i] else paste0("resource_", i)
+      lang <- field(res, "language")
+      if (clash[i]) name <- paste0(name, " (", if (nzchar(lang)) lang else field(res, "id"), ")")
+      out[[name]] <- tryCatch({
+        tmp <- tempfile(fileext = ".csv")
+        on.exit(unlink(tmp), add = TRUE)
+        writeBin(.morie_dataset_http_bytes(url, timeout_s = 120L), tmp)
+        .morie_ckan_read_delim(tmp, ",")
+      }, error = function(e) {
+        warning(sprintf("morie_datasets_ckan_package: could not read '%s' (%s)", name, conditionMessage(e)),
+                call. = FALSE)
+        NULL
+      })
     }
   }
   out

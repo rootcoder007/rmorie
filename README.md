@@ -178,10 +178,11 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
   `ask`, `analyze`, `list-modules`, `run-module`, `list-datasets`, `pull`,
   `provider`, `cheatsheet`, `selftest`, `pipeline`, `emissions`,
   `verify-pollution`, `crypto`, `ingest`. It runs under R 4.6.
-- **Data**: the curated tables at <https://data.rmorie.com> (160 databases, the
-  Health Infobase tables and the OTIS research environments) open with the
-  same key; built-in datasets come through `rmoriedata` (CRAN), fetched with
-  provenance by `rmoriebricklayer` (CRAN); module runs fall back to
+- **Data**: the curated tables at <https://data.rmorie.com> (161 databases and
+  203 tables on 2026-10-05, the Health Infobase tables and the OTIS research
+  environments) open with the same key; built-in datasets come through
+  `rmoriedata` (r-universe), fetched with provenance by `rmoriebricklayer`
+  (r-universe); module runs fall back to
   rmoriedata's synthetic CPADS PUMF.
 - **Pollution and compute emissions**: the pollution-health module and a
   compute-emissions tracker with a C++ background sampler and signed
@@ -207,11 +208,14 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
 
 ## Install
 
-From a clone of this repository:
+From a clone of this repository (its companions, rmoriebricklayer >= 0.5.5 and
+rmoriedata >= 0.3.4, come from r-universe: CRAN carries older versions):
 
 ```r
+install.packages(c("rmoriebricklayer", "rmoriedata"),
+                 repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
 install.packages(".", repos = NULL, type = "source")   # from the repository root
-# or, without cloning:
+# or, without cloning (Remotes pins rmoriebricklayer@v0.5.5 and rmoriedata@v0.3.4):
 # remotes::install_github("rootcoder007/rmorie")
 ```
 
@@ -365,8 +369,9 @@ SIU's heterogeneous markup.
 
 Since 1.1.4 the subsystem is layered on the compiled SIU core in
 'rmoriebricklayer' and the **verified corpus** shipped by
-'rmoriedata': a 65-column table of 5,157 reports whose 2,182 English
-entries were read and cross-audited by a multi-agent review panel
+'rmoriedata' (0.3.4): a 66-column table of 4,613 reports, 2,309 English and
+2,304 French, whose English entries were read and cross-audited by a multi-agent
+review panel (a French report carries its English report's reviewed case facts)
 (every subject-official count verified; the mechanical resolver
 scores zero wrong against it). `morie_siu_reports()` returns that
 corpus verbatim and only ever fetches/parses reports newer than it;
@@ -391,8 +396,8 @@ fetch path `morie_fetch_siu()`, `morie_siu_index_url()`,
 ```r
 library(rmorie)
 
-# Prefer the panel-verified corpus (5,157 reports x 65 columns,
-# 2,182 English entries human+multi-agent reviewed) — no re-fetching:
+# Prefer the panel-verified corpus (4,613 reports x 66 columns, 2,309 English
+# entries human+multi-agent reviewed, French rows carrying their facts) — no re-fetching:
 df <- morie_siu_reports(update = FALSE)
 
 # The legacy live fetch remains available:
@@ -439,7 +444,7 @@ Supported providers: `ollama` (default), `hosted` (llm.rmorie.com), `gemini`, `c
 ### Format-validity sweep
 
 ```r
-df   <- morie_siu_reports()        # the reviewed corpus, from rmoriedata (CRAN)
+df   <- morie_siu_reports()        # the reviewed corpus, from rmoriedata (r-universe)
 sane <- morie_siu_sanity_check(df)  # one row per report, with its format issues (if any)
 table(sane$issues_count > 0)        # regex / ISO date / yes-no / chrome leak; older reports leave many fields blank
 head(sane$issues[sane$issues_count > 0], 3)

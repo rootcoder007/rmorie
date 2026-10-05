@@ -584,8 +584,9 @@ morie_siu_parse_reports <- function(htmls, engine = "auto") {
 #' SIU director's-reports corpus: reviewed data first, fetch only what's new
 #'
 #' The right way to get SIU data in the morie ecosystem. Loads the
-#' panel-reviewed 65-column corpus bundled in \pkg{rmoriedata} (2,182
-#' English reports, subject-official coverage 100 percent, built by a
+#' panel-reviewed 66-column corpus bundled in \pkg{rmoriedata} 0.3.4 (4,613
+#' reports: 2,309 English, reviewed, and 2,304 French carrying their English
+#' report's case facts; subject-official coverage 100 percent, built by a
 #' multi-model reading panel plus deterministic residual resolution) --
 #' nothing is re-fetched or re-parsed for reports already reviewed. With
 #' \code{update = TRUE} it then discovers reports published AFTER the
@@ -602,7 +603,7 @@ morie_siu_parse_reports <- function(htmls, engine = "auto") {
 #' @param max_new Ceiling on how many new reports to fetch per call
 #'   (default 25; a normal refresh sees 0-15).
 #' @param quiet Suppress progress messages.
-#' @return A data.frame in the 65-column reviewed-corpus schema. New rows
+#' @return A data.frame in the 66-column reviewed-corpus schema. New rows
 #'   (if any) carry \code{panel_reviewed = FALSE}.
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
@@ -719,7 +720,7 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
 #' corpus falls through to the deterministic rule set compiled in
 #' \pkg{rmoriebricklayer} (the foundation layer; rmorie's native copy of the
 #' same core when bricklayer is absent), whose rules were proven
-#' zero-wrong against all 2,182 reviewed reports; where even the rules
+#' zero-wrong against the reviewed English reports; where even the rules
 #' cannot answer, the reading panel ([morie_siu_panel()]) decides.
 #'
 #' @param text Plain report text (needed only for unreviewed reports). A case number such as
