@@ -29,6 +29,6 @@ asymptotic form: T is a maximum over n-1 dependent statistics.
 morie_snht(c(0.1, -0.1, 0.05, -0.05, 10.1, 9.9, 10.05, 9.95), n_mc = 0)$change_point
 }
 \references{
-Alexandersson, H. (1986), \emph{Journal of Climatology}
-6, 661-675. Cross-checked against \code{snh.test} in the trend package.
+Alexandersson, H. (1986). A homogeneity test applied to
+precipitation data. \emph{Journal of Climatology} 6(6), 661-675. Cross-checked against \code{snh.test} in the trend package.
 }

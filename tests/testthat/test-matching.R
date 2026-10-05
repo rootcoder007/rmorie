@@ -565,3 +565,23 @@ test_that("assignment solver and argument checks of the new matchers", {
   expect_error(morie_matching_variable_ratio(df2, "d", "x", min_ratio = "a"), "min_ratio")
   expect_error(morie_matching_variable_ratio(df2, "d", "x", caliper = -1), "caliper")
 })
+
+test_that("morie_matching_att_matched counts a reused control once per pair squared", {
+  # Treated 1-3 share control c1, treated 4 has c2: c1 enters the ATT with
+  # weight 3/4, so its noise counts 9 times, not 3 (Abadie & Imbens 2006).
+  df <- data.frame(y = c(3, 4, 6, 5, 1, 2), d = c(1, 1, 1, 1, 0, 0))
+  rownames(df) <- c("t1", "t2", "t3", "t4", "c1", "c2")
+  pairs <- data.frame(treated_idx = c("t1", "t2", "t3", "t4"),
+                      control_idx = c("c1", "c1", "c1", "c2"), stringsAsFactors = FALSE)
+  res <- morie_matching_att_matched(df, "y", "d", pairs)
+  d <- c(2, 3, 5, 3)
+  v <- var(d) / 4 + var(d) / 2 * ((3^2 - 3) + (1^2 - 1)) / 4^2
+  expect_equal(res$estimate, 3.25, tolerance = 1e-12)
+  expect_equal(res$std_error, sqrt(v), tolerance = 1e-12)
+  expect_equal(res$std_error, sqrt(0.69270833333333333), tolerance = 1e-12)
+  # with every control used once the pair formula is unchanged
+  pairs1 <- data.frame(treated_idx = c("t1", "t4"), control_idx = c("c1", "c2"),
+                       stringsAsFactors = FALSE)
+  one <- morie_matching_att_matched(df, "y", "d", pairs1)
+  expect_equal(one$std_error, sd(c(2, 3)) / sqrt(2), tolerance = 1e-12)
+})

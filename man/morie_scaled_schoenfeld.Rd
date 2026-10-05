@@ -49,7 +49,9 @@ morie_scaled_schoenfeld(stats::rexp(n), rep(1, n), x)$df
 }
 }
 \references{
-Schoenfeld, D. (1982), \emph{Biometrika} 69(1), 239-241;
-Grambsch, P. M. & Therneau, T. M. (1994), \emph{Biometrika} 81(3),
-515-526.
+Schoenfeld, D. (1982). Partial residuals for the
+proportional hazards regression model. \emph{Biometrika} 69(1),
+239-241; Grambsch, P. M. & Therneau, T. M. (1994). Proportional hazards
+tests and diagnostics based on weighted residuals. \emph{Biometrika}
+81(3), 515-526.
 }

@@ -176,7 +176,9 @@ print.morie_mrm_reconciliation <- function(x, ...) {
 #' @return An object of class \code{morie_mrm_effect}: list with
 #'   \code{results} (data frame: method, estimate, std_error,
 #'   ci_lower, ci_upper, p_value, p_adjusted), \code{consensus}
-#'   (inverse-variance pooled estimate), \code{correction},
+#'   (inverse-variance pooled estimate; its standard error is the
+#'   weighted mean of the standard errors, because the estimators share
+#'   one data set and are not independent), \code{correction},
 #'   \code{spec}, \code{citation}.
 #' @examples
 #' set.seed(1)
@@ -278,9 +280,14 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
     ci_lower = est - z * se, ci_upper = est + z * se,
     p_value = p, p_adjusted = p_adj,
     stringsAsFactors = FALSE, row.names = NULL)
+  # The estimators share one data set, so their errors are strongly
+  # correlated and sqrt(1 / sum(w)) (independent studies) is far too
+  # small. The weighted mean of the standard errors is the standard
+  # error of the pooled estimate under perfect correlation, an upper
+  # bound under any correlation (Minkowski).
   w <- 1 / se^2
   consensus <- list(estimate = sum(w * est) / sum(w),
-                    std_error = sqrt(1 / sum(w)))
+                    std_error = sum(w * se) / sum(w))
   for (nm in names(rows)[!ok]) {
     diagnostics[[nm]] <- conditionMessage(rows[[nm]])
   }

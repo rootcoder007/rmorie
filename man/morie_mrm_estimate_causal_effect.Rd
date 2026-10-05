@@ -34,7 +34,9 @@ morie_mrm_estimate_causal_effect(
 An object of class \code{morie_mrm_effect}: list with
 \code{results} (data frame: method, estimate, std_error,
 ci_lower, ci_upper, p_value, p_adjusted), \code{consensus}
-(inverse-variance pooled estimate), \code{correction},
+(inverse-variance pooled estimate; its standard error is the
+weighted mean of the standard errors, because the estimators share
+one data set and are not independent), \code{correction},
 \code{spec}, \code{citation}.
 }
 \description{

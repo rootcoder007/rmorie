@@ -46,5 +46,7 @@ set.seed(1)
 morie_bayes_ridge_gibbs(x = rnorm(50), y = rnorm(50))
 }
 \references{
-Meuwissen-Hayes-Goddard (2001) Genetics 157:1819.
+Meuwissen, T. H. E., Hayes, B. J. and Goddard, M. E. (2001).
+Prediction of total genetic value using genome-wide dense marker maps.
+\emph{Genetics} 157(4), 1819-1829.
 }

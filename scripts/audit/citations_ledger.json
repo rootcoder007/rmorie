@@ -614,6 +614,16 @@
       "source": "doi:10.1145/317087.317089",
       "verified": "2026-10-05",
       "note": "Crossref record fetched 2026-10-05; cited for the hash-chained audit log in R/sechsh_native.R."
+    },
+    "abadie-imbens-2006-matching": {
+      "year": 2006,
+      "volume": "74",
+      "issue": "1",
+      "pages": "235-267",
+      "container": "Econometrica",
+      "source": "doi:10.1111/j.1468-0262.2006.00655.x",
+      "verified": "2026-10-05",
+      "note": "Crossref record fetched 2026-10-05; cited for the matched-ATT variance with reused controls in R/matching.R."
     }
   }
 }

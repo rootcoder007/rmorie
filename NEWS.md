@@ -1,5 +1,16 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* `morie_mrm_estimate_causal_effect()`'s consensus standard error is the weighted mean of the
+  estimators' standard errors. It pooled them as independent studies (`sqrt(1 / sum(w))`), but all
+  four run on the same rows, so the interval was about half as wide as it should be: in 300
+  simulated data sets (n = 500, true effect 0.8) its 95% interval covered the truth 70% of the time
+  (morie's run); it now covers 96%.
+* `morie_matching_att_matched()` counts a control matched to several treated units once per pair
+  squared (Abadie and Imbens 2006), not once per pair: with matching with replacement its interval
+  covered the truth 83% of the time in the same simulation; it now covers 93% (95% in morie). With
+  every control used once the standard error is unchanged.
+* Citations without a title now carry the publisher's title, and the citation gate also catches a
+  reference written "Author (year), \emph{Journal} ...", which it had missed.
 * `morie_mrm_estimate_causal_effect()`'s matching estimate matches with replacement and takes the
   ATT from the matched pairs. Without replacement, when controls were no more numerous than treated
   units, nearly every control was used and nothing was balanced: on the package's own simulated

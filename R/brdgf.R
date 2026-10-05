@@ -16,7 +16,9 @@
 #'   so Py<->R streams agree on the canonical fixture.  When `NULL`
 #'   (default) behaviour is unchanged.
 #' @return list(estimate, beta, beta_se, sigma_j2, sigma2, n_iter, n, p, method).
-#' @references Meuwissen-Hayes-Goddard (2001) Genetics 157:1819.
+#' @references Meuwissen, T. H. E., Hayes, B. J. and Goddard, M. E. (2001).
+#'   Prediction of total genetic value using genome-wide dense marker maps.
+#'   \emph{Genetics} 157(4), 1819-1829.
 #' @examples
 #' set.seed(1)
 #' morie_bayes_ridge_gibbs(x = rnorm(50), y = rnorm(50))

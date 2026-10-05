@@ -1230,10 +1230,12 @@ morie_matching_att_matched <- function(data, outcome, treatment,
   if (!nrow(match_pairs)) return(.morie_matching_te_empty("ATT"))
   diffs <- numeric(0)
   wts <- numeric(0)
+  ctrl <- character(0)
   for (k in seq_len(nrow(match_pairs))) {
     t_id <- match_pairs$treated_idx[k]
     c_id <- match_pairs$control_idx[k]
     if (t_id %in% rownames(data) && c_id %in% rownames(data)) {
+      ctrl <- c(ctrl, as.character(c_id))
       diffs <- c(diffs, as.numeric(data[t_id, outcome]) -
                    as.numeric(data[c_id, outcome]))
       # the treated unit's weight, when a weight column is named
@@ -1243,9 +1245,26 @@ morie_matching_att_matched <- function(data, outcome, treatment,
   }
   if (!length(diffs)) return(.morie_matching_te_empty("ATT"))
   att <- sum(wts * diffs) / sum(wts)
-  se  <- if (all(wts == wts[1])) stats::sd(diffs) / sqrt(length(diffs)) else
-    sqrt(sum(wts^2 * (diffs - att)^2)) / sum(wts)
-  .morie_matching_te_result("ATT", att, se, length(diffs), alpha)
+  n <- length(diffs)
+  v <- if (all(wts == wts[1])) {
+    if (n > 1) stats::var(diffs) / n else 0
+  } else {
+    sum(wts^2 * (diffs - att)^2) / sum(wts)^2
+  }
+  # A control matched to several treated units (matching with
+  # replacement) enters the estimate with the summed weight of its
+  # pairs, so its outcome noise counts once per pair squared, not once
+  # per pair. Abadie, A. and Imbens, G. W. (2006). Large sample
+  # properties of matching estimators for average treatment effects.
+  # Econometrica 74(1), 235-267. doi:10.1111/j.1468-0262.2006.00655.x
+  # The conditional variance is estimated as half the pair-difference
+  # variance.
+  if (n > 1) {
+    reuse <- sum(vapply(split(wts, ctrl), function(wc)
+      sum(wc)^2 - sum(wc^2), numeric(1)))
+    v <- v + stats::var(diffs) / 2 * reuse / sum(wts)^2
+  }
+  .morie_matching_te_result("ATT", att, sqrt(v), n, alpha)
 }
 
 #' ATE from a matched / weighted sample

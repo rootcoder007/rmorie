@@ -4,6 +4,21 @@ siu_fixture <- function() {
         collapse = "\n")
 }
 
+# The bricklayer engine is a valid reference only once it carries the
+# subject-officials rule (rmoriebricklayer 0.5.5 from PR #41 on); an earlier
+# 0.5.5 build still names the notifying force. bricklayer's own
+# test-siu-subject-service.R guards the rule there.
+skip_unless_bricklayer_subject_rule <- function() {
+  skip_if_not(requireNamespace("rmoriebricklayer", quietly = TRUE) &&
+                exists("bricklayer_parse_siu", envir = asNamespace("rmoriebricklayer")))
+  probe <- paste0("<p>The Lakeshore Police Service notified the SIU.</p>",
+                  "<p>Analysis and Director's Decision</p>",
+                  "<p>The SO of the Hillcrest Police Service was identified as the subject official.</p>")
+  skip_if_not(identical(morie_siu_parse_report(probe, engine = "bricklayer")[["police_service"]],
+                        "Hillcrest Police Service"),
+              "installed rmoriebricklayer predates the subject-officials rule")
+}
+
 test_that("native core parses the synthetic report", {
   f <- morie_siu_parse_report(siu_fixture(), engine = "native")
   expect_equal(f[["police_service"]], "Barrie Police Service")
@@ -33,8 +48,7 @@ test_that("native parser handles live-page format (CRLF, signature, headlines, F
 })
 
 test_that("native and bricklayer engines agree", {
-  skip_if_not(requireNamespace("rmoriebricklayer", quietly = TRUE) &&
-                exists("bricklayer_parse_siu", envir = asNamespace("rmoriebricklayer")))
+  skip_unless_bricklayer_subject_rule()
   h <- siu_fixture()
   expect_equal(morie_siu_parse_report(h, engine = "native"), morie_siu_parse_report(h, engine = "bricklayer"))
   expect_equal(morie_siu_html_to_text(h, engine = "native"), morie_siu_html_to_text(h, engine = "bricklayer"))
@@ -105,10 +119,14 @@ test_that("SO, subject officer and subject official count the same people in bot
   for (txt in c("Subject Officer #1 declined. Subject Officer #2 was interviewed.",
                 "Subject Official #1 declined. Subject Official #2 was interviewed.",
                 "SO #1 declined. SO #2 was interviewed.")) {
-    for (engine in c("native", "bricklayer")) {
-      expect_identical(as.integer(morie_siu_resolve_so(txt, engine = engine)$count), 2L,
-                       label = paste(engine, txt))
-    }
+    expect_identical(as.integer(morie_siu_resolve_so(txt, engine = "native")$count), 2L, label = txt)
+  }
+  skip_unless_bricklayer_subject_rule()
+  for (txt in c("Subject Officer #1 declined. Subject Officer #2 was interviewed.",
+                "Subject Official #1 declined. Subject Official #2 was interviewed.",
+                "SO #1 declined. SO #2 was interviewed.")) {
+    expect_identical(as.integer(morie_siu_resolve_so(txt, engine = "bricklayer")$count), 2L,
+                     label = paste("bricklayer", txt))
   }
 })
 
@@ -141,7 +159,9 @@ test_that("police_service is the subject officials' service, not the notifying f
          "Lakeshore Police Service"))
   for (cs in cases) {
     expect_equal(morie_siu_parse_report(cs[[1]], engine = "native")[["police_service"]], cs[[2]])
-    skip_if_not(requireNamespace("rmoriebricklayer", quietly = TRUE))
+  }
+  skip_unless_bricklayer_subject_rule()
+  for (cs in cases) {
     expect_equal(morie_siu_parse_report(cs[[1]], engine = "bricklayer")[["police_service"]], cs[[2]])
   }
 })

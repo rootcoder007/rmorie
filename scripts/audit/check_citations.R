@@ -33,7 +33,7 @@ here <- if (length(self)) dirname(normalizePath(self[1L])) else file.path("scrip
 ledger_path <- file.path(here, "citations_ledger.json")
 
 # "#' @references Author (1999). \emph{Journal}, 94(446), 496-509."  -- no title.
-R_TITLELESS <- "\\(\\d{4}[a-z]?\\)\\.\\s*\\\\emph\\{[^}]+\\}[ ,]*\\s*\\d"
+R_TITLELESS <- "\\(\\d{4}[a-z]?\\)[.,]\\s*\\\\emph\\{[^}]+\\}[ ,]*\\s*\\d"
 # "Verdinelli & Wasserman (1995); Dickey (1971)."  -- no venue at all.
 BARE_AUTHOR_YEAR <- paste0("^\\s*(?:#'\\s*)?(?:@references\\s+)?",
                            "[A-Z][A-Za-z'\\-]+(?:[^.()]{0,60})\\(\\d{4}[a-z]?\\)\\s*[;.]\\s*$")
