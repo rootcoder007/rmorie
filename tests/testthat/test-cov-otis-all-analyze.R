@@ -338,8 +338,8 @@ test_that("b07 aggregate pivots to long form: one with-alert and one without-ale
 
 test_that("aggregate Ruhela degenerate inputs: missing columns, zero outcomes, b05 not applicable", {
   st <- morie_otis_analyze_c03_ruhela_aggregate(data.frame(x = 1))
-  expect_identical(st$summary_lines$status, "stub")
-  expect_match(st$warnings, "missing required columns")
+  expect_identical(st$summary_lines$status, "missing columns")
+  expect_match(st$warnings, "missing required columns: EndFiscalYear")
   d <- morie_synth_otis("d02", n = 20L, seed = 24L)
   d$Number_CustodialDeaths <- 0L
   z <- morie_otis_analyze_d02_ruhela_aggregate(d)
@@ -354,7 +354,7 @@ test_that("aggregate Ruhela degenerate inputs: missing columns, zero outcomes, b
   expect_match(morie_otis_analyze_c07_ruhela_aggregate(c7)$warnings, "degenerate")
 })
 
-test_that("not-yet-ported DLRM entry points return the documented stub, and their aliases are identical", {
+test_that("the DLRM entry points and their mrm / dlrm aliases are the same functions", {
   pairs <- list(
     list(morie_otis_analyze_a01_dlrm, morie_otis_analyze_a01_ruhela_formulations, "morie_otis_analyze_a01_ruhela_formulations"),
     list(morie_otis_analyze_a01_mrm, morie_otis_analyze_a01_ruhela_formulations, "morie_otis_analyze_a01_ruhela_formulations"),
@@ -379,12 +379,5 @@ test_that("not-yet-ported DLRM entry points return the documented stub, and thei
   )
   for (pr in pairs) {
     expect_identical(pr[[1L]], pr[[2L]])
-    r <- pr[[1L]]()
-    expect_identical(r$summary_lines$status, "stub")
-    expect_match(r$summary_lines$reason, pr[[3L]], fixed = TRUE)
-    expect_s3_class(r, "morie_otis_analysis_result")
   }
-  py <- morie_otis_analyze_ruhela_per_year(data.frame(), ds_id = "zz9", treatment = "T", outcome = "Y", covariates = "G")
-  expect_identical(py$summary_lines$status, "stub")
-  expect_match(py$title, "morie_otis_analyze_ruhela_per_year(zz9)", fixed = TRUE)
 })

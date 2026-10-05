@@ -121,8 +121,29 @@
   if (!length(b) || validUTF8(rawToChar(b))) "UTF-8" else "windows-1252"
 }
 
+# Windows-1252 bytes to a UTF-8 string without iconv (minimal Linux images ship no
+# converter for it): 0x80-0x9F through the code page's table, every other byte is the
+# Unicode code point of the same value; the five undefined bytes become U+FFFD.
+.morie_cp1252_to_utf8 <- function(b) {
+  hi <- c(0x20AC, NA, 0x201A, 0x0192, 0x201E, 0x2026, 0x2020, 0x2021, 0x02C6, 0x2030,
+          0x0160, 0x2039, 0x0152, NA, 0x017D, NA, NA, 0x2018, 0x2019, 0x201C, 0x201D,
+          0x2022, 0x2013, 0x2014, 0x02DC, 0x2122, 0x0161, 0x203A, 0x0153, NA, 0x017E, 0x0178)
+  cp <- as.integer(b[b != as.raw(0L)])
+  m <- cp >= 0x80 & cp <= 0x9F
+  cp[m] <- hi[cp[m] - 0x7F]
+  cp[is.na(cp)] <- 0xFFFD
+  intToUtf8(cp)
+}
+
 .morie_ckan_read_delim <- function(path, sep = ",") {
   enc <- .morie_text_encoding(path)
+  if (identical(enc, "windows-1252")) {
+    utf8 <- tempfile(fileext = paste0(".", tools::file_ext(path)))
+    on.exit(unlink(utf8), add = TRUE)
+    writeBin(charToRaw(.morie_cp1252_to_utf8(readBin(path, "raw", n = file.size(path)))), utf8)
+    path <- utf8
+    enc <- "UTF-8"
+  }
   if (requireNamespace("readr", quietly = TRUE)) {
     loc <- readr::locale(encoding = enc)
     df <- if (identical(sep, ",")) {
@@ -132,7 +153,7 @@
     }
     return(as.data.frame(df))
   }
-  utils::read.csv(path, sep = sep, stringsAsFactors = FALSE, fileEncoding = enc,
+  utils::read.csv(path, sep = sep, stringsAsFactors = FALSE, encoding = "UTF-8",
                   check.names = TRUE)
 }
 

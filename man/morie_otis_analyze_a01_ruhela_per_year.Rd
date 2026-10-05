@@ -3,14 +3,14 @@
 \name{morie_otis_analyze_a01_ruhela_per_year}
 \alias{morie_otis_analyze_a01_ruhela_per_year}
 \alias{morie_otis_analyze_a01_mrm_per_year}
-\title{Per-year full-DLRM on a01 canonical formulation}
+\title{Per-year full-DLRM on the a01 canonical formulation}
 \usage{
 morie_otis_analyze_a01_ruhela_per_year(data = NULL, out_dir = NULL)
 
 morie_otis_analyze_a01_mrm_per_year(data = NULL, out_dir = NULL)
 }
 \arguments{
-\item{data}{Optional a01 data.frame.}
+\item{data}{The OTIS a01 table; \code{NULL} loads it.}
 
 \item{out_dir}{Optional output directory.}
 }
@@ -18,8 +18,14 @@ morie_otis_analyze_a01_mrm_per_year(data = NULL, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-Per-year full-DLRM on a01 canonical formulation
+\code{\link{morie_otis_analyze_ruhela_per_year}} on the a01 person-year
+cell frame (T = alert complexity >= 2, Y = regional-volatility count),
+clustered on fiscal year.
 }
 \examples{
-\donttest{ morie_otis_analyze_a01_ruhela_per_year() }
+\donttest{
+a01 <- morie_synth_otis("a01", n = 800L, seed = 1L)
+r <- morie_otis_analyze_a01_ruhela_per_year(a01)
+r$summary_lines$`Years analysed`
+}
 }

@@ -39,15 +39,20 @@
   }
   # the file backend is a working default cache: say so only when a SQL file was asked for by name,
   # since that request is not honoured as asked
+  dir <- .morie_cache_fs_dir()
   if (!is.null(db_path)) {
+    # the cache the caller named stays theirs: its files sit beside db_path, so two
+    # databases never share (or read) each other's tables
+    dir <- paste0(tools::file_path_sans_ext(db_path), "_files")
+    dir.create(dir, recursive = TRUE, showWarnings = FALSE)
     .morie_cache_note$shown <- TRUE
-    message("cache: DBI with RSQLite or duckdb is not installed; using the file backend ",
-            "(morie_install_extras(c('DBI', 'RSQLite')) enables SQL caches)")
+    message("cache: DBI with RSQLite or duckdb is not installed; using the file backend in ", dir,
+            " (morie_install_extras(c('DBI', 'RSQLite')) enables SQL caches)")
   }
   if (requireNamespace("nanoparquet", quietly = TRUE)) {
-    return(list(type = "parquet", dir = .morie_cache_fs_dir(), close = FALSE))
+    return(list(type = "parquet", dir = dir, close = FALSE))
   }
-  list(type = "rds", dir = .morie_cache_fs_dir(), close = FALSE)
+  list(type = "rds", dir = dir, close = FALSE)
 }
 
 # Internal: resolve a DBI connection. Accepts a pre-opened connection
@@ -129,9 +134,15 @@
 .morie_atomic_write <- function(path, writer) {
   tmp <- paste0(path, ".tmp", Sys.getpid())
   on.exit(if (file.exists(tmp)) unlink(tmp), add = TRUE)
-  writer(tmp)
-  # an unwritable directory: say which, instead of a later "cannot open the connection"
-  if (!file.exists(tmp)) stop(sprintf("cannot write %s (the directory is not writable)", dirname(path)), call. = FALSE)
+  res <- tryCatch(suppressWarnings(writer(tmp)), error = function(e) e)
+  # an unwritable directory: say which, instead of the writer's "cannot open the connection"
+  if (inherits(res, "error") || !file.exists(tmp)) {
+    if (file.access(dirname(path), 2L) != 0L) {
+      stop(sprintf("cannot write %s (the directory is not writable)", dirname(path)), call. = FALSE)
+    }
+    if (inherits(res, "error")) stop(res)
+    stop(sprintf("cannot write %s", path), call. = FALSE)
+  }
   if (!suppressWarnings(file.rename(tmp, path)) && !file.copy(tmp, path, overwrite = TRUE)) {
     stop(sprintf("cannot write %s", path), call. = FALSE)
   }

@@ -3,23 +3,28 @@
 \name{morie_otis_analyze_b02_ruhela_alt_region}
 \alias{morie_otis_analyze_b02_ruhela_alt_region}
 \alias{morie_otis_analyze_b02_mrm_alt_region}
-\title{b02 alt-T Ruhela: Toronto region -> total seg days}
+\title{b02 alt-T Ruhela: Toronto region -> seg-day count}
 \usage{
 morie_otis_analyze_b02_ruhela_alt_region(data = NULL, out_dir = NULL)
 
 morie_otis_analyze_b02_mrm_alt_region(data = NULL, out_dir = NULL)
 }
 \arguments{
-\item{data}{Optional b02 data.frame.}
+\item{data}{The OTIS b02 table; \code{NULL} loads it.}
 
-\item{out_dir}{Optional output directory.}
+\item{out_dir}{Optional directory for the text and JSON rendering.}
 }
 \value{
 \code{morie_otis_analysis_result}.
 }
 \description{
-b02 alt-T Ruhela: Toronto region -> total seg days
+T = most recent placement region Toronto, Y = TotalAggregatedDays_Segregation,
+adjusting for gender, age band and fiscal year; full DLRM ensemble.
 }
 \examples{
-\donttest{ morie_otis_analyze_b02_ruhela_alt_region() }
+\donttest{
+b02 <- morie_synth_otis("b02", n = 300L, seed = 1L)
+r <- morie_otis_analyze_b02_ruhela_alt_region(b02)
+r$tables[[1L]]$rows[[1L]]
+}
 }

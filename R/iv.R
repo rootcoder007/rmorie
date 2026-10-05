@@ -3,17 +3,9 @@
 # Instrumental Variables (IV) and Two-Stage Least Squares (2SLS) estimators
 # for morie.  Ports the public API of `src/morie/iv.py` (~2166 LOC) to R.
 #
-# Strategy: prefer CRAN wrappers.  Linear IV / 2SLS / LIML / over-identified
-# Module 17 (feat/native-specializations): the IV family is native.
-# 2SLS / LIML run on the k-class engine, GMM on the native two-step /
-# CUE engines (R/iv_native.R); tests/cross validates against ivreg,
-# AER and gmm where installed. The historical wording below described
-# R so the package still installs in a minimal environment.
-#
-# Internal mathematical helpers that merely replicate `ivreg`'s
-# internals (e.g. Kleibergen-Paap rank statistic, Stock-Yogo critical-
-# value tables, exact conditional-LR test) are stubbed with informative
-# the pre-module-17 dispatch strategy and is retained only as history.
+# The IV family is native (module 17): 2SLS / LIML on the k-class engine, GMM on
+# the two-step / CUE engines (R/iv_native.R); tests/cross validates against ivreg,
+# AER and gmm where installed.
 #
 # Public R names mirror the Python module under the `morie_iv_*` prefix.
 

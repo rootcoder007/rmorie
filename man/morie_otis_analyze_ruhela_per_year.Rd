@@ -16,7 +16,8 @@ morie_otis_analyze_ruhela_per_year(
 )
 }
 \arguments{
-\item{data}{Long-format data.frame with treatment / outcome / cov.}
+\item{data}{Data frame holding the treatment, outcome, covariates and
+year column.}
 
 \item{ds_id}{Dataset id label.}
 
@@ -28,20 +29,32 @@ morie_otis_analyze_ruhela_per_year(
 
 \item{year_col}{Year column (default \code{"EndFiscalYear"}).}
 
-\item{cluster_col}{Cluster axis for SE, or \code{NULL}.}
+\item{cluster_col}{Cluster axis for the IRM-DML SE, or \code{NULL}.}
 
 \item{out_dir}{Optional output directory.}
 }
 \value{
-\code{morie_otis_analysis_result}.
+\code{morie_otis_analysis_result}; \code{payload$by_year} holds
+the per-year fits.
 }
 \description{
-Runs the complete 10-estimator DLRM separately on each fiscal year.
-This is a heavy operation (~7x the single-year runtime).
+Runs the DLRM estimator battery separately in each fiscal year through
+\code{\link{morie_otis_per_year_irm_dml}} with \code{full_battery = TRUE}
+and tabulates one row per (year, estimator). Stable signs across
+estimators within a year argue against misspecification; stable
+magnitudes across years argue for temporal stationarity.
 }
 \examples{
 \donttest{
-morie_otis_analyze_ruhela_per_year(df, ds_id = "a01",
-  treatment = "T", outcome = "Y", covariates = c("Gender"))
+set.seed(1)
+n <- 400L
+x <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.4 * x))
+df <- data.frame(T = d, Y = 0.5 * d + x + rnorm(n), x = x,
+                 EndFiscalYear = rep(2023:2024, each = n / 2))
+r <- morie_otis_analyze_ruhela_per_year(df, ds_id = "demo", treatment = "T",
+                                        outcome = "Y", covariates = "x",
+                                        cluster_col = NULL)
+head(r$tables[[1L]]$rows, 3L)
 }
 }

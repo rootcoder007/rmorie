@@ -1064,18 +1064,8 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
 }
 
 # ===========================================================================
-# 8. Bayesian methods -- STUBBED (porting MCMC samplers exceeds session)
+# 8. Bayesian methods (native samplers in spatial_voting_bayes_native.R)
 # ===========================================================================
-
-#' Internal helper: NOT PORTED
-#' @noRd
-.NOT_PORTED <- function(name) {
-  stop(sprintf("NotYetPorted: %s -- the Bayesian MCMC backend is not yet ported to R. ",
-               name),
-       "Use `pscl::ideal`, `MCMCpack::MCMCirt1d`, `emIRT::binIRT`, or ",
-       "the Python morie._spatial_voting backend.",
-       call. = FALSE)
-}
 
 #' Bayesian Aldrich-McKelvey scaling
 #'
@@ -1890,7 +1880,7 @@ morie_spatial_voting_nominate_bootstrap <- function(votes,
 }
 
 # ===========================================================================
-# 14. Alpha-NOMINATE / dynamic / ordinal IRT  -- STUBBED
+# 14. Alpha-NOMINATE / dynamic / ordinal IRT (EM-IRT approximations where flagged)
 # ===========================================================================
 
 #' Alpha-NOMINATE ideal points (EM-IRT approximation)

@@ -1472,3 +1472,255 @@ morie_otis_psm_subclass <- function(df, treatment, outcome,
   out$strata <- do.call(rbind, per)
   out
 }
+
+
+# ---------------------------------------------------------------------------
+# g-computation, ATC, covariate balance, per-year IRM-DML
+# ---------------------------------------------------------------------------
+
+#' Parametric g-computation of the ATE on OTIS data
+#'
+#' Fits the outcome regression \eqn{\hat\mu(d, X)} by OLS with the
+#' treatment as a column, then averages
+#' \eqn{\hat\mu(1, X_i) - \hat\mu(0, X_i)} over the sample (Robins 1986).
+#' The standard error is the non-parametric bootstrap: rows are resampled,
+#' the regression refitted, and the contrast recomputed. Consistent only
+#' when the outcome model is right (single-robust); compare IPW (propensity
+#' model) and AIPW (doubly robust).
+#'
+#' @inheritParams morie_otis_ipw_ate
+#' @param n_bootstrap Number of bootstrap replicates (default 200).
+#' @param seed Integer seed for the bootstrap draws (default 123).
+#' @return A \code{morie_causal_estimate} list.
+#' @references
+#' Robins, J. M. (1986). A new approach to causal inference in mortality
+#'   studies with a sustained exposure period. \emph{Mathematical
+#'   Modelling} 7, 1393-1512.
+#' @export
+#' @examples
+#' set.seed(1)
+#' n <- 300L
+#' x <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.4 * x))
+#' y <- 0.5 * d + x + rnorm(n)
+#' df <- data.frame(d = d, y = y, x = x)
+#' # the contrast of a linear outcome model is the treatment coefficient
+#' g <- morie_otis_gcomputation(df, "d", "y", "x", n_bootstrap = 50L)
+#' c(g$ate, unname(coef(lm(y ~ d + x))["d"]))
+morie_otis_gcomputation <- function(df, treatment, outcome, covariates,
+                                    n_bootstrap = 200L, seed = 123L) {
+  cols <- unique(c(treatment, outcome, covariates))
+  data <- df[stats::complete.cases(df[, cols, drop = FALSE]), cols,
+             drop = FALSE]
+  d <- .otis_binarise(data[[treatment]])
+  y <- as.numeric(data[[outcome]])
+  X <- .otis_design_matrix(data, covariates)
+  n <- length(y)
+  Xfull <- cbind(d, X)
+  X1 <- cbind(1, X)
+  X0 <- cbind(0, X)
+  contrast <- function(rows) {
+    b <- qr.coef(qr(Xfull[rows, , drop = FALSE]), y[rows])
+    b[is.na(b)] <- 0
+    mean(X1 %*% b - X0 %*% b)
+  }
+  ate <- contrast(seq_len(n))
+  .rmorie_local_seed(seed)
+  boot <- vapply(seq_len(n_bootstrap), function(i)
+    tryCatch(contrast(sample.int(n, n, replace = TRUE)),
+             error = function(e) NA_real_), numeric(1))
+  boot <- boot[!is.na(boot)]
+  se <- if (length(boot) > 1L) stats::sd(boot) else NA_real_
+  pval <- if (isTRUE(se > 0)) 2 * stats::pnorm(-abs(ate / se)) else NA_real_
+  .otis_causal_estimate("g-computation", ate, se, pval, n, sum(d), mean(d),
+                        list(sprintf("bootstrap=%d", as.integer(n_bootstrap)),
+                             sprintf("valid_bootstrap_replicates=%d",
+                                     length(boot))))
+}
+
+#' Doubly robust average treatment effect on the controls (ATC)
+#'
+#' \eqn{E[Y(1) - Y(0) \mid D = 0]} from the cross-fitted nuisances of
+#' \code{\link{morie_otis_irm_dml}} (logistic propensity, OLS outcome models
+#' per arm): the score
+#' \eqn{[(1-D)(\mu_1 - \mu_0) + D (1-e)/e (Y - \mu_1) - (1-D)(Y - \mu_0)] / P(D=0)}
+#' averaged, with the iid standard error of its mean.
+#'
+#' @inheritParams morie_otis_aipw_ate
+#' @return A \code{morie_causal_estimate} list.
+#' @export
+#' @examples
+#' set.seed(1)
+#' n <- 300L
+#' x <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.4 * x))
+#' y <- 0.5 * d + x + rnorm(n)
+#' df <- data.frame(d = d, y = y, x = x)
+#' morie_otis_atc(df, "d", "y", "x", n_folds = 3L)$ate
+morie_otis_atc <- function(df, treatment, outcome, covariates,
+                           n_folds = 5L, seed = 123L, eps = 0.02) {
+  fit <- morie_otis_irm_dml(df, treatment, outcome, covariates,
+                            n_folds = n_folds, seed = seed, eps = eps)
+  .otis_causal_estimate("ATC", fit$atc, fit$atc_se, fit$atc_pval, fit$n,
+                        fit$n_treated, fit$p_treat,
+                        list(sprintf("cross-fit folds=%d", as.integer(n_folds)),
+                             sprintf("control n=%d", fit$n - fit$n_treated),
+                             "E[Y(1)-Y(0) | D=0]"))
+}
+
+# Standardised mean difference, pooled-SD denominator; weighted means and
+# variances when w is given. Mirrors python _smd.
+#' @noRd
+.otis_smd <- function(x, d, w = NULL) {
+  if (is.null(w)) {
+    xt <- x[d == 1]
+    xc <- x[d == 0]
+    if (!length(xt) || !length(xc)) return(NA_real_)
+    mt <- mean(xt)
+    mc <- mean(xc)
+    st <- if (length(xt) > 1L) stats::var(xt) else NA_real_
+    sc <- if (length(xc) > 1L) stats::var(xc) else NA_real_
+  } else {
+    wt <- w * (d == 1)
+    wc <- w * (d == 0)
+    if (sum(wt) == 0 || sum(wc) == 0) return(NA_real_)
+    mt <- sum(wt * x) / sum(wt)
+    mc <- sum(wc * x) / sum(wc)
+    st <- sum(wt * (x - mt)^2) / sum(wt)
+    sc <- sum(wc * (x - mc)^2) / sum(wc)
+  }
+  (mt - mc) / sqrt(max((st + sc) / 2, 1e-12))
+}
+
+#' Covariate balance before and after weighting or matching
+#'
+#' Standardised mean difference of every design column (factors expanded
+#' to drop-first dummies) in the raw sample, under inverse-propensity
+#' weights, and in the 1:1 nearest-neighbour matched sample (greedy, without
+#' replacement, on the logit propensity with caliper
+#' \code{caliper_sd * SD(logit e)}; treated units in random order).
+#' \eqn{|SMD| > 0.1} is the usual flag for meaningful imbalance (Austin 2011).
+#'
+#' @inheritParams morie_otis_ipw_ate
+#' @param outcome Optional outcome column; rows missing it are dropped too.
+#' @param caliper_sd Caliper in SDs of the logit propensity, or \code{NULL}
+#'   for none (default 0.2).
+#' @param seed Seed for the order treated units are matched in (default 123).
+#' @return Data frame with \code{covariate}, \code{smd_raw}, \code{smd_ipw},
+#'   \code{smd_psm}.
+#' @references Austin, P. C. (2011). An introduction to propensity score
+#'   methods for reducing the effects of confounding in observational
+#'   studies. \emph{Multivariate Behavioral Research} 46(3), 399-424.
+#' @export
+#' @examples
+#' set.seed(1)
+#' n <- 300L
+#' x <- rnorm(n)
+#' g <- sample(c("a", "b"), n, TRUE)
+#' d <- rbinom(n, 1, plogis(0.8 * x))
+#' morie_otis_balance(data.frame(d = d, x = x, g = g), "d", c("x", "g"))
+morie_otis_balance <- function(df, treatment, covariates, outcome = NULL,
+                               caliper_sd = 0.2, eps = 0.02, seed = 123L) {
+  cols <- unique(c(treatment, covariates, outcome))
+  data <- df[stats::complete.cases(df[, cols, drop = FALSE]), cols,
+             drop = FALSE]
+  d <- .otis_binarise(data[[treatment]])
+  X <- .otis_design_matrix(data, covariates)
+  e <- .otis_predict_ps(X, .otis_logit_fit(X, d), eps = eps)
+  w_ipw <- d / e + (1 - d) / (1 - e)
+  le <- log(e / (1 - e))
+  caliper <- if (is.null(caliper_sd)) Inf else caliper_sd * stats::sd(le)
+  ctrl <- which(d == 0)
+  free <- rep(TRUE, length(ctrl))
+  matched <- integer(0)
+  .rmorie_local_seed(seed)
+  tr <- which(d == 1)
+  for (t in tr[sample.int(length(tr))]) {
+    dist <- abs(le[ctrl] - le[t])
+    dist[!free | dist > caliper] <- Inf
+    j <- which.min(dist)
+    if (!length(j) || !is.finite(dist[j])) next
+    free[j] <- FALSE
+    matched <- c(matched, t, ctrl[j])
+  }
+  Xc <- X[, colnames(X) != "(Intercept)", drop = FALSE]
+  data.frame(
+    covariate = colnames(Xc),
+    smd_raw = apply(Xc, 2, .otis_smd, d = d),
+    smd_ipw = apply(Xc, 2, .otis_smd, d = d, w = w_ipw),
+    smd_psm = if (length(matched)) {
+      apply(Xc[matched, , drop = FALSE], 2, .otis_smd, d = d[matched])
+    } else NA_real_,
+    row.names = NULL, stringsAsFactors = FALSE
+  )
+}
+
+#' IRM-DML (or the whole estimator battery) fitted separately by year
+#'
+#' Splits \code{df} on \code{year_col} and fits
+#' \code{\link{morie_otis_irm_dml}} in each year. With
+#' \code{full_battery = TRUE} each year instead gets IPW, AIPW,
+#' g-computation, PSM 1:1, PSM subclassification, ATC, PLR, SuperLearner
+#' AIPW, IRM-DML and PSM-then-IRM-DML. A year whose fit fails records the
+#' error message rather than stopping the others.
+#'
+#' @inheritParams morie_otis_irm_dml
+#' @param year_col Column to split on (default \code{"EndFiscalYear"}).
+#' @param full_battery Logical; run every estimator per year.
+#' @return Named list keyed by year.
+#' @export
+#' @examples
+#' set.seed(1)
+#' n <- 400L
+#' x <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.4 * x))
+#' df <- data.frame(d = d, y = 0.5 * d + x + rnorm(n), x = x,
+#'                  yr = rep(2023:2024, each = n / 2))
+#' sapply(morie_otis_per_year_irm_dml(df, "d", "y", "x", year_col = "yr"),
+#'        `[[`, "ate")
+morie_otis_per_year_irm_dml <- function(df, treatment, outcome, covariates,
+                                        year_col = "EndFiscalYear",
+                                        cluster_cols = NULL, n_folds = 3L,
+                                        seed = 123L, full_battery = FALSE) {
+  err <- function(e) list(error = substr(conditionMessage(e), 1L, 120L))
+  irm <- function(sub, ...) morie_otis_irm_dml(
+    sub, treatment, outcome, covariates, cluster_cols = cluster_cols,
+    n_folds = n_folds, seed = seed, ...)
+  years <- sort(unique(df[[year_col]]))
+  out <- lapply(years, function(yr) {
+    sub <- df[!is.na(df[[year_col]]) & df[[year_col]] == yr, , drop = FALSE]
+    if (!full_battery) return(tryCatch(irm(sub), error = err))
+    runners <- list(
+      ipw = function() morie_otis_ipw_ate(sub, treatment, outcome, covariates),
+      aipw = function() morie_otis_aipw_ate(sub, treatment, outcome, covariates,
+                                            n_folds = n_folds),
+      gcomp = function() morie_otis_gcomputation(sub, treatment, outcome,
+                                                 covariates, n_bootstrap = 100L),
+      psm_nn = function() morie_otis_psm(sub, treatment, outcome, covariates, k = 1L),
+      psm_subclass = function() morie_otis_psm_subclass(sub, treatment, outcome,
+                                                        covariates, n_strata = 5L),
+      atc = function() morie_otis_atc(sub, treatment, outcome, covariates,
+                                      n_folds = n_folds),
+      plr = function() morie_otis_plr(sub, treatment, outcome, covariates,
+                                      n_folds = n_folds),
+      superlearner = function() morie_otis_aipw_superlearner(
+        sub, treatment, outcome, covariates, n_folds = n_folds)
+    )
+    res <- list(year = yr, n = nrow(sub))
+    for (nm in names(runners)) {
+      res[[nm]] <- tryCatch({
+        est <- runners[[nm]]()
+        list(estimator = est$estimator, ate = est$ate, se = est$ate_se,
+             p = est$ate_pval, ci95 = est$ate_ci95, n = est$n)
+      }, error = err)
+    }
+    res$irm_dml <- tryCatch({
+      f <- irm(sub)
+      f[c("ate", "ate_se", "atte", "atte_se", "atc", "atc_se", "se_kind", "n")]
+    }, error = err)
+    res$match_first <- tryCatch(irm(sub, match_first = TRUE)[c("ate", "ate_se", "n")],
+                                error = err)
+    res
+  })
+  stats::setNames(out, as.character(years))
+}

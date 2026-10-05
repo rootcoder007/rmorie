@@ -23,6 +23,10 @@ test_that("morie_fetch_ckan resolves a resource id from package metadata", {
       if (calls == 1L) pkg_show else records
     }, .package = "base"
   )
+  testthat::local_mocked_bindings(
+    .morie_http_get_with_status = function(url, ...) list(status_code = 200L, body = records),
+    .package = "rmorie"
+  )
   # csus has no baked-in resource id -> the metadata path runs and
   # should pick the CSV resource (res-csv).
   dat <- morie_fetch_ckan(

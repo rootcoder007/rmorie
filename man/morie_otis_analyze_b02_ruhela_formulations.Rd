@@ -13,18 +13,23 @@ morie_otis_analyze_b02_dlrm(data = NULL, out_dir = NULL)
 morie_otis_analyze_b02_mrm(data = NULL, out_dir = NULL)
 }
 \arguments{
-\item{data}{Optional b02 data.frame.}
+\item{data}{The OTIS b02 table; \code{NULL} loads it.}
 
-\item{out_dir}{Optional output directory.}
+\item{out_dir}{Optional directory for the text and JSON rendering.}
 }
 \value{
 \code{morie_otis_analysis_result}.
 }
 \description{
-OTIS b02 Ruhela formulations: T=Female -> seg-day count
+b02 has no alert columns, so the formulation tests gender disparity in
+segregation-day burden: T = Female, Y = TotalAggregatedDays_Segregation,
+adjusting for region, age band and fiscal year. Same DLRM ensemble; no
+Naive arm.
 }
 \examples{
 \donttest{
-morie_otis_analyze_b02_ruhela_formulations(otis_b02)
+b02 <- morie_synth_otis("b02", n = 300L, seed = 1L)
+r <- morie_otis_analyze_b02_ruhela_formulations(b02)
+r$tables[[1L]]$rows[[1L]]
 }
 }
