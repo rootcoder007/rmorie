@@ -1,14 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' RMSNorm, root-mean-square layer normalisation
 #'
-#' Zhang and Sennrich (2019), Root mean square layer normalization,
-#' NeurIPS 32 (arXiv:1910.07467 -- FETCHED), equation (4): abar_i = a_i /
-#' RMS(a) * g_i with RMS(a) = sqrt((1/n) sum a_i^2) -- to be contrasted
-#' with LayerNorm's eq. (2), abar_i = (a_i - mu)/sigma * g_i.  RMSNorm
-#' drops the re-centering entirely, which is the paper's whole hypothesis.
-#' pRMSNorm, in which the RMS is estimated from the first p per cent of
-#' the units, is available as `p` and is NOT the default, because it
-#' changes the statistic.
+#' Zhang and Sennrich (2019), Root mean square layer normalization, NeurIPS 32
+#' (arXiv:1910.07467), equation (4): abar_i = a_i / RMS(a) * g_i with RMS(a) =
+#' sqrt((1/n) sum a_i^2) -- to be contrasted with LayerNorm's eq. (2), abar_i = (a_i -
+#' mu)/sigma * g_i. RMSNorm drops the re-centering entirely, which is the paper's whole
+#' hypothesis. pRMSNorm, in which the RMS is estimated from the first p per cent of the
+#' units, is available as `p` and is NOT the default, because it changes the statistic.
 #'
 #' @param y the summed inputs a (first slot, for signature stability).
 #' @param x the summed inputs; wins over y.

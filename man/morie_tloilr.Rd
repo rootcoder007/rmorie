@@ -2,7 +2,7 @@
 % Please edit documentation in R/tloilr_native.R
 \name{morie_tloilr}
 \alias{morie_tloilr}
-\title{Main entry point -- compact alias per ledger/NAMING.md}
+\title{Main entry point -- compact alias}
 \usage{
 morie_tloilr(Q1, Q0, kappa)
 }

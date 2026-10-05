@@ -26,8 +26,7 @@ than clamped to zero.
 Formula: lambda = 2 (l_full - l_null); p = P(chi^2_df > lambda)
 }
 \references{
-Wasserman (2004), All of Statistics, Definition 10.21 and
-Theorem 10.22, under which lambda converges to chi^2 with r - q
-degrees of freedom, "the dimension of Theta minus the dimension of
-Theta_0". Fetched as the full text of the book.
+Wasserman (2004), All of Statistics, Definition 10.21 and Theorem 10.22,
+under which lambda converges to chi^2 with r - q degrees of freedom, "the dimension
+of Theta minus the dimension of Theta_0".
 }

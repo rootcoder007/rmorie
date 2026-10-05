@@ -24,9 +24,9 @@
 #' width, while v need not.
 #'
 #' The mask is not in the paper -- ViT attends over the whole sequence -- and is
-#' carried because the stub's signature declares it.  A zero (or FALSE) entry
-#' means "this key is not visible to this query" and is set to -Inf before the
-#' softmax; an all-zero mask row is an error rather than a silent NaN.
+#' an optional extra.  A zero (or FALSE) entry means "this key is not visible
+#' to this query" and is set to -Inf before the softmax; an all-zero mask row
+#' is an error rather than a silent NaN.
 #'
 #' @param q N-by-D_h queries.
 #' @param k M-by-D_h keys; D_h must match q.

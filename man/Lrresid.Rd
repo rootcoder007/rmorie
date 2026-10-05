@@ -19,10 +19,9 @@ Lrresid(y, pihat, n = NULL, hat = NULL)
 list: pearson, deviance, D, n, and with hat also hat, delta_d.
 }
 \description{
-Source READ FROM THE CORPUS PDF, pages rendered with pdftoppm:
-Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
-section 8.4.5 "Residual Analysis", printed pages 837-838, equations
-(8.67), (8.68) and (8.69).
+Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+section 8.4.5 "Residual Analysis", printed pages 837-838, equations (8.67), (8.68)
+and (8.69).
 }
 \details{
 Pearson residuals (8.67):

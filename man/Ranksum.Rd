@@ -34,7 +34,6 @@ Ranksum(V, V)
 \references{
 Wilcoxon (1945), Biometrics Bulletin 1(6), 80-83, and Mann
 & Whitney (1947), Annals of Mathematical Statistics 18(1), 50-60 --
-the primary sources. Wasserman (2004), All of Statistics, does NOT
-contain the rank-sum test; the full text of the book was fetched and
-searched to establish that.
+the primary sources. Wasserman (2004), All of Statistics, does not
+contain the rank-sum test.
 }

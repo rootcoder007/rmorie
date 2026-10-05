@@ -25,7 +25,7 @@
 #'   \code{method}.
 #' @references Lepikhin, D. et al. (2021), arXiv:2006.16668, Sec 2.1;
 #'   Fedus, W., Zoph, B. and Shazeer, N. (2022), JMLR 23(120),
-#'   arXiv:2101.03961, Eqs 4-6. Local sources in fetched-wave3/.
+#'   arXiv:2101.03961, Eqs 4-6.
 #' @export
 Moetop <- function(x, W_g, experts, k = 2L, alpha = 0.01) {
   X <- as.matrix(x)

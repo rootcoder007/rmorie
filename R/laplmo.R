@@ -14,10 +14,9 @@
 #' @param tol An eigenvalue below this counts as zero.
 #' @return List with \code{values}, \code{vectors}, \code{fiedler},
 #'   \code{lambda1}, \code{n_components}, \code{n}, \code{k}.
-#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.2,
-#'   which writes Lcal as an operator on functions g : V -> R and works
-#'   with its harmonic eigenfunctions. Fetched from the author's own copy
-#'   of the chapter.
+#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.2, which writes
+#'   Lcal as an operator on functions g : V -> R and works with its harmonic
+#'   eigenfunctions.
 #' @export
 #' @rdname Lapeig-laplmo
 Lapeig <- function(W, k = 2, tol = 1e-10) {

@@ -20,14 +20,12 @@ without double counting.}
 list: N_epsilon, proportion, n, method.
 }
 \description{
-Source READ FROM THE CORPUS PDF: Ghosal, S. and van der Vaart, A.
-(2017), Fundamentals of Nonparametric Bayesian Inference, chapter 3
-(tail-free and Polya tree priors).  For a set A_epsilon in the
-partition at level epsilon,
-\code{N_epsilon := #{1 <= i <= n : X_i in A_epsilon}}.  Because a
-tail-free prior has independent partition-level masses, the vector of
-cell counts at each level is what the posterior update consumes.
-Nothing is estimated here; this is a count.
+Source: Ghosal, S. and van der Vaart, A. (2017), Fundamentals of Nonparametric
+Bayesian Inference, chapter 3 (tail-free and Polya tree priors). For a set A_epsilon
+in the partition at level epsilon, \code{N_epsilon := #{1 <= i <= n : X_i in
+A_epsilon}}. Because a tail-free prior has independent partition-level masses, the
+vector of cell counts at each level is what the posterior update consumes. Nothing is
+estimated here; this is a count.
 }
 \examples{
 Tfcells(c(0.1, 0.4, 0.6, 0.9), list(c(0, 0.5), c(0.5, 1)))$N_epsilon

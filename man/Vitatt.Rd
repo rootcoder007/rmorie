@@ -44,9 +44,9 @@ the query/key width, not the value width; q and k must therefore share a
 width, while v need not.
 
 The mask is not in the paper -- ViT attends over the whole sequence -- and is
-carried because the stub's signature declares it.  A zero (or FALSE) entry
-means "this key is not visible to this query" and is set to -Inf before the
-softmax; an all-zero mask row is an error rather than a silent NaN.
+an optional extra.  A zero (or FALSE) entry means "this key is not visible
+to this query" and is set to -Inf before the softmax; an all-zero mask row
+is an error rather than a silent NaN.
 }
 \examples{
 z <- matrix(c(1, 0, 0, 1, 1, 1), 3, 2, byrow = TRUE)

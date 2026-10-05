@@ -27,9 +27,8 @@
 #'   GO::TermFinder--open source software for accessing Gene Ontology
 #'   information and finding significantly enriched Gene Ontology
 #'   terms associated with a list of genes, Bioinformatics 20(18),
-#'   3710-3715. Hypergeometric formula and Bonferroni correction,
-#'   Algorithm section, p. 3711. Source: PMC3037731 (saved as
-#'   library/pdf/fetched-wave3/Boyle-2004-GO-TermFinder-Bioinformatics.html).
+#'   3710-3715 (PMC3037731). Hypergeometric formula and Bonferroni
+#'   correction, Algorithm section, p. 3711.
 #' @export
 #' @examples
 #' set.seed(1)

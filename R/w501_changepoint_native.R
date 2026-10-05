@@ -115,12 +115,9 @@
 #' @return List with \code{changepoints} (1-based last index of each
 #'   segment except the final), \code{n_changepoints},
 #'   \code{objective}, \code{penalty}, \code{segment_means}.
-#' @references Killick, R., Fearnhead, P. and Eckley, I. A. (2012),
-#'   Optimal detection of changepoints with a linear computational
-#'   cost, Journal of the American Statistical Association 107(500),
-#'   1590-1598 (arXiv:1101.1438), equations 1-5, Algorithms 1-2.
-#'   Source: fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
-#'   changepoint-linear-cost.pdf
+#' @references Killick, R., Fearnhead, P. and Eckley, I. A. (2012), Optimal detection of
+#'   changepoints with a linear computational cost, Journal of the American Statistical
+#'   Association 107(500), 1590-1598 (arXiv:1101.1438), equations 1-5, Algorithms 1-2.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -162,11 +159,9 @@ Pelt <- function(x, cost = "mean", penalty = NULL, min_seglen = 1L) {
 #' @param y Numeric series.
 #' @param penalty Penalty beta; default log(n).
 #' @return As \code{Pelt}.
-#' @references Killick, R., Fearnhead, P. and Eckley, I. A. (2012),
-#'   Journal of the American Statistical Association 107(500),
-#'   1590-1598 (arXiv:1101.1438), eq 3, Algorithm 2. Source:
-#'   fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
-#'   changepoint-linear-cost.pdf
+#' @references Killick, R., Fearnhead, P. and Eckley, I. A. (2012), Journal of the
+#'   American Statistical Association 107(500), 1590-1598 (arXiv:1101.1438), eq 3,
+#'   Algorithm 2.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -193,13 +188,10 @@ Chgseg <- function(y, penalty = NULL) {
 #' @return List with \code{changepoints} (sorted), \code{order}
 #'   (detection order), \code{improvements}, \code{n_changepoints},
 #'   \code{segment_means}.
-#' @references Killick, R., Fearnhead, P. and Eckley, I. A. (2012),
-#'   Journal of the American Statistical Association 107(500),
-#'   1590-1598 (arXiv:1101.1438), Sec. 2.1 eq 2; Scott, A. J. and
-#'   Knott, M. (1974), A cluster analysis method for grouping means in
-#'   the analysis of variance, Biometrics 30(3), 507-512. Source:
-#'   fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
-#'   changepoint-linear-cost.pdf
+#' @references Killick, R., Fearnhead, P. and Eckley, I. A. (2012), Journal of the
+#'   American Statistical Association 107(500), 1590-1598 (arXiv:1101.1438), Sec. 2.1 eq
+#'   2; Scott, A. J. and Knott, M. (1974), A cluster analysis method for grouping means
+#'   in the analysis of variance, Biometrics 30(3), 507-512.
 #' @export
 #' @examples
 #' Binseg(x = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
@@ -423,12 +415,10 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' @return List with \code{changepoints} (detection order),
 #'   \code{changepoints_sorted}, \code{p_values}, \code{q_stats},
 #'   \code{n_changepoints}.
-#' @references Matteson, D. S. and James, N. A. (2014), A
-#'   nonparametric approach for multiple change point analysis of
-#'   multivariate data, Journal of the American Statistical
-#'   Association 109(505), 334-345 (arXiv:1306.4933), equations 4-8,
-#'   Sections 2.1-2.4. Source: fetched-wave3/matteson-james-2014-
-#'   edivisive-nonparametric-changepoint.pdf
+#' @references Matteson, D. S. and James, N. A. (2014), A nonparametric approach for
+#'   multiple change point analysis of multivariate data, Journal of the American
+#'   Statistical Association 109(505), 334-345 (arXiv:1306.4933), equations 4-8,
+#'   Sections 2.1-2.4.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -520,12 +510,9 @@ EDivisive <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
 #'   (max T), \code{kfdr}, \code{d1}, \code{d2}, \code{T},
 #'   \code{detected} (if threshold given), \code{bandwidth},
 #'   \code{gamma}.
-#' @references Harchaoui, Z., Moulines, E. and Bach, F. R. (2008),
-#'   Kernel change-point analysis, Advances in Neural Information
-#'   Processing Systems 21, 609-616. Section 3 (KFDR, d1/d2,
-#'   scan statistic), Section 2 (running maximum strategy),
-#'   Corollary 2. Source: fetched-wave3/harchaoui-moulines-bach-2008-
-#'   kernel-changepoint-analysis-nips.pdf
+#' @references Harchaoui, Z., Moulines, E. and Bach, F. R. (2008), Kernel change-point
+#'   analysis, Advances in Neural Information Processing Systems 21, 609-616. Section 3
+#'   (KFDR, d1/d2, scan statistic), Section 2 (running maximum strategy), Corollary 2.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

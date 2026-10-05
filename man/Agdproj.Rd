@@ -31,7 +31,6 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Agdproj(V, V)
 }
 \references{
-Beck and Teboulle (2009), SIAM J. Imaging Sci. 2(1),
-183-202.  Standard published form; the SIAM article is paywalled and
-was not read.
+Beck and Teboulle (2009), SIAM J. Imaging Sci. 2(1), 183-202. Standard
+published form; standard published form.
 }

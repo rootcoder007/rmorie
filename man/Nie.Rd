@@ -16,9 +16,8 @@ List with \code{estimate}, \code{se}, \code{mean_y11},
 \code{mean_y10}, \code{n}.
 }
 \description{
-DUPLICATE: the contrast is already implemented as \code{Nieff} in
-\code{unclr.R}; per ledger/wave2/DUPMAP.tsv this is an alias, not a
-second copy.
+DUPLICATE: the contrast is already implemented as \code{Nieff} in \code{unclr.R};
+this is an alias, not a second copy.
 }
 \details{
 Formula: \code{NIE = E[Y(1, M(1))] - E[Y(1, M(0))]}, taken within

@@ -1,12 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Bootstrap inference for the doubly robust DiD estimator
 #'
-#' Sant'Anna and Zhao (2020), Doubly robust difference-in-differences
-#' estimators, Journal of Econometrics 219(1), 101-122 (arXiv:1812.01723
-#' -- FETCHED).  Equation (2.6): tau = E\[(w1(D) - w0(D, X; pi))(dY -
-#' mu_0(X))\]; equation (2.7): w1 = D/E\[D\] and w0 = \[pi(X)(1-D)/(1-pi(X))\]
-#' / E\[pi(X)(1-D)/(1-pi(X))\].  Inference is by the multiplier bootstrap on
-#' the influence function, which section 3.2 recommends over the empirical
+#' Sant'Anna and Zhao (2020), Doubly robust difference-in-differences estimators,
+#' Journal of Econometrics 219(1), 101-122 (arXiv:1812.01723). Equation (2.6): tau =
+#' E\[(w1(D) - w0(D, X; pi))(dY - mu_0(X))\]; equation (2.7): w1 = D/E\[D\] and w0 =
+#' \[pi(X)(1-D)/(1-pi(X))\] / E\[pi(X)(1-D)/(1-pi(X))\]. Inference is by the multiplier
+#' bootstrap on the influence function, which section 3.2 recommends over the empirical
 #' bootstrap.
 #'
 #' Determinism: Mammen's two-point multiplier is taken at van der Corput

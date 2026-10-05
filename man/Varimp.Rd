@@ -19,13 +19,11 @@ Varimp(coef, sigma_u, horizon = 20, shock_var = 0)
 As \code{\link{Irfun}}.
 }
 \description{
-DUPLICATE, resolved by aliasing (wave-2 DUPMAP: varimp -> irfun). Both
-names denote the orthogonalised impulse response of a VAR(p): the MA
-recursion Phi_0 = I, Phi_h = sum_\{j=1..min(h,p)\} A_j Phi_\{h-j\}, with
-shocks orthogonalised by the lower Cholesky factor P of Sigma_u, so
-Theta_h = Phi_h P. The name is a trap -- it reads as "variable
-importance", but the stub docstring and the wave-2 categorisation both
-give VAR impulse response, which is what is aliased here.
+Same quantity as \code{irfun}: the orthogonalised impulse response of a
+VAR(p), the MA recursion Phi_0 = I, Phi_h = sum_\{j=1..min(h,p)\} A_j
+Phi_\{h-j\}, with shocks orthogonalised by the lower Cholesky factor P of
+Sigma_u, so Theta_h = Phi_h P. Despite the name this is not "variable
+importance"; it is the VAR impulse response.
 }
 \examples{
 Varimp(matrix(c(0, 0.5, 0.1, 0, 0.2, 0.4), 2, 3), diag(2), 3)$irf

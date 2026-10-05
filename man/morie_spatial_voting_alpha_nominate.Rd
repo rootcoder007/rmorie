@@ -2,7 +2,7 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_alpha_nominate}
 \alias{morie_spatial_voting_alpha_nominate}
-\title{Alpha-NOMINATE (stub)}
+\title{Alpha-NOMINATE ideal points (EM-IRT approximation)}
 \usage{
 morie_spatial_voting_alpha_nominate(
   votes,

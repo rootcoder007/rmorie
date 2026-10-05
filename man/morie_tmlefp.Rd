@@ -57,9 +57,9 @@ A list with \code{estimate}, \code{osate}, \code{ate_full},
 \description{
 Optimal-overlap estimands and their trimming rules
 
-Compact alias per ledger/NAMING.md
+Compact alias
 
-Name carried over from the generated stub this replaced
+Name kept for backward compatibility
 }
 \examples{
 set.seed(2)

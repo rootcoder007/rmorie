@@ -525,7 +525,7 @@ morie_timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
 }
 
 # Compact aliases per ledger/NAMING.md
-#' Compact aliases per ledger/NAMING.md
+#' Compact aliases
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

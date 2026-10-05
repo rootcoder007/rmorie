@@ -1,17 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Switch Transformer top-1 routing with a capacity factor
 #'
-#' Fedus, Zoph and Shazeer (2022), Switch transformers, JMLR 23(120),
-#' 1-39 (arXiv:2101.03961 -- FETCHED), states verbatim that "each token is
-#' routed to the expert with the highest router probability, but each
-#' expert has a fixed batch size of (total_tokens / num_experts) x
-#' capacity_factor.  If the tokens are unevenly dispatched then certain
-#' experts will overflow ... resulting in these tokens not being processed
-#' by this layer."  Overflowed tokens pass through the residual unchanged
-#' here; they are not silently reassigned.  The auxiliary load-balancing
-#' loss is eq. (4), loss = alpha N sum_i f_i P_i, with f_i the dispatched
-#' fraction (eq. 5) and P_i the mean router probability (eq. 6); alpha =
-#' 1e-2 in the paper.
+#' Fedus, Zoph and Shazeer (2022), Switch transformers, JMLR 23(120), 1-39
+#' (arXiv:2101.03961), states verbatim that "each token is routed to the expert with the
+#' highest router probability, but each expert has a fixed batch size of (total_tokens /
+#' num_experts) x capacity_factor. If the tokens are unevenly dispatched then certain
+#' experts will overflow ... resulting in these tokens not being processed by this
+#' layer." Overflowed tokens pass through the residual unchanged here; they are not
+#' silently reassigned. The auxiliary load-balancing loss is eq. (4), loss = alpha N
+#' sum_i f_i P_i, with f_i the dispatched fraction (eq. 5) and P_i the mean router
+#' probability (eq. 6); alpha = 1e-2 in the paper.
 #'
 #' @param y the token batch, one row per token.
 #' @param x the token batch; wins over y.

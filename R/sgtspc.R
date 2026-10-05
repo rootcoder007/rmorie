@@ -11,10 +11,9 @@
 #' @param tol An eigenvalue below this counts as zero.
 #' @return List with \code{values} (increasing), \code{lambda1},
 #'   \code{n_components}, \code{max_value}, \code{n}.
-#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Sections
-#'   1.2-1.3: the eigenvalues of Lcal lie in \[0, 2\] and the multiplicity
-#'   of 0 equals the number of connected components. Fetched from the
-#'   author's own copy of the chapter.
+#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Sections 1.2-1.3: the
+#'   eigenvalues of Lcal lie in \[0, 2\] and the multiplicity of 0 equals the number of
+#'   connected components.
 #' @export
 #' @examples
 #' Lapspec(W = 5L)

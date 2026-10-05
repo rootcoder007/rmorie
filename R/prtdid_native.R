@@ -28,12 +28,10 @@
 #'   treated cohort, control group, weight, estimate),
 #'   \code{overall_estimate} (the recomposed TWFE coefficient) and
 #'   \code{details}.
-#' @references Goodman-Bacon, A. (2021). Difference-in-differences
-#'   with variation in treatment timing. Journal of Econometrics,
-#'   225(2), 254-277. doi:10.1016/j.jeconom.2021.03.014. Implemented
-#'   from Theorem 1 and eqs. (7)-(9) of NBER Working Paper 25018;
-#'   local source: WD_BLACK library/pdf/fetched-wave3/
-#'   goodman-bacon-2021-did-variation-treatment-timing.pdf.
+#' @references Goodman-Bacon, A. (2021). Difference-in-differences with variation in
+#'   treatment timing. Journal of Econometrics, 225(2), 254-277.
+#'   doi:10.1016/j.jeconom.2021.03.014. Implemented from Theorem 1 and eqs. (7)-(9) of
+#'   NBER Working Paper 25018;
 #' @seealso \code{\link{Gbtcom}} for the three-way composition by
 #'   comparison type.
 #' @export

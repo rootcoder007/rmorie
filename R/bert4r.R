@@ -1,14 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' BERT4Rec: the masked-item objective and its evaluation
 #'
-#' Sun et al. (2019), BERT4Rec: sequential recommendation with
-#' bidirectional encoder representations from transformer, CIKM 28,
-#' 1441-1450 (arXiv:1904.06690 -- FETCHED).  The objective is the cloze
-#' task: a proportion rho of the items in each sequence is replaced by
-#' \[mask\] and the loss is the mean over masked positions of -log P(v_m =
-#' v*_m | S'_u).  At test time exactly one \[mask\] is appended to the end
-#' of the sequence, the paper's device for turning a bidirectional model
-#' into a next-item recommender.
+#' Sun et al. (2019), BERT4Rec: sequential recommendation with bidirectional encoder
+#' representations from transformer, CIKM 28, 1441-1450 (arXiv:1904.06690). The
+#' objective is the cloze task: a proportion rho of the items in each sequence is
+#' replaced by \[mask\] and the loss is the mean over masked positions of -log P(v_m =
+#' v*_m | S'_u). At test time exactly one \[mask\] is appended to the end of the
+#' sequence, the paper's device for turning a bidirectional model into a next-item
+#' recommender.
 #'
 #' Determinism: masked positions are chosen on a fixed stride giving the
 #' fraction rho, not drawn.  The paper's random masking is a training

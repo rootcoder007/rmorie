@@ -38,9 +38,8 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Zestim(V)
 }
 \references{
-Kosorok (2008), Introduction to Empirical Processes and
-Semiparametric Inference, Section 2.2.5 and Theorem 10.16. Fetched as
-the full text of the book. The Huber psi is Huber (1964), Annals of
-Mathematical Statistics 35(1), 73-101.
+Kosorok (2008), Introduction to Empirical Processes and Semiparametric
+Inference, Section 2.2.5 and Theorem 10.16. The Huber psi is Huber (1964), Annals
+of Mathematical Statistics 35(1), 73-101.
 }
 \keyword{internal}

@@ -49,7 +49,7 @@ A list with \code{estimate}, \code{torsions},
 \description{
 Topological torsions for a molecule, or for a set of molecules
 
-Compact alias per ledger/NAMING.md
+Compact alias
 }
 \examples{
 elements <- c("C", "C", "C", "C")

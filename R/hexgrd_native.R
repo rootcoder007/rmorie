@@ -27,8 +27,7 @@
 #'   Cartography and Geographic Information Systems, 19(4), 228-236.
 #'
 #'   Reference implementation: Fortran subroutine hbin, src/hbin.f in
-#'   CRAN hexbin 1.28.6. Archived:
-#'   fetched-wave3/carr-hexbin_1.28.6-cran-source.tar.gz.
+#'   CRAN hexbin 1.28.6.
 #' @examples
 #' set.seed(1)
 #' Hexgrd(cbind(runif(50), runif(50)), cell_size = 0.3)

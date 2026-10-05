@@ -17,10 +17,8 @@
 #' @param k Embedding dimension.
 #' @return List with embedding (n by k), eigenvalues, all_eigenvalues
 #'   (ascending), k, n.
-#' @references Belkin, M. and Niyogi, P. (2003). Laplacian eigenmaps
-#'   for dimensionality reduction and data representation. Neural
-#'   Computation, 15(6), 1373-1396, Secs. 2-3. Archived:
-#'   fetched-wave3/belkin-niyogi-2003-laplacian-eigenmaps.pdf.
+#' @references Belkin, M. and Niyogi, P. (2003). Laplacian eigenmaps for dimensionality
+#'   reduction and data representation. Neural Computation, 15(6), 1373-1396, Secs. 2-3.
 #' @examples
 #' C4 <- matrix(0, 4, 4)
 #' C4[cbind(1:4, c(2, 3, 4, 1))] <- 1; C4 <- C4 + t(C4)

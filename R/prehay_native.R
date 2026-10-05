@@ -27,12 +27,10 @@
 #'   \code{ci_lower}, \code{ci_upper}, \code{specific_lower},
 #'   \code{specific_upper}, \code{se}, \code{B}, \code{n},
 #'   \code{conf_level}, \code{method}.
-#' @references Preacher, K. J. and Hayes, A. F. (2008), Asymptotic and
-#'   resampling strategies for assessing and comparing indirect effects
-#'   in multiple mediator models, Behavior Research Methods 40(3),
-#'   879-891, doi:10.3758/BRM.40.3.879, pp. 880-884; local copy
-#'   fetched-wave3/preacher-hayes-2008-asymptotic-resampling-multiple-mediators-BRM40.pdf.
-#'   Rank rule: Preacher and Hayes (2004), Behavior Research Methods,
+#' @references Preacher, K. J. and Hayes, A. F. (2008), Asymptotic and resampling
+#'   strategies for assessing and comparing indirect effects in multiple mediator
+#'   models, Behavior Research Methods 40(3), 879-891, doi:10.3758/BRM.40.3.879, pp.
+#'   880-884. Rank rule: Preacher and Hayes (2004), Behavior Research Methods,
 #'   Instruments, and Computers 36(4), 717-731, p. 722.
 #' @export
 #' @examples

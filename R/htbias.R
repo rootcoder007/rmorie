@@ -1,15 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Best-linear-predictor calibration test for heterogeneous treatment effects
 #'
-#' Source FETCHED (reference implementation): \code{test_calibration} in
-#' the CRAN package \pkg{grf} (grf 2.6.1, \code{R/forest_summary.R}),
-#' implementing the calibration check of Chernozhukov, Demirer, Duflo
-#' and Fernandez-Val (2018), arXiv 1712.04802, in the form Athey and
-#' Wager (2019) use.  The package source regresses, with no intercept,
-#' \code{target = Y - Yhat} on
-#' \code{(W - What) * mean(tauhat)} and
-#' \code{(W - What) * (tauhat - mean(tauhat))}, with HC3 sandwich SEs
-#' and p-values converted to one-sided.
+#' Source: \code{test_calibration} in the CRAN package \pkg{grf} (grf 2.6.1,
+#' \code{R/forest_summary.R}), implementing the calibration check of Chernozhukov,
+#' Demirer, Duflo and Fernandez-Val (2018), arXiv 1712.04802, in the form Athey and
+#' Wager (2019) use. The package source regresses, with no intercept, \code{target = Y -
+#' Yhat} on \code{(W - What) * mean(tauhat)} and \code{(W - What) * (tauhat -
+#' mean(tauhat))}, with HC3 sandwich SEs and p-values converted to one-sided.
 #'
 #' The coefficient on the mean term tests whether the average treatment
 #' effect is right; the coefficient on the differential term is 1 when

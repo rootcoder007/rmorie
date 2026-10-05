@@ -2,16 +2,14 @@
 #' INT8 quantised attention with per-row scales
 #'
 #' Dettmers, Lewis, Belkada and Zettlemoyer (2022), "LLM.int8(): 8-bit matrix
-#' multiplication for transformers at scale", NeurIPS 2022, arXiv:2208.07339,
-#' read from the fetched PDF.  The paper's first ingredient is vector-wise
-#' quantisation: rather than one scale for a whole tensor, each row of the left
-#' operand and each column of the right operand gets its own absmax scale, the
-#' product is accumulated in int32, and dequantisation divides by the outer
-#' product of the two scales.  For a row q_i and a key k_j,
-#' s_q(i) = max_t |Q_it| / 127, s_k(j) = max_t |K_jt| / 127,
-#' Q_int = round(Q / s_q), K_int = round(K / s_k), and
-#' (Q K')_ij ~= s_q(i) s_k(j) (Q_int K_int')_ij, with the same treatment for
-#' the value matmul.  Softmax itself is done in floating point: quantising the
+#' multiplication for transformers at scale", NeurIPS 2022, arXiv:2208.07339. The
+#' paper's first ingredient is vector-wise quantisation: rather than one scale for a
+#' whole tensor, each row of the left operand and each column of the right operand gets
+#' its own absmax scale, the product is accumulated in int32, and dequantisation divides
+#' by the outer product of the two scales. For a row q_i and a key k_j, s_q(i) = max_t
+#' |Q_it| / 127, s_k(j) = max_t |K_jt| / 127, Q_int = round(Q / s_q), K_int = round(K /
+#' s_k), and (Q K')_ij ~= s_q(i) s_k(j) (Q_int K_int')_ij, with the same treatment for
+#' the value matmul. Softmax itself is done in floating point: quantising the
 #' probabilities is what destroys the method, since they span several orders of
 #' magnitude within a row.
 #'

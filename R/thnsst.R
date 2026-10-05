@@ -4,13 +4,11 @@
 #' Thiessen (1911), Precipitation averages for large areas, Monthly
 #' Weather Review 39(7), 1082-1089: each station is assigned the region of
 #' all points closer to it than to any other, and the areal average is the
-#' area-weighted mean of the station values.  The 1911 volume is in the
-#' public domain but was not retrievable here; the construction is quoted
-#' in its standard published form.  It is the Voronoi diagram of Dirichlet
-#' (1850) and Voronoi (1908) under another name.  Cells are computed
-#' exactly as intersections of half-planes with a bounding box, and areas
-#' by the shoelace formula, so the weights are exact rather than estimated
-#' on a grid.
+#' area-weighted mean of the station values.  It is the Voronoi diagram of
+#' Dirichlet (1850) and Voronoi (1908) under another name.  Cells are
+#' computed exactly as intersections of half-planes with a bounding box, and
+#' areas by the shoelace formula, so the weights are exact rather than
+#' estimated on a grid.
 #'
 #' @param coords station locations, one row per station.
 #' @param bbox clipping box c(x0, y0, x1, y1).

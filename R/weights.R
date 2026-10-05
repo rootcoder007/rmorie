@@ -15,7 +15,7 @@
 
 #' Shared parameters for morie_weights_* helpers
 #'
-#' Roxygen-only stub holding the @param entries shared across the
+#' Roxygen-only block holding the @param entries shared across the
 #' weights family (design / calibration / replication / trimming /
 #' diagnostics). Functions reference these via
 #' `@inheritParams morie_weights_params`.

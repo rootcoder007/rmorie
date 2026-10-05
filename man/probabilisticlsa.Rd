@@ -2,7 +2,7 @@
 % Please edit documentation in R/plsa_native.R
 \name{probabilisticlsa}
 \alias{probabilisticlsa}
-\title{Compact aliases per ledger/NAMING.md}
+\title{Compact aliases}
 \usage{
 probabilisticlsa(n_dw, K, iters = 100, tol = 1e-08, seed = 0)
 }

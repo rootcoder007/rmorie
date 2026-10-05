@@ -1,13 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Odds ratio over a fixed interval of an interval-scaled predictor
 #'
-#' Source READ FROM THE CORPUS PDF, page rendered with pdftoppm:
-#' Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
-#' section 8.4.4, printed page 834, equation (8.63):
-#' \code{log psi(a, b) = beta1 (b - a)}, so
-#' \code{psi(a, b) = exp(beta1 (b - a))}.  The intercept cancels, so the
-#' odds ratio for moving the predictor from a to b depends on beta1 and
-#' the span alone.
+#' Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+#' section 8.4.4, printed page 834, equation (8.63): \code{log psi(a, b) = beta1 (b -
+#' a)}, so \code{psi(a, b) = exp(beta1 (b - a))}. The intercept cancels, so the odds
+#' ratio for moving the predictor from a to b depends on beta1 and the span alone.
 #'
 #' A Wald interval is supplied when \code{se} is given: the log odds
 #' ratio is \code{beta1 (b - a)} with standard error

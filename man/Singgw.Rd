@@ -41,10 +41,9 @@ Limiting cases exercised in the tests: G = A11 gives H = A exactly;
 with every individual genotyped, H = Gw.
 }
 \references{
-Christensen, O. F. and Lund, M. S. (2010). Genomic
-prediction when some animals are not genotyped. Genetics
-Selection Evolution 42, 2; eqs. (4), (6), (8), p. 3
-(fetched-wave3 PDF). Legarra, A., Aguilar, I. and Misztal, I.
-(2009). Journal of Dairy Science 92(9), 4656-4663. Aguilar, I.,
-et al. (2010). Journal of Dairy Science 93(2), 743-752.
+Christensen, O. F. and Lund, M. S. (2010). Genomic prediction when some
+animals are not genotyped. Genetics Selection Evolution 42, 2; eqs. (4), (6), (8),
+p. 3. Legarra, A., Aguilar, I. and Misztal, I. (2009). Journal of Dairy Science
+92(9), 4656-4663. Aguilar, I., et al. (2010). Journal of Dairy Science 93(2),
+743-752.
 }

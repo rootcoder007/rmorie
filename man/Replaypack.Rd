@@ -16,15 +16,14 @@ list: estimate, digest, n_rows, n_values, text_len, written,
 method.
 }
 \description{
-No equation here: Silver et al. (2018), arXiv:1712.01815 (FETCHED),
-says only that the (s, pi, z) triples are stored and sampled uniformly
-from the most recent games.  What this contributes is a canonical
-encoding, so the same buffer always yields the same bytes and the same
-digest whichever language wrote it.  The digest is a Rabin-Karp
-polynomial hash, h <- (131 h + c) mod (2^31 - 1), exact in double
-precision because every intermediate stays below 2^53.  It is not a
-cryptographic hash and is not presented as one.  Writing to disk is
-opt-in; by default nothing touches the filesystem.
+No equation here: Silver et al. (2018), arXiv:1712.01815, says only that the (s, pi,
+z) triples are stored and sampled uniformly from the most recent games. What this
+contributes is a canonical encoding, so the same buffer always yields the same bytes
+and the same digest whichever language wrote it. The digest is a Rabin-Karp
+polynomial hash, h <- (131 h + c) mod (2^31 - 1), exact in double precision because
+every intermediate stays below 2^53. It is not a cryptographic hash and is not
+presented as one. Writing to disk is opt-in; by default nothing touches the
+filesystem.
 }
 \examples{
 Replaypack(matrix(c(1, 0.5, 0.5, 1), 1, 4))$digest

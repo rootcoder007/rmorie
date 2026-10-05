@@ -38,9 +38,7 @@ x <- matrix(rep(c(1, 0), 5), ncol = 2, byrow = TRUE)
 Exp3(x, 0.2)$weights
 }
 \references{
-Auer, P., Cesa-Bianchi, N., Freund, Y. and Schapire,
-R. E. (2002). The nonstochastic multiarmed bandit problem. SIAM
-Journal on Computing 32(1), 48-77.  Algorithm: figure 1, Section
-3; bound: Theorem 3.1.  Local source:
-fetched-wave3/auer-cesabianchi-freund-schapire-2002-exp3-nonstochastic-bandit.pdf.
+Auer, P., Cesa-Bianchi, N., Freund, Y. and Schapire, R. E. (2002). The
+nonstochastic multiarmed bandit problem. SIAM Journal on Computing 32(1), 48-77.
+Algorithm: figure 1, Section 3; bound: Theorem 3.1.
 }

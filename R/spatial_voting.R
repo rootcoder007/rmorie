@@ -1077,7 +1077,7 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
        call. = FALSE)
 }
 
-#' Bayesian Aldrich-McKelvey scaling (stub)
+#' Bayesian Aldrich-McKelvey scaling
 #'
 #' @param Z Perceptual placement matrix.
 #' @param n_samples MCMC samples.
@@ -1118,7 +1118,7 @@ morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
                      prior_sd = prior_sd)
 }
 
-#' Bayesian MDS (stub) -- log-normal distances via Metropolis
+#' Bayesian MDS -- log-normal distances via Metropolis
 #' @param D Distance matrix.
 #' @param n_dims Dimensions.
 #' @param n_samples MCMC samples.
@@ -1160,7 +1160,7 @@ morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
                       burn_in = burn_in, sigma_init = sigma_init)
 }
 
-#' Bayesian unfolding (stub) -- Bakker & Poole sampler
+#' Bayesian unfolding -- Bakker & Poole sampler
 #' @param D Respondent-stimulus dissimilarity matrix.
 #' @param n_dims Latent dimensions.
 #' @param n_samples MCMC samples.
@@ -1893,7 +1893,7 @@ morie_spatial_voting_nominate_bootstrap <- function(votes,
 # 14. Alpha-NOMINATE / dynamic / ordinal IRT  -- STUBBED
 # ===========================================================================
 
-#' Alpha-NOMINATE (stub)
+#' Alpha-NOMINATE ideal points (EM-IRT approximation)
 #'
 #' Carroll et al. (2013) mixture model between Gaussian and quadratic
 #' utility, sampled via slice sampling (Neal 2003).  Porting the slice
@@ -1940,7 +1940,7 @@ morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 2L,
   )
 }
 
-#' Ordinal IRT / Quinn factor model (stub)
+#' Ordinal IRT / Quinn factor model
 #'
 #' @param Y Ordinal response matrix.
 #' @param n_dims Latent dimensions.
@@ -1994,7 +1994,7 @@ morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
                           burn_in = burn_in)
 }
 
-#' Dynamic IRT with random-walk priors (stub)
+#' Dynamic IRT, fitted period by period (EM-IRT approximation)
 #'
 #' Time-series IRT where ideal points evolve via a random walk:
 #' \eqn{\phi_{i,t} \sim N(\phi_{i,t-1}, \tau^2)}{phi_i,t ~ N(phi_i,t-1, tau^2)}.

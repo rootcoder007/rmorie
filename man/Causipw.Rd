@@ -40,10 +40,8 @@ set.seed(1)
 Causipw(treat = rbinom(50, 1, 0.5), y = rnorm(50), ps = runif(50, 0.2, 0.8))
 }
 \references{
-Crump, R. K., Hotz, V. J., Imbens, G. W. and Mitnik,
-O. A. (2009), Dealing with limited overlap in estimation of
-average treatment effects, Biometrika 96(1), 187-199,
-doi:10.1093/biomet/asn055; Corollary 5.1 and Section 5 in the
-NBER TWP 330 (2006) version; local copy
-fetched-wave3/crump-hotz-imbens-mitnik-2009-limited-overlap-biometrika.pdf.
+Crump, R. K., Hotz, V. J., Imbens, G. W. and Mitnik, O. A. (2009),
+Dealing with limited overlap in estimation of average treatment effects, Biometrika
+96(1), 187-199, doi:10.1093/biomet/asn055; Corollary 5.1 and Section 5 in the NBER
+TWP 330 (2006) version.
 }

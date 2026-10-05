@@ -33,7 +33,7 @@ rms = sqrt(D_prod); expected max ~= rms sqrt(2 log n)
 Scoredist(b = 5L, d = 5L)
 }
 \references{
-Zandieh et al., arXiv:2504.19874, Theorem 2 and Theorem 3.
-Fetched from arXiv. The expected_max figure is the standard Gaussian
-maximum approximation and is NOT from the paper.
+Zandieh et al., arXiv:2504.19874, Theorem 2 and Theorem 3. The
+expected_max figure is the standard Gaussian maximum approximation and is NOT from
+the paper.
 }

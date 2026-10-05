@@ -2,7 +2,7 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_dynamic_irt}
 \alias{morie_spatial_voting_dynamic_irt}
-\title{Dynamic IRT with random-walk priors (stub)}
+\title{Dynamic IRT, fitted period by period (EM-IRT approximation)}
 \usage{
 morie_spatial_voting_dynamic_irt(
   votes,

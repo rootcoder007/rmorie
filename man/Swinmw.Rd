@@ -30,7 +30,5 @@ parameterised (2M-1) x (2M-1) table by the tokens' relative
 position along each axis.
 }
 \references{
-Liu, Z. et al. (2021), ICCV 2021, arXiv:2103.14030,
-Section 3.2, Eq 4. Local source:
-fetched-wave3/liu-etal-2021-swin-transformer-arxiv2103.14030.pdf.
+Liu, Z. et al. (2021), ICCV 2021, arXiv:2103.14030, Section 3.2, Eq 4.
 }

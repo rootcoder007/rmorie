@@ -92,7 +92,7 @@ cutoff.}
 \item{power}{Numeric in \verb{(0, 1)}; target statistical power.}
 }
 \description{
-Roxygen-only stub holding the @param entries shared across the
+Roxygen-only block holding the @param entries shared across the
 RDD family (sharp / fuzzy / bias-corrected, McCrary / Cattaneo
 density, bandwidth selectors, covariate balance, placebo cutoffs,
 kink, donut, geographic, local randomisation, power, etc.).

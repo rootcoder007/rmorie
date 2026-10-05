@@ -17,13 +17,11 @@ Vardec(var_coefficients, sigma_u, periods = 20)
 As \code{\link{Fevdc}}.
 }
 \description{
-DUPLICATE, resolved by aliasing (wave-2 DUPMAP: vardec -> fevdc). Both
-names denote the same quantity: with P the lower Cholesky factor of
+Same quantity as \code{Fevdc}: with P the lower Cholesky factor of
 Sigma_u and Theta_s the MA coefficient matrices of the fitted VAR, the
 share of the h-step forecast error variance of variable i due to
 orthogonalised shock j is the ratio of sum_s (Theta_s P)[i, j]^2 to its
-row total. \code{Fevdc} implements it; this is a re-export, not a
-second copy.
+row total. \code{Fevdc} implements it; this is a re-export.
 }
 \examples{
 Vardec(matrix(c(0.5, 0.1, 0.2, 0.4), 2, 2), diag(2), 3)$periods

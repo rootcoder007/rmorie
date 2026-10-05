@@ -206,7 +206,7 @@
 }
 
 # Main entry point -- compact alias per ledger/NAMING.md
-#' Main entry point -- compact alias per ledger/NAMING.md
+#' Main entry point -- compact alias
 #'
 #' A step of the tloilr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

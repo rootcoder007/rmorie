@@ -1,15 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Generalized ESD test for outliers (Rosner 1983)
 #'
-#' Source FETCHED: NIST/SEMATECH e-Handbook of Statistical Methods,
-#' section 1.3.5.17.3, which states Rosner (1983, Technometrics 25,
-#' 165-172) in full: \code{R_i = max |x_i - xbar| / s} recomputed after
-#' each removal, with critical values
-#' \code{lambda_i = (n-i) t_{p,n-i-1} / sqrt((n-i-1+t^2)(n-i+1))} and
-#' \code{p = 1 - alpha / (2(n-i+1))}.  The number of outliers is the
-#' largest \code{i} with \code{R_i > lambda_i}.  The handbook worked
-#' example (Rosner 54-point data set, r = 10, alpha = 0.05) gives
-#' \code{R_1 = 3.118}, \code{lambda_1 = 3.158} and three outliers.
+#' Source: NIST/SEMATECH e-Handbook of Statistical Methods, section 1.3.5.17.3, which
+#' states Rosner (1983, Technometrics 25, 165-172) in full: \code{R_i = max |x_i - xbar|
+#' / s} recomputed after each removal, with critical values \code{lambda_i = (n-i)
+#' t_{p,n-i-1} / sqrt((n-i-1+t^2)(n-i+1))} and \code{p = 1 - alpha / (2(n-i+1))}. The
+#' number of outliers is the largest \code{i} with \code{R_i > lambda_i}. The handbook
+#' worked example (Rosner 54-point data set, r = 10, alpha = 0.05) gives \code{R_1 =
+#' 3.118}, \code{lambda_1 = 3.158} and three outliers.
 #'
 #' @param x Numeric vector, approximately normal under H0.
 #' @param alpha Significance level.  Default 0.05.

@@ -21,11 +21,10 @@ Geglu(y, x = NULL, W = NULL, V = NULL, b = NULL, c = NULL, W2 = NULL)
 list: estimate, out, gate, ffn, method.
 }
 \description{
-Shazeer (2020), arXiv:2002.05202 (FETCHED): GEGLU(x, W, V, b, c) =
-GELU(xW + b) * (xV + c), with GELU(z) = z Phi(z), the EXACT Gaussian
-error linear unit of Hendrycks and Gimpel (2016), arXiv:1606.08415 --
-the tanh expression that circulates as "GELU" is an approximation to
-it and is not used here, because at 1e-9 the two differ.
+Shazeer (2020), arXiv:2002.05202: GEGLU(x, W, V, b, c) = GELU(xW + b) * (xV + c),
+with GELU(z) = z Phi(z), the EXACT Gaussian error linear unit of Hendrycks and Gimpel
+(2016), arXiv:1606.08415 -- the tanh expression that circulates as "GELU" is an
+approximation to it and is not used here, because at 1e-9 the two differ.
 }
 \examples{
 Geglu(c(1, -1), W = diag(2), V = diag(2))$out

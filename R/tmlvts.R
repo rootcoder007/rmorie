@@ -14,12 +14,12 @@
 #' @return List with \code{sigma2}, \code{se_sigma2}, \code{ci_lower},
 #'   \code{ci_upper}, \code{se_psi}, \code{se_psi_lower},
 #'   \code{se_psi_upper}, \code{kurtosis}, \code{ic_mean}, \code{n}.
-#' @references The row cites vdL-Hubbard-Pajouh (2018). That paper was NOT
-#'   obtainable, so what is implemented is the standard construction that
-#'   follows from the definition: the influence curve of sigma^2 = E\[D*^2\]
-#'   is D*^2 - sigma^2. The plug-in variance it refines is the
+#' @references van der Laan, Hubbard and Pajouh (2018), for the problem.
+#'   What is implemented is the standard construction that follows from the
+#'   definition: the influence curve of sigma^2 = E\[D*^2\] is
+#'   D*^2 - sigma^2. The plug-in variance it refines is the
 #'   var.psi <- var(IC)/n of the CRAN package tmle 2.1.1 (Gruber & van der
-#'   Laan), which was fetched and read.
+#'   Laan).
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

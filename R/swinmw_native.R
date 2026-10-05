@@ -47,9 +47,7 @@
 #' @return List with \code{output} (H x W x d_v array), \code{bias},
 #'   \code{n_windows}, \code{tokens_per_window}, \code{estimate},
 #'   \code{n}, \code{method}.
-#' @references Liu, Z. et al. (2021), ICCV 2021, arXiv:2103.14030,
-#'   Section 3.2, Eq 4. Local source:
-#'   fetched-wave3/liu-etal-2021-swin-transformer-arxiv2103.14030.pdf.
+#' @references Liu, Z. et al. (2021), ICCV 2021, arXiv:2103.14030, Section 3.2, Eq 4.
 #' @export
 Swinmw <- function(x, window_size, relative_bias = NULL,
                    WQ = NULL, WK = NULL, WV = NULL) {

@@ -1,13 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Wald statistic and confidence interval for logistic-regression coefficients
 #'
-#' Source READ FROM THE CORPUS PDF, page rendered with pdftoppm:
-#' Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
-#' section 8.4, printed pages 829-830, equations (8.56) and (8.57):
-#' \code{beta_i +/- z_{1-alpha/2} se(beta_i)} and
-#' \code{W = beta_i / se(beta_i)}.  W is asymptotically standard normal
-#' under H0: beta_i = 0, so the two-sided p-value is
-#' \code{2 (1 - Phi(abs(W)))}.
+#' Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+#' section 8.4, printed pages 829-830, equations (8.56) and (8.57): \code{beta_i +/-
+#' z_{1-alpha/2} se(beta_i)} and \code{W = beta_i / se(beta_i)}. W is asymptotically
+#' standard normal under H0: beta_i = 0, so the two-sided p-value is \code{2 (1 -
+#' Phi(abs(W)))}.
 #'
 #' BOOK ERRATUM, confirmed by re-running the fit: the R input block
 #' printed on page 829 lists t and d vectors that do not pair up --

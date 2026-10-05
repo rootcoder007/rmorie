@@ -41,11 +41,8 @@ R <- matrix(c(1, 0, 0, 0), 2, byrow = TRUE)
 Mdpval(P, R, 0.5)$estimate
 }
 \references{
-Sutton, R. S. and Barto, A. G. (2018). Reinforcement
-Learning: An Introduction, 2nd ed., MIT Press, Section 4.4, boxed
-algorithm p. 83, eq. 4.10.  Local source:
-fetched-wave3/sutton-barto-2018-reinforcement-learning-2nd-ed.pdf.
-Bellman, R. (1957). Dynamic Programming, Princeton University
-Press.  Puterman, M. L. (1994). Markov Decision Processes, Wiley,
-Section 6.3.
+Sutton, R. S. and Barto, A. G. (2018). Reinforcement Learning: An
+Introduction, 2nd ed., MIT Press, Section 4.4, boxed algorithm p. 83, eq. 4.10.
+Bellman, R. (1957). Dynamic Programming, Princeton University Press. Puterman, M.
+L. (1994). Markov Decision Processes, Wiley, Section 6.3.
 }

@@ -24,12 +24,10 @@
 #' @return List with \code{scores}, \code{pvalues},
 #'   \code{best_score}, \code{best_pvalue}, \code{best_position}
 #'   (0-based), \code{width}, \code{n_windows}, \code{method}.
-#' @references Grant, C. E., Bailey, T. L. and Noble, W. S. (2011),
-#'   FIMO: scanning for occurrences of a given motif, Bioinformatics
-#'   27(7), 1017-1018 (score and dynamic-programming p-values,
-#'   Methods). Staden, R. (1994), Searching for motifs in nucleic
-#'   acid sequences, Methods in Molecular Biology 25, 93-102. Local
-#'   source: library/pdf/fetched-wave3/Grant-2011-FIMO-Bioinformatics.pdf.
+#' @references Grant, C. E., Bailey, T. L. and Noble, W. S. (2011), FIMO: scanning for
+#'   occurrences of a given motif, Bioinformatics 27(7), 1017-1018 (score and
+#'   dynamic-programming p-values, Methods). Staden, R. (1994), Searching for motifs in
+#'   nucleic acid sequences, Methods in Molecular Biology 25, 93-102.
 #' @export
 Motfom <- function(sequence, pwm, background = NULL, pseudocount = 0,
                    scale = 1000L) {

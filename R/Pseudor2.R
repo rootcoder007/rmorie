@@ -1,13 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Pseudo coefficients of determination for a logistic regression
 #'
-#' Source READ FROM THE CORPUS PDF, pages rendered with pdftoppm:
-#' Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
-#' section 8.4.6 "Pseudo Coefficients of Determination", printed pages
-#' 838-839, equations (8.70), (8.71) and (8.72):
-#' \code{R2_McF = 1 - LLmod / LL0},
-#' \code{R2_CS = 1 - (L0 / Lmod)^(2/n)} and
-#' \code{R2_N = R2_CS / (1 - L0^(2/n))}.
+#' Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+#' section 8.4.6 "Pseudo Coefficients of Determination", printed pages 838-839,
+#' equations (8.70), (8.71) and (8.72): \code{R2_McF = 1 - LLmod / LL0}, \code{R2_CS = 1 -
+#' (L0 / Lmod)^(2/n)} and \code{R2_N = R2_CS / (1 - L0^(2/n))}.
 #'
 #' Written on the log scale here so that L0 and Lmod never underflow:
 #' \code{R2_CS = 1 - exp(2 (LL0 - LLmod) / n)} and

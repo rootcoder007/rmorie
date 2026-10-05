@@ -25,7 +25,7 @@ NULL
 
 #' Shared parameters for morie_rdd_* estimators and diagnostics
 #'
-#' Roxygen-only stub holding the @param entries shared across the
+#' Roxygen-only block holding the @param entries shared across the
 #' RDD family (sharp / fuzzy / bias-corrected, McCrary / Cattaneo
 #' density, bandwidth selectors, covariate balance, placebo cutoffs,
 #' kink, donut, geographic, local randomisation, power, etc.).

@@ -1,12 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' The AlphaZero policy-and-value loss
 #'
-#' Silver et al. (2018), arXiv:1712.01815 (FETCHED), prints the loss
-#' verbatim: l = (z - v)^2 - pi' log p + c ||theta||^2 -- squared error on
-#' the value head, cross-entropy between the search policy and the network
-#' policy, and an L2 penalty.  Silver et al. (2017), Nature 550, 354-359,
-#' give the same expression; AlphaGo Zero used c = 1e-4.  The
-#' cross-entropy uses 0 log 0 = 0 and floors p at a tiny epsilon.
+#' Silver et al. (2018), arXiv:1712.01815, prints the loss verbatim: l = (z - v)^2 - pi'
+#' log p + c ||theta||^2 -- squared error on the value head, cross-entropy between the
+#' search policy and the network policy, and an L2 penalty. Silver et al. (2017), Nature
+#' 550, 354-359, give the same expression; AlphaGo Zero used c = 1e-4. The cross-entropy
+#' uses 0 log 0 = 0 and floors p at a tiny epsilon.
 #'
 #' @param z game outcome in \[-1, 1\].
 #' @param v value-head output.

@@ -39,12 +39,9 @@ break to the lowest action.
 Thomp(c(0.8, 0.2), 20, seed = 1)$counts
 }
 \references{
-Russo, D. J., Van Roy, B., Kazerouni, A., Osband, I. and
-Wen, Z. (2018). A tutorial on Thompson sampling. Foundations and
-Trends in Machine Learning 11(1), 1-96 (arXiv:1707.02038).
-Algorithm 3.2 (BernTS), Section 3 conjugate update.  Local source:
-fetched-wave3/russo-etal-2018-thompson-sampling-tutorial-arxiv1707.02038.pdf.
-Thompson, W. R. (1933). On the likelihood that one unknown
-probability exceeds another in view of the evidence of two
-samples. Biometrika 25(3-4), 285-294.
+Russo, D. J., Van Roy, B., Kazerouni, A., Osband, I. and Wen, Z. (2018).
+A tutorial on Thompson sampling. Foundations and Trends in Machine Learning 11(1),
+1-96 (arXiv:1707.02038). Algorithm 3.2 (BernTS), Section 3 conjugate update.
+Thompson, W. R. (1933). On the likelihood that one unknown probability exceeds
+another in view of the evidence of two samples. Biometrika 25(3-4), 285-294.
 }

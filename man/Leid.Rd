@@ -28,10 +28,9 @@ returned community is connected, which is why its partitions survive
 being looked at.
 }
 \details{
-An alias. The optimisation is \code{\link{Leidenclus}};
-\code{ledger/wave2/DUPMAP.tsv} records \code{leid} as a duplicate of
-\code{scleid} and it is the same algorithm on the same quality
-function, so only the calling convention differs here.
+An alias. The optimisation is \code{\link{Leidenclus}}; \code{leid} is the same
+method as \code{scleid} and it is the same algorithm on the same quality function, so
+only the calling convention differs here.
 
 Formula: local move, refinement, then aggregation, repeated -- Traag,
 Waltman and van Eck (2019).

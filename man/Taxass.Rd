@@ -33,8 +33,5 @@ ultrafast metagenomic sequence classification using exact
 alignments, Genome Biology 15(3), R46. Sequence classification
 algorithm (RTL scoring, tie to LCA), p. 8 and Figure 1. Wood,
 D. E., Lu, J. and Langmead, B. (2019), Improved metagenomic
-analysis with Kraken 2, Genome Biology 20, 257, Methods. Local
-sources:
-library/pdf/fetched-wave3/Wood-Salzberg-2014-Kraken1-GenomeBiology.pdf
-and Wood-Lu-Langmead-2019-Kraken2-GenomeBiology.pdf.
+analysis with Kraken 2, Genome Biology 20, 257, Methods.
 }

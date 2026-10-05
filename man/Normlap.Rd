@@ -25,7 +25,6 @@ Lcal(u, v) = 1 - w(v, v)/d_v if u = v and d_v != 0,
 Normlap(W = 5L)
 }
 \references{
-Chung (1997), Spectral Graph Theory, CBMS 92, Sections 1.2
-and 1.4: "L = T^-1/2 L T^-1/2 with the convention T^-1(v, v) = 0 for
-d_v = 0". Fetched from the author's own copy of the chapter.
+Chung (1997), Spectral Graph Theory, CBMS 92, Sections 1.2 and 1.4: "L =
+T^-1/2 L T^-1/2 with the convention T^-1(v, v) = 0 for d_v = 0".
 }

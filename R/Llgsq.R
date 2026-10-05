@@ -1,16 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Goodness of fit of a loglinear model: Pearson chi-squared and G^2
 #'
-#' Source READ FROM THE CORPUS PDF, page rendered with pdftoppm:
-#' Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
-#' section 8.5, printed page 851, equations (8.95) and (8.96):
-#' \code{chi2 = sum (y_ij - n p_ij)^2 / (n p_ij)} and
-#' \code{G2 = 2 sum y_ij log(y_ij / (n p_ij))}, with \code{sum y_ij = n}
-#' and p_ij the cell probabilities estimated under the model.  The book
-#' calls (8.95) the Pearson-residual statistic and (8.96) the
-#' likelihood-quotient statistic, notes that G2 is usually preferred
-#' because its minimum comes from the maximum-likelihood estimate, and
-#' states that both are asymptotically chi-squared.
+#' Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+#' section 8.5, printed page 851, equations (8.95) and (8.96): \code{chi2 = sum (y_ij -
+#' n p_ij)^2 / (n p_ij)} and \code{G2 = 2 sum y_ij log(y_ij / (n p_ij))}, with \code{sum
+#' y_ij = n} and p_ij the cell probabilities estimated under the model. The book calls
+#' (8.95) the Pearson-residual statistic and (8.96) the likelihood-quotient statistic,
+#' notes that G2 is usually preferred because its minimum comes from the
+#' maximum-likelihood estimate, and states that both are asymptotically chi-squared.
 #'
 #' The default model is independence (8.97),
 #' \code{log n pi_ij = mu + lam_i^X + lam_j^Y}, whose fitted counts are

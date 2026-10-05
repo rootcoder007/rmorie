@@ -32,7 +32,6 @@ ytilde mean alpha'/beta', variance (alpha'/beta')(1 + 1/beta')
 Poispred(y = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, beta = 0.5)
 }
 \references{
-Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
-Bayesian Data Analysis, 3rd edition, Sections 2.6 and 2.7. Fetched as
-the full text of the book from the author's own copy.
+Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013), Bayesian Data
+Analysis, 3rd edition, Sections 2.6 and 2.7.
 }

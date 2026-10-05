@@ -42,12 +42,10 @@ from the VanRaden variance split
 \eqn{\lambda = ((1-h^2)/h^2) \, 2 \sum_j p_j (1-p_j)}.
 }
 \references{
-Meuwissen, T. H. E., Hayes, B. J. and Goddard, M. E.
-(2001). Prediction of total genetic value using genome-wide dense
-marker maps. Genetics 157(4), 1819-1829, sec. BLUP estimation
-p. 1822 (fetched-wave3 PDF). Henderson, C. R. (1975). Biometrics
-31(2), 423-447. VanRaden, P. M. (2008). Journal of Dairy Science
-91(11), 4414-4423, via Montesinos-Lopez et al. (2022) Multivariate
-Statistical Machine Learning Methods for Genomic Prediction,
-Springer, sec. 2.4 and ch. 5.2 (local split PDFs).
+Meuwissen, T. H. E., Hayes, B. J. and Goddard, M. E. (2001). Prediction
+of total genetic value using genome-wide dense marker maps. Genetics 157(4),
+1819-1829, sec. BLUP estimation p. 1822. Henderson, C. R. (1975). Biometrics 31(2),
+423-447. VanRaden, P. M. (2008). Journal of Dairy Science 91(11), 4414-4423, via
+Montesinos-Lopez et al. (2022) Multivariate Statistical Machine Learning Methods
+for Genomic Prediction, Springer, sec. 2.4 and ch. 5.2 (local split PDFs).
 }

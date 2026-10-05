@@ -1,11 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' F-test for a nested pair of linear models (ESL eq. 3.13)
 #'
-#' Source READ FROM THE CORPUS PDF: Hastie, Tibshirani and Friedman,
-#' The Elements of Statistical Learning (2nd ed., 2009), section 3.2,
-#' equation (3.13):
-#' \code{F = ((RSS0 - RSS1)/(p1 - p0)) / (RSS1/(N - p1 - 1))}, which
-#' under the Gaussian null is \code{F(p1 - p0, N - p1 - 1)}.
+#' Source: Hastie, Tibshirani and Friedman, The Elements of Statistical Learning (2nd
+#' ed., 2009), section 3.2, equation (3.13): \code{F = ((RSS0 - RSS1)/(p1 - p0)) /
+#' (RSS1/(N - p1 - 1))}, which under the Gaussian null is \code{F(p1 - p0, N - p1 - 1)}.
 #'
 #' @param model0,model1 Integer column indices of \code{X} in each
 #'   model, 1-based; \code{model0} must be nested in \code{model1}.  An

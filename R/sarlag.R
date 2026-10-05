@@ -4,13 +4,11 @@
 #'
 #' \code{y = rho W y + X beta + eps}, \code{eps ~ N(0, sigma2 I)}.
 #'
-#' An alias. The estimator already exists as \code{\link{sarla}} -- the
-#' same concentrated maximum likelihood in \code{rho};
-#' \code{ledger/wave2/DUPMAP.tsv} records \code{sarlag} as a duplicate of
-#' \code{sarla}. Carrying the likelihood a second time would give two
-#' copies that agree with each other at 1e-9 forever and are never
-#' checked against anything else, so this only adapts the calling
-#' convention: \code{sarla} takes \code{(x, y, w)}, this takes
+#' An alias. The estimator already exists as \code{\link{sarla}} -- the same
+#' concentrated maximum likelihood in \code{rho}; \code{sarlag} is the same method as
+#' \code{sarla}. Carrying the likelihood a second time would give two copies that agree
+#' with each other at 1e-9 forever and are never checked against anything else, so this
+#' only adapts the calling convention: \code{sarla} takes \code{(x, y, w)}, this takes
 #' \code{(y, X, W)}.
 #'
 #' @param y Response, length n.

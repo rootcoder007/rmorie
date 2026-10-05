@@ -16,15 +16,13 @@ applied to one value at a time.  It must be fully specified.}
 list: statistic, u, n, method.
 }
 \description{
-Source READ FROM THE CORPUS PDF: Hedderich, Sachs and Reynarowych,
-Applied Statistics: Methods Using R, section 7.2.8, equation (7.33),
-citing Anderson and Darling (1952) and Stephens (1986b).  The corpus
-text layer renders (7.33) with two extraction defects, corrected here
-against the surrounding prose and Anderson and Darling (1952): the
-trailing "n sigma 2" is spillover from the neighbouring column and is
-not part of the statistic, and "1 - Y_\{N+1-i\}" is
-"1 - F(Y_\{N+1-i\})".  What is computed is the standard published form
-\code{A2 = -N - (1/N) sum_i (2i-1) (log u_i + log(1 - u_{N+1-i}))}
+Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+section 7.2.8, equation (7.33), citing Anderson and Darling (1952) and Stephens
+(1986b). The corpus text layer renders (7.33) with two extraction defects, corrected
+here against the surrounding prose and Anderson and Darling (1952): the trailing "n
+sigma 2" is spillover from the neighbouring column and is not part of the statistic,
+and "1 - Y_\{N+1-i\}" is "1 - F(Y_\{N+1-i\})". What is computed is the standard
+published form \code{A2 = -N - (1/N) sum_i (2i-1) (log u_i + log(1 - u_{N+1-i}))}
 with \code{u_i} the sorted probability-integral transforms.
 }
 \details{

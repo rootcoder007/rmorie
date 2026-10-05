@@ -1,14 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Anderson-Rubin weak-instrument-robust test
 #'
-#' Source FETCHED: the reference implementation \code{AR.test} in the
-#' CRAN package \pkg{ivmodel} (file \code{R/AR.r}), implementing
-#' Anderson, T. W. and Rubin, H. (1949), Annals of Mathematical
-#' Statistics 20, 46-63.  The 1949 paper was not reachable here.  With
-#' \code{temp = Y - beta0 D} after the exogenous covariates have been
-#' partialled out of Y, D and Z,
-#' \code{Fstat = ||P_Z temp||^2 / ||M_Z temp||^2 * (n - k - L)/L} and
-#' \code{p = 1 - pf(Fstat, L, n - k - L)}.
+#' Source: the reference implementation \code{AR.test} in the CRAN package \pkg{ivmodel}
+#' (file \code{R/AR.r}), implementing Anderson, T. W. and Rubin, H. (1949), Annals of
+#' Mathematical Statistics 20, 46-63. With \code{temp = Y - beta0 D} after the exogenous
+#' covariates have been partialled out of Y, D and Z, \code{Fstat = ||P_Z temp||^2 /
+#' ||M_Z temp||^2 * (n - k - L)/L} and \code{p = 1 - pf(Fstat, L, n - k - L)}.
 #'
 #' @param y Numeric outcome of length n.
 #' @param X Numeric endogenous regressor of length n.

@@ -38,10 +38,10 @@ per-dimension probabilities and admits no such trade.
 \code{D} is a scaling adjustment, 1 for the logistic metric and 1.702
 for the normal-ogive metric.
 
-The stub this replaces printed the exponent as
-\code{-(a1 theta1 + a2 theta2) + d}, which puts \code{d} outside the
-negation and inverts the role of the intercept. Equation (1) negates
-the whole linear predictor.
+Note the sign: the exponent is \code{-(a1 theta1 + a2 theta2 + d)};
+writing it as \code{-(a1 theta1 + a2 theta2) + d} puts \code{d} outside
+the negation and inverts the role of the intercept. Equation (1)
+negates the whole linear predictor.
 
 Nothing restricts this to two dimensions: \code{a} sets the dimension,
 and \code{Mirt3} is this function with three slopes and no guessing.

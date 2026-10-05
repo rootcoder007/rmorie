@@ -32,16 +32,14 @@ Sinkhlog(
 list: T, cost, f, g, estimate, err, n_iter, method.
 }
 \description{
-Cuturi (2013), Sinkhorn distances, NIPS 26, 2292-2300
-(arXiv:1306.0895), for the entropic problem; Schmitzer (2019),
-Stabilized sparse scaling algorithms for entropy regularized transport
-problems, SIAM J. Sci. Comput. 41(3), A1443-A1481 (arXiv:1610.06519 --
-FETCHED), for the log-domain stabilisation.  The iteration is f_i <-
-eps log a_i - eps logsumexp_j((g_j - C_ij)/eps), g_j <- eps log b_j -
-eps logsumexp_i((f_i - C_ij)/eps), T_ij = exp((f_i + g_j - C_ij)/eps):
-Sinkhorn's scaling with u = exp(f/eps), v = exp(g/eps) substituted out.
-u and v underflow at small eps while f and g do not, so the two forms
-are mathematically identical and numerically are not.
+Cuturi (2013), Sinkhorn distances, NIPS 26, 2292-2300 (arXiv:1306.0895), for the
+entropic problem; Schmitzer (2019), Stabilized sparse scaling algorithms for entropy
+regularized transport problems, SIAM J. Sci. Comput. 41(3), A1443-A1481
+(arXiv:1610.06519), for the log-domain stabilisation. The iteration is f_i <- eps log
+a_i - eps logsumexp_j((g_j - C_ij)/eps), g_j <- eps log b_j - eps logsumexp_i((f_i -
+C_ij)/eps), T_ij = exp((f_i + g_j - C_ij)/eps): Sinkhorn's scaling with u =
+exp(f/eps), v = exp(g/eps) substituted out. u and v underflow at small eps while f
+and g do not, so the two forms are mathematically identical and numerically are not.
 }
 \examples{
 Sinkhlog(c(0.5, 0.5), c(0.5, 0.5), matrix(c(0, 1, 1, 0), 2, 2), 0.5)$cost

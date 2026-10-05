@@ -39,11 +39,10 @@ list: estimate, states, pis, actions, zs, moves, final_state,
 method.
 }
 \description{
-Silver et al. (2018), arXiv:1712.01815 (FETCHED): a game is played by
-running MCTS at every move and playing a_t ~ pi_t, the normalised root
-visit count; the record is (s_t, pi_t, z) with z the outcome from the
-point of view of the player to move at t, and those triples are the
-targets for l = (z - v)^2 - pi' log p + c ||theta||^2.
+Silver et al. (2018), arXiv:1712.01815: a game is played by running MCTS at every
+move and playing a_t ~ pi_t, the normalised root visit count; the record is (s_t,
+pi_t, z) with z the outcome from the point of view of the player to move at t, and
+those triples are the targets for l = (z - v)^2 - pi' log p + c ||theta||^2.
 }
 \details{
 Determinism: selection is greedy once the temperature has decayed

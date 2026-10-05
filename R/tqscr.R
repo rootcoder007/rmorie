@@ -15,9 +15,9 @@
 #' @return List with \code{variance}, \code{rms}, \code{lower_bound},
 #'   \code{ratio}, \code{expected_max}, \code{b}, \code{d},
 #'   \code{n_keys}.
-#' @references Zandieh et al., arXiv:2504.19874, Theorem 2 and Theorem 3.
-#'   Fetched from arXiv. The expected_max figure is the standard Gaussian
-#'   maximum approximation and is NOT from the paper.
+#' @references Zandieh et al., arXiv:2504.19874, Theorem 2 and Theorem 3. The
+#'   expected_max figure is the standard Gaussian maximum approximation and is NOT from
+#'   the paper.
 #' @export
 #' @examples
 #' Scoredist(b = 5L, d = 5L)

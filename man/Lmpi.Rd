@@ -22,15 +22,13 @@ list: fit, lower, upper, se_fit, sigma, df, tquant, leverage,
 coef, level, mean.
 }
 \description{
-Source READ FROM THE CORPUS PDF, page rendered with pdftoppm:
-Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
-section 8.2.6, printed page 813, equations (8.36) and (8.37):
-\code{yhat0 +/- t_{n-p-1, 1-alpha/2} sigma sqrt(1 + x0' (X'X)^-1 x0)}
-and the same without the leading 1.  (8.36) is the interval for a
-single future observation; (8.37) is the narrower interval for a mean
-future value, carrying no Var(epsilon) term.  sigma is
-\code{sqrt(RSS / (n - p - 1))} and p is the number of predictors
-excluding the intercept.
+Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+section 8.2.6, printed page 813, equations (8.36) and (8.37): \code{yhat0 +/-
+t_{n-p-1, 1-alpha/2} sigma sqrt(1 + x0' (X'X)^-1 x0)} and the same without the
+leading 1. (8.36) is the interval for a single future observation; (8.37) is the
+narrower interval for a mean future value, carrying no Var(epsilon) term. sigma is
+\code{sqrt(RSS / (n - p - 1))} and p is the number of predictors excluding the
+intercept.
 }
 \details{
 The book worked example on the same page fits litter size on body

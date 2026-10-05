@@ -2,7 +2,7 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_bayesian_mds}
 \alias{morie_spatial_voting_bayesian_mds}
-\title{Bayesian MDS (stub) -- log-normal distances via Metropolis}
+\title{Bayesian MDS -- log-normal distances via Metropolis}
 \usage{
 morie_spatial_voting_bayesian_mds(
   D,
@@ -28,7 +28,7 @@ List: \code{positions}/\code{coords} (posterior-mean or modal
 configuration), fit diagnostics, and an \code{engine} tag.
 }
 \description{
-Bayesian MDS (stub) -- log-normal distances via Metropolis
+Bayesian MDS -- log-normal distances via Metropolis
 }
 \examples{
 if (requireNamespace("smacof", quietly = TRUE)) {

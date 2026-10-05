@@ -1,14 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Warm-started Sinkhorn from previously optimised potentials
 #'
-#' Schmitzer (2019), SIAM J. Sci. Comput. 41(3), A1443-A1481
-#' (arXiv:1610.06519 -- FETCHED): the epsilon-scaling scheme IS warm
-#' starting -- the potentials solved at one regularisation initialise the
-#' next, which is what makes small-epsilon problems tractable.  The
-#' scaling factors are recovered by u = exp(f/eps), v = exp(g/eps), the
-#' substitution the paper's section 3 makes explicit.  The saving is
-#' reported rather than asserted: n_iter and n_iter_cold are the counts
-#' with and without the warm start.
+#' Schmitzer (2019), SIAM J. Sci. Comput. 41(3), A1443-A1481 (arXiv:1610.06519): the
+#' epsilon-scaling scheme IS warm starting -- the potentials solved at one
+#' regularisation initialise the next, which is what makes small-epsilon problems
+#' tractable. The scaling factors are recovered by u = exp(f/eps), v = exp(g/eps), the
+#' substitution the paper's section 3 makes explicit. The saving is reported rather than
+#' asserted: n_iter and n_iter_cold are the counts with and without the warm start.
 #'
 #' @param a,b marginals.
 #' @param C cost matrix.

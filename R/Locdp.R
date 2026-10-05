@@ -14,7 +14,6 @@
 #' @references Warner, S. L. (1965). Randomized response. JASA 60(309),
 #'   63-69.
 #' @references Dwork, C., and Roth, A. (2014). FnT-TCS 9(3-4), section 3.2.
-#'   Local source: fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
 #'
 #' Delegating wrapper (not a bare assignment) so that source collation
 #' order does not matter at load time; the body is a single call to the

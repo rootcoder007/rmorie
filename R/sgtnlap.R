@@ -10,9 +10,8 @@
 #'
 #' @param W Symmetric non-negative weight matrix.
 #' @return List with \code{Lcal}, \code{degree}, \code{isolated}, \code{n}.
-#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Sections 1.2
-#'   and 1.4: "L = T^-1/2 L T^-1/2 with the convention T^-1(v, v) = 0 for
-#'   d_v = 0". Fetched from the author's own copy of the chapter.
+#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Sections 1.2 and 1.4: "L =
+#'   T^-1/2 L T^-1/2 with the convention T^-1(v, v) = 0 for d_v = 0".
 #' @export
 #' @examples
 #' Normlap(W = 5L)

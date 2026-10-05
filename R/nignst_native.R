@@ -27,10 +27,9 @@
 #'   \code{nu_n}, \code{sigma_n_sq}, \code{mu_scale_sq},
 #'   \code{pred_scale_sq}, \code{n}, \code{ybar}, \code{s_sq},
 #'   \code{method}.
-#' @references Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B.,
-#'   Vehtari, A. and Rubin, D. B. (2013), Bayesian Data Analysis,
-#'   3rd ed., Chapman and Hall/CRC, Section 3.3, Eqs. 3.7-3.8; local
-#'   copy fetched-wave3/gelman-etal-2013-bayesian-data-analysis-3ed.pdf.
+#' @references Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A. and
+#'   Rubin, D. B. (2013), Bayesian Data Analysis, 3rd ed., Chapman and Hall/CRC, Section
+#'   3.3, Eqs. 3.7-3.8.
 #' @export
 Nignst <- function(y, mu0, kappa0, nu0, sigma0_sq) {
   yv <- as.numeric(y)

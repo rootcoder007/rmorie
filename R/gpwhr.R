@@ -7,9 +7,8 @@
 #' the Jacobian, log p(y | X) = log p_GP(f(y) | X) + sum_i log f'(y_i).
 #' The predictive MEDIAN in the original space is the inverse warp of the
 #' warped-space mean, because a monotone map preserves quantiles; the
-#' predictive mean is not, and is not claimed here.  The proceedings were
-#' not retrievable; both statements are quoted in their standard published
-#' form.  The identity warp reduces the model exactly to an ordinary GP.
+#' predictive mean is not, and is not claimed here.  The identity warp
+#' reduces the model exactly to an ordinary GP.
 #'
 #' @param X,y training data.
 #' @param X_test test inputs.

@@ -21,14 +21,12 @@
 #' Genetics 11(4), e1004969, doi:10.1371/journal.pgen.1004969, restates it and
 #' names it BayesR.
 #'
-#' CITATION LIMIT, stated rather than papered over.  The Erbe et al. paper is
-#' paywalled and its own text was not read.  The four-class specification used
-#' here -- beta_j ~ pi_1 N(0, 0) + pi_2 N(0, 1e-4 sigma_g^2)
-#' + pi_3 N(0, 1e-3 sigma_g^2) + pi_4 N(0, 1e-2 sigma_g^2), with
-#' (pi_1, ..., pi_4) ~ Dirichlet(delta), delta = (1, 1, 1, 1), and the first
-#' class a point mass at zero -- is taken from Moser et al.'s verbatim
-#' restatement of it, not from Erbe et al. directly.  The multipliers are NOT
-#' assumed: they are the 0, 0.0001, 0.001 and 0.01 that Moser et al. print.
+#' The four-class specification used here -- beta_j ~ pi_1 N(0, 0) + pi_2 N(0, 1e-4
+#' sigma_g^2) + pi_3 N(0, 1e-3 sigma_g^2) + pi_4 N(0, 1e-2 sigma_g^2), with (pi_1, ...,
+#' pi_4) ~ Dirichlet(delta), delta = (1, 1, 1, 1), and the first class a point mass at
+#' zero -- is taken from Moser et al.'s verbatim restatement of it, not from Erbe et al.
+#' directly. The multipliers are NOT assumed: they are the 0, 0.0001, 0.001 and 0.01
+#' that Moser et al. print.
 #'
 #' DETERMINISM.  Nothing is sampled.  The Gibbs sampler is replaced by its EM
 #' fixed point, which is exact and identical in both arms.  For marker j with

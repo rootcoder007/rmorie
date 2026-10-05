@@ -1,15 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' AlphaZero's MCTS with a neural prior
 #'
-#' Silver et al. (2018), arXiv:1712.01815 (FETCHED), whose search is
-#' stated to be "identical to AlphaGo Zero" (Silver et al., Nature 550,
-#' 354-359), and Schrittwieser et al. (2020), arXiv:1911.08265 (FETCHED),
-#' appendix B, which prints all three phases.  Select descends by
-#' argmax_a Q(s,a) + c_puct P(s,a) sqrt(sum_b N(s,b)) / (1 + N(s,a)) --
-#' the c2 -> infinity limit of MuZero's rule; expand evaluates (p, v) once
-#' at the new leaf and sets N = W = Q = 0; backup walks the path back
-#' updating N, W and Q, negating the value each ply in a two-player game.
-#' The search policy is the normalised root visit count.
+#' Silver et al. (2018), arXiv:1712.01815, whose search is stated to be "identical to
+#' AlphaGo Zero" (Silver et al., Nature 550, 354-359), and Schrittwieser et al. (2020),
+#' arXiv:1911.08265, appendix B, which prints all three phases. Select descends by
+#' argmax_a Q(s,a) + c_puct P(s,a) sqrt(sum_b N(s,b)) / (1 + N(s,a)) -- the c2 ->
+#' infinity limit of MuZero's rule; expand evaluates (p, v) once at the new leaf and
+#' sets N = W = Q = 0; backup walks the path back updating N, W and Q, negating the
+#' value each ply in a two-player game. The search policy is the normalised root visit
+#' count.
 #'
 #' Determinism: a fixed simulation budget, never wall-clock; ties break to
 #' the lowest action index; root Dirichlet noise must be passed in.

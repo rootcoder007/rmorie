@@ -16,9 +16,9 @@ list: statistic, u, sigma, xi, n, method.
 }
 \description{
 Same A^2 statistic as \code{\link{Adgev}}, computed by
-\code{\link{Adcore}}, which holds the single implementation taken
-from the corpus PDF (Hedderich, Sachs and Reynarowych eq (7.33);
-Anderson and Darling 1952).  Only the probability-integral transform
+\code{\link{Adcore}}, which holds the single implementation
+(Hedderich, Sachs and Reynarowych eq (7.33); Anderson and Darling
+1952).  Only the probability-integral transform
 changes: here it is the generalized Pareto distribution function,
 Coles (2001) eq (4.2),
 \code{H(y) = 1 - (1 + xi y/sigma)^(-1/xi)} for \code{y > 0}, and

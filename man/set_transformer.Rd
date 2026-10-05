@@ -2,7 +2,7 @@
 % Please edit documentation in R/setT_mixedcase_native.R
 \name{set_transformer}
 \alias{set_transformer}
-\title{Back-compatible wrapper over \code{setT} (old stub name)}
+\title{Back-compatible wrapper over \code{setT} (old name)}
 \usage{
 set_transformer(X = NULL, k = NULL, S = NULL, params = NULL)
 }
@@ -16,5 +16,5 @@ set_transformer(X = NULL, k = NULL, S = NULL, params = NULL)
 \item{params}{See Usage.}
 }
 \description{
-Back-compatible wrapper over \code{setT} (old stub name)
+Back-compatible wrapper over \code{setT} (old name)
 }

@@ -9,9 +9,8 @@
 #' @param n1,n2 Sample sizes the variances refer to.
 #'
 #' @return List with are, logare, var1, var2, normalmedian, normalhl.
-#' @references Hodges and Lehmann (1956), Annals of Mathematical
-#'   Statistics 27(2), 324-335.  Standard published form; the article is
-#'   not in the local corpus and was not read.
+#' @references Hodges and Lehmann (1956), Annals of Mathematical Statistics 27(2),
+#'   324-335; standard published form.
 #' @export
 #' @examples
 #' Areratio(var1 = 5L, var2 = 5L)

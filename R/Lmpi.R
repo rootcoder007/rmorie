@@ -1,15 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Prediction and mean-response intervals for the linear regression model
 #'
-#' Source READ FROM THE CORPUS PDF, page rendered with pdftoppm:
-#' Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
-#' section 8.2.6, printed page 813, equations (8.36) and (8.37):
-#' \code{yhat0 +/- t_{n-p-1, 1-alpha/2} sigma sqrt(1 + x0' (X'X)^-1 x0)}
-#' and the same without the leading 1.  (8.36) is the interval for a
-#' single future observation; (8.37) is the narrower interval for a mean
-#' future value, carrying no Var(epsilon) term.  sigma is
-#' \code{sqrt(RSS / (n - p - 1))} and p is the number of predictors
-#' excluding the intercept.
+#' Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+#' section 8.2.6, printed page 813, equations (8.36) and (8.37): \code{yhat0 +/-
+#' t_{n-p-1, 1-alpha/2} sigma sqrt(1 + x0' (X'X)^-1 x0)} and the same without the
+#' leading 1. (8.36) is the interval for a single future observation; (8.37) is the
+#' narrower interval for a mean future value, carrying no Var(epsilon) term. sigma is
+#' \code{sqrt(RSS / (n - p - 1))} and p is the number of predictors excluding the
+#' intercept.
 #'
 #' The book worked example on the same page fits litter size on body
 #' weight and brain weight (n = 20, p = 2) and reports for

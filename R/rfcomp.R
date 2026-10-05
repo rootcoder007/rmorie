@@ -3,12 +3,12 @@
 #'
 #' Pison, G., Rousseeuw, P. J., Filzmoser, P. and Croux, C. (2003), "Robust
 #' factor analysis", Journal of Multivariate Analysis 84(1), 145-172.  The
-#' proposal of that paper is the one named in the stub docstring: run the
-#' classical factor-analytic machinery, but on a high-breakdown scatter matrix
-#' rather than on the sample covariance, the MCD being the estimator used.  The
-#' factor model itself is unchanged, Sigma = Lambda Lambda' + Psi, with Lambda
-#' the p-by-k loading matrix and Psi the diagonal matrix of uniquenesses;
-#' substituting the robust scatter for Sigma is what makes it resistant.
+#' proposal of that paper: run the classical factor-analytic machinery, but
+#' on a high-breakdown scatter matrix rather than on the sample covariance,
+#' the MCD being the estimator used.  The factor model itself is unchanged,
+#' Sigma = Lambda Lambda' + Psi, with Lambda the p-by-k loading matrix and Psi
+#' the diagonal matrix of uniquenesses; substituting the robust scatter for
+#' Sigma is what makes it resistant.
 #'
 #' Extraction here is principal factor analysis on the robust CORRELATION
 #' matrix implied by that scatter: the loadings are the first k eigenvectors

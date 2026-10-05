@@ -29,10 +29,7 @@ sum_j |beta_cj| (lasso)
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-doi:10.1007/978-3-030-89010-0.  Chapter 7, Eq. (7.7) p. 226 for the ridge penalty and
-Eq. (7.10) p. 227 for the lasso penalty.  The book states on p. 226 that only the
-slopes are penalized, never the intercepts.  Delegates to the chapter routine in
-morie.fn._gp_core, which was verified against this book in the earlier tranches of
-this shelf recorded in ledger/SHELF_LEDGER.txt; the page and equation number above are
-that routine's own, re-read against the chapter PDF here.
+doi:10.1007/978-3-030-89010-0. Chapter 7, Eq. (7.7) p. 226 for the ridge penalty and
+Eq. (7.10) p. 227 for the lasso penalty. The book states on p. 226 that only the
+slopes are penalized, never the intercepts.
 }

@@ -28,11 +28,8 @@ relabelled.
 An alias. This is the SARAR model of \code{\link{Sarmix}} at
 \code{W1 = W2 = W}; LeSage and Pace (2009) call it the SAC
 specification and note it is the general nesting model from which SAR
-(\code{lam = 0}) and SEM (\code{rho = 0}) drop out. Carrying the
-concentrated likelihood a second time would give two copies that agree
-with each other at 1e-9 forever and are never checked against anything
-else, so this only fixes the second weights argument; the audit note
-is recorded in \code{ledger/wave2/DUPMAP.tsv}.
+(\code{lam = 0}) and SEM (\code{rho = 0}) drop out. This function only
+fixes the second weights argument.
 }
 \examples{
 # See the package vignettes for usage examples:

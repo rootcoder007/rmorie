@@ -2,14 +2,13 @@
 #' DR-DiD with a stratified cluster-block bootstrap interval
 #'
 #' Sant'Anna and Zhao (2020), Journal of Econometrics 219(1), 101-122
-#' (arXiv:1812.01723 -- FETCHED), equations (2.6)-(2.7) and section 3.2;
-#' Cameron, Gelbach and Miller (2008), Bootstrap-based improvements for
-#' inference with clustered errors, Review of Economics and Statistics
-#' 90(3), 414-427, for the rule that the resampling unit must be the
-#' cluster when errors are correlated within it.  The 2008 paper is
-#' paywalled; the cluster-as-unit rule is stated identically wherever the
-#' cluster bootstrap is defined.  One multiplier is therefore drawn per
-#' cluster and applied to every member.
+#' (arXiv:1812.01723), equations (2.6)-(2.7) and section 3.2; Cameron, Gelbach and
+#' Miller (2008), Bootstrap-based improvements for inference with clustered errors,
+#' Review of Economics and Statistics 90(3), 414-427, for the rule that the resampling
+#' unit must be the cluster when errors are correlated within it. The 2008 paper is
+#' paywalled; the cluster-as-unit rule is stated identically wherever the cluster
+#' bootstrap is defined. One multiplier is therefore drawn per cluster and applied to
+#' every member.
 #'
 #' Determinism: Mammen's two-point weights at van der Corput points,
 #' indexed by cluster; no random resampling.

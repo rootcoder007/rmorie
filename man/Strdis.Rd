@@ -32,8 +32,7 @@ B <- A; B[1, 3] <- B[3, 1] <- 1
 Strdis(A, B)
 }
 \references{
-Koutra, D., Vogelstein, J. T. and Faloutsos, C. (2013).
-DeltaCon: a principled massive-graph similarity function. SIAM SDM
-2013, arXiv:1304.4657, eqs. (2.2), (3.3), Table 1, Algorithm 1.
-Archived: fetched-wave3/koutra-2013-deltacon.pdf.
+Koutra, D., Vogelstein, J. T. and Faloutsos, C. (2013). DeltaCon: a
+principled massive-graph similarity function. SIAM SDM 2013, arXiv:1304.4657, eqs.
+(2.2), (3.3), Table 1, Algorithm 1.
 }

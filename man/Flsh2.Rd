@@ -36,8 +36,7 @@ implementation: this function delegates to
 Flsh2(matrix(0, 1, 1), matrix(c(1, 3), 2, 1), matrix(c(1, 3), 2, 1))$output
 }
 \references{
-Dao, T., Fu, D. Y., Ermon, S., Rudra, A. and Re, C.
-(2022), FlashAttention: Fast and Memory-Efficient Exact Attention
-with IO-Awareness, NeurIPS 35, arXiv:2205.14135, Algorithm 1.
-Source PDF: fetched-wave3/dao-etal-2022-flashattention-arxiv2205.14135.pdf.
+Dao, T., Fu, D. Y., Ermon, S., Rudra, A. and Re, C. (2022),
+FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness,
+NeurIPS 35, arXiv:2205.14135, Algorithm 1.
 }

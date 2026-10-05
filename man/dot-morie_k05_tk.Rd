@@ -19,7 +19,6 @@
 A list with \code{tk}, \code{s}.
 }
 \description{
-A step of the k05_tranche1 implementation. Called by \code{morie_snht}.
-See the file header for the source the module follows.
-source it follows.
+Helper step. Called by \code{morie_snht}. See the file header for the source the
+module follows. source it follows.
 }

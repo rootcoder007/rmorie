@@ -12,9 +12,8 @@
 #' @param terms Terms of the alternating series used for H(t).
 #' @return List with \code{statistic}, \code{scaled}, \code{p_value},
 #'   \code{n1}, \code{n2}, \code{ties}.
-#' @references Wasserman (2004), All of Statistics, Section 15.4 and
-#'   Theorem 15.12, equation (15.14). Fetched as the full text of the
-#'   book.
+#' @references Wasserman (2004), All of Statistics, Section 15.4 and Theorem 15.12,
+#'   equation (15.14).
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

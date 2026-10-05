@@ -10,9 +10,9 @@
 #' 1/(12n) + sum_i ((2i-1)/(2n) - F(X_(i)))^2,}
 #' a finite sum with no discretisation error at all.
 #'
-#' This module previously carried a Kolmogorov-Smirnov body under the
-#' Cramer-von Mises name -- one of six modules in this shelf sharing a single
-#' copied KS implementation. It now computes what it says.
+#' This module previously carried a Kolmogorov-Smirnov body under the Cramer-von Mises
+#' name -- one of six modules in this package sharing a single copied KS implementation.
+#' It now computes what it says.
 #'
 #' Where KS uses a supremum and responds to the single worst point, CvM
 #' integrates the squared discrepancy against `dF` and responds to sustained

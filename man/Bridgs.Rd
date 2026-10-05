@@ -35,6 +35,5 @@ str(r, max.level = 1)
 }
 \references{
 Meng, X.-L. and Wong, W. H. (1996), Statistica Sinica
-6, 831-860, eq. (3.5), Sec. 4 (local:
-fetched-wave3/meng-wong-1996-bridge-sampling-statsinica.pdf).
+6, 831-860, eq. (3.5), Sec. 4.
 }

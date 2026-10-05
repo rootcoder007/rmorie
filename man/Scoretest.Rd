@@ -31,7 +31,6 @@ Scoretest(successes = 5L, n = 5L)
 \references{
 Rao (1948), Mathematical Proceedings of the Cambridge
 Philosophical Society 44(1), 50-57 -- the primary source for the
-score test. Wasserman (2004), All of Statistics, does NOT give the
-score test, so it is not cited for this formula; the full text of
-the book was fetched and searched to establish that.
+score test. Wasserman (2004), All of Statistics, does not give the
+score test, so it is not cited for this formula.
 }

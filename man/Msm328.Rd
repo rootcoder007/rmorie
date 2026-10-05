@@ -13,9 +13,8 @@ Msm328(...)
 The list returned by \code{Msm327()}.
 }
 \description{
-The stub generator stamped several extracted page fragments with the same
-function name, so the implementation lives once in \code{Msm327()} and this
-module re-exports it. Calling either path runs the same code.
+The same method as \code{Msm327()}, re-exported under this name; both run the same
+code.
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

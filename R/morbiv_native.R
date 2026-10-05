@@ -24,8 +24,7 @@
 #'   Santa Barbara.
 #'
 #'   Anselin, L. GeoDa workbook, Global Spatial Autocorrelation (2),
-#'   bivariate Moran scatter plot. Archived:
-#'   fetched-wave3/anselin-geoda-workbook-lab5b-bivariate-morans-i.html.
+#'   bivariate Moran scatter plot.
 #'
 #'   Reference implementation spdep moran_bv (CRAN, source read
 #'   directly).

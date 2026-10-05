@@ -7,10 +7,9 @@
 #'   positive degree.
 #' @return List with \code{Lrw}, \code{P}, \code{degree}, \code{rowsum_P},
 #'   \code{n}.
-#' @references von Luxburg (2007), A Tutorial on Spectral Clustering,
-#'   Statistics and Computing 17(4), 395-416, Section 3, which defines
-#'   L_rw = I - D^-1 W and notes it is "closely related to a random walk".
-#'   Fetched from arXiv:0711.0189.
+#' @references von Luxburg (2007), A Tutorial on Spectral Clustering, Statistics and
+#'   Computing 17(4), 395-416, Section 3, which defines L_rw = I - D^-1 W and notes it
+#'   is "closely related to a random walk".
 #' @export
 #' @examples
 #' Rwlap(W = 5L)

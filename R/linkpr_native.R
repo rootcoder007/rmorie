@@ -13,16 +13,12 @@
 #' @param method One of cn, aa, ra, all.
 #' @return List with the requested scores, common_neighbours (1-based),
 #'   estimate, u, v, n.
-#' @references Liben-Nowell, D. and Kleinberg, J. (2007). The
-#'   link-prediction problem for social networks. Journal of the
-#'   American Society for Information Science and Technology, 58(7),
-#'   1019-1031, Sec. 2. Archived:
-#'   fetched-wave3/libennowell-kleinberg-2007-link-prediction.pdf.
+#' @references Liben-Nowell, D. and Kleinberg, J. (2007). The link-prediction problem
+#'   for social networks. Journal of the American Society for Information Science and
+#'   Technology, 58(7), 1019-1031, Sec. 2.
 #'
-#'   Zhou, T., Lu, L. and Zhang, Y.-C. (2009). Predicting missing links
-#'   via local information. European Physical Journal B, 71, 623-630,
-#'   eq. (2). Archived:
-#'   fetched-wave3/zhou-2009-resource-allocation-link-prediction.pdf.
+#' Zhou, T., Lu, L. and Zhang, Y.-C. (2009). Predicting missing links via local
+#'   information. European Physical Journal B, 71, 623-630, eq. (2).
 #' @examples
 #' A <- matrix(0, 4, 4); A[1, 2] <- A[2, 1] <- 1
 #' A[1, 3] <- A[3, 1] <- 1; A[2, 4] <- A[4, 2] <- 1; A[3, 4] <- A[4, 3] <- 1

@@ -20,12 +20,11 @@ vector.}
 list: K, E_K, var_K, z, p_value, p_normal, alpha, n, method.
 }
 \description{
-Source READ FROM THE CORPUS PDF: Ghosal, S. and van der Vaart, A.
-(2017), Fundamentals of Nonparametric Bayesian Inference, section
-4.1.5, Proposition 4.8, crediting Antoniak (1974), Annals of
-Statistics 2, 1152-1174.  (The Antoniak paper was located only as a
-scanned image PDF with no text layer and could not be read; the
-Ghosal and van der Vaart statement is a primary textbook source.)
+Source: Ghosal, S. and van der Vaart, A. (2017), Fundamentals of Nonparametric
+Bayesian Inference, section 4.1.5, Proposition 4.8, crediting Antoniak (1974), Annals
+of Statistics 2, 1152-1174. (The Antoniak paper was located only as a scanned image
+PDF with no text layer and could not be read; the Ghosal and van der Vaart statement
+is a primary textbook source.)
 }
 \details{
 Proposition 4.8: for an atomless base measure of total mass M the

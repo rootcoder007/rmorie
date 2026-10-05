@@ -13,9 +13,8 @@
 #' @param F The true cdf at those points.
 #' @return List with \code{Fn}, \code{Gn}, \code{cov}, \code{sup_abs},
 #'   \code{n}, \code{k}.
-#' @references Kosorok (2008), Introduction to Empirical Processes and
-#'   Semiparametric Inference, Section 2.1, equation (2.5). Fetched as the
-#'   full text of the book.
+#' @references Kosorok (2008), Introduction to Empirical Processes and Semiparametric
+#'   Inference, Section 2.1, equation (2.5).
 #' @export
 Empproc <- function(x, t, F) {
   x <- .t1_vec(x)

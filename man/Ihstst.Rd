@@ -44,5 +44,5 @@ is.list(r)
 Voight, B. F., Kudaravalli, S., Wen, X. and Pritchard,
 J. K. (2006), PLoS Biology 4(3), e72, eqs. (1)-(2) and Materials
 and Methods "Calculation of iHS". Sabeti, P. C. et al. (2002),
-Nature 419, 832-837. Local: fetched-wave3 Voight-2006 PDF.
+Nature 419, 832-837.
 }

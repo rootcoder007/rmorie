@@ -44,7 +44,6 @@ conclusion cannot be tipped at all.
 }
 \references{
 Daniels and Hogan (2008), Missing Data in Longitudinal
-Studies, Chapman and Hall/CRC. The book was not in the local corpus
-and could not be obtained; the mean and tipping point above are
+Studies, Chapman and Hall/CRC. The mean and tipping point above are
 elementary consequences of the shift equation and are stated in full.
 }

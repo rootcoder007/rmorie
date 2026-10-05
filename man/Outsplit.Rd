@@ -35,9 +35,8 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Outsplit(V)
 }
 \references{
-Zandieh et al., arXiv:2504.19874, on splitting channels
-into outlier and non-outlier sets and applying two independent
-TurboQuant instances with higher precision for outliers. Fetched from
-arXiv. The paper does not fix the split RULE; magnitude-rank
+Zandieh et al., arXiv:2504.19874, on splitting channels into outlier and
+non-outlier sets and applying two independent TurboQuant instances with higher
+precision for outliers. The paper does not fix the split RULE; magnitude-rank
 selection is used here and documented as such.
 }

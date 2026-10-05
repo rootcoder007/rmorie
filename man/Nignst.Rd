@@ -38,8 +38,7 @@ centre mu_n and scale^2 sigma_n^2/kappa_n; the posterior predictive
 for one new observation has scale^2 sigma_n^2 (kappa_n + 1)/kappa_n.
 }
 \references{
-Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B.,
-Vehtari, A. and Rubin, D. B. (2013), Bayesian Data Analysis,
-3rd ed., Chapman and Hall/CRC, Section 3.3, Eqs. 3.7-3.8; local
-copy fetched-wave3/gelman-etal-2013-bayesian-data-analysis-3ed.pdf.
+Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A. and
+Rubin, D. B. (2013), Bayesian Data Analysis, 3rd ed., Chapman and Hall/CRC, Section
+3.3, Eqs. 3.7-3.8.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_bayesian_am}
 \alias{morie_spatial_voting_bayesian_am}
-\title{Bayesian Aldrich-McKelvey scaling (stub)}
+\title{Bayesian Aldrich-McKelvey scaling}
 \usage{
 morie_spatial_voting_bayesian_am(
   Z,
@@ -25,7 +25,7 @@ List: \code{zeta_mean}, \code{zeta_sd} (posterior stimulus
 positions), \code{sigma2}, \code{n_samples}, \code{engine}.
 }
 \description{
-Bayesian Aldrich-McKelvey scaling (stub)
+Bayesian Aldrich-McKelvey scaling
 }
 \examples{
 set.seed(1)

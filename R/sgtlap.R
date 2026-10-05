@@ -8,10 +8,9 @@
 #'
 #' @param W Symmetric non-negative weight matrix.
 #' @return List with \code{L}, \code{degree}, \code{rowsum}, \code{n}.
-#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.4,
-#'   which generalises the Section 1.2 definition to weighted graphs with
-#'   loops exactly as written above. Fetched from the author's own copy of
-#'   the chapter.
+#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.4, which
+#'   generalises the Section 1.2 definition to weighted graphs with loops exactly as
+#'   written above.
 #' @export
 #' @examples
 #' Graphlap(W = 5L)

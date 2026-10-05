@@ -32,8 +32,8 @@ Swiglu(
 list: estimate, out, gate, ffn, beta, method.
 }
 \description{
-Shazeer (2020), GLU variants improve transformer, arXiv:2002.05202
-(FETCHED), prints the family verbatim: ReGLU = max(0, xW + b) * (xV +
+Shazeer (2020), GLU variants improve transformer, arXiv:2002.05202,
+prints the family verbatim: ReGLU = max(0, xW + b) * (xV +
 c), GEGLU = GELU(xW + b) * (xV + c), SwiGLU = Swish_beta(xW + b) * (xV
 \itemize{
 \item c), with Swish_beta(z) = z sigma(beta z) (Ramachandran et al. 2017)

@@ -24,7 +24,6 @@ The value of \code{morie_jsonlt_to_json}.
 A step of the helpers_s03 implementation. Called by \code{.morie_to_json},
 \code{.s03json_write}, \code{jsonlite_toJSON_or_stub} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

@@ -36,9 +36,7 @@ x <- matrix(rep(c(1, 0), 6), ncol = 2, byrow = TRUE)
 Ucbb(x)$actions
 }
 \references{
-Auer, P., Cesa-Bianchi, N. and Fischer, P. (2002).
-Finite-time analysis of the multiarmed bandit problem. Machine
-Learning 47, 235-256.  Policy: figure 1, p. 237; bound: Theorem 1.
-Local source:
-fetched-wave3/auer-cesabianchi-fischer-2002-ucb1-finite-time-ML47.pdf.
+Auer, P., Cesa-Bianchi, N. and Fischer, P. (2002). Finite-time analysis
+of the multiarmed bandit problem. Machine Learning 47, 235-256. Policy: figure 1,
+p. 237; bound: Theorem 1.
 }

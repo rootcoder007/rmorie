@@ -24,8 +24,8 @@
 #'   \code{method}.
 #' @references Allen, R. G., Pereira, L. S., Raes, D. and Smith, M.
 #'   (1998), FAO Irrigation and Drainage Paper 56, Eqs. 6, 8, 13, 42,
-#'   Example 18. Local: fetched-wave3/fao56-x0490e0\{6,7,8\}.html,
-#'   zotarelli-2010-fao56-step-by-step-AE459.pdf.
+#'   Example 18; Zotarelli et al. (2010), Step by step calculation of the
+#'   Penman-Monteith evapotranspiration (FAO-56 method), AE459.
 #' @export
 #' @examples
 #' Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -113,8 +113,7 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 #'   \code{n_mod}, \code{method}.
 #' @references Gudmundsson, L., Bremnes, J. B., Haugen, J. E. and
 #'   Engen-Skaugen, T. (2012), HESS 16, 3383-3390,
-#'   \doi{10.5194/hess-16-3383-2012}, Eq. 2, Sec. 2.3.1. Local:
-#'   fetched-wave3/gudmundsson-2012-quantile-mapping-hess16-3383.pdf.
+#'   \doi{10.5194/hess-16-3383-2012}, Eq. 2, Sec. 2.3.1.
 #'   Wood et al. (2004) Climatic Change 62, 189-216; Boe et al.
 #'   (2007) Int J Climatology 27, 1643-1655; Maraun (2013) J Climate
 #'   26, 2137-2143.

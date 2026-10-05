@@ -26,15 +26,12 @@ list: coef_mean, coef_differential, se_mean, se_differential,
 t_mean, t_differential, p_mean, p_differential, n, method.
 }
 \description{
-Source FETCHED (reference implementation): \code{test_calibration} in
-the CRAN package \pkg{grf} (grf 2.6.1, \code{R/forest_summary.R}),
-implementing the calibration check of Chernozhukov, Demirer, Duflo
-and Fernandez-Val (2018), arXiv 1712.04802, in the form Athey and
-Wager (2019) use.  The package source regresses, with no intercept,
-\code{target = Y - Yhat} on
-\code{(W - What) * mean(tauhat)} and
-\code{(W - What) * (tauhat - mean(tauhat))}, with HC3 sandwich SEs
-and p-values converted to one-sided.
+Source: \code{test_calibration} in the CRAN package \pkg{grf} (grf 2.6.1,
+\code{R/forest_summary.R}), implementing the calibration check of Chernozhukov,
+Demirer, Duflo and Fernandez-Val (2018), arXiv 1712.04802, in the form Athey and
+Wager (2019) use. The package source regresses, with no intercept, \code{target = Y -
+Yhat} on \code{(W - What) * mean(tauhat)} and \code{(W - What) * (tauhat -
+mean(tauhat))}, with HC3 sandwich SEs and p-values converted to one-sided.
 }
 \details{
 The coefficient on the mean term tests whether the average treatment

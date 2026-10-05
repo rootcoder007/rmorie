@@ -37,8 +37,6 @@ C4[cbind(1:4, c(2, 3, 4, 1))] <- 1; C4 <- C4 + t(C4)
 LapEig(C4, k = 2)
 }
 \references{
-Belkin, M. and Niyogi, P. (2003). Laplacian eigenmaps
-for dimensionality reduction and data representation. Neural
-Computation, 15(6), 1373-1396, Secs. 2-3. Archived:
-fetched-wave3/belkin-niyogi-2003-laplacian-eigenmaps.pdf.
+Belkin, M. and Niyogi, P. (2003). Laplacian eigenmaps for dimensionality
+reduction and data representation. Neural Computation, 15(6), 1373-1396, Secs. 2-3.
 }

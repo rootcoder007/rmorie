@@ -335,7 +335,7 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 }
 
 # Compact aliases per ledger/NAMING.md
-#' Compact aliases per ledger/NAMING.md
+#' Compact aliases
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

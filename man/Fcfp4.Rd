@@ -44,13 +44,12 @@ Fcfp4(adjacency = 5L, features = 5L)
 \references{
 Rogers, D. and Hahn, M. (2010), "Extended-connectivity
 fingerprints", Journal of Chemical Information and Modeling 50(5),
-742-754, doi:10.1021/ci100050t, section on functional-class variants
--- paywalled at ACS, not read for this implementation.  Feature
-classes: Gobbi, A. and Poppinger, D. (1998), "Genetic optimization of
-combinatorial libraries", Biotechnology and Bioengineering 61(1),
-47-54, as transcribed in the RDKit source,
+742-754, doi:10.1021/ci100050t, section on functional-class variants.
+Feature classes: Gobbi, A. and Poppinger, D. (1998), "Genetic
+optimization of combinatorial libraries", Biotechnology and
+Bioengineering 61(1), 47-54, as transcribed in the RDKit source,
 Code/GraphMol/Fingerprints/FingerprintUtil.cpp lines 172-192 and
 211-240; rounds from MorganGenerator.cpp lines 395-495.  RDKit master
-revision fetched 2026-08-09.  RDKit: Open-Source Cheminformatics,
+revision of 2026-08-09.  RDKit: Open-Source Cheminformatics,
 https://www.rdkit.org.
 }

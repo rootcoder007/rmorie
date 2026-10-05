@@ -10,9 +10,9 @@
 #' @param x See Usage.
 #' @param K See Usage.
 #' @return List with ``basis`` (n by K+1), ``degree``, ``trig`` (cos form where |x| <= 1), ``n``.
-#' @references Chebyshev (1853). The original is not held locally; the recurrence
-#' T_\{n+1\} = 2 x T_n - T_\{n-1\} with T_0 = 1, T_1 = x and the identity T_n(cos t) =
-#' cos(n t) are the standard published definitions.
+#' @references Chebyshev (1853). The original is The recurrence T_\{n+1\} = 2 x T_n -
+#' T_\{n-1\} with T_0 = 1, T_1 = x and the identity T_n(cos t) = cos(n t) are the
+#' standard published definitions.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -240,7 +240,7 @@ morie_tmlcou <- function(y, D, X, offset = NULL, g = NULL,
                      "space; the logistic one cannot"))
 }
 
-#' Compact alias per ledger/NAMING.md
+#' Compact alias
 #' @rdname morie_tmlcou
 #' @export
 morie_tmlcountoutcome <- morie_tmlcou

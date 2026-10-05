@@ -19,13 +19,11 @@ Rootnoise(p, alpha = 0.3, eps = 0.25, eta = NULL)
 list: estimate, p_noisy, eta, entropy, alpha, eps, method.
 }
 \description{
-Silver et al. (2018), arXiv:1712.01815 (FETCHED), states that
-"Dirichlet noise Dir(alpha) was added to the prior probabilities in the
-root node".  The mixture P(s,a) = (1 - eps) p_a + eps eta_a with
-eta ~ Dir(alpha) is written out in Silver et al. (2017), Nature 550,
-354-359, and reproduced in Schrittwieser et al. (2020),
-arXiv:1911.08265 (FETCHED), appendix C; eps = 0.25 and alpha = 0.3,
-0.15, 0.03 for chess, shogi, Go.
+Silver et al. (2018), arXiv:1712.01815, states that "Dirichlet noise Dir(alpha) was
+added to the prior probabilities in the root node". The mixture P(s,a) = (1 - eps)
+p_a + eps eta_a with eta ~ Dir(alpha) is written out in Silver et al. (2017), Nature
+550, 354-359, and reproduced in Schrittwieser et al. (2020), arXiv:1911.08265,
+appendix C; eps = 0.25 and alpha = 0.3, 0.15, 0.03 for chess, shogi, Go.
 }
 \details{
 Determinism: a random Dirichlet draw would put the two arms out of

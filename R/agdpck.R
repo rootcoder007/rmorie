@@ -1,15 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Canonical serialisation of AlphaZero training data
 #'
-#' No equation here: Silver et al. (2018), arXiv:1712.01815 (FETCHED),
-#' says only that the (s, pi, z) triples are stored and sampled uniformly
-#' from the most recent games.  What this contributes is a canonical
-#' encoding, so the same buffer always yields the same bytes and the same
-#' digest whichever language wrote it.  The digest is a Rabin-Karp
-#' polynomial hash, h <- (131 h + c) mod (2^31 - 1), exact in double
-#' precision because every intermediate stays below 2^53.  It is not a
-#' cryptographic hash and is not presented as one.  Writing to disk is
-#' opt-in; by default nothing touches the filesystem.
+#' No equation here: Silver et al. (2018), arXiv:1712.01815, says only that the (s, pi,
+#' z) triples are stored and sampled uniformly from the most recent games. What this
+#' contributes is a canonical encoding, so the same buffer always yields the same bytes
+#' and the same digest whichever language wrote it. The digest is a Rabin-Karp
+#' polynomial hash, h <- (131 h + c) mod (2^31 - 1), exact in double precision because
+#' every intermediate stays below 2^53. It is not a cryptographic hash and is not
+#' presented as one. Writing to disk is opt-in; by default nothing touches the
+#' filesystem.
 #'
 #' @param replay_buffer rows of (s, pi..., z), or any nested numeric.
 #' @param path optional file to write the canonical text to.

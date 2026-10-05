@@ -1,17 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' One LLaMA decoder block
 #'
-#' Touvron et al. (2023), LLaMA: open and efficient foundation language
-#' models, arXiv:2302.13971 (FETCHED), section 2.2, lists the three
-#' departures from the original transformer: pre-normalisation -- "we
-#' normalize the input of each transformer sub-layer, instead of
-#' normalizing the output" -- with RMSNorm (Zhang and Sennrich 2019); the
-#' SwiGLU activation of Shazeer (2020); and rotary positional embeddings
-#' (Su et al. 2021, arXiv:2104.09864).  So the block is h = x +
-#' Attn(RMSNorm(x)), y = h + SwiGLU-FFN(RMSNorm(h)), with RoPE rotating
-#' each consecutive coordinate pair by m theta_j, theta_j =
-#' 10000^(-2j/d).  Attention here is single-head and causal; the caller
-#' supplies the projections, so nothing is invented.
+#' Touvron et al. (2023), LLaMA: open and efficient foundation language models,
+#' arXiv:2302.13971, section 2.2, lists the three departures from the original
+#' transformer: pre-normalisation -- "we normalize the input of each transformer
+#' sub-layer, instead of normalizing the output" -- with RMSNorm (Zhang and Sennrich
+#' 2019); the SwiGLU activation of Shazeer (2020); and rotary positional embeddings (Su
+#' et al. 2021, arXiv:2104.09864). So the block is h = x + Attn(RMSNorm(x)), y = h +
+#' SwiGLU-FFN(RMSNorm(h)), with RoPE rotating each consecutive coordinate pair by m
+#' theta_j, theta_j = 10000^(-2j/d). Attention here is single-head and causal; the
+#' caller supplies the projections, so nothing is invented.
 #'
 #' @param tokens token embeddings, one row per position.
 #' @param model optional list holding the projections by name.

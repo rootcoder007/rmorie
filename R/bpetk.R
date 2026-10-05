@@ -1,12 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Byte-pair-encoding subword tokenizer
 #'
-#' Sennrich, Haddow and Birch (2016), Neural machine translation of rare
-#' words with subword units, ACL 54, 1715-1725 (arXiv:1508.07909 --
-#' FETCHED), algorithm 1: represent every word as characters plus an
-#' end-of-word marker, count all adjacent symbol pairs across the corpus,
-#' merge the most frequent pair into a new symbol, and repeat.  The
-#' paper's own end-of-word marker (slash-w in angle brackets) is used.
+#' Sennrich, Haddow and Birch (2016), Neural machine translation of rare words with
+#' subword units, ACL 54, 1715-1725 (arXiv:1508.07909), algorithm 1: represent every
+#' word as characters plus an end-of-word marker, count all adjacent symbol pairs across
+#' the corpus, merge the most frequent pair into a new symbol, and repeat. The paper's
+#' own end-of-word marker (slash-w in angle brackets) is used.
 #'
 #' Determinism: ties in the pair counts break by first appearance in a
 #' fixed scan order, so the merge list is reproducible -- which is what a

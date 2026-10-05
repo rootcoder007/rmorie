@@ -47,6 +47,5 @@ maps for display of univariate and bivariate geographical data.
 Cartography and Geographic Information Systems, 19(4), 228-236.
 
 Reference implementation: Fortran subroutine hbin, src/hbin.f in
-CRAN hexbin 1.28.6. Archived:
-fetched-wave3/carr-hexbin_1.28.6-cran-source.tar.gz.
+CRAN hexbin 1.28.6.
 }

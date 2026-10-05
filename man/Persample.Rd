@@ -35,14 +35,13 @@ list: estimate, prob, weight, priority, beta_t, sample, n,
 method.
 }
 \description{
-Schaul, Quan, Antonoglou and Silver (2016), ICLR (arXiv:1511.05952 --
-FETCHED).  Section 3.3: P(i) = p_i^alpha / sum_k p_k^alpha (eq. 1),
-with p_i = |delta_i| + eps (proportional) or 1 / rank(i) (rank-based).
-Section 3.4: w_i = ((1/N)(1/P(i)))^beta (eq. 2), and, verbatim, "For
-stability reasons, we always normalize weights by 1/max_i w_i so that
-they only scale the update downwards"; algorithm 1 writes the same as
-w_j = (N P(j))^(-beta) / max_i w_i.  The paper's annealing of beta
-towards 1 is available via t and T.
+Schaul, Quan, Antonoglou and Silver (2016), ICLR (arXiv:1511.05952). Section 3.3:
+P(i) = p_i^alpha / sum_k p_k^alpha (eq. 1), with p_i = |delta_i| + eps (proportional)
+or 1 / rank(i) (rank-based). Section 3.4: w_i = ((1/N)(1/P(i)))^beta (eq. 2), and,
+verbatim, "For stability reasons, we always normalize weights by 1/max_i w_i so that
+they only scale the update downwards"; algorithm 1 writes the same as w_j = (N
+P(j))^(-beta) / max_i w_i. The paper's annealing of beta towards 1 is available via t
+and T.
 }
 \details{
 Determinism: an optional draw uses the inverse CDF of P at van der

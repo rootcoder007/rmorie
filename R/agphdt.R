@@ -1,14 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' AlphaZero policy head
 #'
-#' Silver et al. (2017), Nature 550, 354-359, methods, "Neural network
-#' architecture": a 1x1 convolution to two planes, batch normalisation, a
-#' rectifier, then a fully connected layer to the action space plus one,
-#' whose outputs are the logits of the move distribution.  Silver et al.
-#' (2018), arXiv:1712.01815 (FETCHED), keeps the same head.  The Nature
-#' paper is paywalled; the layer list is reproduced identically
-#' everywhere, and its only numeric content -- logits softmaxed over legal
-#' moves -- is unambiguous.
+#' Silver et al. (2017), Nature 550, 354-359, methods, "Neural network architecture": a
+#' 1x1 convolution to two planes, batch normalisation, a rectifier, then a fully
+#' connected layer to the action space plus one, whose outputs are the logits of the
+#' move distribution. Silver et al. (2018), arXiv:1712.01815, keeps the same head. The
+#' Nature paper is paywalled; the layer list is reproduced identically everywhere, and
+#' its only numeric content -- logits softmaxed over legal moves -- is unambiguous.
 #'
 #' @param x the feature planes, flattened.
 #' @param action_space number of actions.

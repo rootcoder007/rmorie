@@ -40,6 +40,5 @@ is.list(r)
 }
 \references{
 Sabeti, P. C., Varilly, P. et al. (2007), Nature
-449(7164), 913-918, Methods pp. 5-6. Local: fetched-wave3
-Sabeti-2007 PDF.
+449(7164), 913-918, Methods pp. 5-6.
 }

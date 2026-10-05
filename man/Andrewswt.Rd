@@ -23,7 +23,6 @@ Andrewswt(V)
 }
 \references{
 Andrews (1974), A robust method for multiple linear regression,
-Technometrics 16:523-531. Not held locally; w(z) = sin(z/A)/(z/A) for |z| <= A pi with
-A = 1.339 is as documented by statsmodels' AndrewWave norm, the reference
-implementation.
+Technometrics 16:523-531. W(z) = sin(z/A)/(z/A) for |z| <= A pi with A = 1.339 is as
+documented by statsmodels' AndrewWave norm, the reference implementation.
 }

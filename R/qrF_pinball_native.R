@@ -22,11 +22,9 @@
 #'   \code{n}, \code{tau}, \code{method}.
 #' @references Gneiting, T. (2011), Making and evaluating point
 #'   forecasts, Journal of the American Statistical Association
-#'   106(494), 746-762; arXiv:0912.0902, sec. 3.3 and Theorem 9
-#'   (source library/pdf/fetched-wave3/
-#'   gneiting-2011-quantiles-point-forecasts.pdf); Koenker, R. and
-#'   Bassett, G. (1978), Regression quantiles, Econometrica 46(1),
-#'   33-50.
+#'   106(494), 746-762; arXiv:0912.0902, sec. 3.3 and Theorem 9;
+#'   Koenker, R. and Bassett, G. (1978), Regression quantiles,
+#'   Econometrica 46(1), 33-50.
 #' @export
 Qrf <- function(y, y_hat, tau) {
   tau <- as.numeric(tau)

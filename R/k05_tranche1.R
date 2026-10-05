@@ -56,10 +56,8 @@
 
 #' .morie_k05_hits
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc},
-#' \code{morie_kupiec_var_test}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_christoffersen_cc}, \code{morie_kupiec_var_test}.
+#' See the file header for the source the module follows. source it follows.
 #'
 #' @param hits Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{h}, \code{t}, \code{n}.
@@ -73,10 +71,8 @@
 
 #' .morie_k05_lr_uc
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc},
-#' \code{morie_kupiec_var_test}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_christoffersen_cc}, \code{morie_kupiec_var_test}.
+#' See the file header for the source the module follows. source it follows.
 #'
 #' @param p Numeric; passed to \code{log}.
 #' @param t Numeric; combined arithmetically in the body.
@@ -123,9 +119,8 @@ morie_kupiec_var_test <- function(hits, alpha = 0.05) {
 
 #' .morie_k05_lr_ind
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_christoffersen_cc}. See the file header for the
+#' source the module follows. source it follows.
 #'
 #' @param h A vector; its length is taken and its elements indexed.
 #' @return A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11},
@@ -216,9 +211,8 @@ morie_var_backtest <- function(hits, alpha = 0.05) {
 
 #' .morie_k05_bns_one
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_bns_jump_test}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_bns_jump_test}. See the file header for the source
+#' the module follows. source it follows.
 #'
 #' @param r A vector; its length is taken.
 #' @return A list with \code{rv}, \code{bpv}, \code{tpq}, \code{z}.
@@ -291,9 +285,8 @@ morie_bns_jump_test <- function(r_intraday, block_index = NULL) {
 
 #' .morie_k05_tk
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_snht}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_snht}. See the file header for the source the
+#' module follows. source it follows.
 #'
 #' @param x A vector; indexed elementwise.
 #' @param n Numeric; combined arithmetically in the body.
@@ -357,10 +350,8 @@ morie_snht <- function(x, n_mc = 1999, seed = 0) {
 
 #' .morie_k05_acvf
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_sample_acf},
-#' \code{morie_sample_pacf}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_sample_acf}, \code{morie_sample_pacf}. See the
+#' file header for the source the module follows. source it follows.
 #'
 #' @param v Numeric; passed to \code{mean}.
 #' @param n Numeric; combined arithmetically in the body.
@@ -406,9 +397,8 @@ morie_sample_acf <- function(y, max_lag = 20) {
 
 #' R is indexed from 1 for lag 0, so r\[k + 1\] is lag k
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_sample_pacf}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_sample_pacf}. See the file header for the source
+#' the module follows. source it follows.
 #'
 #' @param r A vector; indexed elementwise.
 #' @param max_lag A count; the body uses it as \code{seq_len(...)}.

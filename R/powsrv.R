@@ -16,8 +16,7 @@
 #' @return List with \code{estimate}, \code{power}, \code{n_eff},
 #'   \code{ncp}, \code{z_crit}, \code{DEFF}, \code{n}.
 #' @references Lumley, T. (2010). Complex Surveys: A Guide to Analysis
-#'   Using R, Wiley. \doi{10.1002/9780470580066}. Standard form; the book
-#'   is not held locally.
+#'   Using R, Wiley. \doi{10.1002/9780470580066}. Standard form.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

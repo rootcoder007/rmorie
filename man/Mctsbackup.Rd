@@ -34,14 +34,13 @@ Mctsbackup(
 list: estimate, n, w, q, g, leaf, method.
 }
 \description{
-Schrittwieser et al. (2020), arXiv:1911.08265 (FETCHED), appendix B
-("Backup"), and Silver et al. (2017), Nature 550, 354-359: for every
-edge on the path, N <- N + 1, W <- W + G, Q <- W / N.  In a two-player
-zero-sum game the value is negated at each ply as it propagates, since
-a value is always from the point of view of the player to move; that
-is the \code{alternate} flag, and it is what makes the backup a minimax
-backup rather than a plain average.  MuZero's general form adds
-discounting and the intermediate rewards r_k, accepted as \code{rewards}.
+Schrittwieser et al. (2020), arXiv:1911.08265, appendix B ("Backup"), and Silver et
+al. (2017), Nature 550, 354-359: for every edge on the path, N <- N + 1, W <- W + G,
+Q <- W / N. In a two-player zero-sum game the value is negated at each ply as it
+propagates, since a value is always from the point of view of the player to move;
+that is the \code{alternate} flag, and it is what makes the backup a minimax backup rather
+than a plain average. MuZero's general form adds discounting and the intermediate
+rewards r_k, accepted as \code{rewards}.
 }
 \examples{
 Mctsbackup(0, 0.5, 1:3)$q

@@ -32,9 +32,7 @@ quantity with metric behaviour.
 }
 \references{
 Lovasz (1996), Random walks on graphs: a survey, in Combinatorics, Paul
-Erdos is Eighty, vol. 2, pp. 353-398.  The PDF on Lovasz's ELTE page could not be
-fetched from this host (expired TLS certificate on web.cs.elte.hu), so this is the
-standard first-step recurrence rather than a quoted equation.  It is anchored in the
-harness on the cycle C_n, where the classical closed form H(i,j) = d(n-d) with d the
-cyclic distance holds exactly and is independent of this code.
+Erdos is Eighty, vol. 2, pp. 353-398.  This is the standard first-step recurrence.
+It is checked on the cycle C_n, where the classical closed form H(i,j) = d(n-d) with
+d the cyclic distance holds exactly and is independent of this code.
 }

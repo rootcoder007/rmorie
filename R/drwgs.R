@@ -2,17 +2,15 @@
 #' Propensity-only, outcome-only and doubly robust DiD side by side
 #'
 #' Sant'Anna and Zhao (2020), Journal of Econometrics 219(1), 101-122
-#' (arXiv:1812.01723 -- FETCHED).  The paper's whole argument is a
-#' comparison of weighting strategies, so all three are computed: the
-#' outcome regression of Heckman, Ichimura and Todd (1997), Review of
-#' Economic Studies 64(4), 605-654, tau = E[(D/E\[D\])(dY - mu_0(X))]; the
-#' inverse propensity estimator of Abadie (2005), Review of Economic
-#' Studies 72(1), 1-19, tau = E[(D - pi(X)) dY / (E[D](1 - pi(X)))]; and
-#' the DR estimator, eq. (2.6).  The first is consistent only if mu_0 is
-#' right, the second only if pi is, the third if either is -- so a large
-#' gap between the first two is the diagnostic the paper is built around.
-#' The 1997 and 2005 papers are paywalled; both estimands are restated in
-#' section 2 of Sant'Anna and Zhao, which was fetched.
+#' (arXiv:1812.01723). The paper's whole argument is a comparison of weighting
+#' strategies, so all three are computed: the outcome regression of Heckman, Ichimura
+#' and Todd (1997), Review of Economic Studies 64(4), 605-654, tau = E[(D/E\[D\])(dY -
+#' mu_0(X))]; the inverse propensity estimator of Abadie (2005), Review of Economic
+#' Studies 72(1), 1-19, tau = E[(D - pi(X)) dY / (E[D](1 - pi(X)))]; and the DR
+#' estimator, eq. (2.6). The first is consistent only if mu_0 is right, the second only
+#' if pi is, the third if either is -- so a large gap between the first two is the
+#' diagnostic the paper is built around. Both earlier estimands are as restated in
+#' section 2 of Sant'Anna and Zhao.
 #'
 #' @param y outcome change, or period-1 outcome when y0 is given.
 #' @param D treatment indicator.

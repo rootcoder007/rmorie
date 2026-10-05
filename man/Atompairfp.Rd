@@ -27,8 +27,7 @@ h = ((ta*1000003 + tb)*1000033 + dist) mod nbits with (ta, tb) sorted.
 Atompairfp(adjacency = 5L, atomtype = 5L)
 }
 \references{
-Carhart, Smith and Venkataraghavan (1985), J. Chem. Inf.
-Comput. Sci. 25(2), 64-73.  Standard published form; the article is
-paywalled and was not read.  The folding hash is this
-implementation's own choice, stated rather than attributed.
+Carhart, Smith and Venkataraghavan (1985), J. Chem. Inf. Comput. Sci.
+25(2), 64-73. Standard published form; standard published form. The folding hash is
+this implementation's own choice, stated rather than attributed.
 }

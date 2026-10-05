@@ -26,12 +26,10 @@
 #' @return List with \code{joins} (per cycle: labels a, b, new, La,
 #'   Lb, S), \code{s0}, \code{final_labels}, \code{final_lengths},
 #'   \code{n}, \code{method}.
-#' @references Saitou, N. and Nei, M. (1987), The neighbor-joining
-#'   method: a new method for reconstructing phylogenetic trees,
-#'   Molecular Biology and Evolution 4(4), 406-425. Equations (1),
-#'   (4), (5), (6a), (6b), pp. 408-409; worked example Table 1,
-#'   Table 2 and Figure 3, pp. 410-411. Local source:
-#'   library/pdf/fetched-wave3/Saitou-Nei-1987-NeighborJoining-MBE.pdf.
+#' @references Saitou, N. and Nei, M. (1987), The neighbor-joining method: a new method
+#'   for reconstructing phylogenetic trees, Molecular Biology and Evolution 4(4),
+#'   406-425. Equations (1), (4), (5), (6a), (6b), pp. 408-409; worked example Table 1,
+#'   Table 2 and Figure 3, pp. 410-411.
 #' @export
 Phylotr <- function(distance, labels = NULL) {
   D <- as.matrix(distance)

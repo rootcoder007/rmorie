@@ -1,15 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' AlphaGo's fast rollout policy and its mixed leaf evaluation
 #'
-#' Silver et al. (2016), Mastering the game of Go with deep neural
-#' networks and tree search, Nature 529, 484-489.  The Nature paper is
-#' paywalled, but the equation it turns on is quoted identically
-#' everywhere and in its successors (Silver et al. 2017, Nature 550,
-#' 354-359; Silver et al. 2018, arXiv:1712.01815 -- FETCHED, which
-#' describes AlphaGo Zero as removing exactly this rollout):
-#' V(s_L) = (1 - lambda) v_theta(s_L) + lambda z_L, a convex mixture of
-#' the value network and the outcome of a fast rollout played out with
-#' pi_rollout.  AlphaGo used lambda = 0.5.
+#' Silver et al. (2016), Mastering the game of Go with deep neural networks and tree
+#' search, Nature 529, 484-489. The equation it turns on is quoted identically in its
+#' successors (Silver et al. 2017, Nature 550, 354-359; Silver et al. 2018,
+#' arXiv:1712.01815, which describes AlphaGo Zero as removing exactly this rollout):
+#' V(s_L) = (1 - lambda) v_theta(s_L) + lambda z_L, a convex mixture of the value
+#' network and the outcome of a fast rollout played out with pi_rollout. AlphaGo used
+#' lambda = 0.5.
 #'
 #' Determinism: the rollout is not sampled from a generator.  Actions come
 #' from a caller-supplied uniform stream or, by default, from the inverse

@@ -9,7 +9,7 @@
 
 #' Shared parameters for morie_survey_* design-based estimators
 #'
-#' Roxygen-only stub holding the @param entries shared across the
+#' Roxygen-only block holding the @param entries shared across the
 #' survey family (HT, Hajek, ratio, calibration, post-stratification,
 #' subpopulation, complex-design GLM, mean). Functions reference these
 #' via `@inheritParams morie_survey_params`.

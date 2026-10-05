@@ -33,8 +33,7 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Kvquant(V)
 }
 \references{
-Zandieh et al., arXiv:2504.19874, Algorithm 1 lines 2-11
-and Theorem 1. Fetched from arXiv. The paper specifies the codebook
-only as the MSE-minimising centroids; the Lloyd-Max construction is
-documented in the batch helper .kvmse_codebook.
+Zandieh et al., arXiv:2504.19874, Algorithm 1 lines 2-11 and Theorem 1.
+The paper specifies the codebook only as the MSE-minimising centroids; the
+Lloyd-Max construction is documented in the batch helper .kvmse_codebook.
 }

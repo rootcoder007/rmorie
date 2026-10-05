@@ -7,10 +7,9 @@
 #' non-differentiable corner at zero is exactly the feature that produces
 #' exact zeros rather than merely small numbers.
 #'
-#' An alias. The solver is \code{\link{Esllso}};
-#' \code{ledger/wave2/DUPMAP.tsv} records \code{lassrg} as a duplicate of
-#' \code{esllso} and it is the same problem solved the same way, so only
-#' the argument order differs here.
+#' An alias. The solver is \code{\link{Esllso}}; \code{lassrg} is the same method as
+#' \code{esllso} and it is the same problem solved the same way, so only the argument
+#' order differs here.
 #'
 #' Formula: \code{min_beta ||y - X beta||^2 + lambda ||beta||_1} --
 #' Tibshirani (1996).

@@ -27,9 +27,7 @@ h_G = min_S h_G(S); Sgtcheegerbound inequality 2 h_G >= lambda_1 > h_G^2 / 2,
 and the sharper lambda_1 >= 1 - sqrt(1 - h_G^2)
 }
 \references{
-Chung (1997), Spectral Graph Theory, CBMS 92, Section 2.2,
-equations (2.1) and (2.2) for h_G(S) and h_G; Theorem 2.2 for
-2 h_G >= lambda_1 > h_G^2 / 2; Theorem 2.3 for
-lambda_1 >= 1 - sqrt(1 - h_G^2). Fetched from the author's own copy
-of the chapter.
+Chung (1997), Spectral Graph Theory, CBMS 92, Section 2.2, equations
+(2.1) and (2.2) for h_G(S) and h_G; Theorem 2.2 for 2 h_G >= lambda_1 > h_G^2 / 2;
+Theorem 2.3 for lambda_1 >= 1 - sqrt(1 - h_G^2).
 }

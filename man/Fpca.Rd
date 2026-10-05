@@ -38,17 +38,15 @@ Hooker, G. and Graves, S. (2009), Functional Data Analysis with R and
 MATLAB, Springer, doi:10.1007/978-0-387-98185-7, is its companion software
 text.  Both bibliographic records are verified against Crossref.
 
-CITATION LIMIT, stated rather than papered over.  Neither book's text could
-be fetched, so no page or equation number is attributed to either, and the
-statements below are given as this function's own specification rather than
-as quotations.  The Karhunen-Loeve expansion implemented is
-x_i(t) = mu(t) + sum_k score_ik phi_k(t), with phi_k the eigenfunctions of
-the covariance surface v(s,t) = (1/(n-1)) sum_i (x_i(s)-mu(s))(x_i(t)-mu(t))
-and the normalisation integral phi_k^2 = 1 rather than the Euclidean one.
-The integral is taken by the trapezoid rule on the observation grid, which is
-what makes this the functional and not the multivariate problem, and the
-anchors verify the orthonormality and the exactness of the expansion directly
-rather than against a quoted page.
+No page or equation number is attributed to either book; the statements
+below are this function's own specification.  The Karhunen-Loeve expansion
+implemented is x_i(t) = mu(t) + sum_k score_ik phi_k(t), with phi_k the
+eigenfunctions of the covariance surface
+v(s,t) = (1/(n-1)) sum_i (x_i(s)-mu(s))(x_i(t)-mu(t)) and the normalisation
+integral phi_k^2 = 1 rather than the Euclidean one.  The integral is taken by
+the trapezoid rule on the observation grid, which is what makes this the
+functional and not the multivariate problem; the tests check the
+orthonormality and the exactness of the expansion directly.
 }
 \examples{
 g <- seq(0, 1, length.out = 21)

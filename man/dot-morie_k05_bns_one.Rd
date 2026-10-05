@@ -13,7 +13,6 @@
 A list with \code{rv}, \code{bpv}, \code{tpq}, \code{z}.
 }
 \description{
-A step of the k05_tranche1 implementation. Called by \code{morie_bns_jump_test}.
-See the file header for the source the module follows.
-source it follows.
+Helper step. Called by \code{morie_bns_jump_test}. See the file header for the source
+the module follows. source it follows.
 }

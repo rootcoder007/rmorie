@@ -66,7 +66,7 @@ to the survey-weighted GLM.}
 \item{tol}{Convergence tolerance for calibration.}
 }
 \description{
-Roxygen-only stub holding the @param entries shared across the
+Roxygen-only block holding the @param entries shared across the
 survey family (HT, Hajek, ratio, calibration, post-stratification,
 subpopulation, complex-design GLM, mean). Functions reference these
 via \verb{@inheritParams morie_survey_params}.

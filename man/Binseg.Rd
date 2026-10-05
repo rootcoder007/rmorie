@@ -33,11 +33,8 @@ changepoints. Method originally due to Scott and Knott (1974).
 Binseg(x = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
 }
 \references{
-Killick, R., Fearnhead, P. and Eckley, I. A. (2012),
-Journal of the American Statistical Association 107(500),
-1590-1598 (arXiv:1101.1438), Sec. 2.1 eq 2; Scott, A. J. and
-Knott, M. (1974), A cluster analysis method for grouping means in
-the analysis of variance, Biometrics 30(3), 507-512. Source:
-fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
-changepoint-linear-cost.pdf
+Killick, R., Fearnhead, P. and Eckley, I. A. (2012), Journal of the
+American Statistical Association 107(500), 1590-1598 (arXiv:1101.1438), Sec. 2.1 eq
+2; Scott, A. J. and Knott, M. (1974), A cluster analysis method for grouping means
+in the analysis of variance, Biometrics 30(3), 507-512.
 }

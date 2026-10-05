@@ -1,14 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' DeiT distillation loss
 #'
-#' Touvron, Cord, Douze, Massa, Sablayrolles and Jegou (2021), Training
-#' data-efficient image transformers and distillation through attention,
-#' ICML 139, 10347-10357 (arXiv:2012.12877 -- FETCHED).  Soft
-#' distillation, eq. (2): L = (1 - lambda) L_CE(psi(Z_s), y) + lambda
-#' tau^2 KL(psi(Z_s/tau), psi(Z_t/tau)).  Hard-label distillation, eq.
-#' (3): L = (1/2) L_CE(psi(Z_s), y) + (1/2) L_CE(psi(Z_s), y_t) with y_t =
-#' argmax_c Z_t(c).  The paper finds the hard variant works better and
-#' uses it for the distillation token, so mode = "hard" is the default.
+#' Touvron, Cord, Douze, Massa, Sablayrolles and Jegou (2021), Training data-efficient
+#' image transformers and distillation through attention, ICML 139, 10347-10357
+#' (arXiv:2012.12877). Soft distillation, eq. (2): L = (1 - lambda) L_CE(psi(Z_s), y) +
+#' lambda tau^2 KL(psi(Z_s/tau), psi(Z_t/tau)). Hard-label distillation, eq. (3): L =
+#' (1/2) L_CE(psi(Z_s), y) + (1/2) L_CE(psi(Z_s), y_t) with y_t = argmax_c Z_t(c). The
+#' paper finds the hard variant works better and uses it for the distillation token, so
+#' mode = "hard" is the default.
 #'
 #' @param x student logits Z_s.
 #' @param teacher teacher logits Z_t.

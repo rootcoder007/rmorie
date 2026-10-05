@@ -16,10 +16,9 @@
 #' @return List with \code{outlier_index}, \code{n_outlier},
 #'   \code{effective_bits}, \code{outlier_energy}, \code{threshold},
 #'   \code{d}.
-#' @references Zandieh et al., arXiv:2504.19874, on splitting channels
-#'   into outlier and non-outlier sets and applying two independent
-#'   TurboQuant instances with higher precision for outliers. Fetched from
-#'   arXiv. The paper does not fix the split RULE; magnitude-rank
+#' @references Zandieh et al., arXiv:2504.19874, on splitting channels into outlier and
+#'   non-outlier sets and applying two independent TurboQuant instances with higher
+#'   precision for outliers. The paper does not fix the split RULE; magnitude-rank
 #'   selection is used here and documented as such.
 #' @export
 #' @examples

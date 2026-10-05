@@ -12,10 +12,9 @@
 #' @param G1,G2 Adjacency matrices on the same node set.
 #' @param eps Optional override of the influence constant.
 #' @return List with distance, similarity, estimate, eps, n.
-#' @references Koutra, D., Vogelstein, J. T. and Faloutsos, C. (2013).
-#'   DeltaCon: a principled massive-graph similarity function. SIAM SDM
-#'   2013, arXiv:1304.4657, eqs. (2.2), (3.3), Table 1, Algorithm 1.
-#'   Archived: fetched-wave3/koutra-2013-deltacon.pdf.
+#' @references Koutra, D., Vogelstein, J. T. and Faloutsos, C. (2013). DeltaCon: a
+#'   principled massive-graph similarity function. SIAM SDM 2013, arXiv:1304.4657, eqs.
+#'   (2.2), (3.3), Table 1, Algorithm 1.
 #' @examples
 #' A <- matrix(0, 3, 3); A[1, 2] <- A[2, 1] <- 1; A[2, 3] <- A[3, 2] <- 1
 #' B <- A; B[1, 3] <- B[3, 1] <- 1

@@ -40,11 +40,9 @@ blocks[3, 4] <- blocks[4, 3] <- 1
 LuvR(blocks)
 }
 \references{
-Blondel, V. D., Guillaume, J.-L., Lambiotte, R. and
-Lefebvre, E. (2008). Fast unfolding of communities in large
-networks. Journal of Statistical Mechanics, P10008, Sec. 2,
-arXiv:0803.0476. Archived:
-fetched-wave3/blondel-2008-fast-unfolding-louvain.pdf.
+Blondel, V. D., Guillaume, J.-L., Lambiotte, R. and Lefebvre, E. (2008).
+Fast unfolding of communities in large networks. Journal of Statistical Mechanics,
+P10008, Sec. 2, arXiv:0803.0476.
 
 Reichardt, J. and Bornholdt, S. (2006). Statistical mechanics of
 community detection. Physical Review E, 74, 016110.

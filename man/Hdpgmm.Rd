@@ -29,10 +29,10 @@ Hdpgmm(
 list: estimate, loglik, mu, sigma, pi, beta, n, method.
 }
 \description{
-Teh, Jordan, Beal and Blei (2006), JASA 101(476), 1566-1581 (FETCHED),
-eqs. (2) and (19), applied to a Gaussian likelihood: every group has
-its own mixing proportions but the COMPONENT LOCATIONS are shared,
-which is the entire reason for the hierarchy (their section 3).
+Teh, Jordan, Beal and Blei (2006), JASA 101(476), 1566-1581, eqs. (2) and (19),
+applied to a Gaussian likelihood: every group has its own mixing proportions but the
+COMPONENT LOCATIONS are shared, which is the entire reason for the hierarchy (their
+section 3).
 }
 \details{
 Determinism: locations fitted by EM with the HDP weights entering as

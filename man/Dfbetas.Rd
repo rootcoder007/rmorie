@@ -26,8 +26,8 @@ Dfbetas(V, V)
 }
 \references{
 Belsley, Kuh and Welsch (1980), Regression Diagnostics: Identifying
-Influential Data and Sources of Collinearity, Wiley. The book is not held locally; the
-definitions and the cutoffs used here (2/sqrt(n) for DFBETAS, 2 sqrt(p/n) for DFFITS,
-scaling by the delete-one root mean square s_(i)) are as documented by the SAS and R
-reference implementations, which cite BKW for them.
+Influential Data and Sources of Collinearity, Wiley. The definitions and the cutoffs
+used here (2/sqrt(n) for DFBETAS, 2 sqrt(p/n) for DFFITS, scaling by the delete-one
+root mean square s_(i)) are as documented by the SAS and R reference implementations,
+which cite BKW for them.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_bayesian_unfolding}
 \alias{morie_spatial_voting_bayesian_unfolding}
-\title{Bayesian unfolding (stub) -- Bakker & Poole sampler}
+\title{Bayesian unfolding -- Bakker & Poole sampler}
 \usage{
 morie_spatial_voting_bayesian_unfolding(
   D,
@@ -26,7 +26,7 @@ List with respondent/stimulus configurations and an
 Metropolis sampler when smacof is absent).
 }
 \description{
-Bayesian unfolding (stub) -- Bakker & Poole sampler
+Bayesian unfolding -- Bakker & Poole sampler
 }
 \examples{
 if (requireNamespace("smacof", quietly = TRUE)) {

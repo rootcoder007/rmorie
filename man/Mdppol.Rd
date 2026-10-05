@@ -53,10 +53,7 @@ R <- matrix(c(1, 0, 0, 0), 2, byrow = TRUE)
 Mdppol(P, R, 0.5)$policy
 }
 \references{
-Sutton, R. S. and Barto, A. G. (2018). Reinforcement
-Learning: An Introduction, 2nd ed., MIT Press, Section 4.3, boxed
-algorithm p. 80.  Local source:
-fetched-wave3/sutton-barto-2018-reinforcement-learning-2nd-ed.pdf.
-Howard, R. A. (1960). Dynamic Programming and Markov Processes,
-MIT Press.
+Sutton, R. S. and Barto, A. G. (2018). Reinforcement Learning: An
+Introduction, 2nd ed., MIT Press, Section 4.3, boxed algorithm p. 80. Howard, R. A.
+(1960). Dynamic Programming and Markov Processes, MIT Press.
 }

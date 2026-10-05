@@ -2,7 +2,7 @@
 % Please edit documentation in R/timeRS_native.R
 \name{morie_timeRS_timesvdpp}
 \alias{morie_timeRS_timesvdpp}
-\title{Compact aliases per ledger/NAMING.md}
+\title{Compact aliases}
 \usage{
 morie_timeRS_timesvdpp(
   ratings,

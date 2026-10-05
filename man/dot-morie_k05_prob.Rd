@@ -23,7 +23,6 @@
 A numeric value.
 }
 \description{
-A step of the k05_tranche2 implementation. Called by \code{.morie_k05_info}, \code{morie_tcc}.
-See the file header for the source the module follows.
-source it follows.
+Helper step. Called by \code{.morie_k05_info}, \code{morie_tcc}. See the file header
+for the source the module follows. source it follows.
 }

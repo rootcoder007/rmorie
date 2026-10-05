@@ -34,9 +34,7 @@ Expmc(V, V)
 McSherry, F., and Talwar, K. (2007). Mechanism design via
 differential privacy. FOCS 2007, 94-103.
 
-Dwork, C., and Roth, A. (2014). FnT-TCS 9(3-4), 211-487.
-Definition 3.4.
-Local source: fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
+Dwork, C., and Roth, A. (2014). FnT-TCS 9(3-4), 211-487. Definition 3.4.
 
 Delegating wrapper (not a bare assignment) so that source collation
 order does not matter at load time; the body is a single call to the

@@ -1,12 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' AlphaZero action value Q(s, a)
 #'
-#' Schrittwieser et al. (2020), arXiv:1911.08265 (FETCHED), appendix B,
-#' writes Q(s,a) as the mean of the values backed up through the edge,
-#' W(s,a) / N(s,a) in the AlphaGo Zero notation (Silver et al., Nature
-#' 550, 354-359).  With counts N(s,a,z) of each distinct backed-up return
-#' v(z) this is Q(s,a) = sum_z N(s,a,z) v(z) / N(s,a).  An unvisited edge
-#' gets `unvisited`, which AlphaGo Zero sets to zero.
+#' Schrittwieser et al. (2020), arXiv:1911.08265, appendix B, writes Q(s,a) as the mean
+#' of the values backed up through the edge, W(s,a) / N(s,a) in the AlphaGo Zero
+#' notation (Silver et al., Nature 550, 354-359). With counts N(s,a,z) of each distinct
+#' backed-up return v(z) this is Q(s,a) = sum_z N(s,a,z) v(z) / N(s,a). An unvisited
+#' edge gets `unvisited`, which AlphaGo Zero sets to zero.
 #'
 #' @param N visit counts: a vector paired with W, or a matrix of
 #'   N(s,a,z) with actions in rows.

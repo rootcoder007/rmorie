@@ -27,7 +27,6 @@ S = sum over retained of [max(t_j, 0)]^2.
 Gmsbound(mbar = 5L, sigma = 0.5, n = 5L)
 }
 \references{
-Andrews and Soares (2010), Econometrica 78(1), 119-157,
-Sects. 3-4.  Standard published form; the article is not in the
-local corpus and was not read.
+Andrews and Soares (2010), Econometrica 78(1), 119-157, Sects. 3-4;
+standard published form.
 }

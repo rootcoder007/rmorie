@@ -16,7 +16,7 @@ list: BB, WW, BW, E_BB, E_WW, V_BB, V_WW, z_BB, z_WW, p_BB,
 p_WW, S0, S1, S2, n, method.
 }
 \description{
-Source FETCHED (reference implementation): \code{spdep::joincount.test}
+Source: the reference implementation \code{spdep::joincount.test}
 (Bivand, spdep 1.4-2, \code{R/jc.R}), whose comments cite Cliff, A. D.
 and Ord, J. K. (1981), Spatial Processes: Models and Applications,
 Pion, page 20, equations (1.31) and (1.32) for nonfree sampling:

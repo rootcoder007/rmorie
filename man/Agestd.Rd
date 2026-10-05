@@ -25,7 +25,7 @@ Agestd(V, V)
 }
 \references{
 Boyle and Parkin (1991), Statistical methods for registries, in Jensen et
-al (eds), Cancer Registration: Principles and Methods, IARC Scientific Publications
-95. Not held locally; the direct standardisation estimator and its Poisson variance
-are the standard published forms.
+al (eds), Cancer Registration: Principles and Methods, IARC Scientific Publications 95.
+The direct standardisation estimator and its Poisson variance are the standard
+published forms.
 }

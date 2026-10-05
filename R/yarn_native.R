@@ -23,9 +23,8 @@
 #' @return List with \code{theta}, \code{theta_new}, \code{rotations},
 #'   \code{gamma}, \code{temperature}, \code{logit_scale},
 #'   \code{scale}, \code{estimate}, \code{n}, \code{method}.
-#' @references Peng, B., Quesnelle, J., Fan, H. and Shippole, E.
-#'   (2023), arXiv:2309.00071, Sections 3.2-3.4, Eqs 17/18/20/22.
-#'   Local source: fetched-wave3/peng-etal-2023-yarn-arxiv2309.00071.pdf.
+#' @references Peng, B., Quesnelle, J., Fan, H. and Shippole, E. (2023),
+#'   arXiv:2309.00071, Sections 3.2-3.4, Eqs 17/18/20/22.
 #' @export
 Yarn <- function(base, s, d, L, beta_fast = 32, beta_slow = 1) {
   d <- as.integer(d)

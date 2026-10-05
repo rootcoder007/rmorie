@@ -26,6 +26,5 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Spatrend(V, V)
 }
 \references{
-Bivand, Pebesma and Gomez-Rubio (2013), Equation (8.5),
-p. 218.  Read from the corpus PDF.
+Bivand, Pebesma and Gomez-Rubio (2013), Equation (8.5), p. 218.
 }

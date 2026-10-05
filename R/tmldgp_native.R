@@ -269,7 +269,7 @@ morie_tmldgp <- function(y, D, X, penalty = 0.05, iters = 100) {
                      "score equation"))
 }
 
-#' Compact alias per ledger/NAMING.md
+#' Compact alias
 #' @rdname morie_tmldgp
 #' @export
 morie_penalisedtmle <- morie_tmldgp

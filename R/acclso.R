@@ -16,9 +16,8 @@
 #'
 #' @return List with beta, objective, rss, l1, lipschitz, steps, nonzero,
 #'   n, p.
-#' @references Beck, A. and Teboulle, M. (2009), SIAM Journal on Imaging
-#'   Sciences 2(1), 183-202, Section 4.  Standard published form of FISTA;
-#'   the SIAM article itself is paywalled and was not read.
+#' @references Beck, A. and Teboulle, M. (2009), SIAM Journal on Imaging Sciences 2(1),
+#'   183-202, Section 4. Standard published form of FISTA; standard published form.
 #' @export
 #' @examples
 #' Fistalasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)

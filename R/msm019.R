@@ -1,9 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' eq. (5.1) p.142 (re-export)
 #'
-#' The stub generator stamped several extracted page fragments with the same
-#' function name, so the implementation lives once in \code{Msm010()} and this
-#' module re-exports it. Calling either path runs the same code.
+#' The same method as \code{Msm010()}, re-exported under this name; both run the same
+#' code.
 #'
 #' @param ... Passed unchanged to \code{Msm010()}.
 #' @return The list returned by \code{Msm010()}.

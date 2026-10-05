@@ -69,12 +69,8 @@ Sarsa(P, R, 0.9, alpha = 0.5, epsilon = 0, n_episodes = 3,
       terminal = 1L)$estimate
 }
 \references{
-Sutton, R. S. and Barto, A. G. (2018). Reinforcement
-Learning: An Introduction, 2nd ed., MIT Press, Section 6.4, boxed
-algorithm p. 130.  Local source:
-fetched-wave3/sutton-barto-2018-reinforcement-learning-2nd-ed.pdf.
-Rummery, G. A. and Niranjan, M. (1994). On-line Q-learning using
-connectionist systems. Technical Report CUED/F-INFENG/TR 166,
-Cambridge University Engineering Department.  Local source:
-fetched-wave3/rummery-niranjan-1994-sarsa-tr166.pdf.
+Sutton, R. S. and Barto, A. G. (2018). Reinforcement Learning: An
+Introduction, 2nd ed., MIT Press, Section 6.4, boxed algorithm p. 130. Rummery, G.
+A. and Niranjan, M. (1994). On-line Q-learning using connectionist systems.
+Technical Report CUED/F-INFENG/TR 166, Cambridge University Engineering Department.
 }

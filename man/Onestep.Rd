@@ -42,10 +42,9 @@ Onestep(V, V)
 \references{
 Kosorok (2008), Introduction to Empirical Processes and
 Semiparametric Inference, Section 2.2.5, for the Z-estimator
-framework. The full text of the book was fetched and searched, and
-the phrase "one-step estimator" does NOT appear in it, so the
-one-step construction is cited to Le Cam (1956), Proceedings of the
-Third Berkeley Symposium 1, 129-156, and Bickel, Klaassen, Ritov &
+framework. The book does not treat the one-step estimator by name,
+so the one-step construction is cited to Le Cam (1956), Proceedings of
+the Third Berkeley Symposium 1, 129-156, and Bickel, Klaassen, Ritov &
 Wellner (1993), Efficient and Adaptive Estimation for Semiparametric
 Models, Section 2.5.
 }

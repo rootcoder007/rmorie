@@ -529,7 +529,7 @@ morie_variable_importance <- function(y, X, candidate_strata = NULL,
   out
 }
 
-#' Compact alias per ledger/NAMING.md
+#' Compact alias
 #' @rdname morie_tmldta
 #' @export
 morie_tmledataadaptive <- morie_tmldta

@@ -21,16 +21,14 @@ Graphcmp(G1, G2, kernel = "wl", h = 3, k_size = 3, lam = 0.1)
 list: estimate, raw, k11, k22, kernel, method.
 }
 \description{
-Shervashidze et al. (2011), JMLR 12, 2539-2561 (FETCHED), for the WL
-subtree kernel and its survey of alternatives; Gaertner, Flach and
-Wrobel (2003), On graph kernels: hardness results and efficient
-alternatives, COLT/Kernel 2777, 129-143, for the geometric random-walk
-kernel k_RW = sum_ij [(I - lambda A_x)^-1]_ij on the direct product
-graph, which converges for lambda below the reciprocal of the largest
-eigenvalue of A_x.  The 2003 COLT paper is paywalled; the closed form
-is quoted in its standard published form and restated in section 2 of
-Shervashidze et al.  All three kernels are normalised to a cosine so
-the value is comparable across graph sizes.
+Shervashidze et al. (2011), JMLR 12, 2539-2561, for the WL subtree kernel and its
+survey of alternatives; Gaertner, Flach and Wrobel (2003), On graph kernels: hardness
+results and efficient alternatives, COLT/Kernel 2777, 129-143, for the geometric
+random-walk kernel k_RW = sum_ij [(I - lambda A_x)^-1]_ij on the direct product
+graph, which converges for lambda below the reciprocal of the largest eigenvalue of
+A_x. The 2003 COLT paper is paywalled; the closed form is quoted in its standard
+published form and restated in section 2 of Shervashidze et al. All three kernels are
+normalised to a cosine so the value is comparable across graph sizes.
 }
 \examples{
 A <- matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3)

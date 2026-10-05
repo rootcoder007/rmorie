@@ -23,12 +23,11 @@ Azloss(z, v, pi, p, theta = NULL, c = 1e-04)
 list: estimate, value_loss, policy_loss, l2, sq_norm, method.
 }
 \description{
-Silver et al. (2018), arXiv:1712.01815 (FETCHED), prints the loss
-verbatim: l = (z - v)^2 - pi' log p + c ||theta||^2 -- squared error on
-the value head, cross-entropy between the search policy and the network
-policy, and an L2 penalty.  Silver et al. (2017), Nature 550, 354-359,
-give the same expression; AlphaGo Zero used c = 1e-4.  The
-cross-entropy uses 0 log 0 = 0 and floors p at a tiny epsilon.
+Silver et al. (2018), arXiv:1712.01815, prints the loss verbatim: l = (z - v)^2 - pi'
+log p + c ||theta||^2 -- squared error on the value head, cross-entropy between the
+search policy and the network policy, and an L2 penalty. Silver et al. (2017), Nature
+550, 354-359, give the same expression; AlphaGo Zero used c = 1e-4. The cross-entropy
+uses 0 log 0 = 0 and floors p at a tiny epsilon.
 }
 \examples{
 Azloss(1, 0.5, c(0.7, 0.3), c(0.6, 0.4))$estimate

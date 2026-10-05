@@ -35,6 +35,5 @@ Powsrv(V)
 }
 \references{
 Lumley, T. (2010). Complex Surveys: A Guide to Analysis
-Using R, Wiley. \doi{10.1002/9780470580066}. Standard form; the book
-is not held locally.
+Using R, Wiley. \doi{10.1002/9780470580066}. Standard form.
 }

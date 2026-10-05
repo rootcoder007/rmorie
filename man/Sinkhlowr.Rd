@@ -34,13 +34,12 @@ Sinkhlowr(
 list: U, V, T, g, estimate, cost, rank, method.
 }
 \description{
-Scetbon, Cuturi and Peyre (2021), Low-rank Sinkhorn factorization, ICML
-139, 9344-9354 (arXiv:2103.04737 -- FETCHED), restrict the plan to
-Pi_(a,g,b) = \{P = Q diag(1/g) R' : Q in Pi_(a,g), R in Pi_(b,g)\}, a
-product of two sub-couplings with a common right marginal g, so that
-rank_+(P) <= r by construction.  The optimisation is mirror descent:
-each outer step projects the linearisation back onto the two sets by
-two Sinkhorn solves.
+Scetbon, Cuturi and Peyre (2021), Low-rank Sinkhorn factorization, ICML 139,
+9344-9354 (arXiv:2103.04737), restrict the plan to Pi_(a,g,b) = \{P = Q diag(1/g) R'
+: Q in Pi_(a,g), R in Pi_(b,g)\}, a product of two sub-couplings with a common right
+marginal g, so that rank_+(P) <= r by construction. The optimisation is mirror
+descent: each outer step projects the linearisation back onto the two sets by two
+Sinkhorn solves.
 }
 \details{
 Determinism: the paper initialises at random; here Q, R and g start at

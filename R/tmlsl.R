@@ -16,10 +16,9 @@
 #'   \code{discrete_risk}, \code{discrete_index}, \code{fitted},
 #'   \code{beats_discrete}, \code{n}, \code{K}.
 #' @references van der Laan, Polley & Hubbard (2007), Super Learner, UC
-#'   Berkeley Division of Biostatistics Working Paper 222. That PDF could
-#'   not be downloaded (the bepress endpoint returned an empty body); the
-#'   construction is taken from Polley's dissertation, Super Learner, UC
-#'   Berkeley (escholarship qt4qn0067v), fetched in full.
+#'   Berkeley Division of Biostatistics Working Paper 222; the construction
+#'   as given in Polley's dissertation, Super Learner, UC Berkeley
+#'   (escholarship qt4qn0067v).
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

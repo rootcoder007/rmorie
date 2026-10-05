@@ -41,6 +41,5 @@ str(r, max.level = 1)
 Pritchard, J. K., Seielstad, M. T., Perez-Lezaun, A.
 and Feldman, M. W. (1999), Molecular Biology and Evolution
 16(12), 1791-1798; Sisson, S. A., Fan, Y. and Beaumont, M. A.
-(2018), arXiv:1802.09720, Sec 1.5 (local:
-fetched-wave3/sisson-2018-abc-overview.pdf).
+(2018), arXiv:1802.09720, Sec 1.5.
 }

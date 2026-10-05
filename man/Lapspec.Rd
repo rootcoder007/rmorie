@@ -27,8 +27,7 @@ lambda_0 = 0 <= lambda_1 <= ... <= lambda_\{n-1\} <= 2
 Lapspec(W = 5L)
 }
 \references{
-Chung (1997), Spectral Graph Theory, CBMS 92, Sections
-1.2-1.3: the eigenvalues of Lcal lie in [0, 2] and the multiplicity
-of 0 equals the number of connected components. Fetched from the
-author's own copy of the chapter.
+Chung (1997), Spectral Graph Theory, CBMS 92, Sections 1.2-1.3: the
+eigenvalues of Lcal lie in [0, 2] and the multiplicity of 0 equals the number of
+connected components.
 }

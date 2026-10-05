@@ -1,13 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Mantel-Haenszel pooled odds ratio, given four parallel cell vectors
 #'
-#' An alias. The estimator is \code{\link{Mhors}}; the audit at
-#' \code{ledger/wave2/DUPMAP.tsv} records \code{mamh} as a duplicate of
-#' \code{mhors} and it is the same estimator with the same
-#' Robins-Breslow-Greenland variance. Carrying the arithmetic twice would
-#' mean two copies that agree with each other at 1e-9 forever and are
-#' never checked against anything else, so this only adapts the calling
-#' convention: four vectors in, one matrix of strata out.
+#' An alias. The estimator is \code{\link{Mhors}}; the audit at \code{mamh} is the same
+#' method as \code{mhors} and it is the same estimator with the same
+#' Robins-Breslow-Greenland variance. Carrying the arithmetic twice would mean two
+#' copies that agree with each other at 1e-9 forever and are never checked against
+#' anything else, so this only adapts the calling convention: four vectors in, one
+#' matrix of strata out.
 #'
 #' Formula: \code{OR_MH = sum(a_k d_k/n_k) / sum(b_k c_k/n_k)} -- Mantel
 #' and Haenszel (1959); Robins, Breslow and Greenland (1986).

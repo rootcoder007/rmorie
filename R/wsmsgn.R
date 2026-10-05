@@ -14,8 +14,7 @@
 #'   \code{n_effective}, \code{n_ties}, \code{estimate}, \code{n}.
 #' @references Dixon & Mood (1946), Journal of the American Statistical
 #'   Association 41(236), 557-566 -- the primary source. Wasserman (2004),
-#'   All of Statistics, does NOT contain the sign test; the full text of
-#'   the book was fetched and searched to establish that.
+#'   All of Statistics, does not contain the sign test.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

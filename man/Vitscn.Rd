@@ -32,7 +32,5 @@ scalar constrained above 0.01 and B the relative position bias.
 Vitscn(q = 0.5, k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
-Liu, Z. et al. (2022), CVPR 2022, arXiv:2111.09883,
-Section 3.2. Local source:
-fetched-wave3/liu-etal-2022-swin-v2-arxiv2111.09883.pdf.
+Liu, Z. et al. (2022), CVPR 2022, arXiv:2111.09883, Section 3.2.
 }

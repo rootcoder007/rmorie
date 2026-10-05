@@ -65,7 +65,7 @@
 #' @references Voight, B. F., Kudaravalli, S., Wen, X. and Pritchard,
 #'   J. K. (2006), PLoS Biology 4(3), e72, eqs. (1)-(2) and Materials
 #'   and Methods "Calculation of iHS". Sabeti, P. C. et al. (2002),
-#'   Nature 419, 832-837. Local: fetched-wave3 Voight-2006 PDF.
+#'   Nature 419, 832-837.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -126,8 +126,7 @@ Ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
 #'   \code{I_A}, \code{I_B}, \code{truncated_a}, \code{truncated_b},
 #'   \code{standardized}, \code{core}, \code{method}.
 #' @references Sabeti, P. C., Varilly, P. et al. (2007), Nature
-#'   449(7164), 913-918, Methods pp. 5-6. Local: fetched-wave3
-#'   Sabeti-2007 PDF.
+#'   449(7164), 913-918, Methods pp. 5-6.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -215,10 +214,9 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
 #' Observed IBS-state counts per pair matched to expectations from the
 #' Table 1 P(IBS | IBD) with finite-sample corrections; P(Z=0..2)
 #' solved sequentially, bounded per p. 566, pi-hat = P(Z=1)/2 + P(Z=2)
-#' with the biological constraint transform when pi^2 <= P(Z=2). The
-#' stub's Browning-Browning (2010) citation was a misattribution
-#' (fastIBD is an HMM segment method) -- recorded; this is Purcell
-#' et al. (2007).
+#' with the biological constraint transform when pi^2 <= P(Z=2). This is
+#' Purcell et al. (2007); it is sometimes misattributed to Browning and
+#' Browning (2010), whose fastIBD is an HMM segment method.
 #'
 #' @param G Genotype matrix coded 0/1/2 (individuals x SNPs); other
 #'   values treated as missing.
@@ -227,8 +225,7 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
 #'   \code{n}, \code{m}, \code{method}.
 #' @references Purcell, S., Neale, B., Todd-Brown, K. et al. (2007),
 #'   American Journal of Human Genetics 81(3), 559-575, Table 1 and
-#'   pp. 565-566. Local: fetched-wave3
-#'   Purcell-2007-PLINK-AJHG81-559.pdf.
+#'   pp. 565-566.
 #' @export
 #' @examples
 #' set.seed(1)

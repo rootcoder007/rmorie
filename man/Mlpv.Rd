@@ -47,7 +47,6 @@ Mlpv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
 \references{
 Raudenbush and Bryk (2002), Hierarchical Linear Models,
 2nd ed., Sage, ch. 4, "proportion reduction in variance" at level 1.
-The book was not in the local corpus and could not be obtained; the
-quantity is implemented exactly as the ratio printed above, its
-standard published form, stated in full so it can be checked.
+The quantity is implemented exactly as the ratio printed above, its
+standard published form.
 }

@@ -35,11 +35,7 @@ total minus direct is the indirect effect. In linear models natural
 and controlled path-specific effects coincide.
 }
 \references{
-Avin, C., Shpitser, I. and Pearl, J. (2005),
-Identifiability of path-specific effects, Proc. 19th IJCAI,
-357-363, Section 2; local copy
-fetched-wave3/avin-shpitser-pearl-2005-path-specific-effects-IJCAI.pdf.
-Pearl, J. (2001), Direct and indirect effects, Proc. 17th UAI,
-411-420, Section 2; local copy
-fetched-wave3/pearl-2001-direct-indirect-effects-UAI.pdf.
+Avin, C., Shpitser, I. and Pearl, J. (2005), Identifiability of
+path-specific effects, Proc. 19th IJCAI, 357-363, Section 2. Pearl, J. (2001),
+Direct and indirect effects, Proc. 17th UAI, 411-420, Section 2.
 }

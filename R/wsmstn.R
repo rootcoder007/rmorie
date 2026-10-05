@@ -10,9 +10,8 @@
 #' @param family Either "bernoulli" or "normal".
 #' @return List with \code{T1}, \code{T2}, \code{n}, \code{dim},
 #'   \code{mle_mu}, \code{mle_sigma2}.
-#' @references Wasserman (2004), All of Statistics, Section 9.13.2,
-#'   Definition 9.32 and Examples 9.33 and 9.34. Fetched as the full text
-#'   of the book.
+#' @references Wasserman (2004), All of Statistics, Section 9.13.2, Definition 9.32 and
+#'   Examples 9.33 and 9.34.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -17,10 +17,9 @@
 #' (3, 5, 7, 18, 43, 85, 91, 98, 100, 130, 230, 487), and that printed number
 #' is the anchor.
 #'
-#' Both conventions are returned: lo/hi use type-7 quantiles at alpha~,
-#' matching the rest of this shelf, and lo_order/hi_order use the book's
-#' ((R+1) alpha~)-th order statistic.  a = w = 0 collapses both to the plain
-#' percentile interval.
+#' Both conventions are returned: lo/hi use type-7 quantiles at alpha~, matching the
+#' rest of this package, and lo_order/hi_order use the book's ((R+1) alpha~)-th order
+#' statistic. a = w = 0 collapses both to the plain percentile interval.
 #'
 #' @param theta_hat the estimate on the original data.
 #' @param theta_b the R bootstrap replicates.

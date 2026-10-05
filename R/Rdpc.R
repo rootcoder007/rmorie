@@ -15,10 +15,8 @@
 #' @param sensitivity L2 sensitivity of the query, positive.
 #' @return List with \code{epsilon_rdp}, \code{estimate}, \code{alpha},
 #'   \code{sigma}, \code{sensitivity}, \code{method}.
-#' @references Mironov, I. (2017). Renyi differential privacy. IEEE CSF
-#'   2017, 263-275. arXiv:1702.07476. Proposition 7, Corollary 3,
-#'   Table II.
-#'   Local source: fetched-wave3/mironov-2017-renyi-differential-privacy-arxiv1702.07476.pdf
+#' @references Mironov, I. (2017). Renyi differential privacy. IEEE CSF 2017, 263-275.
+#'   arXiv:1702.07476. Proposition 7, Corollary 3, Table II.
 #' @export
 #' @examples
 #' Rdpc(alpha = 2, sigma = 1.0)

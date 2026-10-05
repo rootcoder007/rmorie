@@ -35,12 +35,10 @@
 #'   vectors over the three types), \code{weight_sum},
 #'   \code{identity_residual}, \code{forbidden_weight} and
 #'   \code{n_components_by_type}.
-#' @references Goodman-Bacon, A. (2021). Difference-in-differences
-#'   with variation in treatment timing. Journal of Econometrics,
-#'   225(2), 254-277. doi:10.1016/j.jeconom.2021.03.014. Implemented
-#'   from Theorem 1 and eqs. (7)-(9) of NBER Working Paper 25018;
-#'   local source: WD_BLACK library/pdf/fetched-wave3/
-#'   goodman-bacon-2021-did-variation-treatment-timing.pdf.
+#' @references Goodman-Bacon, A. (2021). Difference-in-differences with variation in
+#'   treatment timing. Journal of Econometrics, 225(2), 254-277.
+#'   doi:10.1016/j.jeconom.2021.03.014. Implemented from Theorem 1 and eqs. (7)-(9) of
+#'   NBER Working Paper 25018;
 #' @examples
 #' u <- rep(1:9, each = 8L)
 #' tt <- rep(1:8, times = 9L)

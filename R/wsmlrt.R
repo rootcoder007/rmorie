@@ -12,10 +12,9 @@
 #' @param df dim(Theta) - dim(Theta_0), at least 1.
 #' @return List with \code{statistic}, \code{p_value}, \code{df},
 #'   \code{loglik_full}, \code{loglik_null}.
-#' @references Wasserman (2004), All of Statistics, Definition 10.21 and
-#'   Theorem 10.22, under which lambda converges to chi^2 with r - q
-#'   degrees of freedom, "the dimension of Theta minus the dimension of
-#'   Theta_0". Fetched as the full text of the book.
+#' @references Wasserman (2004), All of Statistics, Definition 10.21 and Theorem 10.22,
+#'   under which lambda converges to chi^2 with r - q degrees of freedom, "the dimension
+#'   of Theta minus the dimension of Theta_0".
 #' @export
 Lrtest <- function(loglik_full, loglik_null, df) {
   lf <- as.numeric(loglik_full)

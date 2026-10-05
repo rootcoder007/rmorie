@@ -15,8 +15,8 @@ phase diagram) and a premise x neighbourhood co-occurrence network.
 Each callable consumes one TPS category and returns a multi-section
 \code{morie_rich_result}. Cosine-corrected projection and DBSCAN
 delegation are deferred to companion modules (\code{tps_render},
-\code{tps_spatial_advanced}); when those collaborators are not
-available the routines fall back to a stop-stub explaining the gap.
+\code{tps_spatial_advanced}); when those are not available the
+routines stop with an error explaining what is missing.
 
 Functions
 

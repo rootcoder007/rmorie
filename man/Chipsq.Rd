@@ -46,10 +46,8 @@ lambda_local and fold_enrichment is k / lambda_local.
 Chipsq(count = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L, lambda_bg = 5L)
 }
 \references{
-Zhang, Y., Liu, T., Meyer, C. A., Eeckhoute, J.,
-Johnson, D. S., Bernstein, B. E., Nusbaum, C., Myers, R. M.,
-Brown, M., Li, W. and Liu, X. S. (2008), Model-based Analysis
-of ChIP-Seq (MACS), Genome Biology 9(9), R137. Dynamic lambda
-and Poisson p-value, Methods, Peak detection. Local source:
-library/pdf/fetched-wave3/Zhang-2008-MACS-GenomeBiology.pdf.
+Zhang, Y., Liu, T., Meyer, C. A., Eeckhoute, J., Johnson, D. S.,
+Bernstein, B. E., Nusbaum, C., Myers, R. M., Brown, M., Li, W. and Liu, X. S.
+(2008), Model-based Analysis of ChIP-Seq (MACS), Genome Biology 9(9), R137. Dynamic
+lambda and Poisson p-value, Methods, Peak detection.
 }

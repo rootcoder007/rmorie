@@ -1,14 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Cell counts N_epsilon for a tail-free or Polya-tree partition
 #'
-#' Source READ FROM THE CORPUS PDF: Ghosal, S. and van der Vaart, A.
-#' (2017), Fundamentals of Nonparametric Bayesian Inference, chapter 3
-#' (tail-free and Polya tree priors).  For a set A_epsilon in the
-#' partition at level epsilon,
-#' \code{N_epsilon := #{1 <= i <= n : X_i in A_epsilon}}.  Because a
-#' tail-free prior has independent partition-level masses, the vector of
-#' cell counts at each level is what the posterior update consumes.
-#' Nothing is estimated here; this is a count.
+#' Source: Ghosal, S. and van der Vaart, A. (2017), Fundamentals of Nonparametric
+#' Bayesian Inference, chapter 3 (tail-free and Polya tree priors). For a set A_epsilon
+#' in the partition at level epsilon, \code{N_epsilon := #{1 <= i <= n : X_i in
+#' A_epsilon}}. Because a tail-free prior has independent partition-level masses, the
+#' vector of cell counts at each level is what the posterior update consumes. Nothing is
+#' estimated here; this is a count.
 #'
 #' @param X_i Numeric sample.
 #' @param A_epsilon A cell, or a list of cells.  A cell is either a

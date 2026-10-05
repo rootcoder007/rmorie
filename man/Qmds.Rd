@@ -32,8 +32,7 @@ Qmds(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8),
 \references{
 Gudmundsson, L., Bremnes, J. B., Haugen, J. E. and
 Engen-Skaugen, T. (2012), HESS 16, 3383-3390,
-\doi{10.5194/hess-16-3383-2012}, Eq. 2, Sec. 2.3.1. Local:
-fetched-wave3/gudmundsson-2012-quantile-mapping-hess16-3383.pdf.
+\doi{10.5194/hess-16-3383-2012}, Eq. 2, Sec. 2.3.1.
 Wood et al. (2004) Climatic Change 62, 189-216; Boe et al.
 (2007) Int J Climatology 27, 1643-1655; Maraun (2013) J Climate
 26, 2137-2143.

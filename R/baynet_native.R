@@ -19,10 +19,8 @@
 #' @param query The query node name.
 #' @return List with posterior, states, estimate (0-based argmax),
 #'   normalizer, query.
-#' @references Zhang, N. L. and Poole, D. (1994). A simple approach to
-#'   Bayesian network computations. Proc. 10th Canadian Conference on
-#'   AI, 171-178. Archived:
-#'   fetched-wave3/zhang-poole-1994-simple-approach-bn.pdf.
+#' @references Zhang, N. L. and Poole, D. (1994). A simple approach to Bayesian network
+#'   computations. Proc. 10th Canadian Conference on AI, 171-178.
 #'
 #'   Pearl, J. (1988). Probabilistic Reasoning in Intelligent Systems.
 #'   Morgan Kaufmann.

@@ -40,7 +40,7 @@ to look up the Stock-Yogo critical-value table.}
 up the Stock-Yogo critical-value table.}
 }
 \description{
-Roxygen-only stub holding the @param entries shared across the IV
+Roxygen-only block holding the @param entries shared across the IV
 family (Anderson-Rubin, conditional-LR, Hansen J, Sargan, etc.).
 Functions reference these via \verb{@inheritParams morie_iv_params} so
 each \verb{@param} is documented once and the Rd files stay consistent.

@@ -20,15 +20,14 @@ list: estimate, rating, per_rung, scores, n_games, wins, draws,
 losses, method.
 }
 \description{
-Silver et al. (2018), arXiv:1712.01815 (FETCHED): "Elo ratings were
-computed from the results of a 1 second per move tournament between
-iterations of AlphaZero during training, and also a baseline player:
-either Stockfish, Elmo or AlphaGo Lee respectively.  The Elo rating of
-the baseline players was anchored to publicly available values."  Each
-baseline's rating is therefore fixed and known, and the candidate's
-follows from its score against each; the rungs are combined weighted by
-games played.  The logistic convention is the paper's own; see
-Elorating for why that is not the classical base-10 Elo curve.
+Silver et al. (2018), arXiv:1712.01815: "Elo ratings were computed from the results
+of a 1 second per move tournament between iterations of AlphaZero during training,
+and also a baseline player: either Stockfish, Elmo or AlphaGo Lee respectively. The
+Elo rating of the baseline players was anchored to publicly available values." Each
+baseline's rating is therefore fixed and known, and the candidate's follows from its
+score against each; the rungs are combined weighted by games played. The logistic
+convention is the paper's own; see Elorating for why that is not the classical
+base-10 Elo curve.
 }
 \examples{
 Elomatch(matrix(c(30, 60, 10), 1, 3), 3300)$rating

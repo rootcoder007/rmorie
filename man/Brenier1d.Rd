@@ -27,6 +27,5 @@ Brenier1d(V, V)
 \references{
 Brenier (1991), Polar factorization and monotone rearrangement of
 vector-valued functions, Communications on Pure and Applied Mathematics 44:375-417.
-Not held locally; the one-dimensional monotone-rearrangement solution is the standard
-published result.
+The one-dimensional monotone-rearrangement solution is the standard published result.
 }

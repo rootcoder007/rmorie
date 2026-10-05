@@ -68,11 +68,9 @@ Ecfp4(adjacency = 5L, atomnum = 5L)
 \references{
 Rogers, D. and Hahn, M. (2010), "Extended-connectivity
 fingerprints", Journal of Chemical Information and Modeling 50(5),
-742-754, doi:10.1021/ci100050t -- paywalled at ACS, not read for this
-implementation.  The specification followed is the open-source RDKit
-reference implementation, Code/GraphMol/Fingerprints/
+742-754, doi:10.1021/ci100050t.  The specification followed is the
+open-source RDKit reference implementation, Code/GraphMol/Fingerprints/
 MorganGenerator.cpp lines 395-495 and Code/GraphMol/Fingerprints/
-FingerprintUtil.cpp lines 242-265, master revision fetched
-2026-08-09.  RDKit: Open-Source Cheminformatics,
-https://www.rdkit.org.
+FingerprintUtil.cpp lines 242-265, master revision of 2026-08-09.
+RDKit: Open-Source Cheminformatics, https://www.rdkit.org.
 }

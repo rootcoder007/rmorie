@@ -25,13 +25,9 @@
 #'   vector of 1-based indices c(i, j); default all edges.
 #' @return List with \code{estimate}, \code{total}, \code{direct},
 #'   \code{indirect}, \code{n_edges_used}, \code{method}.
-#' @references Avin, C., Shpitser, I. and Pearl, J. (2005),
-#'   Identifiability of path-specific effects, Proc. 19th IJCAI,
-#'   357-363, Section 2; local copy
-#'   fetched-wave3/avin-shpitser-pearl-2005-path-specific-effects-IJCAI.pdf.
-#'   Pearl, J. (2001), Direct and indirect effects, Proc. 17th UAI,
-#'   411-420, Section 2; local copy
-#'   fetched-wave3/pearl-2001-direct-indirect-effects-UAI.pdf.
+#' @references Avin, C., Shpitser, I. and Pearl, J. (2005), Identifiability of
+#'   path-specific effects, Proc. 19th IJCAI, 357-363, Section 2. Pearl, J. (2001),
+#'   Direct and indirect effects, Proc. 17th UAI, 411-420, Section 2.
 #' @export
 Pseudo <- function(B, x, y, edges = NULL) {
   Bm <- as.matrix(B)

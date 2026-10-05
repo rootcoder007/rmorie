@@ -1,18 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Elo rating from a match pool
 #'
-#' Silver et al. (2018), arXiv:1712.01815 (FETCHED), states its own
-#' convention verbatim: "We estimate the probability that player a will
-#' defeat player b by a logistic function p(a defeats b) = 1 / (1 +
-#' exp(c_elo (e(b) - e(a)))) ... using the standard constant c_elo =
-#' 1/400."  That is the natural exponential logistic, NOT the classical
-#' curve of Elo (1978), The Rating of Chessplayers, Past and Present,
-#' which is 1 / (1 + 10^((R_b - R_a)/400)).  The two disagree: a
-#' 200-point gap gives 0.622 under the paper's constant and 0.760 under
-#' Elo's.  base = "e" is AlphaZero's convention and the default; base = 10
-#' is Elo's.  Ratings are inverted in closed form from a score against an
-#' anchor, not fitted by Bayesian logistic regression, and `method` says
-#' so.
+#' Silver et al. (2018), arXiv:1712.01815, states its own convention verbatim: "We
+#' estimate the probability that player a will defeat player b by a logistic function
+#' p(a defeats b) = 1 / (1 + exp(c_elo (e(b) - e(a)))) ... using the standard constant
+#' c_elo = 1/400." That is the natural exponential logistic, NOT the classical curve of
+#' Elo (1978), The Rating of Chessplayers, Past and Present, which is 1 / (1 + 10^((R_b -
+#' R_a)/400)). The two disagree: a 200-point gap gives 0.622 under the paper's constant
+#' and 0.760 under Elo's. base = "e" is AlphaZero's convention and the default; base =
+#' 10 is Elo's. Ratings are inverted in closed form from a score against an anchor, not
+#' fitted by Bayesian logistic regression, and `method` says so.
 #'
 #' @param games a score in \[0, 1\], or a triple (wins, draws, losses).
 #' @param ladder optional ratings of other players.

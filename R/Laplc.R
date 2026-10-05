@@ -12,10 +12,9 @@
 #' @references Dwork, C., McSherry, F., Nissim, K., and Smith, A. (2006).
 #'   Calibrating noise to sensitivity in private data analysis. Theory of
 #'   Cryptography (TCC 2006), LNCS 3876, 265-284.
-#' @references Dwork, C., and Roth, A. (2014). The algorithmic foundations
-#'   of differential privacy. Foundations and Trends in Theoretical
-#'   Computer Science 9(3-4), 211-487. Definition 3.3 and Theorem 3.6.
-#'   Local source: fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
+#' @references Dwork, C., and Roth, A. (2014). The algorithmic foundations of
+#'   differential privacy. Foundations and Trends in Theoretical Computer Science
+#'   9(3-4), 211-487. Definition 3.3 and Theorem 3.6.
 #'
 #' Delegating wrapper (not a bare assignment) so that source collation
 #' order does not matter at load time; the body is a single call to the

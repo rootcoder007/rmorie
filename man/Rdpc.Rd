@@ -31,8 +31,6 @@ and ships separately in \code{morie_renyi_dp_composition}.
 Rdpc(alpha = 2, sigma = 1.0)
 }
 \references{
-Mironov, I. (2017). Renyi differential privacy. IEEE CSF
-2017, 263-275. arXiv:1702.07476. Proposition 7, Corollary 3,
-Table II.
-Local source: fetched-wave3/mironov-2017-renyi-differential-privacy-arxiv1702.07476.pdf
+Mironov, I. (2017). Renyi differential privacy. IEEE CSF 2017, 263-275.
+arXiv:1702.07476. Proposition 7, Corollary 3, Table II.
 }

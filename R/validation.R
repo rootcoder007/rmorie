@@ -453,7 +453,7 @@ cross_validate <- function(fit_fn, predict_fn, X, y,
 #' supported for backward compatibility:
 #'
 #' \itemize{
-#'   \item \strong{Legacy stub form:} \eqn{nested_cross_validate(tune_fn,
+#'   \item \strong{Legacy form:} \eqn{nested_cross_validate(tune_fn,
 #'         predict_fn, X, y, outer_folds, scoring, random_state)} where
 #'         \code{tune_fn(X, y)} returns a fitted model (no grid argument).
 #'         In this mode no inner search is run.
@@ -482,7 +482,7 @@ cross_validate <- function(fit_fn, predict_fn, X, y,
 #'   \code{score_fn} is \code{NULL}.
 #' @param random_state Integer seed for fold construction (default 42).
 #' @param tune_fn Deprecated legacy positional argument; see Description.
-#' @param outer_folds Deprecated alias for \code{outer_k} (legacy stub form).
+#' @param outer_folds Deprecated alias for \code{outer_k} (legacy form).
 #' @return Named list with \code{outer_scores} (numeric vector, length
 #'   \code{outer_k}), \code{best_hyperparams_per_fold} (list of named lists),
 #'   \code{mean_score}, \code{se_score}, and \code{n_configs}.

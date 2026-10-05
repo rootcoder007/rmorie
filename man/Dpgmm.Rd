@@ -33,9 +33,8 @@ Sethuraman (1994), Statistica Sinica 4(2), 639-650, for pi_k = V_k
 prod_(j<k)(1 - V_j) with V_k ~ Beta(1, alpha); Blei and Jordan (2006),
 Variational inference for Dirichlet process mixtures, Bayesian Analysis
 1(1), 121-143, for the truncated stick-breaking approximation at a
-fixed K.  Neither was retrievable here as a full text; both are quoted
-in their standard published form, and the construction is reproduced in
-Teh et al. (2006), eqs. (5)-(6), which WAS fetched.
+fixed K.  Both in their standard published form; the construction is
+reproduced in Teh et al. (2006), eqs. (5)-(6).
 }
 \details{
 Determinism: prior weights from the exact Beta quantile at

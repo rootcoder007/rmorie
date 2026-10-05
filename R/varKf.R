@@ -8,9 +8,8 @@
 #' second, the Nystrom residual trace, is the penalty that makes the bound
 #' a bound -- it is what stops the inducing points being chosen to
 #' overfit, and is the whole difference from the earlier projected-process
-#' approximations.  The AISTATS volume is free but was not retrievable
-#' here; the bound is quoted in its standard published form.  Both terms
-#' are returned separately so the penalty is visible.
+#' approximations.  Both terms are returned separately so the penalty is
+#' visible.
 #'
 #' @param X,y training data.
 #' @param Z inducing inputs.

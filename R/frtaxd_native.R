@@ -12,10 +12,8 @@
 #' @param grid Number of grid cells per axis.
 #' @return List with H (grid by grid, NaN where empty), richness,
 #'   counts, H_overall, S_overall, J_overall, grid, n.
-#' @references Shannon, C. E. (1948). A mathematical theory of
-#'   communication. Bell System Technical Journal, 27, 379-423, Sec. 6
-#'   (entropy H). Archived:
-#'   fetched-wave3/shannon-1948-mathematical-theory-of-communication.pdf.
+#' @references Shannon, C. E. (1948). A mathematical theory of communication. Bell
+#'   System Technical Journal, 27, 379-423, Sec. 6 (entropy H).
 #'
 #'   Pielou, E. C. (1966). The measurement of diversity in different
 #'   types of biological collections. Journal of Theoretical Biology,

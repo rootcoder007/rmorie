@@ -249,7 +249,7 @@ setT <- function(Z, S, params) {
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
-#' Back-compatible wrapper over `setT` (old stub name)
+#' Back-compatible wrapper over `setT` (old name)
 #' @param X See Usage.
 #' @param k See Usage.
 #' @param S See Usage.

@@ -76,10 +76,8 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 
 #' .morie_k05_item_params
 #'
-#' A step of the k05_tranche2 implementation. Called by \code{morie_tcc},
-#' \code{morie_test_information}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_tcc}, \code{morie_test_information}. See the file
+#' header for the source the module follows. source it follows.
 #'
 #' @param a Passed to \code{rep_to}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
@@ -109,9 +107,8 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 
 #' Branch on the sign so exp never overflows for large |z|
 #'
-#' A step of the k05_tranche2 implementation. Called by \code{.morie_k05_info}, \code{morie_tcc}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{.morie_k05_info}, \code{morie_tcc}. See the file header
+#' for the source the module follows. source it follows.
 #'
 #' @param theta Numeric; combined arithmetically in the body.
 #' @param a Numeric; combined arithmetically in the body.
@@ -350,9 +347,8 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 
 #' .morie_k05_schoenfeld
 #'
-#' A step of the k05_tranche2 implementation. Called by \code{morie_scaled_schoenfeld}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_scaled_schoenfeld}. See the file header for the
+#' source the module follows. source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param e A vector; indexed elementwise.
@@ -386,9 +382,8 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 
 #' .morie_k05_gtime
 #'
-#' A step of the k05_tranche2 implementation. Called by \code{morie_scaled_schoenfeld}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_scaled_schoenfeld}. See the file header for the
+#' source the module follows. source it follows.
 #'
 #' @param times Event times at which the transform is evaluated.
 #' @param t_all All follow-up times, censored ones included.

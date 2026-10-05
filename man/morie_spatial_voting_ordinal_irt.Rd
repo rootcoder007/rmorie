@@ -2,7 +2,7 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_ordinal_irt}
 \alias{morie_spatial_voting_ordinal_irt}
-\title{Ordinal IRT / Quinn factor model (stub)}
+\title{Ordinal IRT / Quinn factor model}
 \usage{
 morie_spatial_voting_ordinal_irt(
   Y,
@@ -28,7 +28,7 @@ List: \code{ideal_points}, \code{ideal_sd}, \code{discrimination},
 \code{difficulty}, \code{cutpoints}, \code{engine}.
 }
 \description{
-Ordinal IRT / Quinn factor model (stub)
+Ordinal IRT / Quinn factor model
 }
 \examples{
 if (requireNamespace("MCMCpack", quietly = TRUE)) {

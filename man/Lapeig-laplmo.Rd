@@ -28,8 +28,7 @@ Formula: Lcal u = lambda u, lambda_0 <= ... <= lambda_\{k-1\};
 Fiedler vector = u for the smallest lambda > tol
 }
 \references{
-Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.2,
-which writes Lcal as an operator on functions g : V -> R and works
-with its harmonic eigenfunctions. Fetched from the author's own copy
-of the chapter.
+Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.2, which writes
+Lcal as an operator on functions g : V -> R and works with its harmonic
+eigenfunctions.
 }

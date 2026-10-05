@@ -49,7 +49,7 @@ A list with \code{estimate}, \code{se}, \code{curve},
 \description{
 The effect curve theta(a) = E(Y^a) for a continuous treatment
 
-Compact alias per ledger/NAMING.md
+Compact alias
 }
 \examples{
 morie_tmlcps(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),

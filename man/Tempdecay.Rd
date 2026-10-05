@@ -17,11 +17,10 @@ Tempdecay(move_count, threshold = 30L, N = NULL)
 list: estimate (tau), tau, greedy, pi, threshold, method.
 }
 \description{
-Silver et al. (2018), arXiv:1712.01815 (FETCHED), and Silver et al.
-(2017), Nature 550, 354-359: during self-play a move is sampled in
-proportion to N(s,a)^(1/tau), with tau = 1 for the first \code{threshold}
-moves (AlphaGo Zero uses 30) and tau -> 0 thereafter, which makes the
-selection greedy.  Passing tau to zero would divide by zero, so the
+Silver et al. (2018), arXiv:1712.01815, and Silver et al. (2017), Nature 550,
+354-359: during self-play a move is sampled in proportion to N(s,a)^(1/tau), with tau
+= 1 for the first \code{threshold} moves (AlphaGo Zero uses 30) and tau -> 0 thereafter,
+which makes the selection greedy. Passing tau to zero would divide by zero, so the
 greedy branch is taken directly; ties break to the lowest index.
 }
 \examples{

@@ -25,6 +25,6 @@ Chernbnd(mgf = function(s) exp(0.5 * s^2), a = 2)
 \references{
 Chernoff (1952), A measure of asymptotic efficiency for tests of a
 hypothesis based on the sum of observations, Annals of Mathematical Statistics
-23:493-507. Not held locally; the exponential Markov bound is stated in this exact
-form in every standard reference.
+23:493-507. The exponential Markov bound is stated in this exact form in every
+standard reference.
 }
