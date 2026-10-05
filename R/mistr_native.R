@@ -343,6 +343,8 @@ mistr_attention_span <- function(window, n_layers) {
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(mistr_cheatsheet())
 #' @export
 mistr_cheatsheet <- function() {
   paste(paste0(

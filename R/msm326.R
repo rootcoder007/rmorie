@@ -9,5 +9,7 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer. DOI 10.1007/978-3-030-89010-0.
+#' @examples
+#' Msm326(y_positive = c(1, 2, 1, 3, 4, 2, 6, 5))$estimate
 #' @export
 Msm326 <- function(...) Msm325(...)

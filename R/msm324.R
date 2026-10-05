@@ -9,5 +9,7 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer. DOI 10.1007/978-3-030-89010-0.
+#' @examples
+#' Msm324(mu_pred = log(c(2, 4)), theta_pred = qlogis(c(0.3, 0.6)))
 #' @export
 Msm324 <- function(...) Msm323(...)

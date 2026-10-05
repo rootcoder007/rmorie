@@ -108,7 +108,8 @@ test_that("a loader's cache is optional: an unwritable cache directory skips it 
   Sys.chmod(d, "0555")
   on.exit(Sys.chmod(d, "0755"), add = TRUE)
   skip_if(file.access(d, 2L) == 0L, "running as root: directories are always writable")
-  withr::local_envvar(MORIE_CACHE_DIR = d)
+  # the file backend: a morie.db left in tempdir() by another test would route this to SQL
+  withr::local_envvar(MORIE_CACHE_DIR = d, MORIE_CACHE_BACKEND = "rds")
   expect_message(rmorie:::.morie_cache_store_soft(data.frame(a = 1), "t1"), "cache skipped for t1")
   expect_error(morie_cache_store(data.frame(a = 1), "t1"), "not writable")
 })

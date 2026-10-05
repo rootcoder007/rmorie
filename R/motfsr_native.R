@@ -597,6 +597,8 @@ motfsr_cheatsheet <- function() {
 #' @param lambda0 Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' motfsr_lambda_grid(n_starts_total = 100, n_seqs = 10, w = 6, lambda0 = NULL)
 #' @export
 motfsr_lambda_grid <- function(n_starts_total, n_seqs, w, lambda0) {
   if (!is.null(lambda0)) return(as.numeric(lambda0))

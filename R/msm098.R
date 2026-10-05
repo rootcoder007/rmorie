@@ -15,9 +15,12 @@
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (7.5) p.220 and Table 7.6 p.233.
 #'   DOI 10.1007/978-3-030-89010-0.
-#' @export
 #' @examples
-#' Msm098(n = 4L, X_E = matrix(c(1, 0, 1, 0, 0, 1, 0, 1), 4), Z_L = diag(4))
+#' set.seed(17)
+#' G <- crossprod(matrix(rnorm(16), 4)) / 4 + diag(0.1, 4)
+#' XE <- model.matrix(~ factor(c(1, 1, 2, 2)) - 1)
+#' Msm098(n = 4L, X_E = XE, Z_L = diag(4), L_g = t(chol(G)))$estimate
+#' @export
 Msm098 <- function(n, X_E, Z_L, L_g = NULL) {
   f <- .gpordlatent(as.integer(n), X_E = X_E, Z_L = Z_L, L_g = L_g)
   list(estimate = as.numeric(f$n_columns), design = f$design, widths = f$widths,

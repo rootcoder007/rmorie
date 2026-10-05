@@ -665,6 +665,8 @@ NULL
 #' @param kind Passed to \code{.Call}.
 #' @param psi Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' morie_hawkes_pair_excitation_sum_cpp(c(0.5, 1.2, 2.0, 3.1), 0.3, "exponential", 1.5)
 #' @export
 #' @name morie_hawkes_pair_excitation_sum_cpp
 #' @rdname morie_hawkes_pair_excitation_sum_cpp
@@ -824,6 +826,10 @@ NULL
 #'
 #' @param X_binned Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' X_binned <- matrix(c(1, 1, 2, 2, 1,
+#'                      3, 3, 1, 1, 3), 5, 2)   # coarsened covariates, one row per unit
+#' morie_matching_cem_strata_cpp(X_binned)
 #' @export
 #' @name morie_matching_cem_strata_cpp
 #' @rdname morie_matching_cem_strata_cpp
@@ -999,6 +1005,14 @@ NULL
 #' @param beta Passed to \code{.Call}.
 #' @param max_iter Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' set.seed(27)
+#' votes <- matrix(rbinom(30, 1, 0.5), 6, 5)        # legislators x roll calls
+#' X <- matrix(rnorm(6, sd = 0.5), 6, 1)             # starting ideal points (1 dimension)
+#' nv <- matrix(1, 5, 1); mid <- matrix(0, 5, 1)     # roll-call normal vectors and midpoints
+#' r <- morie_spatial_nominate_iterate_cpp(votes, X, w = 1, nv = nv, mid = mid,
+#'                                         beta = 15, max_iter = 5L)
+#' str(r, max.level = 1)
 #' @export
 #' @name morie_spatial_nominate_iterate_cpp
 #' @rdname morie_spatial_nominate_iterate_cpp

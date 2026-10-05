@@ -27,6 +27,10 @@
 #' @references Rummery, G. A. and Niranjan, M. (1994). On-line
 #'   Q-learning using connectionist systems. Cambridge University
 #'   Engineering Department, CUED/F-INFENG/TR 166.
+#' @examples
+#' P <- list(matrix(c(0.9, 0.1, 0, 1), 2, byrow = TRUE), matrix(c(0.1, 0.9, 0, 1), 2, byrow = TRUE))
+#' R <- matrix(c(0, 1, 0, 0), 2, 2)
+#' morie_sarsa(P, R, gamma = 0.9, n_episodes = 50L, terminal = 1L)$policy
 #' @export
 morie_sarsa <- function(P, R, gamma, alpha = 0.1, epsilon = 0.1,
                         n_episodes = 100L, start = 0L, terminal = c(),

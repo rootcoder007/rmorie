@@ -9,5 +9,9 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer. DOI 10.1007/978-3-030-89010-0.
+#' @examples
+#' set.seed(18)
+#' X <- matrix(rnorm(40), 20, 2); y <- sample(0:2, 20, TRUE)
+#' Msm114(X, y, beta0 = c(0.1, -0.2), beta = matrix(0.1, 2, 2), lam = 0)$estimate
 #' @export
 Msm114 <- function(...) Msm109(...)

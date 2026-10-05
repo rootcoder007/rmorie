@@ -23,6 +23,11 @@
 #'   Computing 37(2):A1111-A1138. \doi{10.1137/141000439}. Cuturi, M. and
 #'   Doucet, A. (2014). Proceedings of Machine Learning Research
 #'   32:685-693 (ICML).
+#' @examples
+#' x <- 1:5
+#' C <- outer(x, x, function(a, b) (a - b)^2)
+#' A <- cbind(c(1, 0, 0, 0, 0), c(0, 0, 0, 0, 1))
+#' round(Otbar(A, list(C, C), weights = c(0.5, 0.5), epsilon = 0.5)$bary, 3)  # mass moves to the middle
 #' @export
 Otbar <- function(A, C_list, weights, epsilon, max_iter = 200) {
   Am <- as.matrix(A)

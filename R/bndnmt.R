@@ -26,6 +26,13 @@
 #'   average treatment effects without monotonicity. Quantitative
 #'   Economics 8(2), 367-396. \doi{10.3982/QE601}, for the problem; the
 #'   interval above is the elementary mixture bound, derived in Details.
+#' @examples
+#' set.seed(1)
+#' n <- 500
+#' Z <- rbinom(n, 1, 0.5)
+#' D <- rbinom(n, 1, 0.2 + 0.5 * Z)
+#' y <- 1 + D + rnorm(n)
+#' Bndnmt(y, D, Z)[c("lower", "upper", "wald")]
 #' @export
 Bndnmt <- function(y, D, Z) {
   yv <- as.numeric(unlist(y))

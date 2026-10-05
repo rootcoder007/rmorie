@@ -36,6 +36,9 @@
 #'   \code{morie_dp_exponential_mechanism}.
 #' @references McSherry, F. and Talwar, K. (2007). Mechanism design
 #'   via differential privacy. FOCS 2007, 94-103.
+#' @examples
+#' set.seed(26)
+#' morie_expmc(candidates = c("a", "b", "c"), utility = c(1, 5, 2), sensitivity = 1, epsilon = 1)
 #' @export
 morie_expmc <- function(...) morie_dp_exponential_mechanism(...)
 

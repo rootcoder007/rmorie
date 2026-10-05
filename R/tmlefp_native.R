@@ -438,6 +438,8 @@ morie_owate_weights <- function(pscore, sigma2_treated = NULL,
 #' Compact one-line summary of the tmlefp recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_tmlefp_cheatsheet()
 #' @export
 morie_tmlefp_cheatsheet <- function() {
   paste("tmlefp: optimal overlap (Crump, Hotz, Imbens & Mitnik 2009).",

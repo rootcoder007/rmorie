@@ -9,5 +9,8 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer. DOI 10.1007/978-3-030-89010-0.
+#' @examples
+#' xx <- seq(0, 1, length.out = 8); K <- exp(-outer(xx, xx, "-")^2 / 0.1)
+#' Msm129(K, sin(2 * pi * xx), lam = 0.1)$estimate
 #' @export
 Msm129 <- function(...) Msm128(...)

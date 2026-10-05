@@ -15,9 +15,12 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (7.7) p.226. DOI 10.1007/978-3-030-89010-0.
-#' @export
 #' @examples
-#' Msm109(X = matrix(c(1, 2, 3, 4, 5, 6, 7, 8), nrow = 4), y = c(0L, 1L, 2L, 1L), beta0 = c(0.1, -0.2), beta = matrix(0.5, 2, 2))
+#' set.seed(18)
+#' X <- matrix(rnorm(40), 20, 2)
+#' y <- sample(0:2, 20, TRUE)
+#' Msm109(X, y, beta0 = c(0, 0), beta = matrix(0, 2, 2), lam = 1)$estimate
+#' @export
 Msm109 <- function(X, y, beta0, beta, lam = 1, baseline_last = TRUE) {
   f <- .gppenmnloglik(X, y, beta0, beta, lam, penalty = "ridge",
                       baseline_last = baseline_last)

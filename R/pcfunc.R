@@ -22,6 +22,10 @@
 #'   and Point Fields, Wiley, chapter 14; Diggle, P. J. (2003).
 #'   Statistical Analysis of Spatial Point Patterns, 2nd edition,
 #'   Arnold, section 4.3.
+#' @examples
+#' set.seed(21)
+#' pts <- matrix(runif(400), 200, 2)
+#' round(Pcfunc(pts, window = c(0, 0, 1, 1), r = c(0.05, 0.1, 0.15))$g, 2)   # near 1 under CSR
 #' @export
 Pcfunc <- function(points, window, r, h = NULL) {
   p <- as.matrix(points)

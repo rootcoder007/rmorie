@@ -12,9 +12,10 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (15.4) p.652. DOI 10.1007/978-3-030-89010-0.
-#' @export
 #' @examples
-#' Msm329(theta_hat = 5L, mu_hat = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' # classified as a structural zero when theta-hat exceeds the threshold
+#' c(Msm329(theta_hat = 0.7, mu_hat = 2)$estimate, Msm329(theta_hat = 0.2, mu_hat = 2)$estimate)
+#' @export
 Msm329 <- function(theta_hat, mu_hat, threshold = 0.5) {
   v <- .gpzapcpredict(theta_hat, mu_hat, threshold = threshold)
   list(estimate = v, y_hat = v, is_zero = v == 0,

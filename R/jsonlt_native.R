@@ -162,6 +162,9 @@
 #'
 #' @param input raw vector, or character (joined by newlines first).
 #' @return a base64 string; `NA_character_` for `NULL`.
+#' @examples
+#' morie_jsonlt_base64_enc("hello world")
+#' morie_jsonlt_base64_enc(as.raw(c(0, 255, 16)))
 #' @export
 morie_jsonlt_base64_enc <- function(input) {
   if (is.null(input)) return(NA_character_)

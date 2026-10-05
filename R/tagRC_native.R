@@ -364,6 +364,8 @@ tagRC_adapted_pagerank <- function(adjacency, nodes, p = NULL,
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(tagRC_cheatsheet())
 #' @export
 tagRC_cheatsheet <- function() {
   paste("tagRC: a folksonomy is (user, tag, resource) TRIPLES, so ",

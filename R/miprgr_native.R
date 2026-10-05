@@ -711,6 +711,10 @@ miprgr_round_relaxation <- function(x, A, b, integer_vars) {
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-09}.
 #' @param max_iter Passed to \code{run_phase}. Defaults to \code{20000}.
 #' @return A list with \code{feasible}, \code{x}, \code{value}.
+#' @examples
+#' # maximise 3 x1 + 5 x2 subject to x1 <= 4, 2 x2 <= 12, 3 x1 + 2 x2 <= 18
+#' A <- rbind(c(1, 0), c(0, 2), c(3, 2))
+#' miprgr_simplex(A, b = c(4, 12, 18), c = c(3, 5))[c("x", "value")]   # (2, 6), 36
 #' @export
 miprgr_simplex <- function(A, b, c, tol = 1e-9, max_iter = 20000) {
   # Two-phase simplex with Bland's rule, maximising c'x.

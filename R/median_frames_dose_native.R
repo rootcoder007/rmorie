@@ -225,6 +225,12 @@ morie_optimal_overlap_weight <- function(var_a, var_b) {
 #' @return A list with `estimate`, `theta`, `theta_optimal`, `se`,
 #'   `naive_pooled_total`, `overlap_double_count`, domain totals.
 #' @references Hartley HO (1962) \emph{Proc Soc Stat Sect ASA} 203-206.
+#' @examples
+#' set.seed(24)
+#' fa <- rnorm(40, 10); fb <- rnorm(30, 12)
+#' oa <- rbinom(40, 1, 0.3); ob <- rbinom(30, 1, 0.4)
+#' r <- morie_dual_frame_total(fa, fb, oa, ob, weights_a = rep(25, 40), weights_b = rep(30, 30))
+#' c(r$estimate, r$theta)
 #' @export
 morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
                                    weights_a = NULL, weights_b = NULL,

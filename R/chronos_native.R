@@ -336,6 +336,9 @@ morie_chronos <- function(x, bins, context = NULL, add_eos = TRUE,
 #' @param tokens See Usage.
 #' @param bins A list; the body reads \code{$centers} from it.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' bins <- chronos_uniform_bins(lo = -3, hi = 3, n_bins = 12L)
+#' chronos_dequantize(chronos_quantize(c(-2.5, 0, 0.4), bins)$tokens, bins)
 #' @export
 chronos_dequantize <- function(tokens, bins) {
   c <- bins$centers
@@ -454,6 +457,10 @@ chronos_mean_scale <- function(x, context = NULL) {
 #' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4096L}.
 #' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme},
 #' \code{range}, \code{caveat}.
+#' @examples
+#' set.seed(28)
+#' b <- chronos_quantile_bins(rnorm(500), n_bins = 8L)
+#' round(b$edges, 2)
 #' @export
 chronos_quantile_bins <- function(samples, n_bins = 4096L) {
   v <- sort(as.numeric(samples))

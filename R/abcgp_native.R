@@ -1921,6 +1921,14 @@ sobol_sequence <- function(n, dim, skip = 0L) {
 #' @param proposal_sd See Usage.
 #' @param summary See Usage.
 #' @param seed See Usage.
+#' @examples
+#' \donttest{
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' log_prior <- function(theta) dnorm(theta, 0, 5, log = TRUE)
+#' r <- synthetic_abc(sim, obs = c(0.5, 1, 1.5), log_prior = log_prior, theta0 = 0,
+#'                    n_iter = 100L, n_sim = 5L, epsilon = 0.5)
+#' names(r)
+#' }
 #' @export
 synthetic_abc <- function(sim, obs, log_prior, theta0, n_iter = 200L,
                           n_sim = 20L, epsilon = 0, proposal_sd = 0.5,

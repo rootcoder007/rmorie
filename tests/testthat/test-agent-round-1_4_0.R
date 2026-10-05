@@ -71,7 +71,8 @@ test_that("rmorie list-datasets names a route for every key and ends with the fo
   expect_match(r$text, "siumanifest .*rmoriedata \\(CRAN\\)")
   expect_match(r$text, "hibsa .*health-infobase.canada.ca \\(or data.rmorie.com\\)")
   expect_match(r$text, "71 keys: 70 download from their portal, rmoriedata or data.rmorie.com on first use; 1 is your own research file")
-  expect_match(r$text, "Curated tables at data.rmorie.com")
+  # with a MORIE key the hosted tables are listed and counted; without one, how to get them
+  expect_match(r$text, "[Cc]urated tables at data.rmorie.com")
 })
 
 test_that("inspect, verify and pull without a path print usage and exit 2", {

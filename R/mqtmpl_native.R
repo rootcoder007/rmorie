@@ -563,6 +563,8 @@ morie_mqtmpl_qtl_genome_scan <- morie_mqtmpl_scanone
 #' See the file header for the source the module follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(mqtmpl_cheatsheet())
 #' @export
 mqtmpl_cheatsheet <- function() {
   paste(paste0(
@@ -845,6 +847,10 @@ mqtmpl_kw_n_imp <- function(covariates) {
 #' @param scan_result A list; the body reads \code{$lod}, \code{$position} from it.
 #' @param drop Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.5}.
 #' @return A list with \code{peak}, \code{lower}, \code{upper}, \code{drop}, \code{peak_lod}.
+#' @examples
+#' scan <- list(position = seq(0, 1, by = 0.1),
+#'              lod = c(0.2, 0.5, 1.4, 2.9, 4.1, 3.6, 2.2, 1.0, 0.4, 0.2, 0.1))
+#' mqtmpl_lod_support_interval(scan, drop = 1.5)
 #' @export
 mqtmpl_lod_support_interval <- function(scan_result, drop = 1.5) {
   lod <- scan_result$lod
@@ -1086,6 +1092,10 @@ mqtmpl_scanone <- function(y, markers, positions, method = "em", step = 0.02,
 #' @param y A vector; its length is taken.
 #' @param g Numeric; passed to \code{mean}.
 #' @return A list with \code{lod}, \code{rss}, \code{rss0}.
+#' @examples
+#' set.seed(2)
+#' g <- rbinom(50, 1, 0.5)
+#' mqtmpl_single_marker(y = 1 + 0.8 * g + rnorm(50), g = g)$lod
 #' @export
 mqtmpl_single_marker <- function(y, g) {
   n <- length(y)

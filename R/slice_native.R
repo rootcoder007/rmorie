@@ -31,6 +31,9 @@
 #' @return A list with \code{samples} and \code{n_iter}.
 #' @references Neal, R. M. (2003). Slice sampling. Annals of
 #'   Statistics, 31(3), 705-767.
+#' @examples
+#' s <- morie_slice(function(x) dnorm(x, 2, 1, log = TRUE), n_iter = 3000L, seed = 1)
+#' c(mean(s$samples), sd(s$samples))
 #' @export
 morie_slice <- function(log_target, init = 0, width = 1, n_iter = 5000L,
                         max_steps = 100L, seed = 42) {

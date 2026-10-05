@@ -221,6 +221,8 @@ morie_momento <- morie_momento_harmonise
 #' the source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(momento_cheatsheet())
 #' @export
 momento_cheatsheet <- function() {
   paste(paste0(

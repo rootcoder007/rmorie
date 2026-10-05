@@ -10,7 +10,10 @@ test_that("a SQL cache request without DBI falls back to the file backend with a
   tmp <- tempfile(fileext = ".db")
   expect_message(morie_cache_store(df, "fallback_tbl", db_path = tmp), "file backend")
   expect_false(file.exists(tmp))
-  got <- suppressMessages(morie_cache_load("fallback_tbl"))
+  # the files sit beside the path the caller named, so another db_path never reads them
+  expect_true(dir.exists(paste0(tools::file_path_sans_ext(tmp), "_files")))
+  expect_null(suppressMessages(morie_cache_load("fallback_tbl", db_path = tempfile(fileext = ".db"))))
+  got <- suppressMessages(morie_cache_load("fallback_tbl", db_path = tmp))
   expect_equal(nrow(got), 3L)
   expect_equal(got$a, 1:3)
 })

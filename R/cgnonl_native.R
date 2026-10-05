@@ -431,6 +431,9 @@ cgnonl_beta_fletcher_reeves <- function(g_new, g_old) {
 #' @param g_old Numeric; combined arithmetically in the body.
 #' @param plus A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
+#' @examples
+#' cgnonl_beta_polak_ribiere(g_new = c(0.5, -0.2), g_old = c(1, 0.3))
+#' cgnonl_beta_polak_ribiere(g_new = c(0.5, -0.2), g_old = c(1, 0.3), plus = TRUE)
 #' @export
 cgnonl_beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
   den <- .cgnonl_dot(g_old, g_old)

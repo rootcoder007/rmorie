@@ -19,7 +19,7 @@ test_that("morie_siu_reports loads the reviewed corpus offline", {
   skip_if_not_installed("rmoriedata")
   df <- morie_siu_reports()
   expect_gt(nrow(df), 2000L)
-  expect_equal(ncol(df), 65L)
+  expect_equal(ncol(df), 66L)  # rmoriedata 0.3.4: the 66-column reviewed corpus
   expect_true("panel_reviewed" %in% names(df))
 })
 
