@@ -41,12 +41,24 @@ siu::audit::Granularity granularity(const std::string& g) {
 // "native", which a C locale reads as bytes ("Rivi\303\250reville" is not "Rivi\u00e8reville").
 static Rcpp::String u8(const std::string& s) { return Rcpp::String(s, CE_UTF8); }
 
+// The caps rmoriebricklayer's own entry points apply (rmbl_siu.cpp): a report
+// page is a few hundred KB, and the core's regexes run over text whose lines
+// normalize_text() has capped -- libstdc++'s regex executor recurses once per
+// character a repeated atom consumes, and 25 KB of whitespace killed R before
+// the passes over a whole document became loops.
+static const std::string& checked_page(const std::string& s, const char* what) {
+    if (s.size() > (2u << 20)) Rcpp::stop("%s is larger than 2 MiB: not a report page", what);
+    return s;
+}
+
 // [[Rcpp::export(.siu_core_html_to_text)]]
-Rcpp::String siu_core_html_to_text(const std::string& html) { return u8(siu::html_to_text(html)); }
+Rcpp::String siu_core_html_to_text(const std::string& html) {
+    return u8(siu::html_to_text(checked_page(html, "html")));
+}
 
 // [[Rcpp::export(.siu_core_parse_html)]]
 Rcpp::CharacterVector siu_core_parse_html(const std::string& html) {
-    const siu::ParsedFields fields = siu::parse_report_html(html);
+    const siu::ParsedFields fields = siu::parse_report_html(checked_page(html, "html"));
     Rcpp::CharacterVector out(fields.size());
     Rcpp::CharacterVector names(fields.size());
     R_xlen_t i = 0;
@@ -60,14 +72,21 @@ Rcpp::CharacterVector siu_core_parse_html(const std::string& html) {
 }
 
 // [[Rcpp::export(.siu_core_to_iso_date)]]
-Rcpp::String siu_core_to_iso_date(const std::string& human) { return u8(siu::to_iso_date(human)); }
+Rcpp::String siu_core_to_iso_date(const std::string& human) {
+    // a date string is a few dozen bytes; the date regexes run over the whole input
+    if (human.size() > 4096) return u8("");
+    return u8(siu::to_iso_date(human));
+}
 
 // [[Rcpp::export(.siu_core_strip_boilerplate)]]
-Rcpp::String siu_core_strip_boilerplate(const std::string& text) { return u8(siu::strip_boilerplate(text)); }
+Rcpp::String siu_core_strip_boilerplate(const std::string& text) {
+    return u8(siu::strip_boilerplate(siu::normalize_text(checked_page(text, "text"))));
+}
 
 // [[Rcpp::export(.siu_core_resolve_so)]]
 Rcpp::List siu_core_resolve_so(const std::string& text) {
-    const siu::SoResolution res = siu::resolve_subject_officials(text);
+    // plain text from the caller gets the same whitespace/line discipline the HTML path has
+    const siu::SoResolution res = siu::resolve_subject_officials(siu::normalize_text(checked_page(text, "text")));
     return Rcpp::List::create(
         Rcpp::Named("count") = res.count.has_value() ? Rcpp::IntegerVector::create(*res.count)
                                                      : Rcpp::IntegerVector::create(NA_INTEGER),

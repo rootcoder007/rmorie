@@ -10,6 +10,7 @@
 #include "siu/resolve.hpp"
 
 #include <algorithm>
+#include <cctype>
 #include <array>
 #include <map>
 #include <regex>
@@ -33,9 +34,241 @@ std::string trim(const std::string& s) {
     return s.substr(a, z - a + 1);
 }
 
+// ---- regex-free passes over whole documents ------------------------------
+// libstdc++'s regex executor recurses once per character a repeated atom
+// consumes: `\s+` over 25,000 spaces overflowed the C stack and killed R
+// (0.5.7 review, uncatchable -- a stack overflow is not a C++ exception).
+// Every pass that runs over the WHOLE input is a plain loop here, and
+// normalize_text() leaves the field extractors below text whose whitespace
+// runs are single characters and whose lines are capped, so no quantifier
+// they contain can consume more than kMaxLine characters.
 std::string flatten_ws(const std::string& s) {
-    return std::regex_replace(s, std::regex(R"(\s+)"), " ");
+    std::string out;
+    out.reserve(s.size());
+    bool in_ws = false;
+    for (unsigned char c : s) {
+        const bool ws = c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f' || c == '\v';
+        if (ws) {
+            if (!in_ws) out += ' ';
+            in_ws = true;
+        } else {
+            out += static_cast<char>(c);
+            in_ws = false;
+        }
+    }
+    return out;
 }
+
+std::string replace_all(const std::string& s, const std::string& from, const std::string& to) {
+    if (from.empty()) return s;
+    std::string out;
+    out.reserve(s.size());
+    size_t i = 0;
+    while (true) {
+        const size_t j = s.find(from, i);
+        if (j == std::string::npos) {
+            out.append(s, i, std::string::npos);
+            break;
+        }
+        out.append(s, i, j - i);
+        out += to;
+        i = j + from.size();
+    }
+    return out;
+}
+
+// case-insensitive match of `lit` at `pos`
+bool ieq_at(const std::string& s, size_t pos, const std::string& lit) {
+    if (pos + lit.size() > s.size()) return false;
+    for (size_t k = 0; k < lit.size(); ++k) {
+        if (std::tolower(static_cast<unsigned char>(s[pos + k])) !=
+            std::tolower(static_cast<unsigned char>(lit[k]))) return false;
+    }
+    return true;
+}
+
+// every occurrence of any of the entity literals in `alts` -> `to`; each one
+// starts with '&', so the scan only tests at ampersands
+std::string replace_any_icase(const std::string& s, const std::vector<std::string>& alts,
+                              const std::string& to) {
+    std::string out;
+    out.reserve(s.size());
+    size_t i = 0;
+    while (i < s.size()) {
+        bool hit = false;
+        if (s[i] == '&') {
+            for (const auto& a : alts) {
+                if (ieq_at(s, i, a)) {
+                    out += to;
+                    i += a.size();
+                    hit = true;
+                    break;
+                }
+            }
+        }
+        if (!hit) out += s[i++];
+    }
+    return out;
+}
+
+// <script ...>...</script> and <style ...>...</style>, case-insensitive, to
+// one space. As the regex it replaces: the opening tag ends at the first '>'
+// and the element at the first "</script>"; an element with no closer stays.
+std::string strip_elements(const std::string& s) {
+    static const char* const kNames[] = {"script", "style"};
+    std::string out;
+    out.reserve(s.size());
+    size_t i = 0;
+    while (i < s.size()) {
+        bool done = false;
+        if (s[i] == '<') {
+            for (const char* nm : kNames) {
+                const std::string open = std::string("<") + nm;
+                if (!ieq_at(s, i, open)) continue;
+                const size_t gt = s.find('>', i + open.size());
+                if (gt == std::string::npos) break;
+                const std::string close = std::string("</") + nm + ">";
+                size_t k = gt + 1;
+                while (k < s.size() && !ieq_at(s, k, close)) ++k;
+                if (k >= s.size()) break;
+                out += ' ';
+                i = k + close.size();
+                done = true;
+                break;
+            }
+        }
+        if (!done) out += s[i++];
+    }
+    return out;
+}
+
+// every tag to one space, except the block-level closers and <br>, which
+// become newlines so section headers keep their lines (the two regex passes
+// `</(p|div|h[1-6]|tr|li|br)>|<br\s*/?>` -> "\n" then `<[^>]+>` -> " ")
+std::string strip_tags(const std::string& s) {
+    static const char* const kBlock[] = {"p", "div", "h1", "h2", "h3", "h4", "h5", "h6", "tr", "li", "br"};
+    std::string out;
+    out.reserve(s.size());
+    size_t i = 0;
+    while (i < s.size()) {
+        if (s[i] != '<') {
+            out += s[i++];
+            continue;
+        }
+        const size_t gt = s.find('>', i + 1);
+        if (gt == std::string::npos || gt == i + 1) {   // `<[^>]+>` needs a body and a closer
+            out += s[i++];
+            continue;
+        }
+        std::string body = s.substr(i + 1, gt - i - 1);
+        for (char& c : body) c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+        bool nl = false;
+        if (body[0] == '/') {
+            const std::string nm = body.substr(1);
+            for (const char* b : kBlock) {
+                if (nm == b) {
+                    nl = true;
+                    break;
+                }
+            }
+        } else if (body.compare(0, 2, "br") == 0) {
+            size_t k = 2;
+            while (k < body.size() && std::isspace(static_cast<unsigned char>(body[k]))) ++k;
+            if (k < body.size() && body[k] == '/') ++k;
+            nl = (k == body.size());
+        }
+        out += nl ? '\n' : ' ';
+        i = gt + 1;
+    }
+    return out;
+}
+
+// CRLF / CR -> LF
+std::string normalize_newlines(const std::string& s) {
+    std::string out;
+    out.reserve(s.size());
+    for (size_t i = 0; i < s.size(); ++i) {
+        if (s[i] == '\r') {
+            out += '\n';
+            if (i + 1 < s.size() && s[i + 1] == '\n') ++i;
+        } else {
+            out += s[i];
+        }
+    }
+    return out;
+}
+
+}  // namespace
+
+// A line longer than this is split at its last space (or hard): the field
+// extractors' regexes may consume at most one line per repeated atom, and
+// the recursion that costs is one frame per character.
+const size_t kMaxLine = 4000;
+
+// The text every extractor sees: spaces and tabs collapsed to one space,
+// newlines stripped of their flanking spaces, at most two newlines in a row,
+// and no line longer than kMaxLine. Idempotent; html_to_text() ends with it
+// and the plain-text entry points apply it before any rule runs.
+std::string normalize_text(const std::string& s) {
+    std::string t;
+    t.reserve(s.size());
+    // `[ \t]+` -> " "
+    bool in_sp = false;
+    for (unsigned char c : s) {
+        if (c == ' ' || c == '\t') {
+            if (!in_sp) t += ' ';
+            in_sp = true;
+        } else {
+            t += static_cast<char>(c);
+            in_sp = false;
+        }
+    }
+    // ` ?\n ?` -> "\n" and `\n{3,}` -> "\n\n"
+    std::string u;
+    u.reserve(t.size());
+    size_t i = 0;
+    int run = 0;
+    while (i < t.size()) {
+        if (t[i] == '\n') {
+            if (!u.empty() && u.back() == ' ') u.pop_back();
+            if (run < 2) u += '\n';
+            ++run;
+            ++i;
+            if (i < t.size() && t[i] == ' ') ++i;
+            continue;
+        }
+        run = 0;
+        u += t[i++];
+    }
+    // cap every line
+    std::string out;
+    out.reserve(u.size());
+    size_t line_start = 0;
+    size_t last_space = std::string::npos;
+    for (size_t k = 0; k < u.size(); ++k) {
+        const char c = u[k];
+        out += c;
+        if (c == '\n') {
+            line_start = out.size();
+            last_space = std::string::npos;
+            continue;
+        }
+        if (c == ' ') last_space = out.size() - 1;
+        if (out.size() - line_start >= kMaxLine) {
+            if (last_space != std::string::npos && last_space > line_start) {
+                out[last_space] = '\n';
+                line_start = last_space + 1;
+            } else {
+                out += '\n';
+                line_start = out.size();
+            }
+            last_space = std::string::npos;
+        }
+    }
+    return out;
+}
+
+namespace {
 
 // _section_text: text from a line reading exactly `header` up to the first
 // end-marker line (or end of text).
@@ -515,32 +748,47 @@ std::string to_iso_date(const std::string& human_in) {
 
 // "&#233;" / "&#xE9;" -> the character as UTF-8 (any code point the named list misses)
 static std::string decode_numeric_entities(const std::string& s) {
-    static const std::regex ent(R"(&#(x[0-9A-Fa-f]+|[0-9]+);)");
     std::string out;
-    std::size_t last = 0;
-    for (auto it = std::sregex_iterator(s.begin(), s.end(), ent); it != std::sregex_iterator(); ++it) {
-        const std::string g = (*it)[1].str();
-        const unsigned long cp = g[0] == 'x' ? std::stoul(g.substr(1), nullptr, 16) : std::stoul(g);
-        out.append(s, last, static_cast<std::size_t>(it->position(0)) - last);
-        last = static_cast<std::size_t>(it->position(0) + it->length(0));
-        if (cp == 0 || cp > 0x10FFFF) continue;
-        if (cp < 0x80) {
-            out += static_cast<char>(cp);
-        } else if (cp < 0x800) {
-            out += static_cast<char>(0xC0 | (cp >> 6));
-            out += static_cast<char>(0x80 | (cp & 0x3F));
-        } else if (cp < 0x10000) {
-            out += static_cast<char>(0xE0 | (cp >> 12));
-            out += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-            out += static_cast<char>(0x80 | (cp & 0x3F));
-        } else {
-            out += static_cast<char>(0xF0 | (cp >> 18));
-            out += static_cast<char>(0x80 | ((cp >> 12) & 0x3F));
-            out += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-            out += static_cast<char>(0x80 | (cp & 0x3F));
+    out.reserve(s.size());
+    size_t i = 0;
+    while (i < s.size()) {
+        if (s[i] == '&' && i + 2 < s.size() && s[i + 1] == '#') {
+            size_t k = i + 2;
+            bool hex = false;
+            if (k < s.size() && s[k] == 'x') {
+                hex = true;
+                ++k;
+            }
+            const size_t d0 = k;
+            while (k < s.size() &&
+                   (hex ? std::isxdigit(static_cast<unsigned char>(s[k])) != 0
+                        : std::isdigit(static_cast<unsigned char>(s[k])) != 0)) ++k;
+            if (k > d0 && k < s.size() && s[k] == ';') {
+                // more digits than any code point has is not an entity worth keeping
+                const unsigned long cp = (k - d0 > 8) ? 0x110000UL
+                    : std::stoul(s.substr(d0, k - d0), nullptr, hex ? 16 : 10);
+                i = k + 1;
+                if (cp == 0 || cp > 0x10FFFF) continue;
+                if (cp < 0x80) {
+                    out += static_cast<char>(cp);
+                } else if (cp < 0x800) {
+                    out += static_cast<char>(0xC0 | (cp >> 6));
+                    out += static_cast<char>(0x80 | (cp & 0x3F));
+                } else if (cp < 0x10000) {
+                    out += static_cast<char>(0xE0 | (cp >> 12));
+                    out += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
+                    out += static_cast<char>(0x80 | (cp & 0x3F));
+                } else {
+                    out += static_cast<char>(0xF0 | (cp >> 18));
+                    out += static_cast<char>(0x80 | ((cp >> 12) & 0x3F));
+                    out += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
+                    out += static_cast<char>(0x80 | (cp & 0x3F));
+                }
+                continue;
+            }
         }
+        out += s[i++];
     }
-    out.append(s, last, std::string::npos);
     return out;
 }
 
@@ -548,24 +796,20 @@ std::string html_to_text(const std::string& html) {
     // Live SIU pages use CRLF line endings; a stray \r defeats every
     // line-anchored rule (sections, signature, police service), so normalise
     // CRLF / CR to LF before anything else.
-    std::string t = std::regex_replace(html, std::regex(R"(\r\n?)"), "\n");
-    t = std::regex_replace(
-        t, std::regex(R"(<(script|style)[^>]*>[\s\S]*?</\1>)", std::regex::icase),
-        " ");
-    // Block-level closers become newlines so section headers keep their lines.
-    t = std::regex_replace(
-        t, std::regex(R"(</(p|div|h[1-6]|tr|li|br)>|<br\s*/?>)", std::regex::icase),
-        "\n");
-    t = std::regex_replace(t, std::regex(R"(<[^>]+>)"), " ");
-    t = std::regex_replace(t, std::regex(R"(&nbsp;)"), " ");
-    t = std::regex_replace(t, std::regex(R"(&amp;)"), "&");
-    t = std::regex_replace(t, std::regex(R"(&#8217;|&rsquo;|&#x2019;)", std::regex::icase), "'");
-    t = std::regex_replace(t, std::regex(R"(&#8216;|&lsquo;|&#x2018;)", std::regex::icase), "'");
-    t = std::regex_replace(t, std::regex(R"(&#8220;|&ldquo;|&#8221;|&rdquo;|&#x201c;|&#x201d;)", std::regex::icase), "\"");
-    t = std::regex_replace(t, std::regex(R"(&quot;)"), "\"");
-    t = std::regex_replace(t, std::regex(R"(&#0?39;|&apos;)"), "'");
-    t = std::regex_replace(t, std::regex(R"(&#8211;|&ndash;|&#x2013;)", std::regex::icase), "-");
-    t = std::regex_replace(t, std::regex(R"(&#8212;|&mdash;|&#x2014;)", std::regex::icase), "--");
+    std::string t = normalize_newlines(html);
+    t = strip_elements(t);
+    // Block-level closers become newlines so section headers keep their lines;
+    // every other tag is a space.
+    t = strip_tags(t);
+    t = replace_all(t, "&nbsp;", " ");
+    t = replace_all(t, "&amp;", "&");
+    t = replace_any_icase(t, {"&#8217;", "&rsquo;", "&#x2019;"}, "'");
+    t = replace_any_icase(t, {"&#8216;", "&lsquo;", "&#x2018;"}, "'");
+    t = replace_any_icase(t, {"&#8220;", "&ldquo;", "&#8221;", "&rdquo;", "&#x201c;", "&#x201d;"}, "\"");
+    t = replace_all(t, "&quot;", "\"");
+    t = replace_any_icase(t, {"&#39;", "&#039;", "&apos;"}, "'");
+    t = replace_any_icase(t, {"&#8211;", "&ndash;", "&#x2013;"}, "-");
+    t = replace_any_icase(t, {"&#8212;", "&mdash;", "&#x2014;"}, "--");
     // Angle brackets last: the markup is already gone, so a decoded "<"
     // cannot be mistaken for a tag by anything downstream.
     // accented named entities of the French pages, as UTF-8
@@ -578,16 +822,14 @@ std::string html_to_text(const std::string& html) {
         {"&Ecirc;", "\xc3\x8a"}, {"&Ccedil;", "\xc3\x87"}, {"&Ocirc;", "\xc3\x94"}, {"&Icirc;", "\xc3\x8e"},
         {"&Acirc;", "\xc3\x82"}, {"&laquo;", "\xc2\xab"}, {"&raquo;", "\xc2\xbb"}, {"&oelig;", "\xc5\x93"},
         {"&OElig;", "\xc5\x92"}, {"&thinsp;", " "}}};
-    for (const auto& [ent, ch] : kNamed) t = std::regex_replace(t, std::regex(ent), ch);
-    t = std::regex_replace(t, std::regex(R"(&hellip;|&#8230;)"), "...");
+    for (const auto& [ent, ch] : kNamed) t = replace_all(t, ent, ch);
+    t = replace_any_icase(t, {"&hellip;", "&#8230;"}, "...");
     t = decode_numeric_entities(t);
-    t = std::regex_replace(t, std::regex(R"(&lt;)"), "<");
-    t = std::regex_replace(t, std::regex(R"(&gt;)"), ">");
-    // collapse spaces but keep newlines (section slicing needs them)
-    t = std::regex_replace(t, std::regex(R"([ \t]+)"), " ");
-    t = std::regex_replace(t, std::regex(R"( ?\n ?)"), "\n");
-    t = std::regex_replace(t, std::regex(R"(\n{3,})"), "\n\n");
-    return t;
+    t = replace_all(t, "&lt;", "<");
+    t = replace_all(t, "&gt;", ">");
+    // collapse spaces but keep newlines (section slicing needs them), and cap
+    // every line: see normalize_text()
+    return normalize_text(t);
 }
 
 // ---- French reports: the SIU publishes every report in both languages, and the French copy
