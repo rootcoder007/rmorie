@@ -23,7 +23,7 @@ int count_matches(const std::string& s, const std::regex& re) {
 
 }  // namespace
 
-std::string strip_boilerplate(const std::string& t) {
+static std::string strip_boilerplate_impl(const std::string& t) {
     // Reports mix in UTF-8 non-breaking spaces ("SO\u00A0#1"); \s never
     // matches them in byte-mode std::regex, so normalize to plain spaces
     // before any rule runs.
@@ -135,7 +135,7 @@ static SoResolution resolve_fr(const std::string& text) {
     return {std::nullopt, "UNRESOLVED (fr): 'l'AI'x" + std::to_string(the)};
 }
 
-SoResolution resolve_subject_officials(const std::string& report_text) {
+static SoResolution resolve_subject_officials_impl(const std::string& report_text) {
     const std::string body = strip_boilerplate(report_text);
     {
         static const std::regex kUes("\\bUES\\b"), kSiu("\\bSIU\\b");
@@ -271,6 +271,27 @@ SoResolution resolve_subject_officials(const std::string& report_text) {
     // 5. Needs a human read.
     return {std::nullopt, "UNRESOLVED: 'the SO'x" + std::to_string(the_so) +
                               " 'the subj off'x" + std::to_string(the_subj)};
+}
+
+// The public entry points answer on any input (see siu_parse.cpp): a regex
+// engine that gives up on a pathological line yields "no resolution" rather
+// than an exception out of the resolver.
+std::string strip_boilerplate(const std::string& report_text) {
+    try {
+        return strip_boilerplate_impl(report_text);
+    } catch (const std::regex_error&) {
+        return report_text;
+    }
+}
+
+SoResolution resolve_subject_officials(const std::string& report_text) {
+    try {
+        return resolve_subject_officials_impl(report_text);
+    } catch (const std::regex_error&) {
+        SoResolution r;
+        r.reason = "the text defeated the regex engine: no resolution";
+        return r;
+    }
 }
 
 }  // namespace siu

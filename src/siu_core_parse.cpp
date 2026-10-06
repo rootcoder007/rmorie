@@ -202,8 +202,10 @@ std::string normalize_newlines(const std::string& s) {
 
 // A line longer than this is split at its last space (or hard): the field
 // extractors' regexes may consume at most one line per repeated atom, and
-// the recursion that costs is one frame per character.
-const size_t kMaxLine = 4000;
+// the recursion that costs is one frame per character (libstdc++) or, on
+// MSVC's STL, a complexity budget of ten million steps -- a 4,000-digit line
+// against `\d+` exceeded it (morie's Windows wheel, 2026-10-06).
+const size_t kMaxLine = 2000;
 
 // The text every extractor sees: spaces and tabs collapsed to one space,
 // newlines stripped of their flanking spaces, at most two newlines in a row,
@@ -687,7 +689,7 @@ std::string detect_language(const std::string& text) {
 }  // namespace
 
 // shared with rmoriebricklayer's parser: English and French months, ordinals (3rd, 1er)
-std::string to_iso_date(const std::string& human_in) {
+static std::string to_iso_date_impl(const std::string& human_in) {
     // "1 er septembre 2016" (the ordinal set apart, a space or a no-break space) is "1er"
     static const std::regex sep_er("(\\d)(?:\\s|\xc2\xa0)+er\\b");
     const std::string human = std::regex_replace(human_in, sep_er, "$1er");
@@ -1150,7 +1152,7 @@ static std::string relative_incident(const std::string& text, const std::string&
     return civil_from_days(days_from_civil(y, m, d) + shift);
 }
 
-ParsedFields parse_report_text(const std::string& text) {
+static ParsedFields parse_report_text_impl(const std::string& text) {
     ParsedFields f;
     f["_language"] = detect_language(text);
 
@@ -1247,6 +1249,27 @@ ParsedFields parse_report_text(const std::string& text) {
     f["specific_injuries"] = detect_specific_injuries(text, fr);
     f["relevant_legislation"] = detect_legislation(text, fr);
     return f;
+}
+
+// The public entry points answer on any input. A regex engine that gives up
+// on a pathological line (MSVC's STL throws regex_error(error_complexity);
+// libstdc++ never does, and cannot overflow the stack once the lines are
+// capped) yields the no-match answer for the whole document rather than an
+// exception out of a parser.
+std::string to_iso_date(const std::string& human) {
+    try {
+        return to_iso_date_impl(human);
+    } catch (const std::regex_error&) {
+        return "";
+    }
+}
+
+ParsedFields parse_report_text(const std::string& text) {
+    try {
+        return parse_report_text_impl(text);
+    } catch (const std::regex_error&) {
+        return parse_report_text_impl("");   // every field, empty; the language "unknown"
+    }
 }
 
 ParsedFields parse_report_html(const std::string& html) {
