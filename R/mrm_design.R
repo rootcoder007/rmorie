@@ -269,30 +269,11 @@ mrm_causal_design <- function(
     e <- pmax(pmin(e, 1 - 1e-6), 1e-6)
     w1 <- D / e
     w0 <- (1 - D) / (1 - e)
-    tau <- sum(w1 * Y) / sum(w1) - sum(w0 * Y) / sum(w0)
-    # bootstrap SE
-    .rmorie_local_seed(42)
-    boots <- replicate(199, {
-      idx <- sample.int(n, replace = TRUE)
-      sub <- d[idx, , drop = FALSE]
-      e_b <- tryCatch(
-        {
-          fit_b <- stats::glm(fml, data = sub, family = stats::binomial())
-          pmax(pmin(stats::predict(fit_b, type = "response"), 1 - 1e-6), 1e-6)
-        },
-        error = function(e) NA_real_
-      )
-      if (all(is.na(e_b))) {
-        NA_real_
-      } else {
-        Db <- as.integer(sub[[treatment_col]])
-        Yb <- as.numeric(sub[[outcome_col]])
-        w1b <- Db / e_b
-        w0b <- (1 - Db) / (1 - e_b)
-        sum(w1b * Yb) / sum(w1b) - sum(w0b * Yb) / sum(w0b)
-      }
-    })
-    se <- stats::sd(boots, na.rm = TRUE)
+    mu1 <- sum(w1 * Y) / sum(w1)
+    mu0 <- sum(w0 * Y) / sum(w0)
+    tau <- mu1 - mu0
+    X <- stats::model.matrix(fit)[, !is.na(stats::coef(fit)), drop = FALSE]
+    se <- .rmorie_ipw_hajek_se(Y, D, e, X, mu1, mu0)
   } else {
     tau <- mean(Y[D == 1]) - mean(Y[D == 0])
     se <- sqrt(stats::var(Y[D == 1]) / sum(D == 1) +
@@ -313,4 +294,23 @@ mrm_causal_design <- function(
       tau - z * se, tau + z * se
     )
   )
+}
+
+# Sandwich (M-estimation) standard error of the Hajek IPW ATE with an estimated
+# logistic propensity: the two weighted-mean estimating equations stacked on
+# the logistic score, so the variance credits the propensity fit (Lunceford &
+# Davidian 2004, Statistics in Medicine 23:2937, the IPW2 estimator).
+# Deterministic, and the same formula the Python arm evaluates.
+#' @noRd
+.rmorie_ipw_hajek_se <- function(Y, D, e, X, mu1, mu0) {
+  n <- length(Y)
+  score <- (D - e) * X
+  B <- crossprod(X, e * (1 - e) * X) / n
+  psi1 <- D * (Y - mu1) / e
+  psi0 <- (1 - D) * (Y - mu0) / (1 - e)
+  A1 <- colMeans(-psi1 * (1 - e) * X)
+  A0 <- colMeans(psi0 * e * X)
+  if1 <- (psi1 + drop(score %*% solve(B, A1))) / mean(D / e)
+  if0 <- (psi0 + drop(score %*% solve(B, A0))) / mean((1 - D) / (1 - e))
+  sqrt(sum((if1 - if0)^2)) / n
 }

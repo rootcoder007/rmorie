@@ -74,3 +74,45 @@ test_that("mrm_causal_design diff_in_means estimator path works too", {
   out <- mrm_causal_design(d, "d", "y", estimator = "diff_in_means")
   expect_type(out, "list")
 })
+
+test_that("mrm_causal_design IPW standard error is the sandwich both arms report", {
+  i <- 1:150
+  x1 <- sin(i)
+  x2 <- cos(1.4 * i)
+  d <- as.integer(0.7 * x1 + 0.4 * sin(3.1 * i) > 0)
+  df <- data.frame(x1, x2, D = d, Y = 1 + 0.5 * d + x1 + 0.3 * cos(2.2 * i))
+  out <- mrm_causal_design(df, "D", "Y", c("x1", "x2"), estimator = "ipw")
+  # morie: tests/test_mrm_design_reference.py asserts the same two numbers
+  expect_equal(out$estimate, 1.036702)
+  expect_equal(out$se, 0.098274)
+  # the influence-function SE recomputed by hand (Lunceford & Davidian 2004, IPW2)
+  fit <- glm(D ~ x1 + x2, data = df, family = binomial())
+  e <- fitted(fit)
+  X <- model.matrix(fit)
+  D <- df$D
+  Y <- df$Y
+  mu1 <- sum(D * Y / e) / sum(D / e)
+  mu0 <- sum((1 - D) * Y / (1 - e)) / sum((1 - D) / (1 - e))
+  psi1 <- D * (Y - mu1) / e
+  psi0 <- (1 - D) * (Y - mu0) / (1 - e)
+  B <- crossprod(X, e * (1 - e) * X) / nrow(X)
+  if1 <- (psi1 + drop((D - e) * X %*% solve(B, colMeans(-psi1 * (1 - e) * X)))) / mean(D / e)
+  if0 <- (psi0 + drop((D - e) * X %*% solve(B, colMeans(psi0 * e * X)))) / mean((1 - D) / (1 - e))
+  expect_equal(out$se, round(sqrt(sum((if1 - if0)^2)) / nrow(X), 6))
+})
+
+test_that("mrm_causal_design IPW SE has nominal coverage (was a 199-rep bootstrap at 1.7x the SD)", {
+  set.seed(1)
+  est <- se <- numeric(60)
+  for (r in seq_along(est)) {
+    n <- 400
+    x <- rnorm(n)
+    x2 <- rnorm(n)
+    t <- rbinom(n, 1, plogis(0.5 * x - 0.3 * x2))
+    y <- 0.8 * t + x + 0.5 * x2 + rnorm(n)
+    a <- mrm_causal_design(data.frame(y, t, x, x2), "t", "y", c("x", "x2"))
+    est[r] <- a$estimate
+    se[r] <- a$se
+  }
+  expect_lt(abs(mean(se) / sd(est) - 1), 0.25)
+})
