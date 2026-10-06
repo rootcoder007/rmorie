@@ -2,6 +2,7 @@
 // Canonical home of the SIU parse/resolve core. rmorie (src/siu/) and morie
 // (morie.siu.native) carry ports of these sources; edit here first, then port.
 #include "siu/resolve.hpp"
+#include "siu/parse.hpp"
 
 #include <algorithm>
 #include <array>
@@ -91,7 +92,7 @@ static SoResolution resolve_fr(const std::string& text) {
             int entries = 0, ord = 0;
             for (auto it = std::sregex_iterator(win.begin(), win.end(), kEntry); it != std::sregex_iterator(); ++it) {
                 ++entries;
-                if ((*it)[1].matched) ord = std::max(ord, std::stoi((*it)[1].str()));
+                if ((*it)[1].matched) ord = std::max(ord, small_int((*it)[1].str()));
             }
             const int n = std::max(entries, ord);
             if (n > 0) return {n, "section: max(ordinal " + std::to_string(ord) + ", entries " + std::to_string(entries) + ")"};
@@ -100,7 +101,7 @@ static SoResolution resolve_fr(const std::string& text) {
     int mo = 0;
     bool one = false;
     for (auto it = std::sregex_iterator(body.begin(), body.end(), kOrd); it != std::sregex_iterator(); ++it) {
-        const int k = std::stoi((*it)[1].str());
+        const int k = small_int((*it)[1].str());
         mo = std::max(mo, k);
         one = one || k == 1;
     }
@@ -110,7 +111,7 @@ static SoResolution resolve_fr(const std::string& text) {
     auto num = [&](std::string tok) {
         std::transform(tok.begin(), tok.end(), tok.begin(), ::tolower);
         const auto w = kFrNum.find(tok);
-        return w != kFrNum.end() ? w->second : std::stoi(tok);
+        return w != kFrNum.end() ? w->second : small_int(tok);
     };
     std::smatch m;
     if (mo > 0 && one) {
@@ -156,7 +157,7 @@ static SoResolution resolve_subject_officials_impl(const std::string& report_tex
         for (const auto* re : {&kOrdSo, &kOrdSpelled}) {
             for (auto it = std::sregex_iterator(s.begin(), s.end(), *re);
                  it != std::sregex_iterator(); ++it) {
-                mo = std::max(mo, std::stoi((*it)[1].str()));
+                mo = std::max(mo, small_int((*it)[1].str()));
             }
         }
         return mo;
@@ -223,7 +224,7 @@ static SoResolution resolve_subject_officials_impl(const std::string& report_tex
         std::string low = tok;
         std::transform(low.begin(), low.end(), low.begin(), ::tolower);
         auto wit = kWordNum.find(low);
-        n = (wit != kWordNum.end()) ? wit->second : std::stoi(tok);
+        n = (wit != kWordNum.end()) ? wit->second : small_int(tok);
         return {n, "plural cue '" + m[0].str() + "'"};
     }
 

@@ -319,7 +319,7 @@ std::string count_tagged(const std::string& section, const std::string& prefix) 
     int mx = 0;
     for (auto it = std::sregex_iterator(flat.begin(), flat.end(), pat);
          it != std::sregex_iterator(); ++it) {
-        mx = std::max(mx, std::stoi((*it)[1].str()));
+        mx = std::max(mx, small_int((*it)[1].str()));
     }
     if (mx > 0) return std::to_string(mx);
     if (std::regex_search(flat, std::regex("\\b" + prefix + "\\b")))
@@ -364,7 +364,7 @@ std::string count_labelled(const std::string& text, const std::string& label) {
     const std::regex pat("\\b" + label + "s?\\s*(?:#|n\\s?o\\.?|n\xc2[\xb0\xba])\\s*(\\d+)\\b", std::regex::icase);
     int mx = 0;
     for (auto it = std::sregex_iterator(flat.begin(), flat.end(), pat); it != std::sregex_iterator(); ++it)
-        mx = std::max(mx, std::stoi((*it)[1].str()));
+        mx = std::max(mx, small_int((*it)[1].str()));
     return mx > 0 ? std::to_string(mx) : "";
 }
 
@@ -739,12 +739,12 @@ static std::string to_iso_date_impl(const std::string& human_in) {
     const auto it = kMonths.find(key(month));
     if (it == kMonths.end()) return "";
     // "February 30, 2019" is not a date
-    const int y = std::stoi(year), mo = it->second, d = std::stoi(day);
+    const int y = small_int(year), mo = it->second, d = small_int(day);
     static const int kDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     const bool leap = (y % 4 == 0 && y % 100 != 0) || y % 400 == 0;
     if (d < 1 || d > kDays[mo - 1] + (mo == 2 && leap ? 1 : 0)) return "";
     char buf[16];
-    std::snprintf(buf, sizeof buf, "%s-%02d-%02d", year.c_str(), it->second, std::stoi(day));
+    std::snprintf(buf, sizeof buf, "%s-%02d-%02d", year.c_str(), it->second, small_int(day));
     return buf;
 }
 
@@ -1146,9 +1146,9 @@ static std::string relative_incident(const std::string& text, const std::string&
         if (std::regex_search(sent, fr ? same_fr : same_en)) { shift = 0; break; }
     }
     if (shift == 1) return "";
-    const long y = std::stol(notified_iso.substr(0, 4));
-    const unsigned m = static_cast<unsigned>(std::stoul(notified_iso.substr(5, 2)));
-    const unsigned d = static_cast<unsigned>(std::stoul(notified_iso.substr(8, 2)));
+    const long y = small_int(notified_iso.substr(0, 4));
+    const unsigned m = static_cast<unsigned>(small_int(notified_iso.substr(5, 2)));
+    const unsigned d = static_cast<unsigned>(small_int(notified_iso.substr(8, 2)));
     return civil_from_days(days_from_civil(y, m, d) + shift);
 }
 
@@ -1220,7 +1220,7 @@ static ParsedFields parse_report_text_impl(const std::string& text) {
         // a section that spells the role out: "Witness Officer #2", "l'agent t\xc3\xa9moin no 2"
         const std::string spelled = count_labelled(wo, fr ? "agent t\xc3\xa9moin" : "Witness Offic(?:er|ial)");
         if (!spelled.empty() && (f["number_of_witness_officials"].empty() ||
-                                 std::stoi(spelled) > std::stoi(f["number_of_witness_officials"])))
+                                 small_int(spelled) > small_int(f["number_of_witness_officials"])))
             f["number_of_witness_officials"] = spelled;
     }
     if (wo.empty()) f["number_of_witness_officials"] = count_labelled(text, fr ? "agent t\xc3\xa9moin" : "Witness Officer");
@@ -1233,7 +1233,7 @@ static ParsedFields parse_report_text_impl(const std::string& text) {
         f["number_of_civilian_witnesses"] = count_tagged(cw, fr ? "TC" : "CW");
         const std::string spelled = count_labelled(cw, fr ? "t\xc3\xa9moin civil" : "Civilian Witness");
         if (!spelled.empty() && (f["number_of_civilian_witnesses"].empty() ||
-                                 std::stoi(spelled) > std::stoi(f["number_of_civilian_witnesses"])))
+                                 small_int(spelled) > small_int(f["number_of_civilian_witnesses"])))
             f["number_of_civilian_witnesses"] = spelled;
     }
     if (cw.empty()) f["number_of_civilian_witnesses"] = count_labelled(text, fr ? "t\xc3\xa9moin civil" : "Civilian Witness");
