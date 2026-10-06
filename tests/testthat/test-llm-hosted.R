@@ -61,7 +61,7 @@ test_that("the probe never runs without a key and sends the bearer key when it d
   expect_true(morie_llm_probe_hosted()); expect_equal(calls, 1L)
 })
 
-test_that("the hosted tier sits after a local Ollama and before the cloud keys", {
+test_that("the hosted tier is the last resort: after a local Ollama and after every cloud key", {
   testthat::skip_on_covr()
   .hosted_sandbox()
   expect_equal(morie_llm_detect_provider(), "local")
@@ -69,9 +69,19 @@ test_that("the hosted tier sits after a local Ollama and before the cloud keys",
   .morie_llm_cache$hosted_cached <- TRUE
   expect_equal(morie_llm_detect_provider(), "hosted")
   withr::local_envvar(GEMINI_API_KEY = "g")
-  expect_equal(morie_llm_detect_provider(), "hosted")
+  expect_equal(morie_llm_detect_provider(), "gemini")
+  withr::local_envvar(GEMINI_API_KEY = NA, OPENAI_API_KEY = "o")
+  expect_equal(morie_llm_detect_provider(), "openai")
+  withr::local_envvar(OPENAI_API_KEY = NA, LLM_API_BASE_URL = "https://api.example.org", LLM_API_KEY = "k")
+  expect_equal(morie_llm_detect_provider(), "api")
   .morie_llm_cache$ollama_cached <- TRUE
   expect_equal(morie_llm_detect_provider(), "ollama")
+  # the hosted address comes from the services document when bricklayer has it
+  expect_true(is.null(.morie_llm_services()) || is.list(.morie_llm_services()))
+  expect_match(.morie_llm_access_hint(), "rmorie.com/access")
+  expect_match(.morie_llm_hosted_base(), "^https://")
+  expect_match(.morie_llm_hosted_auth(), "^https://")
+  expect_true(nzchar(.morie_llm_hosted_model()))
 })
 
 test_that("morie_llm_ask tries the hosted endpoint with the stored key and the hosted model", {

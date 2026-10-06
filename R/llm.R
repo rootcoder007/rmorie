@@ -199,8 +199,10 @@ morie_llm_probe_ollama <- function(timeout = 2) {
 }
 
 #' Detect the active LLM provider
-#' @return Character scalar provider key: ollama / hosted / gemini / api / openai / local.
-#' The hosted tier (llm.rmorie.com) answers only after \code{morie_llm_login()}.
+#' @return Character scalar provider key: ollama / gemini / api / openai / hosted / local,
+#' in that order of preference: a local model first, then your own cloud keys, then the
+#' hosted MORIE tier as a last resort (it answers only after \code{morie_llm_login()};
+#' keys are issued on request at \url{https://rmorie.com/access}).
 #' @examples
 #' old <- options(morie.llm.ollama_cached = FALSE)
 #' morie_llm_detect_provider()
@@ -208,11 +210,12 @@ morie_llm_probe_ollama <- function(timeout = 2) {
 #' @export
 morie_llm_detect_provider <- function() {
   if (morie_llm_probe_ollama())                                 return("ollama")
-  if (morie_llm_probe_hosted())                                 return("hosted")
   if (!is.null(.morie_llm_gemini_key()))                        return("gemini")
   if (!is.null(.morie_llm_api_base()) && !is.null(.morie_llm_api_key()))
                                                                 return("api")
   if (!is.null(.morie_llm_openai_key()))                        return("openai")
+  # the hosted tier is a last resort, behind every key of the user's own
+  if (morie_llm_probe_hosted())                                 return("hosted")
   "local"
 }
 
@@ -386,22 +389,22 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
   if (provider == "ollama") {
     add(.morie_llm_ollama_base(), model %||% .morie_llm_ollama_default_model(), NULL)
   }
-  if (provider %in% c("ollama", "hosted") && !is.null(.morie_llm_hosted_base()) &&
-      !is.null(.morie_llm_hosted_key())) {
-    add(.morie_llm_hosted_base(), model %||% .morie_llm_hosted_model_available(),
-        .morie_llm_hosted_key())
-  }
-  if (provider %in% c("ollama", "hosted", "gemini") && !is.null(.morie_llm_gemini_key())) {
+  if (provider %in% c("ollama", "gemini") && !is.null(.morie_llm_gemini_key())) {
     add(GEMINI_BASE_URL, model %||% .morie_llm_gemini_model(),
         .morie_llm_gemini_key())
   }
-  if (!is.null(.morie_llm_api_base()) && !is.null(.morie_llm_api_key())) {
+  if (provider != "hosted" && !is.null(.morie_llm_api_base()) && !is.null(.morie_llm_api_key())) {
     add(.morie_llm_api_base(), model %||% .morie_llm_api_model(),
         .morie_llm_api_key())
   }
-  if (!is.null(.morie_llm_openai_key())) {
+  if (provider != "hosted" && !is.null(.morie_llm_openai_key())) {
     add(OPENAI_BASE_URL, model %||% DEFAULT_OPENAI_MODEL,
         .morie_llm_openai_key())
+  }
+  # the hosted MORIE tier is the last resort, after every route of the user's own
+  if (!is.null(.morie_llm_hosted_base()) && !is.null(.morie_llm_hosted_key())) {
+    add(.morie_llm_hosted_base(), model %||% .morie_llm_hosted_model_available(),
+        .morie_llm_hosted_key())
   }
   if (length(attempts) == 0L) return(.morie_llm_local_fallback(prompt))
 
@@ -471,7 +474,7 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
     detected <- morie_llm_detect_provider()
     providers <- unique(c(detected,
                           "ollama", "gemini",
-                          "api", "openai", "local"))
+                          "api", "openai", "hosted", "local"))
   }
 
   fallback_prompt <- function() {
@@ -488,6 +491,10 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
       ollama = list(base = .morie_llm_ollama_base(),
                     mdl = model %||% .morie_llm_ollama_default_model(),
                     key = NULL),
+      hosted = if (!is.null(.morie_llm_hosted_base()) && !is.null(.morie_llm_hosted_key()))
+                 list(base = .morie_llm_hosted_base(),
+                      mdl = model %||% .morie_llm_hosted_model_available(),
+                      key = .morie_llm_hosted_key()),
       gemini = if (!is.null(.morie_llm_gemini_key()))
                  list(base = GEMINI_BASE_URL,
                       mdl = model %||% .morie_llm_gemini_model(),
@@ -522,12 +529,37 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
 # stores it with mode 0600 in $XDG_CONFIG_HOME/morie/credentials.json -- the
 # same file the Python package reads, so one login serves both.
 
+# The defaults below are what an rmoriebricklayer too old to read the signed
+# services document falls back to. With a current bricklayer the document at
+# https://rmorie.com/.well-known/morie-services.json decides (ML-DSA-44, key
+# pinned in bricklayer), so the hosted addresses can change without a release.
 DEFAULT_HOSTED_BASE_URL <- "https://llm.rmorie.com"
 DEFAULT_HOSTED_AUTH_URL <- "https://llm.rmorie.com/auth"
 DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
+ACCESS_REQUEST_URL      <- "https://rmorie.com/access"
+
+#' Internal helper: the signed services document's llm block (through
+#' rmoriebricklayer's cached, verified copy), or NULL when that bricklayer
+#' predates it
+#' @noRd
+.morie_llm_services <- function() {
+  if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) return(NULL)
+  ns <- asNamespace("rmoriebricklayer")
+  if (!exists("bricklayer_services", envir = ns, inherits = FALSE)) return(NULL)
+  tryCatch(get("bricklayer_services", envir = ns)(offline = TRUE)$llm, error = function(e) NULL)
+}
+
+#' Internal helper: one line on how to get a hosted key
+#' @noRd
+.morie_llm_access_hint <- function() {
+  svc <- .morie_llm_services()
+  sprintf("keys are personal and issued on request at %s; store one with `rmorie login --token` (R: morie_llm_login(token = ))",
+          svc$request_access %||% ACCESS_REQUEST_URL)
+}
 
 #' Internal helper: the hosted endpoint, or NULL when disabled by an override
-#' of "" (POSIX) or "off" (any platform; Windows cannot hold an empty variable)
+#' of "" (POSIX) or "off" (any platform; Windows cannot hold an empty variable),
+#' or by the services document
 #' @noRd
 .morie_llm_hosted_base <- function() {
   if (nzchar(Sys.getenv("MORIE_HOSTED_BASE_URL", unset = "")) ||
@@ -535,18 +567,29 @@ DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
     v <- sub("/+$", "", trimws(Sys.getenv("MORIE_HOSTED_BASE_URL")))
     return(if (nzchar(v) && !tolower(v) %in% c("off", "none", "disabled")) v else NULL)
   }
-  DEFAULT_HOSTED_BASE_URL
+  svc <- .morie_llm_services()
+  if (is.null(svc)) return(DEFAULT_HOSTED_BASE_URL)
+  if (!identical(svc$mode, "key") || !nzchar(svc$base_url %||% "")) return(NULL)
+  svc$base_url
 }
 
 #' Internal helper: the sign-in service of the hosted tier
 #' @noRd
 .morie_llm_hosted_auth <- function() {
-  sub("/+$", "", .morie_llm_env("MORIE_HOSTED_AUTH_URL", DEFAULT_HOSTED_AUTH_URL))
+  v <- sub("/+$", "", .morie_llm_env("MORIE_HOSTED_AUTH_URL", ""))
+  if (nzchar(v)) return(v)
+  a <- .morie_llm_services()$auth_url %||% ""
+  if (nzchar(a)) a else DEFAULT_HOSTED_AUTH_URL
 }
 
 #' Internal helper: the hosted model name
 #' @noRd
-.morie_llm_hosted_model <- function() .morie_llm_env("MORIE_HOSTED_MODEL", DEFAULT_HOSTED_MODEL)
+.morie_llm_hosted_model <- function() {
+  v <- .morie_llm_env("MORIE_HOSTED_MODEL", "")
+  if (nzchar(v)) return(v)
+  m <- .morie_llm_services()$default_model %||% ""
+  if (nzchar(m)) m else DEFAULT_HOSTED_MODEL
+}
 
 #' Internal helper: the credentials file shared with the Python package
 #' @noRd

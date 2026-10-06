@@ -1,5 +1,13 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* The hosted MORIE tier is the last resort: `morie_llm_detect_provider()` and the fallback
+  chain in `morie_llm_ask()` / `morie_llm_ask_multi()` now try a local Ollama, then your own
+  Gemini / OpenAI-compatible / OpenAI keys, and only then the hosted tier. Its address, model
+  and sign-in service come from the signed services document at rmorie.com (through
+  `rmoriebricklayer::bricklayer_services()`; an older bricklayer keeps the previous defaults),
+  so they can change without a release. Keys are personal and issued on request at
+  <https://rmorie.com/access>; every hint says so (`rmorie login --token`, GitHub and emailed-code
+  sign-ins keep working). The curated-data address follows the same document.
 * The 19 OTIS Ruhela-formulation analyses that returned a "not yet ported" placeholder run:
   `morie_otis_analyze_{a01,b01,b02}_ruhela_formulations()` (the ten-estimator DLRM with the IRM-DML
   standard-error comparison and the Naive arm), the per-year driver and its a01/b01 forms, the a01,
