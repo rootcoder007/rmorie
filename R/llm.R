@@ -280,10 +280,13 @@ morie_llm_request_completion <- function(base_url, model, messages,
   }
   res <- .morie_llm_http(url, body = .morie_to_json(payload, auto_unbox = TRUE),
                          headers = .morie_llm_bearer(api_key), timeout = timeout)
-  if (res$status == 0L) stop(sprintf("%s did not answer (%s)", base_url, res$body), call. = FALSE)
+  if (res$status == 0L) {
+    stop(sprintf("%s did not answer (%s)", base_url, .morie_llm_redact(res$body, api_key)), call. = FALSE)
+  }
   if (res$status >= 400L) {
     err <- .morie_llm_http_json(res)$error
     msg <- if (is.list(err)) err$message %||% "" else as.character(err %||% "")
+    msg <- .morie_llm_redact(msg, api_key)
     stop(sprintf("HTTP %d from %s%s", res$status, base_url, if (nzchar(msg)) paste0(": ", msg) else ""), call. = FALSE)
   }
   .morie_from_json(res$body, simplifyVector = FALSE)
@@ -310,6 +313,26 @@ morie_llm_request_completion <- function(base_url, model, messages,
 }
 
 .morie_llm_bearer <- function(key) if (!is.null(key) && nzchar(key)) paste("Authorization: Bearer", trimws(key)) else character()
+
+# The sign-in service names the page to open: only an https address of a public host is
+# handed to the browser (bricklayer's fourth review: the auth host chose any URL, any scheme).
+.morie_llm_browsable <- function(uri) {
+  is.character(uri) && length(uri) == 1L &&
+    grepl("^https://[A-Za-z0-9.-]+(:[0-9]+)?(/|$)", uri) &&
+    !grepl("^https://(localhost|127\\.|10\\.|192\\.168\\.|172\\.(1[6-9]|2[0-9]|3[01])\\.|169\\.254\\.|0\\.|100\\.(6[4-9]|[7-9][0-9]|1[01][0-9]|12[0-7])\\.)",
+           uri, ignore.case = TRUE) &&
+    !grepl("^https://[^/]*\\.(local|internal|localhost|lan|home|corp)(:[0-9]+)?(/|$)", uri, ignore.case = TRUE) &&
+    !grepl("^https://[^/.]+(:[0-9]+)?(/|$)", uri)  # a single-label name is not a public host
+}
+
+# A server's error text can quote the key it was sent, in any phrasing: the key itself is
+# redacted by value, the usual bearer / sk- spellings by shape, the LiteLLM phrasings cut.
+.morie_llm_redact <- function(msg, secret = NULL) {
+  msg <- sub("(?i)[.,;]?\\s*(received api key|key hash).*$", "", msg, perl = TRUE)
+  for (sec in secret) if (is.character(sec) && nzchar(sec)) msg <- gsub(sec, "<key>", msg, fixed = TRUE)
+  msg <- gsub("(?i)bearer\\s+[A-Za-z0-9._~+/=-]{8,}", "Bearer <key>", msg, perl = TRUE)
+  gsub("\\bsk-[A-Za-z0-9._-]{6,}", "<key>", msg, perl = TRUE)
+}
 
 #' Internal helper: Morie Llm Extract Text
 #' @noRd
@@ -746,7 +769,9 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
   if (start$status != 200L) stop(sprintf("the sign-in service answered %d", start$status), call. = FALSE)
   info <- .morie_llm_http_json(start)
   message(sprintf("Sign in at %s and enter the code: %s", info$verification_uri, info$user_code))
-  if (isTRUE(open_browser)) try(utils::browseURL(info$verification_uri), silent = TRUE)
+  if (isTRUE(open_browser) && .morie_llm_browsable(info$verification_uri)) {
+    try(utils::browseURL(info$verification_uri), silent = TRUE)
+  }
   interval <- as.numeric(info$interval %||% 5)
   deadline <- Sys.time() + poll_max_seconds
   waited <- 0

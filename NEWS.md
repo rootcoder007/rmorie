@@ -1,5 +1,9 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* Sign-in and errors, after rmoriebricklayer 0.5.9's network review: the page the sign-in
+  service names is handed to the browser only when it is an https address of a public host,
+  and a gateway's error text is redacted of the key it was sent (by value and by shape)
+  before it becomes an R condition.
 * The hosted MORIE tier is the last resort: `morie_llm_detect_provider()` and the fallback
   chain in `morie_llm_ask()` / `morie_llm_ask_multi()` now try a local Ollama, then your own
   Gemini / OpenAI-compatible / OpenAI keys, and only then the hosted tier. Its address, model

@@ -188,3 +188,22 @@ test_that("the hosted model falls back to what the gateway lists for this key", 
   withr::local_envvar(MORIE_HOSTED_MODEL = "anything:cloud")
   expect_equal(.morie_llm_hosted_model_available(), "anything:cloud")  # no list known: keep the name
 })
+
+test_that("only an https address of a public host is handed to the browser, and server text never carries the key", {
+  ok <- function(u) .morie_llm_browsable(u)
+  expect_true(ok("https://github.com/login/device"))
+  expect_true(ok("https://llm.rmorie.com:8443/auth/x"))
+  for (u in c("http://github.com/login/device", "https://127.0.0.1/", "https://localhost/", "https://10.0.0.5/x",
+              "https://192.168.1.9/", "https://172.20.0.1/", "https://169.254.169.254/latest", "https://100.64.0.1/",
+              "https://metadata.google.internal/", "https://box.lan/", "https://metadata/", "file:///etc/passwd",
+              "javascript:alert(1)", NA_character_, "")) {
+    expect_false(ok(u), info = u)
+  }
+  expect_false(ok(c("https://a.example.org", "https://b.example.org")))  # one address, not a vector
+  r <- .morie_llm_redact
+  expect_identical(r("token sk-LEAKLEAK1234 rejected", "sk-LEAKLEAK1234"), "token <key> rejected")
+  expect_identical(r("header was Authorization: Bearer abcdefgh12345678 at the gateway"), "header was Authorization: Bearer <key> at the gateway")
+  expect_identical(r("Invalid key. Received API key = sk-abc, key hash = xyz"), "Invalid key")
+  expect_identical(r("quota exceeded"), "quota exceeded")
+  expect_identical(r("the key 'my secret 42' is unknown", "my secret 42"), "the key '<key>' is unknown")
+})
