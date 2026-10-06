@@ -109,7 +109,7 @@ jobs:
           PKG_INCLUDE_LINKINGTO: "true"
         with:
           cache-version: 2
-          extra-packages: any::pkgdown, local::. github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
+          extra-packages: any::pkgdown, local::. github::stan-dev/cmdstanr
           needs: website
 
       # Examples ARE executed here. examples = FALSE was tried and reverted:

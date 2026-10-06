@@ -63,5 +63,5 @@ jobs:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         with:
           cache-version: 2
-          extra-packages: any::rcmdcheck any::rgenoud any::pkgdown github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
+          extra-packages: any::rcmdcheck any::rgenoud any::pkgdown github::stan-dev/cmdstanr
           needs: check, website
