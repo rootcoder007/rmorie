@@ -41,6 +41,20 @@ siu::audit::Granularity granularity(const std::string& g) {
 // "native", which a C locale reads as bytes ("Rivi\303\250reville" is not "Rivi\u00e8reville").
 static Rcpp::String u8(const std::string& s) { return Rcpp::String(s, CE_UTF8); }
 
+// The core polls this inside every whole-document pass; Rcpp turns a pending
+// Ctrl-C into its own exception, which the Rcpp export wrapper unwinds cleanly.
+static void siu_interrupt_hook() { Rcpp::checkUserInterrupt(); }
+static const bool siu_hook_installed = (siu::interrupt_hook() = siu_interrupt_hook, true);
+
+// A line longer than 2000 characters was split before extraction (sentence end
+// preferred): say so, as the canonical package does, never silently.
+static void siu_split_warning() {
+    if (siu::last_split_lines() > 0) {
+        Rcpp::warning("%d line(s) longer than 2000 characters were split for extraction; a field spanning a split may be incomplete",
+                      static_cast<int>(siu::last_split_lines()));
+    }
+}
+
 // The caps rmoriebricklayer's own entry points apply (rmbl_siu.cpp): a report
 // page is a few hundred KB, and the core's regexes run over text whose lines
 // normalize_text() has capped -- libstdc++'s regex executor recurses once per
@@ -53,12 +67,15 @@ static const std::string& checked_page(const std::string& s, const char* what) {
 
 // [[Rcpp::export(.siu_core_html_to_text)]]
 Rcpp::String siu_core_html_to_text(const std::string& html) {
-    return u8(siu::html_to_text(checked_page(html, "html")));
+    const std::string out = siu::html_to_text(checked_page(html, "html"));
+    siu_split_warning();
+    return u8(out);
 }
 
 // [[Rcpp::export(.siu_core_parse_html)]]
 Rcpp::CharacterVector siu_core_parse_html(const std::string& html) {
     const siu::ParsedFields fields = siu::parse_report_html(checked_page(html, "html"));
+    siu_split_warning();
     Rcpp::CharacterVector out(fields.size());
     Rcpp::CharacterVector names(fields.size());
     R_xlen_t i = 0;
@@ -74,7 +91,7 @@ Rcpp::CharacterVector siu_core_parse_html(const std::string& html) {
 // [[Rcpp::export(.siu_core_to_iso_date)]]
 Rcpp::String siu_core_to_iso_date(const std::string& human) {
     // a date string is a few dozen bytes; the date regexes run over the whole input
-    if (human.size() > 4096) return u8("");
+    if (human.size() > 4096) Rcpp::stop("`x` is longer than 4096 bytes: not a date");
     return u8(siu::to_iso_date(human));
 }
 
@@ -87,6 +104,7 @@ Rcpp::String siu_core_strip_boilerplate(const std::string& text) {
 Rcpp::List siu_core_resolve_so(const std::string& text) {
     // plain text from the caller gets the same whitespace/line discipline the HTML path has
     const siu::SoResolution res = siu::resolve_subject_officials(siu::normalize_text(checked_page(text, "text")));
+    siu_split_warning();
     return Rcpp::List::create(
         Rcpp::Named("count") = res.count.has_value() ? Rcpp::IntegerVector::create(*res.count)
                                                      : Rcpp::IntegerVector::create(NA_INTEGER),

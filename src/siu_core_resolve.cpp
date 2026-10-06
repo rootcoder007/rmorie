@@ -5,6 +5,8 @@
 #include "siu/parse.hpp"
 
 #include <algorithm>
+#include <cstring>
+#include <vector>
 #include <array>
 #include <regex>
 #include <unordered_map>
@@ -24,7 +26,93 @@ int count_matches(const std::string& s, const std::regex& re) {
 
 }  // namespace
 
+// ASCII case-insensitive find of `needle` in `hay` from `from`; npos when absent.
+static size_t find_icase(const std::string& hay, const std::string& needle, size_t from) {
+    if (needle.empty() || hay.size() < needle.size()) return std::string::npos;
+    const unsigned char n0 = static_cast<unsigned char>(std::tolower(static_cast<unsigned char>(needle[0])));
+    for (size_t i = from; i + needle.size() <= hay.size(); ++i) {
+        if ((i & 0xFFFF) == 0xFFFF) poll_interrupt();
+        if (static_cast<unsigned char>(std::tolower(static_cast<unsigned char>(hay[i]))) != n0) continue;
+        size_t k = 1;
+        while (k < needle.size() &&
+               std::tolower(static_cast<unsigned char>(hay[i + k])) == std::tolower(static_cast<unsigned char>(needle[k]))) ++k;
+        if (k == needle.size()) return i;
+    }
+    return std::string::npos;
+}
+
+// `start[\s\S]*?(?:end1|end2)\.?` -> " ", every occurrence, as a scan: from each
+// start the EARLIEST terminator wins (the lazy quantifier's choice); a start
+// with no terminator after it is left alone, as the regex left it.
+static std::string strip_span_icase(const std::string& s, const std::string& start,
+                                    const std::vector<std::string>& ends) {
+    std::string out;
+    out.reserve(s.size());
+    size_t pos = 0;
+    while (pos < s.size()) {
+        const size_t a = find_icase(s, start, pos);
+        if (a == std::string::npos) break;
+        size_t best = std::string::npos, best_len = 0;
+        for (const std::string& e : ends) {
+            const size_t b = find_icase(s, e, a + start.size());
+            if (b != std::string::npos && (best == std::string::npos || b < best)) { best = b; best_len = e.size(); }
+        }
+        if (best == std::string::npos) break;
+        size_t end = best + best_len;
+        if (end < s.size() && s[end] == '.') ++end;
+        out.append(s, pos, a - pos);
+        out += ' ';
+        pos = end;
+    }
+    out.append(s, pos, std::string::npos);
+    return out;
+}
+
+// The glossary sentence, as a scan: "who[,] in the opinion of the SIU Director[,]"
+// or "who[,] in the SIU Director's opinion[,]" (straight or curly apostrophe), then
+// at most 120 characters, "not a subject officer|official", then the rest of the
+// sentence up to and including its period ("[^.]*\.?" in 0.5.8, which matched \n
+// and had no bound).
+static std::string strip_glossary_icase(const std::string& s) {
+    static const char* const kHeads[] = {
+        "in the opinion of the siu director", "in the siu director's opinion",
+        "in the siu director\xE2\x80\x99s opinion", "in the siu directors opinion"};
+    std::string out;
+    out.reserve(s.size());
+    size_t pos = 0;
+    while (pos < s.size()) {
+        size_t h = std::string::npos, hlen = 0;
+        for (const char* head : kHeads) {
+            const size_t f = find_icase(s, head, pos);
+            if (f != std::string::npos && (h == std::string::npos || f < h)) { h = f; hlen = std::strlen(head); }
+        }
+        if (h == std::string::npos) break;
+        // "who" then an optional comma and spaces, right before the head
+        size_t w = h;
+        while (w > pos && (s[w - 1] == ' ' || s[w - 1] == '\n' || s[w - 1] == '\t' || s[w - 1] == ',')) --w;
+        const bool who = w >= pos + 3 && std::tolower(static_cast<unsigned char>(s[w - 3])) == 'w' &&
+                         std::tolower(static_cast<unsigned char>(s[w - 2])) == 'h' &&
+                         std::tolower(static_cast<unsigned char>(s[w - 1])) == 'o';
+        if (!who) { out.append(s, pos, h + hlen - pos); pos = h + hlen; continue; }
+        size_t after = h + hlen;
+        if (after < s.size() && s[after] == ',') ++after;
+        const size_t tail = find_icase(s, "not a subject offic", after);
+        if (tail == std::string::npos || tail - after > 120) { out.append(s, pos, h + hlen - pos); pos = h + hlen; continue; }
+        size_t end = tail + std::strlen("not a subject offic");
+        if (s.compare(end, 3, "ial") == 0 || s.compare(end, 3, "IAL") == 0) end += 3;
+        else if (s.compare(end, 2, "er") == 0 || s.compare(end, 2, "ER") == 0) end += 2;
+        const size_t dot = s.find('.', end);
+        end = dot == std::string::npos ? s.size() : dot + 1;
+        out.append(s, pos, (w - 3) - pos);
+        out += ' ';
+        pos = end;
+    }
+    out.append(s, pos, std::string::npos);
+    return out;
+}
+
 static std::string strip_boilerplate_impl(const std::string& t) {
+    poll_interrupt();
     // Reports mix in UTF-8 non-breaking spaces ("SO\u00A0#1"); \s never
     // matches them in byte-mode std::regex, so normalize to plain spaces
     // before any rule runs.
@@ -40,11 +128,13 @@ static std::string strip_boilerplate_impl(const std::string& t) {
         }
     }
     // The privacy paragraph runs from "this information may include" to the
-    // first "affected person" / "evidence". Remove every occurrence.
-    static const std::regex kBoiler(
-        R"(this information may include[\s\S]*?(?:affected person|evidence)\.?)",
-        std::regex::icase);
-    std::string out = std::regex_replace(norm, kBoiler, " ");
+    // first "affected person" / "evidence". Remove every occurrence. These two
+    // passes were `[\s\S]*?` and `[^.]*` regexes over the WHOLE document --
+    // both match \n, so the line cap never bounded them and 44,000 characters
+    // of period-free text between the boilerplate and its terminator overflowed
+    // the C stack (the SIU review, two sites). They are scans now.
+    std::string out = strip_span_icase(norm, "this information may include",
+                                       {"affected person", "evidence"});
     // The witness-officer glossary note ("a witness officer is a police
     // officer who, in the opinion of the SIU Director, is involved in the
     // incident under investigation but is not a subject officer...") appears
@@ -52,12 +142,9 @@ static std::string strip_boilerplate_impl(const std::string& t) {
     // Two phrasings across report eras, straight or curly apostrophe:
     //   "who, in the opinion of the SIU Director, ... not a subject officer"
     //   "who, in the SIU Director's opinion, ... not a subject officer"
-    static const std::regex kGlossary(
-        "who,?\\s+in the (?:opinion of the SIU Director|"
-        "SIU Director(?:'|\xE2\x80\x99)?s opinion),?"
-        "[\\s\\S]{0,120}?not a subject offic(?:er|ial)[^.]*\\.?",
-        std::regex::icase);
-    return std::regex_replace(out, kGlossary, " ");
+    // then up to 120 characters, "not a subject officer/official", and the
+    // rest of that sentence.
+    return strip_glossary_icase(out);
 }
 
 // French reports (UES): the subject official is the "agent impliqu\xc3\xa9" ("AI no 1"), the witness

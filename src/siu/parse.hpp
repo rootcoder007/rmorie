@@ -19,7 +19,7 @@ namespace siu {
 // than six digits, so anything longer is noise and reads as 0, which every
 // caller already treats as "no number here".
 inline int small_int(const std::string& digits) {
-    if (digits.empty() || digits.size() > 6) return 0;
+    if (digits.empty() || digits.size() > 9) return 0;  // nine digits fit an int; 0.5.8's six turned SO #1234567 into 1
     int v = 0;
     for (const char c : digits) {
         if (c < '0' || c > '9') return 0;
@@ -42,6 +42,19 @@ std::string html_to_text(const std::string& html);
 // the regex engine recurses once per character a repeated atom consumes.
 extern const size_t kMaxLine;
 std::string normalize_text(const std::string& text);
+// How many lines the LAST normalize_text() call had to split at kMaxLine (a
+// field spanning a split may come back incomplete; the host turns this into a
+// warning). 0 when nothing was split.
+size_t last_split_lines();
+
+// Interrupt polling for the long passes. The host installs a function that
+// raises in its own way -- rmoriebricklayer's barrier throws rmbl::Interrupt,
+// rmorie's glue calls Rcpp::checkUserInterrupt(), morie's binding checks
+// Python's signals -- and the core calls it between passes and inside every
+// whole-document loop. Unset, nothing is polled (a plain C++ build).
+using interrupt_fn = void (*)();
+interrupt_fn& interrupt_hook();
+void poll_interrupt();
 
 // Parse plain report text (from html_to_text) into the schema fields.
 ParsedFields parse_report_text(const std::string& text);

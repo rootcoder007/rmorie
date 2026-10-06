@@ -20,6 +20,15 @@
 #include <sstream>
 
 namespace siu {
+// the hook, the split counter and the poll helper live at namespace scope so the
+// header declarations match and the helpers below (an anonymous namespace) see them
+static size_t g_split_lines = 0;
+size_t last_split_lines() { return g_split_lines; }
+interrupt_fn& interrupt_hook() { static interrupt_fn fn = nullptr; return fn; }
+void poll_interrupt() { if (interrupt_fn fn = interrupt_hook()) fn(); }
+// poll every 64 KiB of input inside a whole-document loop
+static inline void poll_every(size_t i) { if ((i & 0xFFFF) == 0xFFFF) poll_interrupt(); }
+
 namespace {
 
 std::string lower(std::string s) {
@@ -89,17 +98,18 @@ bool ieq_at(const std::string& s, size_t pos, const std::string& lit) {
 
 // every occurrence of any of the entity literals in `alts` -> `to`; each one
 // starts with '&', so the scan only tests at ampersands
-std::string replace_any_icase(const std::string& s, const std::vector<std::string>& alts,
-                              const std::string& to) {
+// exact-case alternatives (HTML entity names are case-sensitive: &apos; yes, &APOS; no)
+std::string replace_any(const std::string& s, const std::vector<std::string>& alts, const std::string& rep) {
     std::string out;
     out.reserve(s.size());
     size_t i = 0;
     while (i < s.size()) {
+        poll_every(i);
         bool hit = false;
         if (s[i] == '&') {
-            for (const auto& a : alts) {
-                if (ieq_at(s, i, a)) {
-                    out += to;
+            for (const std::string& a : alts) {
+                if (s.compare(i, a.size(), a) == 0) {
+                    out += rep;
                     i += a.size();
                     hit = true;
                     break;
@@ -111,6 +121,7 @@ std::string replace_any_icase(const std::string& s, const std::vector<std::strin
     return out;
 }
 
+
 // <script ...>...</script> and <style ...>...</style>, case-insensitive, to
 // one space. As the regex it replaces: the opening tag ends at the first '>'
 // and the element at the first "</script>"; an element with no closer stays.
@@ -119,18 +130,26 @@ std::string strip_elements(const std::string& s) {
     std::string out;
     out.reserve(s.size());
     size_t i = 0;
+    // once a search for "</name>" from some position found nothing, no later
+    // position can find one either: remember it, or 262,144 unclosed <script>
+    // rescan to the end each (40 minutes at the 2 MiB cap, the SIU review)
+    size_t dead_from[sizeof(kNames) / sizeof(kNames[0])];
+    for (size_t d = 0; d < sizeof(kNames) / sizeof(kNames[0]); ++d) dead_from[d] = std::string::npos;
     while (i < s.size()) {
         bool done = false;
+        poll_every(i);
         if (s[i] == '<') {
-            for (const char* nm : kNames) {
+            for (size_t ni = 0; ni < sizeof(kNames) / sizeof(kNames[0]); ++ni) {
+                const char* nm = kNames[ni];
                 const std::string open = std::string("<") + nm;
                 if (!ieq_at(s, i, open)) continue;
                 const size_t gt = s.find('>', i + open.size());
                 if (gt == std::string::npos) break;
+                if (dead_from[ni] != std::string::npos && gt + 1 >= dead_from[ni]) break;
                 const std::string close = std::string("</") + nm + ">";
                 size_t k = gt + 1;
                 while (k < s.size() && !ieq_at(s, k, close)) ++k;
-                if (k >= s.size()) break;
+                if (k >= s.size()) { dead_from[ni] = gt + 1; break; }
                 out += ' ';
                 i = k + close.size();
                 done = true;
@@ -150,12 +169,15 @@ std::string strip_tags(const std::string& s) {
     std::string out;
     out.reserve(s.size());
     size_t i = 0;
+    bool no_gt_left = false;   // after one '<' with no '>' to the end, none later has one either
     while (i < s.size()) {
+        poll_every(i);
         if (s[i] != '<') {
             out += s[i++];
             continue;
         }
-        const size_t gt = s.find('>', i + 1);
+        const size_t gt = no_gt_left ? std::string::npos : s.find('>', i + 1);
+        if (gt == std::string::npos) no_gt_left = true;
         if (gt == std::string::npos || gt == i + 1) {   // `<[^>]+>` needs a body and a closer
             out += s[i++];
             continue;
@@ -207,6 +229,7 @@ std::string normalize_newlines(const std::string& s) {
 // against `\d+` exceeded it (morie's Windows wheel, 2026-10-06).
 const size_t kMaxLine = 2000;
 
+
 // The text every extractor sees: spaces and tabs collapsed to one space,
 // newlines stripped of their flanking spaces, at most two newlines in a row,
 // and no line longer than kMaxLine. Idempotent; html_to_text() ends with it
@@ -214,10 +237,13 @@ const size_t kMaxLine = 2000;
 std::string normalize_text(const std::string& s) {
     std::string t;
     t.reserve(s.size());
-    // `[ \t]+` -> " "
+    // `[ \t\f\v\r]+` -> " ": every whitespace byte libstdc++'s \s matches except
+    // \n, which the next pass bounds. 0.5.8 collapsed space and tab only, so
+    // 25,000 form feeds reached the extractors' \s+ one recursive frame each
+    // (the 0.5.8 diff review); flatten_ws() had the full set 180 lines away.
     bool in_sp = false;
     for (unsigned char c : s) {
-        if (c == ' ' || c == '\t') {
+        if (c == ' ' || c == '\t' || c == '\f' || c == '\v' || c == '\r') {
             if (!in_sp) t += ' ';
             in_sp = true;
         } else {
@@ -242,29 +268,44 @@ std::string normalize_text(const std::string& s) {
         run = 0;
         u += t[i++];
     }
-    // cap every line
+    // cap every line: the extractors' regexes recurse once per character a
+    // repeated atom consumes, so no line may exceed kMaxLine. A line is split
+    // at the last sentence end (". ") inside the window when there is one --
+    // every field lives inside a sentence -- else at the last space, else
+    // hard. Each split is counted; the host warns, because a field spanning
+    // a split can come back incomplete (the SIU review's silent truncation).
+    g_split_lines = 0;
     std::string out;
     out.reserve(u.size());
     size_t line_start = 0;
     size_t last_space = std::string::npos;
+    size_t last_sentence = std::string::npos;   // the space after a ". "
     for (size_t k = 0; k < u.size(); ++k) {
         const char c = u[k];
         out += c;
+        poll_every(k);
         if (c == '\n') {
             line_start = out.size();
-            last_space = std::string::npos;
+            last_space = last_sentence = std::string::npos;
             continue;
         }
-        if (c == ' ') last_space = out.size() - 1;
+        if (c == ' ') {
+            last_space = out.size() - 1;
+            if (out.size() >= 2 && out[out.size() - 2] == '.') last_sentence = last_space;
+        }
         if (out.size() - line_start >= kMaxLine) {
-            if (last_space != std::string::npos && last_space > line_start) {
-                out[last_space] = '\n';
-                line_start = last_space + 1;
+            ++g_split_lines;
+            const size_t at = (last_sentence != std::string::npos && last_sentence > line_start) ? last_sentence
+                            : (last_space != std::string::npos && last_space > line_start) ? last_space
+                            : std::string::npos;
+            if (at != std::string::npos) {
+                out[at] = '\n';
+                line_start = at + 1;
             } else {
                 out += '\n';
                 line_start = out.size();
             }
-            last_space = std::string::npos;
+            last_space = last_sentence = std::string::npos;
         }
     }
     return out;
@@ -594,7 +635,7 @@ std::string detect_legislation(const std::string& text, bool fr) {
                                               {"Analysis and Director", "News Releases"});
     if (sec.empty()) return "";
     static const std::regex en_pat(
-        R"(Section\s+\d+(?:\.\d+)*(?:\([^)]+\))?,?\s+([A-Z][^\n,]{2,80}?)(?:\s*[-]|\s*$|\n))"),
+        R"(Section\s+\d+(?:\.\d+)*(?:\([^)\n]{1,80}\))?,?\s+([A-Z][^\n,]{2,80}?)(?:\s*[-]|\s*$|\n))"),
         fr_pat("(?:Articles?|Paragraphes?|Alin\xc3\xa9" "as?)\\s+\\d+[^\\s]*\\s+(?:du |de la |de l'|de l\xe2\x80\x99|des )"
                "([A-Z\xc3][^\\n,]{2,80}?)(?:\\s*--|\\s+-|\\s*$|\\n)");
     const std::regex& pat = fr ? fr_pat : en_pat;
@@ -766,9 +807,12 @@ static std::string decode_numeric_entities(const std::string& s) {
                    (hex ? std::isxdigit(static_cast<unsigned char>(s[k])) != 0
                         : std::isdigit(static_cast<unsigned char>(s[k])) != 0)) ++k;
             if (k > d0 && k < s.size() && s[k] == ';') {
-                // more digits than any code point has is not an entity worth keeping
-                const unsigned long cp = (k - d0 > 8) ? 0x110000UL
-                    : std::stoul(s.substr(d0, k - d0), nullptr, hex ? 16 : 10);
+                // more SIGNIFICANT digits than any code point has is not an entity
+                // worth keeping; leading zeros ("&#0000000233;") are not significant
+                size_t d1 = d0;
+                while (d1 + 1 < k && s[d1] == '0') ++d1;
+                const unsigned long cp = (k - d1 > 8) ? 0x110000UL
+                    : std::stoul(s.substr(d1, k - d1), nullptr, hex ? 16 : 10);
                 i = k + 1;
                 if (cp == 0 || cp > 0x10FFFF) continue;
                 if (cp < 0x80) {
@@ -805,13 +849,13 @@ std::string html_to_text(const std::string& html) {
     t = strip_tags(t);
     t = replace_all(t, "&nbsp;", " ");
     t = replace_all(t, "&amp;", "&");
-    t = replace_any_icase(t, {"&#8217;", "&rsquo;", "&#x2019;"}, "'");
-    t = replace_any_icase(t, {"&#8216;", "&lsquo;", "&#x2018;"}, "'");
-    t = replace_any_icase(t, {"&#8220;", "&ldquo;", "&#8221;", "&rdquo;", "&#x201c;", "&#x201d;"}, "\"");
+    t = replace_any(t, {"&#8217;", "&rsquo;", "&#x2019;"}, "'");
+    t = replace_any(t, {"&#8216;", "&lsquo;", "&#x2018;"}, "'");
+    t = replace_any(t, {"&#8220;", "&ldquo;", "&#8221;", "&rdquo;", "&#x201c;", "&#x201d;"}, "\"");
     t = replace_all(t, "&quot;", "\"");
-    t = replace_any_icase(t, {"&#39;", "&#039;", "&apos;"}, "'");
-    t = replace_any_icase(t, {"&#8211;", "&ndash;", "&#x2013;"}, "-");
-    t = replace_any_icase(t, {"&#8212;", "&mdash;", "&#x2014;"}, "--");
+    t = replace_any(t, {"&#39;", "&#039;", "&apos;"}, "'");
+    t = replace_any(t, {"&#8211;", "&ndash;", "&#x2013;"}, "-");
+    t = replace_any(t, {"&#8212;", "&mdash;", "&#x2014;"}, "--");
     // Angle brackets last: the markup is already gone, so a decoded "<"
     // cannot be mistaken for a tag by anything downstream.
     // accented named entities of the French pages, as UTF-8
@@ -825,7 +869,7 @@ std::string html_to_text(const std::string& html) {
         {"&Acirc;", "\xc3\x82"}, {"&laquo;", "\xc2\xab"}, {"&raquo;", "\xc2\xbb"}, {"&oelig;", "\xc5\x93"},
         {"&OElig;", "\xc5\x92"}, {"&thinsp;", " "}}};
     for (const auto& [ent, ch] : kNamed) t = replace_all(t, ent, ch);
-    t = replace_any_icase(t, {"&hellip;", "&#8230;"}, "...");
+    t = replace_any(t, {"&hellip;", "&#8230;"}, "...");
     t = decode_numeric_entities(t);
     t = replace_all(t, "&lt;", "<");
     t = replace_all(t, "&gt;", ">");
@@ -1153,6 +1197,7 @@ static std::string relative_incident(const std::string& text, const std::string&
 }
 
 static ParsedFields parse_report_text_impl(const std::string& text) {
+    poll_interrupt();
     ParsedFields f;
     f["_language"] = detect_language(text);
 
