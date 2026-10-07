@@ -26,6 +26,7 @@
 #' @param carriers A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .mor_ehh_curve <- function(H, core, carriers) {
   L <- ncol(H)
   n <- length(carriers)
@@ -107,6 +108,7 @@ morie_ehhdec <- function(hap, core, positions = NULL) {
 #' @param min_ehh Passed to \code{<}.
 #' @return A list with \code{area}, \code{truncated}.
 #' @export
+#' @keywords internal
 .mor_ihh_one_side <- function(pos, ehh, core, side, min_ehh) {
   L <- length(pos)
   cc <- core + 1L

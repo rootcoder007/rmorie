@@ -117,6 +117,7 @@ Causrddh <- function(x, y, cutoff = 0) {
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{a}, \code{b}, \code{v}.
 #' @export
+#' @keywords internal
 .morie_w508_llr_side <- function(dm, ym, w) {
   n <- length(dm)
   X <- cbind(1, dm)

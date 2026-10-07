@@ -18,3 +18,4 @@ The value of \code{ifelse}.
 d \%\% n_blocks blocks get one extra, which is what a packer does when
 the dimension does not divide.
 }
+\keyword{internal}

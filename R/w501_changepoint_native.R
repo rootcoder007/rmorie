@@ -18,6 +18,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .w501_cost_tables(x = x)
 #' res
+#' @keywords internal
 .w501_cost_tables <- function(x) {
   n <- length(x)
   cs <- c(0, cumsum(x))
@@ -36,6 +37,7 @@
 #' @param cost One of \code{"mean"}, \code{"meanvar"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .w501_seg_cost <- function(tb, a, b, cost) {
   # 0-based half-open [a, b): R indices a+1 .. b
   nl <- b - a
@@ -61,6 +63,7 @@
 #' @param min_seglen Passed to \code{seq}. Defaults to \code{1L}.
 #' @return A list with \code{taus}, \code{Fn}.
 #' @export
+#' @keywords internal
 .w501_pelt_core <- function(x, cost, penalty, min_seglen = 1L) {
   n <- length(x)
   tb <- .w501_cost_tables(x)
@@ -262,6 +265,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .w501_pairwise_alpha(Z = X, alpha = 0.5)
 #' res
+#' @keywords internal
 .w501_pairwise_alpha <- function(Z, alpha) {
   # Z: matrix with observations in rows
   n <- nrow(Z)
@@ -286,6 +290,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' @param D A matrix; indexed by row and column.
 #' @return The value of \code{P}, as built in the body.
 #' @export
+#' @keywords internal
 .w501_prefix2d <- function(D) {
   n <- nrow(D)
   P <- matrix(0, n + 1, n + 1)
@@ -309,6 +314,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' @param b2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .w501_block <- function(P, a1, b1, a2, b2) {
   P[b1 + 1, b2 + 1] - P[a1 + 1, b2 + 1] - P[b1 + 1, a2 + 1] + P[a1 + 1, a2 + 1]
 }
@@ -324,6 +330,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' @param kappa Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .w501_qhat <- function(P, a, tau, kappa) {
   n1 <- tau - a
   m1 <- kappa - tau
@@ -347,6 +354,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' @param min_size Numeric; combined arithmetically in the body.
 #' @return A list with \code{q}, \code{tau}, \code{kappa}.
 #' @export
+#' @keywords internal
 .w501_best_split <- function(P, a, b, min_size) {
   best_q <- -Inf
   best_tau <- -1L
@@ -372,6 +380,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' @param pos Numeric; combined arithmetically in the body.
 #' @return A list with \code{ord}, \code{pos}.
 #' @export
+#' @keywords internal
 .w501_shuffle_within <- function(ord, clusters, us, pos) {
   # Fisher-Yates within each 0-based half-open cluster, mirroring the
   # Python arm swap-for-swap.

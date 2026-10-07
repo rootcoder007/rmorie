@@ -17,3 +17,4 @@ A step of the karpV_native implementation. Called by \code{.karpv_copy},
 \code{.karpv_random_terminal}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -279,6 +279,7 @@ online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {
 #' @examples
 #' res <- .tlonts_cheatsheet()
 #' res
+#' @keywords internal
 .tlonts_cheatsheet <- function() {
   paste0(
     "tlonts: ONE time series -- covariate, treatment, outcome at ",

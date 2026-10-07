@@ -17,3 +17,4 @@ drawing uniforms until we get one strictly positive, then take
 -log(u). R's qexp would consume the rng from somewhere else, so the
 loop matches the Python arm draw-for-draw.
 }
+\keyword{internal}

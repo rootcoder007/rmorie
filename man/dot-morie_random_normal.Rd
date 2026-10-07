@@ -25,3 +25,4 @@ See the file header for the source the module follows.
 res <- .morie_random_normal(n = 3L)
 res
 }
+\keyword{internal}

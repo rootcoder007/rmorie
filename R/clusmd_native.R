@@ -66,6 +66,7 @@
 #' \code{as.integer}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @keywords internal
 .clusmd_fp <- function(bits, n_bits = NULL) {
   if (is.data.frame(bits))
     bits <- as.matrix(bits)
@@ -118,6 +119,7 @@
 #' @param b Passed to \code{.clusmd_fp}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .clusmd_tanimoto <- function(a, b) {
   A <- .clusmd_fp(a)
   B <- .clusmd_fp(b)
@@ -148,6 +150,7 @@
 #' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
 #' @return The value of \code{nb}, as built in the body.
 #' @export
+#' @keywords internal
 .clusmd_neighbour_lists <- function(fps, threshold = 0.8) {
   th <- as.numeric(threshold)
   if (is.na(th) || th < 0.0 || th > 1.0)
@@ -204,6 +207,7 @@
 #' @param recount A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{clusters}, as built in the body.
 #' @export
+#' @keywords internal
 .clusmd_butina_clusters <- function(fps, threshold = 0.8, recount = FALSE) {
   nb <- .clusmd_neighbour_lists(fps, threshold)
   n <- length(nb)
@@ -263,6 +267,7 @@
 #' @return A list with \code{n_clusters}, \code{n_compounds}, \code{sizes},
 #' \code{n_singletons}, \code{assignment}, \code{centroids}.
 #' @export
+#' @keywords internal
 .clusmd_cluster_summary <- function(clusters) {
   n <- sum(vapply(clusters, function(c) c$size, integer(1)))
   assign <- vector("integer", n)
@@ -307,6 +312,7 @@
 #' @param payload A vector; its length is taken and its elements indexed. Defaults to \code{list()}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .clusmd_rich <- function(title, summary_lines = list(), tables = list(),
                          interpretation = "", warnings = character(),
                          payload = list()) {

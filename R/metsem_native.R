@@ -80,6 +80,7 @@ morie_metsem_kmers <- function(seq, k) {
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A list with \code{out}, \code{inc}, \code{nodes}.
 #' @export
+#' @keywords internal
 .metsem_index <- function(edges, k) {
   out <- list()
   inc <- list()
@@ -140,6 +141,7 @@ morie_metsem_graph <- function(reads, k) {
 #' @param v Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .metsem_outdeg <- function(g, v)
   if (v %in% names(g$out)) length(g$out[[v]]) else 0L
 #' .metsem_indeg
@@ -152,6 +154,7 @@ morie_metsem_graph <- function(reads, k) {
 #' @param v Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .metsem_indeg <- function(g, v)
   if (v %in% names(g$inc)) length(g$inc[[v]]) else 0L
 
@@ -164,6 +167,7 @@ morie_metsem_graph <- function(reads, k) {
 #' @param first A vector; its length is taken.
 #' @return The value of \code{path}, as built in the body.
 #' @export
+#' @keywords internal
 .metsem_walk <- function(g, first) {
   path <- first
   v <- substr(first, 2L, nchar(first))
@@ -184,6 +188,7 @@ morie_metsem_graph <- function(reads, k) {
 #' @param path A vector; its length is taken and its elements indexed.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .metsem_seq <- function(path) {
   if (length(path) == 1L) return(path[1])
   paste0(path[1],
@@ -284,6 +289,7 @@ morie_metsem_n50 <- function(lengths) {
 #' @param es See Usage.
 #' @return The value of \code{g}, as built in the body.
 #' @export
+#' @keywords internal
 .metsem_drop <- function(g, es) {
   for (e in es) if (!is.null(g$edges[[e]])) g$edges[[e]] <- NULL
   ix <- .metsem_index(g$edges, g$k)

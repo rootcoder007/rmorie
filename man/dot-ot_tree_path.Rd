@@ -22,3 +22,4 @@ Nothing; the function is called for its effect.
 A step of the helpers_ot implementation. Called by \code{.ot_emd}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

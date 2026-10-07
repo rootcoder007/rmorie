@@ -240,6 +240,7 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 #' @param z Passed to \code{.s03sigmoid}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .dnnact <- function(name, z) {
   if (identical(name, "linear")) return(z)
   if (identical(name, "relu")) return(if (z > 0) z else 0)
@@ -260,6 +261,7 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 #' @param g Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .dnndact <- function(name, z, g) {
   if (identical(name, "linear")) return(1)
   if (identical(name, "relu")) return(if (z > 0) 1 else 0)
@@ -280,6 +282,7 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 #' @param n Accepted by the signature and not used anywhere in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .dnnheadweights <- function(Yc, nt, n) {
   d <- numeric(nt)
   for (t in seq_len(nt)) {
@@ -307,6 +310,7 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
 #' @param s Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .dnnlcg <- function(s) {
   hi <- floor(s / 65536)
   lo <- s %% 65536

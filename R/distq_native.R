@@ -31,6 +31,7 @@
 #' @param n_atoms Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{z}, \code{dz}.
 #' @export
+#' @keywords internal
 .distq_atoms <- function(v_min, v_max, n_atoms) {
   n <- as.integer(n_atoms)
   if (n < 2L)
@@ -56,6 +57,7 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @keywords internal
 .distq_check_prob <- function(next_probs, n_atoms, name) {
   p <- as.numeric(next_probs)
   if (length(p) != n_atoms)
@@ -101,6 +103,7 @@ atoms <- function(v_min, v_max, n_atoms) {
 #' @param n_atoms Passed to \code{.distq_atoms}.
 #' @return The value of \code{.distq_atoms}.
 #' @export
+#' @keywords internal
 .distq_atoms_full <- function(v_min, v_max, n_atoms) {
   .distq_atoms(v_min, v_max, n_atoms)
 }

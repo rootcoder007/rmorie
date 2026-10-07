@@ -24,3 +24,4 @@ A numeric value.
 A step of the tmlcps_native implementation. Called by \code{.cv_bandwidth}, \code{effect_curve}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

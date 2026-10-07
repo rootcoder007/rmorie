@@ -13,6 +13,7 @@
 #' @param n A count; the body uses it as \code{numeric(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .garch_negll <- function(p, r, n) {
   omega <- p[1]
   alpha <- p[2]

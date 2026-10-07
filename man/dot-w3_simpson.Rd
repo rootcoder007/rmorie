@@ -23,3 +23,4 @@ panels, not adaptive: an adaptive rule branches on a tolerance test
 and the two arms would take different numbers of subdivisions on the
 very integrals where it matters.
 }
+\keyword{internal}

@@ -16,3 +16,4 @@ The value of \code{\%*\%}.
 A step of the helpers_ot implementation. Called by \code{.ot_w2gauss}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

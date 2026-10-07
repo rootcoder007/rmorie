@@ -18,3 +18,4 @@ A step of the prsLR_native implementation. Called by \code{.prsLR_augment},
 module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

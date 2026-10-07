@@ -25,3 +25,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .kinship_from_markers(G = g)
 res
 }
+\keyword{internal}

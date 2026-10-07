@@ -43,3 +43,4 @@ See the file header for the source the module follows.
 res <- .cnvlfc_coupled_logistic(n = 3L)
 res
 }
+\keyword{internal}

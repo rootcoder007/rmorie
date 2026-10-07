@@ -23,3 +23,4 @@ A step of the linkhae_native implementation. Called by \code{morie_linkhae}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

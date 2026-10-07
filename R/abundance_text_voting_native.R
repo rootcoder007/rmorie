@@ -506,6 +506,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 #' @param start See Usage.
 #' @return The value of \code{seen}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_descendants <- function(A, start) {
   seen <- integer(0)
   stack <- start
@@ -530,6 +531,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 #' @param Z Passed to \code{\%in\%}.
 #' @return The value of \code{setdiff}.
 #' @export
+#' @keywords internal
 .morie_reachable <- function(A, x, Z) {
   n <- nrow(A)
   anc <- integer(0)

@@ -17,3 +17,4 @@ A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{.tf_i
 \code{.tf_swt} and 3 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

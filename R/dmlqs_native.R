@@ -40,6 +40,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .dmlqs_edge_key(v = x, w = x)
 #' res
+#' @keywords internal
 .dmlqs_edge_key <- function(v, w) paste(as.character(v), as.character(w),
                                        sep = ",")
 
@@ -51,6 +52,7 @@
 #' @param adj Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .dmlqs_norm_adj <- function(adj) {
   # Coerce an adjacency mapping to a list keyed by character atom id,
   # each value a sorted unique integer vector of neighbours (with v
@@ -93,6 +95,7 @@
 #' @param adj Passed to \code{.dmlqs_norm_adj}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .dmlqs_directed_edges <- function(adj) {
   A <- .dmlqs_norm_adj(adj)
   out <- list()
@@ -118,6 +121,7 @@
 #' Defaults to \code{TRUE}.
 #' @return A list with \code{paths}, \code{totters}, \code{fraction}, \code{excluded_reverse}.
 #' @export
+#' @keywords internal
 .dmlqs_count_totters <- function(adj, length = 3L, exclude_reverse = TRUE) {
   L <- as.integer(length)
   if (L < 3L) {
@@ -172,6 +176,7 @@
 #' @param activation Coerced to character by the body, with \code{as.character}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .dmlqs_act <- function(x, activation) {
   act <- as.character(activation)
   if (act == "relu") return(pmax(0, as.numeric(x)))
@@ -194,6 +199,7 @@
 #' Defaults to \code{TRUE}.
 #' @return A list with \code{edge_states}, \code{T}, \code{excluded_reverse}, \code{note}.
 #' @export
+#' @keywords internal
 .dmlqs_message_pass <- function(h0, adj, T = 3L, W = NULL,
                                 activation = "relu",
                                 exclude_reverse = TRUE) {
@@ -288,6 +294,7 @@
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .dmlqs_atom_readout <- function(edge_states, adj, n) {
   N <- as.integer(n)
   A <- .dmlqs_norm_adj(adj)
@@ -323,6 +330,7 @@
 #' @return A list with \code{estimate}, \code{representation}, \code{learned_dim},
 #' \code{descriptor_dim}, \code{method}.
 #' @export
+#' @keywords internal
 .dmlqs_concat_descriptors <- function(learned, descriptors) {
   a <- as.numeric(learned)
   b <- as.numeric(descriptors)
@@ -343,6 +351,7 @@
 #' @examples
 #' res <- .dmlqs_cheatsheet()
 #' res
+#' @keywords internal
 .dmlqs_cheatsheet <- function() {
   paste("dmlqs: pass messages along DIRECTED BONDS, not atoms. The ",
         "stated reason is TOTTERS -- paths v1 v2 ... vn with ",

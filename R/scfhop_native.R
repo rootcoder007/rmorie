@@ -139,6 +139,7 @@ morie_scfhop_types <- function(smiles) {
 #' @examples
 #' res <- .scfhop_pairs()
 #' res
+#' @keywords internal
 .scfhop_pairs <- function() {
   out <- list()
   for (a in seq_along(.scfhop_types))

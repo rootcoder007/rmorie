@@ -24,3 +24,4 @@ The value of \code{[[}.
 A step of the nashq_native implementation. Called by \code{morie_nashq}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

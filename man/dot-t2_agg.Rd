@@ -18,3 +18,4 @@ Nothing; this branch always raises.
 A step of the tail2_t01 implementation. Called by \code{PnaAgg}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

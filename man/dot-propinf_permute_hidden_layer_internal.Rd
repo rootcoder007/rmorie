@@ -34,3 +34,4 @@ net <- list(
 )
 .propinf_permute_hidden_layer_internal(net, 0L, c(2L, 0L, 1L))[[1]]$b
 }
+\keyword{internal}

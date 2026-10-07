@@ -20,3 +20,4 @@ A numeric value.
 parameters (the Lilliefors construction; parameter-free for a fitted
 location-scale family).
 }
+\keyword{internal}

@@ -32,3 +32,4 @@ f <- .groebn_add(.groebn_mul(.groebn_poly(list("0_1" = 1)), g1),
 # the constant 1 does not
 .groebn_ideal_member(.groebn_poly(list("0_0" = 1)), list(g1, g2))$member
 }
+\keyword{internal}

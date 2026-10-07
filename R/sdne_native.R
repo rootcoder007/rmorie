@@ -73,6 +73,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .sdne_mat(x = x)
 #' res
+#' @keywords internal
 .sdne_mat <- function(x) {
   if (is.matrix(x)) {
     storage.mode(x) <- "double"
@@ -96,6 +97,7 @@
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @return A list with \code{B}, \code{beta}, \code{n_nonzero}, \code{n_zero}.
 #' @export
+#' @keywords internal
 .sdne_penalty_matrix <- function(adjacency, beta = 5.0) {
   A <- .sdne_mat(adjacency)
   b <- as.numeric(beta)
@@ -119,6 +121,7 @@
 #' @param beta Passed to \code{.sdne_penalty_matrix}. Defaults to \code{5}.
 #' @return A list with \code{loss}, \code{unweighted}, \code{beta}, \code{note}.
 #' @export
+#' @keywords internal
 .sdne_second_order_loss <- function(adjacency, reconstruction, beta = 5.0) {
   X <- .sdne_mat(adjacency)
   H <- .sdne_mat(reconstruction)
@@ -145,6 +148,7 @@
 #' @param embeddings Passed to \code{.sdne_mat}.
 #' @return A list with \code{loss}, \code{linked_pairs}, \code{note}.
 #' @export
+#' @keywords internal
 .sdne_first_order_loss <- function(adjacency, embeddings) {
   S <- .sdne_mat(adjacency)
   Y <- .sdne_mat(embeddings)
@@ -175,6 +179,7 @@
 #' @return A list with \code{first_order_pairs}, \code{second_order_pairs},
 #' \code{total_pairs}, \code{density}, \code{ratio}, \code{note}.
 #' @export
+#' @keywords internal
 .sdne_proximity_counts <- function(adjacency) {
   A <- .sdne_mat(adjacency)
   n <- nrow(A)

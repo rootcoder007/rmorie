@@ -35,3 +35,4 @@ dim(L$M1)   # hidden by dim_x + dim_t
 dim(L$M2)   # dim_x by hidden
 L$order
 }
+\keyword{internal}

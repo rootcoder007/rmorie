@@ -75,6 +75,7 @@
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .grace_drop_edges <- function(edges, p, rng) {
   pp <- as.numeric(p)
   if (pp < 0 || pp >= 1) {
@@ -97,6 +98,7 @@
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return A list with \code{X}, \code{kept}, \code{n_masked}.
 #' @export
+#' @keywords internal
 .grace_mask_features <- function(X, p, rng) {
   pp <- as.numeric(p)
   if (pp < 0 || pp >= 1) {
@@ -131,6 +133,7 @@
 #' @param rng Passed to \code{.grace_mask_features}.
 #' @return A list with \code{X}, \code{edges}, \code{n_masked_features}.
 #' @export
+#' @keywords internal
 .grace_generate_view <- function(X, edges, p_edge, p_feature, rng) {
   m <- .grace_mask_features(X, p_feature, rng)
   list(X = m$X, edges = .grace_drop_edges(edges, p_edge, rng),
@@ -151,6 +154,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .grace_cos(a = A, b = b)
 #' res
+#' @keywords internal
 .grace_cos <- function(a, b) {
   na <- sqrt(sum(a * a))
   nb <- sqrt(sum(b * b))
@@ -173,6 +177,7 @@
 #' @param intra A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .grace_pair_loss <- function(U, V, i, tau = 0.5, intra = TRUE) {
   t <- as.numeric(tau)
   if (t <= 0) {
@@ -211,6 +216,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .grace_objective(U = x, V = x)
 #' res
+#' @keywords internal
 .grace_objective <- function(U, V, tau = 0.5, intra = TRUE) {
   U <- as.matrix(U)
   V <- as.matrix(V)
@@ -247,6 +253,7 @@
 #' @examples
 #' res <- .grace_cheatsheet()
 #' res
+#' @keywords internal
 .grace_cheatsheet <- function() {
   paste("grace: contrast NODE AGAINST NODE, not node against a ",
         "global summary -- DGI's local-global objective leans on ",
@@ -393,6 +400,7 @@ morie_graphcontrastive <- function(U, V, tau = 0.5, intra = TRUE) {
 #' @examples
 #' res <- .grace_morie_cheatsheet()
 #' res
+#' @keywords internal
 .grace_morie_cheatsheet <- function() {
   .grace_cheatsheet()
 }

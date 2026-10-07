@@ -19,3 +19,4 @@ A step of the helpers_s03 implementation. Called by \code{Llamablock}, \code{Mbc
 \code{Swiglu}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

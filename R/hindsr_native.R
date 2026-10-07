@@ -16,6 +16,7 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 ._as_states <- function(seq, name) {
   out <- lapply(seq, function(s) as.numeric(s))
   if (length(out) == 0L) {
@@ -36,6 +37,7 @@
 #' @param tol Passed to \code{>}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 ._sparse_reward <- function(s, a, s_next, g, tol) {
   if (length(s_next) != length(g)) {
     stop(sprintf("hindsr: goal has length %d but state has %d; pass a state_to_goal mapping", length(g), length(s_next)))
@@ -61,6 +63,7 @@
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 ._sample_goals <- function(strategy, episode, t, T, k, m, pool, e) {
   if (strategy == "final") {
     return(list(m(episode[[T + 1L]])))
@@ -217,6 +220,7 @@ morie_hindsr <- hindsr
 #' @examples
 #' res <- .hindsr_cheatsheet()
 #' res
+#' @keywords internal
 .hindsr_cheatsheet <- function() {
   paste("hindsr: HER (Andrychowicz 2017 Alg. 1). Store each transition with the original goal, then again for each g' in S(episode) with the reward RECOMPUTED under g'. S in {final, future (k, best), episode, random}; r(s,a,g) = -[f_g(s') = 0].")
 }

@@ -27,3 +27,4 @@ node, not once per tree: averaging B identically distributed trees
 leaves rho sigma^2 behind, so the gain is bounded by how decorrelated
 they are, and a per-tree draw decorrelates far less.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ A list with \code{ffl}, \code{cycle3}.
 A step of the motiff_native implementation. Called by \code{morie_motiff}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

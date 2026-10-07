@@ -75,6 +75,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .twoT_as_vec(v = x)
 #' res
+#' @keywords internal
 .twoT_as_vec <- function(v) {
   if (is.null(v)) return(numeric(0))
   if (is.matrix(v)) as.numeric(v)
@@ -95,6 +96,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .twoT_as_mat(m = X)
 #' res
+#' @keywords internal
 .twoT_as_mat <- function(m) {
   if (is.null(m)) return(matrix(numeric(0), nrow = 0L, ncol = 0L))
   if (is.list(m)) {
@@ -186,6 +188,7 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #' @param t Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{integer}.
 #' @export
+#' @keywords internal
 .twoT_get_items <- function(hits, t) {
   if (is.null(hits)) return(integer(0))
   # a named list is the step -> items map (Python's dict); look the

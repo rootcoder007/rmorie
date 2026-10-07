@@ -31,3 +31,4 @@ net <- list(
 # |sum of the row's weights|, Algorithm 1's sorting key
 vapply(1:3, function(i) .propinf_node_metric(net[[1]], i), numeric(1))
 }
+\keyword{internal}

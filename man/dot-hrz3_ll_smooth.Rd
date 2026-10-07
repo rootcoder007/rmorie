@@ -23,3 +23,4 @@ Local linear reproduces an affine function exactly, which is what
 makes an exact-recovery anchor possible for the additive fits built
 on it; Nadaraya-Watson does not.
 }
+\keyword{internal}

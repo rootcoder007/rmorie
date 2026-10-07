@@ -25,3 +25,4 @@ it follows.
 res <- .b2kl(p = 0.5, q = 0.5)
 res
 }
+\keyword{internal}

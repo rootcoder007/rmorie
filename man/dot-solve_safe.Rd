@@ -24,3 +24,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .solve_safe(A = A, b = b)
 res
 }
+\keyword{internal}

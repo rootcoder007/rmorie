@@ -22,3 +22,4 @@ A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fas
 \code{Mvedet}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

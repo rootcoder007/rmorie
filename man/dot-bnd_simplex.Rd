@@ -41,3 +41,4 @@ lowest-index eligible column and row) trades speed for a
 cycling-freedom guarantee, which is the right trade at the problem
 sizes identification bounds produce.
 }
+\keyword{internal}

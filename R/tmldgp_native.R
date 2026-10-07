@@ -30,6 +30,7 @@
 #' @examples
 #' res <- .tmldgp_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tmldgp_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -48,6 +49,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmldgp_expit(x = x)
 #' res
+#' @keywords internal
 .tmldgp_expit <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)
@@ -63,6 +65,7 @@
 #' @param t Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .soft <- function(x, t) sign(x) * max(abs(x) - t, 0)
 
 #' Coordinate descent for the L1-penalised least squares fit

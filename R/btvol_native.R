@@ -24,6 +24,7 @@
 #' @param seed Passed to \code{set.seed}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .btv_boot_reps <- function(x, stat, B, seed) {
   n <- if (is.matrix(x)) nrow(x) else length(x)
   if (n < 2L) stop("need at least 2 observations.", call. = FALSE)

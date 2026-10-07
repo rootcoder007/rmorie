@@ -22,3 +22,4 @@ A list with \code{flow}, \code{u}, \code{v}.
 Bellman-Ford potentials); ports km122's _solve_transport, and
 km/kmmsc's WMD reads its objective off the same core.
 }
+\keyword{internal}

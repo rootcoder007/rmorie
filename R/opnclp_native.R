@@ -30,6 +30,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .opnclp_vec(v = x)
 #' res
+#' @keywords internal
 .opnclp_vec <- function(v) as.numeric(unlist(v))
 
 #' .opnclp_mat
@@ -44,6 +45,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .opnclp_mat(m = X)
 #' res
+#' @keywords internal
 .opnclp_mat <- function(m) {
   if (is.matrix(m)) {
     storage.mode(m) <- "double"
@@ -136,6 +138,7 @@ fit_power_law <- function(x, y) {
 #' @param compute Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{value}, \code{extrapolation_decades}, \code{interpolated}, \code{note}.
 #' @export
+#' @keywords internal
 .opnclp_predict <- function(fit, compute) {
   c <- as.numeric(compute)
   if (c <= 0.0)
@@ -268,6 +271,7 @@ infonce <- function(image_embeddings, text_embeddings,
 #' @examples
 #' res <- .opnclp_cheatsheet()
 #' res
+#' @keywords internal
 .opnclp_cheatsheet <- function() {
   paste("opnclp: CLIP-scale laws had been measured on PRIVATE data ",
         "and models; re-run on public LAION with an open ",

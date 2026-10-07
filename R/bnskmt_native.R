@@ -353,6 +353,7 @@ compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
 #' @examples
 #' res <- .bnskmt_cheatsheet()
 #' res
+#' @keywords internal
 .bnskmt_cheatsheet <- function() {
   paste0(
     "bnskmt: conditional moment inequalities, KS form. Same ",

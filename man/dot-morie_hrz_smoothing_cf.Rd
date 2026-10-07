@@ -28,3 +28,4 @@ x <- c(-1, -0.5, 0, 0.25, 0.5, 1)
 res <- .morie_hrz_smoothing_cf(u = x)
 res
 }
+\keyword{internal}

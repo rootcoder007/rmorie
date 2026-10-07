@@ -25,3 +25,4 @@ being too close, which is the clash term's job and not this one's
 hair under one whenever the coordinate arithmetic put it a single bit
 on the wrong side.
 }
+\keyword{internal}

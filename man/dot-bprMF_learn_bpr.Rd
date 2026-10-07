@@ -53,3 +53,4 @@ rejection-guard uniforms.  regularizer_sign="paper" reproduces the
 printed Figure 4 update whose +lambda*Theta term diverges; the
 default is the sign that actually ascends BPR-Opt.
 }
+\keyword{internal}

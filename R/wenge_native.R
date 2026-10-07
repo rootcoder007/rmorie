@@ -50,6 +50,7 @@
 #' @param row Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .wenge_key <- function(row) {
   paste(sprintf("%.12g", round(as.numeric(row), 12)), collapse = "|")
 }
@@ -65,6 +66,7 @@
 #' @param Xm A matrix; indexed by row and column.
 #' @return A list with \code{fe1}, \code{fm}.
 #' @export
+#' @keywords internal
 .wenge_saturated_models <- function(ev, Mm, Xm) {
   # Nonparametric cell estimates of f(E|X) and f(M|E,X).
   n <- length(ev)
@@ -115,6 +117,7 @@
 #' @param Xm A matrix; indexed by row and column.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .wenge_saturated_outcome <- function(yv, ev, Mm, Xm) {
   # Nonparametric E(Y | E, M, X) as a cell mean.
   n <- length(yv)
@@ -148,6 +151,7 @@
 #' @param ridge Passed to \code{.s03logit}.
 #' @return A list with \code{fe1}, \code{fm}, \code{ey}.
 #' @export
+#' @keywords internal
 .wenge_parametric_models <- function(yv, ev, Mm, Xm, ridge) {
   # Logistic f(E|X), Gaussian f(M|E,X), linear E(Y|E,M,X).
   n <- length(yv)

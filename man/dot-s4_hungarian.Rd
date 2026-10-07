@@ -21,3 +21,4 @@ Exact,
 arms # walk the same path. Returns 0-based column for each row.
 }
 
+\keyword{internal}

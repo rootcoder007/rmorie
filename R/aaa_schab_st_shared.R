@@ -36,6 +36,7 @@
 #' @examples
 #' res <- .schab_st_as_lags(h = 0.5, k = 3L)
 #' res
+#' @keywords internal
 .schab_st_as_lags <- function(h, k) {
   h <- as.numeric(h)
   k <- abs(as.numeric(k))
@@ -54,6 +55,7 @@
 #' @param times A vector; its length is taken.
 #' @return A list with \code{d}, \code{k}.
 #' @export
+#' @keywords internal
 .schab_st_lag_matrices <- function(coords, times) {
   coords <- as.matrix(coords)
   times <- as.numeric(times)
@@ -81,6 +83,7 @@
 #' Defaults to \code{"product"}.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 .schab_st_separable_covariance <- function(h, k, cov_spatial, cov_temporal,
                                            form = "product") {
   lg <- .schab_st_as_lags(h, k)
@@ -105,6 +108,7 @@
 #' @param form One of \code{"product"}, \code{"sum"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .schab_st_is_separable <- function(form) {
   if (form %in% c("product", "sum")) {
     return(TRUE)
@@ -128,6 +132,7 @@
 #' @param corr_fn Accepted by the signature and not used anywhere in the body.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .schab_st_anisotropic_correlation <- function(h, k, theta_s, theta_t, corr_fn) {
   lg <- .schab_st_as_lags(h, k)
   if (theta_s <= 0 || theta_t <= 0) {
@@ -148,6 +153,7 @@
 #' @param theta_t Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_st_exponential_separable <- function(h, k, theta_s, theta_t) {
   lg <- .schab_st_as_lags(h, k) # eq (9.4)
   if (theta_s <= 0 || theta_t <= 0) {
@@ -178,6 +184,7 @@
 #' @examples
 #' res <- .schab_st_gneiting(h = 0.5, k = 3L)
 #' res
+#' @keywords internal
 .schab_st_gneiting <- function(h, k, sigma2 = 1, a = 1, c = 1, alpha = 1,
                                beta = 1, gamma = 1, d = 2) {
   lg <- .schab_st_as_lags(h, k)
@@ -211,6 +218,7 @@
 #' @examples
 #' res <- .schab_st_gneiting_with_temporal(h = 0.5, k = 3L)
 #' res
+#' @keywords internal
 .schab_st_gneiting_with_temporal <- function(h, k, sigma2 = 1, a = 1, c = 1,
                                              alpha = 1, beta = 1, beta_t = 1,
                                              gamma = 1, d = 2) {
@@ -237,6 +245,7 @@
 #' @return A list with \code{statistic}, \code{p_value}, \code{p_value_naive_chi2_1},
 #' \code{reference}.
 #' @export
+#' @keywords internal
 .schab_st_separability_test <- function(neg2_unrestricted, neg2_separable) {
   # Sec. 6.2.3 states the rule outright: on the boundary of the parameter
   # space the statistic is a mixture of a degenerate distribution at zero and
@@ -266,6 +275,7 @@
 #' @param ... Passed through.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .schab_st_power_mixture <- function(rs, rt, distribution = "poisson", ...) {
   rs <- as.numeric(rs)
   rt <- as.numeric(rt)
@@ -301,6 +311,7 @@
 #' @param pmf A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_st_bivariate_power_mixture <- function(rs, rt, pmf) {
   rs <- as.numeric(rs)
   rt <- as.numeric(rt)
@@ -336,6 +347,7 @@
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_st_scale_mixture <- function(h, k, cov_spatial, cov_temporal, nodes,
                                     weights) {
   lg <- .schab_st_as_lags(h, k)
@@ -376,6 +388,7 @@
 #' @examples
 #' res <- .schab_gauss_legendre(n = 3L)
 #' res
+#' @keywords internal
 .schab_gauss_legendre <- function(n) {
   # Golub and Welsch (1969), Math. Comp. 23(106):221-230 -- NOT a
   # Schabenberger & Gotway result. Nodes are the eigenvalues of the Jacobi
@@ -448,6 +461,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .schab_bessel_j0(x = x)
 #' res
+#' @keywords internal
 .schab_bessel_j0 <- function(x, n_quad = 200L) {
   # J_0(x) = (1/pi) integral_0^pi cos(x sin theta) dtheta. The integrand is
   # smooth and periodic so the trapezoid rule converges geometrically; base
@@ -476,6 +490,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .schab_bessel_k1(z = y)
 #' res
+#' @keywords internal
 .schab_bessel_k1 <- function(z, upper = 40, n_quad = 400L) {
   # K_1(z) = integral_0^inf exp{-z cosh u} cosh u du
   gl <- .schab_gauss_legendre(n_quad)
@@ -499,6 +514,7 @@
 #' @examples
 #' res <- .schab_whittle_covariance(h = 0.5)
 #' res
+#' @keywords internal
 .schab_whittle_covariance <- function(h, sigma2 = 1, theta = 1) {
   h <- as.numeric(h) # Whittle (1954)
   if (any(h < 0)) stop("lag `h` must be non-negative", call. = FALSE)
@@ -521,6 +537,7 @@
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_st_tail_bound_j0 <- function(t, h, p) {
   if (t <= 0) {
     return(Inf)
@@ -551,6 +568,7 @@
 #' @param quiet_runs Passed to \code{>=}. Defaults to \code{4L}.
 #' @return A list with \code{value}, \code{upper}, \code{last_rel}, \code{tail_bound}.
 #' @export
+#' @keywords internal
 .schab_st_hankel_panels <- function(hval, kval, theta, c, p, n_quad = 40L,
                                     rtol = 1e-10, max_panels = 20000L,
                                     quiet_runs = 4L) {
@@ -606,6 +624,7 @@
 #' @examples
 #' res <- .schab_st_jones_zhang(h = 0.5, k = 3L)
 #' res
+#' @keywords internal
 .schab_st_jones_zhang <- function(h, k, sigma2 = 1, theta = 1, c = 1, p = 1.5,
                                   d = 2, n_quad = 40L) {
   lg <- .schab_st_as_lags(h, k) # eq (9.17)
@@ -654,6 +673,7 @@
 #' @param cov_fn Accepted by the signature and not used anywhere in the body.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @keywords internal
 .schab_st_covariance_matrix <- function(coords, times, cov_fn) {
   lm_ <- .schab_st_lag_matrices(coords, times)
   matrix(as.numeric(cov_fn(lm_$d, lm_$k)), nrow = nrow(lm_$d))
@@ -675,6 +695,7 @@
 #' @return A list with \code{valid}, \code{min_eigenvalue}, \code{max_eigenvalue},
 #' \code{tolerance}, \code{reason}.
 #' @export
+#' @keywords internal
 .schab_st_is_valid_covariance <- function(coords, times, cov_fn, tol = NULL) {
   # eq (9.5) is positive semi-definiteness. Checked by eigendecomposition,
   # not by sampling random coefficient vectors: the minimum eigenvalue IS the
@@ -713,6 +734,7 @@
 #' @param cov_fn Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_st_semivariogram_from_cov <- function(h, k, cov_fn) {
   lg <- .schab_st_as_lags(h, k) # gamma = C(0,0) - C(h,k)
   c0 <- as.numeric(cov_fn(0, 0))[1]
@@ -736,6 +758,7 @@
 #' @return A list with \code{gamma}, \code{counts}, \code{space_lags}, \code{time_lags},
 #' \code{space_edges}, \code{time_edges}.
 #' @export
+#' @keywords internal
 .schab_st_empirical_semivariogram <- function(coords, times, z, n_space_bins = 10L,
                                               n_time_bins = 5L, max_dist = NULL,
                                               max_time = NULL) {
@@ -802,6 +825,7 @@
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{gamma}, \code{counts}, \code{n_at_time}, \code{lags}, \code{edges}.
 #' @export
+#' @keywords internal
 .schab_st_conditional_semivariogram <- function(coords, times, z, at_time,
                                                 n_bins = 10L, max_dist = NULL,
                                                 tol = 0) {
@@ -853,6 +877,7 @@
 #' @param model_fn Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_st_wls_objective <- function(emp, model_fn) {
   gamma_hat <- emp$gamma
   counts <- emp$counts
@@ -881,6 +906,7 @@
 #' @param region Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_st_region_box <- function(region) {
   r <- as.numeric(region)
   if (length(r) != 4L) stop("`region` must be (xmin, xmax, ymin, ymax)", call. = FALSE)
@@ -902,6 +928,7 @@
 #' @param time_interval A vector; indexed elementwise.
 #' @return A list with \code{intensity}, \code{n}, \code{area}, \code{duration}, \code{volume}.
 #' @export
+#' @keywords internal
 .schab_st_intensity <- function(points, times, region, time_interval) {
   pts <- as.matrix(points)
   t <- as.numeric(times)
@@ -934,6 +961,7 @@
 #' @return A list with \code{marginal_spatial}, \code{marginal_temporal},
 #' \code{cell_area}, \code{bin_width}, \code{x_edges}, \code{y_edges}, \code{t_edges}.
 #' @export
+#' @keywords internal
 .schab_st_marginal_intensities <- function(points, times, region, time_interval,
                                            n_space_bins = 4L, n_time_bins = 4L) {
   pts <- as.matrix(points)
@@ -977,6 +1005,7 @@
 #' @return A list with \code{expected_count}, \code{variance}, \code{intensity},
 #' \code{second_order_intensity}, \code{volume}.
 #' @export
+#' @keywords internal
 .schab_cstr_reference <- function(area, duration, lam) {
   area <- as.numeric(area)
   duration <- as.numeric(duration)
@@ -1007,6 +1036,7 @@
 #' @return A list with \code{index_of_dispersion}, \code{df}, \code{p_value},
 #' \code{counts}, \code{mean_count}, \code{var_count}.
 #' @export
+#' @keywords internal
 .schab_cstr_test <- function(points, times, region, time_interval,
                              n_space_bins = 3L, n_time_bins = 3L) {
   # Chapter 9 defines the CSTR benchmark but gives no test. This is the
@@ -1059,6 +1089,7 @@
 #' @param df Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_st_chi2_sf <- function(x, df) {
   # P(chi^2_df > x) = Q(df/2, x/2). The HALVING of x is the whole content of
   # the mapping and is easy to drop: Q(df/2, x) is a perfectly well-behaved

@@ -16,6 +16,7 @@
 #' @param delta A vector; indexed elementwise.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .morie_km_censoring <- function(x, delta) {
   n <- length(x)
   ord <- order(x, delta)
@@ -58,6 +59,7 @@
 #' @param s Passed to \code{pmin}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_xi_ph <- function(s) 1 / (1 + exp(pmax(pmin(s, 30), -30)))
 #' .morie_dxi_ph
 #'
@@ -67,6 +69,7 @@
 #' @param s Passed to \code{pmin}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_dxi_ph <- function(s) {
   e <- exp(pmax(pmin(s, 30), -30))
   -e / (1 + e)^2
@@ -79,6 +82,7 @@
 #' @param s Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_xi_po <- function(s) {
   a <- -40
   b <- 40
@@ -100,6 +104,7 @@
 #' @param s Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_dxi_po <- function(s) {
   a <- -40
   b <- 40

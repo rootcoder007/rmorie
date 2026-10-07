@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 .groebn_as_fr(5L)
 .groebn_as_fr("3/4")
 }
+\keyword{internal}

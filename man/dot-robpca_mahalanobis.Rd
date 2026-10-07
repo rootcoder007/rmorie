@@ -21,3 +21,4 @@ A step of the robpca_native implementation. Called by \code{.robpca_c_steps},
 \code{.robpca_fast_mcd}, \code{morie_robpca}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

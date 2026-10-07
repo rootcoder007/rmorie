@@ -30,3 +30,4 @@ A vector, from \code{c}.
 A step of the ecsTCR_native implementation. Called by \code{.ecstcr_euler}, \code{.ecstcr_rk4}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

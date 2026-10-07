@@ -17,3 +17,4 @@ Numeric scalar.
 the asymptotic series. Used to translate the chi-squared sampling
 variance of a log dispersion into the prior width.
 }
+\keyword{internal}

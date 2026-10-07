@@ -18,3 +18,4 @@ A step of the phylby_native implementation. Called by
 \code{morie_phylby_splits_of}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

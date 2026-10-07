@@ -19,3 +19,4 @@ A step of the fnDist implementation. Called by \code{FnDist}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

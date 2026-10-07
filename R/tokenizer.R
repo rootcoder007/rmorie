@@ -185,6 +185,7 @@ morie_tokenizer_decode <- function(tok, ids) {
 #' @param text A vector; its length is taken.
 #' @return The value of \code{tokens}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_tokenizer_bpe_encode <- function(tok, text) {
   text <- paste0("\u2581", gsub(" ", "\u2581", text, fixed = TRUE))
   tokens <- character()

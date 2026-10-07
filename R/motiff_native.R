@@ -13,6 +13,7 @@
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{ffl}, \code{cycle3}.
 #' @export
+#' @keywords internal
 .motiff_triads <- function(adj, n) {
   ff <- 0L
   cyc <- 0L
@@ -42,6 +43,7 @@
 #' @param preserve_mutual A flag; the body branches on it.
 #' @return The value of \code{new}, as built in the body.
 #' @export
+#' @keywords internal
 .motiff_shuffle <- function(adj, n, e, swaps, preserve_mutual) {
   # mfinder switching (Milo refs. 17-18) mirroring Python exactly:
   # row-major classify into single edges and mutual (bidirectional)

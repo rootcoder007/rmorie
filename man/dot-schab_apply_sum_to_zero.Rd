@@ -19,3 +19,4 @@ A step of the schab_glmm_shared implementation. No other function in the package
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

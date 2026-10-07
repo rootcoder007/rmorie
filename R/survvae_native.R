@@ -65,6 +65,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .survvae_erf(x = x)
 #' res
+#' @keywords internal
 .survvae_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .survvae_erfc
 #'
@@ -79,6 +80,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .survvae_erfc(x = x)
 #' res
+#' @keywords internal
 .survvae_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .GHC_SURVVAE_PRIMITIVES <- c("weibull", "lognormal")
@@ -93,6 +95,7 @@
 #' @param primitive A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .ghc_survvae_check_primitive <- function(primitive) {
   if (!(length(primitive) == 1L && is.character(primitive) &&
         !is.na(primitive) && primitive %in% .GHC_SURVVAE_PRIMITIVES))
@@ -116,6 +119,7 @@
 #' @param d Numeric; combined arithmetically in the body.
 #' @return A list with \code{W}, \code{bias}, \code{shapes}, \code{scales}.
 #' @export
+#' @keywords internal
 .ghc_survvae_unpack <- function(v, K, d) {
   v <- as.numeric(v)
   expected <- K * d + 3L * K
@@ -155,6 +159,7 @@
 #' @param maxit Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{x}, \code{value}.
 #' @export
+#' @keywords internal
 .ghc_minimize_nm <- function(objective, x0, maxit = NULL) {
   n <- length(x0)
   if (is.null(maxit)) maxit <- 200L * n
@@ -182,6 +187,7 @@
 #' @param risks A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ghc_c_index <- function(times, events, risks) {
   times <- as.numeric(times)
   events <- as.numeric(events)

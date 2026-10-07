@@ -22,3 +22,4 @@ remainder is itself prime -- it must still be RECORDED, not
 discarded. Dropping it silently would understate the hook product and
 make the division look inexact.
 }
+\keyword{internal}

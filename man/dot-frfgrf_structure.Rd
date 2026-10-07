@@ -17,3 +17,4 @@ A vector, from \code{c}.
 A step of the frfgrf_native implementation. Called by \code{.frfgrf_honesty_test}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

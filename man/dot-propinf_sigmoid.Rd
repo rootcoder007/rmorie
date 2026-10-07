@@ -23,3 +23,4 @@ the source it follows.
 .propinf_sigmoid(800)
 .propinf_sigmoid(-800)
 }
+\keyword{internal}

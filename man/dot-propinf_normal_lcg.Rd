@@ -24,3 +24,4 @@ the source it follows.
 e <- .propinf_rng(11L)
 round(replicate(3, .propinf_normal_lcg(e, scale = 0.5)), 4)
 }
+\keyword{internal}

@@ -19,6 +19,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .funmix_rows(x = x)
 #' res
+#' @keywords internal
 .funmix_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -45,6 +46,7 @@
 #' @param degree Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .funmix_knots <- function(tmin, tmax, n_basis, degree) {
   n_int <- n_basis - degree - 1L
   if (n_int < 0L) stop("funmix: n_basis must be at least degree + 1")
@@ -66,6 +68,7 @@
 #' @param tmax Passed to \code{>=}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .funmix_bspline_row <- function(x, kn, degree, n_basis, tmax) {
   m <- length(kn) - 1L
   N <- numeric(m)
@@ -99,6 +102,7 @@
 #' @param p A count; the body uses it as \code{rep(...)}.
 #' @return A list with \code{score}, \code{pc}.
 #' @export
+#' @keywords internal
 .funmix_first_pc <- function(C, p) {
   n <- nrow(C)
   mean_ <- colMeans(C)
@@ -135,6 +139,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .funmix_cholsolve(A = A, b = b)
 #' res
+#' @keywords internal
 .funmix_cholsolve <- function(A, b) {
   Lc <- chol(A)
   as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
@@ -320,6 +325,7 @@ morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
 #' @examples
 #' res <- .funmix_cheatsheet()
 #' res
+#' @keywords internal
 .funmix_cheatsheet <- function() {
   paste0("funmix: morie_funmix_functional_mixture(Y, K) -> EM clustering of ",
          "curves through a spline basis, canonically ordered components ",

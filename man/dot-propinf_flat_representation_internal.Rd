@@ -30,3 +30,4 @@ net <- list(
 )
 .propinf_flat_representation_internal(net)
 }
+\keyword{internal}

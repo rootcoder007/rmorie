@@ -31,6 +31,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .vec(x = x)
 #' res
+#' @keywords internal
 .vec <- function(x) as.numeric(as.matrix(x))
 
 #' .hist
@@ -42,6 +43,7 @@
 #' @param allow_none A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .hist <- function(obj, allow_none = FALSE) {
   if (is.null(obj)) return(if (allow_none) list(NULL) else list())
   if (is.list(obj) && (length(obj) == 0L ||
@@ -67,6 +69,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .shdsmw_wls(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .shdsmw_wls <- function(X, y, w) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"

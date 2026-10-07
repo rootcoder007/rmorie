@@ -72,6 +72,7 @@
 #' @param min_propensity Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{a}, \code{Xm}, \code{p}, \code{n}, \code{arms}.
 #' @export
+#' @keywords internal
 .trclrn_check <- function(Y, A, X, propensity, min_propensity) {
   y <- as.numeric(unlist(Y))
   a <- as.integer(unlist(A))
@@ -183,6 +184,7 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 #' @param outcome_model Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{best}, \code{bv}.
 #' @export
+#' @keywords internal
 .trclrn_best_treatment <- function(y, a, p, rows, arms, method, Xm,
                                   outcome_model) {
   best <- NULL
@@ -346,6 +348,7 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
 #' @param nd A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .trclrn_count_leaves <- function(nd) {
   if (nd$leaf) return(1L)
   return(.trclrn_count_leaves(nd$left) + .trclrn_count_leaves(nd$right))

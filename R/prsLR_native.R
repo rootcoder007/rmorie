@@ -62,6 +62,7 @@
 #' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .prsLR_grammar <- function(g) {
   if (is.list(g) && !is.null(g$rules) && !is.null(g$start)) return(g)
   stop("prsLR: grammar must be a list with $rules and $start")
@@ -77,6 +78,7 @@
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{unique}.
 #' @export
+#' @keywords internal
 .prsLR_nonterminals <- function(g) {
   unique(sapply(g$rules, function(r) r[[1]]))
 }
@@ -89,6 +91,7 @@
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{setdiff}.
 #' @export
+#' @keywords internal
 .prsLR_terminals <- function(g) {
   nt_set <- .prsLR_nonterminals(g)
   terms  <- unique(unlist(lapply(g$rules, function(r) r[[2]])))
@@ -106,6 +109,7 @@
 #' @param nts Passed to \code{\%in\%}.
 #' @return The value of \code{unique}.
 #' @export
+#' @keywords internal
 .prsLR_first_seq <- function(seq, first, nts) {
   out <- character(0)
   if (length(seq) == 0) return(c(.prsLR_EPSILON))
@@ -131,6 +135,7 @@
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{first}, as built in the body.
 #' @export
+#' @keywords internal
 .prsLR_first_sets <- function(g) {
   nts   <- .prsLR_nonterminals(g)
   first <- list()
@@ -161,6 +166,7 @@
 #' @param first Passed to \code{.prsLR_first_seq}.
 #' @return The value of \code{follow}, as built in the body.
 #' @export
+#' @keywords internal
 .prsLR_follow_sets <- function(g, first) {
   nts    <- .prsLR_nonterminals(g)
   follow <- list()
@@ -200,6 +206,7 @@
 #' @param tree A list; the body reads \code{$children}, \code{$symbol} from it.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .prsLR_linearise <- function(tree) {
   if (is.null(tree$children)) return(tree$symbol)
   paste(sapply(tree$children, .prsLR_linearise), collapse = " ")
@@ -216,6 +223,7 @@
 #' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return A list with \code{rules}, \code{start}, \code{original_start}.
 #' @export
+#' @keywords internal
 .prsLR_augment <- function(g) {
   tag <- .prsLR_AUG
   nts <- .prsLR_nonterminals(g)
@@ -238,6 +246,7 @@
 #' @param k Passed to \code{==}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @keywords internal
 .prsLR_closure <- function(items, ag, first, nts, k) {
   out <- unique(as.character(items))
   changed <- TRUE
@@ -298,6 +307,7 @@
 #' @param k Passed to \code{.prsLR_closure}.
 #' @return The value of \code{.prsLR_closure}.
 #' @export
+#' @keywords internal
 .prsLR_goto <- function(state, sym, ag, first, nts, k) {
   moved <- character(0)
   for (it in state) {
@@ -326,6 +336,7 @@
 #' @param state See Usage.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @keywords internal
 .prsLR_core <- function(state) {
   cores <- character(0)
   for (it in state) {
@@ -346,6 +357,7 @@
 #' @return A list with \code{states}, \code{index}, \code{transitions}, \code{first},
 #' \code{nonterminals}.
 #' @export
+#' @keywords internal
 .prsLR_canonical_collection <- function(ag, k) {
   g0 <- list(rules = ag$rules, start = ag$start)
   first <- .prsLR_first_sets(g0)
@@ -390,6 +402,7 @@
 #' @return A list with \code{action}, \code{goto}, \code{states}, \code{n_states},
 #' \code{conflicts}, \code{rules}, \code{augmented}, \code{method}.
 #' @export
+#' @keywords internal
 .prsLR_build_tables <- function(g, method) {
   if (!(method %in% .prsLR_METHODS)) {
     stop(sprintf("prsLR: method must be one of %s, got %s",
@@ -516,6 +529,7 @@
 #' @param sym Carried through into a list the body builds.
 #' @return A list with \code{symbol}, \code{children}.
 #' @export
+#' @keywords internal
 .prsLR_leaf <- function(sym) {
   list(symbol = sym, children = NULL)
 }
@@ -531,6 +545,7 @@
 #' @param tables Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .prsLR_parse <- function(g, tokens, method, tables) {
   t <- if (!is.null(tables)) tables else .prsLR_build_tables(g, method)
   if (length(t$conflicts) > 0) {

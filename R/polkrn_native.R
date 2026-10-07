@@ -63,6 +63,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .polkrn_vec(x = x)
 #' res
+#' @keywords internal
 .polkrn_vec <- function(x) {
   as.numeric(x)
 }
@@ -80,6 +81,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .polkrn_quantile7(x = x, q = 0.5)
 #' res
+#' @keywords internal
 .polkrn_quantile7 <- function(x, q) {
   # type 7 quantile: linear interpolation, the R default
   as.numeric(quantile(x, probs = q, type = 7, names = FALSE))
@@ -99,6 +101,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .polkrn_wls(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .polkrn_wls <- function(X, y, w) {
   # Weighted least squares with an intercept added automatically.
   # Returns a list with coef, se, vcov.
@@ -132,6 +135,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .polkrn_logistic(X = x, y = y)
 #' res
+#' @keywords internal
 .polkrn_logistic <- function(X, y) {
   # Iteratively reweighted least squares for logistic regression.
   # X: design matrix (with intercept), y: 0/1 vector.
@@ -173,6 +177,7 @@
 #' @param trim Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{w}, \code{per_time}.
 #' @export
+#' @keywords internal
 .polkrn_ip_weights_history <- function(A_hist, L_hist, kind, stabilize, trim) {
   # Compute inverse-probability weights for a treatment history.
   # Only a binary exposure is implemented: the weights below are Bernoulli
@@ -478,6 +483,7 @@ morie_polkrn <- function(y, A_history, H_history, degree = 2,
 #' @examples
 #' res <- .polkrn_cheatsheet()
 #' res
+#' @keywords internal
 .polkrn_cheatsheet <- function() {
   "polkrn: MSM on a flexible function of cumulative exposure (Hernan-Brumback-Robins 2002). polynomial degree D or RBF with quantile centres; weights are the Sec.21.2 product. summary = cumulative | final | duration."
 }

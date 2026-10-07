@@ -19,3 +19,4 @@ A step of the garch_coint_native implementation. Called by \code{morie_garch_spe
 See the file header for the source the module follows.
 for the source it follows.
 }
+\keyword{internal}

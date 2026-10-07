@@ -25,3 +25,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .secaead_p_mulmod(a = A, b = b)
 res
 }
+\keyword{internal}

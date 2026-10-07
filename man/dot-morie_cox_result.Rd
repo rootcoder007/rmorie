@@ -31,3 +31,4 @@ A step of the cox_native implementation. Called by
 \code{morie_breslow_tie_correction}, \code{morie_efron_tie_correction}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ the source it follows.
 res <- .tlstoch_cheatsheet()
 res
 }
+\keyword{internal}

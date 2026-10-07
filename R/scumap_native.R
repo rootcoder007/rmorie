@@ -48,6 +48,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .scumap_matrix(X = x)
 #' res
+#' @keywords internal
 .scumap_matrix <- function(X) {
   M <- as.matrix(X)
   storage.mode(M) <- "double"
@@ -77,6 +78,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .scumap_dist(a = A, b = b)
 #' res
+#' @keywords internal
 .scumap_dist <- function(a, b) {
   sqrt(sum((a - b)^2))
 }
@@ -332,6 +334,7 @@ morie_scumap_fit_ab <- function(min_dist = 0.1, spread = 1.0, n_grid = 300,
 #' @examples
 #' res <- .scumap_rng(seed = 1L)
 #' res
+#' @keywords internal
 .scumap_rng <- function(seed) {
   # Exact 31-bit LCG in doubles: split the state so no intermediate
   # product exceeds 2^53.
@@ -357,6 +360,7 @@ morie_scumap_fit_ab <- function(min_dist = 0.1, spread = 1.0, n_grid = 300,
 #' @param lim Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .scumap_clip <- function(v, lim = 4.0) {
   # The reference implementation clips gradients to +/- 4.
   if (v > lim) {

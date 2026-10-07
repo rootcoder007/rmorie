@@ -20,6 +20,7 @@
 #' @param n_t A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
+#' @keywords internal
 .rgs_grid_weights <- function(n_t) {
   if (n_t < 2L) return(1.0)
   h <- 1.0 / (n_t - 1L)
@@ -159,6 +160,7 @@ morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
 #' @examples
 #' res <- .rgs_cheatsheet()
 #' res
+#' @keywords internal
 .rgs_cheatsheet <- function() {
   paste0("rgs: morie_rgs_functional_regression(X, Y, basis) -> the ",
          "functional linear model Y = int beta(t) X(t) dt by FPC ",

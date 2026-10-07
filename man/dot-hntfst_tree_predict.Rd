@@ -18,3 +18,4 @@ The value of \code{$}.
 A step of the hntfst_native implementation. Called by \code{honest_forest}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

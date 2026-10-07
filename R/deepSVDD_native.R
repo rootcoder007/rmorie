@@ -14,6 +14,7 @@
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .deep_svdd_kernel <- function(a, b, kern, gamma) {
   if (kern == "linear")
     return(sum(a * b))

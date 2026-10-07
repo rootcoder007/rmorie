@@ -24,3 +24,4 @@ log(1/fut) = a + b ElogD(7.4) + c fi(7.4) + d log(1/fu) The four
 coefficients are fitted quantities that belong to the papers. This
 module will not guess them: pass them, or use the measured route.
 }
+\keyword{internal}

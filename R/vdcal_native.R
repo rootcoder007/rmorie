@@ -83,6 +83,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .vdcal_phys(par = x)
 #' res
+#' @keywords internal
 .vdcal_phys <- function(par) {
   p <- .VDCAL_HUMAN
   if (!is.null(par)) for (nm in names(par)) p[[nm]] <- par[[nm]]
@@ -172,6 +173,7 @@ morie_vdcal_fut <- function(vss, fu, par = NULL) {
 #' its elements indexed.
 #' @return The value of \code{fut}, as built in the body.
 #' @export
+#' @keywords internal
 .vdcal_fut_descriptors <- function(elogd, fi, fu, coefficients) {
   if (is.null(coefficients) || !length(coefficients))
     stop("the descriptor route needs the regression coefficients; they ",

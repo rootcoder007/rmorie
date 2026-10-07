@@ -25,3 +25,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .morie_cf_tau(y = y, d = g)
 res
 }
+\keyword{internal}

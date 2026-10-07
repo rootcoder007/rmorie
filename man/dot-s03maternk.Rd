@@ -22,3 +22,4 @@ A numeric value.
 \description{
 does not overflow (z/2)^nu before Gamma(nu) divides it out again.
 }
+\keyword{internal}

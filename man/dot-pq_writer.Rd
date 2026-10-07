@@ -16,3 +16,4 @@ because growing a raw vector element by element is quadratic.
 res <- .pq_writer()
 res
 }
+\keyword{internal}

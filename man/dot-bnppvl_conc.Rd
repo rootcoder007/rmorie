@@ -22,3 +22,4 @@ is absolutely continuous. "constant" holds a_m fixed, which does NOT:
 the limit is continuous but singular, and it is here because a reader
 who wants to see that happen should be able to.
 }
+\keyword{internal}

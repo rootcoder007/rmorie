@@ -18,3 +18,4 @@ The value of \code{function}.
 A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_working_model}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

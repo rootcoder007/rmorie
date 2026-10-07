@@ -38,3 +38,4 @@ key set exactly. The list itself (and \verb{$payload}) is also a plain
 named list with the same names, so callers can use \code{result$size} or
 \code{result$payload$size} interchangeably, just like the Python arm.
 }
+\keyword{internal}

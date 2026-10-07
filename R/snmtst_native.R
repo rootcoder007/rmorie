@@ -32,6 +32,7 @@
 #' @param n_post A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{pre}, \code{post}.
 #' @export
+#' @keywords internal
 .snmtst_split <- function(beta, n_pre, n_post) {
   b <- as.numeric(beta)
   if (length(b) != as.integer(n_pre) + as.integer(n_post))
@@ -53,6 +54,7 @@
 #' \code{as.numeric}.
 #' @return The value of \code{lv}, as built in the body.
 #' @export
+#' @keywords internal
 .snmtst_target <- function(post, l_vec) {
   Tp <- length(post)
   if (is.null(l_vec))
@@ -161,6 +163,7 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
 #' @param lv Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{lo}, \code{hi}.
 #' @export
+#' @keywords internal
 .snmtst_brute <- function(point, c, M, grid, post = NULL, lin = NULL,
                           lv = NULL) {
   if (grid < 2L)
@@ -340,6 +343,7 @@ fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
 #' @examples
 #' res <- .snmtst_cheatsheet()
 #' res
+#' @keywords internal
 .snmtst_cheatsheet <- function() {
   paste0("snmtst: honest DiD. beta = tau + delta with tau_pre = 0, ",
          "so the PRE coefficients estimate the violation. Instead ",

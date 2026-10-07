@@ -26,3 +26,4 @@ The value of \code{.morie_jo_ln}.
 A step of the ts_joseph implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

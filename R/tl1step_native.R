@@ -66,6 +66,7 @@
 #' @examples
 #' res <- .tl1step_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tl1step_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -85,6 +86,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tl1step_expit(x = x)
 #' res
+#' @keywords internal
 .tl1step_expit <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)
@@ -106,6 +108,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tl1step_as_numvec(x = x)
 #' res
+#' @keywords internal
 .tl1step_as_numvec <- function(x) {
   as.numeric(unlist(x))
 }
@@ -129,6 +132,7 @@
 #' @param steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400}.
 #' @return A list with \code{path}, \code{steps}, \code{d_epsilon}, \code{note}.
 #' @export
+#' @keywords internal
 .tl1step_build_ulfm <- function(Q, H_fn, Y, eps_max = 2.0, steps = 400) {
   q <- .tl1step_as_numvec(Q)
   y <- .tl1step_as_numvec(Y)
@@ -192,6 +196,7 @@
 #' @return A list with \code{max_deviation}, \code{universal}, \code{epsilon},
 #' \code{local_submodel_direction_drift}, \code{note}.
 #' @export
+#' @keywords internal
 .tl1step_is_universal <- function(Q, H_fn, eps = 0.3, h = 1e-5) {
   q <- .tl1step_as_numvec(Q)
   n <- length(q)
@@ -250,6 +255,7 @@
 #' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{Q_star},
 #' \code{abs_score}, \code{iterations}, \code{path_steps}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .tl1step_one_step_tmle <- function(Q, H_fn, Y, eps_max = 3.0, steps = 600) {
   b <- .tl1step_build_ulfm(Q, H_fn, Y, eps_max, steps)
   y <- .tl1step_as_numvec(Y)
@@ -303,6 +309,7 @@
 #' @return A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star},
 #' \code{abs_score}, \code{method}.
 #' @export
+#' @keywords internal
 .tl1step_iterative_tmle <- function(Q, H_fn, Y, max_iter = 25, tol = 1e-8) {
   q <- .tl1step_as_numvec(Q)
   y <- .tl1step_as_numvec(Y)
@@ -352,6 +359,7 @@
 #' @examples
 #' res <- .tl1step_cheatsheet()
 #' res
+#' @keywords internal
 .tl1step_cheatsheet <- function() {
   paste0("tl1step: an ordinary TMLE fluctuates along a LOCAL least ",
          "favorable submodel and ITERATES, which is where it becomes ",

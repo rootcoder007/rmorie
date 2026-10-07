@@ -26,3 +26,4 @@ A numeric value.
 Helper step. Called by \code{.morie_k05_info}, \code{morie_tcc}. See the file header
 for the source the module follows. source it follows.
 }
+\keyword{internal}

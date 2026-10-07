@@ -19,3 +19,4 @@ A list with \code{matrix}, \code{names}, \code{groups}, \code{columns},
 A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

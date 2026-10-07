@@ -19,3 +19,4 @@ matrix if it isn\'t already.
 res <- .smoopt_K(K = 3L)
 res
 }
+\keyword{internal}

@@ -48,6 +48,7 @@
 #' @examples
 #' res <- .wrd2v_rng(seed = 1L)
 #' res
+#' @keywords internal
 .wrd2v_rng <- function(seed) {
   # SplitMix64 via .ghc_rng: the Python arm is np.random.default_rng(seed)
   # (_array_core _SplitMix64), so the draws here are bit-identical to it
@@ -72,6 +73,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .wrd2v_softmax(v = x)
 #' res
+#' @keywords internal
 .wrd2v_softmax <- function(v) {
   m <- max(v)
   ex <- exp(v - m)
@@ -86,6 +88,7 @@
 #' @param z Numeric; passed to \code{exp}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .wrd2v_sigmoid <- function(z) {
   if (z >= 0.0) {
     1.0 / (1.0 + exp(-z))
@@ -110,6 +113,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .wrd2v_cos(a = A, b = b)
 #' res
+#' @keywords internal
 .wrd2v_cos <- function(a, b) {
   na <- sqrt(sum(a * a))
   nb <- sqrt(sum(b * b))
@@ -228,6 +232,7 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #' @param h A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .wrd2v_scores <- function(O, h) {
   as.numeric(O %*% h)
 }
@@ -245,6 +250,7 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #' @param lr Numeric; combined arithmetically in the body.
 #' @return The value of \code{loss}, as built in the body.
 #' @export
+#' @keywords internal
 .wrd2v_sg_step <- function(st, c, j, size, V, lr) {
   # Skip-gram: input is the centre word, target a context word.
   h <- st$W[c, ]
@@ -272,6 +278,7 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #' @param draw_noise Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{loss}, as built in the body.
 #' @export
+#' @keywords internal
 .wrd2v_neg_step <- function(st, c, j, size, lr, k, draw_noise) {
   # Mikolov et al. (2013b) eq. 4, one positive and k noise draws.
   h <- st$W[c, ]
@@ -307,6 +314,7 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #' @param lr Numeric; combined arithmetically in the body.
 #' @return The value of \code{loss}, as built in the body.
 #' @export
+#' @keywords internal
 .wrd2v_cbow_step <- function(st, ctx, c, size, V, lr) {
   # CBOW: the projection is the MEAN of the context vectors.
   n <- length(ctx)

@@ -17,3 +17,4 @@ A step of the attrInf_native implementation. Called by \code{morie_attrInf}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

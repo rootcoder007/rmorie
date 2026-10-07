@@ -22,6 +22,7 @@ FAIL <- NA_integer_
 #' @param fn Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{fn}.
 #' @export
+#' @keywords internal
 # every combinator counts its own step, as in Python; the probe only
 # dispatches (counting here too double-counted every sub-expression)
 .probe <- function(text, pos, ctx, fn) {

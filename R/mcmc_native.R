@@ -25,6 +25,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_mcmc_autocov(x = x)
 #' res
+#' @keywords internal
 .morie_mcmc_autocov <- function(x, max_lag = NULL) {
   x <- as.numeric(x)
   n <- length(x)
@@ -47,6 +48,7 @@
 #' @param chains A count; the body uses it as \code{matrix(...)}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_ess_from_chains <- function(chains) {
   C <- if (is.matrix(chains)) chains else matrix(chains, nrow = 1L)
   m <- nrow(C)
@@ -88,6 +90,7 @@
 #' @param C A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @keywords internal
 .morie_rank_normalize <- function(C) {
   flat <- as.vector(C)
   ranks <- order(order(flat))          # stable both sides
@@ -104,6 +107,7 @@
 #' @param rank_normalized A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_split_rhat <- function(chains, rank_normalized = TRUE) {
   C <- if (is.matrix(chains)) chains else matrix(chains, nrow = 1L)
   n <- ncol(C)

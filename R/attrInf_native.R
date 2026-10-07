@@ -20,6 +20,7 @@
 #' @param node Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .leaf <- function(node) {
   is.list(node) && !is.null(node) && "label" %in% names(node)
 }
@@ -36,6 +37,7 @@
 #' @param v Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .attrInf_py_str <- function(v) {
   if (is.null(v)) return("None")
   if (is.logical(v) && length(v) == 1L)
@@ -60,6 +62,7 @@
 #' @param vals A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .attrInf_sort_keys <- function(vals) {
   if (length(vals) <= 1L) return(vals)
   strs <- vapply(vals, .attrInf_py_str, character(1))
@@ -76,6 +79,7 @@
 #' @param scored A vector; its length is taken and its elements indexed.
 #' @return Nothing; the function is called for its effect.
 #' @export
+#' @keywords internal
 .attrInf_argmax <- function(scored) {
   if (length(scored) == 0L) return(NULL)
   strs <- vapply(scored, function(s) .attrInf_py_str(s$v), character(1))
@@ -103,6 +107,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .attrInf_eq(a = A, b = b)
 #' res
+#' @keywords internal
 .attrInf_eq <- function(a, b) {
   if (is.null(a) || is.null(b)) return(is.null(a) && is.null(b))
   isTRUE(a == b)
@@ -269,6 +274,7 @@ morie_attrInf <- function(tree, targets, priors,
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{[[}.
 #' @export
+#' @keywords internal
 .attrInf_tree_predict <- function(tree, x) {
   node <- tree
   while (!.leaf(node)) {

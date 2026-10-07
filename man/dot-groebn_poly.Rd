@@ -25,3 +25,4 @@ names(f)
 # repeated monomials are summed, and a cancellation drops the term
 length(.groebn_poly(list("1_0" = 1, "1_0" = -1)))
 }
+\keyword{internal}

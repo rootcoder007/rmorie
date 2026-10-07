@@ -17,6 +17,7 @@
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}.
 #' @export
+#' @keywords internal
 .bnskt2_wls <- function(rows, ys, w) {
   X <- cbind(1, do.call(rbind, rows))
   y <- as.numeric(ys)
@@ -42,6 +43,7 @@
 #' @param kernel Compared against \code{"triangular"}.
 #' @return A list with \code{slope}, \code{coef}, \code{n}.
 #' @export
+#' @keywords internal
 .side_fit <- function(v, y, k_pt, bandwidth, order, side, kernel) {
   rows <- list()
   ys <- c()
@@ -252,6 +254,7 @@ covariate_kink_test <- function(V, Z, kink, bandwidth, order = 2L,
 #' @examples
 #' res <- .bnskt2_cheatsheet()
 #' res
+#' @keywords internal
 .bnskt2_cheatsheet <- function() {
   paste0(
     "bnskt2: regression KINK design. RD uses a JUMP in treatment; ",

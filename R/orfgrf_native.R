@@ -167,6 +167,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .orfgrf_grow_forest(X = x, y = y)
 #' res
+#' @keywords internal
 .orfgrf_grow_forest <- function(X, y, W = NULL, kind = "double-sample",
                         n_trees = 100, min_leaf = 5, alpha = 0.05,
                         max_depth = 12, seed = 0) {
@@ -212,6 +213,7 @@
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{.predict_tree}.
 #' @export
+#' @keywords internal
 .predict_tree <- function(tree, x) {
   if (isTRUE(tree$leaf)) return(tree$value)
   if (x[tree$j] <= tree$cut) return(.predict_tree(tree$left, x))
@@ -231,6 +233,7 @@
 #' @param x A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .orfgrf_forest_weights <- function(trees, X, x) {
   n <- nrow(X)
   w <- rep(0, n)
@@ -474,6 +477,7 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
 #' @examples
 #' res <- .orfgrf_cheatsheet()
 #' res
+#' @keywords internal
 .orfgrf_cheatsheet <- function() {
   paste("orfgrf: ORF. Moment E[Y - theta(x) T - f(x,W) | X=x] = 0. ",
         "Residualize BOTH Y and T on the controls W, then ",

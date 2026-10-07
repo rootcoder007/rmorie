@@ -16,3 +16,4 @@ Nothing; called for its effect.
 Internal helper in otis_all_analyze.R; see the file header for
 the source the module follows.
 }
+\keyword{internal}

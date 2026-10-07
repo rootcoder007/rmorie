@@ -29,6 +29,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .morie_ml_pinv(a = A)
 #' res
+#' @keywords internal
 .morie_ml_pinv <- function(a) {
   a <- as.matrix(a)
   s <- svd(a)
@@ -50,6 +51,7 @@
 #' @param dag A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .morie_ml_edges <- function(dag) {
   if (is.list(dag) && !is.data.frame(dag)) {
     nm <- names(dag)
@@ -80,6 +82,7 @@
 #' \code{character(0)}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @keywords internal
 .morie_ml_nodes <- function(edges, extra = character(0)) {
   sort(unique(c(as.character(edges), as.character(extra))))
 }
@@ -94,6 +97,7 @@
 #' @param nodes A vector; its length is taken.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .morie_ml_children <- function(edges, nodes) {
   out <- setNames(vector("list", length(nodes)), nodes)
   for (n in nodes) out[[n]] <- character(0)
@@ -115,6 +119,7 @@
 #' @param nodes A vector; its length is taken.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .morie_ml_parents <- function(edges, nodes) {
   out <- setNames(vector("list", length(nodes)), nodes)
   for (n in nodes) out[[n]] <- character(0)
@@ -136,6 +141,7 @@
 #' @param children A vector; indexed elementwise.
 #' @return The value of \code{seen}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_ml_desc <- function(node, children) {
   seen <- character(0)
   stack <- node
@@ -164,6 +170,7 @@
 #' @param parents A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_ml_paths <- function(x, y, children, parents) {
   out <- list()
   stack <- list(list(cur = x, path = x, dirs = character(0)))
@@ -201,6 +208,7 @@
 #' @param children Passed to \code{.morie_ml_desc}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .morie_ml_blocked <- function(path, dirs, z, children) {
   n <- length(path)
   if (n < 3L) return(FALSE)
@@ -232,6 +240,7 @@
 #' @param nodes Optional; may be \code{NULL}. Passed to \code{.morie_ml_children}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .morie_ml_dsep <- function(edges, x, y, z = character(0), nodes = NULL) {
   nodes <- if (is.null(nodes)) .morie_ml_nodes(edges, c(x, y, z)) else nodes
   ch <- .morie_ml_children(edges, nodes)
@@ -253,6 +262,7 @@
 #' @param targets Passed to \code{\%in\%}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .morie_ml_cutin <- function(edges, targets) {
   if (!nrow(edges)) return(edges)
   edges[!(edges[, 2] %in% targets), , drop = FALSE]
@@ -267,6 +277,7 @@
 #' @param sources Passed to \code{\%in\%}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .morie_ml_cutout <- function(edges, sources) {
   if (!nrow(edges)) return(edges)
   edges[!(edges[, 1] %in% sources), , drop = FALSE]
@@ -280,6 +291,7 @@
 #' @param edges A matrix; passed to \code{nrow}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @keywords internal
 .morie_ml_skeleton <- function(edges) {
   if (!nrow(edges)) return(character(0))
   sort(unique(apply(edges, 1, function(r) paste(sort(r), collapse = "\r"))))
@@ -296,6 +308,7 @@
 #' @param b Passed to \code{==}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .morie_ml_adj <- function(edges, a, b) {
   if (!nrow(edges)) return(FALSE)
   any(edges[, 1] == a & edges[, 2] == b) || any(edges[, 1] == b & edges[, 2] == a)
@@ -309,6 +322,7 @@
 #' @param edges Passed to \code{.morie_ml_nodes}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .morie_ml_acyclic <- function(edges) {
   nodes <- .morie_ml_nodes(edges)
   ch <- .morie_ml_children(edges, nodes)
@@ -336,6 +350,7 @@
 #' @param edges A matrix; indexed by row and column.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @keywords internal
 .morie_ml_colliders <- function(edges) {
   if (!nrow(edges)) return(character(0))
   out <- character(0)
@@ -650,6 +665,7 @@ morie_faithchk <- function(dag, x, y, z = character(0), indep = TRUE) {
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .morie_ml_gram(a = A)
 #' res
+#' @keywords internal
 .morie_ml_gram <- function(a, sigma = NULL) {
   a <- as.numeric(a)
   d2 <- outer(a, a, function(p, q) (p - q)^2)
@@ -822,6 +838,7 @@ morie_rlearn <- function(y, t, m, e, x = NULL) {
 #' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_ml_combn <- function(seq_, k) {
   if (k == 0L) return(list(character(0)))
   if (length(seq_) < k) return(list())

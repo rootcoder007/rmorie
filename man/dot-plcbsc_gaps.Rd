@@ -21,3 +21,4 @@ A step of the plcbsc_native implementation. Called by \code{.plcbsc_in_time_plac
 \code{morie_plcbsc}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

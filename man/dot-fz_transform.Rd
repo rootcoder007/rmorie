@@ -22,3 +22,4 @@ O(h^2) everywhere including at the edge.
 res <- .fz_transform()
 res
 }
+\keyword{internal}

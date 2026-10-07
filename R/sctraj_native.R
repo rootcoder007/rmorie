@@ -45,6 +45,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .sctraj_matrix(X = x)
 #' res
+#' @keywords internal
 .sctraj_matrix <- function(X) {
   M <- as.matrix(X)
   storage.mode(M) <- "double"
@@ -74,6 +75,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .sctraj_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .sctraj_solve <- function(A, b) {
   # Solve A x = b; singular pooled covariance gets the paper's advice.
   n <- nrow(A)
@@ -315,6 +317,7 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 #' @param curve A matrix; indexed by row and column.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .sctraj_arc_length <- function(curve) {
   m <- nrow(curve)
   s <- numeric(m)
@@ -337,6 +340,7 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 #' @param s A vector; indexed elementwise.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @keywords internal
 .sctraj_project <- function(point, curve, s) {
   # Nearest point on the polyline, and its arc length.
   best <- NULL
@@ -371,6 +375,7 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 #' @param span Numeric; combined arithmetically in the body. Defaults to \code{0.4}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .sctraj_smooth <- function(t, y, w, span = 0.4) {
   # Local linear smoother of y on t -- the "smoothing spline" step,
   # kept simple and weight-aware.
@@ -499,6 +504,7 @@ morie_sctraj_principal_curve <- function(X, init, weights = NULL,
 #' @param u Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .sctraj_interp <- function(s, curve, u) {
   m <- length(s)
   if (u <= s[1L]) {
@@ -630,6 +636,7 @@ morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
 #' @param vals Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .sctraj_non_outlier_range <- function(vals) {
   # Lowest and highest non-outlier values, by the 1.5 IQR rule.
   v <- sort(as.numeric(vals))

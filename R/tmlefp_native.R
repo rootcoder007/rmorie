@@ -191,6 +191,7 @@ owate_weights <- function(pscore, sigma2_treated = NULL,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ipw(y = y, w = x, e = x)
 #' res
+#' @keywords internal
 .ipw <- function(y, w, e, keep = NULL, weights = NULL) {
   n <- length(y)
   sel <- if (is.null(keep)) seq_len(n) else which(keep)

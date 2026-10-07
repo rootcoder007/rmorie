@@ -62,6 +62,7 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .pgdsdg_norm(v = x)
 #' res
+#' @keywords internal
 .pgdsdg_norm <- function(v) {
   sqrt(sum(v * v))
 }
@@ -173,6 +174,7 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .pgdsdg_project_simplex(x = x)
 #' res
+#' @keywords internal
 .pgdsdg_project_simplex <- function(x, total = 1.0) {
   s <- as.numeric(total)
   if (s <= 0) {

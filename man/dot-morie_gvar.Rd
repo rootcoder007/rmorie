@@ -22,3 +22,4 @@ A step of the geron_ml_native implementation. Called by \code{.morie_gvar_wrap},
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

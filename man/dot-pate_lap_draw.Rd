@@ -18,3 +18,4 @@ A numeric value.
 A step of the pate_native implementation. Called by \code{noisy_argmax}, \code{pate}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

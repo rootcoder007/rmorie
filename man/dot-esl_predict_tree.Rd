@@ -18,3 +18,4 @@ A vector, from \code{vapply}.
 A step of the esl_native0 implementation. Called by \code{morie_esl_random_forest}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

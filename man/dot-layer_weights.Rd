@@ -17,3 +17,4 @@ A step of the elmo_native implementation. Called by \code{.elmo_mix},
 \code{.elmo_representation}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

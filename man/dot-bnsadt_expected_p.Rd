@@ -24,3 +24,4 @@ The value of \code{.w3_csum}.
 sum of normal increments because p is a step function -- the reason
 no quadrature appears anywhere in this module.
 }
+\keyword{internal}

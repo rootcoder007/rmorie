@@ -35,3 +35,4 @@ shapes <- lapply(sets, function(L) c(length(L), length(L[[1]]) - 1L))
 m <- .propinf_deepsets_init(shapes, 6L, 3L, 6L, .propinf_rng(4L))
 .propinf_deepsets_forward(m, sets)[[1]]
 }
+\keyword{internal}

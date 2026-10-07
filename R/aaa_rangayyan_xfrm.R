@@ -56,6 +56,7 @@ Ztrans <- function(x, z = NULL, n0 = 0) {
 #' @param hs A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_rg_conv <- function(xs, hs) {
   n <- length(xs)
   m <- length(hs)
@@ -808,6 +809,7 @@ CircConv <- function(x, h, npoints = NULL) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_rg_evenodd(x = b)
 #' res
+#' @keywords internal
 .morie_rg_evenodd <- function(x, n = NULL) {
   xs <- as.numeric(x)
   m <- length(xs)

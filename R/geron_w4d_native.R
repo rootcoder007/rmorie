@@ -36,6 +36,7 @@
 #' @examples
 #' res <- .morie_w4d_lcg_u(n = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .morie_w4d_lcg_u <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -238,6 +239,7 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @keywords internal
 .morie_w4d_lcg_mat <- function(nr, nc, seed, scale = 0.1) {
   n <- nr * nc
   s <- as.numeric(seed) %% 2^32
@@ -263,6 +265,7 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 #' @param seed Passed to \code{.morie_w4d_lcg_mat}.
 #' @return A list with \code{W}, \code{b}, \code{c}, \code{losses}.
 #' @export
+#' @keywords internal
 .morie_w4d_sae_train_layer <- function(H, k, epochs, lr, seed) {
   n <- nrow(H)
   d <- ncol(H)
@@ -301,6 +304,7 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 #' @param cs A vector; indexed elementwise.
 #' @return A list with \code{hs}, \code{rs}.
 #' @export
+#' @keywords internal
 .morie_w4d_sae_forward <- function(A, Ws, bs, cs) {
   L <- length(Ws)
   hs <- vector("list", L + 1)
@@ -334,6 +338,7 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 #' @param rs A vector; indexed elementwise.
 #' @return A list with \code{dW}, \code{db}, \code{dc}.
 #' @export
+#' @keywords internal
 .morie_w4d_sae_backward <- function(A, Ws, bs, cs, hs, rs) {
   n <- nrow(A)
   d <- ncol(A)
@@ -439,6 +444,7 @@ morie_geron_stacked_autoencoder_modules <- function(X, hidden_sizes = c(2), epoc
 #' @param t A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{theta}, \code{fitted}.
 #' @export
+#' @keywords internal
 .morie_w4d_fit_predict <- function(A, t) {
   D <- cbind(1.0, A)
   theta <- MASS::ginv(t(D) %*% D) %*% (t(D) %*% t)
@@ -603,6 +609,7 @@ morie_geron_semisupervised <- function(X_l, y_l, X_u, alpha = 1.0, gamma = 1.0,
 #' @examples
 #' res <- .morie_w4d_lcg_vec(n = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .morie_w4d_lcg_vec <- function(n, seed, scale = 0.5) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -1038,6 +1045,7 @@ morie_geron_silhouette <- function(X, labels, metric = "euclidean") {
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_w4d_lloyd(Z = X, k = 3L)
 #' res
+#' @keywords internal
 .morie_w4d_lloyd <- function(Z, k, seed = 0, iters = 100) {
   n <- nrow(Z)
   s <- as.numeric(seed) %% 2^32
@@ -1594,6 +1602,7 @@ morie_geron_swin <- function(image, window_size, n_layers = 2, d_model = 4, seed
 #' @param src Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_w4d_symd_tokenize <- function(src) {
   s <- as.character(src)
   chars <- strsplit(s, "")[[1]]
@@ -1726,6 +1735,7 @@ morie_geron_symd_parse <- function(src) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_w4d_symd_num(v = x)
 #' res
+#' @keywords internal
 .morie_w4d_symd_num <- function(v) list("num", as.numeric(v))
 #' .morie_w4d_symd_eqnum
 #'
@@ -1737,6 +1747,7 @@ morie_geron_symd_parse <- function(src) {
 #' @param v Passed to \code{all.equal}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .morie_w4d_symd_eqnum <- function(t, v) length(t) == 2 && t[[1]] == "num" && isTRUE(all.equal(t[[2]], v, tolerance = 0))
 
 #' .morie_w4d_symd_simplify
@@ -1748,6 +1759,7 @@ morie_geron_symd_parse <- function(src) {
 #' @param t A vector; indexed elementwise.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_w4d_symd_simplify <- function(t) {
   k <- t[[1]]
   if (k %in% c("num", "var")) {
@@ -1834,6 +1846,7 @@ morie_geron_symd_parse <- function(src) {
 #' @param var Passed to \code{.morie_w4d_symd_diff}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .morie_w4d_symd_diff <- function(t, var) {
   kind <- t[[1]]
   if (kind == "num") {
@@ -1995,6 +2008,7 @@ morie_geron_symd_evaluate <- function(t, env) {
 #' @param t A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_w4d_symd_count <- function(t) {
   if (t[[1]] %in% c("num", "var")) {
     return(1L)
@@ -2071,6 +2085,7 @@ morie_geron_symbolic_diff <- function(expr, var = "x", at = NULL) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_w4d_tokens(x = x)
 #' res
+#' @keywords internal
 .morie_w4d_tokens <- function(x) {
   if (is.character(x) && length(x) == 1) strsplit(x, "\\s+")[[1]] else as.character(x)
 }
@@ -2385,6 +2400,7 @@ morie_geron_transfer_learning <- function(pretrained_model, X, y, n_frozen = 1, 
 #' @param x A matrix; passed to \code{\%*\%}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .morie_w4d_apply_op <- function(op, x) {
   if (is.list(op) && !is.null(op$kind)) {
     kind <- op$kind
@@ -2508,6 +2524,7 @@ morie_geron_torchscript <- function(model, example_inputs) {
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_w4d_layernorm(x = X)
 #' res
+#' @keywords internal
 .morie_w4d_layernorm <- function(x, eps = 1e-5) {
   mu <- rowMeans(x)
   sd <- sqrt(apply(x, 1, .morie_gr_pvar) + eps)
@@ -2671,6 +2688,7 @@ morie_geron_tensor_parallelism <- function(model, n_devices = 2, x = NULL, schem
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_w4d_sigmoid_stable(z = y)
 #' res
+#' @keywords internal
 .morie_w4d_sigmoid_stable <- function(z) {
   out <- numeric(length(z))
   pos <- z >= 0
@@ -2944,6 +2962,7 @@ morie_geron_unsupervised_learning <- function(X, n_clusters = 2, bottleneck = 1,
 #' @param t A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{theta}, \code{loo}, \code{train}.
 #' @export
+#' @keywords internal
 .morie_w4d_loo_mse <- function(D, t) {
   P <- MASS::ginv(t(D) %*% D)
   theta <- as.numeric(P %*% (t(D) %*% t))
@@ -3056,6 +3075,7 @@ morie_geron_vanishing_gradients <- function(grads, tol = 0.5) {
 #' @examples
 #' res <- .morie_w4d_lcg_normal(n = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .morie_w4d_lcg_normal <- function(n, seed) {
   m <- n + (n %% 2)
   s <- as.numeric(seed) %% 2^32
@@ -3417,6 +3437,7 @@ morie_geron_vilbert <- function(image, text, d_model = 8, seed = 0) {
 #' @param d A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_w4d_sinusoidal <- function(Tn, d) {
   pos <- matrix(0:(Tn - 1), Tn, 1)
   denom <- matrix(10000.0^((2 * ((0:(d - 1)) %/% 2)) / d), Tn, d, byrow = TRUE)
@@ -3687,6 +3708,7 @@ morie_geron_word_embeddings <- function(vocab, d = 8, E = NULL, seed = 0) {
 #' @param word Character; passed to \code{strsplit}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .morie_w4d_wp_split <- function(word) {
   chars <- strsplit(word, "")[[1]]
   c(chars[1], paste0("##", chars[-1]))
@@ -3973,6 +3995,7 @@ morie_geron_xception <- function(n_classes = 1000, in_channels = 3, input_size =
 #' @param lam Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_w4d_xgb_leaf_weight <- function(G, H, lam) -G / (H + lam)
 #' .morie_w4d_xgb_gain
 #'
@@ -3988,6 +4011,7 @@ morie_geron_xception <- function(n_classes = 1000, in_channels = 3, input_size =
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_w4d_xgb_gain <- function(GL, HL, GR, HR, lam, gamma) {
   G <- GL + GR
   H <- HL + HR
@@ -4010,6 +4034,7 @@ morie_geron_xception <- function(n_classes = 1000, in_channels = 3, input_size =
 #' @param min_child_weight Passed to \code{.morie_w4d_xgb_build}.
 #' @return The value of \code{node}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_w4d_xgb_build <- function(X, g, h, depth, max_depth, lam, gamma, min_child_weight) {
   G <- sum(g)
   H <- sum(h)
@@ -4059,6 +4084,7 @@ morie_geron_xception <- function(n_classes = 1000, in_channels = 3, input_size =
 #' @param X A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_w4d_xgb_predict <- function(node, X) {
   out <- numeric(nrow(X))
   for (i in seq_len(nrow(X))) {

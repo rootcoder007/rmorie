@@ -19,6 +19,7 @@
 #' @param Z A matrix; indexed by row and column.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .dccmd_negll <- function(p, Q_bar, n, Z) {
   a <- p[1]
   b <- p[2]

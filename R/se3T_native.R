@@ -74,6 +74,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .se3T_vec(x = x)
 #' res
+#' @keywords internal
 .se3T_vec <- function(x) {
   if (is.null(x)) {
     return(numeric(0))
@@ -96,6 +97,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .se3T_mat(x = x)
 #' res
+#' @keywords internal
 .se3T_mat <- function(x) {
   if (is.matrix(x)) {
     return(matrix(as.numeric(x), nrow = nrow(x), ncol = ncol(x)))
@@ -126,6 +128,7 @@
 #' @param v A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .se3T_apply <- function(R, v) {
   v <- as.numeric(v)
   c(

@@ -20,3 +20,4 @@ A matrix, from \code{solve}.
 A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

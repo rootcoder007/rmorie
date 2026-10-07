@@ -24,3 +24,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .morie_opt_vec(g = g)
 res
 }
+\keyword{internal}

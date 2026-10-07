@@ -22,6 +22,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .crkbsg_rows(x = x)
 #' res
+#' @keywords internal
 .crkbsg_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -47,6 +48,7 @@
 #' @param rng Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .crkbsg_rho <- function(h, model, rng) {
   if (h <= 0.0) return(1.0)
   if (rng <= .crkbsg_EPS) return(0.0)
@@ -75,6 +77,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .crkbsg_dist(a = A, b = b)
 #' res
+#' @keywords internal
 .crkbsg_dist <- function(a, b) sqrt(sum((a - b) ^ 2))
 
 # Gaussian elimination with partial pivoting. The cokriging matrix is
@@ -94,6 +97,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .crkbsg_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .crkbsg_solve <- function(A, b) {
   n <- length(b)
   M <- cbind(A, b)
@@ -290,6 +294,7 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
 #' @examples
 #' res <- .crkbsg_cheatsheet()
 #' res
+#' @keywords internal
 .crkbsg_cheatsheet <- function() {
   paste0("crkbsg: morie_crkbsg_cokriging(coords, y, z, s_predict, ",
          "cross_variogram) -> ordinary cokriging prediction and variance ",

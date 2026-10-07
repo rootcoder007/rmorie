@@ -26,3 +26,4 @@ fn <- function(v) sum(v^2)
 res <- .Fun(f = fn)
 res
 }
+\keyword{internal}

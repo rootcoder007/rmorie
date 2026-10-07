@@ -349,6 +349,7 @@ label <- function(spec) {
 #' @return A list with \code{alpha}, \code{beta}, \code{phi}, \code{gam}, \code{ar},
 #' \code{ma}, \code{omega}.
 #' @export
+#' @keywords internal
 .unpack <- function(spec, theta) {
   i <- 1L
   alpha <- theta[i]
@@ -551,6 +552,7 @@ fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
 #' \code{$level}, \code{$s}, \code{$sstar}, \code{$trend} from it.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .flatten_carry <- function(spec, carry) {
   out <- c(carry$level)
   if (spec$use_trend) out <- c(out, carry$trend)
@@ -696,6 +698,7 @@ concentrated_loglik <- function(y, resid, omega) {
 #' \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.
 #' @return A list with \code{lo}, \code{hi}.
 #' @export
+#' @keywords internal
 .bats_bounds <- function(spec) {
   lo <- 0
   hi <- 1
@@ -729,6 +732,7 @@ concentrated_loglik <- function(y, resid, omega) {
 #' \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .starts <- function(spec) {
   # Several starting points for the smoothing parameters. Nelder-Mead
   # builds its initial simplex by nudging each coordinate by 5% of its
@@ -765,6 +769,7 @@ concentrated_loglik <- function(y, resid, omega) {
 #' @return A list with \code{theta}, \code{x0}, \code{resid}, \code{fitted},
 #' \code{loglik}, \code{omega}, \code{aic}, \code{n_par}.
 #' @export
+#' @keywords internal
 .fit_spec <- function(y, spec, long_run_b = 0, maxiter = 2000) {
   bds <- .bats_bounds(spec)
   lo <- bds$lo
@@ -832,6 +837,7 @@ concentrated_loglik <- function(y, resid, omega) {
 #' @param long_run_b Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .forecast <- function(spec, theta, x0, z, h, long_run_b = 0) {
   # Iterate the state equations with epsilon = 0. Future innovations
   # have mean zero, so the point forecast just runs equations 3b-3f
@@ -911,6 +917,7 @@ concentrated_loglik <- function(y, resid, omega) {
 #' @examples
 #' res <- .bats_cheatsheet()
 #' res
+#' @keywords internal
 .bats_cheatsheet <- function() {
   paste0("bats: De Livera, Hyndman & Snyder (2010). BATS = Box-Cox ",
          "transform, ARMA errors, Trend, Seasonal -- an innovations ",

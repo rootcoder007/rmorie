@@ -18,3 +18,4 @@ The value of \code{e}, as built in the body.
 Part of the algebraic_combinatorics_native implementation; see the
 file header for the source it follows.
 }
+\keyword{internal}

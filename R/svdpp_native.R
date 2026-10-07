@@ -41,6 +41,7 @@
 #' @param b_item Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .svdpp_baseline <- function(mu, b_user, b_item) {
   return(as.numeric(mu) + as.numeric(b_user) + as.numeric(b_item))
 }
@@ -55,6 +56,7 @@
 #' @param exponent Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-0.5}.
 #' @return A list with \code{term}, \code{n_rated}, \code{scale}, \code{exponent}, \code{raw_sum}.
 #' @export
+#' @keywords internal
 .svdpp_implicit_term <- function(rated_items, y, exponent = -0.5) {
   N <- as.list(rated_items)
   if (length(N) == 0) {
@@ -103,6 +105,7 @@
 #' @return A list with \code{prediction}, \code{effective_user_factor}, \code{implicit},
 #' \code{n_rated}, \code{note}.
 #' @export
+#' @keywords internal
 .svdpp_predict <- function(mu, b_user, b_item, p_u, q_i,
                           rated_items = NULL, y = NULL,
                           exponent = -0.5) {
@@ -152,6 +155,7 @@
 #' @return A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u},
 #' \code{q_i}, \code{y}, \code{note}.
 #' @export
+#' @keywords internal
 .svdpp_sgd_step <- function(rating, mu, b_user, b_item, p_u, q_i,
                            rated_items, y,
                            lr = 0.007, reg = 0.015, exponent = -0.5) {
@@ -204,6 +208,7 @@
 #' \code{b_user}, \code{b_item}, \code{P}, \code{Q}, \code{Y}, \code{implicit},
 #' \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .svdpp_fit <- function(ratings, n_users, n_items,
                       factors = 4, epochs = 30,
                       lr = 0.007, reg = 0.015,
@@ -316,6 +321,7 @@ morie_svdpp <- function(ratings, n_users, n_items,
 #' @examples
 #' res <- .svdpp_cheatsheet()
 #' res
+#' @keywords internal
 .svdpp_cheatsheet <- function() {
   return(paste0(
     "svdpp: a rating dataset carries a SECOND signal for free -- ",

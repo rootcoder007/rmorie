@@ -20,3 +20,4 @@ A step of the causrddc_native implementation. Called by \code{.causrddc_hc_sigma
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

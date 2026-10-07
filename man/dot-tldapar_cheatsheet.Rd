@@ -18,3 +18,4 @@ the source it follows.
 res <- .tldapar_cheatsheet()
 res
 }
+\keyword{internal}

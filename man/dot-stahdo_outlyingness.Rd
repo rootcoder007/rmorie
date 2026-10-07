@@ -23,3 +23,4 @@ A list with \code{outlyingness}, \code{n_directions}, \code{n_used},
 A step of the stahdo_native implementation. Called by \code{.stahdo_stahel_donoho}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ The value of \code{[}.
 A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

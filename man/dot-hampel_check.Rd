@@ -23,3 +23,4 @@ A step of the hampw implementation. Called by \code{Hampel}, \code{Hampw}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

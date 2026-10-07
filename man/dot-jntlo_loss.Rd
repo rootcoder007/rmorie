@@ -21,3 +21,4 @@ A step of the jntlO implementation. Called by \code{Jntlo}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

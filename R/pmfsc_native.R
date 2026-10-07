@@ -134,6 +134,7 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .pmfsc_key(a = A, b = b)
 #' res
+#' @keywords internal
 .pmfsc_key <- function(a, b) paste0(a, "|", b)
 
 #' Turn observed contacts into a potential, one curve per type pair
@@ -290,6 +291,7 @@ morie_pmfsc_score <- function(pairs, potential,
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .pmfsc_dist(a = A, b = b)
 #' res
+#' @keywords internal
 .pmfsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Derive a potential if needed, then score the pose

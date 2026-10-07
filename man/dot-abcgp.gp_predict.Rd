@@ -21,3 +21,4 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.implausible},
 \code{morie_abcgp}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

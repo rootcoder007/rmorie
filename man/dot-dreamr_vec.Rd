@@ -25,3 +25,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .dreamr_vec(x = x, name = txt)
 res
 }
+\keyword{internal}

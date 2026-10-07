@@ -29,3 +29,4 @@ it follows.
 res <- .kvmse_codebook(b = 3L)
 res
 }
+\keyword{internal}

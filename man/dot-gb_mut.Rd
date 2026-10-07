@@ -25,3 +25,4 @@ The value of \code{<<-}.
 A step of the secarg_native implementation. Called by \code{.P_mut}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

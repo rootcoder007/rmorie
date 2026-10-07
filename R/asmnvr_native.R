@@ -179,6 +179,7 @@ de_bruijn_graph <- function(reads, k, multiplicity = "set") {
 #' @param verts Accepted by the signature and not used anywhere in the body.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .connected <- function(edges, verts) {
   edge_keys <- ls(edges, all.names = TRUE)
   v_with_out <- character(0)
@@ -316,6 +317,7 @@ eulerian_path <- function(edges, indeg, outdeg) {
 #' @param outdeg A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .unitigs <- function(edges, indeg, outdeg) {
   simple <- function(v) {
     iv <- if (is.null(indeg[[v]])) 0L else indeg[[v]]
@@ -377,6 +379,7 @@ eulerian_path <- function(edges, indeg, outdeg) {
 #' @param path A vector; its length is taken and its elements indexed.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .spell <- function(path) {
   if (length(path) == 0L) return("")
   paste0(path[1L],

@@ -19,3 +19,4 @@ The value of \code{pmax}.
 A step of the abcgp_native implementation. Called by \code{gp_fit}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

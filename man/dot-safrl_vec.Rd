@@ -24,3 +24,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .safrl_vec(v = x, name = txt)
 res
 }
+\keyword{internal}

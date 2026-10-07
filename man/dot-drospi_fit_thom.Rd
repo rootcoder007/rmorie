@@ -16,3 +16,4 @@ A list with \code{q}, \code{alpha}, \code{beta}.
 Part of the droSPI_mixedcase_native implementation; see the file
 header for the source it follows.
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tml
 \code{.tmlmpi_cdf_bank} and 25 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -64,6 +64,7 @@ Btcimed <- function(x, B = 200L, alpha = 0.05, rng = 2L, exhaustive = FALSE) {
 #' @param sorted_vals A vector; its length is taken and its elements indexed.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .bt_median <- function(sorted_vals) {
   m <- length(sorted_vals)
   h <- m %/% 2L

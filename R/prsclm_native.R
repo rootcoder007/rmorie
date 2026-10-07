@@ -21,6 +21,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .prsclm_rows(x = x)
 #' res
+#' @keywords internal
 .prsclm_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -201,6 +202,7 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
 #' @examples
 #' res <- .prsclm_cheatsheet()
 #' res
+#' @keywords internal
 .prsclm_cheatsheet <- function() {
   paste0("prsclm: morie_prsclm_prs_cs_clump(sumstats, ld_ref, p_threshold) ",
          "-> LD clumping plus thresholded polygenic scores (Purcell et al. ",

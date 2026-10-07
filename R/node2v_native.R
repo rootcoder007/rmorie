@@ -72,6 +72,7 @@ alpha_pq <- function(d_tx, p, q) {
 #' @param x Coerced to character by the body, with \code{as.character}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .node2v_dist <- function(adj, t, x) {
   if (identical(t, x)) return(0L)
   nb_t <- adj[[t]]
@@ -270,6 +271,7 @@ skipgram_pairs <- function(walks, window = 2) {
 #' @examples
 #' res <- .node2v_cheatsheet()
 #' res
+#' @keywords internal
 .node2v_cheatsheet <- function() {
   paste("node2v: graph as document, walk as sentence, skip-gram on ",
         "top. The point is that NO sampling strategy wins everywhere: ",

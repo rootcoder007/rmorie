@@ -22,6 +22,7 @@
 #' @param family Passed to \code{identical}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .morie_aft_log_dens_surv <- function(z, family) {
   if (identical(family, "weibull")) {
     zc <- pmax(pmin(z, 500), -500)
@@ -62,6 +63,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_numeric_cov(fn = fn, theta = x)
 #' res
+#' @keywords internal
 .morie_numeric_cov <- function(fn, theta, rel = 1e-5) {
   k <- length(theta)
   h <- rel * pmax(abs(theta), 1)
@@ -102,6 +104,7 @@
 #' @return A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov},
 #' \code{n_iter}, \code{converged}.
 #' @export
+#' @keywords internal
 .morie_aft_fit <- function(t, e, X, family = "weibull", max_iter = 500L,
                            tol = 1e-14, add_intercept = TRUE) {
   n <- length(t)
@@ -164,6 +167,7 @@
 #' \code{n_iter}, \code{converged}, \code{cov}, \code{time}, \code{event}, \code{X},
 #' \code{method}.
 #' @export
+#' @keywords internal
 .morie_aft_result <- function(t, e, X, fit, family, title, method) {
   p <- length(fit$beta)
   se <- if (is.null(fit$cov)) {
@@ -196,6 +200,7 @@
 #' @param ... Passed through.
 #' @return The value of \code{.morie_aft_result}.
 #' @export
+#' @keywords internal
 .morie_aft_common <- function(time, event, X, family, title, method, ...) {
   d <- .morie_cox_prepare(time, event, X)
   if (any(d$t <= 0)) {

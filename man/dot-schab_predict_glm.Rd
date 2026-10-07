@@ -24,3 +24,4 @@ A list with \code{prediction}, \code{mspe}, \code{prediction_error},
 predictor (6.87), whose delta-method variance (6.88) the text says
 belongs to a different predictor.
 }
+\keyword{internal}

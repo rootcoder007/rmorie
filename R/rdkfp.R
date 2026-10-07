@@ -24,6 +24,7 @@
 #' @param branched A flag; the body branches on it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .rdkfp_subgraphs <- function(B, minpath, maxpath, branched) {
   a <- B$a
   nb <- length(B$i)

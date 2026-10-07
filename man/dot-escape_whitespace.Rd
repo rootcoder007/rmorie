@@ -24,3 +24,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .escape_whitespace(text = txt)
 res
 }
+\keyword{internal}

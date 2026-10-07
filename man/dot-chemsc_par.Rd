@@ -19,3 +19,4 @@ A step of the chemsc_native implementation. Called by \code{morie_chemsc_clash},
 \code{morie_chemsc_hbond}, \code{morie_chemsc_lipophilic} and 2 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

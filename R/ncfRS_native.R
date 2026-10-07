@@ -70,6 +70,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ncfRS_sig(x = x)
 #' res
+#' @keywords internal
 .ncfRS_sig <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)

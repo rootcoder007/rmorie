@@ -22,3 +22,4 @@ A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot},
 \code{Tmleor} and 3 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{Ecg
 \code{PpgFeat}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

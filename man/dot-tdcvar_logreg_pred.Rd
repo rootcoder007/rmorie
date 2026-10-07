@@ -18,3 +18,4 @@ The value of \code{pmin}.
 A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ the source it follows.
 res <- .tlbandt_cheatsheet()
 res
 }
+\keyword{internal}

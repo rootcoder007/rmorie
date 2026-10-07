@@ -19,3 +19,4 @@ A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic},
 \code{.morie_ml_dsep}, \code{morie_docalc} and 1 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

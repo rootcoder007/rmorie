@@ -21,3 +21,4 @@ A step of the Strtwt implementation. Called by \code{Strtwt}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

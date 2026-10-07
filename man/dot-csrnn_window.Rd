@@ -20,3 +20,4 @@ A step of the csrnn implementation. Called by \code{morie_csr_nn_test},
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

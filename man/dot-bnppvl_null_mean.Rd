@@ -21,3 +21,4 @@ of the parent interval that the guess assigns to the left child,
 which is the paper's equation (6). A guess that is flat over the
 parent gives exactly a half, the symmetric case.
 }
+\keyword{internal}

@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .stahdo_combn(n = 4L, p = 2L)
 res
 }
+\keyword{internal}

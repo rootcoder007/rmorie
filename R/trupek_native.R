@@ -63,6 +63,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .trupek_dot <- function(a, b) {
   s <- 0
   cc <- 0
@@ -88,6 +89,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .trupek_csum(v = x)
 #' res
+#' @keywords internal
 .trupek_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -114,6 +116,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .trupek_norm(a = A)
 #' res
+#' @keywords internal
 .trupek_norm <- function(a) sqrt(.trupek_dot(a, a))
 
 #' .trupek_matvec
@@ -131,6 +134,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .trupek_matvec(H = A, v = b)
 #' res
+#' @keywords internal
 .trupek_matvec <- function(H, v) {
   n <- nrow(H)
   out <- numeric(n)
@@ -148,6 +152,7 @@
 #' @param s Passed to \code{.trupek_dot}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .trupek_model <- function(g, H, s)
   .trupek_dot(g, s) + 0.5 * .trupek_dot(s, .trupek_matvec(H, s))
 
@@ -170,6 +175,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .trupek_boundary(z = y, d = g, delta = 0.5)
 #' res
+#' @keywords internal
 .trupek_boundary <- function(z, d, delta) {
   dd <- .trupek_dot(d, d)
   zd <- .trupek_dot(z, d)
@@ -196,6 +202,7 @@
 #' @param delta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .trupek_cauchy <- function(g, H, delta) {
   gn <- .trupek_norm(g)
   if (gn == 0) return(rep(0, length(g)))
@@ -217,6 +224,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .trupek_chol(H = A)
 #' res
+#' @keywords internal
 .trupek_chol <- function(H) {
   n <- nrow(H)
   L <- matrix(0, n, n)
@@ -242,6 +250,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .trupek_chol_solve <- function(L, b) {
   n <- nrow(L)
   y <- numeric(n)
@@ -263,6 +272,7 @@
 #' @param delta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .trupek_dogleg <- function(g, H, delta) {
   L <- .trupek_chol(H)
   if (is.null(L)) return(.trupek_cauchy(g, H, delta))
@@ -288,6 +298,7 @@
 #' @param maxit Passed to \code{>}.
 #' @return A list with \code{s}, \code{why}.
 #' @export
+#' @keywords internal
 .trupek_steihaug <- function(g, H, delta, tol, maxit) {
   n <- length(g)
   z <- rep(0, n)
@@ -335,6 +346,7 @@
 #' @param maxit Passed to \code{>}.
 #' @return A list with \code{s}, \code{lambda}, \code{why}.
 #' @export
+#' @keywords internal
 .trupek_exact <- function(g, H, delta, tol, maxit) {
   n <- length(g)
   L <- .trupek_chol(H)
@@ -387,6 +399,7 @@
 #' @param maxit Passed to \code{.trupek_exact}.
 #' @return The value of \code{.trupek_steihaug}.
 #' @export
+#' @keywords internal
 .trupek_sub <- function(g, H, delta, sub, tol, maxit) {
   if (sub == "cauchy")
     return(list(s = .trupek_cauchy(g, H, delta), why = "Cauchy point"))

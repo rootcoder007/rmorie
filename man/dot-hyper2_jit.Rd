@@ -19,3 +19,4 @@ A step of the hyper2_native implementation. Called by \code{morie_hyper2},
 \code{morie_hyper2_logml}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

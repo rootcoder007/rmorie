@@ -21,3 +21,4 @@ A step of the dp_native implementation. Called by \code{morie_dp_changepoint},
 \code{morie_dp_kmeans}, \code{morie_dp_quantile} and 2 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

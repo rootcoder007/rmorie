@@ -45,6 +45,7 @@
 #' @param genotypes A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{G}, \code{n}, \code{m}.
 #' @export
+#' @keywords internal
 .snpqc1_check <- function(genotypes) {
   G <- as.matrix(genotypes)
   storage.mode(G) <- "double"
@@ -123,6 +124,7 @@ morie_snpqc1_maf <- function(genotypes) {
 #' @examples
 #' res <- .snpqc1_log_fact(n = 3L)
 #' res
+#' @keywords internal
 .snpqc1_log_fact <- function(n) {
   lgamma(n + 1.0)
 }
@@ -212,6 +214,7 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .snpqc1_erfc(x = x)
 #' res
+#' @keywords internal
 .snpqc1_erfc <- function(x) {
   # complementary error function via pnorm: erfc(x) = 2*pnorm(-x*sqrt2)
   2.0 * stats::pnorm(-x * sqrt(2.0))

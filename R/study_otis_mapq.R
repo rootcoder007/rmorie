@@ -27,6 +27,7 @@
 #' stringsAsFactors = FALSE)
 #' res <- .otis_b01_canonical(df = df)
 #' res
+#' @keywords internal
 .otis_b01_canonical <- function(df) {
   map <- c(
     EndFiscalYear = "end_fiscal_year",
@@ -58,6 +59,7 @@
 #' @examples
 #' res <- .run_otis_analysis_module_internal()
 #' res
+#' @keywords internal
 .run_otis_analysis_module_internal <- function() {
   df <- .otis_b01_canonical(morie_sample("otis_b01"))
 
@@ -122,6 +124,7 @@
 #' @examples
 #' res <- .mapq_subscales()
 #' res
+#' @keywords internal
 .mapq_subscales <- function() {
   list(
     EE = paste0("EE", 1:5),  # Experiential Engagement
@@ -148,6 +151,7 @@
 #' @examples
 #' res <- .morie_mapq_synth_panel()
 #' res
+#' @keywords internal
 .morie_mapq_synth_panel <- function(n = 400L, seed = 2026L) {
   .rmorie_local_seed(seed)
   subscales <- .mapq_subscales()
@@ -184,6 +188,7 @@
 #' @examples
 #' res <- .run_mapq_psychometrics_module_internal()
 #' res
+#' @keywords internal
 .run_mapq_psychometrics_module_internal <- function() {
   panel <- .morie_mapq_synth_panel()
   subscales <- .mapq_subscales()

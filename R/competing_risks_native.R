@@ -92,6 +92,7 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
 #' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
 #' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}.
 #' @export
+#' @keywords internal
 .morie_fg_newton <- function(t, e, X, competing, Gfun, Gi, max_iter = 50L,
                              tol = 1e-9) {
   p <- ncol(X)

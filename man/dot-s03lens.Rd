@@ -19,3 +19,4 @@ A numeric value.
 (1960) V_n(A, A; v) of eq. (3.4.4) p. 38, at n = 2.  Shared with
 Hcoreg.
 }
+\keyword{internal}

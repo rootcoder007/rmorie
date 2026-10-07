@@ -18,3 +18,4 @@ A list with \code{lam}, \code{psi}, \code{fml}, \code{resid}, \code{it}.
 mask[i, j] is 1 where item i may load on factor j.  Factors are
 standardised and orthogonal, so Sigma = Lambda Lambda' + Psi.
 }
+\keyword{internal}

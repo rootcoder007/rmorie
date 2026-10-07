@@ -24,3 +24,4 @@ A list with \code{w}, \code{info}.
 A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

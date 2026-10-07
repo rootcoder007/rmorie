@@ -67,6 +67,7 @@ Fistalasso <- function(X, y, lam, steps = 100, lipschitz = NULL) {
 #' @param t Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .k01_soft <- function(v, t) sign(v) * pmax(abs(v) - t, 0)
 
 #' .k01_speclip
@@ -80,6 +81,7 @@ Fistalasso <- function(X, y, lam, steps = 100, lipschitz = NULL) {
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @return The value of \code{lam}, as built in the body.
 #' @export
+#' @keywords internal
 .k01_speclip <- function(Xm, p, iters = 50L) {
   v <- rep(1 / sqrt(p), p)
   lam <- 0

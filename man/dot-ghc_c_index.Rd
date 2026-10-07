@@ -21,3 +21,4 @@ morie.fn.survrsf.c_index. Counts over comparable pairs (i, j) where
 the earlier observation is an event; non-events at the shorter time
 do not contribute because their true event time is unknown.
 }
+\keyword{internal}

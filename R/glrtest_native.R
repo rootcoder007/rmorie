@@ -20,6 +20,7 @@
 #' @param sd Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_glrtest_scores <- function(x, p0, p1, family, sd) {
   if (family == "bernoulli") {
     if (!(p0 > 0 && p0 < 1) || !(p1 > 0 && p1 < 1))

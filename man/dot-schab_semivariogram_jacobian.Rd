@@ -25,3 +25,4 @@ d gamma / d c0 = 1 d gamma / d sigma0^2 = 1 - R(h; a) d gamma / d a =
 -sigma0^2 dR/da Every row is zero at h = 0, where gamma(0) = 0 by
 definition whatever the nugget (Sec. 4.3.6).
 }
+\keyword{internal}

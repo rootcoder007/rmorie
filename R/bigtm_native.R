@@ -111,6 +111,7 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' @param z A vector; indexed elementwise.
 #' @return A list with \code{N_ijk}, \code{N_jk}, \code{N_kd}, \code{N_d}.
 #' @export
+#' @keywords internal
 .counts <- function(D, Tn, Vn, z) {
   N_ijk <- new.env(hash = TRUE)
   N_jk <- new.env(hash = TRUE)
@@ -150,6 +151,7 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' @examples
 #' res <- .lcg_uniform(seed = 1L, n = 3L)
 #' res
+#' @keywords internal
 .lcg_uniform <- function(seed, n) {
   .ghc_unif(.ghc_rng(as.numeric(seed)), n)
 }
@@ -298,6 +300,7 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 #' @param b Numeric; combined arithmetically in the body.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @keywords internal
 .log_evidence <- function(D, Tn, Vn, z, mm, nn, a, b) {
   cts <- .counts(D, Tn, Vn, z)
   N_ijk <- cts$N_ijk

@@ -18,3 +18,4 @@ The value of \code{w}, as built in the body.
 A step of the tail2_t01 implementation. Called by \code{KappaWt}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

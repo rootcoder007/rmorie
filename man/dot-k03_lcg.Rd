@@ -16,3 +16,4 @@ A numeric value.
 Exact in double precision (a * m < 2^53), so both language arms
 produce bit-identical initial weights.
 }
+\keyword{internal}

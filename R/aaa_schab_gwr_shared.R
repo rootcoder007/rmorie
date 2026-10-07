@@ -77,6 +77,7 @@
 #' @param coords A matrix; passed to \code{ncol}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
+#' @keywords internal
 .schab_pairwise_distances <- function(coords) {
   coords <- as.matrix(coords)
   if (ncol(coords) < 1L) stop("coords must have at least one column")
@@ -93,6 +94,7 @@
 #' @param template A matrix; passed to \code{dim}.
 #' @return The value of \code{array}.
 #' @export
+#' @keywords internal
 .schab_reshape_like <- function(values, template) {
   d <- dim(template)
   if (is.null(d)) {
@@ -114,6 +116,7 @@
 #' @param normalized A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{.schab_reshape_like}.
 #' @export
+#' @keywords internal
 .schab_kernel_weights <- function(distance, bandwidth, kernel = "gaussian",
                                   normalized = FALSE) {
   d <- as.numeric(distance)
@@ -155,6 +158,7 @@
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1.0000001}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .schab_adaptive_bandwidth <- function(distance_row, n_neighbours,
                                       eps = 1.0000001) {
   d <- sort(as.numeric(distance_row))
@@ -178,6 +182,7 @@
 #' @param adaptive A flag; the body branches on it.
 #' @return The value of \code{.schab_kernel_weights}.
 #' @export
+#' @keywords internal
 .schab_local_weights <- function(d_row, bandwidth, kernel, adaptive) {
   h <- if (adaptive) .schab_adaptive_bandwidth(d_row, bandwidth) else bandwidth
   .schab_kernel_weights(d_row, h, kernel)
@@ -210,6 +215,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8))
 #' res <- .schab_wls_operator(X = X, w = c(1, 0.5, 2, 1))
 #' res
+#' @keywords internal
 .schab_wls_operator <- function(X, w) {
   sw <- sqrt(w)
   Xw <- X * sw
@@ -247,6 +253,7 @@
 #' \code{sigma2_cressie}, \code{n}, \code{p}, \code{bandwidth}, \code{kernel},
 #' \code{adaptive}, \code{n_rank_deficient}.
 #' @export
+#' @keywords internal
 .schab_gwr_fit <- function(y, X, distances, bandwidth, kernel = "gaussian",
                            adaptive = FALSE) {
   y <- as.numeric(y)
@@ -314,6 +321,7 @@
 #' @param tr_S Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_aicc_from_parts <- function(n, sigma2, tr_S) {
   n <- as.numeric(n)
   tr_S <- as.numeric(tr_S)
@@ -337,6 +345,7 @@
 #' @param tr_S Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_aic_from_parts <- function(n, sigma2, tr_S) {
   n <- as.numeric(n)
   2 * n * log(sqrt(sigma2)) + n * log(2 * pi) + n + as.numeric(tr_S)
@@ -358,6 +367,7 @@
 #' @param adaptive Passed to \code{.schab_local_weights}. Defaults to \code{FALSE}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_cv_score <- function(y, X, distances, bandwidth, kernel = "gaussian",
                             adaptive = FALSE) {
   y <- as.numeric(y)
@@ -393,6 +403,7 @@
 #' @param criterion One of \code{"aic"}, \code{"aicc"}, \code{"cv"}. Defaults to \code{"cv"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .schab_gwr_criterion <- function(y, X, distances, bandwidth,
                                  kernel = "gaussian", adaptive = FALSE,
                                  criterion = "cv") {
@@ -429,6 +440,7 @@
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A list with \code{x}, \code{value}.
 #' @export
+#' @keywords internal
 .schab_golden_section <- function(func, lower, upper, tol = 1e-4,
                                   max_iter = 200L) {
   invphi <- (sqrt(5) - 1) / 2
@@ -468,6 +480,7 @@
 #' @param coords A matrix; passed to \code{as.matrix}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .schab_default_bounds <- function(coords) {
   coords <- as.matrix(coords)
   span <- apply(coords, 2, max) - apply(coords, 2, min)
@@ -496,6 +509,7 @@
 #' @return A list with \code{bandwidth}, \code{score}, \code{criterion}, \code{bounds},
 #' \code{adaptive}.
 #' @export
+#' @keywords internal
 .schab_select_bandwidth <- function(y, X, coords, kernel = "gaussian",
                                     criterion = "cv", adaptive = FALSE,
                                     bounds = NULL, tol = 1e-4) {
@@ -589,6 +603,7 @@
 #' \code{score_history}, \code{n_iter}, \code{converged}, \code{criterion},
 #' \code{kernel}.
 #' @export
+#' @keywords internal
 .schab_mgwr_backfit <- function(y, X, coords, kernel = "gaussian",
                                 criterion = "aicc", adaptive = FALSE,
                                 tol = 1e-5, max_iter = 200L,

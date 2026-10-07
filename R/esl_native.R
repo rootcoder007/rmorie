@@ -15,6 +15,7 @@
 #' @param S A matrix; passed to \code{chol}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_esl_logmvn <- function(X, mu, S) {
   p <- ncol(X)
   L <- chol(S) # R's chol is upper-triangular

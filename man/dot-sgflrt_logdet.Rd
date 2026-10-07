@@ -16,3 +16,4 @@ A numeric value.
 A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

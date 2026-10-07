@@ -22,3 +22,4 @@ Rosenbaum sensitivity bounds for the Wilcoxon signed-rank statistic
 Pairs are formed positionally from equal-length treated/control
 vectors, matching how psens() was called here.
 }
+\keyword{internal}

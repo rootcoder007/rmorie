@@ -19,3 +19,4 @@ A step of the gan_an_native implementation. Called by
 \code{.gan_an_anomaly_score_impl}, \code{discrimination_loss}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

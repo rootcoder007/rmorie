@@ -24,6 +24,7 @@
 #' @param r Numeric; combined arithmetically in the body.
 #' @return The value of \code{ffm}, as built in the body.
 #' @export
+#' @keywords internal
 .fwxF_ffmc_day <- function(f0, t, h, w, r) {
   # Fine Fuel Moisture Code, statements 110-165 of the FTR-33 program.
   wmo <- 147.2 * (101.0 - f0) / (59.5 + f0)
@@ -85,6 +86,7 @@
 #' @param month See Usage.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .fwxF_dmc_day <- function(p0, t, h, r, month) {
   # Duff Moisture Code, statements 165-210.
   if (t < -1.1) {
@@ -125,6 +127,7 @@
 #' @param month See Usage.
 #' @return The value of \code{dc}, as built in the body.
 #' @export
+#' @keywords internal
 .fwxF_dc_day <- function(d0, t, r, month) {
   # Drought Code, statements 215-235.
   if (t < -2.8) {
@@ -161,6 +164,7 @@
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .fwxF_isi_bui_fwi <- function(ffm, dmc, dc, w) {
   # ISI, BUI, FWI, DSR, statements 235-280.
   fm <- 147.2 * (101.0 - ffm) / (59.5 + ffm)
@@ -282,6 +286,7 @@ fire_weather_index <- morie_fwxF
 #' @examples
 #' res <- .fwxF_cheatsheet()
 #' res
+#' @keywords internal
 .fwxF_cheatsheet <- function() {
   "fwxF: Canadian FWI System daily FFMC/DMC/DC/ISI/BUI/FWI/DSR (FTR-33)"
 }

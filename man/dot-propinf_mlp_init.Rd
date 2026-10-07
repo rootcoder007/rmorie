@@ -24,3 +24,4 @@ the source it follows.
 net <- .propinf_mlp_init(c(3L, 4L, 1L), .propinf_rng(1L))
 vapply(net, function(L) dim(L$W), integer(2))
 }
+\keyword{internal}

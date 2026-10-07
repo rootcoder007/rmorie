@@ -25,3 +25,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .schab_initial_mu(z = y, family = txt)
 res
 }
+\keyword{internal}

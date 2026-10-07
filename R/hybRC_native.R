@@ -82,6 +82,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .hybRC_vec(x = x)
 #' res
+#' @keywords internal
 .hybRC_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(unlist(x))
@@ -99,6 +100,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .hybRC_mat(x = x)
 #' res
+#' @keywords internal
 .hybRC_mat <- function(x) {
   if (is.null(x)) return(matrix(numeric(0), nrow = 0, ncol = 0))
   if (is.list(x) && !is.data.frame(x)) {
@@ -424,6 +426,7 @@ meta_level <- function(model_builder, consumer, data) {
 #' @examples
 #' res <- .hybRC_cheatsheet()
 #' res
+#' @keywords internal
 .hybRC_cheatsheet <- function() {
   paste("hybRC: collaborative filtering cannot recommend what",
         "nobody rated; content-based filtering cannot surprise",

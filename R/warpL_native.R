@@ -68,6 +68,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .warpL_vec(x = x)
 #' res
+#' @keywords internal
 .warpL_vec <- function(x) {
   as.numeric(x)
 }
@@ -86,6 +87,7 @@
 #' @examples
 #' res <- .warpL_alpha_weights(n = 3L)
 #' res
+#' @keywords internal
 .warpL_alpha_weights <- function(n, scheme = "reciprocal") {
   N <- as.integer(n)
   if (N < 1) stop("warpL: n must be at least 1")
@@ -118,6 +120,7 @@
 #' @param alphas A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .warpL_rank_weight <- function(rank, alphas) {
   r <- as.integer(rank)
   if (r < 0) stop("warpL: the rank cannot be negative")
@@ -135,6 +138,7 @@
 #' @param n_labels Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{as.integer}.
 #' @export
+#' @keywords internal
 .warpL_estimate_rank <- function(n_draws, n_labels) {
   N <- as.integer(n_draws)
   Y <- as.integer(n_labels)
@@ -158,6 +162,7 @@
 #' @return A list with \code{violated}, \code{draws}, \code{negative},
 #' \code{estimated_rank}, \code{capped}, \code{note}.
 #' @export
+#' @keywords internal
 .warpL_sample_violation <- function(score_positive, negative_scorer, n_labels,
                                      rng, margin = 1.0, max_draws = NULL) {
   Y <- as.integer(n_labels)
@@ -205,6 +210,7 @@
 #' @param margin Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{loss}, \code{hinge}, \code{rank_weight}, \code{estimated_rank}.
 #' @export
+#' @keywords internal
 .warpL_warp_loss <- function(score_positive, score_negative, estimated_rank,
                               alphas, margin = 1.0) {
   hinge <- max(0, as.numeric(margin) - as.numeric(score_positive) + as.numeric(score_negative))

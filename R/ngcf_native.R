@@ -76,6 +76,7 @@
 #' @param slope Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .ngcf_leaky <- function(x, slope = 0.2) {
   if (x >= 0.0) x else slope * x
 }

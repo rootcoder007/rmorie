@@ -264,6 +264,7 @@ distortion <- function(A, E) {
 #' @examples
 #' res <- .qjlcrn_cheatsheet()
 #' res
+#' @keywords internal
 .qjlcrn_cheatsheet <- function() {
   paste(paste0(
     "qjlcrn: k0 = (4 + 2 beta) log n / (eps^2/2 - eps^3/3), R wit",

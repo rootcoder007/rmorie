@@ -18,3 +18,4 @@ The value of \code{adj}, as built in the body.
 A step of the helpers_ot implementation. Called by \code{.ot_potentials}, \code{.ot_tree_path}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

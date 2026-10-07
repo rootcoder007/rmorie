@@ -25,3 +25,4 @@ A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged},
 A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

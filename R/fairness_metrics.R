@@ -59,6 +59,7 @@ NULL
 #' @param payload Carried through into a list the body builds. Defaults to \code{list()}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_fairness_result <- function(title, summary_lines = list(),
                                    tables = list(), sections = list(),
                                    warnings = character(0),

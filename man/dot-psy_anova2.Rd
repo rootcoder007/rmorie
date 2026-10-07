@@ -22,3 +22,4 @@ table. An unbalanced table makes the mean squares non-orthogonal and
 every downstream ICC ill-defined, so it is an error rather than a
 number from whatever cells happen to be present.
 }
+\keyword{internal}

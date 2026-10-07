@@ -21,3 +21,4 @@ A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoull
 \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

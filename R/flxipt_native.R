@@ -22,6 +22,7 @@
 #' @param spec A list; the body reads \code{$cols}, \code{$kind} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .flxipt_expand <- function(W, spec) {
   W <- as.matrix(W)
   storage.mode(W) <- "double"
@@ -110,6 +111,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .flxipt_logit_irls(X = x, y = y)
 #' res
+#' @keywords internal
 .flxipt_logit_irls <- function(X, y, ridge = 1e-10, penalty = 0,
                                max_iter = 200, tol = 1e-8) {
   X <- as.matrix(X)
@@ -153,6 +155,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .flxipt_lstsq(X = x, y = y)
 #' res
+#' @keywords internal
 .flxipt_lstsq <- function(X, y, ridge = 1e-10) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -174,6 +177,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .flxipt_sigmoid(v = x)
 #' res
+#' @keywords internal
 .flxipt_sigmoid <- function(v) {
   v <- pmin(pmax(v, -30), 30)
   1 / (1 + exp(-v))
@@ -193,6 +197,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param ridge Numeric; passed to \code{max}.
 #' @return A list with \code{pred}, \code{b}.
 #' @export
+#' @keywords internal
 .flxipt_fit <- function(y, W, spec, rows, binary, ridge) {
   X <- .flxipt_expand(W, spec)
   Xr <- X[rows, , drop = FALSE]
@@ -224,6 +229,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .flxipt_folds(n = 3L, V = x)
 #' res
+#' @keywords internal
 .flxipt_folds <- function(n, V) {
   V <- max(2L, min(as.integer(V), n))
   lapply(0:(V - 1L), function(v) which(seq_len(n) %% V == v))
@@ -242,6 +248,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .flxipt_project_simplex(v = x)
 #' res
+#' @keywords internal
 .flxipt_project_simplex <- function(v) {
   n <- length(v)
   if (n == 0L) return(numeric(0))
@@ -277,6 +284,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .flxipt_nnls_simplex(Z = X, y = y)
 #' res
+#' @keywords internal
 .flxipt_nnls_simplex <- function(Z, y, iters = 8000, tol = 1e-14) {
   n <- nrow(Z)
   J <- ncol(Z)
@@ -610,6 +618,7 @@ iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
 #' @examples
 #' res <- .flxipt_cheatsheet()
 #' res
+#' @keywords internal
 .flxipt_cheatsheet <- function() {
   paste0("flxipt: Super Learner. Z[i,j] = candidate j's HELD-OUT ",
          "prediction for i; fit the meta-learner of y on Z (nnls ",

@@ -25,3 +25,4 @@ closed form; integrate its standard integral representation.
 res <- .morie_hmp(p = 0.5)
 res
 }
+\keyword{internal}

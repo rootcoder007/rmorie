@@ -85,6 +85,7 @@
 #' \code{as.numeric}.
 #' @return A list with \code{hazards}, \code{types}, \code{times}.
 #' @export
+#' @keywords internal
 .tlsieve_cause_specific_hazard <- function(time, event_type, times, weights = NULL) {
   t <- as.numeric(time)
   e <- as.integer(event_type)
@@ -124,6 +125,7 @@
 #' @return A list with \code{F}, \code{survival}, \code{times}, \code{types},
 #' \code{closure}, \code{note}.
 #' @export
+#' @keywords internal
 .tlsieve_cumulative_incidence <- function(hazards, times) {
   type_names <- names(hazards)
   if (is.null(type_names) || length(type_names) == 0) {
@@ -173,6 +175,7 @@
 #' @return A list with \code{estimate}, \code{F}, \code{survival}, \code{types},
 #' \code{times}, \code{closure}, \code{method}, \code{caveat}.
 #' @export
+#' @keywords internal
 .tlsieve_aalen_johansen <- function(time, event_type, times, weights = NULL) {
   h <- .tlsieve_cause_specific_hazard(time, event_type, times, weights)
   ci <- .tlsieve_cumulative_incidence(h$hazards, times)
@@ -194,6 +197,7 @@
 #' @param F_placebo Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 .tlsieve_vaccine_efficacy <- function(F_vaccine, F_placebo) {
   a <- as.numeric(F_vaccine)
   b <- as.numeric(F_placebo)
@@ -252,6 +256,7 @@ morie_tlsieve <- function(F_vac_matched, F_pla_matched, F_vac_mismatched,
 #' @examples
 #' res <- .tlsieve_cheatsheet()
 #' res
+#' @keywords internal
 .tlsieve_cheatsheet <- function() {
   paste("tlsieve: an HIV vaccine built from a few antigens protects",
         "unevenly across strains, so SIEVE ANALYSIS asks how efficacy",

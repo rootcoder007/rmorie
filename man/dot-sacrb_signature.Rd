@@ -35,3 +35,4 @@ See the file header for the source the module follows.
 res <- .sacrb_signature()
 res
 }
+\keyword{internal}

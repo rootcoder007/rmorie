@@ -49,6 +49,7 @@
 #' @param d A count; the body uses it as \code{numeric(...)}.
 #' @return The value of \code{counts}, as built in the body.
 #' @export
+#' @keywords internal
 .depth_counts <- function(tree, max_depth, d) {
   counts <- lapply(seq_len(max_depth), function(i) numeric(d))
   walk <- function(nd, depth) {

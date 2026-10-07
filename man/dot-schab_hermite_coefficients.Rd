@@ -20,3 +20,4 @@ A vector, from \code{as.numeric}.
 quadrature -- exact for polynomial g, so the Example 5.12 identities
 come out exactly.
 }
+\keyword{internal}

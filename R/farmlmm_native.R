@@ -27,6 +27,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .farmlmm_erf(x = x)
 #' res
+#' @keywords internal
 .farmlmm_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .farmlmm_erfc
 #'
@@ -41,6 +42,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .farmlmm_erfc(x = x)
 #' res
+#' @keywords internal
 .farmlmm_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .farmlmm_EPS <- 1e-12
@@ -60,6 +62,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .farmlmm_to_mat(X = x)
 #' res
+#' @keywords internal
 .farmlmm_to_mat <- function(X) {
   if (is.data.frame(X)) X <- as.matrix(X)
   if (is.null(dim(X))) X <- matrix(as.numeric(X), nrow = length(X))
@@ -82,6 +85,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .to_vec(y = y)
 #' res
+#' @keywords internal
 .to_vec <- function(y) {
   if (is.data.frame(y)) y <- as.matrix(y)
   if (!is.null(dim(y))) y <- as.numeric(y)
@@ -101,6 +105,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .norm_cdf(x = x)
 #' res
+#' @keywords internal
 .norm_cdf <- function(x) 0.5 * (1 + .farmlmm_erf(x / sqrt(2)))
 
 # mirror _s03core.wls
@@ -116,6 +121,7 @@
 #' @param rcond Passed to \code{qr.solve}.
 #' @return A list with \code{coef}.
 #' @export
+#' @keywords internal
 .farmlmm_wls <- function(X, y, w, rcond) {
   X <- .farmlmm_to_mat(X)
   y <- .to_vec(y)
@@ -148,6 +154,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .kinship_from_markers(G = g)
 #' res
+#' @keywords internal
 .kinship_from_markers <- function(G, markers = NULL) {
   M <- .farmlmm_to_mat(G)
   n <- nrow(M)
@@ -179,6 +186,7 @@
 #' @param marker Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{correlation}, \code{marker}, \code{note}.
 #' @export
+#' @keywords internal
 .confounding <- function(G, K, marker) {
   M <- .farmlmm_to_mat(G)
   n <- nrow(M)
@@ -211,6 +219,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .fixed_effect_scan(y = y, G = g)
 #' res
+#' @keywords internal
 .fixed_effect_scan <- function(y, G, covariates = integer(0), K = NULL) {
   yv <- .to_vec(y)
   M <- .farmlmm_to_mat(G)
@@ -259,6 +268,7 @@
 #' @param bins Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{K}, \code{markers_used}, \code{blup}, \code{note}.
 #' @export
+#' @keywords internal
 .random_effect_step <- function(y, G, selected, bins = NULL) {
   sel <- as.integer(selected) + 1L
   if (length(sel) == 0L) {
@@ -296,6 +306,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .farmcpu(y = y, G = g)
 #' res
+#' @keywords internal
 .farmcpu <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
   yv <- .to_vec(y)
   M <- .farmlmm_to_mat(G)

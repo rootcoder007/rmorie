@@ -18,3 +18,4 @@ A list with \code{grid}, \code{vals}.
 A step of the copula_native implementation. Called by \code{morie_copula_survival}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -24,3 +24,4 @@ A list with \code{hs}, \code{cs}, \code{gates}.
 A step of the netsts_native implementation. Called by \code{morie_netsts}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

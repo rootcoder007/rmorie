@@ -16,3 +16,4 @@ A logical value.
 \description{
 it is a dict that carries a "label" key).
 }
+\keyword{internal}

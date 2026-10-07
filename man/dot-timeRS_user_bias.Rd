@@ -27,3 +27,4 @@ A step of the timeRS_native implementation. Called by \code{.timeRS_predict_time
 \code{morie_timeRS_user_bias}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

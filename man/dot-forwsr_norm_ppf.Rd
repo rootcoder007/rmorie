@@ -22,3 +22,4 @@ consistency factor and, through it, the deletion residual.
 res <- .forwsr_norm_ppf(p = 0.5)
 res
 }
+\keyword{internal}

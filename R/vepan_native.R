@@ -107,6 +107,7 @@ morie_vepan_PICK_ORDER <- c(
 #' @param hi Passed to \code{>=}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .vepan_seqrange <- function(lo, hi) {
   # Python range(lo, hi+1); empty when hi < lo.
   if (hi >= lo) lo:hi else integer(0)
@@ -121,6 +122,7 @@ morie_vepan_PICK_ORDER <- c(
 #' @param ch Passed to \code{regexpr}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .vepan_find <- function(s, ch) {
   # 0-based index of ch in s, or -1 (like Python str.find).
   p <- regexpr(ch, s, fixed = TRUE)
@@ -141,6 +143,7 @@ morie_vepan_PICK_ORDER <- c(
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .vepan_char(s = txt, k = 3L)
 #' res
+#' @keywords internal
 .vepan_char <- function(s, k) {
   # 0-based character access.
   substr(s, k + 1L, k + 1L)
@@ -218,6 +221,7 @@ morie_vepan_most_severe_consequence <- function(terms) {
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .vepan_revcomp(s = txt)
 #' res
+#' @keywords internal
 .vepan_revcomp <- function(s) {
   chars <- rev(strsplit(toupper(s), "")[[1L]])
   comp <- ifelse(chars %in% names(.vepan_COMPLEMENT),
@@ -236,6 +240,7 @@ morie_vepan_most_severe_consequence <- function(terms) {
 #' @param ex A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .vepan_exons <- function(ex) {
   if (is.matrix(ex)) {
     m <- ex
@@ -258,6 +263,7 @@ morie_vepan_most_severe_consequence <- function(terms) {
 #' \code{cds_start}, \code{cds_end}, \code{biotype}, \code{canonical}, \code{start},
 #' \code{end}.
 #' @export
+#' @keywords internal
 .vepan_transcript <- function(tr) {
   if (is.null(tr[["exons"]])) {
     stop("vepan: a transcript needs exons as (start, end)")
@@ -356,6 +362,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @param genome Passed to \code{morie_vepan_transcript_sequence}.
 #' @return A list with \code{cds}, \code{coding}, \code{sg}.
 #' @export
+#' @keywords internal
 .vepan_cds_frame <- function(t, genome) {
   # cDNA index (0-based) of each coding base, and the coding sequence.
   if (is.null(t$cds_start)) {
@@ -383,6 +390,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @param t A list; the body reads \code{$exons} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .vepan_introns <- function(t) {
   ex <- t$exons
   out <- list()
@@ -405,6 +413,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' \code{$ref} from it.
 #' @return A list with \code{chrom}, \code{pos}, \code{ref}, \code{alt}, \code{id}.
 #' @export
+#' @keywords internal
 .vepan_variant <- function(v) {
   if (is.null(v[["pos"]]) || is.null(v[["ref"]]) || is.null(v[["alt"]])) {
     stop("vepan: a variant needs pos, ref and alt")
@@ -440,6 +449,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @param v A list; the body reads \code{$alt}, \code{$ref} from it.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .vepan_kind <- function(v) {
   if (nchar(v$ref) == 1L && nchar(v$alt) == 1L) {
     return("SNV")
@@ -454,6 +464,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @param v A list; the body reads \code{$pos}, \code{$ref} from it.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .vepan_affected <- function(v) {
   # Genomic bases the variant changes (1-based, inclusive). Insertion
   # yields lo > hi (an empty span between pos and pos+1).
@@ -481,6 +492,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @param hi Passed to \code{.vepan_seqrange}.
 #' @return The value of \code{unique}.
 #' @export
+#' @keywords internal
 .vepan_splice_terms <- function(t, v, lo, hi) {
   # Splice consequences from the distance to each exon boundary.
   terms <- character(0)
@@ -549,6 +561,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @param strand One of \code{"-"}, \code{"+"}.
 #' @return A list with \code{alt_cds}, \code{off}.
 #' @export
+#' @keywords internal
 .vepan_apply <- function(cds, v, coding, gpos, strand) {
   # The coding sequence after the variant, and where it changed
   # (0-based offset). Returns list(alt_cds, off) or list(NULL, NULL).
@@ -609,6 +622,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @param gpos Passed to \code{.vepan_apply}.
 #' @return A list with \code{terms}, \code{info}.
 #' @export
+#' @keywords internal
 .vepan_coding_terms <- function(t, v, cds, coding, gpos) {
   # Everything that depends on the protein: the predicate set. Returns
   # list(terms, info).
@@ -698,6 +712,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @param cds_first Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .vepan_hgvs_c <- function(t, v, seq, gpos, cds_first) {
   # c. notation, with an indel shifted to its most 3' position.
   idx <- stats::setNames(seq_along(gpos) - 1L, as.character(gpos))
@@ -763,6 +778,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' \code{"stop_retained_variant"}, \code{"synonymous_variant"}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .vepan_hgvs_p <- function(info, terms) {
   if (length(info) == 0L || is.null(info$protein_position)) {
     return(NULL)
@@ -991,6 +1007,7 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
 #' \code{$most_severe}, \code{$transcript} from it.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .vepan_pick_key <- function(r) {
   # Table 7's order: canonical, then protein coding, then severity.
   list(
@@ -1010,6 +1027,7 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
 #' @param k2 A vector; indexed elementwise.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .vepan_key_less <- function(k1, k2) {
   # Lexicographic comparison of two pick keys.
   for (i in seq_along(k1)) {

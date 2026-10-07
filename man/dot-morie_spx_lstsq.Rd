@@ -27,3 +27,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .morie_spx_lstsq(A = A, y = b)
 res
 }
+\keyword{internal}

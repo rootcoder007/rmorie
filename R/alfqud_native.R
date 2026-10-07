@@ -57,6 +57,7 @@
 #' @param loc A vector; indexed elementwise.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .alfqud_read <- function(st, loc) {
   bank <- loc[[1]]
   idx <- as.integer(loc[[2]])
@@ -85,6 +86,7 @@
 #' @param v See Usage.
 #' @return The value of \code{st}, as built in the body.
 #' @export
+#' @keywords internal
 .alfqud_write <- function(st, loc, v) {
   bank <- loc[[1]]
   idx <- as.integer(loc[[2]])
@@ -276,6 +278,7 @@ morie_alfqud_text <- function(program) {
 #' @param rf Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .alfqud_score <- function(program, inputs, targets, n_reg, lw, rf) {
   cc <- if (is.null(rf)) {
     morie_alfqud_correctness(
@@ -302,6 +305,7 @@ morie_alfqud_text <- function(program) {
 #' @param rf Passed to \code{.alfqud_score}.
 #' @return A list with \code{prog}, \code{s}, \code{c}, \code{seen}.
 #' @export
+#' @keywords internal
 .alfqud_bfs <- function(inputs, targets, acts, n_reg, max_len, lw, rf) {
   best <- list()
   z <- .alfqud_score(list(), inputs, targets, n_reg, lw, rf)
@@ -345,6 +349,7 @@ morie_alfqud_text <- function(program) {
 #' @param c_puct Numeric; combined arithmetically in the body.
 #' @return A list with \code{prog}, \code{s}, \code{c}, \code{seen}.
 #' @export
+#' @keywords internal
 .alfqud_mcts <- function(inputs, targets, acts, n_reg, max_len, lw, rf,
                          n_sim, c_puct) {
   # Nodes are keyed by the program that reaches them, so the tree is a

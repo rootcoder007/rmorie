@@ -21,3 +21,4 @@ the source it follows.
 e <- .propinf_rng(1L)
 replicate(3, .propinf_rng_next(e))
 }
+\keyword{internal}

@@ -134,6 +134,7 @@ morie_burkov_cosine_similarity <- function(x, y) {
 #' @param name A function; the body checks with \code{is.function}.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 .morie_burkov_phi <- function(name) {
   if (is.function(name)) {
     return(name)

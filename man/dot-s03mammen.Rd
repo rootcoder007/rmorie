@@ -15,3 +15,4 @@ One of two values, depending on the branch taken.
 \description{
 variance 1, third moment 1, and deterministic, so both arms agree.
 }
+\keyword{internal}

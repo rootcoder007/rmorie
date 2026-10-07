@@ -66,6 +66,7 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .funcal_first(x = x)
 #' res
+#' @keywords internal
 .funcal_first <- function(x) {
   if (is.null(x) || length(x) == 0) return(NULL)
   if (is.list(x)) return(x[[1]])
@@ -84,6 +85,7 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #' @return A list with \code{query}, \code{target}, \code{evalue}, \code{score},
 #' \code{query_cov}, \code{target_cov}.
 #' @export
+#' @keywords internal
 .funcal_hit <- function(h) {
   if (is.null(h) || is.null(h[["query"]]) || is.null(h[["target"]])) {
     stop("funcal: a hit needs 'query' and 'target'")
@@ -175,6 +177,7 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
 #' @param n_target_side Passed to \code{<=}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .funcal_type_of <- function(n_query_side, n_target_side) {
   left <- if (n_query_side <= 1) "one" else "many"
   right <- if (n_target_side <= 1) "one" else "many"

@@ -34,3 +34,4 @@ A flat column gives one value (or \code{NULL}) per row. A LIST column
 list, \code{list()} for an empty one, and \code{NULL} inside the list
 for a null element.
 }
+\keyword{internal}

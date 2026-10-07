@@ -18,3 +18,4 @@ Nothing; this branch always raises.
 A step of the cdaeRC_native implementation. Called by \code{decode}, \code{encode}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

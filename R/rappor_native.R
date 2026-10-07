@@ -70,6 +70,7 @@ morie_rappor_epsilon <- function(h, f, p = NULL, q = NULL) {
 #' @param cohort Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @keywords internal
 .morie_rappor_bloom <- function(value, k, h, cohort = 0) {
   s <- as.character(value)
   chars <- utf8ToInt(s)

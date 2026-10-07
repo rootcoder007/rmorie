@@ -24,6 +24,7 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A list with \code{f}, \code{a}, \code{mu}, \code{sd}.
 #' @export
+#' @keywords internal
 .ht_prof <- function(xv, yv, b) {
   n <- length(xv)
   p <- xv^b

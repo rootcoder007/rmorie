@@ -38,3 +38,4 @@ g <- .prsLL_grammar(rules, start = "E")
 g$start
 length(g$rules)
 }
+\keyword{internal}

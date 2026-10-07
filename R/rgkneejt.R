@@ -114,6 +114,7 @@ rgkneejt <- function(vag, fs, force = 1.5, window = NULL) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .rgkneejt_median(v = x)
 #' res
+#' @keywords internal
 .rgkneejt_median <- function(v) {
   s <- sort(v)
   m <- length(s)

@@ -15,6 +15,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .sbm_log_beta(a = A, b = b)
 #' res
+#' @keywords internal
 .sbm_log_beta <- function(a, b) lgamma(a) + lgamma(b) - lgamma(a + b)
 
 #' Dirichlet-process stochastic block model

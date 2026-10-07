@@ -19,3 +19,4 @@ A step of the bayopt_native implementation. Called by \code{gp_posterior_gradien
 \code{matern52}, \code{squared_exponential}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

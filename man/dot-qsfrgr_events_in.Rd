@@ -19,3 +19,4 @@ A step of the qsfrgr_native implementation. Called by \code{.qsfrgr_best_split},
 \code{.qsfrgr_grow}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -20,3 +20,4 @@ A numeric value.
 Part of the geometric_combinatorics_native implementation; see the
 file header for the source it follows.
 }
+\keyword{internal}

@@ -32,3 +32,4 @@ A step of the schab_fit_shared implementation. Called by \code{spols}, \code{spw
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

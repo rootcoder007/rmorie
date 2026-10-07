@@ -12,6 +12,7 @@
 #' @param xi Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gpd_nll <- function(y, sigma, xi) {
   n <- length(y)
   if (sigma <= 0) return(Inf)
@@ -37,6 +38,7 @@
 #' @param t Numeric; passed to \code{abs}.
 #' @return A list with \code{xi}, \code{sigma}, \code{g}.
 #' @export
+#' @keywords internal
 .gpd_profile <- function(y, t) {
   n <- length(y)
   s <- 0

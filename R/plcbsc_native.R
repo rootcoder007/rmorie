@@ -16,6 +16,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .plcbsc_simplex_project(v = x)
 #' res
+#' @keywords internal
 .plcbsc_simplex_project <- function(v) {
   n <- length(v)
   if (n == 0L) return(numeric(0))
@@ -43,6 +44,7 @@
 #' @param step Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{weights}, \code{loss}, \code{fitted}, \code{n_iter}, \code{converged}.
 #' @export
+#' @keywords internal
 .plcbsc_synthetic_control <- function(x_treated, x_donors, v = NULL,
                                       max_iter = 5000, tol = 1e-12,
                                       step = NULL) {
@@ -127,6 +129,7 @@
 #' @param weights A matrix; passed to \code{crossprod}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .plcbsc_gaps <- function(y_treated, y_donors, weights) {
   Y0 <- do.call(rbind, lapply(y_donors, as.numeric))
   y_treated - as.numeric(crossprod(Y0, weights))
@@ -141,6 +144,7 @@
 #' @param gaps A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .plcbsc_rmspe <- function(gaps) {
   if (length(gaps) == 0L) return(NaN)
   sqrt(sum(gaps ^ 2) / length(gaps))
@@ -157,6 +161,7 @@
 #' @param pre_gaps Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .plcbsc_effect <- function(gaps, t0, statistic, pre_gaps = NULL) {
   T <- length(gaps)
   post <- if (t0 < T) gaps[(t0 + 1):T] else numeric(0)
@@ -280,6 +285,7 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 #' @return A list with \code{weights}, \code{gaps}, \code{placebo_effect},
 #' \code{rmspe_pre}, \code{rmspe_placebo}.
 #' @export
+#' @keywords internal
 .plcbsc_in_time_placebo <- function(y_treated, y_donors, t0, fake_t0, v = NULL, ...) {
   y1 <- as.numeric(y_treated)
   Y0 <- do.call(rbind, lapply(y_donors, as.numeric))
@@ -312,6 +318,7 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 #' @examples
 #' res <- .plcbsc_cheatsheet()
 #' res
+#' @keywords internal
 .plcbsc_cheatsheet <- function() {
   paste("plcbsc: synthetic control + placebo inference (Abadie, Diamond & Hainmueller 2015).",
         "Weights live on the SIMPLEX -- non-negative, summing to one -- which is what stops the",

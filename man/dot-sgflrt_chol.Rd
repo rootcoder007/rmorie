@@ -24,3 +24,4 @@ A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 res <- .sgflrt_chol(A = A)
 res
 }
+\keyword{internal}

@@ -36,3 +36,4 @@ A step of the warpL_native implementation. Called by
 \code{morie_warpL_sample_violation}, \code{morie_warpL_warp_step}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

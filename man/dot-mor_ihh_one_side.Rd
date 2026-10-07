@@ -25,3 +25,4 @@ stopping once the curve drops below min_ehh.  \code{truncated} stays TRUE
 when the curve never dropped that far before the data ran out, which
 is exactly the case where the integral understates iHH.
 }
+\keyword{internal}

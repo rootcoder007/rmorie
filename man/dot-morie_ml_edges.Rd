@@ -16,3 +16,4 @@ The value of \code{[}.
 list(node = c(children)). Both spellings normalize to a sorted
 character matrix of edges.
 }
+\keyword{internal}

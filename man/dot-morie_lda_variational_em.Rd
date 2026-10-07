@@ -41,3 +41,4 @@ A list with \code{estimate}, \code{beta}, \code{elbo_history},
 A step of the lda_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

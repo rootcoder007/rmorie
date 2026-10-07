@@ -18,3 +18,4 @@ A numeric value.
 A step of the stahdo_native implementation. Called by \code{.stahdo_subsample_dirs}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

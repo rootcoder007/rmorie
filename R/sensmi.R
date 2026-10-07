@@ -15,6 +15,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .sensmi_ols(X = x, y = y)
 #' res
+#' @keywords internal
 .sensmi_ols <- function(X, y) {
   D <- cbind(1, X)
   beta <- drop(qr.solve(D, y))

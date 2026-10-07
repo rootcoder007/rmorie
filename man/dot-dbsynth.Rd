@@ -23,3 +23,4 @@ A step of the wvltdb implementation. Called by \code{Wvltdb}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

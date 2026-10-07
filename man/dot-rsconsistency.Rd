@@ -26,3 +26,4 @@ mirrors, not stats::.
 res <- .rsconsistency(h = 0.5, n = 3L, p = 0.5)
 res
 }
+\keyword{internal}

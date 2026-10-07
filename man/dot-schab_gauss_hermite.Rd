@@ -24,3 +24,4 @@ is E[g(X)] for X ~ N(0, 1).
 res <- .schab_gauss_hermite(n = 3L)
 res
 }
+\keyword{internal}

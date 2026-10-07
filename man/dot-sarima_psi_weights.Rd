@@ -20,3 +20,4 @@ The value of \code{psi}, as built in the body.
 A step of the sarima_native implementation. Called by \code{forecast}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

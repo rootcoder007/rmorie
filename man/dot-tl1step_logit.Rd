@@ -22,3 +22,4 @@ the source it follows.
 res <- .tl1step_logit(p = 0.5)
 res
 }
+\keyword{internal}

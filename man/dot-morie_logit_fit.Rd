@@ -30,3 +30,4 @@ y <- c(0, 0, 1, 0, 1, 1, 1, 1)
 res <- .morie_logit_fit(X = x, y = y)
 res
 }
+\keyword{internal}

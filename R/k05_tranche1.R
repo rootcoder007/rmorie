@@ -35,6 +35,7 @@
 #' @examples
 #' res <- .morie_k05_permutation(n = 3L)
 #' res
+#' @keywords internal
 .morie_k05_permutation <- function(n, seed = 0, stream = 0) {
   # Fisher-Yates driven by the package's Philox stream, swapping
   # downward from n-1 and consuming one uniform per step, so the
@@ -62,6 +63,7 @@
 #' @param hits Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{h}, \code{t}, \code{n}.
 #' @export
+#' @keywords internal
 .morie_k05_hits <- function(hits) {
   h <- as.numeric(hits)
   if (length(h) < 2L) stop("need at least 2 observations in the hit sequence.", call. = FALSE)
@@ -79,6 +81,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_k05_lr_uc <- function(p, t, n) {
   if (!(p > 0 && p < 1)) stop("alpha must lie strictly between 0 and 1.", call. = FALSE)
   phat <- n / t
@@ -129,6 +132,7 @@ morie_kupiec_var_test <- function(hits, alpha = 0.05) {
 #' @examples
 #' res <- .morie_k05_lr_ind(h = 0.5)
 #' res
+#' @keywords internal
 .morie_k05_lr_ind <- function(h) {
   a <- h[-length(h)]
   b <- h[-1]
@@ -217,6 +221,7 @@ morie_var_backtest <- function(hits, alpha = 0.05) {
 #' @param r A vector; its length is taken.
 #' @return A list with \code{rv}, \code{bpv}, \code{tpq}, \code{z}.
 #' @export
+#' @keywords internal
 .morie_k05_bns_one <- function(r) {
   n <- length(r)
   a <- abs(r)
@@ -294,6 +299,7 @@ morie_bns_jump_test <- function(r_intraday, block_index = NULL) {
 #' @param sigma Numeric; combined arithmetically in the body.
 #' @return A list with \code{tk}, \code{s}.
 #' @export
+#' @keywords internal
 .morie_k05_tk <- function(x, n, xbar, sigma) {
   s <- cumsum((x[seq_len(n - 1L)] - xbar) / sigma)
   k <- seq_len(n - 1L)
@@ -358,6 +364,7 @@ morie_snht <- function(x, n_mc = 1999, seed = 0) {
 #' @param max_lag Passed to \code{:}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_k05_acvf <- function(v, n, max_lag) {
   d <- v - mean(v)
   vapply(0:max_lag, function(k) sum(d[seq.int(k + 1L, n)] * d[seq_len(n - k)]) / n, numeric(1))
@@ -404,6 +411,7 @@ morie_sample_acf <- function(y, max_lag = 20) {
 #' @param max_lag A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{phi}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_k05_durbin_levinson <- function(r, max_lag) {
   # r is indexed from 1 for lag 0, so r[k + 1] is lag k.
   phi <- numeric(max_lag)

@@ -17,3 +17,4 @@ The value of \code{ifelse}.
 unsigned 32-bit values (byte-array lengths, the footer length, the
 low half of an INT64) have to be read signed and folded back up.
 }
+\keyword{internal}

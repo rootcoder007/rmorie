@@ -26,3 +26,4 @@ A step of the rndnet_native implementation. Called by \code{.rndnet_predictor_ne
 \code{morie_rndnet}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

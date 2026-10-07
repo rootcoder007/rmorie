@@ -23,3 +23,4 @@ See the file header for the source the module follows.
 res <- .rsnchoosek(n = 3L, k = 3L)
 res
 }
+\keyword{internal}

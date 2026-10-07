@@ -19,3 +19,4 @@ own value (the same rule as scipy), so a single start of alpha = 0.09
 only ever explores a box 0.004 wide. Starting from a small grid
 instead is what makes the search actually search.
 }
+\keyword{internal}

@@ -28,3 +28,4 @@ A step of the schab_hermite_shared implementation. No other function in the pack
 See the file header for the source the module follows.
 for the source it follows.
 }
+\keyword{internal}

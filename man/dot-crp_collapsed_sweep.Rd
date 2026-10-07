@@ -30,3 +30,4 @@ y_k) and opens a new one with weight alpha f(y_i).  The sweep order
 and the uniform draws are fixed, so the two language arms visit
 identical states.
 }
+\keyword{internal}

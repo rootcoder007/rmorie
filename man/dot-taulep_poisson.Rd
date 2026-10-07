@@ -18,3 +18,4 @@ The value of \code{repeat}.
 A step of the taulep_native implementation. Called by \code{morie_taulep}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

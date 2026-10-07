@@ -15,3 +15,4 @@ A vector, from \code{c}.
 \description{
 yields lo > hi (an empty span between pos and pos+1).
 }
+\keyword{internal}

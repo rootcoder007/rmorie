@@ -105,6 +105,7 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 #' @param name Coerced to character by the body, with \code{as.character}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .dbfilter <- function(name) {
   key <- tolower(trimws(as.character(name)[1L]))
   r2 <- sqrt(2)
@@ -136,6 +137,7 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 #' @examples
 #' res <- .dbmirror(h = 0.5)
 #' res
+#' @keywords internal
 .dbmirror <- function(h) {
   L <- length(h)
   out <- numeric(L)
@@ -154,6 +156,7 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 #' @param g A vector; indexed elementwise.
 #' @return A list with \code{a}, \code{d}.
 #' @export
+#' @keywords internal
 .dbstep <- function(a, h, g) {
   n <- length(a)
   m <- n %/% 2L
@@ -186,6 +189,7 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 #' @param level A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .dbforward <- function(x, h, g, level) {
   a <- x
   coeffs <- vector("list", level)
@@ -211,6 +215,7 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 #' @examples
 #' res <- .dbpow2(n = 3L)
 #' res
+#' @keywords internal
 .dbpow2 <- function(n) {
   k <- 0L
   m <- n

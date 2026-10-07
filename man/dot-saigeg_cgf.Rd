@@ -23,3 +23,4 @@ A step of the saigeg_native implementation. Called by
 \code{.saigeg_saddlepoint_pvalue}, \code{.saigeg_solve_saddle}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

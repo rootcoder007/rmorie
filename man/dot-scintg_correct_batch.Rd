@@ -25,3 +25,4 @@ A list with \code{Z}, \code{W}, \code{batches}.
 A step of the scintg_native implementation. Called by \code{morie_scintg}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

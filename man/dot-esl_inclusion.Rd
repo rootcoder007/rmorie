@@ -20,3 +20,4 @@ The exact finite-n value, not the limit; they differ by about 1\% at n
 res <- .esl_inclusion(n = 3L)
 res
 }
+\keyword{internal}

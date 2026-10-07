@@ -125,6 +125,7 @@ morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
 #' @param n_lat Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .hadcrut_cell_lat <- function(i, n_lat) -90 + (i - 0.5) * (180 / n_lat)
 
 # Area weight of a latitude band: the cosine of its centre.
@@ -139,6 +140,7 @@ morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
 #' @param n_lat Passed to \code{.hadcrut_cell_lat}.
 #' @return The value of \code{cos}.
 #' @export
+#' @keywords internal
 .hadcrut_band_weight <- function(i, n_lat)
   cos(.hadcrut_cell_lat(i, n_lat) * pi / 180)
 
@@ -227,6 +229,7 @@ morie_hadcrut_blend <- function(T, sst, land_fraction, sea_ice = NULL,
 #' @param var Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return A list with \code{mean}, \code{var}, \code{weight}, \code{n}.
 #' @export
+#' @keywords internal
 .hadcrut_region_mean <- function(grid, rows, var = NULL) {
   n_lat <- nrow(grid)
   num <- numeric(0)

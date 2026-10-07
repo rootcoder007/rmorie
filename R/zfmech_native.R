@@ -37,6 +37,7 @@
 #' @examples
 #' res <- .zfmech_check_rho(rho = 0.5)
 #' res
+#' @keywords internal
 .zfmech_check_rho <- function(rho) {
   rho <- as.numeric(rho)
   if (rho <= 0)
@@ -160,6 +161,7 @@ gaussian_mechanism <- morie_zfmech
 #'   rho with no delta budget and no advanced composition theorem.
 #' @references Bun, M. & Steinke, T. (2016). Lemma 1.7.
 #' @export
+#' @keywords internal
 .zfmech_compose <- function(rhos) {
   rs <- as.numeric(rhos)
   if (any(rs < 0))
@@ -281,6 +283,7 @@ postprocessing <- function(rho) {
 #' @examples
 #' res <- .zfmech_cheatsheet()
 #' res
+#' @keywords internal
 .zfmech_cheatsheet <- function() {
   paste("zfmech: rho-zCDP means D_alpha(M(x)||M(x')) <= rho alpha ",
         "for EVERY alpha > 1. Gaussian mechanism: rho = ",

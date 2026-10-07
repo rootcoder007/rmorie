@@ -12,3 +12,4 @@
 \description{
 Derive a distinct DEK per record
 }
+\keyword{internal}

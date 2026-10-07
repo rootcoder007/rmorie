@@ -36,6 +36,7 @@
 #' @examples
 #' res <- .morie_w4c_lcgvec(n = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .morie_w4c_lcgvec <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -60,6 +61,7 @@
 #' @examples
 #' res <- .morie_w4c_lcg_normal(n = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .morie_w4c_lcg_normal <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -89,6 +91,7 @@
 #' @param scale Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @keywords internal
 .morie_w4c_lcg_uniform <- function(rows, cols, seed, scale) {
   u <- .morie_w4c_lcgvec(rows * cols, seed)
   matrix((u * 2 - 1) * scale, nrow = rows, ncol = cols, byrow = TRUE)
@@ -111,6 +114,7 @@
 #' @examples
 #' res <- .morie_w4c_lcg_sample(n = 3L, k = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .morie_w4c_lcg_sample <- function(n, k, seed) {
   s <- as.numeric(seed) %% 2^32
   pool <- 0:(n - 1L)
@@ -138,6 +142,7 @@
 #' @param classify A flag; the body branches on it.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .morie_w4c_stump <- function(Xb, yb, classify) {
   best <- list(sse = Inf, j = 1L, thr = Inf, lp = mean(yb), rp = mean(yb))
   for (j in seq_len(ncol(Xb))) {
@@ -186,6 +191,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_w4c_pca_svd(X = X, k = 3L)
 #' res
+#' @keywords internal
 .morie_w4c_pca_svd <- function(X, k, center = TRUE, scale = FALSE) {
   Xc <- if (center) sweep(X, 2, colMeans(X)) else X
   if (scale) {
@@ -222,6 +228,7 @@
 #' @param seed Numeric; combined arithmetically in the body.
 #' @return A list with \code{W}, \code{H}, \code{n_iter}.
 #' @export
+#' @keywords internal
 .morie_w4c_nmf <- function(X, k, max_iter, tol, seed) {
   m <- nrow(X)
   p <- ncol(X)
@@ -255,6 +262,7 @@
 #' @param s A vector; indexed elementwise.
 #' @return A list with \code{precision}, \code{recall}, \code{average_precision}.
 #' @export
+#' @keywords internal
 .morie_w4c_pr_curve <- function(y_bin, s) {
   ord <- order(-s, method = "radix")
   ys <- y_bin[ord]
@@ -281,6 +289,7 @@
 #' @param n_stages A count; the body uses it as \code{numeric(...)}.
 #' @return A list with \code{assignment}, \code{device_loads}, \code{max_load}, \code{imbalance}.
 #' @export
+#' @keywords internal
 .morie_w4c_model_parallel <- function(sizes, n_stages) {
   L <- length(sizes)
   total <- sum(sizes)
@@ -684,6 +693,7 @@ morie_geron_next_sentence_prediction <- function(sent_A, sent_B, encoder = NULL,
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_w4c_rbf <- function(A, B, gamma) {
   d2 <- outer(rowSums(A^2), rowSums(B^2), "+") - 2 * (A %*% t(B))
   exp(-gamma * pmax(d2, 0))
@@ -1045,6 +1055,7 @@ morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
 #' @param yp Passed to \code{==}.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .morie_w4c_centroid_pair <- function(Xp, yp) {
   c0 <- colMeans(Xp[yp == 0, , drop = FALSE])
   c1 <- colMeans(Xp[yp == 1, , drop = FALSE])
@@ -1122,6 +1133,7 @@ morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL)
 #' @param yb Passed to \code{==}.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .morie_w4c_centroid_score <- function(Xb, yb) {
   c1 <- colMeans(Xb[yb == 1, , drop = FALSE])
   c0 <- if (any(yb == 0)) colMeans(Xb[yb == 0, , drop = FALSE]) else c1
@@ -1549,6 +1561,7 @@ morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, base
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_w4c_sigmoid(z = y)
 #' res
+#' @keywords internal
 .morie_w4c_sigmoid <- function(z) 1.0 / (1.0 + exp(-z))
 
 #' Peephole LSTM cell forward step: gates also see the cell state (Geron Ch 13, hmphp)
@@ -1653,6 +1666,7 @@ morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, i
 #' @examples
 #' res <- .morie_w4c_combos_with_repl(n = 3L, k = 3L)
 #' res
+#' @keywords internal
 .morie_w4c_combos_with_repl <- function(n, k) {
   # 1-based column indices, combinations with replacement, itertools order.
   out <- list()
@@ -1772,6 +1786,7 @@ morie_geron_policy <- function(state, pi, seed = 0) {
 #' @param env A list; the body reads \code{$reset}, \code{$step} from it.
 #' @return A list with \code{reset}, \code{step}.
 #' @export
+#' @keywords internal
 .morie_w4c_bind_env <- function(env) {
   reset <- if (is.function(env$reset)) env$reset else env$reset
   step <- if (is.function(env$step)) env$step else env$step
@@ -2301,6 +2316,7 @@ morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
 #' @param bits Numeric; combined arithmetically in the body.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_w4c_fake_quant <- function(w, bits) {
   qmax <- 2^(bits - 1) - 1
   scale <- max(abs(w)) / qmax
@@ -2387,6 +2403,7 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' @param criterion Compared against \code{"mse"}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .morie_w4c_leaf_value <- function(y, criterion) {
   if (criterion == "mse") {
     return(mean(y))
@@ -2408,6 +2425,7 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' @param min_leaf Passed to \code{<}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_w4c_best_split <- function(X, y, criterion, columns, min_leaf) {
   best <- NULL
   for (j in columns) {
@@ -2441,6 +2459,7 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' @return A list with \code{leaf}, \code{feature}, \code{threshold}, \code{n},
 #' \code{left}, \code{right}.
 #' @export
+#' @keywords internal
 .morie_w4c_grow <- function(X, y, depth, max_depth, min_leaf, criterion, columns_fn) {
   if (depth >= max_depth || length(y) < 2 * min_leaf || length(unique(y)) == 1L) {
     return(list(leaf = TRUE, value = .morie_w4c_leaf_value(y, criterion), n = length(y)))
@@ -2468,6 +2487,7 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' @param X A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_w4c_predict_tree <- function(node, X) {
   out <- numeric(nrow(X))
   for (i in seq_len(nrow(X))) {
@@ -2487,6 +2507,7 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' @param node A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_w4c_count_leaves <- function(node) if (node$leaf) 1L else .morie_w4c_count_leaves(node$left) + .morie_w4c_count_leaves(node$right)
 #' .morie_w4c_tree_depth
 #'
@@ -2497,6 +2518,7 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' @param node A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_w4c_tree_depth <- function(node) if (node$leaf) 0L else 1L + max(.morie_w4c_tree_depth(node$left), .morie_w4c_tree_depth(node$right))
 
 #' CART regression tree minimising per-leaf MSE (Geron Ch 5, hmrdt)
@@ -2675,6 +2697,7 @@ morie_geron_relu <- function(z, leaky = 0.0) {
 #' @examples
 #' res <- .morie_w4c_bootstrap(n = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .morie_w4c_bootstrap <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- integer(n)
@@ -3143,6 +3166,7 @@ morie_geron_random_patches <- function(X, y, base_estimator = NULL, n_estimators
 #' @param params A list; the body reads \code{$alpha} from it.
 #' @return A list with \code{fit}, \code{predict}.
 #' @export
+#' @keywords internal
 .morie_w4c_ridge_estimator <- function(params) {
   alpha <- if (is.null(params$alpha)) 0.0 else as.numeric(params$alpha)
   fit <- function(Xtr, ytr) solve(t(Xtr) %*% Xtr + alpha * diag(ncol(Xtr)), t(Xtr) %*% ytr)

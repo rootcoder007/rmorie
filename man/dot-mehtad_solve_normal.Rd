@@ -28,3 +28,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .mehtad_solve_normal(A = A, d = 3L, rhs = b)
 res
 }
+\keyword{internal}

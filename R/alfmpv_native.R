@@ -57,6 +57,7 @@
 #' @param default A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .alfmpv_field <- function(chain, name, n, default) {
   v <- if (is.list(chain)) chain[[name]] else NULL
   if (is.null(v)) {
@@ -82,6 +83,7 @@
 #' @return A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps},
 #' \code{coverage}, \code{n}.
 #' @export
+#' @keywords internal
 .alfmpv_chain_table <- function(chain, idx) {
   if (is.list(chain) && !is.null(chain$species)) {
     species <- as.character(chain$species)
@@ -116,6 +118,7 @@
 #' @param max_gap Passed to \code{<=}.
 #' @return The value of \code{which}.
 #' @export
+#' @keywords internal
 .alfmpv_keep <- function(tab, mode, min_coverage, max_gap) {
   if (!tab$n) {
     return(integer(0))
@@ -139,6 +142,7 @@
 #' @param pos Numeric; passed to \code{order}.
 #' @return The value of \code{order}.
 #' @export
+#' @keywords internal
 .alfmpv_order <- function(tab, mode, idx, pos) {
   if (mode == "multimer") {
     return(order(-tab$identity[idx], pos))

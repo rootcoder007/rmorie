@@ -18,3 +18,4 @@ A numeric value.
 A step of the comet_native implementation. Called by \code{triplet_loss}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

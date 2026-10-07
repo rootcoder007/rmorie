@@ -60,6 +60,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .plrgrf_folds(n = 3L, V = x)
 #' res
+#' @keywords internal
 .plrgrf_folds <- function(n, V) {
   V <- max(2, min(as.integer(V), n))
   lapply(0:(V - 1), function(v) which((seq_len(n) - 1) %% V == v))
@@ -79,6 +80,7 @@
 #' @param seed Passed to \code{grow_forest}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .plrgrf_forest_predict <- function(X, y, train, at_rows, n_trees, min_leaf, seed) {
   forest <- grow_forest(X[train, , drop = FALSE], y[train],
                         n_trees = n_trees, min_leaf = min_leaf, seed = seed)
@@ -278,6 +280,7 @@ morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
 #' @examples
 #' res <- .plrgrf_cheatsheet()
 #' res
+#' @keywords internal
 .plrgrf_cheatsheet <- function() {
   paste0(
     "plrgrf: residualise FIRST -- Ytilde = Y - m(X), Wtilde = W -",

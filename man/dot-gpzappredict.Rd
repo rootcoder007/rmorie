@@ -21,3 +21,4 @@ estimating equation for mu all carry the mu, so the internally
 consistent mean (1 - theta) mu / (1 - exp(-mu)) is what is
 implemented.
 }
+\keyword{internal}

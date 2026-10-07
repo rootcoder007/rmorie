@@ -17,3 +17,4 @@ A step of the parquet implementation. Called by \code{.pq_column_values},
 \code{.pq_read_footer}, \code{.pq_scalar}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

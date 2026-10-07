@@ -25,3 +25,4 @@ A list with \code{x}, \code{value}.
 parabolic-interpolation step whose tie-breaking the Python arm would
 have to match bit for bit.
 }
+\keyword{internal}

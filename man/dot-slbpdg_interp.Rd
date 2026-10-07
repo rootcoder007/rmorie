@@ -20,3 +20,4 @@ A numeric value.
 A step of the slbpdg_native implementation. Called by \code{morie_slbpdg}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

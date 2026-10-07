@@ -24,6 +24,7 @@
 #' @param y1 Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .ripk_weight <- function(x, y, rad, x0, x1, y0, y1) {
   if (rad <= 0) return(1)
   d <- c(x - x0, x1 - x, y - y0, y1 - y)

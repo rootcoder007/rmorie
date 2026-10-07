@@ -25,3 +25,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .labels(v = x, name = txt)
 res
 }
+\keyword{internal}

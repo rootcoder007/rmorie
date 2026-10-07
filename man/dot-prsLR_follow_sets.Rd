@@ -18,3 +18,4 @@ The value of \code{follow}, as built in the body.
 A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

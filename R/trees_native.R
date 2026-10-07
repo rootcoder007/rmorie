@@ -44,6 +44,7 @@
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tree_soft_threshold <- function(g, alpha) {
   if (alpha <= 0) return(g)
   if (g > alpha) return(g - alpha)

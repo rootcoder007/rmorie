@@ -18,3 +18,4 @@ The value of \code{.w3_gammcf}.
 1 - P when x is large, so the far tail keeps its significant digits
 instead of cancelling against 1.
 }
+\keyword{internal}

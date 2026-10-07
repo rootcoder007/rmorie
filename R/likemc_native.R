@@ -34,6 +34,7 @@
 #' @param dt Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_likemc_incidence <- function(beta, gamma, S0, I0, N, n_steps,
                                     dt = 1) {
   if (beta <= 0 || gamma <= 0) {
@@ -62,6 +63,7 @@
 #' @param expected Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_likemc_poisll <- function(observed, expected) {
   y <- as.numeric(observed)
   lam <- as.numeric(expected)
@@ -84,6 +86,7 @@
 #' @param sigma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_likemc_lnorm <- function(x, mu, sigma) {
   if (x <= 0) return(-Inf)
   z <- (log(x) - mu) / sigma

@@ -21,3 +21,4 @@ A step of the chzlt implementation. Called by \code{Chzlt}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

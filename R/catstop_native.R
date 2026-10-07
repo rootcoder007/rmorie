@@ -18,6 +18,7 @@
 #' @param d Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .catstop_info_4pl <- function(theta, a, b, c, d) {
   e <- exp(a * (theta - b))
   p <- c + (d - c) * e / (1 + e)

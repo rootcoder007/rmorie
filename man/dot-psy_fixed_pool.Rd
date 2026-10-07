@@ -19,3 +19,4 @@ A step of the psycho_native implementation. Called by \code{.psy_dl},
 \code{morie_psy_ma_paule_mandel}, \code{morie_psy_ma_reml}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

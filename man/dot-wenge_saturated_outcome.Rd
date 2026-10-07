@@ -22,3 +22,4 @@ The value of \code{function}.
 A step of the wenge_native implementation. Called by \code{morie_wenge_mediation_functional}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

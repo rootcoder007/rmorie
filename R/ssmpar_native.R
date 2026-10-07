@@ -35,6 +35,7 @@
 #' @param right A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .ssmpar_compose <- function(left, right) {
   # (A2, b2) o (A1, b1) = (A2*A1, A2*b1 + b2)
   left <- as.numeric(left)
@@ -94,6 +95,7 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 #' @examples
 #' res <- .ssmpar_upsweep(P = 0.5)
 #' res
+#' @keywords internal
 .ssmpar_upsweep <- function(P) {
   # Build the tree of partial compositions (private helper).
   tree <- list()
@@ -241,6 +243,7 @@ scan_depth <- function(length) {
 #' @examples
 #' res <- .ssmpar_cheatsheet()
 #' res
+#' @keywords internal
 .ssmpar_cheatsheet <- function() {
   paste0(
     "ssmpar: x_t = A_t x_{t-1} + b_t looks sequential, but each step is ",

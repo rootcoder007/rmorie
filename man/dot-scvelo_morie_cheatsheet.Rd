@@ -18,3 +18,4 @@ populations break.
 res <- .scvelo_morie_cheatsheet()
 res
 }
+\keyword{internal}

@@ -83,6 +83,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .limmav_digamma(x = x)
 #' res
+#' @keywords internal
 .limmav_digamma <- function(x) {
   x <- as.numeric(x)
   if (length(x) > 1L) {
@@ -106,6 +107,7 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .limmav_trigamma <- function(x) {
   x <- as.numeric(x)
   if (x <= 0) stop("limmav: trigamma needs x > 0")
@@ -128,6 +130,7 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .limmav_tetragamma <- function(x) {
   x <- as.numeric(x)
   tot <- 0.0
@@ -151,6 +154,7 @@
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.
 #' @return The value of \code{y}, as built in the body.
 #' @export
+#' @keywords internal
 .limmav_trigamma_inverse <- function(x, tol = 1e-8, max_iter = 60) {
   x <- as.numeric(x)
   if (x <= 0) stop("limmav: trigamma_inverse needs x > 0")
@@ -180,6 +184,7 @@
 #' @param x Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .limmav_erf <- function(x) {
   a1 <- 0.254829592
   a2 <- -0.284496736
@@ -205,6 +210,7 @@
 #' @examples
 #' res <- .limmav_benjamini_hochberg(p = 0.5)
 #' res
+#' @keywords internal
 .limmav_benjamini_hochberg <- function(p) {
   p <- as.numeric(p)
   n <- length(p)
@@ -237,6 +243,7 @@
 #' @return A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total},
 #' \code{no_gene_variation}.
 #' @export
+#' @keywords internal
 .limmav_ebayes <- function(sigma2, df, robust_floor = 1e-12) {
   s2 <- as.numeric(sigma2)
   G <- length(s2)
@@ -297,6 +304,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .limmav_ols(X = x, y = y)
 #' res
+#' @keywords internal
 .limmav_ols <- function(X, y, w = NULL) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -333,6 +341,7 @@
 #' @param lib_offset Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{y}, \code{R}.
 #' @export
+#' @keywords internal
 .limmav_log_cpm <- function(counts, lib_sizes = NULL, prior_count = 0.5,
                             lib_offset = 1.0) {
   counts <- as.matrix(counts)
@@ -373,6 +382,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .limmav_lowess(x = x, y = y)
 #' res
+#' @keywords internal
 .limmav_lowess <- function(x, y, span = 0.5, iterations = 3) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -447,6 +457,7 @@
 #' @return A list with \code{log_cpm}, \code{weights}, \code{mean_log_count},
 #' \code{sqrt_sd}, \code{trend_x}, \code{trend_y}, \code{lib_sizes}, \code{lo}.
 #' @export
+#' @keywords internal
 .limmav_voom_weights <- function(counts, design, lib_sizes = NULL, span = 0.5) {
   lc <- .limmav_log_cpm(counts, lib_sizes)
   y <- lc$y
@@ -530,6 +541,7 @@
 #' @param contrast Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{est}, \code{se}, \code{t}, \code{df}, \code{sd}, \code{v_un}.
 #' @export
+#' @keywords internal
 .limmav_weighted_lm <- function(y, X, w, contrast) {
   ols <- .limmav_ols(X, y, w)
   beta <- ols$beta
@@ -565,6 +577,7 @@
 #' @param df Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .limmav_t_sf <- function(t, df) {
   x <- df / (df + t^2)
 
@@ -774,6 +787,7 @@ morie_limmavoom <- morie_limmav
 #' @examples
 #' res <- .limmav_cheatsheet()
 #' res
+#' @keywords internal
 .limmav_cheatsheet <- function() {
   paste("limmav: voom (Law, Chen, Shi & Smyth 2014). log-cpm = ",
     "log2((r + 0.5)/(R + 1) * 1e6) -- 0.5 keeps the log finite and ",

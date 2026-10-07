@@ -21,3 +21,4 @@ fml <- y ~ x
 res <- .rgisint_runs(f = fml)
 res
 }
+\keyword{internal}

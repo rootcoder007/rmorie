@@ -19,3 +19,4 @@ A step of the helpers_w3num implementation. Called by \code{.baysmplr_build_tree
 \code{.chemsc_angle}, \code{.hyper2_elliptical} and 21 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

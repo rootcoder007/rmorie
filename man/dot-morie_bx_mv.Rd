@@ -26,3 +26,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .morie_bx_mv(A = A, v = b)
 res
 }
+\keyword{internal}

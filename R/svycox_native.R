@@ -87,6 +87,7 @@
 #' @return A list with \code{T}, \code{E}, \code{M}, \code{w}, \code{h}, \code{c},
 #' \code{n}, \code{p}.
 #' @export
+#' @keywords internal
 .svycox_prep <- function(time, event, X, weights, strata, cluster) {
     T <- as.numeric(time)
     E <- as.integer(event)
@@ -170,6 +171,7 @@
 #' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{U}, \code{I}, \code{resid}.
 #' @export
+#' @keywords internal
 .svycox_score_and_info <- function(T, E, M, w, beta, n, p) {
     eta <- numeric(n)
     for (i in seq_len(n)) {
@@ -238,6 +240,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .svycox_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .svycox_solve <- function(A, b) {
     p <- length(b)
     Ab <- cbind(A, b)
@@ -282,6 +285,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .svycox_inverse(A = A)
 #' res
+#' @keywords internal
 .svycox_inverse <- function(A) {
     p <- nrow(A)
     out <- matrix(0.0, p, p)
@@ -306,6 +310,7 @@
 #' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{V}, as built in the body.
 #' @export
+#' @keywords internal
 .svycox_design_variance <- function(contrib, w, h, c, p) {
     n <- length(w)
     keys <- paste(h, c, sep = "\r")
@@ -356,6 +361,7 @@
 #' @param weights Passed to \code{.svycox_prep}.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .svycox_score_residuals <- function(time, event, X, beta, weights = NULL) {
     prep <- .svycox_prep(time, event, X, weights, NULL, NULL)
     T <- prep$T
@@ -387,6 +393,7 @@
 #' \code{score}, \code{design_effect}, \code{z}, \code{n}, \code{n_events},
 #' \code{n_iterations}, \code{ties}, \code{method}.
 #' @export
+#' @keywords internal
 .svycox_svycoxph <- function(time, event, X, weights = NULL, strata = NULL,
                              cluster = NULL, max_iter = 100, tol = 1e-9) {
     prep <- .svycox_prep(time, event, X, weights, strata, cluster)

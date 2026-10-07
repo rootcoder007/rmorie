@@ -34,6 +34,7 @@
 #' @param period Coerced to vector by the body, with \code{as.vector}.
 #' @return A list with \code{Y}, \code{D}, \code{g}, \code{t}, \code{n}.
 #' @export
+#' @keywords internal
 .causdiddc_panel <- function(Y, D, group, period) {
   Yv <- as.numeric(Y)
   Dv <- as.numeric(D)
@@ -68,6 +69,7 @@
 #' @param t Passed to \code{paste0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .causdiddc_cells <- function(Y, D, g, t) {
   keys <- paste0(g, "\r", t)        # ad-hoc separator that never appears
   uk   <- unique(keys)
@@ -100,6 +102,7 @@
 #' @param weights Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{weights}, \code{residual}.
 #' @export
+#' @keywords internal
 .causdiddc_twfe_weights <- function(D, group, period, weights = NULL) {
   Dv <- as.numeric(D)
   g  <- as.vector(group)
@@ -186,6 +189,7 @@
 #' \code{n_negative}, \code{negative_mass}, \code{weight_sum}, \code{n_treated_cells},
 #' \code{n}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .causdiddc_twfe <- function(Y, D, group, period) {
   p <- .causdiddc_panel(Y, D, group, period)
   w  <- .causdiddc_twfe_weights(p$D, p$g, p$t)
@@ -229,6 +233,7 @@
 #' @return A list with \code{estimate}, \code{did_m}, \code{switches}, \code{n_switches},
 #' \code{n_switching_obs}, \code{n}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .causdiddc_did_m <- function(Y, D, group, period) {
   p <- .causdiddc_panel(Y, D, group, period)
   cells <- .causdiddc_cells(p$Y, p$D, p$g, p$t)

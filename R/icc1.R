@@ -70,6 +70,7 @@ Icc1 <- function(y, cluster) {
 #' @param who Passed to \code{paste0}.
 #' @return A list with \code{rows}, \code{n}, \code{k}.
 #' @export
+#' @keywords internal
 .icc_balanced <- function(y, group, who) {
   ys <- .s03vec(y)
   gs <- .s03vec(group)

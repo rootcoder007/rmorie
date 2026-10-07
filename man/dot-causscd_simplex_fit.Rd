@@ -25,3 +25,4 @@ A step of the causscd_native implementation. Called by \code{time_weights}, \cod
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

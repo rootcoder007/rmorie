@@ -29,3 +29,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .morie_gr_w4b_sdpa(Q = A, K = A, V = b)
 res
 }
+\keyword{internal}

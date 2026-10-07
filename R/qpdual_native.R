@@ -26,6 +26,7 @@
 #' @param upper A vector; indexed elementwise.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .lmo <- function(gradient, domain, lower, upper) {
   n <- length(gradient)
   if (domain == "simplex") {

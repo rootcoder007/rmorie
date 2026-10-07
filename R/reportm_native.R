@@ -24,6 +24,7 @@
 #' @examples
 #' res <- .mor_lcg_new()
 #' res
+#' @keywords internal
 .mor_lcg_new <- function(seed = 1) {
   s <- as.numeric(seed) %% 2147483647
   e <- new.env(parent = emptyenv())
@@ -40,6 +41,7 @@
 #' @param e A list; the body reads \code{$s} from it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mor_lcg_unif <- function(e) {
   e$s <- (48271 * e$s) %% 2147483647
   e$s / 2147483647

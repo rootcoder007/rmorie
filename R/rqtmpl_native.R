@@ -47,6 +47,7 @@ LOG10E <- log10(exp(1))
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .rqtmpl_erf(x = x)
 #' res
+#' @keywords internal
 .rqtmpl_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .rqtmpl_erfc
 #'
@@ -60,6 +61,7 @@ LOG10E <- log10(exp(1))
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .rqtmpl_erfc(x = x)
 #' res
+#' @keywords internal
 .rqtmpl_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 #' Haldane's map function
@@ -149,6 +151,7 @@ morie_genotype_probabilities <- function(left, right, r_left, r_right) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .normal_ll(resid = x, sigma2 = 0.5)
 #' res
+#' @keywords internal
 .normal_ll <- function(resid, sigma2) {
   n <- length(resid)
   -0.5 * n * log(2 * pi * sigma2) - sum(resid * resid) / (2 * sigma2)
@@ -442,6 +445,7 @@ morie_progeny_required <- function(var_qtl, var_residual, alpha = 0.05) {
 #' @examples
 #' res <- .rqtmpl_morie_cheatsheet()
 #' res
+#' @keywords internal
 .rqtmpl_morie_cheatsheet <- function() {
   paste("rqtmpl: interval mapping walks a QTL along an interval",
         "and maximises the MIXTURE likelihood (7) by EM, because",

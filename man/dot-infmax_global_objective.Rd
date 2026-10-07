@@ -28,3 +28,4 @@ A list with \code{objective}, \code{estimator}, \code{n_positive},
 A step of the infmax_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

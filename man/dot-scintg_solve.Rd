@@ -18,3 +18,4 @@ The value of \code{X}, as built in the body.
 A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

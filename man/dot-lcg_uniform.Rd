@@ -23,3 +23,4 @@ of default_rng that .ghc_rng already provides.
 res <- .lcg_uniform(seed = 1L, n = 3L)
 res
 }
+\keyword{internal}

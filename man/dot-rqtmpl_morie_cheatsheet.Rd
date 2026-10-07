@@ -18,3 +18,4 @@ Python \code{cheatsheet} helper.
 res <- .rqtmpl_morie_cheatsheet()
 res
 }
+\keyword{internal}

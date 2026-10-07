@@ -19,3 +19,4 @@ A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth},
 \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

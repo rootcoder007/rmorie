@@ -23,3 +23,4 @@ if (requireNamespace("MASS", quietly = TRUE)) {
   res
 }
 }
+\keyword{internal}

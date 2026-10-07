@@ -32,6 +32,7 @@
 #' @examples
 #' res <- .t4_ppcrit(n = 3L)
 #' res
+#' @keywords internal
 .t4_ppcrit <- function(n, kind = "Z(t_alpha)") {
   tab <- if (kind == "Z(alpha)") .t4_PP_ALPHA else .t4_PP_TALPHA
   vapply(seq_along(.t4_PP_P),

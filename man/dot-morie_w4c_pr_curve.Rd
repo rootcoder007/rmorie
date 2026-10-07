@@ -20,3 +20,4 @@ order, one vertex per distinct score, leading (recall=0, precision=1)
 point from a threshold above every score, step-function average
 precision.
 }
+\keyword{internal}

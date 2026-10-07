@@ -18,3 +18,4 @@ A list with \code{cds}, \code{coding}, \code{sg}.
 A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ A list with \code{model}, \code{nugget}, \code{psill}, \code{range}, \code{metho
 analogue. Milliseconds at any n; the full Gaussian-likelihood MLE
 stays available via morie_spatial_variogram_fit().
 }
+\keyword{internal}

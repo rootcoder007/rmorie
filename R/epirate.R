@@ -29,6 +29,7 @@
 #' @param confidence Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{unname}.
 #' @export
+#' @keywords internal
 .s02z <- function(confidence) {
   tab <- c("0.9" = 1.6448536269514722, "0.95" = 1.959963984540054,
            "0.99" = 2.5758293035489004)

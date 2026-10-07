@@ -23,6 +23,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .vc_groups(y = y, group = g)
 #' res
+#' @keywords internal
 .vc_groups <- function(y, group) {
   k <- as.character(group)
   keys <- sort(unique(k))
@@ -94,6 +95,7 @@ morie_ranova <- function(y, group) {
 #' @param s2e Numeric; passed to \code{log}.
 #' @return A list with \code{ll}, \code{mu}.
 #' @export
+#' @keywords internal
 .reml_loglik <- function(gs, ns, s2a, s2e) {
   logdetV <- 0
   xvx <- 0

@@ -36,6 +36,7 @@ NULL
 #' @param ... Passed through.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .fairness_result <- function(title, call, summary_lines = list(),
                               warnings = character(0),
                               interpretation = "", ...) {
@@ -58,6 +59,7 @@ NULL
 #' @examples
 #' res <- .fairness_backend()
 #' res
+#' @keywords internal
 .fairness_backend <- function() {
   # Prefer native R torch; fall back to reticulate + JAX.
   if (requireNamespace("torch", quietly = TRUE)) {
@@ -92,6 +94,7 @@ NULL
 #' @param note Passed to \code{.fairness_result}.
 #' @return The value of \code{.fairness_result}.
 #' @export
+#' @keywords internal
 .fairness_no_backend_result <- function(title, call, note) {
   .fairness_result(
     title, call,
@@ -116,6 +119,7 @@ NULL
 #' @param sizes A vector; its length is taken and its elements indexed.
 #' @return The value of \code{params}, as built in the body.
 #' @export
+#' @keywords internal
 .fairness_he_init <- function(sizes) {
   params <- vector("list", length(sizes) - 1L)
   for (i in seq_len(length(sizes) - 1L)) {
@@ -136,6 +140,7 @@ NULL
 #' @param x A matrix; passed to \code{\%*\%}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .fairness_mlp_forward <- function(params, x) {
   for (i in seq_along(params)) {
     x <- sweep(x %*% params[[i]]$W, 2L, params[[i]]$b, "+")

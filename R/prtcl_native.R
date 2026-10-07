@@ -76,6 +76,7 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #' @param state A vector; its length is taken and its elements indexed.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .scalar <- function(state) {
   if (is.list(state)) state[[1]] else if (length(state) > 1L) state[1] else as.numeric(state)
 }
@@ -89,6 +90,7 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .multinomial <- function(w, e) {
   tot <- sum(w)
   J <- length(w)

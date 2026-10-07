@@ -45,6 +45,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ipwgrf_folds(n = 3L, V = x)
 #' res
+#' @keywords internal
 .ipwgrf_folds <- function(n, V) {
   V <- as.integer(max(2, min(as.integer(V), n)))
   lapply(0:(V - 1), function(v) which(((seq_len(n) - 1) %% V) == v))
@@ -64,6 +65,7 @@
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{mu1}, \code{mu0}, \code{e}.
 #' @export
+#' @keywords internal
 .ipwgrf_forest_nuisances <- function(y, W, X, n_folds = 5, n_trees = 120,
                                     min_leaf = 5, seed = 0) {
   n <- length(y)
@@ -128,6 +130,7 @@
 #' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
 #' @return A list with \code{g}, \code{weights}.
 #' @export
+#' @keywords internal
 .ipwgrf_aipw_scores <- function(y, W, mu1, mu0, e, trim = 0.02) {
   n <- length(y)
   t <- as.numeric(trim)
@@ -259,6 +262,7 @@ morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
 #' @examples
 #' res <- .ipwgrf_cheatsheet()
 #' res
+#' @keywords internal
 .ipwgrf_cheatsheet <- function() {
   paste("ipwgrf: Gamma = mu1 - mu0 + W(Y-mu1)/e - (1-W)(Y-mu0)/(1-e),",
         "mean is the ATE. Right outcome model OR right propensity",

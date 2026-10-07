@@ -17,3 +17,4 @@ A numeric value.
 \description{
 Slower, and exactly reproducible.
 }
+\keyword{internal}

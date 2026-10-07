@@ -20,3 +20,4 @@ correlates the resample positions and shrinks the bootstrap spread.
 res <- .msm_lcg(seed = 1L)
 res
 }
+\keyword{internal}

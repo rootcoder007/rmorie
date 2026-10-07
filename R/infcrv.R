@@ -77,6 +77,7 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .if_wmean(v = x, w = x)
 #' res
+#' @keywords internal
 .if_wmean <- function(v, w) sum(w * v) / sum(w)
 
 #' .if_wvar
@@ -93,6 +94,7 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .if_wvar(v = x, w = x)
 #' res
+#' @keywords internal
 .if_wvar <- function(v, w) {
   m <- .if_wmean(v, w)
   sum(w * (v - m)^2) / sum(w)
@@ -113,6 +115,7 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .if_wmedian(v = x, w = x)
 #' res
+#' @keywords internal
 .if_wmedian <- function(v, w) {
   o <- order(v)
   tot <- sum(w)
@@ -134,6 +137,7 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 #' @param who Passed to \code{paste0}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .if_resolve <- function(estimator, who) {
   if (is.function(estimator)) return(estimator)
   if (is.character(estimator) && length(estimator) == 1L) {

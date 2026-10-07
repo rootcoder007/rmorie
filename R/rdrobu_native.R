@@ -109,6 +109,7 @@ morie_rd_confidence_intervals <- morie_rdrobu
 #' @examples
 #' res <- .rdrobu_cheatsheet()
 #' res
+#' @keywords internal
 .rdrobu_cheatsheet <- function() {
   paste0(
     "rdrobu: the three RD intervals of Calonico, Cattaneo & Titiu",

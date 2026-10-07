@@ -24,3 +24,4 @@ the source it follows.
 res <- .morie_rg_frac(n = 3L, d = 3L)
 res
 }
+\keyword{internal}

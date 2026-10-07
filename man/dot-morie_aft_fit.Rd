@@ -37,3 +37,4 @@ A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov},
 A step of the aft_native implementation. Called by \code{.morie_aft_common}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -24,3 +24,4 @@ A list with \code{d}, \code{ord}, \code{keep}.
 A step of the cnvlfc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

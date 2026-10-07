@@ -40,3 +40,4 @@ t <- .prsLL_ll1_table(g)
 # which production to expand F by when the lookahead is "id"
 .prsLL_pick(t$table, "F", "id")
 }
+\keyword{internal}

@@ -19,3 +19,4 @@ A step of the tqkmse implementation. Called by \code{Kvmse}, \code{Kvquant}, \co
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

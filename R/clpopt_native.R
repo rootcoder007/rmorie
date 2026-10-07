@@ -34,6 +34,7 @@ clpopt_pivots <- c("bland", "dantzig")
 #' @param ncol Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{do.call}.
 #' @export
+#' @keywords internal
 .clpopt_mat <- function(A, name, ncol = NULL) {
   if (is.matrix(A)) {
     M <- lapply(seq_len(nrow(A)), function(i) as.numeric(A[i, ]))
@@ -148,6 +149,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @param col See Usage.
 #' @return The value of \code{T}, as built in the body.
 #' @export
+#' @keywords internal
 .clpopt_pivot <- function(T, row, col) {
   p <- T[row, col]
   T[row, ] <- T[row, ] / p
@@ -177,6 +179,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .clpopt_run <- function(T, basis, cols, rule, blocked, max_iter) {
   m <- length(basis)
   seen_set <- new.env(hash = TRUE, parent = emptyenv())
@@ -224,6 +227,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' \code{duals}, \code{basis}, \code{reduced_costs}, \code{degenerate},
 #' \code{multiple_optima}, \code{alternate_entering}, \code{rule}, \code{method}.
 #' @export
+#' @keywords internal
 .clpopt_report <- function(T, basis, cv, n, m, total, rule) {
   x <- rep(0.0, n)
   for (i in seq_len(m)) {
@@ -265,6 +269,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule},
 #' \code{message}, \code{method}.
 #' @export
+#' @keywords internal
 .clpopt_fail <- function(st, rule, phase) {
   why <- if (st == "cycling")
     "the basis repeated, so the method is cycling"

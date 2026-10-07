@@ -18,3 +18,4 @@ reference of install / learn / run / pull / ingest / help commands.
 .explain_cheatsheet()
 
 }
+\keyword{internal}

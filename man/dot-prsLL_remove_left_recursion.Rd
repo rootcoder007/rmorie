@@ -28,3 +28,4 @@ g2 <- .prsLL_remove_left_recursion(lr)
 # the transformation changes the tree shape, not the language
 morie_prsLL(g2, c("id", "+", "id"))$yield
 }
+\keyword{internal}

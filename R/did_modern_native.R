@@ -20,6 +20,7 @@
 #' @return A list with \code{y}, \code{unit}, \code{time}, \code{g}, \code{rel},
 #' \code{treated_post}.
 #' @export
+#' @keywords internal
 .morie_did_modern_frame <- function(data, outcome, unit, time,
                                     treatment_time) {
   need <- c(outcome, unit, time, treatment_time)
@@ -140,6 +141,7 @@ morie_did_sun_abraham <- function(data, outcome, unit, time,
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @return A list with \code{a}, \code{g}.
 #' @export
+#' @keywords internal
 .morie_did_fe_solve <- function(y0, u0, t0, iters = 50L) {
   a <- stats::setNames(rep(0, nlevels(u0)), levels(u0))
   gm <- stats::setNames(rep(0, nlevels(t0)), levels(t0))

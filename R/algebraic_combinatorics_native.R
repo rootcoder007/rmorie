@@ -102,6 +102,7 @@ morie_hook_lengths <- function(shape) {
 #' @param p Numeric; combined arithmetically in the body.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_legendre <- function(n, p) {
   e <- 0
   q <- p
@@ -131,6 +132,7 @@ morie_hook_lengths <- function(shape) {
 #' @param primes A vector; its length is taken and its elements indexed.
 #' @return A list with \code{exps}, \code{remainder}.
 #' @export
+#' @keywords internal
 .morie_factorise <- function(x, exps, primes) {
   for (idx in seq_along(primes)) {
     p <- primes[idx]
@@ -262,6 +264,7 @@ morie_standard_tableaux_count <- function(shape) {
 #' @examples
 #' res <- .morie_primes_upto(n = 3L)
 #' res
+#' @keywords internal
 .morie_primes_upto <- function(n) {
   n <- as.integer(n)
   if (n < 2L) {

@@ -22,3 +22,4 @@ A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_cv_ri
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

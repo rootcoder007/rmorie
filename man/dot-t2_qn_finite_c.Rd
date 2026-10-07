@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 res <- .t2_qn_finite_c(n = 3L)
 res
 }
+\keyword{internal}

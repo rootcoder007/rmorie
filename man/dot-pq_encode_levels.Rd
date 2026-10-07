@@ -18,3 +18,4 @@ A vector, from \code{c}.
 A step of the parquet implementation. Called by \code{morie_write_parquet}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

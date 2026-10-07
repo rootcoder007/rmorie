@@ -16,3 +16,4 @@ A list with \code{rv}, \code{bpv}, \code{tpq}, \code{z}.
 Helper step. Called by \code{morie_bns_jump_test}. See the file header for the source
 the module follows. source it follows.
 }
+\keyword{internal}

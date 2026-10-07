@@ -16,3 +16,4 @@ The value of \code{H}, as built in the body.
 A step of the replwt_native implementation. Called by \code{.replwt_brr_weights}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

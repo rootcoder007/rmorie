@@ -27,3 +27,4 @@ finite number of random draws can. Sec. 9.3 records that Gneiting
 (2002) found published covariance functions in Cressie and Huang
 (1999) to be invalid, so construction alone is not proof.
 }
+\keyword{internal}

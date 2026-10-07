@@ -43,6 +43,7 @@
 #' @param stages Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
+#' @keywords internal
 .rrblpr_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
   a <- as.numeric(lo)
   b <- as.numeric(hi)
@@ -77,6 +78,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .rrblpr_rows(x = x)
 #' res
+#' @keywords internal
 .rrblpr_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -100,6 +102,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .rrblpr_chol(A = A)
 #' res
+#' @keywords internal
 .rrblpr_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -131,6 +134,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .rrblpr_chol_solve <- function(L, b) {
   n <- nrow(L)
   z <- numeric(n)
@@ -156,6 +160,7 @@
 #' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rrblpr_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
 # Restricted log likelihood at lambda, profiled over sigma_e^2.
@@ -170,6 +175,7 @@
 #' @param X A matrix; indexed by row and column.
 #' @return A list with \code{ll}, \code{lam}, \code{beta}, \code{s2e}, \code{L}.
 #' @export
+#' @keywords internal
 .rrblpr_reml_at <- function(loglam, G, y, X) {
   n <- length(y)
   p <- ncol(X)
@@ -351,6 +357,7 @@ morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,
 #' @examples
 #' res <- .rrblpr_cheatsheet()
 #' res
+#' @keywords internal
 .rrblpr_cheatsheet <- function() {
   paste0("rrblpr: morie_rrblpr_rr_blup(y, M, lam) -> marker effects and ",
          "breeding values from the mixed model equations, lambda by REML ",

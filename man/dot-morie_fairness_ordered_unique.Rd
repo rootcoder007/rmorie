@@ -18,3 +18,4 @@ A step of the frns_metrics implementation. Called by
 \code{morie_fairness_gini} and 1 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

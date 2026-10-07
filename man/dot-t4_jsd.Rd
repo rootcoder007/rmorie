@@ -21,3 +21,4 @@ A step of the jsdivg implementation. Called by \code{Jsdiv}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

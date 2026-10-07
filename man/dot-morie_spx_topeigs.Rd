@@ -21,3 +21,4 @@ The start vector is fixed and slightly non-uniform: an all-ones start
 is orthogonal to the leading eigenvector of some ordinary matrices
 and fails silently when it is.
 }
+\keyword{internal}

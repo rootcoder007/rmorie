@@ -24,3 +24,4 @@ See the file header for the source the module follows.
 .prsLL_subset(c("(", "id"), c("(", "id", "+"))
 .prsLL_subset("*", c("(", "id"))
 }
+\keyword{internal}

@@ -25,3 +25,4 @@ dual min_l log(sum_c exp(-Xc l)) + mbar' l via BFGS with an analytic
 gradient; weights are the softmax of -Xc l, rescaled to sum to the
 number of controls (the ebal::ebalance convention).
 }
+\keyword{internal}

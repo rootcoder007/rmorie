@@ -19,3 +19,4 @@ The value of \code{$}.
 A step of the qsfrgr_native implementation. Called by \code{morie_qsfrgr_weights}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

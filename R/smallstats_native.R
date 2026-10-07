@@ -46,6 +46,7 @@ NULL
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_hurst_rs(x = X)
 #' res
+#' @keywords internal
 .morie_hurst_rs <- function(x, d = 50L) {
   x <- as.numeric(x)
   x <- x[is.finite(x)]
@@ -96,6 +97,7 @@ NULL
 #' @param gamma Passed to \code{.morie_psens_wilcoxon_d}.
 #' @return The value of \code{.morie_psens_wilcoxon_d}.
 #' @export
+#' @keywords internal
 .morie_psens_wilcoxon <- function(treated, control, gamma) {
   stopifnot(length(treated) == length(control), gamma >= 1)
   .morie_psens_wilcoxon_d(as.numeric(treated) - as.numeric(control), gamma)
@@ -115,6 +117,7 @@ NULL
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .morie_psens_wilcoxon_d <- function(d, gamma) {
   stopifnot(gamma >= 1)
   d <- as.numeric(d)
@@ -154,6 +157,7 @@ NULL
 #' @param tol Carried through into a list the body builds. Defaults to \code{1e-08}.
 #' @return A list with \code{w}, \code{converged}, \code{max_imbalance}.
 #' @export
+#' @keywords internal
 .morie_entropy_balance <- function(t_mask, X, max_iter = 200L, tol = 1e-8) {
   t_mask <- as.logical(t_mask)
   X <- as.matrix(X)
@@ -205,6 +209,7 @@ NULL
 #' @param k Passed to \code{.morie_knn_index_cpp}.
 #' @return The value of \code{.morie_knn_index_cpp}.
 #' @export
+#' @keywords internal
 .morie_knn_index <- function(coords, k) {
   coords <- as.matrix(coords)
   n <- nrow(coords)
@@ -231,6 +236,7 @@ NULL
 #' @param k Passed to \code{.morie_knn_index}.
 #' @return A list with \code{X_new}, \code{y_new}.
 #' @export
+#' @keywords internal
 .morie_smote <- function(X, y_chr, k) {
   X <- as.matrix(X)
   counts <- table(y_chr)
@@ -280,6 +286,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_coord_descent(X = x, y = y, alpha = 0.5, lambda = 0.5)
 #' res
+#' @keywords internal
 .morie_coord_descent <- function(X, y, alpha, lambda,
                                  max_iter = 1000L, tol = 1e-6,
                                  warm = NULL) {
@@ -325,6 +332,7 @@ NULL
 #' elements indexed.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_cv_ridge_predict <- function(x_train, z_train, x_test,
                                     n_folds = 5L, lambdas = NULL) {
   x_train <- as.matrix(x_train)
@@ -387,6 +395,7 @@ NULL
 #'   res <- .morie_sobol(n = 3L, d = 3L)
 #'   res
 #' }
+#' @keywords internal
 .morie_sobol <- function(n, d) {
   n <- as.integer(n)
   d <- as.integer(d)
@@ -416,6 +425,7 @@ NULL
 #' @return A list with \code{coefficients}, \code{vbeta}, \code{alpha}, \code{phi},
 #' \code{n_iter}, \code{converged}.
 #' @export
+#' @keywords internal
 .morie_gee_poisson_exch <- function(X, y, id, max_iter = 50L, tol = 1e-8) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -492,6 +502,7 @@ NULL
 #' @examples
 #' res <- .morie_hmp(p = 0.5)
 #' res
+#' @keywords internal
 .morie_hmp <- function(p, L = length(p)) {
   p <- pmax(as.numeric(p), 1e-300)
   t_stat <- mean(1 / p)

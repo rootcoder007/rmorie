@@ -24,3 +24,4 @@ Evaluated away from zero, because at zero a local least favorable
 submodel satisfies it too, so testing only there cannot distinguish
 the two.
 }
+\keyword{internal}

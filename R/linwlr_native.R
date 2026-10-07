@@ -22,6 +22,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .linwlr_vec(x = x)
 #' res
+#' @keywords internal
 .linwlr_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
@@ -40,6 +41,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .linwlr_mat(x = x)
 #' res
+#' @keywords internal
 .linwlr_mat <- function(x) {
   if (is.null(x)) return(matrix(0, nrow = 0, ncol = 0))
   as.matrix(x)
@@ -54,6 +56,7 @@
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{cbind}.
 #' @export
+#' @keywords internal
 .linwlr_design <- function(Zsrc, n) {
   if (is.null(Zsrc)) {
     return(matrix(1, nrow = n, ncol = 1))
@@ -74,6 +77,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .linwlr_sigmoid(v = x)
 #' res
+#' @keywords internal
 .linwlr_sigmoid <- function(v) {
   1 / (1 + exp(-v))
 }
@@ -89,6 +93,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @keywords internal
 .linwlr_logit_irls <- function(Z, y, max_iter, ridge) {
   n <- nrow(Z)
   q <- ncol(Z)
@@ -120,6 +125,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
+#' @keywords internal
 .linwlr_lstsq <- function(Z, y, ridge) {
   q <- ncol(Z)
   A <- crossprod(Z) + ridge * diag(q)
@@ -137,6 +143,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
+#' @keywords internal
 .linwlr_ridgesolve <- function(M, rhs, ridge) {
   q <- nrow(M)
   A <- M + ridge * diag(q)
@@ -158,6 +165,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .linwlr_wls(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .linwlr_wls <- function(X, y, w) {
   X <- cbind(1, X)
   n <- nrow(X)
@@ -183,6 +191,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{se}, as built in the body.
 #' @export
+#' @keywords internal
 .linwlr_sandwich_se <- function(bread, meat, n, ridge) {
   q <- nrow(bread)
   inv_mat <- solve(bread + ridge * diag(q))

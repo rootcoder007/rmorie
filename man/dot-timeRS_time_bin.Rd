@@ -21,3 +21,4 @@ A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bia
 \code{.timeRS_item_bias}, \code{morie_timeRS_time_bin}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

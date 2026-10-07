@@ -11,6 +11,7 @@
 #' @param scale Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .dpvar_laplace <- function(u, scale) {
   d <- u - 0.5
   s <- if (d >= 0) 1 else -1

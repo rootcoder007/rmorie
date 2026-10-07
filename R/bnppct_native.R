@@ -176,6 +176,7 @@ morie_bnppct_quantile <- function(q, w, mu, s2, lo = NULL, hi = NULL) {
 #' @param q Passed to \code{>=}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .bnppct_wq <- function(ys_sorted, weights, q) {
   acc <- 0
   for (i in seq_along(ys_sorted)) {

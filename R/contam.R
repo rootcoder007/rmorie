@@ -13,6 +13,7 @@
 #' @examples
 #' res <- .huber_k(eps = 0.5)
 #' res
+#' @keywords internal
 .huber_k <- function(eps) {
   if (eps <= 0) return(Inf)
   if (eps >= 1) return(0)

@@ -24,3 +24,4 @@ M <- matrix(c(1, 2, 3, 0, 0, 0), nrow = 2, byrow = TRUE)
 # a higher temperature flattens the distribution
 .alfesf_softmax_rows(M, temp = 5)
 }
+\keyword{internal}

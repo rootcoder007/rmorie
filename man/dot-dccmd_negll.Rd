@@ -25,3 +25,4 @@ parameter-domain and non-positive-determinant guards are directly
 unit-testable. \code{Q_bar} is the unconditional correlation, \code{n} the
 sample size, \code{Z} the standardised residuals.
 }
+\keyword{internal}

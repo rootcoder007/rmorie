@@ -61,6 +61,7 @@ Svyqtl <- function(y, weights = NULL, quantile = 0.5) {
 #' @param p Passed to \code{>=}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .svyqtl_inv <- function(xs, cum, p) {
   i <- which(cum >= p)
   if (length(i)) xs[i[1L]] else xs[length(xs)]

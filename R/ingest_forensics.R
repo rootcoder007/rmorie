@@ -517,6 +517,7 @@ morie_ingest_forensics_namus_missing <- function(
 #' \code{height_cm_max}, \code{weight_kg_min}, \code{weight_kg_max}, \code{first_name},
 #' \code{last_name}, \code{city}, \code{circumstances}.
 #' @export
+#' @keywords internal
 .morie_forensics_flatten_namus_search <- function(rec) {
   g <- function(k) if (is.null(rec[[k]])) NA else rec[[k]]
   list(

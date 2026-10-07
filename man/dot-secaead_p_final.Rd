@@ -15,3 +15,4 @@ The value of \code{acc}, as built in the body.
 \description{
 subtraction of P suffices because acc < 2^130 < 2P
 }
+\keyword{internal}

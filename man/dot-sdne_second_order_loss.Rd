@@ -20,3 +20,4 @@ A list with \code{loss}, \code{unweighted}, \code{beta}, \code{note}.
 A step of the sdne_native implementation. Called by \code{morie_sdne}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

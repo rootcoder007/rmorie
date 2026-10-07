@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 res <- .pq_bit_width(n = 3L)
 res
 }
+\keyword{internal}

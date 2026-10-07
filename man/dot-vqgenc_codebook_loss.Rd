@@ -18,3 +18,4 @@ A list with \code{loss}, \code{gradient_flows_to}, \code{note}.
 A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

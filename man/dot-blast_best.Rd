@@ -20,3 +20,4 @@ A list with \code{score}, \code{qi}, \code{sj}, \code{ln}.
 A step of the blastp_native implementation. Called by \code{morie_blastp}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

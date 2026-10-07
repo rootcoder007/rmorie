@@ -73,6 +73,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .infmax_softplus(z = y)
 #' res
+#' @keywords internal
 .infmax_softplus <- function(z) {
   # sp(z) = log(1 + exp(z)), branch-stable so neither branch overflows.
   v <- as.numeric(z)
@@ -93,6 +94,7 @@
 #' @return A list with \code{estimate}, \code{positive}, \code{negative}, \code{bounded},
 #' \code{note}.
 #' @export
+#' @keywords internal
 .infmax_jsd_estimator <- function(joint_scores, marginal_scores) {
   # I_JSD = E_P[-sp(-T)] - E_{PxP~}[sp(T)].
   J <- as.numeric(unlist(joint_scores))
@@ -119,6 +121,7 @@
 #' @return A list with \code{estimate}, \code{log_sum_exp}, \code{negative_variance},
 #' \code{bounded}, \code{note}.
 #' @export
+#' @keywords internal
 .infmax_dv_estimator <- function(joint_scores, marginal_scores) {
   # I_DV = E_P[T] - log E_{PxP~}[exp(T)].
   J <- as.numeric(unlist(joint_scores))
@@ -149,6 +152,7 @@
 #' @return A list with \code{objective}, \code{estimator}, \code{n_positive},
 #' \code{n_negative}, \code{note}.
 #' @export
+#' @keywords internal
 .infmax_global_objective <- function(global_features, feature_maps, critic,
                                      estimator = "jsd") {
   # MI between the global vector and the WHOLE feature map.
@@ -198,6 +202,7 @@
 #' @return A list with \code{estimate}, \code{objective}, \code{estimator},
 #' \code{n_locations}, \code{n_positive}, \code{n_negative}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .infmax_local_objective <- function(global_features, feature_maps, critic,
                                     estimator = "jsd") {
   # MI between the global vector and EACH LOCAL patch, averaged.
@@ -257,6 +262,7 @@
 #' @examples
 #' res <- .infmax_cheatsheet()
 #' res
+#' @keywords internal
 .infmax_cheatsheet <- function() {
   paste0("infmax: maximising MI between input and representation is ",
          "a bad objective alone -- MI is invariant to invertible ",

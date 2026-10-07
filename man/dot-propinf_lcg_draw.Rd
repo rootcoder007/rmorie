@@ -22,3 +22,4 @@ the source it follows.
 e <- .propinf_rng(1L)
 replicate(3, .propinf_lcg_draw(e))
 }
+\keyword{internal}

@@ -24,3 +24,4 @@ The value of \code{eps}, as built in the body.
 \description{
 sum w H (y - sigmoid(off + eps H)) = 0 for eps on the given rows.
 }
+\keyword{internal}

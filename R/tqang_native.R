@@ -22,6 +22,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tqang_fmod(x = x, y = y)
 #' res
+#' @keywords internal
 .tqang_fmod <- function(x, y) x - y * trunc(x / y)
 
 #' Wrap to [-pi, pi)

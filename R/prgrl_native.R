@@ -85,6 +85,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .prgrl_to_rows(X = x)
 #' res
+#' @keywords internal
 .prgrl_to_rows <- function(X) {
   if (is.matrix(X)) {
     lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
@@ -109,6 +110,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .prgrl_to_vec(x = x)
 #' res
+#' @keywords internal
 .prgrl_to_vec <- function(x) {
   as.numeric(as.vector(x))
 }
@@ -124,6 +126,7 @@
 #' @examples
 #' res <- .prgrl_rng(seed = 1L)
 #' res
+#' @keywords internal
 .prgrl_rng <- function(seed) {
   st <- as.numeric(seed) %% 2147483648
   if (st == 0L) st <- 1L
@@ -143,6 +146,7 @@
 #' @param r Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .prgrl_gauss <- function(r) {
   u <- max(r(), 1e-12)
   v <- r()
@@ -292,6 +296,7 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' @param w0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
+#' @keywords internal
 .prgrl_perceptron <- function(X, y, order, updates, w0) {
   p <- length(X[[1]])
   w <- as.numeric(w0)
@@ -327,6 +332,7 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .prgrl_error(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .prgrl_error <- function(X, y, w) {
   p <- length(X[[1]])
   bad <- 0
@@ -557,6 +563,7 @@ easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
 #' @examples
 #' res <- .prgrl_cheatsheet()
 #' res
+#' @keywords internal
 .prgrl_cheatsheet <- function() {
   paste0(
     "prgrl: curriculum learning (Bengio et al. 2009). Q_lambda(z)",

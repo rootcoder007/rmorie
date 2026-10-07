@@ -25,3 +25,4 @@ A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

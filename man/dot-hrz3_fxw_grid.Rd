@@ -30,3 +30,4 @@ Renormalising the discretised density to unit mass on [0, 1]^2 is
 such a correction, and it makes mass == 1 an exact identity that
 fails loudly if the 1/(n h^2) constant is mis-wired.
 }
+\keyword{internal}

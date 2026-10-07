@@ -61,6 +61,7 @@ Btmult <- function(n, B = 200L, rng = 2L, exhaustive = FALSE) {
 #' @param exhaustive A flag; the body branches on it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .bt_counts <- function(n, B, rng, exhaustive) {
   if (exhaustive) {
     if (n > 6L) {
@@ -100,6 +101,7 @@ Btmult <- function(n, B = 200L, rng = 2L, exhaustive = FALSE) {
 #' @param m Passed to \code{<}.
 #' @return The value of \code{ps}, as built in the body.
 #' @export
+#' @keywords internal
 .bt_primes <- function(m) {
   if (!is.numeric(m) || length(m) != 1L || is.na(m) || m < 0) {
     stop("`m` must be one number >= 0", call. = FALSE)

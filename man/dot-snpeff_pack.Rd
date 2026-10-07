@@ -47,3 +47,4 @@ A list with \code{effect}, \code{impact}, \code{ref_codon}, \code{alt_codon},
 A step of the snpeff_native implementation. Called by \code{annotate_variant}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

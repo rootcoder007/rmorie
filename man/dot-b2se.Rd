@@ -22,3 +22,4 @@ it follows.
 res <- .b2se()
 res
 }
+\keyword{internal}

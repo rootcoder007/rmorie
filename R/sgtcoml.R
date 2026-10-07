@@ -60,6 +60,7 @@
 #' @param comm A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .k02relabel <- function(comm) {
   seen <- integer(0)
   out <- integer(length(comm))

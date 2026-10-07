@@ -18,3 +18,4 @@ A list with \code{z}, \code{kl}.
 A step of the glm_native implementation. Called by \code{morie_glr_test}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

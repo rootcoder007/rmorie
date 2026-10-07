@@ -19,3 +19,4 @@ A step of the psycho_native implementation. Called by \code{morie_psy_map_theta}
 \code{morie_psy_mle_theta}, \code{morie_psy_wle_theta}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

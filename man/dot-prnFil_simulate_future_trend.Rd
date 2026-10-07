@@ -23,3 +23,4 @@ The value of \code{sims}, as built in the body.
 A step of the prnFil_native implementation. Called by \code{.prnFil_trend_intervals}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -42,6 +42,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .resnxt_vec(x = x)
 #' res
+#' @keywords internal
 .resnxt_vec <- function(x) {
   as.numeric(x)
 }
@@ -60,6 +61,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .resnxt_lin(W = x, x = x)
 #' res
+#' @keywords internal
 .resnxt_lin <- function(W, x) {
   vapply(seq_along(W), function(o) sum(W[[o]] * x), numeric(1))
 }
@@ -77,6 +79,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .resnxt_relu(v = x)
 #' res
+#' @keywords internal
 .resnxt_relu <- function(v) {
   pmax(0, v)
 }
@@ -92,6 +95,7 @@
 #' @param Wouts A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .resnxt_aggregated_block <- function(x, Wins, Wmids, Wouts) {
   xv <- .resnxt_vec(x)
   acc <- rep(0, length(xv))
@@ -115,6 +119,7 @@
 #' @param Wout_concat Passed to \code{.resnxt_lin}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .resnxt_grouped_block <- function(x, Wins, Wmids, Wout_concat) {
   xv <- .resnxt_vec(x)
   cat <- numeric(0)
@@ -140,6 +145,7 @@
 #' @return A list with \code{equivalent}, \code{max_deviation}, \code{aggregated},
 #' \code{grouped}, \code{note}.
 #' @export
+#' @keywords internal
 .resnxt_block_equivalence <- function(x, Wins, Wmids, Wouts, tol = 1e-9) {
   a <- .resnxt_aggregated_block(x, Wins, Wmids, Wouts)
   n_outs <- length(Wouts[[1]])
@@ -166,6 +172,7 @@
 #' @param bottleneck Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{parameters}, \code{cardinality}, \code{bottleneck}, \code{width}.
 #' @export
+#' @keywords internal
 .resnxt_block_parameters <- function(width, cardinality, bottleneck) {
   W <- as.integer(width)
   C <- as.integer(cardinality)
@@ -190,6 +197,7 @@
 #' @return A list with \code{bottleneck}, \code{rounded}, \code{parameters},
 #' \code{target}, \code{cardinality}.
 #' @export
+#' @keywords internal
 .resnxt_match_complexity <- function(width, cardinality, target_parameters) {
   W <- as.integer(width)
   C <- as.integer(cardinality)
@@ -216,6 +224,7 @@
 #' @examples
 #' res <- .resnxt_cheatsheet()
 #' res
+#' @keywords internal
 .resnxt_cheatsheet <- function() {
   paste0(
     "resnxt: y = x + sum_{i=1..C} T_i(x), every T_i with the SAME",

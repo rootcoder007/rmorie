@@ -20,3 +20,4 @@ The value of \code{out}, as built in the body.
 A step of the snpest_native implementation. Called by \code{morie_snpest}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

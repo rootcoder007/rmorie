@@ -25,6 +25,7 @@
 #' @param z Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .dpoF_logsigmoid <- function(z) {
   if (z >= 0.0) {
     return(-log1p(exp(-z)))
@@ -40,6 +41,7 @@
 #' @param z Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .dpoF_sigmoid <- function(z) {
   if (z >= 0.0) {
     return(1.0 / (1.0 + exp(-z)))
@@ -57,6 +59,7 @@
 #' @param vals A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .dpoF_logsumexp <- function(vals) {
   if (length(vals) == 0L) {
     return(-Inf)
@@ -82,6 +85,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .dpoF_vec(x = x, name = txt)
 #' res
+#' @keywords internal
 .dpoF_vec <- function(x, name) {
   v <- as.numeric(x)
   if (length(v) == 0L) {
@@ -191,6 +195,7 @@ morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
 #' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards},
 #' \code{beta}, \code{n}, \code{model}, \code{method}.
 #' @export
+#' @keywords internal
 .dpoF_plackett_luce <- function(logp, logp_ref, beta) {
   if (is.null(logp) || is.null(logp_ref)) {
     stop("dpoF: model='plackett-luce' needs logp and logp_ref, shape (n_rankings, K)")
@@ -289,6 +294,7 @@ optimal_policy <- function(logp_ref, reward, beta) {
 #' @examples
 #' res <- .dpoF_cheatsheet()
 #' res
+#' @keywords internal
 .dpoF_cheatsheet <- function() {
   return(paste0(
     "dpoF: DPO loss -log sigma(beta log pi_w/ref_w - beta log pi_",

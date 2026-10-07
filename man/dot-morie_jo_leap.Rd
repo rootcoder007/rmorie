@@ -16,3 +16,4 @@ A logical value.
 A step of the ts_joseph implementation. Called by \code{.morie_jo_daynum}, \code{morie_calfeat}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

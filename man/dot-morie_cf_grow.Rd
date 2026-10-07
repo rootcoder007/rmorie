@@ -44,3 +44,4 @@ The value of \code{node}, as built in the body.
 \description{
 (never seen by the splitter) fills the leaf values.
 }
+\keyword{internal}

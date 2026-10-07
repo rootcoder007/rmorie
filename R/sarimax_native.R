@@ -25,6 +25,7 @@ ROOT_TOL <- 1.001
 #' @param ma Passed to \code{.sarima_state_space}.
 #' @return A list with \code{v}, \code{f}.
 #' @export
+#' @keywords internal
 .filter_column <- function(w, ar, ma) {
   ss <- .sarima_state_space(ar, ma)
   T <- ss$T
@@ -61,6 +62,7 @@ ROOT_TOL <- 1.001
 #' @param ma Passed to \code{css}.
 #' @return A list with \code{v}, \code{f}.
 #' @export
+#' @keywords internal
 .residual_column <- function(w, ar, ma) {
   r <- css(w, ar, ma, full = TRUE)
   list(v = r$residuals, f = rep(1.0, length(w)))
@@ -143,6 +145,7 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .columns(X = b, n = 3L)
 #' res
+#' @keywords internal
 .columns <- function(X, n) {
   if (is.null(X)) return(list())
   if (is.list(X)) {
@@ -179,6 +182,7 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 #' \code{innovation_variance}, \code{include_constant}, \code{order},
 #' \code{seasonal_order}, \code{s}, \code{fit_method}, \code{method}.
 #' @export
+#' @keywords internal
 .sarimax_fit <- function(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1),
                 s = 12, include_constant = NULL, method = "ml") {
   if (!method %in% c("ml", "uls", "css")) {
@@ -409,6 +413,7 @@ neighbours <- function(order, seasonal_order, constant, s) {
 #' @param method Passed to \code{.sarimax_fit}.
 #' @return The value of \code{tryCatch}.
 #' @export
+#' @keywords internal
 .try_fit <- function(y, X, order, seasonal_order, s, constant, method) {
   if (constant && (order[2L] + seasonal_order[2L]) >= 2L) return(NULL)
   if (sum(order) + sum(seasonal_order) - order[2L] - seasonal_order[2L] == 0 &&
@@ -523,6 +528,7 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
 #' @examples
 #' res <- .sarimax_cheatsheet()
 #' res
+#' @keywords internal
 .sarimax_cheatsheet <- function() {
   paste("sarimax: y = beta'x + n with seasonal ARIMA errors. beta",
         "is profiled out by exact GLS on the Kalman innovations,",

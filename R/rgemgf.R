@@ -114,6 +114,7 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 #' @param f A vector; its length is taken and its elements indexed.
 #' @return The value of \code{fine}, as built in the body.
 #' @export
+#' @keywords internal
 .rgemgf_intervals <- function(f) {
   # the p. 290 two-stage delineation; ranges are returned zero-based and
   # half-open, c(start, stop), to match the Python arm exactly
@@ -165,6 +166,7 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .rgemgf_zcr(x = x)
 #' res
+#' @keywords internal
 .rgemgf_zcr <- function(x) {
   s <- ifelse(x >= 0, 1, -1)
   sum(s[-1] != s[-length(s)])
@@ -185,6 +187,7 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .rgemgf_r2(x = x, y = y)
 #' res
+#' @keywords internal
 .rgemgf_r2 <- function(x, y) {
   # equation (5.28), p. 292, written exactly as the book prints it
   n <- length(x)
@@ -212,6 +215,7 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .rgemgf_linfit(x = x, y = y)
 #' res
+#' @keywords internal
 .rgemgf_linfit <- function(x, y) {
   n <- length(x)
   den <- n * sum(x * x) - sum(x)^2

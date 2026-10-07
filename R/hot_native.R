@@ -18,6 +18,7 @@
 #' @param seg A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mor_hot_znorm <- function(seg) {
   m <- mean(seg)
   sdv <- sqrt(mean((seg - m)^2))

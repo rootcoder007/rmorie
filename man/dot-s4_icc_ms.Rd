@@ -20,3 +20,4 @@ A list with \code{ms_r}, \code{ms_c}, \code{ms_e}, \code{k}, \code{n}.
 A step of the s04core implementation. Called by \code{Icc12c}, \code{IccA}, \code{IccC}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

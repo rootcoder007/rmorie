@@ -62,6 +62,7 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #' @param hi Numeric; passed to \code{min}.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @keywords internal
 .mass <- function(ts, ys, lo, hi) {
   if (hi <= lo) return(0)
   tot <- 0

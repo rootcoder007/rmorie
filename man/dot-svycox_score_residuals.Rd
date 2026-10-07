@@ -24,3 +24,4 @@ The value of \code{$}.
 A step of the svycox_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

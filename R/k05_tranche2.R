@@ -85,6 +85,7 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 #' @param upper Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{a}, \code{b}, \code{c}, \code{u}, \code{n}.
 #' @export
+#' @keywords internal
 .morie_k05_item_params <- function(a, b, c = NULL, upper = NULL) {
   bb <- as.numeric(b)
   n <- length(bb)
@@ -118,6 +119,7 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 #' @param D Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_k05_prob <- function(theta, a, b, c, u, D = 1) {
   # branch on the sign so exp never overflows for large |z|
   z <- D * a * (theta - b)
@@ -139,6 +141,7 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 #' @param D Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_k05_info <- function(theta, a, b, c, u, D = 1) {
   # general two-category Fisher information I = (P')^2/(PQ); substituting
   # the 4PL P and using P-c = (u-c)P*, u-P = (u-c)Q* gives this form,
@@ -356,6 +359,7 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 #' @param beta A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{times}, \code{res}, \code{var}.
 #' @export
+#' @keywords internal
 .morie_k05_schoenfeld <- function(t, e, X, beta) {
   n <- length(t)
   p <- ncol(X)
@@ -391,6 +395,7 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 #' @param how One of \code{"km"}, \code{"identity"}, \code{"log"}, \code{"rank"}.
 #' @return The transformed times g(t), one per entry of \code{times}.
 #' @export
+#' @keywords internal
 .morie_k05_gtime <- function(times, t_all, e_all, how) {
   # g(t) at the event times as survival::cox.zph computes it: "km" is
   # 1 - S(t-) from the Kaplan-Meier estimate over ALL subjects, censored

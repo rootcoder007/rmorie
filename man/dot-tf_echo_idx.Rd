@@ -23,3 +23,4 @@ See the file header for the source the module follows.
 res <- .tf_echo_idx(n = 3L)
 res
 }
+\keyword{internal}

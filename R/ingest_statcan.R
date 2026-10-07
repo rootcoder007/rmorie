@@ -331,6 +331,7 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
 #' @param language Character; passed to \code{tolower}. Defaults to \code{"en"}.
 #' @return The value of \code{utils::read.csv}.
 #' @export
+#' @keywords internal
 .morie_statcan_wds_table <- function(table_id, language = "en") {
   pid <- gsub("[^0-9]", "", table_id)
   if (nchar(pid) >= 10L) pid <- substr(pid, 1, 8L)

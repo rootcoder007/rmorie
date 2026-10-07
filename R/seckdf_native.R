@@ -160,6 +160,7 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
 #' @param msg Passed to \code{as.raw}.
 #' @return The value of \code{.sech_sha256}.
 #' @export
+#' @keywords internal
 .kdf_hmac <- function(key, msg) {
   key <- as.raw(key)
   if (length(key) > 64L) key <- .sech_sha256(key)
@@ -178,6 +179,7 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .kdf_hex <- function(bs) {
   paste(format(as.hexmode(as.integer(bs)), width = 2L), collapse = "")
 }
@@ -219,6 +221,7 @@ derive_context_keys <- function(ikm, contexts, salt = NULL,
 #' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .seckdf_as_bytes <- function(x) {
   if (is.raw(x)) return(x)
   if (is.character(x)) return(charToRaw(paste(x, collapse = "")))
@@ -235,6 +238,7 @@ derive_context_keys <- function(ikm, contexts, salt = NULL,
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .seckdf_hexlify <- function(bs) {
   paste(format(as.hexmode(as.integer(bs)), width = 2,
                upper.case = TRUE), collapse = "")

@@ -24,3 +24,4 @@ The value of \code{out}, as built in the body.
 A step of the rdkfp_native implementation. Called by \code{morie_rdkfp}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

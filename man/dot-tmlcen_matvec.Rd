@@ -18,3 +18,4 @@ A vector, from \code{as.numeric}.
 A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

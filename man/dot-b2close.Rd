@@ -22,3 +22,4 @@ it follows.
 res <- .b2close(p = 0.5)
 res
 }
+\keyword{internal}

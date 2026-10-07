@@ -231,6 +231,7 @@ Htpfn <- function(y, markers, W_functional, n_basis = 5, lam = 1, a = 0, b = 1,
 #' @param P Numeric; passed to \code{sqrt}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .htpfourier <- function(s, L, P) {
   cc <- sqrt(2 / P)
   w <- 2 * pi / P
@@ -254,6 +255,7 @@ Htpfn <- function(y, markers, W_functional, n_basis = 5, lam = 1, a = 0, b = 1,
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .htpinvspd <- function(A, ridge) {
   n <- nrow(A)
   B <- A

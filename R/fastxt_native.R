@@ -111,6 +111,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' \code{as.integer}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .gram_slot <- function(g, gram_index, hash_buckets) {
   if (!is.null(hash_buckets))
     return(as.integer(.fnv1a(g) %% as.integer(hash_buckets)))
@@ -126,6 +127,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' @param s A vector; its length is taken and its elements indexed.
 #' @return The value of \code{as.integer}.
 #' @export
+#' @keywords internal
 .fnv1a <- function(s) {
   # 32-bit FNV-1a in exact double arithmetic: the xor touches only the low
   # byte, and 16777619 = 2^24 + 403 keeps every product below 2^53
@@ -147,6 +149,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' @param corpus The body requires: fasttext: corpus must not be None.
 #' @return The value of \code{docs}, as built in the body.
 #' @export
+#' @keywords internal
 .as_docs <- function(corpus) {
   if (is.null(corpus))
     stop("fasttext: corpus must not be None")
@@ -336,6 +339,7 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 #' @examples
 #' res <- .fastxt_cheatsheet()
 #' res
+#' @keywords internal
 .fastxt_cheatsheet <- function() {
   paste("fastxt: word = bag of character n-grams with < >",
         "boundaries plus the whole word; s(w,c) = sum_g z_g . v_c",
@@ -390,6 +394,7 @@ morie_fastxt <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 #' @param whole_word A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{grams}, as built in the body.
 #' @export
+#' @keywords internal
 .subwords <- function(word, n_min = 3L, n_max = 6L, boundary = TRUE,
                       whole_word = TRUE) {
   lo <- as.integer(n_min)
@@ -432,6 +437,7 @@ morie_fastxt <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 #' @param hash_buckets Passed to \code{.gram_slot}.
 #' @return A list with \code{v}, \code{hit}.
 #' @export
+#' @keywords internal
 .word_vector <- function(word, Z, gram_index, n_min = 3L, n_max = 6L,
                          boundary = TRUE, whole_word = TRUE,
                          hash_buckets = NULL) {

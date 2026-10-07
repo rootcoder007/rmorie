@@ -30,3 +30,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .fixed_effect_scan(y = y, G = g)
 res
 }
+\keyword{internal}

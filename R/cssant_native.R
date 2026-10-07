@@ -27,6 +27,7 @@
 #' @param time Coerced to vector by the body, with \code{as.vector}.
 #' @return A list with \code{Y}, \code{units}, \code{periods}.
 #' @export
+#' @keywords internal
 .mor_did_panel <- function(y, unit, time) {
   y <- as.numeric(y)
   u <- as.vector(unit)
@@ -69,6 +70,7 @@
 #' @param periods Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{g}, \code{Dm}, \code{units}, \code{periods}.
 #' @export
+#' @keywords internal
 .mor_did_first <- function(D, unit, time, units = NULL, periods = NULL) {
   p <- .mor_did_panel(D, unit, time)
   Dm <- p$Y

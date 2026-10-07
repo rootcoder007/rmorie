@@ -26,3 +26,4 @@ P <- matrix(rnorm(21), 7, 3)
 Q <- P; Q[, 1] <- Q[, 1] + 3
 .agalfsy_rmsd(P, Q)
 }
+\keyword{internal}

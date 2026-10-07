@@ -110,6 +110,7 @@ functional_bootstrap <- morie_funBoot
 #' @examples
 #' res <- .funBoot_cheatsheet()
 #' res
+#' @keywords internal
 .funBoot_cheatsheet <- function() {
   "funBoot: D = q_{1-a}(dist(T*_b, mean T*)); band = ball(center, D)"
 }

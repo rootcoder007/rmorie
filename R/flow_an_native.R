@@ -29,6 +29,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .flow_an_to_mat(X = x)
 #' res
+#' @keywords internal
 .flow_an_to_mat <- function(X) {
   if (is.data.frame(X)) X <- as.matrix(X)
   X <- as.matrix(X)
@@ -46,6 +47,7 @@
 #' @param q Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .flow_an_quantile7 <- function(sorted_x, q) {
   # type 7, as _s03core.quantile7: h = (n - 1) q on 0-based order
   # statistics (q (n + 1) is type 6)
@@ -67,6 +69,7 @@
 #' @param n_layers A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .alternating_masks <- function(d, n_layers) {
   if (d < 2L) stop(sprintf("flow_an: need at least 2 dimensions, got %d", d))
   out <- vector("list", n_layers)
@@ -93,6 +96,7 @@
 #' @param scale_cap Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return A list with \code{s}, \code{t}.
 #' @export
+#' @keywords internal
 .st <- function(x, mask, Ws, bs, Wt, bt, scale_cap = 5.0) {
   xin <- x * mask
   hs <- as.numeric(as.matrix(Ws) %*% xin + bs)
@@ -117,6 +121,7 @@
 #' @param scale_cap Passed to \code{.st}. Defaults to \code{5}.
 #' @return A list with \code{y}, \code{logdet}.
 #' @export
+#' @keywords internal
 .coupling_forward <- function(x, mask, Ws, bs, Wt, bt, scale_cap = 5.0) {
   r <- .st(x, mask, Ws, bs, Wt, bt, scale_cap)
   y <- x * mask + (1 - mask) * (x * exp(r$s) + r$t)
@@ -138,6 +143,7 @@
 #' @param scale_cap Passed to \code{.st}. Defaults to \code{5}.
 #' @return A list with \code{x}, \code{logdet}.
 #' @export
+#' @keywords internal
 .coupling_inverse <- function(y, mask, Ws, bs, Wt, bt, scale_cap = 5.0) {
   r <- .st(y, mask, Ws, bs, Wt, bt, scale_cap)
   x <- y * mask + (1 - mask) * ((y - r$t) * exp(-r$s))
@@ -154,6 +160,7 @@
 #' @param layers See Usage.
 #' @return A list with \code{z}, \code{logdet}.
 #' @export
+#' @keywords internal
 .flow_forward <- function(x, layers) {
   z <- as.numeric(x)
   logdet <- 0
@@ -176,6 +183,7 @@
 #' @param layers Numeric; passed to \code{rev}.
 #' @return A list with \code{x}, \code{logdet}.
 #' @export
+#' @keywords internal
 .flow_inverse <- function(z, layers) {
   x <- as.numeric(z)
   logdet <- 0
@@ -198,6 +206,7 @@
 #' @param layers Passed to \code{.flow_forward}.
 #' @return A list with \code{lp}, \code{z}, \code{logdet}.
 #' @export
+#' @keywords internal
 .log_prob <- function(x, layers) {
   r <- .flow_forward(x, layers)
   base <- -0.5 * sum(r$z * r$z) - 0.5 * length(r$z) * .LOG2PI
@@ -219,6 +228,7 @@
 #' \code{n_flagged}, \code{n}, \code{quantile}, \code{self_referenced},
 #' \code{log_likelihood}, \code{method}.
 #' @export
+#' @keywords internal
 .anomaly_score <- function(X, layers, threshold_quantile = 0.95, reference = NULL) {
   Xm <- .flow_an_to_mat(X)
   scores <- apply(Xm, 1, function(row) -.log_prob(row, layers)$lp)

@@ -23,3 +23,4 @@ A vector, from \code{c}.
 \description{
 Molinari (2021) eq (2.15). Returns c(lo1, hi1, lo0, hi0).
 }
+\keyword{internal}

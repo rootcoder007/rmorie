@@ -12,6 +12,7 @@
 #' @examples
 #' res <- .tl_lchoose(n = 3L, k = 3L)
 #' res
+#' @keywords internal
 .tl_lchoose <- function(n, k) {
   if (k < 0 || k > n) return(-Inf)
   lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1)

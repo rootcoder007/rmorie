@@ -20,6 +20,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .sgflrt_rows(x = x)
 #' res
+#' @keywords internal
 .sgflrt_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -43,6 +44,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .sgflrt_chol(A = A)
 #' res
+#' @keywords internal
 .sgflrt_chol <- function(A, rel_jitter = 1e-10) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -73,6 +75,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .sgflrt_solve <- function(L, b) {
   n <- nrow(L)
   z <- numeric(n)
@@ -98,6 +101,7 @@
 #' @param L A matrix; passed to \code{nrow}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @keywords internal
 .sgflrt_inv <- function(L) {
   n <- nrow(L)
   M <- matrix(0.0, n, n)
@@ -117,6 +121,7 @@
 #' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sgflrt_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
 #' .sgflrt_corr
@@ -130,6 +135,7 @@
 #' @param kappa Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .sgflrt_corr <- function(h, model, phi, kappa) {
   if (h <= 0.0) return(1.0)
   if (model == "exponential") return(exp(-h / phi))
@@ -169,6 +175,7 @@
 #' @param disp Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .sgflrt_family <- function(family, disp = 1.0) {
   if (family == "poisson")
     return(list(inv = function(e) exp(pmax(-500.0, pmin(500.0, e))),
@@ -225,6 +232,7 @@
 #' @return A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta},
 #' \code{loglik}, \code{w}, \code{L}, \code{v}.
 #' @export
+#' @keywords internal
 .sgflrt_laplace <- function(y, X, Sig, family, inner_iter, tol, disp = 1.0) {
   n <- length(y)
   p <- ncol(X)
@@ -284,6 +292,7 @@
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16L}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sgflrt_golden <- function(f, lo, hi, iters = 16L) {
   a <- lo
   b <- hi
@@ -543,6 +552,7 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
 #' @examples
 #' res <- .sgflrt_cheatsheet()
 #' res
+#' @keywords internal
 .sgflrt_cheatsheet <- function() {
   paste0("sgflrt: morie_sgflrt_spatial_glmm_fit(y, X, coords, family) -> ",
          "spatial GLMM by Laplace, with the spatial random effect returned ",

@@ -22,3 +22,4 @@ A list with \code{beta}, \code{scale}.
 local IRLS refinement. Non-convex objective, so the subsets are the
 global search and the refinement the local one.
 }
+\keyword{internal}

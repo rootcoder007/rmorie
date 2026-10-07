@@ -29,3 +29,4 @@ A step of the schab_gwr_shared implementation. Called by \code{.schab_local_weig
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

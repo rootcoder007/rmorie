@@ -27,3 +27,4 @@ all.equal(.agalfsy_apply(P, 6L), .agalfsy_rotate(P, 0L, 1))
 # an action and its opposite cancel
 all.equal(.agalfsy_apply(.agalfsy_apply(P, 0L), 1L), P)
 }
+\keyword{internal}

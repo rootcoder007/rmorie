@@ -23,3 +23,4 @@ A numeric value.
 \description{
 sides. Distinct from .schab_data_covariance -- see .schab_pql_score.
 }
+\keyword{internal}

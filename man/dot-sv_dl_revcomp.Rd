@@ -21,3 +21,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .sv_dl_revcomp(s = txt)
 res
 }
+\keyword{internal}

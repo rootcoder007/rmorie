@@ -24,3 +24,4 @@ A list with \code{L}, \code{H}.
 A step of the svmopt_native implementation. Called by \code{solve_pair}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

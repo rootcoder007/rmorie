@@ -20,3 +20,4 @@ randomness only needs to be reproducible.)
 res <- .survrsf_rng()
 res
 }
+\keyword{internal}

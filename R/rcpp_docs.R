@@ -14,6 +14,7 @@
 #' @export
 #' @name .rmorie_sha256_impl
 #' @rdname dot-rmorie_sha256_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_sha256_hex_impl
@@ -28,6 +29,7 @@ NULL
 #' @export
 #' @name .rmorie_sha256_hex_impl
 #' @rdname dot-rmorie_sha256_hex_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_hmac_sha256_impl
@@ -41,6 +43,7 @@ NULL
 #' @export
 #' @name .rmorie_hmac_sha256_impl
 #' @rdname dot-rmorie_hmac_sha256_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_pbkdf2_sha256_impl
@@ -56,6 +59,7 @@ NULL
 #' @export
 #' @name .rmorie_pbkdf2_sha256_impl
 #' @rdname dot-rmorie_pbkdf2_sha256_impl
+#' @keywords internal
 NULL
 
 #' .morie_blake2b_impl
@@ -71,6 +75,7 @@ NULL
 #' @export
 #' @name .morie_blake2b_impl
 #' @rdname dot-morie_blake2b_impl
+#' @keywords internal
 NULL
 
 #' .morie_argon2_impl
@@ -91,6 +96,7 @@ NULL
 #' @export
 #' @name .morie_argon2_impl
 #' @rdname dot-morie_argon2_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_liboqs_available_impl
@@ -105,6 +111,7 @@ NULL
 #' @export
 #' @name .rmorie_liboqs_available_impl
 #' @rdname dot-rmorie_liboqs_available_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_liboqs_version_impl
@@ -119,6 +126,7 @@ NULL
 #' @export
 #' @name .rmorie_liboqs_version_impl
 #' @rdname dot-rmorie_liboqs_version_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_mlkem768_keygen_impl
@@ -135,6 +143,7 @@ NULL
 #' @export
 #' @name .rmorie_mlkem768_keygen_impl
 #' @rdname dot-rmorie_mlkem768_keygen_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_mlkem768_encaps_impl
@@ -147,6 +156,7 @@ NULL
 #' @export
 #' @name .rmorie_mlkem768_encaps_impl
 #' @rdname dot-rmorie_mlkem768_encaps_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_mlkem768_decaps_impl
@@ -160,6 +170,7 @@ NULL
 #' @export
 #' @name .rmorie_mlkem768_decaps_impl
 #' @rdname dot-rmorie_mlkem768_decaps_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_mldsa65_keygen_impl
@@ -176,6 +187,7 @@ NULL
 #' @export
 #' @name .rmorie_mldsa65_keygen_impl
 #' @rdname dot-rmorie_mldsa65_keygen_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_mldsa65_sign_impl
@@ -189,6 +201,7 @@ NULL
 #' @export
 #' @name .rmorie_mldsa65_sign_impl
 #' @rdname dot-rmorie_mldsa65_sign_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_mldsa65_verify_impl
@@ -203,6 +216,7 @@ NULL
 #' @export
 #' @name .rmorie_mldsa65_verify_impl
 #' @rdname dot-rmorie_mldsa65_verify_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_slhdsa128s_keygen_impl
@@ -219,6 +233,7 @@ NULL
 #' @export
 #' @name .rmorie_slhdsa128s_keygen_impl
 #' @rdname dot-rmorie_slhdsa128s_keygen_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_slhdsa128s_sign_impl
@@ -232,6 +247,7 @@ NULL
 #' @export
 #' @name .rmorie_slhdsa128s_sign_impl
 #' @rdname dot-rmorie_slhdsa128s_sign_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_slhdsa128s_verify_impl
@@ -246,6 +262,7 @@ NULL
 #' @export
 #' @name .rmorie_slhdsa128s_verify_impl
 #' @rdname dot-rmorie_slhdsa128s_verify_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_hqc128_keygen_impl
@@ -262,6 +279,7 @@ NULL
 #' @export
 #' @name .rmorie_hqc128_keygen_impl
 #' @rdname dot-rmorie_hqc128_keygen_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_hqc128_encaps_impl
@@ -274,6 +292,7 @@ NULL
 #' @export
 #' @name .rmorie_hqc128_encaps_impl
 #' @rdname dot-rmorie_hqc128_encaps_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_hqc128_decaps_impl
@@ -287,6 +306,7 @@ NULL
 #' @export
 #' @name .rmorie_hqc128_decaps_impl
 #' @rdname dot-rmorie_hqc128_decaps_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_sodium_available_impl
@@ -301,6 +321,7 @@ NULL
 #' @export
 #' @name .rmorie_sodium_available_impl
 #' @rdname dot-rmorie_sodium_available_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_sodium_version_impl
@@ -315,6 +336,7 @@ NULL
 #' @export
 #' @name .rmorie_sodium_version_impl
 #' @rdname dot-rmorie_sodium_version_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_chacha20poly1305_encrypt_impl
@@ -330,6 +352,7 @@ NULL
 #' @export
 #' @name .rmorie_chacha20poly1305_encrypt_impl
 #' @rdname dot-rmorie_chacha20poly1305_encrypt_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_chacha20poly1305_decrypt_impl
@@ -345,6 +368,7 @@ NULL
 #' @export
 #' @name .rmorie_chacha20poly1305_decrypt_impl
 #' @rdname dot-rmorie_chacha20poly1305_decrypt_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_hkdf_sha256_impl
@@ -360,6 +384,7 @@ NULL
 #' @export
 #' @name .rmorie_hkdf_sha256_impl
 #' @rdname dot-rmorie_hkdf_sha256_impl
+#' @keywords internal
 NULL
 
 #' .rmorie_random_bytes_impl
@@ -377,6 +402,7 @@ NULL
 #' @export
 #' @name .rmorie_random_bytes_impl
 #' @rdname dot-rmorie_random_bytes_impl
+#' @keywords internal
 NULL
 
 #' .morie_twfe_demean_cpp
@@ -395,6 +421,7 @@ NULL
 #' @export
 #' @name .morie_twfe_demean_cpp
 #' @rdname dot-morie_twfe_demean_cpp
+#' @keywords internal
 NULL
 
 #' morie_dsp_lms_cpp
@@ -899,6 +926,7 @@ NULL
 #' @export
 #' @name .morie_match_greedy_kd_cpp
 #' @rdname dot-morie_match_greedy_kd_cpp
+#' @keywords internal
 NULL
 
 #' .morie_match_optimal_1d_cpp
@@ -912,6 +940,7 @@ NULL
 #' @export
 #' @name .morie_match_optimal_1d_cpp
 #' @rdname dot-morie_match_optimal_1d_cpp
+#' @keywords internal
 NULL
 
 #' .morie_match_optimal_assign_cpp
@@ -925,6 +954,7 @@ NULL
 #' @export
 #' @name .morie_match_optimal_assign_cpp
 #' @rdname dot-morie_match_optimal_assign_cpp
+#' @keywords internal
 NULL
 
 #' .morie_rlearner_forest_cpp
@@ -946,6 +976,7 @@ NULL
 #' @export
 #' @name .morie_rlearner_forest_cpp
 #' @rdname dot-morie_rlearner_forest_cpp
+#' @keywords internal
 NULL
 
 #' .morie_rlm_cpp
@@ -962,6 +993,7 @@ NULL
 #' @export
 #' @name .morie_rlm_cpp
 #' @rdname dot-morie_rlm_cpp
+#' @keywords internal
 NULL
 
 #' .morie_sobol_cpp
@@ -978,6 +1010,7 @@ NULL
 #' @export
 #' @name .morie_sobol_cpp
 #' @rdname dot-morie_sobol_cpp
+#' @keywords internal
 NULL
 
 #' .morie_knn_index_cpp
@@ -991,6 +1024,7 @@ NULL
 #' @export
 #' @name .morie_knn_index_cpp
 #' @rdname dot-morie_knn_index_cpp
+#' @keywords internal
 NULL
 
 #' .morie_coord_descent_cpp
@@ -1009,6 +1043,7 @@ NULL
 #' @export
 #' @name .morie_coord_descent_cpp
 #' @rdname dot-morie_coord_descent_cpp
+#' @keywords internal
 NULL
 
 #' .morie_tsne_descent_cpp
@@ -1024,6 +1059,7 @@ NULL
 #' @export
 #' @name .morie_tsne_descent_cpp
 #' @rdname dot-morie_tsne_descent_cpp
+#' @keywords internal
 NULL
 
 #' morie_spatial_nominate_iterate_cpp

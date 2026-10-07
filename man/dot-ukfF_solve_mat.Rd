@@ -19,3 +19,4 @@ A step of the ukfF_mixedcase_native implementation. Called by \code{morie_ukfF}.
 See the file header for the source the module follows.
 for the source it follows.
 }
+\keyword{internal}

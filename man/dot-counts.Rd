@@ -23,3 +23,4 @@ A step of the bigtm_native implementation. Called by \code{.log_evidence},
 \code{gibbs_bigram_topic}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

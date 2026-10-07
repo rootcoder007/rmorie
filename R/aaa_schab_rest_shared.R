@@ -41,6 +41,7 @@
 #' @param w A matrix; passed to \code{nrow}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_moran_check_w <- function(w) {
   w <- as.matrix(w)
   if (nrow(w) != ncol(w)) stop("weights must be a square matrix")
@@ -60,6 +61,7 @@
 #' @param w A matrix; passed to \code{t}.
 #' @return A list with \code{S0}, \code{S1}, \code{S2}.
 #' @export
+#' @keywords internal
 .schab_weight_sums <- function(w) {
   w <- .schab_moran_check_w(w)
   s0 <- sum(w)
@@ -81,6 +83,7 @@
 #' @param w A matrix; passed to \code{nrow}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_moran_i <- function(z, w) {
   z <- as.numeric(z)
   w <- .schab_moran_check_w(w)
@@ -103,6 +106,7 @@
 #' @param w A matrix; passed to \code{nrow}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_geary_c <- function(z, w) {
   z <- as.numeric(z)
   w <- .schab_moran_check_w(w)
@@ -128,6 +132,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .schab_kurtosis_b(z = y)
 #' res
+#' @keywords internal
 .schab_kurtosis_b <- function(z) {
   d <- as.numeric(z) - mean(as.numeric(z))
   s2 <- sum(d * d)
@@ -148,6 +153,7 @@
 #' \code{z_normal}, \code{z_randomization}, \code{kurtosis_b}, \code{S0}, \code{S1},
 #' \code{S2}, \code{n}, \code{geary_c}, \code{geary_expectation}.
 #' @export
+#' @keywords internal
 .schab_moran_moments <- function(z, w) {
   z <- as.numeric(z)
   s <- .schab_weight_sums(w)
@@ -190,6 +196,7 @@
 #' @param radii Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .schab_ripley_weights <- function(points, region, radii) {
   p <- matrix(as.numeric(points), ncol = 2)
   t_ <- as.numeric(radii)
@@ -245,6 +252,7 @@
 #' @param correction One of \code{"none"}, \code{"ripley"}. Defaults to \code{"ripley"}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .schab_cross_k <- function(p1, p2, region, r, correction = "ripley") {
   p1 <- matrix(as.numeric(p1), ncol = 2)
   p2 <- matrix(as.numeric(p2), ncol = 2)
@@ -289,6 +297,7 @@
 #' @return A list with \code{K_star}, \code{K_12}, \code{K_21}, \code{L_star},
 #' \code{L_minus_h}, \code{K_independence}, \code{r}, \code{lambda_1}, \code{lambda_2}.
 #' @export
+#' @keywords internal
 .schab_cross_k_combined <- function(p1, p2, region, r, correction = "ripley") {
   p1 <- matrix(as.numeric(p1), ncol = 2)
   p2 <- matrix(as.numeric(p2), ncol = 2)
@@ -318,6 +327,7 @@
 #' @param r Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .schab_k_border <- function(p, region, r) {
   p <- matrix(as.numeric(p), ncol = 2)
   n <- nrow(p)
@@ -351,6 +361,7 @@
 #' @param r Passed to \code{.schab_k_border}.
 #' @return A list with \code{D}, \code{K_11}, \code{K_22}, \code{r}.
 #' @export
+#' @keywords internal
 .schab_dc_d <- function(p1, p2, region, r) {
   k11 <- .schab_k_border(p1, region, r)
   k22 <- .schab_k_border(p2, region, r)
@@ -373,6 +384,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schab_lattice_check(z = X)
 #' res
+#' @keywords internal
 .schab_lattice_check <- function(z) {
   z <- as.matrix(z)
   if (nrow(z) < 2L || ncol(z) < 2L) stop("lattice must be at least 2x2")
@@ -391,6 +403,7 @@
 #' @param c Numeric; combined arithmetically in the body.
 #' @return A list with \code{w1}, \code{w2}, \code{j}, \code{k}.
 #' @export
+#' @keywords internal
 .schab_fourier_freq <- function(r, c) {
   j <- seq.int(-((r - 1) %/% 2), r %/% 2)
   k <- seq.int(-((c - 1) %/% 2), c %/% 2)
@@ -411,6 +424,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schab_sample_cov2d(z = X)
 #' res
+#' @keywords internal
 .schab_sample_cov2d <- function(z) {
   z <- .schab_lattice_check(z)
   r <- nrow(z)
@@ -454,6 +468,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schab_periodogram(z = X)
 #' res
+#' @keywords internal
 .schab_periodogram <- function(z, omit_zero_frequency = TRUE) {
   z <- .schab_lattice_check(z)
   r <- nrow(z)
@@ -497,6 +512,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schab_periodogram_from_cov(z = X)
 #' res
+#' @keywords internal
 .schab_periodogram_from_cov <- function(z) {
   z <- .schab_lattice_check(z)
   f <- .schab_fourier_freq(nrow(z), ncol(z))
@@ -531,6 +547,7 @@
 #' @param source_anisotropy Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_point_source_corr <- function(coords, source, theta1, theta2 = 0,
                                      theta3 = 0, anisotropy = NULL,
                                      source_anisotropy = NULL) {
@@ -589,6 +606,7 @@
 #' @param cj Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_practical_range <- function(theta1, theta2 = 0, theta3 = 0,
                                    ci = NULL, cj = NULL) {
   if (theta1 <= 0) stop("theta1 must be positive")
@@ -614,6 +632,7 @@
 #' \code{as.integer}.
 #' @return The value of \code{repeat}.
 #' @export
+#' @keywords internal
 .schab_haas_window <- function(coords, target, min_sites = 35L, step = 5L,
                                lag_classes = NULL, max_sites = NULL) {
   s <- as.matrix(coords)
@@ -665,6 +684,7 @@
 #' @param n_lags A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.
 #' @return A list with \code{h}, \code{gamma}, \code{counts}.
 #' @export
+#' @keywords internal
 .schab_empirical_variogram <- function(coords, z, n_lags = 10L) {
   s <- as.matrix(coords)
   z <- as.numeric(z)
@@ -704,6 +724,7 @@
 #' @param counts Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{sill}, \code{range}, \code{converged}, \code{wls}.
 #' @export
+#' @keywords internal
 .schab_variogram_wls <- function(h, gamma, counts) {
   h <- as.numeric(h)
   g <- as.numeric(gamma)
@@ -751,6 +772,7 @@
 #' @param mu Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_krige_at <- function(coords, z, target, sill, rng, mu) {
   s <- as.matrix(coords)
   z <- as.numeric(z)
@@ -781,6 +803,7 @@
 #' \code{window_sizes}, \code{converged}, \code{theta_is_global}, \code{global_sill},
 #' \code{global_range}, \code{caveats}.
 #' @export
+#' @keywords internal
 .schab_moving_window_krige <- function(coords, z, targets, min_sites = 35L,
                                        step = 5L, n_lags = 10L,
                                        local_mean = FALSE,

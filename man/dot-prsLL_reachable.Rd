@@ -33,3 +33,4 @@ rules <- list(
 g <- .prsLL_grammar(rules, start = "E")
 .prsLL_reachable(g)
 }
+\keyword{internal}

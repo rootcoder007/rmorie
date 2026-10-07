@@ -33,6 +33,7 @@
 #' @examples
 #' res <- .le32(n = 3L)
 #' res
+#' @keywords internal
 .le32 <- function(n) {
   n <- as.integer(n)
   writeBin(n, raw(), size = 4L, endian = "little")
@@ -49,6 +50,7 @@
 #' @examples
 #' res <- .le64(n = 3L)
 #' res
+#' @keywords internal
 .le64 <- function(n) {
   n <- bitwAnd(n, .MASK64)
   writeBin(n, raw(), size = 8L, endian = "little")
@@ -147,6 +149,7 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
 #' @param d See Usage.
 #' @return The value of \code{<<-}.
 #' @export
+#' @keywords internal
 .gb_mut <- function(v, a, b, c, d) {
   va <- v[a]
   vb <- v[b]
@@ -186,6 +189,7 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
 #' @param v Passed to \code{.gb_mut}.
 #' @return The value of \code{.gb_mut}.
 #' @export
+#' @keywords internal
 .P_mut <- function(v) {
   .gb_mut(v, 1, 5, 9, 13)
   .gb_mut(v, 2, 6, 10, 14)
@@ -306,6 +310,7 @@ morie_secarg_compress <- function(X, Y) {
 #' @param bs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .to_words <- function(bs) {
   bs <- as.raw(bs)
   n <- length(bs) %/% 8L
@@ -326,6 +331,7 @@ morie_secarg_compress <- function(X, Y) {
 #' @param ws A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .to_bytes <- function(ws) {
   ws <- as.numeric(ws)
   out <- raw(length(ws) * 8L)
@@ -352,6 +358,7 @@ morie_secarg_compress <- function(X, Y) {
 #' @param counter See Usage.
 #' @return The value of \code{morie_secarg_compress}.
 #' @export
+#' @keywords internal
 .addresses <- function(pass_no, lane, slice_no, m_prime, passes, y,
                        counter) {
   zero <- rep(0, 128)
@@ -469,6 +476,7 @@ morie_secarg_parameter_advice <- function(profile = "first") {
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .secarg_hexlify <- function(bs) {
   paste(format(as.hexmode(as.integer(bs)), width = 2L), collapse = "")
 }
@@ -489,6 +497,7 @@ morie_secarg <- morie_secarg_argon2
 #' @param d See Usage.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .gb <- function(v, a, b, c, d) {
   va <- v[a]
   vb <- v[b]
@@ -572,6 +581,7 @@ morie_secarg <- morie_secarg_argon2
 #' @param v Passed to \code{.gb}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .P_step <- function(v) {
   v <- .gb(v, 1L, 5L, 9L, 13L)
   v <- .gb(v, 2L, 6L, 10L, 14L)

@@ -26,3 +26,4 @@ A list with \code{T}, \code{u}, \code{v}, \code{a}, \code{b}, \code{trace}.
 Cuturi's exp(-lambda M) with lambda = 1/eps; updates u <- a/(K v)
 then v <- b/(K' u), started from v = 1.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ The value of \code{tokens}, as built in the body.
 A step of the tokenizer implementation. Called by \code{morie_tokenizer_encode}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

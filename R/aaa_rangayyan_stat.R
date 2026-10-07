@@ -100,6 +100,7 @@ FormFactor <- function(x) {
 #' @param threshold Passed to \code{>}.
 #' @return A list with \code{turns}, \code{positions}.
 #' @export
+#' @keywords internal
 .morie_rg_turns <- function(seg, threshold) {
   if (length(seg) < 3L) {
     return(list(turns = 0L, positions = integer(0)))
@@ -423,6 +424,7 @@ FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
 #' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{psd}, \code{freqs}.
 #' @export
+#' @keywords internal
 .morie_rg_periodogram <- function(xs, fs) {
   m <- length(xs)
   mu <- .morie_fsum(xs) / m

@@ -19,3 +19,4 @@ A step of the rangayyan_class implementation. Called by \code{Accuracy}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

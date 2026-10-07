@@ -19,3 +19,4 @@ the source it follows.
 res <- .run_mapq_psychometrics_module_internal()
 res
 }
+\keyword{internal}

@@ -26,3 +26,4 @@ The value of \code{acc}, as built in the body.
 A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -17,3 +17,4 @@ A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map},
 \code{.pq_scalar} and 2 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

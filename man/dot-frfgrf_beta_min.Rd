@@ -24,3 +24,4 @@ See the file header for the source the module follows.
 res <- .frfgrf_beta_min(d = 3L)
 res
 }
+\keyword{internal}

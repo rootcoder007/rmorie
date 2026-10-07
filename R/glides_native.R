@@ -93,6 +93,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .glides_ipow(x = x, k = 3L)
 #' res
+#' @keywords internal
 .glides_ipow <- function(x, k) {
   p <- 1
   k <- as.integer(k)
@@ -110,6 +111,7 @@
 #' @param over Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{base}, as built in the body.
 #' @export
+#' @keywords internal
 .glides_merge <- function(base, over) {
   if (is.null(over)) return(base)
   for (nm in names(over)) base[[nm]] <- over[[nm]]
@@ -288,6 +290,7 @@ morie_glides_score <- function(vdw = 0, coulomb = 0, lipo = 0, hbond = 0,
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .glides_dist(a = A, b = b)
 #' res
+#' @keywords internal
 .glides_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Score a pose in the Glide form

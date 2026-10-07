@@ -45,6 +45,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .memb_sigmoid(x = x)
 #' res
+#' @keywords internal
 .memb_sigmoid <- function(x) 1 / (1 + exp(-x))
 #' .memb_softmax
 #'
@@ -58,6 +59,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .memb_softmax(z = y)
 #' res
+#' @keywords internal
 .memb_softmax <- function(z) {
   mx <- max(z)
   ez <- exp(z - mx)
@@ -417,6 +419,7 @@ precision_recall <- function(pred, truth) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .memb_sorted_features(vec = x)
 #' res
+#' @keywords internal
 .memb_sorted_features <- function(vec, top = NULL) {
   s <- sort(as.numeric(vec), decreasing = TRUE)
   if (is.null(top)) s else s[seq_len(min(top, length(s)))]
@@ -533,6 +536,7 @@ membership_inference <- memb
 #' @examples
 #' res <- .memb_cheatsheet()
 #' res
+#' @keywords internal
 .memb_cheatsheet <- function() {
   paste("memb: membership inference (Shokri et al. 2017). Black-box ",
         "output vector in, member/non-member out. Train k SHADOW ",
@@ -589,6 +593,7 @@ morie_memb <- function(op, ...) {
 #' @examples
 #' res <- .memb_rng(seed = 1L)
 #' res
+#' @keywords internal
 .memb_rng <- function(seed) .ghc_rng(seed)
 
 # The trainers' predictors return one probability row per query as a

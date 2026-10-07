@@ -21,3 +21,4 @@ A step of the grace_native implementation. Called by \code{.grace_generate_view}
 \code{morie_drop_edges}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

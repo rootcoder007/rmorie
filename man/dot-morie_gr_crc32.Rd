@@ -16,3 +16,4 @@ The value of \code{.morie_gr_xor32}.
 A step of the ml_geron implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

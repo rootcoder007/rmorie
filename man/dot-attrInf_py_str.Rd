@@ -17,3 +17,4 @@ A character value.
 "1.0" not "1", str(True) is "True" not "TRUE", str(None) is "None";
 reproducing those quirks keeps the sort identical to the Python arm.
 }
+\keyword{internal}

@@ -22,3 +22,4 @@ A list with \code{time}, \code{cumhaz}, \code{weight}.
 A step of the survival_more implementation. Called by \code{Coxsnell}, \code{Martingale}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

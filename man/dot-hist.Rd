@@ -18,3 +18,4 @@ The value of \code{list}.
 A step of the shdsmw_native implementation. Called by \code{shrinkage_msm}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

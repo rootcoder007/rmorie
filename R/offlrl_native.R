@@ -27,6 +27,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .offlrl_logsumexp(v = x)
 #' res
+#' @keywords internal
 .offlrl_logsumexp <- function(v) {
   m <- max(v)
   m + log(sum(exp(v - m)))
@@ -44,6 +45,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .offlrl_softmax(v = x)
 #' res
+#' @keywords internal
 .offlrl_softmax <- function(v) {
   m <- max(v)
   e <- exp(v - m)
@@ -62,6 +64,7 @@
 #' @param name Passed to \code{stop}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .offlrl_as_dist <- function(d, S, A, name) {
   if (is.null(d)) return(NULL)
   if (is.function(d)) {
@@ -99,6 +102,7 @@
 #' @param a Passed to \code{paste0}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .offlrl_key <- function(s, a) paste0(s, "\r", a)
 
 #' offlrl
@@ -369,6 +373,7 @@ conservative_q_learning <- offlrl
 #' @examples
 #' res <- .offlrl_cheatsheet()
 #' res
+#' @keywords internal
 .offlrl_cheatsheet <- function() {
   paste("offlrl: CQL (Kumar 2020). Fitted Q plus alpha*(push DOWN ",
         "E_mu[Q] - push UP E_pi_beta[Q]) so the Q-function LOWER ",

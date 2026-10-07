@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .morie_dp_seed(seed = 1L)
 res
 }
+\keyword{internal}

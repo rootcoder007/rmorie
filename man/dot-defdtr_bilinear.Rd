@@ -21,3 +21,4 @@ A step of the defdtr implementation. Called by \code{Defdtr}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

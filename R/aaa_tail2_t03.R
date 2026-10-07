@@ -34,6 +34,7 @@
 #'   res <- .morie_t2_inv(A = A)
 #'   res
 #' }
+#' @keywords internal
 .morie_t2_inv <- function(A) {
   k <- nrow(A)
   M <- cbind(A, diag(1, k))
@@ -230,6 +231,7 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 #' @param beta A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{loglik}, \code{score}, \code{info}, \code{nevent}.
 #' @export
+#' @keywords internal
 .morie_t2_coxterms <- function(time, event, X, beta) {
   n <- length(time)
   p <- length(beta)
@@ -390,6 +392,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' @param x Passed to \code{g}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_t2_viol <- function(constraints, x) {
   vapply(constraints, function(g) max(0, as.numeric(g(x))), numeric(1))
 }
@@ -405,6 +408,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' @param mu Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_t2_qpen <- function(f, constraints, x, mu) {
   v <- .morie_t2_viol(constraints, x)
   as.numeric(f(x)) + mu * sum(v * v)
@@ -425,6 +429,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_t2_fdgrad(fun = fn, x = x, h = 0.5)
 #' res
+#' @keywords internal
 .morie_t2_fdgrad <- function(fun, x, h) {
   g <- numeric(length(x))
   for (k in seq_along(x)) {

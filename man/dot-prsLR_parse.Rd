@@ -22,3 +22,4 @@ Nothing; this branch always raises.
 A step of the prsLR_native implementation. Called by \code{morie_parse}, \code{morie_prsLR}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

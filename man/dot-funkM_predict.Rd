@@ -30,3 +30,4 @@ See the file header for the source the module follows.
 .funkM_predict(3, 0.5, -0.25, matrix(c(1, 2), nrow = 1),
                matrix(c(0.5, -1), nrow = 1))
 }
+\keyword{internal}

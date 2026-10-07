@@ -63,6 +63,7 @@
 #' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tloilr_blip <- function(Q1, Q0) {
   a <- as.numeric(Q1)
   b <- as.numeric(Q0)
@@ -82,6 +83,7 @@
 #' @return A list with \code{tau}, \code{quantile}, \code{kappa}, \code{binding},
 #' \code{fraction_positive_blip}, \code{note}.
 #' @export
+#' @keywords internal
 .tloilr_resource_threshold <- function(B, kappa) {
   b <- sort(as.numeric(B))
   kp <- as.numeric(kappa)
@@ -112,6 +114,7 @@
 #' @param kappa Passed to \code{.tloilr_resource_threshold}.
 #' @return A list with \code{rule}, \code{tau}, \code{treated_fraction}, \code{binding}.
 #' @export
+#' @keywords internal
 .tloilr_constrained_rule <- function(B, kappa) {
   b <- as.numeric(B)
   t <- .tloilr_resource_threshold(b, kappa)
@@ -134,6 +137,7 @@
 #' \code{cost_of_constraint}, \code{tau}, \code{treated_fraction}, \code{kappa},
 #' \code{binding}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .tloilr_constrained_value <- function(Q1, Q0, kappa) {
   q1 <- as.numeric(Q1)
   q0 <- as.numeric(Q0)
@@ -166,6 +170,7 @@
 #' @examples
 #' res <- .tloilr_exceptional_law(B = 3L)
 #' res
+#' @keywords internal
 .tloilr_exceptional_law <- function(B, tol = 1e-9) {
   b <- as.numeric(B)
   n <- length(b)
@@ -186,6 +191,7 @@
 #' @examples
 #' res <- .tloilr_cheatsheet()
 #' res
+#' @keywords internal
 .tloilr_cheatsheet <- function() {
   paste0("tloilr: at most a proportion kappa can be treated, so the ",
          "rule is a THRESHOLD on the blip B(W) = Q(1,W) - Q(0,W): ",

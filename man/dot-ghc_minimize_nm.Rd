@@ -25,3 +25,4 @@ outer loop in morie_survvae(), which calls this helper up to six
 times per restart, each time from the current point -- exactly
 mirroring the "for _ in range(6)" loop in fit().
 }
+\keyword{internal}

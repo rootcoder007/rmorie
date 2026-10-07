@@ -18,3 +18,4 @@ The value of \code{.sech_sha256}.
 A step of the sechsh_native implementation. Called by \code{morie_sechsh_chain_entry}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

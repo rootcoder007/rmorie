@@ -17,6 +17,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_rg_aslist(x = x)
 #' res
+#' @keywords internal
 .morie_rg_aslist <- function(x) {
   if (is.null(x)) {
     return(numeric(0))
@@ -37,6 +38,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_rg_gridint(y = y)
 #' res
+#' @keywords internal
 .morie_rg_gridint <- function(y, x = NULL) {
   # Composite Simpson on a uniform grid with an even panel count (error
   # O(h^4)); trapezoid otherwise, which is what a non-uniform grid admits
@@ -73,6 +75,7 @@
 #' @param maxdepth Passed to \code{>=}. Defaults to \code{50L}.
 #' @return The value of \code{rec}.
 #' @export
+#' @keywords internal
 .morie_rg_quad <- function(f, a, b, tol = 1.49e-8, maxdepth = 50L) {
   # Adaptive Simpson, the same rule the Python arm's quad() uses, so the
   # two languages agree to their shared tolerance rather than to whatever
@@ -112,6 +115,7 @@
 #' @param upper Passed to \code{is.finite}. Defaults to \code{Inf}.
 #' @return The value of \code{.morie_rg_quad}.
 #' @export
+#' @keywords internal
 .morie_rg_pdfint <- function(f, pdf = NULL, x = NULL,
                              lower = -Inf, upper = Inf) {
   if (!is.null(x)) {
@@ -149,6 +153,7 @@
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-06}.
 #' @return A list with \code{pdf_mass}, \code{pdf_mass_ok}.
 #' @export
+#' @keywords internal
 .morie_rg_checkpdf <- function(mass, tol = 1e-6) {
   list(pdf_mass = as.numeric(mass), pdf_mass_ok = abs(mass - 1) <= tol)
 }

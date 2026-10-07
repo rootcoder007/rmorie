@@ -26,3 +26,4 @@ The value of \code{e}, as built in the body.
 A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

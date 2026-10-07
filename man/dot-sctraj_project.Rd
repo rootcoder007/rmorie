@@ -21,3 +21,4 @@ A step of the sctraj_native implementation. Called by \code{morie_sctraj},
 \code{morie_sctraj_principal_curve}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -30,3 +30,4 @@ The value of \code{out}, as built in the body.
 A step of the ngnest_native implementation. Called by \code{morie_ngnest}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

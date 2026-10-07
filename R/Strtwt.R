@@ -59,6 +59,7 @@ Strtwt <- function(A, H = NULL, S = NULL) {
 #' @param nm Passed to \code{sprintf}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @keywords internal
 .strtwt_cols <- function(X, n, nm) {
   if (is.null(X)) return(matrix(numeric(0), n, 0))
   M <- .s03mat(X)
@@ -76,6 +77,7 @@ Strtwt <- function(A, H = NULL, S = NULL) {
 #' @param a Passed to \code{.s03logit}.
 #' @return The value of \code{pmin}.
 #' @export
+#' @keywords internal
 .strtwt_fit <- function(Z, a) {
   b <- .s03logit(Z, a, 60L)
   p <- vapply(.s03matvec(Z, b), .s03sigmoid, 0)

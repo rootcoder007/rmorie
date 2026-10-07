@@ -24,3 +24,4 @@ Nothing; this branch always raises.
 A step of the krpkrg_native implementation. Called by \code{morie_krpkrg_ordinary_kriging}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

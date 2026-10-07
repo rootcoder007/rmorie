@@ -62,3 +62,4 @@ A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations},
 A step of the abcgp_native implementation. Called by \code{gps_abc}, \code{synthetic_abc}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

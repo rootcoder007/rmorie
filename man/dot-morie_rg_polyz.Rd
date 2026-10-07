@@ -20,3 +20,4 @@ A step of the rangayyan_filt implementation. Called by \code{BwDigital}, \code{B
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

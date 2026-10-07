@@ -19,3 +19,4 @@ vectors. Indices are kept 0-based, matching the Python source.
 \examples{
 .funkM_as_ratings(data.frame(u = c(0L, 1L), i = c(2L, 3L), r = c(4, 5)))
 }
+\keyword{internal}

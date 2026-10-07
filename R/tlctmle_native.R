@@ -71,6 +71,7 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' @examples
 #' res <- .ctmle_logit(p = 0.5)
 #' res
+#' @keywords internal
 .ctmle_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -89,6 +90,7 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ctmle_expit(x = x)
 #' res
+#' @keywords internal
 .ctmle_expit <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)
@@ -111,6 +113,7 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .ctmle_fluct(Q = 0.5, H = 0.5, Y = y)
 #' res
+#' @keywords internal
 .ctmle_fluct <- function(Q, H, Y, iters = 60L) {
   q <- as.numeric(Q)
   h <- as.numeric(H)
@@ -359,6 +362,7 @@ ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
 #' @examples
 #' res <- .tlctmle_cheatsheet()
 #' res
+#' @keywords internal
 .tlctmle_cheatsheet <- function() {
   paste("tlctmle: fitting g as well as possible ON ITS OWN TERMS ",
         "is the wrong objective -- a covariate that predicts ",

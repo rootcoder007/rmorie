@@ -22,3 +22,4 @@ A step of the RcppExports implementation. Called by \code{.morie_match_genetic_e
 \code{.morie_match_genetic_native}, \code{.morie_match_mahalanobis_native}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

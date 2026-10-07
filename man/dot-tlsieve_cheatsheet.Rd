@@ -18,3 +18,4 @@ the source it follows.
 res <- .tlsieve_cheatsheet()
 res
 }
+\keyword{internal}

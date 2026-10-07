@@ -24,3 +24,4 @@ A list with \code{w}, \code{info}.
 A step of the gentmt_native implementation. Called by \code{morie_gentmt}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

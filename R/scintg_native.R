@@ -88,6 +88,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .scintg_matrix(Z = X)
 #' res
+#' @keywords internal
 .scintg_matrix <- function(Z) {
   if (is.data.frame(Z)) Z <- as.matrix(Z)
   if (!is.matrix(Z)) {
@@ -128,6 +129,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .scintg_l2_normalise(Z = X)
 #' res
+#' @keywords internal
 .scintg_l2_normalise <- function(Z) {
   n <- sqrt(rowSums(Z * Z))
   n[n <= 0] <- 1
@@ -142,6 +144,7 @@
 #' @param batches A vector; its length is taken.
 #' @return A list with \code{phi}, \code{names}.
 #' @export
+#' @keywords internal
 .scintg_design <- function(batches) {
   names <- sort(unique(as.character(batches)))
   B <- length(names)
@@ -167,6 +170,7 @@
 #' elements indexed.
 #' @return A list with \code{O}, \code{E}, \code{batches}.
 #' @export
+#' @keywords internal
 .scintg_cluster_batch_counts <- function(R, batches, names = NULL) {
   K <- nrow(R)
   N <- ncol(R)
@@ -199,6 +203,7 @@
 #' @param theta Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A list with \code{total}, \code{fit}, \code{entropy}, \code{kl}.
 #' @export
+#' @keywords internal
 .scintg_harmony_objective <- function(Z, R, Y, batches, sigma = 0.1, theta = 2.0) {
   K <- nrow(R)
   N <- ncol(R)
@@ -228,6 +233,7 @@
 #' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{centres}, as built in the body.
 #' @export
+#' @keywords internal
 .scintg_kmeans_init <- function(Zn, K, seed) {
   N <- nrow(Zn)
   d <- ncol(Zn)
@@ -295,6 +301,7 @@
 #' @param B A matrix; passed to \code{ncol}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
+#' @keywords internal
 .scintg_solve <- function(A, B) {
   n <- nrow(A)
   m <- ncol(B)
@@ -336,6 +343,7 @@
 #' elements indexed.
 #' @return A list with \code{Z}, \code{W}, \code{batches}.
 #' @export
+#' @keywords internal
 .scintg_correct_batch <- function(Z, R, batches, lam = 1.0, reference = NULL) {
   rows <- .scintg_matrix(Z)
   N <- nrow(rows)
@@ -397,6 +405,7 @@
 #' @param diversity Compared against \code{"as_printed"}. Defaults to \code{"penalise"}.
 #' @return A list with \code{R}, \code{Y}, \code{K}, \code{objective}.
 #' @export
+#' @keywords internal
 .scintg_maximum_diversity_clustering <- function(Z, batches, K = NULL, sigma = 0.1,
                                                  theta = 2.0, max_iter = 25,
                                                  tol = 1e-5, seed = 0, Y = NULL,
@@ -581,6 +590,7 @@ singlecell_integration <- morie_scintg
 #' @examples
 #' res <- .scintg_cheatsheet()
 #' res
+#' @keywords internal
 .scintg_cheatsheet <- function() {
   paste(
     "scintg: Harmony (Korsunsky et al. 2019). Alternates maximum",

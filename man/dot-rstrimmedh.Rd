@@ -23,3 +23,4 @@ See the file header for the source the module follows.
 res <- .rstrimmedh(n = 3L, p = 0.5)
 res
 }
+\keyword{internal}

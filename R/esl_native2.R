@@ -41,6 +41,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_kernel_matrix(X = x)
 #' res
+#' @keywords internal
 .morie_kernel_matrix <- function(X, Z = NULL, kernel = "rbf", gamma = NULL,
                                  degree = 3, coef0 = 1) {
   X <- as.matrix(X)
@@ -88,6 +89,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_smo(K = A, y = b)
 #' res
+#' @keywords internal
 .morie_smo <- function(K, y, C = 1, tol = 1e-3, max_passes = 50L,
                        max_iter = 100000L, seed = 0L, p = NULL) {
   y <- as.numeric(y)
@@ -557,6 +559,7 @@ morie_esl_thin_plate_spline <- function(X, y, lambda_ = 1, newdata = NULL) {
 #' @param B A matrix; passed to \code{tcrossprod}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_tps_kernel <- function(A, B) {
   d2 <- .morie_esl_sqdist(A, B)
   out <- 0.5 * d2 * log(d2)
@@ -751,6 +754,7 @@ morie_esl_isomap <- function(X, k = 2, neighbors = 5) {
 #' @param adj A matrix; indexed by row and column.
 #' @return The value of \code{comps}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_n_components <- function(adj) {
   n <- nrow(adj)
   seen <- logical(n)

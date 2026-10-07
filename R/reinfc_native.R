@@ -22,6 +22,7 @@
 #' # the two branches keep both tails from overflowing
 #' .reinfc_logistic(800)
 #' .reinfc_logistic(-800)
+#' @keywords internal
 .reinfc_logistic <- function(s) {
   if (s >= 0.0) {
     return(1.0 / (1.0 + exp(-s)))
@@ -44,6 +45,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .reinfc_as_matrix(x = x, name = txt)
 #' res
+#' @keywords internal
 .reinfc_as_matrix <- function(x, name) {
   if (is.null(x)) {
     stop(sprintf("reinfc: %s must be non-empty", name))
@@ -79,6 +81,7 @@
 #' .reinfc_baseline_series(rewards, "none", 0.5)
 #' .reinfc_baseline_series(rewards, "mean", 0.5)
 #' .reinfc_baseline_series(rewards, "comparison", 0.5)
+#' @keywords internal
 .reinfc_baseline_series <- function(rewards, baseline, gamma) {
   n <- length(rewards)
   if (baseline == "none") {
@@ -115,6 +118,7 @@
 #' \code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last},
 #' \code{method}.
 #' @export
+#' @keywords internal
 .reinfc_finish <- function(param, rewards, bs, traj) {
   n <- length(rewards)
   tenth <- max(1, n %/% 10)
@@ -143,6 +147,7 @@
 #' @param gamma Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .reinfc_running_baseline <- function(state, baseline, gamma) {
   if (baseline == "none") {
     return(0.0)
@@ -168,6 +173,7 @@
 #' @param r Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .reinfc_advance_baseline <- function(state, baseline, gamma, r) {
   if (baseline == "comparison") {
     state$v1 <- gamma * state$v1 + (1.0 - gamma) * r
@@ -193,6 +199,7 @@
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{.reinfc_finish}.
 #' @export
+#' @keywords internal
 .reinfc_run_bernoulli <- function(reward_fn, pv, baseline, mode, rho, gamma, k, trials, rng) {
   n <- length(pv)
   p <- pv
@@ -249,6 +256,7 @@
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 .reinfc_run_logistic <- function(reward_fn, xs, wm, baseline, mode, alpha, gamma, k, trials,
                                  eligibility, rng) {
   n_units <- nrow(wm)
@@ -323,6 +331,7 @@
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 .reinfc_run_gaussian <- function(reward_fn, mu, sigma, baseline, mode, alpha, gamma, k,
                                  trials, rate_scaling, rng) {
   if (!(rate_scaling %in% c("sigma2", "none"))) {

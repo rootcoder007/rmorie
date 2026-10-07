@@ -19,3 +19,4 @@ A step of the mdpval_native implementation. Called by \code{morie_ddqn},
 \code{morie_mdpval}, \code{morie_qlearn} and 2 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

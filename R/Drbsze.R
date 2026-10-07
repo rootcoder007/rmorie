@@ -12,6 +12,7 @@
 #' @param df Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .drbsze_tquant <- function(p, df) {
   z <- .s03qnorm(p)
   g1 <- (z^3 + z) / 4

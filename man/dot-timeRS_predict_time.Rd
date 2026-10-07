@@ -52,3 +52,4 @@ A list with \code{prediction}, \code{user_bias}, \code{item_bias},
 A step of the timeRS_native implementation. Called by \code{morie_timeRS_predict_time}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

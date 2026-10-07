@@ -39,6 +39,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .stahdo_median(v = x)
 #' res
+#' @keywords internal
 .stahdo_median <- function(v) {
   v <- as.numeric(v)
   s <- sort(v)
@@ -65,6 +66,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .stahdo_mad(v = x)
 #' res
+#' @keywords internal
 .stahdo_mad <- function(v, consistent = TRUE) {
   v <- as.numeric(v)
   m <- .stahdo_median(v)
@@ -89,6 +91,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .stahdo_prep(X = X)
 #' res
+#' @keywords internal
 .stahdo_prep <- function(X) {
   if (is.data.frame(X)) {
     M <- as.matrix(X)
@@ -123,6 +126,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @examples
 #' res <- .stahdo_combn(n = 4L, p = 2L)
 #' res
+#' @keywords internal
 .stahdo_combn <- function(n, p) {
   if (p == 0L) return(list(integer(0L)))
   if (p > n) return(list())
@@ -158,6 +162,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param p Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .stahdo_null_vector <- function(rows, p) {
   nr <- nrow(rows)
   nc <- ncol(rows)
@@ -222,6 +227,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{dirs}, \code{exhaustive}.
 #' @export
+#' @keywords internal
 .stahdo_subsample_dirs <- function(M, n, p, n_dirs, seed) {
   total <- 1L
   for (i in 0L:(p - 1L)) {
@@ -273,6 +279,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .stahdo_random_dirs <- function(p, n_dirs, seed) {
   e <- .ghc_rng(as.integer(seed))
   out <- list()
@@ -299,6 +306,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @return A list with \code{outlyingness}, \code{n_directions}, \code{n_used},
 #' \code{exhaustive}, \code{directions}.
 #' @export
+#' @keywords internal
 .stahdo_outlyingness <- function(X, directions = "subsample",
                                  n_directions = 500, seed = 1) {
   if (!(directions %in% morie_stahdo_DIRECTIONS)) {
@@ -350,6 +358,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param cutoff Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .stahdo_weight <- function(r, cutoff) {
   c <- as.numeric(cutoff)
   ifelse(r <= c, 1.0, (c / r)^2)
@@ -364,6 +373,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .stahdo_chi2_cdf <- function(x, k) {
   if (x <= 0) return(0.0)
   a <- k / 2.0
@@ -409,6 +419,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @examples
 #' res <- .stahdo_chi2_median(p = 0.5)
 #' res
+#' @keywords internal
 .stahdo_chi2_median <- function(p) {
   lo <- 0.0
   hi <- 100.0 + 10.0 * p
@@ -439,6 +450,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' \code{n_used}, \code{exhaustive}, \code{directions}, \code{n_downweighted}, \code{n},
 #' \code{p}, \code{method}.
 #' @export
+#' @keywords internal
 .stahdo_stahel_donoho <- function(X, directions = "subsample",
                                   n_directions = 500, seed = 1,
                                   cutoff = NULL) {

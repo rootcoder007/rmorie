@@ -16,3 +16,4 @@ A numeric value.
 A step of the deseq2_native implementation. Called by \code{deseq2}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

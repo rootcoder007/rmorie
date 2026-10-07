@@ -70,6 +70,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gan_an_as_num(x = x)
 #' res
+#' @keywords internal
 .gan_an_as_num <- function(x) {
   as.numeric(x)
 }
@@ -84,6 +85,7 @@
 #' @param g_z Passed to \code{.gan_an_as_num}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gan_an_residual_loss_impl <- function(x, g_z) {
   a <- .gan_an_as_num(x)
   b <- .gan_an_as_num(g_z)
@@ -104,6 +106,7 @@
 #' @param f_gz Passed to \code{.gan_an_as_num}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gan_an_discrimination_loss_impl <- function(f_x, f_gz) {
   a <- .gan_an_as_num(f_x)
   b <- .gan_an_as_num(f_gz)
@@ -129,6 +132,7 @@
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A list with \code{score}, \code{residual}, \code{discrimination}, \code{lambda}.
 #' @export
+#' @keywords internal
 .gan_an_anomaly_score_impl <- function(x, g_z, f_x, f_gz, lam = 0.1) {
   l <- as.numeric(lam)
   if (l < 0.0 || l > 1.0) {
@@ -366,6 +370,7 @@ score_separation <- function(normal_scores, anomalous_scores) {
 #' @examples
 #' res <- .gan_an_cheatsheet()
 #' res
+#' @keywords internal
 .gan_an_cheatsheet <- function() {
   paste0(
     "gan_an: train a GAN on NORMAL data only, then score a query ",

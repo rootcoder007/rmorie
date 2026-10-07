@@ -24,3 +24,4 @@ A list with \code{S}, \code{A}, \code{S1}, \code{LP}.
 A step of the airl_native implementation. Called by \code{airl}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

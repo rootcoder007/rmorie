@@ -28,6 +28,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_face_key(v = x)
 #' res
+#' @keywords internal
 .morie_face_key <- function(v) paste(v, collapse = ",")
 
 #' Close maximal simplices under taking faces
@@ -102,6 +103,7 @@ morie_euler_characteristic <- function(maximal_simplices) {
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_gf2_rank(m = X)
 #' res
+#' @keywords internal
 .morie_gf2_rank <- function(m) {
   if (is.null(m) || nrow(m) == 0L || ncol(m) == 0L) return(0L)
   m <- m %% 2L

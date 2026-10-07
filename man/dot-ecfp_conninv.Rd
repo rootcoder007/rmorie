@@ -27,3 +27,4 @@ A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

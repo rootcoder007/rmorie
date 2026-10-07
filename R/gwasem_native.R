@@ -90,6 +90,7 @@ morie_gwasem_gower <- function(S) {
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .gwasem_eigh(M = A)
 #' res
+#' @keywords internal
 .gwasem_eigh <- function(M) {
   ee <- eigen(as.matrix(M), symmetric = TRUE)
   list(values = ee$values, vectors = ee$vectors)
@@ -110,6 +111,7 @@ morie_gwasem_gower <- function(S) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .gwasem_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .gwasem_solve <- function(A, b) {
   as.numeric(solve(A, b))
 }
@@ -126,6 +128,7 @@ morie_gwasem_gower <- function(S) {
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .gwasem_inv(A = A)
 #' res
+#' @keywords internal
 .gwasem_inv <- function(A) solve(A)
 
 #' .gwasem_slogdet
@@ -141,6 +144,7 @@ morie_gwasem_gower <- function(S) {
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .gwasem_slogdet(M = X)
 #' res
+#' @keywords internal
 .gwasem_slogdet <- function(M) {
   v <- svd(M)
   prod(v$d)
@@ -160,6 +164,7 @@ morie_gwasem_gower <- function(S) {
 #' @param ml A flag; the body branches on it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gwasem_loglik <- function(yt, Xt, d, ml) {
   n <- length(yt)
   p <- ncol(Xt)
@@ -195,6 +200,7 @@ morie_gwasem_gower <- function(S) {
 #' @param refine A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @return A list with \code{delta}, \code{sigma_a2}, \code{sigma_e2}, \code{loglik}.
 #' @export
+#' @keywords internal
 .gwasem_reml_delta <- function(y, X, evals, evecs, ml = FALSE,
                                 lo = -10, hi = 10, n_grid = 100L,
                                 refine = 60L) {
@@ -305,6 +311,7 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
 #' @param df2 Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .gwasem_f_sf <- function(f, df1, df2) {
   if (f <= 0) return(1.0)
   x <- df2 / (df2 + df1 * f)
@@ -357,6 +364,7 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .gwasem_norm_sf(z = y)
 #' res
+#' @keywords internal
 .gwasem_norm_sf <- function(z) 2 * pnorm(abs(z), lower.tail = FALSE)
 
 #' Genomic-control inflation factor

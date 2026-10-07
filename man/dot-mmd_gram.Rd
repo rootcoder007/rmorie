@@ -26,3 +26,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .mmd_gram(Z = y, kernel = txt, gamma = 0.5)
 res
 }
+\keyword{internal}

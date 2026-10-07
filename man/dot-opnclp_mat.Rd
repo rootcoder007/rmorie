@@ -21,3 +21,4 @@ X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2
 res <- .opnclp_mat(m = X)
 res
 }
+\keyword{internal}

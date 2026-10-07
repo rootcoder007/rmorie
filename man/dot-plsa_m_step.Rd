@@ -20,3 +20,4 @@ A list with \code{Pz}, \code{Pd_z}, \code{Pw_z}.
 A step of the plsa_native implementation. Called by \code{m_step}, \code{morie_plsa}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

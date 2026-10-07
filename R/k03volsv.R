@@ -19,6 +19,7 @@
 #' @param sig2 Numeric; combined arithmetically in the body.
 #' @return The value of \code{ll}, as built in the body.
 #' @export
+#' @keywords internal
 .k03_kalman_qll <- function(y, mu, phi, sig2) {
   n <- length(y)
   if (!(phi > -0.999999 && phi < 0.999999) || sig2 <= 0) return(-1e300)
@@ -52,6 +53,7 @@
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{80L}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .k03_golden <- function(f, lo, hi, iters = 80L) {
   x1 <- lo + .k03_gold * (hi - lo)
   x2 <- hi - .k03_gold * (hi - lo)

@@ -22,6 +22,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_qrs_pad(v = x, k = 3L)
 #' res
+#' @keywords internal
 .morie_qrs_pad <- function(v, k) c(rep(0, k), v)
 
 #' Causal m-point moving average; the first m-1 outputs use a short
@@ -34,6 +35,7 @@
 #' @param m Numeric; passed to \code{min}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_qrs_mavg <- function(x, m) {
   # Causal m-point moving average; the first m-1 outputs use a short window.
   # The running sum is accumulated in the same order as the Python arm, so
@@ -63,6 +65,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_qrs_dft(x = x)
 #' res
+#' @keywords internal
 .morie_qrs_dft <- function(x) {
   # Plain O(n^2) DFT.  The angle is formed as w * j with w = -2 pi k / n,
   # NOT as -2 pi k j / n: the two differ in the last bits and the Python arm
@@ -90,6 +93,7 @@
 #' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{freqs}, \code{power}.
 #' @export
+#' @keywords internal
 .morie_qrs_psd <- function(x, fs) {
   # One-sided periodogram; power in units^2/Hz.
   n <- length(x)
@@ -116,6 +120,7 @@
 #' @param m Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_qrs_peaks <- function(g, th, m) {
   # Peak set {p} of eq (4.6): above th and strictly greater than the m
   # neighbours on each side.
@@ -147,6 +152,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_qrs_ptbp(x = x)
 #' res
+#' @keywords internal
 .morie_qrs_ptbp <- function(x) {
   # Pan-Tompkins bandpass: eq (4.8) lowpass then eq (4.13) highpass.  The
   # coefficients are integers tied to fs = 200 Hz (book, Section 4.3.2) and
@@ -183,6 +189,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_qrs_ptderiv(x = x)
 #' res
+#' @keywords internal
 .morie_qrs_ptderiv <- function(x) {
   # Pan-Tompkins derivative, eq (4.14).
   n <- length(x)
@@ -204,6 +211,7 @@
 #' @param fs Numeric; combined arithmetically in the body.
 #' @return A list with \code{bp}, \code{dv}, \code{sq}, \code{ig}, \code{w}.
 #' @export
+#' @keywords internal
 .morie_qrs_chain <- function(x, fs) {
   # Full Pan-Tompkins front end: bandpass, derivative, square, integrate.
   bp <- .morie_qrs_ptbp(x)
@@ -222,6 +230,7 @@
 #' @param b A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_qrs_corr <- function(a, b) {
   n <- length(a)
   if (n != length(b) || n < 2L) {
@@ -252,6 +261,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_qrs_check(x = x)
 #' res
+#' @keywords internal
 .morie_qrs_check <- function(x, least = 1L, what = "signal") {
   v <- if (is.null(x)) numeric(0) else as.numeric(x)
   if (length(v) < least) {
@@ -269,6 +279,7 @@
 #' @param fs A vector; its length is taken.
 #' @return The value of \code{fs}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_qrs_fs <- function(fs) {
   fs <- as.numeric(fs)
   if (!(length(fs) == 1L && is.finite(fs) && fs > 0)) stop("fs must be positive")
@@ -287,6 +298,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_qrs_median(v = x)
 #' res
+#' @keywords internal
 .morie_qrs_median <- function(v) {
   s <- sort(v)
   m <- length(s)
@@ -305,6 +317,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_qrs_mean(v = x)
 #' res
+#' @keywords internal
 .morie_qrs_mean <- function(v) if (length(v)) .morie_fsum(v) / length(v) else NULL
 
 #' 0-based argmax over the half-open range [lo, hi); first max on ties,
@@ -316,6 +329,7 @@
 #' @param hi Passed to \code{:}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_qrs_argmax <- function(v, lo, hi) {
   # 0-based argmax over the half-open range [lo, hi); first max on ties,
   # exactly as Python's max(range(...), key=...).
@@ -333,6 +347,7 @@
 #' @param hi Passed to \code{:}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_qrs_argmin <- function(v, lo, hi) {
   lo + which.min(v[(lo + 1L):hi]) - 1L
 }

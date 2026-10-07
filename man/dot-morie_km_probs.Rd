@@ -26,3 +26,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .morie_km_probs(p = 0.5, name = txt)
 res
 }
+\keyword{internal}

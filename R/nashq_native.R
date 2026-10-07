@@ -23,6 +23,7 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @keywords internal
 .nashq_mat <- function(M, name) {
   M <- as.matrix(M)
   if (!is.numeric(M)) {
@@ -49,6 +50,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .nashq_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .nashq_solve <- function(A, b) {
   n <- nrow(A)
   M <- cbind(A, b)
@@ -82,6 +84,7 @@
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .nashq_indifference <- function(payoff, k) {
   # unknowns x_0..x_{k-1}, v
   Aeq <- matrix(0, nrow = k + 1L, ncol = k + 1L)
@@ -112,6 +115,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .nashq_payoff(M = X, p = 0.5, q = 0.5)
 #' res
+#' @keywords internal
 .nashq_payoff <- function(M, p, q) {
   tot <- 0
   for (i in seq_along(p)) {
@@ -135,6 +139,7 @@
 #' @param tol Numeric; combined arithmetically in the body.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .nashq_is_equilibrium <- function(A, B, p, q, tol) {
   va <- .nashq_payoff(A, p, q)
   vb <- .nashq_payoff(B, p, q)
@@ -221,6 +226,7 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
 #' @param tol Numeric; combined arithmetically in the body.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .nashq_is_saddle <- function(A, B, p, q, tol) {
   # Definition 13: each agent gains when the OTHER deviates.
   for (j in seq_len(ncol(A))) {
@@ -299,6 +305,7 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 #' @param tol Numeric; combined arithmetically in the body.
 #' @return The value of \code{[[}.
 #' @export
+#' @keywords internal
 .nashq_select <- function(A, B, selection, agent, tol) {
   eqs <- nash_equilibria_bimatrix(A, B, tol)
   if (length(eqs) == 0L) return(NULL)
@@ -348,6 +355,7 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 #' @param rng_e Passed to \code{.ghc_unif}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .nashq_pick <- function(M, A, who, epsilon, rng_e) {
   if (.ghc_unif(rng_e, 1L) < epsilon) {
     return(as.integer(.ghc_unif(rng_e, 1L) * length(A)) + 1L)
@@ -531,6 +539,7 @@ nashqlearning <- morie_nashq
 #' @examples
 #' res <- .nashq_cheatsheet()
 #' res
+#' @keywords internal
 .nashq_cheatsheet <- function() {
   paste0("nashq: Q^i over JOINT actions; update with the stage-game ",
          "Nash payoff instead of a max -- Q^i <- (1-a)Q^i + ",

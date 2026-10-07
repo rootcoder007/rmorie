@@ -81,6 +81,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .hyper2_dist(a = A, b = b)
 #' res
+#' @keywords internal
 .hyper2_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Covariance between two sets of inputs
@@ -131,6 +132,7 @@ morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
 #' @param v Numeric; combined arithmetically in the body.
 #' @return The value of \code{K}, as built in the body.
 #' @export
+#' @keywords internal
 .hyper2_jit <- function(K, v) {
   n <- nrow(K)
   for (i in seq_len(n)) K[i, i] <- K[i, i] + v
@@ -182,6 +184,7 @@ morie_hyper2_logml <- function(y, X, log_ls, log_sf, log_sn, kind) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .hyper2_logprior(theta = x)
 #' res
+#' @keywords internal
 .hyper2_logprior <- function(theta)
   .w3_csum(-0.5 * theta * theta - 0.5 * log(2 * pi))
 
@@ -241,6 +244,7 @@ morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
 #' @param e Passed to \code{.ghc_norm}.
 #' @return The value of \code{f}, as built in the body.
 #' @export
+#' @keywords internal
 .hyper2_elliptical <- function(logl, f, L, e) {
   n <- length(f)
   nu <- vapply(seq_len(n), function(i) .ghc_norm(e, 1L), numeric(1))

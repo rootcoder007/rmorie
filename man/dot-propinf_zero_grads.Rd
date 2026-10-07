@@ -24,3 +24,4 @@ z <- .propinf_zero_grads(m)
 length(z$psis)
 is.null(z$psis[[1]])
 }
+\keyword{internal}

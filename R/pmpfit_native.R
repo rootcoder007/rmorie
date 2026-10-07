@@ -227,6 +227,7 @@ morie_pmpfit_cheatsheet <- function() {
 #' @param b Passed to \code{.ghc_gamma}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .ghc_beta <- function(e, a, b) {
   g1 <- .ghc_gamma(e, a)
   g2 <- .ghc_gamma(e, b)
@@ -245,6 +246,7 @@ morie_pmpfit_cheatsheet <- function() {
 #' @param shape Numeric; combined arithmetically in the body.
 #' @return The value of \code{repeat}.
 #' @export
+#' @keywords internal
 .ghc_gamma <- function(e, shape) {
   if (shape < 1.0) {
     u <- max(.ghc_unif(e, 1L), 1e-15)

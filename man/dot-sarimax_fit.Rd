@@ -41,3 +41,4 @@ A step of the sarimax_native implementation. Called by \code{.try_fit}, \code{mo
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

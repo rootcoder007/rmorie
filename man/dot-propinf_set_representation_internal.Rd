@@ -28,3 +28,4 @@ net <- list(
 )
 .propinf_set_representation_internal(net)[[1]]
 }
+\keyword{internal}

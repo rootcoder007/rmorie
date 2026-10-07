@@ -23,3 +23,4 @@ it follows.
 res <- .kvmse_rotation(d = 3L, seed = 1L)
 res
 }
+\keyword{internal}

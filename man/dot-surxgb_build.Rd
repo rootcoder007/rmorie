@@ -33,3 +33,4 @@ A list with \code{leaf}, \code{variable}, \code{cut}, \code{gain},
 A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

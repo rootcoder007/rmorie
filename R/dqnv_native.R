@@ -69,6 +69,7 @@
 #' @param hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .dqnv_clip_reward <- function(r, lo = -1.0, hi = 1.0) {
   max(as.numeric(lo), min(as.numeric(hi), as.numeric(r)))
 }
@@ -85,6 +86,7 @@
 #' @param done Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .dqnv_td_target <- function(r, s2, Q_target, gamma = 0.99, done = FALSE) {
   if (as.logical(done)) {
     return(as.numeric(r))
@@ -104,6 +106,7 @@
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.99}.
 #' @return The value of \code{worst}, as built in the body.
 #' @export
+#' @keywords internal
 .dqnv_bellman_residual <- function(Q, P, R, gamma = 0.99) {
   nS <- length(Q)
   nA <- length(Q[[1L]])
@@ -134,6 +137,7 @@
 #' @param capacity Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{capacity}, \code{data}.
 #' @export
+#' @keywords internal
 .dqnv_replay_buffer_new <- function(capacity) {
   capacity <- as.integer(capacity)
   if (capacity < 1L) stop("dqnv: the capacity must be at least 1")
@@ -153,6 +157,7 @@
 #' @param done Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
 #' @return The value of \code{buf}, as built in the body.
 #' @export
+#' @keywords internal
 .dqnv_replay_buffer_add <- function(buf, s, a, r, s2, done = FALSE) {
   buf$data[[length(buf$data) + 1L]] <- list(
     s, as.integer(a), as.numeric(r), as.integer(s2), as.logical(done)
@@ -173,6 +178,7 @@
 #' @param rng_state Passed to \code{.ghc_unif}.
 #' @return A list with \code{state}, \code{samples}.
 #' @export
+#' @keywords internal
 .dqnv_replay_buffer_sample <- function(buf, n, rng_state) {
   if (length(buf$data) == 0L) stop("dqnv: the buffer is empty")
   m <- min(as.integer(n), length(buf$data))
@@ -199,6 +205,7 @@
 #' @param buf A list; the body reads \code{$data} from it.
 #' @return The value of \code{length}.
 #' @export
+#' @keywords internal
 .dqnv_replay_buffer_len <- function(buf) {
   length(buf$data)
 }
@@ -331,6 +338,7 @@ morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
 #' @examples
 #' res <- .dqnv_cheatsheet()
 #' res
+#' @keywords internal
 .dqnv_cheatsheet <- function() {
   paste("dqnv: the LEARNING RULE is ordinary Q-learning; what",
         "changed is the data and the target. EXPERIENCE REPLAY",

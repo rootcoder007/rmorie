@@ -29,6 +29,7 @@
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .pate_lap_draw <- function(e, gamma) {
   u <- .ghc_unif(e, 1L) - 0.5
   -sign(u) * log(1 - 2 * abs(u)) / gamma
@@ -352,6 +353,7 @@ pate <- function(teacher_predicts, queries, gamma = 0.05,
 #' @examples
 #' res <- .pate_cheatsheet()
 #' res
+#' @keywords internal
 .pate_cheatsheet <- function() {
   paste("pate: private aggregation of teacher ensembles (Papernot et ",
         "al. 2017). Teachers trained on disjoint partitions vote; the ",

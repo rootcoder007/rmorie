@@ -20,6 +20,7 @@ NULL
 #' @param hi Passed to \code{pmin}.
 #' @return The value of \code{pmin}.
 #' @export
+#' @keywords internal
 .b1_bound <- function(v, lo, hi) pmin(hi, pmax(lo, v))
 
 #' .b1_logit
@@ -34,6 +35,7 @@ NULL
 #' @examples
 #' res <- .b1_logit(p = 0.5)
 #' res
+#' @keywords internal
 .b1_logit <- function(p) {
   p <- .b1_bound(p, 1e-12, 1 - 1e-12)
   log(p / (1 - p))
@@ -52,6 +54,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .b1_expit(x = x)
 #' res
+#' @keywords internal
 .b1_expit <- function(x) {
   ifelse(x >= 0, 1 / (1 + exp(-x)),
     exp(x) / (1 + exp(x))
@@ -76,6 +79,7 @@ NULL
 #' @return A list with \code{epsilon}, \code{QAstar}, \code{Q1star}, \code{Q0star},
 #' \code{g1}, \code{g0}, \code{H1}, \code{H0}.
 #' @export
+#' @keywords internal
 .b1_target <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025,
                        iters = 100, tol = 1e-12) {
   n <- length(Y)
@@ -120,6 +124,7 @@ NULL
 #' \code{$Q1star}, \code{$QAstar} from it.
 #' @return A list with \code{mu1}, \code{mu0}, \code{ic1}, \code{ic0}.
 #' @export
+#' @keywords internal
 .b1_curves <- function(Y, A, fit) {
   n <- length(Y)
   mu1 <- mean(fit$Q1star)

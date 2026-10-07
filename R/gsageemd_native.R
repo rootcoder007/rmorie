@@ -25,6 +25,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gsageemd_mat(x = x)
 #' res
+#' @keywords internal
 .gsageemd_mat <- function(x) {
   # k.mat's contract: accept a list of vectors OR a matrix, yield a matrix.
   m <- if (is.matrix(x)) x else if (is.data.frame(x)) as.matrix(x) else
@@ -254,6 +255,7 @@ morie_gsageemd <- morie_gsageemd_embed
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gsage_norm(v = x)
 #' res
+#' @keywords internal
 .gsage_norm <- function(v) {
   n <- sqrt(sum(v * v))
   if (n <= .GSAGE_EPS) v else v / n

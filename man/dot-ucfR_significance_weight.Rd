@@ -18,3 +18,4 @@ A numeric value.
 A step of the ucfR_native implementation. Called by \code{.ucfR_pearson}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

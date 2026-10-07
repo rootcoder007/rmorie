@@ -23,3 +23,4 @@ A vector, from \code{vapply}.
 The draw is coordinate by coordinate so the stream position matches
 the Python arm term for term.
 }
+\keyword{internal}

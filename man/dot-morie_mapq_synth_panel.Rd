@@ -23,3 +23,4 @@ stage has a real signal to recover.
 res <- .morie_mapq_synth_panel()
 res
 }
+\keyword{internal}

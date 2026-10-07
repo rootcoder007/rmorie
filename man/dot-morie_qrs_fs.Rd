@@ -17,3 +17,4 @@ A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr},
 \code{CPulseFeat}, \code{DicNotch} and 20 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

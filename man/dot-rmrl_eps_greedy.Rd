@@ -24,3 +24,4 @@ would turn the initial behaviour into a systematic drift. rng is a
 .ghc_rng state: the Python arm draws rng.random() from
 np.random.default_rng(seed), bit-identical to .ghc_unif here.
 }
+\keyword{internal}

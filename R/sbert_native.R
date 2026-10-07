@@ -33,6 +33,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .sbert_mat(x = x)
 #' res
+#' @keywords internal
 .sbert_mat <- function(x) {
   if (is.list(x) && !is.matrix(x)) return(do.call(rbind, x))
   if (is.matrix(x)) { storage.mode(x) <- "double"
@@ -54,6 +55,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .sbert_vec(x = x)
 #' res
+#' @keywords internal
 .sbert_vec <- function(x) {
   if (is.list(x)) return(as.numeric(unlist(x)))
   as.numeric(x)
@@ -243,6 +245,7 @@ sts_score <- function(pairs, embed) {
 #' @examples
 #' res <- .sbert_cheatsheet()
 #' res
+#' @keywords internal
 .sbert_cheatsheet <- function() {
   paste("sbert: BERT scores a PAIR, so comparing n sentences needs ",
         "C(n,2) forward passes -- 10k sentences is ~50M. A SIAMESE ",

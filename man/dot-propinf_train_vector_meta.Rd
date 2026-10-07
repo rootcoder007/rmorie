@@ -34,3 +34,4 @@ meta <- .propinf_train_vector_meta(feats, labs, 8L, 100L, 0.05, 0L)
 round(vapply(feats, function(f) .propinf_vector_meta_predict(meta, f),
              numeric(1)), 2)
 }
+\keyword{internal}

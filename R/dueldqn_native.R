@@ -23,6 +23,7 @@
 #' @param mode Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .dueldqn_check_mode <- function(mode) {
   if (!(mode %in% .dueldqn_AGGS))
     stop(sprintf("duel: mode must be one of %s, got '%s'",
@@ -40,6 +41,7 @@
 #' @param mode One of \code{"max"}, \code{"mean"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .dueld_anchor <- function(a, mode) {
   if (mode == "mean") {
     sum(a) / length(a)
@@ -134,6 +136,7 @@ duelingdqn <- dueling_q
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .dueldqn_argmax(x = x)
 #' res
+#' @keywords internal
 .dueldqn_argmax <- function(x) {
   b <- 1L
   if (length(x) > 1L) {

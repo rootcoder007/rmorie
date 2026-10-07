@@ -23,3 +23,4 @@ See the file header for the source the module follows.
 res <- .hapblk_ci(h = c(40, 10, 10, 40))
 res
 }
+\keyword{internal}

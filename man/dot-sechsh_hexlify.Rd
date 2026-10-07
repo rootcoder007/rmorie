@@ -17,3 +17,4 @@ A step of the sechsh_native implementation. Called by \code{build_chain},
 \code{verify_inclusion}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

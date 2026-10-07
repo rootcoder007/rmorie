@@ -27,3 +27,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .morie_gr_mat(x = x, name = txt)
 res
 }
+\keyword{internal}

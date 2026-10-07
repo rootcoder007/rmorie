@@ -22,3 +22,4 @@ The value of \code{se}, as built in the body.
 A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

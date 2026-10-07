@@ -23,3 +23,4 @@ The value of \code{repeat}.
 order -- while spreading the seeds over the whole index range the way
 random draws would.
 }
+\keyword{internal}

@@ -27,6 +27,7 @@
 #' @param A A matrix; indexed by row and column.
 #' @return The value of \code{A}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_t2_checkadj <- function(A) {
   A <- as.matrix(A)
   storage.mode(A) <- "double"
@@ -59,6 +60,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .morie_t2_neigh(A = A, n = 3L)
 #' res
+#' @keywords internal
 .morie_t2_neigh <- function(A, n) {
   lapply(seq_len(n), function(i) {
     v <- which(A[i, ] != 0)
@@ -238,6 +240,7 @@ BipartSpec <- function(A) {
 #' @param lit Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_t2_simplify <- function(clauses, lit) {
   out <- list()
   for (cl in clauses) {

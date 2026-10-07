@@ -17,3 +17,4 @@ A vector, from \code{vapply}.
 more accurate, but parity requires the same approximation in both
 languages, so LCG-driven chains agree draw for draw.
 }
+\keyword{internal}

@@ -27,3 +27,4 @@ A list with \code{qa}, \code{q1}, \code{q0}, \code{eps}.
 \description{
 clever covariate A/G - (1-A)/(1-G); returns updated fits and epsilon
 }
+\keyword{internal}

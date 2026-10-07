@@ -25,3 +25,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .groebn_sub(f = fn, g = g)
 res
 }
+\keyword{internal}

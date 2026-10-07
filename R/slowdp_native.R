@@ -26,6 +26,7 @@
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .slowdp_beta1alpha <- function(e, alpha) {
   u <- .ghc_unif(e, 1L)
   u <- min(max(u, 1e-15), 1.0 - 1e-15)
@@ -215,6 +216,7 @@ truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
 #' @examples
 #' res <- .slowdp_cheatsheet()
 #' res
+#' @keywords internal
 .slowdp_cheatsheet <- function() {
   paste0("slowdp: Sethuraman writes the DP as a PROGRAM -- ",
          "p_k = V_k prod(1 - V_l) with V_k ~ Beta(1, alpha) and ",

@@ -24,6 +24,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .deseq2_erf(x = x)
 #' res
+#' @keywords internal
 .deseq2_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .deseq2_erfc
 #'
@@ -37,6 +38,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .deseq2_erfc(x = x)
 #' res
+#' @keywords internal
 .deseq2_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .ghc_DESEQ2_EPS <- 1e-12
@@ -50,6 +52,7 @@
 #' @param x Positive numeric.
 #' @return Numeric scalar.
 #' @export
+#' @keywords internal
 .deseq2_trigamma <- function(x) {
   x <- as.numeric(x)
   if (x <= 0) stop("deseq2: trigamma needs x > 0")
@@ -77,6 +80,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ghc_deseq2_median(v = x)
 #' res
+#' @keywords internal
 .ghc_deseq2_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -96,6 +100,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ghc_deseq2_mad(v = x)
 #' res
+#' @keywords internal
 .ghc_deseq2_mad <- function(v) {
   m <- .ghc_deseq2_median(v)
   .ghc_deseq2_median(abs(v - m)) / 0.6744897501960817
@@ -146,6 +151,7 @@ size_factors <- function(counts) {
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @keywords internal
 .ghc_deseq2_nb_loglik <- function(K, mu, alpha) {
   if (alpha <= 0) {
     tot <- 0
@@ -171,6 +177,7 @@ size_factors <- function(counts) {
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{ld}, as built in the body.
 #' @export
+#' @keywords internal
 .ghc_deseq2_xtwx_logdet <- function(X, mu, alpha) {
   p <- ncol(X)
   M <- matrix(0, p, p)
@@ -295,6 +302,7 @@ nb_glm_fit <- function(K, X, alpha, s = NULL, lam = NULL,
 #' @param refine A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ghc_deseq2_maximise_log_alpha <- function(obj, lo = -15, hi = 5,
                                            n_grid = 60L, refine = 60L) {
   best_u <- lo
@@ -414,6 +422,7 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #' @examples
 #' res <- .deseq2_benjamini_hochberg(p = 0.5)
 #' res
+#' @keywords internal
 .deseq2_benjamini_hochberg <- function(p) {
   n <- length(p)
   order_idx <- order(p)
@@ -440,6 +449,7 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .ghc_deseq2_norm_cdf(z = y)
 #' res
+#' @keywords internal
 .ghc_deseq2_norm_cdf <- function(z) 0.5 * (1 + .deseq2_erf(z / sqrt(2)))
 
 #' .ghc_deseq2_norm_ppf
@@ -450,6 +460,7 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #' @param pr Passed to \code{<}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ghc_deseq2_norm_ppf <- function(pr) {
   lo <- -40
   hi <- 40
@@ -469,6 +480,7 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #' @param pr Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ghc_deseq2_quantile <- function(v, pr) {
   s <- sort(v)
   if (length(s) == 0L) stop("deseq2: empty quantile")
@@ -651,6 +663,7 @@ deseq2 <- function(counts, design, contrast = NULL, size = NULL,
 #' @examples
 #' res <- .deseq2_cheatsheet()
 #' res
+#' @keywords internal
 .deseq2_cheatsheet <- function() {
   paste("deseq2: RNA-seq differential expression (Love, Huber & Anders",
         "2014). NB GLM with log link, Var = mu + alpha mu^2. Size",

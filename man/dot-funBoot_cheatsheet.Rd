@@ -17,3 +17,4 @@ header for the source it follows.
 res <- .funBoot_cheatsheet()
 res
 }
+\keyword{internal}

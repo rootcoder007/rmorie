@@ -21,6 +21,7 @@
 #' @param cps Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .changepoints <- function(t, n.cp, range = 0.8, cps = NULL) {
   if (!is.null(cps)) return(as.numeric(cps))
   n <- length(t)

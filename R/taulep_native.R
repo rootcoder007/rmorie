@@ -15,6 +15,7 @@
 #' @param lam Passed to \code{<=}.
 #' @return The value of \code{repeat}.
 #' @export
+#' @keywords internal
 .taulep_poisson <- function(e, lam) {
   if (lam <= 0) return(0L)
   k <- 0L

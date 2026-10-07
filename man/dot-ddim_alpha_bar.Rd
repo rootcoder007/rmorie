@@ -19,3 +19,4 @@ A step of the ddimst implementation. Called by \code{Ddimst}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

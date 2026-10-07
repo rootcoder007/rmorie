@@ -184,6 +184,7 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' @export
 #' @examples
 #' .funkM_as_ratings(data.frame(u = c(0L, 1L), i = c(2L, 3L), r = c(4, 5)))
+#' @keywords internal
 .funkM_as_ratings <- function(ratings) {
   if (is.data.frame(ratings)) {
     if (!all(c("u", "i", "r") %in% names(ratings))) {
@@ -228,6 +229,7 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' @examples
 #' R <- .funkM_as_ratings(data.frame(u = 0:2, i = 0:2, r = c(1, 2, 6)))
 #' .funkM_global_mean(R)
+#' @keywords internal
 .funkM_global_mean <- function(R) {
   if (nrow(R) == 0L) stop("funkM: no ratings given")
   sum(R$r) / as.numeric(nrow(R))
@@ -251,6 +253,7 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' # the bias model plus the factor dot product
 #' .funkM_predict(3, 0.5, -0.25, matrix(c(1, 2), nrow = 1),
 #'                matrix(c(0.5, -1), nrow = 1))
+#' @keywords internal
 .funkM_predict <- function(mu, b_user, b_item, p_u, q_i) {
   if (length(p_u) != length(q_i)) {
     stop(sprintf("funkM: the factors differ in width (%d, %d)",
@@ -294,6 +297,7 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' st$rmse
 #' # the updated parameters come back with it
 #' names(st)
+#' @keywords internal
 .funkM_sgd_epoch <- function(R, mu, bu, bi, P, Q, lr, reg, factor = NULL) {
   se <- 0.0
   n  <- nrow(R)
@@ -446,6 +450,7 @@ morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
 #' @examples
 #' res <- .funkM_cheatsheet()
 #' res
+#' @keywords internal
 .funkM_cheatsheet <- function() {
   paste("funkM: a true SVD needs a COMPLETE matrix and a ratings",
         "matrix is >99% missing -- filling the holes with zeros or",

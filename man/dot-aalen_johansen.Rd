@@ -23,3 +23,4 @@ ALL-CAUSE Kaplan-Meier: leaving it out gives 1 - KM computed on the
 cause alone, which over-states the incidence whenever a competing
 event can happen first.
 }
+\keyword{internal}

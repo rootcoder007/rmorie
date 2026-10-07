@@ -32,3 +32,4 @@ A list with \code{beta}, \code{se}, \code{time_ratio}, \code{sigma},
 A step of the aft_native implementation. Called by \code{.morie_aft_common}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

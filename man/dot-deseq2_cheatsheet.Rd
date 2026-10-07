@@ -16,3 +16,4 @@ One-screen reminder of the module's entry points, printed to the console.
 res <- .deseq2_cheatsheet()
 res
 }
+\keyword{internal}

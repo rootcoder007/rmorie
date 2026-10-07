@@ -24,3 +24,4 @@ entire point of their Sec. 5, since that subpopulation is the one the
 data can actually identify.  The estimators report n_discarded and an
 estimand note whenever this route is taken.
 }
+\keyword{internal}

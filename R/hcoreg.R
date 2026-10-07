@@ -130,6 +130,7 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 #' @param coords A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @keywords internal
 .s03pairs <- function(coords) {
   if (is.matrix(coords) || is.data.frame(coords)) {
     m <- as.matrix(coords)
@@ -160,6 +161,7 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 #' @param v Passed to \code{.s03lens}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .s03hcU <- function(r, v) 2 * pi * r * r - .s03lens(r, v)
 
 # Equation (3.6.4) p. 47.
@@ -174,6 +176,7 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 #' @param lam Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .s03hcK1 <- function(r, v, lam) {
   if (v < r) return(0)
   exp(-lam * .s03hcU(r, v))
@@ -191,6 +194,7 @@ Hcoreg <- function(coords, r, lam, model = 2) {
 #' @param lam Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .s03hcK2 <- function(r, v, lam) {
   if (v < r) return(0)
   gam <- pi * r * r

@@ -17,3 +17,4 @@ A list with \code{assignment}, \code{device_loads}, \code{max_load}, \code{imbal
 \description{
 minimising the maximum device load (prefix-sum greedy assignment).
 }
+\keyword{internal}

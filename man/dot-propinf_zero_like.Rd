@@ -23,3 +23,4 @@ net <- .propinf_mlp_init(c(3L, 4L, 1L), .propinf_rng(1L))
 z <- .propinf_zero_like(net)
 all(unlist(lapply(z, function(L) c(L$W, L$b))) == 0)
 }
+\keyword{internal}

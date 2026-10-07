@@ -23,3 +23,4 @@ A step of the horowitz_native7 implementation. Called by
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

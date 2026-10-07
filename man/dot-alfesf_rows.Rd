@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 .alfesf_rows(matrix(1:6, nrow = 2), "features")
 .alfesf_rows(list(c(1, 2, 3), c(4, 5, 6)), "features")
 }
+\keyword{internal}

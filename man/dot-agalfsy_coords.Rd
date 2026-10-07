@@ -24,3 +24,4 @@ the source it follows.
 # a list of triples is accepted too
 .agalfsy_coords(list(c(1, 2, 3), c(4, 5, 6)), "ligand")
 }
+\keyword{internal}

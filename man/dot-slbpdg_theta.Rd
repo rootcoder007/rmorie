@@ -28,3 +28,4 @@ sampler needs for components it has to invent to cover the slice --
 they are not fitted to anything, so their parameters must come from
 the prior and not from some neighbour.
 }
+\keyword{internal}

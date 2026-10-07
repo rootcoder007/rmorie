@@ -27,6 +27,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .t2_lvl(a = A, b = b)
 #' res
+#' @keywords internal
 .t2_lvl <- function(a, b) sort(unique(c(a, b)))
 
 #' Cohen (1960) kappa for two raters
@@ -72,6 +73,7 @@ KappaCoh <- function(rater1, rater2) {
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
+#' @keywords internal
 .t2_wmat <- function(weights, k) {
   if (is.character(weights)) {
     nm <- tolower(weights)
@@ -191,6 +193,7 @@ CooksD <- function(y, X) {
 #' @param vals A vector; its length is taken.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .t2_agg <- function(name, vals) {
   m <- length(vals)
   if (m == 0L) {

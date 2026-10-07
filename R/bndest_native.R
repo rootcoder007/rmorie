@@ -30,6 +30,7 @@
 #' @param k1 Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .mor_bnd_one_mean <- function(yv, seen, k0, k1) {
   p <- mean(seen)
   if (p > 0) {

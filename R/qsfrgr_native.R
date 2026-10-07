@@ -118,6 +118,7 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 #' @param rows See Usage.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .qsfrgr_events_in <- function(event, rows) sum(event[rows] == 1L)
 
 #' .qsfrgr_best_split
@@ -134,6 +135,7 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 #' @param rule Compared against \code{"logrank"}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @keywords internal
 .qsfrgr_best_split <- function(X, time, event, rows, feats, min_leaf,
                                rule) {
   best <- NULL
@@ -182,6 +184,7 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 #' @param rule Passed to \code{.qsfrgr_best_split}.
 #' @return A list with \code{leaf}, \code{f}, \code{thr}, \code{l}, \code{r}.
 #' @export
+#' @keywords internal
 .qsfrgr_grow <- function(X, time, event, struct_rows, leaf_rows, feats_n,
                          min_leaf, max_depth, depth, e, rule) {
   node <- list(leaf = TRUE, rows = leaf_rows)
@@ -227,6 +230,7 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .qsfrgr_leaf_of <- function(node, x) {
   while (!node$leaf)
     node <- if (x[node$f] <= node$thr) node$l else node$r

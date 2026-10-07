@@ -18,3 +18,4 @@ the source it follows.
 res <- .tlhaltm_cheatsheet()
 res
 }
+\keyword{internal}

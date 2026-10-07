@@ -19,3 +19,4 @@ A step of the bnsadt_native implementation. Called by \code{.bnsadt_expected_p},
 \code{.bnsadt_pub_cdf}, \code{morie_bnsadt_p}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

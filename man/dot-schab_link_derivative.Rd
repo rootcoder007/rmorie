@@ -20,3 +20,4 @@ A step of the schab_glmm_shared implementation. Called by \code{.schab_mu_eta},
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

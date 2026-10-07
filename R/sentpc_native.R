@@ -280,6 +280,7 @@ morie_sentpc <- morie_sentpc_escape_whitespace
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .escape_whitespace(text = txt)
 #' res
+#' @keywords internal
 .escape_whitespace <- function(text, add_prefix = TRUE) {
   s <- as.character(text)
   out <- gsub(" ", .SPACE, s, fixed = TRUE)
@@ -298,6 +299,7 @@ morie_sentpc <- morie_sentpc_escape_whitespace
 #' @param strip_prefix A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{gsub}.
 #' @export
+#' @keywords internal
 .unescape_whitespace <- function(text, strip_prefix = TRUE) {
   s <- as.character(text)
   if (isTRUE(strip_prefix) && startsWith(s, .SPACE))
@@ -314,6 +316,7 @@ morie_sentpc <- morie_sentpc_escape_whitespace
 #' @param escaped Character; passed to \code{strsplit}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .units <- function(escaped) {
   out <- character(0)
   cur <- ""

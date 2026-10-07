@@ -19,3 +19,4 @@ The value of \code{tot}, as built in the body.
 \description{
 sigma^2 = sum_i M_i (M_i - m_i) S_i^2 / m_i.
 }
+\keyword{internal}

@@ -24,3 +24,4 @@ The value of \code{pay}, as built in the body.
 A step of the fairRC_native implementation. Called by \code{rKL}, \code{rND}, \code{rRD}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

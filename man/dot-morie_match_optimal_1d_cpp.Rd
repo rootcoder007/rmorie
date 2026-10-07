@@ -15,3 +15,4 @@ The value of \code{.Call}.
 A step of the RcppExports implementation. Called by \code{.morie_match_optimal_native}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

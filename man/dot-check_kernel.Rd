@@ -17,3 +17,4 @@ A step of the andmnh_native implementation. Called by \code{automatic_bandwidth}
 \code{kernel_hac}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

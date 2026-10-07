@@ -27,3 +27,4 @@ A step of the prsLR_native implementation. Called by
 \code{.prsLR_canonical_collection}, \code{morie_goto}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

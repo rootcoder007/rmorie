@@ -21,3 +21,4 @@ it follows.
 res <- .b2as3d(p = 0.5)
 res
 }
+\keyword{internal}

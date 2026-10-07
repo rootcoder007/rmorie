@@ -13,6 +13,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .tmlspl_frac_treated(D = 3L, A = A)
 #' res
+#' @keywords internal
 .tmlspl_frac_treated <- function(D, A) {
   n <- length(D)
   out <- numeric(n)

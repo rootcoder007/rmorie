@@ -51,6 +51,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .caltbR_norm(v = x)
 #' res
+#' @keywords internal
 .caltbR_norm <- function(v) {
   vv <- as.numeric(v)
   s  <- sum(vv)
@@ -69,6 +70,7 @@
 #' @param p_g_given_i A matrix; passed to \code{as.matrix}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .caltbR_to_pgi <- function(p_g_given_i) {
   if (is.matrix(p_g_given_i)) {
     storage.mode(p_g_given_i) <- "double"
@@ -375,6 +377,7 @@ calibratedrec <- calibrated_rerank
 #' @examples
 #' res <- .caltbR_cheatsheet()
 #' res
+#' @keywords internal
 .caltbR_cheatsheet <- function() {
   paste0(
     "caltbR: ranking by accuracy CROWDS OUT the user's minority ",

@@ -33,6 +33,7 @@
 #' @examples
 #' res <- .b2se()
 #' res
+#' @keywords internal
 .b2se <- function(spec = NULL) {
   if (is.function(spec)) return(function(a, b) as.numeric(spec(a, b)))
   pars <- if (is.null(spec)) c(1, 1) else as.numeric(spec)
@@ -55,6 +56,7 @@
 #' @param kf Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .b2gram <- function(A, B, kf) {
   out <- matrix(0, nrow(A), nrow(B))
   for (i in seq_len(nrow(A))) {

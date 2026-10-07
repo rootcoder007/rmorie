@@ -81,6 +81,7 @@ Htprd <- function(param_grid, cv_data, fit_cv = NULL, k = 5L) {
 #' @param params A list; the body reads \code{$lam} from it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .htprd_ridge_cv <- function(X, y, K, params) {
   n <- length(y)
   lam <- if (is.null(params$lam)) 1 else as.numeric(params$lam)

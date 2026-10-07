@@ -18,3 +18,4 @@ A numeric value.
 A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

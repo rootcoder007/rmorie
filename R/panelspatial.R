@@ -22,6 +22,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .smd_moments(x = x, w = x)
 #' res
+#' @keywords internal
 .smd_moments <- function(x, w) {
   sw <- sum(w)
   m <- sum(w * x) / sw
@@ -119,6 +120,7 @@ morie_covariate_balance <- function(x, treat, weights = NULL, threshold = 0.1) {
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{A}, as built in the body.
 #' @export
+#' @keywords internal
 .knn_indicator <- function(D, k) {
   diag(D) <- Inf
   n <- nrow(D)
@@ -207,6 +209,7 @@ morie_jacquez_knn <- function(coords, time, k = 3L, B = 999L) {
 #' @param area Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .ripley_k <- function(P, radii, area) {
   n <- nrow(P)
   d <- as.matrix(stats::dist(P))

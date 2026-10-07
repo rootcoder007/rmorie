@@ -28,3 +28,4 @@ G <- morie_groebn(list(.groebn_poly(list("1_0" = 1, "0_0" = -1)),
 f <- .groebn_poly(list("2_1" = 3, "1_2" = 5, "0_0" = -2))
 .groebn_normal_form(f, G, "lex")     # 3 + 20 - 2 = 24
 }
+\keyword{internal}

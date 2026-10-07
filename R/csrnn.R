@@ -15,6 +15,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .csrnn_distances(P = A)
 #' res
+#' @keywords internal
 .csrnn_distances <- function(P) {
   d <- as.matrix(stats::dist(P))
   diag(d) <- Inf
@@ -32,6 +33,7 @@
 #' @param grid Passed to \code{findInterval}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .csrnn_G <- function(nn, grid) {
   findInterval(grid, sort(nn)) / length(nn)
 }
@@ -48,6 +50,7 @@
 #' @param P A matrix; passed to \code{ncol}.
 #' @return The value of \code{bounds}, as built in the body.
 #' @export
+#' @keywords internal
 .csrnn_window <- function(window, P) {
   d <- ncol(P)
   if (is.null(window)) {

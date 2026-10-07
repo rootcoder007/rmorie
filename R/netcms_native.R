@@ -16,6 +16,7 @@
 #' @param t Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .netcms_soft <- function(x, t) sign(x) * pmax(abs(x) - t, 0)
 
 #' .netcms_lasso
@@ -31,6 +32,7 @@
 #' @param maxit A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @keywords internal
 .netcms_lasso <- function(V, s12, lam, beta, tol, maxit) {
   p1 <- length(s12)
   for (it in seq_len(maxit)) {

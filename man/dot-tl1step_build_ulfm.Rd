@@ -25,3 +25,4 @@ recomputed continuously from the current point (H_fn(Q_current))
 rather than fixed at the start, which is what makes the submodel
 universal rather than local.
 }
+\keyword{internal}

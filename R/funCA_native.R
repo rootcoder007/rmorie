@@ -20,6 +20,7 @@
 #' @param n_t A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
+#' @keywords internal
 .funCA_grid_weights <- function(n_t) {
   if (n_t < 2L) return(1.0)
   h <- 1.0 / (n_t - 1L)
@@ -39,6 +40,7 @@
 #' @param n_keep A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{lam}, \code{phi}, \code{all}.
 #' @export
+#' @keywords internal
 .funCA_fpca <- function(C, w, n_keep) {
   T <- length(w)
   rw <- sqrt(w)
@@ -70,6 +72,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .funCA_sym_inv_sqrt(M = A)
 #' res
+#' @keywords internal
 .funCA_sym_inv_sqrt <- function(M) {
   ev <- eigen(M, symmetric = TRUE)
   d <- ev$values
@@ -221,6 +224,7 @@ morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
 #' @examples
 #' res <- .funCA_cheatsheet()
 #' res
+#' @keywords internal
 .funCA_cheatsheet <- function() {
   paste0("funCA: morie_funCA_functional_cca(X, Y, p, q) -> canonical ",
          "correlations between two sets of curves, restricted to the ",

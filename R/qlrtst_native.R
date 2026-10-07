@@ -53,6 +53,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .qlr_ssr(X = x, y = y)
 #' res
+#' @keywords internal
 .qlr_ssr <- function(X, y) {
   A <- t(X) %*% X
   b <- t(X) %*% y

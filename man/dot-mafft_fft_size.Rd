@@ -18,3 +18,4 @@ The value of \code{size}, as built in the body.
 A step of the mafft_native implementation. Called by \code{.mafft_xcorr_fft}, \code{correlation}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

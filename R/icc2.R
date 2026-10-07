@@ -73,6 +73,7 @@ Icc2 <- function(y, subject, rater) {
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{bms}, \code{wms}, \code{jms}, \code{ems}.
 #' @export
+#' @keywords internal
 .icc_mean_squares <- function(rows, n, k) {
   tot <- 0
   tot2 <- 0

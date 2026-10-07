@@ -21,6 +21,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .morie_km_softmax(a = A)
 #' res
+#' @keywords internal
 .morie_km_softmax <- function(a) {
   z <- a - max(a)
   exp(z) / sum(exp(z))
@@ -42,6 +43,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .morie_km_probs(p = 0.5, name = txt)
 #' res
+#' @keywords internal
 .morie_km_probs <- function(p, name) {
   p <- as.numeric(p)
   if (length(p) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)

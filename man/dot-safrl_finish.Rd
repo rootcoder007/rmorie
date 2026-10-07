@@ -36,3 +36,4 @@ A list with \code{estimate}, \code{step}, \code{lambda_}, \code{nu},
 A step of the safrl_native implementation. Called by \code{morie_safrl}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

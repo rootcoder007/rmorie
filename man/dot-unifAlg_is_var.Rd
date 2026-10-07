@@ -18,3 +18,4 @@ A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

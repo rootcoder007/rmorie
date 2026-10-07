@@ -24,3 +24,4 @@ e <- .propinf_rng(7L)
 d <- replicate(1000, .propinf_normal(e))
 round(c(mean = mean(d), sd = sd(d)), 2)
 }
+\keyword{internal}

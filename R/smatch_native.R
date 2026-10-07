@@ -33,6 +33,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .smatch_cholsolve(M = A, b = b)
 #' res
+#' @keywords internal
 .smatch_cholsolve <- function(M, b) {
   # Symmetric positive-definite solve via base R's chol.
   L <- chol(M)
@@ -53,6 +54,7 @@
 #' @param ab Passed to \code{morie_sccsno_build_intervals}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .smatch_build_intervals <- function(start, end, exposure, events, rp,
                                     ab) {
   # Python's smatch imports build_intervals from sccsno rather than defining
@@ -212,6 +214,7 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #' @examples
 #' res <- .smatch_qnorm(p = 0.5)
 #' res
+#' @keywords internal
 .smatch_qnorm <- function(p) qnorm(p)
 
 #' .smatch_pnorm
@@ -226,6 +229,7 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .smatch_pnorm(z = y)
 #' res
+#' @keywords internal
 .smatch_pnorm <- function(z) pnorm(z)
 
 #' morie_smatch_sample_size
@@ -350,6 +354,7 @@ morie_smatch_relative_efficiency <- function(r, log_ri) {
 #' @examples
 #' res <- .smatch_cheatsheet()
 #' res
+#' @keywords internal
 .smatch_cheatsheet <- function() {
   paste0("smatch: the case series fitted as a POISSON model -- ",
          "counts n_ijk, offset log(e_ijk), factors for age, ",

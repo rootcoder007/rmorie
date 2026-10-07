@@ -22,3 +22,4 @@ A step of the cox_native implementation. Called by \code{.morie_aft_common},
 in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

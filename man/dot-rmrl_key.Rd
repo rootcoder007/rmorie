@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 res <- .rmrl_key()
 res
 }
+\keyword{internal}

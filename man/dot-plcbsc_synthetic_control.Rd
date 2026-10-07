@@ -33,3 +33,4 @@ A list with \code{weights}, \code{loss}, \code{fitted}, \code{n_iter}, \code{con
 A step of the plcbsc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

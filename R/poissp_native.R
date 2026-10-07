@@ -30,6 +30,7 @@
 #' @param W A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{A}, as built in the body.
 #' @export
+#' @keywords internal
 .poissp_adjacency <- function(W) {
   A <- as.matrix(W)
   storage.mode(A) <- "double"
@@ -110,6 +111,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .poissp_constraint_weight(m = X)
 #' res
+#' @keywords internal
 .poissp_constraint_weight <- function(m) {
   1e8 * max(1.0, if (length(m)) max(m) else 1.0)
 }
@@ -128,6 +130,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' @param constrain A flag; the body branches on it.
 #' @return The value of \code{H}, as built in the body.
 #' @export
+#' @keywords internal
 .poissp_joint_hessian <- function(X, m, Q, constrain) {
   n <- length(m)
   p <- ncol(X)
@@ -160,6 +163,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .poissp_ridgesolve(A = A, b = b)
 #' res
+#' @keywords internal
 .poissp_ridgesolve <- function(A, b, ridge = 1e-10) {
   as.numeric(solve(A + ridge * diag(nrow(A)), b))
 }
@@ -180,6 +184,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' @param ridge Passed to \code{.poissp_ridgesolve}.
 #' @return A list with \code{beta}, \code{u}, \code{m}, \code{eta}.
 #' @export
+#' @keywords internal
 .poissp_fit_mode <- function(y, X, off, Q, constrain, iters, tol, ridge) {
   n <- length(y)
   p <- ncol(X)
@@ -226,6 +231,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .poissp_loglik(y = y, m = X)
 #' res
+#' @keywords internal
 .poissp_loglik <- function(y, m) {
   sum(y * log(m) - m - lgamma(y + 1))
 }
@@ -243,6 +249,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .poissp_logdet_pd(A = A)
 #' res
+#' @keywords internal
 .poissp_logdet_pd <- function(A, ridge = 0.0) {
   L <- chol(A + ridge * diag(nrow(A)))
   2 * sum(log(diag(L)))
@@ -263,6 +270,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .poissp_logdet_gen(A = A)
 #' res
+#' @keywords internal
 .poissp_logdet_gen <- function(A, rank_deficit = 0L) {
   ev <- sort(abs(eigen(A, symmetric = TRUE)$values), decreasing = TRUE)
   keep <- if (rank_deficit > 0L) ev[seq_len(length(ev) - rank_deficit)] else ev
@@ -281,6 +289,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' @param constrain A flag; the body branches on it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .poissp_laplace <- function(y, u, m, Q, constrain) {
   n <- length(y)
   quad <- sum(u * as.numeric(Q %*% u))

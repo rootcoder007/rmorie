@@ -39,3 +39,4 @@ r <- .prsLL_is_ll1(amb)
 r$ll1
 r$conflicts[[1]][c("nonterminal", "lookahead")]
 }
+\keyword{internal}

@@ -11,6 +11,7 @@
 #' @param lag Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .whtnse_autocov <- function(E, lag) {
   n <- nrow(E)
   if (lag == 0L) return(crossprod(E) / n)

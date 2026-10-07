@@ -33,6 +33,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .comet_vec(x = x)
 #' res
+#' @keywords internal
 .comet_vec <- function(x) as.numeric(x)
 
 #' pooled_features
@@ -111,6 +112,7 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 #' @param b Passed to \code{.comet_vec}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .comet_dist <- function(a, b) {
   x <- .comet_vec(a)
   y <- .comet_vec(b)
@@ -255,6 +257,7 @@ morie_comet <- function(hyp, src, ref, W, b = NULL) {
 #' @examples
 #' res <- .comet_cheatsheet()
 #' res
+#' @keywords internal
 .comet_cheatsheet <- function() {
   paste("comet: replace n-gram overlap with a LEARNED metric",
         "trained on human judgements, embedding hypothesis,",

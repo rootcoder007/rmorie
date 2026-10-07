@@ -22,6 +22,7 @@
 #' @param v Passed to \code{sprintf}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .mor_rdk_key <- function(v) paste(sprintf("%06d", v), collapse = "")
 
 #' .mor_rdk_subgraphs
@@ -36,6 +37,7 @@
 #' @param branched A flag; the body branches on it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .mor_rdk_subgraphs <- function(a, bd, minpath, maxpath, branched) {
   nb <- length(bd$i)
   touch <- vector("list", a)

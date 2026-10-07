@@ -16,3 +16,4 @@ A list with \code{symbol}, \code{children}.
 A step of the prsLR_native implementation. Called by \code{.prsLR_parse}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

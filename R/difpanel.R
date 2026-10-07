@@ -194,6 +194,7 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .nw_lrv(u = x)
 #' res
+#' @keywords internal
 .nw_lrv <- function(u, bandwidth = NULL) {
   Tn <- length(u)
   if (Tn < 2L) {
@@ -222,6 +223,7 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 #' @param bandwidth Passed to \code{.nw_lrv}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .pdcoin_nuisance <- function(y, Zx, e, bandwidth) {
   dy <- diff(y)
   dX <- apply(Zx, 2L, diff)

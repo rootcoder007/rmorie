@@ -52,6 +52,7 @@ cumulative_episodes <- function(histories, states = .STATES) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .quantile7(x = x, q = 0.5)
 #' res
+#' @keywords internal
 .quantile7 <- function(x, q) {
   # Linear interpolation, type 7 (R default)
   x <- sort(as.numeric(x))
@@ -169,6 +170,7 @@ weight_diagnostics <- function(weights) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .corr_r(x = x, y = y)
 #' res
+#' @keywords internal
 .corr_r <- function(x, y) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -241,6 +243,7 @@ confounding_check <- function(covariate_history, treatment_history,
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .wls_r(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .wls_r <- function(X, y, w) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"

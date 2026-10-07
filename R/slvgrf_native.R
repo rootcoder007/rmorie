@@ -32,6 +32,7 @@
 #' @param priority Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{g}, \code{s}.
 #' @export
+#' @keywords internal
 .slvgrf_check <- function(scores, priority) {
   g <- as.numeric(scores)
   s <- as.numeric(priority)
@@ -289,6 +290,7 @@ rate_test <- function(scores, priority, weight = "autoc", reps = 500,
 #' @examples
 #' res <- .slvgrf_cheatsheet()
 #' res
+#' @keywords internal
 .slvgrf_cheatsheet <- function() {
   paste0("slvgrf: score a PRIORITIZATION RULE, not a CATE fit. ",
          "TOC(u) = mean effect in the top u minus the ATE, so ",
@@ -326,6 +328,7 @@ morie_slvgrf <- list(aipw_scores = aipw_scores,
 #' @param priority Passed to \code{.slvgrf_vec}.
 #' @return A list with \code{g}, \code{s}.
 #' @export
+#' @keywords internal
 .check <- function(scores, priority) {
   g <- .slvgrf_vec(scores)
   s <- .slvgrf_vec(priority)
@@ -353,4 +356,5 @@ morie_slvgrf <- list(aipw_scores = aipw_scores,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .slvgrf_vec(x = x)
 #' res
+#' @keywords internal
 .slvgrf_vec <- function(x) as.numeric(as.matrix(x))

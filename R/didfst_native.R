@@ -514,6 +514,7 @@ did_forest <- function(Y, D, X, event_time, x_eval = NULL,
 #' @param Y A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{M}, \code{n}, \code{T}.
 #' @export
+#' @keywords internal
 .ghc_didfst_panel <- function(Y) {
   M <- as.matrix(Y)
   if (nrow(M) == 0L) stop("didfst: the panel is empty")

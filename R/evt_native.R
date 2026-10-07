@@ -27,6 +27,7 @@
 #' @param r A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .evt_pwm <- function(x, r) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -53,6 +54,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .evt_lmom(x = x)
 #' res
+#' @keywords internal
 .evt_lmom <- function(x) {
   b0 <- .evt_pwm(x, 0L)
   b1 <- .evt_pwm(x, 1L)
@@ -80,6 +82,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .evt_top(x = x, k = 3L)
 #' res
+#' @keywords internal
 .evt_top <- function(x, k) {
   xs <- sort(as.numeric(x), decreasing = TRUE)
   k <- as.integer(k)

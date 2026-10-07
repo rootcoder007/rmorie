@@ -22,3 +22,4 @@ The value of \code{list}.
 to the first base in alphabetical order -- an arbitrary rule, but a
 STATED arbitrary rule, which is what makes the two arms agree.
 }
+\keyword{internal}

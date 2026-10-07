@@ -21,3 +21,4 @@ the source it follows.
 res <- .schab_logit(p = 0.5)
 res
 }
+\keyword{internal}

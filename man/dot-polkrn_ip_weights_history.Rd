@@ -25,3 +25,4 @@ A list with \code{w}, \code{per_time}.
 A step of the polkrn_native implementation. Called by \code{morie_polkrn}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

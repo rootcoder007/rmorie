@@ -33,6 +33,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .mor_ed_dist(z = y, alpha = 0.5)
 #' res
+#' @keywords internal
 .mor_ed_dist <- function(z, alpha) as.matrix(dist(z))^alpha
 
 # P[i + 1, j + 1] = sum of D[1..i, 1..j]
@@ -44,6 +45,7 @@
 #' @param D A matrix; indexed by row and column.
 #' @return The value of \code{P}, as built in the body.
 #' @export
+#' @keywords internal
 .mor_ed_prefix <- function(D) {
   n <- nrow(D)
   P <- matrix(0, n + 1L, n + 1L)
@@ -65,6 +67,7 @@
 #' @param b2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mor_ed_block <- function(P, a1, b1, a2, b2)
   P[b1 + 1L, b2 + 1L] - P[a1 + 1L, b2 + 1L] - P[b1 + 1L, a2 + 1L] +
     P[a1 + 1L, a2 + 1L]
@@ -80,6 +83,7 @@
 #' @param kappa Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mor_ed_qhat <- function(P, a, tau, kappa) {
   n1 <- tau - a
   m1 <- kappa - tau
@@ -103,6 +107,7 @@
 #' @param min_size Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .mor_ed_best_split <- function(P, a, b, min_size) {
   bestq <- -Inf
   bt <- -1L
@@ -133,6 +138,7 @@
 #' @param pos Numeric; combined arithmetically in the body.
 #' @return A list with \code{order}, \code{pos}.
 #' @export
+#' @keywords internal
 .mor_ed_shuffle <- function(order, clusters, us, pos) {
   for (ci in seq_len(nrow(clusters))) {
     a <- clusters[ci, 1L]

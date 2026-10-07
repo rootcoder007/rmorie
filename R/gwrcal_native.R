@@ -28,6 +28,7 @@
 #' @param kernel One of \code{"bisquare"}, \code{"gaussian"}, \code{"tricube"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .gwr_kernel <- function(d, h, kernel) {
   if (kernel == "gaussian") exp(-0.5 * (d / h)^2)
   else if (kernel == "bisquare") {
@@ -53,6 +54,7 @@
 #' @param C A matrix; indexed by row and column.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .gwr_default_bounds <- function(C) {
   dmin <- dmax <- 0
   for (i in seq_len(nrow(C) - 1L)) {
@@ -74,6 +76,7 @@
 #' @param C A matrix; indexed by row and column.
 #' @return The value of \code{D}, as built in the body.
 #' @export
+#' @keywords internal
 .gwr_pairwise <- function(C) {
   n <- nrow(C)
   D <- matrix(0, n, n)
@@ -97,6 +100,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .gwr_pivot_chol_rcond(M = A)
 #' res
+#' @keywords internal
 .gwr_pivot_chol_rcond <- function(M) {
   # pivoted Cholesky with a small ridge when the smallest pivot is
   # essentially zero; returns a list with the cholesky factor, the
@@ -140,6 +144,7 @@
 #' @return A list with \code{params}, \code{se_params}, \code{fitted}, \code{resid},
 #' \code{tr_S}, \code{sigma2}, \code{edf_resid}, \code{n_rank_deficient}.
 #' @export
+#' @keywords internal
 .gwr_fit <- function(y, X, D, bw, kernel, adaptive) {
   n <- length(y)
   p <- ncol(X)
@@ -223,6 +228,7 @@
 #' @param tr_S Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gwr_aicc <- function(n, sigma2, tr_S) {
   if (sigma2 <= 0) return(-Inf)
   if (n - 2 - tr_S <= 0) return(Inf)
@@ -240,6 +246,7 @@
 #' @param tr_S Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gwr_aic <- function(n, sigma2, tr_S) {
   if (sigma2 <= 0) return(-Inf)
   2 * n * log(sigma2) + n * log(2 * pi) + n + tr_S
@@ -258,6 +265,7 @@
 #' @param adaptive A flag; the body branches on it.
 #' @return The value of \code{acc}, as built in the body.
 #' @export
+#' @keywords internal
 .gwr_cv_score <- function(y, X, D, bw, kernel, adaptive) {
   n <- length(y)
   p <- ncol(X)
@@ -326,6 +334,7 @@
 #' @param criterion One of \code{"aic"}, \code{"cv"}.
 #' @return The value of \code{.gwr_aicc}.
 #' @export
+#' @keywords internal
 .gwr_criterion <- function(y, X, D, bw, kernel, adaptive, criterion) {
   if (criterion == "cv") return(.gwr_cv_score(y, X, D, bw, kernel, adaptive))
   fit <- .gwr_fit(y, X, D, bw, kernel, adaptive)
@@ -345,6 +354,7 @@
 #' @param tol Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .gwr_golden <- function(fn, lo, hi, tol) {
   phi <- (sqrt(5) - 1) / 2
   a <- lo

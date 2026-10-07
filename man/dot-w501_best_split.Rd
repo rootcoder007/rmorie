@@ -22,3 +22,4 @@ A list with \code{q}, \code{tau}, \code{kappa}.
 Part of the w501_changepoint_native implementation; see the file
 header for the source it follows.
 }
+\keyword{internal}

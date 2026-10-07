@@ -18,3 +18,4 @@ set.seed(1)
 df <- data.frame(t = c(0, 1, 0, 1, 0, 1), x = rnorm(6))
 ps <- morie_estimate_propensity_scores(df, "t", "x")
 }
+\keyword{internal}

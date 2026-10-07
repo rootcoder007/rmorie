@@ -23,3 +23,4 @@ shrink 0.5) -- enough for the small abduction problems this serves.
 ponytail: fold into a shared native optimizer when the stats::optim
 sweep reaches the 680 call sites.
 }
+\keyword{internal}

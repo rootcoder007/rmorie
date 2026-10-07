@@ -27,3 +27,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .morie_fairness_as_1d(x = x, name = txt)
 res
 }
+\keyword{internal}

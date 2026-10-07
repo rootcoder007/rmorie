@@ -18,3 +18,4 @@ The value of \code{P}, as built in the body.
 A step of the felsen_native implementation. Called by \code{.felsen_prune}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

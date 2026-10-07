@@ -97,6 +97,7 @@ morie_slbpdg_weights <- function(v) {
 #' @param s2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .slbpdg_dnorm <- function(x, mu, s2) {
   d <- x - mu
   exp(-0.5 * d * d / s2) / sqrt(2 * pi * s2)
@@ -142,6 +143,7 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' @param b0 Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .slbpdg_theta <- function(e, ys, m0, kappa0, a0, b0) {
   n <- length(ys)
   if (n > 0L) {
@@ -180,6 +182,7 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' @param weights A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .slbpdg_categorical <- function(e, weights) {
   tot <- .w3_csum(weights)
   if (tot <= 0) return(-1L)
@@ -208,6 +211,7 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .slbpdg_xi <- function(kappa, k) {
   p <- 1
   if (k > 0L) for (i in seq_len(k)) p <- p * kappa
@@ -225,6 +229,7 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .slbpdg_interp <- function(xs, ys, x) {
   n <- length(xs)
   if (x <= xs[1]) return(ys[1])

@@ -18,3 +18,4 @@ A logical value.
 A step of the rnacov_native implementation. Called by \code{morie_rnacov_nussinov}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

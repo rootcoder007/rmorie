@@ -34,6 +34,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .w3_csum(v = x)
 #' res
+#' @keywords internal
 .w3_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -56,6 +57,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .w3_dot <- function(a, b) {
   n <- length(a)
   if (n == 0L) {
@@ -86,6 +88,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .w3_logsumexp(v = x)
 #' res
+#' @keywords internal
 .w3_logsumexp <- function(v) {
   if (length(v) == 0L) {
     return(-Inf)
@@ -111,6 +114,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .w3_chol(a = A)
 #' res
+#' @keywords internal
 .w3_chol <- function(a) {
   p <- nrow(a)
   lo <- matrix(0, p, p)
@@ -146,6 +150,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .w3_solve_chol <- function(lo, b) {
   p <- nrow(lo)
   z <- numeric(p)
@@ -177,6 +182,7 @@
 #' @param lo A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .w3_inv_from_chol <- function(lo) {
   p <- nrow(lo)
   cols <- lapply(seq_len(p), function(j) {
@@ -206,6 +212,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .w3_ols(y = y, design = X)
 #' res
+#' @keywords internal
 .w3_ols <- function(y, design) {
   n <- length(y)
   p <- ncol(design)
@@ -247,6 +254,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .w3_lgamma(z = y)
 #' res
+#' @keywords internal
 .w3_lgamma <- function(z) {
   x <- z
   tmp <- x + 5.5
@@ -269,6 +277,7 @@
 #' @param x Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .w3_gammcf <- function(a, x) {
   tiny <- 1e-300
   b <- x + 1 - a
@@ -304,6 +313,7 @@
 #' @param x Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .w3_gammp <- function(a, x) {
   if (x < 0 || a <= 0) stop("gammp: need a > 0 and x >= 0")
   if (x == 0) {
@@ -336,6 +346,7 @@
 #' @param x Passed to \code{.w3_gammp}.
 #' @return The value of \code{.w3_gammcf}.
 #' @export
+#' @keywords internal
 .w3_gammq <- function(a, x) {
   if (x < 0 || a <= 0) stop("gammq: need a > 0 and x >= 0")
   if (x == 0) {
@@ -360,6 +371,7 @@
 #' @param z Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .w3_ncdf <- function(z) {
   if (z == 0) {
     return(0.5)
@@ -383,6 +395,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .w3_npdf(z = y)
 #' res
+#' @keywords internal
 .w3_npdf <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
 
 # Standard normal quantile by bisection on the CDF: slower than a
@@ -401,6 +414,7 @@
 #' @examples
 #' res <- .w3_nppf(p = 0.5)
 #' res
+#' @keywords internal
 .w3_nppf <- function(p, lo = -40, hi = 40) {
   if (!(p > 0 && p < 1)) stop("nppf: p must lie strictly inside (0, 1)")
   .w3_bisect(function(z) .w3_ncdf(z) - p, lo, hi)
@@ -416,6 +430,7 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{h}, as built in the body.
 #' @export
+#' @keywords internal
 .w3_betacf <- function(a, b, x) {
   tiny <- 1e-30
   qab <- a + b
@@ -462,6 +477,7 @@
 #' @param x Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .w3_betainc <- function(a, b, x) {
   if (x <= 0) {
     return(0)
@@ -487,6 +503,7 @@
 #' @param df Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .w3_t_sf <- function(t, df) 0.5 * .w3_betainc(df / 2, 0.5, df / (df + t * t))
 
 # Root of f on a bracketing interval, by plain bisection. A fixed
@@ -505,6 +522,7 @@
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .w3_bisect <- function(f, lo, hi, iters = 200L) {
   flo <- f(lo)
   fhi <- f(hi)
@@ -549,6 +567,7 @@
 #' @param n Numeric; combined arithmetically in the body. Defaults to \code{200L}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .w3_simpson <- function(f, a, b, n = 200L) {
   n <- as.integer(n)
   if (n %% 2L == 1L) n <- n + 1L
@@ -590,6 +609,7 @@
 #' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return A list with \code{x}, \code{value}.
 #' @export
+#' @keywords internal
 .w3_nelder_mead <- function(f, x0, step = 0.1, iters = 400L, alpha = 1,
                             gamma = 2, rho = 0.5, sigma = 0.5) {
   n <- length(x0)

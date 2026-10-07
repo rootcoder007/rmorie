@@ -18,3 +18,4 @@ A logical value.
 strings by whatever collation happens to be in force, and the
 canonical spelling of a path would depend on the machine.
 }
+\keyword{internal}

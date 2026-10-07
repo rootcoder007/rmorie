@@ -28,6 +28,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mor_pq_decompose(x = x)
 #' res
+#' @keywords internal
 .mor_pq_decompose <- function(x) {
   levels <- list()
   r <- x
@@ -54,6 +55,7 @@
 #' @param radius See Usage.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @keywords internal
 .mor_pq_reconstruct <- function(levels, radius) {
   r <- radius
   for (ell in seq(length(levels), 1L)) {

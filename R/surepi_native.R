@@ -47,6 +47,7 @@
 #' @param sigma_floor Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{m}, \code{s}, \code{used}.
 #' @export
+#' @keywords internal
 .surepi_baseline <- function(counts, t, lag, width, sigma_floor) {
   # `t` is 0-based (Python convention); translate to 1-based R indices.
   lo <- t - lag - width + 2L
@@ -74,6 +75,7 @@
 #' @param sigma_floor Passed to \code{.surepi_baseline}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .surepi_stat <- function(counts, method, sigma_floor) {
   w <- .surepi_windows[[method]]
   lag <- w[1]
@@ -355,6 +357,7 @@ surepi_compound_smoothing <- function(values, current,
 #' @param width Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .surepi_runmed <- function(x, width) {
   # Running median of odd or even width, endpoints carried.
   n <- length(x)

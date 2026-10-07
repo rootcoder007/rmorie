@@ -32,6 +32,7 @@
 #' @param h A matrix; passed to \code{crossprod}.
 #' @return A list with \code{T}, \code{mu}, \code{Sigma}, \code{n}.
 #' @export
+#' @keywords internal
 .morie_sw_moments <- function(g, h) {
   g <- as.matrix(g)
   h <- as.matrix(h)
@@ -59,6 +60,7 @@
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{statistic}, \code{df}, \code{p.value}.
 #' @export
+#' @keywords internal
 .morie_quad_stat <- function(m, tol = 1e-8) {
   d <- m$T - m$mu
   ev <- eigen(m$Sigma, symmetric = TRUE)
@@ -83,6 +85,7 @@
 #' @param alternative The body requires: bad alternative. Defaults to \code{"two.sided"}.
 #' @return A list with \code{statistic}, \code{p.value}, \code{cor}, \code{z}.
 #' @export
+#' @keywords internal
 .morie_max_stat <- function(m, alternative = "two.sided") {
   d <- m$T - m$mu
   z <- d / sqrt(diag(m$Sigma))
@@ -116,6 +119,7 @@
 #' @param f Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_f_trafo <- function(f) {
   f <- as.factor(f)
   lv <- levels(f)
@@ -152,6 +156,7 @@
 #'   g = c('a', 'b', 'a', 'b', 'a', 'b', 'a', 'b'), stringsAsFactors = FALSE)
 #' res <- .morie_coin_parse(formula = fml, data = df)
 #' res
+#' @keywords internal
 .morie_coin_parse <- function(formula, data) {
   mf <- stats::model.frame(formula, data = data)
   y <- mf[[1L]]

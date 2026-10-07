@@ -81,6 +81,7 @@
 #' @examples
 #' res <- .morie_lda_e_log_theta(gamma = 0.5)
 #' res
+#' @keywords internal
 .morie_lda_e_log_theta <- function(gamma) {
   g <- as.numeric(gamma)
   if (any(g <= 0.0)) {
@@ -103,6 +104,7 @@
 #' @return A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged},
 #' \code{K}, \code{N}, \code{topic_proportions}.
 #' @export
+#' @keywords internal
 .morie_lda_variational_inference <- function(doc, alpha, beta, iters = 100, tol = 1e-8) {
   w <- as.integer(doc)
   B <- as.matrix(beta)
@@ -172,6 +174,7 @@
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{val}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_lda_elbo <- function(doc, alpha, beta, phi, gamma) {
   w <- as.integer(doc)
   B <- as.matrix(beta)
@@ -218,6 +221,7 @@
 #' \code{final_elbo}, \code{K}, \code{V}, \code{n_docs}, \code{iterations},
 #' \code{method}.
 #' @export
+#' @keywords internal
 .morie_lda_variational_em <- function(docs, K, V, alpha = 0.1, iters = 30, inner = 50,
                                       seed = 0, tol = 1e-6) {
   D <- lapply(docs, as.integer)
@@ -279,6 +283,7 @@
 #' @param vocab Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_lda_topic_words <- function(beta, n_top = 5, vocab = NULL) {
   B <- as.matrix(beta)
   storage.mode(B) <- "double"
@@ -308,6 +313,7 @@
 #' @examples
 #' res <- .morie_lda_cheatsheet()
 #' res
+#' @keywords internal
 .morie_lda_cheatsheet <- function() {
   paste(c(
     "lda: theta ~ Dir(alpha), z_n ~ Mult(theta), w_n ~ ",

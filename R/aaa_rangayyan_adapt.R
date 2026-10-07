@@ -28,6 +28,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_rg_acf(x = x, lags = 3L)
 #' res
+#' @keywords internal
 .morie_rg_acf <- function(x, lags) {
   n <- length(x)
   vapply(seq_len(lags) - 1L, function(m) {
@@ -51,6 +52,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .morie_rg_ccf(x = x, d = g, lags = 3L)
 #' res
+#' @keywords internal
 .morie_rg_ccf <- function(x, d, lags) {
   # theta(k) = E[x(n-k) d(n)], the right-hand side of eq. (3.168)
   n <- min(length(x), length(d))
@@ -75,6 +77,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_rg_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .morie_rg_solve <- function(A, b) {
   out <- tryCatch(as.numeric(solve(A, b)), error = function(e) NULL)
   if (is.null(out) || any(!is.finite(out))) {
@@ -95,6 +98,7 @@
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_rg_lagvec <- function(r, i, m) {
   # r(n) as eq. (3.155) wants it: current sample first, zeros before the
   # record starts

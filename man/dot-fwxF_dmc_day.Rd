@@ -25,3 +25,4 @@ A step of the fwxF_mixedcase_native implementation. Called by \code{morie_fwxF}.
 See the file header for the source the module follows.
 for the source it follows.
 }
+\keyword{internal}

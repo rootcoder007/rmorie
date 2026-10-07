@@ -26,3 +26,4 @@ A step of the ctde implementation. Called by \code{Ctde}, \code{Pnie}, \code{Tni
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

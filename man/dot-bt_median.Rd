@@ -16,3 +16,4 @@ One of two values, depending on the branch taken.
 A step of the btcimed implementation. Called by \code{Btcimed}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

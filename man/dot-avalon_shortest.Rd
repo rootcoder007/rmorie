@@ -22,3 +22,4 @@ A vector, from \code{rev}.
 A step of the avalon_native implementation. Called by \code{morie_avalon_rings}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

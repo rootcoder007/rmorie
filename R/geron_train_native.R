@@ -55,6 +55,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .morie_gr_fin(x = x, name = txt)
 #' res
+#' @keywords internal
 .morie_gr_fin <- function(x, name) {
   .morie_gr_need(all(is.finite(x)), paste0(name, " must be finite."))
   invisible(TRUE)
@@ -75,6 +76,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_a2d(x = x)
 #' res
+#' @keywords internal
 .morie_gr_a2d <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -101,6 +103,7 @@
 #' @param clamp A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .morie_gr_lcg_normals <- function(count, seed, clamp = FALSE) {
   count <- as.integer(count)
   if (count <= 0L) {
@@ -138,6 +141,7 @@
 #' @examples
 #' res <- .morie_gr_lcg_perm(n = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .morie_gr_lcg_perm <- function(n, seed) {
   n <- as.integer(n)
   perm <- seq_len(n) - 1L
@@ -172,6 +176,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_gr_sigmoid_vec(z = y)
 #' res
+#' @keywords internal
 .morie_gr_sigmoid_vec <- function(z) {
   z <- as.numeric(z)
   out <- numeric(length(z))
@@ -194,6 +199,7 @@
 #' @param s A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_gr_softmax_vec <- function(s) {
   s <- as.numeric(s)
   .morie_gr_need(length(s) > 0L, "score vector is empty.")
@@ -222,6 +228,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_attend(Q = 0.5, K = 3L, V = x)
 #' res
+#' @keywords internal
 .morie_gr_attend <- function(Q, K, V, mask = NULL) {
   Q <- .morie_gr_a2d(Q)
   K <- .morie_gr_a2d(K)
@@ -258,6 +265,7 @@
 #' @param theta A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{cost}, \code{rmse}, \code{residuals}, \code{predictions}, \code{n}.
 #' @export
+#' @keywords internal
 .morie_gr_mse_core <- function(X, y, theta) {
   X <- .morie_gr_a2d(X)
   y <- as.numeric(y)
@@ -293,6 +301,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_gr_logaddexp0(z = y)
 #' res
+#' @keywords internal
 .morie_gr_logaddexp0 <- function(z) pmax(z, 0) + log1p(exp(-abs(z)))
 
 # ------------------------------------------------------------- grdino
@@ -1209,6 +1218,7 @@ morie_gr_dual <- function(value, deriv = 0) {
 #' @param o Passed to \code{morie_gr_dual}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_gr_lift <- function(o) {
   if (inherits(o, "morie_gr_dual")) {
     o
@@ -4097,6 +4107,7 @@ morie_geron_ch4_softmax_function <- function(s, k, K = NULL) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_score_matrix(X = x, theta = x)
 #' res
+#' @keywords internal
 .morie_gr_score_matrix <- function(X, theta) {
   X <- .morie_gr_a2d(X)
   Tm <- if (is.matrix(theta)) theta else matrix(as.numeric(theta), ncol = 1L)
@@ -4141,6 +4152,7 @@ morie_geron_softmax_score_grsmxs <- function(X, theta) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_probability_matrix(X = x, theta = x)
 #' res
+#' @keywords internal
 .morie_gr_probability_matrix <- function(X, theta) {
   r <- .morie_gr_score_matrix(X, theta)
   P <- t(apply(r$scores, 1L, .morie_gr_softmax_vec))
@@ -4179,6 +4191,7 @@ morie_geron_softmax_probability <- function(X, theta) {
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{Y}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr_one_hot <- function(Y, K, m) {
   if (!is.matrix(Y) || (1L %in% dim(Y) && K != 1L)) {
     idx <- as.numeric(Y)
@@ -4243,6 +4256,7 @@ morie_geron_softmax_cross_entropy_cost <- function(X, Y, theta) {
 #' @param theta Passed to \code{.morie_gr_probability_matrix}.
 #' @return A list with \code{X}, \code{P}, \code{Yh}, \code{G}.
 #' @export
+#' @keywords internal
 .morie_gr_gradient_matrix <- function(X, Y, theta) {
   r <- .morie_gr_probability_matrix(X, theta)
   P <- r$probabilities
@@ -5102,6 +5116,7 @@ morie_geron_ppo_clipped_objective <- function(ratios, advantages, eps = 0.2) {
 #' @param y_scores Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{s}, \code{P}, \code{N}.
 #' @export
+#' @keywords internal
 .morie_gr_sorted_counts <- function(y_true, y_scores) {
   yt <- as.vector(y_true)
   s <- as.numeric(y_scores)
@@ -5638,6 +5653,7 @@ morie_geron_pyramid_vit_stage <- function(X, WQ, WK, WV, reduction_ratio = 2) {
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{pi}, \code{P}, \code{R}, \code{gamma}, \code{S}, \code{A}.
 #' @export
+#' @keywords internal
 .morie_gr_check_mdp <- function(policy, transitions, rewards, gamma) {
   P <- transitions
   .morie_gr_need(length(dim(P)) == 3L, "transitions must be (S, A, S').")
@@ -5689,6 +5705,7 @@ morie_geron_pyramid_vit_stage <- function(X, WQ, WK, WV, reduction_ratio = 2) {
 #' @return A list with \code{V}, \code{pi}, \code{P}, \code{R}, \code{r_sa},
 #' \code{gamma}, \code{S}, \code{A}.
 #' @export
+#' @keywords internal
 .morie_gr_policy_evaluation <- function(policy, transitions, rewards, gamma) {
   m <- .morie_gr_check_mdp(policy, transitions, rewards, gamma)
   S <- m$S
@@ -6713,6 +6730,7 @@ morie_geron_silhouette_score <- function(X, labels) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_sym_is_const(e = x)
 #' res
+#' @keywords internal
 .morie_gr_sym_is_const <- function(e) is.numeric(e) && length(e) == 1L
 .morie_gr_sym_unary <- c("sin", "cos", "exp", "log", "neg")
 .morie_gr_sym_binary <- c("+", "-", "*", "/", "^")
@@ -6728,6 +6746,7 @@ morie_geron_silhouette_score <- function(X, labels) {
 #' @param env A vector; indexed elementwise.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 .morie_gr_sym_eval <- function(e, env) {
   if (.morie_gr_sym_is_const(e)) {
     return(as.numeric(e))
@@ -6785,6 +6804,7 @@ morie_geron_silhouette_score <- function(X, labels) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_sym_simplify(e = x)
 #' res
+#' @keywords internal
 .morie_gr_sym_simplify <- function(e) {
   if (.morie_gr_sym_is_const(e) || (is.character(e) && length(e) == 1L)) {
     return(e)
@@ -6850,6 +6870,7 @@ morie_geron_silhouette_score <- function(X, labels) {
 #' @param var Passed to \code{.morie_gr_sym_diff}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_gr_sym_diff <- function(e, var) {
   if (.morie_gr_sym_is_const(e)) {
     return(0)
@@ -6925,6 +6946,7 @@ morie_geron_silhouette_score <- function(X, labels) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_sym_str(e = x)
 #' res
+#' @keywords internal
 .morie_gr_sym_str <- function(e) {
   if (.morie_gr_sym_is_const(e)) {
     return(format(e))

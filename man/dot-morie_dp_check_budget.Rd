@@ -24,3 +24,4 @@ See the file header for the source the module follows.
 res <- .morie_dp_check_budget(epsilon = 0.5)
 res
 }
+\keyword{internal}

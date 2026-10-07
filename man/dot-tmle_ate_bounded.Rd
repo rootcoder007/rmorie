@@ -30,3 +30,4 @@ A list with \code{psi}, \code{se}, \code{range}.
 A step of the tmldyk_native implementation. Called by \code{morie_tmle_diff_kernel}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

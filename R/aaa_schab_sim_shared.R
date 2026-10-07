@@ -32,6 +32,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .schab_cholesky_root(cov = A)
 #' res
+#' @keywords internal
 .schab_cholesky_root <- function(cov, jitter = 1e-10) {
   # Lower-triangular L with L L' = Sigma. The book writes the root as an
   # upper triangular U with Sigma = U'U; L is that U'.
@@ -57,6 +58,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .schab_spectral_root(cov = A)
 #' res
+#' @keywords internal
 .schab_spectral_root <- function(cov, tol = NULL) {
   # Symmetric square root P Delta^(1/2) P'. Negative eigenvalues can only
   # come from rounding on a matrix positive semi-definite in exact
@@ -86,6 +88,7 @@
 #' @param stream Passed to \code{.morie_random_normal}. Defaults to \code{0}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .schab_simulate_unconditional <- function(mean, cov, method = "cholesky",
                                           seed = 0, stream = 0) {
   mean <- as.numeric(mean)
@@ -117,6 +120,7 @@
 #' @param stream Passed to \code{.schab_simulate_unconditional}. Defaults to \code{0}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .schab_simulate_conditional <- function(cov_all, z_obs, n_obs, mean = 0,
                                         method = "cholesky", seed = 0,
                                         stream = 0) {
@@ -154,6 +158,7 @@
 #' @param n_obs A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_simple_kriging_variance <- function(cov_all, n_obs) {
   # sigma^2_sk at every location, for the E[(Zc - Z)^2] = 2 sigma^2_sk
   # identity that closes Sec. 7.2.2.

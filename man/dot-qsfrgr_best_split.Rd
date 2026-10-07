@@ -28,3 +28,4 @@ The value of \code{best}, as built in the body.
 A step of the qsfrgr_native implementation. Called by \code{.qsfrgr_grow}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

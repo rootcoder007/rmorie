@@ -20,3 +20,4 @@ A vector, from \code{vapply}.
 \description{
 the simulated patterns, drawn in the same window, so it cancels.
 }
+\keyword{internal}

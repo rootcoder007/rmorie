@@ -21,6 +21,7 @@
 #' 2.6, 3.4, 3.9))
 #' res <- .rasch_jmle(X = X)
 #' res
+#' @keywords internal
 .rasch_jmle <- function(X, iters = 200, prior_var = 4) {
   n <- nrow(X)
   k <- ncol(X)

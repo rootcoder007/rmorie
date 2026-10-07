@@ -23,3 +23,4 @@ See the file header for the source the module follows.
 res <- .morie_dp_rlaplace(n = 3L, scale = TRUE)
 res
 }
+\keyword{internal}

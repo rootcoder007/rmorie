@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .grclus_shuffled(n = 3L, seed = 1L)
 res
 }
+\keyword{internal}

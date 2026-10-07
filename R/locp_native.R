@@ -16,6 +16,7 @@
 #' @param t A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .locp_kernel <- function(name, t) {
   out <- numeric(length(t))
   if (name == "gaussian") return(exp(-0.5 * t * t))

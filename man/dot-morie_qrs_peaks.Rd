@@ -19,3 +19,4 @@ The value of \code{out}, as built in the body.
 \description{
 neighbours on each side.
 }
+\keyword{internal}

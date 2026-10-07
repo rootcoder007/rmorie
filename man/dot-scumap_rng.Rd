@@ -19,3 +19,4 @@ product exceeds 2^53.
 res <- .scumap_rng(seed = 1L)
 res
 }
+\keyword{internal}

@@ -26,3 +26,4 @@ The value of \code{loss}, as built in the body.
 A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

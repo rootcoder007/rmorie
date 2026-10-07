@@ -16,3 +16,4 @@ The value of \code{out}, as built in the body.
 A step of the helpers_w3num implementation. Called by \code{.w3_ols}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

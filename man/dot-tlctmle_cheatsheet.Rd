@@ -18,3 +18,4 @@ the source it follows.
 res <- .tlctmle_cheatsheet()
 res
 }
+\keyword{internal}

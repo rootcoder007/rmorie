@@ -28,3 +28,4 @@ A numeric value.
 A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

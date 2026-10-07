@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .robpca_reweight_factor(q = 0.5, k = 3L)
 res
 }
+\keyword{internal}

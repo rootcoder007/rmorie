@@ -22,3 +22,4 @@ the source it follows.
 res <- .morie_bx_sig(b = 3L)
 res
 }
+\keyword{internal}

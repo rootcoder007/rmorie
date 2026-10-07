@@ -27,3 +27,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .causrddc_solve(M = A, b = b)
 res
 }
+\keyword{internal}

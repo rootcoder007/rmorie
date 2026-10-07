@@ -18,3 +18,4 @@ The value of \code{B}, as built in the body.
 A step of the swinmw_native implementation. Called by \code{Swinmw}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

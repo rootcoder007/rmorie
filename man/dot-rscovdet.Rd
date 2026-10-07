@@ -22,3 +22,4 @@ subset happened to round furthest below zero. Clamping at zero makes the compari
 pick the FIRST exactly-degenerate subset instead, which is both correct and identical
 in the two language arms.
 }
+\keyword{internal}

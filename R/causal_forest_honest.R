@@ -25,6 +25,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .morie_cf_tau(y = y, d = g)
 #' res
+#' @keywords internal
 .morie_cf_tau <- function(y, d) {
   tr <- d == 1
   co <- d == 0
@@ -52,6 +53,7 @@
 #' @param imbalance_penalty A flag; the body branches on it. Defaults to \code{0}.
 #' @return The value of \code{node}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_cf_grow <- function(X, y, d, split_rows, est_rows, depth, max_depth,
                            min_leaf, mtry, imbalance_penalty = 0) {
   node <- list(
@@ -134,6 +136,7 @@
 #' @param xrow A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .morie_cf_walk <- function(node, xrow) {
   while (!is.na(node$feature)) {
     node <- if (xrow[node$feature] <= node$threshold) node$left else node$right

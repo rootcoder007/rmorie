@@ -109,6 +109,7 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' @param decay Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.999}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .polyak_running_average <- function(prev, new, decay = 0.999) {
   a <- as.numeric(decay)
   if (a <= 0 || a >= 1) {
@@ -136,6 +137,7 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' @param tau Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .polyak_soft_update <- function(target, online, tau = 0.001) {
   t <- as.numeric(tau)
   if (t <= 0 || t > 1) {
@@ -165,6 +167,7 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' @return A list, whose contents depend on the branch taken; across the branches its
 #' names are \code{target}, \code{copied}.
 #' @export
+#' @keywords internal
 .polyak_hard_update <- function(target, online, step, C = 10000) {
   # step %% C == 0 : a copy is taken at multiples of C
   if (as.integer(step) %% as.integer(C) == 0L) {
@@ -191,6 +194,7 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' @examples
 #' res <- .polyak_lag_halflife(tau = 0.5)
 #' res
+#' @keywords internal
 .polyak_lag_halflife <- function(tau) {
   t <- as.numeric(tau)
   if (t <= 0 || t >= 1) {
@@ -215,6 +219,7 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' @examples
 #' res <- .polyak_cheatsheet()
 #' res
+#' @keywords internal
 .polyak_cheatsheet <- function() {
   paste0(
     "polyak: (1) averaging the iterates of a SLOWLY decaying stoc",

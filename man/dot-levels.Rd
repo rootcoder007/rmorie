@@ -19,3 +19,4 @@ The value of \code{lv}, as built in the body.
 A step of the tmldta_native implementation. Called by \code{morie_tmldta}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

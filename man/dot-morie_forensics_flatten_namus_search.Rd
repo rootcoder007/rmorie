@@ -19,3 +19,4 @@ A list with \code{case_number}, \code{state}, \code{county}, \code{dlc_date},
 NamUs Search endpoint actually returns; verified live 2026-07).
 Height/weight are not projectable via Search -- NA by contract.
 }
+\keyword{internal}

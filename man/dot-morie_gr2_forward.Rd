@@ -22,3 +22,4 @@ every occurrence becomes its own node here. For expressions written
 out literally -- which is every documented use -- the two agree,
 because distinct Python literals are distinct objects too.
 }
+\keyword{internal}

@@ -37,3 +37,4 @@ follow <- .prsLL_follow_sets(g)
 follow$E  # ")" and "$", the end-of-input marker
 follow$F  # "+", "*", ")", "$"
 }
+\keyword{internal}

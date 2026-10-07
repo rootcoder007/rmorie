@@ -18,3 +18,4 @@ The value of \code{j}, as built in the body.
 A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

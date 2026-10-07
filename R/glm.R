@@ -16,6 +16,7 @@
 #' @examples
 #' res <- .morie_glm_families()
 #' res
+#' @keywords internal
 .morie_glm_families <- function() {
   eps <- 1e-10
   clip01 <- function(p) pmin(pmax(p, eps), 1 - eps)
@@ -85,6 +86,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_glm_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .morie_glm_solve <- function(A, b) {
   r <- tryCatch(solve(A, b), error = function(e) NULL)
   if (is.null(r) || any(!is.finite(r))) {

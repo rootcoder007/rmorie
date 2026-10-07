@@ -24,3 +24,4 @@ A list with \code{mean}, \code{var}.
 A step of the s04core implementation. Called by \code{Gpmoe}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -26,6 +26,7 @@
 #' @param payload See Usage.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
+#' @keywords internal
 .RichResult <- function(payload) {
   payload
 }
@@ -43,6 +44,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmlcds_sigmoid(x = x)
 #' res
+#' @keywords internal
 .tmlcds_sigmoid <- function(x) {
   1.0 / (1.0 + exp(-x))
 }
@@ -58,6 +60,7 @@
 #' @examples
 #' res <- .tmlcds_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tmlcds_logit <- function(p) {
   log(p / (1.0 - p))
 }
@@ -74,6 +77,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmlcds_vec(x = x)
 #' res
+#' @keywords internal
 .tmlcds_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
@@ -91,6 +95,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmlcds_mat(X = x)
 #' res
+#' @keywords internal
 .tmlcds_mat <- function(X) {
   if (is.null(X)) return(matrix(numeric(0), nrow = 0, ncol = 0))
   if (is.data.frame(X)) X <- as.matrix(X)
@@ -107,6 +112,7 @@
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{cbind}.
 #' @export
+#' @keywords internal
 .tmlcds_design <- function(cols, n) {
   if (is.null(cols) || length(cols) == 0) {
     return(matrix(1.0, nrow = n, ncol = 1))
@@ -129,6 +135,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .tmlcds_matvec(M = A, v = b)
 #' res
+#' @keywords internal
 .tmlcds_matvec <- function(M, v) {
   as.numeric(M %*% v)
 }
@@ -149,6 +156,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tmlcds_lstsq(Z = X, y = y)
 #' res
+#' @keywords internal
 .tmlcds_lstsq <- function(Z, y) {
   as.numeric(solve(crossprod(Z) + 1e-10 * diag(ncol(Z)), crossprod(Z, y)))
 }
@@ -177,6 +185,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tmlcds_logit_irls(X = X, y = y)
 #' res
+#' @keywords internal
 .tmlcds_logit_irls <- function(X, y, iters = 60L, ridge = 1e-10,
                                tol = 1e-13, penalty = 0.0) {
   n <- nrow(X)
@@ -217,6 +226,7 @@
 #' @param clip Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{qa}, \code{q1}, \code{q0}, \code{eps}.
 #' @export
+#' @keywords internal
 .tmlcds_fluctuate <- function(qa, q1, q0, y, d, g, clip = 1e-8) {
   n <- length(y)
   h <- d / g - (1.0 - d) / (1.0 - g)
@@ -250,6 +260,7 @@
 #' @param y A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tmlcds_qloss <- function(qa, y) {
   -sum(y * log(qa) + (1.0 - y) * log(1.0 - qa)) / length(y)
 }
@@ -268,6 +279,7 @@
 #' @param trim Numeric; combined arithmetically in the body. Defaults to \code{0.005}.
 #' @return A list with \code{g}, \code{b}.
 #' @export
+#' @keywords internal
 .tmlcds_propensity <- function(d, cols, n, penalty = 0.0, trim = 0.005) {
   Z <- .tmlcds_design(cols, n)
   b <- .tmlcds_logit_irls(Z, d, 60L, 1e-10, penalty = as.numeric(penalty))
@@ -433,6 +445,7 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #' @param trim Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .tmlcds_refit_on <- function(info, steps, s, tr, fold, tuning, penalties,
                              trim) {
   ys <- info$y_scaled
@@ -578,6 +591,7 @@ tmle_cdrs <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #' @examples
 #' res <- .tmlcds_cheatsheet()
 #' res
+#' @keywords internal
 .tmlcds_cheatsheet <- function() {
   paste0("tmlcds: collaborative TMLE. Build a NESTED sequence of ",
          "treatment mechanisms and select by the cross-validated loss of ",

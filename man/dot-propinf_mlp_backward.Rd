@@ -49,3 +49,4 @@ bw <- .propinf_mlp_backward(net, fp$acts, fp$pre, p - 1,
 bw$delta                 # gradient with respect to x
 bw$grads[[1]]$b          # accumulated bias gradients of the first layer
 }
+\keyword{internal}

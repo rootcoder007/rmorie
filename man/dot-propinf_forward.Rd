@@ -34,3 +34,4 @@ fp$pre[[1]]        # pre-activations of the hidden layer
 fp$acts[[2]]       # after ReLU
 fp$acts[[3]]       # the logistic output
 }
+\keyword{internal}

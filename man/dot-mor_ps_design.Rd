@@ -20,3 +20,4 @@ A step of the causal implementation. Called by \code{.fit_propensity},
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

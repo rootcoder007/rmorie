@@ -22,3 +22,4 @@ the source it follows.
 res <- .morie_permutations(n = 3L)
 res
 }
+\keyword{internal}

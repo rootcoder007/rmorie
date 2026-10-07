@@ -30,3 +30,4 @@ A list with \code{state}, \code{accepted}.
 A step of the phylby_native implementation. Called by \code{morie_phylby}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

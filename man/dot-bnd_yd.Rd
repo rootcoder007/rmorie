@@ -28,3 +28,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .bnd_yd(y = y, D = g, name = txt)
 res
 }
+\keyword{internal}

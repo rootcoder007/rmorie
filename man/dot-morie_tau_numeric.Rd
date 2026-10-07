@@ -21,3 +21,4 @@ A numeric value.
 \description{
 form Czado's Table 3.2 does not give.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ the source it follows.
 res <- .tlclust_cheatsheet()
 res
 }
+\keyword{internal}

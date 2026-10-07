@@ -19,3 +19,4 @@ p = 1 / (1 + exp(epsilon)) -> achieves epsilon-local-DP.
 res <- .locdp_flip_prob(epsilon = 0.5)
 res
 }
+\keyword{internal}

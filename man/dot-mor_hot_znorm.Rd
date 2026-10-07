@@ -16,3 +16,4 @@ A numeric value.
 A step of the hot_native implementation. Called by \code{morie_hot}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

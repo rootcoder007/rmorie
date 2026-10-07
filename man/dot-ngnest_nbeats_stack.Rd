@@ -24,3 +24,4 @@ local copy that used to live here normalised trend time by (lb - 1)
 rather than lb and built the Fourier basis on max(H, lb) with 1-based
 time, so its forecasts drifted from the spec.
 }
+\keyword{internal}

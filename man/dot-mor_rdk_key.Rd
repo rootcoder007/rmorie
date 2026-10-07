@@ -15,3 +15,4 @@ A character value.
 \description{
 ordering because every tuple compared shares a length
 }
+\keyword{internal}

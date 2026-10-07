@@ -26,3 +26,4 @@ A list with \code{tot}, \code{idx}, \code{sq}.
 A step of the helpers_rouss implementation. Called by \code{Ltsreg}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

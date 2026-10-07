@@ -16,3 +16,4 @@ A list with \code{children}, \code{parents}, \code{nodes}.
 A step of the causal_native implementation. Called by \code{morie_backdoor_criterion}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 res <- .smatch_qnorm(p = 0.5)
 res
 }
+\keyword{internal}

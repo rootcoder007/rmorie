@@ -45,3 +45,4 @@ coordinate when it is non-zero so the simplex is not tiny in a large
 parameter and huge in a small one. A fixed iteration count keeps the
 arms in step.
 }
+\keyword{internal}

@@ -27,3 +27,4 @@ Zeger 1986) -- the geepack::geeglm surface used by the OTIS batch
 module. Fisher scoring on the working model, moment estimate of the
 exchangeable alpha, robust (sandwich) covariance.
 }
+\keyword{internal}

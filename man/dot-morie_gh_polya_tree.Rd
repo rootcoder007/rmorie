@@ -27,3 +27,4 @@ A step of the ghosal_native implementation. Called by \code{morie_polya_tree_den
 \code{morie_polya_tree_mixture}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

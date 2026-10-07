@@ -83,3 +83,4 @@ the source it follows.
 res <- .tlltmle_logit(p = 0.5)
 res
 }
+\keyword{internal}

@@ -18,6 +18,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gpflat(x = x)
 #' res
+#' @keywords internal
 .gpflat <- function(x) as.numeric(unlist(x))
 
 #' .gpmat
@@ -34,6 +35,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .gpmat(A = A)
 #' res
+#' @keywords internal
 .gpmat <- function(A) {
   if (is.matrix(A)) {
     return(matrix(as.numeric(A), nrow(A), ncol(A)))
@@ -59,6 +61,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .gpsolve(A = A, b = b)
 #' res
+#' @keywords internal
 .gpsolve <- function(A, b) {
   A <- .gpmat(A)
   b <- .gpflat(b)
@@ -82,6 +85,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .gppinv(A = A)
 #' res
+#' @keywords internal
 .gppinv <- function(A) {
   s <- svd(.gpmat(A))
   tol <- max(dim(A)) * .Machine$double.eps * max(s$d, 0)
@@ -103,6 +107,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .gpinv(A = A)
 #' res
+#' @keywords internal
 .gpinv <- function(A) {
   A <- .gpmat(A)
   out <- tryCatch(solve(A), error = function(e) NULL)
@@ -125,6 +130,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .gplogdet(A = A)
 #' res
+#' @keywords internal
 .gplogdet <- function(A) {
   A <- .gpmat(A)
   d <- determinant(A, logarithm = TRUE)
@@ -145,6 +151,7 @@
 #' \code{sd_residual}, \code{deviations}, \code{sigma2_b}, \code{icc}, \code{ms_between},
 #' \code{ms_within}.
 #' @export
+#' @keywords internal
 .gponeway <- function(groups) {
   gs <- lapply(groups, as.numeric)
   if (length(gs) == 0L || any(vapply(gs, length, 1L) != length(gs[[1L]]))) {
@@ -186,6 +193,7 @@
 #' \code{as.integer}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @keywords internal
 .gpconf <- function(y_true, y_pred, n_classes = NULL) {
   yt <- as.integer(.gpflat(y_true))
   yp <- as.integer(.gpflat(y_pred))
@@ -206,6 +214,7 @@
 #' @return A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all},
 #' \code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.
 #' @export
+#' @keywords internal
 .gpclassmetrics <- function(conf, i) {
   conf <- .gpmat(conf)
   C <- nrow(conf)
@@ -237,6 +246,7 @@
 #' @param halved A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .gpbrier <- function(probs, y_true, n_classes = NULL, halved = FALSE) {
   P <- .gpmat(probs)
   yt <- as.integer(.gpflat(y_true))
@@ -262,6 +272,7 @@
 #' @param n_classes Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gpmll <- function(probs, y_true, n_classes = NULL) {
   P <- .gpmat(probs)
   yt <- as.integer(.gpflat(y_true))
@@ -281,6 +292,7 @@
 #' @param R Optional; may be \code{NULL}. Passed to \code{.gpmat}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gplmmV <- function(Z, D, R = NULL) {
   Z <- .gpmat(Z)
   n <- nrow(Z)
@@ -301,6 +313,7 @@
 #' @param R Passed to \code{.gplmmV}.
 #' @return A list with \code{beta}, \code{u}.
 #' @export
+#' @keywords internal
 .gpblueblup <- function(X, Z, y, Sigma, R = NULL) {
   X <- .gpmat(X)
   Z <- .gpmat(Z)
@@ -328,6 +341,7 @@
 #' @param R Passed to \code{.gplmmV}.
 #' @return A list with \code{value}, \code{beta}.
 #' @export
+#' @keywords internal
 .gplmmloglik <- function(X, Z, y, D, beta = NULL, R = NULL) {
   Xm <- .gpmat(X)
   y <- .gpflat(y)
@@ -359,6 +373,7 @@
 #' @param R Passed to \code{.gplmmV}.
 #' @return A list with \code{value}, \code{beta}.
 #' @export
+#' @keywords internal
 .gpremlloglik <- function(X, Z, y, D, R = NULL) {
   Xm <- .gpmat(X)
   y <- .gpflat(y)
@@ -393,6 +408,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .gpolsfit(X = X, y = y)
 #' res
+#' @keywords internal
 .gpolsfit <- function(X, y, add_intercept = FALSE) {
   Xm <- .gpmat(X)
   if (add_intercept) Xm <- cbind(1, Xm)
@@ -431,6 +447,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .gpkron(A = A, B = b)
 #' res
+#' @keywords internal
 .gpkron <- function(A, B) kronecker(.gpmat(A), .gpmat(B))
 
 #' .gpmultitrait
@@ -447,6 +464,7 @@
 #' @param X Optional; may be \code{NULL}. Passed to \code{.gpmat}.
 #' @return A list with \code{mu}, \code{beta}, \code{b}, \code{b_by_line}.
 #' @export
+#' @keywords internal
 .gpmultitrait <- function(Y, Z, G, Sigma_T, R_T, X = NULL) {
   Ym <- .gpmat(Y)
   J <- nrow(Ym)
@@ -482,6 +500,7 @@
 #' @param baseline_last A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A matrix, from \code{t}.
 #' @export
+#' @keywords internal
 .gpmnprobs <- function(X, beta0, beta, baseline_last = TRUE) {
   Xm <- .gpmat(X)
   b0 <- .gpflat(beta0)
@@ -510,6 +529,7 @@
 #' @param baseline_last Passed to \code{.gpmnprobs}. Defaults to \code{TRUE}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gpmnloglik <- function(X, y, beta0, beta, baseline_last = TRUE) {
   P <- .gpmnprobs(X, beta0, beta, baseline_last)
   ys <- as.integer(.gpflat(y))
@@ -531,6 +551,7 @@
 #' @param baseline_last Passed to \code{.gpmnloglik}. Defaults to \code{TRUE}.
 #' @return A list with \code{loglik}, \code{penalty}, \code{penalized_loglik}.
 #' @export
+#' @keywords internal
 .gppenmnloglik <- function(X, y, beta0, beta, lam, penalty = "ridge",
                            baseline_last = TRUE) {
   ll <- .gpmnloglik(X, y, beta0, beta, baseline_last)
@@ -553,6 +574,7 @@
 #' @param y Passed to \code{.gpmat}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gpannsse <- function(y_hat, y) 0.5 * sum((.gpmat(y_hat) - .gpmat(y))^2)
 
 # --- chapter 3: expected prediction error, p.80 ---------------------------
@@ -567,6 +589,7 @@
 #' @param eigenvalues Passed to \code{.gpflat}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gpepe <- function(sigma2, x_star, eigenvalues) {
   xs <- .gpflat(x_star)
   lam <- .gpflat(eigenvalues)
@@ -585,6 +608,7 @@
 #' @param theta_pred Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mu}, \code{theta}.
 #' @export
+#' @keywords internal
 .gpzaplink <- function(mu_pred, theta_pred) {
   list(
     mu = exp(min(as.numeric(mu_pred), 700)),
@@ -608,6 +632,7 @@
 #' @param mu_hat Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .gpzappredict <- function(theta_hat, mu_hat) {
   th <- as.numeric(theta_hat)
   mu <- as.numeric(mu_hat)
@@ -626,6 +651,7 @@
 #' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .gpzapcpredict <- function(theta_hat, mu_hat, threshold = 0.5) {
   if (as.numeric(theta_hat) > as.numeric(threshold)) 0 else as.numeric(mu_hat)
 }
@@ -640,6 +666,7 @@
 #' @param mu Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gpztploglik <- function(y_positive, mu) {
   ys <- .gpflat(y_positive)
   n <- length(ys)
@@ -661,6 +688,7 @@
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gpztpmle <- function(y_positive, tol = 1e-12, max_iter = 200) {
   ys <- .gpflat(y_positive)
   n <- length(ys)
@@ -702,6 +730,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gpzapbestsplit(y = y, x = x)
 #' res
+#' @keywords internal
 .gpzapbestsplit <- function(y, x, candidates = NULL) {
   ys <- .gpflat(y)
   xs <- .gpflat(x)
@@ -736,6 +765,7 @@
 #' @param L_g Optional; may be \code{NULL}. Passed to \code{.gpmat}.
 #' @return A list with \code{design}, \code{widths}, \code{n_columns}.
 #' @export
+#' @keywords internal
 .gpordlatent <- function(n, X_E = NULL, X = NULL, X_EM = NULL,
                          Z_L = NULL, L_g = NULL) {
   blocks <- list()
@@ -771,6 +801,7 @@
 #' @param K Passed to \code{.gpmat}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .gprkhsnorm <- function(beta, K) {
   b <- .gpflat(beta)
   as.numeric(t(b) %*% .gpmat(K) %*% b)
@@ -787,6 +818,7 @@
 #' @param eta0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gprkhspredict <- function(K_new, beta, eta0 = 0) {
   as.numeric(eta0) + as.numeric(.gpmat(K_new) %*% .gpflat(beta))
 }
@@ -808,6 +840,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .gprkhsfitsq(K = A, y = b)
 #' res
+#' @keywords internal
 .gprkhsfitsq <- function(K, y, lam = 1) {
   Km <- .gpmat(K)
   ys <- .gpflat(y)

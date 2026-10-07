@@ -41,6 +41,7 @@
 #' @param model Passed to \code{.sp_correlogram}.
 #' @return The value of \code{jac}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_semivariogram_jacobian <- function(h, nugget, sill, rng, model) {
   # d gamma(h; c0, sigma0^2, a) / d(c0, sigma0^2, a), one row per lag.
   #   d gamma / d c0       = 1
@@ -80,6 +81,7 @@
 #' @param counts Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .schab_gn_weights <- function(kind, fitted, counts) {
   # OLS is R = phi I, so the weights are 1. WLS uses Cressie's (1985)
   # approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|, whose
@@ -103,6 +105,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .schab_gn_project(theta = x)
 #' res
+#' @keywords internal
 .schab_gn_project <- function(theta) {
   # Onto the parameter space of Sec. 4.3: variances >= 0, a range > 0. This is
   # the constraint the model imposes, not a search box.
@@ -126,6 +129,7 @@
 #' @param max_halvings A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.
 #' @return A list with \code{theta}, \code{objective}, \code{converged}, \code{iterations}.
 #' @export
+#' @keywords internal
 .schab_gauss_newton <- function(lags, ghat, counts, start, model = "exponential",
                                 kind = "wls", max_iter = 200L, tol = 1e-12,
                                 max_halvings = 40L) {

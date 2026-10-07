@@ -20,3 +20,4 @@ Nothing; this branch always raises.
 A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

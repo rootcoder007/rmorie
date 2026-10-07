@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 .reinfc_logistic(800)
 .reinfc_logistic(-800)
 }
+\keyword{internal}

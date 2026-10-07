@@ -234,6 +234,7 @@ morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
 #' @param min_frac Passed to \code{<}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .longrd_call <- function(col, draft_base, min_depth, min_frac) {
   # Ties go to the draft base if it is among the leaders, and otherwise
   # to the first base in alphabetical order -- an arbitrary rule, but a

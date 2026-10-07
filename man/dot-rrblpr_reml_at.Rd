@@ -22,3 +22,4 @@ A list with \code{ll}, \code{lam}, \code{beta}, \code{s2e}, \code{L}.
 A step of the rrblpr_native implementation. Called by \code{morie_rrblpr_rr_blup}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

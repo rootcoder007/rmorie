@@ -20,3 +20,4 @@ A numeric value.
 within-node sum of squares.  The stored drop is already in raw
 sum-of-squares units.
 }
+\keyword{internal}

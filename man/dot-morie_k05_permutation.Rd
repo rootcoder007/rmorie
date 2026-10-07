@@ -24,3 +24,4 @@ mirror reproduces it exactly.
 res <- .morie_k05_permutation(n = 3L)
 res
 }
+\keyword{internal}

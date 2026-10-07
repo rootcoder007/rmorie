@@ -13,6 +13,7 @@
 #' @param family One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .glmbay_links <- function(family) {
   if (family == "binomial")
     return(list(inv = function(e) 1.0 / (1.0 + exp(-pmax(-500, pmin(500, e)))),
@@ -140,6 +141,7 @@ morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
 #' @examples
 #' res <- .glmbay_cheatsheet()
 #' res
+#' @keywords internal
 .glmbay_cheatsheet <- function() {
   paste0("glmbay: morie_glmbay_bayesian_glm(X, y, family, prior_sd) -> ",
          "posterior mode, Laplace covariance and log marginal likelihood ",

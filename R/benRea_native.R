@@ -36,6 +36,7 @@ bio_labels <- function(types) {
 #' @param label Compared against \code{"O"}.
 #' @return The value of \code{substr}.
 #' @export
+#' @keywords internal
 .parts <- function(label) {
   if (label == "O") return(c("O", NA))
   substr(label, 1, 1)
@@ -49,6 +50,7 @@ bio_labels <- function(types) {
 #' @param label Compared against \code{"O"}.
 #' @return A list with \code{p}, \code{t}.
 #' @export
+#' @keywords internal
 .parts_full <- function(label) {
   if (label == "O") return(list(p = "O", t = NA))
   list(p = substr(label, 1, 1), t = substr(label, 3, nchar(label)))

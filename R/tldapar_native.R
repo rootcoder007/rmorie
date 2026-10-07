@@ -285,6 +285,7 @@ naive_reuse <- function(define_and_estimate, n, seed = 0L) {
 #' @examples
 #' res <- .tldapar_cheatsheet()
 #' res
+#' @keywords internal
 .tldapar_cheatsheet <- function() {
   paste("tldapar: when the QUESTION depends on the data -- which ",
         "levels to contrast, which variable to report -- defining ",

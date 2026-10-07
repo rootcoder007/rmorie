@@ -37,6 +37,7 @@
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mor_stl_tricube <- function(u) {
   if (u >= 1) return(0)
   t <- 1 - u * u * u
@@ -57,6 +58,7 @@
 #' @param rho Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mor_stl_loess_at <- function(xs, ys, x0, q, degree, rho = NULL) {
   n <- length(xs)
   if (q >= n) {
@@ -105,6 +107,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mor_stl_ma(v = x, k = 3L)
 #' res
+#' @keywords internal
 .mor_stl_ma <- function(v, k) {
   cs <- cumsum(c(0, v))
   (cs[(k + 1L):length(cs)] - cs[seq_len(length(v) - k + 1L)]) / k
@@ -118,6 +121,7 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .mor_stl_next_odd <- function(v) {
   v <- as.integer(ceiling(v))
   if (v %% 2L == 1L) v else v + 1L
@@ -136,6 +140,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mor_stl_median(v = x)
 #' res
+#' @keywords internal
 .mor_stl_median <- function(v) {
   s <- sort(v)
   n <- length(s)

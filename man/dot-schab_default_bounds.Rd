@@ -15,3 +15,4 @@ A vector, from \code{c}.
 \description{
 thousandth of it.
 }
+\keyword{internal}

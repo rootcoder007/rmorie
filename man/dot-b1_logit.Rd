@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 res <- .b1_logit(p = 0.5)
 res
 }
+\keyword{internal}

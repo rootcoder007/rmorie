@@ -28,3 +28,4 @@ A step of the survroc_native implementation. Called by \code{morie_survroc_roc_a
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

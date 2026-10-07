@@ -73,6 +73,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlroad_vec(x = x)
 #' res
+#' @keywords internal
 .tlroad_vec <- function(x) {
   as.numeric(x)
 }
@@ -90,6 +91,7 @@
 #' @return A list with \code{steps}, \code{data}, \code{model}, \code{target},
 #' \code{estimator}, \code{note}.
 #' @export
+#' @keywords internal
 .tlroad_roadmap <- function(data_description, model_assumptions, target_name,
                             estimator = "TMLE") {
   if (!nzchar(trimws(as.character(data_description)))) {
@@ -124,6 +126,7 @@
 #' @param psi Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .tlroad_eic_ate <- function(A, Y, Q1, Q0, g, psi) {
   a <- .tlroad_vec(A)
   y <- .tlroad_vec(Y)
@@ -161,6 +164,7 @@
 #' @return A list with \code{score}, \code{eic_component}, \code{difference},
 #' \code{spans}, \code{note}.
 #' @export
+#' @keywords internal
 .tlroad_score_spans_eic <- function(A, Y, Q1, Q0, g, h = 1e-6) {
   a <- .tlroad_vec(A)
   y <- .tlroad_vec(Y)
@@ -210,6 +214,7 @@
 #' @param Q0 Passed to \code{.tlroad_vec}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tlroad_plugin <- function(Q1, Q0) {
   q1 <- .tlroad_vec(Q1)
   q0 <- .tlroad_vec(Q0)
@@ -234,6 +239,7 @@
 #' @return A list with \code{estimate}, \code{mean_eic}, \code{solved}, \code{se},
 #' \code{ci}, \code{method}.
 #' @export
+#' @keywords internal
 .tlroad_solves_eic_equation <- function(A, Y, Q1, Q0, g, psi, tol = 1e-8) {
   d <- .tlroad_eic_ate(A, Y, Q1, Q0, g, psi)
   m <- mean(d)
@@ -258,6 +264,7 @@
 #' @examples
 #' res <- .tlroad_cheatsheet()
 #' res
+#' @keywords internal
 .tlroad_cheatsheet <- function() {
   paste0(
     "tlroad: (1) data as a random variable, (2) a statistical mod",

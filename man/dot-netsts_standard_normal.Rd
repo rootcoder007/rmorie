@@ -17,3 +17,4 @@ The value of \code{out}, as built in the body.
 \description{
 glibc LCG-backed helper. Two uniforms per sample.
 }
+\keyword{internal}

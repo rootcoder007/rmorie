@@ -65,6 +65,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .vqgdec_to_matrix(x = x)
 #' res
+#' @keywords internal
 .vqgdec_to_matrix <- function(x) {
     if (is.matrix(x)) {
         return(`storage.mode<-`(x, "double"))

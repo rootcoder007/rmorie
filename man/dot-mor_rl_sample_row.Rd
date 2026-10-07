@@ -19,3 +19,4 @@ The value of \code{S}, as built in the body.
 \description{
 _sample_row); returns a 1-based state index
 }
+\keyword{internal}

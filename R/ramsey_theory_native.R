@@ -48,6 +48,7 @@
 #' @param l Numeric; combined arithmetically in the body.
 #' @return The value of \code{choose}.
 #' @export
+#' @keywords internal
 .morie_es_bound <- function(k, l) choose(k + l - 2, k - 1)
 
 #' Ramsey number R(k, l), exactly or as an interval

@@ -18,3 +18,4 @@ One of two values, depending on the branch taken.
 A step of the ffmFM_native implementation. Called by \code{.fit_ffm}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

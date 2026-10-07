@@ -25,3 +25,4 @@ A step of the causal_molak implementation. Called by \code{morie_docalc},
 \code{morie_dseptest}, \code{morie_faithchk} and 1 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -38,6 +38,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_gr_xor32(a = A, b = b)
 #' res
+#' @keywords internal
 .morie_gr_xor32 <- function(a, b) {
   ah <- a %/% 65536
   al <- a %% 65536
@@ -66,6 +67,7 @@
 #' @param value See Usage.
 #' @return The value of \code{.morie_gr_xor32}.
 #' @export
+#' @keywords internal
 .morie_gr_crc32 <- function(value) {
   v <- value
   if (v < 0 || v >= 2^53) {
@@ -364,6 +366,7 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 #' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr_perms <- function(seq_, k) {
   if (k == 0L) return(list(integer(0)))
   out <- list()
@@ -384,6 +387,7 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 #' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr_combos <- function(seq_, k) {
   if (k == 0L) return(list(integer(0)))
   if (length(seq_) < k) return(list())

@@ -66,6 +66,7 @@
 #' @param ... Passed through.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
+#' @keywords internal
 .prnFil_changepoint_path <- function(t, y, taus = NULL, n_changepoints = 15,
                                       changepoint_range = 0.8,
                                       seasonalities = NULL, ...) {
@@ -111,6 +112,7 @@
 #' \code{fit}, \code{last_candidate_fraction}, \code{changepoint_range}, \code{rmse},
 #' \code{method}.
 #' @export
+#' @keywords internal
 .prnFil_select_changepoints <- function(t, y, tau = 0.05,
                                         n_changepoints = 15,
                                         changepoint_range = 0.8,
@@ -152,6 +154,7 @@
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{sims}, as built in the body.
 #' @export
+#' @keywords internal
 .prnFil_simulate_future_trend <- function(fit, t_future, n_sims = 200,
                                            seed = 0) {
   tv <- fit[["t"]]
@@ -205,6 +208,7 @@
 #' @return A list with \code{estimate}, \code{median}, \code{lower}, \code{upper},
 #' \code{width}, \code{level}, \code{n_sims}, \code{note}, \code{method}.
 #' @export
+#' @keywords internal
 .prnFil_trend_intervals <- function(fit, t_future, level = 0.8,
                                      n_sims = 200, seed = 0) {
   sims <- .prnFil_simulate_future_trend(fit, t_future, n_sims = n_sims,
@@ -238,6 +242,7 @@
 #' @examples
 #' res <- .prnFil_cheatsheet()
 #' res
+#' @keywords internal
 .prnFil_cheatsheet <- function() {
   paste0("prnFil: lay down many candidate changepoints, let ",
          "delta_j ~ Laplace(0, tau) decide. Small tau = straight ",

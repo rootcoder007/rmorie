@@ -15,3 +15,4 @@ A list with \code{rows}, \code{cols}.
 \description{
 grdetr._linear_sum_assignment. Returns 0-based rows/cols.
 }
+\keyword{internal}

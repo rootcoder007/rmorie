@@ -27,6 +27,7 @@
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{repeat}.
 #' @export
+#' @keywords internal
 .gamma_draw <- function(shape, scale, e) {
   a <- as.numeric(shape)
   if (a < 1.0) {
@@ -54,6 +55,7 @@
 #' @param e Passed to \code{.ghc_norm}.
 #' @return The value of \code{repeat}.
 #' @export
+#' @keywords internal
 .poisson_draw <- function(lam, e) {
   lm <- as.numeric(lam)
   if (lm <= 0.0) return(0L)
@@ -336,6 +338,7 @@ effective_reproduction_number <- function(R0, si_mean, si_sd, delay_mean,
 #' @examples
 #' res <- .ttrace_cheatsheet()
 #' res
+#' @keywords internal
 .ttrace_cheatsheet <- function() {
   paste0("ttrace: branching process. Offspring ~ NegBinom(mean R0, ",
          "dispersion k), variance R0(1 + R0/k) -- overdispersion ",

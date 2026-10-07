@@ -15,3 +15,4 @@ One of two values, depending on the branch taken.
 \description{
 message, mirroring the Python arm's .check().
 }
+\keyword{internal}

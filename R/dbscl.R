@@ -15,6 +15,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_dbscan_native(x = x)
 #' res
+#' @keywords internal
 .morie_dbscan_native <- function(x, eps = 0.5, min_samples = 5L,
                                  metric = "euclidean") {
   metrics <- c("euclidean", "manhattan", "chebyshev")

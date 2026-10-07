@@ -54,6 +54,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .lggvls_vec(x = x)
 #' res
+#' @keywords internal
 .lggvls_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
@@ -71,6 +72,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .lggvls_mat(x = x)
 #' res
+#' @keywords internal
 .lggvls_mat <- function(x) {
   if (is.null(x)) return(matrix(numeric(0), nrow = 0, ncol = 0))
   as.matrix(x)
@@ -90,6 +92,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .lggvls_quantile7(x = x, q = 0.5)
 #' res
+#' @keywords internal
 .lggvls_quantile7 <- function(x, q) {
   as.numeric(stats::quantile(x, probs = q, type = 7, names = FALSE))
 }
@@ -111,6 +114,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .lggvls_logistic_fit(X = x, y = y)
 #' res
+#' @keywords internal
 .lggvls_logistic_fit <- function(X, y, max_iter = 25L, tol = 1e-8) {
   n <- nrow(X)
   Xa <- cbind(1, X)
@@ -150,6 +154,7 @@
 #' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{w}, \code{info}.
 #' @export
+#' @keywords internal
 .lggvls_ip_weights <- function(a, den_X, num_X, kind = "binary", stabilize = TRUE) {
   n <- length(a)
   if (kind != "binary") {
@@ -217,6 +222,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .lggvls_wls(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .lggvls_wls <- function(X, y, w) {
   n <- length(y)
   if (is.null(X) || length(X) == 0L) {
@@ -250,6 +256,7 @@
 #' @param n Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{do.call}.
 #' @export
+#' @keywords internal
 .lggvls_bind <- function(cols, n) {
   if (length(cols) == 0L) return(NULL)
   do.call(cbind, cols)
@@ -265,6 +272,7 @@
 #' @param allow_none A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .lggvls_as_history <- function(obj, allow_none = FALSE) {
   if (is.null(obj)) {
     if (isTRUE(allow_none)) return(list(NULL))
@@ -294,6 +302,7 @@
 #' @param lag Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{cols}, as built in the body.
 #' @export
+#' @keywords internal
 .lggvls_lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
   cols    <- list()
   k_time  <- as.integer(k_time)
@@ -487,6 +496,7 @@ laggedvaliptw  <- morie_lggvls
 #' @examples
 #' res <- .lggvls_cheatsheet()
 #' res
+#' @keywords internal
 .lggvls_cheatsheet <- function() {
   paste("lggvls: sustained-exposure IPTW (Robins 1986). Weight =",
         "prod_k f(A_k|Abar_{k-1}) / f(A_k|Abar_{k-1}, Lbar_k,",

@@ -21,3 +21,4 @@ the source it follows.
 res <- .secaead_clamp_key(k = 3L)
 res
 }
+\keyword{internal}

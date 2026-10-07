@@ -185,6 +185,7 @@ morie_rnacov_parse <- function(s) {
 #' @param b Passed to \code{==}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .rnacov_can_pair <- function(a, b) {
   for (p in .RNACOV_PAIRS) if (a == p[1] && b == p[2]) return(TRUE)
   FALSE

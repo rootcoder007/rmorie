@@ -18,3 +18,4 @@ The value of \code{out}, as built in the body.
 A step of the esl_native2 implementation. Called by \code{morie_esl_thin_plate_spline}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

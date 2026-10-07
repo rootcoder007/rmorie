@@ -45,6 +45,7 @@ MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_pinv(M = X)
 #' res
+#' @keywords internal
 .morie_pinv <- function(M, rcond = 1e-15) {
   s <- svd(M)
   cutoff <- rcond * max(s$d)
@@ -79,6 +80,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t1_vec(x = x)
 #' res
+#' @keywords internal
 .t1_vec <- function(x) as.numeric(unlist(x))
 
 #' .t1_mat
@@ -94,6 +96,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t1_mat(X = x)
 #' res
+#' @keywords internal
 .t1_mat <- function(X) {
   if (is.matrix(X)) {
     return(matrix(as.numeric(X), nrow = nrow(X)))
@@ -117,6 +120,7 @@ NULL
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .t1_eigsym(A = A)
 #' res
+#' @keywords internal
 .t1_eigsym <- function(A) {
   e <- eigen((A + t(A)) / 2, symmetric = TRUE)
   V <- e$vectors
@@ -140,6 +144,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .t1_lstsq(X = x, y = y)
 #' res
+#' @keywords internal
 .t1_lstsq <- function(X, y) {
   # Minimum-norm least squares via the SVD, matching numpy.linalg.lstsq
   # and so the Python arm's _lstsq.
@@ -183,6 +188,7 @@ NULL
 #' @param xtxinv A matrix; passed to \code{\%*\%}.
 #' @return The value of \code{rowSums}.
 #' @export
+#' @keywords internal
 .t1_hatdiag <- function(X, xtxinv) {
   X <- as.matrix(X)
   rowSums((X %*% xtxinv) * X)
@@ -201,6 +207,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t1_cbind1(X = x)
 #' res
+#' @keywords internal
 .t1_cbind1 <- function(X) cbind(1, as.matrix(X))
 
 #' .t1_sd
@@ -215,6 +222,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t1_sd(x = x)
 #' res
+#' @keywords internal
 .t1_sd <- function(x) stats::sd(as.numeric(x))
 
 # Lehmer minstd -- identical stream to the Python arm.
@@ -230,6 +238,7 @@ NULL
 #' @examples
 #' res <- .t1_lcg()
 #' res
+#' @keywords internal
 .t1_lcg <- function(seed = 1) {
   s <- as.numeric(seed) %% 2147483647
   if (s <= 0) s <- 1
@@ -256,6 +265,7 @@ NULL
 #' @examples
 #' res <- .t1_result()
 #' res
+#' @keywords internal
 .t1_result <- function(...) {
   out <- list(...)
   class(out) <- c("morie_rich_result", "list")

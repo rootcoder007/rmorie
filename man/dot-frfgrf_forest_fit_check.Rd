@@ -49,3 +49,4 @@ A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty},
 A step of the frfgrf_native implementation. Called by \code{morie_frfgrf}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

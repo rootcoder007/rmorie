@@ -21,6 +21,7 @@
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{h}, \code{d}.
 #' @export
+#' @keywords internal
 .morie_sb_pairs <- function(coords, z) {
   P <- as.matrix(coords)
   zz <- as.numeric(z)
@@ -52,6 +53,7 @@
 #' @param exact A flag; the body branches on it.
 #' @return A list with \code{centres}, \code{idx}.
 #' @export
+#' @keywords internal
 .morie_sb_groups <- function(h, bins, cutoff, exact) {
   if (isTRUE(exact)) {
     u <- unique(round(h, 12))
@@ -176,6 +178,7 @@ morie_matheron_estimator <- function(coords, z, bins = NULL, cutoff = NULL,
 #' @param rng Numeric; passed to \code{max}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_sb_vgm <- function(h, model, nugget, psill, rng) {
   a <- max(rng, 1e-12)
   g <- switch(

@@ -42,6 +42,7 @@
 #' dim(L$M1)   # hidden by dim_x + dim_t
 #' dim(L$M2)   # dim_x by hidden
 #' L$order
+#' @keywords internal
 .abcnnt_made_layer <- function(dim_x, dim_t, hidden, e, reverse = FALSE) {
   order <- seq_len(dim_x)
   if (reverse) order <- rev(order)
@@ -96,6 +97,7 @@
 #' st <- .abcnnt_layer_stats(L, x = c(0.5, -0.2, 0.9), t = c(0.1, -0.4))
 #' st$mu
 #' st$al       # the log-scale, clamped to [-5, 5]
+#' @keywords internal
 .abcnnt_layer_stats <- function(layer, x, t) {
   dx <- layer$dim_x
   dt <- layer$dim_t
@@ -205,6 +207,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' length(ps)
 #' # each entry addresses one trainable parameter
 #' ps[[1]]
+#' @keywords internal
 .abcnnt_params <- function(flow) {
   # An address, not the value: R hands out a copy of L$W1, so perturbing
   # what this returned could never reach the flow and every
@@ -243,6 +246,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
 #' a <- .abcnnt_params(flow)[[1]]
 #' .abcnnt_param_get(flow, a)
+#' @keywords internal
 .abcnnt_param_get <- function(flow, a) {
   x <- flow$layers[[a$layer]][[a$field]]
   if (length(a$index) == 2L) x[a$index[1L], a$index[2L]] else x[a$index[1L]]
@@ -259,6 +263,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' a <- .abcnnt_params(flow)[[1]]
 #' moved <- .abcnnt_param_set(flow, a, 0.5)
 #' .abcnnt_param_get(moved, a)
+#' @keywords internal
 .abcnnt_param_set <- function(flow, a, v) {
   if (length(a$index) == 2L) {
     flow$layers[[a$layer]][[a$field]][a$index[1L], a$index[2L]] <- v

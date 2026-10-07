@@ -58,3 +58,4 @@ A list with \code{estimate}, \code{sigma2}, \code{phi}, \code{theta},
 A step of the sarima_native implementation. Called by \code{.sarima_fit}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

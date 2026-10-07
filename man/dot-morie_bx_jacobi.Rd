@@ -19,3 +19,4 @@ A list with \code{values}, \code{vectors}.
 \description{
 included, without the deflation error of power iteration
 }
+\keyword{internal}

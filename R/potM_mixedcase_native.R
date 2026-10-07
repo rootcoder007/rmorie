@@ -13,6 +13,7 @@
 #' @param xi Numeric; passed to \code{abs}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .potM_loglik <- function(z, sigma, xi) {
   k <- length(z)
   if (sigma <= 0) {
@@ -45,6 +46,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .potM_neg_loglik(par = x, z = y)
 #' res
+#' @keywords internal
 .potM_neg_loglik <- function(par, z) {
   sigma <- par[1]
   xi <- par[2]
@@ -64,6 +66,7 @@
 #' @param exc Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{sigma}, \code{xi}, \code{loglik}, \code{cov}, \code{converged}.
 #' @export
+#' @keywords internal
 .potM_gpd_mle <- function(exc) {
   z <- as.numeric(exc)
   k <- length(z)

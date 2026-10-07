@@ -23,3 +23,4 @@ e <- .propinf_rng(1L)
 # the stream the Python arm produces for this seed
 replicate(3, .propinf_rng_next(e))
 }
+\keyword{internal}

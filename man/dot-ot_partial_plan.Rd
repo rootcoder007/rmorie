@@ -22,3 +22,4 @@ A list with \code{T}, \code{cost}.
 column (Caffarelli and McCann 2010): the inequality-constrained
 problem becomes an ordinary balanced one and is solved exactly.
 }
+\keyword{internal}

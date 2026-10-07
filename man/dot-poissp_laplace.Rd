@@ -24,3 +24,4 @@ A numeric value.
 A step of the poissp_native implementation. Called by \code{morie_poissp}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

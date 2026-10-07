@@ -30,3 +30,4 @@ A list with \code{best}, \code{bv}.
 A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

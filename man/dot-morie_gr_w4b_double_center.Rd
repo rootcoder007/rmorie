@@ -22,3 +22,4 @@ the source it follows.
 res <- .morie_gr_w4b_double_center(D = 3L)
 res
 }
+\keyword{internal}

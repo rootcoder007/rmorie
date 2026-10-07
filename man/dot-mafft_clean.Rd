@@ -18,3 +18,4 @@ A list with \code{seqs}, \code{type}.
 A step of the mafft_native implementation. Called by \code{mafft_alignment}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -16,3 +16,4 @@ A vector, from \code{sort}.
 A step of the causal_molak implementation. Called by \code{morie_mectest}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

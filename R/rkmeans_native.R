@@ -15,6 +15,7 @@
 #' @param c_val Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rkmeans_phi <- function(t, penalty, c_val) {
   if (penalty == "square") {
     return(t * t)
@@ -43,6 +44,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .rkmeans_dist(x = X, m = X)
 #' res
+#' @keywords internal
 .rkmeans_dist <- function(x, m) {
   d <- x - m
   sqrt(sum(d * d))
@@ -58,6 +60,7 @@
 #' @param pts A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rkmeans_mean <- function(pts) {
   p <- length(pts[[1]])
   out <- numeric(p)
@@ -78,6 +81,7 @@
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @keywords internal
 .rkmeans_spatial_median <- function(pts, tol = 1e-10, max_iter = 200) {
   m <- .rkmeans_mean(pts)
   for (iter in seq_len(max_iter)) {
@@ -119,6 +123,7 @@
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @keywords internal
 .rkmeans_huber_centre <- function(pts, c_val, tol = 1e-10, max_iter = 200) {
   m <- .rkmeans_mean(pts)
   for (iter in seq_len(max_iter)) {
@@ -158,6 +163,7 @@
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .rkmeans_concentrate <- function(rows, cen, k, n_keep, penalty, huber_c, max_iter) {
   n <- length(rows)
   prev <- NULL
@@ -345,6 +351,7 @@ morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
 #' @examples
 #' res <- .rkmeans_cheatsheet()
 #' res
+#' @keywords internal
 .rkmeans_cheatsheet <- function() {
   paste0("rkmeans: impartially alpha-trimmed k-Phi-means ",
          "(Cuesta-Albertos, Gordaliza & Matran 1997). Minimises ",

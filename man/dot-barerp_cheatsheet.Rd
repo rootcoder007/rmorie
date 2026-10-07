@@ -16,3 +16,4 @@ One-line cheatsheet
 res <- .barerp_cheatsheet()
 res
 }
+\keyword{internal}

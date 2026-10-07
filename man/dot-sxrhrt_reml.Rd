@@ -24,3 +24,4 @@ A list with \code{ll}, \code{beta}, \code{L}.
 A step of the sxrhrt_native implementation. Called by \code{morie_sxrhrt_sex_specific_h2}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

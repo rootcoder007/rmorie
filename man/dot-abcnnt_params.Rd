@@ -24,3 +24,4 @@ length(ps)
 # each entry addresses one trainable parameter
 ps[[1]]
 }
+\keyword{internal}

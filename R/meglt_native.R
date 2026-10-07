@@ -33,6 +33,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .meglt_mat(X = x)
 #' res
+#' @keywords internal
 .meglt_mat <- function(X) {
   if (is.matrix(X)) {
     out <- vector("list", nrow(X))
@@ -56,6 +57,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .meglt_svd(M = X)
 #' res
+#' @keywords internal
 .meglt_svd <- function(M) {
   # .meglt_mat hands rows back as a LIST; svd() needs the matrix
   if (is.list(M)) M <- do.call(rbind, lapply(M, as.numeric))
@@ -265,6 +267,7 @@ matrix_completion_low_rank <- svt
 #' @examples
 #' res <- .meglt_cheatsheet()
 #' res
+#' @keywords internal
 .meglt_cheatsheet <- function() {
   paste("meglt: most low-rank matrices are recovered EXACTLY from ",
         "m >= C n^1.2 r log n sampled entries -- 1.25 covers all ",

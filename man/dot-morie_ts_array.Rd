@@ -26,3 +26,4 @@ A list with \code{starts}, \code{lengths}.
 A step of the boot_native implementation. Called by \code{morie_tsboot}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

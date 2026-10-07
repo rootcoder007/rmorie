@@ -21,3 +21,4 @@ The value of \code{[}.
 \description{
 path recursion of R's psmirnov2x.
 }
+\keyword{internal}

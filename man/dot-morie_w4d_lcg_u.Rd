@@ -23,3 +23,4 @@ the source it follows.
 res <- .morie_w4d_lcg_u(n = 3L, seed = 1L)
 res
 }
+\keyword{internal}

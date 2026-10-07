@@ -40,6 +40,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .abcgp.lse(values = x)
 #' res
+#' @keywords internal
 .abcgp.lse <- function(values) {
   vals <- values[!is.na(values)]
   if (length(vals) == 0L) {
@@ -61,6 +62,7 @@
 #' @param bits A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .abcgp.sobol_dir <- function(dim, bits) {
   out <- vector("list", dim)
   for (d in seq_len(dim)) {
@@ -100,6 +102,7 @@
 #' @examples
 #' res <- .abcgp.sobol_sequence(n = 3L, dim = 3L)
 #' res
+#' @keywords internal
 .abcgp.sobol_sequence <- function(n, dim, skip = 0) {
   n <- as.integer(n)
   dim <- as.integer(dim)
@@ -140,6 +143,7 @@
 #' @param summary Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .abcgp.summarise <- function(x, summary) {
   v <- if (is.null(summary)) x else summary(x)
   as.numeric(v)
@@ -155,6 +159,7 @@
 #' @param jitter Defaults to \code{1e-12}.
 #' @return The value of \code{L}, as built in the body.
 #' @export
+#' @keywords internal
 .abcgp.chol <- function(a, jitter = 1e-12) {
   a <- as.matrix(a)
   n <- nrow(a)
@@ -184,6 +189,7 @@
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .abcgp.chol_solve <- function(L, b) {
   n <- length(b)
   y <- numeric(n)
@@ -209,6 +215,7 @@
 #' @param cov Passed to \code{.abcgp.chol}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .abcgp.mvn_logpdf <- function(y, mu, cov) {
   n <- length(y)
   L <- .abcgp.chol(cov)
@@ -231,6 +238,7 @@
 #' @param kernel One of \code{"matern32"}, \code{"sqexp"}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .abcgp.corr <- function(a, b, lengthscale, kernel) {
   r2 <- sum(((a - b) / lengthscale)^2)
   if (kernel == "sqexp") {
@@ -257,6 +265,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .abcgp.basis(theta = x)
 #' res
+#' @keywords internal
 .abcgp.basis <- function(theta) {
   c(1, as.numeric(theta), as.numeric(theta)^2)
 }
@@ -272,6 +281,7 @@
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{pmax}.
 #' @export
+#' @keywords internal
 .abcgp.as_nugget <- function(nugget, n) {
   if (is.null(nugget)) {
     return(rep(1e-8, n))
@@ -294,6 +304,7 @@
 #' @param kernel Passed to \code{.abcgp.corr}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .abcgp.profile_nll <- function(X, y, ls, nug, kernel) {
   n <- nrow(X)
   A <- matrix(0, n, n)
@@ -341,6 +352,7 @@
 #' @param kernel Passed to \code{.abcgp.profile_nll}.
 #' @return The value of \code{ls}, as built in the body.
 #' @export
+#' @keywords internal
 .abcgp.mle_lengthscale <- function(X, y, nugget, kernel) {
   n <- nrow(X)
   p <- ncol(X)
@@ -387,6 +399,7 @@
 #' \code{lengthscale}, \code{kernel}, \code{nugget}, \code{chol}, \code{Ainv_r},
 #' \code{Ainv_H}, \code{H}, \code{HtAinvH_chol}, \code{n}, \code{q}, \code{dim}.
 #' @export
+#' @keywords internal
 .abcgp.gp_fit <- function(design, values, nugget = NULL, lengthscale = NULL,
                           kernel = "sqexp", tau2 = NULL) {
   kernels <- c("sqexp", "matern32", "matern52")
@@ -445,6 +458,7 @@
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .abcgp.gp_predict <- function(fit, theta) {
   t <- as.numeric(theta)
   if (length(t) != fit$dim) {
@@ -476,6 +490,7 @@
 #' @param n_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .abcgp.implausible <- function(fit, theta, threshold = 10, n_sd = 3) {
   pr <- .abcgp.gp_predict(fit, theta)
   pr[1] + n_sd * pr[2] < max(fit$values) - threshold
@@ -492,6 +507,7 @@
 #' @param skip Passed to \code{.abcgp.sobol_sequence}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .abcgp.design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1) {
   if (is.matrix(prior_ppf)) {
     # one row per parameter, columns (lo, hi)
@@ -543,6 +559,7 @@
 #' @param bootstrap Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .abcgp.gabc_log_likelihood <- function(sim, obs, theta, n_sim = 50, epsilon = 1,
                                        summary = NULL, kernel = "gaussian",
                                        seed = 0, bootstrap = 25) {
@@ -597,6 +614,7 @@
 #' @param summary Passed to \code{.abcgp.summarise}.
 #' @return A list with \code{log_lik}, \code{mu}, \code{cov}.
 #' @export
+#' @keywords internal
 .abcgp.synthetic_log_likelihood <- function(draws, obs, epsilon = 0,
                                             summary = NULL) {
   rows <- lapply(draws, function(x) .abcgp.summarise(x, summary))
@@ -635,6 +653,7 @@
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{fit}, \code{waves}.
 #' @export
+#' @keywords internal
 .abcgp.history_match <- function(sim, obs, prior_ppf, n_waves = 3,
                                  n_design = 32, n_sim = 50, epsilon = 1,
                                  summary = NULL, threshold = 10, n_sd = 3,
@@ -702,6 +721,7 @@
 #' @param log_q_p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .abcgp.alpha_terms <- function(log_prior, theta, theta_p, ll, ll_p,
                                log_q, log_q_p) {
   min(0, (log_prior(theta_p) + ll_p + log_q_p) - (log_prior(theta) + ll + log_q))
@@ -717,6 +737,7 @@
 #' @param n_grid A count; the body uses it as \code{seq_len(...)}. Defaults to \code{101}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .abcgp.expected_error <- function(alphas, tau, n_grid = 101) {
   M <- length(alphas)
   total <- 0
@@ -744,6 +765,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .abcgp.median(v = x)
 #' res
+#' @keywords internal
 .abcgp.median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -761,6 +783,7 @@
 #' @param e Passed to \code{.ghc_norm}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .abcgp.draw_mean <- function(mu, cov, S, e) {
   n <- length(mu)
   scaled <- cov / S
@@ -786,6 +809,7 @@
 #' @param seed Passed to \code{.abcgp.mw_sampler}. Defaults to \code{0}.
 #' @return The value of \code{.abcgp.mw_sampler}.
 #' @export
+#' @keywords internal
 .abcgp.synthetic_abc <- function(sim, obs, log_prior, theta0, n_iter = 200,
                                  n_sim = 20, epsilon = 0, proposal_sd = 0.5,
                                  summary = NULL, seed = 0) {
@@ -816,6 +840,7 @@
 #' @param max_sim Passed to \code{.abcgp.mw_sampler}. Defaults to \code{400}.
 #' @return The value of \code{.abcgp.mw_sampler}.
 #' @export
+#' @keywords internal
 .abcgp.gps_abc <- function(sim, obs, log_prior, theta0, n_iter = 200,
                            n_sim = 10, epsilon = 0, proposal_sd = 0.5,
                            summary = NULL, seed = 0, xi = 0.05, delta_s = 10,
@@ -852,6 +877,7 @@
 #' @return A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations},
 #' \code{unresolved_steps}.
 #' @export
+#' @keywords internal
 .abcgp.mw_sampler <- function(sim, obs, log_prior, theta0, n_iter, n_sim,
                               epsilon, proposal_sd, summary, seed,
                               adaptive, xi, delta_s, n_alpha, max_sim = NULL) {
@@ -1181,6 +1207,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param log_q_p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gp_alpha_terms <- function(log_prior, theta, theta_p, ll, ll_p,
                             log_q, log_q_p) {
   min(0, (log_prior(theta_p) + ll_p + log_q_p) -
@@ -1198,6 +1225,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{pmax}.
 #' @export
+#' @keywords internal
 .gp_as_nugget <- function(nugget, n) {
   if (is.null(nugget)) return(rep(1e-8, n))
   v <- as.numeric(nugget)
@@ -1219,6 +1247,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gp_basis(theta = x)
 #' res
+#' @keywords internal
 .gp_basis <- function(theta) c(1, theta, theta * theta)
 
 
@@ -1237,6 +1266,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .gp_chol(a = A)
 #' res
+#' @keywords internal
 .gp_chol <- function(a, jitter = 1e-12) {
   n <- nrow(a)
   L <- matrix(0, n, n)
@@ -1265,6 +1295,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .gp_chol_solve <- function(L, b) {
   n <- nrow(L)
   y <- numeric(n)
@@ -1293,6 +1324,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param kernel One of \code{"matern32"}, \code{"sqexp"}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gp_corr <- function(a, b, lengthscale, kernel) {
   r2 <- sum(((a - b) / lengthscale) ^ 2)
   if (kernel == "sqexp") return(exp(-0.5 * r2))
@@ -1317,6 +1349,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param e Passed to \code{.ghc_norm}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gp_draw_mean <- function(mu, cov, S, e) {
   n <- length(mu)
   scaled <- cov / S
@@ -1336,6 +1369,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param n_grid A count; the body uses it as \code{seq_len(...)}. Defaults to \code{101L}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gp_expected_error <- function(alphas, tau, n_grid = 101L) {
   M <- length(alphas)
   total <- 0
@@ -1360,6 +1394,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gp_lse(values = x)
 #' res
+#' @keywords internal
 .gp_lse <- function(values) {
   vals <- values[is.finite(values)]
   if (length(vals) == 0L) return(-Inf)
@@ -1381,6 +1416,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gp_median(v = x)
 #' res
+#' @keywords internal
 .gp_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -1399,6 +1435,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param kernel Passed to \code{.gp_profile_nll}.
 #' @return The value of \code{ls}, as built in the body.
 #' @export
+#' @keywords internal
 .gp_mle_lengthscale <- function(X, y, nug, kernel) {
   n <- nrow(X)
   p <- ncol(X)
@@ -1438,6 +1475,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param cov Passed to \code{.gp_chol}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gp_mvn_logpdf <- function(y, mu, cov) {
   n <- length(y)
   L <- .gp_chol(cov)
@@ -1473,6 +1511,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @return A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations},
 #' \code{unresolved_steps}.
 #' @export
+#' @keywords internal
 .gp_mw_sampler <- function(sim, obs, log_prior, theta0, n_iter, n_sim,
                            epsilon, proposal_sd, summary, seed, adaptive,
                            xi, delta_s, n_alpha, max_sim = NULL) {
@@ -1543,6 +1582,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param kernel Passed to \code{.gp_corr}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .gp_profile_nll <- function(X, y, ls, nug, kernel) {
   n <- nrow(X)
   A <- matrix(0, n, n)
@@ -1583,6 +1623,7 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param summary Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .gp_summarise <- function(x, summary) {
   v <- if (is.null(summary)) x else summary(x)
   as.numeric(v)

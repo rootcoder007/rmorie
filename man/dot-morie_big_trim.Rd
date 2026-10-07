@@ -17,3 +17,4 @@ A step of the bigint_native implementation. Called by \code{.morie_big_add_abs},
 \code{.morie_big_new}, \code{.morie_big_sub_abs}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

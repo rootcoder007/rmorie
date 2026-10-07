@@ -20,3 +20,4 @@ Nothing; this branch always raises.
 A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

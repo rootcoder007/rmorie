@@ -19,6 +19,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .ukfF_chol(a = A)
 #' res
+#' @keywords internal
 .ukfF_chol <- function(a) {
   k <- nrow(a)
   l <- matrix(0, k, k)
@@ -58,6 +59,7 @@
 #' @param b_cols A matrix; passed to \code{ncol}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .ukfF_solve_mat <- function(a, b_cols) {
   # solve A X = B for X (small systems, partial pivoting, Gauss-Jordan)
   k <- nrow(a)
@@ -96,6 +98,7 @@
 #' @param kappa Numeric; combined arithmetically in the body.
 #' @return A list with \code{pts}, \code{w}.
 #' @export
+#' @keywords internal
 .ukfF_sigma_points <- function(x, P, kappa) {
   n <- length(x)
   scale <- n + kappa
@@ -125,6 +128,7 @@
 #' @param fun Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{ys}, \code{mean}, \code{cov}.
 #' @export
+#' @keywords internal
 .ukfF_ut <- function(pts, w, fun) {
   np <- nrow(pts)
   # size the output by what fun RETURNS, not by the input dimension --

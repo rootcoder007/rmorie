@@ -51,6 +51,7 @@
 #' @param age_breaks See Usage.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @keywords internal
 .sccsno_cuts <- function(start, end, exposure, risk_periods, age_breaks) {
   # Ordered distinct cutpoints for one individual (Fig. 1).
   pts <- c(as.numeric(start), as.numeric(end))
@@ -84,6 +85,7 @@
 #' @param age_breaks See Usage.
 #' @return The value of \code{j}, as built in the body.
 #' @export
+#' @keywords internal
 .sccsno_band <- function(t, age_breaks) {
   # Index of the age band containing t (0-based, matching alpha[j+1]).
   j <- 0L
@@ -108,6 +110,7 @@
 #' @param risk_periods A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sccsno_risk <- function(t, exposure, risk_periods) {
   # Index of the risk period containing t; 0 is the control period.
   if (is.null(exposure)) {
@@ -222,6 +225,7 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
 #' @param risk_periods A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{rp}, as built in the body.
 #' @export
+#' @keywords internal
 .sccsno_rp <- function(risk_periods) {
   if (is.matrix(risk_periods)) {
     rp <- risk_periods
@@ -304,6 +308,7 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
 #' @param n_age Numeric; combined arithmetically in the body.
 #' @return A list with \code{g}, \code{H}.
 #' @export
+#' @keywords internal
 .sccsno_grad_hess <- function(params, cells_by_person, n_risk, n_age) {
   p <- n_risk + n_age - 1L
   g <- rep(0.0, p)

@@ -24,3 +24,4 @@ A list with \code{a}, \code{b}, \code{it}.
 equality constraint sum a_i y_i = 0 that single-coordinate updates
 cannot
 }
+\keyword{internal}

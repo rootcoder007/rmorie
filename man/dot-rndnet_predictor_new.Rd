@@ -23,3 +23,4 @@ The value of \code{e}, as built in the body.
 \description{
 output weight matrix W, updated by plain SGD on the MSE.
 }
+\keyword{internal}

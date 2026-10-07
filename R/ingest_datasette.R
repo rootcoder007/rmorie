@@ -18,6 +18,7 @@
 #' @param base_url Defaults to \code{NULL}.
 #' @return The value of \code{sub}.
 #' @export
+#' @keywords internal
 .morie_datasette_base <- function(base_url = NULL) {
   url <- base_url
   if (is.null(url) || !nzchar(url)) {
@@ -46,6 +47,7 @@
 #' to \code{60}.
 #' @return The value of \code{.s03json_fromJSON}.
 #' @export
+#' @keywords internal
 .morie_datasette_get_json <- function(url, timeout = 60) {
   con <- url(url, open = "rb")
   on.exit(close(con), add = TRUE)

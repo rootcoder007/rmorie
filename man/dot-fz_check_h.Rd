@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .fz_check_h(h = 0.5)
 res
 }
+\keyword{internal}

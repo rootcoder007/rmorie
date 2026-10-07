@@ -31,6 +31,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_bounds_logit(X = X, y = y)
 #' res
+#' @keywords internal
 .morie_bounds_logit <- function(X, y, max_iter = 100L, tol = 1e-10,
                                 ridge = 1e-8) {
   beta <- rep(0, ncol(X))

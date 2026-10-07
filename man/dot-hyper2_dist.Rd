@@ -24,3 +24,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .hyper2_dist(a = A, b = b)
 res
 }
+\keyword{internal}

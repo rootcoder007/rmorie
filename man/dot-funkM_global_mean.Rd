@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 R <- .funkM_as_ratings(data.frame(u = 0:2, i = 0:2, r = c(1, 2, 6)))
 .funkM_global_mean(R)
 }
+\keyword{internal}

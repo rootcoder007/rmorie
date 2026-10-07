@@ -20,3 +20,4 @@ A step of the hadcrut_native implementation. Called by \code{.hadcrut_region_mea
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

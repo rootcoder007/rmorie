@@ -47,3 +47,4 @@ A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu},
 A step of the svdpp_native implementation. Called by \code{morie_svdpp}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

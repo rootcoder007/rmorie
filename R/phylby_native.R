@@ -14,6 +14,7 @@
 #' @param out Optional; may be \code{NULL}. Passed to \code{.phylby_tips}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .phylby_tips <- function(node, out = NULL) {
   if (is.null(out)) out <- character(0)
   if (!is.list(node)) {
@@ -37,6 +38,7 @@
 #' @param tree Passed to \code{.phylby_tips}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .phylby_splits_of <- function(tree) {
   all_tips <- sort(.phylby_tips(tree))
   n <- length(all_tips)
@@ -82,6 +84,7 @@
 #' @param tree Passed to \code{.phylby_splits_of}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .phylby_topology_key <- function(tree) {
   splits <- .phylby_splits_of(tree)
   if (length(splits) == 0) return(list())
@@ -100,6 +103,7 @@
 #' @param value Passed to \code{.phylby_replace_branch}.
 #' @return The value of \code{parts}, as built in the body.
 #' @export
+#' @keywords internal
 .phylby_replace_branch <- function(node, path, value) {
   if (length(path) == 0) return(node)
   idx <- path[1] + 1
@@ -122,6 +126,7 @@
 #' @param path Passed to \code{c}. Defaults to \code{integer(0)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .phylby_branch_paths <- function(node, path = integer(0)) {
   if (!is.list(node)) return(list())
   if (length(node) %% 2 != 0) {
@@ -146,6 +151,7 @@
 #' @param path Passed to \code{c}. Defaults to \code{integer(0)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .phylby_subtrees <- function(node, path = integer(0)) {
   if (!is.list(node)) return(list())
   out <- list()
@@ -168,6 +174,7 @@
 #' @param value Passed to \code{.phylby_set_at}.
 #' @return The value of \code{parts}, as built in the body.
 #' @export
+#' @keywords internal
 .phylby_set_at <- function(node, path, value) {
   if (length(path) == 0) return(value)
   parts <- node
@@ -186,6 +193,7 @@
 #' @param path See Usage.
 #' @return The value of \code{node}, as built in the body.
 #' @export
+#' @keywords internal
 .phylby_get_at <- function(node, path) {
   for (i in path) {
     node <- node[[i + 1]]
@@ -202,6 +210,7 @@
 #' @param tree Passed to \code{.phylby_subtrees}.
 #' @return The value of \code{uniq}, as built in the body.
 #' @export
+#' @keywords internal
 .phylby_nni_neighbours <- function(tree) {
   out <- list()
   subs <- .phylby_subtrees(tree)
@@ -256,6 +265,7 @@
 #' @param temperature Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{loglik}, \code{logprior}, \code{logpost}.
 #' @export
+#' @keywords internal
 .phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
                                     branch_prior_mean = 0.1,
                                     partitions = NULL, rates = NULL,
@@ -314,6 +324,7 @@
 #' @examples
 #' res <- .phylby_rng(seed = 1L)
 #' res
+#' @keywords internal
 .phylby_rng <- function(seed) {
   st <- as.numeric(seed) %% 2147483648
   if (st == 0) st <- 1L
@@ -337,6 +348,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .phylby_clade_credibility(samples = x)
 #' res
+#' @keywords internal
 .phylby_clade_credibility <- function(samples) {
   if (length(samples) == 0) {
     stop("phylby: no samples to summarise")
@@ -372,6 +384,7 @@
 #' @param tune Numeric; combined arithmetically in the body.
 #' @return A list with \code{state}, \code{accepted}.
 #' @export
+#' @keywords internal
 .phylby_step <- function(state, seqs, pi, prior_mean, partitions, rnd, beta, tune) {
   tree <- state$tree
   rate <- state$rate

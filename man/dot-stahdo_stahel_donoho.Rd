@@ -34,3 +34,4 @@ A list with \code{estimate}, \code{location}, \code{scatter},
 A step of the stahdo_native implementation. Called by \code{morie_stahdo}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

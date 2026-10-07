@@ -77,6 +77,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlnetlg_vec(x = x)
 #' res
+#' @keywords internal
 .tlnetlg_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.list(x) && !is.data.frame(x)) {
@@ -101,6 +102,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlnetlg_mat(W = x)
 #' res
+#' @keywords internal
 .tlnetlg_mat <- function(W) {
   if (is.matrix(W)) {
     storage.mode(W) <- "double"

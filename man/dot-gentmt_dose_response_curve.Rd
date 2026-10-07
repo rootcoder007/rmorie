@@ -26,3 +26,4 @@ A list with \code{estimate}, \code{se}, \code{doses}, \code{curve},
 A step of the gentmt_native implementation. Called by \code{morie_gentmt}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -44,3 +44,4 @@ the source it follows.
 res <- .schab_st_jones_zhang(h = 0.5, k = 3L)
 res
 }
+\keyword{internal}

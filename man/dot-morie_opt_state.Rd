@@ -21,3 +21,4 @@ A step of the optim_native implementation. Called by \code{morie_adagrad},
 \code{morie_adam}, \code{morie_adamw_step} and 6 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

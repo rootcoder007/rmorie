@@ -16,3 +16,4 @@ The value of \code{[}.
 A step of the vepan_native implementation. Called by \code{.vepan_transcript}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

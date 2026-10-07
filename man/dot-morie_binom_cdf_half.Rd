@@ -22,3 +22,4 @@ header for the source it follows.
 res <- .morie_binom_cdf_half(k = 3L, n = 3L)
 res
 }
+\keyword{internal}

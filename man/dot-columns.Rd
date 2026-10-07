@@ -24,3 +24,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .columns(X = b, n = 3L)
 res
 }
+\keyword{internal}

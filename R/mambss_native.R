@@ -114,6 +114,7 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .linear <- function(x, Wm, b) {
   out <- numeric(nrow(Wm))
   for (r in seq_len(nrow(Wm))) {
@@ -136,6 +137,7 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .sigmoid(z = y)
 #' res
+#' @keywords internal
 .sigmoid <- function(z) 1.0 / (1.0 + exp(-as.numeric(z)))
 
 #' selective_scan
@@ -281,6 +283,7 @@ s6_layer <- function(X, A, W_B, W_C, W_delta, ...) {
 #' @examples
 #' res <- .mambss_cheatsheet()
 #' res
+#' @keywords internal
 .mambss_cheatsheet <- function() {
   paste0(
     "mambss: S6. B, C, Delta are FUNCTIONS of x (Alg. 2), so the ",

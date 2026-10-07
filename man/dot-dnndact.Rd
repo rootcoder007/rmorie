@@ -21,3 +21,4 @@ A step of the dnnmt implementation. Called by \code{Dnnmt}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

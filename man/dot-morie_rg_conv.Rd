@@ -20,3 +20,4 @@ A step of the rangayyan_xfrm implementation. Called by \code{CCepSum}, \code{Clo
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

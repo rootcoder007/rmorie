@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .s03unif(n = 3L)
 res
 }
+\keyword{internal}

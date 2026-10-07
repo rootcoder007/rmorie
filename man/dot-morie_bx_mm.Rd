@@ -17,3 +17,4 @@ The value of \code{out}, as built in the body.
 \description{
 order has to match the Python arm or an iterative update diverges
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ arm's 32-bit masked integer step for step.
 res <- .morie_bx_rng(seed = 1L)
 res
 }
+\keyword{internal}

@@ -38,3 +38,4 @@ g <- .prsLL_grammar(rules, start = "E")
 .prsLL_first_of(c("F", "Tp"), g)   # F cannot vanish: "(" and "id"
 .prsLL_first_of(c("Tp", "Ep"), g)  # both can: "*", "+", epsilon
 }
+\keyword{internal}

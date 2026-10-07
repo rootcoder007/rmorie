@@ -18,3 +18,4 @@ The value of \code{lapply}.
 A step of the helpers_s03 implementation. Called by \code{morie_dataset_load}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

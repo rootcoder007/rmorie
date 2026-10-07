@@ -46,6 +46,7 @@
 #' @param x0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{beta}, \code{value}.
 #' @export
+#' @keywords internal
 .morie_optimize_scale_normalized <- function(fn, d, n_restarts = 8L, seed = 0L,
                                              x0 = NULL) {
   d <- as.integer(d)

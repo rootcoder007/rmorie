@@ -22,3 +22,4 @@ A list with \code{tokens}, \code{pixels}, \code{compression},
 A step of the vqgenc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

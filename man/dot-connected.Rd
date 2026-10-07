@@ -18,3 +18,4 @@ A logical value.
 by eulerian_path to enforce the "connected on its non-isolated
 vertices" half of the Eulerian existence condition.
 }
+\keyword{internal}

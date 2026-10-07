@@ -25,3 +25,4 @@ A list with \code{W}, \code{H}, \code{error}, \code{iterations}.
 \description{
 eqs (9.54)-(9.55)
 }
+\keyword{internal}

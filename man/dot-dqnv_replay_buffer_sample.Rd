@@ -20,3 +20,4 @@ A list with \code{state}, \code{samples}.
 A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

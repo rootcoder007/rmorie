@@ -30,3 +30,4 @@ st <- .abcnnt_layer_stats(L, x = c(0.5, -0.2, 0.9), t = c(0.1, -0.4))
 st$mu
 st$al       # the log-scale, clamped to [-5, 5]
 }
+\keyword{internal}

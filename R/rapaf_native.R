@@ -256,6 +256,7 @@ morie_rapaf_ar_confidence_interval <- function(case_counts, rate_ratios,
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .rapaf_logit_irls(X = x, y = y)
 #' res
+#' @keywords internal
 .rapaf_logit_irls <- function(X, y, ridge = 1e-8, obs_weights = NULL) {
   if (is.null(obs_weights)) obs_weights <- rep(1.0, length(y))
   X <- cbind(0, X)

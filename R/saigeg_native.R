@@ -102,6 +102,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .saigeg_sigmoid(x = x)
 #' res
+#' @keywords internal
 .saigeg_sigmoid <- function(x) {
   x <- as.numeric(x)
   out <- numeric(length(x))
@@ -125,6 +126,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .saigeg_pnorm(x = x)
 #' res
+#' @keywords internal
 .saigeg_pnorm <- function(x) {
   pnorm(x)
 }
@@ -141,6 +143,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .saigeg_variance(x = x)
 #' res
+#' @keywords internal
 .saigeg_variance <- function(x) {
   x <- as.numeric(x)
   n <- length(x)
@@ -164,6 +167,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .saigeg_design(X = b, n = 3L)
 #' res
+#' @keywords internal
 .saigeg_design <- function(X, n) {
   if (is.null(X)) {
     return(matrix(1, nrow = n, ncol = 1))
@@ -206,6 +210,7 @@
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @keywords internal
 .saigeg_logit_irls <- function(D, y, ridge = 1e-8) {
   n <- nrow(D)
   p <- ncol(D)
@@ -244,6 +249,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .saigeg_fit_null(y = y, X = x)
 #' res
+#' @keywords internal
 .saigeg_fit_null <- function(y, X, ridge = 1e-8) {
   D <- .saigeg_design(X, length(y))
   beta <- .saigeg_logit_irls(D, y, ridge = ridge)
@@ -262,6 +268,7 @@
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{score}, \code{variance}, \code{n}.
 #' @export
+#' @keywords internal
 .saigeg_score_statistic <- function(y, G, mu) {
   yv <- as.numeric(y)
   gv <- as.numeric(G)
@@ -296,6 +303,7 @@
 #' @param order The body requires: saigeg: order must be 0, 1 or 2. Defaults to \code{0}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .saigeg_cgf <- function(t, G, mu, order = 0) {
   gv <- as.numeric(G)
   mv <- as.numeric(mu)
@@ -332,6 +340,7 @@
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .saigeg_solve_saddle <- function(s, G, mu, lo = -50, hi = 50, tol = 1e-11, iters = 200) {
   fl <- .saigeg_cgf(lo, G, mu, 1) - s
   fh <- .saigeg_cgf(hi, G, mu, 1) - s
@@ -365,6 +374,7 @@
 #' @return A list with \code{p_value}, \code{t_hat}, \code{w}, \code{v}, \code{K},
 #' \code{K2}, \code{method}.
 #' @export
+#' @keywords internal
 .saigeg_saddlepoint_pvalue <- function(s, G, mu, two_sided = TRUE) {
   sv <- as.numeric(s)
   var0 <- .saigeg_cgf(0, G, mu, 2)
@@ -438,6 +448,7 @@
 #' @param two_sided A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{p_value}, \code{z}, \code{method}.
 #' @export
+#' @keywords internal
 .saigeg_normal_pvalue <- function(s, variance, two_sided = TRUE) {
   if (as.numeric(variance) <= 0) {
     stop("saigeg: the variance must be positive")
@@ -464,6 +475,7 @@
 #' @param scores_naive Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{ratio}, \code{var_full}, \code{var_naive}, \code{n_variants}.
 #' @export
+#' @keywords internal
 .saigeg_variance_ratio <- function(scores_full, scores_naive) {
   a <- as.numeric(scores_full)
   b <- as.numeric(scores_naive)
@@ -493,6 +505,7 @@
 #' @examples
 #' res <- .saigeg_cheatsheet()
 #' res
+#' @keywords internal
 .saigeg_cheatsheet <- function() {
   paste0(
     "saigeg: SAIGE. Score S = sum G_i (Y_i - mu_i) from a logisti",

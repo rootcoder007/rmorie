@@ -73,6 +73,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmlcmp_vec(x = x)
 #' res
+#' @keywords internal
 .tmlcmp_vec <- function(x) {
   if (is.null(x)) {
     return(numeric(0))
@@ -92,6 +93,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmlcmp_mat(x = x)
 #' res
+#' @keywords internal
 .tmlcmp_mat <- function(x) {
   if (is.null(x)) {
     return(matrix(0, nrow = 0, ncol = 0))
@@ -111,6 +113,7 @@
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{cbind}.
 #' @export
+#' @keywords internal
 .tmlcmp_design <- function(W, n) {
   if (nrow(W) == 0) {
     return(matrix(1, nrow = n, ncol = 1))
@@ -129,6 +132,7 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlcmp_logit_irls <- function(des, a, max_iter = 25, tol = 1e-8) {
   n <- nrow(des)
   p <- ncol(des)
@@ -410,6 +414,7 @@ morie_tmlcmp <- function(time, event_type, D, X, times = NULL,
 #' @examples
 #' res <- .tmlcmp_cheatsheet()
 #' res
+#' @keywords internal
 .tmlcmp_cheatsheet <- function() {
   paste(
     "tmlcmp: with competing risks the estimand is CUMULATIVE",

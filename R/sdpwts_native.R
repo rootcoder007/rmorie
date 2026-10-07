@@ -184,6 +184,7 @@ sdpwts_central_path_gap <- function(t, m) {
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sdpwts_objective <- function(x, c_vec, F0, Fs, t) {
   b <- sdpwts_barrier(x, F0, Fs)
   if (!b$feasible) return(Inf)
@@ -211,6 +212,7 @@ sdpwts_central_path_gap <- function(t, m) {
 #' @param tol Stopping level for half the squared Newton decrement.
 #' @return A list with \code{x}, \code{value}, \code{iterations}.
 #' @export
+#' @keywords internal
 .sdpwts_centre <- function(x0, c_vec, F0, Fs, t, iters = 200, tol = 1e-14) {
   x <- as.numeric(x0)
   cc <- as.numeric(c_vec)

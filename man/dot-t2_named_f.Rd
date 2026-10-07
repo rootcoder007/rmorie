@@ -16,3 +16,4 @@ The value of \code{switch}.
 A step of the tail2_t02 implementation. Called by \code{FDiverg}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

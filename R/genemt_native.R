@@ -73,6 +73,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .genemt_norm_cdf(x = x)
 #' res
+#' @keywords internal
 .genemt_norm_cdf <- function(x) {
   pnorm(x)
 }
@@ -88,6 +89,7 @@
 #' @examples
 #' res <- .genemt_norm_ppf(p = 0.5)
 #' res
+#' @keywords internal
 .genemt_norm_ppf <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-12), 1.0 - 1e-12)
   qnorm(q)
@@ -105,6 +107,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}.
 #' @export
+#' @keywords internal
 .genemt_wls <- function(X, y, w, ridge) {
   X <- as.matrix(X)
   y <- as.numeric(y)

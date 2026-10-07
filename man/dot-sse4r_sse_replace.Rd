@@ -34,3 +34,4 @@ res$rate
 identical(res$indices,
           .sse4r_sse_replace(idx, 10L, p = 0.5, seed = 7)$indices)
 }
+\keyword{internal}

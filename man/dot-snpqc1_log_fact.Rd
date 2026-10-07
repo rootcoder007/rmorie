@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 res <- .snpqc1_log_fact(n = 3L)
 res
 }
+\keyword{internal}

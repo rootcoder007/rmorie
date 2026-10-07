@@ -20,6 +20,7 @@
 #' @param payload Carried through into a list the body builds. Defaults to \code{list()}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_nypd_result <- function(title, summary_lines = list(), tables = list(),
                                interpretation = "", warnings = "",
                                payload = list()) {
@@ -41,6 +42,7 @@
 #' @examples
 #' res <- .morie_nypd_load_sample()
 #' res
+#' @keywords internal
 .morie_nypd_load_sample <- function(which = c("arrests", "complaint")) {
   which <- match.arg(which)
   file <- switch(which,

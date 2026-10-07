@@ -32,3 +32,4 @@ A step of the schab_sim_shared implementation. Called by \code{.schab_simulate_c
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

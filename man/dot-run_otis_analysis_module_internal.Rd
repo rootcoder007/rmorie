@@ -19,3 +19,4 @@ the source it follows.
 res <- .run_otis_analysis_module_internal()
 res
 }
+\keyword{internal}

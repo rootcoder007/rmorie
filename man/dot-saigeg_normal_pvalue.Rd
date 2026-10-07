@@ -20,3 +20,4 @@ A list with \code{p_value}, \code{z}, \code{method}.
 A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

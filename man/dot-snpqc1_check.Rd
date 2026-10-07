@@ -18,3 +18,4 @@ A step of the snpqc1_native implementation. Called by \code{morie_snpqc1},
 module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

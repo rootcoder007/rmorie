@@ -30,3 +30,4 @@ net <- list(
 )
 .propinf_sorted_representation_internal(net)
 }
+\keyword{internal}

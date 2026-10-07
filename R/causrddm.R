@@ -9,6 +9,7 @@
 #' @param ws Numeric; passed to \code{sqrt}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .t4_wls_int <- function(xs, ys, ws) {
   sw <- sqrt(ws)
   X <- cbind(sw, sw * xs)
@@ -25,6 +26,7 @@
 #' @param val Passed to \code{.t4_olsfit}.
 #' @return A list with \code{beta}, \code{mse}.
 #' @export
+#' @keywords internal
 .t4_poly4 <- function(mp, val) {
   X <- cbind(1, mp, mp^2, mp^3, mp^4)
   fit <- .t4_olsfit(X, val)

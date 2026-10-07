@@ -31,3 +31,4 @@ g[[1]]$b <- c(1, -1)
 stepped <- .propinf_sgd_step(net, g, lr = 0.1, scale = 1)
 stepped[[1]]$b - net[[1]]$b
 }
+\keyword{internal}

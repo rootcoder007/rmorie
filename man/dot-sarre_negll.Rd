@@ -27,3 +27,4 @@ Extracted from the sarre() optimiser closure so the singular-GLS,
 non-positive-variance and non-positive-determinant guards are all
 directly unit-testable.
 }
+\keyword{internal}

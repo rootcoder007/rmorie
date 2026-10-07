@@ -34,3 +34,4 @@ to singular, an explicitly inverted one is dominated by the jitter
 that made the inversion possible, and the fitted coefficients then
 miss the exact Gaussian answer by tenths rather than by 1e-10.
 }
+\keyword{internal}

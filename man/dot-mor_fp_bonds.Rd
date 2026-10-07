@@ -15,3 +15,4 @@ A list with \code{a}, \code{i}, \code{j}, \code{o}.
 \description{
 order (i ascending, then j > i ascending)
 }
+\keyword{internal}

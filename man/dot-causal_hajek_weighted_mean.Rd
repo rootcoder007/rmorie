@@ -40,3 +40,4 @@ Hajek, J. (1971). Comment in Godambe and Sprott (Eds.),
 Foundations of Statistical Inference. Holt, Rinehart and Winston;
 Cochran, W. G. (1977). Sampling Techniques, 3rd ed., Sec. 6.13.
 }
+\keyword{internal}

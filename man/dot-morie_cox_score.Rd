@@ -25,3 +25,4 @@ A list with \code{loglik}, \code{U}, \code{I}.
 \description{
 the stratified model, which needs the pieces without taking a step.
 }
+\keyword{internal}

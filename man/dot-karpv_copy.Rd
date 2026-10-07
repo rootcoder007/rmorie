@@ -16,3 +16,4 @@ The value of \code{.karpv_fnode}.
 A step of the karpV_native implementation. Called by \code{.karpv_replace}, \code{morie_karpV}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

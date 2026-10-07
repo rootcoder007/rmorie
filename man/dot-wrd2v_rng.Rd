@@ -20,3 +20,4 @@ The value of \code{e}, as built in the body.
 res <- .wrd2v_rng(seed = 1L)
 res
 }
+\keyword{internal}

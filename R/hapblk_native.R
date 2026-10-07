@@ -18,6 +18,7 @@
 #' # haplotype counts AB, Ab, aB, ab
 #' res <- .hapblk_ci(h = c(40, 10, 10, 40))
 #' res
+#' @keywords internal
 .hapblk_ci <- function(h, grid = 200) {
   n <- sum(h)
   if (n == 0) return(c(0, 0, 0))

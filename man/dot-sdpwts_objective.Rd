@@ -24,3 +24,4 @@ A numeric value.
 A step of the sdpwts_native implementation. Called by \code{.sdpwts_centre}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

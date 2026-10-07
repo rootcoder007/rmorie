@@ -38,6 +38,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .samseg_pos_enc(x = x, y = y)
 #' res
+#' @keywords internal
 .samseg_pos_enc <- function(x, y, dim = 8, scale = 1.0) {
   out <- numeric(0)
   for (j in 0:(as.integer(dim) %/% 2L - 1L)) {
@@ -218,6 +219,7 @@ promptable_segment <- function(image_embedding, prompt_tokens, decoder,
 #' @examples
 #' res <- .samseg_cheatsheet()
 #' res
+#' @keywords internal
 .samseg_cheatsheet <- function() {
   paste("samseg: the task is 'return a VALID mask for any prompt, ",
         "and for an AMBIGUOUS prompt a valid mask for at least one ",

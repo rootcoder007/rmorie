@@ -18,6 +18,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .mi_maxnorm(a = A, b = b)
 #' res
+#' @keywords internal
 .mi_maxnorm <- function(a, b) max(abs(a - b))
 
 #' Mutual information by k-nearest-neighbour statistics (KSG)

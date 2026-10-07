@@ -27,6 +27,7 @@
 #' .agalfsy_coords(matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE), "ligand")
 #' # a list of triples is accepted too
 #' .agalfsy_coords(list(c(1, 2, 3), c(4, 5, 6)), "ligand")
+#' @keywords internal
 .agalfsy_coords <- function(x, what) {
   if (is.matrix(x)) {
     m <- x
@@ -59,6 +60,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .agalfsy_centroid(P = A)
 #' res
+#' @keywords internal
 .agalfsy_centroid <- function(P) colSums(P) / nrow(P)
 
 # Same atom order, no superposition: the ligand moves rigidly so the
@@ -80,6 +82,7 @@
 #' # a uniform shift of 3 along one axis gives an RMSD of exactly 3
 #' Q <- P; Q[, 1] <- Q[, 1] + 3
 #' .agalfsy_rmsd(P, Q)
+#' @keywords internal
 .agalfsy_rmsd <- function(A, B) {
   n <- nrow(A)
   s <- 0.0
@@ -111,6 +114,7 @@
 #' all.equal(as.numeric(dist(R)), as.numeric(dist(P)))
 #' # and a full turn is the identity
 #' all.equal(.agalfsy_rotate(P, 2L, 360), P)
+#' @keywords internal
 .agalfsy_rotate <- function(P, axis, deg) {
   cen <- .agalfsy_centroid(P)
   t <- deg * pi / 180.0
@@ -160,6 +164,7 @@
 #' # only the chosen axis moves
 #' all.equal(T1[, 2], P[, 2] + 2.5)
 #' all.equal(T1[, c(1, 3)], P[, c(1, 3)])
+#' @keywords internal
 .agalfsy_translate <- function(P, axis, step) {
   P[, axis + 1L] <- P[, axis + 1L] + step
   P
@@ -185,6 +190,7 @@
 #' all.equal(.agalfsy_apply(P, 6L), .agalfsy_rotate(P, 0L, 1))
 #' # an action and its opposite cancel
 #' all.equal(.agalfsy_apply(.agalfsy_apply(P, 0L), 1L), P)
+#' @keywords internal
 .agalfsy_apply <- function(P, a) {
   if (a < 6L) {
     return(.agalfsy_translate(
@@ -224,6 +230,7 @@
 #' .agalfsy_reward(site, P, P - 5)
 #' # standing still earns nothing
 #' .agalfsy_reward(site, P, P)
+#' @keywords internal
 .agalfsy_reward <- function(site, before, after) {
   r <- exp(-.agalfsy_rmsd(site, after) / .agalfsy_BOX) -
     exp(-.agalfsy_rmsd(site, before) / .agalfsy_BOX)
@@ -414,6 +421,7 @@ morie_agalfsy_rl_pose_search <- function(receptor, ligand, site = NULL,
 #' @examples
 #' res <- .agalfsy_cheatsheet()
 #' res
+#' @keywords internal
 .agalfsy_cheatsheet <- function() {
   paste0(
     "agalfsy: morie_agalfsy_rl_pose_search(receptor, ligand, site) -> ",

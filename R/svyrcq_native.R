@@ -117,6 +117,7 @@ morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
 #' @examples
 #' res <- .svyrcq_cheatsheet()
 #' res
+#' @keywords internal
 .svyrcq_cheatsheet <- function() {
   paste0("svyrcq: morie_svyrcq_survey_quantile_regression(X, y, tau, ",
          "weights) -> design-weighted quantile regression by MM ",

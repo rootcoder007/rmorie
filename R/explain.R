@@ -90,6 +90,7 @@ If you think this file should be explained, file an issue at ",
 #' .explain_cheatsheet()
 #'
 #' @export
+#' @keywords internal
 .explain_cheatsheet <- function() {
   body <- paste(
     "morie cheat sheet",

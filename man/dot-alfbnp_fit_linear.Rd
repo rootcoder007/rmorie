@@ -23,3 +23,4 @@ The value of \code{coefs}, as built in the body.
 linear map is a ridge regression with a closed form; descending to it
 would only add a tolerance for the two arms to disagree about.
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ the source it follows.
 res <- .secaead_pad16(b = 3L)
 res
 }
+\keyword{internal}

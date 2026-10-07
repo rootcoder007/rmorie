@@ -20,3 +20,4 @@ The value of \code{total}, as built in the body.
 A step of the birl_native implementation. Called by \code{policy_walk}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

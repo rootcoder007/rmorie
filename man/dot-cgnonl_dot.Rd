@@ -26,3 +26,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .cgnonl_dot(a = A, b = b)
 res
 }
+\keyword{internal}

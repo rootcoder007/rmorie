@@ -16,3 +16,4 @@ The value of \code{result}, as built in the body.
 A step of the impFB_native implementation. Called by \code{.impFB_cost}, \code{morie_impFB}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

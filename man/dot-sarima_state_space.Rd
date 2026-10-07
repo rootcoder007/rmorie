@@ -18,3 +18,4 @@ A list with \code{T}, \code{R}, \code{r}.
 A step of the sarima_native implementation. Called by \code{.filter_column}, \code{loglik}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

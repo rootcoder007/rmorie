@@ -23,3 +23,4 @@ A list with \code{alt_cds}, \code{off}.
 \description{
 (0-based offset). Returns list(alt_cds, off) or list(NULL, NULL).
 }
+\keyword{internal}

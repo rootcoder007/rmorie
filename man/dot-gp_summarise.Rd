@@ -19,3 +19,4 @@ A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler},
 \code{gabc_log_likelihood}, \code{synthetic_log_likelihood}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

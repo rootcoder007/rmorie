@@ -32,6 +32,7 @@
 #' @examples
 #' res <- .locdp_flip_prob(epsilon = 0.5)
 #' res
+#' @keywords internal
 .locdp_flip_prob <- function(epsilon) {
   1.0 / (1.0 + exp(epsilon))
 }

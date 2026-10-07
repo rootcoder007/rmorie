@@ -21,3 +21,4 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler},
 \code{.abcgp.synthetic_log_likelihood}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

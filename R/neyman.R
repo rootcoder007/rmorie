@@ -102,6 +102,7 @@ Neyman <- function(y, N_h, S_h, n) {
 #' @param n Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{M}, \code{S}, \code{m0}, \code{H}.
 #' @export
+#' @keywords internal
 .s03allocCheck <- function(N_h, S_h, n) {
   M <- .s03vec(N_h)
   H <- length(M)
@@ -144,6 +145,7 @@ Neyman <- function(y, N_h, S_h, n) {
 #' @param m0 Passed to \code{round}.
 #' @return The value of \code{base}, as built in the body.
 #' @export
+#' @keywords internal
 .s03allocInt <- function(alloc, m0) {
   H <- length(alloc)
   base <- floor(alloc)
@@ -165,6 +167,7 @@ Neyman <- function(y, N_h, S_h, n) {
 #' @param m A vector; indexed elementwise.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @keywords internal
 .s03allocVar <- function(M, S, m) {
   tot <- 0
   for (i in seq_along(M)) {
@@ -189,6 +192,7 @@ Neyman <- function(y, N_h, S_h, n) {
 #' @param m0 Numeric; combined arithmetically in the body.
 #' @return A list with \code{A}, \code{C}, \code{M0}, \code{T}.
 #' @export
+#' @keywords internal
 .s03allocABC <- function(M, S, m0) {
   M0 <- 0
   for (v in M) M0 <- M0 + v

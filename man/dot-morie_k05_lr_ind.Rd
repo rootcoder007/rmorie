@@ -21,3 +21,4 @@ source the module follows. source it follows.
 res <- .morie_k05_lr_ind(h = 0.5)
 res
 }
+\keyword{internal}

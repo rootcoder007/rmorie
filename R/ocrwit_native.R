@@ -27,6 +27,7 @@
 #' @param hi Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .ocrwit_clip_int <- function(v, lo, hi) {
   v <- as.integer(round(v))
   if (v < lo) return(as.integer(lo))
@@ -257,6 +258,7 @@ word_patch_alignment <- function(text_boxes, masked_patches, width,
 #' @examples
 #' res <- .ocrwit_cheatsheet()
 #' res
+#' @keywords internal
 .ocrwit_cheatsheet <- function() {
   paste("ocrwit: document models pre-trained text and image with ",
         "DIFFERENT objectives, giving two spaces and a bridge. ",

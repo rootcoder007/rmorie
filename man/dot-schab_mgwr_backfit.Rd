@@ -62,3 +62,4 @@ scales this happened twice. It is a property of the criterion, not of
 this port -- the reference uses the same score and the same default
 tolerance. \code{at_search_boundary} flags it.
 }
+\keyword{internal}

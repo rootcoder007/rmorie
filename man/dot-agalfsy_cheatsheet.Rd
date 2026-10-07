@@ -18,3 +18,4 @@ the source it follows.
 res <- .agalfsy_cheatsheet()
 res
 }
+\keyword{internal}

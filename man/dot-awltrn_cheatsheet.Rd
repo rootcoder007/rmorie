@@ -16,3 +16,4 @@ One-paragraph summary of the AOL vs OWL trade-off
 res <- .awltrn_cheatsheet()
 res
 }
+\keyword{internal}

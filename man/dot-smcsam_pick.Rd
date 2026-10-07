@@ -19,3 +19,4 @@ findInterval has the same effect but is documented to return the
 leftmost interval, so we keep our own to mirror the Python arm's
 hand-written loop.
 }
+\keyword{internal}

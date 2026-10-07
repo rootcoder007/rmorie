@@ -17,6 +17,7 @@
 #' @param hi2 Numeric; passed to \code{min}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @keywords internal
 .sarmix_refine <- function(negll, lo1, hi1, lo2, hi2) {
   levels <- 7L
   ngrid <- 21L

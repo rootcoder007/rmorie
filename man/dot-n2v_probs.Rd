@@ -25,3 +25,4 @@ The value of \code{out}, as built in the body.
 = 1 every weight is 1, so the walk is exactly DeepWalk's uniform
 walk -- the reduction that pins this function.
 }
+\keyword{internal}

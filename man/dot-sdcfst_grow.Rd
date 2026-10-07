@@ -42,3 +42,4 @@ A list with \code{leaf}, \code{feature}, \code{cut}, \code{left}, \code{right}.
 A step of the sdcfst_native implementation. Called by \code{morie_sdcfst_forest}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

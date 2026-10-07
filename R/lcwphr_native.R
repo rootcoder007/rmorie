@@ -20,6 +20,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .lcwphr_rows(x = x)
 #' res
+#' @keywords internal
 .lcwphr_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -48,6 +49,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .lcwphr_cholsolve(A = A, b = b)
 #' res
+#' @keywords internal
 .lcwphr_cholsolve <- function(A, b) {
   Lc <- chol(A)
   as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
@@ -71,6 +73,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .lcwphr_logit_irls(X = X, y = y)
 #' res
+#' @keywords internal
 .lcwphr_logit_irls <- function(X, y, max_iter = 100L, tol = 1e-11,
                                ridge_rel = 1e-8) {
   n <- nrow(X)
@@ -300,6 +303,7 @@ morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
 #' @examples
 #' res <- .lcwphr_cheatsheet()
 #' res
+#' @keywords internal
 .lcwphr_cheatsheet <- function() {
   paste0("lcwphr: morie_lcwphr_latent_class_weighted(y, A, H, K) -> latent ",
          "classes plus IPW class-specific treatment effects (Lanza, Coffman ",

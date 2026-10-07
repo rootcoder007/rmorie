@@ -72,6 +72,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmlcen_sigmoid(x = x)
 #' res
+#' @keywords internal
 .tmlcen_sigmoid <- function(x) 1 / (1 + exp(-x))
 
 #' .tmlcen_design
@@ -84,6 +85,7 @@
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{Z}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlcen_design <- function(rows, n) {
   if (n == 0L) return(matrix(0, nrow = 0L, ncol = 0L))
   if (is.null(rows) || length(rows) == 0L) {
@@ -110,6 +112,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
+#' @keywords internal
 .tmlcen_ridgesolve <- function(A, b, ridge) {
   p <- ncol(A)
   solve(A + ridge * diag(p), b)
@@ -128,6 +131,7 @@
 #' @param ridge Passed to \code{.tmlcen_ridgesolve}. Defaults to \code{1e-10}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlcen_weighted_logit <- function(Z, y, w, iters = 60L, ridge = 1e-10) {
   n <- nrow(Z)
   p <- ncol(Z)
@@ -163,6 +167,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tmlcen_logit_irls(Z = X, y = y)
 #' res
+#' @keywords internal
 .tmlcen_logit_irls <- function(Z, y, max_iter = 60L, ridge = 1e-8) {
   .tmlcen_weighted_logit(Z, y, rep(1, nrow(Z)), max_iter, ridge)
 }
@@ -176,6 +181,7 @@
 #' @param b A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .tmlcen_matvec <- function(Z, b) as.numeric(Z %*% b)
 
 #' .tmlcen_uniform_density
@@ -186,6 +192,7 @@
 #' @param ts Numeric; passed to \code{max}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .tmlcen_uniform_density <- function(ts) {
   lo <- min(ts)
   hi <- max(ts)
@@ -202,6 +209,7 @@
 #' @param payload Passed to \code{class}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlcen_RichResult <- function(payload) {
   class(payload) <- "RichResult"
   payload
@@ -217,6 +225,7 @@
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{Wm}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlcen_W_mat <- function(W, n) {
   if (is.null(W) || length(W) == 0L) {
     return(matrix(0, nrow = n, ncol = 0L))
@@ -250,6 +259,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .tmlcen_coerce_subject_list(x = X, n = 3L)
 #' res
+#' @keywords internal
 .tmlcen_coerce_subject_list <- function(x, n) {
   if (is.data.frame(x)) {
     x <- as.matrix(x)
@@ -619,6 +629,7 @@ morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
 #' @examples
 #' res <- .tmlcen_morie_cheatsheet()
 #' res
+#' @keywords internal
 .tmlcen_morie_cheatsheet <- function() {
   paste0("tmlcen: censoring by IPCW. right = Gbar_c(k|A,W) = ",
          "prod(1-lambda_C), weight person-time by 1/Gbar_c, hazard ",

@@ -29,3 +29,4 @@ net <- list(
 sets <- lapply(list(net, net), .propinf_set_representation_internal)
 .propinf_layer_scalers(sets)[[1]]
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ SMOTE (Chawla et al. 2002): synthesize minority-class points by
 linear interpolation towards random minority k-NN until classes
 balance. Returns rows to append (X_new, y_new).
 }
+\keyword{internal}

@@ -19,6 +19,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .robpca_matrix(X = X)
 #' res
+#' @keywords internal
 .robpca_matrix <- function(X, name = "X") {
   if (is.data.frame(X)) X <- as.matrix(X)
   if (!is.numeric(X)) {
@@ -42,6 +43,7 @@
 #' @param C Passed to \code{eigen}.
 #' @return A list with \code{values}, \code{vectors}.
 #' @export
+#' @keywords internal
 .robpca_eigh_desc <- function(C) {
   e <- eigen(C, symmetric = TRUE)
   ord <- order(e$values, decreasing = TRUE)
@@ -64,6 +66,7 @@
 #' @param C A matrix; passed to \code{chol}.
 #' @return The value of \code{prod}.
 #' @export
+#' @keywords internal
 .robpca_det_from_chol <- function(C) {
   L <- tryCatch(chol(C), error = function(e) NULL)
   if (is.null(L)) return(0.0)
@@ -81,6 +84,7 @@
 #' @param C A matrix; passed to \code{solve}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .robpca_mahalanobis <- function(X, mu, C) {
   invC <- tryCatch(solve(C), error = function(e) NULL)
   if (is.null(invC)) stop("singular")
@@ -145,6 +149,7 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return The value of \code{do.call}.
 #' @export
+#' @keywords internal
 .robpca_directions <- function(rows, n_dirs, seed) {
   n <- nrow(rows)
   p <- ncol(rows)
@@ -226,6 +231,7 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100L}.
 #' @return A list with \code{idx}, \code{mu}, \code{C}, \code{det}.
 #' @export
+#' @keywords internal
 .robpca_c_steps <- function(rows, idx, max_iter = 100L) {
   h <- length(idx)
   cur <- idx
@@ -270,6 +276,7 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{17L}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @keywords internal
 .robpca_fast_mcd <- function(rows, h, n_start = 250L, seed = 17L) {
   n <- nrow(rows)
   p <- ncol(rows)
@@ -380,6 +387,7 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 #' @param r1 Numeric; passed to \code{min}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .robpca_choose_k <- function(l0, k, kmax, r1) {
   pos <- l0[l0 > 1e-12]
   r <- length(pos)
@@ -415,6 +423,7 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 #' @param v Numeric; combined arithmetically in the body.
 #' @return The value of \code{%*%}.
 #' @export
+#' @keywords internal
 .robpca_drop_direction <- function(rows, v) {
   p <- ncol(rows)
   norm <- sqrt(sum(v * v))
@@ -454,6 +463,7 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 #' @examples
 #' res <- .robpca_reweight_factor(q = 0.5, k = 3L)
 #' res
+#' @keywords internal
 .robpca_reweight_factor <- function(q, k) {
   denom <- pchisq(qchisq(q, k), k + 2)
   if (denom > 0) q / denom else 1.0
@@ -468,6 +478,7 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 #' @param h Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .robpca_od_cutoff <- function(od, h) {
   v <- od ^ (2.0 / 3.0)
   if (length(v) < 2L) return(Inf)

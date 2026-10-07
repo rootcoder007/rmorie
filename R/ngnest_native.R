@@ -58,6 +58,7 @@
 #' @param ridge Passed to \code{nbeats_stack}. Defaults to \code{1e-08}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .ngnest_nbeats_stack <- function(window, H, blocks, ridge = 1e-8) {
   # Delegate to the shared implementation, which is what the Python arm
   # does (morie.fn.ngnest imports nbeats_stack from morie.fn.nbeats). The
@@ -79,6 +80,7 @@
 #' @examples
 #' res <- .ngnest_default_block_sets()
 #' res
+#' @keywords internal
 .ngnest_default_block_sets <- function() {
   list(
     list(list("trend", 2L, 3L), list("seasonality", 2L, 3L)),
@@ -99,6 +101,7 @@
 #' @param ridge Passed to \code{.ngnest_nbeats_stack}. Defaults to \code{1e-08}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .ngnest_ensemble_members <- function(y, horizon,
                                      lookback_multiples = c(2, 3, 4, 5, 6, 7),
                                      block_sets = NULL, ridge = 1e-8) {
@@ -150,6 +153,7 @@
 #' @param how Compared against \code{"median"}. Defaults to \code{"median"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .ngnest_aggregate_forecasts <- function(members, how = "median") {
   how <- match.arg(how, c("median", "mean"))
   if (length(members) == 0L) stop("ngnest: no members to aggregate")
@@ -251,6 +255,7 @@ morie_ngnest <- function(y, horizon,
 #' @examples
 #' res <- .ngnest_cheatsheet()
 #' res
+#' @keywords internal
 .ngnest_cheatsheet <- function() {
   paste("ngnest: same source as nbeats -- this is the ENSEMBLE, ",
         "which is what the paper's numbers actually are (180 models ",

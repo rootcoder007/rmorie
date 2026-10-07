@@ -19,3 +19,4 @@ A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at},
 \code{morie_rrblpr_rr_blup}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

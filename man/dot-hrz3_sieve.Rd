@@ -22,3 +22,4 @@ are literally the inner products beta_j = <g, psi_j> as the text
 notes.  "poly" is the monomial basis, which spans the same spaces but
 is not orthonormal.
 }
+\keyword{internal}

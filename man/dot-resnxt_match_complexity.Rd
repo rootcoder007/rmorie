@@ -21,3 +21,4 @@ A list with \code{bottleneck}, \code{rounded}, \code{parameters},
 A step of the resnxt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

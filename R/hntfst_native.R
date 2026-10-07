@@ -29,6 +29,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- ._mean(v = x)
 #' res
+#' @keywords internal
 ._mean <- function(v) if (length(v) == 0L) 0.0 else mean(v)
 
 #' ._best_split
@@ -44,6 +45,7 @@
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @keywords internal
 ._best_split <- function(X, y, rows, feats, min_leaf, alpha) {
   n <- length(rows)
   if (n < 2L * min_leaf) return(NULL)
@@ -220,6 +222,7 @@ leaf_of <- function(tree, x) {
 #' @param x Passed to \code{leaf_of}.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .hntfst_tree_predict <- function(tree, x) {
   leaf_of(tree, x)$node$value
 }
@@ -541,6 +544,7 @@ morie_hntfst <- function(X, y, W = NULL, kind = "double-sample",
 #' @examples
 #' res <- .hntfst_cheatsheet()
 #' res
+#' @keywords internal
 .hntfst_cheatsheet <- function() {
   paste(paste0(
     "hntfst: honest forest. Procedure 1 splits the subsample into",

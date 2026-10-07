@@ -154,6 +154,7 @@ MORIE_TPS_REGISTRY <- list(
 #' @param name A vector; its length is taken.
 #' @return The value of \code{[[}.
 #' @export
+#' @keywords internal
 .morie_tps_canonical <- function(name) {
   stopifnot(is.character(name), length(name) == 1L)
   keys <- names(MORIE_TPS_REGISTRY)

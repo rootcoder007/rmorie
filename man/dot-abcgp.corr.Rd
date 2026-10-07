@@ -23,3 +23,4 @@ A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
 \code{.abcgp.gp_predict}, \code{.abcgp.profile_nll}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ The value of \code{s}, as built in the body.
 A step of the helpers_fda implementation. Called by \code{Scfd}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

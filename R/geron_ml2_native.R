@@ -2473,6 +2473,7 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
 #' @param criterion One of \code{"gini"}, \code{"mse"}.
 #' @return A list with \code{leaf}, \code{value}, \code{proba}, \code{n}, \code{impurity}.
 #' @export
+#' @keywords internal
 .morie_gr2_leaf <- function(y, criterion) {
   if (criterion == "mse") {
     yv <- as.numeric(y)
@@ -2505,6 +2506,7 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
 #' @param min_samples_leaf Passed to \code{<}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr2_best_split <- function(X, y, criterion, min_samples_leaf) {
   best <- NULL
   m <- nrow(X)
@@ -2553,6 +2555,7 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
 #' @param stats A list; the body reads \code{$leaves}, \code{$max_depth}, \code{$splits} from it.
 #' @return The value of \code{lf}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr2_grow <- function(X, y, criterion, max_depth, min_samples_split,
                             min_samples_leaf, min_impurity_decrease, depth,
                             stats) {
@@ -2791,6 +2794,7 @@ morie_geron_classification_tree <- function(X, y, criterion = "gini",
 #' @param K A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{Yoh}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr2_onehot <- function(Y, m, K) {
   Yarr <- Y
   if (is.null(dim(Yarr)) || (length(dim(Yarr)) == 2L && K != 1L &&
@@ -3342,6 +3346,7 @@ morie_geron_classification_localization <- function(image, model,
 #' @param st A list; the body reads \code{$nodes} from it.
 #' @return The value of \code{length}.
 #' @export
+#' @keywords internal
 .morie_gr2_forward <- function(node, env, st) {
   if (is.numeric(node) && length(node) == 1L) {
     st$nodes[[length(st$nodes) + 1L]] <-

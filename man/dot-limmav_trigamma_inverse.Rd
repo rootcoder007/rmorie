@@ -20,3 +20,4 @@ The value of \code{y}, as built in the body.
 A step of the limmav_native implementation. Called by \code{.limmav_ebayes}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

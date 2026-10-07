@@ -90,6 +90,7 @@
 #' @param b Passed to \code{utf8ToInt}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .avalon_lte <- function(a, b) {
   x <- utf8ToInt(a)
   y <- utf8ToInt(b)
@@ -113,6 +114,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .avalon_sortkeys(v = x)
 #' res
+#' @keywords internal
 .avalon_sortkeys <- function(v) sort(unique(v), method = "radix")
 
 #' FNV-1a over the bytes of a feature key
@@ -336,6 +338,7 @@ morie_avalon_parse <- function(smiles) {
 #' @param bonds A vector; its length is taken and its elements indexed.
 #' @return The value of \code{adj}, as built in the body.
 #' @export
+#' @keywords internal
 .avalon_adj <- function(n, bonds) {
   adj <- vector("list", n)
   for (i in seq_len(n)) adj[[i]] <- list()
@@ -399,6 +402,7 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
 #' @param banned Passed to \code{==}.
 #' @return A vector, from \code{rev}.
 #' @export
+#' @keywords internal
 .avalon_shortest <- function(adj, src, dst, banned) {
   n <- length(adj)
   dist <- rep(-1L, n)
@@ -464,6 +468,7 @@ morie_avalon_rings <- function(n, bonds, closures) {
 #' @param i See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .avalon_ty <- function(el, arom, i)
   if (arom[i] == 1L) tolower(el[i]) else el[i]
 
@@ -480,6 +485,7 @@ morie_avalon_rings <- function(n, bonds, closures) {
 #' @param ty A vector; indexed elementwise.
 #' @return The value of \code{unique}.
 #' @export
+#' @keywords internal
 .avalon_paths <- function(adj, n, maxpath, ty) {
   # A path and its reverse are the same feature, so only the smaller of
   # the two spellings is kept -- otherwise a symmetric molecule would
@@ -533,6 +539,7 @@ morie_avalon_rings <- function(n, bonds, closures) {
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{D}, as built in the body.
 #' @export
+#' @keywords internal
 .avalon_dist <- function(adj, n) {
   D <- matrix(-1L, n, n)
   for (s in 0:(n - 1L)) {

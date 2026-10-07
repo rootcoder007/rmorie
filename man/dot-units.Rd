@@ -16,3 +16,4 @@ The value of \code{out}, as built in the body.
 U+2581; joining reproduces the input exactly so runs of spaces do not
 collapse.
 }
+\keyword{internal}

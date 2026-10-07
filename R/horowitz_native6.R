@@ -30,6 +30,7 @@
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_hrz_normalize_scale <- function(beta) {
   b <- as.numeric(beta)
   if (length(b) == 0L) stop("beta must be non-empty.", call. = FALSE)
@@ -61,6 +62,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_hrz_kz6(u = x)
 #' res
+#' @keywords internal
 .morie_hrz_kz6 <- function(u) (15 - 10 * u^2 + u^4) / 16 * stats::dnorm(u)
 
 # K'(u) = phi(u)(-35u + 14u^3 - u^5)/16, by differentiating the above
@@ -76,6 +78,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_hrz_kz6_deriv(u = x)
 #' res
+#' @keywords internal
 .morie_hrz_kz6_deriv <- function(u) {
   stats::dnorm(u) * (-35 * u + 14 * u^3 - u^5) / 16
 }

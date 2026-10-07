@@ -93,6 +93,7 @@ translate <- function(seq, to_stop = FALSE) {
 #' @param effect Passed to \code{\%in\%}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .snpeff_impact <- function(effect) {
   if (effect %in% .SNPEFF_HIGH) return("HIGH")
   if (effect %in% .SNPEFF_MODERATE) return("MODERATE")
@@ -119,6 +120,7 @@ translate <- function(seq, to_stop = FALSE) {
 #' \code{ref_aa}, \code{alt_aa}, \code{codon_index}, \code{hgvs_p}, \code{hgvs_c},
 #' \code{pos}, \code{ref}, \code{alt}.
 #' @export
+#' @keywords internal
 .snpeff_pack <- function(effect, ref_codon, alt_codon, ref_aa, alt_aa,
                          ref, alt, pos, codon_index = NULL,
                          hgvs_p = NULL) {
@@ -307,6 +309,7 @@ snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,
 #' @examples
 #' res <- .snpeff_cheatsheet()
 #' res
+#' @keywords internal
 .snpeff_cheatsheet <- function() {
   paste0("snpeff: variant annotation (Cingolani et al. 2012). ",
          "Classify by codon change: synonymous, missense, ",

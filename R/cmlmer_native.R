@@ -43,6 +43,7 @@
 #' @param stages Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
+#' @keywords internal
 .cmlmer_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
   a <- as.numeric(lo)
   b <- as.numeric(hi)
@@ -84,6 +85,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .cmlmer_snap12(x = x)
 #' res
+#' @keywords internal
 .cmlmer_snap12 <- function(x) floor(x * 1e12 + 0.5) / 1e12
 
 #' .cmlmer_rows
@@ -98,6 +100,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .cmlmer_rows(x = x)
 #' res
+#' @keywords internal
 .cmlmer_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -120,6 +123,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .cmlmer_chol(A = A)
 #' res
+#' @keywords internal
 .cmlmer_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -151,6 +155,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .cmlmer_solve <- function(L, b) {
   n <- nrow(L)
   z <- numeric(n)
@@ -176,6 +181,7 @@
 #' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .cmlmer_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
 # Average-linkage clustering on 1 - K, cut at g groups. Deterministic
@@ -190,6 +196,7 @@
 #' @param g Passed to \code{>}.
 #' @return A list with \code{lab}, \code{groups}.
 #' @export
+#' @keywords internal
 .cmlmer_upgma <- function(K, g) {
   n <- nrow(K)
   members <- lapply(seq_len(n), function(i) i)
@@ -245,6 +252,7 @@
 #' @param X A matrix; indexed by row and column.
 #' @return A list with \code{ll}, \code{delta}, \code{beta}, \code{s2g}, \code{L}.
 #' @export
+#' @keywords internal
 .cmlmer_reml_at <- function(logdelta, Vk, y, X) {
   n <- length(y)
   p <- ncol(X)
@@ -451,6 +459,7 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
 #' @examples
 #' res <- .cmlmer_cheatsheet()
 #' res
+#' @keywords internal
 .cmlmer_cheatsheet <- function() {
   paste0("cmlmer: morie_cmlmer_compressed_lmm(y, M, K, clusters) -> ",
          "compressed MLM genome scan with REML variance components ",

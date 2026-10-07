@@ -85,6 +85,7 @@ exp3 <- morie_exp3
 #' @examples
 #' res <- .exp3_cheatsheet()
 #' res
+#' @keywords internal
 .exp3_cheatsheet <- function() {
   "exp3(x, gamma_) -> Exp3 adversarial bandit on a (T, K) reward table (Auer et al 2002, fig 1)."
 }

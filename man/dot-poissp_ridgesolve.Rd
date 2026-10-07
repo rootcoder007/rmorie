@@ -27,3 +27,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .poissp_ridgesolve(A = A, b = b)
 res
 }
+\keyword{internal}

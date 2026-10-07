@@ -16,3 +16,4 @@ A numeric value.
 A step of the rangayyan_tf implementation. Called by \code{EmdEns}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

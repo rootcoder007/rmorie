@@ -19,3 +19,4 @@ if (morie_crypto_sodium_available()) {
   res
 }
 }
+\keyword{internal}

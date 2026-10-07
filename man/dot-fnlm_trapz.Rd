@@ -19,3 +19,4 @@ A step of the fnlm implementation. Called by \code{Fnlm}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

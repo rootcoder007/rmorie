@@ -21,3 +21,4 @@ The value of \code{out}, as built in the body.
 \description{
 kept simple and weight-aware.
 }
+\keyword{internal}

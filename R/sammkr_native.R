@@ -27,6 +27,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .sammkr_flat(m = X)
 #' res
+#' @keywords internal
 .sammkr_flat <- function(m) {
   M <- m
   if (is.list(M) && !is.matrix(M)) {
@@ -199,6 +200,7 @@ rank_masks <- function(masks, predicted_iou, target = NULL) {
 #' @examples
 #' res <- .sammkr_cheatsheet()
 #' res
+#' @keywords internal
 .sammkr_cheatsheet <- function() {
   paste("sammkr: one output forces the model to AVERAGE the valid ",
         "masks of an ambiguous prompt -- a blur that answers nobody. ",

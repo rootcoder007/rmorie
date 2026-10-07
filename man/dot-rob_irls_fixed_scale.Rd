@@ -24,3 +24,4 @@ A list with \code{beta}, \code{converged}.
 A step of the robust_native implementation. Called by \code{morie_rob_mm}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

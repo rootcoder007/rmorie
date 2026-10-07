@@ -79,6 +79,7 @@
 #' \code{.timeRS_BETA}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .timeRS_deviation <- function(t, t_user, beta = .timeRS_BETA) {
   d <- as.numeric(t) - as.numeric(t_user)
   b <- as.numeric(beta)
@@ -100,6 +101,7 @@
 #' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{30}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .timeRS_time_bin <- function(t, bin_days = 70, n_bins = 30) {
   w <- as.integer(bin_days)
   if (w < 1L) {
@@ -124,6 +126,7 @@
 #' @param beta Passed to \code{.timeRS_deviation}. Defaults to \code{.timeRS_BETA}.
 #' @return A list with \code{bias}, \code{deviation}, \code{per_day}, \code{note}.
 #' @export
+#' @keywords internal
 .timeRS_user_bias <- function(b_u, alpha_u, t, t_user, per_day = NULL,
                               beta = .timeRS_BETA) {
   dev <- .timeRS_deviation(t, t_user, beta)
@@ -158,6 +161,7 @@
 #' @param n_bins Passed to \code{.timeRS_time_bin}. Defaults to \code{30}.
 #' @return A list with \code{bias}, \code{bin}.
 #' @export
+#' @keywords internal
 .timeRS_item_bias <- function(b_i, bins, t, bin_days = 70, n_bins = 30) {
   idx <- .timeRS_time_bin(t, bin_days, n_bins)
   nb <- length(bins)
@@ -189,6 +193,7 @@
 #' @return A list with \code{prediction}, \code{user_bias}, \code{item_bias},
 #' \code{deviation}, \code{bin}.
 #' @export
+#' @keywords internal
 .timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins, t,
                                  p_u = NULL, q_i = NULL, per_day = NULL,
                                  bin_days = 70, beta = .timeRS_BETA) {
@@ -232,6 +237,7 @@
 #' \code{b_user}, \code{alpha_user}, \code{b_item}, \code{item_bins}, \code{t_user},
 #' \code{beta}, \code{n_instances}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
                                   n_bins = 30, epochs = 40, lr = 0.005,
                                   reg = 0.02, beta = .timeRS_BETA) {

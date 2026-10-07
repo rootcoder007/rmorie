@@ -50,6 +50,7 @@ NULL
 #' @param ... Passed through.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .frns_check_aligned <- function(...) {
   args <- list(...)
   lengths <- vapply(args, function(a) length(a[[2]]), integer(1))
@@ -76,6 +77,7 @@ NULL
 #' @param favorable Passed to \code{==}.
 #' @return The value of \code{rates}, as built in the body.
 #' @export
+#' @keywords internal
 .frns_favorable_rates <- function(outcome, group, favorable) {
   groups <- unique(group)
   rates <- list()
@@ -98,6 +100,7 @@ NULL
 #' @param rates Iterated over elementwise, with \code{vapply}.
 #' @return A list with \code{privileged}, \code{warning}.
 #' @export
+#' @keywords internal
 .frns_resolve_privileged <- function(privileged, rates) {
   # Returns list(privileged = <key>, warning = <chr or NULL>).
   keys <- names(rates)
@@ -133,6 +136,7 @@ NULL
 #' @param favorable Passed to \code{==}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .frns_rates_from_labels <- function(y_true, y_pred, group, favorable) {
   groups <- unique(group)
   out <- list()
@@ -163,6 +167,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .frns_gini(x = x)
 #' res
+#' @keywords internal
 .frns_gini <- function(x) {
   # Gini via the sorted-rank formula; equals sum_i sum_j |x_i-x_j| /
   # (2 n sum x). Returns 0 for all-zero or single-element input.
@@ -188,6 +193,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .frns_worst_abs(values = x)
 #' res
+#' @keywords internal
 .frns_worst_abs <- function(values) {
   # The element with the largest absolute value (finite only); NA if none.
   finite <- values[is.finite(values)]
@@ -233,6 +239,7 @@ NULL
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .morie_fairness_as_1d(x = x, name = txt)
 #' res
+#' @keywords internal
 .morie_fairness_as_1d <- function(x, name) {
   arr <- as.vector(x)
   if (length(arr) == 0L) {
@@ -252,6 +259,7 @@ NULL
 #' @param ... Passed through.
 #' @return The value of \code{for}.
 #' @export
+#' @keywords internal
 .morie_fairness_check_aligned <- function(...) {
   pairs <- list(...) # list of c(name, length)
   n <- pairs[[1L]]$len
@@ -275,6 +283,7 @@ NULL
 #' @param arr Passed to \code{unique}.
 #' @return The value of \code{unique}.
 #' @export
+#' @keywords internal
 .morie_fairness_ordered_unique <- function(arr) {
   # Python's "first-seen" order; unique() in R is already first-seen.
   unique(arr)
@@ -292,6 +301,7 @@ NULL
 #' @param favorable Passed to \code{==}.
 #' @return The value of \code{rates}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_fairness_favorable_rates <- function(outcome, group, favorable) {
   groups <- .morie_fairness_ordered_unique(group)
   rates <- vector("list", length(groups))
@@ -320,6 +330,7 @@ NULL
 #' @param warnings_env A list; the body reads \code{$w} from it.
 #' @return The value of \code{inferred}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_fairness_resolve_privileged <- function(privileged, rates, warnings_env) {
   group_keys <- vapply(rates, function(r) as.character(r$g), character(1))
   if (!is.null(privileged)) {
@@ -352,6 +363,7 @@ NULL
 #' @param favorable Passed to \code{==}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_fairness_rates_from_labels <- function(y_true, y_pred, group, favorable) {
   groups <- .morie_fairness_ordered_unique(group)
   out <- vector("list", length(groups))
@@ -384,6 +396,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_fairness_gini_core(x = x)
 #' res
+#' @keywords internal
 .morie_fairness_gini_core <- function(x) {
   # Sorted-rank formula. Returns 0.0 for an all-zero or single-element
   # input (no inequality defined), matching the Python helper.

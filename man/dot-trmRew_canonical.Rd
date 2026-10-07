@@ -15,3 +15,4 @@ The value of \code{out}, as built in the body.
 \description{
 the bookkeeping suffixes renaming apart introduced.
 }
+\keyword{internal}

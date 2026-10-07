@@ -48,6 +48,7 @@
 #' @param p1 A vector; its length is taken.
 #' @return A list with \code{z}, \code{kl}.
 #' @export
+#' @keywords internal
 .glm_score_bernoulli <- function(p0, p1) {
   if (!is.numeric(p0) || length(p0) != 1L || p0 <= 0 || p0 >= 1)
     stop("glr_test: bernoulli p0 must lie strictly in (0, 1)")
@@ -74,6 +75,7 @@
 #' @param sd A vector; its length is taken.
 #' @return A list with \code{z}, \code{kl}.
 #' @export
+#' @keywords internal
 .glm_score_normal <- function(p0, p1, sd) {
   if (!is.numeric(sd) || length(sd) != 1L || sd <= 0)
     stop("glr_test: sd must be positive")
@@ -94,6 +96,7 @@
 #' @param p1 A vector; its length is taken.
 #' @return A list with \code{z}, \code{kl}.
 #' @export
+#' @keywords internal
 .glm_score_poisson <- function(p0, p1) {
   if (!is.numeric(p0) || length(p0) != 1L || p0 <= 0)
     stop("glr_test: poisson rate p0 must be positive")
@@ -271,6 +274,7 @@ glrtest <- function(x, p0, p1, threshold = NULL,
 #' @examples
 #' res <- .glm_cheatsheet()
 #' res
+#' @keywords internal
 .glm_cheatsheet <- function() {
   paste0("glm: Page likelihood-ratio CUSUM, max_k sum_{i=k}^{n} ",
          "log(f1/f0) (Lai 1995 eq. 2.3); families bernoulli/normal/",

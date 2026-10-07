@@ -19,3 +19,4 @@ The value of \code{out}, as built in the body.
 \description{
 position, and rewrite the overlap both ways.
 }
+\keyword{internal}

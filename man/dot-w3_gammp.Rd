@@ -19,3 +19,4 @@ continued fraction for the complement above: the crossover is where
 each is the convergent one, and using the wrong side is where a
 hand-rolled version loses its digits.
 }
+\keyword{internal}

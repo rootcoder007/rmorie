@@ -18,3 +18,4 @@ A list with \code{nn}, \code{d0}.
 A step of the lyapun_native implementation. Called by \code{divergence_curve}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

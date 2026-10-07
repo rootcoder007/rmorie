@@ -38,3 +38,4 @@ if (requireNamespace("jsonlite", quietly = TRUE)) {
   res
 }
 }
+\keyword{internal}

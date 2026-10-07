@@ -18,3 +18,4 @@ A list with \code{statistic}, \code{p.value}, \code{cor}, \code{z}.
 A step of the coin_native implementation. Called by \code{morie_indep_test}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

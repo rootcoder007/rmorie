@@ -19,3 +19,4 @@ A step of the intf implementation. Called by \code{Intf}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

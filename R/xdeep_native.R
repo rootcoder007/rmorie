@@ -63,6 +63,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .xdeep_to_vec(a = A)
 #' res
+#' @keywords internal
 .xdeep_to_vec <- function(a) {
   as.numeric(a)
 }
@@ -79,6 +80,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .xdeep_to_mat(M = X)
 #' res
+#' @keywords internal
 .xdeep_to_mat <- function(M) {
   # a CIN layer returns its feature maps as a list of vectors; the next
   # layer receives that list, which as.matrix() cannot coerce, so every

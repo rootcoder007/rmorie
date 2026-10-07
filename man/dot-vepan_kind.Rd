@@ -17,3 +17,4 @@ A step of the vepan_native implementation. Called by \code{.vepan_affected},
 \code{.vepan_apply}, \code{.vepan_coding_terms} and 2 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

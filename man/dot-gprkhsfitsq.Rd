@@ -28,3 +28,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .gprkhsfitsq(K = A, y = b)
 res
 }
+\keyword{internal}

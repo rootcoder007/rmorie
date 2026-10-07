@@ -16,3 +16,4 @@ Nothing; the function is called for its effect.
 \description{
 among ties, the key whose str() sorts earliest wins.
 }
+\keyword{internal}

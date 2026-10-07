@@ -61,6 +61,7 @@
 #' @param t A vector; its length is taken and its elements indexed.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .unifAlg_is_var <- function(t) {
   is.list(t) && length(t) == 2L && identical(t[[1]], .VAR)
 }
@@ -76,6 +77,7 @@
 #' @param t A vector; its length is taken and its elements indexed.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .unifAlg_check <- function(t) {
   if (.unifAlg_is_var(t)) {
     return(t)
@@ -102,6 +104,7 @@
 #' @param subst A vector; indexed elementwise.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .unifAlg_apply_once <- function(t, subst) {
   if (.unifAlg_is_var(t)) {
     nm <- t[[2]]
@@ -126,6 +129,7 @@
 #' @return A list with \code{estimate}, \code{unified}, \code{mgu}, \code{reason},
 #' \code{occurs_check}, \code{partial}, \code{n_bindings}, \code{method}.
 #' @export
+#' @keywords internal
 .unifAlg_fail <- function(sub, why, oc) {
   list(
     estimate = FALSE,

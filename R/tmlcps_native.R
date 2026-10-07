@@ -28,6 +28,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .kern(u = x)
 #' res
+#' @keywords internal
 .kern <- function(u) exp(-0.5 * u * u)
 
 #' .smooth_at
@@ -42,6 +43,7 @@
 #' @param fit Compared against \code{"kernel"}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .smooth_at <- function(xv, av, g, h, fit) {
   n <- length(xv)
   w <- .kern((av - g) / h)
@@ -69,6 +71,7 @@
 #' @param n_folds Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{best_h}, as built in the body.
 #' @export
+#' @keywords internal
 .cv_bandwidth <- function(xv, av, fit, n_folds) {
   n <- length(xv)
   spread <- max(av) - min(av)

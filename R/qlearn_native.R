@@ -21,6 +21,7 @@
 #' @param A Passed to \code{seq.int}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @keywords internal
 .mor_rl_greedy <- function(Qs, A) {
   b <- 1L
   for (a in seq.int(2L, A)) if (Qs[a] > Qs[b]) b <- a
@@ -38,6 +39,7 @@
 #' @param u Passed to \code{<=}.
 #' @return The value of \code{S}, as built in the body.
 #' @export
+#' @keywords internal
 .mor_rl_sample_row <- function(row, S, u) {
   cc <- 0
   for (s2 in seq_len(S)) {
@@ -59,6 +61,7 @@
 #' @param epsilon Passed to \code{<}.
 #' @return The value of \code{.mor_rl_greedy}.
 #' @export
+#' @keywords internal
 .mor_rl_eps <- function(e, Qs, A, epsilon) {
   u1 <- .ghc_unif(e, 1L)
   if (u1 < epsilon) {
@@ -78,6 +81,7 @@
 #' @param terminal Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mor_rl_terminal <- function(terminal) as.integer(terminal) + 1L
 
 #' .mor_rl_out
@@ -91,6 +95,7 @@
 #' @param A Passed to \code{.mor_rl_greedy}.
 #' @return A list with \code{policy}, \code{v}.
 #' @export
+#' @keywords internal
 .mor_rl_out <- function(Q, S, A) {
   pol <- numeric(S)
   V <- numeric(S)

@@ -22,6 +22,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .ca_rms(a = A, b = b)
 #' res
+#' @keywords internal
 .ca_rms <- function(a, b) {
   n <- length(a)
   sqrt(sum((as.numeric(a) - as.numeric(b))^2) / n)

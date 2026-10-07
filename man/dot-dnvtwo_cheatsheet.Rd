@@ -16,3 +16,4 @@ One-paragraph summary of the DINOv2 recipe
 res <- .dnvtwo_cheatsheet()
 res
 }
+\keyword{internal}

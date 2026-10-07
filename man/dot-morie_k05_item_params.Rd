@@ -22,3 +22,4 @@ A list with \code{a}, \code{b}, \code{c}, \code{u}, \code{n}.
 Helper step. Called by \code{morie_tcc}, \code{morie_test_information}. See the file
 header for the source the module follows. source it follows.
 }
+\keyword{internal}

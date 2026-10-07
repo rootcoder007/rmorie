@@ -23,6 +23,7 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mor_qm_ecdf <- function(sorted_x, v) {
   n <- length(sorted_x)
   if (n == 1L) return(0.5)
@@ -50,6 +51,7 @@
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mor_qm_quantile <- function(sorted_x, p) {
   n <- length(sorted_x)
   if (n == 1L) return(sorted_x[1L])

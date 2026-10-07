@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 # bin midpoints in angstroms, at the given bin width
 .alfesf_pae_centres(4L, 0.5)
 }
+\keyword{internal}

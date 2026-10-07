@@ -25,3 +25,4 @@ the source it follows.
 res <- .morie_w4c_combos_with_repl(n = 3L, k = 3L)
 res
 }
+\keyword{internal}

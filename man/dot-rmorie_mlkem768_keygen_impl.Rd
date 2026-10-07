@@ -16,3 +16,4 @@ if (morie_crypto_liboqs_available()) {
   res
 }
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ The value of \code{[}.
 A step of the rgemgfd implementation. Called by \code{rgemgfd}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

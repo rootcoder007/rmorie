@@ -19,3 +19,4 @@ A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map},
 \code{.pq_struct}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

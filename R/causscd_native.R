@@ -15,6 +15,7 @@
 #' @param t_post Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{rows}, \code{n}, \code{T}, \code{tr}, \code{t_post}.
 #' @export
+#' @keywords internal
 .causscd_grid <- function(Y, treated, t_post) {
   rows <- lapply(Y, function(r) as.numeric(r))
   n <- length(rows)
@@ -47,6 +48,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .causscd_project_simplex(v = x)
 #' res
+#' @keywords internal
 .causscd_project_simplex <- function(v) {
   m <- length(v)
   u <- sort(v, decreasing = TRUE)
@@ -77,6 +79,7 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @return A list with \code{w}, \code{intercept}.
 #' @export
+#' @keywords internal
 .causscd_simplex_fit <- function(cols, target, penalty, iters = 2000L, tol = 1e-12) {
   m <- length(cols)
   L <- length(target)

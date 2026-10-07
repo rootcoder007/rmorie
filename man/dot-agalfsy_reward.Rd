@@ -32,3 +32,4 @@ site <- P + 5
 # standing still earns nothing
 .agalfsy_reward(site, P, P)
 }
+\keyword{internal}

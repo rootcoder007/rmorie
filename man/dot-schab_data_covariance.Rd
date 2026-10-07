@@ -24,3 +24,4 @@ equations with the symbol Sigma_mu, but the matrix they need is this
 one; with (6.79) as written the scores are wrong by a factor of
 Psi^2.
 }
+\keyword{internal}

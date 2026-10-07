@@ -23,6 +23,7 @@
 #' @param what Passed to \code{sprintf}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @keywords internal
 .alfbnp_atoms <- function(x, what) {
   if (is.matrix(x)) {
     m <- x
@@ -51,6 +52,7 @@
 #' @param rho Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .alfbnp_schedule <- function(T, sigma_data, s_max, s_min, rho) {
   a <- s_max^(1.0 / rho)
   b <- s_min^(1.0 / rho)
@@ -75,6 +77,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .alfbnp_centre(X = X)
 #' res
+#' @keywords internal
 .alfbnp_centre <- function(X) {
   cen <- colSums(X) / nrow(X)
   for (a in 1:3) X[, a] <- X[, a] - cen[a]
@@ -96,6 +99,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{coefs}, as built in the body.
 #' @export
+#' @keywords internal
 .alfbnp_fit_linear <- function(clean, sigmas, draws, ridge) {
   n <- nrow(clean[[1]])
   coefs <- numeric(length(sigmas))
@@ -135,6 +139,7 @@
 #' @param clean A matrix; indexed by row and column.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .alfbnp_clean_list <- function(clean) {
   if (is.array(clean) && length(dim(clean)) == 3L) {
     d <- dim(clean)
@@ -364,6 +369,7 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
 #' @examples
 #' res <- .alfbnp_cheatsheet()
 #' res
+#' @keywords internal
 .alfbnp_cheatsheet <- function() {
   paste0(
     "alfbnp: morie_alfbnp_af3_sample(n_atoms, denoiser=) or (clean=) ",

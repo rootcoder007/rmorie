@@ -20,3 +20,4 @@ every sink that spawns an external process.
 res <- .morie_ensure_exec_allowed()
 res
 }
+\keyword{internal}

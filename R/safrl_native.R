@@ -78,6 +78,7 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
+#' @keywords internal
 .safrl_mat <- function(M, name) {
   rows <- NULL
   if (is.matrix(M)) {
@@ -121,6 +122,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .safrl_vec(v = x, name = txt)
 #' res
+#' @keywords internal
 .safrl_vec <- function(v, name) {
   out <- NULL
   if (is.list(v)) {
@@ -144,6 +146,7 @@
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .safrl_solve <- function(A, b) {
   n <- length(b)
   M <- matrix(0, nrow = n, ncol = n + 1)
@@ -203,6 +206,7 @@
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{lam}, \code{nu}.
 #' @export
+#' @keywords internal
 .safrl_dual <- function(q, r, S, c, delta, m, tol, max_iter) {
   nu <- rep(0.0, m)
 
@@ -283,6 +287,7 @@
 #' \code{feasible}, \code{recovery}, \code{predicted_gain}, \code{predicted_violation},
 #' \code{kl}, \code{delta}, \code{method}.
 #' @export
+#' @keywords internal
 .safrl_finish <- function(step, g, cols, cv, H, delta, lam, nu,
                            feasible, recovery) {
   n <- length(g)

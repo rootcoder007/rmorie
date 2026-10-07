@@ -33,3 +33,4 @@ A vector, from \code{as.numeric}.
 A step of the mass_native implementation. Called by \code{morie_glm_nb}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

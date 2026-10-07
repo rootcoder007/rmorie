@@ -21,3 +21,4 @@ only (download.file + unzip + read.csv); replaces cansim::get_cansim.
 Column set is StatCan's raw CSV schema (REF_DATE, GEO, VALUE, ...),
 which is the subset of get_cansim() output the callers use.
 }
+\keyword{internal}

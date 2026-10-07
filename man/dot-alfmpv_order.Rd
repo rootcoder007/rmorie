@@ -22,3 +22,4 @@ The value of \code{order}.
 \description{
 so the order is total and neither arm can wander off on a tie.
 }
+\keyword{internal}

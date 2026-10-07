@@ -65,6 +65,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .karpv_xor32(a = A, b = b)
 #' res
+#' @keywords internal
 .karpv_xor32 <- function(a, b) {
   ah <- a %/% 65536
   al <- a %% 65536
@@ -86,6 +87,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .karpv_shl(a = A, k = A)
 #' res
+#' @keywords internal
 .karpv_shl <- function(a, k) (a * 2^k) %% .KARPV_2_32
 #' .karpv_shr
 #'
@@ -100,6 +102,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .karpv_shr(a = A, k = A)
 #' res
+#' @keywords internal
 .karpv_shr <- function(a, k) a %/% 2^k
 
 #' .karpv_rng
@@ -113,6 +116,7 @@
 #' @examples
 #' res <- .karpv_rng(seed = 1L)
 #' res
+#' @keywords internal
 .karpv_rng <- function(seed) {
   s <- seed %% .KARPV_2_32
   if (s == 0) s <- 2463534242
@@ -129,6 +133,7 @@
 #' @param e A list; the body reads \code{$s} from it.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .karpv_u32 <- function(e) {
   s <- e$s
   s <- .karpv_xor32(s, .karpv_shl(s, 13))
@@ -147,6 +152,7 @@
 #' @param e Passed to \code{.karpv_u32}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .karpv_unit <- function(e) .karpv_u32(e) / .KARPV_2_32
 
 # A whole number in 0..n-1 by rejection, so the range is exact. A
@@ -161,6 +167,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{repeat}.
 #' @export
+#' @keywords internal
 .karpv_below <- function(e, n) {
   if (n <= 1) return(0)
   mask <- .KARPV_2_32 - 1
@@ -183,6 +190,7 @@
 #' @param args Carried through into a list the body builds.
 #' @return A list with \code{op}, \code{args}.
 #' @export
+#' @keywords internal
 .karpv_fnode <- function(op, args) list(op = op, args = args)
 #' .karpv_tnode
 #'
@@ -193,6 +201,7 @@
 #' @param term Carried through into a list the body builds.
 #' @return A list with \code{term}.
 #' @export
+#' @keywords internal
 .karpv_tnode <- function(term) list(term = term)
 #' .karpv_is_term
 #'
@@ -203,6 +212,7 @@
 #' @param node A list; the body reads \code{$term} from it.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .karpv_is_term <- function(node) !is.null(node$term)
 
 .KARPV_FUNCTIONS <- list(list("+", 2L), list("-", 2L), list("*", 2L),
@@ -217,6 +227,7 @@
 #' @param vals A vector; indexed elementwise.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .karpv_apply <- function(op, vals) {
   if (op == "+") return(vals[1] + vals[2])
   if (op == "-") return(vals[1] - vals[2])
@@ -316,6 +327,7 @@ morie_karpV_to_string <- function(node) {
 #' @param erc Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{.karpv_tnode}.
 #' @export
+#' @keywords internal
 .karpv_random_terminal <- function(e, terminals, erc) {
   n <- length(terminals) + (if (is.null(erc)) 0L else 1L)
   i <- .karpv_below(e, n)
@@ -337,6 +349,7 @@ morie_karpV_to_string <- function(node) {
 #' @param full A flag; the body branches on it.
 #' @return The value of \code{.karpv_fnode}.
 #' @export
+#' @keywords internal
 .karpv_grow <- function(e, functions, terminals, erc, d, full) {
   if (d <= 1) return(.karpv_random_terminal(e, terminals, erc))
   if (!full) {
@@ -386,6 +399,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #' @param out A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .karpv_collect <- function(node, path, out) {
   out[[length(out) + 1L]] <- list(path = path, node = node)
   if (!.karpv_is_term(node))
@@ -404,6 +418,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #' @param internal_bias Passed to \code{<}.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .karpv_pick_point <- function(e, node, internal_bias) {
   nodes <- .karpv_collect(node, integer(0), list())
   is_t <- vapply(nodes, function(p) .karpv_is_term(p$node), logical(1))
@@ -423,6 +438,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #' @param path See Usage.
 #' @return The value of \code{node}, as built in the body.
 #' @export
+#' @keywords internal
 .karpv_get <- function(node, path) {
   for (k in path) node <- node$args[[k]]
   node
@@ -436,6 +452,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #' @param node A list; the body reads \code{$args}, \code{$op}, \code{$term} from it.
 #' @return The value of \code{.karpv_fnode}.
 #' @export
+#' @keywords internal
 .karpv_copy <- function(node) {
   if (.karpv_is_term(node)) return(.karpv_tnode(node$term))
   .karpv_fnode(node$op, lapply(node$args, .karpv_copy))
@@ -451,6 +468,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #' @param new Passed to \code{.karpv_copy}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .karpv_replace <- function(node, path, new) {
   if (!length(path)) return(.karpv_copy(new))
   out <- .karpv_fnode(node$op, node$args)
@@ -473,6 +491,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .karpv_csum(v = x)
 #' res
+#' @keywords internal
 .karpv_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -536,6 +555,7 @@ morie_karpV_adjusted <- function(raw) if (!is.finite(raw)) 0 else 1 / (1 + raw)
 #' @param total Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .karpv_roulette <- function(e, adj, total) {
   if (total <= 0) return(.karpv_below(e, length(adj)))
   r <- .karpv_unit(e) * total

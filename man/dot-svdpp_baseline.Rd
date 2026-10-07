@@ -20,3 +20,4 @@ A numeric value.
 A step of the svdpp_native implementation. Called by \code{.svdpp_predict}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

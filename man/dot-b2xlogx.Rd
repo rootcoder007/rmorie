@@ -23,3 +23,4 @@ it follows.
 res <- .b2xlogx(p = 0.5)
 res
 }
+\keyword{internal}

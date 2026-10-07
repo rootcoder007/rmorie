@@ -17,3 +17,4 @@ A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_los
 \code{morie_surxgb_boost}, \code{morie_surxgb_cdf} and 3 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

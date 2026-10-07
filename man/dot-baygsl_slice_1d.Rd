@@ -37,3 +37,4 @@ Nothing; this branch always raises.
 \code{logf} is the log of an unnormalised density; rng is the .ghc_rng
 environment so the chain stays reproducible.
 }
+\keyword{internal}

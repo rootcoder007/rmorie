@@ -19,3 +19,4 @@ A numeric value.
 \description{
 log p(r), with p(r) the standard normal so log p(r) = -r.r/2.
 }
+\keyword{internal}

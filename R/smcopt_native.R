@@ -124,6 +124,7 @@ smcopt <- function(objective, initial, n_particles = 200, n_steps = 30,
 #' @examples
 #' res <- .smcopt_cheatsheet()
 #' res
+#' @keywords internal
 .smcopt_cheatsheet <- function() {
   paste0("smcopt: SMC as a global optimiser (Del Moral, Doucet & Jasra ",
          "2006, sec 2.3.1c). Anneal pi_n = pi^phi_n with phi rising, so ",

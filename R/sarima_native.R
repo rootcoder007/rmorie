@@ -106,6 +106,7 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .sarima_poly_mult(a = A, b = b)
 #' res
+#' @keywords internal
 .sarima_poly_mult <- function(a, b) {
   out <- rep(0, length(a) + length(b) - 1)
   for (i in seq_along(a)) for (j in seq_along(b)) out[i + j - 1] <- out[i + j - 1] + a[i] * b[j]
@@ -121,6 +122,7 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 #' @param s Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .sarima_seasonal_lift <- function(c, s) {
   out <- rep(0, (length(c) - 1) * s + 1)
   for (i in seq_along(c)) out[(i - 1) * s + 1] <- c[i]
@@ -226,6 +228,7 @@ airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
 #' @examples
 #' res <- .sarima_invert_rho(rho = 0.5)
 #' res
+#' @keywords internal
 .sarima_invert_rho <- function(rho) {
   r <- as.numeric(rho)
   if (abs(r) > 0.5)
@@ -315,6 +318,7 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 #' @param ma A vector; its length is taken.
 #' @return A list with \code{T}, \code{R}, \code{r}.
 #' @export
+#' @keywords internal
 .sarima_state_space <- function(ar, ma) {
   p <- length(ar)
   q <- length(ma)
@@ -336,6 +340,7 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 #' @param r A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{P}, as built in the body.
 #' @export
+#' @keywords internal
 .sarima_initial_covariance <- function(T, R, r) {
   n <- r * r
   A <- matrix(0, n, n)
@@ -411,6 +416,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' @param tol Passed to \code{<}. Defaults to \code{1.001}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .sarima_roots_ok <- function(coefs, tol = 1.001) {
   if (length(coefs) == 0) return(TRUE)
   poly <- c(1, -as.numeric(coefs))
@@ -439,6 +445,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' @param maxit A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A list with \code{x}, \code{fun}, \code{success}.
 #' @export
+#' @keywords internal
 .sarima_minimize_nm <- function(fn, x0, maxit = 200L) {
   # Small Nelder-Mead simplex minimiser in base R, with the same
   # restart-until-stuck shape as the Python arm's call to
@@ -526,6 +533,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' @param start Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{.sarima_package}.
 #' @export
+#' @keywords internal
 .sarima_fit <- function(y, order = c(0, 1, 1), seasonal_order = c(0, 1, 1), s = 12,
                 method = "ml", start = NULL) {
   if (!(method %in% .SARIMA_METHODS))
@@ -645,6 +653,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' \code{seasonal_order}, \code{s}, \code{y}, \code{w}, \code{fit_method},
 #' \code{converged}, \code{method}.
 #' @export
+#' @keywords internal
 .sarima_package <- function(y, w, phi, theta, Phi, Theta, s, order, seasonal_order,
                             ll, cs, method, res) {
   npar <- length(phi) + length(theta) + length(Phi) + length(Theta)
@@ -675,6 +684,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' @param s Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .sarima_diff_poly <- function(k, s) {
   out <- c(1.0)
   for (i in seq_len(as.integer(k)))
@@ -692,6 +702,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' @param h Passed to \code{:}.
 #' @return The value of \code{psi}, as built in the body.
 #' @export
+#' @keywords internal
 .sarima_psi_weights <- function(ar, ma, h) {
   psi <- c(1.0)
   for (j in 2:h) {
@@ -867,6 +878,7 @@ r_convention <- function(fitted) {
 #' @examples
 #' res <- .sarima_cheatsheet()
 #' res
+#' @keywords internal
 .sarima_cheatsheet <- function() {
   paste("sarima: phi(B)Phi(B^s) nabla^d nabla_s^D z = theta(B)Theta(B^s) a. ",
         "The airline (0,1,1)x(0,1,1)_12 is an MA(13) in w = nabla nabla_12 z ",

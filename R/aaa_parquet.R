@@ -52,6 +52,7 @@
 #' @param pos Defaults to \code{1L}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_reader <- function(buf, pos = 1L) {
   e <- new.env(parent = emptyenv())
   e$buf <- buf
@@ -68,6 +69,7 @@
 #' @param e A list; the body reads \code{$buf}, \code{$pos} from it.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_byte <- function(e) {
   b <- as.integer(e$buf[e$pos])
   e$pos <- e$pos + 1L
@@ -83,6 +85,7 @@
 #' @param e Passed to \code{.pq_byte}.
 #' @return The value of \code{repeat}.
 #' @export
+#' @keywords internal
 .pq_varint <- function(e) {
   result <- 0
   shift <- 0
@@ -104,6 +107,7 @@
 #' @param e Passed to \code{.pq_varint}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .pq_zigzag <- function(e) {
   n <- .pq_varint(e)
   # (n >> 1) xor -(n & 1), written in doubles so values past 2^31 stay
@@ -119,6 +123,7 @@
 #' @param e A list; the body reads \code{$buf}, \code{$pos} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_binary <- function(e) {
   n <- .pq_varint(e)
   out <- e$buf[seq.int(e$pos, length.out = n)]
@@ -134,6 +139,7 @@
 #' @param e A list; the body reads \code{$buf}, \code{$pos} from it.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_double <- function(e) {
   v <- readBin(e$buf[seq.int(e$pos, length.out = 8L)], "double",
     n = 1L, size = 8L, endian = "little"
@@ -152,6 +158,7 @@
 #' @param ttype Passed to \code{==}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .pq_scalar <- function(e, ttype) {
   if (ttype == .pqTTrue) {
     return(TRUE)
@@ -194,6 +201,7 @@
 #' @param e Passed to \code{.pq_byte}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .pq_list <- function(e) {
   h <- .pq_byte(e)
   size <- bitwShiftR(h, 4L)
@@ -213,6 +221,7 @@
 #' @param e Passed to \code{.pq_varint}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_map <- function(e) {
   size <- .pq_varint(e)
   if (size == 0) {
@@ -238,6 +247,7 @@
 #' @param e Passed to \code{.pq_byte}.
 #' @return The value of \code{repeat}.
 #' @export
+#' @keywords internal
 .pq_struct <- function(e) {
   out <- list()
   fid <- 0L
@@ -264,6 +274,7 @@
 #' @param default Defaults to \code{NULL}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .pq_f <- function(st, id, default = NULL) {
   v <- st[[as.character(id)]]
   if (is.null(v)) default else v
@@ -280,6 +291,7 @@
 #' @examples
 #' res <- .pq_writer()
 #' res
+#' @keywords internal
 .pq_writer <- function() {
   e <- new.env(parent = emptyenv())
   e$parts <- list()
@@ -297,6 +309,7 @@
 #' @param r See Usage.
 #' @return Invisibly,nothing; the function is called for its effect.
 #' @export
+#' @keywords internal
 .pq_emit <- function(e, r) {
   e$n <- e$n + 1L
   e$parts[[e$n]] <- r
@@ -313,6 +326,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{.pq_emit}.
 #' @export
+#' @keywords internal
 .pq_wvarint <- function(e, n) {
   out <- raw(0)
   repeat {
@@ -336,6 +350,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{.pq_wvarint}.
 #' @export
+#' @keywords internal
 .pq_wzigzag <- function(e, n) {
   .pq_wvarint(e, if (n < 0) -2 * n - 1 else 2 * n)
 }
@@ -349,6 +364,7 @@
 #' @param b A vector; its length is taken.
 #' @return The value of \code{.pq_emit}.
 #' @export
+#' @keywords internal
 .pq_wbinary <- function(e, b) {
   if (is.character(b)) b <- charToRaw(enc2utf8(b))
   .pq_wvarint(e, length(b))
@@ -367,6 +383,7 @@
 #' @param last Numeric; combined arithmetically in the body.
 #' @return The value of \code{fid}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_wfield <- function(e, fid, ttype, last) {
   delta <- fid - last
   if (delta > 0 && delta <= 15) {
@@ -389,6 +406,7 @@
 #' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_wi32 <- function(e, fid, v, last) {
   last <- .pq_wfield(e, fid, .pqTI32, last)
   .pq_wzigzag(e, v)
@@ -406,6 +424,7 @@
 #' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_wi64 <- function(e, fid, v, last) {
   last <- .pq_wfield(e, fid, .pqTI64, last)
   .pq_wzigzag(e, v)
@@ -423,6 +442,7 @@
 #' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_wbytes <- function(e, fid, v, last) {
   last <- .pq_wfield(e, fid, .pqTBinary, last)
   .pq_wbinary(e, v)
@@ -440,6 +460,7 @@
 #' @param etype Passed to \code{bitwOr}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .pq_wlisthdr <- function(e, size, etype) {
   if (size < 15) {
     .pq_emit(e, as.raw(bitwOr(bitwShiftL(size, 4L), etype)))
@@ -460,6 +481,7 @@
 #' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_wlisti32 <- function(e, fid, vals, last) {
   last <- .pq_wfield(e, fid, .pqTList, last)
   .pq_wlisthdr(e, length(vals), .pqTI32)
@@ -478,6 +500,7 @@
 #' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_wlistbin <- function(e, fid, vals, last) {
   last <- .pq_wfield(e, fid, .pqTList, last)
   .pq_wlisthdr(e, length(vals), .pqTBinary)
@@ -496,6 +519,7 @@
 #' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_wliststruct <- function(e, fid, bodies, last) {
   last <- .pq_wfield(e, fid, .pqTList, last)
   .pq_wlisthdr(e, length(bodies), .pqTStruct)
@@ -514,6 +538,7 @@
 #' @param last Passed to \code{.pq_wfield}.
 #' @return The value of \code{last}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_wstruct <- function(e, fid, body, last) {
   last <- .pq_wfield(e, fid, .pqTStruct, last)
   .pq_emit(e, body)
@@ -528,6 +553,7 @@
 #' @param e A list; the body reads \code{$parts} from it.
 #' @return The value of \code{do.call}.
 #' @export
+#' @keywords internal
 .pq_wstop <- function(e) {
   .pq_emit(e, as.raw(0L))
   do.call(base::c, e$parts)
@@ -543,6 +569,7 @@
 #' @param data A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_snappy_decompress <- function(data) {
   pos <- 1L
   n <- 0
@@ -623,6 +650,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .pq_snappy_compress(data = x)
 #' res
+#' @keywords internal
 .pq_snappy_compress <- function(data) {
   # Literal-only stream: fully conformant, just does not shrink.
   # ponytail: no match-finder; add one if written size ever matters.
@@ -705,6 +733,7 @@
 #' @param r A vector; its length is taken.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .pq_u32 <- function(r) {
   v <- readBin(r, "integer",
     n = length(r) %/% 4L, size = 4L,
@@ -724,6 +753,7 @@
 #' @examples
 #' res <- .pq_bit_width(n = 3L)
 #' res
+#' @keywords internal
 .pq_bit_width <- function(n) {
   w <- 0L
   while (n > 0) {
@@ -745,6 +775,7 @@
 #' @param end Passed to \code{<=}.
 #' @return A list with \code{values}, \code{pos}.
 #' @export
+#' @keywords internal
 .pq_read_rle <- function(buf, pos, width, count, end) {
   if (width == 0L) {
     return(list(values = rep(0L, count), pos = pos))
@@ -805,6 +836,7 @@
 #' @param count Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .pq_read_i64 <- function(raw_bytes, count) {
   # readBin has no 64-bit integer, so recombine two 32-bit halves. Exact
   # to 2^53, which covers every count, offset and epoch value here.
@@ -828,6 +860,7 @@
 #' @param type_length Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .pq_decode_plain <- function(buf, pos, ptype, count, type_length = NULL) {
   if (count == 0L) {
     return(list(values = list(), pos = pos))
@@ -908,6 +941,7 @@
 #' @param converted Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{vals}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_convert <- function(vals, ptype, converted) {
   if (ptype == .pqByteArray) {
     return(vapply(vals, function(v) {
@@ -941,6 +975,7 @@
 #' @param converted Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_apply_logical <- function(v, ptype, converted) {
   if (is.null(converted)) {
     return(v)
@@ -968,6 +1003,7 @@
 #' @param size Numeric; combined arithmetically in the body.
 #' @return The value of \code{.pq_struct}.
 #' @export
+#' @keywords internal
 .pq_read_footer <- function(con, size) {
   seek(con, 0L)
   if (!identical(readBin(con, "raw", 4L), charToRaw("PAR1"))) {
@@ -1061,6 +1097,7 @@
 #' @param repdef Definition level of the REPEATED node (LIST only).
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .pq_column_values <- function(con, cm, num_rows, maxdef, typelen,
                               maxrep = 0L, repdef = 0L) {
   ptype <- as.integer(.pq_f(cm, 1))
@@ -1385,6 +1422,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .pq_infer(v = x)
 #' res
+#' @keywords internal
 .pq_infer <- function(v) {
   # Date and POSIXct must keep their logical type on the way out.
   # Without this a column read as TIMESTAMP_MICROS was written back as a
@@ -1417,6 +1455,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' @param inf Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .pq_prep_write <- function(v, inf) {
   if (inherits(v, "Date")) {
     return(as.integer(unclass(v)))
@@ -1438,6 +1477,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .pq_encode_i64(values = x)
 #' res
+#' @keywords internal
 .pq_encode_i64 <- function(values) {
   # writeBin has no 64-bit integer; emit two 32-bit halves, folding the
   # low half back into signed range because that is all writeBin takes.
@@ -1460,6 +1500,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' @param ptype Passed to \code{==}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .pq_encode_plain <- function(values, ptype) {
   if (length(values) == 0L) {
     return(raw(0))
@@ -1509,6 +1550,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' @param width Passed to \code{==}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .pq_encode_levels <- function(levels, width) {
   if (width == 0L) {
     return(raw(0))

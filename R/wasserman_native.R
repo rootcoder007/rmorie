@@ -25,6 +25,7 @@
 #' @param msg Passed to \code{stop}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_wsm_need <- function(ok, msg) if (!isTRUE(ok)) stop(msg, call. = FALSE)
 
 #' Variance Var(X) = E\[X^2\] - E\[X\]^2 (Wasserman Ch 3, morie.fn wsmvar)
@@ -389,6 +390,7 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{13}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_wsm_lcg_u <- function(count, seed = 13) {
   s <- as.numeric(seed)
   out <- numeric(count)
@@ -414,6 +416,7 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
 #' @param seed Passed to \code{.morie_wsm_lcg_u}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_wsm_boot_reps <- function(data, T, B, seed) {
   n <- length(data)
   u <- .morie_wsm_lcg_u(B * n, seed)
@@ -433,6 +436,7 @@ morie_wasserman_dkw_cb <- function(data, alpha) {
 #' @param p Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .morie_wsm_q1 <- function(sorted_vals, p) sorted_vals[ceiling(p * length(sorted_vals))]
 
 #' Nonparametric bootstrap standard error (Ch 8, wsmnpb)
@@ -913,6 +917,7 @@ morie_wasserman_chi_sq_gof <- function(observed, expected) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_wsm_trapz(y = y, x = x)
 #' res
+#' @keywords internal
 .morie_wsm_trapz <- function(y, x) {
   dx <- diff(x)
   sum(0.5 * dx * (y[-1] + y[-length(y)]))
@@ -2137,6 +2142,7 @@ morie_wasserman_viterbi <- function(obs, A, B, pi) {
 #' @param u Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_wsm_norm_inv <- function(u) {
   a <- c(
     -3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02,

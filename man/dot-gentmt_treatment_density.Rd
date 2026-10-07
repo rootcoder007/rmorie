@@ -23,3 +23,4 @@ A step of the gentmt_native implementation. Called by
 \code{.gentmt_ip_weights}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -19,3 +19,4 @@ See the file header for the source the module follows.
 res <- .morie_sobol_cpp(n = 3L, d = 3L)
 res
 }
+\keyword{internal}

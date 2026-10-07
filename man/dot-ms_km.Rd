@@ -19,3 +19,4 @@ A step of the survival_more implementation. Called by \code{Cif}, \code{Finegray
 \code{Landmark} and 2 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

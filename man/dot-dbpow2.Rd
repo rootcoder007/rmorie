@@ -21,3 +21,4 @@ it follows.
 res <- .dbpow2(n = 3L)
 res
 }
+\keyword{internal}

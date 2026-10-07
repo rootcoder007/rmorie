@@ -20,3 +20,4 @@ header for the source it follows.
 res <- .drospi_as_z(h = 0.5)
 res
 }
+\keyword{internal}

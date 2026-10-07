@@ -30,6 +30,7 @@
 #' @param maxbas Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
+#' @keywords internal
 .hbvMod_maxbas_weights <- function(maxbas) {
   # Eq. 6 of Seibert & Vis (2012): triangular routing weights
   # c(i) = int_{i-1}^{i} of (2/M - |u - M/2| * 4/M^2) du
@@ -212,6 +213,7 @@ hbv_hydrology <- morie_hbvMod
 #' @examples
 #' res <- .hbvMod_cheatsheet()
 #' res
+#' @keywords internal
 .hbvMod_cheatsheet <- function() {
   "hbvMod: HBV rainfall-runoff (snow/soil/2 GW boxes/MAXBAS routing)"
 }

@@ -17,3 +17,4 @@ One of two values, depending on the branch taken.
 \description{
 far tail never passes through 1 - P and lose its digits.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ The value of \code{lapply}.
 A step of the tmldta_native implementation. Called by \code{morie_tmle_data_adaptive}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

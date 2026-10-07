@@ -22,3 +22,4 @@ A list with \code{times}, \code{res}, \code{var}.
 Helper step. Called by \code{morie_scaled_schoenfeld}. See the file header for the
 source the module follows. source it follows.
 }
+\keyword{internal}

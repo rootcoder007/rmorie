@@ -10,6 +10,7 @@
 #' @param base Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .t4_jsd <- function(p, q, base) {
   lg <- log(base)
   s1 <- 0

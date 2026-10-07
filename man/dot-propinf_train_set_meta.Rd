@@ -57,3 +57,4 @@ meta <- .propinf_train_set_meta(sets, c(0, 1, 0, 1, 0, 1), 6L, 3L, 6L,
 round(vapply(sets, function(s)
   .propinf_deepsets_forward(meta, s)[[1]], numeric(1)), 3)
 }
+\keyword{internal}

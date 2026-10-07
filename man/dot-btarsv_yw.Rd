@@ -18,3 +18,4 @@ A list with \code{phi}, \code{v}.
 A step of the btarsv_native implementation. Called by \code{morie_btarsv}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

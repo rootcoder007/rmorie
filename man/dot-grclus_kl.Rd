@@ -30,3 +30,4 @@ A list with \code{parts}, \code{cut}.
 A step of the grclus_native implementation. Called by \code{.grclus_bisect}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

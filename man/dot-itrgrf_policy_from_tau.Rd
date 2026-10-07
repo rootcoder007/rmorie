@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .itrgrf_policy_from_tau(tau = 0.5)
 res
 }
+\keyword{internal}

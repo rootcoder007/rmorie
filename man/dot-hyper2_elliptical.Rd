@@ -23,3 +23,4 @@ proposal is an exact ellipse through the current point and a fresh
 prior draw, so the prior term cancels and only the likelihood enters
 the acceptance test. No rejection and no step size.
 }
+\keyword{internal}

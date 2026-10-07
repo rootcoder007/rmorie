@@ -15,6 +15,7 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' @param gamma The body requires: birl: gamma must be in [0, 1).
 #' @return A list with \code{nS}, \code{nA}.
 #' @export
+#' @keywords internal
 .mdp <- function(T, gamma) {
   if (length(T) == 0) stop("birl: the transition model is empty")
   nS <- length(T)
@@ -50,6 +51,7 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .solve(A = A, b = b)
 #' res
+#' @keywords internal
 .solve <- function(A, b) {
   n <- nrow(A)
   M <- cbind(A, b)
@@ -180,6 +182,7 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
+#' @keywords internal
 .birl_log_likelihood <- function(Q, observations, alpha = 1) {
   if (alpha <= 0) stop("birl: alpha must be positive")
   if (length(observations) == 0) stop("birl: no observations")
@@ -244,6 +247,7 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #' @examples
 #' res <- .rng(seed = 1L)
 #' res
+#' @keywords internal
 .rng <- function(seed) {
   st <- as.integer(seed)
   if (st <= 0) st <- 1L

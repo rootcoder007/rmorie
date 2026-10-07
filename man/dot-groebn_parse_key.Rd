@@ -18,3 +18,4 @@ Exponent keys
 \examples{
 .groebn_parse_key("2_1")
 }
+\keyword{internal}

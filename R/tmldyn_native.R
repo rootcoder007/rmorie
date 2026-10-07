@@ -34,6 +34,7 @@
 #' @examples
 #' res <- .tmldyn_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tmldyn_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), .tmldyn_EPS), 1 - .tmldyn_EPS)
   log(q / (1 - q))
@@ -52,6 +53,7 @@
 #' res <- .tmldyn_expit(z = y)
 #' res
 #' @export
+#' @keywords internal
 # vectorised: every call site hands a linear-predictor VECTOR in
 .tmldyn_expit <- function(z) {
   zc <- pmin(pmax(z, -700), 700)
@@ -68,6 +70,7 @@
 #' @param n Passed to \code{!=}.
 #' @return A list with \code{L0}, \code{L1}.
 #' @export
+#' @keywords internal
 .blocks <- function(covariate_history, n) {
   if (is.null(covariate_history))
     stop("tmldyn: covariate_history is required")
@@ -95,6 +98,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .project <- function(values, basis, n, ridge) {
   if (is.null(basis)) return(as.numeric(values))
   Z <- cbind(1, as.matrix(basis))
@@ -208,6 +212,7 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{q2}, \code{b}.
 #' @export
+#' @keywords internal
 .fit_q2 <- function(y, L0, A0, L1, A1, idx, ridge) {
   p0 <- ncol(L0)
   p1 <- ncol(L1)
@@ -239,6 +244,7 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{q1}, \code{b}.
 #' @export
+#' @keywords internal
 .fit_q1 <- function(pseudo, L0, A0, idx, ridge) {
   p0 <- ncol(L0)
   row_q1 <- function(a0, i) {
@@ -376,6 +382,7 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 #' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @keywords internal
 .fluctuate <- function(outcome, offset_logit, H, rows, iters = 100,
                        tol = 1e-12) {
   if (length(rows) == 0L ||
@@ -406,6 +413,7 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 #' @param n_folds Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .tmldyn_folds <- function(n, n_folds) {
   J <- max(2L, min(as.integer(n_folds), n))
   lapply(seq_len(J) - 1L, function(j) which(seq_len(n) %% J == j))
@@ -461,6 +469,7 @@ rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
 #' @param n Passed to \code{==}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .coerce_regime <- function(regime, n) {
   if (is.null(regime) || (is.character(regime) &&
       tolower(regime) %in% c("optimal", "v-optimal"))) return(NULL)
@@ -711,6 +720,7 @@ morie_tmledynamicregime <- morie_tmldyn
 #' @param tol Passed to \code{<=}. Defaults to \code{0.01}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .exceptional_law_share <- function(blips, tol = 0.01) {
   if (length(blips) == 0L) return(0)
   mean(abs(blips) <= tol)
@@ -726,6 +736,7 @@ morie_tmledynamicregime <- morie_tmldyn
 #' @param n_folds Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .folds <- function(n, n_folds) {
   J <- max(2, min(as.integer(n_folds), n))
   lapply(seq_len(J) - 1L, function(j) which(seq_len(n) %% J == j))
@@ -746,6 +757,7 @@ morie_tmledynamicregime <- morie_tmldyn
 #' @param penalty See Usage.
 #' @return A list with \code{g0}, \code{g1}, \code{info}.
 #' @export
+#' @keywords internal
 .intervention_mechanism <- function(L0, A0, L1, A1, trim, known,
                                     penalty = 0) {
   n <- length(A0)
@@ -798,6 +810,7 @@ morie_tmledynamicregime <- morie_tmldyn
 #' @param ridge Passed to \code{.fit_q2}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rule_value_seq <- function(ys, L0, A0, L1, A1, d0, d1, ridge) {
   f2 <- .fit_q2(ys, L0, A0, L1, A1, seq_along(ys), ridge)
   pseudo <- vapply(seq_along(ys), function(i)
@@ -819,6 +832,7 @@ morie_tmledynamicregime <- morie_tmldyn
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .sd(x = x)
 #' res
+#' @keywords internal
 .sd <- function(x) sqrt(mean((x - mean(x))^2))
 
 #' .tmldyn_lstsq
@@ -832,6 +846,7 @@ morie_tmledynamicregime <- morie_tmldyn
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A matrix, from \code{solve}.
 #' @export
+#' @keywords internal
 .tmldyn_lstsq <- function(X, yv, ridge = 1e-8) {
   Xm <- if (is.matrix(X)) X else do.call(rbind, X)
   p <- ncol(Xm)
@@ -855,6 +870,7 @@ morie_tmledynamicregime <- morie_tmldyn
 #' @return A list with \code{blip1}, \code{blip2}, \code{d0}, \code{d1}, \code{q2},
 #' \code{q1}, \code{coef_q2}, \code{coef_q1}, \code{pseudo}.
 #' @export
+#' @keywords internal
 .sequential_blips <- function(ys, L0, A0, L1, A1, V0, V1, ridge) {
   n <- length(ys)
   f2 <- .fit_q2(ys, L0, A0, L1, A1, seq_len(n), ridge)
@@ -896,6 +912,7 @@ morie_tmledynamicregime <- morie_tmldyn
 #' @examples
 #' res <- .tmldyn_qnorm(p = 0.5)
 #' res
+#' @keywords internal
 .tmldyn_qnorm <- function(p) qnorm(p, 0, 1)
 
 

@@ -21,3 +21,4 @@ A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

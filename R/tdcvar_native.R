@@ -55,6 +55,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tdcvar_vec(x = x)
 #' res
+#' @keywords internal
 .tdcvar_vec <- function(x) {
   as.numeric(x)
 }
@@ -72,6 +73,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tdcvar_mat(X = x)
 #' res
+#' @keywords internal
 .tdcvar_mat <- function(X) {
   if (is.null(X)) {
     return(matrix(0, nrow = 0, ncol = 0))
@@ -110,6 +112,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tdcvar_wls(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .tdcvar_wls <- function(X, y, w) {
   n <- nrow(X)
   p <- ncol(X)
@@ -140,6 +143,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tdcvar_logreg(X = X, y = y)
 #' res
+#' @keywords internal
 .tdcvar_logreg <- function(X, y, max_iter = 25L, tol = 1e-8) {
   n <- nrow(X)
   p <- ncol(X)
@@ -172,6 +176,7 @@
 #' @param beta A matrix; passed to \code{\%*\%}.
 #' @return The value of \code{pmin}.
 #' @export
+#' @keywords internal
 .tdcvar_logreg_pred <- function(X, beta) {
   eta <- as.numeric(X %*% beta)
   eta <- pmin(pmax(eta, -30), 30)
@@ -192,6 +197,7 @@
 #' @param trim Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{weights}, \code{per_time}.
 #' @export
+#' @keywords internal
 .tdcvar_ip_weights_history <- function(A_hist, L_hist, kind = "binary",
                                        stabilize = TRUE, trim = NULL) {
   K <- length(A_hist)

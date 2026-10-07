@@ -23,6 +23,7 @@
 #' @examples
 #' res <- .unif_stream(seed = 1L)
 #' res
+#' @keywords internal
 .unif_stream <- function(seed, block = 8192L) {
   # Same block-drawn uniform stream as the morie R arm and the Python
   # arm (Philox via .ghc_rng/.ghc_unif). State lives in an environment so
@@ -64,6 +65,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .logabsdet(a = A)
 #' res
+#' @keywords internal
 .logabsdet <- function(a) {
   n <- nrow(a)
   if (n == 0) return(0)
@@ -255,6 +257,7 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 #' @param scale Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .rw_within <- function(theta, uni, scale) {
   out <- numeric(length(theta))
   for (i in seq_along(theta)) {
@@ -619,6 +622,7 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' @param h_right Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .merge_height <- function(s_left, s_mid, s_right, h_left, h_right) {
   span <- as.numeric(s_right) - as.numeric(s_left)
   exp(((as.numeric(s_mid) - as.numeric(s_left)) * log(h_left) +
@@ -635,6 +639,7 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .log_k_prior_ratio <- function(lam, k) {
   log(lam) - log(k + 1)
 }

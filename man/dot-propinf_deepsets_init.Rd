@@ -45,3 +45,4 @@ m <- .propinf_deepsets_init(shapes, 8L, 4L, 8L, .propinf_rng(1L))
 length(m$psis)            # one entry per layer
 is.null(m$psis[[1]])      # the first layer has no incoming edge network
 }
+\keyword{internal}

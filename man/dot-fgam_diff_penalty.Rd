@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .fgam_diff_penalty(n = 3L)
 res
 }
+\keyword{internal}

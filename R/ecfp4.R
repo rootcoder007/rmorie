@@ -28,6 +28,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ecfp_mix(h = 0.5, v = x)
 #' res
+#' @keywords internal
 .ecfp_mix <- function(h, v) (h * .ecfp_mul + (v %% .ecfp_mod)) %% .ecfp_mod
 
 #' .ecfp_bonds
@@ -40,6 +41,7 @@
 #' @param adjacency Passed to \code{.t1_mat}.
 #' @return A list with \code{a}, \code{i}, \code{j}, \code{o}.
 #' @export
+#' @keywords internal
 .ecfp_bonds <- function(adjacency) {
   A <- .t1_mat(adjacency)
   a <- nrow(A)
@@ -70,6 +72,7 @@
 #' @param isodelta A vector; indexed elementwise.
 #' @return The value of \code{inv}, as built in the body.
 #' @export
+#' @keywords internal
 .ecfp_conninv <- function(B, atomnum, numhs, charge, inring, isodelta) {
   a <- B$a
   deg <- integer(a)
@@ -101,6 +104,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ecfp_envkey(v = x)
 #' res
+#' @keywords internal
 .ecfp_envkey <- function(v) {
   if (!length(v)) return("")
   paste0(sprintf("%04d", sort(as.integer(v), method = "radix")), collapse = "")
@@ -119,6 +123,7 @@
 #' @param use_bond_order A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{bits}, \code{count}, \code{ident}.
 #' @export
+#' @keywords internal
 .ecfp_morgan <- function(B, invariants, radius, nbits, use_bond_order = TRUE) {
   a <- B$a
   nb <- length(B$i)
@@ -209,6 +214,7 @@
 #' @param default A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .ecfp_percol <- function(x, a, default) {
   if (is.null(x)) return(rep(default, a))
   v <- as.numeric(.t1_vec(x))

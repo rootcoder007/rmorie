@@ -25,6 +25,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .labels(v = x, name = txt)
 #' res
+#' @keywords internal
 .labels <- function(v, name) {
   out <- as.character(v)
   if (length(out) == 0L) stop(paste0("randIE: ", name, " is empty"))

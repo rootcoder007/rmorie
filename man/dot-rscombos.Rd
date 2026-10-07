@@ -25,3 +25,4 @@ See the file header for the source the module follows.
 res <- .rscombos(n = 3L, k = 3L)
 res
 }
+\keyword{internal}

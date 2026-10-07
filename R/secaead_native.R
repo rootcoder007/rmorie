@@ -59,6 +59,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .secaead_as_bytes(x = x)
 #' res
+#' @keywords internal
 .secaead_as_bytes <- function(x) {
   # Return an integer vector of byte values (0..255).
   if (is.raw(x)) {
@@ -82,6 +83,7 @@
 #' @param bs Passed to \code{.secaead_as_bytes}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .secaead_hexlify <- function(bs) {
   paste(sprintf("%02x", .secaead_as_bytes(bs)), collapse = "")
 }
@@ -101,6 +103,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .secaead_constant_time_equal(a = A, b = b)
 #' res
+#' @keywords internal
 .secaead_constant_time_equal <- function(a, b) {
   x <- .secaead_as_bytes(a)
   y <- .secaead_as_bytes(b)
@@ -142,6 +145,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .secaead_xor32(a = A, b = b)
 #' res
+#' @keywords internal
 .secaead_xor32 <- function(a, b) {
   ah <- a %/% 65536
   al <- a %% 65536
@@ -162,6 +166,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .secaead_rotl(x = x, n = 3L)
 #' res
+#' @keywords internal
 .secaead_rotl <- function(x, n) {
   # left-rotate a 32-bit word by n (n in {7, 8, 12, 16}); x*2^n stays
   # below 2^48 for these n, well within double precision
@@ -181,6 +186,7 @@
 #' @param d See Usage.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .secaead_qr <- function(s, a, b, c, d) {
   s[a] <- (s[a] + s[b]) %% .secaead_MASK32
   s[d] <- .secaead_rotl(.secaead_xor32(s[d], s[a]), 16)
@@ -202,6 +208,7 @@
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .secaead_words_le <- function(b) {
   # b is an integer byte vector whose length is a multiple of 4
   n <- length(b)
@@ -223,6 +230,7 @@
 #' @param words A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .secaead_le_bytes <- function(words) {
   out <- integer(length(words) * 4L)
   for (i in seq_along(words)) {
@@ -338,6 +346,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @param bs See Usage.
 #' @return The value of \code{limbs}, as built in the body.
 #' @export
+#' @keywords internal
 .secaead_limbs_from_bytes <- function(bs) {
   # bs: integer bytes LSB first -> base 2^26 limbs
   limbs <- numeric(0)
@@ -368,6 +377,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @param nbytes A count; the body uses it as \code{integer(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .secaead_bytes_from_limbs <- function(limbs, nbytes) {
   out <- integer(nbytes)
   cur <- 0
@@ -403,6 +413,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @param limbs See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .secaead_p_carry <- function(limbs) {
   # normalize base 2^26 in place; returns limbs each < 2^26 plus a
   # possible extra high limb
@@ -435,6 +446,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .secaead_p_add(a = A, b = b)
 #' res
+#' @keywords internal
 .secaead_p_add <- function(a, b) {
   n <- max(length(a), length(b))
   a <- c(a, rep(0, n - length(a)))
@@ -449,6 +461,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @param res A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .secaead_p_reduce <- function(res) {
   # fold limbs at index >= 6 (weight >= 2^130) back with factor 5,
   # since 2^130 == 5 (mod 2^130 - 5), then carry-normalize; repeat
@@ -476,6 +489,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @param acc A vector; indexed elementwise.
 #' @return The value of \code{acc}, as built in the body.
 #' @export
+#' @keywords internal
 .secaead_p_final <- function(acc) {
   # reduce to the canonical residue in [0, 2^130 - 5): one conditional
   # subtraction of P suffices because acc < 2^130 < 2P
@@ -512,6 +526,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .secaead_p_mulmod(a = A, b = b)
 #' res
+#' @keywords internal
 .secaead_p_mulmod <- function(a, b) {
   la <- length(a)
   lb <- length(b)
@@ -544,6 +559,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @examples
 #' res <- .secaead_clamp_key(k = 3L)
 #' res
+#' @keywords internal
 .secaead_clamp_key <- function(k) {
   # k: 32 integer bytes; clamp the low 16 (r) per RFC 8439 Sec 2.5
   r <- k[1:16]
@@ -642,6 +658,7 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 #' @examples
 #' res <- .secaead_pad16(b = 3L)
 #' res
+#' @keywords internal
 .secaead_pad16 <- function(b) {
   rep(0L, (16L - length(b) %% 16L) %% 16L)
 }
@@ -658,6 +675,7 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 #' @examples
 #' res <- .secaead_len8(n = 3L)
 #' res
+#' @keywords internal
 .secaead_len8 <- function(n) {
   out <- integer(8)
   v <- n
@@ -679,6 +697,7 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 #' @param ciphertext Passed to \code{.secaead_as_bytes}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .secaead_mac_data <- function(aad, ciphertext) {
   a <- .secaead_as_bytes(aad)
   c <- .secaead_as_bytes(ciphertext)

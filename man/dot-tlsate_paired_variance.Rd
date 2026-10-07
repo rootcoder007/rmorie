@@ -18,3 +18,4 @@ A list with \code{se}, \code{n_pairs}, \code{note}.
 A step of the tlsate_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ it follows.
 res <- .rfkprimes(k = 3L)
 res
 }
+\keyword{internal}

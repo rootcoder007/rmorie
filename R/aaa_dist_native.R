@@ -25,6 +25,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_fsum(x = x)
 #' res
+#' @keywords internal
 .morie_fsum <- function(x) {
   # Neumaier compensated summation: the R-side counterpart of Python's
   # math.fsum (Shewchuk).  On ARM64 R's long double IS double, so base
@@ -48,6 +49,7 @@
 #' @param x Numeric; passed to \code{log}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_gammainc_q <- function(a, x) {
   # regularized UPPER incomplete gamma Q(a, x), computed directly so the
   # far tail never passes through 1 - P and lose its digits.
@@ -90,6 +92,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_erfc(x = x)
 #' res
+#' @keywords internal
 .morie_erfc <- function(x) {
   # exact identity erfc(v) = Q(1/2, v^2): no transcribed continued
   # fraction of its own, and the tail comes straight from the CF branch
@@ -115,6 +118,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_erf(x = x)
 #' res
+#' @keywords internal
 .morie_erf <- function(x) {
   vapply(x, function(v) {
     if (v < 0) {
@@ -132,6 +136,7 @@
 #' @param x Numeric; passed to \code{log}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_gammainc_p <- function(a, x) {
   # regularized lower incomplete gamma P(a, x): series for x < a + 1,
   # Lentz continued fraction for the complement otherwise.
@@ -181,6 +186,7 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{h}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_betacf <- function(a, b, x) {
   tiny <- 1e-300
   qab <- a + b
@@ -224,6 +230,7 @@
 #' @param x Numeric; passed to \code{log}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_betainc <- function(a, b, x) {
   # regularized incomplete beta I_x(a, b)
   if (x <= 0) {
@@ -255,6 +262,7 @@
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-13}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_bisect_q <- function(cdf, p, lo, hi, tol = 1e-13) {
   if (p <= 0) {
     return(lo)

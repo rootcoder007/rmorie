@@ -22,3 +22,4 @@ back as a bare day count while nanoparquet handed the caller a Date,
 which is a silent factor-of-86400 trap for anyone swapping the
 engines.
 }
+\keyword{internal}

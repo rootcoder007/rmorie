@@ -9,6 +9,7 @@
 #' @param cost A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .detr_hungarian <- function(cost) {
   n <- nrow(cost)
   m <- ncol(cost)

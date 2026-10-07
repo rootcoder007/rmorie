@@ -43,3 +43,4 @@ t <- .prsLL_ll1_table(g)
 res <- .prsLL_parse_rd(g, t$table, c("id", "*", "id", "$"), "E", 0L)
 .prsLL_linearise(res[[1]])
 }
+\keyword{internal}

@@ -20,3 +20,4 @@ A list with \code{M}, \code{S}, \code{m0}, \code{H}.
 stratum arguments; S is all ones when S_h is NULL, which turns Neyman
 allocation into proportional allocation.
 }
+\keyword{internal}

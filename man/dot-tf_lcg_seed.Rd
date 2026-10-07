@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 res <- .tf_lcg_seed(seed = 1L)
 res
 }
+\keyword{internal}

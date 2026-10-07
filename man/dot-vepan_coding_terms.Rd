@@ -23,3 +23,4 @@ A list with \code{terms}, \code{info}.
 \description{
 list(terms, info).
 }
+\keyword{internal}

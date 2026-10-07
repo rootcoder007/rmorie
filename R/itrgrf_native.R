@@ -60,6 +60,7 @@
 #' @examples
 #' res <- .itrgrf_policy_from_tau(tau = 0.5)
 #' res
+#' @keywords internal
 .itrgrf_policy_from_tau <- function(tau, cost = 0.0) {
   ifelse(as.numeric(tau) > as.numeric(cost), 1.0, 0.0)
 }
@@ -77,6 +78,7 @@
 #' @param d A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .itrgrf_dr_scores <- function(y, W, mu1, mu0, e, d) {
   n <- length(y)
   eps <- 1e-12
@@ -111,6 +113,7 @@
 #' @param d Passed to \code{.itrgrf_dr_scores}.
 #' @return A list with \code{value}, \code{se}, \code{scores}.
 #' @export
+#' @keywords internal
 .itrgrf_rule_value <- function(y, W, mu1, mu0, e, d) {
   g <- .itrgrf_dr_scores(y, W, mu1, mu0, e, d)
   n <- length(g)
@@ -135,6 +138,7 @@
 #' @param seed Passed to \code{grow_forest}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .itrgrf_fit_arm <- function(X, y, W, arm, rows, at_rows, n_trees,
                             min_leaf, seed) {
   idx <- rows[W[rows] == arm]
@@ -287,6 +291,7 @@ morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
 #' @examples
 #' res <- .itrgrf_cheatsheet()
 #' res
+#' @keywords internal
 .itrgrf_cheatsheet <- function() {
   paste0(
     "itrgrf: d(x) = 1{tau(x) > cost}; value it with the doubly ro",

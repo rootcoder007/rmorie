@@ -15,3 +15,4 @@ A matrix, from \code{matrix}.
 \description{
 matrix or data frame, or a flat vector of even length in x, y order.
 }
+\keyword{internal}

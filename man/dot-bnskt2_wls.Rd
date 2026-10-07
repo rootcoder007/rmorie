@@ -20,3 +20,4 @@ A list with \code{coef}.
 A step of the bnskt2_native implementation. Called by \code{.side_fit}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

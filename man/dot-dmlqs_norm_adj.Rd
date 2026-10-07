@@ -16,3 +16,4 @@ Nothing; this branch always raises.
 each value a sorted unique integer vector of neighbours (with v
 itself excluded -- mirrors Python \code{set(adj[v]) - {v}}).
 }
+\keyword{internal}

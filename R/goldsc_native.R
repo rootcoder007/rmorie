@@ -84,6 +84,7 @@
 #' @param p Passed to \code{switch}.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 .goldsc_outer <- function(p)
   switch(p, "4-8" = c(4, 8), "6-12" = c(6, 12), "split_2-4" = c(4, 8),
          "split_1-2" = c(4, 8), NULL)
@@ -95,6 +96,7 @@
 #' @param p Passed to \code{switch}.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 .goldsc_inner <- function(p)
   switch(p, "split_2-4" = c(2, 4), "split_1-2" = c(1, 2), NULL)
 
@@ -120,6 +122,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .goldsc_ipow(x = x, k = 3L)
 #' res
+#' @keywords internal
 .goldsc_ipow <- function(x, k) {
   p <- 1
   k <- as.integer(k)
@@ -189,6 +192,7 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 #' @param potential Passed to \code{.goldsc_inner}.
 #' @return The value of \code{morie_goldsc_lj}.
 #' @export
+#' @keywords internal
 .goldsc_pair <- function(r, r0, eps, potential) {
   if (!(potential %in% .GOLDSC_POTENTIALS))
     stop("potential must be one of ",
@@ -210,6 +214,7 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 #' @param what Passed to \code{stop}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .goldsc_lookup <- function(table, key, what) {
   for (kv in table) if (kv[[1]] == key) return(as.numeric(kv[[2]]))
   stop("no ", what, " for atom type ", key)
@@ -315,6 +320,7 @@ morie_goldsc_torsion <- function(torsions) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .goldsc_dist(a = A, b = b)
 #' res
+#' @keywords internal
 .goldsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' The GoldScore fitness of a pose

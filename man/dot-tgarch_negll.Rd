@@ -20,3 +20,4 @@ A numeric value.
 base-R fallback. Extracted from the morie_tgarch_model() optimiser
 closure so the parameter-domain guard is directly unit-testable.
 }
+\keyword{internal}

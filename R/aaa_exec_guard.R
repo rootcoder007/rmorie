@@ -29,6 +29,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .morie_env_true(name = txt)
 #' res
+#' @keywords internal
 .morie_env_true <- function(name) {
   val <- Sys.getenv(name, unset = "")
   tolower(trimws(val)) %in% c("1", "true", "yes", "on")
@@ -46,6 +47,7 @@
 #' @examples
 #' res <- .morie_exec_disabled()
 #' res
+#' @keywords internal
 .morie_exec_disabled <- function() {
   .morie_env_true("MORIE_NO_EXEC")
 }
@@ -63,6 +65,7 @@
 #' @examples
 #' res <- .morie_ensure_exec_allowed()
 #' res
+#' @keywords internal
 .morie_ensure_exec_allowed <- function(feature = "dynamic execution") {
   if (.morie_exec_disabled()) {
     stop(sprintf(
@@ -95,6 +98,7 @@
 #' @param feature Passed to \code{sprintf}. Defaults to \code{"reading an .rds file"}.
 #' @return The value of \code{readRDS}.
 #' @export
+#' @keywords internal
 .morie_safe_readRDS <- function(path, feature = "reading an .rds file") {
   if (.morie_exec_disabled()) {
     stop(sprintf(
@@ -119,6 +123,7 @@
 #' @param ref A vector; its length is taken.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .morie_valid_git_ref <- function(ref) {
   length(ref) == 1L && grepl("^[A-Za-z0-9][A-Za-z0-9._/-]*$", ref)
 }
@@ -134,6 +139,7 @@
 #' @examples
 #' res <- .morie_knob_status()
 #' res
+#' @keywords internal
 .morie_knob_status <- function() {
   knobs <- c(
     MORIE_NO_EXEC = paste(

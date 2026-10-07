@@ -19,3 +19,4 @@ A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at},
 \code{morie_cmlmer_compressed_lmm}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -19,3 +19,4 @@ A step of the whtnse implementation. Called by \code{morie_portmanteau_hosking}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

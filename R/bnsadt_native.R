@@ -93,6 +93,7 @@
 #' @param family See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .bnsadt_nfree <- function(family) {
   g <- .BNSADT_FAMILIES[[family]]$groups
   g <- g[g >= 0L]
@@ -110,6 +111,7 @@
 #' @param params A vector; indexed elementwise.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .bnsadt_betas <- function(family, params) {
   g <- .BNSADT_FAMILIES[[family]]$groups
   vapply(g, function(k) if (k < 0L) 1 else params[k + 1L], numeric(1))
@@ -148,6 +150,7 @@ morie_bnsadt_p <- function(z, family = "symmetric_step", params = numeric(0)) {
 #' @param params Passed to \code{.bnsadt_betas}.
 #' @return The value of \code{.w3_csum}.
 #' @export
+#' @keywords internal
 .bnsadt_expected_p <- function(sigma, mu, tau, family, params) {
   cuts <- .BNSADT_FAMILIES[[family]]$cuts
   betas <- .bnsadt_betas(family, params)
@@ -339,6 +342,7 @@ morie_bnsadt_fit <- function(x, sigma, family = "symmetric_step",
 #' @param params Passed to \code{.bnsadt_betas}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .bnsadt_pub_cdf <- function(x, theta, sigma, family, params) {
   cuts <- .BNSADT_FAMILIES[[family]]$cuts
   betas <- .bnsadt_betas(family, params)

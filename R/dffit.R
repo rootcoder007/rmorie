@@ -19,6 +19,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .bkw_influence(y = y, X = x)
 #' res
+#' @keywords internal
 .bkw_influence <- function(y, X, intercept = TRUE) {
   y <- .s03vec(y)
   Xm <- .s03mat(X)
@@ -62,6 +63,7 @@
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .bkw_sdel <- function(sse, e_i, h_i, n, p) {
   num <- sse - e_i * e_i / (1 - h_i)
   sqrt(max(num, 0) / (n - p - 1))

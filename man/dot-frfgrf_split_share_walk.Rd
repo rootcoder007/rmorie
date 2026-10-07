@@ -19,3 +19,4 @@ The value of \code{counts}, as built in the body.
 A step of the frfgrf_native implementation. Called by \code{.frfgrf_split_share}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

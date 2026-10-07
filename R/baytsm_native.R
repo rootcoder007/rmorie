@@ -97,6 +97,7 @@ morie_baytsm_dlm_local_level <- function(y, V = 1.0, W = 0.1, m0 = 0.0,
 #' @examples
 #' res <- .baytsm_cheatsheet()
 #' res
+#' @keywords internal
 .baytsm_cheatsheet <- function() {
   paste0("baytsm: morie_baytsm_dlm_local_level(y, V, W, m0, C0) -> filtered ",
          "and smoothed states of the first-order DLM (West & Harrison 1997)")

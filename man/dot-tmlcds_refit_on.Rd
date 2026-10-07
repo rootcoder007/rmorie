@@ -31,3 +31,4 @@ One of two values, depending on the branch taken.
 \description{
 tr and fold hold 1-based row indices.
 }
+\keyword{internal}

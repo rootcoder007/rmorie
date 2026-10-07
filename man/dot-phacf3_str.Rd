@@ -20,3 +20,4 @@ done on the numbers themselves.
 res <- .phacf3_str(k = 3L)
 res
 }
+\keyword{internal}

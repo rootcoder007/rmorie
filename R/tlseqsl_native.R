@@ -58,6 +58,7 @@
 #' @param p Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tlseqsl_loss <- function(kind, y, p) {
   if (kind == "squared") {
     return((y - p)^2)

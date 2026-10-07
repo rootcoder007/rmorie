@@ -18,3 +18,4 @@ See the file header for the source the module follows.
 res <- .morie_exec_disabled()
 res
 }
+\keyword{internal}

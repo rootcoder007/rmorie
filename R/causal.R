@@ -64,6 +64,7 @@ NULL
 #' @param covariates Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{cbind}.
 #' @export
+#' @keywords internal
 .mor_ps_design <- function(data, covariates) {
   # numeric covariates as they are; others as treatment-coded dummies over
   # their sorted levels (the first is the reference), as model.matrix --
@@ -94,6 +95,7 @@ NULL
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .mor_ps_standardize(X = X)
 #' res
+#' @keywords internal
 .mor_ps_standardize <- function(X) {
   n <- nrow(X)
   for (j in seq.int(2L, ncol(X))) {
@@ -123,6 +125,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .mor_ps_irls(X = X, y = y)
 #' res
+#' @keywords internal
 .mor_ps_irls <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
   beta <- .mor_ps_irls_beta(X, y, lam = lam, max_iter = max_iter, tol = tol)
   eta <- pmin(pmax(as.numeric(X %*% beta), -30), 30)
@@ -147,6 +150,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .mor_ps_irls_beta(X = X, y = y)
 #' res
+#' @keywords internal
 .mor_ps_irls_beta <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
   # aliased columns (those qr() pivots out) get a zero coefficient, as
   # glm's NA, so collinear covariates do not make the fit singular
@@ -331,6 +335,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mor_trim_weights(w = x)
 #' res
+#' @keywords internal
 .mor_trim_weights <- function(w, weight_trim = NULL, side = "upper") {
   if (is.null(weight_trim)) return(w)
   if (!(side %in% c("upper", "both")))
@@ -375,6 +380,7 @@ NULL
 #' @param trim_type Passed to \code{identical}. Defaults to \code{"value"}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .mor_ps_keep <- function(ps, trim = c(0.1, 0.9), trim_type = "value") {
   if (!identical(trim_type, "discard") || is.null(trim))
     return(rep(TRUE, length(ps)))
@@ -399,6 +405,7 @@ NULL
 #' to \code{"value"}.
 #' @return The value of \code{pmin}.
 #' @export
+#' @keywords internal
 .mor_trim_ps <- function(ps, trim = c(0.01, 0.99), trim_type = "value") {
   ps <- as.numeric(ps)
   if (!(trim_type %in% c("value", "quantile", "discard")))
@@ -724,6 +731,7 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 #' @param outcome_model Compared against \code{"logistic"}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .mor_om_fit_predict <- function(X, y, rows, Xpred, outcome_model) {
   Xs <- X[rows, , drop = FALSE]
   ys <- y[rows]
@@ -1748,6 +1756,7 @@ morie_causal_robust_se <- function(model,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .causal_hajek_weighted_mean(y = y, weights = x)
 #' res
+#' @keywords internal
 .causal_hajek_weighted_mean <- function(y, weights) {
   y <- as.numeric(y)
   w <- as.numeric(weights)

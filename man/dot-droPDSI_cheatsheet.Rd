@@ -18,3 +18,4 @@ the source it follows.
 res <- .droPDSI_cheatsheet()
 res
 }
+\keyword{internal}

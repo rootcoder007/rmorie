@@ -49,6 +49,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .wsm_spread(x = x)
 #' res
+#' @keywords internal
 .wsm_spread <- function(x) {
   xv <- as.numeric(x)
   if (length(xv) < 2L) {
@@ -84,6 +85,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .wsm_bandwidth(x = x)
 #' res
+#' @keywords internal
 .wsm_bandwidth <- function(x, rule = "3.31") {
   xv <- as.numeric(x)
   n <- length(xv)
@@ -117,6 +119,7 @@
 #' @param seed Passed to \code{set.seed}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .wsm_boot_reps <- function(data, statistic, B, seed) {
   d <- if (is.matrix(data)) data else matrix(as.numeric(data), ncol = 1L)
   n <- nrow(d)

@@ -21,3 +21,4 @@ A numeric value.
 \description{
 with c > 0 the curve never reaches zero.
 }
+\keyword{internal}

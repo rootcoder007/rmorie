@@ -28,6 +28,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03vec(x = x)
 #' res
+#' @keywords internal
 .s03vec <- function(x) {
   if (is.null(x)) {
     return(numeric(0))
@@ -48,6 +49,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03mat(x = x)
 #' res
+#' @keywords internal
 .s03mat <- function(x) {
   if (is.null(x)) {
     return(matrix(numeric(0), 0, 0))
@@ -72,6 +74,7 @@
 #' @param B A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .s03matmul <- function(A, B) {
   n <- nrow(A)
   k <- nrow(B)
@@ -102,6 +105,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .s03matvec(A = A, v = b)
 #' res
+#' @keywords internal
 .s03matvec <- function(A, v) {
   n <- nrow(A)
   out <- numeric(n)
@@ -126,6 +130,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .s03crossprod(A = A)
 #' res
+#' @keywords internal
 .s03crossprod <- function(A) .s03matmul(t(A), A)
 
 #' .s03chol
@@ -141,6 +146,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .s03chol(A = A)
 #' res
+#' @keywords internal
 .s03chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0, n, n)
@@ -192,6 +198,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .s03cholsolve(A = A, b = b)
 #' res
+#' @keywords internal
 .s03cholsolve <- function(A, b) {
   n <- nrow(A)
   L <- .s03chol(A)
@@ -226,6 +233,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .s03ridgesolve(A = A, b = b)
 #' res
+#' @keywords internal
 .s03ridgesolve <- function(A, b, ridge = 1e-10) {
   n <- nrow(A)
   M <- A
@@ -249,6 +257,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s03lstsq(X = X, y = y)
 #' res
+#' @keywords internal
 .s03lstsq <- function(X, y, ridge = 1e-10) {
   XtX <- .s03crossprod(X)
   Xty <- .s03matvec(t(X), y)
@@ -272,6 +281,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .s03jacobi(A = A)
 #' res
+#' @keywords internal
 .s03jacobi <- function(A, sweeps = 60L) {
   n <- nrow(A)
   M <- matrix(as.numeric(A), n, n)
@@ -333,6 +343,7 @@
 #' @param z Numeric; passed to \code{exp}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .s03sigmoid <- function(z) {
   if (z >= 0) {
     1 / (1 + exp(-z))
@@ -356,6 +367,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s03gelu(z = y)
 #' res
+#' @keywords internal
 .s03gelu <- function(z) z * pnorm(z)
 
 # Swish_beta(x) = x sigma(beta x) (Ramachandran et al. 2017).
@@ -369,6 +381,7 @@
 #' @param beta Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .s03swish <- function(z, beta = 1) z * .s03sigmoid(beta * z)
 
 #' .s03relu
@@ -379,6 +392,7 @@
 #' @param z Passed to \code{>}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .s03relu <- function(z) if (z > 0) z else 0
 
 #' .s03softmax
@@ -394,6 +408,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03softmax(v = x)
 #' res
+#' @keywords internal
 .s03softmax <- function(v) {
   if (length(v) == 0L) {
     return(numeric(0))
@@ -418,6 +433,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03logsumexp(v = x)
 #' res
+#' @keywords internal
 .s03logsumexp <- function(v) {
   if (length(v) == 0L) {
     return(-Inf)
@@ -444,6 +460,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03mean(v = x)
 #' res
+#' @keywords internal
 .s03mean <- function(v) {
   n <- length(v)
   if (n == 0L) {
@@ -468,6 +485,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03var(v = x)
 #' res
+#' @keywords internal
 .s03var <- function(v, ddof = 1L) {
   n <- length(v)
   if (n - ddof <= 0L) {
@@ -493,6 +511,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03sd(v = x)
 #' res
+#' @keywords internal
 .s03sd <- function(v, ddof = 1L) sqrt(.s03var(v, ddof))
 
 #' .s03median
@@ -508,6 +527,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03median(v = x)
 #' res
+#' @keywords internal
 .s03median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -531,6 +551,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03mad(v = x)
 #' res
+#' @keywords internal
 .s03mad <- function(v, constant = 1.4826) {
   m <- .s03median(v)
   constant * .s03median(abs(v - m))
@@ -551,6 +572,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03quantile7(v = x, p = 0.5)
 #' res
+#' @keywords internal
 .s03quantile7 <- function(v, p) {
   s <- sort(v)
   n <- length(s)
@@ -579,6 +601,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03rank(v = x)
 #' res
+#' @keywords internal
 .s03rank <- function(v) {
   n <- length(v)
   ord <- order(v, seq_len(n))
@@ -609,6 +632,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s03corr(x = x, y = y)
 #' res
+#' @keywords internal
 .s03corr <- function(x, y) {
   n <- length(x)
   if (n < 2L) {
@@ -641,6 +665,7 @@
 #' @param base Numeric; combined arithmetically in the body. Defaults to \code{2L}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @keywords internal
 .s03vdc <- function(i, base = 2L) {
   f <- 1
   r <- 0
@@ -665,6 +690,7 @@
 #' @examples
 #' res <- .s03unif(n = 3L)
 #' res
+#' @keywords internal
 .s03unif <- function(n, base = 2L) vapply(seq_len(n) - 1L, .s03vdc, 0, base = base)
 
 # R's qnorm IS Wichura AS 241, the same algorithm the Python arm codes.
@@ -680,6 +706,7 @@
 #' @examples
 #' res <- .s03qnorm(p = 0.5)
 #' res
+#' @keywords internal
 .s03qnorm <- function(p) qnorm(p)
 
 #' .s03pnorm
@@ -695,6 +722,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s03pnorm(z = y)
 #' res
+#' @keywords internal
 .s03pnorm <- function(z) pnorm(z)
 
 #' .s03normdraws
@@ -710,6 +738,7 @@
 #' @examples
 #' res <- .s03normdraws(n = 3L)
 #' res
+#' @keywords internal
 .s03normdraws <- function(n, base = 2L) qnorm(.s03unif(n, base))
 
 #' .s03lgamma
@@ -725,6 +754,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03lgamma(x = x)
 #' res
+#' @keywords internal
 .s03lgamma <- function(x) lgamma(x)
 
 # Same recurrence + asymptotic series as the Python arm, so the two agree
@@ -742,6 +772,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03digamma(x = x)
 #' res
+#' @keywords internal
 .s03digamma <- function(x) {
   # Vectorised: the recurrence below is scalar (while (x < 6) on a vector
   # is an error in modern R), and this helper is SHARED, so every caller
@@ -793,6 +824,7 @@
 #' \code{160L}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .s03besselk <- function(nu, x, terms = 160L) {
   if (x <= 0) {
     return(Inf)
@@ -836,6 +868,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s03logit(X = X, y = y)
 #' res
+#' @keywords internal
 .s03logit <- function(X, y, iters = 60L, ridge = 1e-10, tol = 1e-13) {
   n <- nrow(X)
   p <- ncol(X)
@@ -878,6 +911,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03design(X = x, n = 3L)
 #' res
+#' @keywords internal
 .s03design <- function(X, n) {
   if (is.null(X)) {
     return(matrix(1, n, 1))
@@ -906,6 +940,7 @@
 #' @return A list with \code{tau}, \code{inf}, \code{se}, \code{pi}, \code{mu0},
 #' \code{w1}, \code{w0}, \code{gamma}, \code{beta0}.
 #' @export
+#' @keywords internal
 .s03drdid <- function(dy, D, X = NULL, weights = NULL) {
   dyv <- .s03vec(dy)
   d <- .s03vec(D)
@@ -956,6 +991,7 @@
 #' @param i Passed to \code{.s03vdc}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .s03mammen <- function(i) {
   r5 <- sqrt(5)
   p <- (r5 + 1) / (2 * r5)
@@ -994,6 +1030,7 @@
 #'   res <- .s03tmle(y = y, D = g)
 #'   res
 #' }
+#' @keywords internal
 .s03tmle <- function(y, D, X = NULL, trim = 0, link = "logit") {
   yv <- .s03vec(y)
   d <- .s03vec(D)
@@ -1101,6 +1138,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s03json_toJSON(x = x)
 #' res
+#' @keywords internal
 .s03json_toJSON <- function(x, auto_unbox = TRUE, digits = NULL,
                             pretty = FALSE, ...) {
   # Defaults for na/null only when the caller did not set them -- passing
@@ -1126,6 +1164,7 @@
 #' @param indent Passed to \code{morie_jsonlt_prettify}. Defaults to \code{2L}.
 #' @return The value of \code{morie_jsonlt_prettify}.
 #' @export
+#' @keywords internal
 .s03json_pretty <- function(txt, indent = 2L) {
   morie_jsonlt_prettify(txt, indent)
 }
@@ -1140,6 +1179,7 @@
 #' @param ... Passed through.
 #' @return The value of \code{morie_jsonlt_from_json}.
 #' @export
+#' @keywords internal
 .s03json_fromJSON <- function(txt, ...) {
   # jsonlite-compatible defaults (simplifyVector/DataFrame/Matrix = TRUE)
   # and every caller-supplied option honoured. The previous shim dropped
@@ -1161,6 +1201,7 @@
 #' @param ... Passed through.
 #' @return Invisibly,the value of \code{path}, as built in the body.
 #' @export
+#' @keywords internal
 .s03json_write <- function(x, path, auto_unbox = TRUE, digits = NULL,
                            pretty = FALSE, ...) {
   writeLines(.s03json_toJSON(x, auto_unbox, digits, pretty), path)
@@ -1177,6 +1218,7 @@
 #' @param ... Passed through.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .s03json_stream_in <- function(con, ...) {
   lines <- readLines(con, warn = FALSE)
   lines <- lines[nzchar(trimws(lines))]

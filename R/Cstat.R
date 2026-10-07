@@ -80,6 +80,7 @@ Cstat <- function(time, event, risk_score, method = "harrell") {
 #' @return A list with \code{c_statistic}, \code{se}, \code{ci_lower}, \code{ci_upper},
 #' \code{concordant}, \code{discordant}, \code{tied}, \code{comparable}.
 #' @export
+#' @keywords internal
 .cstat_uno <- function(time, event, risk_score) {
   n <- length(time)
   cen_event <- as.numeric(event == 0)

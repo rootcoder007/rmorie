@@ -19,3 +19,4 @@ A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfK
 \code{PdfMean} and 3 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

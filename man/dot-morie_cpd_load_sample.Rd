@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 res <- .morie_cpd_load_sample()
 res
 }
+\keyword{internal}

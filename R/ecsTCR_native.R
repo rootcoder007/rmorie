@@ -70,6 +70,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ecstcr_csum(v = x)
 #' res
+#' @keywords internal
 .ecstcr_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -94,6 +95,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ecstcr_mean(v = x)
 #' res
+#' @keywords internal
 .ecstcr_mean <- function(v)
   if (length(v)) .ecstcr_csum(v) / length(v) else NA_real_
 
@@ -112,6 +114,7 @@
 #' @param CD Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .ecstcr_deriv <- function(T, TD, F, lam, gam, eps, C, CD)
   c((F - lam * T - eps * gam * (T - TD)) / C, gam * (T - TD) / CD)
 
@@ -131,6 +134,7 @@
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .ecstcr_rk4 <- function(T, TD, F, lam, gam, eps, C, CD, h) {
   k1 <- .ecstcr_deriv(T, TD, F, lam, gam, eps, C, CD)
   k2 <- .ecstcr_deriv(T + 0.5 * h * k1[1], TD + 0.5 * h * k1[2], F, lam,
@@ -162,6 +166,7 @@
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .ecstcr_euler <- function(T, TD, F, lam, gam, eps, C, CD, h) {
   d <- .ecstcr_deriv(T, TD, F, lam, gam, eps, C, CD)
   c(T + h * d[1], TD + h * d[2])
@@ -186,6 +191,7 @@
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .ecstcr_analytic <- function(T, TD, F, lam, gam, eps, C, CD, h) {
   if (gam == 0) {
     # The one-layer model is not a degenerate case to be nursed through
@@ -315,6 +321,7 @@ morie_ecsTCR_co2_forcing <- function(ratio, f2x = .ECSTCR_F2X)
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .ecstcr_ols(x = x, y = y)
 #' res
+#' @keywords internal
 .ecstcr_ols <- function(x, y) {
   mx <- .ecstcr_mean(x)
   my <- .ecstcr_mean(y)

@@ -84,6 +84,7 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
 #' @param cols A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .t2_alpha_on <- function(X, cols) {
   k <- length(cols)
   if (k < 2L) stop("alpha needs at least two items")
@@ -114,6 +115,7 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t2_table(X = x)
 #' res
+#' @keywords internal
 .t2_table <- function(X) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -201,6 +203,7 @@ CttAlphaMax <- function(X) {
 #' @examples
 #' res <- .t2_qn_finite_c(n = 3L)
 #' res
+#' @keywords internal
 .t2_qn_finite_c <- function(n) {
   inner <- if (n %% 2L) {
     1.60188 + (-2.1284 - 5.172 / n) / n
@@ -339,6 +342,7 @@ BrayCurt <- function(x, y, close = TRUE) {
 #' @param key Passed to \code{switch}.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 .t2_named_f <- function(key) {
   switch(key,
     kl = function(t) if (t > 0) t * log(t) else 0,
@@ -362,6 +366,7 @@ BrayCurt <- function(x, y, close = TRUE) {
 #' @param key Passed to \code{switch}.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 .t2_named_inf <- function(key) {
   switch(key,
     kl = Inf,

@@ -25,3 +25,4 @@ for the source it follows.
 res <- .morie_gr_lcg_perm(n = 3L, seed = 1L)
 res
 }
+\keyword{internal}

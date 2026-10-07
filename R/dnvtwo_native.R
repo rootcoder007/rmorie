@@ -43,6 +43,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .dnvtwo_norm_vec(v = x)
 #' res
+#' @keywords internal
 .dnvtwo_norm_vec <- function(v) {
   v <- as.numeric(v)
   s2 <- sum(v * v)
@@ -65,6 +66,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .dnvtwo_cos_raw(a = A, b = b)
 #' res
+#' @keywords internal
 .dnvtwo_cos_raw <- function(a, b) {
   a <- .dnvtwo_norm_vec(a)
   b <- .dnvtwo_norm_vec(b)
@@ -85,6 +87,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .dnvtwo_mat(x = x)
 #' res
+#' @keywords internal
 .dnvtwo_mat <- function(x) {
   if (is.null(x)) return(list())
   if (is.matrix(x)) {
@@ -109,6 +112,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .dnvtwo_vec(x = x)
 #' res
+#' @keywords internal
 .dnvtwo_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
@@ -355,6 +359,7 @@ self_distillation_loss <- function(student, teacher, temperature_s = 0.1,
 #' @examples
 #' res <- .dnvtwo_cheatsheet()
 #' res
+#' @keywords internal
 .dnvtwo_cheatsheet <- function() {
   paste0("dnvtwo: self-supervision lost feature quality when scaled ",
          "to UNCURATED data -- the cause is data quality and ",

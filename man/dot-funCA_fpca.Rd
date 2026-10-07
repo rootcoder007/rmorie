@@ -20,3 +20,4 @@ A list with \code{lam}, \code{phi}, \code{all}.
 A step of the funCA_native implementation. Called by \code{morie_funCA_functional_cca}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

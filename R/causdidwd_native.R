@@ -41,6 +41,7 @@
 #' @param period Passed to \code{unlist}.
 #' @return A list with \code{y}, \code{u}, \code{t}, \code{n}.
 #' @export
+#' @keywords internal
 .causdidwd_panel <- function(Y, unit, period) {
   yv <- as.numeric(unlist(Y, use.names = FALSE))
   uv <- as.character(unlist(unit, use.names = FALSE))
@@ -69,6 +70,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .causdidwd_unique_sorted(v = x)
 #' res
+#' @keywords internal
 .causdidwd_unique_sorted <- function(v) {
   out <- character(0)
   seen <- character(0)
@@ -91,6 +93,7 @@
 #' @param rows Passed to \code{cbind}.
 #' @return The value of \code{cbind}.
 #' @export
+#' @keywords internal
 .causdidwd_with_intercept <- function(rows) {
   cbind(1, rows)
 }
@@ -106,6 +109,7 @@
 #' @param period Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{G}, \code{ts}, \code{order}.
 #' @export
+#' @keywords internal
 .causdidwd_cohorts <- function(first_treated, period) {
   ts <- unique(as.character(period))
   tn <- suppressWarnings(as.numeric(ts))
@@ -531,6 +535,7 @@ morie_aggregate <- function(result, scheme = "simple", weights = NULL) {
 #' @examples
 #' res <- .causdidwd_morie_cheatsheet()
 #' res
+#' @keywords internal
 .causdidwd_morie_cheatsheet <- function() {
   paste("causdidwd: ETWFE. TWFE == two-way MUNDLAK -- pooled OLS ",
         "with unit-specific time averages AND period-specific ",

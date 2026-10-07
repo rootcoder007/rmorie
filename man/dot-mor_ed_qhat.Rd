@@ -22,3 +22,4 @@ A numeric value.
 A step of the e_div_native implementation. Called by \code{.mor_ed_best_split}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

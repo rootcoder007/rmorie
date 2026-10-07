@@ -17,3 +17,4 @@ A step of the secrtt_native implementation. Called by \code{generate_dek},
 \code{open_record}, \code{rotate_dek} and 3 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

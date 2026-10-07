@@ -24,3 +24,4 @@ light twice as many bits as an asymmetric one for no chemical reason.
 The key is built here rather than by the caller so the two arms of
 this package cannot canonicalise it differently.
 }
+\keyword{internal}

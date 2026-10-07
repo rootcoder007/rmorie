@@ -60,6 +60,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .nhits_vec(y = y)
 #' res
+#' @keywords internal
 .nhits_vec <- function(y) {
   as.numeric(y)
 }
@@ -79,6 +80,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .nhits_lstsq(X = x, y = y)
 #' res
+#' @keywords internal
 .nhits_lstsq <- function(X, y, ridge = 1e-8) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -100,6 +102,7 @@
 #' \code{as.integer}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .nhits_max_pool <- function(x, kernel, stride = NULL) {
   xv <- as.numeric(x)
   kk <- as.integer(kernel)
@@ -122,6 +125,7 @@
 #' @param ratio Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .nhits_expressiveness_knots <- function(horizon, ratio) {
   r <- as.numeric(ratio)
   if (r <= 0 || r > 1) {
@@ -140,6 +144,7 @@
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .nhits_linear_interpolate <- function(knots, horizon) {
   kv <- as.numeric(knots)
   n <- length(kv)
@@ -168,6 +173,7 @@
 #' @param ridge Passed to \code{.nhits_lstsq}. Defaults to \code{1e-08}.
 #' @return A list with \code{backcast}, \code{forecast}, \code{knots}, \code{pooled}.
 #' @export
+#' @keywords internal
 .nhits_nhits_block <- function(window, horizon, kernel = 1L, ratio = 1.0,
                                 degree = 2L, ridge = 1e-8) {
   w <- as.numeric(window)
@@ -226,6 +232,7 @@
 #' @param ridge Passed to \code{.nhits_nhits_block}. Defaults to \code{1e-08}.
 #' @return A list with \code{total}, \code{resid}, \code{trace}.
 #' @export
+#' @keywords internal
 .nhits_nhits_stack <- function(window, horizon, blocks, ridge = 1e-8) {
   resid <- as.numeric(window)
   total <- rep(0.0, as.integer(horizon))

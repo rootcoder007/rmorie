@@ -31,3 +31,4 @@ A step of the svycox_native implementation. Called by \code{.svycox_score_residu
 \code{.svycox_svycoxph}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

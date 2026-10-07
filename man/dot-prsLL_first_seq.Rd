@@ -41,3 +41,4 @@ nts <- .prsLL_nonterminals(g)
 # T' can derive epsilon, so the walk continues into E'
 .prsLL_first_seq(c("Tp", "Ep"), first, nts)
 }
+\keyword{internal}

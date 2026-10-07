@@ -17,3 +17,4 @@ A step of the sechsh_native implementation. Called by \code{.kdf_hmac},
 \code{.sech_hmac}, \code{morie_sechsh_chain_entry} and 2 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

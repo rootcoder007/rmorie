@@ -22,3 +22,4 @@ A list with \code{loglik}, \code{score}, \code{info}, \code{nevent}.
 A step of the tail2_t03 implementation. Called by \code{CoxPL}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -60,6 +60,7 @@
 #' @examples
 #' # FIRST-set accumulation unions symbol sets and keeps first-seen order
 #' .prsLL_union(c("(", "id"), c("id", "+"))
+#' @keywords internal
 .prsLL_union <- function(a, b) unique(c(a, b))
 #' .prsLL_setdiff
 #'
@@ -74,6 +75,7 @@
 #' @examples
 #' # epsilon is dropped from a FIRST set before the symbols after it are added
 #' .prsLL_setdiff(c("+", ""), "")
+#' @keywords internal
 .prsLL_setdiff <- function(a, b) a[!(a %in% b)]
 #' .prsLL_subset
 #'
@@ -89,6 +91,7 @@
 #' # the fixed-point loops stop when nothing new was added
 #' .prsLL_subset(c("(", "id"), c("(", "id", "+"))
 #' .prsLL_subset("*", c("(", "id"))
+#' @keywords internal
 .prsLL_subset <- function(a, b) all(a %in% b)
 
 # ----- Grammar construction and validation -----
@@ -120,6 +123,7 @@
 #' g <- .prsLL_grammar(rules, start = "E")
 #' g$start
 #' length(g$rules)
+#' @keywords internal
 .prsLL_grammar <- function(rules, start = NULL) {
   R <- list()
   for (item in rules) {
@@ -180,6 +184,7 @@
 #' )
 #' g <- .prsLL_grammar(rules, start = "E")
 #' .prsLL_reachable(g)
+#' @keywords internal
 .prsLL_reachable <- function(g) {
   nts <- .prsLL_nonterminals(g)
   seen <- c(g$start)
@@ -225,6 +230,7 @@
 #' )
 #' g <- .prsLL_grammar(rules, start = "E")
 #' .prsLL_nonterminals(g)
+#' @keywords internal
 .prsLL_nonterminals <- function(g) {
   out <- character(0)
   for (rule in g$rules) {
@@ -260,6 +266,7 @@
 #' )
 #' g <- .prsLL_grammar(rules, start = "E")
 #' .prsLL_terminals(g)
+#' @keywords internal
 .prsLL_terminals <- function(g) {
   nts <- .prsLL_nonterminals(g)
   out <- character(0)
@@ -301,6 +308,7 @@
 #' first <- .prsLL_first_sets(g)
 #' first$E   # "(" and "id"
 #' first$Ep  # "+" and the empty string, which stands for epsilon
+#' @keywords internal
 .prsLL_first_sets <- function(g) {
   nts <- .prsLL_nonterminals(g)
   first <- list()
@@ -351,6 +359,7 @@
 #' nts <- .prsLL_nonterminals(g)
 #' # T' can derive epsilon, so the walk continues into E'
 #' .prsLL_first_seq(c("Tp", "Ep"), first, nts)
+#' @keywords internal
 .prsLL_first_seq <- function(seq, first, nts) {
   out <- character(0)
   for (s in seq) {
@@ -394,6 +403,7 @@
 #' g <- .prsLL_grammar(rules, start = "E")
 #' .prsLL_first_of(c("F", "Tp"), g)   # F cannot vanish: "(" and "id"
 #' .prsLL_first_of(c("Tp", "Ep"), g)  # both can: "*", "+", epsilon
+#' @keywords internal
 .prsLL_first_of <- function(seq, g, first = NULL) {
   f <- if (is.null(first)) .prsLL_first_sets(g) else first
   .prsLL_first_seq(as.character(seq), f, .prsLL_nonterminals(g))
@@ -426,6 +436,7 @@
 #' follow <- .prsLL_follow_sets(g)
 #' follow$E  # ")" and "$", the end-of-input marker
 #' follow$F  # "+", "*", ")", "$"
+#' @keywords internal
 .prsLL_follow_sets <- function(g, first = NULL) {
   nts <- .prsLL_nonterminals(g)
   f <- if (is.null(first)) .prsLL_first_sets(g) else first
@@ -485,6 +496,7 @@
 #' length(t$conflicts)  # 0: one production per (nonterminal, lookahead) cell
 #' # cells are keyed by nonterminal and lookahead, joined by a CR
 #' t$table[[paste("F", "id", sep = intToUtf8(13))]]
+#' @keywords internal
 .prsLL_ll1_table <- function(g) {
   first <- .prsLL_first_sets(g)
   follow <- .prsLL_follow_sets(g, first)
@@ -546,6 +558,7 @@
 #' r <- .prsLL_is_ll1(amb)
 #' r$ll1
 #' r$conflicts[[1]][c("nonterminal", "lookahead")]
+#' @keywords internal
 .prsLL_is_ll1 <- function(g) {
   t <- .prsLL_ll1_table(g)
   list(
@@ -577,6 +590,7 @@
 #'   list("T", "id")
 #' ), start = "E")
 #' .prsLL_left_recursive(lr)
+#' @keywords internal
 .prsLL_left_recursive <- function(g) {
   nts <- .prsLL_nonterminals(g)
   first <- .prsLL_first_sets(g)
@@ -635,6 +649,7 @@
 #' .prsLL_is_ll1(g2)$ll1
 #' # the transformation changes the tree shape, not the language
 #' morie_prsLL(g2, c("id", "+", "id"))$yield
+#' @keywords internal
 .prsLL_remove_left_recursion <- function(g) {
   rules <- list()
   nts <- .prsLL_nonterminals(g)
@@ -693,6 +708,7 @@
 #' @export
 #' @examples
 #' .prsLL_leaf("id")
+#' @keywords internal
 .prsLL_leaf <- function(sym) {
   list(symbol = sym, children = NULL)
 }
@@ -709,6 +725,7 @@
 #' @export
 #' @examples
 #' .prsLL_node("T", list(.prsLL_leaf("id")))
+#' @keywords internal
 .prsLL_node <- function(sym, kids) {
   list(symbol = sym, children = kids)
 }
@@ -743,6 +760,7 @@
 #' t <- .prsLL_ll1_table(g)
 #' # which production to expand F by when the lookahead is "id"
 #' .prsLL_pick(t$table, "F", "id")
+#' @keywords internal
 .prsLL_pick <- function(table, A, a) {
   key <- paste(A, a, sep = "\r")
   if (is.null(table[[key]])) {
@@ -781,6 +799,7 @@
 #' t <- .prsLL_ll1_table(g)
 #' res <- .prsLL_parse_rd(g, t$table, c("id", "*", "id", "$"), "E", 0L)
 #' .prsLL_linearise(res[[1]])
+#' @keywords internal
 .prsLL_parse_rd <- function(g, table, toks, A, pos) {
   i <- .prsLL_pick(table, A, toks[pos + 1L])
   rhs <- g$rules[[i]][[2]]
@@ -833,6 +852,7 @@
 #' res <- .prsLL_parse_table(g, t$table, c("id", "+", "id", "$"))
 #' .prsLL_linearise(res[[1]])
 #' res[[2]]   # tokens consumed
+#' @keywords internal
 .prsLL_parse_table <- function(g, table, toks) {
   nts <- .prsLL_nonterminals(g)
   # Nodes are held flat and referred to by index. Assigning into a list
@@ -905,6 +925,7 @@
 #' tree <- .prsLL_parse(g, c("id", "+", "id", "*", "id"))
 #' tree$symbol
 #' vapply(tree$children, function(k) k$symbol, character(1))
+#' @keywords internal
 .prsLL_parse <- function(g, tokens, route = "table") {
   if (!(route %in% .prsLL_ROUTES)) {
     stop(sprintf("prsLL: route must be one of %s, got %s",
@@ -947,6 +968,7 @@
 #'   .prsLL_node("B", list(.prsLL_leaf("y"), .prsLL_leaf("z")))
 #' ))
 #' .prsLL_linearise(tree)
+#' @keywords internal
 .prsLL_linearise <- function(tree) {
   if (is.null(tree$children)) {
     return(c(tree$symbol))

@@ -25,3 +25,4 @@ g <- .groebn_poly(list("1_1" = 1, "0_2" = 1))
 # the leading terms cancel by construction
 .groebn_spoly(f, g, "lex")
 }
+\keyword{internal}

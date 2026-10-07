@@ -220,6 +220,7 @@ g_formula_sequential <- function(Q_seq) {
 #' @examples
 #' res <- .tlclust_cheatsheet()
 #' res
+#' @keywords internal
 .tlclust_cheatsheet <- function() {
   paste("tlclust: PROBIT randomised HOSPITALS because breastfeeding ",
         "cannot be allocated. Hospitalisation is both part of the ",

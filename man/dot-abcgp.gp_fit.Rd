@@ -36,3 +36,4 @@ A list with \code{design}, \code{values}, \code{beta}, \code{tau2},
 A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

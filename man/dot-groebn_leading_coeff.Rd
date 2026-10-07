@@ -23,3 +23,4 @@ fn <- function(v) sum(v^2)
 res <- .groebn_leading_coeff(f = fn)
 res
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ See the file header for the source the module follows.
 res <- .fairness_backend()
 res
 }
+\keyword{internal}

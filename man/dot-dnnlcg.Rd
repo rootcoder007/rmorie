@@ -15,3 +15,4 @@ A numeric value.
 \description{
 intermediate product exceeds 2^53 and R doubles stay exact.
 }
+\keyword{internal}

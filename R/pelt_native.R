@@ -30,6 +30,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mor_cp_tables(x = x)
 #' res
+#' @keywords internal
 .mor_cp_tables <- function(x) {
   n <- length(x)
   cs <- numeric(n + 1L)
@@ -51,6 +52,7 @@
 #' @param cost One of \code{"mean"}, \code{"meanvar"}.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .mor_cp_cost <- function(tab, cost) {
   log2pi <- log(2 * pi)
   function(a, b) {
@@ -78,6 +80,7 @@
 #' @param min_seglen Passed to \code{seq.int}.
 #' @return A list with \code{taus}, \code{objective}.
 #' @export
+#' @keywords internal
 .mor_pelt_core <- function(x, cost, penalty, min_seglen) {
   n <- length(x)
   tab <- .mor_cp_tables(x)
@@ -124,6 +127,7 @@
 #' @param bounds A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .mor_cp_segmeans <- function(x, bounds) {
   vapply(seq_len(length(bounds) - 1L), function(i)
     mean(x[(bounds[i] + 1L):bounds[i + 1L]]), numeric(1))

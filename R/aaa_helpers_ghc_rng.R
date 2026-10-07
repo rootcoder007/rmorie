@@ -30,6 +30,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .ghc_xor32(a = A, b = b)
 #' res
+#' @keywords internal
 .ghc_xor32 <- function(a, b) {
   # bitwXor is signed-32-bit; split into 16-bit halves to stay in range.
   bitwXor(a %/% 65536, b %/% 65536) * 65536 + bitwXor(a %% 65536, b %% 65536)
@@ -45,6 +46,7 @@
 #' @param b A list; the body reads \code{$hi}, \code{$lo} from it.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
+#' @keywords internal
 .ghc_xor64 <- function(a, b) {
   list(hi = .ghc_xor32(a$hi, b$hi), lo = .ghc_xor32(a$lo, b$lo))
 }
@@ -60,6 +62,7 @@
 #' @param b A list; the body reads \code{$hi}, \code{$lo} from it.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
+#' @keywords internal
 .ghc_add64 <- function(a, b) {
   lo <- a$lo + b$lo
   carry <- lo %/% .ghc_M32
@@ -76,6 +79,7 @@
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
+#' @keywords internal
 .ghc_shr64 <- function(a, k) {
   # logical right shift, 0 < k < 32 (the only widths SplitMix64 uses)
   p <- 2^k
@@ -100,6 +104,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .ghc_mul32(a = A, b = b)
 #' res
+#' @keywords internal
 .ghc_mul32 <- function(a, b) {
   # exact 32x32 -> 64 via 16-bit limbs; `a` a vector, `b` a scalar
   a0 <- a %% 65536
@@ -125,6 +130,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
+#' @keywords internal
 .ghc_mul64 <- function(a, b) {
   # (a * b) mod 2^64: only the low word of each cross term survives
   r <- .ghc_mul32(a$lo, b[2])
@@ -316,6 +322,7 @@
 #' @param st Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ghc_lcg31 <- function(st) {
   hi <- st %/% 65536
   lo <- st %% 65536
@@ -334,6 +341,7 @@
 #' @param env A list; the body reads \code{$st} from it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ghc_lcg31_unif <- function(env) {
   env$st <- .ghc_lcg31(env$st)
   env$st / 2147483648

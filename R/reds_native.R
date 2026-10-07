@@ -65,6 +65,7 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 #' @param cdf_vals A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rn_ks_stat <- function(cdf_vals) {
   n <- length(cdf_vals)
   i <- seq_len(n)
@@ -84,6 +85,7 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 #' @param n_mc A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rn_mc_p_fitted <- function(d_obs, n, n_mc) {
   count <- 0L
   for (b in seq_len(n_mc)) {

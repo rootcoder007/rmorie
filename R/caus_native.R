@@ -27,6 +27,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .caus_intercept(X = x)
 #' res
+#' @keywords internal
 .caus_intercept <- function(X) {
   A <- as.matrix(X)
   storage.mode(A) <- "double"
@@ -53,6 +54,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .caus_project(Z = X, M = X)
 #' res
+#' @keywords internal
 .caus_project <- function(Z, M) {
   Z <- as.matrix(Z)
   M <- as.matrix(M)
@@ -73,6 +75,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .caus_annihilate(Z = X, M = X)
 #' res
+#' @keywords internal
 .caus_annihilate <- function(Z, M) as.matrix(M) - .caus_project(Z, M)
 
 # The k-class family. k = 0 is least squares, k = 1 is two-stage
@@ -94,6 +97,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .caus_k_class(y = y, X = x, Z = y, k = 3L)
 #' res
+#' @keywords internal
 .caus_k_class <- function(y, X, Z, k) {
   y <- as.numeric(y)
   X <- as.matrix(X)
@@ -118,6 +122,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .caus_first_stage_f(D = g, Z = y)
 #' res
+#' @keywords internal
 .caus_first_stage_f <- function(D, Z) {
   D <- as.numeric(D)
   Zf <- .caus_intercept(Z)

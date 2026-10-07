@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .morie_tcls_ordered(p = 0.5, q = 0.5)
 res
 }
+\keyword{internal}

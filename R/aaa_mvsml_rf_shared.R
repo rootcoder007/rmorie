@@ -45,6 +45,7 @@
 #' @examples
 #' res <- .rfboot(b = 3L, n = 3L)
 #' res
+#' @keywords internal
 .rfboot <- function(b, n) {
   x <- ((b + 1) * 2654435761) %% .rfLCGM
   rows <- numeric(n)
@@ -67,6 +68,7 @@
 #' @param mtry A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rfcand <- function(b, s, p, mtry) {
   off <- floor(.s03vdc(b * 4096 + s + 1, 3L) * p)
   ((off + seq_len(mtry) - 1L) %% p) + 1L
@@ -85,6 +87,7 @@
 #' @examples
 #' res <- .rfmtry(p = 0.5)
 #' res
+#' @keywords internal
 .rfmtry <- function(p, kind = "regression") {
   m <- if (identical(kind, "regression")) ceiling(p / 3) else ceiling(sqrt(p))
   max(1L, min(as.integer(p), as.integer(m)))
@@ -104,6 +107,7 @@
 #' @param q A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{g}, as built in the body.
 #' @export
+#' @keywords internal
 .rfgain <- function(Y, left, right, q) {
   nL <- length(left)
   nR <- length(right)
@@ -131,6 +135,7 @@
 #' @param q A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @keywords internal
 .rfimp <- function(Y, rows, q) {
   n <- length(rows)
   if (n == 0L) {
@@ -157,6 +162,7 @@
 #' @param q Passed to \code{.rfgain}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @keywords internal
 .rfbest <- function(X, Y, rows, cand, q) {
   best <- NULL
   for (v in cand) {
@@ -194,6 +200,7 @@
 #' @param env A list; the body reads \code{$k}, \code{$nodes}, \code{$s} from it.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
+#' @keywords internal
 .rfgrow <- function(X, Y, rows, b, nodesize, mtry, q, env) {
   n <- length(rows)
   idx <- env$k + 1L
@@ -239,6 +246,7 @@
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .rfpredtree <- function(nodes, root, x) {
   i <- root
   while (nodes[[i]]$var != -1L) {
@@ -261,6 +269,7 @@
 #' @param q Passed to \code{.rfgrow}.
 #' @return A list with \code{trees}, \code{oob}.
 #' @export
+#' @keywords internal
 .rfforest <- function(X, Y, n_trees, nodesize, mtry, q) {
   n <- nrow(X)
   trees <- vector("list", n_trees)
@@ -290,6 +299,7 @@
 #' @param q A count; the body uses it as \code{numeric(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .rfpredict <- function(trees, Xnew, q) {
   B <- length(trees)
   out <- matrix(0, nrow(Xnew), q)
@@ -311,6 +321,7 @@
 #' @param Y A matrix; passed to \code{nrow}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .rfcheck <- function(X, Y) {
   n <- nrow(X)
   if (n == 0L) stop("random forest: X is empty")
@@ -334,6 +345,7 @@
 #' @param q A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .rfstd <- function(Y, n, q) {
   out <- matrix(0, n, q)
   for (j in seq_len(q)) {
@@ -366,6 +378,7 @@
 #' @param normalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{imp}, as built in the body.
 #' @export
+#' @keywords internal
 .rfperm <- function(trees, oob, X, Y, q, normalise = TRUE) {
   p <- ncol(X)
   imp <- numeric(p)
@@ -423,6 +436,7 @@
 #' @param p A count; the body uses it as \code{numeric(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rfmdi_imp <- function(trees, p) {
   B <- length(trees)
   imp <- numeric(p)

@@ -26,3 +26,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .samdec_attend(Q = A, K = A, V = b)
 res
 }
+\keyword{internal}

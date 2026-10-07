@@ -39,6 +39,7 @@
 #' @param psi_plugin Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{mean_D1}, \code{order}, \code{note}.
 #' @export
+#' @keywords internal
 .tlhoest_first_order_expansion <- function(D1, psi_plugin) {
   d <- as.numeric(D1)
   n <- length(d)
@@ -65,6 +66,7 @@
 #' @param exclude_diagonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{value}, \code{n_pairs}, \code{cost}, \code{note}.
 #' @export
+#' @keywords internal
 .tlhoest_second_order_term <- function(D2_kernel, O, exclude_diagonal = TRUE) {
   obs <- as.list(O)
   n <- length(obs)

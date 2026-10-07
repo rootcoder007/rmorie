@@ -7,8 +7,10 @@
 morie_llm_detect_provider()
 }
 \value{
-Character scalar provider key: ollama / hosted / gemini / api / openai / local.
-The hosted tier (llm.rmorie.com) answers only after \code{morie_llm_login()}.
+Character scalar provider key: ollama / gemini / api / openai / hosted / local,
+in that order of preference: a local model first, then your own cloud keys, then the
+hosted MORIE tier as a last resort (it answers only after \code{morie_llm_login()};
+keys are issued on request at \url{https://rmorie.com/access}).
 }
 \description{
 Detect the active LLM provider

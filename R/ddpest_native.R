@@ -47,6 +47,7 @@
 #' @param e Passed to \code{.ghc_unif}.
 #' @return A list with \code{weights}.
 #' @export
+#' @keywords internal
 .morie_ddpest_stick_breaking <- function(alpha, K, e) {
   alpha <- as.numeric(alpha)
   K <- as.integer(K)

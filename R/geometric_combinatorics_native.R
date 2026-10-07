@@ -27,6 +27,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_cross3 <- function(o, a, b) {
   (a[1] - o[1]) * (b[2] - o[2]) - (a[2] - o[2]) * (b[1] - o[1])
 }

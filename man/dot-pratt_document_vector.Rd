@@ -22,3 +22,4 @@ A list with \code{vector}, \code{alpha}.
 A step of the pratt_native implementation. Called by \code{morie_pratt}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

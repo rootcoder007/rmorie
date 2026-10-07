@@ -19,3 +19,4 @@ A step of the avalon_native implementation. Called by \code{morie_avalon_feature
 \code{morie_scfhop_cats}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

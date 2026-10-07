@@ -39,3 +39,4 @@ tree <- .prsLL_parse(g, c("id", "+", "id", "*", "id"))
 tree$symbol
 vapply(tree$children, function(k) k$symbol, character(1))
 }
+\keyword{internal}

@@ -34,6 +34,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .rsosort(v = x)
 #' res
+#' @keywords internal
 .rsosort <- function(v) {
   idx <- seq_along(v)
   n <- length(idx)
@@ -80,6 +81,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .rslufactor(A = A)
 #' res
+#' @keywords internal
 .rslufactor <- function(A) {
   n <- nrow(A)
   M <- matrix(as.numeric(A), n, n)
@@ -146,6 +148,7 @@
 #' @param S Passed to \code{.rsludet}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .rscovdet <- function(S) {
   d <- .rsludet(S)
   if (d > 0) d else 0
@@ -163,6 +166,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .rsludet(A = A)
 #' res
+#' @keywords internal
 .rsludet <- function(A) {
   n <- nrow(A)
   if (n == 0L) {
@@ -193,6 +197,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .rslusolve(A = A, b = b)
 #' res
+#' @keywords internal
 .rslusolve <- function(A, b) {
   n <- nrow(A)
   f <- .rslufactor(A)
@@ -227,6 +232,7 @@
 #' @param idx A vector; its length is taken.
 #' @return A list with \code{mu}, \code{S}.
 #' @export
+#' @keywords internal
 .rsmeancov <- function(X, idx) {
   m <- length(idx)
   p <- ncol(X)
@@ -258,6 +264,7 @@
 #' @param S Passed to \code{.rslufactor}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .rsmahal2 <- function(X, mu, S) {
   n <- nrow(X)
   p <- length(mu)
@@ -302,6 +309,7 @@
 #' @examples
 #' res <- .rsnchoosek(n = 3L, k = 3L)
 #' res
+#' @keywords internal
 .rsnchoosek <- function(n, k) {
   if (k < 0L || k > n) {
     return(0)
@@ -327,6 +335,7 @@
 #' @examples
 #' res <- .rscombos(n = 3L, k = 3L)
 #' res
+#' @keywords internal
 .rscombos <- function(n, k, cap = NULL) {
   out <- list()
   if (k > n || k < 0L) {
@@ -373,6 +382,7 @@
 #' @param h A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{idx}, \code{det}.
 #' @export
+#' @keywords internal
 .rscstep <- function(X, idx, h) {
   mc <- .rsmeancov(X, idx)
   d0 <- .rscovdet(mc$S)
@@ -398,6 +408,7 @@
 #' @examples
 #' res <- .rstrimmedh(n = 3L, p = 0.5)
 #' res
+#' @keywords internal
 .rstrimmedh <- function(n, p) n %/% 2L + (p + 1L) %/% 2L
 
 # The most robust MCD subset size, [(n + p + 1) / 2].
@@ -414,6 +425,7 @@
 #' @examples
 #' res <- .rsmcdh(n = 3L, p = 0.5)
 #' res
+#' @keywords internal
 .rsmcdh <- function(n, p) (n + p + 1L) %/% 2L
 
 # Shortest window of h points in a sorted univariate sample.  Rousseeuw (1984)
@@ -434,6 +446,7 @@
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A list with \code{start}, \code{width}, \code{sorted}.
 #' @export
+#' @keywords internal
 .rsshortesthalf <- function(v, h) {
   s <- sort(v)
   n <- length(s)
@@ -469,6 +482,7 @@
 #' @examples
 #' res <- .rsconsistency(h = 0.5, n = 3L, p = 0.5)
 #' res
+#' @keywords internal
 .rsconsistency <- function(h, n, p) {
   alpha <- h / n
   if (alpha >= 1) {
@@ -488,6 +502,7 @@
 #' @param r Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .rsmedsq <- function(r) {
   sq <- sort(r * r)
   n <- length(sq)
@@ -505,6 +520,7 @@
 #' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rsintercept <- function(Xm, n, p) {
   for (j in seq_len(p)) {
     allone <- TRUE
@@ -533,6 +549,7 @@
 #' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{.rslusolve}.
 #' @export
+#' @keywords internal
 .rsltsfit <- function(Xm, yy, idx, p) {
   A <- matrix(0, p, p)
   b <- numeric(p)
@@ -559,6 +576,7 @@
 #' @param h A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{tot}, \code{idx}, \code{sq}.
 #' @export
+#' @keywords internal
 .rsltsobj <- function(Xm, yy, th, n, p, h) {
   sq <- numeric(n)
   for (i in seq_len(n)) {
@@ -601,6 +619,7 @@
 #' @param max_walk Passed to \code{>}. Defaults to \code{5e+06}.
 #' @return The value of \code{repeat}.
 #' @export
+#' @keywords internal
 .rscombosstride <- function(n, k, want, max_walk = 5000000) {
   total <- .rsnchoosek(n, k)
   if (total == 0) {

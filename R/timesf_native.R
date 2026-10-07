@@ -48,6 +48,7 @@ morie_timesf <- function(history, predictor, horizon, input_patch_len,
 #' @examples
 #' res <- .timesf_cheatsheet()
 #' res
+#' @keywords internal
 .timesf_cheatsheet <- function() {
   paste0("timesf: the same ledger method as `timesfm` -- one ",
          "paper, one implementation, re-exported so the two ",

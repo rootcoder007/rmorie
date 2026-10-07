@@ -62,6 +62,7 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_qm_ecdf <- function(sx, v) {
   n <- length(sx)
   if (n == 1L) return(0.5)
@@ -87,6 +88,7 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_qm_quant <- function(sx, p) {
   n <- length(sx)
   if (n == 1L) return(sx[1])

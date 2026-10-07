@@ -33,3 +33,4 @@ The value of \code{.sarima_package}.
 A step of the sarima_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

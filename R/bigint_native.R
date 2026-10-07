@@ -36,6 +36,7 @@
 #' @param limbs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .morie_big_trim <- function(limbs) {
   n <- length(limbs)
   while (n > 1L && limbs[n] == 0) n <- n - 1L
@@ -53,6 +54,7 @@
 #' @param limbs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{structure}.
 #' @export
+#' @keywords internal
 .morie_big_new <- function(sign, limbs) {
   limbs <- .morie_big_trim(limbs)
   if (length(limbs) == 1L && limbs[1] == 0) sign <- 0
@@ -175,6 +177,7 @@ format.morie_bigint <- function(x, ...) as.character(x)
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_big_cmp_abs(a = A, b = b)
 #' res
+#' @keywords internal
 .morie_big_cmp_abs <- function(a, b) {
   la <- length(a)
   lb <- length(b)
@@ -203,6 +206,7 @@ format.morie_bigint <- function(x, ...) as.character(x)
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_big_add_abs(a = A, b = b)
 #' res
+#' @keywords internal
 .morie_big_add_abs <- function(a, b) {
   n <- max(length(a), length(b))
   a <- c(a, numeric(n - length(a)))
@@ -238,6 +242,7 @@ format.morie_bigint <- function(x, ...) as.character(x)
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_big_sub_abs(a = A, b = b)
 #' res
+#' @keywords internal
 .morie_big_sub_abs <- function(a, b) {
   n <- length(a)
   b <- c(b, numeric(n - length(b)))

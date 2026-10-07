@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 res <- .t1_lcg()
 res
 }
+\keyword{internal}

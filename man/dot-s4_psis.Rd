@@ -16,3 +16,4 @@ A list with \code{lw}, \code{k}.
 A step of the s04core implementation. Called by \code{Infcrt}, \code{Khatd}, \code{Loopr}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

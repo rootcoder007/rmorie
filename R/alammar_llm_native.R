@@ -23,6 +23,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_al_softmax_rows(z = X)
 #' res
+#' @keywords internal
 .morie_al_softmax_rows <- function(z) {
   z <- z - apply(z, 1, max)
   e <- exp(z)
@@ -46,6 +47,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_al_cos(a = A, b = b)
 #' res
+#' @keywords internal
 .morie_al_cos <- function(a, b) {
   na <- sqrt(sum(a^2))
   nb <- sqrt(sum(b^2))
@@ -68,6 +70,7 @@
 #' @param state Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_al_lcg <- function(state) {
   (1664525 * state + 1013904223) %% 2^32
 }
@@ -680,6 +683,7 @@ morie_alammar_infonce_loss <- function(anchor, positive, negatives,
 #' @param S Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_al_inbatch_ce <- function(S) {
   Z <- S - apply(S, 1, max)
   logp <- Z - log(rowSums(exp(Z)))

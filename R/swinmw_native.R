@@ -14,6 +14,7 @@
 #' @param tab A matrix; indexed by row and column.
 #' @return The value of \code{B}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_swin_bias <- function(M, tab) {
   n <- M * M
   B <- matrix(0, n, n)

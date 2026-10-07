@@ -31,6 +31,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .morie_subsets(g = g)
 #' res
+#' @keywords internal
 .morie_subsets <- function(g) {
   n <- length(g)
   out <- list(integer(0))
@@ -54,6 +55,7 @@
 #' @examples
 #' res <- .morie_key(s = c(3L, 1L, 2L))
 #' res
+#' @keywords internal
 .morie_key <- function(s) paste(sort(as.integer(s)), collapse = ",")
 
 #' Check the two matroid axioms directly

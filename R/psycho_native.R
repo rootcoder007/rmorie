@@ -36,6 +36,7 @@
 #' @return A list with \code{MSR}, \code{MSC}, \code{MSE}, \code{MSW}, \code{n},
 #' \code{k}, \code{matrix}.
 #' @export
+#' @keywords internal
 .psy_anova2 <- function(y, subject, rater) {
   yv <- as.numeric(y)
   s <- as.vector(subject)
@@ -85,6 +86,7 @@
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .psy_spearman_brown <- function(icc1, k) {
   den <- 1 + (k - 1) * icc1
   if (den == 0) return(NA_real_)
@@ -103,6 +105,7 @@
 #' @param cc A count; the body uses it as \code{matrix(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .psy_p3pl <- function(theta, a, b, cc) {
   z <- pmin(pmax(outer(theta, b, function(t, bb) a * (t - bb)), -500), 500)
   sweep(1 / (1 + exp(-z)), 2L, 1 - cc, "*") +
@@ -120,6 +123,7 @@
 #' @param cc Numeric; combined arithmetically in the body.
 #' @return The value of \code{sweep}.
 #' @export
+#' @keywords internal
 .psy_dp3pl <- function(theta, a, b, cc) {
   P <- .psy_p3pl(theta, a, b, cc)
   star <- sweep(P, 2L, cc, "-")
@@ -139,6 +143,7 @@
 #' @param cc Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{a}, \code{b}, \code{c}.
 #' @export
+#' @keywords internal
 .psy_items <- function(m, a, b, cc) {
   if (is.null(b)) stop("item difficulties b are required.", call. = FALSE)
   bv <- as.numeric(b)
@@ -162,6 +167,7 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{yv}, as built in the body.
 #' @export
+#' @keywords internal
 .psy_check_y <- function(y) {
   yv <- as.numeric(y)
   if (!all(yv %in% c(0, 1))) {
@@ -181,6 +187,7 @@
 #' @param it A list; the body reads \code{$a}, \code{$b}, \code{$c} from it.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .psy_ll <- function(grid, yv, it) {
   P <- pmin(pmax(.psy_p3pl(grid, it$a, it$b, it$c), 1e-12), 1 - 1e-12)
   as.numeric(log(P) %*% yv + log(1 - P) %*% (1 - yv))
@@ -237,6 +244,7 @@
 #' @param it A list; the body reads \code{$a}, \code{$b}, \code{$c} from it.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .psy_info <- function(theta, it) {
   P <- pmin(pmax(.psy_p3pl(theta, it$a, it$b, it$c), 1e-12), 1 - 1e-12)
   dP <- .psy_dp3pl(theta, it$a, it$b, it$c)
@@ -253,6 +261,7 @@
 #' @param vi Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mu}, \code{Q}, \code{w}, \code{k}.
 #' @export
+#' @keywords internal
 .psy_fixed_pool <- function(yi, vi) {
   y <- as.numeric(yi)
   v <- as.numeric(vi)
@@ -284,6 +293,7 @@
 #' @param vi Passed to \code{.psy_fixed_pool}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .psy_dl <- function(yi, vi) {
   f <- .psy_fixed_pool(yi, vi)
   den <- sum(f$w) - sum(f$w^2) / sum(f$w)

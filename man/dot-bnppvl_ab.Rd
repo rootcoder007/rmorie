@@ -27,3 +27,4 @@ A step of the bnppvl_native implementation. Called by \code{morie_bnppvl_draw},
 \code{morie_bnppvl_log_prior}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -30,3 +30,4 @@ The value of \code{lapply}.
 A step of the hindsr_native implementation. Called by \code{hindsr}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

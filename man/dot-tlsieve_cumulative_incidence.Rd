@@ -20,3 +20,4 @@ A step of the tlsieve_native implementation. Called by \code{.tlsieve_aalen_joha
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

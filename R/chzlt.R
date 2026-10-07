@@ -12,6 +12,7 @@
 #' @param j See Usage.
 #' @return A list with \code{beta}, \code{se}, \code{df}.
 #' @export
+#' @keywords internal
 .ch_ols_se <- function(y, X, j) {
   y <- .s03vec(y)
   D <- .s03mat(X)
@@ -46,6 +47,7 @@
 #' @param q Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ch_rv <- function(t, df, q = 1) {
   fq <- q * abs(t) / sqrt(df)
   rv <- 0.5 * (sqrt(fq^4 + 4 * fq^2) - fq^2)

@@ -19,3 +19,4 @@ A list with \code{estimate}, \code{representation}, \code{learned_dim},
 A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

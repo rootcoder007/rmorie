@@ -90,6 +90,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .dreamr_vec(x = x, name = txt)
 #' res
+#' @keywords internal
 .dreamr_vec <- function(x, name) {
   v <- as.numeric(x)
   if (length(v) == 0L) stop(sprintf("dreamr: %s must be non-empty", name))
@@ -105,6 +106,7 @@
 #' @param name Passed to \code{sprintf}.
 #' @return A list with \code{estimate}, \code{returns}, \code{n}, \code{method}.
 #' @export
+#' @keywords internal
 .dreamr_pack <- function(vals, name) {
   list(
     estimate = vals,

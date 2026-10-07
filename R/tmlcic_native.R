@@ -57,6 +57,7 @@
 #' @examples
 #' res <- .tmlcic_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tmlcic_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), .tmlcic_EPS), 1.0 - .tmlcic_EPS)
   log(q / (1.0 - q))
@@ -76,6 +77,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tmlcic_sig(z = y)
 #' res
+#' @keywords internal
 .tmlcic_sig <- function(z) {
   # vectorised sigmoid (.s03sigmoid is scalar-only)
   vapply(z, .s03sigmoid, numeric(1))
@@ -100,6 +102,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tmlcic_wlogit(X = x, y = y)
 #' res
+#' @keywords internal
 .tmlcic_wlogit <- function(X, y, ridge = 1e-10, obs_weights = NULL) {
   # Weighted logistic IRLS with a ridge penalty.
   X <- as.matrix(X)
@@ -135,6 +138,7 @@
 #' \code{as.numeric}.
 #' @return The value of \code{eps}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlcic_fluct <- function(y, off, H, rows = NULL, obs_weights = NULL) {
   # One-parameter logistic fluctuation: solve
   # sum w H (y - sigmoid(off + eps H)) = 0 for eps on the given rows.
@@ -200,6 +204,7 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #' @param cand A list; the body reads \code{$cols}, \code{$interact} from it.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .tmlcic_row_fun <- function(W, cand) {
   cols1 <- cand$cols + 1L
   interact <- isTRUE(cand$interact)
@@ -225,6 +230,7 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #' @param ridge Numeric; passed to \code{max}.
 #' @return A list with \code{q}, \code{b}.
 #' @export
+#' @keywords internal
 .tmlcic_fit_working_model <- function(y, A, W, cand, rows, ridge) {
   # logit[Qbar(A,W)] on the candidate's terms, fitted on rows.
   rowf <- .tmlcic_row_fun(W, cand)
@@ -247,6 +253,7 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #' @param ridge Numeric; passed to \code{max}.
 #' @return A list with \code{g1}, \code{b}.
 #' @export
+#' @keywords internal
 .tmlcic_fit_g <- function(A, W, cand, rows, ridge) {
   # A candidate for the exposure mechanism, P(A = 1 | W).
   cols1 <- cand$cols + 1L
@@ -382,6 +389,7 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .tmlcic_pairs_from <- function(cluster, n) {
   # Group row indices by pair (or cluster) label, in first-seen order.
   if (is.null(cluster)) {
@@ -476,6 +484,7 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #' @param rows A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .tmlcic_loss <- function(D, y, qa, groups, design, target, rows) {
   # Eq. (13.5)/(13.6) unmatched, (13.8)/(13.9) matched.
   if (design == "unmatched") {
@@ -520,6 +529,7 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{Filter}.
 #' @export
+#' @keywords internal
 .tmlcic_cv_folds <- function(groups, n_folds, design, n) {
   # Folds that respect the pairing: a pair is never split.
   if (design == "unmatched") {
@@ -872,6 +882,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlcic_one_per_cluster <- function(v, groups, name) {
   # Pull a cluster-level variable out of per-individual rows.
   out <- numeric(length(groups))
@@ -905,6 +916,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
 #' \code{as.numeric}.
 #' @return A list with \code{psi}, \code{D}, \code{info}.
 #' @export
+#' @keywords internal
 .tmlcic_hier_cluster_arm <- function(yc, Aj, Zj, groups, a, trim, ridge,
                                      known_g) {
   # TMLE I, eq. (4)-(9): fit, target and average at cluster level.
@@ -962,6 +974,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
 #' \code{as.numeric}.
 #' @return A list with \code{psi}, \code{D}, \code{info}.
 #' @export
+#' @keywords internal
 .tmlcic_hier_individual_arm <- function(y, Ai, Zi, alpha, groups, a, trim,
                                         ridge, known_g) {
   # TMLE II, eq. (14)-(21): individual clever covariate, targeted

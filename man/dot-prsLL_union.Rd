@@ -23,3 +23,4 @@ See the file header for the source the module follows.
 # FIRST-set accumulation unions symbol sets and keeps first-seen order
 .prsLL_union(c("(", "id"), c("id", "+"))
 }
+\keyword{internal}

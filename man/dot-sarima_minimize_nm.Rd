@@ -20,3 +20,4 @@ A list with \code{x}, \code{fun}, \code{success}.
 restart-until-stuck shape as the Python arm's call to
 _sci_core.minimize(method="Nelder-Mead").
 }
+\keyword{internal}

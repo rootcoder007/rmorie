@@ -30,3 +30,4 @@ y <- apply(L, 1L, which.max) - 1L
 y[1:40] <- sample(0:4, 40L, TRUE)
 round(.alfesf_fit_temperature(L, y, iters = 200L), 3)
 }
+\keyword{internal}

@@ -22,3 +22,4 @@ A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bia
 \code{.timeRS_user_bias}, \code{morie_timeRS_deviation}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

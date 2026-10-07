@@ -19,3 +19,4 @@ A list with \code{chrom1}, \code{pos1}, \code{strand1}, \code{len1},
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_classify_pair}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

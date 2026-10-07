@@ -12,6 +12,7 @@
 #' @param resolution Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .lou_modularity <- function(A, z, resolution = 1) {
   n <- nrow(A)
   k <- numeric(n)

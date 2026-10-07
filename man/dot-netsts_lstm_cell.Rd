@@ -26,3 +26,4 @@ A list with \code{h}, \code{c}, \code{gates}.
 A step of the netsts_native implementation. Called by \code{.netsts_lstm_run}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

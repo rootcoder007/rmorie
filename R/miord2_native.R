@@ -20,6 +20,7 @@
 #' @param kappa Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .miord2_norm_draw <- function(e, X_obs, y_obs, X_mis, kappa) {
   n1 <- length(y_obs)
   q <- ncol(X_obs)

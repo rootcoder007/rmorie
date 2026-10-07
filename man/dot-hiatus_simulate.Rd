@@ -48,3 +48,4 @@ A list with \code{estimate}, \code{S}, \code{I}, \code{t}, \code{S_traj},
 A step of the hiatus_native implementation. Called by \code{morie_hiatus}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

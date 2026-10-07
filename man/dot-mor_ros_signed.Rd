@@ -19,3 +19,4 @@ A list with \code{p_upper}, \code{p_lower}, \code{W}, \code{mu_plus},
 A step of the rosenb_native implementation. Called by \code{morie_rosenb}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

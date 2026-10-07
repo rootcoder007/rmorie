@@ -24,3 +24,4 @@ f <- .groebn_poly(list("2_0" = 1, "0_3" = 1))
 .groebn_leading_monomial(f, "lex")     # lex prefers the x power
 .groebn_leading_monomial(f, "grlex")   # grlex prefers the higher degree
 }
+\keyword{internal}

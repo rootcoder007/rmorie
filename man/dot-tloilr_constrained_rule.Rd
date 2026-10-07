@@ -18,3 +18,4 @@ A list with \code{rule}, \code{tau}, \code{treated_fraction}, \code{binding}.
 A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_value}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

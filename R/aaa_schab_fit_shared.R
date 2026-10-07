@@ -19,6 +19,7 @@
 #' \code{$lags}, \code{$n_pairs} from it.
 #' @return A list with \code{lags}, \code{gamma}, \code{counts}.
 #' @export
+#' @keywords internal
 .schab_as_empirical_variogram <- function(ev) {
   # Accept the list the empirical estimator returns, or a plain matrix.
   # Counts default to 1 so an unweighted table still fits; that makes the WLS
@@ -64,6 +65,7 @@
 #' @param ghat A vector; indexed elementwise.
 #' @return A list with \code{start}, \code{lo}, \code{hi}.
 #' @export
+#' @keywords internal
 .schab_start_and_bounds <- function(lags, ghat) {
   # The bounds ARE the parameter space of Sec. 4.3: a nugget and a partial
   # sill are variances so they are non-negative, and a range is a distance so
@@ -94,6 +96,7 @@
 #' @param model Passed to \code{.sp_semivariogram}.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .schab_objective <- function(kind, lags, ghat, counts, model) {
   ok <- is.finite(ghat) & is.finite(lags) & counts > 0
   h <- lags[ok]
@@ -140,6 +143,7 @@
 #' @return A list with \code{nugget}, \code{partial_sill}, \code{range},
 #' \code{objective}, \code{converged}.
 #' @export
+#' @keywords internal
 .schab_fit_semivariogram <- function(lags, ghat, counts, model = "exponential",
                                      kind = "wls") {
   # Fit by Gauss-Newton, the algorithm Sec. 4.5 names for this problem: the
@@ -178,6 +182,7 @@
 #' @param model Passed to \code{.sp_correlogram}.
 #' @return The value of \code{sigma}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_covariance_matrix <- function(coords, nugget, sill, rng, model) {
   # Sigma(theta) for the model of Sec. 4.3. C(0) = c0 + sigma0^2 and
   # C(h) = sigma0^2 R(h) for h > 0, so the nugget enters only on the
@@ -208,6 +213,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .schab_error_contrasts(X = x)
 #' res
+#' @keywords internal
 .schab_error_contrasts <- function(X) {
   # A matrix K of error contrasts: full row rank, K X = 0. Sec. 4.5.2 builds
   # K explicitly for the intercept-only case and notes, citing Harville

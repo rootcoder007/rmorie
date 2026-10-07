@@ -19,3 +19,4 @@ k-nearest-neighbour indices (Euclidean), the FNN::get.knn()$nn.index
 surface used here. Brute force O(n^2) -- the call sites feed spatial
 unit tables (hundreds of rows), where this is instant.
 }
+\keyword{internal}

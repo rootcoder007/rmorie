@@ -218,6 +218,7 @@ morie_tmlediffkernel <- morie_tmldyk
 #' \code{as.numeric}.
 #' @return A list with \code{scaled}, \code{lower}, \code{upper}, \code{range}.
 #' @export
+#' @keywords internal
 .rescale <- function(y, lower, upper) {
   v <- as.numeric(y)
   if (length(v) == 0L) stop("tmlcou: no outcomes given")
@@ -243,6 +244,7 @@ morie_tmlediffkernel <- morie_tmldyk
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmldyk_expit(x = x)
 #' res
+#' @keywords internal
 .tmldyk_expit <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)
@@ -261,6 +263,7 @@ morie_tmlediffkernel <- morie_tmldyk
 #' @examples
 #' res <- .tmldyk_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tmldyk_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -279,6 +282,7 @@ morie_tmlediffkernel <- morie_tmldyk
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @keywords internal
 .tmldyk_logit_irls <- function(Z, a, ridge = 1e-8, max_iter = 50L,
                         tol = 1e-10) {
   n <- length(a)
@@ -317,6 +321,7 @@ morie_tmlediffkernel <- morie_tmldyk
 #' @param upper Passed to \code{.rescale}.
 #' @return A list with \code{psi}, \code{se}, \code{range}.
 #' @export
+#' @keywords internal
 .tmle_ate_bounded <- function(yv, a, W, g, Q1, Q0, lower, upper) {
   n <- length(yv)
   if (any(yv < lower | yv > upper))
@@ -384,6 +389,7 @@ morie_tmlediffkernel <- morie_tmldyk
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
+#' @keywords internal
 .wls_int <- function(Xm, yv, w, ridge) {
   Xd <- cbind(1, Xm)
   W <- diag(w, nrow(Xm))

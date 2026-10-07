@@ -27,6 +27,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .patcht_vec(v = x)
 #' res
+#' @keywords internal
 .patcht_vec <- function(v) as.numeric(unlist(v))
 
 #' .patcht_mat
@@ -43,6 +44,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .patcht_mat(M = X)
 #' res
+#' @keywords internal
 .patcht_mat <- function(M) {
   if (is.matrix(M)) {
     storage.mode(M) <- "double"
@@ -290,6 +292,7 @@ patchtst_encode <- function(X, patch_len, stride = NULL,
 #' @examples
 #' res <- .patchT_cheatsheet()
 #' res
+#' @keywords internal
 .patchT_cheatsheet <- function() {
   paste("patchT: PatchTST. A single time step is not a word, so ",
         "tokenise SUBSERIES: patches of length P, stride S, giving ",

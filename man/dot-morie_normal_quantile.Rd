@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .morie_normal_quantile(p = 0.5)
 res
 }
+\keyword{internal}

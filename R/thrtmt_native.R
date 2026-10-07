@@ -18,6 +18,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .thrtmt_vec(x = x)
 #' res
+#' @keywords internal
 .thrtmt_vec <- function(x) {
   if (is.null(x)) {
     return(numeric(0))
@@ -37,6 +38,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .thrtmt_mat(W = x)
 #' res
+#' @keywords internal
 .thrtmt_mat <- function(W) {
   if (is.null(W)) {
     return(matrix(0, nrow = 0, ncol = 0))
@@ -57,6 +59,7 @@
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{Z}, as built in the body.
 #' @export
+#' @keywords internal
 .thrtmt_design <- function(rows, n) {
   if (length(rows) == 0 || n == 0) {
     return(matrix(0, nrow = n, ncol = 0))
@@ -81,6 +84,7 @@
 #' @param ridge A matrix; passed to \code{diag}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .thrtmt_lstsq <- function(Z, y, ridge) {
   # Z: n x p, y: length n
   # Returns b solving (Z'Z + ridge I) b = Z' y
@@ -110,6 +114,7 @@
 #' @param b A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .thrtmt_matvec <- function(Z, b) {
   if (length(b) == 0 || ncol(Z) == 0) {
     return(rep(0, nrow(Z)))

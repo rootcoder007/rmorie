@@ -25,6 +25,7 @@
 #' @examples
 #' res <- .morie_dp_check_budget(epsilon = 0.5)
 #' res
+#' @keywords internal
 .morie_dp_check_budget <- function(epsilon, delta = NULL) {
   epsilon <- as.numeric(epsilon)[1L]
   if (!is.finite(epsilon) || epsilon <= 0) {
@@ -52,6 +53,7 @@
 #' @examples
 #' res <- .morie_dp_rlaplace(n = 3L, scale = TRUE)
 #' res
+#' @keywords internal
 .morie_dp_rlaplace <- function(n, scale) {
   u <- stats::runif(n) - 0.5
   -scale * sign(u) * log1p(-2 * abs(u))
@@ -68,6 +70,7 @@
 #' @param delta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_dp_gaussian_sigma <- function(sensitivity, epsilon, delta) {
   if (delta <= 0) {
     stop(paste(
@@ -89,6 +92,7 @@
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{x}, \code{a}, \code{b}.
 #' @export
+#' @keywords internal
 .morie_dp_clip <- function(x, a, b) {
   a <- as.numeric(a)
   b <- as.numeric(b)
@@ -111,6 +115,7 @@
 #' @examples
 #' res <- .morie_dp_seed(seed = 1L)
 #' res
+#' @keywords internal
 .morie_dp_seed <- function(seed) {
   if (is.null(seed)) {
     return(NULL)
@@ -134,6 +139,7 @@
 #' @param old Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_dp_unseed <- function(old) {
   if (!is.null(old)) assign(".Random.seed", old, envir = globalenv())
 }

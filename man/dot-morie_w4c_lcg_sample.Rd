@@ -27,3 +27,4 @@ the source it follows.
 res <- .morie_w4c_lcg_sample(n = 3L, k = 3L, seed = 1L)
 res
 }
+\keyword{internal}

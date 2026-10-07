@@ -27,3 +27,4 @@ A list with \code{a}, \code{lam}, \code{b}.
 \description{
 restricted to \code{obs}, plus optional covariate coefficients.
 }
+\keyword{internal}

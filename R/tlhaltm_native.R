@@ -195,6 +195,7 @@ cv_tmle_split <- function(n, V = 10L, seed = 0L) {
 #' @examples
 #' res <- .tlhaltm_cheatsheet()
 #' res
+#' @keywords internal
 .tlhaltm_cheatsheet <- function() {
   paste("tlhaltm: TMLE is efficient when (a) the second-order ",
         "remainder -- a PRODUCT of the two nuisance errors -- is ",

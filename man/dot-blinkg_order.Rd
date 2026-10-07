@@ -18,3 +18,4 @@ on a small panel several markers can share a p value to the last bit,
 and a selection that depended on which one the sort happened to put
 first would not be reproducible.
 }
+\keyword{internal}

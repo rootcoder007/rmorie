@@ -26,3 +26,4 @@ rewards <- c(1, 0, 1, 1, 0)
 .reinfc_baseline_series(rewards, "mean", 0.5)
 .reinfc_baseline_series(rewards, "comparison", 0.5)
 }
+\keyword{internal}

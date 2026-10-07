@@ -24,6 +24,7 @@
 #' @param u Numeric; passed to \code{abs}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .mor_rdd_kernel <- function(name, u) {
   if (name == "triangular") return(pmax(1 - abs(u), 0))
   if (name == "uniform") return(ifelse(abs(u) <= 1, 0.5, 0))
@@ -41,6 +42,7 @@
 #' @param w A count; the body uses it as \code{rep(...)}.
 #' @return A list with \code{a}, \code{b}, \code{v}.
 #' @export
+#' @keywords internal
 .mor_rdd_side <- function(dm, ym, w) {
   X <- cbind(1, dm)
   XtW <- t(X) * rep(w, each = 2L)

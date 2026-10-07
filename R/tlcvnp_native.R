@@ -254,6 +254,7 @@ cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
 #' @examples
 #' res <- .tlcvnp_cheatsheet()
 #' res
+#' @keywords internal
 .tlcvnp_cheatsheet <- function() {
   paste("tlcvnp: a density or regression curve AT A POINT is ",
         "NONpathwise differentiable -- no efficient influence ",

@@ -40,6 +40,7 @@
 #' @param upper A vector; indexed elementwise.
 #' @return A list with \code{status}, \code{x}, \code{fun}.
 #' @export
+#' @keywords internal
 .bnd_simplex <- function(cv, A_ub = NULL, b_ub = NULL, A_eq = NULL,
                          b_eq = NULL, lower, upper) {
   k <- length(cv)

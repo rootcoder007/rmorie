@@ -99,6 +99,7 @@ morie_survrsf_rule_status <- function(rule = NULL) {
 #' @param rule Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .survrsf_check_rule <- function(rule) {
   if (!(rule %in% morie_survrsf_SPLIT_RULES)) {
     stop(sprintf(
@@ -128,6 +129,7 @@ morie_survrsf_rule_status <- function(rule = NULL) {
 #' @examples
 #' res <- .survrsf_rng()
 #' res
+#' @keywords internal
 .survrsf_rng <- function(seed = 0) {
   e <- new.env(parent = emptyenv())
   e$s <- as.numeric(seed) %% 2147483648
@@ -232,6 +234,7 @@ morie_survrsf_nelson_aalen <- function(times, events) {
 #' @param t Passed to \code{<=}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .survrsf_chf_at <- function(na, t) {
   out <- 0.0
   tm <- na$time

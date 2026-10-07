@@ -21,6 +21,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .remlfn_groups(y = y, group = g)
 #' res
+#' @keywords internal
 .remlfn_groups <- function(y, group) {
   # Group y values by group label, preserving first-appearance order.
   if (length(y) != length(group)) {
@@ -54,6 +55,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .remlfn_ranova(y = y, group = g)
 #' res
+#' @keywords internal
 .remlfn_ranova <- function(y, group) {
   grp <- .remlfn_groups(y, group)
   keys <- grp$keys
@@ -109,6 +111,7 @@
 #' @param s2e Numeric; passed to \code{log}.
 #' @return A list with \code{loglik}, \code{mu}.
 #' @export
+#' @keywords internal
 .remlfn_loglik <- function(gs, ns, s2a, s2e) {
   logdetV <- 0
   xvx <- 0
@@ -142,6 +145,7 @@
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5000}.
 #' @return A list with \code{x}, \code{fun}, \code{nit}, \code{success}.
 #' @export
+#' @keywords internal
 .remlfn_nelder_mead <- function(fn, x0, xatol = 1e-10, fatol = 1e-10, maxiter = 5000) {
   n <- length(x0)
   alpha <- 1
@@ -423,6 +427,7 @@ morie_reml_variance_components <- morie_remlfn
 #' @examples
 #' res <- .remlfn_cheatsheet()
 #' res
+#' @keywords internal
 .remlfn_cheatsheet <- function() {
   return("remlfn: REML for the one-way random model; balanced data REML solutions = ANOVA estimators (Searle Sec. 4.8)")
 }

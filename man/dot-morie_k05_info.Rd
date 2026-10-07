@@ -27,3 +27,4 @@ A numeric value.
 the 4PL P and using P-c = (u-c)P*, u-P = (u-c)Q* gives this form,
 which collapses to D^2 a^2 P Q when c = 0, u = 1.
 }
+\keyword{internal}

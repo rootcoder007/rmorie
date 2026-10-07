@@ -85,6 +85,7 @@
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{a}, \code{y}, \code{q1}, \code{q0}, \code{gg}, \code{n}.
 #' @export
+#' @keywords internal
 .tlsate_check <- function(A, Y, Q1, Q0, g) {
   a <- as.numeric(A)
   y <- as.numeric(Y)
@@ -113,6 +114,7 @@
 #' @examples
 #' res <- .tlsate_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tlsate_logit <- function(p) {
   q <- pmin(pmax(p, 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -130,6 +132,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlsate_expit(x = x)
 #' res
+#' @keywords internal
 .tlsate_expit <- function(x) {
   ifelse(x > -700, 1.0 / (1.0 + exp(-x)), 0.0)
 }
@@ -146,6 +149,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlsate_var(v = x)
 #' res
+#' @keywords internal
 .tlsate_var <- function(v) {
   m <- sum(v) / length(v)
   sum((v - m)^2) / (length(v) - 1)
@@ -163,6 +167,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlsate_se(v = x)
 #' res
+#' @keywords internal
 .tlsate_se <- function(v) {
   m <- sum(v) / length(v)
   sqrt(sum((v - m)^2) / (length(v) - 1) / length(v))
@@ -182,6 +187,7 @@
 #' @param psi Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tlsate_pate_influence_curve <- function(A, Y, Q1, Q0, g, psi) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
   a <- d$a
@@ -209,6 +215,7 @@
 #' @param g Passed to \code{.tlsate_check}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tlsate_sate_influence_curve <- function(A, Y, Q1, Q0, g) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
   a <- d$a
@@ -236,6 +243,7 @@
 #' @return A list with \code{var_pate}, \code{var_sate}, \code{gap},
 #' \code{var_conditional_effect}, \code{note}.
 #' @export
+#' @keywords internal
 .tlsate_variance_gap <- function(A, Y, Q1, Q0, g, psi) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
   n <- d$n
@@ -265,6 +273,7 @@
 #' \code{se_sample}, \code{ci_population}, \code{ci_sample}, \code{width_ratio},
 #' \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .tlsate_sate_tmle <- function(A, Y, Q1, Q0, g) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
   a <- d$a
@@ -319,6 +328,7 @@
 #' @param ic Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{se}, \code{n_pairs}, \code{note}.
 #' @export
+#' @keywords internal
 .tlsate_paired_variance <- function(pair_ids, ic) {
   p <- as.character(pair_ids)
   v <- as.numeric(ic)
@@ -356,6 +366,7 @@
 #' @examples
 #' res <- .tlsate_cheatsheet()
 #' res
+#' @keywords internal
 .tlsate_cheatsheet <- function() {
   paste0(
     "tlsate: in a cluster randomized trial the units are not samp",

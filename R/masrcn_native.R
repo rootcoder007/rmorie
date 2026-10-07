@@ -29,6 +29,7 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .masrcn_bilinear <- function(F, y, x) {
   h <- length(F)
   w <- length(F[[1L]])
@@ -59,6 +60,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .masrcn_mat(X = x)
 #' res
+#' @keywords internal
 .masrcn_mat <- function(X) {
   if (is.matrix(X)) {
     out <- vector("list", nrow(X))
@@ -286,6 +288,7 @@ mask_rcnn_segmentation <- roi_align
 #' @examples
 #' res <- .masrcn_cheatsheet()
 #' res
+#' @keywords internal
 .masrcn_cheatsheet <- function() {
   paste("masrcn: Faster R-CNN plus a THIRD branch predicting a ",
         "binary mask per RoI. Two details carry it. RoIPool ",

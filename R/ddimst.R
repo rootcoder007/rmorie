@@ -11,6 +11,7 @@
 #' @param T Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ddim_alpha_bar <- function(t, T) {
   f <- function(u) cos((u / T + 0.008) / 1.008 * pi / 2)^2
   f(t) / f(0)

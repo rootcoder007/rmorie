@@ -24,3 +24,4 @@ A numeric value.
 denominator are both finite sums of normal increments, so this is
 exact rather than quadrature.
 }
+\keyword{internal}

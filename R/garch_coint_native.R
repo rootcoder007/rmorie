@@ -84,6 +84,7 @@ morie_garch_recursion <- function(eps, params, spec = "garch") {
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_garch_pack <- function(spec, x) {
   sig <- function(z) 1 / (1 + exp(-pmax(pmin(z, 30), -30)))
   if (spec == "igarch") {

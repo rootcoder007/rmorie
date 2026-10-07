@@ -18,3 +18,4 @@ A numeric value.
 A step of the slowdp_native implementation. Called by \code{stick_breaking}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

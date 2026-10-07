@@ -19,3 +19,4 @@ A step of the grclus_native implementation. Called by \code{.grclus_grow_partiti
 \code{.grclus_kl}, \code{morie_grclus}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

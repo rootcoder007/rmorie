@@ -10,6 +10,7 @@
 #' @param G Passed to \code{.s03mat}.
 #' @return A list with \code{A}, \code{n}, \code{nb}.
 #' @export
+#' @keywords internal
 .dw_adj <- function(G) {
   A <- .s03mat(G)
   n <- nrow(A)
@@ -35,6 +36,7 @@
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .dw_walk <- function(nb, start, length_, e) {
   w <- integer(length_)
   w[1] <- start
@@ -70,6 +72,7 @@
 #' @param e Passed to \code{.ghc_unif}.
 #' @return A list with \code{W}, \code{C}.
 #' @export
+#' @keywords internal
 .dw_skipgram <- function(walks, n, dim, window, epochs, lr, neg, e) {
   W <- matrix(0, n, dim)
   for (i in seq_len(n)) for (d in seq_len(dim))

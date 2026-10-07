@@ -53,6 +53,7 @@
 #' @param msa A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .alfomg_shape <- function(msa) {
   s <- length(msa)
   if (s == 0L) stop("an alignment with no sequences has nothing to say")

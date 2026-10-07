@@ -18,6 +18,7 @@
 #' @param roots See Usage.
 #' @return The value of \code{coefs}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_rg_polyroots <- function(roots) {
   # expand prod (z - r_k) into ascending-power coefficients
   coefs <- complex(real = 1, imaginary = 0)

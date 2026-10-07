@@ -46,3 +46,4 @@ A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss},
 A step of the ffmFM_native implementation. Called by \code{morie_ffmFM}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

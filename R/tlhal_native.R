@@ -232,6 +232,7 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
 #' @param lam Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tlhal_project_l1 <- function(v, lam) {
   if (sum(abs(v)) <= lam) return(v)
   u <- sort(abs(v), decreasing = TRUE)
@@ -352,6 +353,7 @@ cv_select_lambda <- function(X, y, lambdas, V = 5L, seed = 0L,
 #' @examples
 #' res <- .tlhal_cheatsheet()
 #' res
+#' @keywords internal
 .tlhal_cheatsheet <- function() {
   paste("tlhal: replace SMOOTHNESS with a VARIATION NORM bound. ",
         "Any cadlag function of finite variation is a sum over ",

@@ -24,6 +24,7 @@
 #'   res <- .boot_n(data = x)
 #'   res
 #' }
+#' @keywords internal
 .boot_n <- function(data) if (is.null(dim(data))) length(data) else nrow(data)
 
 # boot:::ordinary.array -- single- or multi-stratum R x n index matrix.
@@ -37,6 +38,7 @@
 #' @param strata Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{output}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_boot_index <- function(n, R, strata = NULL) {
   if (is.null(strata) || length(unique(strata)) == 1L) {
     out <- sample.int(n, n * R, replace = TRUE)
@@ -106,6 +108,7 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' @param boot_obj A list; the body reads \code{$index} from it.
 #' @return A matrix, from \code{t}.
 #' @export
+#' @keywords internal
 .morie_boot_freq <- function(boot_obj) {
   idx <- boot_obj$index
   n <- ncol(idx)
@@ -123,6 +126,7 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' \code{boot_obj$t[, 1L]}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .morie_empinf_reg <- function(boot_obj, t = boot_obj$t[, 1L]) {
   fins <- which(is.finite(t))
   t <- t[fins]
@@ -154,6 +158,7 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' @param alpha A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_norm_inter <- function(t, alpha) {
   t <- sort(t[is.finite(t)])
   R <- length(t)
@@ -191,6 +196,7 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' @param conf Numeric; combined arithmetically in the body.
 #' @return The value of \code{.morie_norm_inter}.
 #' @export
+#' @keywords internal
 .morie_ci_perc <- function(t, conf) .morie_norm_inter(t, (1 + c(-conf, conf)) / 2)
 
 #' .morie_ci_basic
@@ -203,6 +209,7 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' @param conf Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_ci_basic <- function(t0, t, conf) {
   2 * t0 - .morie_norm_inter(t, (1 + c(conf, -conf)) / 2)
 }
@@ -217,6 +224,7 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' @param conf Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .morie_ci_norm <- function(t0, t, conf) {
   t <- t[is.finite(t)]
   bias <- mean(t) - t0
@@ -234,6 +242,7 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' @param conf Numeric; combined arithmetically in the body.
 #' @return The value of \code{.morie_norm_inter}.
 #' @export
+#' @keywords internal
 .morie_ci_bca <- function(boot_obj, index, conf) {
   t_all <- boot_obj$t[, index]
   t0 <- boot_obj$t0[index]
@@ -302,6 +311,7 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 #' @param endcorr A flag; the body branches on it.
 #' @return A list with \code{starts}, \code{lengths}.
 #' @export
+#' @keywords internal
 .morie_ts_array <- function(n, n.sim, R, l, sim, endcorr) {
   endpt <- if (endcorr) n else n - l + 1
   if (sim == "geom") {
@@ -341,6 +351,7 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 #'   res <- .morie_make_ends(a = A, n = 3L)
 #'   res
 #' }
+#' @keywords internal
 .morie_make_ends <- function(a, n) {
   if (a[2L] == 0) {
     return(numeric())

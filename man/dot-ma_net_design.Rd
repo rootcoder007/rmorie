@@ -17,3 +17,4 @@ and the smallest is the reference, fixed at zero; a study comparing
 t2 against t1 contributes +1 in the column of t2 and -1 in that of
 t1.
 }
+\keyword{internal}

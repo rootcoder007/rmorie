@@ -26,3 +26,4 @@ floating-point noise. Going finer would push the comparison back
 below the noise floor and reintroduce exactly the disagreement this
 exists to remove.
 }
+\keyword{internal}

@@ -24,3 +24,4 @@ the source it follows.
 res <- .unif_stream(seed = 1L)
 res
 }
+\keyword{internal}

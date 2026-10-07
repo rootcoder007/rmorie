@@ -20,6 +20,7 @@
 #' @param n_t A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
+#' @keywords internal
 .fgam_grid_weights <- function(n_t) {
   if (n_t < 2L) return(1.0)
   h <- 1.0 / (n_t - 1L)
@@ -40,6 +41,7 @@
 #' @param degree Numeric; combined arithmetically in the body. Defaults to \code{3L}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .fgam_knots <- function(lo, hi, n_basis, degree = 3L) {
   n_int <- n_basis - degree - 1L
   if (n_int < 0L)
@@ -64,6 +66,7 @@
 #' @param degree A count; the body uses it as \code{seq_len(...)}. Defaults to \code{3L}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .fgam_bspline <- function(x, kn, n_basis, degree = 3L) {
   hi <- kn[length(kn)]
   if (x >= hi) x <- hi - .fgam_EPS
@@ -97,6 +100,7 @@
 #' @examples
 #' res <- .fgam_diff_penalty(n = 3L)
 #' res
+#' @keywords internal
 .fgam_diff_penalty <- function(n, order = 2L) {
   rows <- n - order
   D <- matrix(0.0, max(rows, 0L), n)
@@ -266,6 +270,7 @@ morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
 #' @examples
 #' res <- .fgam_cheatsheet()
 #' res
+#' @keywords internal
 .fgam_cheatsheet <- function() {
   paste0("fgam: morie_fgam_functional_gam(X, Y, n_x, n_t, lam_x, lam_t) -> ",
          "E[Y|X] = theta0 + int F(X(t), t) dt by tensor-product penalised ",

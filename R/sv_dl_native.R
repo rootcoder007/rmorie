@@ -59,6 +59,7 @@
 #' @return A list with \code{chrom1}, \code{pos1}, \code{strand1}, \code{len1},
 #' \code{chrom2}, \code{pos2}, \code{strand2}, \code{len2}, \code{seq}, \code{id}.
 #' @export
+#' @keywords internal
 .sv_dl_pair <- function(p) {
   # Normalise one read pair; mate 1 is the left-most alignment.
   need <- c("chrom1", "pos1", "strand1", "chrom2", "pos2", "strand2")
@@ -117,6 +118,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .sv_dl_median(v = x)
 #' res
+#' @keywords internal
 .sv_dl_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -139,6 +141,7 @@
 #' @param p A list; the body reads \code{$len2}, \code{$pos1}, \code{$pos2} from it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sv_dl_insert <- function(p) {
   # Outer distance: left-most start to right-most end.
   (p$pos2 + p$len2) - p$pos1
@@ -285,6 +288,7 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation = c("+", "-"),
 #' @param median Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sv_dl_size <- function(p, label, median) {
   # The SV size this pair implies, used as the clustering weight.
   if (label[1L] == "TRA") {
@@ -356,6 +360,7 @@ morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
 #' @param edges A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .sv_dl_components <- function(n, edges) {
   # Connected components (union-find); singletons dropped.
   parent <- seq_len(n)
@@ -565,6 +570,7 @@ morie_sv_dl_paired_end_calls <- function(pairs, median = NULL, sd = NULL,
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .sv_dl_revcomp(s = txt)
 #' res
+#' @keywords internal
 .sv_dl_revcomp <- function(s) {
   chars <- rev(strsplit(toupper(s), "")[[1L]])
   comp <- ifelse(chars %in% names(.sv_dl_COMPLEMENT),
@@ -761,6 +767,7 @@ morie_sv_dl_split_read_consensus <- function(reads, starts = NULL) {
 #' @param gap_extend Numeric; combined arithmetically in the body. Defaults to \code{-1}.
 #' @return A list with \code{best}, \code{best_at}.
 #' @export
+#' @keywords internal
 .sv_dl_gotoh <- function(query, ref, match = 1.0, mismatch = -2.0,
                          gap_open = -4.0, gap_extend = -1.0) {
   # Affine-gap DP; returns, for each query prefix, its best score and

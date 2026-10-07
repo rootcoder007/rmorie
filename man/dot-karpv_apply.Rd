@@ -18,3 +18,4 @@ Nothing; this branch always raises.
 A step of the karpV_native implementation. Called by \code{morie_karpV_evaluate}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

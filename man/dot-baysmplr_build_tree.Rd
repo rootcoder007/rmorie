@@ -37,3 +37,4 @@ A step of the baysmplr_native implementation. Called by \code{morie_baysmplr_nut
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

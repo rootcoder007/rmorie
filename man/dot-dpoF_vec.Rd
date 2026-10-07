@@ -24,3 +24,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .dpoF_vec(x = x, name = txt)
 res
 }
+\keyword{internal}

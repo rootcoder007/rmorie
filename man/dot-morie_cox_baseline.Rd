@@ -27,3 +27,4 @@ A step of the cox_native implementation. Called by \code{morie_cox_breslow_step}
 module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

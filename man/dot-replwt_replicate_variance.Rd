@@ -23,3 +23,4 @@ A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error},
 A step of the replwt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

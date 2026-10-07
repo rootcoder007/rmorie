@@ -26,6 +26,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .sschin_cholsolve(A = A, b = b)
 #' res
+#' @keywords internal
 .sschin_cholsolve <- function(A, b) {
   Lc <- chol(A)
   as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
@@ -47,6 +48,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .sschin_ols(X = X, y = y)
 #' res
+#' @keywords internal
 .sschin_ols <- function(X, y, ridge_rel = 1e-8) {
   n <- nrow(X)
   p <- ncol(X)
@@ -73,6 +75,7 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @return A list with \code{beta}, \code{var}, \code{loglik}, \code{iterations}, \code{converged}.
 #' @export
+#' @keywords internal
 .sschin_cox_breslow <- function(t, e, X, max_iter = 100L, tol = 1e-10) {
   n <- length(t)
   p <- ncol(X)
@@ -146,6 +149,7 @@
 #' @param df Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sschin_t_quantile <- function(pq, df) {
   z <- qnorm(pq)
   if (df > 1e8) return(z)
@@ -345,6 +349,7 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
 #' @examples
 #' res <- .sschin_cheatsheet()
 #' res
+#' @keywords internal
 .sschin_cheatsheet <- function() {
   paste0("sschin: morie_sschin_chained_imputation(time, event, X, mi_iter) ",
          "-> MICE imputation, per-imputation Cox fits and Rubin-pooled ",

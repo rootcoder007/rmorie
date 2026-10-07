@@ -100,6 +100,7 @@ Matern <- function(lambda_p, mu, r, t = NULL) {
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .s03lens <- function(r, v) {
   if (v >= 2 * r) return(0)
   if (v <= 0) return(pi * r * r)
@@ -119,6 +120,7 @@ Matern <- function(lambda_p, mu, r, t = NULL) {
 #' @param r Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .s03lensH <- function(t, r) {
   if (t <= 0) return(0)
   S <- t / (2 * r)

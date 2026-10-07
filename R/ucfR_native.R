@@ -68,6 +68,7 @@
 #' @param ratings_b Coerced to list by the body, with \code{as.list}.
 #' @return A list with \code{items}, \code{n}, \code{a}, \code{b}, \code{note}.
 #' @export
+#' @keywords internal
 .ucfR_co_rated <- function(ratings_a, ratings_b) {
   A <- as.list(ratings_a)
   B <- as.list(ratings_b)
@@ -92,6 +93,7 @@
 #' @param threshold Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ucfR_significance_weight <- function(n_common, threshold = 50) {
   n <- as.integer(n_common)
   t <- as.integer(threshold)
@@ -112,6 +114,7 @@
 #' @param threshold Passed to \code{.ucfR_significance_weight}. Defaults to \code{50}.
 #' @return A list with \code{w}, \code{n_common}, \code{degenerate}, \code{significance_applied}.
 #' @export
+#' @keywords internal
 .ucfR_pearson <- function(ratings_a, ratings_b, min_common = 2,
                           significance = FALSE, threshold = 50) {
   c <- .ucfR_co_rated(ratings_a, ratings_b)
@@ -151,6 +154,7 @@
 #' @param significance Passed to \code{.ucfR_pearson}. Defaults to \code{FALSE}.
 #' @return A list with \code{neighbours}, \code{n}, \code{note}.
 #' @export
+#' @keywords internal
 .ucfR_neighbours <- function(target, others, min_common = 2,
                              top_k = NULL, significance = FALSE) {
   out <- list()
@@ -194,6 +198,7 @@
 #' @return A list with \code{estimate}, \code{prediction}, \code{naive_weighted_mean},
 #' \code{user_mean}, \code{n_neighbours}, \code{fell_back}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .ucfR_predict_rating <- function(target, others, item, min_common = 2,
                                  top_k = NULL, significance = FALSE) {
   item <- as.character(item)
@@ -253,6 +258,7 @@
 #' @examples
 #' res <- .ucfR_cheatsheet()
 #' res
+#' @keywords internal
 .ucfR_cheatsheet <- function() {
   paste0(
     "ucfR: people who agreed before will probably agree again -- ",

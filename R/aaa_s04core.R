@@ -24,6 +24,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s4_expit(z = y)
 #' res
+#' @keywords internal
 .s4_expit <- function(z) ifelse(z >= 0, 1 / (1 + exp(-z)), exp(z) / (1 + exp(z)))
 
 #' .s4_logit
@@ -37,6 +38,7 @@ NULL
 #' @examples
 #' res <- .s4_logit(p = 0.5)
 #' res
+#' @keywords internal
 .s4_logit <- function(p) log(p / (1 - p))
 
 #' .s4_clip
@@ -50,6 +52,7 @@ NULL
 #' @param hi Passed to \code{pmin}.
 #' @return The value of \code{pmin}.
 #' @export
+#' @keywords internal
 .s4_clip <- function(v, lo, hi) pmin(pmax(v, lo), hi)
 
 #' .s4_median
@@ -64,6 +67,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_median(x = x)
 #' res
+#' @keywords internal
 .s4_median <- function(x) {
   x <- sort(as.numeric(unlist(x)))
   n <- length(x)
@@ -88,6 +92,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_quantile7(x = x, p = 0.5)
 #' res
+#' @keywords internal
 .s4_quantile7 <- function(x, p) {
   x <- sort(as.numeric(unlist(x)))
   n <- length(x)
@@ -116,6 +121,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_order(x = x)
 #' res
+#' @keywords internal
 .s4_order <- function(x) order(as.numeric(unlist(x)), seq_along(unlist(x))) - 1L
 
 #' .s4_rank_avg
@@ -130,6 +136,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_rank_avg(x = x)
 #' res
+#' @keywords internal
 .s4_rank_avg <- function(x) as.numeric(rank(as.numeric(unlist(x)), ties.method = "average"))
 
 #' .s4_softmax
@@ -144,6 +151,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_softmax(v = x)
 #' res
+#' @keywords internal
 .s4_softmax <- function(v) {
   e <- exp(v - max(v))
   e / sum(e)
@@ -166,6 +174,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s4_glmbin(X = x, y = y)
 #' res
+#' @keywords internal
 .s4_glmbin <- function(X, y, iters = 25L, ridge = 1e-8) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -199,6 +208,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s4_rbf(X = x, Z = y)
 #' res
+#' @keywords internal
 .s4_rbf <- function(X, Z, ell = 1) {
   X <- as.matrix(X)
   Z <- as.matrix(Z)
@@ -223,6 +233,7 @@ NULL
 #' @param noise A matrix; passed to \code{diag}. Defaults to \code{1e-06}.
 #' @return A list with \code{mean}, \code{var}.
 #' @export
+#' @keywords internal
 .s4_gppost <- function(K, Ks, Kss, y, noise = 1e-6) {
   K <- as.matrix(K)
   Ks <- as.matrix(Ks)
@@ -247,6 +258,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_colstd(X = x)
 #' res
+#' @keywords internal
 .s4_colstd <- function(X) {
   X <- as.matrix(X)
   n <- nrow(X)
@@ -274,6 +286,7 @@ NULL
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .s4_euclid(a = A, b = b)
 #' res
+#' @keywords internal
 .s4_euclid <- function(a, b) sqrt(sum((as.numeric(a) - as.numeric(b))^2))
 
 #' .s4_sgn
@@ -288,6 +301,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_sgn(v = x)
 #' res
+#' @keywords internal
 .s4_sgn <- function(v) ifelse(v >= 0, 1, -1)
 
 ## Half-away-from-zero. Deliberately not round(): both languages round
@@ -304,6 +318,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_rnd(v = x)
 #' res
+#' @keywords internal
 .s4_rnd <- function(v) .s4_sgn(v) * floor(abs(v) + 0.5)
 
 ## Thin QR by modified Gram-Schmidt. R diagonal is non-negative by
@@ -322,6 +337,7 @@ NULL
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .s4_qr_mgs(A = A)
 #' res
+#' @keywords internal
 .s4_qr_mgs <- function(A) {
   A <- as.matrix(A)
   n <- nrow(A)
@@ -354,6 +370,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_rank_first(x = x)
 #' res
+#' @keywords internal
 .s4_rank_first <- function(x) {
   x <- as.numeric(unlist(x))
   o <- order(x, seq_along(x))
@@ -376,6 +393,7 @@ NULL
 #' @param Cc Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{theta}, \code{beta}, \code{cbar}.
 #' @export
+#' @keywords internal
 .s4_medmodels <- function(Y, A, M, Cc = NULL) {
   Y <- as.numeric(Y)
   A <- as.numeric(A)
@@ -405,6 +423,7 @@ NULL
 #' @param m Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{cde}, \code{intref}, \code{intmed}, \code{pie}, \code{te}.
 #' @export
+#' @keywords internal
 .s4_fourway <- function(theta, beta, cbar, a = 1, astar = 0, m = 0) {
   d <- a - astar
   bc <- beta[1] + beta[2] * astar
@@ -439,6 +458,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_tmle(y = y, D = g, W = x)
 #' res
+#' @keywords internal
 .s4_tmle <- function(y, D, W, gbound = 0.025) {
   y <- as.numeric(y)
   D <- as.numeric(D)
@@ -485,6 +505,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s4_ols(X = x, y = y)
 #' res
+#' @keywords internal
 .s4_ols <- function(X, y) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -521,6 +542,7 @@ NULL
 #' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .s4_triinv <- function(R, p) {
   out <- matrix(0, p, p)
   for (j in seq_len(p)) {
@@ -546,6 +568,7 @@ NULL
 #' @param cost A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{ans}, as built in the body.
 #' @export
+#' @keywords internal
 .s4_hungarian <- function(cost) {
   Cst <- as.matrix(cost)
   n <- nrow(Cst)
@@ -611,6 +634,7 @@ NULL
 #' @param rater Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{ms_r}, \code{ms_c}, \code{ms_e}, \code{k}, \code{n}.
 #' @export
+#' @keywords internal
 .s4_icc_ms <- function(y, subject, rater) {
   yv <- as.numeric(y)
   sv <- as.integer(round(as.numeric(subject)))
@@ -650,6 +674,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .s4_gpdfit(x = x)
 #' res
+#' @keywords internal
 .s4_gpdfit <- function(x) {
   N <- length(x)
   if (N < 5L) {
@@ -684,6 +709,7 @@ NULL
 #' @param lw A vector; its length is taken and its elements indexed.
 #' @return A list with \code{lw}, \code{k}.
 #' @export
+#' @keywords internal
 .s4_psis <- function(lw) {
   lw <- as.numeric(lw)
   Sn <- length(lw)

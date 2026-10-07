@@ -75,6 +75,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlstoch_vec(x = x)
 #' res
+#' @keywords internal
 .tlstoch_vec <- function(x) {
   if (is.null(x)) {
     return(numeric(0))
@@ -96,6 +97,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlstoch_mat(x = x)
 #' res
+#' @keywords internal
 .tlstoch_mat <- function(x) {
   if (is.null(x)) {
     return(matrix(numeric(0), nrow = 0, ncol = 0))
@@ -141,6 +143,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .tlstoch_shift_regime(A = A, delta = 0.5)
 #' res
+#' @keywords internal
 .tlstoch_shift_regime <- function(A, delta, lower = NULL, upper = NULL) {
   a <- .tlstoch_vec(A)
   d <- as.numeric(delta)
@@ -182,6 +185,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .tlstoch_positivity_shift(A = A, delta = 0.5)
 #' res
+#' @keywords internal
 .tlstoch_positivity_shift <- function(A, delta, W = NULL, bins = 5) {
   a <- .tlstoch_vec(A)
   d <- as.numeric(delta)
@@ -233,6 +237,7 @@
 #' @param upper Passed to \code{.tlstoch_shift_regime}.
 #' @return A list with \code{psi}, \code{observed_mean}, \code{contrast}, \code{delta}.
 #' @export
+#' @keywords internal
 .tlstoch_stochastic_estimand <- function(Q_fn, A, W, delta,
                                          lower = NULL, upper = NULL) {
   a <- .tlstoch_vec(A)
@@ -271,6 +276,7 @@
 #' @param upper Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{H}, \code{max}, \code{mean}.
 #' @export
+#' @keywords internal
 .tlstoch_density_ratio <- function(A, W, delta, g_fn,
                                    lower = NULL, upper = NULL) {
   a <- .tlstoch_vec(A)
@@ -311,6 +317,7 @@
 #' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci},
 #' \code{mean_eic}, \code{delta}, \code{max_density_ratio}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .tlstoch_shift_tmle <- function(Y, A, W, Q_fn, g_fn, delta,
                                 lower = NULL, upper = NULL, iters = 60) {
   y <- .tlstoch_vec(Y)
@@ -371,6 +378,7 @@
 #' @examples
 #' res <- .tlstoch_cheatsheet()
 #' res
+#' @keywords internal
 .tlstoch_cheatsheet <- function() {
   paste(
     "tlstoch: static and dynamic regimes are both DETERMINISTIC,",

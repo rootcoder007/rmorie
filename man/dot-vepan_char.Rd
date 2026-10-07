@@ -24,3 +24,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .vepan_char(s = txt, k = 3L)
 res
 }
+\keyword{internal}

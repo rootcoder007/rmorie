@@ -24,3 +24,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .morie_svdd_mat(X = x, name = txt)
 res
 }
+\keyword{internal}

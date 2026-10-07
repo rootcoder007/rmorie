@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 \examples{
 .groebn_scale(.groebn_poly(list("1_0" = 3)), c(1L, 2L))
 }
+\keyword{internal}

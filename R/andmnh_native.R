@@ -105,6 +105,7 @@ tukey_hanning_kernel <- function(x) {
 #' @param kernel Carried through into a list the body builds.
 #' @return A list with \code{fun}, \code{const}, \code{name}.
 #' @export
+#' @keywords internal
 .check_kernel <- function(kernel) {
   if (!(kernel %in% names(.KERNELS))) {
     stop(sprintf(
@@ -167,6 +168,7 @@ moment_vectors <- function(e, X) {
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .svd_r(a = A)
 #' res
+#' @keywords internal
 .svd_r <- function(a) {
   # returns U, s, V (V transposed, like np.linalg.svd with full matrices)
   a <- as.matrix(a)
@@ -188,6 +190,7 @@ moment_vectors <- function(e, X) {
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .singular_value_adjust(a = A)
 #' res
+#' @keywords internal
 .singular_value_adjust <- function(a, cap = 0.97) {
   cap <- as.numeric(cap)
   if (!(cap > 0 && cap < 1)) {
@@ -217,6 +220,7 @@ moment_vectors <- function(e, X) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .solve_safe(A = A, b = b)
 #' res
+#' @keywords internal
 .solve_safe <- function(A, b) {
   A <- as.matrix(A)
   storage.mode(A) <- "double"
@@ -680,6 +684,7 @@ morie_andmnh <- andrews_monahan_hac
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .morie_svd(a = A)
 #' res
+#' @keywords internal
 .morie_svd <- function(a) {
   a <- as.matrix(a)
   m <- nrow(a)

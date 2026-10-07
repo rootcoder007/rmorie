@@ -122,6 +122,7 @@ shrink_covariance <- function(residuals, lam = NULL) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- ._cholsolve(A = A, b = b)
 #' res
+#' @keywords internal
 ._cholsolve <- function(A, b) {
   A <- as.matrix(A)
   # chol() returns the UPPER factor U with A = t(U) %*% U, so the
@@ -288,6 +289,7 @@ morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
 #' @examples
 #' res <- .hierF_cheatsheet()
 #' res
+#' @keywords internal
 .hierF_cheatsheet <- function() {
   paste(paste0(
     "hierF: y = S b, reconcile with ytilde = S P yhat where P = (",

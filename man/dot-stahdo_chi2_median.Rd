@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 res <- .stahdo_chi2_median(p = 0.5)
 res
 }
+\keyword{internal}

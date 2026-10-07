@@ -25,3 +25,4 @@ language arms run the identical arithmetic -- a fixed 21x21 sweep,
 then 7 zooms each shrinking the box by ten -- so they land on the
 same numbers rather than on two different optimiser trajectories.
 }
+\keyword{internal}

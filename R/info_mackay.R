@@ -28,6 +28,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .morie_mk_pinv(a = A)
 #' res
+#' @keywords internal
 .morie_mk_pinv <- function(a) {
   s <- svd(a)
   tol <- max(dim(a)) * max(s$d) * .Machine$double.eps

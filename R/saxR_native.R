@@ -42,6 +42,7 @@ morie_sax_breakpoints <- function(alphabet) {
 #' @param w A count; the body uses it as \code{seq_len(...)}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .mor_sax_paa <- function(z, w) {
   n <- length(z)
   if (n %% w != 0L)

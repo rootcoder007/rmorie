@@ -16,3 +16,4 @@ The value of \code{$}.
 A step of the karpV_native implementation. Called by \code{.karpv_below}, \code{.karpv_unit}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

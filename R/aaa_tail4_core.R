@@ -27,6 +27,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t4_vec(x = x)
 #' res
+#' @keywords internal
 .t4_vec <- function(x) as.numeric(unlist(x))
 
 #' .t4_mat
@@ -41,6 +42,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t4_mat(X = x)
 #' res
+#' @keywords internal
 .t4_mat <- function(X) {
   if (is.matrix(X)) {
     return(matrix(as.numeric(X), nrow = nrow(X)))
@@ -63,6 +65,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t4_ranks(x = x)
 #' res
+#' @keywords internal
 .t4_ranks <- function(x) rank(x, ties.method = "average")
 
 #' .t4_tiecounts
@@ -77,6 +80,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t4_tiecounts(x = x)
 #' res
+#' @keywords internal
 .t4_tiecounts <- function(x) as.numeric(table(x))
 
 # Sample autocorrelations with the biased (n in both numerator and
@@ -93,6 +97,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t4_acfbiased(x = x, lag = 3L)
 #' res
+#' @keywords internal
 .t4_acfbiased <- function(x, lag) {
   n <- length(x)
   d <- x - mean(x)
@@ -115,6 +120,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .t4_lrvnw(u = x, lag = 3L)
 #' res
+#' @keywords internal
 .t4_lrvnw <- function(u, lag) {
   n <- length(u)
   s <- sum(u * u) / n
@@ -141,6 +147,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .t4_olsfit(X = x, y = y)
 #' res
+#' @keywords internal
 .t4_olsfit <- function(X, y) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -165,6 +172,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .t4_kendallS(x = x, y = y)
 #' res
+#' @keywords internal
 .t4_kendallS <- function(x, y) {
   n <- length(x)
   S <- 0
@@ -191,6 +199,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .t4_kendalltaub(x = x, y = y)
 #' res
+#' @keywords internal
 .t4_kendalltaub <- function(x, y) {
   n <- length(x)
   S <- .t4_kendallS(x, y)
@@ -223,6 +232,7 @@ NULL
 #' @examples
 #' res <- .t4_result()
 #' res
+#' @keywords internal
 .t4_result <- function(...) {
   out <- list(...)
   class(out) <- c("morie_rich_result", "list")

@@ -22,3 +22,4 @@ A list with \code{sigma}, \code{d}, \code{r}.
 sigma^2 = c0 + sigma0^2 out of Sigma leaves the nugget as a RATIO in
 [0, 1] -- the reparameterisation Sec. 5.5.2 calls for.
 }
+\keyword{internal}

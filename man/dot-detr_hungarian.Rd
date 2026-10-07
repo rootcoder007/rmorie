@@ -15,3 +15,4 @@ The value of \code{out}, as built in the body.
 \description{
 rectangular cost with rows <= columns.  Returns the column per row.
 }
+\keyword{internal}

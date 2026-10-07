@@ -18,3 +18,4 @@ The value of \code{cbind}.
 A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

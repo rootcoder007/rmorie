@@ -28,3 +28,4 @@ Nothing; this branch always raises.
 A step of the alfrf2_native implementation. Called by \code{morie_alfrf2}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

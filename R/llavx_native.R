@@ -189,6 +189,7 @@ training_stage <- function(stage) {
 #' @examples
 #' res <- .llavx_cheatsheet()
 #' res
+#' @keywords internal
 .llavx_cheatsheet <- function() {
   paste("llavx: instruction tuning works in language and lacked ",
         "MULTIMODAL data, so generate it with a LANGUAGE-ONLY ",

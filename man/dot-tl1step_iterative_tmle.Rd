@@ -25,3 +25,4 @@ A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star},
 within each iteration and recomputed between them -- a sequence of
 jumps rather than a path.
 }
+\keyword{internal}

@@ -23,3 +23,4 @@ the source it follows.
 res <- .rfmtry(p = 0.5)
 res
 }
+\keyword{internal}

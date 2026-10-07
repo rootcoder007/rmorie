@@ -41,6 +41,7 @@
 #' @examples
 #' res <- .drospi_as_z(h = 0.5)
 #' res
+#' @keywords internal
 .drospi_as_z <- function(h) {
   if (h <= 0.0 || h >= 1.0)
     stop("cumulative probability out of (0, 1)")
@@ -64,6 +65,7 @@
 #' @param xs A vector; its length is taken and its elements indexed.
 #' @return A list with \code{q}, \code{alpha}, \code{beta}.
 #' @export
+#' @keywords internal
 .drospi_fit_thom <- function(xs) {
   pos <- xs[xs > 0]
   n <- length(xs)
@@ -159,6 +161,7 @@ spi <- morie_droSPI
 #' @examples
 #' res <- .droSPI_cheatsheet()
 #' res
+#' @keywords internal
 .droSPI_cheatsheet <- function() {
   "droSPI: gamma-fit totals (Thom MLE), H=q+(1-q)G, A-S normal transform"
 }

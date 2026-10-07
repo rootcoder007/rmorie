@@ -20,3 +20,4 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_periodogr
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

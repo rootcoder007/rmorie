@@ -16,3 +16,4 @@ mirror in src/morie/fn/_mapq_const.py).
 res <- .mapq_subscales()
 res
 }
+\keyword{internal}

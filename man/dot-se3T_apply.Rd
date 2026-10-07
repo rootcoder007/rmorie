@@ -18,3 +18,4 @@ A vector, from \code{c}.
 A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

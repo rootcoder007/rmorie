@@ -346,6 +346,7 @@ crypto_shred <- function(kek_id, wrapped_deks) {
 #' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .secrtt_as_bytes <- function(x) {
   if (is.raw(x)) return(x)
   if (is.character(x)) return(charToRaw(paste(x, collapse = "")))
@@ -562,5 +563,6 @@ wrap_dek <- function(dek, kek, nonce, kek_id = "kek-1",
 #' Derive a distinct DEK per record
 #' @param bs See Usage.
 #' @export
+#' @keywords internal
 .secrtt_hex <- function(bs) paste(sprintf("%02x", as.integer(bs)),
                                  collapse = "")

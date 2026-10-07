@@ -20,3 +20,4 @@ A numeric value.
 fallback. Extracted from the morie_garch_fit() optimiser closure so
 the parameter-domain guard is directly unit-testable.
 }
+\keyword{internal}

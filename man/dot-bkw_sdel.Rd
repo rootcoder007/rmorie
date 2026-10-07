@@ -25,3 +25,4 @@ A step of the dffit implementation. Called by \code{Covrat}, \code{Dfbetb}, \cod
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

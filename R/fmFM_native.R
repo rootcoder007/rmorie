@@ -64,6 +64,7 @@ predict_naive <- function(x, w0, w, V) {
 #' @param V A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .fmFM_predict <- function(x, w0, w, V) {
   V <- .fmFM_rows(V)
   xs <- as.numeric(x)
@@ -210,6 +211,7 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
 #' @examples
 #' res <- .fmFM_cheatsheet()
 #' res
+#' @keywords internal
 .fmFM_cheatsheet <- function() {
   paste0("fmFM: y = w0 + sum w_i x_i + sum_{i<j} <v_i,v_j> x_i x_j. ",
          "Factorising the interaction parameter COUPLES pairs that ",

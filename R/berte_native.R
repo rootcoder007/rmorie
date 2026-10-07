@@ -69,6 +69,7 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 #' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .proj <- function(row, W, b = NULL) {
   W <- as.matrix(W)
   storage.mode(W) <- "double"

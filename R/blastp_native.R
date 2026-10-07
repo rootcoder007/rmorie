@@ -14,6 +14,7 @@
 #' @param score Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{score}, \code{qi}, \code{sj}, \code{ln}.
 #' @export
+#' @keywords internal
 .blast_best <- function(a, b, score) {
   n <- length(a)
   m <- length(b)

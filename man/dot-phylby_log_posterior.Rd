@@ -40,3 +40,4 @@ A step of the phylby_native implementation. Called by \code{.phylby_step},
 \code{morie_phylby_log_posterior}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

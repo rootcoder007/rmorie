@@ -283,6 +283,7 @@ morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
 #' @param grid Passed to \code{morie_assign_latent_time}. Defaults to \code{200}.
 #' @return A list with \code{rss}, \code{assign}.
 #' @export
+#' @keywords internal
 .scvelo_residual <- function(u, s, alpha, beta, gamma, t_switch,
                              grid = 200) {
   a <- morie_assign_latent_time(u, s, alpha, beta, gamma, t_switch, grid)
@@ -450,6 +451,7 @@ morie_latent_time <- function(fits) {
 #' @examples
 #' res <- .scvelo_morie_cheatsheet()
 #' res
+#' @keywords internal
 .scvelo_morie_cheatsheet <- function() {
   paste("scvelo: du/dt = alpha - beta u, ds/dt = beta u - gamma s,",
         "and velocity IS ds/dt. The steady-state model reads velocity",

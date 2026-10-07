@@ -21,3 +21,4 @@ A step of the plsa_native implementation. Called by \code{.plsa_log_likelihood},
 \code{joint_probability}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

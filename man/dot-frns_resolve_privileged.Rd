@@ -19,3 +19,4 @@ A list with \code{privileged}, \code{warning}.
 A step of the frns_metrics implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

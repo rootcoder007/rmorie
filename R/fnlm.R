@@ -112,6 +112,7 @@ Fnlm <- function(X, Y, basis_X, basis_Y, s = NULL, t = NULL) {
 #' @param v A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .fnlm_trapz <- function(t, v) {
   s <- 0
   n <- length(t)

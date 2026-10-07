@@ -24,3 +24,4 @@ The value of \code{rec}.
 two languages agree to their shared tolerance rather than to whatever
 a black-box integrator happens to do.
 }
+\keyword{internal}

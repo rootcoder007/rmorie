@@ -23,3 +23,4 @@ X <- cbind(1, c(1.2, 2.4, 3.1, 4.8))
 res <- .schab_wls_operator(X = X, w = c(1, 0.5, 2, 1))
 res
 }
+\keyword{internal}

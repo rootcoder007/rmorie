@@ -22,3 +22,4 @@ A numeric value.
 A step of the prphet_native implementation. Called by \code{morie_prphet_fit}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

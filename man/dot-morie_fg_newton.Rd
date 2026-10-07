@@ -30,3 +30,4 @@ A list with \code{beta}, \code{loglik}, \code{I}, \code{U}.
 Part of the competing_risks_native implementation; see the file
 header for the source it follows.
 }
+\keyword{internal}

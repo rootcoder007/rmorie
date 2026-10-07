@@ -25,6 +25,7 @@
 #' @param im A vector; indexed elementwise.
 #' @return A list with \code{re}, \code{im}.
 #' @export
+#' @keywords internal
 .bsafft <- function(re, im) {
   # In-place iterative radix-2 Cooley-Tukey FFT; len must be a power of 2.
   n <- length(re)
@@ -90,6 +91,7 @@
 #' @param detrend A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{freqs}, \code{power}.
 #' @export
+#' @keywords internal
 .bsapsd <- function(x, fs, detrend = TRUE) {
   # Periodogram of x sampled at fs Hz with a Hann window, 0 .. fs/2.
   xs <- as.numeric(x)
@@ -124,6 +126,7 @@
 #' @param hi Passed to \code{<}.
 #' @return The value of \code{.morie_fsum}.
 #' @export
+#' @keywords internal
 .bsabandpow <- function(freqs, power, lo, hi) {
   # Total power in the half-open band [lo, hi) Hz.
   .morie_fsum(power[freqs >= lo & freqs < hi])
@@ -143,6 +146,7 @@
 #' @param minsep Passed to \code{>=}. Defaults to \code{0}.
 #' @return A list with \code{freqs}, \code{powers}.
 #' @export
+#' @keywords internal
 .bsapeaks <- function(freqs, power, count = 3L, minsep = 0) {
   # Local maxima of power, strongest first, at least minsep Hz apart.
   np <- length(power)
@@ -179,6 +183,7 @@
 #' @param maxlag Numeric; passed to \code{min}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .bsaacf <- function(x, maxlag) {
   # Biased autocorrelation of the mean-removed x, lags 0..maxlag.
   xs <- as.numeric(x)
@@ -210,6 +215,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .bsalpc(x = x, order = 3L)
 #' res
+#' @keywords internal
 .bsalpc <- function(x, order) {
   # Levinson-Durbin linear prediction; returns list(a = a[1..p], e = error).
   if (order < 1L) stop("order must be >= 1")
@@ -252,6 +258,7 @@
 #' @param npts A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1024L}.
 #' @return A list with \code{freqs}, \code{power}.
 #' @export
+#' @keywords internal
 .bsalpcspec <- function(a, fs, npts = 1024L) {
   # Magnitude-squared response of the all-pole LPC filter, 0..fs/2 Hz.
   i <- seq_len(npts) - 1L
@@ -280,6 +287,7 @@
 #' @return A list with \code{total_power}, \code{mean_freq_hz}, \code{median_freq_hz},
 #' \code{fm2_hz2}, \code{spread_hz}, \code{spectral_skewness}, \code{spectral_kurtosis}.
 #' @export
+#' @keywords internal
 .bsapsdmom <- function(freqs, power) {
   # Moments of a PSD treated as a density, Rangayyan (2024) Section 6.4.1.
   Ep <- .morie_fsum(power)
@@ -313,6 +321,7 @@
 #' @param fpeak Numeric; combined arithmetically in the body.
 #' @return A list with \code{bandwidth_hz}, \code{q}.
 #' @export
+#' @keywords internal
 .bsaqfactor <- function(freqs, power, fpeak) {
   # -3 dB bandwidth and Q = f_peak / bandwidth of the peak at fpeak.
   if (!length(freqs)) {
@@ -357,6 +366,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .bsahjorth(x = x)
 #' res
+#' @keywords internal
 .bsahjorth <- function(x) {
   # Hjorth activity, mobility, form factor; Rangayyan (2024) eqs. (5.25-26).
   xs <- as.numeric(x)
@@ -395,6 +405,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .bsarms(x = x)
 #' res
+#' @keywords internal
 .bsarms <- function(x) {
   xs <- as.numeric(x)
   if (!length(xs)) stop("empty signal")
@@ -413,6 +424,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .bsamoments(x = x)
 #' res
+#' @keywords internal
 .bsamoments <- function(x) {
   # (mean, variance, skewness, kurtosis); kurtosis is the raw fourth
   # standardised moment (3.0 for a Gaussian).
@@ -443,6 +455,7 @@
 #' @param win_s Numeric; combined arithmetically in the body.
 #' @return A list with \code{env}, \code{step_s}.
 #' @export
+#' @keywords internal
 .bsaenvelope <- function(x, fs, win_s) {
   # Short-time RMS envelope, non-overlapping windows of win_s seconds.
   xs <- as.numeric(x)
@@ -470,6 +483,7 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .bsahhrates <- function(v) {
   # Hodgkin-Huxley (1952) alpha/beta rate constants in 1/ms for membrane
   # potential v in mV, modern sign convention, rest -65 mV.  Removable
@@ -3517,6 +3531,7 @@ VagKnee <- function(vag, fs, weights = NULL, bias = NULL, n_segments = 8) {
 #' @param ph A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .bsaunwrap <- function(ph) {
   out <- numeric(length(ph))
   out[1L] <- ph[1L]

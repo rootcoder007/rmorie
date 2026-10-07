@@ -16,6 +16,7 @@
 #' @param b See Usage.
 #' @return A list with \code{g}, \code{c}, \code{d}.
 #' @export
+#' @keywords internal
 .crt_egcd <- function(a, b) {
   # extended Euclid: returns (g, c, d) with c*a + d*b = g
   old_r <- a

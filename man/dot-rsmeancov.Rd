@@ -19,3 +19,4 @@ A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fas
 \code{Mcdcv} and 2 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

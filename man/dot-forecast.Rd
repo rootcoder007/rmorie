@@ -28,3 +28,4 @@ have mean zero, so the point forecast just runs equations 3b-3f
 forward from the final state. The MA terms die after q steps; the AR
 recursion on d continues.
 }
+\keyword{internal}

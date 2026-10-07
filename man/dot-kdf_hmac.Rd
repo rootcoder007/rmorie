@@ -18,3 +18,4 @@ The value of \code{.sech_sha256}.
 .sech_sha256 and .sech_hmac defined there; this file is intended to
 be sourced together with sechsh_native.R.
 }
+\keyword{internal}

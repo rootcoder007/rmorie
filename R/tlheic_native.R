@@ -226,6 +226,7 @@ verify_gradient <- function(psi_of_P, D, score, weights = NULL,
 #' @examples
 #' res <- .tlheic_cheatsheet()
 #' res
+#' @keywords internal
 .tlheic_cheatsheet <- function() {
   paste("tlheic: for many parameters the efficient influence curve ",
         "exists only IMPLICITLY and deriving it is what stops the ",

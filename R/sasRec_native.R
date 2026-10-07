@@ -185,6 +185,7 @@ complexity <- function(n, d) {
 #' @examples
 #' res <- .sasRec_cheatsheet()
 #' res
+#' @keywords internal
 .sasRec_cheatsheet <- function() {
   paste("sasRec: Markov chains win where data are SPARSE (parsimony ",
         "is critical), RNNs where they are DENSE (complexity is ",

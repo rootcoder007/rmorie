@@ -15,3 +15,4 @@ A step of the RcppExports implementation. Called by \code{.morie_sha256_hex},
 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

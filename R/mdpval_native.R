@@ -19,6 +19,7 @@
 #' @param R A matrix; passed to \code{dim}.
 #' @return A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 #' @export
+#' @keywords internal
 .mdp_args <- function(P, R) {
   Pm <- lapply(P, function(Pa) as.matrix(Pa))
   A <- length(Pm)

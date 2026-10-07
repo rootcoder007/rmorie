@@ -18,3 +18,4 @@ A numeric value.
 A step of the regmlm_native implementation. Called by \code{test_variant}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

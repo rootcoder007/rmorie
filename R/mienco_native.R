@@ -70,6 +70,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .mienco_softplus(z = y)
 #' res
+#' @keywords internal
 .mienco_softplus <- function(z) {
   v <- as.numeric(z)
   ifelse(v > 0, v + log1p(exp(-v)), log1p(exp(v)))
@@ -84,6 +85,7 @@
 #' @param unpaired Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mienco_jsd_estimate <- function(paired, unpaired) {
   p <- as.numeric(paired)
   q <- as.numeric(unpaired)
@@ -102,6 +104,7 @@
 #' @param unpaired Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mienco_dv_estimate <- function(paired, unpaired) {
   p <- as.numeric(paired)
   q <- as.numeric(unpaired)
@@ -161,6 +164,7 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 #' @param estimator Passed to \code{morie_mienco}. Defaults to \code{"jsd"}.
 #' @return The value of \code{morie_mienco}.
 #' @export
+#' @keywords internal
 .mienco_global_objective <- function(summary, whole, other_whole, critic, estimator = "jsd") {
   morie_mienco(summary, list(whole), list(other_whole), critic, estimator)
 }
@@ -175,6 +179,7 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 #' @param discriminator Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .mienco_prior_matching_loss <- function(samples, prior_samples, discriminator) {
   a <- sapply(samples, function(s) as.numeric(discriminator(s)))
   b <- sapply(prior_samples, function(s) as.numeric(discriminator(s)))
@@ -194,6 +199,7 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 #' @examples
 #' res <- .mienco_cheatsheet()
 #' res
+#' @keywords internal
 .mienco_cheatsheet <- function() {
   paste0("mienco: unsupervised representations by maximising mutual ",
          "information -- but GLOBAL MI is weak, since MI is ",

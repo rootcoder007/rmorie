@@ -20,3 +20,4 @@ A step of the bigint_native implementation. Called by \code{morie_big_add},
 module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

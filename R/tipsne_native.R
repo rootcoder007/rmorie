@@ -86,6 +86,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tipsne_csum(v = x)
 #' res
+#' @keywords internal
 .tipsne_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -108,6 +109,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tipsne_dot <- function(a, b) {
   s <- 0
   cc <- 0
@@ -136,6 +138,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .tipsne_chol(a = A)
 #' res
+#' @keywords internal
 .tipsne_chol <- function(a) {
   p <- nrow(a)
   lo <- matrix(0, p, p)
@@ -163,6 +166,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .tipsne_solve_chol <- function(lo, b) {
   p <- nrow(lo)
   z <- numeric(p)
@@ -188,6 +192,7 @@
 #' @param lo A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .tipsne_inv_from_chol <- function(lo) {
   p <- nrow(lo)
   cols <- lapply(seq_len(p), function(j) {
@@ -250,6 +255,7 @@ morie_tipsne_ancova <- function(y, design) {
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @keywords internal
 .tipsne_design <- function(arm, X, n) {
   m <- cbind(rep(1, n), as.numeric(arm))
   if (!is.null(X)) m <- cbind(m, as.matrix(X))
@@ -271,6 +277,7 @@ morie_tipsne_ancova <- function(y, design) {
 #' @param sigma2_draw Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .tipsne_draw_beta <- function(e, beta, xtx_inv, sigma2_draw) {
   p <- length(beta)
   cov <- sigma2_draw * xtx_inv
@@ -335,6 +342,7 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tipsne_lgamma(z = y)
 #' res
+#' @keywords internal
 .tipsne_lgamma <- function(z) {
   x <- z
   tmp <- x + 5.5
@@ -358,6 +366,7 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{h}, as built in the body.
 #' @export
+#' @keywords internal
 .tipsne_betacf <- function(a, b, x) {
   tiny <- 1e-30
   qab <- a + b
@@ -404,6 +413,7 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #' @param x Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tipsne_betainc <- function(a, b, x) {
   if (x <= 0) return(0)
   if (x >= 1) return(1)
@@ -426,6 +436,7 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #' @param df Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tipsne_t_sf <- function(t, df) 0.5 * .tipsne_betainc(df / 2, 0.5, df / (df + t * t))
 
 #' Combine per-imputation estimates and variances by Rubin's rules
@@ -482,6 +493,7 @@ morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tipsne_sd(v = x)
 #' res
+#' @keywords internal
 .tipsne_sd <- function(v) {
   n <- length(v)
   mu <- .tipsne_csum(v) / n

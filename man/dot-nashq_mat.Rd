@@ -19,3 +19,4 @@ A step of the nashq_native implementation. Called by \code{nash_equilibria_bimat
 \code{stage_game_type}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

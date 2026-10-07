@@ -77,6 +77,7 @@
 #' @param n_dw A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{N}, \code{D}, \code{V}.
 #' @export
+#' @keywords internal
 .plsa_check <- function(n_dw) {
   if (is.list(n_dw) && !is.data.frame(n_dw) && !is.matrix(n_dw)) {
     N <- do.call(rbind, lapply(n_dw, as.numeric))
@@ -101,6 +102,7 @@
 #' @param Pw_z A matrix; indexed by row and column.
 #' @return The value of \code{post}, as built in the body.
 #' @export
+#' @keywords internal
 .plsa_e_step <- function(n_dw, Pz, Pd_z, Pw_z) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -133,6 +135,7 @@
 #' @param K A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{Pz}, \code{Pd_z}, \code{Pw_z}.
 #' @export
+#' @keywords internal
 .plsa_m_step <- function(n_dw, post, K) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -171,6 +174,7 @@
 #' @param Pw_z A matrix; indexed by row and column.
 #' @return The value of \code{P}, as built in the body.
 #' @export
+#' @keywords internal
 .plsa_joint_probability <- function(Pz, Pd_z, Pw_z) {
   K <- length(Pz)
   D <- ncol(Pd_z)
@@ -195,6 +199,7 @@
 #' @param Pw_z Passed to \code{.plsa_joint_probability}.
 #' @return The value of \code{.plsa_log_likelihood}.
 #' @export
+#' @keywords internal
 .plsa_log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -298,6 +303,7 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #' @param Pw_z Passed to \code{.plsa_log_likelihood}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .plsa_perplexity <- function(n_dw, Pz, Pd_z, Pw_z) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -315,6 +321,7 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #' @examples
 #' res <- .plsa_cheatsheet()
 #' res
+#' @keywords internal
 .plsa_cheatsheet <- function() {
   paste("plsa: the ASPECT model. P(d,w) = sum_z P(z)P(d|z)P(w|z)",
         "-- d and w independent GIVEN z, with |z| small so z is a",

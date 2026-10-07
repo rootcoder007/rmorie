@@ -137,6 +137,7 @@ morie_spatial_variogram_fit <- function(coords, values,
 #' @param model Passed to \code{.morie_vgm_gamma}. Defaults to \code{"exponential"}.
 #' @return A list with \code{model}, \code{nugget}, \code{psill}, \code{range}, \code{method}.
 #' @export
+#' @keywords internal
 .morie_vgm_wls_fit <- function(coords, values, model = "exponential") {
   emp <- morie_spatial_variogram(coords, values)
   h <- emp$dist

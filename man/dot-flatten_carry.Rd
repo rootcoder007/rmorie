@@ -19,3 +19,4 @@ A vector, from \code{c}.
 A step of the bats_native implementation. Called by \code{state_matrices}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

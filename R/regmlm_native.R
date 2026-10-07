@@ -50,6 +50,7 @@ CV_SCHEMES <- c("kfold", "loo")
 #' @examples
 #' res <- .regmlm_lambda_grid(p = 0.5, n = 3L)
 #' res
+#' @keywords internal
 .regmlm_lambda_grid <- function(p, n, n_ridge = 5) {
   j <- as.integer(n_ridge)
   if (j < 1) stop("regmlm: need at least one ridge predictor")
@@ -67,6 +68,7 @@ CV_SCHEMES <- c("kfold", "loo")
 #' @param scheme Compared against \code{"loo"}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .regmlm_folds <- function(n, k, scheme) {
   if (scheme == "loo") {
     return(lapply(seq_len(n), function(i) i))
@@ -84,6 +86,7 @@ CV_SCHEMES <- c("kfold", "loo")
 #' @param cols A matrix; passed to \code{\%*\%}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .regmlm_residualise <- function(v, cols) {
   if (!is.matrix(cols)) {
     cols <- do.call(cbind, cols)
@@ -463,6 +466,7 @@ whole_genome_regression <- morie_regmlm
 #' @examples
 #' res <- .regmlm_cheatsheet()
 #' res
+#' @keywords internal
 .regmlm_cheatsheet <- function() {
   paste0(
     "regmlm: Step 1 is two stacked ridges. Level 0 fits J ridges ",

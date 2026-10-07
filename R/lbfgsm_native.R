@@ -42,6 +42,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .lbfgsm_dot(a = A, b = b)
 #' res
+#' @keywords internal
 
 .lbfgsm_dot <- function(a, b) {
   sum(a * b)
@@ -386,6 +387,7 @@ lbfgsm <- morie_lbfgsm
 #' @examples
 #' res <- .lbfgsm_cheatsheet()
 #' res
+#' @keywords internal
 .lbfgsm_cheatsheet <- function() {
   "lbfgsm: L-BFGS two-loop recursion, H0 = (s'y/y'y) I, curvature pairs with y's <= 0 skipped, Armijo backtracking."
 }

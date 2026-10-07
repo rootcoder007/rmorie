@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 kf <- .groebn_key("grlex")
 kf(c(1L, 2L))    # total degree first, then the exponents
 }
+\keyword{internal}

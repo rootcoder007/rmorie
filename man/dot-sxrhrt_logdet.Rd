@@ -16,3 +16,4 @@ A numeric value.
 A step of the sxrhrt_native implementation. Called by \code{.sxrhrt_reml}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

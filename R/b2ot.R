@@ -34,6 +34,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .b2mat(a = A)
 #' res
+#' @keywords internal
 .b2mat <- function(a) {
   m <- if (is.matrix(a)) a else do.call(rbind, lapply(a, as.numeric))
   storage.mode(m) <- "double"
@@ -54,6 +55,7 @@
 #' @examples
 #' res <- .b2close(p = 0.5)
 #' res
+#' @keywords internal
 .b2close <- function(p) {
   p <- as.numeric(p)
   if (any(p < 0)) stop("probabilities must be non-negative", call. = FALSE)
@@ -73,6 +75,7 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .b2margerr <- function(T, a, b) {
   max(max(abs(rowSums(T) - a)), max(abs(colSums(T) - b)))
 }
@@ -93,6 +96,7 @@
 #' @param trace A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{T}, \code{u}, \code{v}, \code{a}, \code{b}, \code{trace}.
 #' @export
+#' @keywords internal
 .b2sinkhorn <- function(a, b, C, epsilon, max_iter = 200L, trace = FALSE) {
   eps <- as.numeric(epsilon)
   if (!(eps > 0)) stop("epsilon must be positive", call. = FALSE)

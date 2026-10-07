@@ -90,6 +90,7 @@ Fanva <- function(functions, groups, t = NULL) {
 #' @param v A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .fanva_trapz <- function(t, v) {
   s <- 0
   n <- length(t)

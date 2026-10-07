@@ -85,6 +85,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .blinkg_corr(a = A, b = b)
 #' res
+#' @keywords internal
 .blinkg_corr <- function(a, b) {
   n <- length(a)
   ma <- .w3_csum(a) / n
@@ -108,6 +109,7 @@
 #' @param cols A vector; its length is taken.
 #' @return The value of \code{d}, as built in the body.
 #' @export
+#' @keywords internal
 .blinkg_design <- function(n, covars, cols) {
   d <- matrix(1, n, 1L + length(covars) + length(cols))
   k <- 1L
@@ -198,6 +200,7 @@ morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
 #' @param pv A vector; indexed elementwise.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .blinkg_order <- function(pv) {
   live <- which(!is.nan(pv))
   if (!length(live)) return(integer(0))
@@ -282,6 +285,7 @@ morie_blinkg_bin_filter <- function(order, positions, bin_size) {
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .blinkg_loglik <- function(rss, n) {
   if (rss <= 0) return(Inf)
   -0.5 * n * (log(2 * pi) + log(rss / n) + 1)

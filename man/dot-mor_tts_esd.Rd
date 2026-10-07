@@ -22,3 +22,4 @@ A list with \code{anoms}, \code{stats}, \code{lams}.
 A step of the ttsAn_native implementation. Called by \code{morie_ttsAn}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

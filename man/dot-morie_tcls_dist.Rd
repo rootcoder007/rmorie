@@ -18,3 +18,4 @@ The value of \code{p}, as built in the body.
 A step of the tcls_native implementation. Called by \code{morie_tcls}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -92,6 +92,7 @@
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .bprMF_sigmoid <- function(x) {
   v <- as.numeric(x)
   if (v >= 0) return(1 / (1 + exp(-v)))
@@ -111,6 +112,7 @@
 #' @param i Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .bprMF_predict <- function(W, H, u, i) {
   sum(W[[u + 1L]] * H[[i + 1L]])
 }
@@ -124,6 +126,7 @@
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .bprMF_triples <- function(pos, n_items) {
   out <- list()
   users <- sort(names(pos))
@@ -159,6 +162,7 @@
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @return A list with \code{bpr_opt}, \code{loglik}, \code{penalty}, \code{n_triples}.
 #' @export
+#' @keywords internal
 .bprMF_bpr_opt <- function(W, H, pos, n_items, lam = 0.01) {
   lm <- as.numeric(lam)
   n_items <- as.integer(n_items)
@@ -200,6 +204,7 @@
 #' @param n_items A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{auc}, \code{per_user}, \code{note}.
 #' @export
+#' @keywords internal
 .bprMF_auc <- function(W, H, pos, n_items) {
   n_items <- as.integer(n_items)
   users <- sort(names(pos))
@@ -263,6 +268,7 @@
 #' \code{bpr_opt_history}, \code{final_bpr_opt}, \code{auc}, \code{param_norm},
 #' \code{regularizer_sign}, \code{method}, \code{caveat}.
 #' @export
+#' @keywords internal
 .bprMF_learn_bpr <- function(pos, n_users, n_items, k_dim = 8L,
                              alpha = 0.05, lam = 0.01, iters = 2000L,
                              seed = 0L, regularizer_sign = "correct",
@@ -367,6 +373,7 @@
 #' @param exclude Passed to \code{unique}. Defaults to \code{integer(0)}.
 #' @return A list with \code{ranking}, \code{n_scored}.
 #' @export
+#' @keywords internal
 .bprMF_recommend <- function(W, H, u, n_items, top_k = 5L,
                              exclude = integer(0)) {
   u_idx <- as.integer(u)
@@ -536,6 +543,7 @@ bayesianpersonalizedranking <- bpr_learn_bpr_R
 #' @examples
 #' res <- .bprMF_cheatsheet()
 #' res
+#' @keywords internal
 .bprMF_cheatsheet <- function() {
   paste("bprMF: implicit feedback is positive-only, and labelling every",
         "unobserved pair NEGATIVE trains the model to predict 0 on",

@@ -113,6 +113,7 @@ morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
 #' @examples
 #' res <- .plsqs_cheatsheet()
 #' res
+#' @keywords internal
 .plsqs_cheatsheet <- function() {
   paste0("plsqs: morie_plsqs_pls_regression(X, Y, n_components) -> NIPALS ",
          "PLS1 (Wold, Sjostrom & Eriksson 2001)")

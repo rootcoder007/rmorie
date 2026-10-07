@@ -20,3 +20,4 @@ A list with \code{coef}.
 matrix (or vector) of predictors; returns list(coef=...) with the
 intercept first.
 }
+\keyword{internal}

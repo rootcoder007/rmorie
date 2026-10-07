@@ -22,3 +22,4 @@ A vector, from \code{as.numeric}.
 A step of the tmldyn_native implementation. Called by \code{sequential_blips}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

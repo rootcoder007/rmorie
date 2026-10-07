@@ -257,6 +257,7 @@ morie_brr_variance <- function(estimates, full_estimate = NULL, fay_k = 0) {
 #' @param theta A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_irt_icc <- function(a, b, theta) {
   1 / (1 + exp(-1.7 * outer(a, rep(1, length(theta))) *
                  (outer(rep(1, length(a)), theta) - outer(b, rep(1, length(theta))))))
@@ -283,6 +284,7 @@ morie_brr_variance <- function(estimates, full_estimate = NULL, fay_k = 0) {
 #' @return A list with \code{A}, \code{B}, \code{criterion}, \code{a_transformed},
 #' \code{b_transformed}, \code{n_items}, \code{converged}, \code{warnings}.
 #' @export
+#' @keywords internal
 .morie_irt_link <- function(a_ref, b_ref, a_focal, b_focal, n_quad,
                             theta_range, aggregate_first) {
   a_r <- as.numeric(a_ref)

@@ -64,6 +64,7 @@
 #' @param greedy A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .tlbandt_design_probability <- function(blip_estimate, delta = 0.1,
                                         greedy = FALSE) {
   d <- as.numeric(delta)
@@ -157,6 +158,7 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #' @param psi Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .tlbandt_martingale_terms <- function(A, Y, g, Q1, Q0, psi) {
   a <- as.numeric(A)
   y <- as.numeric(Y)
@@ -190,6 +192,7 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .tlbandt_sequential_ci(D = g)
 #' res
+#' @keywords internal
 .tlbandt_sequential_ci <- function(D, level = 1.96) {
   v <- as.numeric(D)
   Tlen <- length(v)
@@ -213,6 +216,7 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #' @param Y0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{cumulative_regret}, \code{mean_regret}, \code{note}.
 #' @export
+#' @keywords internal
 .tlbandt_regret <- function(Y, Y1, Y0) {
   y <- as.numeric(Y)
   a <- as.numeric(Y1)
@@ -236,6 +240,7 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #' @examples
 #' res <- .tlbandt_cheatsheet()
 #' res
+#' @keywords internal
 .tlbandt_cheatsheet <- function() {
   paste0(
     "tlbandt: contexts arrive, we choose a RANDOMISED action with",

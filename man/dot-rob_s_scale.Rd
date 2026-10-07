@@ -20,3 +20,4 @@ The value of \code{s}, as built in the body.
 b = 1/2 -- the 50\%-breakdown calibration. The fixed-point iteration
 s^2 <- s^2 * mean(rho(r/s))/b is monotone for the biweight.
 }
+\keyword{internal}

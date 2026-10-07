@@ -19,3 +19,4 @@ A step of the avalon_native implementation. Called by \code{morie_avalon_feature
 \code{morie_avalon_rings}, \code{morie_cypin_descriptors} and 3 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

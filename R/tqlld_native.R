@@ -27,6 +27,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tqlld_phi(x = x)
 #' res
+#' @keywords internal
 .tqlld_phi <- function(x) exp(-0.5 * x * x) / sqrt(2 * pi)
 
 #' .gaussian_cells
@@ -40,6 +41,7 @@
 #' @param n_grid Numeric; combined arithmetically in the body.
 #' @return A list with \code{mass}, \code{mom}.
 #' @export
+#' @keywords internal
 .gaussian_cells <- function(bounds, lo, hi, n_grid) {
   edges <- c(lo, bounds, hi)
   mass <- mom <- numeric(length(edges) - 1L)
@@ -214,6 +216,7 @@ morie_lloyd_max_codebook <- morie_tqlld
 #' @param n_grid Numeric; combined arithmetically in the body.
 #' @return A list with \code{mass}, \code{mom}.
 #' @export
+#' @keywords internal
 .tqlld_gaussian_cells <- function(bounds, lo, hi, n_grid) {
   edges <- c(lo, bounds, hi)
   m <- length(edges) - 1L

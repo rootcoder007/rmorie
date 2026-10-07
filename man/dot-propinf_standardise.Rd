@@ -22,3 +22,4 @@ st <- .propinf_standardise(list(c(1, 10), c(3, 20), c(5, 30)))
 st$mu
 st$feats[[2]]     # the centre maps to zero
 }
+\keyword{internal}

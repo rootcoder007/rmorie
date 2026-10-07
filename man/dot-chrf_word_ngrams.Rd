@@ -18,3 +18,4 @@ The value of \code{out}, as built in the body.
 A step of the chrF_native implementation. Called by \code{chrf_score}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

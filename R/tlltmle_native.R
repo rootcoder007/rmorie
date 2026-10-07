@@ -73,6 +73,7 @@
 #' @examples
 #' res <- .tlltmle_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tlltmle_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   return(log(q / (1.0 - q)))
@@ -92,6 +93,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlltmle_expit(x = x)
 #' res
+#' @keywords internal
 .tlltmle_expit <- function(x) {
   ifelse(x > -700, 1.0 / (1.0 + exp(-x)), 0.0)
 }

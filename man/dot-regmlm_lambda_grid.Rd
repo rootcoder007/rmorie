@@ -24,3 +24,4 @@ See the file header for the source the module follows.
 res <- .regmlm_lambda_grid(p = 0.5, n = 3L)
 res
 }
+\keyword{internal}

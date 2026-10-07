@@ -48,6 +48,7 @@
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sa_opt_temperature <- function(schedule, T0, k, n_iter, alpha) {
   if (schedule == "geometric") {
     return(T0 * (alpha^k))
@@ -196,6 +197,7 @@ morie_sa_opt <- function(fun, x0, step = 1.0, T0 = 1.0, n_iter = 1000,
 #' @examples
 #' res <- .sa_opt_cheatsheet()
 #' res
+#' @keywords internal
 .sa_opt_cheatsheet <- function() {
   paste(
     "sa_opt: Metropolis accept exp(-dE/T) for dE>0, always for dE<=0;",

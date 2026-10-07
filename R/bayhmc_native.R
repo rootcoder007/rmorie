@@ -235,6 +235,7 @@ DELTA_MAX <- 1000.0
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .bayhmc_num_grad <- function(logp, theta, h = 1e-5) {
   d <- length(theta)
   out <- numeric(d)
@@ -259,6 +260,7 @@ DELTA_MAX <- 1000.0
 #' @param r Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .joint <- function(logp, theta, r) {
   logp(theta) - 0.5 * sum(r * r)
 }

@@ -18,3 +18,4 @@ The value of \code{cbind}.
 A step of the tmlcds_native implementation. Called by \code{.tmlcds_propensity}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

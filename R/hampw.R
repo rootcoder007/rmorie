@@ -62,6 +62,7 @@ Hampw <- function(y, a = 2, b = 4, c = 8) {
 #' @param who Passed to \code{paste0}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .hampel_check <- function(a, b, c, who) {
   a <- as.numeric(a)
   b <- as.numeric(b)

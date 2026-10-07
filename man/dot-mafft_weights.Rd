@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 res <- .mafft_weights(k = 3L)
 res
 }
+\keyword{internal}

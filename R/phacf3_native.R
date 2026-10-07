@@ -105,6 +105,7 @@ morie_phacf3_bin <- function(d, edges) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .phacf3_less(a = A, b = b)
 #' res
+#' @keywords internal
 .phacf3_less <- function(a, b) {
   for (i in seq_len(6L)) {
     if (a[i] < b[i]) return(TRUE)
@@ -168,6 +169,7 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
 #' @examples
 #' res <- .phacf3_str(k = 3L)
 #' res
+#' @keywords internal
 .phacf3_str <- function(k)
   sprintf("%02d,%02d,%02d,%02d,%02d,%02d", k[1], k[2], k[3], k[4], k[5],
           k[6])
@@ -231,6 +233,7 @@ morie_phacf3_space <- function(features = .PHACF3_FEATURES,
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .phacf3_dist(a = A, b = b)
 #' res
+#' @keywords internal
 .phacf3_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Tanimoto coefficient of two equal-length fingerprints

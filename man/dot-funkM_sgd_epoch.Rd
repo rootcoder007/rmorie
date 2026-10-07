@@ -50,3 +50,4 @@ st$rmse
 # the updated parameters come back with it
 names(st)
 }
+\keyword{internal}

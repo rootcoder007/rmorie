@@ -25,3 +25,4 @@ f2 <- .groebn_poly(list("2_1" = 1, "0_2" = -2, "1_0" = 1))
 G <- .groebn_buchberger(list(f1, f2), order = "grlex", reduced = FALSE)$basis
 length(.groebn_reduce_basis(G, "grlex"))
 }
+\keyword{internal}

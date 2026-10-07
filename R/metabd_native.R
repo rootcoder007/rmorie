@@ -32,6 +32,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .metabd_mat(X = x)
 #' res
+#' @keywords internal
 .metabd_mat <- function(X) {
   if (is.matrix(X)) {
     out <- vector("list", nrow(X))
@@ -54,6 +55,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .metabd_vec(v = x)
 #' res
+#' @keywords internal
 .metabd_vec <- function(v) as.numeric(unlist(v))
 
 #' tetranucleotide_frequency
@@ -302,6 +304,7 @@ metagenome_binning <- bin_contigs
 #' @examples
 #' res <- .metabd_cheatsheet()
 #' res
+#' @keywords internal
 .metabd_cheatsheet <- function() {
   paste("metabd: bin contigs into draft genomes from TWO signals ",
         "-- tetranucleotide composition (available always, noisy ",

@@ -22,3 +22,4 @@ it follows.
 res <- .b2pnorm(p = 0.5)
 res
 }
+\keyword{internal}

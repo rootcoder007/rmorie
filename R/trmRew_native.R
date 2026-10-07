@@ -53,6 +53,7 @@
 #' @param t Passed to \code{morie_unifAlg_is_var}.
 #' @return The value of \code{morie_unifAlg_is_var}.
 #' @export
+#' @keywords internal
 .trmRew_is_var <- function(t) morie_unifAlg_is_var(t)
 
 #' .trmRew_app
@@ -65,6 +66,7 @@
 #' @param args Passed to \code{c}.
 #' @return The value of \code{do.call}.
 #' @export
+#' @keywords internal
 .trmRew_app <- function(symbol, args) {
   do.call(morie_unifAlg_app, c(list(symbol), args))
 }
@@ -305,6 +307,7 @@ morie_trmRew_normal_form <- function(t, rules, strategy = "innermost",
 #' @param sym Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .trmRew_prec <- function(precedence, sym) {
   if (!is.null(precedence) && sym %in% names(precedence)) {
     as.numeric(precedence[[sym]])
@@ -421,6 +424,7 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
 #' @param tag Passed to \code{.trmRew_rename}.
 #' @return The value of \code{.trmRew_app}.
 #' @export
+#' @keywords internal
 .trmRew_rename <- function(t, tag) {
   if (.trmRew_is_var(t)) {
     return(morie_unifAlg_var(paste0(t[[2]], tag)))
@@ -437,6 +441,7 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
 #' @param same A flag; the body branches on it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .trmRew_overlap <- function(ra, rb, same) {
   # Superpose rb's left-hand side on ra's, at every non-variable
   # position, and rewrite the overlap both ways.
@@ -602,6 +607,7 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps = 10000) {
 #' @return A list with \code{estimate}, \code{rules}, \code{complete}, \code{reason},
 #' \code{pair}, \code{n_rules}, \code{method}.
 #' @export
+#' @keywords internal
 .trmRew_incomplete <- function(rules, why, pair) {
   list(
     estimate = NULL, rules = rules, complete = FALSE, reason = why, pair = pair,
@@ -620,6 +626,7 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps = 10000) {
 #' @param rules See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .trmRew_canonical <- function(rules) {
   # Rename variables to x0, x1, ... so completion output does not carry
   # the bookkeeping suffixes renaming apart introduced.
@@ -649,6 +656,7 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps = 10000) {
 #' @param precedence Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{.trmRew_canonical}.
 #' @export
+#' @keywords internal
 .trmRew_interreduce <- function(rules, precedence) {
   out <- rules
   changed <- TRUE

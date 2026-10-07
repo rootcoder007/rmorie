@@ -18,3 +18,4 @@ The value of \code{function}.
 A step of the twostg_native implementation. Called by \code{Twostg}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

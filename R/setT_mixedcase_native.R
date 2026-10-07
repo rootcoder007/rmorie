@@ -135,6 +135,7 @@ Sett <- morie_setT
 #' @param Wv A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{O}, \code{W}.
 #' @export
+#' @keywords internal
 .attend <- function(X, Y, Wq, Wk, Wv) {
   Q <- X %*% Wq
   K <- Y %*% Wk
@@ -160,6 +161,7 @@ Sett <- morie_setT
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{.setT_EPS}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ln <- function(row, eps = .setT_EPS) {
   n <- length(row)
   mu <- sum(row) / n
@@ -181,6 +183,7 @@ Sett <- morie_setT
 #' \code{$Wk}, \code{$Wq}, \code{$Wv} from it.
 #' @return A list with \code{O}, \code{W}.
 #' @export
+#' @keywords internal
 .mab <- function(X, Y, p) {
   out <- .attend(X, Y, p$Wq, p$Wk, p$Wv)
   A <- out$O
@@ -205,6 +208,7 @@ Sett <- morie_setT
 #' @param b2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rff <- function(M, W1, b1, W2, b2) {
   H <- M %*% W1
   R <- t(apply(H, 1, function(row)

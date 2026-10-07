@@ -20,3 +20,4 @@ A list with \code{id}, \code{gene}, \code{chrom}, \code{strand}, \code{exons},
 A step of the vepan_native implementation. Called by \code{morie_vepan_transcript_sequence}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -35,6 +35,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .samdec_mat(x = x)
 #' res
+#' @keywords internal
 .samdec_mat <- function(x) {
   if (is.matrix(x)) {
     return(x)
@@ -58,6 +59,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .samdec_vec(x = x)
 #' res
+#' @keywords internal
 .samdec_vec <- function(x) {
   if (is.matrix(x)) {
     if (nrow(x) == 1L) {
@@ -85,6 +87,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .samdec_attend(Q = A, K = A, V = b)
 #' res
+#' @keywords internal
 .samdec_attend <- function(Q, K, V) {
   d <- ncol(Q)
   out <- matrix(0, nrow = nrow(Q), ncol = d)
@@ -407,6 +410,7 @@ sammaskdecoder <- decode_mask
 #' @examples
 #' res <- .samdec_cheatsheet()
 #' res
+#' @keywords internal
 .samdec_cheatsheet <- function() {
   paste(
     "samdec: image embedding + prompt embeddings + a learned",

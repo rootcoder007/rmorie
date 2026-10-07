@@ -20,6 +20,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .bnd_yd(y = y, D = g, name = txt)
 #' res
+#' @keywords internal
 .bnd_yd <- function(y, D, name) {
   yv <- as.numeric(unlist(y))
   dv <- as.numeric(unlist(D))
@@ -41,6 +42,7 @@
 #' @param dv Passed to \code{==}.
 #' @return A list with \code{p1}, \code{m1}, \code{p0}, \code{m0}.
 #' @export
+#' @keywords internal
 .bnd_cellmeans <- function(yv, dv) {
   n <- length(yv)
   n1 <- sum(dv == 1)
@@ -62,6 +64,7 @@
 #' @param hi Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .bnd_wc_arm <- function(m_t, p_t, lo, hi) {
   c(m_t * p_t + lo * (1 - p_t), m_t * p_t + hi * (1 - p_t))
 }
@@ -77,6 +80,7 @@
 #' @param hi Passed to \code{.bnd_wc_arm}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .bnd_wc_ate <- function(yv, dv, lo, hi) {
   cm <- .bnd_cellmeans(yv, dv)
   a1 <- .bnd_wc_arm(cm$m1, cm$p1, lo, hi)
@@ -97,6 +101,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .bnd_q1(v = x, p = 0.5)
 #' res
+#' @keywords internal
 .bnd_q1 <- function(v, p) {
   s <- sort(v)
   m <- length(s)
@@ -119,6 +124,7 @@
 #' @param name Passed to \code{paste0}.
 #' @return A list with \code{yl}, \code{yu}.
 #' @export
+#' @keywords internal
 .bnd_interval <- function(moments, name) {
   M <- as.matrix(moments)
   if (nrow(M) < 2L) stop(paste0(name, ": need at least two observations"))
@@ -140,6 +146,7 @@
 #' @param yu Numeric; passed to \code{mean}.
 #' @return A list with \code{n}, \code{mL}, \code{sL}, \code{mU}, \code{sU}.
 #' @export
+#' @keywords internal
 .bnd_mistats <- function(yl, yu) {
   sL <- stats::sd(yl)
   sU <- stats::sd(yu)
@@ -158,6 +165,7 @@
 #' \code{$sU} from it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .bnd_crit <- function(theta, st) {
   rn <- sqrt(st$n)
   a <- max(rn * (st$mL - theta) / st$sL, 0)
@@ -175,6 +183,7 @@
 #' \code{$sU} from it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .bnd_critmax <- function(theta, st) {
   rn <- sqrt(st$n)
   max(rn * (st$mL - theta) / st$sL, rn * (theta - st$mU) / st$sU, 0)
@@ -193,6 +202,7 @@
 #' @param hi Passed to \code{.bnd_wc_arm}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .bnd_wc_intersect <- function(yv, dv, cellv, lo, hi) {
   lo1 <- -Inf
   hi1 <- Inf

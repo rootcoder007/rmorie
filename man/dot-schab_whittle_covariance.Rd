@@ -25,3 +25,4 @@ the source it follows.
 res <- .schab_whittle_covariance(h = 0.5)
 res
 }
+\keyword{internal}

@@ -25,3 +25,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .remlfn_ranova(y = y, group = g)
 res
 }
+\keyword{internal}

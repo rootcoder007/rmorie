@@ -32,6 +32,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schn_mat(x = X)
 #' res
+#' @keywords internal
 .schn_mat <- function(x) {
   if (is.list(x) && !is.matrix(x)) return(do.call(rbind, x))
   if (is.matrix(x)) { storage.mode(x) <- "double"
@@ -51,6 +52,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .schn_vec(x = x)
 #' res
+#' @keywords internal
 .schn_vec <- function(x) {
   if (is.list(x)) return(as.numeric(unlist(x)))
   as.numeric(x)
@@ -234,6 +236,7 @@ invariance_error <- function(energy_fn, R, Q, g = NULL) {
 #' @examples
 #' res <- .schN_cheatsheet()
 #' res
+#' @keywords internal
 .schN_cheatsheet <- function() {
   paste("schn: a convolution needs a grid and atoms have none, so ",
         "make the filter a FUNCTION of interatomic distance -- a ",

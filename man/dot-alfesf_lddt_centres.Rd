@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 .alfesf_lddt_centres(5L)
 range(.alfesf_lddt_centres(50L))
 }
+\keyword{internal}

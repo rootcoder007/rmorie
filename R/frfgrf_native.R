@@ -66,6 +66,7 @@
 #' @examples
 #' res <- .frfgrf_beta_min(d = 3L)
 #' res
+#' @keywords internal
 .frfgrf_beta_min <- function(d, alpha = 0.05, pi = 0.5) {
   if (alpha <= 0.0 || alpha >= 0.5) {
     stop(sprintf("frfgrf: alpha must be in (0, 0.5), got %s",
@@ -90,6 +91,7 @@
 #' \code{$right}, \code{$threshold} from it.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .frfgrf_structure <- function(tree) {
   if (isTRUE(tree$leaf)) {
     return(list("leaf"))
@@ -116,6 +118,7 @@
 #' @return A list with \code{honest}, \code{splits_stable_under_I_permutation},
 #' \code{splits_move_under_J_permutation}, \code{n_splits}.
 #' @export
+#' @keywords internal
 .frfgrf_honesty_test <- function(X, y, kind = "double-sample", min_leaf = 5,
                                  seed = 11, n_permutations = 3) {
   ht_out <- honest_tree(X, y, kind = kind, min_leaf = min_leaf, seed = seed)
@@ -193,6 +196,7 @@
 #' @param counts A vector; indexed elementwise.
 #' @return The value of \code{counts}, as built in the body.
 #' @export
+#' @keywords internal
 .frfgrf_split_share_walk <- function(nd, counts) {
   if (!isTRUE(nd$leaf)) {
     counts[nd$feature] <- counts[nd$feature] + 1
@@ -211,6 +215,7 @@
 #' @param d A count; the body uses it as \code{numeric(...)}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .frfgrf_split_share <- function(trees, d) {
   counts <- numeric(d)
   for (t in trees) {
@@ -229,6 +234,7 @@
 #' @param nd A list; the body reads \code{$leaf}, \code{$left}, \code{$n_I}, \code{$right} from it.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .frfgrf_leaf_count <- function(nd) {
   if (isTRUE(nd$leaf)) {
     return(nd$n_I)
@@ -245,6 +251,7 @@
 #' @param worst Numeric; passed to \code{min}.
 #' @return The value of \code{worst}, as built in the body.
 #' @export
+#' @keywords internal
 .frfgrf_regularity_walk <- function(nd, worst) {
   if (isTRUE(nd$leaf)) {
     return(worst)
@@ -268,6 +275,7 @@
 #' @param trees See Usage.
 #' @return The value of \code{worst}, as built in the body.
 #' @export
+#' @keywords internal
 .frfgrf_regularity <- function(trees) {
   worst <- 1.0
   for (t in trees) {
@@ -297,6 +305,7 @@
 #' \code{alpha}, \code{pi}, \code{beta}, \code{beta_min}, \code{s}, \code{n}, \code{d},
 #' \code{n_trees}, \code{kind}, \code{failed}, \code{method}.
 #' @export
+#' @keywords internal
 .frfgrf_forest_fit_check <- function(y, X, n_trees = 100, min_leaf = 5,
                                       subsample_frac = 0.5, alpha = 0.05,
                                       pi = 0.5, seed = 0,
@@ -392,6 +401,7 @@
 #' @examples
 #' res <- .frfgrf_cheatsheet()
 #' res
+#' @keywords internal
 .frfgrf_cheatsheet <- function() {
   return(paste0(
     "frfgrf: audit the conditions the theory needs -- honesty ",

@@ -20,3 +20,4 @@ A list with \code{tfd}, \code{freqs}.
 A step of the rangayyan_tf implementation. Called by \code{Gtfd}, \code{WvDist}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

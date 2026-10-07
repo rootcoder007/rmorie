@@ -21,3 +21,4 @@ A step of the Svyqtl implementation. Called by \code{Svyqtl}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

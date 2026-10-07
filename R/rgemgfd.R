@@ -84,6 +84,7 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
 #' @param kmax Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .rg_higuchi_fd <- function(x, kmax) {
   xs <- as.numeric(x)
   N <- length(xs)

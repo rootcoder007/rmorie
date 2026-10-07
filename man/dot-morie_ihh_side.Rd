@@ -24,3 +24,4 @@ A list with \code{area}, \code{truncated}.
 trapezoid area outward from the core, INCLUDING the segment that ends
 at the first marker below min_ehh.
 }
+\keyword{internal}

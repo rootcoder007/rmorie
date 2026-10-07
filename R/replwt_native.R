@@ -66,6 +66,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .replwt_design(weights = x)
 #' res
+#' @keywords internal
 .replwt_design <- function(weights, strata = NULL, psu = NULL) {
   w <- as.numeric(weights)
   n <- length(w)
@@ -146,6 +147,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{H}, as built in the body.
 #' @export
+#' @keywords internal
 .replwt_hadamard <- function(order) {
   k <- as.integer(order)
   if (k < 1L || bitwAnd(k, k - 1L) != 0L) {
@@ -168,6 +170,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' @param values A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .replwt_psu_totals <- function(d, values) {
   out <- numeric(length(d$psu_order))
   for (k in seq_along(d$psu_order)) {
@@ -187,6 +190,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' @param method One of \code{"jk1"}, \code{"jkn"}. Defaults to \code{"jkn"}.
 #' @return A list with \code{weights}, \code{dropped}, \code{scale}, \code{method}.
 #' @export
+#' @keywords internal
 .replwt_jackknife_weights <- function(d, method = "jkn") {
   if (!method %in% c("jk1", "jkn")) {
     stop(sprintf("replwt: jackknife method must be jk1 or jkn, got %s", method))
@@ -252,6 +256,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' @return A list with \code{weights}, \code{scale}, \code{n_replicates},
 #' \code{hadamard_order}, \code{fay}, \code{method}.
 #' @export
+#' @keywords internal
 .replwt_brr_weights <- function(d, fay = 0.0) {
   rho <- as.numeric(fay)
   if (rho < 0.0 || rho >= 1.0) {
@@ -317,6 +322,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{seed},
 #' \code{method}.
 #' @export
+#' @keywords internal
 .replwt_bootstrap_weights <- function(d, R = 200, seed = 1) {
   R <- as.integer(R)
   if (R < 2L) {
@@ -367,6 +373,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' @return A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error},
 #' \code{replicates}, \code{n_replicates}, \code{method}.
 #' @export
+#' @keywords internal
 .replwt_replicate_variance <- function(estimator, d, rep, values = NULL) {
   call_est <- function(w) {
     if (is.null(values)) {

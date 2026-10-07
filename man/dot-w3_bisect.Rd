@@ -23,3 +23,4 @@ iteration count rather than a tolerance loop: the two arms then take
 exactly the same number of steps and end at exactly the same point,
 which a tolerance test cannot guarantee.
 }
+\keyword{internal}

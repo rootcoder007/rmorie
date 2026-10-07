@@ -55,6 +55,7 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 #' @param dist Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .surxgb_check_dist <- function(dist) {
   if (!(dist %in% morie_surxgb_DISTRIBUTIONS)) {
     stop(sprintf(
@@ -194,6 +195,7 @@ morie_surxgb_ddpdf <- function(z, dist = "normal") {
 #' @param sigma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .surxgb_s <- function(y, u, sigma) {
   if (is.infinite(y) && y > 0) {
     return(Inf)
@@ -382,6 +384,7 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam = 1.0, gamma = 0.0) {
 #' @return A list with \code{leaf}, \code{variable}, \code{cut}, \code{gain},
 #' \code{left}, \code{right}.
 #' @export
+#' @keywords internal
 .surxgb_build <- function(X, g, h, idx, depth, max_depth, lam, gamma,
                           min_child) {
   G <- sum(g[idx])
@@ -447,6 +450,7 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam = 1.0, gamma = 0.0) {
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .surxgb_eval_tree <- function(node, x) {
   while (!node$leaf) {
     node <- if (x[node$variable] > node$cut) node$right else node$left

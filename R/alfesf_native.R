@@ -22,6 +22,7 @@
 #' @examples
 #' .alfesf_rows(matrix(1:6, nrow = 2), "features")
 #' .alfesf_rows(list(c(1, 2, 3), c(4, 5, 6)), "features")
+#' @keywords internal
 .alfesf_rows <- function(x, what) {
   if (is.matrix(x)) {
     m <- x
@@ -51,6 +52,7 @@
 #' .alfesf_softmax_rows(M, temp = 1)
 #' # a higher temperature flattens the distribution
 #' .alfesf_softmax_rows(M, temp = 5)
+#' @keywords internal
 .alfesf_softmax_rows <- function(M, temp) {
   out <- M
   for (i in seq_len(nrow(M))) {
@@ -74,6 +76,7 @@
 #' # bin midpoints on the 0..100 pLDDT scale
 #' .alfesf_lddt_centres(5L)
 #' range(.alfesf_lddt_centres(50L))
+#' @keywords internal
 .alfesf_lddt_centres <- function(nb) ((seq_len(nb) - 1L) + 0.5) * 100.0 / nb
 
 #' .alfesf_pae_centres
@@ -88,6 +91,7 @@
 #' @examples
 #' # bin midpoints in angstroms, at the given bin width
 #' .alfesf_pae_centres(4L, 0.5)
+#' @keywords internal
 .alfesf_pae_centres <- function(nb, width) ((seq_len(nb) - 1L) + 0.5) * width
 
 # Zhang-Skolnick normalisation. Below 16 residues the cube-root term goes
@@ -106,6 +110,7 @@
 #' @examples
 #' res <- .alfesf_d0(n = 3L)
 #' res
+#' @keywords internal
 .alfesf_d0 <- function(n) {
   if (n <= 15L) {
     return(0.5)
@@ -143,6 +148,7 @@
 #'                                iters = 50L, lr = 0.5)
 #' dim(fit$W)
 #' length(fit$b)
+#' @keywords internal
 .alfesf_fit_multinomial <- function(X, y, n_bins, l2, iters, lr) {
   n <- nrow(X)
   d <- ncol(X)
@@ -193,6 +199,7 @@
 #' y <- apply(L, 1L, which.max) - 1L
 #' y[1:40] <- sample(0:4, 40L, TRUE)
 #' round(.alfesf_fit_temperature(L, y, iters = 200L), 3)
+#' @keywords internal
 .alfesf_fit_temperature <- function(L, y, iters = 200L, lr = 0.5) {
   logt <- 0.0
   n <- nrow(L)
@@ -458,6 +465,7 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
 #' @examples
 #' res <- .alfesf_cheatsheet()
 #' res
+#' @keywords internal
 .alfesf_cheatsheet <- function() {
   paste0(
     "alfesf: morie_alfesf_esmfold_confidence(lddt_logits, pae_logits) ",

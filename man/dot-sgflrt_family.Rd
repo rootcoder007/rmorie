@@ -22,3 +22,4 @@ mu) / W looks correct and is -- right up until a family with a real
 dispersion parameter arrives, where it is off by exactly that factor.
 The working response is eta + (y - mu) / V(mu) and nothing else.
 }
+\keyword{internal}

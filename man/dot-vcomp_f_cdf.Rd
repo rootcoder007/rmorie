@@ -19,3 +19,4 @@ The value of \code{pbeta}.
 \description{
 P(F <= x) = I_\{d1 x / (d1 x + d2)\}(d1/2, d2/2)
 }
+\keyword{internal}

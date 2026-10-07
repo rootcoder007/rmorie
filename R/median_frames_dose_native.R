@@ -24,6 +24,7 @@
 #' @examples
 #' res <- .morie_z(p = 0.5)
 #' res
+#' @keywords internal
 .morie_z <- function(p) stats::qnorm(p)
 
 #' .morie_binom_cdf_half
@@ -38,6 +39,7 @@
 #' @examples
 #' res <- .morie_binom_cdf_half(k = 3L, n = 3L)
 #' res
+#' @keywords internal
 .morie_binom_cdf_half <- function(k, n) {
   if (k < 0) return(0)
   if (k >= n) return(1)
@@ -54,6 +56,7 @@
 #' @param point Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_kde_at <- function(x, point) {
   n <- length(x)
   s <- stats::sd(x)
@@ -195,6 +198,7 @@ morie_optimal_overlap_weight <- function(var_a, var_b) {
 #' @param mask Passed to \code{any}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .morie_domain_total <- function(y, w, mask) {
   if (!any(mask)) return(c(0, 0))
   contrib <- w[mask] * y[mask]
@@ -326,6 +330,7 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
 #' @param tol Passed to \code{<}. Defaults to \code{1e-11}.
 #' @return A list with \code{beta}, \code{cov}, \code{converged}, \code{fitted}.
 #' @export
+#' @keywords internal
 .morie_glm_quantal <- function(X, k, n, link, max_iter = 100L, tol = 1e-11) {
   mu <- function(eta) {
     e <- pmin(pmax(eta, -8), 8)

@@ -106,6 +106,7 @@ Jntlo <- function(y_dict, y_hat_dict, weights = NULL) {
 #' @param yh A vector; indexed elementwise.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .jntlo_loss <- function(kind, y, yh) {
   n <- length(y)
   s <- 0

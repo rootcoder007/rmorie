@@ -19,3 +19,4 @@ A list with \code{a}, \code{b}, \code{v}.
 \description{
 the intercept (the boundary value that the RDD contrast uses)
 }
+\keyword{internal}

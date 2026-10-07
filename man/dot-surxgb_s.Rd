@@ -21,3 +21,4 @@ A step of the surxgb_native implementation. Called by
 \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -26,6 +26,7 @@
 #' @param equations A vector; indexed elementwise.
 #' @return The value of \code{vals}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_scm_solve <- function(u, equations) {
   vals <- as.list(u)
   remaining <- names(equations)
@@ -67,6 +68,7 @@
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return A list with \code{par}, \code{value}.
 #' @export
+#' @keywords internal
 .morie_neldermead <- function(f, x0, maxit = 400, tol = 1e-10) {
   # compact Nelder-Mead (reflection 1, expansion 2, contraction 0.5,
   # shrink 0.5) -- enough for the small abduction problems this serves.

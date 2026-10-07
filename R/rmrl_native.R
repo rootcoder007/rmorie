@@ -46,6 +46,7 @@
 #' @examples
 #' res <- .rmrl_key()
 #' res
+#' @keywords internal
 .rmrl_key <- function(...) {
   paste(vapply(list(...), function(x) as.character(x), character(1)),
     collapse = "\r"
@@ -60,6 +61,7 @@
 #' @param phi Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .rmrl_compile <- function(phi) {
   if (is.null(phi) ||
     (is.character(phi) && length(phi) == 1L && tolower(phi) == "true")) {
@@ -215,6 +217,7 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{[[}.
 #' @export
+#' @keywords internal
 .rmrl_eps_greedy <- function(row, A, epsilon, rng) {
   # epsilon-greedy with ties broken UNIFORMLY AT RANDOM. The table
   # starts all-zero, so every action ties; deterministic tie-breaking

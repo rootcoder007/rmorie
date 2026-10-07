@@ -22,6 +22,7 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .cdae_act <- function(name, x) {
   if (name == "sigmoid") {
     # vectorised clamp: the scalar if() errors on vector activations
@@ -42,6 +43,7 @@
 #' @param y Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .cdae_dact <- function(name, y) {
   if (name == "sigmoid") return(y * (1.0 - y))
   if (name == "identity") return(1.0)

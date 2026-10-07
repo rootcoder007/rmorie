@@ -15,3 +15,4 @@ The value of \code{[}.
 \description{
 since 2^130 == 5 (mod 2^130 - 5), then carry-normalize; repeat
 }
+\keyword{internal}

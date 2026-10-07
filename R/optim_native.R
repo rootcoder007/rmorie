@@ -22,6 +22,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .morie_opt_vec(g = g)
 #' res
+#' @keywords internal
 .morie_opt_vec <- function(g, name = "g") {
   a <- as.numeric(g)
   if (length(a) == 0L) stop(sprintf("%s must be non-empty", name), call. = FALSE)
@@ -40,6 +41,7 @@
 #' @param keys Defaults to \code{c("m", "v")}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_opt_state <- function(state, n, keys = c("m", "v")) {
   out <- list(t = 0L)
   if (!is.null(state)) {

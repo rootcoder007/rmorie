@@ -22,3 +22,4 @@ The value of \code{post}, as built in the body.
 A step of the plsa_native implementation. Called by \code{e_step}, \code{morie_plsa}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ res
 \references{
 Bun, M. & Steinke, T. (2016).
 }
+\keyword{internal}

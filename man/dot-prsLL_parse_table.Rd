@@ -40,3 +40,4 @@ res <- .prsLL_parse_table(g, t$table, c("id", "+", "id", "$"))
 .prsLL_linearise(res[[1]])
 res[[2]]   # tokens consumed
 }
+\keyword{internal}

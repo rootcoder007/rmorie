@@ -20,3 +20,4 @@ A step of the evpot implementation. Called by \code{Evpot}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

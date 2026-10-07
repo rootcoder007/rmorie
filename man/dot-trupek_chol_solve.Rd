@@ -19,3 +19,4 @@ A step of the trupek_native implementation. Called by \code{.trupek_dogleg},
 \code{.trupek_exact}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

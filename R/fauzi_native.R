@@ -37,6 +37,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .fz_K(u = x)
 #' res
+#' @keywords internal
 .fz_K <- function(u) exp(-0.5 * u^2) / sqrt(2 * pi)
 
 # W(u) = int_{-inf}^u K(v) dv, the INTEGRATED kernel of (2.2). A
@@ -56,6 +57,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .fz_W(u = x)
 #' res
+#' @keywords internal
 .fz_W <- function(u) stats::pnorm(u)
 
 # V(u) = 1 - W(u), the survival counterpart used throughout Ch. 4.
@@ -73,6 +75,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .fz_V(u = x)
 #' res
+#' @keywords internal
 .fz_V <- function(u) stats::pnorm(u, lower.tail = FALSE)
 
 #' .fz_trapz
@@ -91,6 +94,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .fz_trapz(y = y, x = x)
 #' res
+#' @keywords internal
 .fz_trapz <- function(y, x) sum(diff(x) * (y[-1L] + y[-length(y)])) / 2
 
 #' .fz_seq
@@ -105,6 +109,7 @@
 #' @param n Passed to \code{seq}.
 #' @return The value of \code{seq}.
 #' @export
+#' @keywords internal
 .fz_seq <- function(from, to, n) seq(from, to, length.out = n)
 
 # Bandwidth for a DISTRIBUTION-function-type estimator:
@@ -136,6 +141,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .fz_kdfe_h(x = x)
 #' res
+#' @keywords internal
 .fz_kdfe_h <- function(x) {
   n <- length(x)
   s <- stats::sd(x)
@@ -163,6 +169,7 @@
 #' @examples
 #' res <- .fz_transform()
 #' res
+#' @keywords internal
 .fz_transform <- function(kind = "log") {
   if (identical(kind, "log")) {
     return(list(
@@ -199,6 +206,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .fz_muller(u = x)
 #' res
+#' @keywords internal
 .fz_muller <- function(u, m = 4L) {
   m <- as.integer(m)
   if (m == 2L) {
@@ -228,6 +236,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .fz_check_sample(x = x)
 #' res
+#' @keywords internal
 .fz_check_sample <- function(x, min_n = 2L) {
   x <- as.numeric(x)
   if (length(x) < min_n) {
@@ -252,6 +261,7 @@
 #' @examples
 #' res <- .fz_check_h(h = 0.5)
 #' res
+#' @keywords internal
 .fz_check_h <- function(h) {
   h <- as.numeric(h)
   if (h <= 0) {
@@ -584,6 +594,7 @@ morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
 #' @param transform Passed to \code{.fz_transform}.
 #' @return A list with \code{tr}, \code{tg}, \code{zx}, \code{zt}, \code{hh}, \code{n}.
 #' @export
+#' @keywords internal
 .fz_cs_common <- function(x, t_grid, h, transform) {
   xv <- .fz_check_sample(x)
   tr <- .fz_transform(transform)
@@ -711,6 +722,7 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
 #' @param transform Passed to \code{.fz_transform}.
 #' @return A list with \code{tv}, \code{fx}, \code{tr}, \code{zt}, \code{gp}, \code{gpp}.
 #' @export
+#' @keywords internal
 .fz_bias_common <- function(t, f_X, transform) {
   tv <- as.numeric(t)
   fx <- as.numeric(f_X)
@@ -742,6 +754,7 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
 #' @return A list with \code{g_prime}, \code{g_double_prime}, \code{bias_order},
 #' \code{contrast}, \code{transform}.
 #' @export
+#' @keywords internal
 .fz_bias_payload <- function(cm) {
   list(
     g_prime = cm$gp, g_double_prime = cm$gpp,

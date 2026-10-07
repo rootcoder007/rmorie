@@ -20,3 +20,4 @@ header for the source it follows.
 res <- .morie_z(p = 0.5)
 res
 }
+\keyword{internal}

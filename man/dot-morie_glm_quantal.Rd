@@ -26,3 +26,4 @@ A list with \code{beta}, \code{cov}, \code{converged}, \code{fitted}.
 Part of the median_frames_dose_native implementation; see the file
 header for the source it follows.
 }
+\keyword{internal}

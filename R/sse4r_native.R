@@ -62,6 +62,7 @@
 #' @return A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width},
 #' \code{length}, \code{note}.
 #' @export
+#' @keywords internal
 .sse4r_personalise <- function(item_embeddings, user_embedding) {
   I <- as.matrix(item_embeddings)
   storage.mode(I) <- "double"
@@ -102,6 +103,7 @@
 #' # the same seed reproduces the draw
 #' identical(res$indices,
 #'           .sse4r_sse_replace(idx, 10L, p = 0.5, seed = 7)$indices)
+#' @keywords internal
 .sse4r_sse_replace <- function(indices, table_size, p = 0.0, seed = 0) {
   idx <- as.integer(indices)
   n <- as.integer(table_size)
@@ -174,6 +176,7 @@
 #' @param table_size Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{expected_rate}, \code{p}, \code{table_size}, \code{note}.
 #' @export
+#' @keywords internal
 .sse4r_expected_replacement <- function(p, table_size) {
   pr <- as.numeric(p)
   n <- as.integer(table_size)
@@ -200,6 +203,7 @@
 #' @return A list with \code{user_params}, \code{item_params}, \code{total},
 #' \code{user_share}, \code{note}.
 #' @export
+#' @keywords internal
 .sse4r_parameter_count <- function(n_users, n_items, user_dim, item_dim) {
   nu <- as.integer(n_users)
   ni <- as.integer(n_items)

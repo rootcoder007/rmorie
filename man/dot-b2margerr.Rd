@@ -21,3 +21,4 @@ A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otsinkh}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

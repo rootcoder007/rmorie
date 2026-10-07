@@ -17,3 +17,4 @@ The value of \code{out}, as built in the body.
 \description{
 quantile scale (shared by percentile / basic / BCa).
 }
+\keyword{internal}

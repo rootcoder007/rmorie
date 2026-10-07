@@ -19,3 +19,4 @@ The value of \code{ifelse}.
 \description{
 expectation is E[min(T, horizon)] under independent censoring.
 }
+\keyword{internal}

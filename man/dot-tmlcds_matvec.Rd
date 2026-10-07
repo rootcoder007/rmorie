@@ -24,3 +24,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .tmlcds_matvec(M = A, v = b)
 res
 }
+\keyword{internal}

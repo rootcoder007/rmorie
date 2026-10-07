@@ -71,6 +71,7 @@
 #' @param pi Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @keywords internal
 .phylml_pi <- function(pi) {
   if (is.null(pi)) {
     return(rep(0.25, 4))
@@ -126,6 +127,7 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
 #' @param base Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .phylml_tip_vector <- function(base) {
   b <- toupper(as.character(base))
   if (b %in% c("-", "N", "?")) {
@@ -151,6 +153,7 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
 #' @param seqs A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .phylml_prune <- function(node, site, pi, u, seqs) {
   if (!is.list(node)) {
     return(.phylml_tip_vector(substr(seqs[[node]], site, site)))
@@ -334,6 +337,7 @@ optimise_branch <- function(make_tree, seqs, pi = NULL, u = 1.0, lo = 1e-6, hi =
 #' @examples
 #' res <- .phylml_cheatsheet()
 #' res
+#' @keywords internal
 .phylml_cheatsheet <- function() {
   return(paste0(
     "phylml: Felsenstein (1981) pruning. L_s(k) = prod over child",

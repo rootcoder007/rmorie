@@ -34,6 +34,7 @@
 #' @examples
 #' res <- .pratt_mat(H = 0.5)
 #' res
+#' @keywords internal
 .pratt_mat <- function(H) {
   if (is.list(H) && !is.matrix(H)) {
     if (length(H) == 0L) {
@@ -59,6 +60,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .pratt_vec(v = x)
 #' res
+#' @keywords internal
 .pratt_vec <- function(v) {
   as.numeric(v)
 }
@@ -75,6 +77,7 @@
 #' @param u_context Passed to \code{.pratt_vec}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .pratt_attention <- function(H, W, b, u_context) {
   rows <- .pratt_mat(H)
   if (nrow(rows) == 0L) {
@@ -107,6 +110,7 @@
 #' @param u_w Passed to \code{.pratt_attention}.
 #' @return A list with \code{vector}, \code{alpha}.
 #' @export
+#' @keywords internal
 .pratt_sentence_vector <- function(H_words, W, b, u_w) {
   a <- .pratt_attention(H_words, W, b, u_w)
   rows <- .pratt_mat(H_words)
@@ -127,6 +131,7 @@
 #' @param u_s Passed to \code{.pratt_attention}.
 #' @return A list with \code{vector}, \code{alpha}.
 #' @export
+#' @keywords internal
 .pratt_document_vector <- function(H_sentences, W, b, u_s) {
   a <- .pratt_attention(H_sentences, W, b, u_s)
   rows <- .pratt_mat(H_sentences)

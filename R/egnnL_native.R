@@ -40,6 +40,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .sqdist(a = A, b = b)
 #' res
+#' @keywords internal
 .sqdist <- function(a, b) {
   a <- as.numeric(a)
   b <- as.numeric(b)
@@ -318,6 +319,7 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
 #' @examples
 #' res <- .egnnL_cheatsheet()
 #' res
+#' @keywords internal
 .egnnL_cheatsheet <- function() {
   paste0("egnnL: equivariance to translation, rotation and reflection ",
          "WITHOUT spherical harmonics. m_ij depends on position only ",

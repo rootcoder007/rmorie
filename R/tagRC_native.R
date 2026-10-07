@@ -249,6 +249,7 @@ tagawarerec <- folkrank
 #' @examples
 #' res <- .tagRC_cheatsheet()
 #' res
+#' @keywords internal
 .tagRC_cheatsheet <- function() {
   paste("tagRC: a folksonomy is (user, tag, resource) TRIPLES, so",
         "the structure is an undirected triadic HYPEREDGE, not a",

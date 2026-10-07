@@ -251,6 +251,7 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' @param bytes Passed to \code{as.raw}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .sech_sha256 <- function(bytes) {
   # Words live as DOUBLES in [0, 2^32): R integers are signed 32-bit,
   # so bitwAnd/bitwXor on anything >= 2^31 returns NA and the old code
@@ -345,6 +346,7 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' @param msg Passed to \code{as.raw}.
 #' @return The value of \code{.sech_sha256}.
 #' @export
+#' @keywords internal
 .sech_hmac <- function(key, msg) {
   key <- as.raw(key)
   if (length(key) > 64L) key <- .sech_sha256(key)
@@ -364,6 +366,7 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .sech_hexlify <- function(bs) {
   paste(format(as.hexmode(as.integer(bs)), width = 2L), collapse = "")
 }
@@ -383,6 +386,7 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .sech_cteq(a = A, b = b)
 #' res
+#' @keywords internal
 .sech_cteq <- function(a, b) {
   a <- as.raw(a)
   b <- as.raw(b)
@@ -457,6 +461,7 @@ chain_entry <- function(previous_hash, entry, key = NULL) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .constant_time_equal(a = A, b = b)
 #' res
+#' @keywords internal
 .constant_time_equal <- function(a, b) {
   if (length(a) != length(b)) return(FALSE)
   v <- as.integer(bitwXor(as.integer(a), as.integer(b)))
@@ -474,6 +479,7 @@ chain_entry <- function(previous_hash, entry, key = NULL) {
 #' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .sechsh_as_bytes <- function(x) {
   if (is.raw(x)) return(x)
   if (is.character(x)) return(charToRaw(paste(x, collapse = "")))
@@ -491,6 +497,7 @@ chain_entry <- function(previous_hash, entry, key = NULL) {
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .sechsh_hexlify <- function(bs) {
   paste(format(as.hexmode(as.integer(bs)), width = 2,
                upper.case = TRUE), collapse = "")

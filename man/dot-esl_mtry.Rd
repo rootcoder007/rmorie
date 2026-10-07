@@ -21,3 +21,4 @@ classification rule is larger, above it the regression rule is, by a
 widening margin (33 against 10 at p = 100). Both are tuning
 parameters, not laws.
 }
+\keyword{internal}

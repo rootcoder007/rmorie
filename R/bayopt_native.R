@@ -20,6 +20,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .bayopt_phi(z = y)
 #' res
+#' @keywords internal
 .bayopt_phi <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
 
 #' .Phi
@@ -35,6 +36,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .Phi(z = y)
 #' res
+#' @keywords internal
 .Phi <- function(z) pnorm(z)
 
 #' .lengths
@@ -47,6 +49,7 @@
 #' @param d A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .lengths <- function(ls, d) {
   if (is.numeric(ls) && length(ls) == 1L) {
     out <- rep(as.numeric(ls), d)
@@ -71,6 +74,7 @@
 #' @param ls A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .r2 <- function(a, b, ls) {
   d <- length(a)
   s <- 0
@@ -137,6 +141,7 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 #' @param r2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .dkernel_dr2 <- function(name, amplitude, r2) {
   if (name == "se") {
     return(-0.5 * amplitude * exp(-0.5 * r2))
@@ -154,6 +159,7 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 #' @param name One of \code{"matern52"}, \code{"se"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .kernel <- function(name) {
   if (!(name %in% c("matern52", "se"))) {
     stop("bayopt: kernel must be one of matern52, se")
@@ -178,6 +184,7 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .chol_r(A = A)
 #' res
+#' @keywords internal
 .chol_r <- function(A) {
   A <- as.matrix(A)
   n <- nrow(A)
@@ -211,6 +218,7 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .chol_solve <- function(L, b) {
   n <- nrow(L)
   y <- numeric(n)
@@ -808,6 +816,7 @@ morie_bayopt <- bayopt
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .bayopt_erfc(x = x)
 #' res
+#' @keywords internal
 .bayopt_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .bayopt_KERNELS <- c("matern52", "se")

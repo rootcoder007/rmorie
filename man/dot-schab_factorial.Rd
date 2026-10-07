@@ -22,3 +22,4 @@ for the source it follows.
 res <- .schab_factorial(p = 0.5)
 res
 }
+\keyword{internal}

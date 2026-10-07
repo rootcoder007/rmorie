@@ -20,6 +20,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .pibmd_moments(v = x)
 #' res
+#' @keywords internal
 .pibmd_moments <- function(v) {
   n <- length(v)
   m <- sum(v) / n
@@ -40,6 +41,7 @@
 #' @param sp2 Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .pibmd_kl_gaussian <- function(mq, sq2, mp, sp2) {
   sp2 <- max(sp2, 1e-300)
   sq2 <- max(sq2, 1e-300)
@@ -57,6 +59,7 @@
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .pibmd_quantile <- function(sorted_v, u) {
   n <- length(sorted_v)
   if (n == 1L) return(sorted_v[1])
@@ -79,6 +82,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .pibmd_bandwidth(v = x)
 #' res
+#' @keywords internal
 .pibmd_bandwidth <- function(v) {
   n <- length(v)
   s <- sort(v)
@@ -99,6 +103,7 @@
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .pibmd_kde <- function(x, sample_, h) {
   cst <- 1.0 / (length(sample_) * h * sqrt(2.0 * pi))
   z <- (x - sample_) / h
@@ -117,6 +122,7 @@
 #' @param n_grid A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .pibmd_kl_kde <- function(q, p, n_grid) {
   n <- length(q)
   m <- length(p)
@@ -151,6 +157,7 @@
 #' @param x Passed to \code{<=}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .pibmd_ecdf <- function(sorted_v, x) sum(sorted_v <= x) / length(sorted_v)
 
 #' morie_pibmd_prior_informativeness_bias_diagnostic
@@ -288,6 +295,7 @@ morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
 #' @examples
 #' res <- .pibmd_cheatsheet()
 #' res
+#' @keywords internal
 .pibmd_cheatsheet <- function() {
   paste0("pibmd: morie_pibmd_prior_informativeness_bias_diagnostic(samples, ",
          "prior) -> KL(posterior||prior) two ways, shrinkage and a ",

@@ -16,3 +16,4 @@ The value of \code{out}, as built in the body.
 \description{
 the single-channel case, C = 1.
 }
+\keyword{internal}

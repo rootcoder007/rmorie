@@ -43,3 +43,4 @@ A step of the schab_gn_shared implementation. Called by \code{.schab_fit_semivar
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

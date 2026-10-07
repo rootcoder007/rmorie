@@ -26,3 +26,4 @@ The value of \code{lapply}.
 A step of the smatch_native implementation. Called by \code{morie_smatch_poisson_design}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

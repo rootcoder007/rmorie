@@ -12,6 +12,7 @@
 #' @param x Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .defdtr_bilinear <- function(F, y, x) {
   H <- nrow(F)
   W <- ncol(F)

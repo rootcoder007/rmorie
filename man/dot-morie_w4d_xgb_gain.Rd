@@ -27,3 +27,4 @@ A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_xgb_bu
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

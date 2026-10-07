@@ -18,6 +18,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sarre_negll <- function(lam, I, W, X, y, n) {
   A <- I - lam * W
   AX <- A %*% X

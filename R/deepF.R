@@ -12,6 +12,7 @@
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .fm_second_order <- function(V, x) {
   n <- length(x)
   K <- ncol(V)

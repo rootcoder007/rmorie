@@ -33,6 +33,7 @@
 #' @param log_pd Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .clrnt_binding_term <- function(log_pd) {
   x <- as.numeric(log_pd)
   10 ^ (0.072 * x * x + 0.067 * x - 1.126)
@@ -395,6 +396,7 @@ morie_clrnt <- function(clint_in_vitro, cl_h = NULL, fu_blood = NULL,
 #' @examples
 #' res <- .clrnt_cheatsheet()
 #' res
+#' @keywords internal
 .clrnt_cheatsheet <- function() {
   paste("clrnt: in vitro to in vivo CLint,u (Wood, Houston & Hallifax",
         "2017). fu in the incubation from eq.1 (microsomes) or eq.2",

@@ -22,3 +22,4 @@ The value of \code{morie_goldsc_lj}.
 A step of the goldsc_native implementation. Called by \code{morie_goldsc_vdw}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

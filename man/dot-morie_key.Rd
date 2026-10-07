@@ -20,3 +20,4 @@ header for the source it follows.
 res <- .morie_key(s = c(3L, 1L, 2L))
 res
 }
+\keyword{internal}

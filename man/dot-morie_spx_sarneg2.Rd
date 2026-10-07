@@ -22,3 +22,4 @@ A list with \code{v}, \code{b}, \code{s2}.
 A step of the sp_fill implementation. Called by \code{SpErrMod}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

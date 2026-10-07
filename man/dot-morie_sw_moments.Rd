@@ -20,3 +20,4 @@ n x q influence (transformation) of the response Returns the vec'd
 statistic T (pq), its conditional mean mu and covariance Sigma,
 matching coin's \code{expectation()} / \code{covariance()}.
 }
+\keyword{internal}

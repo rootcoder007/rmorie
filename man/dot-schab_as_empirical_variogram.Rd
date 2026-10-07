@@ -18,3 +18,4 @@ Counts default to 1 so an unweighted table still fits; that makes the
 WLS weights degenerate to 1/(2 gamma^2), the right limiting form
 rather than a silent failure.
 }
+\keyword{internal}

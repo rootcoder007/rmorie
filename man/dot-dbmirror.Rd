@@ -21,3 +21,4 @@ it follows.
 res <- .dbmirror(h = 0.5)
 res
 }
+\keyword{internal}

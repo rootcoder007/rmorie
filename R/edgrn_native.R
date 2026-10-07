@@ -18,6 +18,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .edgrn_lgamma(x = x)
 #' res
+#' @keywords internal
 .edgrn_lgamma <- function(x) lgamma(x)
 
 #' .edgrn_vec
@@ -33,6 +34,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .edgrn_vec(x = x)
 #' res
+#' @keywords internal
 .edgrn_vec <- function(x) as.numeric(x)
 
 #' .edgrn_nb_logpmf
@@ -45,6 +47,7 @@
 #' @param phi Numeric; combined arithmetically in the body.
 #' @return The value of \code{(}.
 #' @export
+#' @keywords internal
 .edgrn_nb_logpmf <- function(y, mu, phi) {
   if (phi <= .edgrn_eps) {
     return(-mu + y * log(max(mu, .edgrn_eps)) - .edgrn_lgamma(y + 1))
@@ -65,6 +68,7 @@
 #' @param iters Numeric; combined arithmetically in the body. Defaults to \code{300}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .edgrn_betainc <- function(a, b, x, iters = 300) {
   if (x <= 0) {
     return(0)
@@ -111,6 +115,7 @@
 #' @param iters Numeric; combined arithmetically in the body. Defaults to \code{400}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .edgrn_chi2_sf <- function(x, df, iters = 400) {
   if (x <= 0) {
     return(1)

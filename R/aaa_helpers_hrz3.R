@@ -34,6 +34,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .hrz3_u01(v = x)
 #' res
+#' @keywords internal
 .hrz3_u01 <- function(v) {
   v <- as.numeric(v)
   n <- length(v)
@@ -50,6 +51,7 @@ NULL
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{z}, \code{w}.
 #' @export
+#' @keywords internal
 .hrz3_grid_w <- function(m) {
   m <- as.integer(m)
   if (m < 3L) stop(sprintf("grid must have at least 3 points, got %d.", m))
@@ -73,6 +75,7 @@ NULL
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .hrz3_kmat <- function(a, b, h) {
   a <- as.numeric(a)
   b <- as.numeric(b)
@@ -98,6 +101,7 @@ NULL
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .hrz3_ll_smooth <- function(z, y, zq, h) {
   z <- as.numeric(z)
   y <- as.numeric(y)
@@ -143,6 +147,7 @@ NULL
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .hrz3_wquant(v = x, w = x, tau = 0.5)
 #' res
+#' @keywords internal
 .hrz3_wquant <- function(v, w, tau) {
   v <- as.numeric(v)
   w <- as.numeric(w)
@@ -188,6 +193,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .hrz3_ade(X = x, y = y, h = 0.5)
 #' res
+#' @keywords internal
 .hrz3_ade <- function(X, y, h) {
   X <- if (is.null(dim(X))) matrix(as.numeric(X), ncol = 1L) else as.matrix(X)
   y <- as.numeric(y)
@@ -230,6 +236,7 @@ NULL
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .hrz3_index_dir(X = x, y = y, h = 0.5)
 #' res
+#' @keywords internal
 .hrz3_index_dir <- function(X, y, h) {
   d <- .hrz3_ade(X, y, h)
   lead <- d[1L]
@@ -261,6 +268,7 @@ NULL
 #' @examples
 #' res <- .hrz3_bw01(n = 3L)
 #' res
+#' @keywords internal
 .hrz3_bw01 <- function(n) {
   n <- as.integer(n)
   if (n < 2L) stop(sprintf("need at least 2 observations, got %d.", n))
@@ -294,6 +302,7 @@ NULL
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A list with \code{f}, \code{mass}.
 #' @export
+#' @keywords internal
 .hrz3_fxw_grid <- function(u, v, z, wq, h) {
   u <- as.numeric(u)
   v <- as.numeric(v)
@@ -326,6 +335,7 @@ NULL
 #' @param kind One of \code{"cos"}, \code{"poly"}. Defaults to \code{"poly"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .hrz3_sieve <- function(z, J, kind = "poly") {
   z <- as.numeric(z)
   J <- as.integer(J)

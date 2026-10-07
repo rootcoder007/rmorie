@@ -22,3 +22,4 @@ The value of \code{sweep}.
 A step of the psycho_native implementation. Called by \code{.psy_info}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

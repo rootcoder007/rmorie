@@ -24,3 +24,4 @@ neither endpoint.
 res <- .morie_random_uniform(n = 3L)
 res
 }
+\keyword{internal}

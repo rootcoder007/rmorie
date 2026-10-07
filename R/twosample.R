@@ -18,6 +18,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .w1_distance(a = A, b = b)
 #' res
+#' @keywords internal
 .w1_distance <- function(a, b) {
   xs <- sort(a)
   ys <- sort(b)
@@ -124,6 +125,7 @@ morie_wasserstein_test <- function(x, y, B = 999L, cdf = NULL) {
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .mmd_gram(Z = y, kernel = txt, gamma = 0.5)
 #' res
+#' @keywords internal
 .mmd_gram <- function(Z, kernel, gamma) {
   if (identical(kernel, "linear")) return(tcrossprod(Z))
   d2 <- as.matrix(stats::dist(Z))^2

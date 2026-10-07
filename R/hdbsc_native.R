@@ -16,6 +16,7 @@
 #' @param mp Numeric; passed to \code{min}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .hdb_core <- function(D, n, mp) {
   vapply(seq_len(n), function(i) sort(D[i, ])[min(mp, n)], numeric(1))
 }
@@ -30,6 +31,7 @@
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{edges}, as built in the body.
 #' @export
+#' @keywords internal
 .hdb_mst <- function(D, core, n) {
   in_tree <- rep(FALSE, n)
   key <- rep(Inf, n)
@@ -68,6 +70,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A list with \code{root}, \code{children}, \code{node_size}.
 #' @export
+#' @keywords internal
 .hdb_linkage <- function(edges, n) {
   m <- length(edges)
   E <- if (m) do.call(rbind, edges) else matrix(numeric(0), 0, 3)
@@ -111,6 +114,7 @@
 #' @param n Passed to \code{<}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .hdb_points_under <- function(node, children, n) {
   out <- integer(0)
   stack <- c(node)

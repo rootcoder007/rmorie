@@ -27,3 +27,4 @@ y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 res <- .ot_costmat(X = x, Y = y)
 res
 }
+\keyword{internal}

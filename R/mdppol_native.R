@@ -12,6 +12,7 @@
 #' @param R A vector; its length is taken and its elements indexed.
 #' @return A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 #' @export
+#' @keywords internal
 .mdppol_args <- function(P, R) {
   Pm <- lapply(P, function(p) {
     if (is.matrix(p)) {
@@ -159,6 +160,7 @@ mdppol <- morie_mdppol
 #' @examples
 #' res <- .mdppol_cheatsheet()
 #' res
+#' @keywords internal
 .mdppol_cheatsheet <- function() {
   "mdppol(P, R, gamma) -> optimal policy/V by Howard policy iteration (Sutton-Barto 2018 Sec 4.3)."
 }

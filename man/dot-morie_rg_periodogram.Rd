@@ -20,3 +20,4 @@ A step of the rangayyan_stat implementation. Called by \code{EmgFreq}, \code{FdV
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

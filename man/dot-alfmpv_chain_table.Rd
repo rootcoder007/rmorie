@@ -19,3 +19,4 @@ A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps},
 A step of the alfmpv_native implementation. Called by \code{morie_alfmpv_msa_pairing}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

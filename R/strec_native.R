@@ -84,6 +84,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .strec_sigmoid(x = x)
 #' res
+#' @keywords internal
 .strec_sigmoid <- function(x) {
   x <- max(-60.0, min(60.0, x))
   1.0 / (1.0 + exp(-x))
@@ -102,6 +103,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .strec_as_rows(x = x)
 #' res
+#' @keywords internal
 .strec_as_rows <- function(x) {
   if (is.list(x) && !is.data.frame(x)) {
     return(lapply(x, as.numeric))

@@ -23,3 +23,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .morie_bx_solve(A = A, b = b)
 res
 }
+\keyword{internal}

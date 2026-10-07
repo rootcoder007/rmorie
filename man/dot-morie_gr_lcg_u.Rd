@@ -19,3 +19,4 @@ s <- (1664525 s + 1013904223) mod 2^32 \code{.morie_gr_lcg_u} returns the
 (s + 0.5)/2^32 uniform stream, \code{.morie_gr_lcg_w} the symmetric weight
 stream 2u - 1 scaled.
 }
+\keyword{internal}

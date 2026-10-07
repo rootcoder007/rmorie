@@ -25,3 +25,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .secaead_xor32(a = A, b = b)
 res
 }
+\keyword{internal}

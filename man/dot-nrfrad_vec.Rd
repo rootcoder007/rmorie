@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .nrfrad_vec(p = 0.5)
 res
 }
+\keyword{internal}

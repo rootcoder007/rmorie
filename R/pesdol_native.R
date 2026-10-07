@@ -19,6 +19,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .pesdol_ols(X = X, y = y)
 #' res
+#' @keywords internal
 .pesdol_ols <- function(X, y) {
   n <- nrow(X)
   p <- ncol(X)
@@ -134,6 +135,7 @@ morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
 #' @examples
 #' res <- .pesdol_cheatsheet()
 #' res
+#' @keywords internal
 .pesdol_cheatsheet <- function() {
   paste0("pesdol: morie_pesdol_ardl_bounds(y, x, p, q) -> ARDL long-run ",
          "coefficients and the bounds test (Pesaran, Shin & Smith 2001)")

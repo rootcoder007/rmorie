@@ -21,3 +21,4 @@ it follows.
 res <- .huber_k(eps = 0.5)
 res
 }
+\keyword{internal}

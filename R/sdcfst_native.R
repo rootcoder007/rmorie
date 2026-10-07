@@ -91,6 +91,7 @@
 #' @param min_leaf Numeric; combined arithmetically in the body.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @keywords internal
 .sdcfst_best_split <- function(X, y, rows, feats, min_leaf) {
   n <- length(rows)
   if (n < 2L * min_leaf) return(NULL)
@@ -139,6 +140,7 @@
 #' @param depth Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A list with \code{leaf}, \code{feature}, \code{cut}, \code{left}, \code{right}.
 #' @export
+#' @keywords internal
 .sdcfst_grow <- function(X, y, struct_rows, leaf_rows, feats_n, min_leaf,
                          max_depth, e, depth = 0L) {
   p <- ncol(X)
@@ -190,6 +192,7 @@
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .sdcfst_tree_predict <- function(node, x) {
   while (!node$leaf)
     node <- if (x[node$feature] <= node$cut) node$left else node$right
@@ -324,6 +327,7 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sdcfst_logit_predict <- function(beta, x) {
   eta <- beta[1] + .w3_dot(beta[-1], as.numeric(x))
   if (eta > 30) eta <- 30 else if (eta < -30) eta <- -30
@@ -341,6 +345,7 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 #' @param e Passed to \code{.ghc_unif}.
 #' @return The value of \code{lab}, as built in the body.
 #' @export
+#' @keywords internal
 .sdcfst_folds <- function(n, k, e) {
   idx <- seq_len(n)
   if (n > 1L)

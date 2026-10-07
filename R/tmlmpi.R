@@ -20,6 +20,7 @@
 #' @param grid A vector; its length is taken and its elements indexed.
 #' @return A list with \code{F}, \code{IC}.
 #' @export
+#' @keywords internal
 .tmlmpi_cdf_bank <- function(yv, Dv, W, g, grid) {
   n <- length(yv)
   K <- length(grid)

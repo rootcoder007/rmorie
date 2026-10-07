@@ -24,3 +24,4 @@ The value of \code{.impFB_solve}.
 A step of the impFB_native implementation. Called by \code{morie_impFB}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

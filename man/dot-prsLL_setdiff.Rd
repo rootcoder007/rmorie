@@ -23,3 +23,4 @@ See the file header for the source the module follows.
 # epsilon is dropped from a FIRST set before the symbols after it are added
 .prsLL_setdiff(c("+", ""), "")
 }
+\keyword{internal}

@@ -19,3 +19,4 @@ A list with \code{atoms}, \code{params}.
 \description{
 dictionary is reproducible without an RNG
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ A step of the rangayyan_filt2 implementation. Called by \code{BwAnalog},
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

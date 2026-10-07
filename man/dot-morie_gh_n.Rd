@@ -22,3 +22,4 @@ exactly where the asymptotics become interesting.
 res <- .morie_gh_n(n = 3L)
 res
 }
+\keyword{internal}

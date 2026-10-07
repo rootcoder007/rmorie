@@ -72,6 +72,7 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' @examples
 #' res <- .varcal_base_code(b = 3L)
 #' res
+#' @keywords internal
 .varcal_base_code <- function(b) {
   b <- toupper(as.character(b))
   if (b == "A") return(0.25)
@@ -92,6 +93,7 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' @examples
 #' res <- .varcal_phred(p = 0.5)
 #' res
+#' @keywords internal
 .varcal_phred <- function(p) {
   p <- max(min(as.numeric(p), 1.0), 1e-12)
   return(-10.0 * log10(p))
@@ -110,6 +112,7 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .varcal_chars(x = x)
 #' res
+#' @keywords internal
 .varcal_chars <- function(x) {
   if (is.character(x) && length(x) == 1L) strsplit(x, "")[[1]] else x
 }
@@ -123,6 +126,7 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' @param reads Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .varcal_norm_reads <- function(reads) {
   lapply(reads, function(r) { r$seq <- .varcal_chars(r$seq)
   r })

@@ -25,3 +25,4 @@ A list with \code{weights}, \code{fitted}.
 A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

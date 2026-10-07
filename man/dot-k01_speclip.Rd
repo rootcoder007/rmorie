@@ -21,3 +21,4 @@ A step of the acclso implementation. Called by \code{Agdproj}, \code{Fistalasso}
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

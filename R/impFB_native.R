@@ -30,6 +30,7 @@
 #' @param r A matrix; passed to \code{nrow}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 .impFB_preference <- function(r) {
   r <- as.matrix(r)
   storage.mode(r) <- "double"
@@ -47,6 +48,7 @@
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{40}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .impFB_confidence <- function(r, alpha = 40.0) {
   a <- as.numeric(alpha)
   if (a < 0.0) stop("impFB: alpha must be non-negative")
@@ -70,6 +72,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .impFB_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .impFB_solve <- function(A, b) {
   n <- length(b)
   M <- matrix(0, nrow = n, ncol = n + 1)
@@ -120,6 +123,7 @@
 #' @param fast A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{.impFB_solve}.
 #' @export
+#' @keywords internal
 .impFB_als_step <- function(Y, C_row, p_row, lam, fast = TRUE) {
   n <- nrow(Y)
   f <- ncol(Y)
@@ -155,6 +159,7 @@
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .impFB_cost <- function(R, X, Y, alpha = 40.0, lam = 0.1) {
   P <- .impFB_preference(R)
   C <- .impFB_confidence(R, alpha)
@@ -247,6 +252,7 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A list with \code{contributions}, \code{prediction}, \code{note}.
 #' @export
+#' @keywords internal
 .impFB_explain <- function(Y, C_row, p_row, i, lam = 0.1) {
   n <- nrow(Y)
   f <- ncol(Y)
@@ -293,6 +299,7 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
 #' @examples
 #' res <- .impFB_cheatsheet()
 #' res
+#' @keywords internal
 .impFB_cheatsheet <- function() {
   return(paste0(
     "impFB: implicit feedback measures CONFIDENCE, not preference",

@@ -23,3 +23,4 @@ factor because there the Gaussian weight integrates to 1.
 res <- .schab_gauss_legendre(n = 3L)
 res
 }
+\keyword{internal}

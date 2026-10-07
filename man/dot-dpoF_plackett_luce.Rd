@@ -21,3 +21,4 @@ A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards},
 A step of the dpoF_native implementation. Called by \code{morie_dpoF}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -22,3 +22,4 @@ A list with \code{tk}, \code{s}.
 Helper step. Called by \code{morie_snht}. See the file header for the source the
 module follows. source it follows.
 }
+\keyword{internal}

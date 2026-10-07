@@ -25,3 +25,4 @@ labs <- c(0, 0, 0, 0, 1, 1, 1, 1)
 meta <- .propinf_train_vector_meta(feats, labs, 8L, 50L, 0.05, 0L)
 .propinf_vector_meta_predict(meta, feats[[1]])
 }
+\keyword{internal}

@@ -13,6 +13,7 @@
 #' @param state Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .k03_lcg <- function(state) (.k03_lcg_a * state) %% .k03_lcg_m
 
 #' Wide & Deep jointly trained classifier

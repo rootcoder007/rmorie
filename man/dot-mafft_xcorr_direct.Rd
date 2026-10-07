@@ -26,3 +26,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .mafft_xcorr_direct(a = A, b = b, size = 3L)
 res
 }
+\keyword{internal}

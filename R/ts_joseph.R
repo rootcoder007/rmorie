@@ -38,6 +38,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_jo_vec(x = x)
 #' res
+#' @keywords internal
 .morie_jo_vec <- function(x, name = "x") {
   v <- as.numeric(x)
   if (length(v) == 0L) stop(sprintf("%s must be non-empty.", name), call. = FALSE)
@@ -54,6 +55,7 @@
 #' @param yhat Passed to \code{.morie_jo_vec}.
 #' @return A list with \code{a}, \code{b}.
 #' @export
+#' @keywords internal
 .morie_jo_pair <- function(y, yhat) {
   a <- .morie_jo_vec(y, "y")
   b <- .morie_jo_vec(yhat, "yhat")
@@ -76,6 +78,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_jo_med(v = x)
 #' res
+#' @keywords internal
 .morie_jo_med <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -98,6 +101,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_jo_solve(a = A, b = b)
 #' res
+#' @keywords internal
 .morie_jo_solve <- function(a, b) {
   n <- length(b)
   m <- cbind(matrix(as.numeric(unlist(a)), n, n, byrow = TRUE), as.numeric(b))
@@ -138,6 +142,7 @@
 #'   res <- .morie_jo_ols(x = x, y = y)
 #'   res
 #' }
+#' @keywords internal
 .morie_jo_ols <- function(x, y) {
   x <- as.matrix(x)
   n <- nrow(x)
@@ -515,6 +520,7 @@ morie_fourfeat <- function(n, period, k, start = 0) {
 #' @param y Numeric; combined arithmetically in the body.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .morie_jo_leap <- function(y) (y %% 4 == 0 && y %% 100 != 0) || y %% 400 == 0
 
 #' .morie_jo_daynum
@@ -527,6 +533,7 @@ morie_fourfeat <- function(n, period, k, start = 0) {
 #' @param d Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_jo_daynum <- function(y, m, d) {
   days <- 0
   if (y >= 1970) {
@@ -885,6 +892,7 @@ morie_tsregmat <- function(x, lags, horizon = 1L) {
 #' @param newrow Passed to \code{c}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_jo_fitpred <- function(rows, y, newrow) {
   design <- cbind(rep(1, nrow(rows)), rows)
   beta <- .morie_jo_ols(design, y)
@@ -1287,6 +1295,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' @param v A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .morie_jo_matvec <- function(w, v) {
   wm <- if (is.matrix(w)) w else do.call(rbind, w)
   if (ncol(wm) != length(v)) {
@@ -1308,6 +1317,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_jo_softmax(v = x)
 #' res
+#' @keywords internal
 .morie_jo_softmax <- function(v) {
   ex <- exp(v - max(v))
   ex / sum(ex)
@@ -1327,6 +1337,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_jo_ln(v = x)
 #' res
+#' @keywords internal
 .morie_jo_ln <- function(v, eps = 1e-5) {
   m <- mean(v)
   (v - m) / sqrt(sum((v - m)^2) / length(v) + eps)
@@ -1340,6 +1351,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' @param t Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_jo_elu <- function(t) ifelse(t > 0, t, expm1(t))
 #' .morie_jo_relu
 #'
@@ -1350,6 +1362,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' @param t Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_jo_relu <- function(t) ifelse(t > 0, t, 0)
 #' .morie_jo_sigmoid
 #'
@@ -1359,6 +1372,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' @param t Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_jo_sigmoid <- function(t) ifelse(t >= 0, 1 / (1 + exp(-t)),
                                         exp(t) / (1 + exp(t)))
 
@@ -1375,6 +1389,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_jo_maxpool(v = x, k = 3L)
 #' res
+#' @keywords internal
 .morie_jo_maxpool <- function(v, k) {
   k <- as.integer(k)
   if (k < 1L) stop("pool kernel must be at least 1.", call. = FALSE)
@@ -1392,6 +1407,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' @param length_ A count; the body uses it as \code{seq_len(...)}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_jo_interp <- function(theta, length_) {
   n <- length(theta)
   if (n < 1L || length_ < 1L) stop("theta and length must be non-empty.", call. = FALSE)
@@ -1610,6 +1626,7 @@ morie_nhitsnet <- function(y, horizon, kernels, ratios, wf, wb) {
 #' @param b5 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_jo_glu <- function(gamma, w4, b4, w5, b5) {
   a <- .morie_jo_matvec(w4, gamma) + b4
   b <- .morie_jo_matvec(w5, gamma) + b5
@@ -1686,6 +1703,7 @@ morie_tftnet <- function(a, w1, b1, w2, b2, w4, b4, w5, b5, wsel, bsel,
 #' @param wskip Passed to \code{.morie_jo_matvec}.
 #' @return The value of \code{.morie_jo_ln}.
 #' @export
+#' @keywords internal
 .morie_jo_resblock <- function(x, w1, b1, w2, b2, wskip) {
   h <- .morie_jo_relu(.morie_jo_matvec(w1, x) + b1)
   out <- .morie_jo_matvec(w2, h) + b2

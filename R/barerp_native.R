@@ -187,6 +187,7 @@ centering_steps <- function(m, eps, t0, mu) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .barerp_num_grad(f = fn, x = x)
 #' res
+#' @keywords internal
 .barerp_num_grad <- function(f, x, h = 1e-6) {
   x <- as.numeric(x)
   n <- length(x)
@@ -217,6 +218,7 @@ centering_steps <- function(m, eps, t0, mu) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .num_hess(f = fn, x = x)
 #' res
+#' @keywords internal
 .num_hess <- function(f, x, h = 1e-4) {
   x <- as.numeric(x)
   n <- length(x)
@@ -266,6 +268,7 @@ centering_steps <- function(m, eps, t0, mu) {
 #' fn <- function(v) sum(v^2)
 #' res <- .Fun(f = fn)
 #' res
+#' @keywords internal
 .Fun <- function(f, grad = NULL, hess = NULL, affine = FALSE) {
   self <- list(f = f, .g = grad, .h = hess, affine = isTRUE(affine))
   class(self) <- "Fun"
@@ -337,6 +340,7 @@ hess.Fun <- function(self, x) {
 #' @param spec A list; the body reads \code{$affine}, \code{$f}, \code{$grad}, \code{$hess} from it.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .as_fun <- function(spec) {
   if (inherits(spec, "Fun")) return(spec)
   if (is.function(spec)) return(.Fun(spec))
@@ -361,6 +365,7 @@ hess.Fun <- function(self, x) {
 #' @param aeq Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .solve_kkt <- function(hmat, grad, aeq) {
   n <- length(grad)
   if (is.null(aeq) || length(aeq) == 0L) {
@@ -410,6 +415,7 @@ hess.Fun <- function(self, x) {
 #' @param aeq A matrix; passed to \code{t}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .project_null <- function(v, aeq) {
   aeq <- as.matrix(aeq)
   v <- as.numeric(v)
@@ -784,6 +790,7 @@ barriermethod <- barrier_method
 #' @examples
 #' res <- .barerp_cheatsheet()
 #' res
+#' @keywords internal
 .barerp_cheatsheet <- function() {
   paste0("barerp: the logarithmic barrier method. Frisch (1956) ",
          "eq. 5.1 defines the potential as the sum of the logs of ",

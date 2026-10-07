@@ -22,3 +22,4 @@ A list with \code{auc}, \code{per_user}, \code{note}.
 A step of the bprMF_native implementation. Called by \code{.bprMF_learn_bpr}, \code{bpr_auc_R}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

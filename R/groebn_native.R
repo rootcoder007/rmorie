@@ -30,6 +30,7 @@
 #' @examples
 #' .groebn_fr(2L, 4L)     # kept in lowest terms
 #' .groebn_fr(2L, -4L)    # the sign is carried by the numerator
+#' @keywords internal
 .groebn_fr <- function(num, den = 1L) {
   num <- as.integer(num)
   den <- as.integer(den)
@@ -52,6 +53,7 @@
 #' @export
 #' @examples
 #' .groebn_gcd(12L, 18L)
+#' @keywords internal
 .groebn_gcd <- function(a, b) {
   a <- as.integer(a)
   b <- as.integer(b)
@@ -75,6 +77,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .groebn_fr_add(p = A, q = A)
 #' res
+#' @keywords internal
 .groebn_fr_add <- function(p, q) {
   .groebn_fr(p[1L] * q[2L] + q[1L] * p[2L], p[2L] * q[2L])
 }
@@ -92,6 +95,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .groebn_fr_sub(p = A, q = A)
 #' res
+#' @keywords internal
 .groebn_fr_sub <- function(p, q) {
   .groebn_fr(p[1L] * q[2L] - q[1L] * p[2L], p[2L] * q[2L])
 }
@@ -107,6 +111,7 @@
 #' @examples
 #' res <- .groebn_fr_neg(p = 0.5)
 #' res
+#' @keywords internal
 .groebn_fr_neg <- function(p) c(-p[1L], p[2L])
 
 #' .groebn_fr_mul
@@ -122,6 +127,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .groebn_fr_mul(p = A, q = A)
 #' res
+#' @keywords internal
 .groebn_fr_mul <- function(p, q) {
   .groebn_fr(p[1L] * q[1L], p[2L] * q[2L])
 }
@@ -140,6 +146,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .groebn_fr_div(p = A, q = A)
 #' res
+#' @keywords internal
 .groebn_fr_div <- function(p, q) {
   if (q[1L] == 0L) stop("groebn: division by zero rational")
   .groebn_fr(p[1L] * q[2L], p[2L] * q[1L])
@@ -157,6 +164,7 @@
 #' @examples
 #' res <- .groebn_fr_is_zero(p = 0.5)
 #' res
+#' @keywords internal
 .groebn_fr_is_zero <- function(p) p[1L] == 0L
 
 #' .groebn_fr_eq
@@ -171,6 +179,7 @@
 #' @examples
 #' res <- .groebn_fr_eq(p = 0.5, q = 0.5)
 #' res
+#' @keywords internal
 .groebn_fr_eq <- function(p, q) p[1L] == q[1L] && p[2L] == q[2L]
 
 #' .groebn_as_fr
@@ -184,6 +193,7 @@
 #' @examples
 #' .groebn_as_fr(5L)
 #' .groebn_as_fr("3/4")
+#' @keywords internal
 .groebn_as_fr <- function(x) {
   if (is.null(x)) return(.groebn_fr(0L))
   if (is.character(x) && length(x) == 1L) {
@@ -221,6 +231,7 @@
 #' @examples
 #' kf <- .groebn_key("grlex")
 #' kf(c(1L, 2L))    # total degree first, then the exponents
+#' @keywords internal
 .groebn_key <- function(order) {
   if (order == "lex") {
     function(e) as.integer(e)
@@ -247,6 +258,7 @@
 #' @export
 #' @examples
 #' .groebn_parse_key("2_1")
+#' @keywords internal
 .groebn_parse_key <- function(s) {
   as.integer(strsplit(s, "_", fixed = TRUE)[[1L]])
 }
@@ -264,6 +276,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .groebn_format_key(e = x)
 #' res
+#' @keywords internal
 .groebn_format_key <- function(e) {
   paste(as.integer(e), collapse = "_")
 }
@@ -286,6 +299,7 @@
 #' names(f)
 #' # repeated monomials are summed, and a cancellation drops the term
 #' length(.groebn_poly(list("1_0" = 1, "1_0" = -1)))
+#' @keywords internal
 .groebn_poly <- function(terms, nvars = NULL) {
   out <- list()
   n <- NULL
@@ -404,6 +418,7 @@
 #' @export
 #' @examples
 #' .groebn_nvars(list(.groebn_poly(list("2_1" = 1))))
+#' @keywords internal
 .groebn_nvars <- function(F) {
   for (f in F) {
     if (length(f) > 0L) {
@@ -428,6 +443,7 @@
 #' f <- .groebn_poly(list("2_0" = 1, "1_1" = 1, "0_2" = 1, "0_0" = 1))
 #' .groebn_monomials(f, "lex")
 #' .groebn_monomials(f, "grlex")
+#' @keywords internal
 .groebn_monomials <- function(f, order = "lex") {
   nms <- names(f)
   if (length(nms) == 0L) return(character(0L))
@@ -456,6 +472,7 @@
 #' f <- .groebn_poly(list("2_0" = 1, "0_3" = 1))
 #' .groebn_leading_monomial(f, "lex")     # lex prefers the x power
 #' .groebn_leading_monomial(f, "grlex")   # grlex prefers the higher degree
+#' @keywords internal
 .groebn_leading_monomial <- function(f, order = "lex") {
   ms <- .groebn_monomials(f, order)
   if (length(ms) == 0L) return(NULL)
@@ -475,6 +492,7 @@
 #' fn <- function(v) sum(v^2)
 #' res <- .groebn_leading_coeff(f = fn)
 #' res
+#' @keywords internal
 .groebn_leading_coeff <- function(f, order = "lex") {
   lm <- .groebn_leading_monomial(f, order)
   if (is.null(lm)) return(.groebn_fr(0L))
@@ -494,6 +512,7 @@
 #' fn <- function(v) sum(v^2)
 #' res <- .groebn_leading_term(f = fn)
 #' res
+#' @keywords internal
 .groebn_leading_term <- function(f, order = "lex") {
   lm <- .groebn_leading_monomial(f, order)
   if (is.null(lm)) return(list())
@@ -518,6 +537,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .groebn_add(f = fn, g = g)
 #' res
+#' @keywords internal
 .groebn_add <- function(f, g) {
   out <- f
   for (k in names(g)) {
@@ -548,6 +568,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .groebn_sub(f = fn, g = g)
 #' res
+#' @keywords internal
 .groebn_sub <- function(f, g) {
   neg_g <- lapply(g, .groebn_fr_neg)
   .groebn_add(f, neg_g)
@@ -568,6 +589,7 @@
 #' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 #' res <- .groebn_mul(f = fn, g = g)
 #' res
+#' @keywords internal
 .groebn_mul <- function(f, g) {
   if (length(f) == 0L || length(g) == 0L) return(list())
   out <- list()
@@ -604,6 +626,7 @@
 #' @export
 #' @examples
 #' .groebn_scale(.groebn_poly(list("1_0" = 3)), c(1L, 2L))
+#' @keywords internal
 .groebn_scale <- function(f, c) {
   q <- .groebn_as_fr(c)
   if (.groebn_fr_is_zero(q)) return(list())
@@ -625,6 +648,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .groebn_divides(a = A, b = b)
 #' res
+#' @keywords internal
 .groebn_divides <- function(a, b) {
   all(a <= b)
 }
@@ -643,6 +667,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .groebn_lcm(a = A, b = b)
 #' res
+#' @keywords internal
 .groebn_lcm <- function(a, b) {
   pmax(a, b)
 }
@@ -664,6 +689,7 @@
 #' g <- .groebn_poly(list("1_1" = 1, "0_2" = 1))
 #' # the leading terms cancel by construction
 #' .groebn_spoly(f, g, "lex")
+#' @keywords internal
 .groebn_spoly <- function(f, g, order = "lex") {
   if (length(f) == 0L || length(g) == 0L)
     stop("groebn: the S-polynomial of the zero polynomial is not defined")
@@ -697,6 +723,7 @@
 #'           .groebn_poly(list("0_1" = 1, "0_0" = -2)))
 #' d <- .groebn_divide(f, G, "lex")
 #' d$remainder
+#' @keywords internal
 .groebn_divide <- function(f, G, order = "lex") {
   Gs <- Filter(function(g) length(g) > 0L, G)
   if (length(Gs) == 0L)
@@ -749,6 +776,7 @@
 #'                        .groebn_poly(list("0_1" = 1, "0_0" = -2))))$basis
 #' f <- .groebn_poly(list("2_1" = 3, "1_2" = 5, "0_0" = -2))
 #' .groebn_normal_form(f, G, "lex")     # 3 + 20 - 2 = 24
+#' @keywords internal
 .groebn_normal_form <- function(f, G, order = "lex") {
   .groebn_divide(f, G, order)$remainder
 }
@@ -775,6 +803,7 @@
 #' res <- .groebn_buchberger(list(f1, f2), order = "grlex")
 #' res$size
 #' res$n_pairs
+#' @keywords internal
 .groebn_buchberger <- function(F, order = "lex", prune = TRUE, reduced = TRUE) {
   .groebn_key(order)  # validate
   G <- lapply(F, function(f) if (is.null(f) || length(f) == 0L) NULL else f)
@@ -856,6 +885,7 @@
 #' f2 <- .groebn_poly(list("2_1" = 1, "0_2" = -2, "1_0" = 1))
 #' G <- .groebn_buchberger(list(f1, f2), order = "grlex", reduced = FALSE)$basis
 #' length(.groebn_reduce_basis(G, "grlex"))
+#' @keywords internal
 .groebn_reduce_basis <- function(G, order = "lex") {
   H <- Filter(function(g) length(g) > 0L, G)
   keep <- list()
@@ -930,6 +960,7 @@
 #' .groebn_ideal_member(f, list(g1, g2))$member
 #' # the constant 1 does not
 #' .groebn_ideal_member(.groebn_poly(list("0_0" = 1)), list(g1, g2))$member
+#' @keywords internal
 .groebn_ideal_member <- function(f, F, order = "lex", basis = NULL) {
   G <- if (!is.null(basis)) basis
        else .groebn_buchberger(F, order)$basis

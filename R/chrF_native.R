@@ -12,6 +12,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .chrf_char_ngrams <- function(s, n) {
   L <- nchar(s)
   if (L < n) return(list())
@@ -29,6 +30,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .chrf_word_ngrams <- function(ws, n) {
   L <- length(ws)
   if (L < n) return(list())
@@ -45,6 +47,7 @@
 #' @param seq See Usage.
 #' @return The value of \code{d}, as built in the body.
 #' @export
+#' @keywords internal
 .chrf_counts <- function(seq) {
   d <- list()
   for (g in seq) {
@@ -63,6 +66,7 @@
 #' @param ref_grams A vector; its length is taken.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .chrf_pr <- function(hyp_grams, ref_grams) {
   if (length(hyp_grams) == 0L || length(ref_grams) == 0L) return(NULL)
   hc <- .chrf_counts(hyp_grams)

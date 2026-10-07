@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .mor_ks_sf(d = 3L, n = 3L)
 res
 }
+\keyword{internal}

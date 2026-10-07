@@ -10,6 +10,7 @@
 #' @param b A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .seq_hamming <- function(a, b) {
   if (length(a) != length(b))
     stop("sequences must be the same length to compare")

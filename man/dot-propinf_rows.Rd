@@ -21,3 +21,4 @@ the source it follows.
 \examples{
 .propinf_rows(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE))
 }
+\keyword{internal}

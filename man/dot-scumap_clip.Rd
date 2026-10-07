@@ -18,3 +18,4 @@ The value of \code{v}, as built in the body.
 A step of the scumap_native implementation. Called by \code{morie_scumap_umap_singlecell}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

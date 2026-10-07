@@ -32,6 +32,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tf_need(x = x)
 #' res
+#' @keywords internal
 .tf_need <- function(x, name = "x", minlen = 2L) {
   v <- as.numeric(x)
   if (length(v) < minlen) {
@@ -61,6 +62,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tf_dft(x = x)
 #' res
+#' @keywords internal
 .tf_dft <- function(x) {
   z <- as.complex(x)
   n <- length(z)
@@ -91,6 +93,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tf_idft(X = x)
 #' res
+#' @keywords internal
 .tf_idft <- function(X) {
   z <- as.complex(X)
   n <- length(z)
@@ -119,6 +122,7 @@
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .tf_win <- function(name, m) {
   m <- as.integer(m)
   if (m < 1L) stop("window length must be >= 1")
@@ -157,6 +161,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tf_analytic(x = x)
 #' res
+#' @keywords internal
 .tf_analytic <- function(x) {
   v <- as.numeric(x)
   n <- length(v)
@@ -246,6 +251,7 @@
 #' @param wavelet Coerced to character by the body, with \code{as.character}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .tf_dbname <- function(wavelet) {
   w <- gsub("[-_]", "", tolower(trimws(as.character(wavelet))))
   if (w %in% c("haar", "db1", "d2")) {
@@ -278,6 +284,7 @@
 #' @param wavelet Passed to \code{.tf_dbname}.
 #' @return A list with \code{h}, \code{g}, \code{rec_lo}, \code{rec_hi}.
 #' @export
+#' @keywords internal
 .tf_filters <- function(wavelet) {
   h <- .TF_DBTAPS[[as.character(.tf_dbname(wavelet))]]
   L <- length(h)
@@ -311,6 +318,7 @@
 #' @param g Numeric; combined arithmetically in the body.
 #' @return A list with \code{lo}, \code{hi}.
 #' @export
+#' @keywords internal
 .tf_dwtstep <- function(a, h, g) {
   a <- as.numeric(a)
   n <- length(a)
@@ -341,6 +349,7 @@
 #' @param g A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .tf_idwtstep <- function(lo, hi, h, g) {
   half <- length(lo)
   n <- 2L * half
@@ -366,6 +375,7 @@
 #' @param levels A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{approx}, \code{details}, \code{lengths}.
 #' @export
+#' @keywords internal
 .tf_dwt <- function(x, wavelet, levels) {
   f <- .tf_filters(wavelet)
   a <- as.numeric(x)
@@ -408,6 +418,7 @@
 #' @param wavelet Passed to \code{.tf_filters}.
 #' @return The value of \code{cur}, as built in the body.
 #' @export
+#' @keywords internal
 .tf_idwt <- function(a, details, lengths, wavelet) {
   f <- .tf_filters(wavelet)
   cur <- as.numeric(a)
@@ -430,6 +441,7 @@
 #' @param levels A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{approx}, \code{details}, \code{approxes}.
 #' @export
+#' @keywords internal
 .tf_swt <- function(x, wavelet, levels) {
   f <- .tf_filters(wavelet)
   n <- length(x)
@@ -466,6 +478,7 @@
 #' @param xq Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tf_spline <- function(xs, ys, xq) {
   xs <- as.numeric(xs)
   ys <- as.numeric(ys)
@@ -520,6 +533,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tf_extrema(x = x)
 #' res
+#' @keywords internal
 .tf_extrema <- function(x) {
   n <- length(x)
   mx <- integer(0)
@@ -557,6 +571,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tf_zerox(x = x)
 #' res
+#' @keywords internal
 .tf_zerox <- function(x) {
   n <- length(x)
   if (n < 2L) {
@@ -583,6 +598,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tf_sift(x = x)
 #' res
+#' @keywords internal
 .tf_sift <- function(x, maxiter = 50L, tol = 0.05) {
   h <- as.numeric(x)
   n <- length(h)
@@ -622,6 +638,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tf_emd(x = x)
 #' res
+#' @keywords internal
 .tf_emd <- function(x, maxmodes = 10L, tol = 0.05) {
   res <- as.numeric(x)
   imfs <- list()
@@ -647,6 +664,7 @@
 #' @param w0 Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .tf_mother <- function(name, t, w0 = 5) {
   nm <- tolower(trimws(as.character(name)))
   if (nm %in% c("mexh", "mexicanhat", "sombrero", "ricker")) {
@@ -673,6 +691,7 @@
 #' @param name Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .tf_support <- function(name) {
   nm <- tolower(trimws(as.character(name)))
   tbl <- c(
@@ -694,6 +713,7 @@
 #' @param w0 Passed to \code{.tf_mother}. Defaults to \code{5}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .tf_cwt <- function(x, scales, wavelet = "morlet", w0 = 5) {
   v <- as.numeric(x)
   n <- length(v)
@@ -727,6 +747,7 @@
 #' @param nfreq Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{tfd}, \code{freqs}.
 #' @export
+#' @keywords internal
 .tf_wvd <- function(x, fs, nfreq = NULL) {
   v <- as.numeric(x)
   n <- length(v)
@@ -756,6 +777,7 @@
 #' @param flen Passed to \code{gauss}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .tf_smooth2d <- function(tfd, tlen, flen) {
   nt <- nrow(tfd)
   nf <- ncol(tfd)
@@ -797,6 +819,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tf_energy(v = x)
 #' res
+#' @keywords internal
 .tf_energy <- function(v) .morie_fsum(Mod(v)^2)
 
 # --- deterministic 64-bit LCG for the EEMD noise ---------------------------
@@ -815,6 +838,7 @@
 #' @param st A vector; indexed elementwise.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @keywords internal
 .tf_lcg_step <- function(st) {
   r <- c(0, 0, 0, 0)
   for (i in 1:4) {
@@ -841,6 +865,7 @@
 #' @param st A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tf_lcg_unif <- function(st) {
   # (state >> 11) is exact in a double: it is at most 2^53 - 1.
   (floor(st[1] / 2048) + st[2] * 2^5 + st[3] * 2^21 + st[4] * 2^37 + 1) /
@@ -858,6 +883,7 @@
 #' @examples
 #' res <- .tf_lcg_seed(seed = 1L)
 #' res
+#' @keywords internal
 .tf_lcg_seed <- function(seed) .tf_lcg_step(c(0, 0, 0, 0) + .tf_seed_limbs(seed))
 
 #' .tf_seed_limbs
@@ -871,6 +897,7 @@
 #' @examples
 #' res <- .tf_seed_limbs(seed = 1L)
 #' res
+#' @keywords internal
 .tf_seed_limbs <- function(seed) {
   s <- as.numeric(seed)
   if (s < 0) stop("seed must be non-negative")
@@ -3415,6 +3442,7 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 #' @examples
 #' res <- .tf_echo_idx(n = 3L)
 #' res
+#' @keywords internal
 .tf_echo_idx <- function(n, default = NULL) {
   if (is.null(n)) {
     return(default)

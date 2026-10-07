@@ -24,3 +24,4 @@ which is the property that matters here.
 res <- .w3_nppf(p = 0.5)
 res
 }
+\keyword{internal}

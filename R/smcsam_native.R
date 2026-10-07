@@ -53,6 +53,7 @@ ess <- function(weights) {
 #' @param u Passed to \code{<}.
 #' @return The value of \code{lo}, as built in the body.
 #' @export
+#' @keywords internal
 .smcsam_pick <- function(cum, u) {
   lo <- 1L
   hi <- length(cum)
@@ -176,6 +177,7 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
 #' @param n_moves Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
+#' @keywords internal
 .smcsam_rwk <- function(scale, n_moves) {
   force(scale)
   force(n_moves)
@@ -356,6 +358,7 @@ smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
 #' @examples
 #' res <- .smcsam_cheatsheet()
 #' res
+#' @keywords internal
 .smcsam_cheatsheet <- function() {
   paste("smcsam: SMC samplers (Del Moral, Doucet & Jasra 2006). A ",
         "sequence pi_n on a FIXED space is made sequential by an ",

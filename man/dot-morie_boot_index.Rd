@@ -20,3 +20,4 @@ The value of \code{output}, as built in the body.
 A step of the boot_native implementation. Called by \code{morie_boot}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

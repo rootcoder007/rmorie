@@ -18,6 +18,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .strmkr_rows(x = x)
 #' res
+#' @keywords internal
 .strmkr_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -212,6 +213,7 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
 #' @examples
 #' res <- .strmkr_cheatsheet()
 #' res
+#' @keywords internal
 .strmkr_cheatsheet <- function() {
   paste0("strmkr: morie_strmkr_strauss_process(coords, r, gamma) -> ",
          "pseudolikelihood beta and gamma for the Strauss inhibition model ",

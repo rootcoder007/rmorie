@@ -20,3 +20,4 @@ The value of \code{k}, as built in the body.
 linear scan, not a bisection: k is 2^m with m small by construction,
 and a scan visits the cells in one fixed order in both arms.
 }
+\keyword{internal}

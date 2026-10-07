@@ -24,3 +24,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .reinfc_as_matrix(x = x, name = txt)
 res
 }
+\keyword{internal}

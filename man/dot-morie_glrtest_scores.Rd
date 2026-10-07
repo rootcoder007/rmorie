@@ -25,3 +25,4 @@ A step of the glrtest_native implementation. Called by \code{morie_glrtest}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

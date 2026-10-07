@@ -22,6 +22,7 @@
 #' @param event Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{t}, \code{e}.
 #' @export
+#' @keywords internal
 .ms_check <- function(time, event) {
   t <- as.numeric(time)
   e <- as.integer(event)
@@ -43,6 +44,7 @@
 #' @param event Passed to \code{.ms_check}.
 #' @return A list with \code{time}, \code{surv}, \code{n_risk}, \code{n_event}, \code{greenwood}.
 #' @export
+#' @keywords internal
 .ms_km <- function(time, event) {
   z <- .ms_check(time, event)
   t <- z$t
@@ -76,6 +78,7 @@
 #' @param beta A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{time}, \code{cumhaz}, \code{weight}.
 #' @export
+#' @keywords internal
 .ms_baseline <- function(time, event, X, beta) {
   # Breslow cumulative baseline hazard, what survival::basehaz returns
   z <- .ms_check(time, event)
@@ -110,6 +113,7 @@
 #' @param t Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .ms_h0_at <- function(ut, H, t) {
   vapply(t, function(x) {
     k <- sum(ut <= x)
@@ -904,6 +908,7 @@ Turnbull <- function(left, right, max_iter = 1000L,
 #' @param logsig Numeric; passed to \code{exp}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .ms_logsf_logpdf <- function(dist, y, mu, logsig) {
   sig <- exp(logsig)
   z <- (y - mu) / sig
@@ -937,6 +942,7 @@ Turnbull <- function(left, right, max_iter = 1000L,
 #' \code{loglik}, \code{n_par}, \code{n}, \code{n_events}, \code{aic}, \code{bic},
 #' \code{fixed_scale}, \code{convergence}.
 #' @export
+#' @keywords internal
 .ms_fit_lls <- function(dist, time, event, X = NULL) {
   z <- .ms_check(time, event)
   t <- z$t

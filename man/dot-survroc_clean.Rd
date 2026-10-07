@@ -23,3 +23,4 @@ A step of the survroc_native implementation. Called by \code{.survroc_pair},
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

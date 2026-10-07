@@ -21,3 +21,4 @@ Exact rationals (Fraction-equivalent)
 .groebn_fr(2L, 4L)     # kept in lowest terms
 .groebn_fr(2L, -4L)    # the sign is carried by the numerator
 }
+\keyword{internal}

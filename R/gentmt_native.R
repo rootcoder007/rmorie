@@ -24,6 +24,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gentmt_vec(x = x)
 #' res
+#' @keywords internal
 .gentmt_vec <- function(x) {
   as.numeric(x)
 }
@@ -43,6 +44,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .gentmt_ols_core(X = x, y = y)
 #' res
+#' @keywords internal
 .gentmt_ols_core <- function(X, y) {
   n <- nrow(X)
   X_full <- cbind(1, X)
@@ -77,6 +79,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .gentmt_wls(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .gentmt_wls <- function(X, y, w) {
   n <- nrow(X)
   X_full <- cbind(1, X)
@@ -110,6 +113,7 @@
 #' \code{"normal"}.
 #' @return A list with \code{dens}, \code{info}.
 #' @export
+#' @keywords internal
 .gentmt_treatment_density <- function(A, H, kind = "normal") {
   A <- .gentmt_vec(A)
   H <- as.matrix(H)
@@ -184,6 +188,7 @@
 #' @param trim Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{w}, \code{info}.
 #' @export
+#' @keywords internal
 .gentmt_ip_weights <- function(A, H, kind = "normal", stabilize = TRUE, trim = NULL) {
   A <- .gentmt_vec(A)
   td <- .gentmt_treatment_density(A, H, kind)
@@ -247,6 +252,7 @@
 #' \code{stratum_sizes}, \code{stratum_se}, \code{gps_mean}, \code{n_strata}, \code{n},
 #' \code{degree}.
 #' @export
+#' @keywords internal
 .gentmt_gps_subclassify <- function(y, A, H, n_strata = 5, degree = 1) {
   yv <- .gentmt_vec(y)
   av <- .gentmt_vec(A)
@@ -315,6 +321,7 @@
 #' @return A list with \code{estimate}, \code{se}, \code{doses}, \code{curve},
 #' \code{slopes}, \code{coef}, \code{gps}, \code{n}, \code{degree}.
 #' @export
+#' @keywords internal
 .gentmt_dose_response_curve <- function(y, A, H, doses = NULL, degree = 1) {
   yv <- .gentmt_vec(y)
   av <- .gentmt_vec(A)
@@ -478,6 +485,7 @@ morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
 #' @examples
 #' res <- .gentmt_cheatsheet()
 #' res
+#' @keywords internal
 .gentmt_cheatsheet <- function() {
   paste0("gentmt: continuous-dose MSM. weight = SW = f(A)/f(A|L) ",
          "(Robins-Hernan-Brumback 2000, default); subclassify = GPS ",

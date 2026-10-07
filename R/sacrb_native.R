@@ -80,6 +80,7 @@
 #' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .sacrb_tokenize_13a <- function(text, lowercase = FALSE) {
   s <- as.character(text)
   if (lowercase) {
@@ -109,6 +110,7 @@
 #' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .sacrb_tokenize_intl <- function(text, lowercase = FALSE) {
   s <- as.character(text)
   if (lowercase) {
@@ -150,6 +152,7 @@
 #' @param lowercase A flag; the body branches on it.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .sacrb_tok <- function(text, scheme, lowercase) {
   if (scheme == "13a") {
     return(.sacrb_tokenize_13a(text, lowercase))
@@ -182,6 +185,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{c}, as built in the body.
 #' @export
+#' @keywords internal
 .sacrb_ngram_counts <- function(tokens, n) {
   if (as.integer(n) < 1L) {
     stop("sacrb: n must be at least 1")
@@ -213,6 +217,7 @@
 #' @param n Passed to \code{.sacrb_ngram_counts}.
 #' @return A list with \code{numerator}, \code{denominator}, \code{precision}.
 #' @export
+#' @keywords internal
 .sacrb_modified_precision <- function(cand_tokens, refs_tokens, n) {
   cc <- .sacrb_ngram_counts(cand_tokens, n)
   if (length(cc) == 0L) {
@@ -256,6 +261,7 @@
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sacrb_brevity_penalty <- function(c, r) {
   cv <- as.numeric(c)
   rv <- as.numeric(r)
@@ -277,6 +283,7 @@
 #' @param rlens A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sacrb_best_match <- function(clen, rlens) {
   if (length(rlens) == 0L) {
     return(0L)
@@ -401,6 +408,7 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
 #' @examples
 #' res <- .sacrb_signature()
 #' res
+#' @keywords internal
 .sacrb_signature <- function(tokenizer = "13a", lowercase = FALSE,
                             max_n = 4L, n_refs = 1L,
                             version = "morie-sacrb-1") {
@@ -421,6 +429,7 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
 #' @examples
 #' res <- .sacrb_cheatsheet()
 #' res
+#' @keywords internal
 .sacrb_cheatsheet <- function() {
   paste0("sacrb: BLEU = BP * exp(sum w_n log p_n), with clipped ",
          "n-gram precision and BP = 1 if c > r else exp(1 - r/c). ",

@@ -25,6 +25,7 @@
 #' @return A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter},
 #' \code{n_events}.
 #' @export
+#' @keywords internal
 .morie_cox_counting <- function(start, stop, event, X, strata = NULL,
                                 max_iter = 50L, tol = 1e-9,
                                 offset = NULL) {

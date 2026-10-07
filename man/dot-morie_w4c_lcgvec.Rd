@@ -25,3 +25,4 @@ the source it follows.
 res <- .morie_w4c_lcgvec(n = 3L, seed = 1L)
 res
 }
+\keyword{internal}

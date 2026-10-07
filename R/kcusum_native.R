@@ -28,6 +28,7 @@
 #' @param bandwidth Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{K}, \code{bw}.
 #' @export
+#' @keywords internal
 .mor_kc_gram <- function(z, kernel, bandwidth) {
   n <- nrow(z)
   if (kernel == "linear") return(list(K = z %*% t(z), bw = NULL))

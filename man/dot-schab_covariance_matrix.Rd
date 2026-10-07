@@ -25,3 +25,4 @@ C(h) = sigma0^2 R(h) for h > 0, so the nugget enters only on the
 diagonal -- it is a discontinuity at the origin, not a term added
 everywhere.
 }
+\keyword{internal}

@@ -73,6 +73,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmlcll_mat(X = x)
 #' res
+#' @keywords internal
 .tmlcll_mat <- function(X) {
   if (is.matrix(X)) return(X)
   if (is.null(X) || (is.numeric(X) && length(X) == 0)) {
@@ -119,6 +120,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmlcll_vec(x = x)
 #' res
+#' @keywords internal
 .tmlcll_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.numeric(x)) return(as.numeric(x))
@@ -137,6 +139,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}.
 #' @export
+#' @keywords internal
 .tmlcll_wls <- function(X, y, w, ridge) {
   n <- length(y)
   p <- ncol(X)
@@ -159,6 +162,7 @@
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return The value of \code{des}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlcll_design <- function(W, n) {
   p <- ncol(W)
   des <- matrix(0, nrow = n, ncol = p + 1)
@@ -176,6 +180,7 @@
 #' @param a Numeric; combined arithmetically in the body.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlcll_logit_irls <- function(des, a) {
   n <- nrow(des)
   p <- ncol(des)
@@ -215,6 +220,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tmlcll_ols(X = x, y = y)
 #' res
+#' @keywords internal
 .tmlcll_ols <- function(X, y) {
   Xm <- .tmlcll_mat(X)
   yv <- .tmlcll_vec(y)
@@ -234,6 +240,7 @@
 #' @examples
 #' res <- .tmlcll_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tmlcll_logit <- function(p) {
   log(p / (1 - p))
 }
@@ -250,6 +257,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmlcll_expit(x = x)
 #' res
+#' @keywords internal
 .tmlcll_expit <- function(x) {
   ifelse(x > -700, 1 / (1 + exp(-x)), 0)
 }
@@ -487,6 +495,7 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
 #' @examples
 #' res <- .tmlcll_morie_cheatsheet()
 #' res
+#' @keywords internal
 .tmlcll_morie_cheatsheet <- function() {
   paste0(
     "tmlcll: the traditional CLPM's cross-lags MIX within-person ",

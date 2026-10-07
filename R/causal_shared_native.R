@@ -25,6 +25,7 @@
 #' y <- c(0, 0, 1, 0, 1, 1, 1, 1)
 #' res <- .morie_logit_fit(X = x, y = y)
 #' res
+#' @keywords internal
 .morie_logit_fit <- function(X, y, max_iter = 100L, tol = 1e-9) {
   D <- cbind(1, X)
   beta <- rep(0, ncol(D))
@@ -79,6 +80,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_ridge_fit(X = x, y = y)
 #' res
+#' @keywords internal
 .morie_ridge_fit <- function(X, y, lam = 1e-3) {
   D <- cbind(1, X)
   A <- crossprod(D) + lam * diag(ncol(D))
@@ -97,6 +99,7 @@
 #' @param horizon Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_cf_rmst_pseudo <- function(time, event, horizon) {
   n <- length(time)
   o <- order(time)

@@ -24,3 +24,4 @@ then take the centroid together with its live neighbours as the next
 cluster and remove them. Ties broken by ascending index for
 determinism. Final list is sorted by (-size, centroid).
 }
+\keyword{internal}

@@ -76,6 +76,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .copynm_cbs_stat(v = x)
 #' res
+#' @keywords internal
 .copynm_cbs_stat <- function(v) {
   n <- length(v)
   if (n < 3L) stop("copynm: need at least 3 points to test for a change")
@@ -114,6 +115,7 @@
 #' @param e Passed to \code{.ghc_unif}.
 #' @return Invisibly,the value of \code{w}, as built in the body.
 #' @export
+#' @keywords internal
 .copynm_shuffle <- function(w, e) {
   n <- length(w)
   # Python: for t in range(n - 1, 0, -1):  u = int(rng.random() * (t + 1))
@@ -141,6 +143,7 @@
 #' @param e Passed to \code{.copynm_shuffle}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .copynm_binary_supported <- function(v, cut, alpha, perms, e) {
   n <- length(v)
   if (cut <= 0L || cut >= n) return(FALSE)

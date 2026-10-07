@@ -16,6 +16,7 @@
 #' @param theta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .forsnp_locus <- function(a1, a2, fr, theta) {
   p1 <- as.numeric(fr[[a1]])
   if (a1 == a2) {

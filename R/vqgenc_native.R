@@ -67,6 +67,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .vqgenc_as_matrix(x = x)
 #' res
+#' @keywords internal
 .vqgenc_as_matrix <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -110,6 +111,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .vqgenc_as_vector(x = x)
 #' res
+#' @keywords internal
 .vqgenc_as_vector <- function(x) {
   if (is.matrix(x)) {
     if (nrow(x) == 1L) {
@@ -142,6 +144,7 @@
 #' @return A list with \code{indices}, \code{codes}, \code{distance},
 #' \code{codebook_size}, \code{used}, \code{usage_fraction}, \code{note}.
 #' @export
+#' @keywords internal
 .vqgenc_quantize <- function(vectors, codebook) {
   Z <- .vqgenc_as_matrix(codebook)
   V <- .vqgenc_as_matrix(vectors)
@@ -197,6 +200,7 @@
 #' @param upstream_gradient Passed to \code{.vqgenc_as_vector}.
 #' @return A list with \code{forward}, \code{backward}, \code{jacobian_is_identity}, \code{note}.
 #' @export
+#' @keywords internal
 .vqgenc_straight_through <- function(encoder_output, quantized, upstream_gradient) {
   e <- .vqgenc_as_vector(encoder_output)
   q <- .vqgenc_as_vector(quantized)
@@ -223,6 +227,7 @@
 #' @param quantized Passed to \code{.vqgenc_as_vector}.
 #' @return A list with \code{loss}, \code{gradient_flows_to}, \code{note}.
 #' @export
+#' @keywords internal
 .vqgenc_codebook_loss <- function(encoder_output, quantized) {
   e <- .vqgenc_as_vector(encoder_output)
   q <- .vqgenc_as_vector(quantized)
@@ -250,6 +255,7 @@
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
 #' @return A list with \code{loss}, \code{beta}, \code{gradient_flows_to}, \code{note}.
 #' @export
+#' @keywords internal
 .vqgenc_commitment_loss <- function(encoder_output, quantized, beta = 0.25) {
   e <- .vqgenc_as_vector(encoder_output)
   q <- .vqgenc_as_vector(quantized)
@@ -285,6 +291,7 @@
 #' \code{attention_cost_pixels}, \code{attention_cost_tokens}, \code{speedup},
 #' \code{note}.
 #' @export
+#' @keywords internal
 .vqgenc_sequence_length <- function(height, width, downsample = 16L) {
   H <- as.integer(height)
   W <- as.integer(width)
@@ -320,6 +327,7 @@
 #' \code{codebook_loss}, \code{commitment_loss}, \code{reconstruction}, \code{loss},
 #' \code{usage_fraction}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 .vqgenc_encode <- function(vectors, codebook, beta = 0.25, target = NULL) {
   q <- .vqgenc_quantize(vectors, codebook)
   V <- .vqgenc_as_matrix(vectors)
@@ -366,6 +374,7 @@
 #' @examples
 #' res <- .vqgenc_cheatsheet()
 #' res
+#' @keywords internal
 .vqgenc_cheatsheet <- function() {
   paste("vqgenc: transformers have no locality prior and cost O(n^2),",
         "so shorten the SEQUENCE rather than cheapen the attention --",

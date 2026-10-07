@@ -35,6 +35,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .forwsr_prep(X = x, y = y)
 #' res
+#' @keywords internal
 .forwsr_prep <- function(X, y) {
   M <- as.matrix(X)
   storage.mode(M) <- "double"
@@ -66,6 +67,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .forwsr_dsum(v = x)
 #' res
+#' @keywords internal
 .forwsr_dsum <- function(v) {
   # CPython's builtin sum() switched to Neumaier compensated summation
   # for floats in 3.12. R's sum() accumulates in long double, and a
@@ -99,6 +101,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .forwsr_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .forwsr_solve <- function(A, b) {
   p <- length(b)
   Ab <- cbind(A, b)
@@ -133,6 +136,7 @@
 #' @examples
 #' res <- .forwsr_norm_ppf(p = 0.5)
 #' res
+#' @keywords internal
 .forwsr_norm_ppf <- function(p) {
   # R's qnorm IS Wichura AS 241 (PPND16); the Python arm implements the
   # same rational approximation with the same coefficients, and the two

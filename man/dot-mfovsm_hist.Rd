@@ -18,3 +18,4 @@ The value of \code{list}.
 A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

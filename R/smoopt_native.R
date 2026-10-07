@@ -37,6 +37,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .smoopt_kvec(x = x)
 #' res
+#' @keywords internal
 .smoopt_kvec <- function(x) if (is.null(dim(x))) as.numeric(x) else
   as.numeric(x)
 
@@ -51,6 +52,7 @@
 #' @examples
 #' res <- .smoopt_make_rng(seed = 1L)
 #' res
+#' @keywords internal
 .smoopt_make_rng <- function(seed) {
   e <- .ghc_rng(seed)
   list(uniform = function() .ghc_unif(e, 1L))
@@ -334,6 +336,7 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
 #' @examples
 #' res <- .smoopt_cheatsheet()
 #' res
+#' @keywords internal
 .smoopt_cheatsheet <- function() {
   paste0("smoopt: same SVM dual as svmopt, different CHOICE of ",
          "pair. Two multipliers because the equality constraint ",
@@ -376,6 +379,7 @@ morie_smoopt <- list(error_cache = error_cache,
 #' @examples
 #' res <- .smoopt_K(K = 3L)
 #' res
+#' @keywords internal
 .smoopt_K <- function(K) {
   if (is.matrix(K)) return(K)
   n <- length(K)

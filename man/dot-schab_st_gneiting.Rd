@@ -47,3 +47,4 @@ the source it follows.
 res <- .schab_st_gneiting(h = 0.5, k = 3L)
 res
 }
+\keyword{internal}

@@ -223,6 +223,7 @@ morie_ibpfa <- function(n, alpha, seed = 0L) {
 #' @examples
 #' res <- .ibpfa_cheatsheet()
 #' res
+#' @keywords internal
 .ibpfa_cheatsheet <- function() {
   paste(paste0(
     "ibpfa: objects have SEVERAL latent features, and how many ex",

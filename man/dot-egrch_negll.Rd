@@ -28,3 +28,4 @@ internally while reading alpha1/gamma1 out of a package using the
 opposite order, so the returned alpha and gamma swapped meaning
 depending on whether that package happened to be installed.
 }
+\keyword{internal}

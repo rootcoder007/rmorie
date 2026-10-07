@@ -32,3 +32,4 @@ A vector, from \code{c}.
 step. The system is linear, so diagonalising the 2x2 matrix gives the
 answer outright: no tolerance, no step-size sensitivity.
 }
+\keyword{internal}

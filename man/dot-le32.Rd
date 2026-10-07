@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 res <- .le32(n = 3L)
 res
 }
+\keyword{internal}

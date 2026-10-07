@@ -29,6 +29,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .painn_vec(v = x)
 #' res
+#' @keywords internal
 .painn_vec <- function(v) as.numeric(unlist(v))
 
 #' .painn_mat
@@ -44,6 +45,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .painn_mat(M = X)
 #' res
+#' @keywords internal
 .painn_mat <- function(M) {
   if (is.matrix(M)) {
     storage.mode(M) <- "double"
@@ -300,6 +302,7 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
 #' @examples
 #' res <- .painn_cheatsheet()
 #' res
+#' @keywords internal
 .painn_cheatsheet <- function() {
   paste("painn: message passing was LESS DATA EFFICIENT than kernel ",
         "methods, and the diagnosis is INVARIANT representations -- a ",

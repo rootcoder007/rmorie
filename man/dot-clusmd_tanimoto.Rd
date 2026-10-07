@@ -17,3 +17,4 @@ A numeric value.
 \description{
 c / (a + b - c), guarding the all-zero case like sasimi._guard.
 }
+\keyword{internal}

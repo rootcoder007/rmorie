@@ -21,3 +21,4 @@ Accepts an integer set, a numeric vector of indices, or a 0/1
 sequence. Returns an integer vector of on-bit indices (sorted,
 deduped).
 }
+\keyword{internal}

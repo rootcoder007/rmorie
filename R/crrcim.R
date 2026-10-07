@@ -18,6 +18,7 @@
 #'   Defaults to \code{1}.
 #' @return A list with \code{times}, \code{F}, \code{S}, \code{Y}, \code{dk}, \code{n}.
 #' @export
+#' @keywords internal
 .aalen_johansen <- function(time, event_type, cause = 1) {
   t <- .s03vec(time)
   n <- length(t)

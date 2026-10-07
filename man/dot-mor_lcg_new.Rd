@@ -19,3 +19,4 @@ exactly in a double, which is what makes the streams identical.
 res <- .mor_lcg_new()
 res
 }
+\keyword{internal}

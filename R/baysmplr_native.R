@@ -248,6 +248,7 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 #' @param steps Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{q}, \code{p}, \code{g}.
 #' @export
+#' @keywords internal
 .baysmplr_leapfrog <- function(grad, q, p, eps, steps) {
   g <- grad(q)
   for (t in seq_len(as.integer(steps))) {
@@ -349,6 +350,7 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
 #' @param dmax Numeric; combined arithmetically in the body. Defaults to \code{1000}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @keywords internal
 .baysmplr_build_tree <- function(log_p, grad, q, p, u, v, j, eps, e, h0,
                                  dmax = 1000) {
   if (j == 0L) {

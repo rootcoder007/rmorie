@@ -27,6 +27,7 @@
 #' @param v A vector; its length is taken.
 #' @return A list with \code{u}, \code{v}.
 #' @export
+#' @keywords internal
 .morie_cop_uv <- function(u, v) {
   u <- as.numeric(u)
   v <- as.numeric(v)
@@ -117,6 +118,7 @@ morie_copula_cdf <- function(family, u, v, theta = NULL, nu = NULL) {
 #' @param rho Numeric; combined arithmetically in the body.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .morie_bvn_cdf <- function(x, y, rho) {
   if (!is.finite(x) || !is.finite(y)) {
     return(as.numeric(is.finite(x) && x > 0) * as.numeric(is.finite(y) && y > 0))
@@ -144,6 +146,7 @@ morie_copula_cdf <- function(family, u, v, theta = NULL, nu = NULL) {
 #' @param nu Numeric; combined arithmetically in the body.
 #' @return The value of \code{$}.
 #' @export
+#' @keywords internal
 .morie_bvt_cdf <- function(x, y, rho, nu) {
   if (!is.finite(x) || !is.finite(y)) {
     return(as.numeric(is.finite(x) && x > 0) * as.numeric(is.finite(y) && y > 0))
@@ -220,6 +223,7 @@ morie_copula_tau <- function(family, theta = NULL, nu = NULL) {
 #' @param n A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_tau_numeric <- function(family, theta = NULL, nu = NULL, n = 200L) {
   g <- (seq_len(n) - 0.5) / n
   U <- rep(g, each = n)
@@ -433,6 +437,7 @@ morie_extreme_value_copula <- function(u, v, A = "gumbel", theta = 2) {
 #' @param event A vector; indexed elementwise.
 #' @return A list with \code{grid}, \code{vals}.
 #' @export
+#' @keywords internal
 .morie_cop_km <- function(time, event) {
   o <- order(time)
   tt <- time[o]

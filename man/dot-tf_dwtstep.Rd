@@ -20,3 +20,4 @@ A list with \code{lo}, \code{hi}.
 A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{Wpt}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

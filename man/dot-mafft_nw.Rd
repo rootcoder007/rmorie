@@ -26,3 +26,4 @@ A list with \code{out1}, \code{out2}.
 A step of the mafft_native implementation. Called by \code{group_align}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

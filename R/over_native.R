@@ -25,6 +25,7 @@
 #' @param two_sided A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .mor_ks_psmirnov <- function(d, n1, n2, two_sided = TRUE) {
   md <- n1
   nd <- n2
@@ -57,6 +58,7 @@
 #' @examples
 #' res <- .mor_ks_sf(d = 3L, n = 3L)
 #' res
+#' @keywords internal
 .mor_ks_sf <- function(d, n) {
   lam <- d * (sqrt(n) + 0.12 + 0.11 / sqrt(n))
   if (lam < 0.04) {
@@ -92,6 +94,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .mor_ks_2samp(a = A, b = b)
 #' res
+#' @keywords internal
 .mor_ks_2samp <- function(a, b) {
   x <- sort(as.numeric(a))
   y <- sort(as.numeric(b))

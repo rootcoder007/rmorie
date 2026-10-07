@@ -101,6 +101,7 @@ Icc12c <- function(X, model = "2,k") {
 #' @param k The body requires: ICC(1,1), ICC(1,k), ICC(2,1), ICC(2,k), ICC(3,1), ICC(3,k).
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .icc12c_form <- function(model, k) {
   s <- gsub("[^0-9k]", "", tolower(as.character(model)))
   if (nchar(s) == 2L && grepl("^[0-9]$", substr(s, 2L, 2L)) &&

@@ -23,3 +23,4 @@ A step of the farmlmm_native implementation. Called by \code{.fixed_effect_scan}
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

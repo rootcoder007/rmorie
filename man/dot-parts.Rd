@@ -16,3 +16,4 @@ The value of \code{substr}.
 A step of the benRea_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

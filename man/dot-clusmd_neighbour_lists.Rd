@@ -21,3 +21,4 @@ Returns a list of integer vectors (sorted ascending); index i holds
 the indices j != i with Tanimoto(fp_i, fp_j) >= threshold. Mirrors
 the Python neighbour_lists() function.
 }
+\keyword{internal}

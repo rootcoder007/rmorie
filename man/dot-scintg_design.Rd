@@ -16,3 +16,4 @@ A list with \code{phi}, \code{names}.
 A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

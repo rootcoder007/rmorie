@@ -166,6 +166,7 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 #' @param smoothing One of \code{"gaussian"}, \code{"none"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .chemsc_B <- function(d, d_ideal, d_max, sigma, smoothing) {
   if (smoothing == "none") return(morie_chemsc_block(d, d_ideal, d_max))
   if (smoothing == "gaussian")
@@ -184,6 +185,7 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 #' @param over Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{base}, as built in the body.
 #' @export
+#' @keywords internal
 .chemsc_par <- function(base, over) {
   if (is.null(over)) return(base)
   for (nm in names(over)) base[[nm]] <- over[[nm]]
@@ -247,6 +249,7 @@ morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
 #' @param r1 Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .chemsc_over <- function(r, r1) {
   d <- as.numeric(r) - r1
   if (d > 0) d else 0
@@ -454,6 +457,7 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .chemsc_dist(a = A, b = b)
 #' res
+#' @keywords internal
 .chemsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 # The angle at b, in degrees, formed by a-b-c.
@@ -467,6 +471,7 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
 #' @param c Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .chemsc_angle <- function(a, b, c) {
   u <- a - b
   v <- c - b

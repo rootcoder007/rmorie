@@ -30,6 +30,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gh_sig(x = x)
 #' res
+#' @keywords internal
 .gh_sig <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)
@@ -218,6 +219,7 @@ morie_gru4r <- session_parallel_batches
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gru4r_sigmoid(x = x)
 #' res
+#' @keywords internal
 .gru4r_sigmoid <- function(x) {
   # Numerically stable sigmoid: below -700 it is effectively 0.
   ifelse(x > -700, 1 / (1 + exp(-x)), 0)

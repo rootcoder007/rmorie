@@ -148,6 +148,7 @@ morie_runs_updown <- function(n = NULL, x = NULL) {
 #' @examples
 #' res <- .morie_permutations(n = 3L)
 #' res
+#' @keywords internal
 .morie_permutations <- function(n) {
   if (n == 1L) {
     return(matrix(1L, 1L, 1L))

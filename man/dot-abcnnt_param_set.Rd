@@ -25,3 +25,4 @@ a <- .abcnnt_params(flow)[[1]]
 moved <- .abcnnt_param_set(flow, a, 0.5)
 .abcnnt_param_get(moved, a)
 }
+\keyword{internal}

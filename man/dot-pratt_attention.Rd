@@ -23,3 +23,4 @@ A step of the pratt_native implementation. Called by \code{.pratt_document_vecto
 \code{.pratt_sentence_vector}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -25,3 +25,4 @@ when it consumes from the GHC stream. NOTE: the Python source for
 slowdp.stick_breaking is not held here; the inverse-CDF form is the
 standard implementation and matches the GHC stream one-for-one.
 }
+\keyword{internal}

@@ -160,6 +160,7 @@ morie_droPDSI_palmer_pdsi <- function(precip, pet, awc = 100.0,
 #' @examples
 #' res <- .droPDSI_cheatsheet()
 #' res
+#' @keywords internal
 .droPDSI_cheatsheet <- function() {
   paste0("droPDSI: morie_droPDSI_palmer_pdsi(precip, pet, awc) -> PDSI, Z ",
          "index and the CAFEC water balance (Palmer 1965)")

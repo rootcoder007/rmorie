@@ -21,6 +21,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_rg_dft(x = x)
 #' res
+#' @keywords internal
 .morie_rg_dft <- function(x) {
   n <- length(x)
   idx <- seq_len(n) - 1L
@@ -45,6 +46,7 @@
 #' @param im Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_rg_idft_re <- function(re, im) {
   n <- length(re)
   idx <- seq_len(n) - 1L
@@ -62,6 +64,7 @@
 #' @param phase A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_rg_unwrap <- function(phase) {
   out <- numeric(length(phase))
   if (!length(phase)) {

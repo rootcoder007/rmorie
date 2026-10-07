@@ -19,3 +19,4 @@ A step of the schab_st_shared implementation. Called by \code{.schab_st_covarian
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

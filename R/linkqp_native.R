@@ -17,6 +17,7 @@
 #' @param c Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .linkqp_p3pl <- function(theta, a, b, c) {
   e <- exp(a * (theta - b))
   c + (1 - c) * e / (1 + e)

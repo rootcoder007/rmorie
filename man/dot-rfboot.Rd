@@ -23,3 +23,4 @@ the source it follows.
 res <- .rfboot(b = 3L, n = 3L)
 res
 }
+\keyword{internal}

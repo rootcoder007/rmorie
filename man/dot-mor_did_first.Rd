@@ -24,3 +24,4 @@ A list with \code{g}, \code{Dm}, \code{units}, \code{periods}.
 A step of the cssant_native implementation. Called by \code{morie_boryis}, \code{morie_cssant}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

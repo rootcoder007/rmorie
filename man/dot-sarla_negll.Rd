@@ -28,3 +28,4 @@ non-positive-variance guard is directly unit-testable. \code{e0}, \code{e1} are
 the residual projections, \code{n} the sample size, \code{I}/\code{W} the identity
 and spatial-weights matrices.
 }
+\keyword{internal}

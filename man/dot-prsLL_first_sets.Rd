@@ -36,3 +36,4 @@ first <- .prsLL_first_sets(g)
 first$E   # "(" and "id"
 first$Ep  # "+" and the empty string, which stands for epsilon
 }
+\keyword{internal}

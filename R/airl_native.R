@@ -32,6 +32,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .log(x = x)
 #' res
+#' @keywords internal
 .log <- function(x) log(max(x, 1e-300))
 
 #' .state_key
@@ -46,6 +47,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .state_key(s = txt)
 #' res
+#' @keywords internal
 .state_key <- function(s) {
   if (is.character(s)) {
     return(s)
@@ -70,6 +72,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .action_key(a = A)
 #' res
+#' @keywords internal
 .action_key <- function(a) {
   if (is.character(a)) {
     return(a)
@@ -423,6 +426,7 @@ airl <- function(expert_states, expert_actions, expert_next,
 #' @param s A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .airl_key <- function(s) {
   if (is.numeric(s) && length(s) == 1L) s
   else as.numeric(s)
@@ -437,6 +441,7 @@ airl <- function(expert_states, expert_actions, expert_next,
 #' @param s Character; passed to \code{grepl}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .airl_key_from_str <- function(s) {
   if (grepl("^list\\(", s)) {
     inner <- sub("^list\\((.*)\\)$", "\\1", s)
@@ -461,6 +466,7 @@ airl <- function(expert_states, expert_actions, expert_next,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .airl_log(x = x)
 #' res
+#' @keywords internal
 .airl_log <- function(x, floor = 1e-300) log(max(x, floor))
 
 
@@ -477,6 +483,7 @@ airl <- function(expert_states, expert_actions, expert_next,
 #' @param name Passed to \code{stop}.
 #' @return A list with \code{S}, \code{A}, \code{S1}, \code{LP}.
 #' @export
+#' @keywords internal
 .airl_prep <- function(S, A, S1, LP, name) {
   if (length(S) == 0L || length(A) == 0L || length(S1) == 0L ||
         length(LP) == 0L)

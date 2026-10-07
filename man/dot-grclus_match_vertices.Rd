@@ -20,3 +20,4 @@ The value of \code{mate}, as built in the body.
 A step of the grclus_native implementation. Called by \code{.grclus_bisect}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ distance so it is strictly positive. Nothing narrower -- a fit that
 cannot reach sill = 0 cannot report "no spatial structure", and one
 that cannot reach nugget = 0 cannot report a continuous field.
 }
+\keyword{internal}

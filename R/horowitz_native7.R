@@ -47,6 +47,7 @@
 #' x <- c(-1, -0.5, 0, 0.25, 0.5, 1)
 #' res <- .morie_hrz_smoothing_cf(u = x)
 #' res
+#' @keywords internal
 .morie_hrz_smoothing_cf <- function(u, kernel = "fourfold") {
   .morie_hrz_check_kernel(kernel)
   if (kernel == "flattop") return(ifelse(abs(u) <= 1, 1, 0))
@@ -116,6 +117,7 @@
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{W}, \code{eta}, \code{n}, \code{T}.
 #' @export
+#' @keywords internal
 .morie_hrz_panel_residuals <- function(y, x, beta) {
   Y <- if (is.matrix(y)) y else matrix(as.numeric(y), nrow = 1L)
   b <- as.numeric(beta)
@@ -181,6 +183,7 @@
 #' @param kernel \code{"fourfold"} or \code{"flattop"} psi_zeta.
 #' @return A list with \code{f_U}, \code{f_eps}.
 #' @export
+#' @keywords internal
 .morie_hrz_deconvolve_pair <- function(w, eta, grid_u, grid_z, nu_U, nu_eps,
                                        n_tau = 2001L, kernel = "fourfold") {
   if (nu_U <= 0 || nu_eps <= 0) {

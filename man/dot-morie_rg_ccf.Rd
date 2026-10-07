@@ -27,3 +27,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .morie_rg_ccf(x = x, d = g, lags = 3L)
 res
 }
+\keyword{internal}

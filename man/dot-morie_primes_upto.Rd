@@ -20,3 +20,4 @@ file header for the source it follows.
 res <- .morie_primes_upto(n = 3L)
 res
 }
+\keyword{internal}

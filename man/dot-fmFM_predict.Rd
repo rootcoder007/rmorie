@@ -22,3 +22,4 @@ The value of \code{s}, as built in the body.
 A step of the fmFM_native implementation. Called by \code{fit_fm}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

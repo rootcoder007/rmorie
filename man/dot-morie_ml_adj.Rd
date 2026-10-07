@@ -21,3 +21,4 @@ A step of the causal_molak implementation. Called by \code{.morie_ml_colliders},
 \code{morie_bowarc}, \code{morie_collider} and 1 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

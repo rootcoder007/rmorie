@@ -41,6 +41,7 @@
 #' @param inverse A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .schab_link <- function(x, kind, inverse = FALSE) {
   x <- as.numeric(x)
   if (identical(kind, "log")) {
@@ -68,6 +69,7 @@
 #' @param kind Passed to \code{identical}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .schab_link_derivative <- function(mu, kind) {
   mu <- as.numeric(mu) # g'(mu) = d eta / d mu
   if (identical(kind, "log")) {
@@ -91,6 +93,7 @@
 #' @param kind Passed to \code{.schab_link_derivative}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_mu_eta <- function(mu, kind) {
   # d mu / d eta, the diagonal of Psi; the reciprocal of g'(mu), as the text
   # notes when deriving (6.89).
@@ -109,6 +112,7 @@
 #' @param family The body requires: `family` must be 'poisson', 'binomial' or 'gaussian'.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .schab_variance_function <- function(mu, family) {
   mu <- as.numeric(mu) # v(mu) in eq (6.74)
   if (identical(family, "poisson")) {
@@ -133,6 +137,7 @@
 #' @param family The body requires: unknown family.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 .schab_canonical_link <- function(family) {
   switch(family,
     poisson = "log",
@@ -156,6 +161,7 @@
 #' @param link_kind Passed to \code{.schab_link}. Defaults to \code{"log"}.
 #' @return The value of \code{.schab_link}.
 #' @export
+#' @keywords internal
 .schab_conditional_mean <- function(X, beta, S, link_kind = "log") {
   X <- as.matrix(X) # eq (6.73)
   .schab_link(as.numeric(X %*% as.numeric(beta)) + as.numeric(S),
@@ -175,6 +181,7 @@
 #' @param family Passed to \code{.schab_variance_function}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_conditional_variance <- function(mu, sigma2, family) {
   as.numeric(sigma2) * .schab_variance_function(mu, family) # eq (6.74)
 }
@@ -192,6 +199,7 @@
 #' @param rho Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_marginal_moments_lognormal <- function(X, beta, sigma2_S, sigma2 = 1,
                                               rho = NULL) {
   # Example 6.6. NOTE the second variance term carries m(s)^2: the printed
@@ -224,6 +232,7 @@
 #' @param link_kind Passed to \code{.schab_link}. Defaults to \code{"log"}.
 #' @return The value of \code{.schab_link}.
 #' @export
+#' @keywords internal
 .schab_naive_marginal_mean <- function(X, beta, link_kind = "log") {
   # g^-1(x'beta) -- what the marginal mean is NOT, in a GLMM.
   X <- as.matrix(X)
@@ -243,6 +252,7 @@
 #' @param link_kind Passed to \code{.schab_link}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_pseudo_data <- function(z, mu, link_kind) {
   z <- as.numeric(z)
   mu <- as.numeric(mu) # eq (6.78)
@@ -260,6 +270,7 @@
 #' @param R Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_sigma_mu <- function(mu, sigma2, family, link_kind, R = NULL) {
   # eq (6.79): the covariance of the PSEUDO-data, carrying Psi^-1 on both
   # sides. Distinct from .schab_data_covariance -- see .schab_pql_score.
@@ -285,6 +296,7 @@
 #' @param R Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_data_covariance <- function(mu, sigma2, family, R = NULL) {
   # sigma^2 V^1/2 R V^1/2, on the DATA scale. Sec. 6.3.5.3 writes its score
   # equations with the symbol Sigma_mu, but the matrix they need is this
@@ -307,6 +319,7 @@
 #' @param nu A matrix; passed to \code{\%*\%}.
 #' @return A list with \code{beta}, \code{cov_beta}.
 #' @export
+#' @keywords internal
 .schab_gls_beta <- function(X, Sigma_nu, nu) {
   X <- as.matrix(X)
   nu <- as.numeric(nu) # eq (6.80)
@@ -331,6 +344,7 @@
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .schab_predict_random_field <- function(Sigma_S, Sigma_nu, nu, X, beta) {
   resid <- as.numeric(nu) - as.numeric(as.matrix(X) %*% as.numeric(beta))
   as.numeric(as.matrix(Sigma_S) %*% solve(as.matrix(Sigma_nu), resid)) # (6.81)
@@ -347,6 +361,7 @@
 #' @param nu A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .schab_reml_objective <- function(X, Sigma_nu, nu) {
   X <- as.matrix(X)
   nu <- as.numeric(nu)
@@ -384,6 +399,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .schab_initial_mu(z = y, family = txt)
 #' res
+#' @keywords internal
 .schab_initial_mu <- function(z, family) {
   z <- as.numeric(z)
   if (identical(family, "poisson")) {
@@ -414,6 +430,7 @@
 #' \code{se_beta}, \code{Sigma_nu}, \code{pseudo_data}, \code{n_iter}, \code{converged},
 #' \code{link}, \code{family}.
 #' @export
+#' @keywords internal
 .schab_fit_pseudo_likelihood <- function(z, X, Sigma_S, family = "poisson",
                                          link_kind = NULL, sigma2 = 1,
                                          R = NULL, max_iter = 100L,
@@ -483,6 +500,7 @@
 #' @param R Passed to \code{.schab_data_covariance}.
 #' @return A list with \code{score_beta}, \code{score_S}.
 #' @export
+#' @keywords internal
 .schab_pql_score <- function(z, X, beta, S, Sigma_S, family, link_kind,
                              sigma2 = 1, R = NULL) {
   # Sec. 6.3.5.3 first-order conditions, with the DATA-scale covariance.
@@ -517,6 +535,7 @@
 #' \code{inverse_link_prediction}, \code{pseudo_scale_prediction},
 #' \code{pseudo_scale_mspe}, \code{mspe_is_for}.
 #' @export
+#' @keywords internal
 .schab_predict_glm <- function(nu0_hat, sigma2_nu0, mu0_hat, link_kind) {
   # eq (6.90) with its own MSPE (6.91), kept apart from the inverse-link
   # predictor (6.87), whose delta-method variance (6.88) the text says
@@ -551,6 +570,7 @@
 #' @param adjacency A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_neighbour_structure <- function(adjacency) {
   A <- as.matrix(adjacency) # R_ii = n_i, R_ij = -1
   if (nrow(A) != ncol(A)) stop("`adjacency` must be square", call. = FALSE)
@@ -578,6 +598,7 @@
 #' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_icar_covariance <- function(R, sigma2 = 1) {
   # sigma^2 R^-, the Moore-Penrose inverse: R is singular by construction.
   R <- as.matrix(R)
@@ -598,6 +619,7 @@
 #' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{mean}, \code{variance}, \code{n_neighbours}.
 #' @export
+#' @keywords internal
 .schab_icar_full_conditional <- function(u, adjacency, sigma2 = 1) {
   u <- as.numeric(u)
   A <- as.matrix(adjacency) # eq (5)/(4.3)
@@ -622,6 +644,7 @@
 #' @param sigma2 The body requires: `sigma2` must be positive. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_lcar_precision <- function(R, rho, sigma2 = 1) {
   R <- as.matrix(R)
   rho <- as.numeric(rho) # eq (6)
@@ -642,6 +665,7 @@
 #' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{mean}, \code{variance}, \code{n_neighbours}.
 #' @export
+#' @keywords internal
 .schab_lcar_full_conditional <- function(u, adjacency, rho, sigma2 = 1) {
   u <- as.numeric(u)
   A <- as.matrix(adjacency)
@@ -669,6 +693,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .schab_bym_convolution(u = x, v = x)
 #' res
+#' @keywords internal
 .schab_bym_convolution <- function(u, v) {
   u <- as.numeric(u)
   v <- as.numeric(v)
@@ -689,6 +714,7 @@
 #' @examples
 #' res <- .schab_bym_identifiability_note()
 #' res
+#' @keywords internal
 .schab_bym_identifiability_note <- function() {
   paste(
     "only u + v enters the likelihood, so sigma_u^2 and sigma_v^2 are not",
@@ -708,6 +734,7 @@
 #' @param expected Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_smr <- function(counts, expected) {
   z <- as.numeric(counts)
   e <- as.numeric(expected)
@@ -730,6 +757,7 @@
 #' @param psi Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_poisson_disease_mean <- function(expected, X, beta, psi) {
   as.numeric(expected) *
     exp(as.numeric(as.matrix(X) %*% as.numeric(beta)) + as.numeric(psi))
@@ -748,6 +776,7 @@
 #' @param kappa Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_bym_icar_log_prior <- function(u, adjacency, kappa) {
   u <- as.numeric(u)
   R <- .schab_neighbour_structure(adjacency) # eq (4.2)
@@ -767,6 +796,7 @@
 #' @param kappa Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_bym_median_log_prior <- function(u, adjacency, kappa) {
   u <- as.numeric(u)
   A <- as.matrix(adjacency) # eq (4.4)
@@ -793,6 +823,7 @@
 #' @param epsilon Numeric; combined arithmetically in the body. Defaults to \code{0.01}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_bym_log_posterior <- function(y, c_exp, u, v, kappa, lam, adjacency,
                                      epsilon = 0.01) {
   y <- as.numeric(y)
@@ -833,6 +864,7 @@
 #' \code{n_iter}, \code{converged}, \code{sum_v}, \code{fitted_total},
 #' \code{observed_total}, \code{log_posterior}.
 #' @export
+#' @keywords internal
 .schab_bym_map <- function(y, c_exp, adjacency, kappa, lam, max_iter = 200L,
                            tol = 1e-11) {
   # Conditional MAP of u and v by Newton. The paper states the log posterior
@@ -906,6 +938,7 @@
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @keywords internal
 .schab_random_walk_structure <- function(n_time, order = 1L) {
   T_ <- as.integer(n_time)
   k <- as.integer(order)
@@ -933,6 +966,7 @@
 #' @return A list with \code{structure}, \code{kind}, \code{rank},
 #' \code{rank_deficiency}, \code{n_constraints_required}.
 #' @export
+#' @keywords internal
 .schab_interaction_structure <- function(R_space, R_time, kind) {
   kinds <- c("I", "II", "III", "IV")
   if (!kind %in% kinds) {
@@ -965,6 +999,7 @@
 #' @param tol Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{A}, \code{e}, \code{n_constraints}, \code{rank_deficiency}.
 #' @export
+#' @keywords internal
 .schab_null_space_constraints <- function(R_delta, tol = NULL) {
   M <- as.matrix(R_delta) # eq (12)
   e <- eigen(M, symmetric = TRUE)
@@ -988,6 +1023,7 @@
 #' @param A A matrix; passed to \code{nrow}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_apply_sum_to_zero <- function(delta, A) {
   d <- as.numeric(delta)
   A <- as.matrix(A)
@@ -1010,6 +1046,7 @@
 #' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .schab_linear_trend_log_risk <- function(alpha, u, beta_t, delta_i, times) {
   u <- as.numeric(u)
   d <- as.numeric(delta_i)
@@ -1034,6 +1071,7 @@
 #' @param delta Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_nonparametric_log_risk <- function(alpha, u, phi, gamma, delta = NULL) {
   u <- as.numeric(u)
   phi <- as.numeric(phi)

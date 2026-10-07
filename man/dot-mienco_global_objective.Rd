@@ -30,3 +30,4 @@ The value of \code{morie_mienco}.
 A step of the mienco_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

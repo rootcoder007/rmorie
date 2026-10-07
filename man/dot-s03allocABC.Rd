@@ -22,3 +22,4 @@ and T = sum_j M_j S_j.  B is omitted because it depends on the
 allocation rather than on the population; the callers add it
 themselves.
 }
+\keyword{internal}

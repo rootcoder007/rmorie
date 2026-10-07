@@ -32,6 +32,7 @@
 #' @examples
 #' res <- .kvmse_rotation(d = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .kvmse_rotation <- function(d, seed) {
   g <- .t1_lcg(seed)
   A <- matrix(0, d, d)
@@ -64,6 +65,7 @@
 #' @examples
 #' res <- .kvmse_codebook(b = 3L)
 #' res
+#' @keywords internal
 .kvmse_codebook <- function(b, iters = 200, grid = 2001, lo = -6, hi = 6) {
   K <- 2^as.integer(b)
   n <- as.integer(grid)
@@ -94,6 +96,7 @@
 #' @param cb Passed to \code{outer}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .kvmse_quantize <- function(y, cb) {
   d <- abs(outer(as.numeric(y), cb, "-"))
   as.integer(max.col(-d, ties.method = "first")) - 1L

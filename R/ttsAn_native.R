@@ -33,6 +33,7 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .mor_tts_t_cdf <- function(t, v) {
   x <- v / (v + t * t)
   p <- 0.5 * pbeta(x, v / 2, 0.5)
@@ -71,6 +72,7 @@ morie_t_quantile <- function(p, v) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mor_tts_median(v = x)
 #' res
+#' @keywords internal
 .mor_tts_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -89,6 +91,7 @@ morie_t_quantile <- function(p, v) {
 #' @param hybrid A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{anoms}, \code{stats}, \code{lams}.
 #' @export
+#' @keywords internal
 .mor_tts_esd <- function(res, k, alpha, hybrid = TRUE) {
   n <- length(res)
   idx <- seq_len(n) - 1L

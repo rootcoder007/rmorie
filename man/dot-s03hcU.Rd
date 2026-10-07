@@ -19,3 +19,4 @@ A step of the hcoreg implementation. Called by \code{.s03hcK1}, \code{.s03hcK2}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

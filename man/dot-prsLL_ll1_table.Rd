@@ -36,3 +36,4 @@ length(t$conflicts)  # 0: one production per (nonterminal, lookahead) cell
 # cells are keyed by nonterminal and lookahead, joined by a CR
 t$table[[paste("F", "id", sep = intToUtf8(13))]]
 }
+\keyword{internal}

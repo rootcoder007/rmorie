@@ -21,3 +21,4 @@ the source it follows.
 res <- .secaead_len8(n = 3L)
 res
 }
+\keyword{internal}

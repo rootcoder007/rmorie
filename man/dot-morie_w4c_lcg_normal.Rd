@@ -21,3 +21,4 @@ morie.fn._lcg_normal (hmncsn / hmpemb-style helpers).
 res <- .morie_w4c_lcg_normal(n = 3L, seed = 1L)
 res
 }
+\keyword{internal}

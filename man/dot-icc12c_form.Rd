@@ -21,3 +21,4 @@ labels its own table with the concrete number of judges (ICC(1,4) for
 k = 4), a trailing integer equal to k is read as the average-measure
 form.
 }
+\keyword{internal}

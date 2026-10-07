@@ -144,6 +144,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .grclus_rows_to_mat(A = A)
 #' res
+#' @keywords internal
 .grclus_rows_to_mat <- function(A) {
   if (is.matrix(A)) return(A)
   if (is.list(A)) return(do.call(rbind, lapply(A, as.numeric)))
@@ -162,6 +163,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .grclus_as_graph(A = A)
 #' res
+#' @keywords internal
 .grclus_as_graph <- function(A) {
   M <- .grclus_rows_to_mat(A)
   if (nrow(M) == 0L) stop("grclus: A is empty")
@@ -206,6 +208,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param parts A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .grclus_edge_cut <- function(adj, parts) {
   cut <- 0.0
   for (u in seq_along(adj)) {
@@ -224,6 +227,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param adj See Usage.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .grclus_total_edge_weight <- function(adj) {
   s <- 0.0
   for (nbr in adj) s <- s + sum(nbr$w)
@@ -240,6 +244,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param members A vector; its length is taken and its elements indexed.
 #' @return A list with \code{adj}, \code{vw}.
 #' @export
+#' @keywords internal
 .grclus_subgraph <- function(adj, vw, members) {
   # members: 0-based
   index <- new.env(hash = TRUE, parent = emptyenv())
@@ -273,6 +278,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param hi Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .grclus_int_in <- function(e, lo, hi) {
   # numpy rng.integers(0, k): low inclusive, high exclusive
   if (hi <= lo) return(lo)
@@ -291,6 +297,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @examples
 #' res <- .grclus_shuffled(n = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .grclus_shuffled <- function(n, seed) {
   e <- .ghc_rng(seed)
   idx <- as.integer(seq_len(n) - 1L)
@@ -315,6 +322,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param seed Numeric; combined arithmetically in the body.
 #' @return The value of \code{mate}, as built in the body.
 #' @export
+#' @keywords internal
 .grclus_match_vertices <- function(adj, scheme, seed) {
   n <- length(adj)
   mate <- as.integer(seq_len(n) - 1L)
@@ -358,6 +366,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param mate A vector; indexed elementwise.
 #' @return A list with \code{adj}, \code{vw}, \code{mapping}.
 #' @export
+#' @keywords internal
 .grclus_coarsen <- function(adj, vw, mate) {
   # mate: 0-based, mate[u] = v means u matched with v
   n <- length(adj)
@@ -411,6 +420,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param parts A vector; indexed elementwise.
 #' @return The value of \code{g}, as built in the body.
 #' @export
+#' @keywords internal
 .grclus_gains <- function(adj, parts) {
   n <- length(adj)
   g <- numeric(n)
@@ -440,6 +450,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param n_starts Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{best_parts}, as built in the body.
 #' @export
+#' @keywords internal
 .grclus_grow_partition <- function(adj, vw, target, seed, greedy,
                                    n_starts = NULL) {
   n <- length(adj)
@@ -517,6 +528,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param patience Passed to \code{>=}.
 #' @return A list with \code{parts}, \code{cut}.
 #' @export
+#' @keywords internal
 .grclus_kl <- function(adj, vw, parts, target, tolerance, boundary,
                        max_passes, patience) {
   n <- length(adj)
@@ -597,6 +609,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param tolerance Numeric; combined arithmetically in the body.
 #' @return The value of \code{parts}, as built in the body.
 #' @export
+#' @keywords internal
 .grclus_balance_bisection <- function(adj, vw, parts, target, tolerance) {
   n <- length(adj)
   parts <- as.integer(parts)
@@ -634,6 +647,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param seed Numeric; combined arithmetically in the body.
 #' @return The value of \code{.grclus_balance_bisection}.
 #' @export
+#' @keywords internal
 .grclus_bisect <- function(adj, vw, target, matching, initial, refinement,
                            tolerance, coarsest, seed) {
   levels <- list()

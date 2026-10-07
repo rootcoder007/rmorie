@@ -22,3 +22,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .vepan_revcomp(s = txt)
 res
 }
+\keyword{internal}

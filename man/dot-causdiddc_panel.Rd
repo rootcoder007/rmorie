@@ -24,3 +24,4 @@ A step of the causdiddc_native implementation. Called by \code{.causdiddc_did_m}
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

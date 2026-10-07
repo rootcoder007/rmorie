@@ -15,3 +15,4 @@ The value of \code{fine}, as built in the body.
 \description{
 half-open, c(start, stop), to match the Python arm exactly
 }
+\keyword{internal}

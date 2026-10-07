@@ -19,3 +19,4 @@ A step of the counterfactual implementation. Called by \code{Counterfactual}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

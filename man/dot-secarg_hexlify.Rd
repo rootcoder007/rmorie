@@ -16,3 +16,4 @@ A character value.
 A step of the secarg_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 }
+\keyword{internal}

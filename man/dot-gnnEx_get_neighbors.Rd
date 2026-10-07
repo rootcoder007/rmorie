@@ -18,3 +18,4 @@ A vector, from \code{integer}.
 are integer vectors of neighbours. Falls back to 1-based integer
 indexing when the list has no names.
 }
+\keyword{internal}

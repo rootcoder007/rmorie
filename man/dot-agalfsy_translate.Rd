@@ -29,3 +29,4 @@ T1 <- .agalfsy_translate(P, axis = 1L, step = 2.5)
 all.equal(T1[, 2], P[, 2] + 2.5)
 all.equal(T1[, c(1, 3)], P[, c(1, 3)])
 }
+\keyword{internal}

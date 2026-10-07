@@ -15,6 +15,7 @@
 #' @param theta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .quanrg_loss <- function(res, theta) {
   sum(ifelse(res >= 0, theta * res, (theta - 1) * res))
 }

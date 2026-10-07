@@ -21,3 +21,4 @@ because the histogram is uniform inside the cell. Taking these in
 closed form rather than from the sampled positions is what keeps the
 predictive moments exact given the draws.
 }
+\keyword{internal}

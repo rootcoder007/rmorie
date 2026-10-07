@@ -18,3 +18,4 @@ A step of the dp_native implementation. Called by \code{morie_approx_dp},
 the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

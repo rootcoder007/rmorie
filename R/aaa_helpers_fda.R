@@ -22,6 +22,7 @@
 #' @param v A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .fdtrapz <- function(t, v) {
   s <- 0
   n <- length(t)
@@ -43,6 +44,7 @@
 #' @examples
 #' res <- .fdgrid(n = 3L)
 #' res
+#' @keywords internal
 .fdgrid <- function(n) (seq_len(n) - 1) / (n - 1)
 
 #' .fdcolmeans
@@ -55,6 +57,7 @@
 #' @param nc A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .fdcolmeans <- function(A, nr, nc) {
   m <- numeric(nc)
   for (i in seq_len(nr)) for (j in seq_len(nc)) m[j] <- m[j] + A[i, j]

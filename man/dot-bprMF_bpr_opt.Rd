@@ -25,3 +25,4 @@ A list with \code{bpr_opt}, \code{loglik}, \code{penalty}, \code{n_triples}.
 pieces are returned so callers that want just the data loglik or just
 the penalty term can pull them out.
 }
+\keyword{internal}

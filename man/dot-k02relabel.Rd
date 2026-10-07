@@ -16,3 +16,4 @@ The value of \code{out}, as built in the body.
 A step of the sgtcoml implementation. Called by \code{louv}, \code{sgtcoml}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

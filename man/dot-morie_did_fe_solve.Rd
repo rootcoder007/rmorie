@@ -21,3 +21,4 @@ A list with \code{a}, \code{g}.
 \description{
 cells by alternating projections; returns per-level lookups.
 }
+\keyword{internal}

@@ -20,3 +20,4 @@ compensated one, because the comparison is against a uniform scaled
 by the same total -- consistency between the two sums is what
 matters, not their accuracy.
 }
+\keyword{internal}

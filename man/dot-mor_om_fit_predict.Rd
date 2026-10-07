@@ -25,3 +25,4 @@ A step of the causal implementation. Called by \code{morie_estimate_aipw}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

@@ -25,3 +25,4 @@ the source it follows.
 st <- .propinf_standardise(list(c(1, 10), c(3, 20), c(5, 30)))
 .propinf_apply_standardise(c(3, 20), st$mu, st$sd)
 }
+\keyword{internal}

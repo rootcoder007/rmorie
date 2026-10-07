@@ -19,6 +19,7 @@
 #' @param sigma A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{b}, \code{nv}, \code{m}, \code{sg}, \code{n}.
 #' @export
+#' @keywords internal
 ._check <- function(beta, nu, mu, sigma) {
   b <- as.numeric(beta)
   n <- length(b)
@@ -172,6 +173,7 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
 #' \code{I_traj}, \code{n_strains}, \code{R0}, \code{n_variables},
 #' \code{n_variables_history_based}, \code{surviving}, \code{method}.
 #' @export
+#' @keywords internal
 .hiatus_simulate <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
                      t_end = 2000.0, dt = 0.05, mutation = 0.0,
                      record_every = 100L) {
@@ -332,6 +334,7 @@ morie_hiatus <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
 #' @examples
 #' res <- .hiatus_cheatsheet()
 #' res
+#' @keywords internal
 .hiatus_cheatsheet <- function() {
   paste(paste0(
     "hiatus: many-strain dynamics in 2n variables, not 2^n. Statu",

@@ -45,6 +45,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .rouge_toks(x = x)
 #' res
+#' @keywords internal
 .rouge_toks <- function(x) {
   if (is.character(x) && length(x) == 1L) {
     if (nchar(x) == 0L) return(character(0))
@@ -65,6 +66,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .rouge_ngrams <- function(toks, n) {
   len <- length(toks)
   if (len < n) return(list())
@@ -80,6 +82,7 @@
 #' @param keys A vector; its length is taken.
 #' @return The value of \code{table}.
 #' @export
+#' @keywords internal
 .rouge_counts <- function(keys) {
   if (length(keys) == 0L) {
     return(structure(integer(0), names = character(0)))
@@ -98,6 +101,7 @@
 #' @param beta Numeric; combined arithmetically in the body.
 #' @return A list with \code{precision}, \code{recall}, \code{f1}.
 #' @export
+#' @keywords internal
 .rouge_prf <- function(match, n_cand, n_ref, beta) {
   p <- if (n_cand > 0L) as.numeric(match) / n_cand else 0.0
   r <- if (n_ref > 0L) as.numeric(match) / n_ref else 0.0
@@ -118,6 +122,7 @@
 #' @param reference A vector; its length is taken and its elements indexed.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .rouge_get_refs_complex <- function(reference) {
   if (is.list(reference)) {
     if (length(reference) == 0L) return(list())
@@ -155,6 +160,7 @@
 #' @param reference A vector; its length is taken.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .rouge_get_refs_simple <- function(reference) {
   if (is.character(reference) && length(reference) == 1L) {
     return(list(reference))
@@ -183,6 +189,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .rouge_lcs_length(a = A, b = b)
 #' res
+#' @keywords internal
 .rouge_lcs_length <- function(a, b) {
   m <- length(a)
   n <- length(b)
@@ -218,6 +225,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .rouge_wlcs(a = A, b = b, alpha = 0.5)
 #' res
+#' @keywords internal
 .rouge_wlcs <- function(a, b, alpha) {
   m <- length(a)
   n <- length(b)

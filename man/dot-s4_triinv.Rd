@@ -23,3 +23,4 @@ rather
 the # same large numbers in both arms instead of one raising.
 }
 
+\keyword{internal}

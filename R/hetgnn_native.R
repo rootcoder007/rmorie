@@ -280,6 +280,7 @@ morie_hetgnn <- function(H, edges, types, metapaths, a_vec, W_node,
 #' @examples
 #' res <- .hetgnn_cheatsheet()
 #' res
+#' @keywords internal
 .hetgnn_cheatsheet <- function() {
   paste(paste0(
     "hetgnn: in a heterogeneous graph the relation between two no",

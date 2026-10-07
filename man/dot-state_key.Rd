@@ -21,3 +21,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .state_key(s = txt)
 res
 }
+\keyword{internal}

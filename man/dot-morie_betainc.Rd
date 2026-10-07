@@ -21,3 +21,4 @@ A step of the dist_native implementation. Called by \code{Pbeta}, \code{Pbinom},
 \code{Pf} and 1 others in the module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

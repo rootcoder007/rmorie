@@ -28,6 +28,7 @@
 #' @param msg Passed to \code{stop}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .w4a_need <- function(cond, msg) if (!isTRUE(cond)) stop(msg, call. = FALSE)
 
 #' .w4a_lcg_u
@@ -45,6 +46,7 @@
 #' @examples
 #' res <- .w4a_lcg_u(n = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .w4a_lcg_u <- function(n, seed) {
   s <- as.integer(seed) %% 2^32
   u <- numeric(n)

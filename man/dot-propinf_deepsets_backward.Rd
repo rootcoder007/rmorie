@@ -44,3 +44,4 @@ g <- .propinf_deepsets_backward(m, sets, fwd[[2]], fwd[[1]] - 1,
                                 .propinf_zero_grads(m))
 g$rho[[1]]$b
 }
+\keyword{internal}

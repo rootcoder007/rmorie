@@ -33,6 +33,7 @@
 #' @examples
 #' res <- .morie_gh_n(n = 3L)
 #' res
+#' @keywords internal
 .morie_gh_n <- function(n) {
   v <- as.numeric(n)
   if (!is.finite(v) || v < 2) {
@@ -52,6 +53,7 @@
 #' @param d Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_gh_minimax_rate <- function(n, s, d = 1) {
   n <- .morie_gh_n(n)
   s <- as.numeric(s)
@@ -73,6 +75,7 @@
 #' @param yy See Usage.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_gh_trapz <- function(xx, yy) {
   sum(diff(xx) * (utils::head(yy, -1L) + utils::tail(yy, -1L)) / 2)
 }
@@ -87,6 +90,7 @@
 #' @param grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_gh_hellinger <- function(p, q, grid) {
   pv <- pmax(as.numeric(p), 0)
   qv <- pmax(as.numeric(q), 0)
@@ -107,6 +111,7 @@
 #' @param hi Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_gh_polya_tree <- function(x, grid, levels = 6L, a_fn = NULL,
                                  lo = NULL, hi = NULL) {
   xv <- as.numeric(x)
@@ -158,6 +163,7 @@
 #' @examples
 #' res <- .morie_gh_stick(alpha = 0.5, K = 3L)
 #' res
+#' @keywords internal
 .morie_gh_stick <- function(alpha, K) {
   v <- stats::rbeta(K, 1, alpha)
   v[K] <- 1

@@ -18,3 +18,4 @@ for the source it follows.
 res <- .fwxF_cheatsheet()
 res
 }
+\keyword{internal}

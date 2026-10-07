@@ -17,3 +17,4 @@ A step of the wave implementation. Called by \code{Wave}, \code{Wvltdb}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

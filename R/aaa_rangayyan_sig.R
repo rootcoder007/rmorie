@@ -53,6 +53,7 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
 #' @param seg A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_dft_power <- function(seg) {
   # |DFT|^2 per bin by direct evaluation: exact at any M, no padding.
   m <- length(seg)

@@ -22,3 +22,4 @@ The value of \code{out}, as built in the body.
 A step of the rangayyan_tf implementation. Called by \code{CprWt}, \code{Cwt}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

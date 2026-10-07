@@ -55,6 +55,7 @@ cutoffs <- function(N, step = 10) {
 #' @param i A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .shares <- function(protected, i) {
   sum(protected[seq_len(i)]) / as.numeric(i)
 }
@@ -69,6 +70,7 @@ cutoffs <- function(N, step = 10) {
 #' @param step Passed to \code{cutoffs}.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @keywords internal
 .raw <- function(protected, measure, step) {
   N <- length(protected)
   P <- sum(protected) / as.numeric(N)
@@ -131,6 +133,7 @@ normalizer <- function(protected, measure = "rND", step = 10) {
 #' @param caveat Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{pay}, as built in the body.
 #' @export
+#' @keywords internal
 .measure <- function(protected, measure, step, normalize,
                       caveat = NULL) {
   p <- as.integer(as.logical(protected))
@@ -239,6 +242,7 @@ rRD <- function(protected, step = 10, normalize = TRUE) {
 #' @examples
 #' res <- .fairRC_cheatsheet()
 #' res
+#' @keywords internal
 .fairRC_cheatsheet <- function() {
   paste0("fairRC: statistical parity for RANKINGS -- did group ",
          "membership influence POSITION. Set-based fairness at ",

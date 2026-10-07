@@ -24,3 +24,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .forwsr_solve(A = A, b = b)
 res
 }
+\keyword{internal}

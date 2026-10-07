@@ -25,3 +25,4 @@ row-major classify into single edges and mutual (bidirectional)
 pairs; single<->single and mutual<->mutual switches only, so the
 mutual-edge count is invariant; identical RNG draw order.
 }
+\keyword{internal}

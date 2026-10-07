@@ -13,6 +13,7 @@
 #' @param p A count; the body uses it as \code{numeric(...)}.
 #' @return A list with \code{phi}, \code{v}.
 #' @export
+#' @keywords internal
 .btarsv_yw <- function(xc, p) {
   n <- length(xc)
   g <- sapply(0:p, function(k) sum(xc[1:(n - k)] * xc[(1 + k):n]) / n)

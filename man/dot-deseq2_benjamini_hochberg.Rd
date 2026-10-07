@@ -19,3 +19,4 @@ Benjamini-Hochberg step-up adjusted p-values
 res <- .deseq2_benjamini_hochberg(p = 0.5)
 res
 }
+\keyword{internal}

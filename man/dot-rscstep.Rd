@@ -27,3 +27,4 @@ iteration terminate. Returns list(idx, det) or NULL when S1 is
 singular, in which case the objective is already zero and the subset
 lies on a hyperplane.
 }
+\keyword{internal}

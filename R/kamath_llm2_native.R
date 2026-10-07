@@ -44,6 +44,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_km2_soft(z = y)
 #' res
+#' @keywords internal
 .morie_km2_soft <- function(z) {
   z <- as.numeric(z)
   e <- exp(z - max(z))
@@ -65,6 +66,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_km2_sig(z = y)
 #' res
+#' @keywords internal
 .morie_km2_sig <- function(z) {
   ifelse(z >= 0, 1 / (1 + exp(-abs(z))), exp(-abs(z)) / (1 + exp(-abs(z))))
 }
@@ -83,6 +85,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_km2_lse_rows(M = X)
 #' res
+#' @keywords internal
 .morie_km2_lse_rows <- function(M) {
   m <- apply(M, 1, max)
   m + log(rowSums(exp(M - m)))
@@ -99,6 +102,7 @@
 #' @param logits A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_km2_rowce <- function(logits) {
   .morie_km2_lse_rows(logits) - diag(logits)
 }
@@ -116,6 +120,7 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_km2_dist <- function(p, name) {
   p <- as.numeric(p)
   if (length(p) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)
@@ -141,6 +146,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_km2_ord(v = x)
 #' res
+#' @keywords internal
 .morie_km2_ord <- function(v) order(v, decreasing = TRUE)
 
 # Stable descending order matching numpy argsort(-v, kind="stable").
@@ -159,6 +165,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_km2_stable_desc(v = x)
 #' res
+#' @keywords internal
 .morie_km2_stable_desc <- function(v) order(-v, seq_along(v))
 
 #' .morie_km2_ngrams
@@ -173,6 +180,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_km2_ngrams <- function(tokens, n) {
   L <- length(tokens)
   if (L < n) return(character(0))
@@ -192,6 +200,7 @@
 #' @param keys A vector; its length is taken.
 #' @return The value of \code{stats::setNames}.
 #' @export
+#' @keywords internal
 .morie_km2_counts <- function(keys) {
   if (length(keys) == 0L) return(integer(0))
   tb <- table(keys)
@@ -214,6 +223,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_km2_layer_norm(x = x)
 #' res
+#' @keywords internal
 .morie_km2_layer_norm <- function(x, eps = 1e-5) {
   x <- as.matrix(x)
   mu <- rowMeans(x)
@@ -236,6 +246,7 @@
 #' @return A list with \code{loss}, \code{perplexity}, \code{token_losses},
 #' \code{n_tokens}, \code{vocab_size}.
 #' @export
+#' @keywords internal
 .morie_km2_causal_lm_loss <- function(logits, targets, ignore_index = -100L) {
   logits <- as.matrix(logits)
   tgt <- as.integer(targets)
@@ -274,6 +285,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_km2_rms(x = x)
 #' res
+#' @keywords internal
 .morie_km2_rms <- function(x, gamma = NULL, eps = 1e-6) {
   X <- if (is.matrix(x)) x else matrix(as.numeric(x), nrow = 1L)
   r <- sqrt(rowMeans(X^2) + eps)
@@ -298,6 +310,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_km2_top_p(z = y, p = 0.5)
 #' res
+#' @keywords internal
 .morie_km2_top_p <- function(z, p, T = 1) {
   q <- .morie_km2_soft(as.numeric(z) / T)
   ord <- order(q, decreasing = TRUE)
@@ -324,6 +337,7 @@
 #' @param max_iter See Usage.
 #' @return A list with \code{flow}, \code{u}, \code{v}.
 #' @export
+#' @keywords internal
 .morie_km2_transport <- function(a, b, C, max_iter = 10000L) {
   m <- length(a)
   n <- length(b)
@@ -572,6 +586,7 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
 #' @param z Optional; may be \code{NULL}. Character; passed to \code{gsub}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_km2_fill_template <- function(template, x, z) {
   if (!is.character(template) || !grepl("[x]", template, fixed = TRUE)) {
     stop("the template must be a string with an [x] slot.", call. = FALSE)
@@ -604,6 +619,7 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
 #' @return A list with \code{prompt}, \code{slot_filled}, \code{template}, \code{tokens},
 #' \code{estimate}, \code{n}, \code{method}.
 #' @export
+#' @keywords internal
 .morie_km2_tmpl_result <- function(prompt, filled, eq, template) {
   tokens <- strsplit(trimws(prompt), "\\s+")[[1]]
   list(prompt = prompt, slot_filled = filled, template = template,
@@ -827,6 +843,7 @@ morie_kamath_ch3_prefix_tuning_obj <- function(phi, x, y, h, Y_idx = NULL) {
 #' @param f A function; the body checks with \code{is.function}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_km2_adapter_core <- function(H_o, H_in, W_down, W_up, f) {
   H_o <- as.matrix(H_o)
   H_in <- as.matrix(H_in)
@@ -891,6 +908,7 @@ morie_kamath_ch4_parallel_adapter <- function(H_o, H_i, W_down, W_up,
 #' @param y Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_km2_seq_obj <- function(model, x, y) {
   xs <- as.list(x)
   ys <- lapply(y, as.list)
@@ -1048,6 +1066,7 @@ morie_kamath_ch4_krona_efficient <- function(A, B, x) {
 #' @param s Numeric; combined arithmetically in the body.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_km2_tuned <- function(W, A_k, B_k, s) {
   Wm <- as.matrix(W)
   K <- kronecker(as.matrix(A_k), as.matrix(B_k))
@@ -1105,6 +1124,7 @@ morie_kamath_ch4_krona_output <- function(X, W, A_k, B_k, s) {
 #' @param size Passed to \code{!=}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_km2_diag <- function(v, name, size) {
   v <- if (is.matrix(v)) {
     if (nrow(v) != ncol(v) || !isTRUE(all.equal(v, diag(diag(v)),
@@ -1194,6 +1214,7 @@ morie_kamath_ch4_loftq_objective <- function(W, Q, A, B) {
 #' @param margins Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_km2_bt_loss <- function(margins) {
   m <- as.numeric(margins)
   if (length(m) == 0L) stop("no preference pairs.", call. = FALSE)
@@ -1499,6 +1520,7 @@ morie_kamath_ch5_pref_sigmoid_form <- function(r_star) {
 #' @param beta Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .morie_km2_implicit_rewards <- function(pi_star, pi_ref, beta) {
   beta <- as.numeric(beta)
   if (beta <= 0) stop("beta must be strictly positive.", call. = FALSE)
@@ -1702,6 +1724,7 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 #' @param name Passed to \code{sprintf}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_km2_cos_mean <- function(a, W, name) {
   A <- as.matrix(W)
   if (nrow(A) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)
@@ -1726,6 +1749,7 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 #' @param W_2 Passed to \code{.morie_km2_cos_mean}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_km2_weat_s <- function(a, W_1, W_2) {
   a <- as.numeric(a)
   .morie_km2_cos_mean(a, W_1, "W_1") - .morie_km2_cos_mean(a, W_2, "W_2")
@@ -1744,6 +1768,7 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 #' @param W_2 Passed to \code{apply}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_km2_weat_sums <- function(A_1, A_2, W_1, W_2) {
   a1 <- as.matrix(A_1)
   a2 <- as.matrix(A_2)
@@ -1940,6 +1965,7 @@ morie_kamath_ch6_cbs_variance <- function(W, A, p_a, p_prior, ddof = 0) {
 #' @param name Passed to \code{sprintf}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_km2_log_probs <- function(items, scorer, name) {
   seqv <- as.list(items)
   if (length(seqv) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)
@@ -2104,6 +2130,7 @@ morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_km2_tokens(Y = y)
 #' res
+#' @keywords internal
 .morie_km2_tokens <- function(Y) {
   if (is.character(Y) && length(Y) == 1L) strsplit(trimws(Y), "\\s+")[[1]]
   else unlist(Y)
@@ -2119,6 +2146,7 @@ morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
 #' @param outputs Iterated over elementwise, with \code{vapply}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_km2_count_word <- function(word, outputs) {
   sum(vapply(outputs, function(Y) sum(.morie_km2_tokens(Y) == word),
              numeric(1)))
@@ -2215,6 +2243,7 @@ morie_kamath_ch6_honest_score <- function(Yhat, k, hurtlex = NULL) {
 #' @param name Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_km2_pair_vectors <- function(A, E, name) {
   emb <- if (is.function(E)) E else function(a) {
     if (!(a %in% names(E))) stop("a word has no embedding.", call. = FALSE)
@@ -2389,6 +2418,7 @@ morie_kamath_ch6_log_prob_ratio_attr <- function(a_i, a_j, K = NULL, lam = 1) {
 #' @param name Passed to \code{sprintf}. Defaults to \code{"Yhat"}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_km2_tox_scores <- function(Yhat, c, name = "Yhat") {
   outs <- as.list(Yhat)
   if (length(outs) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)
@@ -2491,6 +2521,7 @@ morie_kamath_ch6_lstm_chain_rule <- function(w_1_w_M) {
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_km2_hidden <- function(f, c, name) {
   v <- if (is.null(f)) c else if (is.function(f)) f(c) else f
   v <- as.numeric(v)
@@ -2947,6 +2978,7 @@ morie_kamath_ch8_rouge_n <- function(S, gram_n, candidate = NULL) {
 #' @param normalize A flag; the body branches on it.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .morie_km2_sim_matrix <- function(x, xhat, normalize) {
   X <- as.matrix(x)
   Y <- as.matrix(xhat)
@@ -6769,6 +6801,7 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
 #' @param maxlen Numeric; passed to \code{min}.
 #' @return The value of \code{ends}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_km2_pieces_by_end <- function(text, vocab, maxlen) {
   L <- nchar(text)
   ends <- vector("list", L + 1L)
@@ -6795,6 +6828,7 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
 #' @param maxlen Passed to \code{.morie_km2_pieces_by_end}.
 #' @return A list with \code{alpha}, \code{ends}.
 #' @export
+#' @keywords internal
 .morie_km2_forward <- function(text, probs, maxlen) {
   L <- nchar(text)
   ends <- .morie_km2_pieces_by_end(text, probs, maxlen)
@@ -6820,6 +6854,7 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
 #' @param maxlen Numeric; passed to \code{min}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_km2_backward <- function(text, probs, maxlen) {
   L <- nchar(text)
   beta <- rep(0, L + 1L)

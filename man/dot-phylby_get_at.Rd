@@ -19,3 +19,4 @@ A step of the phylby_native implementation. Called by \code{.phylby_log_posterio
 \code{.phylby_step}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

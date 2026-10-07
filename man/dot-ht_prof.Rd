@@ -26,3 +26,4 @@ numerical search there decides its steps on the last bits, which
 walked the arms 1e-8 apart.  The sums are accumulated in loops for
 the same reason -- R sums in long double, Python in double.
 }
+\keyword{internal}

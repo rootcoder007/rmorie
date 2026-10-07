@@ -16,6 +16,7 @@
 #' @examples
 #' res <- .morie_tmle_logit(p = 0.5)
 #' res
+#' @keywords internal
 .morie_tmle_logit <- function(p) log(p / (1 - p))
 #' .morie_tmle_expit
 #'
@@ -30,6 +31,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_tmle_expit(x = x)
 #' res
+#' @keywords internal
 .morie_tmle_expit <- function(x) 1 / (1 + exp(-pmin(pmax(x, -35), 35)))
 
 # OLS fitted on `fit_rows` only, predicted for everyone.
@@ -43,6 +45,7 @@
 #' @param fit_rows See Usage.
 #' @return The value of \code{as.vector}.
 #' @export
+#' @keywords internal
 .morie_tmle_ols_predict <- function(X, y, fit_rows) {
   D <- cbind(1, X)
   b <- qr.coef(qr(D[fit_rows, , drop = FALSE]), y[fit_rows])

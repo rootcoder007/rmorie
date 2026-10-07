@@ -17,3 +17,4 @@ One of two values, depending on the branch taken.
 \description{
 Lentz continued fraction for the complement otherwise.
 }
+\keyword{internal}

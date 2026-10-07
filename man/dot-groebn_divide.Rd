@@ -27,3 +27,4 @@ G <- list(.groebn_poly(list("1_0" = 1, "0_0" = -1)),
 d <- .groebn_divide(f, G, "lex")
 d$remainder
 }
+\keyword{internal}

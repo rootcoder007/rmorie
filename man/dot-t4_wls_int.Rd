@@ -19,3 +19,4 @@ The value of \code{[}.
 \description{
 weighted least squares of y on (1, x); returns the intercept
 }
+\keyword{internal}

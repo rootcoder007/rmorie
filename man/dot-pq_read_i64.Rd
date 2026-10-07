@@ -17,3 +17,4 @@ A numeric value.
 \description{
 to 2^53, which covers every count, offset and epoch value here.
 }
+\keyword{internal}

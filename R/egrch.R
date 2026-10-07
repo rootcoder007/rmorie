@@ -31,6 +31,7 @@
 #' @param EZ Numeric; combined arithmetically in the body.
 #' @return The value of \code{res}, as built in the body.
 #' @export
+#' @keywords internal
 .egrch_negll <- function(p, r, n, EZ) {
   omega <- p[1]
   alpha <- p[2]

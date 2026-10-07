@@ -26,3 +26,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .rouge_wlcs(a = A, b = b, alpha = 0.5)
 res
 }
+\keyword{internal}

@@ -25,3 +25,4 @@ if (requireNamespace("boot", quietly = TRUE)) {
   res
 }
 }
+\keyword{internal}

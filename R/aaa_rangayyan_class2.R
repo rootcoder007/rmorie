@@ -31,6 +31,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_bx_vec(v = x)
 #' res
+#' @keywords internal
 .morie_bx_vec <- function(v, name = "x") {
   out <- as.numeric(v)
   if (length(out) == 0L) {
@@ -57,6 +58,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_bx_mat(M = X)
 #' res
+#' @keywords internal
 .morie_bx_mat <- function(M, name = "X") {
   if (is.null(M)) stop(name, " is required")
   if (is.list(M) && !is.data.frame(M)) {
@@ -90,6 +92,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_bx_dot(a = A, b = b)
 #' res
+#' @keywords internal
 .morie_bx_dot <- function(a, b) .morie_fsum(a * b)
 
 #' .morie_bx_nrm
@@ -106,6 +109,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .morie_bx_nrm(a = A)
 #' res
+#' @keywords internal
 .morie_bx_nrm <- function(a) sqrt(.morie_fsum(a * a))
 
 #' Matrix product with compensated inner sums, not BLAS: the summation
@@ -116,6 +120,7 @@
 #' @param B A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_bx_mm <- function(A, B) {
   # matrix product with compensated inner sums, not BLAS: the summation
   # order has to match the Python arm or an iterative update diverges
@@ -147,6 +152,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_bx_mv(A = A, v = b)
 #' res
+#' @keywords internal
 .morie_bx_mv <- function(A, v) {
   if (ncol(A) != length(v)) {
     stop("matrix and vector dimensions do not agree")
@@ -168,6 +174,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_bx_mean(v = x)
 #' res
+#' @keywords internal
 .morie_bx_mean <- function(v) .morie_fsum(v) / length(v)
 
 #' .morie_bx_sd
@@ -185,6 +192,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_bx_sd(v = x)
 #' res
+#' @keywords internal
 .morie_bx_sd <- function(v, ddof = 1) {
   n <- length(v)
   if (n - ddof < 1) {
@@ -206,6 +214,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_bx_kurt(v = x)
 #' res
+#' @keywords internal
 .morie_bx_kurt <- function(v) {
   # kurtosis EXCESS K' = K - 3, eq (3.5) and the note below it: zero for a
   # Gaussian, positive for a peaked heavy-tailed PDF
@@ -233,6 +242,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_bx_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .morie_bx_solve <- function(A, b) {
   # Gaussian elimination with partial pivoting; raises rather than
   # returning garbage on a singular system
@@ -278,6 +288,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_bx_lstsq(A = A, y = b)
 #' res
+#' @keywords internal
 .morie_bx_lstsq <- function(A, y, ridge = 1e-10) {
   At <- t(A)
   G <- .morie_bx_mm(At, A)
@@ -294,6 +305,7 @@
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-12}.
 #' @return A list with \code{values}, \code{vectors}.
 #' @export
+#' @keywords internal
 .morie_bx_jacobi <- function(S, sweeps = 60L, tol = 1e-12) {
   # cyclic Jacobi rotations: the whole spectrum, repeated eigenvalues
   # included, without the deflation error of power iteration
@@ -346,6 +358,7 @@
 #' @examples
 #' res <- .morie_bx_rng(seed = 1L)
 #' res
+#' @keywords internal
 .morie_bx_rng <- function(seed) {
   # Numerical Recipes ranqd1 LCG on (0, 1).  1664525 * (2^32 - 1) is below
   # 2^53, so the double arithmetic here is exact and matches the Python
@@ -370,6 +383,7 @@
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_bx_fill <- function(nr, nc, u, f) {
   # row-major fill, the order the Python list comprehensions draw in
   m <- matrix(0, nr, nc)
@@ -390,6 +404,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_bx_nsum(v = x)
 #' res
+#' @keywords internal
 .morie_bx_nsum <- function(v) {
   # plain sequential double accumulation, NOT compensated: mirrors the one
   # place the Python arm uses `x += ...` in a loop instead of fsum, so the
@@ -413,6 +428,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_bx_cov(X = X)
 #' res
+#' @keywords internal
 .morie_bx_cov <- function(X, unbiased = TRUE) {
   n <- nrow(X)
   p <- ncol(X)
@@ -444,6 +460,7 @@
 #' @param cost Passed to \code{identical}.
 #' @return A list with \code{W}, \code{H}, \code{error}, \code{iterations}.
 #' @export
+#' @keywords internal
 .morie_bx_nmfmu <- function(V, r, maxiter, tol, seed, cost) {
   # Lee-Seung multiplicative updates: "ls" is eqs (9.49)-(9.50), "kld" is
   # eqs (9.54)-(9.55)
@@ -507,6 +524,7 @@
 #' @param tol Passed to \code{<=}.
 #' @return A list with \code{coefficients}, \code{support}, \code{residual}.
 #' @export
+#' @keywords internal
 .morie_bx_omp <- function(x, D, sparsity, tol) {
   # greedy atom picks with a least-squares reprojection on the support
   n <- length(x)
@@ -557,6 +575,7 @@
 #' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{1}.
 #' @return A list with \code{atoms}, \code{params}.
 #' @export
+#' @keywords internal
 .morie_bx_gabor <- function(n, natoms, seed = 1) {
   # real Gabor dictionary, eqs (9.2)-(9.3), on a fixed dyadic grid so the
   # dictionary is reproducible without an RNG
@@ -612,6 +631,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_bx_dftmag(x = x)
 #' res
+#' @keywords internal
 .morie_bx_dftmag <- function(x) {
   n <- length(x)
   tt <- seq_len(n) - 1L
@@ -634,6 +654,7 @@
 #' @param hop Numeric; combined arithmetically in the body.
 #' @return A list with \code{re}, \code{im}, \code{mag}, \code{win}.
 #' @export
+#' @keywords internal
 .morie_bx_stft <- function(x, nwin, hop) {
   n <- length(x)
   if (nwin < 4L || nwin > n) {
@@ -690,6 +711,7 @@
 #' @param n A count; the body uses it as \code{numeric(...)}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_bx_istft <- function(re_f, im_f, nwin, hop, win, n) {
   out <- numeric(n)
   wsum <- numeric(n)
@@ -729,6 +751,7 @@
 #' @param pred Passed to \code{==}.
 #' @return A list with \code{tp}, \code{tn}, \code{fp}, \code{fn}.
 #' @export
+#' @keywords internal
 .morie_bx_confusion <- function(true, pred) {
   list(
     tp = sum(true == 1 & pred == 1), tn = sum(true == 0 & pred == 0),
@@ -748,6 +771,7 @@
 #' @param fn Numeric; combined arithmetically in the body.
 #' @return A list with \code{sensitivity}, \code{specificity}, \code{accuracy}.
 #' @export
+#' @keywords internal
 .morie_bx_scores <- function(tp, tn, fp, fn) {
   tot <- tp + tn + fp + fn
   list(
@@ -770,6 +794,7 @@
 #' @examples
 #' res <- .morie_bx_sig(b = 3L)
 #' res
+#' @keywords internal
 .morie_bx_sig <- function(b) {
   # logistic node function, eq (10.81), saturated rather than overflowing
   ifelse(b < -700, 0, ifelse(b > 700, 1, 1 / (1 + exp(-b))))
@@ -1134,6 +1159,7 @@ PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
 #' @return A list with \code{X}, \code{C}, \code{W}, \code{H}, \code{error}, \code{rmsd},
 #' \code{normalized}, \code{ranking}, \code{selected}.
 #' @export
+#' @keywords internal
 .morie_bx_chsel <- function(trials, nselect, rank, maxiter, tol, seed) {
   # shared core of BciChSel and NmfChSel: eqs (9.94)-(9.96)
   X <- .morie_bx_mat(trials, "trials")

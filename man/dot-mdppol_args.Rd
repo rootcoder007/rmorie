@@ -18,3 +18,4 @@ A list with \code{Pm}, \code{R}, \code{S}, \code{A}.
 A step of the mdppol_native implementation. Called by \code{morie_mdppol}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ A numeric value.
 A step of the rangayyan_ccf implementation. Called by \code{.morie_rg_H}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

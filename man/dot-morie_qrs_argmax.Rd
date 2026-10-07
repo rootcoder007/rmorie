@@ -19,3 +19,4 @@ A numeric value.
 \description{
 exactly as Python's max(range(...), key=...).
 }
+\keyword{internal}

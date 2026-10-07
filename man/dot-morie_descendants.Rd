@@ -18,3 +18,4 @@ The value of \code{seen}, as built in the body.
 Part of the abundance_text_voting_native implementation; see the file
 header for the source it follows.
 }
+\keyword{internal}

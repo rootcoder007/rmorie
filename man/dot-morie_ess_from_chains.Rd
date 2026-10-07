@@ -18,3 +18,4 @@ A step of the mcmc_native implementation. Called by
 \code{morie_effective_sample_size_tail}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

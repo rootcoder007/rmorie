@@ -16,3 +16,4 @@ One-sentence ADIDA cheatsheet
 res <- .adida_cheatsheet()
 res
 }
+\keyword{internal}

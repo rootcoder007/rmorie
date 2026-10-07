@@ -24,3 +24,4 @@ See the file header for the source the module follows.
 res <- .abcgp.sobol_sequence(n = 3L, dim = 3L)
 res
 }
+\keyword{internal}

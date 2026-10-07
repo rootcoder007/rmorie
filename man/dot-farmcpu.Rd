@@ -34,3 +34,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .farmcpu(y = y, G = g)
 res
 }
+\keyword{internal}

@@ -25,6 +25,7 @@
 #' @param b Numeric; passed to \code{abs}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_rg_gcd <- function(a, b) {
   a <- abs(a)
   b <- abs(b)
@@ -50,6 +51,7 @@
 #' @examples
 #' res <- .morie_rg_frac(n = 3L, d = 3L)
 #' res
+#' @keywords internal
 .morie_rg_frac <- function(n, d) {
   # an exact rational as a list, so counts-based ratios are not rounded
   if (d == 0) stop("a rational cannot have a zero denominator")
@@ -71,6 +73,7 @@
 #' @param v Coerced to character by the body, with \code{as.character}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .morie_rg_asfrac <- function(v) {
   if (inherits(v, "morie_frac")) {
     return(v)
@@ -100,6 +103,7 @@
 #' @param b A list; the body reads \code{$d}, \code{$n} from it.
 #' @return The value of \code{.morie_rg_frac}.
 #' @export
+#' @keywords internal
 .morie_rg_fadd <- function(a, b) {
   .morie_rg_frac(a$n * b$d + b$n * a$d, a$d * b$d)
 }
@@ -113,6 +117,7 @@
 #' @param b A list; the body reads \code{$d}, \code{$n} from it.
 #' @return The value of \code{.morie_rg_frac}.
 #' @export
+#' @keywords internal
 .morie_rg_fsub <- function(a, b) {
   .morie_rg_frac(a$n * b$d - b$n * a$d, a$d * b$d)
 }
@@ -126,6 +131,7 @@
 #' @param b A list; the body reads \code{$d}, \code{$n} from it.
 #' @return The value of \code{.morie_rg_frac}.
 #' @export
+#' @keywords internal
 .morie_rg_fmul <- function(a, b) .morie_rg_frac(a$n * b$n, a$d * b$d)
 
 # as.numeric() dispatches to as.double methods, not as.numeric ones
@@ -211,6 +217,7 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
 #' @param mu Passed to \code{sweep}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @keywords internal
 .morie_rg_scatter <- function(X, mu) {
   # sum of (x - mu)(x - mu)^T: the SCATTER, not divided by n
   d <- sweep(as.matrix(X), 2, mu, "-")
@@ -233,6 +240,7 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_rg_groups(X = X, y = y)
 #' res
+#' @keywords internal
 .morie_rg_groups <- function(X, y) {
   # split rows by label, preserving first-seen order
   order <- unique(y)
@@ -2228,6 +2236,7 @@ LooCv <- function(X, y, classifier = NULL) {
 #' @param tol Numeric; combined arithmetically in the body.
 #' @return A list with \code{a}, \code{b}, \code{it}.
 #' @export
+#' @keywords internal
 .morie_rg_smo <- function(K, ys, Cv, maxiter, tol) {
   # SMO on the maximal violating pair (Fan, Chen & Lin 2005; smo() in
   # svmopt_native.R, checked against sklearn).  The former loop paired

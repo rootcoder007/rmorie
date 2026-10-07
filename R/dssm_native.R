@@ -76,6 +76,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .dssm_to_vec(x = x)
 #' res
+#' @keywords internal
 .dssm_to_vec <- function(x) {
   if (is.null(x)) return(numeric(0L))
   if (is.numeric(x)) return(as.numeric(x))

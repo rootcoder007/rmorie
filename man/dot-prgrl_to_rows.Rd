@@ -21,3 +21,4 @@ x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 res <- .prgrl_to_rows(X = x)
 res
 }
+\keyword{internal}

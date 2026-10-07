@@ -24,3 +24,4 @@ See the file header for the source the module follows.
 res <- .infmer_select_queries(q = 0.5, k = 3L)
 res
 }
+\keyword{internal}

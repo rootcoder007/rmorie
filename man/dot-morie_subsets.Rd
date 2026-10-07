@@ -21,3 +21,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .morie_subsets(g = g)
 res
 }
+\keyword{internal}

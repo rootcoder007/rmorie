@@ -68,6 +68,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .vidgen_mat(x = x)
 #' res
+#' @keywords internal
 .vidgen_mat <- function(x) {
   if (is.matrix(x)) return(x * 1.0)
   rows <- lapply(x, function(r) as.numeric(unlist(r)))
@@ -87,6 +88,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .vidgen_vec(x = x)
 #' res
+#' @keywords internal
 .vidgen_vec <- function(x) {
   as.numeric(unlist(x))
 }
@@ -105,6 +107,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .vidgen_softmax_attend(X = X)
 #' res
+#' @keywords internal
 .vidgen_softmax_attend <- function(X, mask = NULL) {
   n <- nrow(X)
   d <- ncol(X)

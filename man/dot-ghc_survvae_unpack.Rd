@@ -21,3 +21,4 @@ log_shapes | log_scales) into named pieces. Mirrors the Python arm's
 .unpack(): W is a list of K length-d vectors, bias is length K,
 shapes and scales are length K (positives, recovered via exp()).
 }
+\keyword{internal}

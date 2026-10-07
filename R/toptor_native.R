@@ -24,6 +24,7 @@
 #' @param bonds See Usage.
 #' @return The value of \code{adj}, as built in the body.
 #' @export
+#' @keywords internal
 .neighbours <- function(n_atoms, bonds) {
   adj <- vector("list", n_atoms)
   for (i in seq_len(n_atoms)) adj[[i]] <- integer(0)
@@ -48,6 +49,7 @@
 #' @param bonds See Usage.
 #' @return The value of \code{as.integer}.
 #' @export
+#' @keywords internal
 .pi_electrons <- function(n_atoms, bonds) {
   npi <- rep(0, n_atoms)
   for (b in bonds) {
@@ -114,6 +116,7 @@ torsion_similarity <- function(t1, t2) {
 #' @return A list with \code{vector}, \code{descriptors}, \code{length},
 #' \code{null_mean}, \code{null_sd}, \code{z}.
 #' @export
+#' @keywords internal
 .trend_vector <- function(torsion_sets, activities, permutations, seed) {
   sets <- lapply(torsion_sets, function(t) {
     if (is.list(t)) names(t) else unique(as.character(t))
@@ -240,6 +243,7 @@ morie_topological_torsion <- morie_toptor
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .lex_le(a = A, b = b)
 #' res
+#' @keywords internal
 .lex_le <- function(a, b) {
   for (k in seq_along(a)) {
     if (a[[k]][[1]] != b[[k]][[1]]) return(a[[k]][[1]] < b[[k]][[1]])

@@ -12,6 +12,7 @@
 #' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_rg_tse <- function(seg, p) {
   # AR prediction-error energy, eq (7.19), by Levinson-Durbin.
   k <- length(seg)
@@ -50,6 +51,7 @@
 #' @param p Passed to \code{.morie_rg_tse}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_rg_H <- function(seg, p) {
   L <- length(seg)
   t <- .morie_rg_tse(seg, p)

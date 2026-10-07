@@ -31,3 +31,4 @@ res <- .groebn_buchberger(list(f1, f2), order = "grlex")
 res$size
 res$n_pairs
 }
+\keyword{internal}

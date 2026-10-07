@@ -20,3 +20,4 @@ The value of \code{[}.
 weight reaches q. The inverse of the weighted ECDF, which is a step
 function, so nothing is interpolated between the steps.
 }
+\keyword{internal}

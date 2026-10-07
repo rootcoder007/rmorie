@@ -25,6 +25,7 @@
 #' @param bits Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 .tqpack_pack_indices <- function(indices, bits) {
   b <- as.integer(bits)
   if (is.na(b) || b < 1L || b > 32L) {
@@ -111,6 +112,7 @@
 #' @param count Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 .tqpack_unpack_indices <- function(data, bits, count) {
   b <- as.integer(bits)
   if (is.na(b) || b < 1L || b > 32L) {
@@ -185,6 +187,7 @@
 #' @examples
 #' res <- .tqpack_cheatsheet()
 #' res
+#' @keywords internal
 .tqpack_cheatsheet <- function() {
   return("tqpack: pack b-bit indices big-endian, index 0 in the top b bits of byte 0, crossing byte boundaries; tail padded on the right; n_bytes = ceil(n*b/8); round-trip is exact.")
 }

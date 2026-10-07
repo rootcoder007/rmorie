@@ -19,3 +19,4 @@ follows.
 res <- .morie_glm_families()
 res
 }
+\keyword{internal}

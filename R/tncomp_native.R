@@ -53,6 +53,7 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tncomp_fingerprint(x = x)
 #' res
+#' @keywords internal
 .tncomp_fingerprint <- function(x) {
   if (is.character(x)) {
     chars <- strsplit(x, "")[[1]]
@@ -79,6 +80,7 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #' @param f2 A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .tncomp_tanimoto <- function(f1, f2) {
   s1 <- length(f1)
   s2 <- length(f2)
@@ -125,6 +127,7 @@ distance_matrix <- function(fps) {
 #' @param seed Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{which.max}.
 #' @export
+#' @keywords internal
 .tncomp_seed <- function(D, seed) {
   n <- nrow(D)
   if (!is.null(seed)) {
@@ -151,6 +154,7 @@ distance_matrix <- function(fps) {
 #' @param D Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{chosen}, \code{M}.
 #' @export
+#' @keywords internal
 .tncomp_select <- function(fps, k, objective, seed = NULL, D = NULL) {
   if (!(objective %in% OBJECTIVES)) {
     stop(sprintf("tncomp: objective must be one of %s, got %s",

@@ -16,3 +16,4 @@ The value of \code{switch}.
 A step of the goldsc_native implementation. Called by \code{.goldsc_pair}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

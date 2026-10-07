@@ -21,3 +21,4 @@ A step of the comlou implementation. Called by \code{Comlou}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

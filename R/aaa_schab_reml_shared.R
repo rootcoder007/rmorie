@@ -41,6 +41,7 @@
 #' @param model Passed to \code{.sp_correlogram}.
 #' @return A list with \code{sigma}, \code{d}, \code{r}.
 #' @export
+#' @keywords internal
 .schab_correlation_matrix <- function(coords, nugget_ratio, rng, model) {
   # Sigma(theta*) = xi I + (1 - xi) R(h; a). Factoring
   # sigma^2 = c0 + sigma0^2 out of Sigma leaves the nugget as a RATIO in
@@ -66,6 +67,7 @@
 #' @param model Passed to \code{.schab_semivariogram_jacobian}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .schab_dsigma <- function(d, r, nugget_ratio, rng, model) {
   # dSigma(theta*)/d(xi, a): d/dxi is I - R, d/da is (1 - xi) dR/da. dR/da is
   # the same expression the Gauss-Newton Jacobian uses, so both fitters share
@@ -94,6 +96,7 @@
 #' @param model Passed to \code{.schab_correlation_matrix}.
 #' @return A list with \code{value}, \code{gradient}, \code{sigma2}, \code{beta}.
 #' @export
+#' @keywords internal
 .schab_profiled_reml <- function(coords, z, X, nugget_ratio, rng, model) {
   n <- nrow(X)
   k <- ncol(X)
@@ -162,6 +165,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .schab_logistic(u = x)
 #' res
+#' @keywords internal
 .schab_logistic <- function(u) 1 / (1 + exp(-u))
 #' .schab_logit
 #'
@@ -175,6 +179,7 @@
 #' @examples
 #' res <- .schab_logit(p = 0.5)
 #' res
+#' @keywords internal
 .schab_logit <- function(p) {
   p <- min(max(p, 1e-12), 1 - 1e-12)
   log(p / (1 - p))
@@ -197,6 +202,7 @@
 #' @return A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget},
 #' \code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.
 #' @export
+#' @keywords internal
 .schab_fit_reml <- function(coords, z, X, model = "exponential",
                             start_ratio = 0.1, start_range = NULL,
                             max_iter = 200L, tol = 1e-10) {

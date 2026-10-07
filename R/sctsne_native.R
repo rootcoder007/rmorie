@@ -17,6 +17,7 @@
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.
 #' @return The value of \code{P}, as built in the body.
 #' @export
+#' @keywords internal
 .tsne_pcond <- function(D2, perp, tol = 1e-5, max_iter = 60) {
   n <- nrow(D2)
   target <- log(perp)

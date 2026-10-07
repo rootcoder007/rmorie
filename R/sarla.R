@@ -20,6 +20,7 @@
 #' @param W Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sarla_negll <- function(rho, e0, e1, n, I, W) {
   e <- e0 - rho * e1
   sigma2 <- as.numeric(sum(e^2)) / n

@@ -21,3 +21,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .morie_env_true(name = txt)
 res
 }
+\keyword{internal}

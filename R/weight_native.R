@@ -24,6 +24,7 @@
 #' @param trim Carried through into a list the body builds.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_weight_result <- function(weights, propensity, method, estimand,
                                  call, stabilize = FALSE, trim = NULL) {
   ess <- sum(weights)^2 / sum(weights^2)
@@ -65,6 +66,7 @@ print.morie_weight <- function(x, ...) {
 #' @param estimand The body requires: estimand must be ATE, ATT, or ATC.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 .morie_weight_from_ps <- function(ps, t01, estimand) {
   switch(estimand,
     ATE = ifelse(t01 == 1, 1 / ps, 1 / (1 - ps)),
@@ -365,6 +367,7 @@ morie_weight_super <- function(data, treatment, covariates,
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_nnls(A = A, b = b)
 #' res
+#' @keywords internal
 .morie_nnls <- function(A, b, tol = 1e-10, max_iter = 2000L) {
   p <- ncol(A)
   x <- rep(0, p)

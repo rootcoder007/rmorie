@@ -22,3 +22,4 @@ A list with \code{u}, \code{v}.
 A step of the helpers_ot implementation. Called by \code{.ot_emd}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

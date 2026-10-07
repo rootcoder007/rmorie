@@ -20,3 +20,4 @@ NA outright. Split the state into 16-bit limbs and reduce each
 partial product before recombining, so every intermediate stays below
 2^53.
 }
+\keyword{internal}

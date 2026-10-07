@@ -28,6 +28,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .cnvlfc_embed(series = x)
 #' res
+#' @keywords internal
 .cnvlfc_embed <- function(series, E = 2, tau = 1) {
     v <- as.numeric(series)
     e <- as.integer(E)
@@ -68,6 +69,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .cnvlfc_corr(a = A, b = b)
 #' res
+#' @keywords internal
 .cnvlfc_corr <- function(a, b) {
     n <- length(a)
     if (n < 2L) return(NaN)
@@ -92,6 +94,7 @@
 #' @param exclude_window Passed to \code{<=}.
 #' @return A list with \code{d}, \code{ord}, \code{keep}.
 #' @export
+#' @keywords internal
 .cnvlfc_euclid <- function(target, candidates, exclude_idx, target_idx,
                           exclude_window) {
     # returns sorted (distance, index) for first (E+1) candidates.
@@ -128,6 +131,7 @@
 #' @return A list with \code{rho}, \code{observed}, \code{predicted}, \code{n_predicted},
 #' \code{library}, \code{E}, \code{tau}.
 #' @export
+#' @keywords internal
 .cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
                               library = NULL, seed = 1L, exclude = 0L) {
     X <- as.numeric(driver)
@@ -225,6 +229,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .cnvlfc_ccm(x = x, y = y)
 #' res
+#' @keywords internal
 .cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
                         seed = 1L, exclude = 0L) {
     X <- as.numeric(x)
@@ -302,6 +307,7 @@
 #' @examples
 #' res <- .cnvlfc_coupled_logistic(n = 3L)
 #' res
+#' @keywords internal
 .cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
                                      byx = 0.1, x0 = 0.4, y0 = 0.2,
                                      burn = 300L) {

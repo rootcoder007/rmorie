@@ -62,6 +62,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' @param activity Passed to \code{unlist}.
 #' @return A list with \code{C}, \code{y}, \code{k}.
 #' @export
+#' @keywords internal
 .frwil_prep <- function(compounds, activity) {
   C <- lapply(compounds, function(row) as.character(unlist(row)))
   y <- as.numeric(unlist(activity))
@@ -89,6 +90,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' @return A list with \code{matrix}, \code{names}, \code{groups}, \code{columns},
 #' \code{constraint}, \code{n_positions}, \code{reference}.
 #' @export
+#' @keywords internal
 .frwil_design_matrix <- function(compounds, constraint = "reference") {
   if (!(constraint %in% CONSTRAINTS)) {
     stop(sprintf("frwil: constraint must be one of %s, got %s",
@@ -159,6 +161,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .frwil_lstsq(M = X, y = y)
 #' res
+#' @keywords internal
 .frwil_lstsq <- function(M, y, ridge = 0.0) {
   n <- nrow(M)
   p <- ncol(M)
@@ -225,6 +228,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' \code{sigma}, \code{df_residual}, \code{n_parameters}, \code{occurrences},
 #' \code{groups}, \code{reference}, \code{constraint}, \code{n_positions}, \code{method}.
 #' @export
+#' @keywords internal
 .frwil_free_wilson <- function(compounds, activity, constraint = "reference") {
   prep <- .frwil_prep(compounds, activity)
   C <- prep$C
@@ -297,6 +301,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' @param compound Passed to \code{unlist}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
+#' @keywords internal
 .frwil_predict_activity <- function(fit, compound) {
   row <- as.character(unlist(compound))
   if (length(row) != fit$n_positions) {

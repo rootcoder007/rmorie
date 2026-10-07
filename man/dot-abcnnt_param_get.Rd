@@ -22,3 +22,4 @@ flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
 a <- .abcnnt_params(flow)[[1]]
 .abcnnt_param_get(flow, a)
 }
+\keyword{internal}

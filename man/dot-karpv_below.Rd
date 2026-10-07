@@ -18,3 +18,4 @@ The value of \code{repeat}.
 remainder would bias the low end, and the bias changes with n -- the
 kind of thing that never shows up in one language alone.
 }
+\keyword{internal}

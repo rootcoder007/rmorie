@@ -29,6 +29,7 @@
 #' @examples
 #' res <- .tmlcou_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tmlcou_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -46,6 +47,7 @@
 #' res <- .tmlcou_expit(x = x)
 #' res
 #' @export
+#' @keywords internal
 # vectorised: the scalar if() errors the moment a linear predictor
 # VECTOR arrives, which is every call site
 .tmlcou_expit <- function(x) ifelse(x > -700, 1 / (1 + exp(-x)), 0)

@@ -19,3 +19,4 @@ random_walk_kernel(scale, n_moves), performs n_moves of x' = x +
 Normal(0, scale^2) and returns the average accept rate over the inner
 moves.
 }
+\keyword{internal}

@@ -14,6 +14,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .clip_l2norm(v = x)
 #' res
+#' @keywords internal
 .clip_l2norm <- function(v) {
   n <- sqrt(sum(v * v))
   if (n <= 0) stop("cannot normalise a zero-norm embedding")

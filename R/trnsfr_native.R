@@ -53,6 +53,7 @@
 #' @param S Passed to \code{.s03vec}.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .trnsfr_cohort <- function(S) {
   s <- .s03vec(S)
   if (any(!(s %in% c(0.0, 1.0)))) {
@@ -80,6 +81,7 @@
 #' @param w A vector; indexed elementwise.
 #' @return A list with \code{coef}.
 #' @export
+#' @keywords internal
 .trnsfr_wls <- function(rows, y, w) {
   # Weighted least squares with an intercept prepended. rows is a
   # matrix (or vector) of predictors; returns list(coef=...) with the

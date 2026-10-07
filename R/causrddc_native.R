@@ -26,6 +26,7 @@
 #' @param kernel One of \code{"triangular"}, \code{"uniform"}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .causrddc_kern <- function(u, kernel) {
   a <- abs(u)
   if (a > 1.0) return(0.0)
@@ -51,6 +52,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .causrddc_solve(M = A, b = b)
 #' res
+#' @keywords internal
 .causrddc_solve <- function(M, b) {
   as.numeric(solve(M, b))
 }
@@ -69,6 +71,7 @@
 #' @param side Passed to \code{>}. Defaults to \code{1}.
 #' @return A list with \code{w}, \code{omega}.
 #' @export
+#' @keywords internal
 .causrddc_local_poly_weights <- function(x, h, p, nu, kernel = "triangular", side = 1) {
   n <- length(x)
   side_cond <- if (side > 0) x >= 0.0 else x < 0.0
@@ -110,6 +113,7 @@
 #' @examples
 #' res <- .causrddc_kernel_constants(p = 0.5, q = 0.5)
 #' res
+#' @keywords internal
 .causrddc_kernel_constants <- function(p, q, kernel = "triangular", n_grid = 2001) {
   d <- p + 1
   G <- matrix(0.0, d, d)
@@ -149,6 +153,7 @@
 #' @param deriv Numeric; combined arithmetically in the body.
 #' @return A list with \code{deriv}, \code{sigma2}.
 #' @export
+#' @keywords internal
 .causrddc_global_derivative <- function(x, y, side, order, deriv) {
   side_cond <- if (side > 0) x >= 0.0 else x < 0.0
   idx <- which(side_cond)
@@ -187,6 +192,7 @@
 #' @param window Neighbours are drawn from units with \code{abs(x) <= window}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .causrddc_nn_sigma2 <- function(x, y, J, side_of, window = Inf) {
   ## Neighbours come from the estimation sample |x| <= max(h, b), and ties
   ## follow rdrobust: units sharing x are matched together, and an
@@ -246,6 +252,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .causrddc_density_at_zero(x = x)
 #' res
+#' @keywords internal
 .causrddc_density_at_zero <- function(x, h = NULL) {
   n <- length(x)
   xs <- sort(x)
@@ -346,6 +353,7 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
 #' @param kernel Passed to \code{.causrddc_kern}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .causrddc_hc_sigma2 <- function(x, y, h, p, kernel) {
   n <- length(x)
   out <- rep(0.0, n)

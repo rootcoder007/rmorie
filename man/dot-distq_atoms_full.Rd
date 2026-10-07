@@ -19,3 +19,4 @@ The value of \code{.distq_atoms}.
 \description{
 routines so we don't rebuild the spacing each time.)
 }
+\keyword{internal}

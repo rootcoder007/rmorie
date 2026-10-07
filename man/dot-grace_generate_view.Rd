@@ -24,3 +24,4 @@ A list with \code{X}, \code{edges}, \code{n_masked_features}.
 A step of the grace_native implementation. Called by \code{morie_generate_view}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

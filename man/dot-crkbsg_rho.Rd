@@ -20,3 +20,4 @@ Nothing; this branch always raises.
 A step of the crkbsg_native implementation. Called by \code{morie_crkbsg_cokriging}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

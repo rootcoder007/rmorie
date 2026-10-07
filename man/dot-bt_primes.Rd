@@ -17,3 +17,4 @@ A step of the btmult implementation. Called by \code{.bt_counts}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

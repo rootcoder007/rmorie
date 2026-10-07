@@ -18,3 +18,4 @@ A vector, from \code{vapply}.
 A step of the helpers_ot implementation. Called by \code{Otsd}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

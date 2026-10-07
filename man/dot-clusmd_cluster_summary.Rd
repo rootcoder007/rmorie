@@ -18,3 +18,4 @@ Cluster summary: sizes, singleton count, and the assignment.
 Mirrors Python cluster_summary(). \code{assignment[m]} = k means compound
 m is in cluster k (0-indexed).
 }
+\keyword{internal}

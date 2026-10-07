@@ -17,3 +17,4 @@ A step of the poissp_native implementation. Called by
 \code{morie_poissp_car_precision}, \code{morie_poissp_rho_bounds}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

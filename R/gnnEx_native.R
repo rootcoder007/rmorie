@@ -43,6 +43,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .gnnEx_sig(x = x)
 #' res
+#' @keywords internal
 .gnnEx_sig <- function(x) {
   # Vectorised sigmoid with overflow protection (matches Python _sig).
   out <- numeric(length(x))
@@ -61,6 +62,7 @@
 #' @param u Coerced to integer by the body, with \code{as.integer}.
 #' @return A vector, from \code{integer}.
 #' @export
+#' @keywords internal
 .gnnEx_get_neighbors <- function(adj, u) {
   # adj is a list: names are node IDs (as character or integer), values
   # are integer vectors of neighbours. Falls back to 1-based integer

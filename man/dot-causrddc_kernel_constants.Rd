@@ -27,3 +27,4 @@ the source it follows.
 res <- .causrddc_kernel_constants(p = 0.5, q = 0.5)
 res
 }
+\keyword{internal}

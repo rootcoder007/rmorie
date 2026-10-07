@@ -9,6 +9,7 @@
 #' @param t Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .tmlphd_soft <- function(z, t) if (z > t) z - t else if (z < -t) z + t else 0
 
 ## Cyclic coordinate descent for a weighted lasso; column 1 unpenalised.
@@ -27,6 +28,7 @@
 #' @param sweeps A count; the body uses it as \code{seq_len(...)}. Defaults to \code{400L}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlphd_lasso <- function(X, y, lam, w = NULL, sweeps = 400L) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -64,6 +66,7 @@
 #' @param sweeps Passed to \code{.tmlphd_lasso}. Defaults to \code{60L}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @keywords internal
 .tmlphd_lasso_logit <- function(X, y, lam, outer = 15L, sweeps = 60L) {
   X <- as.matrix(X)
   y <- as.numeric(y)

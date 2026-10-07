@@ -18,3 +18,4 @@ the source it follows.
 res <- .schab_bym_identifiability_note()
 res
 }
+\keyword{internal}

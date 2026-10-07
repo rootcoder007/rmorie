@@ -20,3 +20,4 @@ pow(); the module does not rely on the two agreeing.
 res <- .tqipb_pow4(b = 3L)
 res
 }
+\keyword{internal}

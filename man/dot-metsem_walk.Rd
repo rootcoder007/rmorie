@@ -18,3 +18,4 @@ The value of \code{path}, as built in the body.
 A step of the metsem_native implementation. Called by \code{morie_metsem_unitigs}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

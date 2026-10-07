@@ -42,3 +42,4 @@ A list with \code{estimate}, \code{coefficients}, \code{hazard_ratios},
 A step of the svycox_native implementation. Called by \code{morie_svycox}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

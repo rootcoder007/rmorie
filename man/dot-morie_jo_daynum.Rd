@@ -20,3 +20,4 @@ A numeric value.
 A step of the ts_joseph implementation. Called by \code{morie_calfeat}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

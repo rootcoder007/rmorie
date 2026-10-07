@@ -140,6 +140,7 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 #' @param scheme One of \code{"multinomial"}, \code{"stratified"}, \code{"systematic"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .snpest_resample <- function(e, weights, scheme) {
   n <- length(weights)
   if (scheme == "multinomial")
@@ -180,6 +181,7 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .snpest_ess(w = x)
 #' res
+#' @keywords internal
 .snpest_ess <- function(w) 1 / .w3_csum(w * w)
 
 #' On-line DP-mixture filter over a stream of observations

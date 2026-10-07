@@ -20,3 +20,4 @@ The value of \code{do.call}.
 A step of the robpca_native implementation. Called by \code{outlyingness}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

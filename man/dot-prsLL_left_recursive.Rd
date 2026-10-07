@@ -25,3 +25,4 @@ lr <- .prsLL_grammar(list(
 ), start = "E")
 .prsLL_left_recursive(lr)
 }
+\keyword{internal}

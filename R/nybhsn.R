@@ -33,6 +33,7 @@
 #' @param df Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .t4_lccrit <- function(df) {
   df <- as.integer(df)
   if (df < 1L || df > nrow(.t4_LC_TABLE))

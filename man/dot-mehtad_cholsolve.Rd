@@ -24,3 +24,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .mehtad_cholsolve(M = A, rhs = b)
 res
 }
+\keyword{internal}

@@ -84,6 +84,7 @@
 #' @param schedule One of \code{"constant"}, \code{"cubic"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .bnppvl_conc <- function(level, c, schedule) {
   if (schedule == "cubic") return(as.numeric(c) * level * level * level)
   if (schedule == "constant") return(as.numeric(c))
@@ -105,6 +106,7 @@
 #' @param level Passed to \code{bitwShiftL}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .bnppvl_null_mean <- function(nullq, j, level) {
   d <- 1 / bitwShiftL(1L, level)
   a <- nullq((j - 1) * d)
@@ -131,6 +133,7 @@
 #' @param j Passed to \code{.bnppvl_null_mean}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .bnppvl_ab <- function(level, c, schedule, centring, nullq, j) {
   a_m <- .bnppvl_conc(level, c, schedule)
   if (a_m <= 0) stop("the concentration must be positive")
@@ -188,6 +191,7 @@ morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .bnppvl_log_beta <- function(v, a, b) {
   if (!(v > 0 && v < 1)) return(-Inf)
   (a - 1) * log(v) + (b - 1) * log1p(-v) + .w3_lgamma(a + b) -
@@ -248,6 +252,7 @@ morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{k}, as built in the body.
 #' @export
+#' @keywords internal
 .bnppvl_cell <- function(u, q, k) {
   for (j in seq_len(k)) if (u <= q[j + 1L]) return(j)
   k
@@ -327,6 +332,7 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{m1}, \code{m2}.
 #' @export
+#' @keywords internal
 .bnppvl_moments <- function(draws, k) {
   m1 <- numeric(length(draws))
   m2 <- numeric(length(draws))
@@ -356,6 +362,7 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #' @param k Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .bnppvl_density_at <- function(u, q, k) {
   j <- .bnppvl_cell(u, q, k)
   w <- q[j + 1L] - q[j]
@@ -372,6 +379,7 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .bnppvl_cdf_at <- function(u, q, k) {
   if (u <= 0) return(0)
   if (u >= 1) return(1)
@@ -407,6 +415,7 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .bnppvl_empirical_start(u = x, k = 3L)
 #' res
+#' @keywords internal
 .bnppvl_empirical_start <- function(u, k) {
   n <- length(u)
   su <- sort(u, method = "radix")

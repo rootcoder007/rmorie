@@ -24,3 +24,4 @@ txt <- c('alpha', 'beta', 'gamma', 'delta')
 res <- .mat(x = x, name = txt)
 res
 }
+\keyword{internal}

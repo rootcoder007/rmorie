@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .tloilr_exceptional_law(B = 3L)
 res
 }
+\keyword{internal}

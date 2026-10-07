@@ -27,3 +27,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .trupek_boundary(z = y, d = g, delta = 0.5)
 res
 }
+\keyword{internal}

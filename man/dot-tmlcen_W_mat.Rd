@@ -19,3 +19,4 @@ A step of the tmlcen_native implementation. Called by \code{morie_censoring_surv
 \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

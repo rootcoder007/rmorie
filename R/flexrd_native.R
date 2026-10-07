@@ -170,6 +170,7 @@ morie_flexrd_energy <- function(rec, lig, rec_r, lig_r, scale = 1,
 #' @param angles See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .flexrd_grid <- function(nchi, angles) {
   out <- list(numeric(0))
   if (nchi > 0L) for (k in seq_len(nchi)) {

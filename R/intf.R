@@ -43,6 +43,7 @@ Intf <- function(coef, basis, t = NULL) {
 #' @param v A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .intf_trapz <- function(t, v) {
   s <- 0
   n <- length(t)

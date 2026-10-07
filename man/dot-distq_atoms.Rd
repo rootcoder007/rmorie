@@ -21,3 +21,4 @@ A list with \code{z}, \code{dz}.
 (n_atoms - 1), and the spacing. n must be at least 2 and v_max >
 v_min.
 }
+\keyword{internal}

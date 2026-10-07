@@ -16,3 +16,4 @@ The value of \code{out}, as built in the body.
 A step of the tipsne_native implementation. Called by \code{morie_tipsne_ancova}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

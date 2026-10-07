@@ -228,6 +228,7 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
 #' @examples
 #' res <- .ffmFM_cheatsheet()
 #' res
+#' @keywords internal
 .ffmFM_cheatsheet <- function() {
   paste("ffmFM: one latent vector per feature PER FIELD, because a",
         "feature interacts differently with an advertiser than",
@@ -351,6 +352,7 @@ field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
 #' @param W A vector; indexed elementwise.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @keywords internal
 .ffmFM_phi <- function(x, fields, W) {
   nz <- list()
   for (kv in x) {
@@ -400,6 +402,7 @@ field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
 #' @return A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss},
 #' \code{k}, \code{n_parameters}, \code{n_parameters_fm}, \code{method}, \code{caveat}.
 #' @export
+#' @keywords internal
 .fit_ffm <- function(rows, labels, fields, n_features, n_fields,
                      k_dim = 4L, eta = 0.1, lam = 2e-5, epochs = 10L,
                      seed = 0L) {
@@ -486,6 +489,7 @@ field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
 #' @param phi_val Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .logistic_loss <- function(y, phi_val) {
   yv <- as.numeric(y)
   if (!(yv == -1 || yv == 1)) {
@@ -507,6 +511,7 @@ field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
 #' @param model One of \code{"ffm"}, \code{"fm"}. Defaults to \code{"ffm"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .n_parameters <- function(n_features, n_fields, k_dim, model = "ffm") {
   n <- as.integer(n_features)
   f <- as.integer(n_fields)

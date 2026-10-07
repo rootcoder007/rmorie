@@ -39,3 +39,4 @@ fit <- .alfesf_fit_multinomial(X, y, n_bins = 10L, l2 = 1e-3,
 dim(fit$W)
 length(fit$b)
 }
+\keyword{internal}

@@ -75,6 +75,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .sam2vd_to_num(x = x)
 #' res
+#' @keywords internal
 .sam2vd_to_num <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.list(x)) return(as.numeric(unlist(x)))

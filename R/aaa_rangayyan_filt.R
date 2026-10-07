@@ -17,6 +17,7 @@
 #' @param z Coerced to complex by the body, with \code{as.complex}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_rg_polyz <- function(coefs, z) {
   zc <- as.complex(z)
   if (any(zc == 0)) {

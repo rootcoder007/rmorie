@@ -66,6 +66,7 @@ Ctde <- function(X, M, Y, m, C = NULL, a = 1, astar = 0) {
 #' @param who Passed to \code{paste0}.
 #' @return A list with \code{beta}, \code{theta}, \code{cbar}, \code{n}.
 #' @export
+#' @keywords internal
 .med_fit <- function(X, M, Y, C, who) {
   a <- .s03vec(X)
   m <- .s03vec(M)
@@ -106,6 +107,7 @@ Ctde <- function(X, M, Y, m, C = NULL, a = 1, astar = 0) {
 #' @return A list with \code{pnde}, \code{tnde}, \code{tnie}, \code{pnie}, \code{te},
 #' \code{mediated_interaction}, \code{beta}, \code{theta}.
 #' @export
+#' @keywords internal
 .med_effects <- function(beta, theta, cbar, a, astar) {
   d <- a - astar
   b0 <- beta[1L]

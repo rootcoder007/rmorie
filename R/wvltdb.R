@@ -88,6 +88,7 @@ Wvltdb <- function(y, level = NULL, wavelet = "db2") {
 #' @param g A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .dbsynth <- function(a, d, h, g) {
   m <- length(a)
   n <- 2L * m

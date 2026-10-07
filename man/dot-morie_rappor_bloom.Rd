@@ -22,3 +22,4 @@ A vector, from \code{sort}.
 A step of the rappor_native implementation. Called by \code{morie_rappor}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

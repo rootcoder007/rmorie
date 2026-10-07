@@ -18,3 +18,4 @@ A numeric value.
 least the single-measure value, which is why every average-measure
 ICC exceeds its single-measure counterpart.
 }
+\keyword{internal}

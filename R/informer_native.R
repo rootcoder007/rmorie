@@ -58,6 +58,7 @@
 #' res <- .informer_vec(x = x)
 #' res
 #' @export
+#' @keywords internal
 # The k.* helper names the port carried never existed in either arm;
 # these are their concrete forms.
 .informer_vec <- function(x) as.numeric(x)
@@ -100,6 +101,7 @@
 #' @examples
 #' res <- .informer_logits(q = 0.5, K = 3L, scale = TRUE)
 #' res
+#' @keywords internal
 .informer_logits <- function(q, K, scale) {
   sapply(K, function(kj) scale * sum(q * kj))
 }

@@ -20,3 +20,4 @@ A list with \code{mean}, \code{var}, \code{weight}, \code{n}.
 is NA when the region holds no observation, which is a real state in
 1850 and must not silently become zero.
 }
+\keyword{internal}

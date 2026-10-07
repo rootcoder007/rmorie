@@ -20,3 +20,4 @@ The value of \code{.morie_norm_inter}.
 A step of the boot_native implementation. Called by \code{morie_boot_ci}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

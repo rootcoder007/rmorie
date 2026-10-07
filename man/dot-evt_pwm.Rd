@@ -19,3 +19,4 @@ Hosking-Wallis-Wood 1985 Eq. 4) -- not the plotting-position
 approximation, whose small-sample bias is exactly what these methods
 exist to avoid.
 }
+\keyword{internal}

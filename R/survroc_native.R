@@ -70,6 +70,7 @@ ROUTES <- c("km", "empirical")
 #' \code{as.numeric}.
 #' @return A list with \code{T}, \code{E}, \code{M}.
 #' @export
+#' @keywords internal
 .survroc_clean <- function(times, events, marker = NULL) {
   T <- as.numeric(times)
   E <- as.integer(events)
@@ -168,6 +169,7 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 #' @param t Passed to \code{<}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .survroc_empirical <- function(T, E, M, c, t) {
   if (any(E == 0L & T < t)) {
     stop(sprintf("survroc: the empirical route needs complete follow-up to time %g, but a subject is censored before it", t))
@@ -195,6 +197,7 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 #' @param t Passed to \code{morie_survroc_kaplan_meier}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .survroc_km_pair <- function(T, E, M, c, t) {
   n <- length(T)
   hi_idx <- which(M > c)
@@ -238,6 +241,7 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 #' @param route Compared against \code{"empirical"}.
 #' @return The value of \code{.survroc_km_pair}.
 #' @export
+#' @keywords internal
 .survroc_pair <- function(times, events, marker, c, t, route) {
   if (!(route %in% ROUTES)) {
     stop(sprintf("survroc: route must be one of %s, got '%s'",

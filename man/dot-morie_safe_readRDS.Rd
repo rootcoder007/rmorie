@@ -22,3 +22,4 @@ loads normally -- the path is user-chosen or a first-party cache
 file; provenance is the caller's responsibility. Feed it only .rds
 files you trust.
 }
+\keyword{internal}

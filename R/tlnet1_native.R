@@ -73,6 +73,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlnet1_vec(values = x)
 #' res
+#' @keywords internal
 .tlnet1_vec <- function(values) {
   if (is.matrix(values)) {
     as.numeric(values)
@@ -98,6 +99,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tlnet1_mat(W = x)
 #' res
+#' @keywords internal
 .tlnet1_mat <- function(W) {
   if (is.matrix(W) || is.data.frame(W)) {
     n <- nrow(W)
@@ -120,6 +122,7 @@
 #' @param i Passed to \code{setdiff}.
 #' @return The value of \code{setdiff}.
 #' @export
+#' @keywords internal
 .tlnet1_fset <- function(friends, i) {
   setdiff(friends[[i]], i)
 }
@@ -133,6 +136,7 @@
 #' @param friends A vector; its length is taken.
 #' @return The value of \code{total}, as built in the body.
 #' @export
+#' @keywords internal
 .tlnet1_count_edges <- function(friends) {
   N <- length(friends)
   total <- 0L

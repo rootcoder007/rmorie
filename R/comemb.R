@@ -17,6 +17,7 @@
 #' @param q Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .n2v_probs <- function(nb, prev, cur, p, q) {
   x <- nb[[cur]]
   out <- numeric(length(x))

@@ -23,3 +23,4 @@ A step of the frns_metrics implementation. Called by
 \code{morie_fairness_average_odds_difference}, \code{morie_fairness_equalized_odds}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

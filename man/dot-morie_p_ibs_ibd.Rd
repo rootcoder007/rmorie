@@ -21,3 +21,4 @@ A step of the selscan_w504_native implementation. Called by \code{Ibdmtx}.
 See the file header for the source the module follows.
 for the source it follows.
 }
+\keyword{internal}

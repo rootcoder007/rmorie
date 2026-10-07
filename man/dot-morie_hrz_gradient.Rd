@@ -20,3 +20,4 @@ on a uniform grid, and the index here is sorted data, which is
 anything but. Using the naive form put every quantity downstream of
 G' about 1e-4 away from morie.fn, which is small but is not parity.
 }
+\keyword{internal}

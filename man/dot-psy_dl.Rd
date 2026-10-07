@@ -18,3 +18,4 @@ A numeric value.
 at zero is not symmetric -- a biased tau^2 that hits the floor
 understates heterogeneity AND overstates precision together.
 }
+\keyword{internal}

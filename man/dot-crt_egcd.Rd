@@ -19,3 +19,4 @@ A step of the crtT_mixedcase_native implementation. Called by \code{crtT}.
 See the file header for the source the module follows.
 for the source it follows.
 }
+\keyword{internal}

@@ -44,6 +44,7 @@
 #' @param vals A vector; its length is taken.
 #' @return A vector, from \code{c}.
 #' @export
+#' @keywords internal
 .mafft_norm <- function(vals) {
   n <- length(vals)
   mu <- sum(vals) / n
@@ -71,6 +72,7 @@ names(.MAFFT_PHAT) <- .MAFFT_AA
 #' @param seq_type Optional; may be \code{NULL}. One of \code{"aa"}, \code{"nt"}.
 #' @return A list with \code{seqs}, \code{type}.
 #' @export
+#' @keywords internal
 .mafft_clean <- function(seqs, seq_type = NULL) {
   out <- c()
   for (s in seqs) {
@@ -161,6 +163,7 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #' @param m Numeric; combined arithmetically in the body.
 #' @return The value of \code{size}, as built in the body.
 #' @export
+#' @keywords internal
 .mafft_fft_size <- function(n, m) {
   size <- 1L
   while (size < n + m) size <- size * 2L
@@ -179,6 +182,7 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mafft_fft(x = x)
 #' res
+#' @keywords internal
 .mafft_fft <- function(x) {
   fft(x)
 }
@@ -194,6 +198,7 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mafft_ifft(x = x)
 #' res
+#' @keywords internal
 .mafft_ifft <- function(x) {
   fft(x, inverse = TRUE) / length(x)
 }
@@ -212,6 +217,7 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .mafft_xcorr_fft(a = A, b = b)
 #' res
+#' @keywords internal
 .mafft_xcorr_fft <- function(a, b) {
   n <- length(a)
   m <- length(b)
@@ -238,6 +244,7 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .mafft_xcorr_direct(a = A, b = b, size = 3L)
 #' res
+#' @keywords internal
 .mafft_xcorr_direct <- function(a, b, size) {
   out <- rep(0.0, size)
   n <- length(a)
@@ -313,6 +320,7 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
 #' @param n_peaks Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .mafft_peaks <- function(lags, c, n_peaks) {
   ord <- order(-c, seq_along(c))
   lags[ord[seq_len(min(as.integer(n_peaks), length(lags)))]]
@@ -355,6 +363,7 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
 #' @examples
 #' res <- .mafft_jtt_exchangeability()
 #' res
+#' @keywords internal
 .mafft_jtt_exchangeability <- function() {
   f <- .MAFFT_JTT_FREQ
   S <- matrix(0, 20L, 20L)
@@ -441,6 +450,7 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
 #' @param which Compared against \code{"grantham"}. Defaults to \code{"jtt200"}.
 #' @return A list with \code{M}, \code{freqs}.
 #' @export
+#' @keywords internal
 .mafft_default_raw_matrix <- function(seq_type, which = "jtt200") {
   if (seq_type == "nt") {
     M <- list()
@@ -476,6 +486,7 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
 #' @param b Passed to \code{paste}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .mafft_get <- function(M, a, b) {
   v <- M[[paste(a, b, sep = "|")]]
   if (is.null(v)) 0.0 else v
@@ -568,6 +579,7 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #' @param j Character; passed to \code{substr}.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @keywords internal
 .mafft_site_score <- function(M, ga, gb, wa, wb, i, j) {
   tot <- 0.0
   for (wn in seq_along(wa)) {
@@ -591,6 +603,7 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #' @param weights A vector; indexed elementwise.
 #' @return A list with \code{gs}, \code{ge}.
 #' @export
+#' @keywords internal
 .mafft_gap_profiles <- function(group, weights) {
   L <- nchar(group[1L])
   gs <- rep(0.0, L + 1L)
@@ -623,6 +636,7 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #' @param s_op Numeric; combined arithmetically in the body.
 #' @return A list with \code{out1}, \code{out2}.
 #' @export
+#' @keywords internal
 .mafft_nw <- function(g1, g2, M, w1, w2, s_op) {
   n <- nchar(g1[1L])
   m <- nchar(g2[1L])
@@ -951,6 +965,7 @@ arrange_segments <- function(segments) {
 #' @param chain See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .mafft_anchors_from <- function(chain) {
   out <- list()
   for (s in chain) {
@@ -1102,6 +1117,7 @@ guide_tree <- function(D) {
 #' @examples
 #' res <- .mafft_weights(k = 3L)
 #' res
+#' @keywords internal
 .mafft_weights <- function(k) rep(1.0 / k, k)
 
 #' progressive_align
@@ -1244,6 +1260,7 @@ wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
 #' @param group A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .mafft_degap <- function(group) {
   if (length(group) == 0L) {
     return(group)
@@ -1453,6 +1470,7 @@ mafftalignment <- mafft_alignment
 #' @examples
 #' res <- .mafft_cheatsheet()
 #' res
+#' @keywords internal
 .mafft_cheatsheet <- function() {
   paste("mafft: MAFFT (Katoh et al. 2002). Residues become Grantham ",
     "volume/polarity vectors, c(k) = c_v(k) + c_p(k) is got by ",

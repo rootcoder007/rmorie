@@ -17,6 +17,7 @@
 #' @param rng Numeric; combined arithmetically in the body.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .krpkrg_gamma <- function(h, model, nugget, sill, rng) {
   if (h <= 0.0) return(0.0)
   ps <- sill - nugget
@@ -122,6 +123,7 @@ morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
 #' @examples
 #' res <- .krpkrg_cheatsheet()
 #' res
+#' @keywords internal
 .krpkrg_cheatsheet <- function() {
   paste0("krpkrg: morie_krpkrg_ordinary_kriging(coords, values, targets, ",
          "model, nugget, sill, range) -> BLUP and kriging variance ",

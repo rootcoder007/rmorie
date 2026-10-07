@@ -19,3 +19,4 @@ A step of the acclso implementation. Called by \code{Admmlasso}, \code{Fistalass
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

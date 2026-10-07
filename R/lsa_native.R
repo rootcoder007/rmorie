@@ -23,6 +23,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .ghc_svd(A = A)
 #' res
+#' @keywords internal
 .ghc_svd <- function(A) {
   A <- as.matrix(A)
   s <- svd(A, nu = nrow(A), nv = ncol(A))
@@ -230,6 +231,7 @@ cosine_ranking <- function(q_hat, model, top_k = 5) {
 #' @examples
 #' res <- .lsa_cheatsheet()
 #' res
+#' @keywords internal
 .lsa_cheatsheet <- function() {
   paste0(
     "lsa: literal term matching fails through SYNONYMY (the right",

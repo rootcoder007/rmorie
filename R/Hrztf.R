@@ -19,6 +19,7 @@
 #' @param y1 Passed to \code{>}.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .hrztf_tn_at <- function(yv, ygrid, T, y2, y1) {
   if (yv < y2) {
     return(-.hrztf_big)

@@ -69,6 +69,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .netsts_sigmoid(x = x)
 #' res
+#' @keywords internal
 .netsts_sigmoid <- function(x) {
   1 / (1 + exp(-x))
 }
@@ -85,6 +86,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .netsts_sd(y = y)
 #' res
+#' @keywords internal
 .netsts_sd <- function(y) {
   n <- length(y)
   if (n < 2) return(0)
@@ -104,6 +106,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .netsts_vec(y = y)
 #' res
+#' @keywords internal
 .netsts_vec <- function(y) {
   as.numeric(y)
 }
@@ -118,6 +121,7 @@
 #' @param ridge Numeric; combined arithmetically in the body.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @keywords internal
 .netsts_lstsq <- function(X, y, ridge) {
   X <- if (is.list(X)) do.call(rbind, X) else as.matrix(X)
   y <- as.numeric(y)
@@ -142,6 +146,7 @@
 #' @param forget_bias Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{h}, \code{c}, \code{gates}.
 #' @export
+#' @keywords internal
 .netsts_lstm_cell <- function(x, h, c, W, b, forget_bias = 0.0) {
   d <- length(h)
   if (length(c) != d) stop("netsts: hidden and cell sizes differ")
@@ -176,6 +181,7 @@
 #' @param forget_bias Passed to \code{.netsts_lstm_cell}. Defaults to \code{0}.
 #' @return A list with \code{hs}, \code{cs}, \code{gates}.
 #' @export
+#' @keywords internal
 .netsts_lstm_run <- function(X, W, b, hidden, forget_bias = 0.0) {
   d <- as.integer(hidden)
   h <- rep(0.0, d)
@@ -204,6 +210,7 @@
 #' @param steps Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .netsts_gradient_retention <- function(forget_value, steps) {
   f <- as.numeric(forget_value)
   if (f < 0 || f > 1)
@@ -223,6 +230,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .netsts_standardize(y = y)
 #' res
+#' @keywords internal
 .netsts_standardize <- function(y) {
   yv <- as.numeric(y)
   mu <- mean(yv)
@@ -239,6 +247,7 @@
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .netsts_standard_normal <- function(rng, n) {
   # Standard normals via Box-Muller on pairs of uniforms from the
   # glibc LCG-backed helper. Two uniforms per sample.

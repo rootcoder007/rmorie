@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 res <- .memb_rng(seed = 1L)
 res
 }
+\keyword{internal}

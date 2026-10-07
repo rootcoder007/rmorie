@@ -21,3 +21,4 @@ A step of the hcoreg implementation. Called by \code{Hcoreg}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

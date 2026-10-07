@@ -16,3 +16,4 @@ diagnostics so the active posture is visible).
 res <- .morie_knob_status()
 res
 }
+\keyword{internal}

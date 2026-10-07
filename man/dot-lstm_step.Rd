@@ -26,3 +26,4 @@ A list with \code{h}, \code{c}.
 A step of the elmo_native implementation. Called by \code{.bilm_forward}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

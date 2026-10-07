@@ -21,3 +21,4 @@ A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total},
 A step of the limmav_native implementation. Called by \code{morie_limmav}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

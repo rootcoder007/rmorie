@@ -43,6 +43,7 @@
 #' @param stages Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
+#' @keywords internal
 .sxrhrt_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
   a <- as.numeric(lo)
   b <- as.numeric(hi)
@@ -77,6 +78,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .sxrhrt_rows(x = x)
 #' res
+#' @keywords internal
 .sxrhrt_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -98,6 +100,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .sxrhrt_chol(A = A)
 #' res
+#' @keywords internal
 .sxrhrt_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -127,6 +130,7 @@
 #' @param b A vector; indexed elementwise.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @keywords internal
 .sxrhrt_solve <- function(L, b) {
   n <- nrow(L)
   z <- numeric(n)
@@ -152,6 +156,7 @@
 #' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .sxrhrt_logdet <- function(L) 2.0 * sum(log(diag(L)))
 
 # Restricted log likelihood at (s2gm, s2gf, rg, s2em, s2ef).
@@ -167,6 +172,7 @@
 #' @param male A vector; indexed elementwise.
 #' @return A list with \code{ll}, \code{beta}, \code{L}.
 #' @export
+#' @keywords internal
 .sxrhrt_reml <- function(theta, y, X, Km, male) {
   s2gm <- theta[1]
   s2gf <- theta[2]
@@ -383,6 +389,7 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
 #' @examples
 #' res <- .sxrhrt_cheatsheet()
 #' res
+#' @keywords internal
 .sxrhrt_cheatsheet <- function() {
   paste0("sxrhrt: morie_sxrhrt_sex_specific_h2(y, sex, K) -> per-sex ",
          "heritability and the cross-sex genetic correlation by bivariate ",

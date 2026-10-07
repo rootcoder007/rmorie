@@ -30,3 +30,4 @@ all.equal(as.numeric(dist(R)), as.numeric(dist(P)))
 # and a full turn is the identity
 all.equal(.agalfsy_rotate(P, 2L, 360), P)
 }
+\keyword{internal}

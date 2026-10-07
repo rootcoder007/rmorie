@@ -16,3 +16,4 @@ The value of \code{.gb_mut}.
 A step of the secarg_native implementation. Called by \code{morie_secarg_compress}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

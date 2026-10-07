@@ -263,6 +263,7 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
 #' @examples
 #' res <- .elmo_cheatsheet()
 #' res
+#' @keywords internal
 .elmo_cheatsheet <- function() {
   paste0("elmo: ELMo_k = gamma * sum_j s_j h_{k,j}, s SOFTMAX-",
          "normalised (eq. 1). The simplex constraint means s chooses ",
@@ -362,6 +363,7 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #' @param layers A vector; its length is taken and its elements indexed.
 #' @return The value of \code{reps}, as built in the body.
 #' @export
+#' @keywords internal
 .bilm_forward <- function(X, layers) {
   Xm <- as.matrix(X)
   L <- nrow(Xm)
@@ -421,6 +423,7 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #' \code{as.integer}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .elmo_mix <- function(reps, raw_weights, gamma = 1.0, position = NULL) {
   n_layers <- length(reps)
   if (length(raw_weights) != n_layers) {
@@ -461,6 +464,7 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #' @return A list with \code{estimate}, \code{elmo}, \code{layers}, \code{weights},
 #' \code{gamma}, \code{n_layers}, \code{L}, \code{d}, \code{top_layer}, \code{method}.
 #' @export
+#' @keywords internal
 .elmo_representation <- function(X, layers, raw_weights = NULL, gamma = 1.0) {
   reps <- .bilm_forward(X, layers)
   n <- length(reps)
@@ -489,6 +493,7 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .elmo_sigmoid(x = x)
 #' res
+#' @keywords internal
 .elmo_sigmoid <- function(x) 1 / (1 + exp(-x))
 
 #' .layer_weights
@@ -500,6 +505,7 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #' @param raw A vector; its length is taken.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .layer_weights <- function(raw) {
   if (length(raw) == 0L) stop("elmo: no layer weights given")
   mx <- max(raw)
@@ -524,6 +530,7 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{h}, \code{c}.
 #' @export
+#' @keywords internal
 .lstm_step <- function(x, h, c, Wx, Wh, b) {
   d <- length(h)
   if (length(c) != d) stop("elmo: hidden and cell sizes differ")

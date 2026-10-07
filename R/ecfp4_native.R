@@ -32,6 +32,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mor_fp_mix(h = 0.5, v = x)
 #' res
+#' @keywords internal
 .mor_fp_mix <- function(h, v) (h * .MOR_FP_MUL + (v %% .MOR_FP_MOD)) %% .MOR_FP_MOD
 
 # bond list: 0-based (i, j, order) triples in the Python enumeration
@@ -43,6 +44,7 @@
 #' @param adjacency A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{a}, \code{i}, \code{j}, \code{o}.
 #' @export
+#' @keywords internal
 .mor_fp_bonds <- function(adjacency) {
   A <- as.matrix(adjacency)
   a <- nrow(A)
@@ -75,6 +77,7 @@
 #' @param isotope_delta A vector; indexed elementwise.
 #' @return The value of \code{inv}, as built in the body.
 #' @export
+#' @keywords internal
 .mor_fp_invariants <- function(a, bd, atomnum, numhs, charge, inring,
                                isotope_delta) {
   deg <- integer(a)
@@ -103,6 +106,7 @@
 #' @param bs A vector; its length is taken.
 #' @return A character value.
 #' @export
+#' @keywords internal
 .mor_fp_envkey <- function(bs) {
   if (length(bs) == 0L) return("")
   paste(sprintf("%04d", sort(bs)), collapse = "")
@@ -122,6 +126,7 @@
 #' @param use_bond_order A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{bits}, \code{count}, \code{ident}.
 #' @export
+#' @keywords internal
 .mor_fp_morgan <- function(a, bd, invariants, radius, nbits,
                            use_bond_order = TRUE) {
   inc_b <- vector("list", a)
@@ -223,6 +228,7 @@
 #' @param isotope_delta Passed to \code{col}.
 #' @return A list with \code{numhs}, \code{charge}, \code{inring}, \code{isotope_delta}.
 #' @export
+#' @keywords internal
 .mor_fp_defaults <- function(a, numhs, charge, inring, isotope_delta) {
   col <- function(x, default) {
     if (is.null(x)) return(rep(default, a))

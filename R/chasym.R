@@ -14,6 +14,7 @@
 #' @examples
 #' res <- .msm_lcg(seed = 1L)
 #' res
+#' @keywords internal
 .msm_lcg <- function(seed) {
   st <- as.numeric(seed) %% 2147483647
   if (st == 0) st <- 1

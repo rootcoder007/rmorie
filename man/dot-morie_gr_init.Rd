@@ -25,3 +25,4 @@ stream, so byrow = TRUE.
 res <- .morie_gr_init(nrow = 3L, ncol = 3L, seed = 1L)
 res
 }
+\keyword{internal}

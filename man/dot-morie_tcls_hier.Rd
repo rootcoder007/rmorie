@@ -22,3 +22,4 @@ The value of \code{cost}, as built in the body.
 A step of the tcls_native implementation. Called by \code{morie_emd}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

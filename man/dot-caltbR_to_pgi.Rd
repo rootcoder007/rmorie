@@ -15,3 +15,4 @@ Nothing; this branch always raises.
 \description{
 columns, the G determined from the first non-empty row.
 }
+\keyword{internal}

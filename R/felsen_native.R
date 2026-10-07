@@ -13,6 +13,7 @@
 #' @param pi A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{P}, as built in the body.
 #' @export
+#' @keywords internal
 .felsen_pij <- function(t, pi) {
   e <- exp(-t)
   P <- matrix(rep(pi, each = 4) * (1 - e), 4, 4)
@@ -30,6 +31,7 @@
 #' @param pi Passed to \code{.felsen_prune}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .felsen_prune <- function(node, site, pi) {
   if (is.character(node)) {
     s <- match(site[[node]], c("A", "C", "G", "T"))

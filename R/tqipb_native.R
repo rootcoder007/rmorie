@@ -74,6 +74,7 @@
 #' @examples
 #' res <- .tqipb_pd()
 #' res
+#' @keywords internal
 .tqipb_pd <- function() sqrt(3) * pi * pi
 
 # 4^b by repeated multiplication. Written out because R's `^` on an
@@ -90,6 +91,7 @@
 #' @examples
 #' res <- .tqipb_pow4(b = 3L)
 #' res
+#' @keywords internal
 .tqipb_pow4 <- function(b) {
   p <- 1
   b <- as.integer(b)
@@ -137,6 +139,7 @@ morie_tqipb_constant <- function(bits, d, route = "table") {
 #' @param n_blocks Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .tqipb_blocks <- function(d, n_blocks) {
   d <- as.integer(d)
   k <- as.integer(n_blocks)

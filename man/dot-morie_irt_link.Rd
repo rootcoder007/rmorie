@@ -39,3 +39,4 @@ ONLY in whether the curve differences are summed before or after
 squaring, which is exactly the difference between matching every item
 and matching the test as a whole.
 }
+\keyword{internal}

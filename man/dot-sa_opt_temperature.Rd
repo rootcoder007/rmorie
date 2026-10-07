@@ -24,3 +24,4 @@ A numeric value.
 A step of the sa_opt_native implementation. Called by \code{morie_sa_opt}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

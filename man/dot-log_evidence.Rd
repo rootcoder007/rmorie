@@ -30,3 +30,4 @@ The value of \code{tot}, as built in the body.
 A step of the bigtm_native implementation. Called by \code{log_evidence}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

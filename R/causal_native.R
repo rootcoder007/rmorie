@@ -159,6 +159,7 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #' @param dag A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{children}, \code{parents}, \code{nodes}.
 #' @export
+#' @keywords internal
 .bd_parse <- function(dag) {
   if (is.list(dag) && !is.null(names(dag))) {
     edges <- do.call(rbind, lapply(names(dag), function(u) {
@@ -183,6 +184,7 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #' @param ch A vector; indexed elementwise.
 #' @return The value of \code{seen}, as built in the body.
 #' @export
+#' @keywords internal
 .bd_desc <- function(node, ch) {
   seen <- character(0)
   stack <- node
@@ -210,6 +212,7 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #' @param pa A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .bd_paths <- function(x, y, ch, pa) {
   out <- list()
   stack <- list(list(cur = x, path = x, dirs = character(0)))
@@ -245,6 +248,7 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #' @param ch Passed to \code{.bd_desc}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .bd_blocked <- function(p, d, Z, ch) {
   if (length(p) < 3L) {
     return(FALSE)
@@ -702,6 +706,7 @@ morie_hsic <- function(a, b) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .anm_resid(x = x, y = y)
 #' res
+#' @keywords internal
 .anm_resid <- function(x, y) {
   d2 <- outer(x, x, "-")^2
   h <- sqrt(max(stats::median(d2[upper.tri(d2)]), 1e-12)) * 0.5

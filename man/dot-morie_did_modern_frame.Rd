@@ -24,3 +24,4 @@ A list with \code{y}, \code{unit}, \code{time}, \code{g}, \code{rel},
 \description{
 NA = never), event time, and the treated-post indicator.
 }
+\keyword{internal}

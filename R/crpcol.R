@@ -12,6 +12,7 @@
 #' @param var Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .crp_norm_logpdf <- function(x, mu, var) {
   -0.5 * (log(2 * pi * var) + (x - mu)^2 / var)
 }
@@ -37,6 +38,7 @@
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{z}, \code{counts}, \code{sums}.
 #' @export
+#' @keywords internal
 .crp_collapsed_sweep <- function(y, alpha, n_iter, mu0, tau2, sigma2, seed) {
   n <- length(y)
   z <- rep(1L, n)

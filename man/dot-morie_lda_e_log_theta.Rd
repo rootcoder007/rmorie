@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 res <- .morie_lda_e_log_theta(gamma = 0.5)
 res
 }
+\keyword{internal}

@@ -150,6 +150,7 @@ order_is_graph_determined <- function(features, adj, perm, k_keep,
 #' @examples
 #' res <- .sortP_cheatsheet()
 #' res
+#' @keywords internal
 .sortP_cheatsheet <- function() {
   paste("sortP: the under-stated problem in graph classification is",
         "how to read vertices in a MEANINGFUL AND CONSISTENT",

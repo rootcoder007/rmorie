@@ -27,3 +27,4 @@ A step of the karpV_native implementation. Called by \code{morie_karpV},
 \code{morie_karpV_ramped}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

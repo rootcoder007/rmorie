@@ -45,6 +45,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' @param kind One of \code{"relu"}, \code{"tanh"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @keywords internal
 .survnnr_act <- function(v, kind) {
   if (kind == "tanh") return(tanh(v))
   if (kind == "relu") return(if (v > 0) v else 0)
@@ -61,6 +62,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' @param kind One of \code{"relu"}, \code{"tanh"}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .survnnr_dact <- function(v, kind) {
   if (kind == "tanh") {
     t <- tanh(v)
@@ -81,6 +83,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{W}, \code{b}.
 #' @export
+#' @keywords internal
 .survnnr_init <- function(d, hidden, seed) {
   sizes <- c(d, as.integer(hidden), 1L)
   L <- length(sizes) - 1
@@ -187,6 +190,7 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
 #' @param risk A vector; indexed elementwise.
 #' @return The value of \code{g}, as built in the body.
 #' @export
+#' @keywords internal
 .survnnr_grad_wrt_risk <- function(times, events, risk) {
   n <- length(times)
   n_events <- as.numeric(sum(events))
@@ -400,6 +404,7 @@ morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
 #' @param risk A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .survnnr_c_index <- function(times, events, risk) {
   n <- length(times)
   num <- 0

@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .tl_lchoose(n = 3L, k = 3L)
 res
 }
+\keyword{internal}

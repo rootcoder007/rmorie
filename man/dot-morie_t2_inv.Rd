@@ -23,3 +23,4 @@ if (requireNamespace("metafor", quietly = TRUE)) {
   res
 }
 }
+\keyword{internal}

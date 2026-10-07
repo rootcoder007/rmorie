@@ -42,3 +42,4 @@ A list with \code{delta}, \code{sigma_a2}, \code{sigma_e2}, \code{loglik}.
 A step of the gwasem_native implementation. Called by \code{morie_gwasem_reml}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

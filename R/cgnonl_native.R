@@ -26,6 +26,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .cgnonl_dot(a = A, b = b)
 #' res
+#' @keywords internal
 .cgnonl_dot <- function(a, b) sum(a * b)
 
 #' beta_fletcher_reeves
@@ -79,6 +80,7 @@ beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 #' @param g_old Passed to \code{beta_fletcher_reeves}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .cgnonl_beta <- function(rule, g_new, g_old) {
   if (rule == "fletcher-reeves") return(beta_fletcher_reeves(g_new, g_old))
   if (rule == "polak-ribiere") return(beta_polak_ribiere(g_new, g_old, plus = FALSE))
@@ -240,6 +242,7 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #' @param hess_vec Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .cgnonl_exact_quadratic_step <- function(x, p, g, hess_vec) {
   ap <- hess_vec(p)
   den <- .cgnonl_dot(p, ap)

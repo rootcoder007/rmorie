@@ -20,3 +20,4 @@ A list with \code{approx}, \code{details}, \code{approxes}.
 A step of the rangayyan_tf implementation. Called by \code{Swt}, \code{WtVar}, \code{WtXcor}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

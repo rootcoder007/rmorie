@@ -63,6 +63,7 @@ NULL
 #' @param df Passed to \code{names}.
 #' @return Nothing; called for its effect.
 #' @export
+#' @keywords internal
 .otis_year_col <- function(df) {
   for (c in c("EndFiscalYear", "Year")) {
     if (c %in% names(df)) return(c)

@@ -21,3 +21,4 @@ A vector, from \code{as.numeric}.
 neighbour itself falls strictly inside a truncated kernel's support.
 The regression point counts as its own first neighbour.
 }
+\keyword{internal}

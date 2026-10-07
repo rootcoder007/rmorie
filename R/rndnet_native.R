@@ -28,6 +28,7 @@
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @keywords internal
 .rndnet_random_features_new <- function(n_in, n_hidden, n_out, rng, scale = 1.0) {
   s1 <- scale / sqrt(max(1, n_in))
   s2 <- scale / sqrt(max(1, n_hidden))
@@ -89,6 +90,7 @@
 #' @param scale Passed to \code{.rndnet_random_features_new}. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @keywords internal
 .rndnet_predictor_new <- function(n_in, n_hidden, n_out, rng, scale = 1.0) {
   e <- new.env()
   e$n_in <- n_in
@@ -136,6 +138,7 @@
 #' @examples
 #' res <- .rndnet_running_stats_new(n = 3L)
 #' res
+#' @keywords internal
 .rndnet_running_stats_new <- function(n) {
   e <- new.env()
   e$n <- 0
@@ -380,6 +383,7 @@ morie_rndnet_combine_returns <- function(reward_ext, reward_int,
 #' @examples
 #' res <- .rndnet_cheatsheet()
 #' res
+#' @keywords internal
 .rndnet_cheatsheet <- function() {
   paste(
     "rndnet: RND bonus r^i = ||fhat(x) - f(x)||^2 with f a",

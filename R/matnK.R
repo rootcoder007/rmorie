@@ -73,6 +73,7 @@ MatnK <- function(d, nu, rho, sigma2 = 1) {
 #' @param sigma2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .s03maternk <- function(d, nu, rho, sigma2) {
   if (d < 0) stop("matern_kernel: distances d must be non-negative")
   if (d == 0) return(sigma2)

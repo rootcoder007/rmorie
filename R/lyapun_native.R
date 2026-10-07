@@ -37,6 +37,7 @@
 #' @param y A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .lyapun_as_series <- function(y) {
   if (is.matrix(y) || is.list(y)) {
     out <- as.numeric(unlist(y))
@@ -163,6 +164,7 @@ mean_period <- function(y, dt = 1.0) {
 #' @param min_sep Passed to \code{<=}.
 #' @return A list with \code{nn}, \code{d0}.
 #' @export
+#' @keywords internal
 .lyapun_nearest_neighbours <- function(pts, min_sep) {
   n_pts <- length(pts)
   m <- length(pts[[1L]])
@@ -203,6 +205,7 @@ mean_period <- function(y, dt = 1.0) {
 #' @param b See Usage.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .lyapun_distance <- function(pts, a, b) {
   pa <- pts[[a]]
   pb <- pts[[b]]
@@ -299,6 +302,7 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 #' @param hi_frac Numeric; combined arithmetically in the body. Defaults to \code{0.8}.
 #' @return A list with \code{lo}, \code{hi}.
 #' @export
+#' @keywords internal
 .lyapun_linear_region <- function(curve, lo_frac = 0.1, hi_frac = 0.8) {
   n <- length(curve)
   if (n < 4L) return(list(lo = 0L, hi = n))
@@ -328,6 +332,7 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 #' @param ys A vector; indexed elementwise.
 #' @return A list with \code{slope}, \code{intercept}, \code{se}, \code{r2}.
 #' @export
+#' @keywords internal
 .lyapun_ols_slope <- function(xs, ys) {
   n <- length(xs)
   mx <- sum(xs) / n
@@ -482,6 +487,7 @@ largest_lyapunov <- lyapunov_exponent
 #' @examples
 #' res <- .lyapun_cheatsheet()
 #' res
+#' @keywords internal
 .lyapun_cheatsheet <- function() {
   paste("lyapun: largest Lyapunov exponent (Rosenstein, Collins & De ",
         "Luca 1993). Embed with delay J and dimension m, find each ",
@@ -535,6 +541,7 @@ morie_lyapun <- function(op, ...) {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .as_series <- function(y) {
   out <- as.numeric(y)
   if (length(out) < 10L)
@@ -555,6 +562,7 @@ morie_lyapun <- function(op, ...) {
 #' @param tau Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .lyapun_embed <- function(y, m, tau) {
   y <- .as_series(y)
   m <- as.integer(m)

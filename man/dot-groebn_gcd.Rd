@@ -21,3 +21,4 @@ See the file header for the source the module follows.
 \examples{
 .groebn_gcd(12L, 18L)
 }
+\keyword{internal}

@@ -19,3 +19,4 @@ A numeric value.
 \description{
 adjacency dict, restricted to 0/1/2.
 }
+\keyword{internal}

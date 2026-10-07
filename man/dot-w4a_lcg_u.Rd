@@ -25,3 +25,4 @@ the source it follows.
 res <- .w4a_lcg_u(n = 3L, seed = 1L)
 res
 }
+\keyword{internal}

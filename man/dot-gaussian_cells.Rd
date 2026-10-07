@@ -22,3 +22,4 @@ A list with \code{mass}, \code{mom}.
 A step of the tqlld_native implementation. Called by \code{morie_tqlld}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -27,3 +27,4 @@ the source it follows.
 res <- .informer_logits(q = 0.5, K = 3L, scale = TRUE)
 res
 }
+\keyword{internal}

@@ -27,3 +27,4 @@ A list with \code{rss}, \code{assign}.
 \description{
 latent assignment as a side product.
 }
+\keyword{internal}

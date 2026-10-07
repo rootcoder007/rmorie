@@ -73,6 +73,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .unetbk_as_matrix(x = x)
 #' res
+#' @keywords internal
 .unetbk_as_matrix <- function(x) {
   if (is.matrix(x)) return(x)
   if (is.list(x)) {
@@ -322,6 +323,7 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
 #' @examples
 #' res <- .unetbk_cheatsheet()
 #' res
+#' @keywords internal
 .unetbk_cheatsheet <- function() {
   paste0(
     "unetbk: built for the case where annotated IMAGES are scarce",

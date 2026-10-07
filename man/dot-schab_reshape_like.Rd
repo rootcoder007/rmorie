@@ -19,3 +19,4 @@ A step of the schab_gwr_shared implementation. Called by \code{.schab_kernel_wei
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

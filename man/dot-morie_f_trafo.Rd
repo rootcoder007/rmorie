@@ -16,3 +16,4 @@ One of two values, depending on the branch taken.
 \description{
 k==2 gives a single column (indicator of the second level).
 }
+\keyword{internal}

@@ -22,3 +22,4 @@ A list with \code{weights}, \code{residual}.
 fixed effects.  Alternating projections, iterated to convergence --
 the within-transformation solver, not the matrix-form Frisch-Waugh.
 }
+\keyword{internal}

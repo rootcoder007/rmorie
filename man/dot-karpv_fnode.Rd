@@ -19,3 +19,4 @@ A step of the karpV_native implementation. Called by \code{.karpv_copy},
 \code{.karpv_grow}, \code{.karpv_replace}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

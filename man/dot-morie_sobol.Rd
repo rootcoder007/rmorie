@@ -26,3 +26,4 @@ if (requireNamespace("geepack", quietly = TRUE)) {
   res
 }
 }
+\keyword{internal}

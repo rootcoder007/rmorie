@@ -71,6 +71,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .impfun_as_double_matrix(x = x)
 #' res
+#' @keywords internal
 .impfun_as_double_matrix <- function(x) {
   if (is.matrix(x)) {
     storage.mode(x) <- "double"
@@ -95,6 +96,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .impfun_as_double_vec(x = x)
 #' res
+#' @keywords internal
 .impfun_as_double_vec <- function(x) {
   if (is.list(x)) return(unlist(lapply(x, as.numeric)))
   as.numeric(x)
@@ -112,6 +114,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .impfun_as_int_list(x = x)
 #' res
+#' @keywords internal
 .impfun_as_int_list <- function(x) {
   if (is.list(x)) return(lapply(x, as.integer))
   if (is.matrix(x)) {
@@ -362,6 +365,7 @@ concordance <- function(imputed, truth) {
 #' @examples
 #' res <- .impfun_cheatsheet()
 #' res
+#' @keywords internal
 .impfun_cheatsheet <- function() {
   paste0(
     "impfun: imputation is bounded by the REFERENCE PANEL, and pa",

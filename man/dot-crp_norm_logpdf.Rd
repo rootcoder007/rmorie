@@ -22,3 +22,4 @@ A step of the crpcol implementation. Called by \code{.crp_collapsed_sweep},
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

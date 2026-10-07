@@ -18,3 +18,4 @@ A list with \code{lab}, \code{groups}.
 throughout: ties are broken by the smaller index pair, so two
 implementations agree on the dendrogram, not merely on its quality.
 }
+\keyword{internal}

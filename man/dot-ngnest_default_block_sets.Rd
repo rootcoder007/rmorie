@@ -17,3 +17,4 @@ See the file header for the source the module follows.
 res <- .ngnest_default_block_sets()
 res
 }
+\keyword{internal}

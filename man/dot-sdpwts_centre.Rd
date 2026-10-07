@@ -29,3 +29,4 @@ A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}.
 Minimises t * c'x - log det F(x) by Newton's method with the analytic
 gradient and Hessian of the log-determinant barrier.
 }
+\keyword{internal}

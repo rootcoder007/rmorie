@@ -34,6 +34,7 @@
 #' @examples
 #' res <- .tmldta_logit(p = 0.5)
 #' res
+#' @keywords internal
 .tmldta_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), .tmldta_EPS), 1 - .tmldta_EPS)
   log(q / (1 - q))
@@ -52,6 +53,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .tmldta_expit(x = x)
 #' res
+#' @keywords internal
 .tmldta_expit <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)
@@ -68,6 +70,7 @@
 #' with \code{as.numeric}.
 #' @return The value of \code{lv}, as built in the body.
 #' @export
+#' @keywords internal
 .levels <- function(A, candidate_strata) {
   if (!is.null(candidate_strata)) {
     lv <- as.numeric(candidate_strata)
@@ -93,6 +96,7 @@
 #' @param ridge Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{q}, \code{b}.
 #' @export
+#' @keywords internal
 .fit_q <- function(y, A, W, levels, rows, ridge) {
   ref <- levels[1]
   others <- levels[-1]
@@ -142,6 +146,7 @@
 #' @param trim Numeric; passed to \code{max}.
 #' @return A list with \code{gH}, \code{gL}.
 #' @export
+#' @keywords internal
 .fit_g <- function(A, W, aL, aH, rows, ridge, trim) {
   n <- length(A)
   X <- if (ncol(W) > 0) cbind(1, W) else matrix(1, nrow = n, ncol = 1)
@@ -299,6 +304,7 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
 #' @param n_folds Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .tmldta_folds <- function(n, n_folds) {
   V <- max(2L, min(as.integer(n_folds), n))
   lapply(seq_len(V) - 1L, function(v) which(seq_len(n) %% V == v))
@@ -543,6 +549,7 @@ morie_tmledataadaptive <- morie_tmldta
 #' @param ridge Passed to \code{.fit_q_dta}.
 #' @return A list with \code{aL}, \code{aH}, \code{info}.
 #' @export
+#' @keywords internal
 .discover_levels <- function(ys, A_, W, levels, rows, eval_rows, ridge) {
   fit <- .fit_q_dta(ys, A_, W, levels, rows, ridge)
   means <- sapply(levels, function(a) {
@@ -572,6 +579,7 @@ morie_tmledataadaptive <- morie_tmldta
 #' @param trim Numeric; passed to \code{max}.
 #' @return A list with \code{gH}, \code{gL}.
 #' @export
+#' @keywords internal
 .fit_g_dta <- function(A_, W, aL, aH, rows, ridge, trim) {
   n <- length(A_)
   if (is.matrix(W)) {
@@ -618,6 +626,7 @@ morie_tmledataadaptive <- morie_tmldta
 #' @param ridge Numeric; passed to \code{max}.
 #' @return A list with \code{q}, \code{b}.
 #' @export
+#' @keywords internal
 .fit_q_dta <- function(ys, A_, W, levels, rows, ridge) {
   ref <- levels[1]
   others <- levels[-1]
@@ -656,6 +665,7 @@ morie_tmledataadaptive <- morie_tmldta
 #' @param n_folds Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @keywords internal
 .folds_dta <- function(n, n_folds) {
   V <- max(2, min(as.integer(n_folds), n))
   lapply(seq_len(V), function(v) {
@@ -682,6 +692,7 @@ morie_tmledataadaptive <- morie_tmldta
 #' @param target A flag; the body branches on it.
 #' @return A list with \code{psi}, \code{D}, \code{info}.
 #' @export
+#' @keywords internal
 .split_specific_tmle <- function(ys, A_, W, levels, aL, aH,
                                  fit_rows, est_rows, ridge, trim,
                                  target) {
@@ -749,6 +760,7 @@ morie_tmledataadaptive <- morie_tmldta
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @keywords internal
 .tmldta_logit_irls <- function(Z, a, ridge = 1e-8, max_iter = 50L,
                                tol = 1e-10) {
   n <- length(a)
@@ -792,6 +804,7 @@ morie_tmledataadaptive <- morie_tmldta
 #' @examples
 #' res <- .tmldta_qnorm(p = 0.5)
 #' res
+#' @keywords internal
 .tmldta_qnorm <- function(p) {
   qnorm(p, 0, 1)
 }

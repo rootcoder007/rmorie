@@ -21,3 +21,4 @@ A step of the ts_joseph implementation. Called by \code{morie_dirmulti},
 \code{morie_dirrec}, \code{morie_recmulti}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

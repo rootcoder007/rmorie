@@ -19,3 +19,4 @@ A step of the copynm_native implementation. Called by \code{.copynm_binary_suppo
 \code{copynm}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

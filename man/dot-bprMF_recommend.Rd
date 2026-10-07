@@ -26,3 +26,4 @@ A list with \code{ranking}, \code{n_scored}.
 A step of the bprMF_native implementation. Called by \code{bpr_recommend_R}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

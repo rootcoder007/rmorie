@@ -18,3 +18,4 @@ A step of the trnsfr_native implementation. Called by
 \code{morie_trnsfr_transport_weights}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -64,6 +64,7 @@
 #' @param profile A vector; its length is taken and its elements indexed.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @keywords internal
 .phmmsr_to_matrix <- function(profile) {
   if (is.matrix(profile)) {
     storage.mode(profile) <- "numeric"

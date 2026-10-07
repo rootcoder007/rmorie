@@ -16,3 +16,4 @@ The value of \code{P}, as built in the body.
 Part of the w501_changepoint_native implementation; see the file
 header for the source it follows.
 }
+\keyword{internal}

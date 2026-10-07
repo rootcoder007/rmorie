@@ -22,3 +22,4 @@ The value of \code{.mor_rl_greedy}.
 A step of the qlearn_native implementation. Called by \code{morie_qlearn}, \code{morie_sarsa}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

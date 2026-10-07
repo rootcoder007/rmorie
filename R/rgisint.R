@@ -80,6 +80,7 @@ rgisint <- function(emg, force, fs, rest_level = 0) {
 #' fml <- y ~ x
 #' res <- .rgisint_runs(f = fml)
 #' res
+#' @keywords internal
 .rgisint_runs <- function(f) {
   out <- list()
   i <- 1L

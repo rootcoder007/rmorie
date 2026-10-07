@@ -40,6 +40,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_pvar(x = x)
 #' res
+#' @keywords internal
 .morie_gr_pvar <- function(x) {
   n <- length(x)
   if (n == 0) {
@@ -63,6 +64,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_psd(x = x)
 #' res
+#' @keywords internal
 .morie_gr_psd <- function(x) sqrt(.morie_gr_pvar(x))
 
 #' .morie_gr_softmax
@@ -80,6 +82,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_gr_softmax(z = y)
 #' res
+#' @keywords internal
 .morie_gr_softmax <- function(z) {
   e <- exp(z - max(z))
   e / sum(e)
@@ -100,6 +103,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_gr_log_softmax(z = y)
 #' res
+#' @keywords internal
 .morie_gr_log_softmax <- function(z) {
   m <- max(z)
   zz <- z - m
@@ -121,6 +125,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_gr_log_softmax_rows(Z = y)
 #' res
+#' @keywords internal
 .morie_gr_log_softmax_rows <- function(Z) {
   Z <- as.matrix(Z)
   m <- apply(Z, 1, max)
@@ -143,6 +148,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_gr_softmax_cols(Z = y)
 #' res
+#' @keywords internal
 .morie_gr_softmax_cols <- function(Z) {
   t(.morie_al_softmax_rows(t(as.matrix(Z))))
 }
@@ -161,6 +167,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_layernorm(X = x)
 #' res
+#' @keywords internal
 .morie_gr_layernorm <- function(X, eps = 1e-5) {
   X <- as.matrix(X)
   mu <- rowMeans(X)
@@ -182,6 +189,7 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr_lcg_u <- function(count, seed) {
   count <- as.integer(count)
   s <- as.numeric(seed) %% 2^32
@@ -207,6 +215,7 @@
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_gr_lcg_w <- function(count, seed, scale = 0.1) {
   (2 * .morie_gr_lcg_u(count, seed) - 1) * scale
 }
@@ -226,6 +235,7 @@
 #' @examples
 #' res <- .morie_gr_init(nrow = 3L, ncol = 3L, seed = 1L)
 #' res
+#' @keywords internal
 .morie_gr_init <- function(nrow, ncol, seed, scale = 0.1) {
   matrix(.morie_gr_lcg_w(nrow * ncol, seed, scale),
     nrow = nrow,
@@ -248,6 +258,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_gr_lstsq(A = A, b = b)
 #' res
+#' @keywords internal
 .morie_gr_lstsq <- function(A, b) {
   A <- as.matrix(A)
   if (ncol(A) == 0L) {
@@ -271,6 +282,7 @@
 #' @param msg Passed to \code{stop}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_gr_need <- function(cond, msg) if (!cond) stop(msg, call. = FALSE)
 
 #' .morie_gr_mat
@@ -290,6 +302,7 @@
 #' txt <- c('alpha', 'beta', 'gamma', 'delta')
 #' res <- .morie_gr_mat(x = x, name = txt)
 #' res
+#' @keywords internal
 .morie_gr_mat <- function(x, name) {
   m <- if (is.matrix(x)) x else as.matrix(x)
   storage.mode(m) <- "double"
@@ -310,6 +323,7 @@
 #' @param K A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr_array_split <- function(idx, K) {
   m <- length(idx)
   base <- m %/% K
@@ -2996,6 +3010,7 @@ morie_geron_detr_hungarian_matching <- function(pred_boxes, pred_classes,
 #' @param cost Passed to \code{.morie_gr_mat}.
 #' @return A list with \code{rows}, \code{cols}.
 #' @export
+#' @keywords internal
 .morie_gr_lsa <- function(cost) {
   C <- .morie_gr_mat(cost, "cost matrix")
   .morie_gr_need(length(C) > 0L, "cost must be a non-empty 2-D matrix.")
@@ -4487,6 +4502,7 @@ morie_geron_denoising_autoencoder <- function(x, noise, decoded,
 #' @param s Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr_conv2d_valid <- function(Z, K, s) {
   kh <- nrow(K)
   kw <- ncol(K)
@@ -4521,6 +4537,7 @@ morie_geron_denoising_autoencoder <- function(x, noise, decoded,
 #' @param s Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gr_conv_transpose2d <- function(Z, K, s) {
   kh <- nrow(K)
   kw <- ncol(K)
@@ -4954,6 +4971,7 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_f32_bits(x = x)
 #' res
+#' @keywords internal
 .morie_gr_f32_bits <- function(x) {
   raw4 <- writeBin(as.double(x), raw(), size = 4, endian = "little")
   i <- readBin(raw4, "integer", n = length(x), size = 4, endian = "little")
@@ -4975,6 +4993,7 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_bits_f32(u = x)
 #' res
+#' @keywords internal
 .morie_gr_bits_f32 <- function(u) {
   signed <- ifelse(u >= 2^31, u - 2^32, u)
   raw4 <- writeBin(as.integer(signed), raw(), size = 4, endian = "little")
@@ -4995,6 +5014,7 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_f32(x = x)
 #' res
+#' @keywords internal
 .morie_gr_f32 <- function(x) .morie_gr_bits_f32(.morie_gr_f32_bits(x))
 
 # Round the float32 bit pattern to the BF16 grid. mode is
@@ -5014,6 +5034,7 @@ morie_geron_bert_finetune <- function(bert, X, y, epochs = 100, lr = 0.1,
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gr_bf16_bits(u = x)
 #' res
+#' @keywords internal
 .morie_gr_bf16_bits <- function(u, mode = "nearest_even") {
   if (mode == "nearest_even") {
     lsb <- floor(u / 2^16) %% 2
@@ -5127,6 +5148,7 @@ morie_geron_bf16_range <- function(x) {
 #' @param op Defaults to \code{"leaf"}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_gvar <- function(value, parents = list(), op = "leaf") {
   e <- new.env(parent = emptyenv())
   .morie_gr_tape_counter$id <- .morie_gr_tape_counter$id + 1L
@@ -5152,6 +5174,7 @@ morie_geron_bf16_range <- function(x) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_gvar_wrap(x = x)
 #' res
+#' @keywords internal
 .morie_gvar_wrap <- function(x) if (inherits(x, "morie_gvar")) x else .morie_gvar(x)
 
 #' Arithmetic on reverse-mode tape nodes
@@ -5938,6 +5961,7 @@ morie_geron_bpe_merge <- function(corpus, n_merges) {
 #' @param keep_attn A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .morie_gr_encoder_block <- function(X, W, n_heads, keep_attn = FALSE) {
   Tn <- nrow(X)
   d <- ncol(X)
@@ -5974,6 +5998,7 @@ morie_geron_bpe_merge <- function(corpus, n_merges) {
 #' @return A list with \code{Wq}, \code{Wk}, \code{Wv}, \code{Wo}, \code{W1}, \code{b1},
 #' \code{W2}, \code{b2}.
 #' @export
+#' @keywords internal
 .morie_gr_block_weights <- function(d_model, d_ff, seed) {
   list(
     Wq = .morie_gr_init(d_model, d_model, seed + 1),

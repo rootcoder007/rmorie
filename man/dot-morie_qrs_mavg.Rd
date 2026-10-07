@@ -19,3 +19,4 @@ The value of \code{out}, as built in the body.
 The running sum is accumulated in the same order as the Python arm,
 so the rounding sequence matches term for term.
 }
+\keyword{internal}

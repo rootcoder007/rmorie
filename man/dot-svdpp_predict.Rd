@@ -40,3 +40,4 @@ A list with \code{prediction}, \code{effective_user_factor}, \code{implicit},
 A step of the svdpp_native implementation. Called by \code{.svdpp_sgd_step}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

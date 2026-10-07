@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 res <- .rndnet_running_stats_new(n = 3L)
 res
 }
+\keyword{internal}

@@ -32,6 +32,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .schab_hermite_e(x = x, degree = 3L)
 #' res
+#' @keywords internal
 .schab_hermite_e <- function(x, degree) {
   x <- as.numeric(x)
   degree <- as.integer(degree)
@@ -60,6 +61,7 @@
 #' @examples
 #' res <- .schab_factorial(p = 0.5)
 #' res
+#' @keywords internal
 .schab_factorial <- function(p) {
   if (p < 2) {
     return(1)
@@ -82,6 +84,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .schab_hermite_orthonormal(x = x, degree = 3L)
 #' res
+#' @keywords internal
 .schab_hermite_orthonormal <- function(x, degree) {
   h <- .schab_hermite_e(x, degree)
   scale <- sqrt(vapply(0:degree, .schab_factorial, numeric(1)))
@@ -103,6 +106,7 @@
 #' @examples
 #' res <- .schab_gauss_hermite(n = 3L)
 #' res
+#' @keywords internal
 .schab_gauss_hermite <- function(n) {
   # Golub-Welsch: nodes are the eigenvalues of the symmetric tridiagonal
   # Jacobi matrix (zero diagonal, sqrt(k) off-diagonal for the probabilists'
@@ -135,6 +139,7 @@
 #' @param n_quad Optional; may be \code{NULL}. Passed to \code{.schab_gauss_hermite}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 .schab_hermite_coefficients <- function(g, degree, n_quad = NULL) {
   # b_p = integral g(x) eta_p(x) f(x) dx, eq (5.65), by Gauss-Hermite
   # quadrature -- exact for polynomial g, so the Example 5.12 identities
@@ -157,6 +162,7 @@
 #' @param degree A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @keywords internal
 .schab_indicator_coefficients <- function(z_k, degree) {
   # Exact coefficients of I(Z <= z_k), eq (5.72). Quadrature must NOT be
   # used: it is exact for polynomials and the indicator is a step function,
@@ -190,6 +196,7 @@
 #' @return A list with \code{prediction}, \code{variance}, \code{coefficients},
 #' \code{component_variances}.
 #' @export
+#' @keywords internal
 .schab_disjunctive_kriging <- function(coords, y, target, correlation_fn,
                                        b, degree) {
   # The (5.67)-(5.71) loop, for coefficients already in hand.

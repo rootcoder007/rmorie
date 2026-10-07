@@ -22,3 +22,4 @@ A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_ml
 See the file header for the source the module follows.
 for the source it follows.
 }
+\keyword{internal}

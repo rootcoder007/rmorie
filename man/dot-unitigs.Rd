@@ -22,3 +22,4 @@ every non-simple vertex (in sorted order) and through every simple
 vertex until a branch point; a graph that is one pure cycle
 contributes the cycle itself.
 }
+\keyword{internal}

@@ -25,3 +25,4 @@ y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 res <- .polkrn_wls(X = x, y = y, w = x)
 res
 }
+\keyword{internal}

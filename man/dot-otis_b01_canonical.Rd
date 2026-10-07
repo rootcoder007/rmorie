@@ -22,3 +22,4 @@ stringsAsFactors = FALSE)
 res <- .otis_b01_canonical(df = df)
 res
 }
+\keyword{internal}

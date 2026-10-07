@@ -22,6 +22,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .ot_hist(a = A)
 #' res
+#' @keywords internal
 .ot_hist <- function(a, normalise = FALSE) {
   v <- as.numeric(a)
   if (any(v < 0)) stop("weights must be non-negative")
@@ -49,6 +50,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .ot_costmat(X = x, Y = y)
 #' res
+#' @keywords internal
 .ot_costmat <- function(X, Y, p = 2) {
   A <- as.matrix(X)
   B <- as.matrix(Y)
@@ -72,6 +74,7 @@
 #' @param C Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ot_frob <- function(T, C) sum(T * C)
 
 #' .ot_kl
@@ -83,6 +86,7 @@
 #' @param R A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ot_kl <- function(T, R) {
   pos <- T > 0
   sum(T[pos] * (log(T[pos]) - log(R[pos]))) + sum(R) - sum(T)
@@ -100,6 +104,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ot_lse(v = x)
 #' res
+#' @keywords internal
 .ot_lse <- function(v) {
   mx <- max(v)
   if (!is.finite(mx)) {
@@ -121,6 +126,7 @@
 #' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @return A list with \code{T}, \code{f}, \code{g}.
 #' @export
+#' @keywords internal
 .ot_sinkhorn <- function(a, b, C, eps, n_iter = 200L) {
   n <- length(a)
   m <- length(b)
@@ -164,6 +170,7 @@
 #' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ot_sinkhorn_unbalanced <- function(a, b, C, eps, lam, n_iter = 200L) {
   n <- length(a)
   m <- length(b)
@@ -201,6 +208,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .ot_nwcorner(a = A, b = b)
 #' res
+#' @keywords internal
 .ot_nwcorner <- function(a, b) {
   n <- length(a)
   m <- length(b)
@@ -238,6 +246,7 @@
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{.ot_sortbasis}.
 #' @export
+#' @keywords internal
 .ot_complete_tree <- function(basis, n, m) {
   parent <- seq_len(n + m)
   fnd <- function(x) {
@@ -282,6 +291,7 @@
 #' @param edges A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
+#' @keywords internal
 .ot_sortbasis <- function(edges) {
   if (!length(edges)) {
     return(edges)
@@ -299,6 +309,7 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{adj}, as built in the body.
 #' @export
+#' @keywords internal
 .ot_adj <- function(basis, n) {
   adj <- vector("list", n + max(vapply(basis, function(e) e[2], 0L)))
   for (e in basis) {
@@ -321,6 +332,7 @@
 #' @param m A count; the body uses it as \code{numeric(...)}.
 #' @return A list with \code{u}, \code{v}.
 #' @export
+#' @keywords internal
 .ot_potentials <- function(basis, C, n, m) {
   adj <- .ot_adj(basis, n)
   u <- numeric(n)
@@ -355,6 +367,7 @@
 #' @param sj Numeric; combined arithmetically in the body.
 #' @return Nothing; the function is called for its effect.
 #' @export
+#' @keywords internal
 .ot_tree_path <- function(basis, n, si, sj) {
   adj <- .ot_adj(basis, n)
   goal <- n + sj
@@ -391,6 +404,7 @@
 #' \code{20000L}.
 #' @return A list with \code{T}, \code{cost}.
 #' @export
+#' @keywords internal
 .ot_emd <- function(a, b, C, max_pivots = 20000L) {
   n <- length(a)
   m <- length(b)
@@ -455,6 +469,7 @@
 #' @param m Numeric; combined arithmetically in the body.
 #' @return A list with \code{T}, \code{cost}.
 #' @export
+#' @keywords internal
 .ot_partial_plan <- function(a, b, C, m) {
   n <- length(a)
   k <- length(b)
@@ -483,6 +498,7 @@
 #' @param S A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @keywords internal
 .ot_sqrtm <- function(S) {
   e <- .s03jacobi(as.matrix(S))
   r <- ifelse(e$values > 0, sqrt(e$values), 0)
@@ -500,6 +516,7 @@
 #' @param S2 A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ot_w2gauss <- function(m1, S1, m2, S2) {
   a <- as.numeric(m1)
   b <- as.numeric(m2)
@@ -533,6 +550,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .ot_wp1d(x = x, y = y)
 #' res
+#' @keywords internal
 .ot_wp1d <- function(x, y, p = 2) {
   xs <- sort(as.numeric(x))
   ys <- sort(as.numeric(y))
@@ -551,6 +569,7 @@
 #' @param grid Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .ot_quantiles <- function(x, grid) {
   v <- sort(as.numeric(x))
   vapply(grid, function(q) .s03quantile7(v, q), 0)
@@ -565,6 +584,7 @@
 #' @param n_proj A count; the body uses it as \code{matrix(...)}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .ot_directions <- function(d, n_proj) {
   if (d < 1 || n_proj < 1) stop("directions: d and n_proj must be positive")
   n_proj <- as.integer(n_proj)
@@ -591,4 +611,5 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .ot_project(X = x, theta = x)
 #' res
+#' @keywords internal
 .ot_project <- function(X, theta) as.numeric(as.matrix(X) %*% as.numeric(theta))

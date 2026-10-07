@@ -24,3 +24,4 @@ g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
 res <- .tlbandt_sequential_ci(D = g)
 res
 }
+\keyword{internal}

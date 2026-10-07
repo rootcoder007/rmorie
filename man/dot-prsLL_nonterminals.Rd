@@ -34,3 +34,4 @@ rules <- list(
 g <- .prsLL_grammar(rules, start = "E")
 .prsLL_nonterminals(g)
 }
+\keyword{internal}

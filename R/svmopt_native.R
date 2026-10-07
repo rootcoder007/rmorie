@@ -108,6 +108,7 @@ dual_objective <- function(alpha, y, K) {
 #' @param C Numeric; passed to \code{min}.
 #' @return A list with \code{L}, \code{H}.
 #' @export
+#' @keywords internal
 .svmopt_bounds <- function(i, j, a, y, C) {
   if (y[i] != y[j]) {
     L <- max(0.0, a[j] - a[i])
@@ -318,6 +319,7 @@ smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
 #' @examples
 #' res <- .svmopt_cheatsheet()
 #' res
+#' @keywords internal
 .svmopt_cheatsheet <- function() {
   paste0("svmopt: the SVM DUAL is where the kernel enters and where ",
          "the structure is exploitable -- max sum(a) - 0.5 a'Qa ",

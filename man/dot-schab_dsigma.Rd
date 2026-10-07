@@ -25,3 +25,4 @@ The value of \code{list}.
 the same expression the Gauss-Newton Jacobian uses, so both fitters
 share one derivation.
 }
+\keyword{internal}

@@ -16,3 +16,4 @@ One of two values, depending on the branch taken.
 A step of the wrd2v_native implementation. Called by \code{.wrd2v_neg_step}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

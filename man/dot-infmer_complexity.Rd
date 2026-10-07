@@ -20,3 +20,4 @@ A list with \code{full_attention_flops}, \code{probsparse_flops}, \code{ratio}, 
 A step of the infmer_native implementation. Called by \code{morie_infmer}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

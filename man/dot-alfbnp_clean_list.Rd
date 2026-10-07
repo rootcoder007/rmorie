@@ -18,3 +18,4 @@ and what a caller who stacked their structures would naturally pass.
 lapply over a 3-D array walks the wrong dimension and silently
 produces garbage, so normalise before anything touches it.
 }
+\keyword{internal}

@@ -24,6 +24,7 @@
 #' @param domain A vector; its length is taken.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_tcls_dist <- function(labels, domain) {
   n <- length(labels)
   if (n < 1) stop("morie_tcls: empty group of records")
@@ -50,6 +51,7 @@
 #' @examples
 #' res <- .morie_tcls_equal(p = 0.5, q = 0.5)
 #' res
+#' @keywords internal
 .morie_tcls_equal <- function(p, q) 0.5 * sum(abs(p - q))
 
 #' .morie_tcls_ordered
@@ -64,6 +66,7 @@
 #' @examples
 #' res <- .morie_tcls_ordered(p = 0.5, q = 0.5)
 #' res
+#' @keywords internal
 .morie_tcls_ordered <- function(p, q) {
   m <- length(p)
   if (m < 2) return(0)
@@ -85,6 +88,7 @@
 #' @param children A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .morie_tcls_height <- function(n, children) {
   if (is.null(children[[n]])) return(0L)
   1L + max(vapply(children[[n]],
@@ -102,6 +106,7 @@
 #' @param domain The body requires: is not a domain value.
 #' @return The value of \code{cost}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_tcls_hier <- function(p, q, hierarchy, domain) {
   children <- hierarchy
   named <- names(children)

@@ -15,3 +15,4 @@ A character value.
 \description{
 (k-1)-mer in full, then the last character of each subsequent one.
 }
+\keyword{internal}

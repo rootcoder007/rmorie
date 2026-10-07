@@ -19,3 +19,4 @@ The value of \code{do.call}.
 \description{
 Mirrors clpopt._mat.
 }
+\keyword{internal}

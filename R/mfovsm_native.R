@@ -54,6 +54,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mfovsm_vec(x = x)
 #' res
+#' @keywords internal
 .mfovsm_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.list(x)) {
@@ -74,6 +75,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mfovsm_mat(x = x)
 #' res
+#' @keywords internal
 .mfovsm_mat <- function(x) {
   if (is.null(x)) return(NULL)
   if (is.matrix(x)) return(x)
@@ -92,6 +94,7 @@
 #' @param allow_one A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{list}.
 #' @export
+#' @keywords internal
 .mfovsm_hist <- function(obj, allow_one = FALSE) {
   if (is.null(obj)) {
     if (allow_one) return(list(NULL))
@@ -114,6 +117,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mfovsm_quantile7(x = x, q = 0.5)
 #' res
+#' @keywords internal
 .mfovsm_quantile7 <- function(x, q) {
   x <- sort(as.numeric(x))
   n <- length(x)
@@ -143,6 +147,7 @@
 #' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .mfovsm_logreg_fit(y = y, X = X)
 #' res
+#' @keywords internal
 .mfovsm_logreg_fit <- function(y, X, max_iter = 25, tol = 1e-8) {
   n <- length(y)
   p <- ncol(X)
@@ -184,6 +189,7 @@
 #' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{weights}, \code{fitted}.
 #' @export
+#' @keywords internal
 .mfovsm_ip_weights <- function(ak, den, num, kind = "binary", stabilize = TRUE) {
   n <- length(ak)
   if (!kind %in% c("binary", "normal")) {
@@ -267,6 +273,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .mfovsm_wls(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .mfovsm_wls <- function(X, y, w) {
   X <- cbind(1, X)
   n <- length(y)

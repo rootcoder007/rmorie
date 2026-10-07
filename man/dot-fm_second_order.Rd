@@ -19,3 +19,4 @@ A numeric value.
 for the pairwise term, exactly equal to the naive double sum over
 i<j.
 }
+\keyword{internal}

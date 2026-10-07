@@ -46,3 +46,4 @@ A step of the timeRS_native implementation. Called by \code{morie_timeRS},
 module.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -115,6 +115,7 @@ morie_drift_forecast <- function(y, h = 1) {
 #' @param series A vector; its length is taken and its elements indexed.
 #' @return A list with \code{fitted}, \code{level}.
 #' @export
+#' @keywords internal
 .morie_ses_run <- function(a, series) {
   lev <- series[1L]
   fit <- numeric(length(series))
@@ -199,6 +200,7 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
 #' \code{fitted}, \code{residuals}, \code{sse}, \code{alpha}, \code{beta}, \code{gamma},
 #' \code{period}, \code{horizon}.
 #' @export
+#' @keywords internal
 .morie_holt_winters <- function(y, period, alpha, beta, gamma, horizon,
                                 mult) {
   y <- as.numeric(y)

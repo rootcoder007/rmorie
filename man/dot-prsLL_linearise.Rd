@@ -23,3 +23,4 @@ tree <- .prsLL_node("A", list(
 ))
 .prsLL_linearise(tree)
 }
+\keyword{internal}

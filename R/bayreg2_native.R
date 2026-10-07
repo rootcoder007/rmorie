@@ -111,6 +111,7 @@ morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
 #' @examples
 #' res <- .bayreg2_cheatsheet()
 #' res
+#' @keywords internal
 .bayreg2_cheatsheet <- function() {
   paste0("bayreg2: morie_bayreg2_student_t_regression(X, y, nu) -> robust ",
          "regression by EM on the Student-t scale mixture (West 1984)")

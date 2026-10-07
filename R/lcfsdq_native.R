@@ -68,6 +68,7 @@
 #' @param metric One of \code{"chebyshev"}, \code{"euclidean"}, \code{"manhattan"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .lcfsdq_d <- function(a, b, metric) {
   if (metric == "euclidean") return(sqrt(.w3_csum((a - b) * (a - b))))
   if (metric == "manhattan") return(.w3_csum(abs(a - b)))
@@ -118,6 +119,7 @@ morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
 #' @param coords A matrix; indexed by row and column.
 #' @return A list with \code{area}, \code{perimeter}, \code{bb}.
 #' @export
+#' @keywords internal
 .lcfsdq_window <- function(coords) {
   xs <- coords[, 1]
   ys <- coords[, 2]

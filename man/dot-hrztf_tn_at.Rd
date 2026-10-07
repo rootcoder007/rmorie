@@ -25,3 +25,4 @@ an arbitrarily large negative number if y < y2 and an arbitrarily
 large positive number if y > y1".  Inside [y2, y1] the grid values
 are interpolated.
 }
+\keyword{internal}

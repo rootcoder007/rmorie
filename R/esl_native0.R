@@ -28,6 +28,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .esl_K(u = x)
 #' res
+#' @keywords internal
 .esl_K <- function(u) exp(-0.5 * u^2) / sqrt(2 * pi)
 
 # (7.55): Pr{i in bootstrap sample b} = 1 - (1 - 1/n)^n -> 1 - e^-1.
@@ -44,6 +45,7 @@
 #' @examples
 #' res <- .esl_inclusion(n = 3L)
 #' res
+#' @keywords internal
 .esl_inclusion <- function(n) {
   n <- as.integer(n)
   if (is.na(n) || n < 1L) {
@@ -69,6 +71,7 @@
 #' to \code{"regression"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .esl_mtry <- function(p, task = "regression") {
   p <- as.integer(p)
   if (is.na(p) || p < 1L) stop("need at least one predictor.", call. = FALSE)
@@ -92,6 +95,7 @@
 #' @param min_node Passed to \code{<=}.
 #' @return A logical value.
 #' @export
+#' @keywords internal
 .esl_stop <- function(y, depth, max_depth, min_node) {
   depth >= max_depth || length(y) <= min_node || stats::var(y) < 1e-12
 }
@@ -114,6 +118,7 @@
 #' @param min_node Passed to \code{.esl_stop}.
 #' @return A list with \code{leaf}, \code{feature}, \code{threshold}, \code{left}, \code{right}.
 #' @export
+#' @keywords internal
 .esl_grow <- function(X, y, mtry, depth, max_depth, min_node) {
   if (.esl_stop(y, depth, max_depth, min_node)) {
     return(list(leaf = TRUE, value = mean(y)))
@@ -167,6 +172,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .esl_var_p(y = y)
 #' res
+#' @keywords internal
 .esl_var_p <- function(y) {
   n <- length(y)
   if (n < 1L) {
@@ -184,6 +190,7 @@
 #' @param X A matrix; indexed by row and column.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .esl_predict_tree <- function(node, X) {
   vapply(seq_len(nrow(X)), function(i) {
     nd <- node
@@ -210,6 +217,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .esl_matrix(X = x, y = y)
 #' res
+#' @keywords internal
 .esl_matrix <- function(X, y, what = "X") {
   A <- as.matrix(X)
   storage.mode(A) <- "double"

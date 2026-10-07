@@ -25,3 +25,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .morie_rg_evenodd(x = b)
 res
 }
+\keyword{internal}

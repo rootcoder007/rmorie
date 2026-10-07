@@ -23,3 +23,4 @@ The value of \code{ifelse}.
 \description{
 unit-clustered variance.
 }
+\keyword{internal}

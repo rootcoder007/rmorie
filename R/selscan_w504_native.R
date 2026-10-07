@@ -18,6 +18,7 @@
 #' @param min_ehh Passed to \code{<}.
 #' @return A list with \code{area}, \code{truncated}.
 #' @export
+#' @keywords internal
 .morie_ihh_side <- function(pos, ehh, core, side, min_ehh) {
   # Voight et al. 2006, Materials and Methods "Calculation of iHS":
   # trapezoid area outward from the core, INCLUDING the segment that
@@ -183,6 +184,7 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
 #' @param T_ Numeric; combined arithmetically in the body.
 #' @return The value of \code{rbind}.
 #' @export
+#' @keywords internal
 .morie_p_ibs_ibd <- function(X, Y, T_) {
   # PLINK Table 1 with finite-sample corrections (Purcell 2007 p 566)
   X <- as.numeric(X)

@@ -27,6 +27,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_spx_dot(a = A, b = b)
 #' res
+#' @keywords internal
 .morie_spx_dot <- function(a, b) .morie_fsum(a * b)
 
 #' .morie_spx_matvec
@@ -44,6 +45,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_spx_matvec(A = A, b = b)
 #' res
+#' @keywords internal
 .morie_spx_matvec <- function(A, b) {
   vapply(seq_len(nrow(A)), function(i) .morie_fsum(A[i, ] * b), numeric(1))
 }
@@ -58,6 +60,7 @@
 #' @param B A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_spx_matmul <- function(A, B) {
   out <- matrix(0, nrow(A), ncol(B))
   for (i in seq_len(nrow(A))) {
@@ -80,6 +83,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .morie_spx_trace(A = A)
 #' res
+#' @keywords internal
 .morie_spx_trace <- function(A) .morie_fsum(diag(A))
 
 #' Gauss-Jordan with partial pivoting; raises rather than returning
@@ -95,6 +99,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_spx_solve(A = A, b = b)
 #' res
+#' @keywords internal
 .morie_spx_solve <- function(A, b) {
   # Gauss-Jordan with partial pivoting; raises rather than returning
   # garbage on a singular system.
@@ -135,6 +140,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- .morie_spx_logabsdet(A = A)
 #' res
+#' @keywords internal
 .morie_spx_logabsdet <- function(A) {
   # (sign, log|det|) by LU with partial pivoting.
   n <- nrow(A)
@@ -183,6 +189,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_spx_lstsq(A = A, y = b)
 #' res
+#' @keywords internal
 .morie_spx_lstsq <- function(A, y, ridge = 0) {
   G <- .morie_spx_matmul(t(A), A)
   if (ridge) diag(G) <- diag(G) + ridge
@@ -201,6 +208,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_spx_fixsign(v = x)
 #' res
+#' @keywords internal
 .morie_spx_fixsign <- function(v) {
   j <- which.max(abs(v))
   if (v[j] < 0) -v else v
@@ -217,6 +225,7 @@
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{400L}.
 #' @return A list with \code{values}, \code{vectors}.
 #' @export
+#' @keywords internal
 .morie_spx_topeigs <- function(A, k, iters = 400L) {
   # Top-k eigenpairs of a SYMMETRIC matrix by power iteration + deflation.
   # The start vector is fixed and slightly non-uniform: an all-ones start
@@ -257,6 +266,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_spx_dft(x = x)
 #' res
+#' @keywords internal
 .morie_spx_dft <- function(x) {
   # X_k = sum_u x_u exp(-i w_k u), u and k running from 0.
   n <- length(x)
@@ -279,6 +289,7 @@
 #' @param im Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @keywords internal
 .morie_spx_idftre <- function(re, im) {
   n <- length(re)
   idx <- seq_len(n) - 1L
@@ -300,6 +311,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_spx_median(v = x)
 #' res
+#' @keywords internal
 .morie_spx_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -323,6 +335,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .morie_spx_dist(a = A, b = b)
 #' res
+#' @keywords internal
 .morie_spx_dist <- function(a, b) sqrt(.morie_fsum((a - b)^2))
 
 #' .morie_spx_p2
@@ -338,6 +351,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_spx_p2(z = y)
 #' res
+#' @keywords internal
 .morie_spx_p2 <- function(z) 2 * pnorm(abs(z), lower.tail = FALSE)
 
 #' .morie_spx_chkw
@@ -351,6 +365,7 @@
 #' @param zero_diag A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{W}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_spx_chkw <- function(w, n, zero_diag = TRUE) {
   W <- as.matrix(w)
   if (nrow(W) != ncol(W)) stop("`w` must be square")
@@ -378,6 +393,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .morie_spx_chkv(x = x)
 #' res
+#' @keywords internal
 .morie_spx_chkv <- function(x, name = "x") {
   v <- as.numeric(x)
   if (!length(v)) stop(sprintf("`%s` must contain at least one value", name))
@@ -1117,6 +1133,7 @@ SpecRad <- function(g, iters = 400L) {
 #' @param rho Numeric; combined arithmetically in the body.
 #' @return A list with \code{v}, \code{b}, \code{s2}.
 #' @export
+#' @keywords internal
 .morie_spx_sarneg2 <- function(y, X, W, rho) {
   n <- length(y)
   A <- diag(n) - rho * W

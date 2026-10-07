@@ -27,3 +27,4 @@ A step of the ecfp4_native implementation. Called by \code{morie_ecfp4},
 \code{morie_ecfp6}, \code{morie_fcfp4}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

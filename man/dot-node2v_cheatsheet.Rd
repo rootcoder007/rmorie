@@ -17,3 +17,4 @@ See the file header for the source the module follows.
 res <- .node2v_cheatsheet()
 res
 }
+\keyword{internal}

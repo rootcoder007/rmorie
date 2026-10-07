@@ -20,3 +20,4 @@ See the file header for the source the module follows.
 res <- .prgrl_rng(seed = 1L)
 res
 }
+\keyword{internal}

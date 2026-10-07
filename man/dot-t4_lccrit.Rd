@@ -17,3 +17,4 @@ A step of the nybhsn implementation. Called by \code{Lctest}.
 See the file header for the source the module follows.
 it follows.
 }
+\keyword{internal}

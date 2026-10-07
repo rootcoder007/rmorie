@@ -25,3 +25,4 @@ A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree},
 \code{trclrn_rule_value}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

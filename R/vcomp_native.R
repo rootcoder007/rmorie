@@ -16,6 +16,7 @@
 #' @param d2 Numeric; combined arithmetically in the body.
 #' @return The value of \code{pbeta}.
 #' @export
+#' @keywords internal
 .vcomp_f_cdf <- function(x, d1, d2) {
   # F CDF via the regularized incomplete beta:
   # P(F <= x) = I_{d1 x / (d1 x + d2)}(d1/2, d2/2)
@@ -34,6 +35,7 @@
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .vcomp_f_ppf <- function(p, d1, d2, iters = 300) {
   ## R's qf is the reference (the bisection lost digits near p = 1)
   if (p <= 0.0) return(0.0)
@@ -115,6 +117,7 @@ variance_components <- morie_vcomp
 #' @examples
 #' res <- .vcomp_cheatsheet()
 #' res
+#' @keywords internal
 .vcomp_cheatsheet <- function() {
   return("vcomp: ANOVA or REML variance components + exact ICC F interval on balanced data (Searle Sec. 3.5)")
 }

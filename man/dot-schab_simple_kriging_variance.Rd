@@ -17,3 +17,4 @@ A numeric value.
 \description{
 identity that closes Sec. 7.2.2.
 }
+\keyword{internal}

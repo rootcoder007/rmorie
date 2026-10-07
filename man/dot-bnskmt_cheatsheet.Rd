@@ -17,3 +17,4 @@ See the file header for the source the module follows.
 res <- .bnskmt_cheatsheet()
 res
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ A numeric value.
 A step of the blinkg_native implementation. Called by \code{morie_blinkg_select}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

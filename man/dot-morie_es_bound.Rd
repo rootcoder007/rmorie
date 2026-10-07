@@ -20,3 +20,4 @@ A step of the ramsey_theory_native implementation. Called by
 See the file header for the source the module follows.
 for the source it follows.
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ A step of the grclus_native implementation. Called by \code{.grclus_grow_partiti
 \code{.grclus_match_vertices}, \code{.grclus_shuffled}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

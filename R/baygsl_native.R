@@ -35,6 +35,7 @@
 #' @param e Passed to \code{.ghc_unif}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .baygsl_expo <- function(e) {
   u <- .ghc_unif(e, 1L)
   while (u <= 0) u <- .ghc_unif(e, 1L)
@@ -59,6 +60,7 @@
 #' @param upper Passed to \code{<}. Defaults to \code{.baygsl_POS_INF}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .baygsl_slice_1d <- function(logf, x0, e, w = 1.0, max_steps = 50L,
                              lower = .baygsl_NEG_INF,
                              upper = .baygsl_POS_INF) {

@@ -33,6 +33,7 @@
 #' @param xv A vector; indexed elementwise.
 #' @return The value of \code{g}, as built in the body.
 #' @export
+#' @keywords internal
 .morie_hrz_gradient <- function(fv, xv) {
   n <- length(fv)
   g <- numeric(n)
@@ -64,6 +65,7 @@
 #' @param h Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .morie_hrz_nw <- function(x, y, grid, h) {
   w <- exp(-0.5 * (outer(grid, x, "-") / h)^2)
   den <- rowSums(w)

@@ -20,3 +20,4 @@ The value of \code{counts}, as built in the body.
 morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at
 that depth, so the caller indexes by depth directly.
 }
+\keyword{internal}

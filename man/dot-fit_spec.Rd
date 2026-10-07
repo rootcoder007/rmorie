@@ -23,3 +23,4 @@ A list with \code{theta}, \code{x0}, \code{resid}, \code{fitted},
 A step of the bats_native implementation. Called by \code{morie_bats}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -143,6 +143,7 @@ sasimi_counts <- function(fp_a, fp_b) {
 #' @param n A list; the body reads \code{$a}, \code{$b} from it.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .sasimi_guard <- function(n) {
   if (n$a == 0L && n$b == 0L) {
     stop("sasimi: both fingerprints are empty, so no similarity is defined")
@@ -254,6 +255,7 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 #' @param name One of \code{"cosine"}, \code{"dice"}, \code{"tanimoto"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 .sasimi_coef <- function(name) {
   if (name == "tanimoto") return(sasimi_tanimoto)
   if (name == "dice") return(sasimi_dice)

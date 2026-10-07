@@ -20,3 +20,4 @@ space the statistic is a mixture of a degenerate distribution at zero
 and a chi-square, so "simply divide the p-value ... by 2" (Self and
 Liang, 1987; Littell, Milliken, Stroup and Wolfinger, 1996).
 }
+\keyword{internal}

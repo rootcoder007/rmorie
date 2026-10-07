@@ -18,3 +18,4 @@ The value of \code{as.integer}.
 A step of the toptor_native implementation. Called by \code{topological_torsions}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

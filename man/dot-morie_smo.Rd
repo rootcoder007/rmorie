@@ -48,3 +48,4 @@ b <- c(1.5, 2.5, 3.5)
 res <- .morie_smo(K = A, y = b)
 res
 }
+\keyword{internal}

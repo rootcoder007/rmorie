@@ -21,3 +21,4 @@ A vector, from \code{c}.
 \description{
 Returns L11^2, lambda_i and sigma^2_i.
 }
+\keyword{internal}

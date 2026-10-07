@@ -314,6 +314,7 @@ integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
 #' @examples
 #' res <- .inlasm_cheatsheet()
 #' res
+#' @keywords internal
 .inlasm_cheatsheet <- function() {
   paste0(
     "inlasm: latent GAUSSIAN field x, a FEW hyperparameters theta",

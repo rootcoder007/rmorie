@@ -26,3 +26,4 @@ set that can produce different partitions, and putting a cut exactly
 on a data point is where the two arms' comparisons could part
 company.
 }
+\keyword{internal}

@@ -22,6 +22,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mor_hits_unit(v = x)
 #' res
+#' @keywords internal
 .mor_hits_unit <- function(v) {
   s <- sqrt(sum(v * v))
   if (s == 0) v else v / s

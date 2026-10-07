@@ -20,3 +20,4 @@ A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables},
 \code{morie_canonical_collection}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

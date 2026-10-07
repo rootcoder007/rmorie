@@ -41,6 +41,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mehtad_mat(X = x)
 #' res
+#' @keywords internal
 .mehtad_mat <- function(X) {
   if (is.matrix(X)) X
   else do.call(rbind, lapply(X, function(r) as.numeric(unlist(r))))
@@ -58,6 +59,7 @@
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- .mehtad_vec(v = x)
 #' res
+#' @keywords internal
 .mehtad_vec <- function(v) as.numeric(unlist(v))
 
 #' .mehtad_cholsolve
@@ -74,6 +76,7 @@
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .mehtad_cholsolve(M = A, rhs = b)
 #' res
+#' @keywords internal
 .mehtad_cholsolve <- function(M, rhs) {
   L <- chol(M)
   as.numeric(solve(t(L), solve(L, rhs)))
@@ -185,6 +188,7 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #' b <- c(1.5, 2.5, 3.5)
 #' res <- .mehtad_solve_normal(A = A, d = 3L, rhs = b)
 #' res
+#' @keywords internal
 .mehtad_solve_normal <- function(A, d, rhs, ridge = 1e-11) {
   M <- as.matrix(A)
   storage.mode(M) <- "double"
@@ -322,6 +326,7 @@ mehrotras_predictor <- solve_lp
 #' @examples
 #' res <- .mehtad_cheatsheet()
 #' res
+#' @keywords internal
 .mehtad_cheatsheet <- function() {
   paste("mehtad: the expensive part of an interior-point iteration ",
         "is ONE factorisation of A D A'; a second right-hand side ",

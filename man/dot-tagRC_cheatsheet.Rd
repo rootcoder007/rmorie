@@ -17,3 +17,4 @@ See the file header for the source the module follows.
 res <- .tagRC_cheatsheet()
 res
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ A vector, from \code{vapply}.
 A step of the pelt_native implementation. Called by \code{morie_binseg}, \code{morie_pelt}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

@@ -27,6 +27,7 @@
 #' @param r Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rob_mad <- function(r) {
   1.482602218505602 * stats::median(abs(r - stats::median(r)))
 }
@@ -40,6 +41,7 @@
 #' @param cc Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 .rob_tukey_rho <- function(u, cc) {
   v <- pmin(pmax(u / cc, -1), 1)
   1 - (1 - v^2)^3
@@ -57,6 +59,7 @@
 #' @param cc Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .rob_tukey_w <- function(u, cc) {
   v <- u / cc
   ifelse(abs(v) < 1, (1 - v^2)^2, 0)
@@ -75,6 +78,7 @@
 #' @param b Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @keywords internal
 .rob_s_scale <- function(r, cc = .rob_tukey_c_bdp, b = 0.5) {
   s <- .rob_mad(r)
   if (s <= 0) s <- mean(abs(r))
@@ -104,6 +108,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .rob_design(X = x, y = y)
 #' res
+#' @keywords internal
 .rob_design <- function(X, y) {
   yv <- as.numeric(y)
   A <- as.matrix(X)
@@ -133,6 +138,7 @@
 #' @param seed Passed to \code{set.seed}.
 #' @return A list with \code{beta}, \code{scale}.
 #' @export
+#' @keywords internal
 .rob_s_reg <- function(X, y, n_subsets, seed) {
   n <- nrow(X)
   p <- ncol(X)
@@ -192,6 +198,7 @@
 #' @param cc Passed to \code{.rob_tukey_w}.
 #' @return A list with \code{beta}, \code{converged}.
 #' @export
+#' @keywords internal
 .rob_irls_fixed_scale <- function(X, y, beta, scale, cc) {
   conv <- FALSE
   for (i in seq_len(100L)) {

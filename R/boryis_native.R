@@ -31,6 +31,7 @@
 #' @param T Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 .mor_bjs_check <- function(obs, n, T) {
   if (sum(obs) < n + T - 1L)
     stop(sprintf(paste("only %d untreated cells for %d unit and period",
@@ -62,6 +63,7 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-13}.
 #' @return A list with \code{a}, \code{lam}, \code{b}.
 #' @export
+#' @keywords internal
 .mor_bjs_solve <- function(obs, u_a, u_l, u_b, Xc, max_iter = 2000L,
                            tol = 1e-13) {
   n <- nrow(obs)
@@ -159,6 +161,7 @@ morie_impute_untreated <- function(Y, treated, X = NULL, max_iter = 2000L,
 #' @param tol Passed to \code{.mor_bjs_solve}. Defaults to \code{1e-13}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @keywords internal
 .mor_bjs_weights <- function(W, treated, Xc, max_iter = 2000L, tol = 1e-13) {
   obs <- !treated
   n <- nrow(W)

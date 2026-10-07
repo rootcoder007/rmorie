@@ -22,3 +22,4 @@ See the file header for the source the module follows.
 res <- .groebn_fr_eq(p = 0.5, q = 0.5)
 res
 }
+\keyword{internal}

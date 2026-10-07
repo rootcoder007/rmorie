@@ -23,3 +23,4 @@ A step of the helpers_gp_core implementation. Called by \code{.gpmnloglik}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

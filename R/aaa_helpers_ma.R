@@ -21,6 +21,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .ma_wls(X = x, y = y, w = x)
 #' res
+#' @keywords internal
 .ma_wls <- function(X, y, w) {
   X <- as.matrix(X)
   p <- ncol(X)
@@ -46,6 +47,7 @@
 #' @param design A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{X}, \code{treats}, \code{T}.
 #' @export
+#' @keywords internal
 .ma_net_design <- function(design) {
   D <- as.matrix(design)
   if (ncol(D) != 2L) {

@@ -20,3 +20,4 @@ A numeric value.
 \description{
 Fotheringham et al. (2002) p. 61 eq (2.33) / p. 96 eq (4.21).
 }
+\keyword{internal}

@@ -20,3 +20,4 @@ A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int},
 See the file header for the source the module follows.
 the source it follows.
 }
+\keyword{internal}

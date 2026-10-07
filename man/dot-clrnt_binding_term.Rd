@@ -16,3 +16,4 @@ A numeric value.
 A step of the clrnt_native implementation. Called by \code{fu_hepatocytes}, \code{fu_microsomes}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

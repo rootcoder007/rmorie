@@ -22,3 +22,4 @@ of the shortest half, found as the smallest of y_\{h:n\} - y_\{1:n\},
 univariate MCD and MVE subsets.  Returns list(start, width, sorted)
 with a 1-based start.
 }
+\keyword{internal}

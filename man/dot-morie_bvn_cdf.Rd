@@ -19,3 +19,4 @@ The value of \code{$}.
 \description{
 conditional normal -- avoids a mvtnorm dependency.
 }
+\keyword{internal}

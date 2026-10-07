@@ -18,3 +18,4 @@ The value of \code{A}, as built in the body.
 A step of the panelspatial implementation. Called by \code{morie_jacquez_knn}.
 See the file header for the source the module follows.
 }
+\keyword{internal}

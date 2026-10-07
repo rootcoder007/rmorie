@@ -23,3 +23,4 @@ it follows.
 res <- .t4_ppcrit(n = 3L)
 res
 }
+\keyword{internal}

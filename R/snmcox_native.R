@@ -75,6 +75,7 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #' @return A list, whose contents depend on the branch taken; across the branches its
 #' names are \code{e}, \code{b}, \code{kind}.
 #' @export
+#' @keywords internal
 .snmcox_treat_model <- function(A, L, ridge = 1e-8) {
   n <- length(A)
   Z <- if (is.null(L)) matrix(1.0, n, 1L) else cbind(1.0, as.matrix(L))
@@ -106,6 +107,7 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .snmcox_logit_irls(X = X, y = y)
 #' res
+#' @keywords internal
 .snmcox_logit_irls <- function(X, y, iters = 60L, ridge = 1e-8, tol = 1e-13) {
   p <- ncol(X)
   beta <- numeric(p)
