@@ -35,7 +35,7 @@ in the package-level help (`?rmorie`).
   <https://rootcoder007.github.io/rmorie/>
 - **r-universe project page**: <https://rootcoder007.r-universe.dev/rmorie>
 - **Website**: <https://rmorie.com> — the MORIE family (rmorie, morie, rmoriebricklayer, rmoriedata) in one place.
-- **Hosted LLM tier**: <https://llm.rmorie.com> — the fallback model behind `morie_llm_ask()` when there is no local Ollama. Sign in with `morie_llm_login()` (GitHub) or `morie_llm_login(email = "you@example.com")`, or from the shell after `install_cli()`: `rmorie login`. The tier serves ollama.com cloud models and additional AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf); when a cloud model is rate limited or down the gateway answers from one of the additional models, so `morie_llm_models()` is the list to trust.
+- **Hosted LLM tier**: <https://llm.rmorie.com> — the last resort behind `morie_llm_ask()`, after a local Ollama and every key of your own. Keys are issued on request at <https://rmorie.com/access> and stored with `morie_llm_login(token = "...")` (or `rmorie login --token` from the shell after `install_cli()`); the GitHub and emailed-code sign-ins, `morie_llm_login()` and `morie_llm_login(email = "you@example.com")`, still work for accounts that have them. The endpoints and the model list come from a signed services document the package verifies before use (`rmoriebricklayer::bricklayer_services()`), so they can change without a release. The tier serves ollama.com cloud models and additional AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf); when a cloud model is rate limited or down the gateway answers from one of the additional models, so `morie_llm_models()` is the list to trust.
 
 > With over 13,000 exported functions, the full reference is large — use the
 > manual or the package site above rather than scrolling the function
@@ -169,10 +169,11 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
 - **Native causal-inference engines**: matching, double machine learning,
   causal forests, meta-learners, design-based GLM and the `morie_dag*`
   toolkit, cross-validated against MatchIt, DoubleML, grf and dagitty.
-- **Ask a model**: a local Ollama first, then the hosted tier at
-  <https://llm.rmorie.com> (one key from a GitHub sign-in or an emailed code),
-  then Gemini, your own OpenAI-compatible endpoint or OpenAI; a keyword
-  fallback needs no network. See *Ask a model and sign in* below.
+- **Ask a model**: a local Ollama first, then Gemini, your own
+  OpenAI-compatible endpoint or OpenAI, then the hosted tier at
+  <https://llm.rmorie.com> as a last resort (a key requested at
+  <https://rmorie.com/access>); a keyword fallback needs no network. See
+  *Ask a model and sign in* below.
 - **The full command line in R**: `install_cli()` puts `rmorie` on your PATH,
   with every verb of the Python command line: `login`, `doctor`, `models`,
   `ask`, `analyze`, `list-modules`, `run-module`, `list-datasets`, `pull`,
@@ -180,7 +181,9 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
   `verify-pollution`, `crypto`, `ingest`. It runs under R 4.6.
 - **Data**: the curated tables at <https://data.rmorie.com> (161 databases and
   203 tables on 2026-10-05, the Health Infobase tables and the OTIS research
-  environments) open with the same key; built-in datasets come through
+  environments) open with the same key, issued on request at
+  <https://rmorie.com/access> under <https://rmorie.com/data-license>;
+  built-in datasets come through
   `rmoriedata` (r-universe), fetched with provenance by `rmoriebricklayer`
   (r-universe); module runs fall back to
   rmoriedata's synthetic CPADS PUMF.
@@ -237,10 +240,11 @@ install.packages(
 )
 ```
 
-The assistant (`morie_llm_ask()`) tries a local Ollama, then the hosted
-MORIE tier at <https://llm.rmorie.com> once you have signed in with
-`morie_llm_login()`, then any Gemini or OpenAI-compatible key in the
-environment, and finally a keyword fallback that needs no network.
+The assistant (`morie_llm_ask()`) tries a local Ollama, then any Gemini or
+OpenAI-compatible key in the environment, then the hosted MORIE tier at
+<https://llm.rmorie.com> as a last resort (once a key from
+<https://rmorie.com/access> is stored with `morie_llm_login()`), and finally
+a keyword fallback that needs no network.
 
 ### Optional packages (the R equivalent of `pip install pkg[extra]`)
 
@@ -272,16 +276,17 @@ Common families: ML (`randomForest`, `glmnet`, `xgboost`/`gbm`,
 
 ## Ask a model and sign in
 
-`morie_llm_ask()` tries a local [Ollama](https://ollama.com) first, then the
-hosted MORIE tier, then Gemini (`GEMINI_API_KEY`) or your own endpoint. One
-key covers the hosted models and the curated tables at data.rmorie.com, and
-the Python package `morie` reads the same key.
+`morie_llm_ask()` tries a local [Ollama](https://ollama.com) first, then
+Gemini (`GEMINI_API_KEY`) or your own endpoint, then the hosted MORIE tier as
+a last resort. Its key is issued on request at <https://rmorie.com/access>;
+one key covers the hosted models and the curated tables at data.rmorie.com,
+and the Python package `morie` reads the same key.
 
 ```r
-morie_llm_login()                                  # with a GitHub account
-morie_llm_login(email = "you@example.com")         # no GitHub account: a code is emailed to you
+morie_llm_login(token = "sk-...")                  # the key issued at rmorie.com/access
+morie_llm_login()                                  # GitHub sign-in, for accounts that have one
+morie_llm_login(email = "you@example.com")         # an emailed code instead
 morie_llm_login(email = "you@example.com", code = "123456")   # the same, code passed
-morie_llm_login(token = "sk-...")                  # a key you already have
 morie_llm_hosted_models()                          # the hosted models on your key
 morie_llm_ask("Which design fits a pre/post comparison with a control group?")
 morie_llm_ask("Explain an E-value of 2.1", model = "gpt-oss-120b:cf")
@@ -294,10 +299,10 @@ morie_llm_logout()
 From the shell, after `install_cli()`:
 
 ```sh
-rmorie login                                  # GitHub
-rmorie login --email you@example.com          # no GitHub account: type the emailed code at the prompt
+rmorie login --token                          # paste the key issued at rmorie.com/access
+rmorie login                                  # GitHub sign-in, for accounts that have one
+rmorie login --email you@example.com          # an emailed code instead: type it at the prompt
 rmorie login --no-browser                     # server / SSH: prints a link + code to open on any device
-rmorie login --token                          # paste a key you already have
 rmorie models
 rmorie ask --model gpt-oss-120b:cf "What does the power-design module compute?"
 rmorie doctor                                 # which providers answer from this machine
@@ -430,14 +435,14 @@ morie_siu_compare(
 # Default: local Ollama with gemma3:4b. No API key required.
 morie_siu_llm_extract("17-OVI-201")
 
-# Failover chain: local first, then the hosted MORIE tier (after `rmorie login`, GitHub or --email), then Gemini.
+# An explicit chain: local first, then the hosted MORIE tier (a key from rmorie.com/access stored with `rmorie login --token`), then Gemini.
 morie_siu_llm_extract("17-OVI-201", model = c("ollama", "hosted", "gemini"))
 
 # French to English translation of the cached reports (field by field, via the local model).
 morie_siu_translate(target_lang = "en", case_numbers = "26-OCI-168")
 ```
 
-Supported providers: `ollama` (default), `hosted` (llm.rmorie.com), `gemini`, `claude`, `vertex`,
+Supported providers: `ollama` (default), `hosted` (llm.rmorie.com, the last resort, key on request), `gemini`, `claude`, `vertex`,
 `openai`, `openai_compatible`. Environment knobs: `OLLAMA_HOST` (defaults to `http://localhost:11434`),
 `OLLAMA_MODEL` (defaults to `gemma3:4b`), `OLLAMA_KEEP_ALIVE` (`30m`), `GEMINI_API_KEY`.
 
