@@ -51,7 +51,7 @@ case("list-datasets", function() {
   if (nzchar(key)) check(grepl("data.rmorie.com", r$text), "hosted rows missing although a key is set")
 })
 case("cheatsheet", function() { r <- run("cheatsheet"); check(r$status == 0 && grepl("provider set", r$text), r$text) })
-case("explain", function() { r <- run("explain", "power_two_proportion_gender.csv"); check(r$status == 0 && grepl("effect_size", r$text), r$text) })
+case("explain", function() { r <- run("explain", "power_two_proportion_gender.csv"); check(r$status == 0 && grepl("effect size", r$text, fixed = TRUE) && grepl("Cohen's h", r$text, fixed = TRUE), r$text) })
 case("doctor", function() { r <- run("doctor"); check(r$status == 0 && nzchar(r$text), r$text) })
 case("models", function() {
   r <- run("models"); check(r$status == 0, r$text)
@@ -97,7 +97,9 @@ mkcsv <- function() {
 case("profile-dataset", function() { p <- mkcsv(); r <- run("profile-dataset", p, "--treatment", "treated", "--outcome", "y", "--suggest"); check(r$status == 0 && grepl("Suggested", r$text), r$text) })
 case("sample", function() {
   p <- mkcsv(); r <- run("sample", p, "--n", "7", "--output", "s.csv"); check(r$status == 0 && nrow(utils::read.csv("s.csv")) == 7, r$text)
-  r <- run("sample", p, "--n", "3", "--method", "stratified", "--strata-col", "g", "--output", "st.csv"); check(nrow(utils::read.csv("st.csv")) == 6, r$text)
+  # 1.4.0: --n is the total across strata; --per-stratum keeps n in each
+  r <- run("sample", p, "--n", "3", "--method", "stratified", "--strata-col", "g", "--output", "st.csv"); check(r$status == 0 && nrow(utils::read.csv("st.csv")) == 3, r$text)
+  r <- run("sample", p, "--n", "3", "--method", "stratified", "--strata-col", "g", "--per-stratum", "--output", "st2.csv"); check(r$status == 0 && nrow(utils::read.csv("st2.csv")) == 6, r$text)
 })
 case("run-module", function() {
   r <- run("run-module", "power-design", "--output-dir", "out0")
@@ -127,7 +129,7 @@ case("emissions", function() {
   check(isTRUE(get("morie_emissions_verify")("em")$ok), "capsule does not verify")
 })
 case("verify-pollution", function() {
-  r <- run("verify-pollution", "--pollutant", "no2", "--demo"); check(r$status == 0 && grepl("STATUS: ok", r$text) && grepl("source:   Atkinson", r$text), r$text)
+  r <- run("verify-pollution", "--pollutant", "no2", "--demo"); check(r$status == 0 && grepl("STATUS: ok", r$text) && grepl("source:   Huangfu & Atkinson (2020)", r$text, fixed = TRUE), r$text)
   r <- run("verify-pollution", "--pollutant", "pm25", "--exposure-mean", "2", "--exposure-prevalence", "0.5"); check(r$status == 1 && grepl("assumption_failure", r$text), r$text)
 })
 case("crypto", function() {
@@ -208,7 +210,7 @@ case("ask-fallback-honest", function() {
 })
 case("selftest", function() { r <- run("selftest"); check(r$status == 0 && grepl("All tests passed", r$text), r$text) })
 case("update", function() { r <- run("update"); check(r$status %in% c(0L, 1L), r$text) })
-case("analyze", function() { r <- run("analyze"); check(r$status == 1 && grepl("usage", r$text), r$text) })
+case("analyze", function() { r <- run("analyze"); check(r$status == 2 && grepl("usage", r$text), r$text) })  # usage errors exit 2
 
 # verb coverage, from the help text
 help_text <- run("help")$text

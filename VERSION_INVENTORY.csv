@@ -1525,6 +1525,7 @@ File,Line,Status,Version,Context
 ./README.md,377,STALE_OR_DEP,0.3.4,"'rmoriedata' (0.3.4): a 66-column table of 4;613 reports; 2;309 English and"
 ./data-raw/srr-ledger.md,3,STALE_OR_DEP,1.0.0,"Generated 2026-07-10 from `R/srr-stats-standards.R` (`srr::srr_stats_roxygen`; srr 1.0.0)."
 ./inst/COPYRIGHTS,4,STALE_OR_DEP,3.11.3,"JSON for Modern C++; version 3.11.3"
+./inst/smoke/smoke.R,100,CURRENT,1.4.0,"# 1.4.0: --n is the total across strata; --per-stratum keeps n in each"
 ./inst/templates/first-paper.md,24,STALE_OR_DEP,0.5.0,"Analyses were conducted in `morie` v0.5.0 [@Ruhela2026MoriePy; @Ruhela2026MorieR]; a multi-domain scientific computing toolkit for observational inference. The Multilevel Reconciliation Methodology (MRM) framework backing morie's primary modules is documented separately [@Ruhela2026MRM]."
 ./inst/templates/first-paper.md,47,STALE_OR_DEP,0.5.0,"Reproducibility: outputs are reproducible by running `morie run-module [MODULE] --output-dir <dir>` on morie v0.5.0; the analysis CSVs are available in our supplementary materials."
 ./man/ARtoCepstrum.Rd,20,STALE_OR_DEP,4.7.3,"cepstrum needs (Section 4.7.3)."
