@@ -34,11 +34,18 @@ jobs:
         with:
           dependencies: '"hard"'
           extra-packages: any::pkgload any::testthat any::withr any::httr2 any::jsonlite any::DBI any::RSQLite any::duckdb any::xml2 any::readxl
+      # the base-R fallback builds whatever has no binary: on Linux that needs the headers
+      # bricklayer (libcurl) and fs (libuv) compile against
+      - name: system libraries for the fallback (Linux)
+        if: steps.deps.outcome == 'failure' && runner.os == 'Linux'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq libcurl4-openssl-dev libuv1-dev libssl-dev libxml2-dev
       - name: install dependencies with base R (when pak cannot solve)
         if: steps.deps.outcome == 'failure'
         shell: Rscript {0}
         run: |
-          repos <- c("https://rootcoder007.r-universe.dev", "https://stan-dev.r-universe.dev", "https://cloud.r-project.org")
+          # getOption("repos") is the binary mirror setup-r configured (P3M on Linux): a bare
+          # cloud.r-project.org there compiles every dependency from source
+          repos <- c("https://rootcoder007.r-universe.dev", "https://stan-dev.r-universe.dev", getOption("repos"))
           install.packages(c("remotes", "pkgload", "testthat", "withr", "httr2", "jsonlite", "DBI", "RSQLite", "duckdb", "xml2", "readxl"), repos = repos)
           remotes::install_deps(".", dependencies = NA, repos = repos, upgrade = "never")
       - name: install
