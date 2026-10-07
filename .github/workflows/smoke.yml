@@ -43,9 +43,11 @@ jobs:
         if: steps.deps.outcome == 'failure'
         shell: Rscript {0}
         run: |
-          # getOption("repos") is the binary mirror setup-r configured (P3M on Linux): a bare
-          # cloud.r-project.org there compiles every dependency from source
-          repos <- c("https://rootcoder007.r-universe.dev", "https://stan-dev.r-universe.dev", getOption("repos"))
+          # setup-r exports its binary mirror as RSPM (P3M on Linux): a bare cloud.r-project.org
+          # there compiles every dependency from source. Rscript does not see it as an option.
+          cran <- Sys.getenv("RSPM", "")
+          if (!nzchar(cran)) cran <- "https://cloud.r-project.org"
+          repos <- c("https://rootcoder007.r-universe.dev", "https://stan-dev.r-universe.dev", CRAN = cran)
           install.packages(c("remotes", "pkgload", "testthat", "withr", "httr2", "jsonlite", "DBI", "RSQLite", "duckdb", "xml2", "readxl"), repos = repos)
           remotes::install_deps(".", dependencies = NA, repos = repos, upgrade = "never")
       - name: install
