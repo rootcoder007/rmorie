@@ -58,7 +58,7 @@
 #' slack columns, the same for flipped rows because their slack column
 #' is flipped too, so strong duality c'x = b'y is available as a check.
 #'
-#' Formula: phase one min 1'a over [sA | sI | I_flip][x; s; a] = s b;
+#' Formula: phase one min 1'a over (sA | sI | I_flip)(x; s; a) = s b;
 #'   phase two pivots until every reduced cost is non-negative; x* from
 #'   the basis, y* from the objective row.
 #'
