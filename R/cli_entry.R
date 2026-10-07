@@ -276,8 +276,15 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
             out(sprintf("%s is an R environment (%d objects), not a table: copied it to %s; open it with load(\"%s\") or morie_load_dataset(\"%s\")\n",
                         rest[[1L]], length(ls(df)), dest, dest, rest[[1L]]))
           } else {
-          wrote <- tryCatch({
-            .morie_write_csv_minimal(df, dest)
+          wrote <- if (dir.exists(dest)) {
+            out(sprintf("cannot write %s: it is a directory\n", dest))
+            FALSE
+          } else tryCatch({
+            # the connection warning (not a regular file, permission denied) precedes the error
+            # that names the cause; report that once, not both
+            withCallingHandlers(.morie_write_csv_minimal(df, dest), warning = function(w) {
+              if (grepl("cannot open|not a regular file", conditionMessage(w))) invokeRestart("muffleWarning")
+            })
             TRUE
           }, error = function(e) {
             out(sprintf("cannot write %s: %s\n", dest, conditionMessage(e)))

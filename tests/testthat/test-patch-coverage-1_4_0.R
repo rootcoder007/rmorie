@@ -102,9 +102,9 @@ test_that("pull muffles connection warnings, writes the CSV, and names a path it
   expect_equal(r$status, 0L)
   expect_match(r$text, "3 rows, 2 cols")
   expect_equal(nrow(utils::read.csv(dest)), 3L)
-  r2 <- .pc_cap("pull", "zzcov", "--out", d)  # a directory is not a writable file
+  expect_no_warning(r2 <- .pc_cap("pull", "zzcov", "--out", d))  # a directory is not a writable file
   expect_equal(r2$status, 1L)
-  expect_match(r2$text, "cannot write")
+  expect_match(r2$text, "cannot write .*: it is a directory")
 })
 
 test_that("inspect --help and verify --help print their usage", {
@@ -171,7 +171,11 @@ test_that("a failed read with no Wayback snapshot names the URL and the cause", 
     testthat::local_mocked_bindings(wayback_snapshot_url = function(...) NULL, .package = "rmoriebricklayer")
   }
   url <- paste0("file://", file.path(withr::local_tempdir(), "missing.json"))
+  # the message depends on whether archive.org answers: pin both cases, never the network
+  testthat::local_mocked_bindings(.morie_wayback_reachable = function() TRUE)
   expect_error(.morie_read_text(url), "Wayback Machine has no snapshot")
+  testthat::local_mocked_bindings(.morie_wayback_reachable = function() FALSE)
+  expect_error(.morie_read_text(url), "Wayback Machine could not be reached either")
 })
 
 test_that("morie_fetch_arcgis draws its progress line when not quiet", {

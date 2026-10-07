@@ -1,3 +1,13 @@
+# rmorie 1.4.1 - 2026-10-07
+
+* Tests: the Wayback fallback test pinned the reachability probe as well as the
+  snapshot lookup. It asserted the "no snapshot" message and so failed whenever the
+  machine running it could not reach archive.org (the 1.4.0 CI runners). Both
+  messages are now asserted with the probe mocked; no test touches the network.
+* `pull --out DIR`, a directory: says "cannot write DIR: it is a directory" without R's
+  "not a regular file" warning ahead of it; a file it cannot open is reported once, by
+  the error that names the cause.
+
 # rmorie 1.4.0 - 2026-10-03
 
 * Sign-in and errors, after rmoriebricklayer 0.5.9's network review: the page the sign-in
