@@ -12,6 +12,10 @@ jobs:
   smoke:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 120
+    env:
+      # DESCRIPTION's Remotes are GitHub refs (rmoriebricklayer, rmoriedata): pak and the remotes
+      # fallback resolve them through the API, which needs the token, as every other workflow sets
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     strategy:
       fail-fast: false
       matrix:
