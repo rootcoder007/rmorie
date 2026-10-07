@@ -26,7 +26,6 @@
 #' A step of the samseg_native implementation. Called by \code{encode_box_prompt},
 #' \code{encode_point_prompt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -52,7 +51,6 @@
 #'
 #' A step of the samseg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param points Iterated over elementwise, with \code{lapply}.
 #' @param labels Passed to \code{unlist}.
@@ -92,7 +90,6 @@ encode_point_prompt <- function(points, labels, dim = 8, type_embeddings = NULL)
 #'
 #' A step of the samseg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param box The body requires: samseg: the box is empty or inverted.
 #' @param dim Passed to \code{.samseg_pos_enc}. Defaults to \code{8}.
@@ -124,7 +121,6 @@ encode_box_prompt <- function(box, dim = 8, type_embeddings = NULL) {
 #'
 #' A step of the samseg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mask See Usage.
 #' @param image_embedding See Usage.
@@ -154,7 +150,6 @@ encode_mask_prompt <- function(mask, image_embedding, weight = 1.0) {
 #'
 #' A step of the samseg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param encoder_ms Coerced to numeric by the body, with \code{as.numeric}.
 #' @param decoder_ms Coerced to numeric by the body, with \code{as.numeric}.
@@ -183,7 +178,6 @@ amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
 #'
 #' A step of the samseg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param image_embedding Passed to \code{decoder}.
 #' @param prompt_tokens Passed to \code{decoder}.
@@ -218,7 +212,6 @@ promptable_segment <- function(image_embedding, prompt_tokens, decoder,
 #'
 #' A step of the samseg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

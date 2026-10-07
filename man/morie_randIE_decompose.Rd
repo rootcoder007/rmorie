@@ -16,7 +16,6 @@ A list with \code{total}, \code{direct}, \code{indirect}, \code{residual},
 \description{
 A step of the randIE_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

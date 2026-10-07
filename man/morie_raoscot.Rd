@@ -29,6 +29,9 @@ estimate sum_i (1 - p0_i) d_i/(k - 1).  If V = c P0 (uniform
 clustering), every eigenvalue is c and X^2/c is exactly
 chi-square_\{k-1\}.
 }
+\examples{
+morie_raoscot(p_hat = c(0.3, 0.3, 0.4), p0 = c(1, 1, 1) / 3, n = 500, deffs = c(1.5, 1.4, 1.6))[c("statistic", "corrected", "p_value")]
+}
 \references{
 Rao, J. N. K. and Scott, A. J. (1981). The analysis of
 categorical data from complex sample surveys. JASA, 76(374),

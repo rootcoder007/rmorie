@@ -291,6 +291,7 @@ GravityDistribution <- function(productions, attractions, cost, beta, deterrence
 #' @rdname ClarkeWrightVrp
 #' @export
 LogitModeShares <- function(utilities) {
+  .morie_arg(utilities, "m")
   V <- as.matrix(utilities)
   mx <- apply(V, 1, max)
   e <- exp(V - mx)

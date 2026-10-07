@@ -12,9 +12,8 @@
 #' @return List with \code{lppd}, \code{p_waic}, \code{elpd_waic},
 #'   \code{waic}, \code{pointwise_lppd}, \code{pointwise_var}, \code{S},
 #'   \code{n}.
-#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
-#'   Bayesian Data Analysis, 3rd edition, Section 7.2, equation (7.5).
-#'   Fetched as the full text of the book from the author's own copy.
+#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013), Bayesian Data
+#'   Analysis, 3rd edition, Section 7.2, equation (7.5).
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

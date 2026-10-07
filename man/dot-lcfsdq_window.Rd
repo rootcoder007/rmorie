@@ -15,5 +15,4 @@ A list with \code{area}, \code{perimeter}, \code{bb}.
 \description{
 A step of the lcfsdq_native implementation. Called by \code{morie_lcfsdq}.
 See the file header for the source the module follows.
-source it follows.
 }

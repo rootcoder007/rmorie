@@ -23,7 +23,6 @@
 #'
 #' A step of the fastxt_native implementation. Called by \code{fasttext}, \code{word_vector}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param word Coerced to character by the body, with \code{as.character}.
 #' @param n_min Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
@@ -70,7 +69,6 @@ subwords <- function(word, n_min = 3, n_max = 6, boundary = TRUE,
 #'
 #' A step of the fastxt_native implementation. Called by \code{fasttext}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param word Passed to \code{subwords}.
 #' @param Z A matrix; indexed by row and column.
@@ -106,7 +104,6 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #'
 #' A step of the fastxt_native implementation. Called by \code{fasttext}, \code{word_vector}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g Passed to \code{.fnv1a}.
 #' @param gram_index A vector; indexed elementwise.
@@ -125,7 +122,6 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #'
 #' A step of the fastxt_native implementation. Called by \code{.gram_slot}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s A vector; its length is taken and its elements indexed.
 #' @return The value of \code{as.integer}.
@@ -147,7 +143,6 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #'
 #' A step of the fastxt_native implementation. Called by \code{fasttext}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param corpus The body requires: fasttext: corpus must not be None.
 #' @return The value of \code{docs}, as built in the body.
@@ -172,7 +167,6 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #'
 #' A step of the fastxt_native implementation. Called by \code{morie_fastxt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param corpus Passed to \code{.as_docs}.
 #' @param dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
@@ -336,7 +330,6 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 #'
 #' A step of the fastxt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -355,7 +348,6 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 #'
 #' A step of the fastxt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param corpus Passed to \code{fasttext}.
 #' @param dim Passed to \code{fasttext}. Defaults to \code{50}.
@@ -390,7 +382,6 @@ morie_fastxt <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 #'
 #' A step of the fastxt_native implementation. Called by \code{.word_vector}, \code{fasttext}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param word Coerced to character by the body, with \code{as.character}.
 #' @param n_min Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
@@ -430,7 +421,6 @@ morie_fastxt <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 #'
 #' A step of the fastxt_native implementation. Called by \code{fasttext}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param word Passed to \code{.subwords}.
 #' @param Z A matrix; indexed by row and column.

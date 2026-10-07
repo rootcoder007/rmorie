@@ -67,19 +67,35 @@
   read_one <- function(u) {
     con <- base::url(u)
     on.exit(close(con), add = TRUE)
-    paste(readLines(con, warn = FALSE), collapse = "\n")
+    # url() warns ("cannot open URL", "InternetOpenUrl failed") before it errors; the error carries the cause
+    withCallingHandlers(paste(readLines(con, warn = FALSE), collapse = "\n"),
+                        warning = function(w) invokeRestart("muffleWarning"))
   }
   tryCatch(read_one(url), error = function(e) {
     wb <- tryCatch(rmoriebricklayer::wayback_snapshot_url(url),
       error = function(e2) NULL
     )
     if (is.null(wb)) {
-      stop("Read failed and no Wayback snapshot is available for: ", url,
+      stop("Read failed for ", url, " (", conditionMessage(e), "); the Wayback Machine ",
+           if (.morie_wayback_reachable()) "has no snapshot of it" else "could not be reached either",
         call. = FALSE
       )
     }
     read_one(wb)
   })
+}
+
+#' Internal helper: whether the Wayback Machine answers at all (a lookup that came back empty
+#' means "no snapshot" only when it did)
+#' @noRd
+.morie_wayback_reachable <- function() {
+  old <- options(timeout = 10)
+  on.exit(options(old))
+  isTRUE(tryCatch({
+    con <- url("https://archive.org/wayback/available?url=example.com")
+    on.exit(close(con), add = TRUE)
+    length(suppressWarnings(readLines(con, n = 1L, warn = FALSE))) > 0L
+  }, error = function(e) FALSE))
 }
 
 # Download a URL to a temp file, returning the local path.
@@ -90,20 +106,20 @@
 .morie_download <- function(url, ext = "") {
   if (!nzchar(ext)) ext <- tools::file_ext(sub("\\?.*$", "", url))
   tmp <- tempfile(fileext = if (nzchar(ext)) paste0(".", ext) else "")
-  ok <- tryCatch(
+  failed <- tryCatch(
     {
       .morie_dl(url, tmp, label = basename(sub("\\?.*$", "", url)))
-      TRUE
+      NULL
     },
-    error = function(e) FALSE
+    error = function(e) conditionMessage(e)
   )
-  if (!ok) {
-    wb <- tryCatch(rmoriebricklayer::wayback_snapshot_url(url),
-      error = function(e) NULL
-    )
-    if (is.null(wb)) {
-      stop("Download failed and no Wayback snapshot is available for: ", url,
-        call. = FALSE
+  if (!is.null(failed)) {
+    wb <- tryCatch(rmoriebricklayer::wayback_snapshot_url(url), error = function(e) NULL)
+    if (!is.character(wb) || !length(wb) || !nzchar(wb[[1L]])) {
+      # say which of the two failed and how: an unreachable archive is not "no snapshot"
+      stop("Download failed for ", url, " (", failed, "); the Wayback Machine ",
+           if (.morie_wayback_reachable()) "has no snapshot of it" else "could not be reached either",
+           call. = FALSE
       )
     }
     .morie_dl(wb, tmp, label = paste0(basename(sub("\\?.*$", "", url)), " (Wayback)"))
@@ -167,10 +183,7 @@
 #' @noRd
 .morie_parse_file <- function(path, format, simplify, ...) {
   if (format %in% c("xlsx")) {
-    if (!requireNamespace("readxl", quietly = TRUE)) {
-      stop("Package 'readxl' is required to read xlsx data.", call. = FALSE)
-    }
-    return(as.data.frame(readxl::read_excel(path, ...)))
+    return(.morie_xlsx_data_sheet(path, ...))  # the data sheet, not a cover sheet; large workbooks streamed
   }
   if (format == "tsv") {
     return(utils::read.delim(path,
@@ -281,23 +294,24 @@ morie_fetch <- function(url,
   if (format == "auto") format <- .morie_detect_format(full_url)
 
   if (format == "zip") {
-    if (!nzchar(zip_member)) {
-      stop("A 'zip_member' is required to extract from a .zip resource.",
-        call. = FALSE
-      )
-    }
     zpath <- .morie_download(full_url, ext = "zip")
     on.exit(unlink(zpath), add = TRUE)
     exdir <- tempfile("morie-unzip-")
     dir.create(exdir)
     on.exit(unlink(exdir, recursive = TRUE), add = TRUE)
     members <- utils::unzip(zpath, list = TRUE)$Name
-    hit <- members[basename(members) == zip_member]
-    if (length(hit) == 0L) {
-      hit <- members[grepl(zip_member, members, fixed = TRUE)]
-    }
-    if (length(hit) == 0L) {
-      stop("zip member '", zip_member, "' not found in ", url, call. = FALSE)
+    if (!nzchar(zip_member)) {
+      # no member named: the archive's first CSV (a StatCan product zip holds one table plus codebooks)
+      hit <- members[grepl("[.]csv$", members, ignore.case = TRUE)]
+      if (length(hit) == 0L) stop("no CSV member in ", url, "; pass 'zip_member'", call. = FALSE)
+    } else {
+      hit <- members[basename(members) == zip_member]
+      if (length(hit) == 0L) {
+        hit <- members[grepl(zip_member, members, fixed = TRUE)]
+      }
+      if (length(hit) == 0L) {
+        stop("zip member '", zip_member, "' not found in ", url, call. = FALSE)
+      }
     }
     utils::unzip(zpath, files = hit[1L], exdir = exdir, junkpaths = TRUE)
     inner <- file.path(exdir, basename(hit[1L]))
@@ -352,11 +366,6 @@ morie_fetch <- function(url,
 #' @export
 morie_ckan_search <- function(query, portal = "open.canada.ca",
                               rows = 25L, ...) {
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("Package 'jsonlite' is required for morie_ckan_search().",
-      call. = FALSE
-    )
-  }
   base <- .morie_ckan_portal(portal)
   api <- paste0(base, "/api/3/action/package_search")
   url <- .morie_url_with_params(
@@ -424,6 +433,7 @@ morie_ckan_search <- function(query, portal = "open.canada.ca",
 #' @param page_size Records requested per page (default 2000).
 #' @param max_records Cap on the total number of records (default
 #'   \code{Inf} -- fetch the whole layer).
+#' @param label Name shown on the progress bar (default: the service name in \code{layer_url}).
 #' @return A data.frame of feature attributes (geometry is dropped).
 #' @examples
 #' \donttest{
@@ -439,20 +449,26 @@ morie_ckan_search <- function(query, portal = "open.canada.ca",
 #' @export
 morie_fetch_arcgis <- function(layer_url, where = "1=1", out_fields = "*",
                                params = NULL, page_size = 2000L,
-                               max_records = Inf) {
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("Package 'jsonlite' is required for morie_fetch_arcgis().",
-      call. = FALSE
-    )
-  }
+                               max_records = Inf, label = NULL) {
   layer_url <- sub("/+$", "", layer_url)
   query_url <- paste0(layer_url, "/query")
+  # the bar names the service, not the layer number (".../Homicides/FeatureServer/0" -> "Homicides")
+  label <- label %||% basename(sub("/(Feature|Map)Server(/[0-9]+)?$", "", layer_url))
   offset <- 0L
   fetched <- 0L
   pages <- list()
+  quiet <- .morie_dl_quiet()
+  t0 <- proc.time()[["elapsed"]]
+  total <- if (!quiet) tryCatch({
+    cnt <- .morie_from_json(.morie_read_text(.morie_url_with_params(query_url, c(list(where = where, returnCountOnly = "true", f = "json"), params))), simplifyVector = TRUE)
+    as.numeric(cnt$count)
+  }, error = function(e) NA_real_) else NA_real_
   repeat {
     this_page <- min(page_size, max_records - fetched)
     if (this_page <= 0L) break
+    if (!quiet) {
+      cat(sprintf("\r%s", .morie_dl_line(label, fetched, if (is.finite(total)) min(total, max_records) else NA, t0, length(pages), unit = "rows")), file = stderr())
+    }
     p <- c(list(
       where = where, outFields = out_fields,
       returnGeometry = "false", f = "json",
@@ -469,22 +485,19 @@ morie_fetch_arcgis <- function(layer_url, where = "1=1", out_fields = "*",
         call. = FALSE
       )
     }
-    feats <- payload$features
-    attrs <- if (is.null(feats) || NROW(feats) == 0L) {
-      NULL
-    } else if (is.data.frame(feats) && !is.null(feats$attributes)) {
-      feats$attributes
-    } else {
-      feats
-    }
-    if (is.null(attrs) || NROW(attrs) == 0L) break
-    attrs <- as.data.frame(attrs, stringsAsFactors = FALSE)
+    feats <- .morie_arcgis_feature_list(payload$features)
+    if (length(feats) == 0L) break
+    # one row per feature, whichever JSON reader parsed the page
+    attrs <- .morie_dataset_records_to_df(lapply(feats, function(f) f$attributes %||% f))
     pages[[length(pages) + 1L]] <- attrs
     fetched <- fetched + NROW(attrs)
     if (!isTRUE(payload$exceededTransferLimit) || fetched >= max_records) {
       break
     }
     offset <- offset + NROW(attrs)
+  }
+  if (!quiet) {
+    cat(sprintf("\r%s\n", .morie_dl_line(label, fetched, if (is.finite(total)) min(total, max_records) else NA, t0, length(pages), unit = "rows")), file = stderr())
   }
   if (length(pages) == 0L) {
     return(data.frame())

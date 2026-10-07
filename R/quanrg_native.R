@@ -10,7 +10,6 @@
 #'
 #' A step of the quanrg_native implementation. Called by \code{morie_quanrg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param res Numeric; combined arithmetically in the body.
 #' @param theta Numeric; combined arithmetically in the body.

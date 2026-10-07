@@ -25,5 +25,4 @@ The value of \code{e}, as built in the body.
 A step of the rndnet_native implementation. Called by \code{.rndnet_predictor_new},
 \code{morie_rndnet}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -65,7 +65,6 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #'
 #' A step of the varcal_native implementation. Called by \code{varcal_encode_pileup}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param b One of \code{"A"}, \code{"C"}, \code{"G"}, \code{"T"}.
 #' @return A numeric value.
@@ -86,7 +85,6 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #'
 #' A step of the varcal_native implementation. Called by \code{varcal_genotype_posterior}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -104,7 +102,6 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' A step of the varcal_native implementation. Called by \code{.varcal_norm_reads},
 #' \code{morie_varcal}, \code{varcal_encode_pileup} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
@@ -122,7 +119,6 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' A step of the varcal_native implementation. Called by \code{morie_varcal},
 #' \code{varcal_encode_pileup}, \code{varcal_find_candidates} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reads Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{lapply}.
@@ -136,7 +132,6 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #'
 #' A step of the varcal_native implementation. Called by \code{varcal_find_candidates}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reads Passed to \code{.varcal_norm_reads}.
 #' @param position Numeric; combined arithmetically in the body.
@@ -178,7 +173,6 @@ varcal_pileup_column <- function(reads, position, reference) {
 #'
 #' A step of the varcal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reads Passed to \code{.varcal_norm_reads}.
 #' @param reference A vector; its length is taken.
@@ -251,7 +245,6 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 #'
 #' A step of the varcal_native implementation. Called by \code{morie_varcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reads Passed to \code{.varcal_norm_reads}.
 #' @param reference A vector; its length is taken and its elements indexed.
@@ -342,7 +335,6 @@ varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
 #'
 #' A step of the varcal_native implementation. Called by \code{morie_varcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param image A list; the body reads \code{$read_rows}, \code{$width} from it.
 #' @param scorer The body requires: varcal: the scorer must return three non-negative scores.
@@ -409,7 +401,6 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
 #'
 #' A step of the varcal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reads Passed to \code{.varcal_norm_reads}.
 #' @param reference Passed to \code{.varcal_chars}.
@@ -459,7 +450,6 @@ morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
 #'
 #' A step of the varcal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param called See Usage.
 #' @param truth See Usage.
@@ -521,7 +511,6 @@ varcal_evaluate <- function(called, truth, candidates = NULL) {
 #'
 #' A step of the varcal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

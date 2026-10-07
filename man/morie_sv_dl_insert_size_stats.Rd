@@ -20,7 +20,6 @@ A list with \code{median}, \code{sd}, \code{spread}, \code{orientation}, \code{n
 A step of the sv_dl_native implementation. Called by
 \code{morie_sv_dl_paired_end_calls}, \code{morie_sv_dl_structural_variant}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

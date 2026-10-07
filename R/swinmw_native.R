@@ -9,7 +9,6 @@
 #'
 #' A step of the swinmw_native implementation. Called by \code{Swinmw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M Numeric; combined arithmetically in the body.
 #' @param tab A matrix; indexed by row and column.
@@ -47,9 +46,12 @@
 #' @return List with \code{output} (H x W x d_v array), \code{bias},
 #'   \code{n_windows}, \code{tokens_per_window}, \code{estimate},
 #'   \code{n}, \code{method}.
-#' @references Liu, Z. et al. (2021), ICCV 2021, arXiv:2103.14030,
-#'   Section 3.2, Eq 4. Local source:
-#'   fetched-wave3/liu-etal-2021-swin-transformer-arxiv2103.14030.pdf.
+#' @references Liu, Z. et al. (2021), ICCV 2021, arXiv:2103.14030, Section 3.2, Eq 4.
+#' @examples
+#' set.seed(6)
+#' x <- array(rnorm(4 * 4 * 2), c(4, 4, 2))
+#' r <- Swinmw(x, window_size = 2)
+#' c(r$n_windows, r$tokens_per_window)
 #' @export
 Swinmw <- function(x, window_size, relative_bias = NULL,
                    WQ = NULL, WK = NULL, WV = NULL) {

@@ -8,29 +8,39 @@ morie_download_bootstrap(
   survey = "all",
   limit = 32000L,
   db_path = NULL,
-  con = NULL
+  con = NULL,
+  refresh = FALSE
 )
 }
 \arguments{
-\item{survey}{One of \code{"csads_2021"}, \code{"csads_2023"},
-\code{"csus_2019"}, \code{"csus_2023"}, or \code{"all"} (default).}
+\item{survey}{A bootstrap key of \code{\link{morie_dataset_catalog}}
+(\code{"ocs22bt"}, \code{"ocs24bt"}, \code{"cu20bt"},
+\code{"cu23bt"}), its survey-year name (\code{"csads_2021"},
+\code{"csads_2023"}, \code{"csus_2019"}, \code{"csus_2023"}), or
+\code{"all"} (default).}
 
 \item{limit}{Max records per CKAN request (default 32000).}
 
 \item{db_path}{Optional path to a SQLite/DuckDB file (default backend).}
 
 \item{con}{Optional pre-opened DBI connection (overrides \code{db_path}).}
+
+\item{refresh}{Download again even when the table is already cached (default
+\code{FALSE}: a cached table is reported and kept).}
 }
 \value{
-Invisibly, the number of CSV files successfully downloaded.
+Invisibly, the number of surveys available (downloaded or already cached).
 }
 \description{
 Downloads large bootstrap weight CSVs that are too big to ship with the
 package. Data is cached in the user cache database for future use.
 }
 \examples{
+# the bootstrap tables and their keys
+cat_ <- morie_dataset_catalog()
+cat_[cat_$type == "bootstrap", c("key", "name")]
 \donttest{
-# the CSADS 2021 bootstrap weights (376 MB), cached for later survey work
-morie_download_bootstrap(survey = "csads_2021")
+# the CSADS 2021 bootstrap weights are 376 MB: fetched once, then read from the cache
+if (interactive()) morie_download_bootstrap(survey = "csads_2021")
 }
 }

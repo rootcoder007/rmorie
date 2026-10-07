@@ -20,12 +20,10 @@
 #' @return List with \code{rate}, \code{intercept}, \code{tmrca},
 #'   \code{correlation}, \code{r_squared}, \code{residuals},
 #'   \code{n}, \code{method}.
-#' @references Rambaut, A., Lam, T. T., Max Carvalho, L. and Pybus,
-#'   O. G. (2016), Exploring the temporal structure of
-#'   heterochronous sequences using TempEst (formerly Path-O-Gen),
-#'   Virus Evolution 2(1), vew007. Equation (1) and Section 2,
-#'   Root-to-tip regression. Local source:
-#'   library/pdf/fetched-wave3/Rambaut-2016-TempEst-VirusEvolution.pdf.
+#' @references Rambaut, A., Lam, T. T., Max Carvalho, L. and Pybus, O. G. (2016),
+#'   Exploring the temporal structure of heterochronous sequences using TempEst
+#'   (formerly Path-O-Gen), Virus Evolution 2(1), vew007. Equation (1) and Section 2,
+#'   Root-to-tip regression.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

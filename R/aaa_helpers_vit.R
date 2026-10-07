@@ -34,7 +34,6 @@
 #' A step of the helpers_vit implementation. Called by \code{Vaean}, \code{Vaeber},
 #' \code{Vaecf} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nr A count; the body uses it as \code{matrix(...)}.
 #' @param nc A count; the body uses it as \code{matrix(...)}.
@@ -59,7 +58,6 @@
 #'
 #' A step of the helpers_vit implementation. Called by \code{.vitlnrows}, \code{Vitfwd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{.vitlneps}.
@@ -81,7 +79,6 @@
 #'
 #' A step of the helpers_vit implementation. Called by \code{Vitfwd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param eps Passed to \code{.vitln}. Defaults to \code{.vitlneps}.
@@ -124,7 +121,6 @@
 #'
 #' A step of the helpers_vit implementation. Called by \code{Vitfsv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return The value of \code{which.max}.

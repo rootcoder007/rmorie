@@ -2,7 +2,7 @@
 % Please edit documentation in R/crypto_sym.R
 \name{morie_crypto_random_bytes}
 \alias{morie_crypto_random_bytes}
-\title{Cryptographically secure random bytes (libsodium)}
+\title{Cryptographically secure random bytes}
 \usage{
 morie_crypto_random_bytes(n)
 }
@@ -13,11 +13,11 @@ morie_crypto_random_bytes(n)
 Raw vector of length \code{n}.
 }
 \description{
-Phase 3JJJ1. Wraps libsodium's \code{randombytes_buf}.
+libsodium's \code{randombytes_buf} when rmorie is linked against it,
+otherwise the operating system's source through
+\code{\link[rmoriebricklayer:random_bytes]{rmoriebricklayer::random_bytes()}} (never R's own generator).
 }
 \examples{
-if (morie_crypto_sodium_available()) {
-  r <- morie_crypto_random_bytes(32L)
-  length(r)
-}
+r <- morie_crypto_random_bytes(32L)
+length(r)
 }

@@ -22,7 +22,10 @@ squares: beta = (X'X)^-1X'y, Var(beta) = sigma2 (X'X)^-1 and
 sigma2 = RSS/(n - p - 1).
 }
 \examples{
-Msm332(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
+set.seed(29)
+X <- matrix(rnorm(60), 30, 2)
+y <- 1 + X \%*\% c(2, -1) + rnorm(30, sd = 0.1)
+Msm332(X, as.numeric(y))$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

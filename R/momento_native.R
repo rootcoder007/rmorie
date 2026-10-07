@@ -156,6 +156,7 @@ morie_momento_masked_loss <- function(truth, reconstruction, mask) {
 #' @keywords internal
 morie_momento_task_mask <- function(n_patches, task = "forecast",
                                      span = 1, start = NULL) {
+  .morie_arg(n_patches, "i1")
   n <- as.integer(n_patches)
   s <- as.integer(span)
   if (!(task %in% .GHC_MOM_TASKS))
@@ -221,6 +222,8 @@ morie_momento <- morie_momento_harmonise
 #' the source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(momento_cheatsheet())
 #' @export
 momento_cheatsheet <- function() {
   paste(paste0(
@@ -248,6 +251,10 @@ momento_cheatsheet <- function() {
 #' @param normalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{batch}, \code{meta}, \code{n_series}, \code{n_patches},
 #' \code{patch_len}, \code{note}.
+#' @examples
+#' s <- list(sin(1:24), cos(1:10))
+#' h <- momento_harmonise(s, patch_len = 8)
+#' c(h$n_series, h$n_patches)
 #' @export
 momento_harmonise <- function(series_list, patch_len, normalise = TRUE) {
   P <- as.integer(patch_len)
@@ -307,6 +314,8 @@ momento_harmonise <- function(series_list, patch_len, normalise = TRUE) {
 #' @param reconstruction A vector; its length is taken and its elements indexed.
 #' @param mask A vector; its length is taken and its elements indexed.
 #' @return A list with \code{mse}, \code{n_scored}, \code{scored}.
+#' @examples
+#' momento_masked_loss(truth = c(1, 2, 3, 4), reconstruction = c(1.1, 2, 2.5, 4), mask = c(0, 1, 1, 0))$mse
 #' @export
 momento_masked_loss <- function(truth, reconstruction, mask) {
   n <- length(truth)
@@ -344,6 +353,9 @@ momento_masked_loss <- function(truth, reconstruction, mask) {
 #' @param fill A count; the body uses it as \code{rep(...)}. Defaults to \code{0}.
 #' @return A list with \code{masked}, \code{mask}, \code{mask_idx}, \code{mask_rate},
 #' \code{n_patches}.
+#' @examples
+#' p <- list(c(1, 2), c(3, 4), c(5, 6), c(7, 8))
+#' momento_mask_patches(p, mask_idx = c(1, 3))$masked   # 0-based patch indices
 #' @export
 momento_mask_patches <- function(patches, mask_idx, fill = 0) {
   n <- length(patches)
@@ -375,10 +387,19 @@ momento_mask_patches <- function(patches, mask_idx, fill = 0) {
 #' the source it follows.
 #'
 #' @param patches Iterated over elementwise, with \code{lapply}.
-#' @param reconstructor Accepted by the signature and not used anywhere in the body.
+#' @param reconstructor Function \code{(masked, mask)} returning the reconstructed patches.
 #' @param rates See Usage.
 #' @param seed Passed to \code{set.seed}. Defaults to \code{0}.
 #' @return A list with \code{curve}, \code{n_patches}, \code{rates}, \code{mse}.
+#' @examples
+#' set.seed(9)
+#' p <- lapply(1:8, function(i) rnorm(4))
+#' # a naive reconstructor: fill every masked patch with the mean of the visible ones
+#' fill_mean <- function(masked, mask) {
+#'   m <- Reduce(`+`, masked[mask == 0]) / sum(mask == 0)
+#'   lapply(seq_along(masked), function(i) if (mask[i] == 1) m else masked[[i]])
+#' }
+#' momento_reconstruction_curve(p, fill_mean, rates = c(0.25, 0.5), seed = 1)$mse
 #' @export
 momento_reconstruction_curve <- function(patches, reconstructor, rates, seed = 0) {
   P <- lapply(patches, as.numeric)
@@ -411,6 +432,8 @@ momento_reconstruction_curve <- function(patches, reconstructor, rates, seed = 0
 #' @param start Optional; may be \code{NULL}. Coerced to integer by the body, with
 #' \code{as.integer}.
 #' @return The value of \code{seq.int}.
+#' @examples
+#' momento_task_mask(n_patches = 8, task = "forecast", span = 2)   # the last two patches
 #' @export
 momento_task_mask <- function(n_patches, task = "forecast", span = 1, start = NULL) {
   n <- as.integer(n_patches)

@@ -20,7 +20,6 @@ A list with \code{tokens}, \code{D}, \code{n_patches}, \code{patch_len},
 \description{
 A step of the patchT_native implementation. Called by \code{patchtst_encode}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 channel_independent_tokens(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)

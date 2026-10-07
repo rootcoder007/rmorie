@@ -33,13 +33,11 @@ Moelayer(
 list: estimate, out, gate, chosen, h, keep, method.
 }
 \description{
-Shazeer et al. (2017), Outrageously large neural networks: the
-sparsely-gated mixture-of-experts layer, ICLR (arXiv:1701.06538 --
-FETCHED).  Equation (3): y = sum_i G(x)_i E_i(x), with only the nonzero
-gates evaluated.  Equations (4)-(6) give the noisy top-k gate, G(x) =
-Softmax(KeepTopK(H(x), k)) with H(x)_i = (x . W_g)_i + StandardNormal()
-. Softplus((x . W_noise)_i) and KeepTopK setting everything outside the
-top k to -infinity.
+Shazeer et al. (2017), Outrageously large neural networks: the sparsely-gated
+mixture-of-experts layer, ICLR (arXiv:1701.06538). Equation (3): y = sum_i G(x)_i
+E_i(x), with only the nonzero gates evaluated. Equations (4)-(6) give the noisy top-k
+gate, G(x) = Softmax(KeepTopK(H(x), k)) with H(x)_i = (x . W_g)_i + StandardNormal()
+. Softplus((x . W_noise)_i) and KeepTopK setting everything outside the top k to -infinity.
 }
 \details{
 Determinism: StandardNormal() would make routing irreproducible, so the

@@ -43,7 +43,6 @@ A list with \code{estimate}, \code{source_ate}, \code{outcome_route},
 \description{
 A step of the trnsfr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

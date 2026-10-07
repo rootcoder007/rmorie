@@ -48,7 +48,7 @@ hyperparameter). The Cartesian product defines the search grid.}
 
 \item{tune_fn}{Deprecated legacy positional argument; see Description.}
 
-\item{outer_folds}{Deprecated alias for \code{outer_k} (legacy stub form).}
+\item{outer_folds}{Deprecated alias for \code{outer_k} (legacy form).}
 }
 \value{
 Named list with \code{outer_scores} (numeric vector, length
@@ -63,7 +63,7 @@ supported for backward compatibility:
 }
 \details{
 \itemize{
-\item \strong{Legacy stub form:} \eqn{nested_cross_validate(tune_fn,
+\item \strong{Legacy form:} \eqn{nested_cross_validate(tune_fn,
         predict_fn, X, y, outer_folds, scoring, random_state)} where
 \code{tune_fn(X, y)} returns a fitted model (no grid argument).
 In this mode no inner search is run.

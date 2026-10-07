@@ -35,7 +35,8 @@ Formula: minimise \code{f(x) = 0.5 x'Qx - b'x}; exact block minimiser
 \code{x_B = Q_BB^{-1} (b_B - Q_{B,Bc} x_{Bc})}.
 }
 \examples{
-Bcdblk(Q = 0.5, b = 5L, blocks = c("a", "b", "c"))
+Q <- matrix(c(4, 1, 0, 1, 3, 0, 0, 0, 2), 3)
+Bcdblk(Q, b = c(1, 2, 3), blocks = list(c(0, 1), 2), n_iter = 10)
 }
 \references{
 Tseng, P. (2001). Convergence of a block coordinate

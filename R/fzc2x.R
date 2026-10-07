@@ -30,6 +30,7 @@
 #' Bfc2(dg = 1, d2g = 0, d3g = 0, density = 0.3, fp = 0.2, fpp = -0.1)
 #' @export
 Bfc2 <- function(dg, d2g, d3g, density, fp, fpp) {
+  .morie_arg(dg, "n")
   if (dg == 0) stop("g'(g^-1(x)) must be non-zero; the bias divides by it.")
   val <- d3g * density + 3 * d2g * dg * fp + dg^3 * fpp
   list(estimate = val, scaled = val / dg,

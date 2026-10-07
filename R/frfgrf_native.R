@@ -57,7 +57,6 @@
 #'
 #' A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
@@ -86,7 +85,6 @@
 #'
 #' A step of the frfgrf_native implementation. Called by \code{.frfgrf_honesty_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree A list; the body reads \code{$feature}, \code{$leaf}, \code{$left},
 #' \code{$right}, \code{$threshold} from it.
@@ -107,7 +105,6 @@
 #'
 #' A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{honest_tree}.
 #' @param y A vector; indexed elementwise.
@@ -190,7 +187,6 @@
 #'
 #' A step of the frfgrf_native implementation. Called by \code{.frfgrf_split_share}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nd A list; the body reads \code{$feature}, \code{$leaf}, \code{$left},
 #' \code{$right} from it.
@@ -210,7 +206,6 @@
 #'
 #' A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param trees See Usage.
 #' @param d A count; the body uses it as \code{numeric(...)}.
@@ -230,7 +225,6 @@
 #'
 #' A step of the frfgrf_native implementation. Called by \code{.frfgrf_regularity_walk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nd A list; the body reads \code{$leaf}, \code{$left}, \code{$n_I}, \code{$right} from it.
 #' @return A numeric value.
@@ -246,7 +240,6 @@
 #'
 #' A step of the frfgrf_native implementation. Called by \code{.frfgrf_regularity}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nd A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.
 #' @param worst Numeric; passed to \code{min}.
@@ -271,7 +264,6 @@
 #'
 #' A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param trees See Usage.
 #' @return The value of \code{worst}, as built in the body.
@@ -288,7 +280,6 @@
 #'
 #' A step of the frfgrf_native implementation. Called by \code{morie_frfgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
@@ -395,7 +386,6 @@
 #'
 #' A step of the frfgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -411,7 +401,7 @@
     "beta_min = 1 - (1 + (d/pi) log(1/alpha)/log(1/(1-alpha)))^-1."))
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 .frfgrf_forestfitcheck <- .frfgrf_forest_fit_check
 
 # public names resolved by fn/_lazy_map.json
@@ -423,7 +413,6 @@
 #'
 #' A step of the frfgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.frfgrf_forest_fit_check}.
 #' @param X Passed to \code{.frfgrf_forest_fit_check}.

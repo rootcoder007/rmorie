@@ -22,7 +22,6 @@ message's own pair and differ here -- which is precisely what a
 distance-only model cannot see.
 }
 \examples{
-morie_dimNet_angle_between(r_k = c(1, 2, 3, 4, 5, 6, 7, 8),
-  r_j = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), r_i = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_dimNet_angle_between(r_k = c(1, 0, 0), r_j = c(0, 0, 0), r_i = c(0, 1, 0))   # pi / 2
 }
 \keyword{internal}

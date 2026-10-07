@@ -95,13 +95,7 @@ morie_ingest_tps_layers <- function() {
                                       .MORIE_TPS_DEFAULT_UA,
                                     timeout =
                                       .MORIE_TPS_DEFAULT_TIMEOUT) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop(
-      "Package 'httr2' is required for morie_ingest_tps_*(). ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
+  .morie_http_require("morie_ingest_tps_*()")
   params <- list(
     where = where,
     outFields = out_fields,
@@ -176,8 +170,8 @@ morie_ingest_tps_layers <- function() {
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("httr2", quietly = TRUE)) withAutoprint({
 #' df <- morie_ingest_tps_feature_layer(
 #'   morie_ingest_tps_layers()$url[
 #'     morie_ingest_tps_layers()$name == "major-crime"
@@ -186,8 +180,8 @@ morie_ingest_tps_layers <- function() {
 #'   max_features = 5000L
 #' )
 #' nrow(df)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_tps_feature_layer <- function(
     layer_url,

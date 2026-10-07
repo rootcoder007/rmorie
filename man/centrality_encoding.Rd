@@ -24,7 +24,8 @@ List with encoding, degrees, note.
 Learnable vector per degree, added at the input layer
 }
 \examples{
-centrality_encoding(adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n = 5L,
-  z_in = c(1, 2, 3, 4, 5, 6, 7, 8))
+adj <- list("0" = list("1" = 1, "2" = 1), "1" = list("0" = 1), "2" = list("0" = 1))
+z_in <- list(c(0, 0), c(1, 0), c(0, 1))   # one learnable vector per in-degree 0, 1, 2
+centrality_encoding(adj, n = 3L, z_in = z_in)
 }
 \keyword{internal}

@@ -65,7 +65,6 @@
 #'
 #' A step of the rfppos_native implementation. Called by \code{morie_rfppos_dihedral}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; indexed elementwise.
 #' @param b A vector; indexed elementwise.
@@ -85,7 +84,6 @@
 #' A step of the rfppos_native implementation. Called by \code{morie_rfppos_angle},
 #' \code{morie_rfppos_dihedral}, \code{morie_rfppos_distance}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @return A numeric value.

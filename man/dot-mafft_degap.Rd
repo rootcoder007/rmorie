@@ -15,5 +15,4 @@ A vector, from \code{vapply}.
 \description{
 A step of the mafft_native implementation. Called by \code{iterative_refine}.
 See the file header for the source the module follows.
-source it follows.
 }

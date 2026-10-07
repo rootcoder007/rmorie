@@ -467,6 +467,7 @@ morie_bayes_continue <- function(fit, iter = 1000L, ...) {
 #' ))
 #' @export
 morie_bayes_compare <- function(fit) {
+  .morie_arg(fit, "cls:morie_bayes_fit")
   stopifnot(inherits(fit, "morie_bayes_fit"))
   ols <- stats::coef(stats::lm.fit(fit$X, fit$y))
   data.frame(

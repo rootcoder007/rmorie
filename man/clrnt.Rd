@@ -62,7 +62,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the clrnt_native implementation. Called by \code{morie_clrnt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- clrnt(clint_in_vitro = 15, cl_h = 12, fu_blood = 0.1,

@@ -30,13 +30,19 @@ List with \code{beta}, \code{b_lines}, \code{b_gxe}, \code{n}.
 Formula: Y = 1 mu + X_E beta_E + Z_L b_1 + Z_EL b_2 + eps,  b_1 ~ N(0, sigma2_g G),
 b_2 ~ N(0, Sigma_E (x) G)
 }
+\examples{
+set.seed(5)
+nl <- 4; ne <- 2
+G <- crossprod(matrix(rnorm(16), 4)) / 4 + diag(0.1, 4)
+Z_L <- kronecker(matrix(1, ne, 1), diag(nl)); X_E <- kronecker(diag(ne), matrix(1, nl, 1))
+Z_EL <- diag(nl * ne)
+y <- rnorm(nl * ne, 10)
+Gxeblup(y, X_E, Z_L, Z_EL, G, sigma2_g = 1, Sigma_E = diag(ne))$beta
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-doi:10.1007/978-3-030-89010-0.  Chapter 5, Eq. (5.4) p. 150.  The two random terms are
-stacked into one Z = [Z_L  Z_EL] with a block-diagonal Sigma and solved as Eq.
-(5.1).  Delegates to the chapter routine in morie.fn._gp_core, which was verified
-against this book in the earlier tranches of this shelf recorded in
-ledger/SHELF_LEDGER.txt; the page and equation number above are that routine's own,
-re-read against the chapter PDF here.
+doi:10.1007/978-3-030-89010-0. Chapter 5, Eq. (5.4) p. 150. The two random terms are
+stacked into one Z = [Z_L Z_EL] with a block-diagonal Sigma and solved as Eq.
+(5.1).
 }

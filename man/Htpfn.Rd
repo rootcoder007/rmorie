@@ -43,16 +43,12 @@ list: estimate, mu, beta_func, beta, g_hat, coefs, X, Q, fitted,
 sigma2, bic, cv1, n, method.
 }
 \description{
-SOURCE, AND A CORRECTION TO THE STUB THIS REPLACES.  The stub docstring cited
-"Montesinos Lopez Ch 14" for the whole model, including the genomic term g_i.
-Chapter 14 does not contain a genomic term at all.  It was read in full --
-volume [Pages 579-631] of Montesinos Lopez, Montesinos Lopez and Crossa
+Sources.  Chapter 14 of Montesinos Lopez, Montesinos Lopez and Crossa
 (2022), Multivariate Statistical Machine Learning Methods for Genomic
-Prediction, Springer, doi:10.1007/978-3-030-89010-0 -- and Section 14.1
-pp.579-583 gives ONLY the functional part: a scalar response, one functional
-covariate, and no random line effect anywhere.  The genomic term therefore
-comes from a different chapter and is cited as such below.  It is NOT in
-Chapter 14.
+Prediction, Springer, doi:10.1007/978-3-030-89010-0, Section 14.1
+pp. 579-583, gives only the functional part: a scalar response, one
+functional covariate, and no random line effect.  The genomic term g_i
+comes from a different chapter and is cited as such below.
 }
 \details{
 FUNCTIONAL PART -- Chapter 14, Section 14.1, volume [Pages 579-631],

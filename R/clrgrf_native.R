@@ -27,7 +27,6 @@
 #'
 #' A step of the clrgrf_native implementation. Called by \code{morie_clrgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param clusters Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{groups}, \code{labels}.
@@ -57,7 +56,6 @@ clrgrf_cluster_index <- function(clusters) {
 #'
 #' A step of the clrgrf_native implementation. Called by \code{morie_clrgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param preds A vector; its length is taken.
 #' @param bags A vector; indexed elementwise.
@@ -96,7 +94,6 @@ clrgrf_cluster_jackknife <- function(preds, bags, groups,
 #'
 #' A step of the clrgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X A matrix; passed to \code{as.matrix}.
@@ -204,7 +201,6 @@ morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
 #'
 #' A step of the clrgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -67,7 +67,6 @@ The value of \code{.reinfc_run_logistic}.
 \description{
 A step of the reinfc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # reward_fn is called as reward_fn(y, x); reward action 1

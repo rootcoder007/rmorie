@@ -45,7 +45,6 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #'
 #' A step of the tncomp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
@@ -75,7 +74,6 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #'
 #' A step of the tncomp_native implementation. Called by \code{distance_matrix}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f1 A vector; its length is taken.
 #' @param f2 A vector; its length is taken.
@@ -95,7 +93,6 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #'
 #' A step of the tncomp_native implementation. Called by \code{.tncomp_select}, \code{diversity}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fps Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{D}, as built in the body.
@@ -123,7 +120,6 @@ distance_matrix <- function(fps) {
 #'
 #' A step of the tncomp_native implementation. Called by \code{.tncomp_select}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A matrix; passed to \code{nrow}.
 #' @param seed Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
@@ -147,7 +143,6 @@ distance_matrix <- function(fps) {
 #' A step of the tncomp_native implementation. Called by \code{maxmin_selection},
 #' \code{maxsum_selection}, \code{morie_tncomp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fps Passed to \code{distance_matrix}.
 #' @param k Coerced to integer by the body, with \code{as.integer}.
@@ -188,7 +183,6 @@ distance_matrix <- function(fps) {
 #'
 #' A step of the tncomp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fps Passed to \code{.tncomp_select}.
 #' @param k Passed to \code{.tncomp_select}.
@@ -206,7 +200,6 @@ maxmin_selection <- function(fps, k, seed = NULL) {
 #'
 #' A step of the tncomp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fps Passed to \code{.tncomp_select}.
 #' @param k Passed to \code{.tncomp_select}.
@@ -224,7 +217,6 @@ maxsum_selection <- function(fps, k, seed = NULL) {
 #'
 #' A step of the tncomp_native implementation. Called by \code{morie_tncomp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fps Passed to \code{distance_matrix}.
 #' @param subset Coerced to integer by the body, with \code{as.integer}.
@@ -264,7 +256,6 @@ diversity <- function(fps, subset, D = NULL) {
 #'
 #' A step of the tncomp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fps Passed to \code{.tncomp_select}.
 #' @param k Passed to \code{.tncomp_select}.

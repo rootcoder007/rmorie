@@ -23,7 +23,6 @@ A vector, from \code{c}.
 \description{
 A step of the rdrobu_native implementation. Called by \code{morie_calonico_cattaneo_titiunik}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

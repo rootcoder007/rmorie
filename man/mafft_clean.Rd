@@ -17,5 +17,7 @@ A list with \code{seqs}, \code{seq_type}.
 \description{
 A step of the mafft_native implementation. Called by \code{mafft_alignment}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mafft_clean(c("acgt-", "AC GT"))
 }

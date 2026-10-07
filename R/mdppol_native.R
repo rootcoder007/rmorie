@@ -7,7 +7,6 @@
 #'
 #' A step of the mdppol_native implementation. Called by \code{morie_mdppol}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P Iterated over elementwise, with \code{lapply}.
 #' @param R A vector; its length is taken and its elements indexed.
@@ -48,7 +47,6 @@
 #'
 #' A step of the mdppol_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P Passed to \code{.mdppol_args}.
 #' @param R A matrix; indexed by row and column.
@@ -155,7 +153,6 @@ mdppol <- morie_mdppol
 #'
 #' A step of the mdppol_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

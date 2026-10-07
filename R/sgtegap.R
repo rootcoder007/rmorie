@@ -12,9 +12,8 @@
 #' @param kmax Largest k considered.
 #' @return List with \code{k}, \code{gap}, \code{gaps}, \code{values},
 #'   \code{n_zero}, \code{kmax}.
-#' @references von Luxburg (2007), A Tutorial on Spectral Clustering,
-#'   Statistics and Computing 17(4), 395-416, Section 8.3. Fetched from
-#'   arXiv:0711.0189.
+#' @references von Luxburg (2007), A Tutorial on Spectral Clustering, Statistics and
+#'   Computing 17(4), 395-416, Section 8.3.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

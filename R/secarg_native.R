@@ -26,7 +26,6 @@
 #' A step of the secarg_native implementation. Called by \code{morie_secarg_prehash},
 #' \code{morie_secarg_variable_hash}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{writeBin}.
@@ -43,7 +42,6 @@
 #'
 #' A step of the secarg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{bitwAnd}.
 #' @return The value of \code{writeBin}.
@@ -141,7 +139,6 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
 #'
 #' A step of the secarg_native implementation. Called by \code{.P_mut}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; indexed elementwise.
 #' @param a See Usage.
@@ -185,7 +182,6 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
 #'
 #' A step of the secarg_native implementation. Called by \code{morie_secarg_compress}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{.gb_mut}.
 #' @return The value of \code{.gb_mut}.
@@ -306,7 +302,6 @@ morie_secarg_compress <- function(X, Y) {
 #'
 #' A step of the secarg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -327,7 +322,6 @@ morie_secarg_compress <- function(X, Y) {
 #'
 #' A step of the secarg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ws A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -348,7 +342,6 @@ morie_secarg_compress <- function(X, Y) {
 #'
 #' A step of the secarg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pass_no See Usage.
 #' @param lane See Usage.
@@ -472,7 +465,6 @@ morie_secarg_parameter_advice <- function(profile = "first") {
 #'
 #' A step of the secarg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
@@ -489,7 +481,6 @@ morie_secarg <- morie_secarg_argon2
 #'
 #' A step of the secarg_native implementation. Called by \code{.P_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; indexed elementwise.
 #' @param a See Usage.
@@ -577,7 +568,6 @@ morie_secarg <- morie_secarg_argon2
 #'
 #' A step of the secarg_native implementation. Called by \code{morie_secarg_compress}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{.gb}.
 #' @return The value of \code{v}, as built in the body.

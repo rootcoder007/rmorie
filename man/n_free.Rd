@@ -16,7 +16,6 @@ The value of \code{n}, as built in the body.
 \description{
 A step of the bats_native implementation. Called by \code{.fit_spec}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 spec <- BatsSpec(periods = c(4), use_trend = TRUE)

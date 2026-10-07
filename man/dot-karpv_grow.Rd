@@ -26,5 +26,4 @@ The value of \code{.karpv_fnode}.
 A step of the karpV_native implementation. Called by \code{morie_karpV},
 \code{morie_karpV_ramped}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -10,8 +10,7 @@
 #' @param addintercept Prepend the column X_0(s) = 1.
 #'
 #' @return List with beta, fitted, resid, rss, sigma2, n, p.
-#' @references Bivand, Pebesma and Gomez-Rubio (2013), Equation (8.5),
-#'   p. 218.  Read from the corpus PDF.
+#' @references Bivand, Pebesma and Gomez-Rubio (2013), Equation (8.5), p. 218.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

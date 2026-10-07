@@ -13,9 +13,11 @@ Msm317(...)
 The list returned by \code{Msm002()}.
 }
 \description{
-The stub generator stamped several extracted page fragments with the same
-function name, so the implementation lives once in \code{Msm002()} and this
-module re-exports it. Calling either path runs the same code.
+The same method as \code{Msm002()}, re-exported under this name; both run the same
+code.
+}
+\examples{
+Msm317(list(c(4.1, 4.5, 3.9), c(5.2, 5.0, 5.6)))$sd_residual
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

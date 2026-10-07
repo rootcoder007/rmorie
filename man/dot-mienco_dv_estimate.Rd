@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the mienco_native implementation. Called by \code{morie_mienco}.
 See the file header for the source the module follows.
-source it follows.
 }

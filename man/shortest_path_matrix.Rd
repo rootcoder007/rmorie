@@ -18,8 +18,7 @@ List with distance matrix, unreachable, n_unreachable.
 All-pairs shortest path lengths by BFS
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-shortest_path_matrix(D, V)
+adj <- list("0" = list("1" = 1), "1" = list("0" = 1, "2" = 1), "2" = list("1" = 1))
+shortest_path_matrix(adj, n = 3L)
 }
 \keyword{internal}

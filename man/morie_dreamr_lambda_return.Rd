@@ -33,7 +33,6 @@ The value of \code{.dreamr_pack}.
 \description{
 A step of the dreamr_native implementation. Called by \code{morie_dreamr}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- morie_dreamr_lambda_return(rewards = c(1, 0.8, 0.6, 0.4),

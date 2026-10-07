@@ -22,5 +22,4 @@ The value of \code{fid}, as built in the body.
 A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wi32},
 \code{.pq_wi64} and 4 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -315,9 +315,8 @@ morie_dsp_rls <- function(x, d, order = 16L, lam = 0.99, delta = 100) {
 
 #' IIR notch filter (single frequency)
 #'
-#' Native IIR notch (module 20); previously wrapped the signal package's
-#' `iirnotch` / `filtfilt`. Falls back to a stop with `NotYetPorted` if
-#' `signal` is unavailable.
+#' Native IIR notch (module 20), zero-phase by forward-backward filtering;
+#' no dependency on the signal package.
 #'
 #' @param x Numeric vector.
 #' @param freq Notch centre frequency (Hz).

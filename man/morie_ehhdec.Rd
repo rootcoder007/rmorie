@@ -25,6 +25,11 @@ core site, computed separately for chromosomes carrying each core
 allele (Sabeti et al. 2002) and for all chromosomes together, the
 site-wise EHHS of Sabeti et al. (2007).
 }
+\examples{
+set.seed(21)
+hap <- matrix(rbinom(20 * 7, 1, 0.5), 20, 7)
+morie_ehhdec(hap, core = 3)$ehh1
+}
 \references{
 Sabeti, P. C. et al. (2002). Detecting recent positive
 selection in the human genome from haplotype structure. Nature,

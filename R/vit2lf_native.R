@@ -79,7 +79,6 @@
 #'
 #' A step of the vit2lf_native implementation. Called by \code{morie_vit2lf_logits}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{.w3_dot}.
 #' @return A numeric value.

@@ -20,7 +20,6 @@ A list with \code{loss}, \code{index}, \code{losses}, \code{mean_loss},
 \description{
 A step of the sammkr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 min_loss_over_masks(list(c(1, 0), c(0, 1)), c(1, 0), function(p, t) sum((p - t)^2))

@@ -20,5 +20,4 @@ A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule},
 \description{
 A step of the clpopt_native implementation. Called by \code{simplex}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -99,8 +99,7 @@ morie_mistr_rope_angles <- function(d, base = 10000) {
 #' @return The rotated vector.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_mistr_apply_rope(V, V)
+#' morie_mistr_apply_rope(x = c(1, 0, 0.5, -0.5), pos = 3)
 #' @keywords internal
 morie_mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
   x <- as.numeric(x)
@@ -130,7 +129,7 @@ morie_mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
 #' @return An L x L logical matrix.
 #' @export
 #' @examples
-#' morie_mistr_sliding_window_mask(L = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
+#' morie_mistr_sliding_window_mask(L = 6L, window = 3L)
 #' @keywords internal
 morie_mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
   if (window < 1L)
@@ -297,13 +296,14 @@ morie_mistr <- morie_mistr_mistral_block
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_grouped_query_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param pos Numeric; combined arithmetically in the body.
 #' @param theta Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param base Passed to \code{mistr_rope_angles}. Defaults to \code{10000}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' mistr_apply_rope(c(1, 0, 1, 0), pos = 3)
 #' @export
 mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
   d <- length(x)
@@ -329,7 +329,6 @@ mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
 #'
 #' A step of the mistr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param window Coerced to integer by the body, with \code{as.integer}.
 #' @param n_layers Coerced to integer by the body, with \code{as.integer}.
@@ -344,9 +343,10 @@ mistr_attention_span <- function(window, n_layers) {
 #'
 #' A step of the mistr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(mistr_cheatsheet())
 #' @export
 mistr_cheatsheet <- function() {
   paste(paste0(
@@ -364,7 +364,6 @@ mistr_cheatsheet <- function() {
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A matrix; passed to \code{as.matrix}.
 #' @param K A matrix; passed to \code{as.matrix}.
@@ -375,6 +374,10 @@ mistr_cheatsheet <- function() {
 #' @param positions Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param base Passed to \code{mistr_apply_rope}. Defaults to \code{10000}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' set.seed(11)
+#' Q <- matrix(rnorm(16), 4, 4); K <- matrix(rnorm(8), 4, 2); V <- matrix(rnorm(8), 4, 2)
+#' dim(mistr_grouped_query_attention(Q, K, V, n_heads = 2, n_kv_heads = 1))
 #' @export
 mistr_grouped_query_attention <- function(Q, K, V, n_heads, n_kv_heads,
                                           mask = NULL, positions = NULL,
@@ -446,7 +449,6 @@ mistr_grouped_query_attention <- function(Q, K, V, n_heads, n_kv_heads,
 #'
 #' A step of the mistr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Wq Passed to \code{proj}.
@@ -465,6 +467,15 @@ mistr_grouped_query_attention <- function(Q, K, V, n_heads, n_kv_heads,
 #' @return A list with \code{estimate}, \code{output}, \code{attention_mask}, \code{L},
 #' \code{d}, \code{n_heads}, \code{n_kv_heads}, \code{window}, \code{kv_cache_entries},
 #' \code{method}.
+#' @examples
+#' set.seed(15)
+#' L <- 4; d <- 4; dff <- 6
+#' X <- matrix(rnorm(L * d), L, d)
+#' mk <- function(r, c) matrix(rnorm(r * c, sd = 0.3), r, c)
+#' b <- mistr_mistral_block(X, Wq = mk(d, d), Wk = mk(d, d / 2), Wv = mk(d, d / 2), Wo = mk(d, d),
+#'                          W1 = mk(d, dff), W2 = mk(dff, d), W3 = mk(d, dff),
+#'                          n_heads = 2, n_kv_heads = 1, window = 2)
+#' dim(b$output)
 #' @export
 mistr_mistral_block <- function(X, Wq, Wk, Wv, Wo, W1, W2, W3,
                                 n_heads, n_kv_heads, window,
@@ -497,12 +508,13 @@ mistr_mistral_block <- function(X, Wq, Wk, Wv, Wo, W1, W2, W3,
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @param weight Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return A numeric value.
+#' @examples
+#' mistr_rms_norm(c(3, 4))   # divides by sqrt(mean(x^2)) = sqrt(12.5)
 #' @export
 mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
   d <- length(x)
@@ -524,11 +536,12 @@ mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_apply_rope}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Numeric; combined arithmetically in the body.
 #' @param base Numeric; combined arithmetically in the body. Defaults to \code{10000}.
 #' @return A numeric value.
+#' @examples
+#' mistr_rope_angles(d = 8)
 #' @export
 mistr_rope_angles <- function(d, base = 10000) {
   if (d %% 2L != 0L) {
@@ -542,12 +555,13 @@ mistr_rope_angles <- function(d, base = 10000) {
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A count; the body uses it as \code{seq_len(...)}.
 #' @param window Passed to \code{<}.
 #' @param causal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{mask}, as built in the body.
+#' @examples
+#' mistr_sliding_window_mask(L = 5, window = 2)
 #' @export
 mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
   if (window < 1L) {
@@ -568,13 +582,16 @@ mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{crossprod}.
 #' @param W1 A matrix; passed to \code{crossprod}.
 #' @param W2 A matrix; passed to \code{crossprod}.
 #' @param W3 A matrix; passed to \code{crossprod}.
 #' @return A vector, from \code{as.numeric}.
+#' @examples
+#' set.seed(1)
+#' x <- matrix(rnorm(4), 1, 4)
+#' mistr_swiglu(x, W1 = matrix(rnorm(24), 4, 6), W2 = matrix(rnorm(24), 6, 4), W3 = matrix(rnorm(24), 4, 6))
 #' @export
 mistr_swiglu <- function(x, W1, W2, W3) {
   x <- as.numeric(x)

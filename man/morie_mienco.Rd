@@ -24,6 +24,5 @@ A list with \code{estimate}, \code{mi_lower_bound}, \code{estimator},
 \description{
 A step of the mienco_native implementation. Called by \code{.mienco_global_objective}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

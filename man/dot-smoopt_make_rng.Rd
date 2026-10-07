@@ -15,7 +15,6 @@ A list with \code{uniform}.
 \description{
 A step of the smoopt_native implementation. Called by \code{smo_platt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .smoopt_make_rng(seed = 1L)

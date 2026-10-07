@@ -18,7 +18,6 @@ A list with \code{realised_tail}, \code{expected_tail}, \code{ratio},
 \description{
 A step of the slowdp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 decay_diagnostics(weights = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)

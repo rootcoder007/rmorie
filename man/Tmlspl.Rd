@@ -39,6 +39,14 @@ HAC form of Aronow & Samii, summing \code{ic_i ic_j} over pairs that
 are adjacent or identical.  On an edgeless network it collapses back
 to the i.i.d. variance.
 }
+\examples{
+set.seed(13)
+n <- 120
+network <- matrix(rbinom(n * n, 1, 0.03), n); network <- (network + t(network) > 0) * 1; diag(network) <- 0
+X <- matrix(rnorm(n), n); D <- rbinom(n, 1, 0.5)
+y <- D + 0.5 * as.numeric(network \%*\% D) / pmax(rowSums(network), 1) + X[, 1] + rnorm(n)
+Tmlspl(y, D, X, network)$estimate
+}
 \references{
 Aronow, P. M. & Samii, C. (2017). Annals of Applied
 Statistics 11(4):1912-1947; Sofrygin, O. & van der Laan, M. J.

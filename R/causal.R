@@ -4,41 +4,22 @@
 #' T-learner, and 2SLS. All estimators require propensity scores that
 #' can be supplied or estimated internally via logistic regression.
 #'
-#' The Phase 1.h rewrite thin-wraps each estimator over the canonical
-#' CRAN causal-inference packages while preserving the inline
-#' implementation as a fallback (dual-arm pattern):
+#' Every estimator here is native and gives the same result whatever is
+#' installed: propensity scores (logistic regression), the IPW
+#' ATE/ATT/ATC with Hajek weights and influence-function SEs, AIPW, the
+#' doubly-robust forest, the g-formula with stdReg's sandwich SE, LATE
+#' (Wald / 2SLS k-class), double machine learning (PLR / IRM cross-fit),
+#' E-values and Rosenbaum bounds, and HC0-HC5 / cluster / HAC robust
+#' variances (\code{morie_causal_robust_se()}). The reference packages
+#' (WeightIt, AIPW, grf, stdReg, DoubleML, EValue, rbounds, sandwich) are
+#' used only by the cross-validation tests.
 #'
-#' * \code{morie_estimate_propensity_scores()} -> \pkg{WeightIt}
-#'   (\code{WeightIt::weightit(method = "glm")}) when installed.
-#' * \code{morie_estimate_ate/att/atc()} -> \pkg{WeightIt} weights with
-#'   the inline Hajek / influence-function estimator preserved.
-#' * \code{morie_estimate_aipw()} -> \pkg{AIPW} when installed, else
-#'   the inline doubly-robust estimator.
-#' * \code{morie_estimate_dr_forest()} -> \pkg{grf} causal forest with
-#'   doubly-robust (AIPW) averaging; honest random-forest nuisances.
-#' * \code{morie_estimate_g_computation()} -> \pkg{stdReg}
-#'   (\code{stdReg::stdGlm}) when installed, else inline G-formula.
-#' * \code{morie_estimate_late()} -> native Wald / 2SLS k-class
-#'   engine (module 17).
-#' * \code{morie_estimate_double_ml() / morie_estimate_irm()} ->
-#'   \pkg{DoubleML} when installed, else inline cross-fit ridge
-#'   (unchanged from prior release).
-#' * \code{morie_e_value()} -> \pkg{EValue} when installed, else
-#'   inline closed-form E-value.
-#' * \code{morie_sensitivity_rosenbaum()} -> \pkg{rbounds} /
-#'   \pkg{sensitivitymv} when installed, else inline sign-score bounds.
-#'
-#' Phase 1.h also adds four new \emph{extender} functions exposing
-#' value-add from CRAN packages that previously had no MORIE entry
-#' point:
-#'
-#' * \code{morie_causal_impact()} -> \pkg{CausalImpact}
-#'   (Bayesian structural time-series intervention analysis).
-#' * \code{morie_causal_weighting()} -> \pkg{WeightIt}
-#'   (full \code{weightit()} interface with method = glm / cbps /
-#'   ebal / ps / energy / optweight).
-#' * \code{morie_causal_robust_se()} -> \pkg{sandwich}
-#'   (HC0-HC5 / cluster / HAC robust variance matrices).
+#' Two functions reach an optional package by design, and say so:
+#' \code{morie_causal_impact()} is a named pass-through to
+#' \pkg{CausalImpact} (Bayesian structural time series), and
+#' \code{morie_causal_weighting()} uses \pkg{WeightIt} only for a weighting
+#' method this package has no engine for (glm, cbps and ATT entropy
+#' balancing are native).
 #'
 #' @name causal
 #' @keywords internal
@@ -49,64 +30,10 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Causal Have Weightit
-#' @noRd
-.causal_have_weightit     <- function() {
-  requireNamespace("WeightIt",     quietly = TRUE)
-}
-#' Internal helper: Causal Have Aipw
-#' @noRd
-.causal_have_aipw         <- function() {
-  requireNamespace("AIPW",         quietly = TRUE)
-}
-#' Internal helper: Causal Have Stdreg
-#' @noRd
-.causal_have_stdreg       <- function() {
-  requireNamespace("stdReg",       quietly = TRUE)
-}
-#' Internal helper: Causal Have Doubleml
-#' @noRd
-.causal_have_doubleml     <- function() {
-  requireNamespace("DoubleML",     quietly = TRUE) &&
-    requireNamespace("mlr3",         quietly = TRUE) &&
-    requireNamespace("mlr3learners", quietly = TRUE) &&
-    requireNamespace("ranger",       quietly = TRUE)
-}
-#' Internal helper: Causal Have Evalue
-#' @noRd
-.causal_have_evalue       <- function() {
-  requireNamespace("EValue",       quietly = TRUE)
-}
-#' Internal helper: Causal Have Rbounds
-#' @noRd
-.causal_have_rbounds      <- function() {
-  requireNamespace("rbounds",      quietly = TRUE)
-}
-#' Internal helper: Causal Have Sensitivitymv
-#' @noRd
-.causal_have_sensitivitymv <- function() {
-  requireNamespace("sensitivitymv", quietly = TRUE)
-}
 #' Internal helper: Causal Have Causalimpact
 #' @noRd
 .causal_have_causalimpact <- function() {
   requireNamespace("CausalImpact", quietly = TRUE)
-}
-#' Internal helper: Causal Have Aer
-#' @noRd
-.causal_have_aer          <- function() {
-  requireNamespace("AER",          quietly = TRUE)
-}
-#' Internal helper: Causal Have Grf
-#' @noRd
-.causal_have_grf          <- function() {
-  requireNamespace("grf",          quietly = TRUE)
-}
-#' Internal helper: Causal Have Ivreg
-#' @noRd
-.causal_have_ivreg        <- function() {
-  requireNamespace("ivreg",        quietly = TRUE) ||
-    requireNamespace("AER",          quietly = TRUE)
 }
 
 # Internal helper: Fit Propensity
@@ -310,9 +237,8 @@ NULL
 
 #' Estimate propensity scores via logistic regression
 #'
-#' Thin wrapper over \eqn{WeightIt::weightit(method = "glm",
-#' estimand = "ATE")} when \pkg{WeightIt} is installed; falls back
-#' to \code{stats::glm(family = binomial())} otherwise.
+#' Logistic regression of the treatment on the covariates (native; the
+#' same scores as \code{WeightIt::weightit(method = "glm")}).
 #'
 #' @param data A data frame.
 #' @param treatment Name of the binary treatment column.
@@ -511,10 +437,8 @@ NULL
 #' @export
 #' @examples
 #' set.seed(1)
-#' if (requireNamespace("WeightIt", quietly = TRUE)) {
-#'   df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
-#'   morie_estimate_propensity_scores(df, "t", "x")
-#' }
+#' df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
+#' morie_estimate_propensity_scores(df, "t", "x")
 #' @keywords internal
 morie_estimate_propensity_scores <- function(data, treatment, covariates,
                                              trim = c(0.01, 0.99),
@@ -535,6 +459,20 @@ morie_estimate_propensity_scores <- function(data, treatment, covariates,
 # ATE -- Hajek IPW
 # ---------------------------------------------------------------------------
 
+# HC3 standard error of the slope in the weighted regression y ~ t (statsmodels' WLS with
+# cov_type = "HC3": OLS on sqrt(w)-scaled rows, residuals and leverages of the scaled design).
+.ipw_hc3_se <- function(y, t, w) {
+  sw <- sqrt(w)
+  X <- cbind(sw, sw * t)
+  yw <- sw * y
+  bread <- solve(crossprod(X))
+  b <- bread %*% crossprod(X, yw)
+  e <- as.numeric(yw - X %*% b)
+  h <- rowSums((X %*% bread) * X)
+  meat <- crossprod(X * (e / (1 - h)))
+  sqrt((bread %*% meat %*% bread)[2L, 2L])
+}
+
 #' Estimate the Average Treatment Effect (ATE) via Hajek IPW
 #'
 #' The Hajek estimator uses stabilised IPW weights:
@@ -544,11 +482,9 @@ morie_estimate_propensity_scores <- function(data, treatment, covariates,
 #' and \eqn{w_i = T_i/\hat{e}(X_i) + (1-T_i)/(1-\hat{e}(X_i))}{w_i = T_i/e_hat(X_i) +
 #' (1-T_i)/(1-e_hat(X_i))}.
 #'
-#' When \pkg{WeightIt} is installed the propensity step delegates to
-#' \code{WeightIt::weightit()}; otherwise the inline logistic
-#' regression is used. The Hajek difference and influence-function SE
-#' below are evaluated inline either way so the result list shape and
-#' the closed-form variance preserved.
+#' The propensity scores come from the native logistic regression of
+#' \code{morie_estimate_propensity_scores()}; the Hajek difference and its
+#' influence-function SE are computed in closed form.
 #'
 #' @param data A data frame.
 #' @param treatment Name of the binary treatment column.
@@ -606,15 +542,14 @@ morie_estimate_ate <- function(data, treatment, outcome, covariates,
   w <- t / ps + (1 - t) / (1 - ps)
   w <- .mor_trim_weights(w, weight_trim, weight_trim_side)
   ate <- .hajek_diff(y[t == 1], w[t == 1], y[t == 0], w[t == 0])
-  # Standard IPW influence-function SE (Hernan-Robins, "What If" Ch 12.6):
-  # psi_i = t*y/ps - (1-t)*y/(1-ps) - ATE. Divides by sqrt(total n).
-  # NB: This is the "known propensity score" form. When ps is estimated
-  # (the default path via morie_estimate_propensity_scores), this SE is
-  # conservative -- it ignores the PS-estimation step and slightly
-  # over-estimates variance. Standard for IPW packages; bootstrap or
-  # WeightIt / survey for the efficient sandwich correction.
-  if_vec <- t * y / ps - (1 - t) * y / (1 - ps) - ate
-  se <- stats::sd(if_vec) / sqrt(length(y))
+  # The Hajek estimate is the coefficient of t in the weighted regression y ~ t; its standard
+  # error is that regression's HC3 sandwich (heteroskedasticity-robust, the leverage-adjusted
+  # form), as morie's Python arm computes it with statsmodels. The earlier formula, the
+  # Horvitz-Thompson influence function t*y/ps - (1-t)*y/(1-ps) - ATE, belongs to the
+  # unnormalised estimator: it is not centred on the group means, so it grew with the level of y
+  # and ran 45-57% above this one (69% above the sampling SD in simulation). Like any
+  # plug-in SE it treats the propensity scores as known, which errs on the conservative side.
+  se <- .ipw_hc3_se(y, t, w)
   ci <- .wald_ci(ate, se)
   ess <- (sum(w)^2) / sum(w^2)
 
@@ -644,9 +579,9 @@ morie_estimate_ate <- function(data, treatment, outcome, covariates,
 #' Treated units receive weight 1; controls receive
 #' \eqn{w_i = \hat{e}(X_i)/(1-\hat{e}(X_i))}{w_i = e_hat(X_i)/(1-e_hat(X_i))}.
 #'
-#' Propensity-score estimation delegates to \pkg{WeightIt} when
-#' installed (via \code{morie_estimate_propensity_scores}); the
-#' weighted-difference and influence-function SE run inline.
+#' The propensity scores come from \code{morie_estimate_propensity_scores()}
+#' (native logistic regression); the weighted difference and its
+#' influence-function SE are closed form.
 #'
 #' @inheritParams morie_estimate_ate
 #' @return Named list: `att`, `se`, `ci_lower`, `ci_upper`, `n_treated`.
@@ -696,9 +631,9 @@ morie_estimate_att <- function(data, treatment, outcome, covariates,
 #' Control units receive weight 1; treated units receive
 #' \eqn{w_i = (1-\hat{e}(X_i))/\hat{e}(X_i)}{w_i = (1-e_hat(X_i))/e_hat(X_i)}.
 #'
-#' Propensity-score estimation delegates to \pkg{WeightIt} when
-#' installed (via \code{morie_estimate_propensity_scores}); the
-#' weighted-difference and influence-function SE run inline.
+#' The propensity scores come from \code{morie_estimate_propensity_scores()}
+#' (native logistic regression); the weighted difference and its
+#' influence-function SE are closed form.
 #'
 #' @inheritParams morie_estimate_ate
 #' @return Named list: `atc`, `se`, `ci_lower`, `ci_upper`, `n_control`.
@@ -750,10 +685,9 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 # \strong{either} the propensity model \strong{or} the outcome model
 # is correctly specified.
 #
-# The propensity step delegates to \pkg{WeightIt} when installed
-# (via \code{morie_estimate_propensity_scores}). The outcome
-# regression and the doubly-robust influence-function score are
-# evaluated inline to preserve the closed-form SE used downstream.
+# The propensity scores come from morie_estimate_propensity_scores()
+# (native logistic regression); the outcome regression and the
+# doubly-robust influence-function score are closed form.
 # Where richer outputs are desired, \code{AIPW::AIPW} (with SuperLearner
 # nuisance learners) is the canonical CRAN counterpart.
 #
@@ -812,14 +746,12 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 #' \strong{either} the propensity model \strong{or} the outcome model
 #' is correctly specified.
 #'
-#' The propensity step delegates to \pkg{WeightIt} when installed
-#' (via \code{morie_estimate_propensity_scores}). The outcome
-#' regression and the doubly-robust influence-function score are
-#' evaluated inline to preserve the closed-form SE used downstream.
+#' The propensity scores come from \code{morie_estimate_propensity_scores()}
+#' (native logistic regression); the outcome regression and the
+#' doubly-robust influence-function score are closed form.
 #' Where richer outputs are desired, \code{AIPW::AIPW} (with SuperLearner
 #' nuisance learners) is the canonical CRAN counterpart.
 #'
-#' @inheritParams morie_estimate_ate
 #' @param outcome_model Family for the outcome model: `"auto"` (logistic for a 0/1 outcome, linear otherwise), `"linear"` or
 #'   `"logistic"`.
 #' @param data A vector; indexed elementwise.
@@ -1276,9 +1208,7 @@ morie_e_value <- function(rr, rr_lower = NULL) {
 #' @return Data frame with columns: `gamma`, `p_lower`, `p_upper`.
 #' @examples
 #' set.seed(1)
-#' if (requireNamespace("rbounds", quietly = TRUE) && requireNamespace("stdReg", quietly = TRUE)) {
-#'   morie_sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))
-#' }
+#' morie_sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))
 #' @export
 #' @references
 #'   Rosenbaum PR (2002). *Observational Studies* (2nd ed.). Springer.
@@ -1331,6 +1261,44 @@ morie_sensitivity_rosenbaum <- function(treated, control,
 # G-computation (outcome regression ATE)
 # ---------------------------------------------------------------------------
 
+#' Internal: the standardised (g-formula) ATE of a fitted GLM and its sandwich SE
+#'
+#' The M-estimation sandwich of stdReg::stdGlm (Sjolander 2016), computed
+#' natively: the GLM score equations stacked with the two standardisation
+#' equations, V = I^-1 J I^-T / n, and the ATE's SE by the delta method. The
+#' plain sd(mu1 - mu0) / sqrt(n) ignores the outcome model's own uncertainty
+#' and understates it. Cross-validated against stdReg in tests/cross.
+#' @noRd
+.morie_gformula_std <- function(fit, data, treatment) {
+  X <- stats::model.matrix(fit)
+  n <- nrow(X)
+  w <- fit$prior.weights
+  dat <- data[match(rownames(X), rownames(data)), , drop = FALSE]
+  mu_eta <- fit$family$mu.eta
+  pred <- matrix(NA_real_, n, 2L)
+  si_beta <- matrix(NA_real_, 2L, ncol(X))
+  for (i in 1:2) {
+    dx <- dat
+    dx[[treatment]] <- i - 1
+    pred[, i] <- as.numeric(stats::predict(fit, newdata = dx, type = "response"))
+    deta <- mu_eta(as.numeric(stats::predict(fit, newdata = dx)))
+    Xx <- stats::model.matrix(stats::terms(fit), data = dx)
+    si_beta[i, ] <- colMeans(w * deta * Xx)
+  }
+  est <- colSums(w * pred) / sum(w)
+  scores <- cbind(w * (pred - matrix(est, n, 2L, byrow = TRUE)),
+                  w * X * as.numeric(stats::residuals(fit, type = "response")))
+  J <- stats::var(scores)
+  I <- rbind(cbind(-diag(2L) * mean(w), si_beta),
+             cbind(matrix(0, ncol(X), 2L), -solve(summary(fit)$cov.unscaled) / n))
+  Ii <- solve(I)
+  V <- (Ii %*% J %*% t(Ii) / n)[1:2, 1:2]
+  ate <- est[2L] - est[1L]
+  se <- sqrt(V[1L, 1L] + V[2L, 2L] - 2 * V[1L, 2L])
+  list(ate = ate, se = se)
+}
+
+
 #' G-computation (outcome regression) ATE estimator
 #'
 #' Estimates the ATE by:
@@ -1338,19 +1306,22 @@ morie_sensitivity_rosenbaum <- function(treated, control,
 #' \hat{\mu}_0(X_i)\bigr]}{ATE_hat = (1)/(n)sum_i bigl[mu_hat_1(X_i) -
 #' mu_hat_0(X_i)bigr]}
 #'
-#' Delegates the standardisation step to \code{stdReg::stdGlm()} when
-#' \pkg{stdReg} is installed; otherwise computes the contrast inline
-#' from a single \code{stats::glm()} fit with treatment-flipped
-#' counterfactual datasets.
+#' The outcome model is one \code{stats::glm()} fit; its predictions with
+#' the treatment set to 1 and to 0 are averaged over the sample. The SE is
+#' the M-estimation sandwich of \code{stdReg::stdGlm()} (Sjolander 2016):
+#' the GLM score equations stacked with the two standardisation equations,
+#' so the outcome model's own uncertainty is included. Computed natively;
+#' cross-validated against stdReg in \code{tests/cross}.
+#' @references Sjolander, A. (2016). Regression standardization with the R
+#'   package stdReg. \emph{European Journal of Epidemiology}, 31(6), 563--574.
 #'
 #' @inheritParams morie_estimate_aipw
 #' @return Named list: `ate`, `se`, `ci_lower`, `ci_upper`.
 #' @examples
-#' if (requireNamespace("stdReg", quietly = TRUE)) {
-#'   set.seed(1)
-#'   df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-#'   morie_estimate_g_computation(df, "t", "y", "x")
-#' }
+#' set.seed(1)
+#' df <- data.frame(t = rbinom(200, 1, 0.4), x = rnorm(200))
+#' df$y <- 1 + 0.5 * df$t + df$x + rnorm(200)
+#' morie_estimate_g_computation(df, "t", "y", "x")
 #' @export
 morie_estimate_g_computation <- function(data, treatment, outcome,
                                          covariates,
@@ -1367,34 +1338,9 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
   )
   fit <- stats::glm(formula, data = data, family = fam)
 
-  if (.causal_have_stdreg()) {
-    res <- tryCatch({
-      std <- stdReg::stdGlm(fit = fit, data = data, X = treatment,
-                            x = c(0, 1))
-      sm <- summary(std, contrast = "difference", reference = 0)
-      # sm$est.table is a matrix with rows for each x and cols
-      # Estimate / Std. Error / lower / upper.
-      tab <- sm$est.table
-      ate_idx <- which(rownames(tab) == "1")
-      ate <- as.numeric(tab[ate_idx, "Estimate"])
-      se  <- as.numeric(tab[ate_idx, "Std. Error"])
-      ci  <- .wald_ci(ate, se)
-      list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
-    }, error = function(e) NULL)
-    if (!is.null(res)) {
-      return(res)
-    }
-  }
-
-  data1 <- data
-  data1[[treatment]] <- 1
-  data0 <- data
-  data0[[treatment]] <- 0
-  mu1 <- as.numeric(stats::predict(fit, newdata = data1, type = "response"))
-  mu0 <- as.numeric(stats::predict(fit, newdata = data0, type = "response"))
-  diffs <- mu1 - mu0
-  ate <- mean(diffs)
-  se <- stats::sd(diffs) / sqrt(length(diffs))
+  g <- .morie_gformula_std(fit, data, treatment)
+  ate <- g$ate
+  se <- g$se
   ci <- .wald_ci(ate, se)
   list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
 }
@@ -1575,9 +1521,7 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #'   models. *Annals of Applied Statistics*, 9(1):247-274.
 #' @examples
 #' set.seed(1)
-#' if (requireNamespace("CausalImpact", quietly = TRUE) &&
-#'   requireNamespace("WeightIt", quietly = TRUE) &&
-#'   requireNamespace("cobalt", quietly = TRUE) && requireNamespace("survey", quietly = TRUE)) {
+#' if (requireNamespace("CausalImpact", quietly = TRUE)) {
 #'   morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)),
 #'       pre_period = c(1, 5), post_period = c(6, 10))
 #' }
@@ -1613,18 +1557,17 @@ morie_causal_impact <- function(data, pre_period, post_period,
 }
 
 
-#' Estimate balancing weights via \pkg{WeightIt}
+#' Estimate balancing weights
 #'
-#' Thin wrapper around \code{WeightIt::weightit()} exposing the full
-#' WeightIt method palette (\code{"glm"}, \code{"cbps"},
-#' \code{"ebal"}, \code{"ps"}, \code{"energy"}, \code{"optweight"},
-#' and any future additions). Provides MORIE callers with a stable
-#' \code{morie_*} entry point for balancing weights while preserving
-#' the underlying object so callers can pipe into
-#' \code{survey::svyglm} or \code{cobalt::bal.tab} downstream.
-#'
-#' Hard-errors if \pkg{WeightIt} is not installed -- the multi-method
-#' weighting machinery has no compact inline equivalent.
+#' Balancing weights under a \code{WeightIt}-style method name. The methods
+#' this package has engines for run natively and give the same weights
+#' whatever is installed: \code{"glm"} / \code{"ps"} (logistic propensity
+#' weights, \code{\link{morie_weight_ps}}), \code{"cbps"}
+#' (\code{\link{morie_weight_cbps}}) and, for the ATT, \code{"ebal"} /
+#' \code{"entropy"} (\code{\link{morie_weight_entropy}}). Any other method
+#' (\code{"energy"}, \code{"optweight"}, \code{"bart"}, ...) is passed to
+#' \code{WeightIt::weightit()}, which must then be installed; the error says
+#' so and names the native methods.
 #'
 #' @param data A data frame.
 #' @param treatment Name of the treatment column (binary, multinomial,
@@ -1636,48 +1579,47 @@ morie_causal_impact <- function(data, pre_period, post_period,
 #' @param estimand One of \code{"ATE"}, \code{"ATT"}, \code{"ATC"};
 #'   defaults to \code{"ATE"}.
 #' @param ... Additional arguments forwarded to
-#'   \code{WeightIt::weightit()}.
+#'   \code{WeightIt::weightit()} (non-native methods only).
 #' @return Named list with elements \code{weights} (numeric vector),
 #'   \code{propensity_scores} (numeric vector or \code{NULL}),
 #'   \code{method}, \code{estimand}, \code{ess} (effective sample
-#'   size), and \code{weightit} (the original WeightIt object).
+#'   size), and \code{weightit} (the WeightIt object for a non-native
+#'   method, \code{NULL} otherwise).
 #' @export
 #' @references
 #'   Greifer N (2024). WeightIt: Weighting for Covariate Balance in
 #'   Observational Studies. R package version 1.4.0.
 #' @examples
 #' set.seed(1)
-#' if (requireNamespace("WeightIt", quietly = TRUE) && requireNamespace("sandwich", quietly = TRUE)) {
-#'   morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4),
-#'       x = rnorm(20)), treatment = "t", covariates = "x")
-#' }
+#' w <- morie_causal_weighting(data = data.frame(t = rbinom(40, 1, 0.4),
+#'     x = rnorm(40)), treatment = "t", covariates = "x")
+#' w$ess
 morie_causal_weighting <- function(data, treatment, covariates,
                                    method = "glm",
                                    estimand = c("ATE", "ATT", "ATC"),
                                    ...) {
-  if (!.causal_have_weightit()) {
-    stop(
-      "morie_causal_weighting requires the 'WeightIt' package. ",
-      "Install with install.packages('WeightIt').",
-      call. = FALSE
-    )
-  }
   estimand <- match.arg(estimand)
-  formula <- stats::as.formula(
-    paste(treatment, "~", paste(covariates, collapse = " + "))
+  native <- switch(method,
+    glm = , ps = morie_weight_ps(data, treatment, covariates, estimand = estimand),
+    cbps = morie_weight_cbps(data, treatment, covariates, estimand = estimand),
+    ebal = , entropy = if (estimand == "ATT") morie_weight_entropy(data, treatment, covariates) else NULL,
+    NULL
   )
-  w <- WeightIt::weightit(formula, data = data, method = method,
-                          estimand = estimand, ...)
+  if (!is.null(native)) {
+    wt <- native$weights
+    return(list(weights = wt, propensity_scores = native$propensity, method = method,
+                estimand = estimand, ess = sum(wt)^2 / sum(wt^2), weightit = NULL))
+  }
+  # a method this package has no engine for: WeightIt's, explicitly
+  if (!requireNamespace("WeightIt", quietly = TRUE)) {
+    stop(sprintf("method = \"%s\" (estimand %s) is WeightIt's; install.packages(\"WeightIt\"), ", method, estimand),
+         "or use a native method: \"glm\", \"cbps\", or \"ebal\" for the ATT", call. = FALSE)
+  }
+  formula <- stats::as.formula(paste(treatment, "~", paste(covariates, collapse = " + ")))
+  w <- WeightIt::weightit(formula, data = data, method = method, estimand = estimand, ...)
   wt <- as.numeric(w$weights)
-  ess <- (sum(wt)^2) / sum(wt^2)
-  list(
-    weights = wt,
-    propensity_scores = if (!is.null(w$ps)) as.numeric(w$ps) else NULL,
-    method = method,
-    estimand = estimand,
-    ess = ess,
-    weightit = w
-  )
+  list(weights = wt, propensity_scores = if (!is.null(w$ps)) as.numeric(w$ps) else NULL,
+       method = method, estimand = estimand, ess = sum(wt)^2 / sum(wt^2), weightit = w)
 }
 
 

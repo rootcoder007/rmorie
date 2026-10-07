@@ -480,6 +480,7 @@ morie_zonal_ebm <- function(S, albedo = 0.3, A = 203.3, B = 2.09, k = 3.8,
                             n_zones = 9, max_iter = 500, tol = 1e-8,
                             ice_albedo = 0.62, ice_threshold = -10,
                             start = 15) {
+  .morie_arg(S, "n")
   n <- as.integer(n_zones)
   if (n < 2L) stop("n_zones must be at least 2", call. = FALSE)
   edges <- seq(-1, 1, length.out = n + 1L)

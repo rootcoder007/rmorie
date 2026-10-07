@@ -19,5 +19,4 @@ The value of \code{tot}, as built in the body.
 \description{
 A step of the ffmFM_native implementation. Called by \code{.fit_ffm}.
 See the file header for the source the module follows.
-source it follows.
 }

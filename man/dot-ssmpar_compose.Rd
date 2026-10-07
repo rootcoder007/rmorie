@@ -18,5 +18,4 @@ A vector, from \code{c}.
 A step of the ssmpar_native implementation. Called by \code{.ssmpar_upsweep},
 \code{check_associativity}, \code{parallel_scan}.
 See the file header for the source the module follows.
-source it follows.
 }

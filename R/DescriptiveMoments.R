@@ -57,6 +57,7 @@ central_moment <- function(x, k = 2) {
 #' @rdname sample_mean
 #' @export
 skewness_coeff <- function(x) {
+  .morie_arg(x, "n")
   x <- as.numeric(x)
   d <- x - mean(x)
   m2 <- mean(d^2)

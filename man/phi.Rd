@@ -20,7 +20,6 @@ The value of \code{tot}, as built in the body.
 A step of the ffmFM_native implementation. Called by \code{explor}, \code{fit_ffm},
 \code{gated_update} and 15 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(3)

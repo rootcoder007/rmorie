@@ -25,7 +25,6 @@ A logical value.
 \description{
 A step of the smoopt_native implementation. Called by \code{smo_platt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 violates_kkt(i = 5L, alpha = 0.5, y = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8),

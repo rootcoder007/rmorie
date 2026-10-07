@@ -45,7 +45,6 @@ A list with \code{estimate}, \code{psi}, \code{F_treated}, \code{F_control},
 \description{
 A step of the tmlcmp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

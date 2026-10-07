@@ -21,7 +21,6 @@ A numeric value.
 \description{
 A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_sctraj_shrinkage_weight(t = 5, t_min = 0, t_max = 10)

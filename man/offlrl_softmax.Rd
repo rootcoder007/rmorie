@@ -15,5 +15,8 @@ A numeric value.
 \description{
 A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+offlrl_softmax(c(1, 2, 3))
+exp(1:3) / sum(exp(1:3))
 }

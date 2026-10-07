@@ -21,7 +21,6 @@ A list with \code{y}, \code{offset}, \code{X}, \code{n_risk}, \code{n_age},
 \description{
 A step of the smatch_native implementation. Called by \code{morie_smatch_sccs_poisson_fit}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 cases <- list(

@@ -23,7 +23,6 @@ The value of \code{heads}, as built in the body.
 \description{
 A step of the berte_native implementation. Called by \code{multi_head_attention}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

@@ -16,7 +16,6 @@ A numeric value.
 A step of the lda_native implementation. Called by \code{.morie_lda_elbo},
 \code{.morie_lda_variational_inference}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .morie_lda_e_log_theta(gamma = 0.5)

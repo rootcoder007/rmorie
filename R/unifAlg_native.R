@@ -548,5 +548,5 @@ morie_unifAlg_factor_through <- function(general, other, over) {
 # Main entry point
 morie_unifAlg <- morie_unifAlg_unify
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_unifAlg_unification <- morie_unifAlg_unify

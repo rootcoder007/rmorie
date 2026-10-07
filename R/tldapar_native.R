@@ -268,6 +268,7 @@ variable_importance <- function(X, Y, screen, effect, V = 5L,
 #' }
 #' @keywords internal
 naive_reuse <- function(define_and_estimate, n, seed = 0L) {
+  .morie_arg(define_and_estimate, "f")
   r <- define_and_estimate(seq_len(as.integer(n)))
   list(estimate = as.numeric(r$estimate),
        warning = "the parameter was selected and estimated on the same sample; the reported inference is not valid for the selected parameter")

@@ -1,15 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' First-stage F statistic for weak instruments
 #'
-#' Source FETCHED (reference implementation): the partial-F used by
-#' Stock, Wright and Yogo (2002), Journal of Business and Economic
-#' Statistics 20, 518-529.  With RSS_u the residual sum of squares of
-#' the first-stage regression \code{D ~ X_exog + Z} and RSS_r that of
-#' the restricted fit on \code{X_exog} alone,
-#' \code{F = ((RSS_r - RSS_u)/L) / (RSS_u/(n - k - L))} on
-#' \code{(L, n - k - L)} degrees of freedom.  The Stock-Yogo threshold
-#' of 10 is reported as \code{weak}, but it is a rule of thumb, not a
-#' size-correct critical value.
+#' Source: the partial-F used by Stock, Wright and Yogo (2002), Journal of Business and
+#' Economic Statistics 20, 518-529. With RSS_u the residual sum of squares of the
+#' first-stage regression \code{D ~ X_exog + Z} and RSS_r that of the restricted fit on
+#' \code{X_exog} alone, \code{F = ((RSS_r - RSS_u)/L) / (RSS_u/(n - k - L))} on
+#' \code{(L, n - k - L)} degrees of freedom. The Stock-Yogo threshold of 10 is reported
+#' as \code{weak}, but it is a rule of thumb, not a size-correct critical value.
 #'
 #' @param D Numeric endogenous regressor of length n.
 #' @param Z Numeric n x L matrix of excluded instruments.

@@ -19,7 +19,6 @@
 #'
 #' A step of the offlrl_native implementation. Called by \code{offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -37,7 +36,6 @@
 #'
 #' A step of the offlrl_native implementation. Called by \code{offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -57,7 +55,6 @@
 #'
 #' A step of the offlrl_native implementation. Called by \code{offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param S See Usage.
@@ -97,7 +94,6 @@
 #'
 #' A step of the offlrl_native implementation. Called by \code{offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Passed to \code{paste0}.
 #' @param a Passed to \code{paste0}.
@@ -109,7 +105,6 @@
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dataset The body requires: offlrl: dataset must be non-empty.
 #' @param states Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
@@ -368,7 +363,6 @@ conservative_q_learning <- offlrl
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -392,13 +386,16 @@ morie_offlrl <- offlrl
 #'
 #' A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param S See Usage.
 #' @param A See Usage.
 #' @param name Passed to \code{stop}.
 #' @return A list with \code{matrix}, \code{lookup}.
+#' @examples
+#' d <- function(s, a) if (a == 0) 0.25 else 0.75
+#' pi_b <- offlrl_as_dist(d, S = c(0, 1), A = c(0, 1), name = "behaviour")
+#' pi_b$lookup(1, 1)
 #' @export
 offlrl_as_dist <- function(d, S, A, name) {
   if (is.null(d)) return(NULL)
@@ -429,9 +426,10 @@ offlrl_as_dist <- function(d, S, A, name) {
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(offlrl_cheatsheet())
 #' @export
 offlrl_cheatsheet <- function() {
   paste("offlrl: CQL (Kumar 2020). Fitted Q plus alpha*(push DOWN ",
@@ -448,10 +446,12 @@ offlrl_cheatsheet <- function() {
 #'
 #' A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
+#' @examples
+#' offlrl_logsumexp(c(1000, 1000))
+#' log(2) + 1000
 #' @export
 offlrl_logsumexp <- function(v) {
   m <- max(v)
@@ -463,12 +463,14 @@ offlrl_logsumexp <- function(v) {
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mat A vector; indexed elementwise.
 #' @param s Passed to \code{paste0}.
 #' @param a Passed to \code{paste0}.
 #' @return The value of \code{[[}.
+#' @examples
+#' mat <- list(`0|1` = 0.25, `1|1` = 0.75)
+#' offlrl_lookup(mat, 1, 1)
 #' @export
 offlrl_lookup <- function(mat, s, a) {
   mat[[paste0(s, "|", a)]]
@@ -479,12 +481,14 @@ offlrl_lookup <- function(mat, s, a) {
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param qmap A vector; indexed elementwise.
 #' @param s Passed to \code{paste0}.
 #' @param A A vector; indexed elementwise.
 #' @return The value of \code{best_a}, as built in the body.
+#' @examples
+#' q <- list(`0|0` = 0.2, `0|1` = 0.7)
+#' offlrl_safe_max_key(q, 0, A = c(0, 1))
 #' @export
 offlrl_safe_max_key <- function(qmap, s, A) {
   best_v <- -Inf
@@ -502,10 +506,12 @@ offlrl_safe_max_key <- function(qmap, s, A) {
 #'
 #' A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
+#' @examples
+#' offlrl_softmax(c(1, 2, 3))
+#' exp(1:3) / sum(exp(1:3))
 #' @export
 offlrl_softmax <- function(v) {
   m <- max(v)

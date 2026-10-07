@@ -24,6 +24,11 @@ Five heavy-atom pair terms, all functions of the surface distance
 rotatable-bond term divides rather than adds, penalising the entropy
 a flexible ligand gives up on binding.
 }
+\examples{
+receptor <- cbind(c(0, 2, 4), c(0, 0, 0), c(0, 0, 0), c(1.9, 1.8, 1.9), c(1, 2, 0))
+ligand <- cbind(c(0, 2), c(4, 4), c(0, 0), c(1.9, 1.8), c(1, 2))
+Vinasc(receptor, ligand, n_rot = 2)$estimate
+}
 \references{
 Trott, O. & Olson, A. J. (2010). AutoDock Vina. Journal
 of Computational Chemistry 31:455-461. Weights are table 1;

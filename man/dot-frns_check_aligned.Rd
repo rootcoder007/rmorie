@@ -15,5 +15,4 @@ One of two values, depending on the branch taken.
 \description{
 A step of the frns_metrics implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

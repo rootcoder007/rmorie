@@ -80,7 +80,6 @@
 #'
 #' A step of the goldsc_native implementation. Called by \code{.goldsc_pair}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{switch}.
 #' @return The value of \code{switch}.
@@ -92,7 +91,6 @@
 #'
 #' A step of the goldsc_native implementation. Called by \code{.goldsc_pair}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{switch}.
 #' @return The value of \code{switch}.
@@ -184,7 +182,6 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 #'
 #' A step of the goldsc_native implementation. Called by \code{morie_goldsc_vdw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Passed to \code{morie_goldsc_split}.
 #' @param r0 Passed to \code{morie_goldsc_split}.
@@ -207,7 +204,6 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 #'
 #' A step of the goldsc_native implementation. Called by \code{morie_goldsc_vdw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param table See Usage.
 #' @param key Passed to \code{==}.
@@ -309,7 +305,6 @@ morie_goldsc_torsion <- function(torsions) {
 #'
 #' A step of the goldsc_native implementation. Called by \code{morie_goldsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.

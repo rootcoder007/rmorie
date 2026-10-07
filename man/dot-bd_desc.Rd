@@ -18,5 +18,4 @@ The value of \code{seen}, as built in the body.
 A step of the causal_native implementation. Called by \code{.bd_blocked},
 \code{morie_backdoor_criterion}.
 See the file header for the source the module follows.
-source it follows.
 }

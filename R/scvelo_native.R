@@ -116,7 +116,6 @@ morie_solve_kinetics <- function(tau, alpha, beta, gamma,
 #' A step of the scvelo_native implementation. Called by \code{morie_dynamical_fit},
 #' \code{morie_simulate_gene}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param s Coerced to numeric by the body, with \code{as.numeric}.

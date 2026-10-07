@@ -14,5 +14,8 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{morie_spatial_voting_classical_mds}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+D <- as.matrix(dist(cbind(c(0, 1, 0, 1), c(0, 0, 1, 1))))
+morie_spatial_classical_mds_cpp(D, 2L)
 }

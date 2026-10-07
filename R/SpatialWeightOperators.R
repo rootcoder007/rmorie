@@ -19,6 +19,7 @@
 #' RhoBounds(matrix(c(0, 1, 0, .5, 0, .5, 0, 1, 0), 3, byrow = TRUE))[c("lower", "upper")]
 #' @export
 RhoBounds <- function(W, tol = 1e-10) {
+  .morie_arg(W, "m")
   W <- as.matrix(W)
   if (nrow(W) != ncol(W)) stop("W must be square")
   if (max(abs(W - t(W))) <= tol) {

@@ -200,7 +200,7 @@ morie_tmldyk <- function(y, D, X, epsilon = 1, g_min = 0.05,
                      "sensitivity"))
 }
 
-#' Compact alias per ledger/NAMING.md
+#' Compact alias
 #' @rdname morie_tmldyk
 #' @export
 morie_tmlediffkernel <- morie_tmldyk
@@ -210,7 +210,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lower Optional; may be \code{NULL}. Coerced to numeric by the body, with
@@ -236,7 +235,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #' A step of the tmldyk_native implementation. Called by \code{.tmldyk_logit_irls},
 #' \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -256,7 +254,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -274,7 +271,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; the body checks with \code{is.matrix}.
 #' @param a A vector; its length is taken.
@@ -310,7 +306,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{morie_tmle_diff_kernel}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yv A vector; its length is taken.
 #' @param a A vector; indexed elementwise.
@@ -382,7 +377,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Xm A matrix; passed to \code{nrow}.
 #' @param yv A matrix; passed to \code{\%*\%}.
@@ -409,6 +403,8 @@ morie_tmlediffkernel <- morie_tmldyk
 #' @param g_min Propensity truncation bound.
 #' @param y_range Range of the outcome.
 #' @return A list with the sensitivity and a few related quantities.
+#' @examples
+#' morie_ate_sensitivity(n = 1000, g_min = 0.05)$sensitivity   # 2 / (1000 * 0.05)
 #' @export
 morie_ate_sensitivity <- function(n, g_min, y_range = 1.0) {
   nn <- as.integer(n)
@@ -429,6 +425,8 @@ morie_ate_sensitivity <- function(n, g_min, y_range = 1.0) {
 #' @param epsilons Numeric vector of positive epsilons.
 #' @return A list with the total epsilon, the number of releases, and
 #'   a note.
+#' @examples
+#' morie_composition_budget(c(0.5, 0.25, 0.25))
 #' @export
 morie_composition_budget <- function(epsilons) {
   e <- as.numeric(epsilons)
@@ -444,6 +442,9 @@ morie_composition_budget <- function(epsilons) {
 #' @param scale Positive scale parameter.
 #' @param rng Environment produced by \code{.ghc_rng}.
 #' @return A numeric value.
+#' @examples
+#' rng <- rmorie:::.ghc_rng(1)
+#' morie_laplace_noise(2, rng)
 #' @export
 morie_laplace_noise <- function(scale, rng) {
   b <- as.numeric(scale)
@@ -465,6 +466,8 @@ morie_laplace_noise <- function(scale, rng) {
 #' @return A list with \code{estimate}, \code{se_private},
 #'   \code{se_sampling}, \code{ci}, \code{width_ratio},
 #'   \code{epsilon}.
+#' @examples
+#' morie_private_ci(value = 42.3, sensitivity = 1, epsilon = 0.5, se = 1.2, seed = 1)[c("se_private", "se_sampling", "ci")]
 #' @export
 morie_private_ci <- function(value, sensitivity, epsilon, se, seed = 0,
                              level = 1.96) {
@@ -491,6 +494,8 @@ morie_private_ci <- function(value, sensitivity, epsilon, se, seed = 0,
 #' @param seed Seed for the shared generator.
 #' @return A list with the released value, the noise, the scale, the
 #'   noise variance, and the epsilon.
+#' @examples
+#' morie_private_release(value = 120, sensitivity = 1, epsilon = 0.5, seed = 1)[c("released", "scale")]
 #' @export
 morie_private_release <- function(value, sensitivity, epsilon, seed = 0) {
   eps <- as.numeric(epsilon)
@@ -511,6 +516,8 @@ morie_private_release <- function(value, sensitivity, epsilon, seed = 0) {
 #' Compact one-line summary of the tmldyk recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_tmldyk_cheatsheet()
 #' @export
 morie_tmldyk_cheatsheet <- function() {
   paste("tmldyk: epsilon-DP by the LAPLACE mechanism -- add",
@@ -538,6 +545,14 @@ morie_tmldyk_cheatsheet <- function() {
 #' @param g,Q1,Q0 Optional pre-fitted nuisances.
 #' @return A list with the private estimate, the non-private TMLE for
 #'   comparison, the sensitivity, and the private interval.
+#' @examples
+#' set.seed(14)
+#' n <- 400
+#' X <- matrix(rnorm(n), n)
+#' D <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+#' y <- rbinom(n, 1, plogis(-0.5 + D + X[, 1]))
+#' r <- morie_tmle_diff_kernel(y, D, X, epsilon = 1, seed = 1)
+#' names(r)
 #' @export
 morie_tmle_diff_kernel <- function(y, D, X, epsilon = 1.0, g_min = 0.05,
                                    seed = 0, g = NULL, Q1 = NULL,

@@ -10,10 +10,11 @@ morie_crypto_sodium_available()
 Single logical.
 }
 \description{
-Phase 3JJJ1. Returns \code{TRUE} when morie's compiled .so was linked
-against libsodium at install time (detected by ./configure via
-\verb{pkg-config --libs libsodium} or a bare \code{-lsodium} probe). If
-\code{FALSE}, install libsodium and reinstall morie:
+Returns \code{TRUE} when morie's compiled .so was linked against libsodium
+at install time (detected by ./configure via \verb{pkg-config --libs libsodium} or a bare \code{-lsodium} probe). Nothing needs it: without it
+ChaCha20-Poly1305, HKDF and the random bytes run on rmorie's native
+code, with identical output. To use libsodium's code, install it and
+reinstall morie:
 }
 \details{
 \itemize{

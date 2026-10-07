@@ -18,7 +18,6 @@ A numeric value.
 A step of the caus_native implementation. Called by \code{.caus_first_stage_f},
 \code{.caus_k_class}, \code{morie_caus_iv_2sls} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))

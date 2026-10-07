@@ -17,7 +17,6 @@ A list with \code{dec_lo}, \code{dec_hi}, \code{rec_lo}, \code{rec_hi},
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 OrthFilt()

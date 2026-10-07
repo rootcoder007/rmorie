@@ -17,7 +17,6 @@
 #' A step of the alf_core implementation. Called by \code{Alfmsaat}, \code{Alftriat},
 #' \code{Alftrimu}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
@@ -32,7 +31,6 @@ alfSigm <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)), exp(x) / (1 + exp(x)))
 #'
 #' A step of the alf_core implementation. Called by \code{Alfevo}, \code{Alfplddt}, \code{Alfstrtr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
@@ -58,6 +56,7 @@ alfRelu <- function(x) ifelse(x > 0, x, 0)
 #' alfSmax(V)
 #' @keywords internal
 alfSmax <- function(v) {
+  .morie_arg(v, "n")
   e <- exp(v - max(v))
   e / sum(e)
 }
@@ -67,7 +66,6 @@ alfSmax <- function(v) {
 #' A step of the alf_core implementation. Called by \code{Alfipa}, \code{Alfmsaat},
 #' \code{Alftmpl} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -83,7 +81,6 @@ alfVdot <- function(a, b) sum(a * b)
 #'
 #' A step of the alf_core implementation. Called by \code{Alffape}, \code{Alfipa}, \code{Alfrecyc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -100,7 +97,6 @@ alfVn2 <- function(a) sum(a * a)
 #' A step of the alf_core implementation. Called by \code{Alfbkb}, \code{Alfdgram},
 #' \code{Alfembed} and 11 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W A matrix; passed to \code{\%*\%}.
@@ -149,7 +145,6 @@ alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
 #'
 #' A step of the alf_core implementation. Called by \code{Alfipa}, \code{alfRcomp}, \code{Alfschn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Tf A list; the body reads \code{$R}, \code{$t} from it.
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
@@ -159,13 +154,15 @@ alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
 #' Tf <- list(R = diag(2), t = c(1, -1))
 #' alfRap(Tf, c(2, 3))
 #' @keywords internal
-alfRap <- function(Tf, x) as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
+alfRap <- function(Tf, x) {
+  .morie_arg(Tf, "l")
+  as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
+}
 
 #' alfRinv
 #'
 #' A step of the alf_core implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Tf A list; the body reads \code{$R}, \code{$t} from it.
 #' @return A list with \code{R}, \code{t}.
@@ -187,7 +184,6 @@ alfRinv <- function(Tf) {
 #'
 #' A step of the alf_core implementation. Called by \code{Alffape}, \code{Alfipa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Tf A list; the body reads \code{$R}, \code{$t} from it.
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
@@ -208,7 +204,6 @@ alfRinvap <- function(Tf, x) {
 #'
 #' A step of the alf_core implementation. Called by \code{Alfbkb}, \code{Alfschn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A list; the body reads \code{$R} from it.
 #' @param B A list; the body reads \code{$R}, \code{$t} from it.
@@ -256,7 +251,6 @@ alfQ2rot <- function(b, c, d) {
 #'
 #' A step of the alf_core implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A list with \code{R}, \code{t}.
 #' @export
@@ -291,7 +285,6 @@ alfOnehot <- function(x, bins) {
 #'
 #' A step of the alf_core implementation. Called by \code{Alfdgram}, \code{Alfplddt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; combined arithmetically in the body.
 #' @param p Passed to \code{pmax}.

@@ -19,5 +19,4 @@ A numeric value.
 \description{
 A step of the edgrn_native implementation. Called by \code{edgrn_ql_f_test}.
 See the file header for the source the module follows.
-source it follows.
 }

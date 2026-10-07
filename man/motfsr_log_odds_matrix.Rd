@@ -17,5 +17,7 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_run}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+motfsr_log_odds_matrix(motif = list(c(0.7, 0.1, 0.1, 0.1), c(0.1, 0.7, 0.1, 0.1)), background = rep(0.25, 4))
 }

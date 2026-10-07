@@ -20,6 +20,12 @@
 #' @return A list with the loss \code{estimate}, the distance matrix
 #'   \code{d}, \code{nframes}, \code{natoms} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 28
+#' @examples
+#' R0 <- diag(3)
+#' fr <- list(list(R = R0, t = c(0, 0, 0)), list(R = R0, t = c(3.8, 0, 0)))
+#' x <- rbind(c(0, 0, 0), c(3.8, 0, 0), c(5, 1, 0))
+#' Alffape(fr, x, fr, x)$estimate                      # perfect prediction: sqrt(eps) / Z
+#' Alffape(fr, x + 0.5, fr, x)$estimate
 #' @export
 Alffape <- function(frames_pred, x, frames_true, x_true, Z = 10, dclamp = 10,
                     eps = 1e-4) {

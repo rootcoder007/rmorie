@@ -26,7 +26,6 @@ A list with \code{estimate}, \code{actions}, \code{rewards}, \code{alpha},
 \description{
 A step of the thomp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_thomp(p = 0.5, T = 5L)

@@ -42,12 +42,9 @@ set.seed(1)
 Gnsetenr(correlations = rnorm(20), in_set = c(rep(TRUE, 5), rep(FALSE, 15)))
 }
 \references{
-Subramanian, A., Tamayo, P., Mootha, V. K.,
-Mukherjee, S., Ebert, B. L., Gillette, M. A., Paulovich, A.,
-Pomeroy, S. L., Golub, T. R., Lander, E. S. and Mesirov, J. P.
-(2005), Gene set enrichment analysis: A knowledge-based approach
-for interpreting genome-wide expression profiles, PNAS 102(43),
-15545-15550. Appendix, Enrichment Score ES(S), p. 15550;
-sign-separated significance, p. 15546. Local source:
-library/pdf/fetched-wave3/Subramanian-2005-GSEA-PNAS.pdf.
+Subramanian, A., Tamayo, P., Mootha, V. K., Mukherjee, S., Ebert, B. L.,
+Gillette, M. A., Paulovich, A., Pomeroy, S. L., Golub, T. R., Lander, E. S. and
+Mesirov, J. P. (2005), Gene set enrichment analysis: A knowledge-based approach for
+interpreting genome-wide expression profiles, PNAS 102(43), 15545-15550. Appendix,
+Enrichment Score ES(S), p. 15550; sign-separated significance, p. 15546.
 }

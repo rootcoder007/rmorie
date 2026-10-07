@@ -21,7 +21,6 @@ A list with \code{path}, \code{score}.
 \description{
 A step of the benRea_native implementation. Called by \code{ner_decode}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)

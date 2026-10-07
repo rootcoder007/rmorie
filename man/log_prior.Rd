@@ -37,7 +37,6 @@ A numeric value.
 A step of the birl_native implementation. Called by \code{.abcgp.alpha_terms},
 \code{.abcgp.mw_sampler}, \code{abcnnt} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

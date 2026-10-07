@@ -29,7 +29,6 @@ A numeric value.
 \description{
 A step of the bayopt_native implementation. Called by \code{maximise_acquisition}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- acquisition_gradient(gmu = c(0.2, -0.1), gsd = c(-0.05, 0.03),

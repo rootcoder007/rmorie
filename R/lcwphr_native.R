@@ -12,7 +12,6 @@
 #'
 #' A step of the lcwphr_native implementation. Called by \code{morie_lcwphr_latent_class_weighted}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -39,7 +38,6 @@
 #'
 #' A step of the lcwphr_native implementation. Called by \code{.lcwphr_logit_irls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{chol}.
 #' @param b Passed to \code{forwardsolve}.
@@ -60,7 +58,6 @@
 #'
 #' A step of the lcwphr_native implementation. Called by \code{morie_lcwphr_latent_class_weighted}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -101,7 +98,6 @@
 #'
 #' A step of the lcwphr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
@@ -298,7 +294,6 @@ morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
 #'
 #' A step of the lcwphr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

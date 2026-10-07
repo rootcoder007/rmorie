@@ -28,7 +28,6 @@ A list with \code{alpha}, \code{moved}, \code{clipped}, \code{L}, \code{H},
 \description{
 A step of the svmopt_native implementation. Called by \code{smo}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

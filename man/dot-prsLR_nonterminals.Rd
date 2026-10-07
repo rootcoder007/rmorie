@@ -17,5 +17,4 @@ A step of the prsLR_native implementation. Called by \code{.prsLR_augment},
 \code{.prsLR_canonical_collection}, \code{.prsLR_first_sets} and 2 others in the
 module.
 See the file header for the source the module follows.
-source it follows.
 }

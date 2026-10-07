@@ -10,19 +10,13 @@ morie_crypto_hqc_encaps(pk)
 \item{pk}{Recipient's HQC-128 public key.}
 }
 \value{
-List with \code{ct} and \code{shared_secret} (raw, 64 B).
+List with \code{ct} and \code{shared_secret} (raw: 64 B with liboqs, 32 B natively).
 }
 \description{
 HQC-128 encapsulation
 }
 \examples{
-if (morie_crypto_sodium_available()) {
-  if (morie_crypto_liboqs_available()) {
-    kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-    if (!inherits(kp, "try-error")) {
-      enc <- morie_crypto_hqc_encaps(kp$pk)
-      str(enc)
-    }
-  }
-}
+kp <- morie_crypto_hqc_keygen()
+enc <- morie_crypto_hqc_encaps(kp$pk)
+str(enc)
 }

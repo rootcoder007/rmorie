@@ -34,13 +34,11 @@ Pertarget(
 list: estimate, prob, weight, priority, n, method.
 }
 \description{
-Schaul, Quan, Antonoglou and Silver (2016), Prioritized experience
-replay, ICLR (arXiv:1511.05952 -- FETCHED), section 3.3 and algorithm
-1: P(i) = p_i^alpha / sum_k p_k^alpha and w_i = (N P(i))^(-beta) /
-max_j w_j, with p_i = |delta_i| + eps (proportional) or 1 / rank(i)
-(rank-based).  For AlphaZero-style training the TD error delta is
-replaced by the value residual |z - v|, the value head's own error on
-the stored outcome.
+Schaul, Quan, Antonoglou and Silver (2016), Prioritized experience replay, ICLR
+(arXiv:1511.05952), section 3.3 and algorithm 1: P(i) = p_i^alpha / sum_k p_k^alpha
+and w_i = (N P(i))^(-beta) / max_j w_j, with p_i = |delta_i| + eps (proportional) or
+1 / rank(i) (rank-based). For AlphaZero-style training the TD error delta is replaced
+by the value residual |z - v|, the value head's own error on the stored outcome.
 }
 \examples{
 Pertarget(NULL, priorities = c(1, 2, 3))$prob

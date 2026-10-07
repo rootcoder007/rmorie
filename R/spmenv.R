@@ -26,6 +26,10 @@
 #' @references Schabenberger Ch 1, Sec 1.3.2, eqs (1.14)-(1.15), pp. 21-23;
 #'   Example 1.7 p. 22; Problem 1.8 p. 39, quoting Cliff and Ord (1981),
 #'   Spatial Processes: Models and Applications, Pion, Ch. 2.
+#' @examples
+#' w <- matrix(0, 5, 5); w[cbind(1:4, 2:5)] <- 1; w <- w + t(w)
+#' s <- spmenv(x = c(1, 2, 3, 5, 8), w = w)
+#' c(s$I, s$expectation, s$sd_normal)
 #' @export
 spmenv <- function(x, w) {
   m <- .schab_moran_moments(x, w)

@@ -24,6 +24,5 @@ A list with \code{x}, \code{y}, \code{s}, \code{iterations}, \code{gap},
 \description{
 A step of the linprm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

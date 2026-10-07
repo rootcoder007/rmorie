@@ -20,7 +20,6 @@ A list with \code{colour}, \code{weights}, \code{accumulated_alpha},
 \description{
 A step of the nrfrad_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 volume_render(sigma = c(1, 2, 3, 4, 5, 6, 7, 8), colour = c(1, 2, 3, 4, 5, 6, 7, 8),

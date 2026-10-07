@@ -12,5 +12,9 @@ The value of \code{env}, as built in the body.
 \description{
 A step of the muzero_native implementation. Called by \code{muzero_search}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mm <- muzero_MinMax()
+mm$update(2); mm$update(6)
+mm$normalize(4)
 }

@@ -30,7 +30,6 @@
 #' A step of the zfmech_native implementation. Called by \code{group_privacy},
 #' \code{postprocessing}, \code{sigma_for_rho} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rho Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{rho}, as built in the body.
@@ -200,6 +199,7 @@ group_privacy <- function(rho, k) {
 #' to_approx_dp(rho = 0.5, delta = 0.5)
 #' @keywords internal
 to_approx_dp <- function(rho, delta) {
+  .morie_arg(rho, "n1")
   rho <- .zfmech_check_rho(rho)
   delta <- as.numeric(delta)
   if (!is.finite(delta) || !(delta > 0) || !(delta < 1))

@@ -30,7 +30,6 @@
 #'
 #' A step of the egnnL_native implementation. Called by \code{edge_message}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -73,7 +72,6 @@ edge_message <- function(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL) {
 #'
 #' A step of the egnnL_native implementation. Called by \code{egcl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A vector; its length is taken and its elements indexed.
 #' @param M A vector; indexed elementwise.
@@ -117,7 +115,6 @@ coord_update <- function(X, M, phi_x, C = NULL) {
 #'
 #' A step of the egnnL_native implementation. Called by \code{run_egnn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H A vector; its length is taken and its elements indexed.
 #' @param X A vector; indexed elementwise.
@@ -203,7 +200,6 @@ egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
 #' A step of the egnnL_native implementation. Called by \code{e_gcn}, \code{egnn_layer},
 #' \code{egnnlayer} and 5 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Iterated over elementwise, with \code{lapply}.
 #' @param X Iterated over elementwise, with \code{lapply}.
@@ -246,7 +242,6 @@ run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #'
 #' A step of the egnnL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Passed to \code{run_egnn}.
 #' @param X A vector; its length is taken and its elements indexed.
@@ -317,7 +312,6 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
 #'
 #' A step of the egnnL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -336,12 +330,11 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
          "matters.")
 }
 
-# compact alias per ledger/NAMING.md
-#' Compact alias per ledger/NAMING.md
+# compact alias
+#' Compact alias
 #'
 #' A step of the egnnL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Passed to \code{run_egnn}.
 #' @param X Passed to \code{run_egnn}.
@@ -373,7 +366,6 @@ equivariantgnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #'
 #' A step of the egnnL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Passed to \code{run_egnn}.
 #' @param X Passed to \code{run_egnn}.
@@ -403,7 +395,6 @@ egnn_layer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #'
 #' A step of the egnnL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Passed to \code{run_egnn}.
 #' @param X Passed to \code{run_egnn}.
@@ -435,7 +426,6 @@ egnnlayer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #'
 #' A step of the egnnL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Passed to \code{run_egnn}.
 #' @param X Passed to \code{run_egnn}.

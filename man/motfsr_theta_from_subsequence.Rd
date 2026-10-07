@@ -27,5 +27,7 @@ The value of \code{theta}, as built in the body.
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_mm_fit}, \code{motfsr_run}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+motfsr_theta_from_subsequence(coded = c(0, 1, 2, 3, 0, 1), i = 1, j = 0, w = 3, L = 4, mu = 0.5, weight = 1)
 }

@@ -15,5 +15,4 @@ The value of \code{P}, as built in the body.
 \description{
 A step of the e_div_native implementation. Called by \code{morie_e_div}.
 See the file header for the source the module follows.
-source it follows.
 }

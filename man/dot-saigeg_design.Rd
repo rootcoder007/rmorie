@@ -17,7 +17,6 @@ Nothing; this branch always raises.
 \description{
 A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 b <- c(1.5, 2.5, 3.5)

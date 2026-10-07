@@ -32,5 +32,9 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scan_imp}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+g <- mqtmpl_sample_genotypes(genotypes = list(c(0, NA, 1), c(1, 1, 0)), positions = c(0, 0.1, 0.2),
+                             grid = c(0.05, 0.15), n_imp = 4, seed = 1)
+str(g, max.level = 1)
 }

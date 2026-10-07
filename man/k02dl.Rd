@@ -18,7 +18,6 @@ A list with \code{tau2}, \code{mu}, \code{var}, \code{Q}, \code{df}.
 A step of the k02util implementation. Called by \code{mabay}, \code{mac3},
 \code{macum} and 7 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -15,12 +15,9 @@ A list with \code{per_snp}, \code{per_ind}.
 \description{
 A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
-if (morie_crypto_sodium_available()) {
-  S <- c("a", "b", "c")
-  morie_snpqc1_call_rates(S)
-}
+G <- rbind(c(0, 1, 2, NA), c(1, 1, 0, 2), c(2, NA, 1, 0))   # three individuals, four SNPs (0/1/2 copies)
+morie_snpqc1_call_rates(G)
 }
 \keyword{internal}

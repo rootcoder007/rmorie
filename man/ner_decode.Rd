@@ -30,7 +30,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the benRea_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 ner_decode(emissions = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), types = 5L)

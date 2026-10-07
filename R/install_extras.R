@@ -112,14 +112,16 @@ morie_install_extras <- function(which = "missing",
   ))
   if (length(needs)) {
     message("Packages to install:")
-    message(paste("   ", needs, collapse = "\n"))
+    message(paste(strwrap(paste(needs, collapse = ", "), width = 76, indent = 4, exdent = 4), collapse = "\n"))
   }
 
   syslibs <- .morie_check_system_libs()
   message("\nSystem libraries:")
   for (nm in names(syslibs)) {
     message(sprintf("  %-10s %s", nm,
-                    if (syslibs[[nm]]) "OK" else "MISSING (see ?morie_install_extras)"))
+                    if (syslibs[[nm]]) "OK"
+                    else if (nm == "liboqs") "not linked (ML-KEM / ML-DSA / SLH-DSA use rmoriebricklayer's built-in code; only HQC needs liboqs)"
+                    else "MISSING (see ?morie_install_extras)"))
   }
   if (!syslibs[["libcurl"]] || !syslibs[["libsodium"]]) {
     message(
@@ -137,6 +139,12 @@ morie_install_extras <- function(which = "missing",
                           system_libs = syslibs)))
   }
 
+  if (isTRUE(ask) && !interactive()) {
+    # nobody can answer the question: say so instead of reading an empty line as "no"
+    message("\nNot installing: there is no terminal to ask on (ask = FALSE installs without asking).")
+    return(invisible(list(installed = character(0), already_present = already,
+                          failed = character(0), system_libs = syslibs)))
+  }
   if (isTRUE(ask)) {
     ans <- readline(sprintf(
       "\nInstall %d package%s now? [y/N] ",
@@ -210,7 +218,8 @@ morie_install_extras <- function(which = "missing",
 #' Internal helper: Morie Pkg Installed
 #' @noRd
 .morie_pkg_installed <- function(pkg) {
-  isTRUE(requireNamespace(pkg, quietly = TRUE))
+  # a library lookup, not a load: requireNamespace() on 178 packages takes 20 s and prints their S3 notes
+  nzchar(system.file(package = pkg))
 }
 
 
@@ -273,7 +282,8 @@ morie_install_extras <- function(which = "missing",
 #' @export
 morie_ensure_extras <- function(pkgs, ask = interactive(), repos = NULL) {
   stopifnot(is.character(pkgs), length(pkgs) >= 1L)
-  miss <- pkgs[!vapply(pkgs, .morie_pkg_installed, logical(1L))]
+  # about to be loaded anyway, so ask requireNamespace(): an installed but broken package counts as missing
+  miss <- pkgs[!vapply(pkgs, function(p) isTRUE(requireNamespace(p, quietly = TRUE)), logical(1L))]
   if (length(miss) == 0L) {
     return(invisible(TRUE))
   }

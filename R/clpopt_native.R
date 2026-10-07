@@ -142,7 +142,6 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #'
 #' A step of the clpopt_native implementation. Called by \code{.clpopt_run}, \code{simplex}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T A matrix; indexed by row and column.
 #' @param row Passed to \code{==}.
@@ -169,7 +168,6 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #'
 #' A step of the clpopt_native implementation. Called by \code{simplex}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T A matrix; indexed by row and column.
 #' @param basis A vector; its length is taken and its elements indexed.
@@ -214,7 +212,6 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #'
 #' A step of the clpopt_native implementation. Called by \code{simplex}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T A matrix; indexed by row and column.
 #' @param basis A vector; indexed elementwise.
@@ -261,7 +258,6 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #'
 #' A step of the clpopt_native implementation. Called by \code{simplex}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param st Compared against \code{"cycling"}.
 #' @param rule Compared against \code{"dantzig"}.
@@ -291,7 +287,6 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #'
 #' A step of the clpopt_native implementation. Called by \code{morie_clpopt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Passed to \code{.clpopt_mat}.

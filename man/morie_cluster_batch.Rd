@@ -20,5 +20,7 @@ A named list of \code{morie_cluster} objects.
 Batch-cluster several data sets
 }
 \examples{
-morie_cluster_batch(list(a = iris[1:4], b = iris[1:4]), k = 3)
+x <- iris[1:4]
+rownames(x) <- paste0("s", seq_len(nrow(x)))
+morie_cluster_batch(list(a = x, b = x), k = 3)
 }

@@ -13,9 +13,12 @@ Msm129(...)
 The list returned by \code{Msm128()}.
 }
 \description{
-The stub generator stamped several extracted page fragments with the same
-function name, so the implementation lives once in \code{Msm128()} and this
-module re-exports it. Calling either path runs the same code.
+The same method as \code{Msm128()}, re-exported under this name; both run the same
+code.
+}
+\examples{
+xx <- seq(0, 1, length.out = 8); K <- exp(-outer(xx, xx, "-")^2 / 0.1)
+Msm129(K, sin(2 * pi * xx), lam = 0.1)$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

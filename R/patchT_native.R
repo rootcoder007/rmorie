@@ -19,7 +19,6 @@
 #'
 #' A step of the patchT_native implementation. Called by \code{instance_norm}, \code{patchify}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
@@ -36,7 +35,6 @@
 #' \code{channel_independent_tokens}, \code{channel_mixed_tokens},
 #' \code{patchtst_encode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -59,7 +57,6 @@
 #' A step of the patchT_native implementation. Called by
 #' \code{channel_independent_tokens}, \code{channel_mixed_tokens}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.patcht_vec}.
 #' @param patch_len Coerced to integer by the body, with \code{as.integer}.
@@ -103,7 +100,6 @@ patchify <- function(x, patch_len, stride = NULL) {
 #'
 #' A step of the patchT_native implementation. Called by \code{patchtst_encode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.patcht_mat}.
 #' @param patch_len Coerced to integer by the body, with \code{as.integer}.
@@ -140,7 +136,6 @@ channel_independent_tokens <- function(X, patch_len, stride = NULL) {
 #'
 #' A step of the patchT_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.patcht_mat}.
 #' @param patch_len Passed to \code{patchify}.
@@ -170,7 +165,6 @@ channel_mixed_tokens <- function(X, patch_len, stride = NULL) {
 #'
 #' A step of the patchT_native implementation. Called by \code{patchtst_encode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.patcht_vec}.
 #' @return A list with \code{normalised}, \code{mean}, \code{sd}, \code{degenerate}.
@@ -202,7 +196,6 @@ instance_norm <- function(x) {
 #'
 #' A step of the patchT_native implementation. Called by \code{patchtst_encode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L Coerced to integer by the body, with \code{as.integer}.
 #' @param patch_len Coerced to integer by the body, with \code{as.integer}.
@@ -241,7 +234,6 @@ attention_cost <- function(L, patch_len, stride = NULL, D = 1,
 #'
 #' A step of the patchT_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.patcht_mat}.
 #' @param patch_len Passed to \code{channel_independent_tokens}.
@@ -292,7 +284,6 @@ patchtst_encode <- function(X, patch_len, stride = NULL,
 #'
 #' A step of the patchT_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -310,7 +301,7 @@ patchtst_encode <- function(X, patch_len, stride = NULL,
         "projection and is permutation-INVARIANT instead.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 patchtst <- patchtst_encode
 
 # public names resolved by fn/_lazy_map.json

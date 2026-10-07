@@ -47,5 +47,4 @@ A list with \code{leaf}, \code{f}, \code{thr}, \code{l}, \code{r}.
 \description{
 A step of the qsfrgr_native implementation. Called by \code{morie_qsfrgr_forest}.
 See the file header for the source the module follows.
-source it follows.
 }

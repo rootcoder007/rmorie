@@ -67,9 +67,12 @@ NULL
 #' @return A `morie_cluster` object (or `morie_cluster_spec` if
 #'   `nofit = TRUE`) whose cluster labels are ordered by decreasing size.
 #' @examples
-#' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' # with vs without scaling changes which columns drive the clusters; cases are labelled
+#' # (an input without row names draws the UL1.2 warning and gets positional labels)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))
+#' morie_cluster(x, k = 3)
+#' morie_cluster(x, k = 3, scale = TRUE)
 #' @export
 morie_cluster <- function(x, k = 2L, scale = FALSE,
                           na_action = c("omit", "fail"),
@@ -81,9 +84,12 @@ morie_cluster <- function(x, k = 2L, scale = FALSE,
     class(spec) <- c("morie_cluster_spec", "morie_rich_result", "list")
     return(spec)
   }
-  xm <- as.matrix(x[vapply(as.data.frame(x), is.numeric, logical(1))])
+  # select the numeric COLUMNS through a data frame: x[logical] on a matrix picks cells, which
+  # turned a 150 x 4 matrix into 600 one-dimensional points
+  xd <- as.data.frame(x)
+  xm <- as.matrix(xd[vapply(xd, is.numeric, logical(1))])
   storage.mode(xm) <- "double"
-  rn <- rownames(xm)
+  rn <- rownames(x)  # a data frame always has row names (automatic ones are the positions)
   if (is.null(rn)) {
     if (!is.null(case_labels)) {
       rn <- as.character(case_labels)
@@ -144,8 +150,10 @@ morie_cluster <- function(x, k = 2L, scale = FALSE,
 #' @param ... Unused.
 #' @return Integer cluster labels for the new rows (named by row name).
 #' @examples
-#' cl <- morie_cluster(iris[1:4], k = 3)
-#' predict(cl, iris[1:5, 1:4])
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' cl <- morie_cluster(x, k = 3)
+#' predict(cl, x[1:5, ])
 #' @export
 predict.morie_cluster <- function(object, newdata, ...) {
   xm <- as.matrix(newdata[, object$feature_names, drop = FALSE])
@@ -179,8 +187,10 @@ predict.morie_cluster <- function(object, newdata, ...) {
 #' @examples
 #' \donttest{
 #' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' morie_cluster(x, k = 3)
+#' obj <- morie_cluster(x, k = 3, scale = TRUE)
 #' print(obj)
 #' }
 #' @export
@@ -201,8 +211,10 @@ print.morie_cluster <- function(x, max_rows = 10L, ...) {
 #' @examples
 #' \donttest{
 #' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' morie_cluster(x, k = 3)
+#' obj <- morie_cluster(x, k = 3, scale = TRUE)
 #' summary(obj)
 #' }
 #' @export
@@ -220,8 +232,10 @@ summary.morie_cluster <- function(object, ...) {
 #' @examples
 #' \donttest{
 #' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' morie_cluster(x, k = 3)
+#' obj <- morie_cluster(x, k = 3, scale = TRUE)
 #' plot(obj)
 #' }
 #' @export
@@ -257,8 +271,10 @@ plot.morie_cluster <- function(x, ...) {
 #' @examples
 #' \donttest{
 #' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' morie_cluster(x, k = 3)
+#' obj <- morie_cluster(x, k = 3, scale = TRUE)
 #' print(obj)
 #' }
 #' @export
@@ -273,7 +289,9 @@ print.morie_cluster_spec <- function(x, ...) {
 #' @param ... Passed to [morie_cluster()].
 #' @return A named list of `morie_cluster` objects.
 #' @examples
-#' morie_cluster_batch(list(a = iris[1:4], b = iris[1:4]), k = 3)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))
+#' morie_cluster_batch(list(a = x, b = x), k = 3)
 #' @export
 morie_cluster_batch <- function(datasets, k = 2L, ...) {
   stopifnot(is.list(datasets))

@@ -41,7 +41,6 @@
 #' \code{morie_snpqc1_call_rates}, \code{morie_snpqc1_heterozygosity} and 5 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{G}, \code{n}, \code{m}.
@@ -66,16 +65,13 @@
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return A list with \code{per_snp}, \code{per_ind}.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_call_rates(S)
-#' }
+#' G <- rbind(c(0, 1, 2, NA), c(1, 1, 0, 2), c(2, NA, 1, 0))   # three individuals, four SNPs (0/1/2 copies)
+#' morie_snpqc1_call_rates(G)
 #' @keywords internal
 morie_snpqc1_call_rates <- function(genotypes) {
   # Per-SNP and per-individual call rates.
@@ -91,16 +87,13 @@ morie_snpqc1_call_rates <- function(genotypes) {
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1},
 #' \code{morie_snpqc1_sex_check}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_maf(S)
-#' }
+#' G <- rbind(c(0, 1, 2, NA), c(1, 1, 0, 2), c(2, NA, 1, 0))
+#' morie_snpqc1_maf(G)
 #' @keywords internal
 morie_snpqc1_maf <- function(genotypes) {
   # Minor allele frequency per SNP, over non-missing calls.
@@ -123,7 +116,6 @@ morie_snpqc1_maf <- function(genotypes) {
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1_hwe_pvalue}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{lgamma}.
@@ -139,7 +131,6 @@ morie_snpqc1_maf <- function(genotypes) {
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_hom_minor Coerced to integer by the body, with \code{as.integer}.
 #' @param n_het Coerced to integer by the body, with \code{as.integer}.
@@ -213,7 +204,6 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1_hwe_pvalue}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -231,16 +221,13 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_heterozygosity(S)
-#' }
+#' G <- rbind(c(0, 1, 2, NA), c(1, 1, 0, 2), c(2, NA, 1, 0))
+#' morie_snpqc1_heterozygosity(G)
 #' @keywords internal
 morie_snpqc1_heterozygosity <- function(genotypes) {
   # Per-individual heterozygosity rate over non-missing calls.
@@ -262,7 +249,6 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x_genotypes Passed to \code{.snpqc1_check}.
 #' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -272,10 +258,8 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
 #' @return The value of \code{res}, as built in the body.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_sex_check(S)
-#' }
+#' X <- rbind(c(0, 2, 0, 2, 0), c(1, 1, 0, 1, 2), c(2, 0, 2, 2, 0))   # X-chromosome genotypes
+#' morie_snpqc1_sex_check(X, reported_sex = c(1L, 2L, 1L))
 #' @keywords internal
 morie_snpqc1_sex_check <- function(x_genotypes, reported_sex = NULL,
                                    male_min = 0.8, female_max = 0.2) {
@@ -484,7 +468,6 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction = TRUE) {
 #'
 #' A step of the snpqc1_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{morie_snpqc1_ibd_moments}.
 #' @param correction Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.
@@ -568,10 +551,8 @@ morie_snpqc1_kinship_matrix <- function(genotypes) {
 #' @return The value of \code{keep}, as built in the body.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_ld_prune(S)
-#' }
+#' G <- rbind(c(0, 0, 2, 1), c(1, 1, 0, 2), c(2, 2, 1, 0), c(0, 0, 1, 1))
+#' morie_snpqc1_ld_prune(G, window = 4, step = 1, r2 = 0.5)
 #' @keywords internal
 morie_snpqc1_ld_prune <- function(genotypes, window = 50, step = 5, r2 = 0.2) {
   # Window-based pruning: drop one of any pair with r^2 above the
@@ -625,7 +606,6 @@ morie_snpqc1_ld_prune <- function(genotypes, window = 50, step = 5, r2 = 0.2) {
 #'
 #' A step of the snpqc1_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @param phenotype Optional; may be \code{NULL}. Coerced to numeric by the body, with
@@ -894,7 +874,6 @@ morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
 #'
 #' A step of the snpqc1_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

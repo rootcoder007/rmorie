@@ -46,7 +46,6 @@
 #'
 #' A step of the lggvls_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -64,7 +63,6 @@
 #'
 #' A step of the lggvls_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{as.matrix}.
@@ -83,7 +81,6 @@
 #'
 #' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x See Usage.
 #' @param q See Usage.
@@ -102,7 +99,6 @@
 #'
 #' A step of the lggvls_native implementation. Called by \code{.lggvls_ip_weights}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -146,7 +142,6 @@
 #'
 #' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param den_X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
@@ -211,7 +206,6 @@
 #'
 #' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param y A vector; its length is taken.
@@ -251,7 +245,6 @@
 #'
 #' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cols A vector; its length is taken.
 #' @param n Accepted by the signature and not used anywhere in the body.
@@ -267,7 +260,6 @@
 #'
 #' A step of the lggvls_native implementation. Called by \code{morie_lggvls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param obj Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param allow_none A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -293,7 +285,6 @@
 #'
 #' A step of the lggvls_native implementation. Called by \code{lagged_design}, \code{morie_lggvls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L_hist Optional; may be \code{NULL}. A vector; its length is taken and its
 #' elements indexed.
@@ -342,7 +333,6 @@
 #'
 #' A step of the lggvls_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L_hist Passed to \code{.lggvls_lagged_design}.
 #' @param Y_hist Passed to \code{.lggvls_lagged_design}.
@@ -364,7 +354,6 @@ lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
 #'
 #' A step of the lggvls_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Passed to \code{.lggvls_as_history}.
@@ -492,7 +481,6 @@ laggedvaliptw  <- morie_lggvls
 #'
 #' A step of the lggvls_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -44,7 +44,6 @@ A list with \code{estimate}, \code{se}, \code{ci}, \code{mean_treated},
 \description{
 A step of the flxipt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

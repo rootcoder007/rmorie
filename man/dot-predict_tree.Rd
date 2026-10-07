@@ -18,5 +18,4 @@ The value of \code{.predict_tree}.
 \description{
 A step of the orfgrf_native implementation. Called by \code{.orfgrf_forest_weights}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -60,9 +60,11 @@ test_that("morie_make_raw converts to raw bytes", {
 })
 
 test_that("cli_main dispatches analysis subjects and reports as JSON", {
+  # tps without datasets is an error (exit 1 from the CLI), not a quiet success
   out <- capture.output(r <- cli_main("tps"))
-  expect_identical(r$status, "not_available")
-  expect_identical(.morie_from_json(paste(out, collapse = ""))$status, "not_available")
+  expect_identical(r$status, "error")
+  expect_match(r$message, "needs the datasets")
+  expect_identical(.morie_from_json(paste(out, collapse = ""))$status, "error")
   capture.output(u <- cli_main("nothing"))
   expect_identical(u$status, "error")
   expect_match(u$message, "unknown analysis subject")

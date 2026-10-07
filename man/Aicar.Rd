@@ -27,6 +27,6 @@ Aicar(x, max_p = 5)
 \references{
 Akaike (1973), Information theory and an extension of the maximum
 likelihood principle, in Petrov and Csaki (eds), 2nd International Symposium on
-Information Theory. Not held locally; AIC = -2 log L + 2k and its AR(p) specialisation
-via the Levinson-Durbin innovation variance are the standard published forms.
+Information Theory. AIC = -2 log L + 2k and its AR(p) specialisation via the
+Levinson-Durbin innovation variance are the standard published forms.
 }

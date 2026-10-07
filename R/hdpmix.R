@@ -2,7 +2,7 @@
 #' Hierarchical Dirichlet process
 #'
 #' Teh, Jordan, Beal and Blei (2006), Hierarchical Dirichlet processes,
-#' JASA 101(476), 1566-1581 (FETCHED as PDF from the author's page).
+#' JASA 101(476), 1566-1581.
 #' Equation (2): G_0 | gamma, H ~ DP(gamma, H) and G_j | alpha_0, G_0 ~
 #' DP(alpha_0, G_0).  Equation (19): beta | gamma ~ GEM(gamma), pi_j |
 #' alpha_0, beta ~ DP(alpha_0, beta), z_ji | pi_j ~ pi_j, with GEM the

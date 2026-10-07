@@ -26,10 +26,8 @@ Whatever \code{\link{Chzlt}} returns.
 Formula: adjusted estimate under hypothesised confounder R2_Y * R2_D
 }
 \details{
-\code{cnffvw} and \code{chzlt} document the SAME method.  Rather than
-carry a second implementation -- which would agree with the first at
-1e-9 forever while doubling the surface -- this function forwards to
-\code{\link{Chzlt}} with the argument names of its own stub.
+\code{cnffvw} and \code{chzlt} are the same method; this function
+forwards to \code{\link{Chzlt}} under its own argument names.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -23,3 +23,7 @@ A list with \code{bias}, \code{unreachable_bias},
 Looks up \code{b_table[d]} (clipped to the table size) and uses
 \code{unreachable_bias} for disconnected pairs.
 }
+\examples{
+D <- matrix(c(0, 1, 2, 1, 0, 1, 2, 1, 0), 3)
+morie_grphmr_spatial(D, b_table = c(0.5, 0.2, -0.1))$bias
+}

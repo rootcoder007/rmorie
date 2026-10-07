@@ -23,5 +23,4 @@ A list with \code{T}, \code{cost}.
 A step of the helpers_ot implementation. Called by \code{.ot_partial_plan},
 \code{Otbarfree}, \code{Otemd} and 6 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

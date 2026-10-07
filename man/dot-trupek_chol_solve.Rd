@@ -18,5 +18,4 @@ The value of \code{x}, as built in the body.
 A step of the trupek_native implementation. Called by \code{.trupek_dogleg},
 \code{.trupek_exact}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -25,7 +25,6 @@ A list with \code{coeffs}, \code{scales}, \code{freqs}, \code{times},
 \description{
 A step of the rangayyan_tf implementation. Called by \code{Scalogram}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

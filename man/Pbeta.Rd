@@ -21,7 +21,6 @@ One of two values, depending on the branch taken.
 \description{
 A step of the dist_native implementation. Called by \code{Qbeta}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 Pbeta(q = 1, shape1 = c(1, 2, 3, 4, 5, 6, 7, 8), shape2 = c(1, 2, 3, 4, 5, 6, 7, 8))

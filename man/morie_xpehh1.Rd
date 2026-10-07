@@ -38,6 +38,12 @@ where \eqn{I} integrates the all-chromosome site-wise EHH outward
 from the core (Sabeti et al. 2007).  Large positive values indicate
 unusually long haplotypes in population A relative to B.
 }
+\examples{
+set.seed(3)
+hapA <- matrix(c(rep(1, 20), rbinom(20 * 9, 1, 0.1)), 20)   # one long haplotype in A
+hapB <- matrix(rbinom(200, 1, 0.5), 20)
+morie_xpehh1(hapA, hapB, core = 0)$estimate                 # positive: longer haplotypes in A
+}
 \references{
 Sabeti, P. C. et al. (2007). Genome-wide detection and
 characterization of positive selection in human populations.

@@ -21,6 +21,9 @@
 #' Journal of Clinical Epidemiology 50:683-691. Paywalled; d_AC = d_AB - d_CB with
 #' variances added is the standard published form, restated identically in every network
 #' meta-analysis source consulted.
+#' @examples
+#' # A vs C through the common comparator B
+#' Bucherind(d_AB = -0.4, v_AB = 0.01, d_CB = -0.1, v_CB = 0.02)
 #' @export
 Bucherind <- function(d_AB, v_AB, d_CB, v_CB, alpha = 0.05) {
   d <- as.numeric(d_AB) - as.numeric(d_CB)

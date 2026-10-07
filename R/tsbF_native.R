@@ -108,7 +108,6 @@
 #' A step of the tsbF_native implementation. Called by
 #' \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param init One of \code{"global"}, \code{"known"}. Defaults to \code{"global"}.
@@ -181,7 +180,6 @@
 #' A step of the tsbF_native implementation. Called by
 #' \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq A vector; its length is taken and its elements indexed.
 #' @param burn_in Coerced to integer by the body, with \code{as.integer}.
@@ -203,7 +201,6 @@
 #'
 #' A step of the tsbF_native implementation. Called by \code{morie_tsbF_intermittent_forecast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
@@ -281,7 +278,6 @@ morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
 #' A step of the tsbF_native implementation. Called by
 #' \code{morie_tsbF_intermittent_forecast}, \code{morie_tsbF_sba_forecast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
@@ -347,7 +343,6 @@ morie_tsbF_croston_forecast <- function(y, alpha = 0.1, horizon = 1,
 #'
 #' A step of the tsbF_native implementation. Called by \code{morie_tsbF_intermittent_forecast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{morie_tsbF_croston_forecast}.
 #' @param alpha Passed to \code{morie_tsbF_croston_forecast}. Defaults to \code{0.1}.
@@ -388,7 +383,6 @@ morie_tsbF_sba_forecast <- function(y, alpha = 0.1, horizon = 1,
 #'
 #' A step of the tsbF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param adi_cut Passed to \code{<=}. Defaults to \code{1.32}.
@@ -423,7 +417,6 @@ morie_tsbF_demand_classification <- function(y, adi_cut = 1.32, cv2_cut = 0.49) 
 #'
 #' A step of the tsbF_native implementation. Called by \code{morie_tsbF}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{morie_tsbF_tsb_forecast}.
 #' @param method One of \code{"croston"}, \code{"tsb"}. Defaults to \code{"tsb"}.
@@ -469,7 +462,6 @@ morie_tsbF_intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
 #'
 #' A step of the tsbF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -497,7 +489,6 @@ morie_tsbF_cheatsheet <- function() {
 #'
 #' A step of the tsbF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{morie_tsbF_intermittent_forecast}.
 #' @param method Passed to \code{morie_tsbF_intermittent_forecast}. Defaults to \code{"tsb"}.

@@ -29,5 +29,4 @@ The value of \code{lapply}.
 \description{
 A step of the hindsr_native implementation. Called by \code{hindsr}.
 See the file header for the source the module follows.
-source it follows.
 }

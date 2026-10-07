@@ -17,7 +17,6 @@ A numeric value.
 \description{
 A step of the ngcf_native implementation. Called by \code{ngcf_propagate}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 ngcf_laplacian_coefficient(n_u = 5L, n_i = 5L)

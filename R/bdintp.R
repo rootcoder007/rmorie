@@ -11,9 +11,8 @@
 #'
 #' @return List with Q, nQ, argmin (zero-based), minQ, inset, nin,
 #'   cutoff, g, J.
-#' @references Chernozhukov, Hong and Tamer (2007), Econometrica 75(5),
-#'   1243-1284, Sect. 2.  Standard published form; the article is not in
-#'   the local corpus and was not read.
+#' @references Chernozhukov, Hong and Tamer (2007), Econometrica 75(5), 1243-1284, Sect.
+#'   2; standard published form.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

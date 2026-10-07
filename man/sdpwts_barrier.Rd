@@ -19,7 +19,6 @@ A list with \code{value}, \code{feasible}, \code{min_eigenvalue}, \code{eigenval
 \description{
 A step of the sdpwts_native implementation. Called by \code{.sdpwts_objective}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sdpwts_barrier(x = 2, F0 = matrix(c(0, 1, 1, 0), 2), Fs = list(diag(2)))$value

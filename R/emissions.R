@@ -157,16 +157,24 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 .emissions_detect_location <- function() {
   env <- Sys.getenv("MORIE_COUNTRY_ISO", "")
   if (nzchar(env)) return(list(iso = toupper(env), region = Sys.getenv("MORIE_REGION", ""), name = "", lat = 0, lon = 0))
-  if (nzchar(Sys.getenv("MORIE_EMISSIONS_OFFLINE", "")) || !requireNamespace("httr2", quietly = TRUE)) {
-    return(list(iso = "", region = "", name = "", lat = 0, lon = 0))
-  }
+  none <- list(iso = "", region = "", name = "", lat = 0, lon = 0)
+  if (nzchar(Sys.getenv("MORIE_EMISSIONS_OFFLINE", ""))) return(none)
+  # base R's url() (libcurl) reads the flat ipapi record: no optional package is needed to place the run
   tryCatch({
-    req <- httr2::req_timeout(httr2::request("https://ipapi.co/json/"), 5)
-    d <- httr2::resp_body_json(httr2::req_perform(req))
-    list(iso = toupper(d$country_code %||% ""), region = d$region %||% "",
-         name = d$country_name %||% "", lat = as.numeric(d$latitude %||% 0),
-         lon = as.numeric(d$longitude %||% 0))
-  }, error = function(e) list(iso = "", region = "", name = "", lat = 0, lon = 0))
+    old <- options(timeout = 5)
+    on.exit(options(old), add = TRUE)
+    con <- url("https://ipapi.co/json/")
+    on.exit(close(con), add = TRUE)
+    txt <- paste(suppressWarnings(readLines(con, warn = FALSE)), collapse = "")
+    get <- function(k) {
+      m <- regmatches(txt, regexec(sprintf('"%s"\\s*:\\s*("([^"]*)"|-?[0-9.]+)', k), txt))[[1L]]
+      if (!length(m)) "" else if (nzchar(m[[3L]])) m[[3L]] else m[[2L]]
+    }
+    # the energy-mix table is keyed by ISO-3 ("CAN"); country_code is ISO-2 ("CA")
+    iso3 <- get("country_code_iso3")
+    list(iso = toupper(if (nzchar(iso3)) iso3 else get("country_code")), region = get("region"), name = get("country_name"),
+         lat = suppressWarnings(as.numeric(get("latitude"))) %||% 0, lon = suppressWarnings(as.numeric(get("longitude"))) %||% 0)
+  }, error = function(e) none)
 }
 
 .emissions_iso2_to_iso3 <- function(iso) {
@@ -217,7 +225,8 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 #' were sealed, not who sealed them; pass your own
 #' \code{rmoriebricklayer::fips_keygen()} key to bind the run to you.
 #' @param project_name Label written to the CSV and the manifest.
-#' @param output_dir Where \code{emissions.csv} and the capsule go.
+#' @param output_dir Where \code{emissions.csv} and the capsule go. \code{NULL}
+#'   (the default) writes nothing: the measurement is returned in R only.
 #' @param output_file CSV file name.
 #' @param pue,wue Power and water usage effectiveness multipliers.
 #' @param country_iso_code,region Location overrides.
@@ -243,14 +252,15 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 #' list.files(dir)
 #' unlink(dir, recursive = TRUE)
 #' @export
-morie_emissions_start <- function(project_name = "morie", output_dir = ".",
+morie_emissions_start <- function(project_name = "morie", output_dir = NULL,
                                   output_file = "emissions.csv", pue = 1, wue = 0,
                                   country_iso_code = "", region = "",
-                                  save_to_file = TRUE, capsule = TRUE, key = NULL,
+                                  save_to_file = !is.null(output_dir), capsule = !is.null(output_dir), key = NULL,
                                   measure_power_secs = 1) {
   t <- new.env(parent = emptyenv())
   t$project_name <- project_name
-  t$output_dir <- output_dir
+  # nothing is written unless an output_dir is given: a measurement is a value, not a side effect
+  t$output_dir <- output_dir %||% "."
   t$output_file <- output_file
   t$pue <- pue
   t$wue <- wue

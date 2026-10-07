@@ -36,10 +36,7 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Pelt(V)
 }
 \references{
-Killick, R., Fearnhead, P. and Eckley, I. A. (2012),
-Optimal detection of changepoints with a linear computational
-cost, Journal of the American Statistical Association 107(500),
-1590-1598 (arXiv:1101.1438), equations 1-5, Algorithms 1-2.
-Source: fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
-changepoint-linear-cost.pdf
+Killick, R., Fearnhead, P. and Eckley, I. A. (2012), Optimal detection of
+changepoints with a linear computational cost, Journal of the American Statistical
+Association 107(500), 1590-1598 (arXiv:1101.1438), equations 1-5, Algorithms 1-2.
 }

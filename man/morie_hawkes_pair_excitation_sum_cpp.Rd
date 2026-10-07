@@ -18,5 +18,7 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{.tps_hwka_neg_loglik_general}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+morie_hawkes_pair_excitation_sum_cpp(c(0.5, 1.2, 2.0, 3.1), 0.3, "exponential", 1.5)
 }

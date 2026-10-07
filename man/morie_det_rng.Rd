@@ -28,8 +28,8 @@ deterministic-pseudo-bootstrap mode is plumbed).
 Mechanism: \code{SHA-256(paste0(name, ":", seed))} is truncated to 32 bytes;
 bytes \verb{[9:12]} (1-indexed, i.e. hex chars 17..24) form a 32-bit value
 reduced modulo \code{2^31 - 1} and passed to [set.seed()].  Bytes \verb{[1:8]}
-are reserved for the Python Philox key.  See \code{inst/python-stub/det_rng.py}
-(or the parent \verb{morie/_det_rng.py}) for the Python counterpart.
+are reserved for the Python Philox key; morie's \verb{morie/_det_rng.py} is
+the Python counterpart.
 
 Requires either the \code{digest} or \code{openssl} package for SHA-256.  Both
 are widely available on CRAN; we try \code{digest} first, then \code{openssl},

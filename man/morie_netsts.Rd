@@ -40,6 +40,5 @@ A list with \code{estimate}, \code{forecast}, \code{strategy}, \code{hidden},
 \description{
 A step of the netsts_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

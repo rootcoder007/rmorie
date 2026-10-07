@@ -19,7 +19,6 @@
 #' A step of the caus_native implementation. Called by \code{.caus_first_stage_f},
 #' \code{morie_caus_iv_2sls}, \code{morie_caus_iv_liml}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{cbind}.
@@ -65,7 +64,6 @@
 #' A step of the caus_native implementation. Called by \code{.caus_first_stage_f},
 #' \code{.caus_k_class}, \code{morie_caus_iv_2sls} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z Passed to \code{.caus_project}.
 #' @param M A matrix; passed to \code{as.matrix}.
@@ -110,7 +108,6 @@
 #'
 #' A step of the caus_native implementation. Called by \code{morie_caus_iv_2sls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A vector; its length is taken.
 #' @param Z Passed to \code{.caus_intercept}.

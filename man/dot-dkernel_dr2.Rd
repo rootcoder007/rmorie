@@ -19,5 +19,4 @@ A numeric value.
 \description{
 A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient}.
 See the file header for the source the module follows.
-source it follows.
 }

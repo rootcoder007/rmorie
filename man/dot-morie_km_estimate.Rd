@@ -19,5 +19,4 @@ A step of the cox_native implementation. Called by
 \code{morie_censoring_at_risk_weight}, \code{morie_competing_risks_fg},
 \code{morie_cox_schoenfeld_residuals}.
 See the file header for the source the module follows.
-source it follows.
 }

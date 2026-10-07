@@ -255,3 +255,25 @@ test_that("morie_tps_hawkes_markovian_vs_nonmarkovian compares 2x2 grid", {
   )
   expect_s3_class(rr, "morie_tps_hawkes_advanced_result")
 })
+
+test_that("the event times and fits equal morie Python's on the same records", {
+  # the values morie's Python arm returns for these records (tests/test_hawkes_fast_1_4_0.py)
+  k <- 1:400
+  df <- data.frame(OCC_YEAR = 2015 + k %% 2, OCC_MONTH = month.name[1 + (k * 5) %% 12],
+                   OCC_DAY = 1 + (k * 13) %% 28)
+  e <- rmorie:::.tps_hwka_events_to_days(df, 300)
+  expect_length(e$t, 300L)
+  expect_equal(e$T_, 727.3948813285101, tolerance = 1e-12)
+  expect_equal(sum(e$t), 108783.93019224967, tolerance = 1e-12)
+  expect_equal(e$t[1:3], c(0.1599103928769201, 0.27860113025513866, 0.34419071652363753),
+               tolerance = 1e-12)
+  ex <- rmorie:::.tps_hwka_fit_one(e$t, e$T_, "exponential", "constant")
+  expect_identical(ex$method, "exact")
+  expect_equal(ex$theta, c(-1.9229920843209447, 0.6523636308313808, 4.235992308382929), tolerance = 1e-6)
+  expect_equal(ex$nll, 342.8276118056356, tolerance = 1e-8)
+  wb <- rmorie:::.tps_hwka_fit_one(e$t, e$T_, "weibull", "constant")
+  expect_identical(wb$method, "truncate")
+  expect_equal(wb$theta, c(-1.940282186867362, 0.6590628336268858, 1.3760780701481492, 0.26255518901442443),
+               tolerance = 1e-6)
+  expect_equal(wb$nll, 334.0862418399089, tolerance = 1e-8)
+})

@@ -24,5 +24,7 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the cdaeRC_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+morie_cdaeRC_decode(z = c(0.5, -0.5), Wp = matrix(1, 3, 2), bp = c(0, 0, 0))
 }

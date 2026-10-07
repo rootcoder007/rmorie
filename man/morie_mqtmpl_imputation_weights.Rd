@@ -4,7 +4,12 @@
 \alias{morie_mqtmpl_imputation_weights}
 \title{Normal-model imputation weight}
 \usage{
-morie_mqtmpl_imputation_weights(y, genotype_column, model_dimension = 2)
+morie_mqtmpl_imputation_weights(
+  y,
+  genotype_column,
+  model_dimension = 2,
+  covariates = NULL
+)
 }
 \arguments{
 \item{y}{Phenotype.}
@@ -12,6 +17,9 @@ morie_mqtmpl_imputation_weights(y, genotype_column, model_dimension = 2)
 \item{genotype_column}{A column of imputed genotypes.}
 
 \item{model_dimension}{Degrees of freedom in the model.}
+
+\item{covariates}{Optional matrix of additive covariates, fitted
+alongside the genotype column.}
 }
 \value{
 The log weight.

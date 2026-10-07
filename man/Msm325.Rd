@@ -26,8 +26,8 @@ LL+(left) + LL+(right).
 }
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Msm325(V)
+# positive counts in a node, split on a covariate
+Msm325(y_positive = c(1, 2, 1, 3, 4, 2, 6, 5), x = c(0.1, 0.2, 0.15, 0.4, 0.8, 0.3, 0.9, 0.7))$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

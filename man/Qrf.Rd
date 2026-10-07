@@ -26,12 +26,15 @@ predictive distribution is the optimal point forecast. Equivalent
 to the Koenker-Bassett check function
 \eqn{\rho_\tau(u) = u(\tau - 1\{u < 0\})} with \eqn{u = y - x}.
 }
+\examples{
+set.seed(10)
+y <- rnorm(500)
+c(median = Qrf(y, 0, tau = 0.5)$estimate, off = Qrf(y, 1, tau = 0.5)$estimate)   # the median scores best
+}
 \references{
 Gneiting, T. (2011), Making and evaluating point
 forecasts, Journal of the American Statistical Association
-106(494), 746-762; arXiv:0912.0902, sec. 3.3 and Theorem 9
-(source library/pdf/fetched-wave3/
-gneiting-2011-quantiles-point-forecasts.pdf); Koenker, R. and
-Bassett, G. (1978), Regression quantiles, Econometrica 46(1),
-33-50.
+106(494), 746-762; arXiv:0912.0902, sec. 3.3 and Theorem 9;
+Koenker, R. and Bassett, G. (1978), Regression quantiles,
+Econometrica 46(1), 33-50.
 }

@@ -19,7 +19,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the xdeep_native implementation. Called by \code{xdeep_cin}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 xdeep_cin_layer(X_prev = 5L, X0 = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8))

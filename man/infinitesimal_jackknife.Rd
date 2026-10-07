@@ -23,7 +23,6 @@ The value of \code{total}, as built in the body.
 \description{
 A step of the hntfst_native implementation. Called by \code{honest_forest}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(3)

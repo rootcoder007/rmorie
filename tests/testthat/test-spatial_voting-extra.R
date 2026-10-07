@@ -181,14 +181,12 @@ test_that("morie_spatial_voting_nominate_bootstrap returns SE matrix", {
 test_that("morie_spatial_voting_alpha_nominate returns ideal-point matrix", {
   skip_heavy()
   V <- make_synthetic_vote_matrix(25L, 20L, 1L, seed = 73L)
-  out <- tryCatch(
-    morie_spatial_voting_alpha_nominate(V, n_dims = 1L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("alpha_nominate error: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_alpha_nominate(V, n_dims = 1L,
+                                             n_samples = 20L,
+                                             burn_in = 10L,
+                                             minvotes = 10L)
+  expect_true(is.matrix(out$ideal_points))
+  expect_identical(nrow(out$ideal_points), length(out$legislators_used))
 })
 
 # ----------------------------------------------------------------- Ordinal IRT
@@ -197,14 +195,10 @@ test_that("morie_spatial_voting_ordinal_irt runs on ordinal vote-like data", {
   skip_heavy()
   set.seed(81L)
   Y <- matrix(sample.int(4L, 20L * 15L, replace = TRUE), 20L, 15L)
-  out <- tryCatch(
-    morie_spatial_voting_ordinal_irt(Y, n_dims = 1L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("ordinal_irt error: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_ordinal_irt(Y, n_dims = 1L, n_samples = 30L,
+                                          burn_in = 10L)
+  expect_equal(dim(out$ideal_points), c(20L, 1L))
+  expect_length(out$cutpoints, 15L)
 })
 
 # ----------------------------------------------------------------- Dynamic IRT
@@ -287,43 +281,31 @@ test_that("morie_spatial_voting_ordered_oc runs on ordinal vote matrix", {
 # These typically delegate to optional packages (rstan/MCMCpack). They
 # may error cleanly when the optional dep is absent; skip gracefully.
 
-test_that("morie_spatial_voting_bayesian_am runs or skips on missing Stan", {
+test_that("morie_spatial_voting_bayesian_am returns standardised stimuli", {
   skip_heavy()
   Z <- matrix(stats::rnorm(20L * 5L), 20L, 5L)
-  out <- tryCatch(
-    morie_spatial_voting_bayesian_am(Z, n_samples = 20L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("bayesian_am: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_bayesian_am(Z, n_samples = 20L, burn_in = 5L)
+  expect_length(out$zeta_mean, 5L)
+  expect_equal(apply(out$draws, 1L, stats::sd), rep(1, 20L), tolerance = 1e-12)
 })
 
-test_that("morie_spatial_voting_bayesian_mds runs or skips on missing Stan", {
+test_that("morie_spatial_voting_bayesian_mds returns a configuration", {
   skip_heavy()
   D <- make_synthetic_distance_matrix(10L, 2L, seed = 131L)
-  out <- tryCatch(
-    morie_spatial_voting_bayesian_mds(D, n_dims = 2L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("bayesian_mds: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_bayesian_mds(D, n_dims = 2L, n_samples = 30L,
+                                           burn_in = 10L)
+  expect_equal(dim(out$positions), c(10L, 2L))
+  expect_true(all(is.finite(out$distance_mean)))
 })
 
-test_that("morie_spatial_voting_bayesian_unfolding runs or skips on missing Stan", {
+test_that("morie_spatial_voting_bayesian_unfolding returns both configurations", {
   skip_heavy()
   D <- make_synthetic_unfolding_matrix(10L, 4L, 2L, seed = 132L)
-  out <- tryCatch(
-    morie_spatial_voting_bayesian_unfolding(D, n_dims = 2L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("bayesian_unfolding: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_bayesian_unfolding(D, n_dims = 2L,
+                                                 n_samples = 30L,
+                                                 burn_in = 10L)
+  expect_equal(dim(out$stimuli), c(4L, 2L))
+  expect_equal(dim(out$ideal_points), c(10L, 2L))
 })
 
 test_that("morie_spatial_voting_cjr_irt runs or skips on missing Stan", {
@@ -410,7 +392,7 @@ test_that("non-finite stimuli from basicspace fall back to the native solver", {
   set.seed(1)
   Z <- matrix(rnorm(100), 20, 5)
   fit <- morie_spatial_voting_aldrich_mckelvey(Z)
-  expect_identical(fit$engine, "fallback")
+  expect_identical(fit$engine, "native")
   expect_true(all(is.finite(fit$zhat)))
   expect_true(all(is.finite(fit$alpha)))
 })

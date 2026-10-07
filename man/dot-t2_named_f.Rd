@@ -15,5 +15,4 @@ The value of \code{switch}.
 \description{
 A step of the tail2_t02 implementation. Called by \code{FDiverg}.
 See the file header for the source the module follows.
-source it follows.
 }

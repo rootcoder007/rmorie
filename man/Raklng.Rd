@@ -34,6 +34,15 @@ Formula: repeat over margins A, B, ...:
 \code{w_i <- w_i m^A_h / sum_{j in h} w_j} for every level h, until
 every margin matches its target.
 }
+\examples{
+y <- c(10, 12, 9, 15, 11, 14)
+w <- rep(1, 6)
+sex <- c("f", "m", "f", "m", "f", "m"); age <- c("y", "y", "o", "o", "y", "o")
+margins <- list(list(labels = sex, targets = c(f = 300, m = 300)),
+                list(labels = age, targets = c(y = 250, o = 350)))
+r <- Raklng(y, w, margins)
+c(r$estimate, r$max_margin_error)
+}
 \references{
 Deming, W. E. & Stephan, F. F. (1940). On a least squares
 adjustment of a sampled frequency table when the expected marginal

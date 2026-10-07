@@ -21,7 +21,6 @@ The value of \code{beta}, as built in the body.
 \description{
 A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))

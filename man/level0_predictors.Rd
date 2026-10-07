@@ -21,7 +21,6 @@ A list with \code{predictors}, \code{meta}, \code{n_predictors}, \code{reduction
 \description{
 A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

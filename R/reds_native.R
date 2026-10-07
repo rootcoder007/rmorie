@@ -61,7 +61,6 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 #' A step of the reds_native implementation. Called by \code{.rn_mc_p_fitted},
 #' \code{morie_multi_horizon_ks}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cdf_vals A vector; its length is taken.
 #' @return A numeric value.

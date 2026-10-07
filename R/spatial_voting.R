@@ -81,19 +81,13 @@ NULL
 #   - Slapin & Proksch (2008) "A Scaling Model for Estimating Time-Series
 #     Party Positions from Texts", AJPS 52(3)  (Wordfish).
 #
-# Where the upstream R ecosystem provides a battle-tested implementation
-# we delegate to it: `basicspace` for Aldrich-McKelvey and blackbox
-# scaling, with a pure-R numeric fallback so the package keeps working
-# when `basicspace` (or `MASS`/`mvtnorm`) is not installed.
-#
-# Heavy Bayesian MCMC paths (CJR-IRT, Bayesian MDS / unfolding, dynamic
-# IRT, alpha-NOMINATE) now run on native samplers or documented
-# deterministic approximations (see each function's engine tag)
-# stubs.  Porting a faithful Gibbs/MH sampler exceeds the in-session
-# budget; users needing those should reach for `pscl::ideal`, `MCMCpack`,
-# or `emIRT`.  The function signatures, parameter docs, and references
-# are kept in place so the API surface is stable and a future port lands
-# cleanly.
+# Aldrich-McKelvey and blackbox scaling use `basicspace` when it is
+# installed and otherwise compute the same estimators natively (closed-form
+# AM; EM low-rank blackbox).  The Bayesian estimators (Bayesian AM,
+# Bayesian MDS and unfolding, CJR, ordinal and dynamic IRT,
+# alpha-NOMINATE) run on the native samplers in
+# spatial_voting_bayes_native.R, each checked against its reference
+# implementation (see the function documentation).
 
 # ---- internal helpers ------------------------------------------------------
 
@@ -206,29 +200,75 @@ NULL
   list(alpha = alpha, beta = beta)
 }
 
+# Aldrich-McKelvey closed form: the stimulus vector minimising
+# sum_i ||X_i c_i - z||^2 over unit-length, centred z is the eigenvector of
+# sum_i (I - P_i) with the smallest eigenvalue orthogonal to the constant
+# (which every P_i reproduces).  Complete, non-constant rows only, as in
+# basicspace::aldmck.  Standardised, first stimulus on the left.
+.sv_am_stimuli <- function(Z) {
+  q <- ncol(Z)
+  if (q < 2L) {
+    stop("Aldrich-McKelvey scaling needs at least two stimuli.",
+         call. = FALSE)
+  }
+  M <- matrix(0, q, q)
+  used <- 0L
+  for (i in seq_len(nrow(Z))) {
+    z <- Z[i, ]
+    if (anyNA(z) || stats::var(z) == 0) next
+    X <- cbind(1, z)
+    M <- M + diag(q) - X %*% solve(crossprod(X), t(X))
+    used <- used + 1L
+  }
+  if (used < 1L) {
+    stop("Aldrich-McKelvey scaling needs at least one respondent who ",
+         "places every stimulus and not all at the same point.",
+         call. = FALSE)
+  }
+  C <- diag(q) - 1 / q
+  e <- eigen(C %*% M %*% C, symmetric = TRUE)
+  # the constant direction has eigenvalue 0 too; skip it
+  off <- abs(colSums(e$vectors)) > 1e-8 * sqrt(q)
+  v <- e$vectors[, which.min(ifelse(off, Inf, e$values))]
+  v <- (v - mean(v)) / stats::sd(v)
+  if (v[1L] > 0) v <- -v
+  v
+}
+
 #' Aldrich-McKelvey scaling
 #'
 #' Recovers latent stimulus positions from perceptual placement data by
 #' estimating respondent-specific intercepts \eqn{a_i} and slopes
 #' \eqn{b_i} in the model
 #' \deqn{z_{ij} = a_i + b_i \hat{z}_j + \epsilon_{ij}.}{z_ij = a_i + b_i z_hat_j + epsilon_ij.}
-#' The stimulus positions come from `basicspace::aldmck` when the
-#' `basicspace` package is installed (standardised to mean 0, sd 1);
-#' otherwise from a hand-rolled EM/least-squares fallback. The respondent
-#' intercepts and slopes are, on either path, the per-respondent least
-#' squares regression of the reported placements on those positions, so
-#' they are defined for every respondent with at least two placements
-#' (`basicspace` itself reports them only for respondents it scales
-#' against a self-placement, which this function does not take).
+#' The stimulus positions are Aldrich and McKelvey's least-squares
+#' solution: each respondent's placements are mapped onto the common
+#' scale by the best affine transformation, and \eqn{\hat z} minimises
+#' the total squared error
+#' \eqn{\sum_i \lVert X_i c_i - \hat z \rVert^2}, \eqn{X_i = [1, z_i]},
+#' subject to \eqn{\hat z^\top \hat z = 1} and \eqn{1^\top \hat z = 0}.
+#' Concentrating out \eqn{c_i} leaves
+#' \eqn{\hat z^\top \sum_i (I - P_i) \hat z} with \eqn{P_i} the
+#' projection onto the columns of \eqn{X_i}, so \eqn{\hat z} is the
+#' eigenvector of \eqn{\sum_i (I - P_i)} with the smallest eigenvalue
+#' orthogonal to the constant.  Respondents with a missing placement, or
+#' who place every stimulus at the same point, are left out, as
+#' `basicspace::aldmck` does; with `basicspace` installed it computes the
+#' stimuli, otherwise the same closed form is evaluated here (the two agree
+#' to rounding).  Positions are standardised to mean 0 and sd 1 and the
+#' first stimulus is put on the left.  The respondent intercepts and slopes
+#' are, on either path, the per-respondent least squares regression of the
+#' reported placements on those positions, so they are defined for every
+#' respondent with at least two placements (`basicspace` itself reports
+#' them only for respondents it scales against a self-placement, which
+#' this function does not take).
 #'
 #' @param Z A respondent-by-stimulus numeric matrix of perceptual
 #'   placements.  `NA` entries are treated as missing.
-#' @param n_dims Number of latent dimensions (typically 1).
-#' @param max_iter Maximum EM iterations for the fallback solver.
-#' @param tol Convergence tolerance on the stimulus configuration.
+#' @param n_dims Number of latent dimensions (must be 1).
 #' @return A list with components `zhat` (stimulus positions), `alpha`,
-#'   `beta`, `weights`, `iterations`, `converged`, and `engine`
-#'   ("basicspace" or "fallback").
+#'   `beta`, `weights`, `iterations` (`NA`, the solution is closed form),
+#'   `converged`, and `engine` ("basicspace" or "native").
 #' @references
 #'   Aldrich, J. H. and McKelvey, R. D. (1977). "A Method of Scaling with
 #'   Applications to the 1968 and 1972 Presidential Elections."
@@ -241,17 +281,15 @@ NULL
 #'   and Rosenthal, H. (2021). *Analyzing Spatial Models of Choice and
 #'   Judgment*, 2nd ed. Chapman & Hall/CRC.
 #' @examples
-#' if (requireNamespace("basicspace", quietly = TRUE)) {
-#'   set.seed(1)
-#'   Z <- matrix(rnorm(20 * 5), 20, 5)
-#'   fit <- morie_spatial_voting_aldrich_mckelvey(Z)
-#'   fit$zhat
-#' }
+#' set.seed(1)
+#' truth <- c(-1.2, -0.4, 0.1, 0.9, 1.5)
+#' Z <- t(sapply(1:40, function(i) 4 + rnorm(1, 0, 0.3) +
+#'   runif(1, 0.6, 1.4) * truth + rnorm(5, 0, 0.3)))
+#' fit <- morie_spatial_voting_aldrich_mckelvey(Z)
+#' round(fit$zhat, 2)
+#' round((truth - mean(truth)) / sd(truth), 2)
 #' @export
-morie_spatial_voting_aldrich_mckelvey <- function(Z,
-                                                  n_dims  = 1L,
-                                                  max_iter = 100L,
-                                                  tol      = 1e-6) {
+morie_spatial_voting_aldrich_mckelvey <- function(Z, n_dims = 1L) {
   if (as.integer(n_dims) != 1L) {
     stop("morie_spatial_voting_aldrich_mckelvey: this implementation recovers a single ",
          "latent dimension; n_dims must be 1", call. = FALSE)
@@ -264,7 +302,7 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
         .sv_basicspace_shape_ok(Z)) {
     # aldmck's default treats NA cells as missing; passing `missing = NA`
     # is rejected ("must only contain integers"), which sent every call
-    # down the fallback while the docs promised basicspace
+    # down the native path while the docs promised basicspace
     out <- try(basicspace::aldmck(Z, respondent = 0, polarity = 1),
                silent = TRUE)
     if (!inherits(out, "try-error") && all(is.finite(out$stimuli))) {
@@ -284,43 +322,11 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
     }
   }
 
-  mask <- !is.na(Z)
-  zhat <- .sv_nanmean_col(Z)
-  if (stats::sd(zhat, na.rm = TRUE) > 0) {
-    zhat <- (zhat - mean(zhat, na.rm = TRUE)) /
-            stats::sd(zhat, na.rm = TRUE)
-  }
-  alpha <- numeric(n_resp)
-  beta <- numeric(n_resp)
-  iter <- 0L
-  for (iter in seq_len(max_iter)) {
-    zhat_old <- zhat
-    rp <- .sv_am_respondents(Z, mask, zhat)
-    alpha <- rp$alpha
-    beta <- rp$beta
-    for (j in seq_len(n_stim)) {
-      valid <- mask[, j]
-      if (sum(valid) < 1L) next
-      # v0.9.5.6+: Aldrich-McKelvey (1977) precision-weighted stimulus
-      # update z_j = sum_i beta_i (Z_ij - alpha_i) / sum_i beta_i^2,
-      # NOT the unweighted mean. The unweighted form biases the
-      # estimate under heterogeneous respondent reliability.
-      denom <- sum(beta[valid]^2)
-      if (denom < 1e-12) {
-        zhat[j] <- mean((Z[valid, j] - alpha[valid]) / beta[valid])
-      } else {
-        zhat[j] <- sum(beta[valid] * (Z[valid, j] - alpha[valid])) / denom
-      }
-    }
-    zhat <- zhat - mean(zhat)
-    if (stats::sd(zhat) > 0) zhat <- zhat / stats::sd(zhat)
-    if (max(abs(zhat - zhat_old)) < tol) break
-  }
-  weights <- abs(beta)
-  weights <- weights / sum(weights) * n_resp
-  list(zhat = zhat, alpha = alpha, beta = beta, weights = weights,
-       iterations = iter, converged = iter < max_iter,
-       engine = "fallback")
+  zhat <- .sv_am_stimuli(Z)
+  rp <- .sv_am_respondents(Z, !is.na(Z), zhat)
+  list(zhat = zhat, alpha = rp$alpha, beta = rp$beta,
+       weights = abs(rp$beta) / sum(abs(rp$beta)) * n_resp,
+       iterations = NA_integer_, converged = TRUE, engine = "native")
 }
 
 # ===========================================================================
@@ -330,25 +336,38 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
 #' Blackbox / Basic Space scaling
 #'
 #' Recovers respondent ideal points from an issue-scale response matrix
-#' via SVD on the column-centred matrix.  Implements Poole's (1998)
-#' decomposition \eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0}.  Delegates to
-#' `basicspace::blackbox` when available.
+#' by Poole's (1998) decomposition
+#' \eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0}, fitted
+#' by least squares over the observed cells only.  Respondents with fewer
+#' than `minscale` responses are not scaled (their rows are `NA`).
+#' `basicspace::blackbox` computes it when installed and the matrix has at
+#' least eight issues; otherwise it is computed here, by the EM low-rank
+#' fit: missing cells are filled with the current fit, the column means
+#' and the leading singular vectors of the centred matrix recomputed, and
+#' the two steps repeated until the filled cells stop moving.  With no
+#' missing cells this is one SVD; either way \eqn{\Psi = U D^{1/2}} and
+#' \eqn{W = V D^{1/2}}, the scaling `basicspace` reports, and the two
+#' paths give the same fitted values.
 #'
 #' @param X A respondent-by-issue numeric matrix of responses
 #'   (`NA` for missing).
 #' @param n_dims Number of dimensions to extract.
+#' @param minscale Minimum number of responses for a respondent to be
+#'   scaled (capped at the number of issues).
 #' @return A list with `ideal_points`, `stimuli_weights`, `eigenvalues`,
 #'   `singular_values`, `explained_variance`, `col_means`, `n_dims`, and
 #'   `engine`.
 #' @references Poole, K. T. (1998); Armstrong et al. (2021).
 #' @examples
-#' if (requireNamespace("basicspace", quietly = TRUE)) {
-#'   set.seed(1)
-#'   X <- matrix(rnorm(30 * 6), 30, 6)
-#'   morie_spatial_voting_blackbox(X, n_dims = 2)
-#' }
+#' set.seed(1)
+#' X <- matrix(rnorm(30 * 2), 30, 2) %*% matrix(rnorm(2 * 8), 2, 8) +
+#'   matrix(rnorm(240, 0, 0.3), 30, 8)
+#' X[sample(240, 10)] <- NA
+#' fit <- morie_spatial_voting_blackbox(X, n_dims = 2)
+#' fit$engine
+#' head(fit$ideal_points)
 #' @export
-morie_spatial_voting_blackbox <- function(X, n_dims = 2L) {
+morie_spatial_voting_blackbox <- function(X, n_dims = 2L, minscale = 8L) {
   X <- .sv_as_matrix(X)
   n <- nrow(X)
   p <- ncol(X)
@@ -357,8 +376,14 @@ morie_spatial_voting_blackbox <- function(X, n_dims = 2L) {
   # responses, so fewer than eight stimuli would only error anyway
   if (requireNamespace("basicspace", quietly = TRUE) &&
         .sv_basicspace_shape_ok(X, min_cols = max(8L, n_dims + 1L))) {
-    out <- try(basicspace::blackbox(X, missing = NA, dims = n_dims,
-                                    minscale = 8, verbose = FALSE),
+    # blackbox's default treats NA cells as missing; `missing = NA` is
+    # rejected ("must only contain integers") and silently sent every
+    # call to the native path
+    Xb <- X
+    if (is.null(colnames(Xb))) colnames(Xb) <- paste0("issue", seq_len(p))
+    if (is.null(rownames(Xb))) rownames(Xb) <- paste0("resp", seq_len(n))
+    out <- try(basicspace::blackbox(Xb, dims = n_dims, minscale = minscale,
+                                    verbose = FALSE),
                silent = TRUE)
     if (!inherits(out, "try-error")) {
       ip <- as.matrix(out$individuals[[n_dims]][, paste0("c", seq_len(n_dims))])
@@ -376,23 +401,39 @@ morie_spatial_voting_blackbox <- function(X, n_dims = 2L) {
     }
   }
 
-  col_means <- .sv_nanmean_col(X)
-  Xc <- sweep(X, 2, col_means, FUN = "-")
-  Xc[is.na(Xc)] <- 0
-  sv <- svd(Xc)
-  q  <- min(n_dims, length(sv$d))
-  Lambda_q <- diag(sv$d[seq_len(q)], nrow = q)
-  V_q <- sv$v[, seq_len(q), drop = FALSE]
-  U_q <- sv$u[, seq_len(q), drop = FALSE]
-  W   <- V_q %*% sqrt(Lambda_q)
-  Psi <- U_q %*% sqrt(Lambda_q)
-  total_var <- sum(sv$d ^ 2)
-  explained <- if (total_var > 0) sum(sv$d[seq_len(q)] ^ 2) / total_var else 0
+  if (p < 2L) {
+    stop("Blackbox scaling needs at least two issues (columns).",
+         call. = FALSE)
+  }
+  keep <- rowSums(!is.na(X)) >= min(as.integer(minscale), p)
+  if (sum(keep) <= n_dims) {
+    stop("Too few respondents answer at least `minscale` issues.",
+         call. = FALSE)
+  }
+  Xk <- X[keep, , drop = FALSE]
+  obs <- !is.na(Xk)
+  M <- Xk
+  M[!obs] <- .sv_nanmean_col(Xk)[col(Xk)][!obs]
+  q <- min(as.integer(n_dims), p - 1L, nrow(Xk) - 1L)
+  for (it in seq_len(5000L)) {
+    col_means <- colMeans(M)
+    sv <- svd(sweep(M, 2L, col_means), nu = q, nv = q)
+    fit <- sv$u %*% (sv$d[seq_len(q)] * t(sv$v)) +
+      rep(col_means, each = nrow(M))
+    if (all(obs)) break
+    change <- max(abs(M[!obs] - fit[!obs]))
+    M[!obs] <- fit[!obs]
+    if (change < 1e-10) break
+  }
+  d <- sv$d[seq_len(q)]
+  Psi <- matrix(NA_real_, n, q)
+  Psi[keep, ] <- sv$u %*% diag(sqrt(d), nrow = q)
+  W <- sv$v %*% diag(sqrt(d), nrow = q)
+  total_var <- sum(svd(sweep(M, 2L, col_means))$d^2)
   list(ideal_points = Psi, stimuli_weights = W,
-       eigenvalues  = sv$d[seq_len(q)] ^ 2,
-       singular_values = sv$d[seq_len(q)],
-       explained_variance = explained,
-       col_means = col_means, n_dims = q, engine = "fallback")
+       eigenvalues = d^2, singular_values = d,
+       explained_variance = if (total_var > 0) sum(d^2) / total_var else 0,
+       col_means = col_means, n_dims = q, engine = "native")
 }
 
 # ===========================================================================
@@ -858,6 +899,7 @@ morie_spatial_voting_smacof_unfolding <- function(D,
                                                   n_dims   = 2L,
                                                   max_iter = 300L,
                                                   tol      = 1e-6) {
+  .morie_arg(D, "m")
   D <- as.matrix(D)
   n_r <- nrow(D)
   n_s <- ncol(D)
@@ -1064,139 +1106,197 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
 }
 
 # ===========================================================================
-# 8. Bayesian methods -- STUBBED (porting MCMC samplers exceeds session)
+# 8. Bayesian methods (native samplers in spatial_voting_bayes_native.R)
 # ===========================================================================
 
-#' Internal helper: NOT PORTED
-#' @noRd
-.NOT_PORTED <- function(name) {
-  stop(sprintf("NotYetPorted: %s -- the Bayesian MCMC backend is not yet ported to R. ",
-               name),
-       "Use `pscl::ideal`, `MCMCpack::MCMCirt1d`, `emIRT::binIRT`, or ",
-       "the Python morie._spatial_voting backend.",
-       call. = FALSE)
-}
-
-#' Bayesian Aldrich-McKelvey scaling (stub)
+#' Bayesian Aldrich-McKelvey scaling (Hare et al. 2015)
 #'
-#' @param Z Perceptual placement matrix.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
-#' @param prior_sd Prior SD on stimulus positions.
-#' @return List: `zeta_mean`, `zeta_sd` (posterior stimulus
-#'   positions), `sigma2`, `n_samples`, `engine`.
+#' Respondent \eqn{i} places stimulus \eqn{j} at
+#' \deqn{z_{ij} \sim N(a_i + b_i \hat z_j,\; 1 / (\tau_i \tau_j)),}
+#' a respondent-specific shift and stretch of the common stimulus
+#' positions \eqn{\hat z} plus noise whose precision factors into a
+#' respondent and a stimulus part.  Priors follow the authors' JAGS
+#' template: \eqn{a_i, b_i \sim U(-100, 100)},
+#' \eqn{\tau_j \sim G(0.1, 0.1)}, \eqn{\tau_i \sim G(g_a, g_b)} with
+#' \eqn{g_a, g_b \sim G(0.1, 0.1)}, and \eqn{\hat z} the standardised
+#' version of \eqn{z^* \sim N(0, 1)}, with the \code{polarity} stimulus
+#' restricted to the left (\eqn{z^* \le 0}).  Standardising fixes the
+#' location and scale, the polarity restriction the reflection.
+#'
+#' Gibbs sampling: \eqn{a_i \mid b_i} and \eqn{b_i \mid a_i} are truncated
+#' normals, \eqn{\tau_j}, \eqn{\tau_i} and \eqn{g_b} conjugate gammas, and
+#' \eqn{g_a} and each \eqn{z^*_j} are slice sampled (Neal 2003); every
+#' \eqn{z^*_j} enters every \eqn{\hat z} through the mean and standard
+#' deviation, so the stimuli are updated one at a time against the full
+#' likelihood.  On 150 simulated respondents and five stimuli the
+#' posterior means and standard deviations agree with the JAGS model run
+#' through \code{asmcjr::BAM} to the third decimal.
+#'
+#' @param Z Respondent-by-stimulus placement matrix; \code{NA} marks a
+#'   missing placement and rows with no placements are dropped.
+#' @param n_samples Retained draws.
+#' @param burn_in Sweeps discarded first.
+#' @param polarity Column index of the stimulus placed on the left.
+#' @param seed RNG seed.
+#' @return List: \code{zeta_mean}, \code{zeta_sd} and
+#'   \code{zeta_interval} (central 95\%) for the stimuli, \code{a} and
+#'   \code{b} (posterior mean shifts and stretches), \code{tau_stimulus},
+#'   \code{draws} (retained \eqn{\hat z}, one row per draw),
+#'   \code{n_samples}, \code{engine}.
 #' @references
-#'   Hare, C., Armstrong, D. A., Bakker, R., Carroll, R., and Poole, K. T.
-#'   (2015). "Using Bayesian Aldrich-McKelvey Scaling to Study Citizens'
-#'   Ideological Preferences and Perceptions." *AJPS*, 59(3).
+#'   Hare, C., Armstrong, D. A., Bakker, R., Carroll, R. and Poole, K. T.
+#'   (2015). Using Bayesian Aldrich-McKelvey scaling to study citizens'
+#'   ideological preferences and perceptions. \emph{American Journal of
+#'   Political Science} 59(3), 759-774.
+#'
+#'   Neal, R. M. (2003). Slice sampling. \emph{Annals of Statistics}
+#'   31(3), 705-767.
 #' @examples
 #' set.seed(1)
-#' if (requireNamespace("basicspace", quietly = TRUE)) {
-#'   \donttest{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
-#' }
+#' zt <- c(-1, -0.3, 0.4, 1.2)
+#' Z <- rnorm(40, 0, 0.5) + outer(runif(40, 0.5, 1.5), zt) +
+#'   matrix(rnorm(160, 0, 0.3), 40, 4)
+#' fit <- morie_spatial_voting_bayesian_am(Z, n_samples = 200L,
+#'                                         burn_in = 100L)
+#' round(fit$zeta_mean, 2)
+#' # the true positions, standardised the same way
+#' round((zt - mean(zt)) / sd(zt), 2)
 #' @export
 morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
                                              burn_in = 200L,
-                                             prior_sd = 10.0) {
+                                             polarity = 1L,
+                                             seed = 42L) {
+  .morie_arg(Z, "mNA")
   Z <- as.matrix(Z)
   mode(Z) <- "numeric"
-  if (requireNamespace("basicspace", quietly = TRUE) &&
-        .sv_basicspace_shape_ok(Z)) {
-    # basicspace::aldmck rejects `missing = NA` (it expects integer
-    # sentinels). Letting it default + casting to numeric is the
-    # safe path for arbitrary floating-point input matrices.
-    out <- try(basicspace::aldmck(Z, respondent = 0, polarity = 1),
-               silent = TRUE)
-    if (!inherits(out, "try-error")) {
-      return(list(
-        zeta_mean = as.numeric(out$stimuli),
-        engine    = "basicspace (deterministic AM; full Bayesian not ported)"
-      ))
-    }
+  if (sum(colSums(is.finite(Z)) > 0L) < 2L) {
+    stop("Bayesian Aldrich-McKelvey scaling needs placements of at ",
+         "least two stimuli (columns).", call. = FALSE)
   }
-  .morie_sv_bayes_am(Z, n_samples = n_samples, burn_in = burn_in,
-                     prior_sd = prior_sd)
+  if (!any(is.finite(Z[, polarity]))) {
+    stop("The `polarity` stimulus has no placements.", call. = FALSE)
+  }
+  .rmorie_local_seed(as.integer(seed))
+  .morie_sv_bayes_am(Z, n_samples = as.integer(n_samples),
+                     burn_in = as.integer(burn_in),
+                     polarity = as.integer(polarity))
 }
 
-#' Bayesian MDS (stub) -- log-normal distances via Metropolis
-#' @param D Distance matrix.
+#' Bayesian metric multidimensional scaling (Bakker and Poole 2013)
+#'
+#' Each observed dissimilarity is lognormal about the distance between the
+#' two objects' coordinates,
+#' \deqn{\log \delta_{ij} \sim N(\log d_{ij}, 1 / \tau), \quad
+#' d_{ij} = \lVert x_i - x_j \rVert,}
+#' with \eqn{x_{ik} \sim N(0, 10^2)} and \eqn{\tau \sim U(0, 10)}, the
+#' priors of the authors' JAGS code (\code{asmcjr::BMDS}).  The upper
+#' bound on \eqn{\tau} keeps \eqn{\sigma = \tau^{-1/2}} at or above 0.316,
+#' so dissimilarities measured more precisely than that are fitted with
+#' \eqn{\sigma} near the bound.  Zero, negative or missing
+#' dissimilarities are left out of the likelihood.
+#'
+#' Coordinates are slice sampled one at a time (Neal 2003) and \eqn{\tau}
+#' is drawn exactly from its truncated gamma full conditional.  The
+#' likelihood is invariant to translation, rotation and reflection, so
+#' the chain runs unconstrained and every draw is then aligned
+#' (translation and rotation, no rescaling) onto the posterior mean
+#' configuration.  The JAGS code instead pins one object at the origin and
+#' a second to an axis; pinning that second object adds an implicit
+#' \eqn{1/d} prior on its distance to the first, so distances involving
+#' those two objects differ slightly between the two programs.  On a
+#' simulated set of 12 objects the posterior mean distances among the
+#' other ten agree with JAGS to within 0.05 (mean distance 2.0), the
+#' size of the Monte Carlo error.
+#'
+#' @param D Symmetric dissimilarity matrix.
 #' @param n_dims Dimensions.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
-#' @param sigma_init Initial sigma.
-#' @return List: `positions`/`coords` (posterior-mean or modal
-#'   configuration), fit diagnostics, and an `engine` tag.
-#' @references Oh & Raftery (2001) JASA 96(455).
+#' @param n_samples Retained draws.
+#' @param burn_in Sweeps discarded first.
+#' @param sigma_init Starting value of \eqn{\sigma}.
+#' @param seed RNG seed.
+#' @return List: \code{positions} (aligned posterior mean),
+#'   \code{positions_sd}, \code{distance_mean} (posterior mean of every
+#'   pairwise distance, invariant to the alignment), \code{sigma},
+#'   \code{tau}, \code{draws} (aligned draws, draw index first),
+#'   \code{n_samples}, \code{engine}.
+#' @references Bakker, R. and Poole, K. T. (2013). Bayesian metric
+#'   multidimensional scaling. \emph{Political Analysis} 21(1), 125-140.
 #' @examples
-#' if (requireNamespace("smacof", quietly = TRUE)) {
-#'   \donttest{
-#'   # A real dissimilarity matrix (the all-zero matrix is degenerate
-#'   # and makes the stress majorizer divide by zero).
-#'   set.seed(1)
-#'   X <- matrix(rnorm(30), 10, 3)
-#'   morie_spatial_voting_bayesian_mds(as.matrix(dist(X)))
-#'   }
-#' }
+#' set.seed(1)
+#' X <- matrix(rnorm(16), 8, 2)
+#' D <- as.matrix(dist(X))
+#' fit <- morie_spatial_voting_bayesian_mds(D, n_samples = 150L,
+#'                                          burn_in = 100L)
+#' # posterior mean distances against the true ones
+#' cor(fit$distance_mean[upper.tri(D)], D[upper.tri(D)])
 #' @export
 morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
                                               n_samples = 1000L,
                                               burn_in = 200L,
-                                              sigma_init = 1.0) {
-  # smacof::mds is a deterministic stress-minimiser that finds the
-  # posterior mode of the Oh & Raftery (2001) lognormal-distance MDS
-  # model under a flat prior. We expose it here under bayesian_mds as
-  # the standing R-side implementation pending a full MCMC port.
-  if (requireNamespace("smacof", quietly = TRUE)) {
-    fit <- smacof::mds(stats::as.dist(D), ndim = n_dims,
-                       type = "ratio", verbose = FALSE)
-    return(list(
-      coords = unname(as.matrix(fit$conf)),
-      stress = as.numeric(fit$stress),
-      n_dims = n_dims,
-      engine = "smacof (deterministic MDS; full Bayesian not ported)"
-    ))
+                                              sigma_init = 1.0,
+                                              seed = 42L) {
+  .morie_arg(D, "mNA")
+  D <- as.matrix(D)
+  if (nrow(D) != ncol(D)) {
+    stop("`D` must be a square dissimilarity matrix.", call. = FALSE)
   }
-  .morie_sv_bayes_mds(D, n_dims = n_dims, n_samples = n_samples,
-                      burn_in = burn_in, sigma_init = sigma_init)
+  .rmorie_local_seed(as.integer(seed))
+  .morie_sv_bayes_mds(D, n_dims = as.integer(n_dims),
+                      n_samples = as.integer(n_samples),
+                      burn_in = as.integer(burn_in), sigma_init = sigma_init)
 }
 
-#' Bayesian unfolding (stub) -- Bakker & Poole sampler
-#' @param D Respondent-stimulus dissimilarity matrix.
+#' Bayesian unfolding (Bakker and Poole 2013)
+#'
+#' The lognormal model of \code{\link{morie_spatial_voting_bayesian_mds}}
+#' for a respondent-by-stimulus matrix: respondent \eqn{i} and stimulus
+#' \eqn{j} get their own coordinates and
+#' \deqn{\log \delta_{ij} \sim N(\log \lVert x_i - z_j \rVert, 1 / \tau),}
+#' with \eqn{N(0, 10^2)} priors on every coordinate and
+#' \eqn{\tau \sim U(0, 10)}.  Feeling thermometers \eqn{T} on 0-100 enter
+#' as \eqn{\delta = (100 - T) / 50}, the transformation of Bakker and
+#' Poole; zero or missing dissimilarities are left out.
+#'
+#' Given the stimuli the respondents are independent, and given the
+#' respondents the stimuli are, so each block is slice sampled as one
+#' vector per dimension (the same chain law as one at a time), and
+#' \eqn{\tau} is drawn exactly.  Draws are aligned (translation and
+#' rotation) on the stimuli.  On 150 simulated respondents and ten
+#' stimuli the posterior mean respondent-stimulus distances agree with a
+#' JAGS encoding of the same model to within 0.018, and \eqn{\tau} to the
+#' third decimal.  (The C sampler shipped with \pkg{asmcjr} could not be
+#' used for the comparison: its \code{.C} interface keeps pointers to
+#' freed R memory and crashes.)
+#'
+#' @param D Respondent-by-stimulus dissimilarity matrix.
 #' @param n_dims Latent dimensions.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
-#' @return List with respondent/stimulus configurations and an
-#'   `engine` tag (smacof deterministic mode, or the native
-#'   Metropolis sampler when smacof is absent).
-#' @references Bakker, R. and Poole, K. T. (2013).
+#' @param n_samples Retained draws.
+#' @param burn_in Sweeps discarded first.
+#' @param seed RNG seed.
+#' @return List: \code{stimuli} (aligned posterior mean),
+#'   \code{stimuli_sd}, \code{ideal_points}, \code{distance_mean}
+#'   (posterior mean respondent-stimulus distances), \code{sigma},
+#'   \code{tau}, \code{n_samples}, \code{engine}.
+#' @references Bakker, R. and Poole, K. T. (2013). Bayesian metric
+#'   multidimensional scaling. \emph{Political Analysis} 21(1), 125-140.
 #' @examples
-#' if (requireNamespace("smacof", quietly = TRUE)) {
-#'   \donttest{
-#'   # Random positive respondent-stimulus dissimilarities; an all-zero
-#'   # matrix is degenerate for the unfolding transform.
-#'   set.seed(1)
-#'   morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
-#'   }
-#' }
+#' set.seed(1)
+#' S <- matrix(runif(8, -0.5, 0.5), 4, 2)
+#' R <- matrix(runif(60, -0.5, 0.5), 30, 2)
+#' D <- sqrt(outer(R[, 1], S[, 1], "-")^2 + outer(R[, 2], S[, 2], "-")^2)
+#' fit <- morie_spatial_voting_bayesian_unfolding(D, n_samples = 100L,
+#'                                                burn_in = 100L)
+#' cor(as.numeric(fit$distance_mean), as.numeric(D))
 #' @export
 morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,
                                                     n_samples = 1000L,
-                                                    burn_in = 200L) {
-  # smacof::unfolding is the deterministic-mode equivalent of the
-  # Bakker & Poole (2013) sampler under a flat prior.
-  if (requireNamespace("smacof", quietly = TRUE)) {
-    fit <- smacof::unfolding(as.matrix(D), ndim = n_dims,
-                             verbose = FALSE)
-    return(list(
-      coords_r = unname(as.matrix(fit$conf.row)),
-      coords_s = unname(as.matrix(fit$conf.col)),
-      stress   = as.numeric(fit$stress),
-      n_dims   = n_dims,
-      engine   = "smacof::unfolding (deterministic; full Bayesian not ported)"
-    ))
-  }
-  .morie_sv_bayes_unfold(D, n_dims = n_dims, n_samples = n_samples,
-                         burn_in = burn_in)
+                                                    burn_in = 200L,
+                                                    seed = 42L) {
+  .morie_arg(D, "mNA")
+  .rmorie_local_seed(as.integer(seed))
+  .morie_sv_bayes_unfold(as.matrix(D), n_dims = as.integer(n_dims),
+                         n_samples = as.integer(n_samples),
+                         burn_in = as.integer(burn_in))
 }
 
 #' Clinton-Jackman-Rivers Bayesian IRT by Gibbs sampling
@@ -1890,173 +1990,320 @@ morie_spatial_voting_nominate_bootstrap <- function(votes,
 }
 
 # ===========================================================================
-# 14. Alpha-NOMINATE / dynamic / ordinal IRT  -- STUBBED
+# 14. Alpha-NOMINATE / dynamic / ordinal IRT
 # ===========================================================================
 
-#' Alpha-NOMINATE (stub)
+#' Alpha-NOMINATE ideal points (Carroll et al. 2013)
 #'
-#' Carroll et al. (2013) mixture model between Gaussian and quadratic
-#' utility, sampled via slice sampling (Neal 2003).  Porting the slice
-#' sampler is beyond this session's budget.
+#' Bayesian alpha-NOMINATE: legislator \eqn{i} votes yea on roll call
+#' \eqn{j} with probability \eqn{\Phi(u_{ij})}, where
+#' \deqn{u_{ij} = Q_{ij} + \alpha (G_{ij} - Q_{ij}),}
+#' \eqn{Q_{ij} = -\frac{1}{2} \beta w^2 (d^2_{iY} - d^2_{iN})} is the
+#' quadratic and
+#' \eqn{G_{ij} = \beta \{\exp(-\frac{1}{2} w^2 d^2_{iY}) -
+#' \exp(-\frac{1}{2} w^2 d^2_{iN})\}} the Gaussian utility difference, and
+#' \eqn{d_{iY}}, \eqn{d_{iN}} are the distances from the ideal point to the
+#' yea and nay outcomes.  \eqn{\alpha = 1} is pure Gaussian utility,
+#' \eqn{\alpha = 0} pure quadratic; the posterior of \eqn{\alpha} is the
+#' quantity of interest.  As in the reference implementation the weight
+#' \eqn{w} is fixed at 0.5, \eqn{\beta} has a flat prior on
+#' \eqn{(0, \infty)} and \eqn{\alpha} a flat prior on \eqn{[0, 1]}.  Ideal
+#' points, yea and nay locations carry the reference implementation's
+#' hierarchical penalty \eqn{-x' S x / 2}, with \eqn{S} redrawn each sweep
+#' from an inverse Wishart with \eqn{n - 1} degrees of freedom and scale
+#' the cross-product of the current coordinates.
 #'
-#' @param votes Vote matrix.
-#' @param n_dims Latent dimensions.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
+#' Every coordinate, \eqn{\beta} and \eqn{\alpha} are updated by slice
+#' sampling (Neal 2003, stepping out with width 8 and at most 3 steps,
+#' then shrinkage).  Coordinates that are conditionally independent --
+#' all legislators on one dimension, all yea (or nay) locations on one
+#' dimension -- are sliced together, which gives the same chain law as
+#' updating them one at a time.  Starting values are uniform on
+#' \eqn{(-1, 1)}, \eqn{\beta = 10} and \eqn{\alpha = 0.7}.
+#'
+#' The likelihood depends on distances only, so after sampling each draw
+#' is centred on its legislators' mean and rotated (orthogonal
+#' Procrustes, no dilation) onto the posterior mean configuration; the
+#' sign of each dimension makes the \code{polarity} legislator positive.
+#' Roll calls whose minority side is below \code{lop} and legislators
+#' with fewer than \code{minvotes} votes on the kept roll calls are
+#' dropped first, the screens the reference implementation applies
+#' through W-NOMINATE.
+#'
+#' Checked against the \pkg{anominate} package on a simulated chamber of
+#' 40 legislators and 120 roll calls (true \eqn{\alpha = 0.5}): posterior
+#' mean \eqn{\alpha} 0.314 against 0.325, \eqn{\beta} 3.50 against 3.48,
+#' and the posterior mean ideal points correlate at 0.9998.
+#'
+#' @param votes Legislator-by-roll-call matrix of 1 (yea), 0 (nay) and
+#'   \code{NA} (missing).
+#' @param n_dims Number of latent dimensions.
+#' @param n_samples Number of retained draws.
+#' @param burn_in Sweeps discarded before the first retained draw.
 #' @param seed RNG seed.
-#' @return List with ideal points, discrimination, difficulty and an
-#'   `engine` tag (EM-IRT closed-form approximation).
-#' @references Carroll, R., Lewis, J. B., Lo, J., Poole, K. T., and
-#'   Rosenthal, H. (2013); Neal, R. M. (2003) *Annals of Statistics*.
-#' @examples \donttest{morie_spatial_voting_alpha_nominate(matrix(0, 5, 5))}
+#' @param thin Keep every \code{thin}-th sweep after burn-in.
+#' @param lop Minimum minority share for a roll call to be kept.
+#' @param minvotes Minimum number of kept roll calls a legislator must
+#'   have voted on.
+#' @param polarity Row index (one per dimension, recycled) of the
+#'   legislator placed on the positive side.
+#' @param constrain If \code{TRUE}, fix \eqn{\alpha = 1} (Gaussian
+#'   utility, the W-NOMINATE special case).
+#' @return List: \code{ideal_points} and \code{ideal_sd} (kept
+#'   legislators by dimension), \code{yea_locations},
+#'   \code{nay_locations}, \code{alpha} (posterior mean),
+#'   \code{alpha_interval} (central 95\%), \code{beta}, \code{draws} (the
+#'   identified draws: arrays \code{X}, \code{Y}, \code{N} with the draw
+#'   index first, and vectors \code{beta}, \code{alpha}),
+#'   \code{legislators_used}, \code{votes_used}, \code{n_dims},
+#'   \code{engine}.
+#' @references Carroll, R., Lewis, J. B., Lo, J., Poole, K. T. and
+#'   Rosenthal, H. (2013). The structure of utility in spatial models of
+#'   voting. \emph{American Journal of Political Science} 57(4), 1008-1028.
+#'
+#'   Neal, R. M. (2003). Slice sampling. \emph{Annals of Statistics}
+#'   31(3), 705-767.
+#' @examples
+#' set.seed(1)
+#' x <- seq(-1, 1, length.out = 20)
+#' mid <- runif(30, -0.7, 0.7)
+#' V <- outer(x, mid, ">") * 1
+#' flip <- sample(length(V), 30)
+#' V[flip] <- 1 - V[flip]
+#' fit <- morie_spatial_voting_alpha_nominate(V, n_dims = 1L,
+#'   n_samples = 40L, burn_in = 20L, minvotes = 10L, polarity = 20L)
+#' fit$alpha
+#' # the ideal points keep the simulated order
+#' cor(fit$ideal_points[, 1], x[fit$legislators_used])
 #' @export
-morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 2L,
+morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 1L,
                                                 n_samples = 500L,
                                                 burn_in = 100L,
-                                                seed = 42L) {
-  # 3MMM.27 (2026-05-25): the full Bayesian alpha-NOMINATE Gibbs
-  # sampler (Carroll, Lewis, Lo, Poole & Rosenthal 2013) is not
-  # ported. Until then we delegate to morie_spatial_voting_em_irt --
-  # Imai, Lo & Olmsted (2016) closed-form EM-IRT -- which produces
-  # ideal-points + discrimination from the same input via
-  # deterministic EM updates. Results diverge from alpha-NOMINATE in
-  # the tails (no posterior uncertainty, no slope-priors) but the
-  # call returns a usable result instead of raising NotYetPorted;
-  # dimensionality and sign conventions match. Engine tag flags the
-  # substitution.
+                                                seed = 42L, thin = 1L,
+                                                lop = 0.025, minvotes = 20L,
+                                                polarity = 1L,
+                                                constrain = FALSE) {
+  .morie_arg(votes, "mNA")
+  V <- as.matrix(votes)
+  storage.mode(V) <- "double"
+  if (!all(V[!is.na(V)] %in% c(0, 1))) {
+    stop("`votes` must hold 1 (yea), 0 (nay) or NA (missing).",
+         call. = FALSE)
+  }
+  n_dims <- as.integer(n_dims)
+  thin <- as.integer(thin)
+  if (length(polarity) == 1L) polarity <- rep(as.integer(polarity), n_dims)
+  yeas <- colSums(V == 1, na.rm = TRUE)
+  cast <- colSums(!is.na(V))
+  minority <- pmin(yeas, cast - yeas) / pmax(cast, 1)
+  use_votes <- minority >= lop & cast > 0
+  use_legis <- rowSums(!is.na(V[, use_votes, drop = FALSE])) >= minvotes
+  if (sum(use_votes) < 2L || sum(use_legis) < n_dims + 2L) {
+    stop("Too few roll calls or legislators survive the `lop` and ",
+         "`minvotes` screens; lower them or supply more votes.",
+         call. = FALSE)
+  }
+  legis_id <- which(use_legis)
+  if (any(!polarity %in% legis_id)) {
+    stop("`polarity` must index legislators kept by the `minvotes` ",
+         "screen.", call. = FALSE)
+  }
+  pol <- match(polarity, legis_id)
+  V <- V[use_legis, use_votes, drop = FALSE]
   .rmorie_local_seed(as.integer(seed))
-  fit <- morie_spatial_voting_em_irt(as.matrix(votes),
-                                      n_dims = as.integer(n_dims))
+  n_iter <- as.integer(burn_in) + as.integer(n_samples) * thin
+  g <- .morie_anom_gibbs(V, n_dims, n_iter, as.integer(burn_in), thin,
+                         pol, isTRUE(constrain))
+  S <- length(g$beta)
+  # The likelihood depends on distances only; translation and rotation
+  # are fixed after sampling.  Each draw is centred on its legislators,
+  # then rotated (Procrustes, no dilation) onto a common target.
+  draw <- function(A, s) matrix(A[s, , ], ncol = n_dims)
+  for (s in seq_len(S)) {
+    mu <- colMeans(draw(g$X, s))
+    g$X[s, , ] <- sweep(draw(g$X, s), 2L, mu)
+    g$Y[s, , ] <- sweep(draw(g$Y, s), 2L, mu)
+    g$N[s, , ] <- sweep(draw(g$N, s), 2L, mu)
+  }
+  target <- draw(g$X, S)
+  for (pass in 1:2) {
+    for (s in seq_len(S)) {
+      Q <- .morie_procrustes_rot(draw(g$X, s), target)
+      g$X[s, , ] <- draw(g$X, s) %*% Q
+      g$Y[s, , ] <- draw(g$Y, s) %*% Q
+      g$N[s, , ] <- draw(g$N, s) %*% Q
+    }
+    target <- apply(g$X, c(2L, 3L), mean)
+  }
+  flip <- ifelse(target[cbind(pol, seq_len(n_dims))] < 0, -1, 1)
+  for (k in seq_len(n_dims)) {
+    g$X[, , k] <- g$X[, , k] * flip[k]
+    g$Y[, , k] <- g$Y[, , k] * flip[k]
+    g$N[, , k] <- g$N[, , k] * flip[k]
+  }
+  ideal <- apply(g$X, c(2L, 3L), mean)
+  colnames(ideal) <- paste0("dim", seq_len(n_dims))
   list(
-    ideal_points     = fit$ideal_points,
-    discrimination   = fit$discrimination,
-    difficulty       = fit$difficulty,
-    n_dims           = as.integer(n_dims),
-    n_samples_target = as.integer(n_samples),
-    burn_in_target   = as.integer(burn_in),
-    engine = paste0("morie_spatial_voting_em_irt (deterministic EM ",
-                    "approximation; full alpha-NOMINATE Gibbs not yet ",
-                    "ported -- see Carroll et al 2013)")
+    ideal_points = ideal,
+    ideal_sd = matrix(apply(g$X, c(2L, 3L), stats::sd), ncol = n_dims),
+    yea_locations = apply(g$Y, c(2L, 3L), mean),
+    nay_locations = apply(g$N, c(2L, 3L), mean),
+    alpha = mean(g$alpha),
+    alpha_interval = stats::quantile(g$alpha, c(0.025, 0.975),
+                                     names = FALSE),
+    beta = mean(g$beta),
+    draws = g,
+    legislators_used = legis_id,
+    votes_used = which(use_votes),
+    n_dims = n_dims,
+    engine = "native alpha-NOMINATE slice-within-Gibbs sampler"
   )
 }
 
-#' Ordinal IRT / Quinn factor model (stub)
+#' Ordinal IRT: the ordinal factor model of Quinn (2004)
 #'
-#' @param Y Ordinal response matrix.
+#' Each ordinal response is a thresholded latent normal,
+#' \deqn{y^*_{ij} = \lambda_{j0} + \lambda_j^\top \phi_i + e_{ij},
+#' \quad e_{ij} \sim N(0, 1),}
+#' with \eqn{y_{ij} = c} when \eqn{\gamma_{j,c-1} < y^*_{ij} \le
+#' \gamma_{j,c}}, item-specific cutpoints \eqn{\gamma_{j0} = -\infty},
+#' \eqn{\gamma_{j1} = 0}, \eqn{\gamma_{jC} = \infty}, ideal points
+#' \eqn{\phi_i \sim N(0, I)}, loadings \eqn{\lambda_j \sim N(0, I / L_0)}
+#' and a flat prior on the free cutpoints.  \eqn{L_0 = 0} (the default)
+#' is the flat loading prior of \code{MCMCpack::MCMCordfactanal}.  Each
+#' item's categories are its observed values in increasing order.
+#'
+#' Each sweep updates the free cutpoints of every item by the Cowles
+#' (1996) Metropolis-Hastings step with \eqn{y^*} integrated out (step
+#' sizes tuned during burn-in only), then draws \eqn{y^*} from truncated
+#' normals and the loadings and ideal points from their Gaussian full
+#' conditionals.  Reflection (and, with several dimensions, rotation)
+#' leaves the model unchanged; each draw is reflected so the first item
+#' loads positively, or with several dimensions rotated onto the first
+#' draw.  On 200 simulated respondents and ten four-category items the
+#' posterior means agree with \code{MCMCordfactanal} (first loading
+#' constrained positive) to Monte Carlo error: ideal points correlate at
+#' 0.9999 and loadings, intercepts and cutpoints differ by at most 0.05.
+#'
+#' @param Y Respondent-by-item matrix of ordinal responses (any ordered
+#'   numeric coding; \code{NA} for missing).
 #' @param n_dims Latent dimensions.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
+#' @param n_samples Retained draws.
+#' @param burn_in Sweeps discarded first.
 #' @param seed RNG seed.
-#' @return List: `ideal_points`, `ideal_sd`, `discrimination`,
-#'   `difficulty`, `cutpoints`, `engine`.
-#' @references Quinn, K. M. (2004). "Bayesian Factor Analysis for Mixed
-#'   Ordinal and Continuous Responses." *Political Analysis*, 12(4).
+#' @param lambda_prior_precision Prior precision \eqn{L_0} of the
+#'   loadings and intercepts.
+#' @return List: \code{ideal_points} and \code{ideal_sd} (respondents by
+#'   dimension), \code{discrimination} (items by dimension),
+#'   \code{intercept}, \code{cutpoints} (per item, posterior means, the
+#'   first fixed at 0), \code{acceptance} (cutpoint steps after burn-in),
+#'   \code{n_samples}, \code{engine}.
+#' @references Quinn, K. M. (2004). Bayesian factor analysis for mixed
+#'   ordinal and continuous responses. \emph{Political Analysis} 12(4),
+#'   338-353.
+#'
+#'   Cowles, M. K. (1996). Accelerating Monte Carlo Markov chain
+#'   convergence for cumulative-link generalized linear models.
+#'   \emph{Statistics and Computing} 6(2), 101-111.
 #' @examples
-#' if (requireNamespace("MCMCpack", quietly = TRUE)) {
-#'   set.seed(1)
-#'   Y <- matrix(sample(1:3, 60, TRUE), 20, 3)
-#'   fit <- morie_spatial_voting_ordinal_irt(Y, n_samples = 100L,
-#'                                           burn_in = 50L)
-#'   head(fit$ideal_points)
-#' }
+#' set.seed(1)
+#' th <- rnorm(60)
+#' Y <- matrix(cut(outer(th, runif(6, 0.8, 1.5)) + rnorm(360),
+#'                 c(-Inf, -0.5, 0.5, Inf), labels = FALSE), 60, 6)
+#' fit <- morie_spatial_voting_ordinal_irt(Y, n_samples = 150L,
+#'                                         burn_in = 100L)
+#' cor(fit$ideal_points[, 1], th)
 #' @export
 morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
                                              n_samples = 500L,
                                              burn_in = 100L,
-                                             seed = 42L) {
-  # MCMCpack::MCMCordfactanal runs ordinal factor-analytic IRT with a
-  # Gibbs-sampler; it's the closest R-side equivalent to ordIRT.
-  if (requireNamespace("MCMCpack", quietly = TRUE)) {
-    Y <- as.matrix(Y)
-    df <- as.data.frame(Y)
-    for (j in seq_along(df)) df[[j]] <- as.ordered(df[[j]])
-    # MCMCordfactanal needs a formula + data; passing a matrix
-    # directly yields "no terms component nor attribute".
-    f <- stats::as.formula(
-      paste("~", paste(names(df), collapse = " + ")))
-    fit <- tryCatch(
-      MCMCpack::MCMCordfactanal(
-        x = f, data = df, factors = as.integer(n_dims),
-        burnin = as.integer(burn_in),
-        mcmc   = as.integer(n_samples),
-        verbose = 0L, seed = as.integer(seed)),
-      error = function(e) e
-    )
-    if (!inherits(fit, "error")) {
-      return(list(
-        ideal_points = unname(as.matrix(summary(fit)$statistics[, "Mean", drop = FALSE])),
-        n_dims = n_dims, n_samples = n_samples,
-        engine = "MCMCpack::MCMCordfactanal (ordinal Bayesian IRT)"
-      ))
-    }
-  }
-  .morie_sv_bayes_ordinal(Y, n_samples = n_samples,
-                          burn_in = burn_in)
+                                             seed = 42L,
+                                             lambda_prior_precision = 0) {
+  .morie_arg(Y, "mNA")
+  .rmorie_local_seed(as.integer(seed))
+  .morie_sv_bayes_ordinal(as.matrix(Y), n_dims = as.integer(n_dims),
+                          n_samples = as.integer(n_samples),
+                          burn_in = as.integer(burn_in),
+                          L0 = lambda_prior_precision)
 }
 
-#' Dynamic IRT with random-walk priors (stub)
+#' Dynamic IRT: ideal points that drift by a random walk (Martin and Quinn 2002)
 #'
-#' Time-series IRT where ideal points evolve via a random walk:
-#' \eqn{\phi_{i,t} \sim N(\phi_{i,t-1}, \tau^2)}{phi_i,t ~ N(phi_i,t-1, tau^2)}.
+#' The one-dimensional dynamic item response model of Martin and Quinn (2002),
+#' fitted by their Gibbs sampler: a vote is cast when the latent utility
+#' \eqn{z_{jk} = -\alpha_k + \beta_k \theta_{j,t(k)} + \varepsilon_{jk}}
+#' is positive, \eqn{\varepsilon \sim N(0, 1)}; the ideal points follow a
+#' random walk, \eqn{\theta_{j,0} \sim N(e_0, E_0)},
+#' \eqn{\theta_{j,t} \sim N(\theta_{j,t-1}, \tau^2_j)}; and the roll-call
+#' parameters have normal priors \eqn{\alpha_k \sim N(a_0, 1/A_0)},
+#' \eqn{\beta_k \sim N(b_0, 1/B_0)}. Each sweep draws the latent utilities
+#' (truncated normals), every roll call's \eqn{(\alpha, \beta)} (conjugate
+#' normal), every legislator's whole path by forward filtering and backward
+#' sampling, and, when \code{c0} and \code{d0} are positive, the evolution
+#' variances from \eqn{IG((c_0 + T)/2, (d_0 + SS)/2)}. The sign is fixed by
+#' reflecting a draw whenever the \code{anchor} legislator's mean ideal point
+#' is negative. This is the model of \code{MCMCpack::MCMCdynamicIRT1d}, with
+#' the same default priors; both recover the same paths on simulated data.
 #'
-#' @param votes Vote matrix.
-#' @param time_periods Per-vote period indices.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
+#' @param votes Legislators-by-roll-calls matrix of 0/1 votes (-1/1 is read as
+#'   0/1); \code{NA} for absent.
+#' @param time_periods Period of each roll call (one entry per column).
+#' @param n_samples Posterior draws kept.
+#' @param burn_in Sweeps discarded first.
 #' @param seed RNG seed.
-#' @return List of per-period ideal-point matrices with an `engine`
-#'   tag flagging the per-period EM approximation.
-#' @references Martin, A. D. and Quinn, K. M. (2002). "Dynamic Ideal Point
-#'   Estimation via Markov Chain Monte Carlo for the U.S. Supreme Court,
-#'   1953-1999." *Political Analysis*, 10(2).
-#' @examples \donttest{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
-#' # dynamic-IRT random-walk prior on ideal points.
+#' @param thin Keep every \code{thin}-th sweep.
+#' @param tau2 Evolution variance (the starting value when it is estimated).
+#' @param c0,d0 Inverse-gamma prior on \eqn{\tau^2}; \eqn{\tau^2} is held at
+#'   \code{tau2} unless both are positive.
+#' @param e0,E0 Prior mean and variance of the initial ideal point.
+#' @param a0,A0,b0,B0 Prior means and precisions of \eqn{\alpha} and \eqn{\beta}.
+#' @param anchor Legislator (row index) whose ideal point is kept positive; the
+#'   largest first principal-component score by default.
+#' @return A list with \code{theta} (legislators by periods, posterior means),
+#'   \code{theta_sd}, \code{alpha}, \code{beta}, \code{tau2},
+#'   \code{per_period} (one entry per period with its \code{ideal_points}),
+#'   \code{periods}, \code{n_periods}, \code{n_legislators}, \code{n_samples},
+#'   \code{anchor} and \code{engine}.
+#' @references Martin, A. D. and Quinn, K. M. (2002). Dynamic ideal point
+#'   estimation via Markov chain Monte Carlo for the U.S. Supreme Court,
+#'   1953-1999. \emph{Political Analysis} 10(2), 134-153.
+#' @examples
+#' \donttest{
+#' set.seed(7)
+#' N <- 12; Tn <- 3; kper <- 15
+#' period <- rep(1:Tn, each = kper)
+#' truth <- t(sapply(rnorm(N), function(s) s + cumsum(c(0, rnorm(Tn - 1, 0, 0.3)))))
+#' a <- rnorm(Tn * kper, 0, 0.5); b <- rnorm(Tn * kper, 1.5, 0.5)
+#' p <- pnorm(-rep(a, each = N) + rep(b, each = N) * truth[, period])
+#' V <- matrix(rbinom(length(p), 1, p), N)
+#' fit <- morie_spatial_voting_dynamic_irt(V, period, n_samples = 400, burn_in = 100)
+#' abs(cor(as.numeric(fit$theta), as.numeric(truth)))   # the paths are recovered
+#' }
 #' @export
 morie_spatial_voting_dynamic_irt <- function(votes, time_periods,
                                              n_samples = 500L,
                                              burn_in = 100L,
-                                             seed = 42L) {
-  # 3MMM.27 (2026-05-25): emIRT::dynIRT's prior shape contract varies
-  # across releases. Until we wire a stable adapter we run EM-IRT
-  # period-by-period (Imai, Lo & Olmsted 2016 closed-form) and return
-  # a list of per-period ideal-points matrices. This loses the
-  # Brownian-motion smoothing across periods (the whole point of
-  # Martin-Quinn dynamic-IRT) but each per-period fit is itself a
-  # valid IRT estimate, so the call returns instead of raising
-  # NotYetPorted. Engine tag flags the approximation.
-  .rmorie_local_seed(as.integer(seed))
+                                             seed = 42L, thin = 1L, tau2 = 1,
+                                             c0 = -1, d0 = -1, e0 = 0, E0 = 1,
+                                             a0 = 0, A0 = 0.1, b0 = 0, B0 = 0.1,
+                                             anchor = NULL) {
+  .morie_arg(votes, "mNA")
   votes <- as.matrix(votes)
-  time_periods <- as.integer(time_periods)
   if (length(time_periods) != ncol(votes)) {
-    stop("time_periods length must equal ncol(votes)")
+    stop("time_periods must give one period per roll call (ncol(votes) = ",
+         ncol(votes), ", got ", length(time_periods), ")", call. = FALSE)
   }
-  periods <- sort(unique(time_periods))
-  per_period <- lapply(periods, function(p) {
-    cols <- which(time_periods == p)
-    if (length(cols) < 1L) {
-      return(list(period = p, ideal_points = NULL))
-    }
-    sub <- votes[, cols, drop = FALSE]
-    fit <- morie_spatial_voting_em_irt(sub, n_dims = 1L)
-    list(period = p,
-         ideal_points = fit$ideal_points,
-         discrimination = fit$discrimination,
-         difficulty = fit$difficulty,
-         n_votes_in_period = length(cols))
-  })
-  names(per_period) <- as.character(periods)
-  list(
-    per_period = per_period,
-    periods = periods,
-    n_periods = length(periods),
-    n_legislators = nrow(votes),
-    n_samples_target = as.integer(n_samples),
-    burn_in_target = as.integer(burn_in),
-    engine = paste0("morie_spatial_voting_em_irt per-period ",
-                    "(deterministic EM approximation; full Martin-Quinn ",
-                    "dynamic-IRT with Brownian-motion smoothing not yet ",
-                    "ported -- see Martin & Quinn 2002)")
-  )
+  fit <- .morie_sv_dynamic_irt_gibbs(votes, time_periods, n_samples = as.integer(n_samples),
+                                     burn_in = as.integer(burn_in), thin = as.integer(thin),
+                                     seed = seed, tau2 = tau2, e0 = e0, E0 = E0, a0 = a0,
+                                     A0 = A0, b0 = b0, B0 = B0, c0 = c0, d0 = d0, anchor = anchor)
+  per_period <- lapply(seq_along(fit$periods), function(t) list(
+    period = fit$periods[t], ideal_points = fit$theta[, t, drop = FALSE],
+    n_votes_in_period = sum(time_periods == fit$periods[t])))
+  names(per_period) <- as.character(fit$periods)
+  c(fit, list(per_period = per_period, n_periods = length(fit$periods),
+              n_legislators = nrow(votes),
+              engine = "native Gibbs sampler (Martin and Quinn 2002)"))
 }
 
 # ===========================================================================

@@ -41,9 +41,13 @@
 #' @param variant one of "sobel", "aroian", "goodman".
 #' @return list: statistic (z), pvalue, indirect_effect, se, variant,
 #'   ci_lower, ci_upper, method.
-#' @references Sobel, M. E. (1982), \emph{Sociological Methodology} 13,
-#'   290-312; Aroian, L. A. (1947), \emph{Ann. Math. Statist.} 18,
-#'   265-271; Goodman, L. A. (1960), \emph{JASA} 55, 708-713.
+#' @references Sobel, M. E. (1982). Asymptotic confidence intervals for
+#'   indirect effects in structural equation models. \emph{Sociological
+#'   Methodology} 13, 290-312; Aroian, L. A. (1947). The probability
+#'   function of the product of two normally distributed variables.
+#'   \emph{Annals of Mathematical Statistics} 18(2), 265-271; Goodman, L. A.
+#'   (1960). On the exact variance of products. \emph{Journal of the
+#'   American Statistical Association} 55, 708-713.
 #' @examples
 #' morie_sobel_test(0.5, 0.4, 0.1, 0.08)$statistic
 #' @export
@@ -72,10 +76,8 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 
 #' .morie_k05_item_params
 #'
-#' A step of the k05_tranche2 implementation. Called by \code{morie_tcc},
-#' \code{morie_test_information}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_tcc}, \code{morie_test_information}. See the file
+#' header for the source the module follows. source it follows.
 #'
 #' @param a Passed to \code{rep_to}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
@@ -105,9 +107,8 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 
 #' Branch on the sign so exp never overflows for large |z|
 #'
-#' A step of the k05_tranche2 implementation. Called by \code{.morie_k05_info}, \code{morie_tcc}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{.morie_k05_info}, \code{morie_tcc}. See the file header
+#' for the source the module follows. source it follows.
 #'
 #' @param theta Numeric; combined arithmetically in the body.
 #' @param a Numeric; combined arithmetically in the body.
@@ -299,7 +300,8 @@ morie_cochran_q <- function(yi, vi) morie_ma_cochran_q(yi, vi)
 #' @param weight one of "tarone-ware", "logrank", "gehan", "peto".
 #' @return list: statistic, pvalue, df, observed, expected, score,
 #'   variance, n_events, n_event_times, groups, weight, method.
-#' @references Tarone, R. E. & Ware, J. (1977), \emph{Biometrika} 64(1),
+#' @references Tarone, R. E. & Ware, J. (1977). On distribution-free tests
+#'   for equality of survival distributions. \emph{Biometrika} 64(1),
 #'   156-160. Weights cross-checked against \code{comp.ten} in survMisc.
 #' @examples
 #' morie_tarone_ware(c(1, 2, 3, 4, 5, 6), rep(1, 6), c(0, 1, 0, 1, 0, 1))$statistic
@@ -345,9 +347,8 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 
 #' .morie_k05_schoenfeld
 #'
-#' A step of the k05_tranche2 implementation. Called by \code{morie_scaled_schoenfeld}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_scaled_schoenfeld}. See the file header for the
+#' source the module follows. source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param e A vector; indexed elementwise.
@@ -381,9 +382,8 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 
 #' .morie_k05_gtime
 #'
-#' A step of the k05_tranche2 implementation. Called by \code{morie_scaled_schoenfeld}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_scaled_schoenfeld}. See the file header for the
+#' source the module follows. source it follows.
 #'
 #' @param times Event times at which the transform is evaluated.
 #' @param t_all All follow-up times, censored ones included.
@@ -444,9 +444,11 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 #' @param transform time transform g: "km", "rank", "identity", "log".
 #' @return list: scaled, residuals, times, gtime, beta, vcov, statistic,
 #'   pvalue, global_statistic, global_pvalue, df, n_events, transform, method.
-#' @references Schoenfeld, D. (1982), \emph{Biometrika} 69(1), 239-241;
-#'   Grambsch, P. M. & Therneau, T. M. (1994), \emph{Biometrika} 81(3),
-#'   515-526.
+#' @references Schoenfeld, D. (1982). Partial residuals for the
+#'   proportional hazards regression model. \emph{Biometrika} 69(1),
+#'   239-241; Grambsch, P. M. & Therneau, T. M. (1994). Proportional hazards
+#'   tests and diagnostics based on weighted residuals. \emph{Biometrika}
+#'   81(3), 515-526.
 #' @examples
 #' \donttest{
 #' set.seed(1); n <- 60; x <- matrix(stats::rnorm(n), ncol = 1)

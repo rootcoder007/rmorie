@@ -24,6 +24,7 @@
 #' @export
 mhmcmc <- function(target, x0 = 0, n_iter = 1000L, u = NULL, z = NULL,
                    scale = 1, q = NULL, burn = 0L) {
+  .morie_arg(target, "f")
   ni <- as.integer(n_iter)
   uv <- as.numeric(u)
   zv <- as.numeric(z)

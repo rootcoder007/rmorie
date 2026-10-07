@@ -12,9 +12,8 @@
 #' @return List with \code{estimate}, \code{sd}, \code{sd_pooled},
 #'   \code{ci_lower}, \code{ci_upper}, \code{rep_mean}, \code{S},
 #'   \code{n}.
-#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
-#'   Bayesian Data Analysis, 3rd edition, Section 6.3. Fetched as the full
-#'   text of the book from the author's own copy.
+#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013), Bayesian Data
+#'   Analysis, 3rd edition, Section 6.3.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -20,6 +20,9 @@
 #' @references Hall and Wellner (1980), Confidence bands for a survival
 #'   curve from censored data, Biometrika 67(1):133-143.
 #'   \doi{10.1093/biomet/67.1.133}
+#' @examples
+#' fit <- list(time = c(2, 3, 5, 8), n_risk = c(10, 9, 7, 4), n_event = c(1, 1, 2, 1))
+#' Kpmsmp(fit, alpha = 0.05)[c("surv", "lower", "upper", "h")]
 #' @export
 Kpmsmp <- function(fit, alpha) {
   rt <- .kpm_risk_table(fit)

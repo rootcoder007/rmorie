@@ -13,7 +13,6 @@
 #' A step of the helpers_ot implementation. Called by \code{Otbar}, \code{Otbarfree},
 #' \code{Otbreg} and 9 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param normalise A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -39,7 +38,6 @@
 #' A step of the helpers_ot implementation. Called by \code{Otbarfree}, \code{Otker},
 #' \code{Otmcluster} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y A matrix; passed to \code{as.matrix}.
@@ -69,7 +67,6 @@
 #'
 #' A step of the helpers_ot implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T Numeric; combined arithmetically in the body.
 #' @param C Numeric; combined arithmetically in the body.
@@ -81,7 +78,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{Otdiv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T A vector; indexed elementwise.
 #' @param R A vector; indexed elementwise.
@@ -96,7 +92,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{.ot_sinkhorn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -118,7 +113,6 @@
 #' A step of the helpers_ot implementation. Called by \code{Otdiv}, \code{Otgws},
 #' \code{Otker} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
@@ -161,7 +155,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{Otunbal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -198,7 +191,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{.ot_emd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
@@ -240,7 +232,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{.ot_emd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param basis See Usage.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
@@ -287,7 +278,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{.ot_complete_tree}, \code{.ot_emd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
@@ -304,7 +294,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{.ot_potentials}, \code{.ot_tree_path}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param basis Iterated over elementwise, with \code{vapply}.
 #' @param n Numeric; combined arithmetically in the body.
@@ -325,7 +314,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{.ot_emd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param basis Passed to \code{.ot_adj}.
 #' @param C A matrix; indexed by row and column.
@@ -360,7 +348,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{.ot_emd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param basis Passed to \code{.ot_adj}.
 #' @param n Numeric; combined arithmetically in the body.
@@ -396,7 +383,6 @@
 #' A step of the helpers_ot implementation. Called by \code{.ot_partial_plan},
 #' \code{Otbarfree}, \code{Otemd} and 6 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
@@ -493,7 +479,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{.ot_w2gauss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param S A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{%*%}.
@@ -508,7 +493,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{Otmxh}, \code{Otwsg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param S1 A matrix; passed to \code{as.matrix}.
@@ -538,7 +522,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsw}, \code{Otws2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -563,7 +546,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{Otsd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grid Iterated over elementwise, with \code{vapply}.
@@ -578,7 +560,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsd}, \code{Otsw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d A count; the body uses it as \code{matrix(...)}.
 #' @param n_proj A count; the body uses it as \code{matrix(...)}.
@@ -601,7 +582,6 @@
 #'
 #' A step of the helpers_ot implementation. Called by \code{Otmsw}, \code{Otsd}, \code{Otsw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.

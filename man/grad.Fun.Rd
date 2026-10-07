@@ -17,7 +17,6 @@ The value of \code{.barerp_num_grad}.
 \description{
 A step of the barerp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 f <- .Fun(function(x) sum(x^2))

@@ -19,7 +19,6 @@ The value of \code{g}, as built in the body.
 \description{
 A step of the tail2_t03 implementation. Called by \code{PenaltyMin}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 fn <- function(v) sum(v^2)

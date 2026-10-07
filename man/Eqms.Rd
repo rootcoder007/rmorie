@@ -27,10 +27,8 @@ moments of the difficulties gives A = sd(b_R) / sd(b_F) and
 B = mean(b_R) - A mean(b_F).
 }
 \details{
-DOCSTRING ERRATUM: the generated stub printed A = sd(b_F)/sd(b_R) and
-B = mean(b_F) - A mean(b_R), the transformation in the opposite
-direction from its own sibling module eqmm.  Marco's method places the
-NEW form on the REFERENCE metric, the orientation implemented here.
+Marco's method places the NEW form on the REFERENCE metric, the
+orientation implemented here (the same direction as \code{eqmm}).
 }
 \examples{
 Eqms(y = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8),

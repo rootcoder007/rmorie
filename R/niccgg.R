@@ -26,6 +26,12 @@
 #'   simple method for obtaining R^2 from generalized linear
 #'   mixed-effects models. Methods in Ecology and Evolution, 4(2),
 #'   133-142. doi:10.1111/j.2041-210x.2012.00261.x
+#' @examples
+#' set.seed(1)
+#' cl <- rep(1:20, each = 10)
+#' x <- rnorm(200)
+#' y <- 1 + 0.8 * x + rnorm(20)[cl] + rnorm(200)
+#' Niccgg(y, X = matrix(x), cluster = cl)[c("r2_marginal", "r2_conditional", "icc")]
 #' @export
 Niccgg <- function(y, X, Z = NULL, cluster = NULL) {
   yv <- as.numeric(y)

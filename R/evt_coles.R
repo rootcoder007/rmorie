@@ -162,7 +162,6 @@ morie_evt_gev_mle <- function(x) {
 #' A step of the evt_coles implementation. Called by \code{morie_evt_gev_mle},
 #' \code{morie_evt_gpd_mle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Passed to \code{eigen}.
 #' @return The value of \code{%*%}.
@@ -502,6 +501,7 @@ morie_evt_bayes_gev <- function(x, n_draws = 2000, seed = 42,
 #' morie_evt_gev_trend(V)
 #' @keywords internal
 morie_evt_gev_trend <- function(x, t = seq_along(x) - 1) {
+  .morie_arg(x, "n")
   n <- length(x)
   tz <- (t - mean(t)) / max(stats::sd(t) * sqrt((n - 1) / n), 1e-12)
   f0 <- morie_evt_gev_mle(x)

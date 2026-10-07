@@ -17,7 +17,6 @@ A step of the tmlcic_native implementation. Called by \code{.tmlcic_fluct},
 \code{.tmlcic_hier_cluster_arm}, \code{.tmlcic_hier_individual_arm} and 1 others in
 the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)

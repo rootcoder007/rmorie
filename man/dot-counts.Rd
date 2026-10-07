@@ -22,5 +22,4 @@ A list with \code{N_ijk}, \code{N_jk}, \code{N_kd}, \code{N_d}.
 A step of the bigtm_native implementation. Called by \code{.log_evidence},
 \code{gibbs_bigram_topic}.
 See the file header for the source the module follows.
-source it follows.
 }

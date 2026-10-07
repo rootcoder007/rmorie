@@ -62,7 +62,6 @@
 #' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf},
 #' \code{morie_ncfRS_gmf}, \code{morie_ncfRS_neumf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -81,7 +80,6 @@
 #'
 #' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p_u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param q_i Coerced to numeric by the body, with \code{as.numeric}.
@@ -118,7 +116,6 @@ morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
 #'
 #' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_neumf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p_u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param q_i Coerced to numeric by the body, with \code{as.numeric}.
@@ -151,7 +148,6 @@ morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
 #'
 #' A step of the ncfRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p_gmf Coerced to numeric by the body, with \code{as.numeric}.
 #' @param q_gmf Coerced to numeric by the body, with \code{as.numeric}.
@@ -193,7 +189,6 @@ morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
 #'
 #' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y_hat Coerced to numeric by the body, with \code{as.numeric}.
@@ -213,7 +208,6 @@ morie_ncfRS_log_loss <- function(y, y_hat) {
 #'
 #' A step of the ncfRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pos A vector; indexed elementwise.
 #' @param n_users Coerced to integer by the body, with \code{as.integer}.
@@ -337,7 +331,6 @@ morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
 #'
 #' A step of the ncfRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -356,7 +349,7 @@ morie_ncfRS_cheatsheet <- function() {
          "data, so log loss with sampled negatives.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_ncfRS_neuralcollaborativefiltering <- morie_ncfRS_fit_gmf
 
 # public names resolved by fn/_lazy_map.json

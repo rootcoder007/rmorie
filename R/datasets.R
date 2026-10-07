@@ -47,14 +47,15 @@
       kind, name
     ))
   }
-  warning(sprintf(
+  # offline = TRUE was asked for: say what the frame is, as a message rather than a warning
+  message(sprintf(
     paste0(
       "morie_datasets_%s(offline=TRUE): using the bundled synthetic %s frame. ",
       "This is a toy dataset with the documented schema but random data; ",
       "do not interpret outputs as findings about the real population."
     ),
     kind, kind
-  ), call. = FALSE)
+  ))
   utils::read.csv(path, stringsAsFactors = FALSE)
 }
 
@@ -111,6 +112,27 @@
   )
 }
 
+#' Fail early only when this build has no HTTP client at all: the libcurl backend is
+#' compiled in, and httr2 is the fallback for a build without it.
+#' @keywords internal
+#' @noRd
+.morie_http_require <- function(what) {
+  if (.morie_dataset_http_backend_cpp() || requireNamespace("httr2", quietly = TRUE)) return(invisible(TRUE))
+  stop(sprintf("%s needs an HTTP client: this build of rmorie has no libcurl backend; install.packages(\"httr2\")", what),
+       call. = FALSE)
+}
+
+#' Stop with the host and curl's reason when a request got no HTTP response at all
+#' @keywords internal
+#' @noRd
+.morie_http_reached <- function(url, r) {
+  if (identical(as.integer(r$status_code %||% 0L), 0L)) {
+    host <- sub("^[a-z]+://([^/:?#]+).*$", "\\1", url)
+    stop(sprintf("could not reach %s (%s)", host, r$error %||% "no response"), call. = FALSE)
+  }
+  invisible(r)
+}
+
 #' GET that returns the response body as a UTF-8 character string.
 #' 3VV: routes through morie's C++ libcurl backend (.morie_http_get,
 #' src/morie_http.cpp) when available; falls back to httr2 if not.
@@ -121,10 +143,12 @@
                                      timeout_s = 60L) {
   full_url <- .morie_dataset_build_url(url, query)
   if (.morie_dataset_http_backend_cpp()) {
-    return(.morie_http_get(full_url,
+    r <- .morie_http_get_with_status(full_url,
       timeout_s = as.integer(timeout_s),
       headers = as.character(headers)
-    ))
+    )
+    .morie_http_reached(full_url, r)
+    return(r$body)
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop(
@@ -330,10 +354,15 @@
     where = asNamespace("rmorie"),
     mode = "function"
   )) {
-    return(.morie_http_get_bytes(full_url,
+    bytes <- .morie_http_get_bytes(full_url,
       timeout_s = as.integer(timeout_s),
       headers = as.character(headers)
-    ))
+    )
+    if (!length(bytes)) {  # the binary GET returns nothing at all when no response came back
+      stop(sprintf("could not reach %s (no data came back)", sub("^[a-z]+://([^/:?#]+).*$", "\\1", full_url)),
+           call. = FALSE)
+    }
+    return(bytes)
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop(
@@ -369,15 +398,30 @@
                                      timeout_s = 60L) {
   full_url <- .morie_dataset_build_url(url, query)
   if (.morie_dataset_http_backend_cpp()) {
-    body <- .morie_http_get(full_url,
-      timeout_s = as.integer(timeout_s),
-      headers = as.character(headers)
-    )
+    get <- function() {
+      .morie_http_get_with_status(full_url,
+        timeout_s = as.integer(timeout_s),
+        headers = as.character(headers)
+      )
+    }
+    r <- get()
+    if (identical(as.integer(r$status_code), 0L) || isTRUE(r$status_code >= 500L)) {
+      Sys.sleep(2)  # one retry: open-data portals answer 503 / drop a connection now and then
+      r <- get()
+    }
+    .morie_http_reached(full_url, r)
+    body <- r$body
+    if (isTRUE(r$status_code >= 400L)) {
+      err <- tryCatch(.morie_from_json(body, simplifyVector = FALSE), error = function(e) NULL)
+      msg <- if (is.list(err)) as.character(err$message %||% err$error$message %||% err$error %||% "")[1L] else ""
+      stop(sprintf("HTTP %d from %s%s", as.integer(r$status_code),
+                   sub("^[a-z]+://([^/:?#]+).*$", "\\1", full_url),
+                   if (length(msg) && !is.na(msg) && nzchar(msg)) paste0(": ", msg) else ""),
+           call. = FALSE)
+    }
     if (!nzchar(body)) {
-      stop(sprintf(
-        "morie HTTP fetch failed (libcurl returned empty body): %s",
-        full_url
-      ), call. = FALSE)
+      stop(sprintf("%s answered with an empty body", sub("^[a-z]+://([^/:?#]+).*$", "\\1", full_url)),
+           call. = FALSE)
     }
     # Validate the body is JSON-shaped before handing to jsonlite.
     # Upstream proxies (Envoy, nginx) return text/HTML error pages on
@@ -389,7 +433,14 @@
         full_url, substr(body, 1L, 200L)
       ), call. = FALSE)
     }
-    return(.morie_from_json(body, simplifyVector = TRUE))
+    parsed <- .morie_from_json(body, simplifyVector = TRUE)
+    if (is.list(parsed) && !is.data.frame(parsed) && !is.null(parsed$errorCode)) {
+      # Socrata reports a failure as a JSON object, not as the records asked for
+      stop(sprintf("%s: %s (%s)", sub("^[a-z]+://([^/:?#]+).*$", "\\1", full_url),
+                   as.character(parsed$message %||% "error")[1L], as.character(parsed$errorCode)[1L]),
+           call. = FALSE)
+    }
+    return(parsed)
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop(
@@ -414,6 +465,22 @@
   httr2::resp_body_json(resp, simplifyVector = TRUE)
 }
 
+#' Internal helper: ArcGIS features as a list of list(attributes, geometry) records
+#'
+#' jsonlite simplifies the features array into a data frame with a nested `attributes` frame; the
+#' package's own JSON reader leaves it a list of records. Every reader takes this one shape.
+#' @noRd
+.morie_arcgis_feature_list <- function(feats) {
+  if (is.null(feats) || NROW(feats) == 0L) return(list())
+  if (!is.data.frame(feats)) return(feats)
+  at <- if (is.data.frame(feats$attributes)) feats$attributes else feats
+  ge <- if (is.data.frame(feats$geometry)) feats$geometry else NULL
+  lapply(seq_len(nrow(at)), function(i) {
+    list(attributes = as.list(at[i, , drop = FALSE]),
+         geometry = if (!is.null(ge)) as.list(ge[i, , drop = FALSE]))
+  })
+}
+
 #' Convert a list-of-records / data.frame response into a clean data.frame
 #' @keywords internal
 #' @noRd
@@ -424,20 +491,28 @@
   if (is.null(records) || length(records) == 0L) {
     return(data.frame())
   }
-  do.call(rbind, lapply(records, function(r) {
-    as.data.frame(lapply(r, function(v) if (is.null(v)) NA else v),
-      stringsAsFactors = FALSE
-    )
-  }))
+  # one row per record, one column per field seen in any record: a NULL is NA, a vector is joined,
+  # a nested list (a CKAN package's resources, tags) is kept as its JSON text
+  cell <- function(v) {
+    if (is.null(v) || !length(v)) return(NA)
+    if (is.list(v)) return(.morie_to_json(v, auto_unbox = TRUE))
+    if (length(v) > 1L) return(paste(v, collapse = "; "))
+    v
+  }
+  rows <- lapply(records, function(r) lapply(r, cell))
+  cols <- unique(unlist(lapply(rows, names), use.names = FALSE))
+  out <- lapply(cols, function(cn) {
+    vals <- lapply(rows, function(r) if (is.null(r[[cn]])) NA else r[[cn]])
+    unlist(vals, use.names = FALSE)
+  })
+  names(out) <- cols
+  as.data.frame(out, stringsAsFactors = FALSE, optional = TRUE)
 }
 
 # ---------------------------------------------------------------------------
 # TPS -- Toronto Police Service ArcGIS
 # ---------------------------------------------------------------------------
 
-#' Default TPS ArcGIS layer registry (verified 2026-05)
-#' @keywords internal
-#' @noRd
 #' Fetch a TPS ArcGIS FeatureServer layer as a data frame.
 #' @keywords internal
 #' @noRd
@@ -454,8 +529,8 @@
     query$resultRecordCount <- as.integer(max_features)
   }
   body <- .morie_dataset_http_json(paste0(layer_url, "/query"), query = query)
-  features <- body$features
-  if (is.null(features) || length(features) == 0L) {
+  features <- .morie_arcgis_feature_list(body$features)
+  if (length(features) == 0L) {
     return(data.frame())
   }
   attrs <- lapply(features, function(f) f$attributes)
@@ -614,12 +689,12 @@ morie_datasets_tps_layers <- function() {
 #'   column map; [morie_datasets_load_by_key()] for catalog-wide
 #'   dispatch.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
 #' df <- try(suppressWarnings(morie_datasets_cpads()))
 #' if (!inherits(df, "try-error")) head(df)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_cpads <- function(offline = TRUE,
                                  mode = c("datastore_search", "csv"),
@@ -1410,7 +1485,7 @@ morie_datasets_ckan_search <- function(portal, query, rows = 50L) {
 #' \donttest{
 #' res <- try(morie_datasets_ckan_package(
 #'   "https://open.canada.ca/data",
-#'   "public-safety-canada-grants-and-contributions"
+#'   "a0877b5b-07d0-4e44-b55d-743966eff37d" # CESG payments: two 3 kB tables
 #' ))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' }
@@ -1419,16 +1494,36 @@ morie_datasets_ckan_package <- function(portal, package_id) {
   url <- paste0(sub("/$", "", portal), "/api/3/action/package_show")
   body <- .morie_dataset_http_json(url, query = list(id = package_id))
   resources <- body$result$resources
+  # the JSON reader simplifies the resource array to a data frame (one row per resource)
+  if (is.data.frame(resources)) {
+    resources <- lapply(seq_len(nrow(resources)), function(i) as.list(resources[i, , drop = FALSE]))
+  }
+  field <- function(res, key) {
+    v <- unlist(res[[key]])
+    if (length(v) && !is.na(v[1L])) as.character(v[1L]) else ""
+  }
+  is_csv <- vapply(resources, function(r) identical(tolower(field(r, "format")), "csv"), logical(1))
+  plain <- vapply(resources, function(r) field(r, "name"), character(1))
+  # a bilingual portal publishes the English and French copy under one name: keep both
+  clash <- plain %in% plain[is_csv][duplicated(plain[is_csv])]
   out <- list()
   for (i in seq_along(resources)) {
     res <- resources[[i]]
-    fmt <- tolower(as.character(res$format %||% ""))
-    if (identical(fmt, "csv") && nzchar(res$url %||% "")) {
-      name <- as.character(res$name %||% paste0("resource_", i))
-      out[[name]] <- tryCatch(
-        utils::read.csv(res$url, stringsAsFactors = FALSE),
-        error = function(e) NULL
-      )
+    url <- field(res, "url")
+    if (is_csv[i] && nzchar(url)) {
+      name <- if (nzchar(plain[i])) plain[i] else paste0("resource_", i)
+      lang <- field(res, "language")
+      if (clash[i]) name <- paste0(name, " (", if (nzchar(lang)) lang else field(res, "id"), ")")
+      out[[name]] <- tryCatch({
+        tmp <- tempfile(fileext = ".csv")
+        on.exit(unlink(tmp), add = TRUE)
+        writeBin(.morie_dataset_http_bytes(url, timeout_s = 120L), tmp)
+        .morie_ckan_read_delim(tmp, ",")
+      }, error = function(e) {
+        warning(sprintf("morie_datasets_ckan_package: could not read '%s' (%s)", name, conditionMessage(e)),
+                call. = FALSE)
+        NULL
+      })
     }
   }
   out

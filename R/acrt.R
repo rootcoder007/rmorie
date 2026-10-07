@@ -1,14 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' One-step actor-critic
 #'
-#' Sutton and Barto (2018), Reinforcement Learning: An Introduction, 2nd
-#' ed. (FETCHED from incompleteideas.net), section 13.5, equations
-#' (13.12)-(13.14): theta <- theta + alpha (R + gamma vhat(S') - vhat(S))
-#' grad ln pi(A|S, theta), paired with semi-gradient TD(0) for the critic,
-#' w <- w + alpha_w delta grad vhat(S).  The episodic pseudocode carries
-#' the discount factor I (I <- gamma I each step), included as
-#' `discount_actor`.  Gradients are supplied by the caller, since they
-#' belong to the policy's own parameterisation.
+#' Sutton and Barto (2018), Reinforcement Learning: An Introduction, 2nd ed., section
+#' 13.5, equations (13.12)-(13.14): theta <- theta + alpha (R + gamma vhat(S') -
+#' vhat(S)) grad ln pi(A|S, theta), paired with semi-gradient TD(0) for the critic, w <-
+#' w + alpha_w delta grad vhat(S). The episodic pseudocode carries the discount factor I
+#' (I <- gamma I each step), included as `discount_actor`. Gradients are supplied by the
+#' caller, since they belong to the policy's own parameterisation.
 #'
 #' @param env the rewards R_1..R_T.
 #' @param actor,critic alternative slots for grad_logpi and values.

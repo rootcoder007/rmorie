@@ -10,7 +10,6 @@
 #'
 #' A step of the blipqf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ... Passed through.
 #' @return The value of \code{morie_blip2v}.

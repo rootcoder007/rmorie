@@ -27,7 +27,6 @@ The value of \code{payload}, as built in the body.
 \description{
 A step of the glm_native implementation. Called by \code{glrtest}, \code{page_cusum}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

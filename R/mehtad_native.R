@@ -33,7 +33,6 @@
 #'
 #' A step of the mehtad_native implementation. Called by \code{mehtad_residuals}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -51,7 +50,6 @@
 #'
 #' A step of the mehtad_native implementation. Called by \code{mehtad_residuals}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
@@ -66,7 +64,6 @@
 #'
 #' A step of the mehtad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{chol}.
 #' @param rhs A matrix; passed to \code{solve}.
@@ -86,7 +83,6 @@
 #'
 #' A step of the mehtad_native implementation. Called by \code{morie_mehtad}, \code{solve_lp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.mehtad_mat}.
 #' @param b Passed to \code{.mehtad_vec}.
@@ -98,8 +94,8 @@
 #' \code{dual_norm}, \code{note}.
 #' @export
 #' @examples
-#' mehtad_residuals(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' mehtad_residuals(A = matrix(c(1, 1, 1, 2), 2), b = c(3, 4), c = c(1, 2),
+#'   x = c(1, 1), y = c(0.5, 0.5), s = c(0.2, 0.3))
 #' @keywords internal
 mehtad_residuals <- function(A, b, c, x, y, s) {
   M <- .mehtad_mat(A)
@@ -123,7 +119,6 @@ mehtad_residuals <- function(A, b, c, x, y, s) {
 #'
 #' A step of the mehtad_native implementation. Called by \code{morie_mehtad}, \code{solve_lp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken and its elements indexed.
 #' @param dv A vector; indexed elementwise.
@@ -149,7 +144,6 @@ max_step <- function(v, dv, eta = 0.9995) {
 #'
 #' A step of the mehtad_native implementation. Called by \code{morie_mehtad}, \code{solve_lp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu_affine Coerced to numeric by the body, with \code{as.numeric}.
@@ -179,7 +173,6 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #'
 #' A step of the mehtad_native implementation. Called by \code{newton_direction}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @param d A count; the body uses it as \code{rep(...)}.
@@ -209,7 +202,6 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #'
 #' A step of the mehtad_native implementation. Called by \code{solve_lp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
@@ -245,7 +237,6 @@ newton_direction <- function(A, x, s, rp, rd, rc) {
 #'
 #' A step of the mehtad_native implementation. Called by \code{morie_mehtad}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
@@ -325,7 +316,6 @@ mehrotras_predictor <- solve_lp
 #'
 #' A step of the mehtad_native implementation. Called by \code{morie_mehtad}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -352,7 +342,6 @@ mehrotras_predictor <- solve_lp
 #'
 #' A step of the mehtad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op A vector; its length is taken.
 #' @param ... Passed through.

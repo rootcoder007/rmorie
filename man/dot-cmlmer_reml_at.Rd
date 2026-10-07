@@ -21,5 +21,4 @@ A list with \code{ll}, \code{delta}, \code{beta}, \code{s2g}, \code{L}.
 \description{
 A step of the cmlmer_native implementation. Called by \code{morie_cmlmer_compressed_lmm}.
 See the file header for the source the module follows.
-source it follows.
 }

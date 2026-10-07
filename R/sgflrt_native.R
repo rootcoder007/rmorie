@@ -12,7 +12,6 @@
 #'
 #' A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -35,7 +34,6 @@
 #' A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace},
 #' \code{morie_sgflrt_spatial_glmm_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param rel_jitter Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
@@ -70,7 +68,6 @@
 #' A step of the sgflrt_native implementation. Called by \code{.sgflrt_inv},
 #' \code{.sgflrt_laplace}, \code{morie_sgflrt_spatial_glmm_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -97,7 +94,6 @@
 #'
 #' A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; passed to \code{nrow}.
 #' @return The value of \code{M}, as built in the body.
@@ -117,7 +113,6 @@
 #'
 #' A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
@@ -128,7 +123,6 @@
 #'
 #' A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h Numeric; combined arithmetically in the body.
 #' @param model One of \code{"exponential"}, \code{"gaussian"}, \code{"matern"}, \code{"spherical"}.
@@ -283,7 +277,6 @@
 #'
 #' A step of the sgflrt_native implementation. Called by \code{morie_sgflrt_spatial_glmm_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo See Usage.
@@ -321,7 +314,6 @@
 #'
 #' A step of the sgflrt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Passed to \code{.sgflrt_rows}.
@@ -545,7 +537,6 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
 #'
 #' A step of the sgflrt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -27,12 +27,16 @@ The list returned by
 Formula: h <- h + tanh(g) * CrossAttn(h, vision).
 }
 \details{
-DUPLICATE: the same method already ships as
-\code{morie_geron_flamingo_cross_modal_attn}.  Per
-ledger/wave2/DUPMAP.tsv this is a thin alias, not a second copy of the
-arithmetic.  When \code{weights} is omitted the three projections
+The same method as \code{morie_geron_flamingo_cross_modal_attn}; this
+is a thin alias.  When \code{weights} is omitted the three projections
 default to the identity, making the gated branch plain scaled
 dot-product cross-attention on the raw features.
+}
+\examples{
+set.seed(5)
+x <- matrix(rnorm(12), 3, 4); v <- matrix(rnorm(8), 2, 4)
+identical(Flmgcr(x, v, gate = 0)$h, x)        # tanh(0) = 0: the identity
+Flmgcr(x, v, gate = 1)$estimate
 }
 \references{
 Alayrac et al (2022), NeurIPS 35:23716-23736 (Flamingo).

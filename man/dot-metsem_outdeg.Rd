@@ -18,5 +18,4 @@ One of two values, depending on the branch taken.
 A step of the metsem_native implementation. Called by \code{.metsem_walk},
 \code{morie_metsem}, \code{morie_metsem_unitigs}.
 See the file header for the source the module follows.
-source it follows.
 }

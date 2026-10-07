@@ -37,7 +37,6 @@ A list with \code{distance}, \code{composition}, \code{abundance},
 \description{
 A step of the metabd_native implementation. Called by \code{bin_contigs}, \code{morie_metabd}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

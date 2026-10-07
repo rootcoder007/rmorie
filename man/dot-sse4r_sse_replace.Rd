@@ -21,7 +21,6 @@ A list with \code{indices}, \code{replaced}, \code{p}, \code{rate}, \code{note}.
 \description{
 A step of the sse4r_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 idx <- c(3L, 1L, 4L, 1L, 5L, 9L, 2L, 6L)

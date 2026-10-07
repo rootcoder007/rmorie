@@ -105,7 +105,6 @@
 #'
 #' A step of the avalon_native implementation. Called by \code{morie_avalon_features}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{unique}.
 #' @return A vector, from \code{sort}.
@@ -127,8 +126,7 @@
 #' @return A number below two to the thirty-second.
 #' @export
 #' @examples
-#' S <- c("a", "b", "c")
-#' morie_avalon_fnv(S)
+#' morie_avalon_fnv("feature:a")
 #' @keywords internal
 morie_avalon_fnv <- function(s, seed = 2166136261) {
   h <- seed
@@ -333,7 +331,6 @@ morie_avalon_parse <- function(smiles) {
 #' A step of the avalon_native implementation. Called by \code{morie_avalon_features},
 #' \code{morie_avalon_rings}, \code{morie_cypin_descriptors} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param bonds A vector; its length is taken and its elements indexed.
@@ -395,7 +392,6 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
 #'
 #' A step of the avalon_native implementation. Called by \code{morie_avalon_rings}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; its length is taken and its elements indexed.
 #' @param src Numeric; combined arithmetically in the body.
@@ -462,7 +458,6 @@ morie_avalon_rings <- function(n, bonds, closures) {
 #'
 #' A step of the avalon_native implementation. Called by \code{morie_avalon_features}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param el A vector; indexed elementwise.
 #' @param arom A vector; indexed elementwise.
@@ -533,7 +528,6 @@ morie_avalon_rings <- function(n, bonds, closures) {
 #' A step of the avalon_native implementation. Called by \code{morie_avalon_features},
 #' \code{morie_scfhop_cats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; indexed elementwise.
 #' @param n A count; the body uses it as \code{matrix(...)}.

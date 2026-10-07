@@ -40,7 +40,6 @@
 #'
 #' A step of the sarima_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
@@ -63,7 +62,6 @@ series_g <- function(log = FALSE) {
 #'
 #' A step of the sarima_native implementation. Called by \code{.sarima_fit}, \code{.sarimax_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param d A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0}.
@@ -98,7 +96,6 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 #' A step of the sarima_native implementation. Called by \code{.sarima_diff_poly},
 #' \code{expand_polynomials}, \code{forecast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -119,7 +116,6 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 #'
 #' A step of the sarima_native implementation. Called by \code{expand_polynomials}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param c A vector; its length is taken and its elements indexed.
 #' @param s Numeric; combined arithmetically in the body.
@@ -136,7 +132,6 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 #' A step of the sarima_native implementation. Called by \code{.sarima_fit},
 #' \code{.sarima_package}, \code{.sarimax_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param phi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.
 #' @param Phi A vector; its length is taken. Defaults to \code{numeric(0)}.
@@ -165,7 +160,6 @@ expand_polynomials <- function(phi = numeric(0), Phi = numeric(0),
 #'
 #' A step of the sarima_native implementation. Called by \code{preliminary_estimates}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param lags Passed to \code{unlist}.
@@ -194,7 +188,6 @@ sample_acf <- function(x, lags) {
 #'
 #' A step of the sarima_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Theta Coerced to numeric by the body, with \code{as.numeric}.
@@ -226,7 +219,6 @@ airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
 #' A step of the sarima_native implementation. Called by \code{moment_estimate},
 #' \code{preliminary_estimates}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rho Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
@@ -246,7 +238,6 @@ airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
 #'
 #' A step of the sarima_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rho Passed to \code{.sarima_invert_rho}.
 #' @return The value of \code{.sarima_invert_rho}.
@@ -260,7 +251,6 @@ moment_estimate <- function(rho) .sarima_invert_rho(rho)
 #'
 #' A step of the sarima_native implementation. Called by \code{.sarima_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param w Passed to \code{sample_acf}.
 #' @param s Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
@@ -287,7 +277,6 @@ preliminary_estimates <- function(w, s = 12) {
 #' A step of the sarima_native implementation. Called by \code{.residual_column},
 #' \code{.sarima_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param w A vector; its length is taken and its elements indexed.
 #' @param ar A vector; its length is taken and its elements indexed. Defaults to \code{numeric(0)}.
@@ -321,7 +310,6 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 #'
 #' A step of the sarima_native implementation. Called by \code{.filter_column}, \code{loglik}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ar A vector; its length is taken and its elements indexed.
 #' @param ma A vector; its length is taken.
@@ -342,7 +330,6 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 #'
 #' A step of the sarima_native implementation. Called by \code{.filter_column}, \code{loglik}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T A matrix; indexed by row and column.
 #' @param R A vector; indexed elementwise.
@@ -371,7 +358,6 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 #' A step of the sarima_native implementation. Called by \code{.gwasem_reml_delta},
 #' \code{.sarima_fit}, \code{morie_glm_nb} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param w A vector; its length is taken and its elements indexed.
 #' @param ar Passed to \code{.sarima_state_space}. Defaults to \code{numeric(0)}.
@@ -420,7 +406,6 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #'
 #' A step of the sarima_native implementation. Called by \code{.sarima_fit}, \code{.sarimax_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param coefs A vector; its length is taken.
 #' @param tol Passed to \code{<}. Defaults to \code{1.001}.
@@ -532,7 +517,6 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #'
 #' A step of the sarima_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.sarima_package}.
 #' @param order A vector; indexed elementwise. Defaults to \code{c(0, 1, 1)}.
@@ -641,7 +625,6 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #'
 #' A step of the sarima_native implementation. Called by \code{.sarima_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param w A vector; its length is taken.
@@ -687,7 +670,6 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #'
 #' A step of the sarima_native implementation. Called by \code{forecast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param k Coerced to integer by the body, with \code{as.integer}.
 #' @param s Numeric; combined arithmetically in the body.
@@ -704,7 +686,6 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #'
 #' A step of the sarima_native implementation. Called by \code{forecast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ar A vector; its length is taken and its elements indexed.
 #' @param ma A vector; its length is taken and its elements indexed.
@@ -725,7 +706,6 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #'
 #' A step of the sarima_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fitted A list; the body reads \code{$ar}, \code{$ma}, \code{$order},
 #' \code{$residuals}, \code{$s}, \code{$seasonal_order}, \code{$sigma2}, \code{$y} from
@@ -805,7 +785,6 @@ forecast <- function(fitted, h = 12) {
 #'
 #' A step of the sarima_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Theta Coerced to numeric by the body, with \code{as.numeric}.
@@ -833,7 +812,6 @@ large_sample_se <- function(theta, Theta, n) {
 #'
 #' A step of the sarima_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rho A list; the body reads \code{$1} from it.
 #' @param n Numeric; combined arithmetically in the body.
@@ -862,7 +840,6 @@ bartlett_se <- function(rho, n) {
 #'
 #' A step of the sarima_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fitted A list; the body reads \code{$aic}, \code{$loglik}, \code{$phi},
 #' \code{$Phi}, \code{$sigma2}, \code{$theta}, \code{$Theta} from it.
@@ -884,7 +861,6 @@ r_convention <- function(fitted) {
 #'
 #' A step of the sarima_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

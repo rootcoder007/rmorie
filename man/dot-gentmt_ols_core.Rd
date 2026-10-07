@@ -18,7 +18,6 @@ A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted},
 \description{
 A step of the gentmt_native implementation. Called by \code{.gentmt_treatment_density}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

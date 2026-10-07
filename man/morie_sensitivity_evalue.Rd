@@ -2,7 +2,7 @@
 % Please edit documentation in R/sensitivity.R
 \name{morie_sensitivity_evalue}
 \alias{morie_sensitivity_evalue}
-\title{Internal helper: Morie Sens Need}
+\title{E-values for the EValue dispatch family (extender)}
 \usage{
 morie_sensitivity_evalue(
   estimate,
@@ -46,7 +46,12 @@ A list of class \code{morie_sensitivity_evalue} with
 E-values).
 }
 \description{
-Internal helper: Morie Sens Need
+Native E-values for the \pkg{EValue} dispatch family
+(\code{evalues.OLS}, \code{evalues.RR}, \code{evalues.OR},
+\code{evalues.HR}, \code{evalues.MD}); OLS and MD use the
+\eqn{\exp(0.91 d \pm 1.78 se)} interval.  Pairs with
+\code{\link{e_value_rr}} / \code{\link{e_value_or}} /
+\code{\link{e_value_hr}} / \code{\link{e_value_d}}.
 }
 \examples{
 str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,

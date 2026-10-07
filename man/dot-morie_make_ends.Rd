@@ -17,7 +17,6 @@ A numeric value.
 \description{
 A step of the boot_native implementation. Called by \code{morie_tsboot}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 if (requireNamespace("boot", quietly = TRUE)) {

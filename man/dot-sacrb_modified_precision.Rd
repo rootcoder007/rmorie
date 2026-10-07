@@ -19,5 +19,4 @@ A list with \code{numerator}, \code{denominator}, \code{precision}.
 \description{
 A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
 See the file header for the source the module follows.
-source it follows.
 }

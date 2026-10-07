@@ -27,5 +27,4 @@ The value of \code{.gwr_aicc}.
 \description{
 A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}.
 See the file header for the source the module follows.
-source it follows.
 }

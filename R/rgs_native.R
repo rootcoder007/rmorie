@@ -16,7 +16,6 @@
 #'
 #' A step of the rgs_native implementation. Called by \code{morie_rgs_functional_regression}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_t A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{w}, as built in the body.
@@ -34,7 +33,6 @@
 #'
 #' A step of the rgs_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
@@ -155,7 +153,6 @@ morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
 #'
 #' A step of the rgs_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

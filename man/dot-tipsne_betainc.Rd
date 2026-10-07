@@ -19,5 +19,4 @@ A numeric value.
 \description{
 A step of the tipsne_native implementation. Called by \code{.tipsne_t_sf}.
 See the file header for the source the module follows.
-source it follows.
 }

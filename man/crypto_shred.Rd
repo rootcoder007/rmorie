@@ -14,3 +14,9 @@ crypto_shred(kek_id, wrapped_deks)
 \description{
 Crypto-shred: destroy a KEK and report what that covers
 }
+\examples{
+kek <- as.raw(32:1)
+w1 <- wrap_dek(as.raw(1:32), kek, as.raw(1:12), kek_id = "kek-1")
+w2 <- wrap_dek(as.raw(33:64), kek, as.raw(13:24), kek_id = "kek-1")
+crypto_shred("kek-1", list(w1, w2))
+}

@@ -30,7 +30,6 @@ A list with \code{estimate}, \code{gradient}, \code{error}, \code{weight},
 \description{
 A step of the vidgen_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_vidgen_reconstruction_guidance(x_hat = c(1, 2, 3, 4, 5, 6, 7, 8),

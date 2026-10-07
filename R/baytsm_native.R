@@ -9,7 +9,6 @@
 #'
 #' A step of the baytsm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param V Numeric; combined arithmetically in the body. Defaults to \code{1}.
@@ -92,7 +91,6 @@ morie_baytsm_dlm_local_level <- function(y, V = 1.0, W = 0.1, m0 = 0.0,
 #'
 #' A step of the baytsm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

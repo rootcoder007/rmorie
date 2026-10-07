@@ -22,7 +22,8 @@ yields a proper posterior whenever X has full column rank. The density is
 returned up to its (infinite) normalizing constant.
 }
 \examples{
-Msm043(sigma2 = 5L)
+# the improper prior p(beta, sigma2) proportional to 1 / sigma2
+Msm043(sigma2 = c(0.5))$density
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

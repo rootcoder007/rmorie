@@ -17,7 +17,6 @@ The value of \code{[}.
 \description{
 A step of the evt_native implementation. Called by \code{morie_evt_dedh}, \code{morie_evt_hill}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

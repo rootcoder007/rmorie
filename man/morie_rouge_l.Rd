@@ -19,7 +19,6 @@ The value of \code{best}, as built in the body.
 \description{
 A step of the rouge_native implementation. Called by \code{morie_rouge}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -45,7 +45,6 @@ A list with \code{estimate}, \code{tau}, \code{outcome_kink},
 \description{
 A step of the bnskt2_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

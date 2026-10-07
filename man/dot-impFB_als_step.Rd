@@ -23,5 +23,4 @@ The value of \code{.impFB_solve}.
 \description{
 A step of the impFB_native implementation. Called by \code{morie_impFB}.
 See the file header for the source the module follows.
-source it follows.
 }

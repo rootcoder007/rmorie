@@ -33,14 +33,13 @@ list: estimate, e_res, attention, loss, method.
 }
 \description{
 Song et al. (2019), AutoInt: automatic feature interaction learning via
-self-attentive neural networks, CIKM 28, 1161-1170 (arXiv:1810.11921 --
-FETCHED).  Eq. (2) embeds a numeric field as e_m = v_m x_m; eq. (3) is
-the key-value attention alpha_(m,k) = softmax_k <W_Query e_m, W_Key
-e_k>; eq. (4) is the head output sum_k alpha_(m,k) W_Value e_k; eq. (6)
-adds the residual, e_m^Res = ReLU(ehat_m + W_Res e_m), so the original
-feature survives the interaction layer.  Projections are supplied by
-the caller; the identity is used when they are not, which is the
-degenerate case rather than an invented parameterisation.
+self-attentive neural networks, CIKM 28, 1161-1170 (arXiv:1810.11921). Eq. (2) embeds
+a numeric field as e_m = v_m x_m; eq. (3) is the key-value attention alpha_(m,k) =
+softmax_k <W_Query e_m, W_Key e_k>; eq. (4) is the head output sum_k alpha_(m,k)
+W_Value e_k; eq. (6) adds the residual, e_m^Res = ReLU(ehat_m + W_Res e_m), so the
+original feature survives the interaction layer. Projections are supplied by the
+caller; the identity is used when they are not, which is the degenerate case rather
+than an invented parameterisation.
 }
 \examples{
 Autoint(matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE))$estimate

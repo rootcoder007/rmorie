@@ -170,18 +170,21 @@ morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
 #' @param limit Page size (max 32000 per CKAN; sane default 100).
 #' @return A `data.frame` of records.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
-#' cat_df <- morie_datasets_toronto_opendata_bulk_layers()
-#' df <- try(morie_datasets_toronto_open_ckan_resource(cat_df$resource_id[1],
-#'   limit = 5L
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
+#' # the datastore resource of the neighbourhood-crime-rates package (package_show, 2026-10)
+#' df <- try(morie_datasets_toronto_open_ckan_resource(
+#'   "d4160604-9f3e-4589-8821-9fd70fa350b3", limit = 5L
 #' ))
 #' if (!inherits(df, "try-error")) head(df)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_toronto_open_ckan_resource <- function(resource_id,
                                                       limit = 100L) {
+  if (!is.character(resource_id) || length(resource_id) != 1L || is.na(resource_id) || !nzchar(resource_id)) {
+    stop("`resource_id` must be one CKAN resource id (package_show lists them)", call. = FALSE)
+  }
   url <- sprintf(
     "%s/action/datastore_search?resource_id=%s&limit=%d",
     .MORIE_TORONTO_CKAN_BASE,

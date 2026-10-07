@@ -15,7 +15,6 @@ A numeric value.
 \description{
 A step of the tmlcds_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .tmlcds_logit(p = 0.5)

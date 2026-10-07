@@ -20,5 +20,10 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{morie_spatial_voting_wordfish}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(15)
+dtm <- matrix(rpois(12, 3), 3, 4)  # 3 documents x 4 words
+morie_spatial_wordfish_omega_update_cpp(dtm, psi = rep(1, 3), alpha = rep(0, 4),
+                                        beta = c(-0.5, 0, 0.2, 0.5), omega = c(-1, 0, 1))
 }

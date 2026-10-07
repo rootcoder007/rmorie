@@ -22,7 +22,6 @@ A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{features},
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 \donttest{

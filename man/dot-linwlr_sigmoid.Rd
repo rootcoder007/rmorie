@@ -16,7 +16,6 @@ A numeric value.
 A step of the linwlr_native implementation. Called by \code{.linwlr_logit_irls},
 \code{morie_linwlr}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

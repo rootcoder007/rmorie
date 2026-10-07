@@ -38,12 +38,15 @@ morie_sentpc_escape_whitespace <- function(text, add_prefix = TRUE) {
 #' @param text Character.
 #' @param strip_prefix Logical; remove the leading marker if present.
 #' @return Character.
-#' @export
 #' @examples
-#' morie_sentpc_unescape_whitespace(text = 5L)
+#' esc <- morie_sentpc_escape_whitespace("hello world")
+#' esc
+#' morie_sentpc_unescape_whitespace(esc)
+#' @export
 #' @keywords internal
 morie_sentpc_unescape_whitespace <- function(text,
                                               strip_prefix = TRUE) {
+  .morie_arg(text, "c")
   s <- as.character(text)
   if (isTRUE(strip_prefix) && startsWith(s, .SENT_SPACE)) s <- substr(s, 2L, nchar(s))
   gsub(.SENT_SPACE, " ", s, fixed = TRUE)
@@ -236,7 +239,8 @@ morie_sentpc_viterbi_segment <- function(text, piece_logp,
     Lmax <- min(maxlen, i - 1L)
     for (L in 1:Lmax) {
       piece <- substr(s, i - L, i - 1L)
-      lp <- piece_logp[[piece]]
+      # a named list or a named numeric vector; an unknown piece is simply absent
+      lp <- if (piece %in% names(piece_logp)) piece_logp[[piece]]
       if (is.null(lp)) next
       cand <- best[i - L] + lp
       if (cand > best[i]) {
@@ -267,7 +271,6 @@ morie_sentpc <- morie_sentpc_escape_whitespace
 #' A step of the sentpc_native implementation. Called by \code{encode_bpe},
 #' \code{escape_whitespace}, \code{train_bpe} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param text Coerced to character by the body, with \code{as.character}.
 #' @param add_prefix A flag; the body branches on it. Defaults to \code{TRUE}.
@@ -290,7 +293,6 @@ morie_sentpc <- morie_sentpc_escape_whitespace
 #' A step of the sentpc_native implementation. Called by \code{morie_sentpc_decode},
 #' \code{unescape_whitespace}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param text Coerced to character by the body, with \code{as.character}.
 #' @param strip_prefix A flag; the body branches on it. Defaults to \code{TRUE}.
@@ -333,6 +335,9 @@ morie_sentpc <- morie_sentpc_escape_whitespace
 #' @param text See Usage.
 #' @param model See Usage.
 #' @param add_prefix See Usage.
+#' @examples
+#' bpe <- train_bpe(c("low lower lowest", "new newer newest"), vocab_size = 30)
+#' encode_bpe("lowest newer", bpe)
 #' @export
 encode_bpe <- function(text, model, add_prefix = TRUE) {
   esc <- .escape_whitespace(text, add_prefix)
@@ -364,6 +369,8 @@ encode_bpe <- function(text, model, add_prefix = TRUE) {
 #' Escape whitespace as U+2581, optionally prefixing the marker
 #' @param text See Usage.
 #' @param add_prefix See Usage.
+#' @examples
+#' escape_whitespace("a b\tc")
 #' @export
 escape_whitespace <- function(text, add_prefix = TRUE) {
   .escape_whitespace(text, add_prefix)
@@ -374,6 +381,9 @@ escape_whitespace <- function(text, add_prefix = TRUE) {
 #' @param corpus See Usage.
 #' @param vocab_size See Usage.
 #' @param add_prefix See Usage.
+#' @examples
+#' bpe <- train_bpe(c("low lower lowest", "new newer newest"), vocab_size = 30)
+#' names(bpe)
 #' @export
 train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
   # the string-keyed version re-split every merged word into single
@@ -386,6 +396,8 @@ train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
 #' Invert the whitespace escape
 #' @param text See Usage.
 #' @param strip_prefix See Usage.
+#' @examples
+#' unescape_whitespace(escape_whitespace("a b\tc"))
 #' @export
 unescape_whitespace <- function(text, strip_prefix = TRUE) {
   .unescape_whitespace(text, strip_prefix)
@@ -396,6 +408,9 @@ unescape_whitespace <- function(text, strip_prefix = TRUE) {
 #' @param text See Usage.
 #' @param piece_logp See Usage.
 #' @param add_prefix See Usage.
+#' @examples
+#' lp <- list(h = -3, e = -3, l = -3, o = -3, he = -2, ll = -2, hello = -1.5)
+#' viterbi_segment("hello", lp, add_prefix = FALSE)$pieces   # the whole word beats he + ll + o
 #' @export
 viterbi_segment <- function(text, piece_logp, add_prefix = TRUE) {
   s <- .escape_whitespace(text, add_prefix)
@@ -409,7 +424,8 @@ viterbi_segment <- function(text, piece_logp, add_prefix = TRUE) {
   for (i in 2:(n + 1L)) {
     for (L in seq_len(min(maxlen, i - 1L))) {
       piece <- substr(s, i - L, i - 1L)
-      lp <- piece_logp[[piece]]
+      # a named list or a named numeric vector; an unknown piece is simply absent
+      lp <- if (piece %in% names(piece_logp)) piece_logp[[piece]]
       if (is.null(lp)) next
       if (best[i - L] + lp > best[i]) {
         best[i] <- best[i - L] + lp

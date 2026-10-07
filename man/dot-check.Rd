@@ -18,5 +18,4 @@ A list with \code{g}, \code{s}.
 A step of the slvgrf_native implementation. Called by \code{qini_curve},
 \code{rate_test}, \code{toc_curve}.
 See the file header for the source the module follows.
-source it follows.
 }

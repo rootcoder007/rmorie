@@ -18,7 +18,6 @@ A list with \code{X}, \code{y}.
 A step of the robust_native implementation. Called by \code{morie_rob_huber},
 \code{morie_rob_m}, \code{morie_rob_mm} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

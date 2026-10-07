@@ -20,14 +20,12 @@ list: estimate, digest, moves, total_value, mean_value,
 action_entropy, written, method.
 }
 \description{
-No equation here either: Silver et al. (2018), arXiv:1712.01815
-(FETCHED), reports games and outcomes but specifies no log format, so
-nothing is attributed to it.  What this provides is a canonical,
-order-stable record -- move index, action, root visit count, value
-estimate -- with the statistics a log is read for: length, total and
-mean value, and the entropy of the realised move distribution.  The
-digest is the same Rabin-Karp hash as Replaypack.  Writing to disk is
-opt-in.
+No equation here either: Silver et al. (2018), arXiv:1712.01815, reports games and
+outcomes but specifies no log format, so nothing is attributed to it. What this
+provides is a canonical, order-stable record -- move index, action, root visit count,
+value estimate -- with the statistics a log is read for: length, total and mean
+value, and the entropy of the realised move distribution. The digest is the same
+Rabin-Karp hash as Replaypack. Writing to disk is opt-in.
 }
 \examples{
 Gamelog(c(0, 1, 1, 0))$action_entropy

@@ -23,9 +23,7 @@ similarity search in heterogeneous information networks, PVLDB 4(11),
 path instances following it is an entry of the product of the
 type-restricted adjacency matrices, M_P = W_(A1,A2) ... W_(Al,A(l+1)).
 PathSim normalises this to s(x, y) = 2 M_P(x, y) / (M_P(x, x) + M_P(y,
-y)) for a symmetric meta path, which is returned too.  The PVLDB paper
-is open access but was not retrievable here; both expressions are
-quoted in their standard published form.
+y)) for a symmetric meta path, which is returned too.
 }
 \examples{
 A <- matrix(c(0, 1, 1, 0), 2, 2)

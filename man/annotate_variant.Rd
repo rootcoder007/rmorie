@@ -39,7 +39,6 @@ The value of \code{.snpeff_pack}.
 \description{
 A step of the snpeff_native implementation. Called by \code{snpeff}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 annotate_variant("ATGAAACCCGGGTTTTAA", 4, "A", "T")

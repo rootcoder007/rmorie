@@ -23,3 +23,6 @@ Numeric matrix with \code{n} rows.
 \description{
 Sobol design pushed through the prior's inverse CDF
 }
+\examples{
+design_from_prior(5, list(c(0, -1), c(1, 1)))
+}

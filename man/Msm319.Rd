@@ -13,9 +13,11 @@ Msm319(...)
 The list returned by \code{Msm002()}.
 }
 \description{
-The stub generator stamped several extracted page fragments with the same
-function name, so the implementation lives once in \code{Msm002()} and this
-module re-exports it. Calling either path runs the same code.
+The same method as \code{Msm002()}, re-exported under this name; both run the same
+code.
+}
+\examples{
+Msm319(list(c(1, 2, 3), c(2, 3, 4)))$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

@@ -9,7 +9,7 @@ morie_siu_record_correction(
   field,
   verified_value,
   note = "",
-  cache_dir = file.path(tempdir(), "morie", "siu")
+  cache_dir = .siu_corrections_dir()
 )
 }
 \arguments{
@@ -24,16 +24,18 @@ cached HTML (see \code{morie_siu_audit_case()}).}
 \item{note}{Optional one-line note describing the basis for the
 correction (HTML excerpt, LLM verdict, etc.).}
 
-\item{cache_dir}{Directory holding the harvester's SIU.csv.}
+\item{cache_dir}{Directory for the overrides CSV (default: the user data
+directory, which persists between sessions).}
 }
 \value{
 Invisibly, the path to the updated overrides CSV.
 }
 \description{
-Saves a (case_number, field, verified_value) tuple to a local
-overrides CSV at \code{<cache_dir>/canonical_overrides.csv}. Every
-subsequent \code{morie_fetch_siu()} on that \code{cache_dir} will
-overlay these corrections onto the regex-parsed output. The shipped
+Saves a (case_number, field, verified_value) tuple to an overrides CSV,
+\code{canonical_overrides.csv}, in the user data directory
+(\code{tools::R_user_dir("morie", "data")}, sub-directory \code{siu}), so
+it outlives the R session. Every later \code{morie_fetch_siu()} overlays
+these corrections onto the regex-parsed output. The shipped
 \code{inst/extdata/siu_canonical_overrides.csv.gz} carries
 maintainer-confirmed corrections; this function lets users add
 their own without touching the package source.

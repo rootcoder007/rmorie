@@ -24,11 +24,9 @@
 #'   final average reward), \code{actions} (0-based machine per play),
 #'   \code{rewards}, \code{means}, \code{counts}, \code{index} (final
 #'   UCB index with n = T), \code{total_reward}, \code{method}.
-#' @references Auer, P., Cesa-Bianchi, N. and Fischer, P. (2002).
-#'   Finite-time analysis of the multiarmed bandit problem. Machine
-#'   Learning 47, 235-256.  Policy: figure 1, p. 237; bound: Theorem 1.
-#'   Local source:
-#'   fetched-wave3/auer-cesabianchi-fischer-2002-ucb1-finite-time-ML47.pdf.
+#' @references Auer, P., Cesa-Bianchi, N. and Fischer, P. (2002). Finite-time analysis
+#'   of the multiarmed bandit problem. Machine Learning 47, 235-256. Policy: figure 1,
+#'   p. 237; bound: Theorem 1.
 #' @examples
 #' x <- matrix(rep(c(1, 0), 6), ncol = 2, byrow = TRUE)
 #' Ucbb(x)$actions

@@ -21,7 +21,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the berte_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

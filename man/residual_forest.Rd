@@ -41,7 +41,6 @@ A list with \code{tau}, \code{info}.
 \description{
 A step of the plrgrf_native implementation. Called by \code{morie_plrgrf}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

@@ -23,7 +23,6 @@
 #' A step of the ecfp4_native implementation. Called by \code{.mor_fp_invariants},
 #' \code{.mor_fp_morgan}, \code{morie_rdkfp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h Numeric; combined arithmetically in the body.
 #' @param v Numeric; combined arithmetically in the body.
@@ -66,7 +65,6 @@
 #'
 #' A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A count; the body uses it as \code{seq_len(...)}.
 #' @param bd A list; the body reads \code{$i}, \code{$j} from it.
@@ -101,7 +99,6 @@
 #'
 #' A step of the ecfp4_native implementation. Called by \code{.mor_fp_morgan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bs A vector; its length is taken.
 #' @return A character value.
@@ -116,7 +113,6 @@
 #' A step of the ecfp4_native implementation. Called by \code{morie_ecfp4},
 #' \code{morie_ecfp6}, \code{morie_fcfp4}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A count; the body uses it as \code{seq_len(...)}.
 #' @param bd A list; the body reads \code{$i}, \code{$j}, \code{$o} from it.
@@ -219,7 +215,6 @@
 #'
 #' A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A count; the body uses it as \code{rep(...)}.
 #' @param numhs Passed to \code{col}.

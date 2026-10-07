@@ -16,5 +16,4 @@ A list with \code{rules}, \code{start}, \code{original_start}.
 A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables},
 \code{morie_augment}.
 See the file header for the source the module follows.
-source it follows.
 }

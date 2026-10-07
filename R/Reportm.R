@@ -20,10 +20,9 @@
 #' @param seed Seed for the shared deterministic stream.
 #' @return List with \code{index} (0-based argmax), \code{winner},
 #'   \code{estimate}, \code{epsilon}, \code{scale}, \code{n}.
-#' @references Dwork, C., and Roth, A. (2014). The algorithmic
-#'   foundations of differential privacy. FnT-TCS 9(3-4), 211-487.
-#'   Section 3.3, Report Noisy Max and Claim 3.9.
-#'   Local source: fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
+#' @references Dwork, C., and Roth, A. (2014). The algorithmic foundations of
+#'   differential privacy. FnT-TCS 9(3-4), 211-487. Section 3.3, Report Noisy Max and
+#'   Claim 3.9.
 #' @export
 #' @examples
 #' Reportm(counts = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)

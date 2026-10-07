@@ -24,3 +24,7 @@ A list with \code{mean}, \code{coef_x0}, \code{coef_xt},
 \description{
 \code{mu(x_t, x_0_hat)} with the standard coefficients.
 }
+\examples{
+posterior_mean(x_t = c(0.5, -0.2), x0_hat = c(0.6, -0.1), alpha_bar_t = 0.8,
+               alpha_bar_prev = 0.9, beta_t = 0.1)$mean
+}

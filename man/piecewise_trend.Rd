@@ -24,3 +24,6 @@ Numeric vector of trend values.
 The offsets carry \code{gamma_j = -s_j delta_j} so the segments join
 by construction.
 }
+\examples{
+piecewise_trend(t = 0:6, k_rate = 1, m_off = 0, deltas = -1, cps = 3)   # flat after t = 3
+}

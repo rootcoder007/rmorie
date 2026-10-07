@@ -23,7 +23,6 @@ The value of \code{.gan_an_anomaly_score_impl}.
 \description{
 A step of the gan_an_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 anomaly_score(x = c(1, 2, 3, 4, 5, 6, 7, 8), g_z = c(1, 2, 3, 4, 5, 6, 7, 8),

@@ -52,7 +52,6 @@
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq},
 #' \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{c}.
 #' @param b Passed to \code{c}.
@@ -67,7 +66,6 @@
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq},
 #' \code{.prsLL_follow_sets}, \code{.prsLL_ll1_table}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; indexed elementwise.
 #' @param b Passed to \code{\%in\%}.
@@ -82,7 +80,6 @@
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_first_sets},
 #' \code{.prsLL_follow_sets}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{\%in\%}.
 #' @param b Passed to \code{\%in\%}.
@@ -100,7 +97,6 @@
 #' A step of the prsLL_native implementation. Called by
 #' \code{.prsLL_remove_left_recursion}, \code{morie_prsLL}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rules See Usage.
 #' @param start Optional; may be \code{NULL}. Coerced to character by the body, with
@@ -164,7 +160,6 @@
 #'
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_grammar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return The value of \code{seen}, as built in the body.
@@ -210,7 +205,6 @@
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of},
 #' \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 8 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{out}, as built in the body.
@@ -246,7 +240,6 @@
 #'
 #' A step of the prsLL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{out}, as built in the body.
@@ -286,7 +279,6 @@
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of},
 #' \code{.prsLL_follow_sets}, \code{.prsLL_left_recursive} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{first}, as built in the body.
@@ -334,7 +326,6 @@
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of},
 #' \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq See Usage.
 #' @param first A vector; indexed elementwise.
@@ -380,7 +371,6 @@
 #'
 #' A step of the prsLL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq Coerced to character by the body, with \code{as.character}.
 #' @param g Passed to \code{.prsLL_first_sets}.
@@ -413,7 +403,6 @@
 #'
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_ll1_table}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @param first Optional; may be \code{NULL}. Passed to \code{is.null}.
@@ -473,7 +462,6 @@
 #'
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_is_ll1}, \code{.prsLL_parse}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return A list with \code{table}, \code{conflicts}, \code{first}, \code{follow}.
@@ -532,7 +520,6 @@
 #'
 #' A step of the prsLL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g Passed to \code{.prsLL_ll1_table}.
 #' @return A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table},
@@ -578,7 +565,6 @@
 #'
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_is_ll1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{out}, as built in the body.
@@ -634,7 +620,6 @@
 #'
 #' A step of the prsLL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return The value of \code{.prsLL_grammar}.
@@ -702,7 +687,6 @@
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd},
 #' \code{.prsLL_parse_table}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sym Carried through into a list the body builds.
 #' @return A list with \code{symbol}, \code{children}.
@@ -718,7 +702,6 @@
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd},
 #' \code{.prsLL_parse_table}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sym Carried through into a list the body builds.
 #' @param kids Carried through into a list the body builds.
@@ -736,7 +719,6 @@
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd},
 #' \code{.prsLL_parse_table}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param table A vector; indexed elementwise.
 #' @param A Passed to \code{paste}.
@@ -773,7 +755,6 @@
 #'
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_parse}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules} from it.
 #' @param table Passed to \code{.prsLL_pick}.
@@ -827,7 +808,6 @@
 #'
 #' A step of the prsLL_native implementation. Called by \code{.prsLL_parse}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @param table Passed to \code{.prsLL_pick}.
@@ -901,7 +881,6 @@
 #'
 #' A step of the prsLL_native implementation. Called by \code{morie_prsLL}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$start} from it.
 #' @param tokens Coerced to character by the body, with \code{as.character}.
@@ -958,7 +937,6 @@
 #'
 #' A step of the prsLL_native implementation. Called by \code{morie_prsLL}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree A list; the body reads \code{$children}, \code{$symbol} from it.
 #' @return The value of \code{out}, as built in the body.
@@ -985,7 +963,6 @@
 #'
 #' A step of the prsLL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param grammar_ A list; the body reads \code{$rules}, \code{$start} from it.
 #' @param tokens Passed to \code{.prsLL_parse}.

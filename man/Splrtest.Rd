@@ -56,10 +56,9 @@ Theorem 5 (page 165).  Remark 4.1 (page 171) extends (4.1) to a
 parametric null other than the linear model, applied to the
 residuals of the fitted null.
 
-Two things the stub this replaces got wrong: the statistic is
-r_K lambda_n, not 2 lambda_n; and the degrees of freedom
-r_K c_K abs(Omega) / h grow as h shrinks, so there is no fixed
-integer df.
+Note that the statistic is r_K lambda_n, not 2 lambda_n; and the
+degrees of freedom r_K c_K abs(Omega) / h grow as h shrinks, so there is
+no fixed integer df.
 
 Table 2 (page 170) prints r_K = 2.5375 and c_K = 0.7737 for the
 Gaussian.  The r_K value reproduces exactly from the Theorem 5

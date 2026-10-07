@@ -88,7 +88,6 @@
 #' A step of the bprMF_native implementation. Called by \code{.bprMF_bpr_opt},
 #' \code{.bprMF_learn_bpr}, \code{bpr_sigmoid}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -105,7 +104,6 @@
 #' A step of the bprMF_native implementation. Called by \code{.bprMF_auc},
 #' \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A vector; indexed elementwise.
 #' @param H A vector; indexed elementwise.
@@ -121,7 +119,6 @@
 #'
 #' A step of the bprMF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pos A vector; indexed elementwise.
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.
@@ -196,7 +193,6 @@
 #'
 #' A step of the bprMF_native implementation. Called by \code{.bprMF_learn_bpr}, \code{bpr_auc_R}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W Passed to \code{.bprMF_predict}.
 #' @param H Passed to \code{.bprMF_predict}.
@@ -362,7 +358,6 @@
 #'
 #' A step of the bprMF_native implementation. Called by \code{bpr_recommend_R}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W Passed to \code{.bprMF_predict}.
 #' @param H Passed to \code{.bprMF_predict}.
@@ -517,7 +512,9 @@ bpr_learn_bpr_R <- function(pos, n_users, n_items, k_dim = 8L,
 #'   \code{top_k}) and \code{n_scored}.
 #' @export
 #' @examples
-#' bpr_recommend_R(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, u = 5L, n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' W <- list(c(0.5, 0.1), c(-0.2, 0.4))                 # two users' factors
+#' H <- list(c(0.3, 0.3), c(-0.1, 0.8), c(0.6, -0.2))   # three items' factors
+#' bpr_recommend_R(W, H, u = 0L, n_items = 3L, top_k = 2L)
 #' @keywords internal
 bpr_recommend_R <- function(W, H, u, n_items, top_k = 5L,
                             exclude = integer(0))
@@ -533,7 +530,6 @@ bayesianpersonalizedranking <- bpr_learn_bpr_R
 #'
 #' A step of the bprMF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

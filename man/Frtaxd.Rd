@@ -32,10 +32,8 @@ set.seed(1)
 Frtaxd(cbind(runif(20), runif(20)), sample(letters[1:3], 20, TRUE), grid = 2)
 }
 \references{
-Shannon, C. E. (1948). A mathematical theory of
-communication. Bell System Technical Journal, 27, 379-423, Sec. 6
-(entropy H). Archived:
-fetched-wave3/shannon-1948-mathematical-theory-of-communication.pdf.
+Shannon, C. E. (1948). A mathematical theory of communication. Bell
+System Technical Journal, 27, 379-423, Sec. 6 (entropy H).
 
 Pielou, E. C. (1966). The measurement of diversity in different
 types of biological collections. Journal of Theoretical Biology,

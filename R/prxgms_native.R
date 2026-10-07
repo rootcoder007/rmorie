@@ -12,7 +12,6 @@
 #'
 #' A step of the prxgms_native implementation. Called by \code{morie_prxgms_lasso_fista}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; indexed elementwise.
 #' @param tau Numeric; combined arithmetically in the body.
@@ -38,7 +37,6 @@ morie_prxgms_soft_threshold <- function(v, tau) {
 #'
 #' A step of the prxgms_native implementation. Called by \code{morie_prxgms_lasso_fista}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fun Accepted by the signature and not used anywhere in the body.
 #' @param grad Accepted by the signature and not used anywhere in the body.
@@ -112,7 +110,6 @@ morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
 #'
 #' A step of the prxgms_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
@@ -178,6 +175,11 @@ morie_prxgms <- morie_prxgms_soft_threshold
 #' @return A list with \code{estimate}, \code{x}, \code{fun},
 #'   \code{objective}, \code{iterations}, \code{L}, \code{accelerated},
 #'   \code{converged}, \code{method}, \code{lambda}, \code{L}.
+#' @examples
+#' set.seed(4)
+#' A <- matrix(rnorm(100 * 5), 100, 5)
+#' b <- A %*% c(2, 0, 0, -1, 0) + rnorm(100, sd = 0.1)
+#' round(lasso_fista(A, as.numeric(b), lam = 5)$x, 3)
 #' @export
 lasso_fista <- function(A, b, lam, max_iter = 500L, tol = 1e-10,
                         accelerate = TRUE) {
@@ -240,6 +242,8 @@ prxgms_cheatsheet <- function() {
 #' @param v Numeric vector.
 #' @param tau Non-negative threshold.
 #' @return Numeric vector of the same length.
+#' @examples
+#' soft_threshold(c(-3, -0.5, 0, 0.5, 3), tau = 1)
 #' @export
 soft_threshold <- function(v, tau) {
   v <- as.numeric(v)

@@ -20,7 +20,6 @@ A list with \code{afe}, \code{fold_underprediction}, \code{rmse}, \code{esf},
 \description{
 A step of the clrnt_native implementation. Called by \code{clrnt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

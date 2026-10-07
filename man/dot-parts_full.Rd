@@ -15,5 +15,4 @@ A list with \code{p}, \code{t}.
 \description{
 A step of the benRea_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

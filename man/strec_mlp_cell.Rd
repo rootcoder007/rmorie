@@ -21,11 +21,9 @@ One of two values, depending on the branch taken.
 \description{
 A step of the strec_native implementation. Called by \code{strec_stamp_scores}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-S <- c("a", "b", "c")
-strec_mlp_cell(S, M)
+W <- matrix(c(1, 0, 0.5, -1, 0.2, 0.3), nrow = 2)   # two outputs from three inputs
+strec_mlp_cell(m = c(1, 0.5, -0.5), W = W)
 }
 \keyword{internal}

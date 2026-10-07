@@ -21,5 +21,4 @@ The value of \code{ll}, as built in the body.
 \description{
 A step of the k03volsv implementation. Called by \code{Volsv}.
 See the file header for the source the module follows.
-source it follows.
 }

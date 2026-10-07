@@ -143,3 +143,15 @@ test_that("morie_estimate_double_ml is reasonably stable across seeds", {
                                  n_folds = 3L, random_state = 2L)
   expect_equal(r1$ate, r2$ate, tolerance = 0.15)
 })
+
+test_that("morie_estimate_double_ml matches morie's causal_dml_plr_gcv on the shared frame", {
+  i <- 1:150
+  x1 <- sin(i)
+  x2 <- cos(1.4 * i)
+  d <- as.integer(0.7 * x1 + 0.4 * sin(3.1 * i) > 0)
+  df <- data.frame(x1, x2, D = d, Y = 1 + 0.5 * d + x1 + 0.3 * cos(2.2 * i))
+  r <- morie_estimate_double_ml(df, outcome = "Y", treatment = "D", covariates = c("x1", "x2"))
+  # morie: tests/fn/test_causdml2.py asserts the same theta and SE to 1e-9
+  expect_equal(r$estimate %||% r$ate, 0.468147062199554, tolerance = 1e-9)
+  expect_equal(r$se %||% r$std_error, 0.0543268562926612, tolerance = 1e-9)
+})

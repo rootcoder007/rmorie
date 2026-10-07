@@ -32,13 +32,12 @@
 #'   \code{exp_hom}, \code{n_obs}, \code{flag_callrate},
 #'   \code{flag_het}, \code{pass_qc}, \code{het_mean}, \code{het_sd},
 #'   \code{freq}, \code{n}, \code{m}, \code{method}.
-#' @references Marees, A. T., de Kluiver, H., Stringer, S., et al.
-#'   (2018). A tutorial on conducting genome-wide association studies.
-#'   International Journal of Methods in Psychiatric Research 27(2),
-#'   e1608, Table 1 steps 1 and 5 (fetched-wave3 PDF). PLINK 1.9
-#'   basic statistics documentation, het and missing reports
-#'   (cog-genomics.org/plink/1.9/basic_stats, fetched 2026-08-09).
-#'   Nei, M. (1978). Genetics 89(3), 583-590.
+#' @references Marees, A. T., de Kluiver, H., Stringer, S., et al. (2018). A tutorial on
+#'   conducting genome-wide association studies. International Journal of Methods in
+#'   Psychiatric Research 27(2), e1608, Table 1 steps 1 and 5. PLINK 1.9 basic
+#'   statistics documentation, het and missing reports
+#'   (cog-genomics.org/plink/1.9/basic_stats). Nei, M. (1978).
+#'   Genetics 89(3), 583-590.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -80,6 +80,11 @@
 #' @references Imbens, G. and Kalyanaraman, K. (2012). Optimal
 #'   bandwidth choice for the regression discontinuity estimator.
 #'   Review of Economic Studies, 79(3), 933-959.
+#' @examples
+#' set.seed(3)
+#' x <- runif(500, -1, 1)
+#' y <- 0.5 * (x >= 0) + x + rnorm(500, sd = 0.3)
+#' morie_causrddh(x, y, cutoff = 0)$estimate
 #' @export
 morie_causrddh <- function(x, y, cutoff = 0) {
   xa <- as.numeric(x)

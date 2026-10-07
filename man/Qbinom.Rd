@@ -19,7 +19,6 @@ A vector, from \code{vapply}.
 \description{
 A step of the dist_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 Qbinom(p = 0.5, size = 5L, prob = 0.5)

@@ -21,7 +21,6 @@
 #'
 #' A step of the exec_guard implementation. Called by \code{.morie_exec_disabled}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param name Passed to \code{Sys.getenv}.
 #' @return The value of \code{%in%}.
@@ -41,7 +40,6 @@
 #' A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allowed},
 #' \code{.morie_safe_readRDS}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.morie_env_true}.
 #' @export

@@ -66,6 +66,14 @@ inverse-probability-weighted average treatment effect inside each
 stratum, so that both nuisance models are allowed to differ across
 groups.
 }
+\examples{
+set.seed(14)
+n <- 600
+d <- data.frame(x = rnorm(n), g = sample(c("a", "b"), n, TRUE))
+d$t <- rbinom(n, 1, plogis(d$x))
+d$y <- 1 + d$t * ifelse(d$g == "a", 1, 2) + d$x + rnorm(n)
+morie_gate(d, "t", "y", "x", group_col = "g")[, c("group", "ate", "se")]
+}
 \references{
 Robins, J. M., Rotnitzky, A. and Zhao, L. P. (1994).
 Estimation of regression coefficients when some regressors are

@@ -17,5 +17,4 @@ The value of \code{list}.
 \description{
 A step of the shdsmw_native implementation. Called by \code{shrinkage_msm}.
 See the file header for the source the module follows.
-source it follows.
 }

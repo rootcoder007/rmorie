@@ -35,5 +35,4 @@ A list with \code{mu1}, \code{mu0}, \code{e}.
 \description{
 A step of the ipwgrf_native implementation. Called by \code{morie_ipwgrf}.
 See the file header for the source the module follows.
-source it follows.
 }

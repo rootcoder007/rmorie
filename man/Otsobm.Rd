@@ -27,6 +27,10 @@ is that it is only a first-order approximation.
 Formula: \eqn{W_1(mu,nu) ~ ||mu - nu||_{H^{-1}} = sqrt((mu-nu)'
 (-Delta)^\{-1\} (mu-nu))} -- Peyre (2018), Section 2
 }
+\examples{
+L <- matrix(c(1, -1, 0, -1, 2, -1, 0, -1, 1), 3)    # path-graph Laplacian
+Otsobm(mu = c(0.5, 0.5, 0), nu = c(0, 0.5, 0.5), Laplace_inv = MASS::ginv(L))$W1_sob
+}
 \references{
 Peyre, G. (2018). ESAIM: Control, Optimisation and Calculus
 of Variations 24(4):1489-1501. \doi{10.1051/cocv/2017050}.

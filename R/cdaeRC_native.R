@@ -17,7 +17,6 @@
 #'
 #' A step of the cdaeRC_native implementation. Called by \code{decode}, \code{encode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param name One of \code{"identity"}, \code{"sigmoid"}, \code{"tanh"}.
 #' @param x Numeric; combined arithmetically in the body.
@@ -38,7 +37,6 @@
 #'
 #' A step of the cdaeRC_native implementation. Called by \code{fit_cdae}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param name One of \code{"identity"}, \code{"sigmoid"}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -54,7 +52,6 @@
 #'
 #' A step of the cdaeRC_native implementation. Called by \code{fit_cdae}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param q Coerced to numeric by the body, with \code{as.numeric}.
@@ -78,7 +75,6 @@ corrupt <- function(y, q, rng) {
 #'
 #' A step of the cdaeRC_native implementation. Called by \code{fit_cdae}, \code{recommend}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y_tilde See Usage.
 #' @param W A vector; indexed elementwise.
@@ -109,7 +105,6 @@ encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
 #'
 #' A step of the cdaeRC_native implementation. Called by \code{fit_cdae}, \code{recommend}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @param Wp A vector; indexed elementwise.
@@ -136,7 +131,6 @@ decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
 #' \code{.plcbsc_synthetic_control}, \code{.tlroad_score_spans_eic}, \code{fit_cdae} and
 #' 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y_hat Coerced to numeric by the body, with \code{as.numeric}.
@@ -170,7 +164,6 @@ loss <- function(y, y_hat, kind = "square") {
 #'
 #' A step of the cdaeRC_native implementation. Called by \code{morie_cdaeRC}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pos A vector; indexed elementwise.
 #' @param n_users Coerced to integer by the body, with \code{as.integer}.
@@ -281,7 +274,6 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 #'
 #' A step of the cdaeRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param model A list; the body reads \code{$b}, \code{$b_prime}, \code{$V}, \code{$W},
 #' \code{$W_prime} from it.
@@ -324,7 +316,6 @@ recommend <- function(model, pos, u, n_items, top_k = 5L,
 #'
 #' A step of the cdaeRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pos Passed to \code{fit_cdae}.
 #' @param n_users Passed to \code{fit_cdae}.
@@ -359,7 +350,6 @@ morie_cdaeRC <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 #'
 #' A step of the cdaeRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z A vector; its length is taken and its elements indexed.
 #' @param Wp A matrix; indexed by row and column.
@@ -368,6 +358,8 @@ morie_cdaeRC <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 #' \code{as.integer}.
 #' @param activation Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' morie_cdaeRC_decode(z = c(0.5, -0.5), Wp = matrix(1, 3, 2), bp = c(0, 0, 0))
 #' @export
 morie_cdaeRC_decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
   idx <- if (is.null(items)) seq_along(bp) else as.integer(items)

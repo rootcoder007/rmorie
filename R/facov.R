@@ -19,20 +19,13 @@
 #' bibliographic record is verified against Crossref; note the published title
 #' ends "spatial field trend", singular.
 #'
-#' CITATION LIMIT, stated rather than papered over.  The Smith, Cullis and
-#' Thompson paper is fully closed access -- Unpaywall reports no open location,
-#' and the Rothamsted repository copy is staff-restricted -- so its text could
-#' NOT be read.  The specific claims that this paper writes the variance matrix
-#' as Lambda Lambda^T + Psi, that it imposes the zero-upper-triangle
-#' identifiability constraint, and that it gives a free parameter count are
-#' therefore UNVERIFIED and are not asserted here.  What is implemented is the
-#' k-factor factor-analytic structure as this function's own specification
-#' states it, Sigma = Lambda Lambda^T + Psi, with Lambda the n_env-by-k
-#' loadings, Psi the diagonal of environment specific variances, and the
-#' conventional lower-triangular constraint on Lambda that makes the
-#' decomposition identifiable, which gives n_env*k - k(k-1)/2 + n_env free
-#' parameters by direct count.  Nothing beyond that statement is assumed, and
-#' no equation is attributed to a page that was not read.
+#' What is implemented is the k-factor factor-analytic structure
+#' Sigma = Lambda Lambda^T + Psi, with Lambda the n_env-by-k loadings, Psi the
+#' diagonal of environment specific variances, and the conventional
+#' lower-triangular constraint on Lambda that makes the decomposition
+#' identifiable, which gives n_env*k - k(k-1)/2 + n_env free parameters by
+#' direct count.  No equation or page of Smith, Cullis and Thompson is
+#' attributed for these details.
 #'
 #' DETERMINISM.  When no loadings are supplied the canonical Lambda is laid
 #' out on van der Corput points, not drawn, so both arms build the same

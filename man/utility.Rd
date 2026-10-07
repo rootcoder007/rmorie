@@ -17,3 +17,6 @@ Numeric.
 \description{
 Utility = efficacy per person-day in quarantine (eq. 4)
 }
+\examples{
+utility(efficacy = 0.9, days_in_quarantine = 14)
+}

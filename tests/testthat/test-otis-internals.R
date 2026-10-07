@@ -100,17 +100,11 @@ test_that(".otis_d_simple returns a function that runs on d-shaped data", {
   expect_type(out, "list")
 })
 
-test_that(".otis_causal_available returns logical", {
-  expect_type(rmorie:::.otis_causal_available(), "logical")
-})
-
-test_that(".otis_not_yet_ported returns a stub rich-result + warning", {
-  # Contract: it does NOT throw; it returns a rich-result list with
-  # status="stub" + a warning to surface in console output.
-  out <- suppressWarnings(
-    rmorie:::.otis_not_yet_ported("fake_fn", "no impl"))
-  expect_type(out, "list")
+test_that(".otis_missing_columns names what is missing, without throwing", {
+  out <- rmorie:::.otis_missing_columns("fake_fn", data.frame(a = 1), c("a", "b", "c"))
   expect_s3_class(out, "morie_otis_analysis_result")
+  expect_identical(out$summary_lines$missing, "b, c")
+  expect_identical(out$warnings, "fake_fn: missing required columns: b, c")
 })
 
 # ========================================================== otis.R

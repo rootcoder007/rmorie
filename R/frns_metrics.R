@@ -46,7 +46,6 @@ NULL
 #'
 #' A step of the frns_metrics implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ... Passed through.
 #' @return One of two values, depending on the branch taken.
@@ -71,7 +70,6 @@ NULL
 #'
 #' A step of the frns_metrics implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param outcome A vector; indexed elementwise.
 #' @param group Passed to \code{unique}.
@@ -94,7 +92,6 @@ NULL
 #'
 #' A step of the frns_metrics implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with
 #' \code{as.character}.
@@ -129,7 +126,6 @@ NULL
 #'
 #' A step of the frns_metrics implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y_true A vector; indexed elementwise.
 #' @param y_pred A vector; indexed elementwise.
@@ -184,7 +180,6 @@ NULL
 #'
 #' A step of the frns_metrics implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values A vector; indexed elementwise.
 #' @return The value of \code{[}.
@@ -228,7 +223,6 @@ NULL
 #' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
 #' 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to vector by the body, with \code{as.vector}.
 #' @param name Passed to \code{sprintf}.
@@ -254,7 +248,6 @@ NULL
 #' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
 #' 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ... Passed through.
 #' @return The value of \code{for}.
@@ -278,7 +271,6 @@ NULL
 #' \code{.morie_fairness_favorable_rates}, \code{.morie_fairness_rates_from_labels},
 #' \code{morie_fairness_gini} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param arr Passed to \code{unique}.
 #' @return The value of \code{unique}.
@@ -294,7 +286,6 @@ NULL
 #' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity},
 #' \code{morie_fairness_disparate_impact}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param outcome A vector; indexed elementwise.
 #' @param group Passed to \code{.morie_fairness_ordered_unique}.
@@ -322,7 +313,6 @@ NULL
 #' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
 #' 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with
 #' \code{as.character}.
@@ -355,7 +345,6 @@ NULL
 #' A step of the frns_metrics implementation. Called by
 #' \code{morie_fairness_average_odds_difference}, \code{morie_fairness_equalized_odds}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y_true A vector; indexed elementwise.
 #' @param y_pred A vector; indexed elementwise.

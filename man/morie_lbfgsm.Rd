@@ -60,7 +60,6 @@ iteration limit),
 \description{
 A step of the lbfgsm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \section{Conditioning, and what the tolerance means}{
 

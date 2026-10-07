@@ -19,5 +19,7 @@ The value of \code{z}, as built in the body.
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_mm_fit}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+motfsr_normalise_windows(z = c(0.6, 0.6, 0.1, 0.9, 0.2), w = 2)
 }

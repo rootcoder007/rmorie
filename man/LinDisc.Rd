@@ -24,8 +24,6 @@ classes whose regions are not convex, however many features are
 added.
 }
 \examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-S <- c("a", "b", "c")
-LinDisc(S, M)
+LinDisc(x = c(1, 2), weights = rbind(c(1, 0), c(0, 1), c(-1, 1)), w0 = c(0, 0, 0.5))
 }
 \keyword{internal}

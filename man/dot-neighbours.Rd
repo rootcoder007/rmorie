@@ -17,5 +17,4 @@ The value of \code{adj}, as built in the body.
 \description{
 A step of the toptor_native implementation. Called by \code{topological_torsions}.
 See the file header for the source the module follows.
-source it follows.
 }

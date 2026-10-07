@@ -23,7 +23,6 @@ Nothing; this branch always raises.
 A step of the trmRew_native implementation. Called by \code{.trmRew_interreduce},
 \code{morie_trmRew_complete}, \code{morie_trmRew_decides} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- morie_unifAlg_var("x")

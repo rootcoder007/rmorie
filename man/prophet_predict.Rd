@@ -29,3 +29,11 @@ Numeric vector of forecasts.
 \description{
 Forecast at new times, reusing the fitted coefficients
 }
+\examples{
+set.seed(20)
+t <- 1:60
+y <- 0.1 * t + sin(2 * pi * t / 7) + rnorm(60, sd = 0.1)
+seas <- list(list(name = "weekly", period = 7, order = 2))
+fit <- morie_prphet_fit(t, y, seasonalities = seas)
+prophet_predict(fit, t_new = 61:63, seasonalities = seas)
+}

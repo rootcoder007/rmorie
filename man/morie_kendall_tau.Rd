@@ -4,12 +4,15 @@
 \alias{morie_kendall_tau}
 \title{Kendall's tau-b}
 \usage{
-morie_kendall_tau(x, y)
+morie_kendall_tau(x, y, exact = NULL)
 }
 \arguments{
 \item{x}{Numeric vector.}
 
 \item{y}{Numeric vector.}
+
+\item{exact}{Exact p-value? \code{NULL} (default): exact below 50 pairs without ties, as
+\code{\link[stats:cor.test]{stats::cor.test()}}.}
 }
 \value{
 Named list: \code{tau}, \code{p_value}.

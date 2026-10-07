@@ -34,6 +34,12 @@ read by bilinear interpolation, which is what makes the learned
 offsets differentiable.  With zero offsets and equal weights the
 output is exactly the feature at the reference point.
 }
+\examples{
+x <- outer(1:16, 1:16, function(i, j) sin(i / 3) + cos(j / 4))
+q <- rbind(c(0.25, 0.25), c(0.75, 0.5))
+d <- Defdtr(x, q, K = 4)
+d$out
+}
 \references{
 Zhu et al. (2021), Deformable DETR, ICLR 2021.
 }

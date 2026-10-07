@@ -26,6 +26,10 @@
 #'   Venkitasubramaniam, M. (2007). l-diversity: privacy beyond
 #'   k-anonymity. ACM Transactions on Knowledge Discovery from Data
 #'   1(1), article 3, Definitions 4.1 and 4.2.
+#' @examples
+#' qi <- cbind(age = c(30, 30, 30, 40, 40, 40), zip = c(1, 1, 1, 2, 2, 2))
+#' s <- c("flu", "cold", "flu", "cancer", "flu", "cold")
+#' Dpld(seq_len(6), qi, s, l = 2)[c("distinct_l", "entropy_l", "satisfies_distinct")]
 #' @export
 Dpld <- function(X, quasi_ids, sensitive, l, c = 1) {
   n <- length(.s03vec(X))

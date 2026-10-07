@@ -17,5 +17,4 @@ The value of \code{x}, as built in the body.
 \description{
 A step of the fairness_gan implementation. Called by \code{morie_fairness_spatial_gan}.
 See the file header for the source the module follows.
-source it follows.
 }

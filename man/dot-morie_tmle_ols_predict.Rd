@@ -19,5 +19,4 @@ The value of \code{as.vector}.
 \description{
 A step of the tmle_native implementation. Called by \code{morie_tmle_ate}.
 See the file header for the source the module follows.
-source it follows.
 }

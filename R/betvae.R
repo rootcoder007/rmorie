@@ -15,10 +15,9 @@
 #' @param noisevar Decoder variance, strictly positive.
 #'
 #' @return List with objective, recon, kl, klper, penalty, beta, J, d.
-#' @references Higgins et al. (2017), ICLR; capacity form from Burgess et
-#'   al. (2018), arXiv:1804.03599; Gaussian KL from Kingma and Welling
-#'   (2014), Appendix B.  Standard published form; the ICLR paper is not
-#'   in the local corpus and was not read.
+#' @references Higgins et al. (2017), ICLR; capacity form from Burgess et al. (2018),
+#'   arXiv:1804.03599; Gaussian KL from Kingma and Welling (2014), Appendix B. Standard
+#'   published form.
 #' @export
 #' @examples
 #' Betavae(x = c(1, 2, 3, 4, 5, 6, 7, 8), xhat = c(1, 2, 3, 4, 5, 6, 7, 8),

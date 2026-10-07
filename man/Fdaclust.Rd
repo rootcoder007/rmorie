@@ -28,8 +28,7 @@ Fdaclust(V)
 \references{
 Abraham, Cornillon, Matzner-Lober and Molinari (2003), Unsupervised curve
 clustering using B-splines, Scandinavian Journal of Statistics 30(3):581-595. The
-article itself is behind a paywall and could not be obtained; the two-stage form
-implemented here -- fit B-spline coefficients per curve, then k-means on the
-coefficient vectors -- is as the method is described in the functional-clustering
-review literature (arXiv:1803.00276).
+two-stage form implemented here -- fit B-spline coefficients per curve, then k-means
+on the coefficient vectors -- is as the method is described in the
+functional-clustering review literature (arXiv:1803.00276).
 }

@@ -14,3 +14,8 @@ open_record(sealed, dek)
 \description{
 Open a sealed record
 }
+\examples{
+dek <- as.raw(1:32); nonce <- as.raw(1:12)
+sealed <- seal_record(charToRaw("visit 2026-10-05"), dek, nonce)
+rawToChar(open_record(sealed, dek))
+}

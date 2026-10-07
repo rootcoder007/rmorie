@@ -15,7 +15,6 @@ A list with \code{stage}, \code{trainable}, \code{frozen}, \code{data}, \code{no
 \description{
 A step of the llavx_native implementation. Called by \code{morie_llavx}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 s <- training_stage(1)

@@ -43,6 +43,10 @@
 #'   Venkitasubramaniam, M. (2007). l-diversity: privacy beyond
 #'   k-anonymity. ACM Transactions on Knowledge Discovery from Data,
 #'   1(1), article 3.
+#' @examples
+#' qi <- cbind(age = c(30, 30, 30, 40, 40, 40), zip = c(1, 1, 1, 2, 2, 2))
+#' s <- c("flu", "cold", "flu", "cancer", "flu", "cold")
+#' morie_ldiff(X = seq_len(6), quasi_ids = qi, sensitive = s, l = 2)[c("distinct_l", "satisfies_distinct")]
 #' @export
 morie_ldiff <- function(X, quasi_ids, sensitive, l, c = 1) {
   n <- length(as.vector(X))

@@ -20,3 +20,8 @@ hkdf(ikm, salt = NULL, info = raw(0), length = 32L, skip_extract = FALSE)
 \description{
 HKDF: extract-then-expand, or expand-only on uniform input
 }
+\examples{
+# RFC 5869 test case 1 OKM: 3cb25f25faacd57a90434f64d0362f2a...
+okm <- hkdf(as.raw(rep(0x0b, 22)), salt = as.raw(0:12), info = as.raw(0xf0:0xf9), length = 42L)
+okm$okm_hex
+}

@@ -32,5 +32,4 @@ A list with \code{best}, \code{best_at}.
 \description{
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_gotoh_score_vectors}.
 See the file header for the source the module follows.
-source it follows.
 }

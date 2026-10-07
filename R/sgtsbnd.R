@@ -20,6 +20,9 @@
 #'   (2011). Asymptotic analysis of the stochastic block model for
 #'   modular networks and its algorithmic applications. Physical Review
 #'   E 84, 066106. \doi{10.1103/PhysRevE.84.066106}; equation (44).
+#' @examples
+#' Sgtsbnd(a = 5, b = 1)$detectable    # (a - b)^2 = 16 > k (a + b) = 12
+#' Sgtsbnd(a = 3, b = 2)$detectable
 #' @export
 Sgtsbnd <- function(a, b, k = 2) {
   a <- as.numeric(a)

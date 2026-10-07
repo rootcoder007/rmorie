@@ -19,7 +19,6 @@ A numeric value.
 \description{
 A step of the pate_native implementation. Called by \code{moments_accountant}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 theorem3_moment(q = 0.5, gamma = 0.5, l = c(1, 2, 3, 4, 5, 6, 7, 8))

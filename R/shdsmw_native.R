@@ -23,7 +23,6 @@
 #'
 #' A step of the shdsmw_native implementation. Called by \code{.shdsmw_wls}, \code{shrinkage_msm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return A vector, from \code{as.numeric}.
@@ -38,7 +37,6 @@
 #'
 #' A step of the shdsmw_native implementation. Called by \code{shrinkage_msm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param obj Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param allow_none A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -58,7 +56,6 @@
 #'
 #' A step of the shdsmw_native implementation. Called by \code{shrinkage_msm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y A matrix; passed to \code{crossprod}.

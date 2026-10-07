@@ -38,7 +38,6 @@ The value of \code{structure}.
 \description{
 A step of the bats_native implementation. Called by \code{morie_bats}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 BatsSpec()

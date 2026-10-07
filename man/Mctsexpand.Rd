@@ -20,12 +20,11 @@ vector itself.}
 list: estimate (the value v), value, p, n, w, q, state, method.
 }
 \description{
-Schrittwieser et al. (2020), arXiv:1911.08265 (FETCHED), appendix B
-("Expansion"), and Silver et al. (2017), Nature 550, 354-359: when a
-simulation reaches a state not yet in the tree the network is
-evaluated once, (p, v) = f_theta(s), each edge gets P(s,a) = p_a, and
-N = W = Q = 0.  Illegal moves are masked and the remaining priors
-renormalised, since the policy head is over the whole action space.
+Schrittwieser et al. (2020), arXiv:1911.08265, appendix B ("Expansion"), and Silver
+et al. (2017), Nature 550, 354-359: when a simulation reaches a state not yet in the
+tree the network is evaluated once, (p, v) = f_theta(s), each edge gets P(s,a) = p_a,
+and N = W = Q = 0. Illegal moves are masked and the remaining priors renormalised,
+since the policy head is over the whole action space.
 }
 \examples{
 Mctsexpand(0, c(0.2, 0.5, 0.3))$p

@@ -21,7 +21,6 @@
 #'
 #' A step of the slowdp_native implementation. Called by \code{stick_breaking}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
@@ -37,7 +36,6 @@
 #'
 #' A step of the slowdp_native implementation. Called by \code{truncated_dp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K Coerced to integer by the body, with \code{as.integer}.
@@ -78,7 +76,6 @@ stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
 #' A step of the slowdp_native implementation. Called by \code{decay_diagnostics},
 #' \code{sticks_for_tolerance}, \code{truncated_dp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K Coerced to integer by the body, with \code{as.integer}.
@@ -103,7 +100,6 @@ truncation_error <- function(alpha, K) {
 #'
 #' A step of the slowdp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
@@ -131,7 +127,6 @@ sticks_for_tolerance <- function(alpha, tol = 1e-3) {
 #'
 #' A step of the slowdp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Passed to \code{truncation_error}.
@@ -167,7 +162,6 @@ decay_diagnostics <- function(weights, alpha) {
 #'
 #' A step of the slowdp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K Coerced to integer by the body, with \code{as.integer}.
@@ -215,7 +209,6 @@ truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
 #'
 #' A step of the slowdp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

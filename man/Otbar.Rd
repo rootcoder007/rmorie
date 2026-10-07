@@ -34,6 +34,12 @@ Formula: \eqn{rgmin_nu sum_k w_k OT_eps(mu_k, nu)}, solved by
 \eqn{v_k = mu_k/(K_k' u_k)} -- Benamou et al. (2015) Section 3.2;
 Peyre and Cuturi (2019) eq. (9.11), (9.15)
 }
+\examples{
+x <- 1:5
+C <- outer(x, x, function(a, b) (a - b)^2)
+A <- cbind(c(1, 0, 0, 0, 0), c(0, 0, 0, 0, 1))
+round(Otbar(A, list(C, C), weights = c(0.5, 0.5), epsilon = 0.5)$bary, 3)  # mass moves to the middle
+}
 \references{
 Benamou, J.-D. et al. (2015). SIAM Journal on Scientific
 Computing 37(2):A1111-A1138. \doi{10.1137/141000439}. Cuturi, M. and

@@ -10,7 +10,6 @@
 #' A step of the edgrn_native implementation. Called by \code{.edgrn_betainc},
 #' \code{.edgrn_chi2_sf}, \code{.edgrn_nb_logpmf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{lgamma}.
 #' @return The value of \code{lgamma}.
@@ -26,7 +25,6 @@
 #' A step of the edgrn_native implementation. Called by \code{edgrn_moderate_dispersion},
 #' \code{edgrn_tmm_factor}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -41,7 +39,6 @@
 #'
 #' A step of the edgrn_native implementation. Called by \code{edgrn_exact_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; combined arithmetically in the body.
 #' @param mu Numeric; passed to \code{max}.
@@ -61,7 +58,6 @@
 #'
 #' A step of the edgrn_native implementation. Called by \code{edgrn_ql_f_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -109,7 +105,6 @@
 #'
 #' A step of the edgrn_native implementation. Called by \code{edgrn_ql_f_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param df Numeric; combined arithmetically in the body.
@@ -159,7 +154,6 @@
 #'
 #' A step of the edgrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dispersion Coerced to numeric by the body, with \code{as.numeric}.
@@ -185,7 +179,6 @@ edgrn_nb_variance <- function(mu, dispersion) {
 #'
 #' A step of the edgrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts_sample Passed to \code{.edgrn_vec}.
 #' @param counts_reference Passed to \code{.edgrn_vec}.
@@ -265,7 +258,6 @@ edgrn_tmm_factor <- function(counts_sample, counts_reference,
 #'
 #' A step of the edgrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param library_size Coerced to numeric by the body, with \code{as.numeric}.
 #' @param factor Coerced to numeric by the body, with \code{as.numeric}.
@@ -290,7 +282,6 @@ edgrn_effective_library_size <- function(library_size, factor) {
 #'
 #' A step of the edgrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gene_dispersions Passed to \code{.edgrn_vec}.
 #' @param common Optional; may be \code{NULL}. Coerced to numeric by the body, with
@@ -345,7 +336,6 @@ edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
 #'
 #' A step of the edgrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param count_a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param count_b Coerced to numeric by the body, with \code{as.numeric}.
@@ -391,7 +381,6 @@ edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
 #'
 #' A step of the edgrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lrt Coerced to numeric by the body, with \code{as.numeric}.
 #' @param q Coerced to integer by the body, with \code{as.integer}.

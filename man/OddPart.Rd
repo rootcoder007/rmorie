@@ -20,7 +20,7 @@ See the file header for the source the module follows.
 the source it follows.
 }
 \examples{
-S <- c("a", "b", "c")
-OddPart(S)
+x <- c(2, -1, 4, 0, 1)
+OddPart(x)
 }
 \keyword{internal}

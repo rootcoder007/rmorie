@@ -16,7 +16,6 @@ The value of \code{ifelse}.
 A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle},
 \code{.tmlphd_lasso_logit} and 23 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)

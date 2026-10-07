@@ -22,7 +22,6 @@
 #' A step of the gru4r_native implementation. Called by \code{bpr_loss}, \code{gru_step},
 #' \code{top1_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -211,7 +210,6 @@ morie_gru4r <- session_parallel_batches
 #' A step of the gru4r_native implementation. Called by \code{morie_gru4r_bpr},
 #' \code{morie_gru4r_gru}, \code{morie_gru4r_top1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
@@ -234,6 +232,8 @@ morie_gru4r <- session_parallel_batches
 #' @param r_target Score of the target item.
 #' @param r_negatives Numeric vector of negative-item scores.
 #' @return Scalar loss.
+#' @examples
+#' morie_gru4r_bpr(r_target = 2, r_negatives = c(0.5, 1, -1))
 #' @export
 morie_gru4r_bpr <- function(r_target, r_negatives) {
   neg <- as.numeric(r_negatives)
@@ -255,6 +255,12 @@ morie_gru4r_bpr <- function(r_target, r_negatives) {
 #' @param Wr,Ur Reset-gate linear maps.
 #' @param Wh,Uh Candidate-h linear maps.
 #' @return New hidden state.
+#' @examples
+#' set.seed(5)
+#' d <- 3; nh <- 2
+#' mk <- function(r, c) matrix(rnorm(r * c, sd = 0.5), r, c)
+#' morie_gru4r_gru(x = rnorm(d), h = rep(0, nh), Wz = mk(nh, d), Uz = mk(nh, nh),
+#'                 Wr = mk(nh, d), Ur = mk(nh, nh), Wh = mk(nh, d), Uh = mk(nh, nh))
 #' @export
 morie_gru4r_gru <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
   x <- as.numeric(x)
@@ -282,6 +288,8 @@ morie_gru4r_gru <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
 #' @param target Target item id.
 #' @param kk Cutoff.
 #' @return Scalar.
+#' @examples
+#' morie_gru4r_mrr(c(5L, 2L, 9L, 1L), target = 9L, kk = 3)   # 1/3
 #' @export
 morie_gru4r_mrr <- function(ranked, target, kk = 20) {
   top <- as.integer(ranked)[seq_len(min(as.integer(kk),
@@ -299,6 +307,9 @@ morie_gru4r_mrr <- function(ranked, target, kk = 20) {
 #' @param target Target item id.
 #' @param kk Cutoff.
 #' @return 0 or 1.
+#' @examples
+#' morie_gru4r_recall(c(5L, 2L, 9L, 1L), target = 9L, kk = 3)
+#' morie_gru4r_recall(c(5L, 2L, 9L, 1L), target = 1L, kk = 3)
 #' @export
 morie_gru4r_recall <- function(ranked, target, kk = 20) {
   top <- as.integer(ranked)[seq_len(min(as.integer(kk),
@@ -318,6 +329,8 @@ morie_gru4r_recall <- function(ranked, target, kk = 20) {
 #' @param r_negatives Numeric vector of negative-item scores.
 #' @param regularize Include the sigma(r_j^2) regulariser.
 #' @return Scalar loss.
+#' @examples
+#' morie_gru4r_top1(r_target = 2, r_negatives = c(0.5, 1, -1))
 #' @export
 morie_gru4r_top1 <- function(r_target, r_negatives, regularize = TRUE) {
   neg <- as.numeric(r_negatives)

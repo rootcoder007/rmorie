@@ -744,6 +744,7 @@ standardized_coefficients <- function(X, y) {
 #' r$estimate
 #' @export
 coefficient_of_variation <- function(x) {
+  .morie_arg(x, "n")
   x <- .arr(x)
   m <- mean(x)
   s <- sd(x)
@@ -797,6 +798,7 @@ variance_ratio <- function(x, y, confidence = 0.95) {
 #' d_to_r(0.5, n1 = 30, n2 = 30)
 #' @export
 d_to_r <- function(d, n1 = NULL, n2 = NULL) {
+  .morie_arg(d, "n")
   a <- if (!is.null(n1) && !is.null(n2)) (n1 + n2)^2 / (n1 * n2) else 4
   d / sqrt(d^2 + a)
 }

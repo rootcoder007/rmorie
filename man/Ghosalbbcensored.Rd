@@ -28,6 +28,10 @@ no Bayesian apology.
 \details{
 Formula: S(t) = prod over events t_j <= t of (R_j - 1) / R_j.
 }
+\examples{
+times <- c(2, 3, 3, 5, 6, 8, 9, 12); events <- c(1, 1, 0, 1, 0, 1, 1, 0)
+Ghosalbbcensored(times, events, t_query = 6)[c("estimate", "km_survival")]
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.7.1.

@@ -40,7 +40,6 @@ A list with \code{estimate}, \code{beta}, \code{intercept}, \code{columns},
 \description{
 A step of the tlhal_native implementation. Called by \code{cv_select_lambda}, \code{morie_tlhal}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

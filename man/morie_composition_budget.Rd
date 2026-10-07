@@ -16,3 +16,6 @@ a note.
 \description{
 Basic composition of privacy budgets
 }
+\examples{
+morie_composition_budget(c(0.5, 0.25, 0.25))
+}

@@ -14,7 +14,6 @@
 #'
 #' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @param what Passed to \code{sprintf}.
@@ -42,7 +41,6 @@
 #'
 #' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; indexed by row and column.
 #' @param temp Numeric; combined arithmetically in the body.
@@ -68,7 +66,6 @@
 #'
 #' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nb A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
@@ -83,7 +80,6 @@
 #'
 #' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nb A count; the body uses it as \code{seq_len(...)}.
 #' @param width Numeric; combined arithmetically in the body.
@@ -183,7 +179,6 @@
 #'
 #' A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
@@ -221,7 +216,6 @@
 #'
 #' A step of the alfesf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lddt_logits Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @param pae_logits Optional; may be \code{NULL}. Passed to \code{.alfesf_rows}.
@@ -458,7 +452,6 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
 #'
 #' A step of the alfesf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

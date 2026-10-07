@@ -13,9 +13,13 @@ Msm119(...)
 The list returned by \code{Msm115()}.
 }
 \description{
-The stub generator stamped several extracted page fragments with the same
-function name, so the implementation lives once in \code{Msm115()} and this
-module re-exports it. Calling either path runs the same code.
+The same method as \code{Msm115()}, re-exported under this name; both run the same
+code.
+}
+\examples{
+set.seed(18)
+X <- matrix(rnorm(40), 20, 2); y <- sample(0:2, 20, TRUE)
+Msm119(X, y, beta0 = c(0, 0), beta = matrix(0.3, 2, 2), lam = 1)$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

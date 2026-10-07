@@ -20,7 +20,6 @@ The value of \code{repeat}.
 A step of the helpers_rouss implementation. Called by \code{.rscombosstride},
 \code{Lmsreg}, \code{Ltsreg} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .rscombos(n = 3L, k = 3L)

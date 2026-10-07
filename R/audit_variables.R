@@ -262,10 +262,9 @@ morie_specs_from_df <- function(df) {
 #' @return The path written.
 #' @examples
 #' df <- data.frame(age = c(21, 34, NA), city = c("a", "b", "b"))
-#' res <- try(morie_write_audit_markdown(
-#'   tempfile(fileext = ".md"),
-#'   morie_specs_from_df(df)
-#' ))
+#' audit <- morie_audit_otis_variables(morie_specs_from_df(df))
+#' path <- morie_write_audit_markdown(tempfile(fileext = ".md"), audit)
+#' readLines(path)[1]
 #' @export
 morie_write_audit_markdown <- function(out_path, audit_result) {
   if (!inherits(audit_result, "morie_audit_result") &&

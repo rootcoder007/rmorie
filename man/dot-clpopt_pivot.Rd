@@ -19,5 +19,4 @@ The value of \code{T}, as built in the body.
 \description{
 A step of the clpopt_native implementation. Called by \code{.clpopt_run}, \code{simplex}.
 See the file header for the source the module follows.
-source it follows.
 }

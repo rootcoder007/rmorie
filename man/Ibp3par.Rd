@@ -26,10 +26,9 @@ expected feature count is K_n = alpha sum_i Gamma(1+c) Gamma(i-1+c+sigma)
 / (Gamma(i+c) Gamma(c+sigma)), which grows like O(n^sigma) for sigma in
 (0, 1) -- the power law of the title -- and reduces to the logarithmic
 O(alpha log n) at sigma = 0, c = 1.  The dish probability for an
-already-chosen dish is (m_k - sigma)/(n - 1 + c).  The proceedings were
-not retrievable here; both are quoted in their standard published form.
-Both the power-law count and the sigma = 0 reduction are computed so
-the claim can be checked rather than trusted.
+already-chosen dish is (m_k - sigma)/(n - 1 + c).  Both the power-law
+count and the sigma = 0 reduction are computed so the claim can be
+checked.
 }
 \examples{
 Ibp3par(20, 0.5, 1, 1)$K_n

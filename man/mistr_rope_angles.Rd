@@ -17,5 +17,7 @@ A numeric value.
 \description{
 A step of the mistr_native implementation. Called by \code{mistr_apply_rope}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mistr_rope_angles(d = 8)
 }

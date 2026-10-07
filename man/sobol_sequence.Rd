@@ -22,6 +22,9 @@ The first \code{n} points of the Sobol sequence in the requested
 dimension. The design is shared with the Python arm down to the
 last bit and is the design Wilkinson (2014) Sec. 2.2 uses.
 }
+\examples{
+sobol_sequence(4, dim = 2)
+}
 \references{
 Sobol, I. M. (1967). Bratley, P. & Fox, B. L. (1988).
 }

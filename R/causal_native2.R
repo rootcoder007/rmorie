@@ -139,8 +139,10 @@ morie_g_formula <- function(y, a, l) {
 #' @references Granger CWJ (1969). *Econometrica* 37(3), 424-438.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_granger_test(V, V)
+#' # x drives y one step later; a term no lag explains keeps the fit inexact
+#' x <- sin(1:60)
+#' y <- c(0, 0.8 * x[-60]) + 0.3 * cos(3 * (1:60))
+#' morie_granger_test(x, y)
 morie_granger_test <- function(x, y, p = 1L) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -164,7 +166,12 @@ morie_granger_test <- function(x, y, p = 1L) {
   rss <- function(X) sum(stats::lm.fit(X, target)$residuals^2)
   rss_r <- rss(Xr)
   rss_u <- rss(Xu)
-  if (rss_u <= 0) stop("unrestricted model fits exactly.", call. = FALSE)
+  # an exact fit leaves a residual sum at round-off, not at 0: a constant or perfectly
+  # predictable response is caught against its own total sum of squares
+  tss <- sum((target - mean(target))^2)
+  if (tss == 0 || rss_u <= 1e-12 * tss) {
+    stop("unrestricted model fits exactly (a constant or perfectly predictable series).", call. = FALSE)
+  }
   f <- ((rss_r - rss_u) / p) / (rss_u / dof2)
   list(
     statistic = f, p_value = stats::pf(f, p, dof2, lower.tail = FALSE),
@@ -186,8 +193,9 @@ morie_granger_test <- function(x, y, p = 1L) {
 #'   Letters* 103(23), 238701.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_transfer_entropy_gaussian(V, V)
+#' x <- sin(1:60)
+#' y <- c(0, 0.8 * x[-60]) + 0.3 * cos(3 * (1:60))
+#' morie_transfer_entropy_gaussian(x, y)
 morie_transfer_entropy_gaussian <- function(x, y, lag = 1L) {
   g <- morie_granger_test(x, y, p = lag)
   n <- length(y)

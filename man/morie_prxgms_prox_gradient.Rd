@@ -48,6 +48,5 @@ A list with \code{estimate}, \code{x}, \code{fun}, \code{objective},
 \description{
 A step of the prxgms_native implementation. Called by \code{morie_prxgms_lasso_fista}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

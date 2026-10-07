@@ -42,7 +42,6 @@ A list with \code{q1}, \code{q0}, \code{qa}, \code{info}.
 A step of the tmlcic_native implementation. Called by
 \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

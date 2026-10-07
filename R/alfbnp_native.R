@@ -18,7 +18,6 @@
 #' A step of the alfbnp_native implementation. Called by \code{.alfbnp_clean_list},
 #' \code{morie_alfbnp_af3_sample}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @param what Passed to \code{sprintf}.
@@ -44,7 +43,6 @@
 #'
 #' A step of the alfbnp_native implementation. Called by \code{morie_alfbnp_af3_sample}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T A count; the body uses it as \code{seq_len(...)}.
 #' @param sigma_data Numeric; combined arithmetically in the body.
@@ -69,7 +67,6 @@
 #'
 #' A step of the alfbnp_native implementation. Called by \code{morie_alfbnp_af3_sample}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @return The value of \code{X}, as built in the body.
@@ -155,7 +152,6 @@
 #'
 #' A step of the alfbnp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_atoms Optional; may be \code{NULL}. Coerced to integer by the body, with
 #' \code{as.integer}.
@@ -362,7 +358,6 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
 #'
 #' A step of the alfbnp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

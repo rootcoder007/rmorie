@@ -16,7 +16,6 @@
 #'
 #' A step of the funCA_native implementation. Called by \code{morie_funCA_functional_cca}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_t A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{w}, as built in the body.
@@ -34,7 +33,6 @@
 #'
 #' A step of the funCA_native implementation. Called by \code{morie_funCA_functional_cca}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param C Numeric; combined arithmetically in the body.
 #' @param w A vector; its length is taken.
@@ -64,7 +62,6 @@
 #'
 #' A step of the funCA_native implementation. Called by \code{morie_funCA_functional_cca}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M Passed to \code{eigen}.
 #' @return The value of \code{%*%}.
@@ -85,7 +82,6 @@
 #'
 #' A step of the funCA_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y A matrix; passed to \code{as.matrix}.
@@ -219,7 +215,6 @@ morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
 #'
 #' A step of the funCA_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

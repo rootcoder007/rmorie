@@ -131,6 +131,7 @@ swlagf <- function(W, rho) ErrorOperator(W, rho)
 #' @rdname swdist
 #' @export
 swpower <- function(W, p = 2) {
+  .morie_arg(W, "m")
   A <- unname(as.matrix(W)) * 1
   if (p < 0) stop("p must be non-negative")
   P <- diag(nrow(A))

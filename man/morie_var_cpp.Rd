@@ -17,7 +17,6 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{morie_var}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(2, 4, 4, 4, 5, 5, 7, 9)

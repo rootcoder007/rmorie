@@ -23,7 +23,6 @@ The value of \code{z}, as built in the body.
 \description{
 A step of the cdaeRC_native implementation. Called by \code{fit_cdae}, \code{recommend}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 encode(y_tilde = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8),

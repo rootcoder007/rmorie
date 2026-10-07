@@ -17,5 +17,4 @@ A list with \code{B}, \code{beta}, \code{n_nonzero}, \code{n_zero}.
 \description{
 A step of the sdne_native implementation. Called by \code{.sdne_second_order_loss}.
 See the file header for the source the module follows.
-source it follows.
 }

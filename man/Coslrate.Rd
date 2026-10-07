@@ -21,14 +21,13 @@ Coslrate(t, T, lr_0 = 0.2, kind = "cosine", floor = 0)
 list: estimate, lr, frac, kind, method.
 }
 \description{
-Silver et al. (2018), arXiv:1712.01815 (FETCHED): "The learning rate
-was set to 0.2 for each game, and was dropped three times (to 0.02,
-0.002 and 0.0002 respectively) during the course of training."
-AlphaZero therefore used a step schedule, available as kind = "step".
-The module's own formula line asks for the cosine schedule of
-Loshchilov and Hutter (2017), arXiv:1608.03983, lr_t = lr_0 * 0.5 (1 +
-cos(pi t / T)), which is kind = "cosine" and the default.  The cosine
-curve is not AlphaZero's own schedule and is not presented as such.
+Silver et al. (2018), arXiv:1712.01815: "The learning rate was set to 0.2 for each
+game, and was dropped three times (to 0.02, 0.002 and 0.0002 respectively) during the
+course of training." AlphaZero therefore used a step schedule, available as kind =
+"step". The module's own formula line asks for the cosine schedule of Loshchilov and
+Hutter (2017), arXiv:1608.03983, lr_t = lr_0 * 0.5 (1 + cos(pi t / T)), which is kind
+= "cosine" and the default. The cosine curve is not AlphaZero's own schedule and is
+not presented as such.
 }
 \examples{
 Coslrate(50, 100)$lr

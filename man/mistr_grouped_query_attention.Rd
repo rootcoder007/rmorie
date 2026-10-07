@@ -38,5 +38,9 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(11)
+Q <- matrix(rnorm(16), 4, 4); K <- matrix(rnorm(8), 4, 2); V <- matrix(rnorm(8), 4, 2)
+dim(mistr_grouped_query_attention(Q, K, V, n_heads = 2, n_kv_heads = 1))
 }

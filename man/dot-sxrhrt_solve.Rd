@@ -17,5 +17,4 @@ The value of \code{x}, as built in the body.
 \description{
 A step of the sxrhrt_native implementation. Called by \code{.sxrhrt_reml}.
 See the file header for the source the module follows.
-source it follows.
 }

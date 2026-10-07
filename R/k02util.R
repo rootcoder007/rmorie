@@ -7,7 +7,6 @@
 #' A step of the k02util implementation. Called by \code{k02dl}, \code{mafix},
 #' \code{mai2} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param v Numeric; combined arithmetically in the body.
@@ -32,7 +31,6 @@ k02fe <- function(y, v) {
 #' A step of the k02util implementation. Called by \code{mabay}, \code{mac3},
 #' \code{macum} and 7 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; combined arithmetically in the body.
 #' @param v Numeric; combined arithmetically in the body.
@@ -58,7 +56,6 @@ k02dl <- function(y, v) {
 #'
 #' A step of the k02util implementation. Called by \code{matr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; combined arithmetically in the body.
 #' @param v Numeric; combined arithmetically in the body.
@@ -86,36 +83,31 @@ k02mm <- function(y, v, tau0) {
 #' A step of the k02util implementation. Called by \code{mabay}, \code{macum},
 #' \code{mafix} and 9 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p See Usage.
 #' @return The value of \code{stats::qnorm}.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' k02z(V)
+#' k02z(c(0.025, 0.5, 0.975))
 #' @keywords internal
 k02z <- function(p) stats::qnorm(p)
 #' k02tq
 #'
 #' A step of the k02util implementation. Called by \code{mahks}, \code{mahsj}, \code{matau2pi}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p See Usage.
 #' @param df See Usage.
 #' @return The value of \code{stats::qt}.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' k02tq(V, V)
+#' k02tq(p = c(0.9, 0.975), df = 10)
 #' @keywords internal
 k02tq <- function(p, df) stats::qt(p, df)
 #' k02p2z
 #'
 #' A step of the k02util implementation. Called by \code{mafix}, \code{marndm}, \code{matr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{abs}.
 #' @return A numeric value.
@@ -129,7 +121,6 @@ k02p2z <- function(z) 2 * stats::pnorm(abs(z), lower.tail = FALSE)
 #'
 #' A step of the k02util implementation. Called by \code{mahks}, \code{mahsj}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tv Numeric; passed to \code{abs}.
 #' @param df See Usage.
@@ -145,7 +136,6 @@ k02p2t <- function(tv, df) 2 * stats::pt(abs(tv), df, lower.tail = FALSE)
 #' A step of the k02util implementation. Called by \code{mafix}, \code{mai2},
 #' \code{marndm} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q See Usage.
 #' @param df See Usage.
@@ -163,7 +153,6 @@ k02pchi <- function(q, df) stats::pchisq(q, df, lower.tail = FALSE)
 #'
 #' A step of the k02util implementation. Called by \code{magpa}, \code{matrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo Coerced to numeric by the body, with \code{as.numeric}.
@@ -201,7 +190,6 @@ k02gold <- function(f, lo, hi, iters = 80L) {
 #'
 #' A step of the k02util implementation. Called by \code{magpa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{numeric(...)}.
 #' @return A list with \code{x}, \code{w}.
@@ -255,7 +243,6 @@ k02gh <- function(n) {
 #'
 #' A step of the k02util implementation. Called by \code{louv}, \code{sgtcoml}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @param comm A vector; indexed elementwise.
@@ -283,7 +270,6 @@ k02mod <- function(A, comm) {
 #'
 #' A step of the k02util implementation. Called by \code{smwgrp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.

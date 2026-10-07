@@ -60,6 +60,7 @@ angular_difference <- function(a, b) wrap_angle(as.numeric(a) - as.numeric(b))
 #' is.list(q) || is.numeric(q)
 #' @keywords internal
 morie_tqang <- function(theta, bits = 4) {
+  .morie_arg(theta, "n")
   b <- as.integer(bits)
   if (!(b >= 1L && b <= 30L))
     stop("quantize_angles: bits must lie in 1..30")
@@ -102,6 +103,8 @@ morie_turboquant_angle_quantization <- morie_tqang
 #' @param a See Usage.
 #' @param b See Usage.
 #' @return Numeric scalar.
+#' @examples
+#' morie_tqang_angular_difference(0.1, 2 * pi - 0.1)   # 0.2, not 0.2 - 2 pi
 #' @export
 morie_tqang_angular_difference <- function(a, b) {
   morie_tqang_wrap_angle(as.numeric(a) - as.numeric(b))
@@ -110,6 +113,8 @@ morie_tqang_angular_difference <- function(a, b) {
 # -- restored: morie-only definition kept through the rmorie sync --
 #' One-line rationale mirroring the Python cheatsheet
 #' @return Character.
+#' @examples
+#' morie_tqang_cheatsheet()
 #' @export
 morie_tqang_cheatsheet <- function() {
   paste0("tqang: 2^b equal sectors, delta = 2pi/2^b, codeword ",
@@ -127,6 +132,9 @@ morie_tqang_cheatsheet <- function() {
 #' \code{levels}.
 #' @param theta Numeric vector of angles.
 #' @param bits Bits per symbol (1..30).
+#' @examples
+#' q <- morie_tqang_quantize_angles(c(0.1, 1.2, -2.5, 3), bits = 3L)
+#' q$mse
 #' @export
 #' @aliases morie_tqang_tqang morie_tqang_turboquant_angle_quantization
 morie_tqang_quantize_angles <- function(theta, bits = 4L) {
@@ -165,6 +173,8 @@ morie_tqang_quantize_angles <- function(theta, bits = 4L) {
 #' Wrap an angle to \code{[-pi, pi)}
 #' @param theta Numeric scalar.
 #' @return Numeric scalar in \code{[-pi, pi)}.
+#' @examples
+#' morie_tqang_wrap_angle(3 * pi / 2)   # -pi/2
 #' @export
 morie_tqang_wrap_angle <- function(theta) {
   t <- (as.numeric(theta) + pi) %% .tqang_two_pi

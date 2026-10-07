@@ -30,6 +30,11 @@ is returned alongside for contrast. \code{h} holds one-based labels.
 Formula: W_h = N_h/N, ybar_st = sum_h W_h ybar_h,
 V(ybar_st) = sum_h W_h^2 (1 - f_h) s_h^2 / n_h, f_h = n_h/N_h
 }
+\examples{
+y <- c(10, 12, 11, 30, 32, 31, 29)
+h <- c(1, 1, 1, 2, 2, 2, 2)
+Stratmean(y, h, Nh = c(600, 400))[c("estimate", "se", "unweighted_mean")]
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Section
 5.3, Theorem 5.3: V(ybar_st) = sum W_h^2 S_h^2 (1 - f_h)/n_h, the

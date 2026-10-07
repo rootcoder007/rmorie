@@ -26,6 +26,12 @@ other.  Each \code{ATT(d|d)} is the doubly robust panel moment of
 Sant'Anna and Zhao (2020) comparing the units at dose \code{d}
 against the zero-dose units.
 }
+\examples{
+set.seed(12)
+dose <- c(rep(0, 100), sample(1:3, 200, TRUE))
+y <- 0.5 * dose + rnorm(300)
+Drctf(y, dose)[c("doses", "att")]
+}
 \references{
 Callaway, B., Goodman-Bacon, A. and Sant'Anna, P. H. C.
 (2024). Difference-in-differences with a continuous treatment.

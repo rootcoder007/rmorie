@@ -18,5 +18,9 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+D <- matrix(c(0.1, 0.5, 0.9,
+              0.4, 0.2, 0.8), 2, byrow = TRUE)   # treated x control distances
+morie_matching_nn_select_cpp(D, FALSE, Inf, 1L)
 }

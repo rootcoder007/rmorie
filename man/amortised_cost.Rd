@@ -20,7 +20,6 @@ A list with \code{total_ms}, \code{per_prompt_ms}, \code{naive_ms},
 \description{
 A step of the samseg_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- amortised_cost(encoder_ms = 100, decoder_ms = 5, n_prompts = 50)

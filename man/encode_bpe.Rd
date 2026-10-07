@@ -16,3 +16,7 @@ encode_bpe(text, model, add_prefix = TRUE)
 \description{
 Encode text with a trained BPE model
 }
+\examples{
+bpe <- train_bpe(c("low lower lowest", "new newer newest"), vocab_size = 30)
+encode_bpe("lowest newer", bpe)
+}

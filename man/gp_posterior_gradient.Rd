@@ -38,7 +38,6 @@ A list with \code{grad_mu}, \code{grad_sd}, \code{mu}, \code{sd}.
 \description{
 A step of the bayopt_native implementation. Called by \code{maximise_acquisition}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 gp_posterior_gradient(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), xs = 5L)

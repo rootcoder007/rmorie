@@ -19,7 +19,6 @@ A numeric value.
 \description{
 A step of the strec_native implementation. Called by \code{strec_stamp_scores}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 strec_trilinear(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),

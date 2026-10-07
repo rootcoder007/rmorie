@@ -19,6 +19,8 @@
 #' cross-sectional studies: an empirical comparison of models that directly estimate the
 #' prevalence ratio, BMC Medical Research Methodology 3:21. Open access; the delta-method
 #' standard error for log PR used here is the standard binomial one.
+#' @examples
+#' Prevratio(prev_exposed = 0.3, prev_unexposed = 0.15, n_exposed = 200, n_unexposed = 300)
 #' @export
 Prevratio <- function(prev_exposed, prev_unexposed, n_exposed = NULL, n_unexposed = NULL, alpha = 0.05) {
   pe <- as.numeric(prev_exposed)

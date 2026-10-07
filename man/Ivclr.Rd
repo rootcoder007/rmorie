@@ -24,19 +24,16 @@ list: statistic, p_value, QS, QT, QTS, beta0, n,
 n_instruments, df2, method.
 }
 \description{
-Source FETCHED: the reference implementation \code{CLR} in the CRAN
-package \pkg{ivmodel} (file \code{R/CLR.r}), implementing Moreira,
-M. J. (2003), Econometrica 71, 1027-1048, with the conditional
-p-value integral of Andrews, Moreira and Stock (2007), Journal of
-Econometrics 138, 46-81; Kleibergen, F. (2002), Econometrica 70,
-1781-1803, supplies the score decomposition.  With \code{P_Z} the
-projection on the partialled-out instruments and
-\code{sigmaHat = crossprod(M_Z [Y D]) / (n - k - L)},
-\code{a0 = (beta0, 1)}, \code{b0 = (1, -beta0)}:
-\eqn{QS = ||P_Z [Y D] b0||^2 / (b0' sigmaHat b0)},
-\eqn{QT = ||P_Z [Y D] sigmaHat^-1 a0||^2 / (a0' sigmaHat^-1 a0)},
-\code{QTS} the corresponding normalised cross term, and
-\code{LR = (QS - QT + sqrt((QS+QT)^2 - 4(QS QT - QTS^2)))/2}.
+Source: the reference implementation \code{CLR} in the CRAN package \pkg{ivmodel}
+(file \code{R/CLR.r}), implementing Moreira, M. J. (2003), Econometrica 71,
+1027-1048, with the conditional p-value integral of Andrews, Moreira and Stock
+(2007), Journal of Econometrics 138, 46-81; Kleibergen, F. (2002), Econometrica 70,
+1781-1803, supplies the score decomposition. With \code{P_Z} the projection on the
+partialled-out instruments and \code{sigmaHat = crossprod(M_Z [Y D]) / (n - k - L)},
+\code{a0 = (beta0, 1)}, \code{b0 = (1, -beta0)}: \eqn{QS = ||P_Z [Y D] b0||^2 / (b0'
+sigmaHat b0)}, \eqn{QT = ||P_Z [Y D] sigmaHat^-1 a0||^2 / (a0' sigmaHat^-1 a0)},
+\code{QTS} the corresponding normalised cross term, and \code{LR = (QS - QT +
+sqrt((QS+QT)^2 - 4(QS QT - QTS^2)))/2}.
 }
 \details{
 For \code{L = 1} the conditional p-value is \code{1 - pf(LR, 1, df2)}.

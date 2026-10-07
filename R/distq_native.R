@@ -50,7 +50,6 @@
 #'
 #' A step of the distq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param next_probs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_atoms Passed to \code{!=}.
@@ -399,7 +398,7 @@ value_distribution_iteration <- function(reward_atoms, reward_probs, gamma,
                    shift = shift))
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 categoricalprojection <- categorical_projection
 
 # public names resolved by fn/_lazy_map.json

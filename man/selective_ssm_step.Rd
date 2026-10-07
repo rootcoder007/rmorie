@@ -27,7 +27,6 @@ A list with \code{h}, \code{y}.
 \description{
 A step of the mambss_native implementation. Called by \code{selective_scan}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

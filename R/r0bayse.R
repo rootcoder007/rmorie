@@ -15,6 +15,8 @@
 #' @references Diekmann, O., Heesterbeek, J. A. P. & Metz, J. A. J.
 #'   (1990). Journal of Mathematical Biology 28(4):365-382.
 #'   \doi{10.1007/BF00178324}.
+#' @examples
+#' R0bayse(beta = 0.3, gamma = 0.1)$estimate
 #' @export
 R0bayse <- function(beta = NULL, gamma = NULL, attack_rate = NULL,
                     tol = 1e-8, max_iter = 100) {

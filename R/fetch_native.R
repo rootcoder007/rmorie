@@ -32,9 +32,15 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
   if (is.raw(txt)) txt <- rawToChar(txt)
   stopifnot(is.character(txt), length(txt) == 1L)
   st <- new.env(parent = emptyenv())
-  st$s <- txt
+  # one character per element, split once: substr(txt, i, i) rescans a UTF-8 string from the start,
+  # which made a long document (an a2aj decision) quadratic -- minutes at 100% CPU
+  st$c <- strsplit(enc2utf8(txt), "", fixed = TRUE)[[1L]]
   st$i <- 1L
-  st$n <- nchar(txt)
+  st$n <- length(st$c)
+  st$q <- which(st$c == "\"")  # quote and backslash positions: strings jump between them
+  st$b <- which(st$c == "\\")
+  st$qp <- 1L  # parsing only moves forward: pointers into st$q / st$b
+  st$bp <- 1L
   val <- .mj_value(st)
   .mj_ws(st)
   if (st$i <= st$n) {
@@ -46,9 +52,16 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
 }
 
 #' @noRd
+.mj_at <- function(st) {
+  # the character at the cursor; input that stops mid-value is a parse error, not an NA
+  if (st$i > st$n) stop("JSON parse error: unexpected end", call. = FALSE)
+  st$c[st$i]
+}
+
+#' @noRd
 .mj_ws <- function(st) {
   while (st$i <= st$n &&
-    substr(st$s, st$i, st$i) %in% c(" ", "\t", "\n", "\r")) {
+    st$c[st$i] %in% c(" ", "\t", "\n", "\r")) {
     st$i <- st$i + 1L
   }
 }
@@ -57,7 +70,7 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
 .mj_value <- function(st) {
   .mj_ws(st)
   if (st$i > st$n) stop("JSON parse error: unexpected end", call. = FALSE)
-  ch <- substr(st$s, st$i, st$i)
+  ch <- st$c[st$i]
   if (ch == "{") {
     return(.mj_object(st))
   }
@@ -85,7 +98,7 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
 #' @noRd
 .mj_lit <- function(st, lit) {
   k <- nchar(lit)
-  if (substr(st$s, st$i, st$i + k - 1L) != lit) {
+  if (st$i + k - 1L > st$n || paste(st$c[st$i:(st$i + k - 1L)], collapse = "") != lit) {
     stop("JSON parse error at position ", st$i, call. = FALSE)
   }
   st$i <- st$i + k
@@ -93,62 +106,70 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
 
 #' @noRd
 .mj_string <- function(st) {
-  # st$i sits on the opening quote
-  i <- st$i + 1L
-  out <- character(0)
-  seg_start <- i
-  s <- st$s
+  # st$i sits on the opening quote. Copy whole runs up to the next quote or backslash (found by
+  # forward pointers into positions computed once), so the cost is linear in the document size.
+  cs <- st$c
   n <- st$n
-  while (i <= n) {
-    ch <- substr(s, i, i)
-    if (ch == "\"") {
-      out <- c(out, substr(s, seg_start, i - 1L))
-      st$i <- i + 1L
-      return(paste(out, collapse = ""))
+  i <- st$i + 1L
+  out <- vector("list", 4L)
+  k <- 0L
+  run <- function(a, b) if (b >= a) paste(cs[a:b], collapse = "") else ""
+  repeat {
+    while (st$qp <= length(st$q) && st$q[st$qp] < i) st$qp <- st$qp + 1L
+    while (st$bp <= length(st$b) && st$b[st$bp] < i) st$bp <- st$bp + 1L
+    jq <- st$q[st$qp]
+    jb <- st$b[st$bp]
+    if (is.na(jq)) stop("JSON parse error: unterminated string", call. = FALSE)
+    if (is.na(jb) || jq < jb) {
+      k <- k + 1L
+      out[[k]] <- run(i, jq - 1L)
+      st$i <- jq + 1L
+      return(paste(unlist(out[seq_len(k)], use.names = FALSE), collapse = ""))
     }
-    if (ch == "\\") {
-      out <- c(out, substr(s, seg_start, i - 1L))
-      esc <- substr(s, i + 1L, i + 1L)
-      rep <- switch(esc,
-        "\"" = "\"",
-        "\\" = "\\",
-        "/" = "/",
-        b = "\b",
-        f = "\f",
-        n = "\n",
-        r = "\r",
-        t = "\t",
-        u = NA_character_,
-        stop("JSON parse error: bad escape \\", esc, call. = FALSE)
-      )
-      if (is.na(rep)) {
-        code <- strtoi(substr(s, i + 2L, i + 5L), 16L)
-        if (is.na(code)) {
-          stop("JSON parse error: bad \\u escape", call. = FALSE)
+    k <- k + 1L
+    out[[k]] <- run(i, jb - 1L)
+    esc <- if (jb + 1L <= n) cs[jb + 1L] else ""
+    rep <- switch(esc,
+      "\"" = "\"",
+      "\\" = "\\",
+      "/" = "/",
+      b = "\b",
+      f = "\f",
+      n = "\n",
+      r = "\r",
+      t = "\t",
+      u = NA_character_,
+      stop("JSON parse error: bad escape \\", esc, call. = FALSE)
+    )
+    i <- jb + 2L
+    if (is.na(rep)) {
+      code <- strtoi(run(i, min(n, i + 3L)), 16L)
+      if (is.na(code)) stop("JSON parse error: bad \\u escape", call. = FALSE)
+      i <- i + 4L
+      # a UTF-16 surrogate pair (an emoji) is two escapes for one character
+      if (code >= 0xD800 && code <= 0xDBFF && i + 5L <= n && cs[i] == "\\" && cs[i + 1L] == "u") {
+        low <- strtoi(run(i + 2L, i + 5L), 16L)
+        if (!is.na(low) && low >= 0xDC00 && low <= 0xDFFF) {
+          code <- 0x10000 + (code - 0xD800) * 0x400 + (low - 0xDC00)
+          i <- i + 6L
         }
-        rep <- intToUtf8(code)
-        i <- i + 6L
-      } else {
-        i <- i + 2L
       }
-      out <- c(out, rep)
-      seg_start <- i
-    } else {
-      i <- i + 1L
+      rep <- intToUtf8(code)
     }
+    k <- k + 1L
+    out[[k]] <- rep
   }
-  stop("JSON parse error: unterminated string", call. = FALSE)
 }
 
 #' @noRd
 .mj_number <- function(st) {
   m <- regexpr(
     "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?",
-    substr(st$s, st$i, min(st$n, st$i + 63L))
+    paste(st$c[st$i:min(st$n, st$i + 63L)], collapse = "")
   )
   if (m == -1L) stop("JSON parse error at position ", st$i, call. = FALSE)
   len <- attr(m, "match.length")
-  num <- substr(st$s, st$i, st$i + len - 1L)
+  num <- paste(st$c[st$i:(st$i + len - 1L)], collapse = "")
   st$i <- st$i + len
   as.numeric(num)
 }
@@ -158,7 +179,7 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
   st$i <- st$i + 1L # consume [
   out <- list()
   .mj_ws(st)
-  if (substr(st$s, st$i, st$i) == "]") {
+  if (.mj_at(st) == "]") {
     st$i <- st$i + 1L
     return(out)
   }
@@ -166,7 +187,7 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
     v <- .mj_value(st)
     out[[length(out) + 1L]] <- if (is.null(v)) NA else v
     .mj_ws(st)
-    ch <- substr(st$s, st$i, st$i)
+    ch <- .mj_at(st)
     st$i <- st$i + 1L
     if (ch == "]") {
       return(out)
@@ -186,18 +207,18 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
   out <- list()
   nms <- character(0)
   .mj_ws(st)
-  if (substr(st$s, st$i, st$i) == "}") {
+  if (.mj_at(st) == "}") {
     st$i <- st$i + 1L
     return(out)
   }
   repeat {
     .mj_ws(st)
-    if (substr(st$s, st$i, st$i) != "\"") {
+    if (.mj_at(st) != "\"") {
       stop("JSON parse error: expected key at ", st$i, call. = FALSE)
     }
     key <- .mj_string(st)
     .mj_ws(st)
-    if (substr(st$s, st$i, st$i) != ":") {
+    if (.mj_at(st) != ":") {
       stop("JSON parse error: expected : at ", st$i, call. = FALSE)
     }
     st$i <- st$i + 1L
@@ -205,7 +226,7 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
     out[length(out) + 1L] <- list(v) # list() wrapper keeps NULLs
     nms <- c(nms, key)
     .mj_ws(st)
-    ch <- substr(st$s, st$i, st$i)
+    ch <- .mj_at(st)
     st$i <- st$i + 1L
     if (ch == "}") {
       names(out) <- nms
@@ -271,31 +292,41 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
     is.list(e) && !is.null(names(e))
   }, logical(1))
   if (all(is_obj)) {
+    # one row per object, as jsonlite: a field holding objects in every row becomes a nested data
+    # frame, any other non-scalar field a list column (a Socrata row with a location object was
+    # left a bare list of records)
     keys <- unique(unlist(lapply(x, names)))
-    cols_ok <- TRUE
-    cols <- lapply(keys, function(k) {
+    out <- data.frame(row.names = seq_along(x))
+    for (k in keys) {
       vals <- lapply(x, function(e) {
         v <- e[[k]]
         if (is.null(v)) NA else v
       })
-      if (all(vapply(vals, function(v) {
-        is.atomic(v) && length(v) == 1L
-      }, logical(1)))) {
+      scalar <- vapply(vals, function(v) is.atomic(v) && length(v) == 1L, logical(1))
+      nested <- if (all(scalar)) NULL else .mj_simplify(vals)
+      out[[k]] <- if (all(scalar)) {
         unlist(vals, use.names = FALSE)
+      } else if (is.data.frame(nested) && nrow(nested) == length(vals)) {
+        nested
       } else {
-        cols_ok <<- FALSE
-        vals
+        I(vals)
       }
-    })
-    if (cols_ok) {
-      names(cols) <- keys
-      return(as.data.frame(cols,
-        stringsAsFactors = FALSE,
-        check.names = FALSE
-      ))
     }
+    return(out)
   }
   x
+}
+
+#' Internal helper: the rows of a simplified JSON array of objects as a list of records
+#' (nested data frames and list columns taken apart), whichever reader parsed it
+#' @noRd
+.morie_json_records <- function(x) {
+  if (!is.data.frame(x)) return(x)
+  lapply(seq_len(nrow(x)), function(i) {
+    lapply(x, function(col) {
+      if (is.data.frame(col)) .morie_json_records(col)[[i]] else if (is.list(col)) col[[i]] else col[i]
+    })
+  })
 }
 
 #' Serialize an R object to JSON natively (pure R)
@@ -313,6 +344,10 @@ morie_json_stringify <- function(x, auto_unbox = TRUE) {
     s <- gsub("\n", "\\n", s, fixed = TRUE)
     s <- gsub("\r", "\\r", s, fixed = TRUE)
     s <- gsub("\t", "\\t", s, fixed = TRUE)
+    # every other control character is invalid raw inside a JSON string (a \x1f in OTIS text broke the output)
+    if (any(grepl("[\001-\037]", s, perl = TRUE), na.rm = TRUE)) {
+      for (k in setdiff(1:31, c(9L, 10L, 13L))) s <- gsub(intToUtf8(k), sprintf("\\u%04x", k), s, fixed = TRUE)
+    }
     s
   }
   ser <- function(v) {
@@ -364,19 +399,19 @@ morie_json_stringify <- function(x, auto_unbox = TRUE) {
   ser(x)
 }
 
-#' Internal shim: prefer jsonlite, fall back to the native parser
+#' Internal shim: prefer jsonlite, fall back to rmoriebricklayer's port of its reader
 #' @noRd
 .morie_from_json <- function(txt, ...) {
   if (requireNamespace("jsonlite", quietly = TRUE)) {
     return(.s03json_fromJSON(txt, ...))
   }
-  args <- list(...)
-  simplify <- !isFALSE(args$simplifyVector)
   if (length(txt) == 1L && !grepl("^[\\[{ \t\r\n\"]", txt) &&
     (file.exists(txt) || grepl("^https?://", txt))) {
     txt <- paste(readLines(txt, warn = FALSE), collapse = "\n")
   }
-  morie_fetch_json(txt, simplify = simplify)
+  # the port gives jsonlite's shapes (records -> data frames, nested objects -> nested frames), so a
+  # caller sees the same object whether or not jsonlite is installed
+  rmoriebricklayer::bricklayer_json_from_json(txt, ...)
 }
 
 #' Internal shim: prefer .s03json_toJSON, fall back to native

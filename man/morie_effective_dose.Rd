@@ -42,6 +42,10 @@ failure to patch over -- if the slope is not distinguishable from
 zero the data do not bound the median dose, and a delta-method
 interval returning two tidy finite numbers there is lying.
 }
+\examples{
+# probit fit on log10 dose; ED50 = -intercept / slope
+morie_effective_dose(intercept = -2, slope = 1.5, cov = matrix(c(0.04, -0.01, -0.01, 0.02), 2))[c("ed", "lower", "upper")]
+}
 \references{
 Fieller EC (1954) \emph{JRSS B} 16(2):175-185,
 \doi{10.1111/j.2517-6161.1954.tb00159.x}.

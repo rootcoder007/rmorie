@@ -61,6 +61,11 @@ proportional, so the spatial dependence has the same shape at every time
 lag and the two components "do not act upon each other". If that matters,
 use \code{\link[=spstcn]{spstcn()}}.
 }
+\examples{
+cs <- function(h) exp(-h / 2); ct <- function(k) exp(-abs(k))
+spstcv(spatial_h = 1, temporal_u = 2, cov_spatial = cs, cov_temporal = ct)$st_covariance
+exp(-0.5) * exp(-2)
+}
 \references{
 Schabenberger Ch 9, Sec 9.2, eqs (9.5)-(9.6)
 }

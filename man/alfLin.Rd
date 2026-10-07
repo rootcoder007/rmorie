@@ -20,7 +20,6 @@ The value of \code{o}, as built in the body.
 A step of the alf_core implementation. Called by \code{Alfbkb}, \code{Alfdgram},
 \code{Alfembed} and 11 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

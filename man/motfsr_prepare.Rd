@@ -19,5 +19,7 @@ A list with \code{coded}, \code{alpha}, \code{starts}.
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_mm_fit}, \code{motfsr_run}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+str(motfsr_prepare(c("ACGTAC", "CGTACG"), w = 3, alphabet = NULL))
 }

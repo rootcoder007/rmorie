@@ -25,7 +25,6 @@ A list with \code{ds}, \code{dv}, \code{note}.
 \description{
 A step of the painn_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

@@ -30,5 +30,4 @@ A list with \code{loss}, \code{hinge}, \code{rank_weight}, \code{estimated_rank}
 A step of the warpL_native implementation. Called by \code{morie_warpL_warp_loss},
 \code{morie_warpL_warp_step}.
 See the file header for the source the module follows.
-source it follows.
 }

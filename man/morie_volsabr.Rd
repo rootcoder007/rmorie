@@ -30,6 +30,9 @@ z/x(z) * (1 + correction T), with z = (nu/alpha)(fK)^((1-beta)/2)
 log(f/K) and x(z) = log((sqrt(1-2 rho z + z^2)+z-rho)/(1-rho));
 reduces to Eq. 2.18 at the money.
 }
+\examples{
+morie_volsabr(K = 100, f = 100, T = 1, alpha = 0.2, beta = 1, rho = 0, nu = 0)$estimate   # = alpha when nu = 0, beta = 1
+}
 \references{
 Hagan, P. S., Kumar, D., Lesniewski, A. S. and
 Woodward, D. E. (2002). Managing smile risk. Wilmott Magazine,

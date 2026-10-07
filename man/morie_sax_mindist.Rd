@@ -21,6 +21,11 @@ The lower bound of the true Euclidean distance given by Lin et al.
 (2003), eq. (4): adjacent symbols contribute zero, otherwise the
 gap between the enclosing breakpoints.
 }
+\examples{
+# SAX words are strings over the first `alphabet` letters
+morie_sax_mindist("abcd", "acdd", n = 32, alphabet = 4)
+morie_sax_mindist("abcd", "abcd", n = 32, alphabet = 4)   # identical words: 0
+}
 \references{
 Lin, J., Keogh, E., Lonardi, S. and Chiu, B. (2003). A
 symbolic representation of time series. DMKD 2003.

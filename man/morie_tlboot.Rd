@@ -34,7 +34,6 @@ A list with \code{replicates}, \code{mean}, \code{se},
 A step of the tlboot_native implementation. Called by \code{multiplier_bootstrap},
 \code{naive_bootstrap}, \code{targeted_bootstrap}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 if (requireNamespace("ranger", quietly = TRUE)) {

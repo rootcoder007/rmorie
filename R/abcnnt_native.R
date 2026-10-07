@@ -81,7 +81,6 @@
 #'
 #' A step of the abcnnt_native implementation. Called by \code{flow_forward}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param layer A list; the body reads \code{$b1}, \code{$ba}, \code{$bm}, \code{$dim_t},
 #' \code{$dim_x}, \code{$hidden}, \code{$M1}, \code{$M2}, \code{$W1}, \code{$Wa},
@@ -388,8 +387,8 @@ mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
 #' log_prior <- function(th) if (any(abs(th) > 5)) -Inf else -0.5 * sum(th^2)
 #' set.seed(1)
 #' res <- abcnnt(simulator, x_o = 0.25, log_prior = log_prior, theta0 = 0.5,
-#'               n_rounds = 2L, n_per_round = 25L, epochs = 5L, lr = 0.02,
-#'               seed = 1L, mcmc_burn = 50L, mcmc_step = 0.8)
+#'               n_rounds = 1L, n_per_round = 20L, epochs = 3L, lr = 0.02,
+#'               seed = 1L, mcmc_burn = 20L, mcmc_step = 0.8)
 #' names(res)
 #' }
 #' @keywords internal

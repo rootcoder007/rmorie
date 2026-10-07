@@ -65,13 +65,7 @@ morie_ingest_chicago_resources <- function() {
                                          .MORIE_CHICAGO_DEFAULT_UA,
                                        timeout =
                                          .MORIE_CHICAGO_DEFAULT_TIMEOUT) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop(
-      "Package 'httr2' is required for morie_ingest_chicago_*(). ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
+  .morie_http_require("morie_ingest_chicago_*()")
   params <- list(
     `$limit`  = as.integer(limit),
     `$offset` = as.integer(offset)
@@ -171,8 +165,8 @@ morie_ingest_chicago_resources <- function() {
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("httr2", quietly = TRUE)) withAutoprint({
 #' # Chicago crimes (schema verified 2026-07: `year` is a real column)
 #' df <- try(morie_ingest_chicago_socrata(
 #'   "https://data.cityofchicago.org/resource/ijzp-q8t2.json",
@@ -187,8 +181,8 @@ morie_ingest_chicago_resources <- function() {
 #'   select = "arrest_key,arrest_date",
 #'   max_features = 100L
 #' ))
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_chicago_socrata <- function(resource_url,
                                          where = NULL,
@@ -259,12 +253,12 @@ morie_ingest_chicago_socrata <- function(resource_url,
 #'   \code{\link{morie_ingest_bigquery_table}} for the BigQuery
 #'   public-data mirror (\code{bigquery-public-data.chicago_crime}).
 #' @examples
-#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("httr2", quietly = TRUE)) withAutoprint({
 #' df <- morie_ingest_chicago_crime(year = 2024, max_features = 10000L)
 #' head(df)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_chicago_crime <- function(year = NULL,
                                        where = NULL,
@@ -333,6 +327,7 @@ morie_ingest_chicago_crime_bigquery <- function(where = NULL,
                                                 page_size = 10000L,
                                                 max_rows = Inf,
                                                 quiet = TRUE) {
+  .morie_arg(where, "c1null")
   clause <- where
   if (is.null(clause) && !is.null(year)) {
     yr <- suppressWarnings(as.integer(year))

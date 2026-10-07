@@ -30,7 +30,6 @@ A list with \code{features}, \code{attended}, \code{n_memories},
 \description{
 A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_sam2vd_memory_attention(frame_features = c(1, 2, 3, 4, 5, 6, 7, 8),

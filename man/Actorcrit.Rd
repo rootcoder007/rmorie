@@ -43,14 +43,12 @@ Actorcrit(
 list: estimate, deltas, theta, w, n, method.
 }
 \description{
-Sutton and Barto (2018), Reinforcement Learning: An Introduction, 2nd
-ed. (FETCHED from incompleteideas.net), section 13.5, equations
-(13.12)-(13.14): theta <- theta + alpha (R + gamma vhat(S') - vhat(S))
-grad ln pi(A|S, theta), paired with semi-gradient TD(0) for the critic,
-w <- w + alpha_w delta grad vhat(S).  The episodic pseudocode carries
-the discount factor I (I <- gamma I each step), included as
-\code{discount_actor}.  Gradients are supplied by the caller, since they
-belong to the policy's own parameterisation.
+Sutton and Barto (2018), Reinforcement Learning: An Introduction, 2nd ed., section
+13.5, equations (13.12)-(13.14): theta <- theta + alpha (R + gamma vhat(S') -
+vhat(S)) grad ln pi(A|S, theta), paired with semi-gradient TD(0) for the critic, w <-
+w + alpha_w delta grad vhat(S). The episodic pseudocode carries the discount factor I
+(I <- gamma I each step), included as \code{discount_actor}. Gradients are supplied by the
+caller, since they belong to the policy's own parameterisation.
 }
 \examples{
 Actorcrit(c(1, 0), values = c(0, 0.5, 1))$deltas

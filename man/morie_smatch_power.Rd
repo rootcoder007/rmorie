@@ -23,7 +23,6 @@ A list with \code{power}, \code{z_power}, \code{n_events}, \code{A}, \code{B}, \
 \description{
 A step of the smatch_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_smatch_power(n_events = 120, log_ri = log(2), r = 0.1,

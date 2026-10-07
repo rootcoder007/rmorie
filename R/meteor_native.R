@@ -23,14 +23,11 @@
 #' @return List with \code{score}, \code{fmean}, \code{penalty},
 #'   \code{precision}, \code{recall}, \code{matches}, \code{chunks},
 #'   \code{len_candidate}, \code{len_reference}, \code{method}.
-#' @references Banerjee, S. and Lavie, A. (2005), METEOR: An
-#'   automatic metric for MT evaluation with improved correlation
-#'   with human judgments, Proceedings of the ACL Workshop on
-#'   Intrinsic and Extrinsic Evaluation Measures for Machine
-#'   Translation and/or Summarization, Ann Arbor, 65-72. Fmean,
-#'   penalty and score formulas with the worked example, Section
-#'   2.1, p. 68. Local source:
-#'   library/pdf/fetched-wave3/Banerjee-Lavie-2005-METEOR-ACL.pdf.
+#' @references Banerjee, S. and Lavie, A. (2005), METEOR: An automatic metric for MT
+#'   evaluation with improved correlation with human judgments, Proceedings of the ACL
+#'   Workshop on Intrinsic and Extrinsic Evaluation Measures for Machine Translation
+#'   and/or Summarization, Ann Arbor, 65-72. Fmean, penalty and score formulas with the
+#'   worked example, Section 2.1, p. 68.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

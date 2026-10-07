@@ -27,6 +27,9 @@
 #'   aequationum universalis. The modern statement is Nocedal, J. &
 #'   Wright, S. J. (2006), Numerical Optimization, 2nd ed., Springer,
 #'   algorithm 3.2.
+#' @examples
+#' f <- function(x) sum((x - c(1, 2))^2); g <- function(x) 2 * (x - c(1, 2)); H <- function(x) diag(2, 2)
+#' Newraf(f, g, H, x0 = c(0, 0))$x   # one step on a quadratic
 #' @export
 Newraf <- function(f, grad_f, hess_f, x0, n_iter = 50, tol = 1e-12) {
   x <- as.numeric(x0)

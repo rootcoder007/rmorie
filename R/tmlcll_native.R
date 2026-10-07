@@ -65,7 +65,6 @@
 #' \code{morie_clpm_coefficients}, \code{morie_tmle_cross_lagged} and 1 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
 #' @return Nothing; this branch always raises.
@@ -112,7 +111,6 @@
 #' A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols},
 #' \code{morie_tmle_cross_lagged}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Numeric; the body checks with \code{is.numeric}.
 #' @return Nothing; this branch always raises.
@@ -132,7 +130,6 @@
 #'
 #' A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y A vector; its length is taken.
@@ -157,7 +154,6 @@
 #'
 #' A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A matrix; passed to \code{ncol}.
 #' @param n A count; the body uses it as \code{matrix(...)}.
@@ -175,7 +171,6 @@
 #'
 #' A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param des A matrix; passed to \code{nrow}.
 #' @param a Numeric; combined arithmetically in the body.
@@ -210,7 +205,6 @@
 #' A step of the tmlcll_native implementation. Called by \code{morie_clpm_coefficients},
 #' \code{morie_tmle_cross_lagged}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.tmlcll_mat}.
 #' @param y Passed to \code{.tmlcll_vec}.
@@ -233,7 +227,6 @@
 #'
 #' A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -249,7 +242,6 @@
 #'
 #' A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lagged}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
@@ -268,7 +260,6 @@
 #'
 #' A step of the tmlcll_native implementation. Called by \code{morie_ri_clpm_coefficients}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.tmlcll_mat}.
 #' @param Y Passed to \code{.tmlcll_mat}.
@@ -326,7 +317,6 @@ morie_clpm_coefficients <- function(X, Y) {
 #'
 #' A step of the tmlcll_native implementation. Called by \code{morie_ri_clpm_coefficients}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P Passed to \code{.tmlcll_mat}.
 #' @return A list with \code{person_means}, \code{within}, \code{between_variance},
@@ -355,7 +345,6 @@ morie_within_between_decomposition <- function(P) {
 #'
 #' A step of the tmlcll_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{morie_within_between_decomposition}.
 #' @param Y Passed to \code{morie_within_between_decomposition}.
@@ -389,7 +378,6 @@ morie_ri_clpm_coefficients <- function(X, Y) {
 #'
 #' A step of the tmlcll_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.tmlcll_vec}.
 #' @param D Passed to \code{.tmlcll_vec}.
@@ -493,7 +481,6 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
 #'
 #' A step of the tmlcll_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

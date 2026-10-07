@@ -16,5 +16,4 @@ A list with \code{chrom}, \code{pos}, \code{ref}, \code{alt}, \code{id}.
 \description{
 A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
 See the file header for the source the module follows.
-source it follows.
 }

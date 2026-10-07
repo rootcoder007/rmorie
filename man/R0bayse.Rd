@@ -33,6 +33,9 @@ is the name the backlog asked for, not a second implementation.
 \details{
 Formula: \code{R0 = beta / gamma}; or solve \code{1 - AR = exp(-R0 AR)}.
 }
+\examples{
+R0bayse(beta = 0.3, gamma = 0.1)$estimate
+}
 \references{
 Diekmann, O., Heesterbeek, J. A. P. & Metz, J. A. J.
 (1990). Journal of Mathematical Biology 28(4):365-382.

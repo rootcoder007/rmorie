@@ -31,7 +31,6 @@ A list with \code{statistic}, \code{per_instrument}, \code{form},
 \description{
 A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

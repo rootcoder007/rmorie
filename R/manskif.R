@@ -22,6 +22,10 @@
 #'   Papers and Proceedings 80(2):319-323. Molinari, F. (2021),
 #'   Microeconometrics with Partial Identification, Handbook of
 #'   Econometrics 7A, eq. (2.11) (arXiv:2004.11751).
+#' @examples
+#' set.seed(7)
+#' y <- runif(50); obs <- runif(50) > 0.2
+#' Manskif(y, obs, support = c(0, 1))
 #' @export
 Manskif <- function(y, observed, support, treatment = NULL) {
   morie_bnd_manski(y, observed, support, treatment = treatment)

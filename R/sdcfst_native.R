@@ -127,7 +127,6 @@
 #'
 #' A step of the sdcfst_native implementation. Called by \code{morie_sdcfst_forest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
@@ -185,7 +184,6 @@
 #'
 #' A step of the sdcfst_native implementation. Called by \code{morie_sdcfst_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A list; the body reads \code{$cut}, \code{$feature}, \code{$leaf},
 #' \code{$left}, \code{$right}, \code{$value} from it.
@@ -321,7 +319,6 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 #'
 #' A step of the sdcfst_native implementation. Called by \code{morie_sdcfst}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta A vector; indexed elementwise.
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
@@ -338,7 +335,6 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 #'
 #' A step of the sdcfst_native implementation. Called by \code{morie_sdcfst}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param k Numeric; combined arithmetically in the body.

@@ -24,7 +24,6 @@ A numeric value.
 A step of the surxgb_native implementation. Called by
 \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_boost}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_surxgb_aft_loss(y_lower = 5L, y_upper = 5L, u = c(1, 2, 3, 4, 5, 6, 7, 8))

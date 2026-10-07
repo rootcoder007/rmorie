@@ -19,5 +19,4 @@ The value of \code{lab}, as built in the body.
 \description{
 A step of the sdcfst_native implementation. Called by \code{morie_sdcfst}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -24,6 +24,10 @@ List with \code{estimate}, \code{variance}, \code{se}, \code{z}, \code{p_value},
 \description{
 Formula: d_AC = d_AB - d_CB; var(d_AC) = v_AB + v_CB
 }
+\examples{
+# A vs C through the common comparator B
+Bucherind(d_AB = -0.4, v_AB = 0.01, d_CB = -0.1, v_CB = 0.02)
+}
 \references{
 Bucher, Guyatt, Griffith and Walter (1997), The results of direct and
 indirect treatment comparisons in meta-analysis of randomized controlled trials,

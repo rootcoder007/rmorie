@@ -30,6 +30,12 @@ K_j ~ Poisson(a_j(x) tau) times independently (Eq. 16) and the
 state advances by sum_j K_j nu_j; negative populations are clamped
 to zero (tau-too-large symptom, per Gillespie's discussion).
 }
+\examples{
+# immigration-death: 0 -> X at rate 10, X -> 0 at rate 0.1 X; equilibrium near 100
+nu <- matrix(c(1, -1), 2, 1)
+r <- morie_taulep(nu, function(x) c(10, 0.1 * x[1]), x0 = 0, tau = 0.5, n_steps = 200, seed = 1)
+tail(r$path[, 1], 3)
+}
 \references{
 Gillespie, D. T. (2001). Approximate accelerated
 stochastic simulation of chemically reacting systems. Journal of

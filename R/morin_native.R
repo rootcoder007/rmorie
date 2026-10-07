@@ -251,6 +251,7 @@ morie_data_variance <- function(x) {
 #' morie_sd_forms(c(3, 4))$sd_sum
 #' @export
 morie_sd_forms <- function(sigmas, a = 1) {
+  .morie_arg(sigmas, "n")
   sigmas <- as.numeric(sigmas)
   if (any(sigmas < 0)) stop("sigmas must be >= 0.", call. = FALSE)
   n <- length(sigmas)
@@ -574,6 +575,7 @@ morie_sum_density <- function(grid_x, density_x, grid_y, density_y, z,
 #' @export
 morie_approx_ladder <- function(a, n, order = 1, x = NULL, delta = NULL,
                                 power = 2) {
+  .morie_arg(a, "n1")
   if (a <= -1) stop("need a > -1.", call. = FALSE)
   exact <- (1 + a)^n
   if (order == 1) {

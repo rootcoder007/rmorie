@@ -27,6 +27,10 @@ formula h(t) = <h, K(t, .)>_H is checked coordinatewise here.
 Formula: <Sigma a, Sigma b>_H = a' Sigma b;  h = Sigma a;
 K(t, .) = Sigma e_t, so <h, K(t, .)>_H = a' Sigma e_t = h(t).
 }
+\examples{
+S <- matrix(c(2, 0.5, 0.5, 1), 2)
+Ghosalgpdefrkhs(S, a = c(1, 0), b = c(0, 1))$estimate   # = a' Sigma b = 0.5
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Example 11.15 and

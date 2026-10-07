@@ -23,7 +23,6 @@ axis has no direction to rotate about and is refused rather than
 normalised into a division by zero.
 }
 \examples{
-morie_flexrd_rotate(p = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L,
-  degrees = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_flexrd_rotate(p = c(1, 1, 0), a = c(0, 0, 0), b = c(0, 0, 1), degrees = 90)
 }
 \keyword{internal}

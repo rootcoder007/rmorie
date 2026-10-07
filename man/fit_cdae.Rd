@@ -52,7 +52,6 @@ A list with \code{estimate}, \code{W}, \code{W_prime}, \code{V}, \code{b},
 \description{
 A step of the cdaeRC_native implementation. Called by \code{morie_cdaeRC}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

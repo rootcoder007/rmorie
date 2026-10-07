@@ -18,7 +18,6 @@ The value of \code{stats::pchisq}.
 A step of the k02util implementation. Called by \code{mafix}, \code{mai2},
 \code{marndm} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

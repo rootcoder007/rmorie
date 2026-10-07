@@ -16,9 +16,8 @@
 #' @param tol Convergence tolerance on the maximum coefficient change.
 #' @return List with \code{estimate}, \code{se}, \code{log_posterior},
 #'   \code{iterations}, \code{converged}, \code{n}, \code{p}.
-#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
-#'   Bayesian Data Analysis, 3rd edition, Section 4.1 and Chapter 16.
-#'   Fetched as the full text of the book from the author's own copy.
+#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013), Bayesian Data
+#'   Analysis, 3rd edition, Section 4.1 and Chapter 16.
 #' @export
 #' @examples
 #' set.seed(1)

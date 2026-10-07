@@ -91,6 +91,61 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_scrypt_romix
+Rcpp::RawVector morie_scrypt_romix(Rcpp::RawVector B, int N, int r, int p);
+RcppExport SEXP _rmorie_morie_scrypt_romix(SEXP BSEXP, SEXP NSEXP, SEXP rSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type B(BSEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    Rcpp::traits::input_parameter< int >::type r(rSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_scrypt_romix(B, N, r, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_aead_seal
+Rcpp::RawVector morie_aead_seal(Rcpp::RawVector key, Rcpp::RawVector nonce, Rcpp::RawVector pt, Rcpp::RawVector aad);
+RcppExport SEXP _rmorie_morie_aead_seal(SEXP keySEXP, SEXP nonceSEXP, SEXP ptSEXP, SEXP aadSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type key(keySEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type nonce(nonceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type pt(ptSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type aad(aadSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_aead_seal(key, nonce, pt, aad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_aead_open
+SEXP morie_aead_open(Rcpp::RawVector key, Rcpp::RawVector nonce, Rcpp::RawVector ct_with_tag, Rcpp::RawVector aad);
+RcppExport SEXP _rmorie_morie_aead_open(SEXP keySEXP, SEXP nonceSEXP, SEXP ct_with_tagSEXP, SEXP aadSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type key(keySEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type nonce(nonceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type ct_with_tag(ct_with_tagSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type aad(aadSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_aead_open(key, nonce, ct_with_tag, aad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_ks_secretbox_open
+SEXP morie_ks_secretbox_open(Rcpp::RawVector key, Rcpp::RawVector nonce, Rcpp::RawVector box);
+RcppExport SEXP _rmorie_morie_ks_secretbox_open(SEXP keySEXP, SEXP nonceSEXP, SEXP boxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type key(keySEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type nonce(nonceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type box(boxSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_ks_secretbox_open(key, nonce, box));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_crypto_liboqs_available
 bool morie_crypto_liboqs_available();
 RcppExport SEXP _rmorie_morie_crypto_liboqs_available() {
@@ -827,18 +882,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// morie_match_greedy_1d_cpp
-IntegerMatrix morie_match_greedy_1d_cpp(NumericVector treated_val, NumericVector control_val, int ratio, double caliper_width, bool replace);
-RcppExport SEXP _rmorie_morie_match_greedy_1d_cpp(SEXP treated_valSEXP, SEXP control_valSEXP, SEXP ratioSEXP, SEXP caliper_widthSEXP, SEXP replaceSEXP) {
+// morie_match_nn_cpp
+IntegerMatrix morie_match_nn_cpp(IntegerVector treat_, NumericVector dist_, IntegerVector ratio_, bool replace, double caliper);
+RcppExport SEXP _rmorie_morie_match_nn_cpp(SEXP treat_SEXP, SEXP dist_SEXP, SEXP ratio_SEXP, SEXP replaceSEXP, SEXP caliperSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type treated_val(treated_valSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type control_val(control_valSEXP);
-    Rcpp::traits::input_parameter< int >::type ratio(ratioSEXP);
-    Rcpp::traits::input_parameter< double >::type caliper_width(caliper_widthSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type treat_(treat_SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dist_(dist_SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ratio_(ratio_SEXP);
     Rcpp::traits::input_parameter< bool >::type replace(replaceSEXP);
-    rcpp_result_gen = Rcpp::wrap(morie_match_greedy_1d_cpp(treated_val, control_val, ratio, caliper_width, replace));
+    Rcpp::traits::input_parameter< double >::type caliper(caliperSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_match_nn_cpp(treat_, dist_, ratio_, replace, caliper));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -863,6 +918,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type treated(treatedSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type control(controlSEXP);
     rcpp_result_gen = Rcpp::wrap(morie_match_optimal_assign_cpp(treated, control));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_lsap_cpp
+Rcpp::IntegerVector morie_lsap_cpp(Rcpp::NumericMatrix cost);
+RcppExport SEXP _rmorie_morie_lsap_cpp(SEXP costSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost(costSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_lsap_cpp(cost));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1128,7 +1194,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_html_to_text
-std::string siu_core_html_to_text(const std::string& html);
+Rcpp::String siu_core_html_to_text(const std::string& html);
 RcppExport SEXP _rmorie_siu_core_html_to_text(SEXP htmlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1150,7 +1216,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_to_iso_date
-std::string siu_core_to_iso_date(const std::string& human);
+Rcpp::String siu_core_to_iso_date(const std::string& human);
 RcppExport SEXP _rmorie_siu_core_to_iso_date(SEXP humanSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1161,7 +1227,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_strip_boilerplate
-std::string siu_core_strip_boilerplate(const std::string& text);
+Rcpp::String siu_core_strip_boilerplate(const std::string& text);
 RcppExport SEXP _rmorie_siu_core_strip_boilerplate(SEXP textSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1193,7 +1259,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_get
-std::string siu_core_get(const std::string& url, double timeout_s);
+Rcpp::String siu_core_get(const std::string& url, double timeout_s);
 RcppExport SEXP _rmorie_siu_core_get(SEXP urlSEXP, SEXP timeout_sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1231,7 +1297,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_chat
-std::string siu_core_chat(const std::string& api, const std::string& base, const std::string& key, const std::string& model, const std::string& prompt, double timeout_s, double temperature);
+Rcpp::String siu_core_chat(const std::string& api, const std::string& base, const std::string& key, const std::string& model, const std::string& prompt, double timeout_s, double temperature);
 RcppExport SEXP _rmorie_siu_core_chat(SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP, SEXP modelSEXP, SEXP promptSEXP, SEXP timeout_sSEXP, SEXP temperatureSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1248,7 +1314,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_default_model
-std::string siu_core_default_model(const std::string& api, const std::string& base, const std::string& key);
+Rcpp::String siu_core_default_model(const std::string& api, const std::string& base, const std::string& key);
 RcppExport SEXP _rmorie_siu_core_default_model(SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1261,7 +1327,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // siu_core_panel
-std::string siu_core_panel(const std::string& report_text, const std::string& parsed_json, int mode, std::vector<std::string> readers, std::vector<std::string> auditors, int num_readers, int num_auditors, int reader_concurrency, bool auditor_sequential, const std::string& reader_granularity, const std::string& auditor_granularity, bool health_check, const std::string& api, const std::string& base, const std::string& key, double timeout_s, double temperature, SEXP chat_fn);
+Rcpp::String siu_core_panel(const std::string& report_text, const std::string& parsed_json, int mode, std::vector<std::string> readers, std::vector<std::string> auditors, int num_readers, int num_auditors, int reader_concurrency, bool auditor_sequential, const std::string& reader_granularity, const std::string& auditor_granularity, bool health_check, const std::string& api, const std::string& base, const std::string& key, double timeout_s, double temperature, SEXP chat_fn);
 RcppExport SEXP _rmorie_siu_core_panel(SEXP report_textSEXP, SEXP parsed_jsonSEXP, SEXP modeSEXP, SEXP readersSEXP, SEXP auditorsSEXP, SEXP num_readersSEXP, SEXP num_auditorsSEXP, SEXP reader_concurrencySEXP, SEXP auditor_sequentialSEXP, SEXP reader_granularitySEXP, SEXP auditor_granularitySEXP, SEXP health_checkSEXP, SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP, SEXP timeout_sSEXP, SEXP temperatureSEXP, SEXP chat_fnSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1374,6 +1440,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_crypto_pbkdf2_sha256_native", (DL_FUNC) &_rmorie_morie_crypto_pbkdf2_sha256_native, 4},
     {"_rmorie_morie_crypto_blake2b_native", (DL_FUNC) &_rmorie_morie_crypto_blake2b_native, 3},
     {"_rmorie_morie_crypto_argon2_native", (DL_FUNC) &_rmorie_morie_crypto_argon2_native, 9},
+    {"_rmorie_morie_scrypt_romix", (DL_FUNC) &_rmorie_morie_scrypt_romix, 4},
+    {"_rmorie_morie_aead_seal", (DL_FUNC) &_rmorie_morie_aead_seal, 4},
+    {"_rmorie_morie_aead_open", (DL_FUNC) &_rmorie_morie_aead_open, 4},
+    {"_rmorie_morie_ks_secretbox_open", (DL_FUNC) &_rmorie_morie_ks_secretbox_open, 3},
     {"_rmorie_morie_crypto_liboqs_available", (DL_FUNC) &_rmorie_morie_crypto_liboqs_available, 0},
     {"_rmorie_morie_crypto_liboqs_version", (DL_FUNC) &_rmorie_morie_crypto_liboqs_version, 0},
     {"_rmorie_morie_crypto_mlkem768_keygen", (DL_FUNC) &_rmorie_morie_crypto_mlkem768_keygen, 0},
@@ -1431,9 +1501,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_matching_cem_strata_cpp", (DL_FUNC) &_rmorie_morie_matching_cem_strata_cpp, 1},
     {"_rmorie_morie_matching_abadie_imbens_kernel_cpp", (DL_FUNC) &_rmorie_morie_matching_abadie_imbens_kernel_cpp, 4},
     {"_rmorie_morie_match_greedy_kd_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_kd_cpp, 5},
-    {"_rmorie_morie_match_greedy_1d_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_1d_cpp, 5},
+    {"_rmorie_morie_match_nn_cpp", (DL_FUNC) &_rmorie_morie_match_nn_cpp, 5},
     {"_rmorie_morie_match_optimal_1d_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_1d_cpp, 2},
     {"_rmorie_morie_match_optimal_assign_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_assign_cpp, 2},
+    {"_rmorie_morie_lsap_cpp", (DL_FUNC) &_rmorie_morie_lsap_cpp, 1},
     {"_rmorie_morie_rlearner_forest_cpp", (DL_FUNC) &_rmorie_morie_rlearner_forest_cpp, 9},
     {"_rmorie_morie_rlm_cpp", (DL_FUNC) &_rmorie_morie_rlm_cpp, 5},
     {"_rmorie_morie_sobol_cpp", (DL_FUNC) &_rmorie_morie_sobol_cpp, 2},

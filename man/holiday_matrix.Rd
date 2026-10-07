@@ -22,3 +22,7 @@ A list with \code{matrix} (list of rows) and \code{names}
 \description{
 One indicator per holiday, optionally widened by a window
 }
+\examples{
+h <- holiday_matrix(t = 1:10, holidays = list(canada = 3, boxing = 8), lower = 1, upper = 1)
+h$names
+}

@@ -44,6 +44,11 @@ Equation (5) is partial prediction: score only the trailing
 are the longest available. The scored subset then depends on the
 permutation, so the loss does too, and \code{order_invariant} goes FALSE.
 }
+\examples{
+set.seed(10)
+logits <- matrix(rnorm(4 * 5), 4, 5)
+morie_permutation_lm_loss(logits, targets = c(0, 3, 1, 4), permutation = c(2, 0, 3, 1))$loss
+}
 \references{
 Yang et al (2019) arXiv:1906.08237, eq (3) and (5).
 }

@@ -24,6 +24,8 @@
 #' @references MacKinnon, D. P., Lockwood, C. M. and Williams, J. (2004).
 #'   Multivariate Behavioral Research 39(1):99-128.
 #'   \doi{10.1207/s15327906mbr3901_4}.
+#' @examples
+#' MedCI(a = 0.3, b = 0.4, sa = 0.1, sb = 0.12, n_sim = 5000)[c("estimate", "ci_lo", "ci_hi", "sobel_lo", "sobel_hi")]
 #' @export
 MedCI <- function(a, b, sa, sb, n_sim = 20000, level = 0.95) {
   av <- as.numeric(a)

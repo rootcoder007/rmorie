@@ -18,7 +18,6 @@ A list with \code{matrix}, \code{freqs}, \code{P}, \code{Q}, \code{pam}, \code{r
 A step of the mafft_native implementation. Called by \code{.mafft_default_raw_matrix},
 \code{morie_mafft}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 jtt_matrix()

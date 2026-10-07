@@ -13,9 +13,9 @@
 #' @param alpha See Usage.
 #' @return List with ``smr``, ``ci_lower``, ``ci_upper``, ``observed``, ``expected``.
 #' @references Breslow and Day (1987), Statistical Methods in Cancer Research Volume II:
-#' The Design and Analysis of Cohort Studies, IARC. Not held locally; SMR = O/E with
-#' exact Poisson limits on O is the standard published form, and is what the existing
-#' morie.fn.smr implements.
+#' The Design and Analysis of Cohort Studies, IARC. SMR = O/E with exact Poisson limits
+#' on O is the standard published form, and is what the existing morie.fn.smr
+#' implements.
 #' @export
 #' @examples
 #' Smrind(observed = 5L, expected = 5L)

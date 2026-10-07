@@ -13,5 +13,8 @@
 #' @return List with Q, estimate, n_communities, n.
 #' @references Newman and Girvan (2004), Physical Review E 69, 026113,
 #'   \doi{10.1103/PhysRevE.69.026113}.
+#' @examples
+#' A <- matrix(0, 6, 6); A[1:3, 1:3] <- 1; A[4:6, 4:6] <- 1; A[3, 4] <- A[4, 3] <- 1; diag(A) <- 0
+#' Modulq(A, communities = c(1, 1, 1, 2, 2, 2))$Q
 #' @export
 Modulq <- function(G, communities) Sgtmodq(G, communities)

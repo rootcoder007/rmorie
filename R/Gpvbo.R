@@ -1,13 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Bayesian optimisation: expected improvement under a GP posterior
 #'
-#' The stub carried the label "Wang-Frazier (2017)".  Nothing by that
-#' author pair in that year matches an acquisition function of this
-#' description in Crossref; the attribution is recorded as UNVERIFIED.
-#' The acquisition implemented is the standard one the stub's formula
-#' describes.  Expected improvement vanishes exactly where the posterior
-#' variance is zero, which is what stops the search re-evaluating a
-#' point it already knows.
+#' The acquisition implemented is standard expected improvement; the
+#' usual label ("Wang-Frazier 2017") matches no traceable paper and is
+#' not relied on.  Expected improvement vanishes exactly where the
+#' posterior variance is zero, which is what stops the search
+#' re-evaluating a point it already knows.
 #'
 #' Formula: EI(x) = (f_min - mu(x)) Phi(z) + sigma(x) phi(z),
 #'   z = (f_min - mu(x)) / sigma(x); EI = 0 when sigma(x) = 0.
@@ -72,5 +70,5 @@ Gpvbo <- function(X, y, X_grid, lengthscale = 1, variance = 1, noise = 1e-6, xi 
   best <- which.max(ei)
   .t1_result(estimate = ei[best], acquisition = ei, mean = mu, sd = sdv,
              next_index = best, next_point = G[best, ], f_min = fmin, n = n,
-             method = "expected improvement, Jones, Schonlau & Welch (1998) eq. (15); stub attribution 'Wang-Frazier (2017)' UNVERIFIED")
+             method = "expected improvement, Jones, Schonlau & Welch (1998) eq. (15)")
 }

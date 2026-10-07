@@ -25,6 +25,7 @@
 #' Srvcov2(n = 100, surv = 0.4)
 #' @export
 Srvcov2 <- function(n, surv, cdf = NULL) {
+  .morie_arg(n, "i1")
   if (n < 1) stop("sample size must be at least 1.")
   f <- if (is.null(cdf)) 1 - surv else cdf
   list(covariance = surv * f / n, surv = surv, cdf = f, n = n,

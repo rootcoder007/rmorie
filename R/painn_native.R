@@ -21,7 +21,6 @@
 #' A step of the painn_native implementation. Called by \code{dipole_moment},
 #' \code{gated_update}, \code{scalar_vector_message}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
@@ -37,7 +36,6 @@
 #' A step of the painn_native implementation. Called by \code{dipole_moment},
 #' \code{gated_update}, \code{morie_painn_equivariance_error} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -59,7 +57,6 @@
 #'
 #' A step of the painn_native implementation. Called by \code{gated_update}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{.painn_mat}.
 #' @return The value of \code{out}, as built in the body.
@@ -84,7 +81,6 @@ vector_norm <- function(v) {
 #'
 #' A step of the painn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s_j Passed to \code{.painn_vec}.
 #' @param v_j Passed to \code{.painn_mat}.
@@ -139,7 +135,6 @@ scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
 #'
 #' A step of the painn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Passed to \code{.painn_vec}.
 #' @param v Passed to \code{.painn_mat}.
@@ -193,7 +188,6 @@ gated_update <- function(s, v, U, V, phi) {
 #'
 #' A step of the painn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param charges Passed to \code{.painn_vec}.
 #' @param R Passed to \code{.painn_mat}.
@@ -238,7 +232,6 @@ dipole_moment <- function(charges, R, centre = NULL) {
 #'
 #' A step of the painn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param model Accepted by the signature and not used anywhere in the body.
 #' @param s Passed to \code{model}.
@@ -301,7 +294,6 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
 #'
 #' A step of the painn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -321,7 +313,7 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
         "is SMALLER, not larger.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 painnnet <- gated_update
 
 # public names resolved by fn/_lazy_map.json

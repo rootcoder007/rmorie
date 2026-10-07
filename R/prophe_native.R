@@ -22,7 +22,6 @@
 #'
 #' A step of the prophe_native implementation. Called by \code{morie_prophe}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{morie_prphet_fit}.
 #' @param y Passed to \code{morie_prphet_fit}.
@@ -113,7 +112,6 @@ prophe_additive_components <- function(t, y, seasonalities = NULL,
 #'
 #' A step of the prophe_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param components A vector; indexed elementwise.
 #' @return A list with \code{sd}, \code{relative}, \code{ranked}, \code{note}.
@@ -148,7 +146,6 @@ prophe_component_shares <- function(components) {
 #'
 #' A step of the prophe_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -168,7 +165,6 @@ prophe_cheatsheet <- function() {
 #'
 #' A step of the prophe_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{prophe_additive_components}.
 #' @param y Passed to \code{prophe_additive_components}.
@@ -191,7 +187,7 @@ morie_prophe <- function(t, y, seasonalities = NULL, holidays = NULL,
                              holiday_window = holiday_window, ...)
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 additivecomponents <- prophe_additive_components
 
 # public names resolved by fn/_lazy_map.json

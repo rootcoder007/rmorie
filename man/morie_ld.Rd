@@ -22,6 +22,11 @@ the squared correlation
 1968).  \eqn{r^2} is exactly the squared Pearson correlation of the
 two indicator vectors, which is the form used for LD pruning.
 }
+\examples{
+a <- c(1, 1, 0, 0, 1, 0, 1, 0); b <- c(1, 1, 0, 0, 1, 1, 0, 0)
+morie_ld(a, b)$statistic
+cor(a, b)^2
+}
 \references{
 Hill, W. G. and Robertson, A. (1968). Linkage
 disequilibrium in finite populations. Theoretical and Applied

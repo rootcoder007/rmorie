@@ -18,13 +18,11 @@
 #' @param size One of small, medium, large, xl. Default small.
 #' @param ... Further configuration passed through.
 #' @return List as returned by \code{morie_geron_gpt2}.
-#' @references Radford, A., Wu, J., Child, R., Luan, D., Amodei, D.
-#'   and Sutskever, I. (2019), Language Models are Unsupervised
-#'   Multitask Learners, OpenAI technical report, Section 2.3 and
-#'   Table 2. Radford, A., Narasimhan, K., Salimans, T. and
-#'   Sutskever, I. (2018), Improving Language Understanding by
-#'   Generative Pre-Training, OpenAI. Source PDF:
-#'   fetched-wave3/radford-etal-2019-gpt2-unsupervised-multitask-learners.pdf.
+#' @references Radford, A., Wu, J., Child, R., Luan, D., Amodei, D. and Sutskever, I.
+#'   (2019), Language Models are Unsupervised Multitask Learners, OpenAI technical
+#'   report, Section 2.3 and Table 2. Radford, A., Narasimhan, K., Salimans, T. and
+#'   Sutskever, I. (2018), Improving Language Understanding by Generative Pre-Training,
+#'   OpenAI.
 #' @examples
 #' Gpt2(matrix(0.1, 2, 4), n_layers = 1, n_heads = 1)$estimate
 #' @export

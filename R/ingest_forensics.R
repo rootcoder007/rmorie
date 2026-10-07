@@ -86,13 +86,6 @@
 #' Internal helper: Morie Forensics Flatten Nibrs
 #' @noRd
 .morie_forensics_flatten_nibrs <- function(rec) {
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop(
-      "Package 'jsonlite' is required for NIBRS flattening. ",
-      "install.packages('jsonlite')",
-      call. = FALSE
-    )
-  }
   out <- list()
   for (k in names(rec)) {
     v <- rec[[k]]
@@ -409,13 +402,13 @@ morie_ingest_forensics_nibrs <- function(year,
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("httr2", quietly = TRUE)) withAutoprint({
 #' df <- morie_ingest_forensics_namus_missing(state = "CA",
 #'                                            max_features = 1000L)
 #' head(df)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_forensics_namus_missing <- function(
     state = NULL,
@@ -423,20 +416,7 @@ morie_ingest_forensics_namus_missing <- function(
     page_size = 200L,
     user_agent = .MORIE_FORENSICS_DEFAULT_UA,
     timeout = .MORIE_FORENSICS_DEFAULT_TIMEOUT) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop(
-      "Package 'httr2' is required for morie_ingest_forensics_*(). ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop(
-      "Package 'jsonlite' is required for morie_ingest_forensics_*(). ",
-      "install.packages('jsonlite')",
-      call. = FALSE
-    )
-  }
+  .morie_http_require("morie_ingest_forensics_*()")
   page_size <- as.integer(page_size)
   body <- list(
     take = page_size, skip = 0L,
@@ -581,13 +561,7 @@ morie_ingest_forensics_namus_missing <- function(
   license_ <- rec$license
   if (is.null(license_)) license_ <- rec$rights
   if (is.list(license_)) {
-    if (requireNamespace("jsonlite", quietly = TRUE)) {
-      license_ <- .morie_to_json(license_, auto_unbox = TRUE)
-    } else {
-      license_ <- paste(unlist(license_, use.names = FALSE),
-        collapse = ";"
-      )
-    }
+    license_ <- as.character(.morie_to_json(license_, auto_unbox = TRUE))
   }
   list(
     dataset_id   = {

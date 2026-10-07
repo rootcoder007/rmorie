@@ -19,7 +19,6 @@
 The transformed times g(t), one per entry of \code{times}.
 }
 \description{
-A step of the k05_tranche2 implementation. Called by \code{morie_scaled_schoenfeld}.
-See the file header for the source the module follows.
-source it follows.
+Helper step. Called by \code{morie_scaled_schoenfeld}. See the file header for the
+source the module follows. source it follows.
 }

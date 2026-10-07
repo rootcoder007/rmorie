@@ -21,5 +21,7 @@ A vector, from \code{sort}.
 \description{
 A step of the ocrwit_native implementation. Called by \code{morie_ocrwit}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+ocrwit_patch_of_box(c(10, 10, 60, 40), width = 100, height = 100)
 }

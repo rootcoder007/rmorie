@@ -76,7 +76,6 @@ A list with \code{estimate}, \code{calls}, \code{n_calls}, \code{n_precise},
 \description{
 A step of the sv_dl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(3)

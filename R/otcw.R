@@ -14,6 +14,11 @@
 #' @param perm Zero-based assignment: \code{y_i} matched to \code{x_perm[i]}.
 #' @return List with \code{is_cm}, \code{slack}, \code{estimate}, \code{n}.
 #' @references Villani, C. (2003). AMS GSM 58, theorem 2.12.
+#' @examples
+#' X <- c(0, 1); Y <- c(0, 1)
+#' Cost <- outer(X, Y, function(a, b) (a - b)^2)
+#' Otcw(X, Y, Cost, perm = c(1L, 0L))$is_cm   # crossed matching: improvable
+#' Otcw(X, Y, Cost, perm = c(0L, 1L))$is_cm   # identity: cyclically monotone
 #' @export
 Otcw <- function(X, Y, Cost, perm) {
   M <- as.matrix(Cost)

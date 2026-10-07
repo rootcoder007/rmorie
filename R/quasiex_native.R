@@ -166,6 +166,9 @@ print.morie_did <- function(x, ...) {
 #' @param alpha CI tail. Default 0.05.
 #' @return Object of class \code{"morie_iv"}: estimate (NA when the
 #'   gate refuses), std.error, conf.int, first_stage_F, stock_yogo_10,
+#'   effective_F and mop_critical_10 (the heteroskedasticity-robust
+#'   Montiel Olea-Pflueger effective F and its TSLS critical value at
+#'   tau = 10 percent),
 #'   weak_instruments, ar_confidence_set, method, n, call.
 #' @references Staiger & Stock (1997); Anderson & Rubin (1949);
 #'   Stock & Yogo (2005).
@@ -179,6 +182,7 @@ print.morie_did <- function(x, ...) {
 #' @export
 morie_iv_2sls <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, alpha = 0.05) {
+  .morie_arg(data, "df")
   stopifnot(is.data.frame(data), length(endogenous) == 1L)
   need <- c(outcome, endogenous, instruments, exogenous)
   missing_cols <- setdiff(need, names(data))
@@ -191,7 +195,14 @@ morie_iv_2sls <- function(data, outcome, endogenous, instruments,
   fs <- morie_iv_first_stage_diagnostics(df, endogenous, instruments,
                                          exogenous = exogenous)
   first_F <- as.numeric(fs$F[1L])
-  # Shipped table covers 1 endogenous x 1-3 instruments; NA beyond.
+  # heteroskedasticity-robust: the Montiel Olea-Pflueger effective F and its
+  # computed TSLS critical value at tau = 10 percent (the SEs below are HC1)
+  mop <- tryCatch(morie_iv_montiel_olea_pflueger(df, outcome, endogenous, instruments,
+                                                 exogenous = exogenous, tau = 0.10),
+                  error = function(e) NULL)
+  eff_F <- if (is.null(mop)) NA_real_ else mop$F_eff
+  mop_crit <- if (is.null(mop)) NA_real_ else mop$critical_values$tsls[1L]
+  # Stock-Yogo rows included: 1 endogenous x 1-3 instruments, iid; NA beyond.
   sy_crit <- tryCatch(
     as.numeric(morie_iv_stock_yogo(1L, length(instruments))[["10pct"]]),
     error = function(e) NA_real_
@@ -231,6 +242,7 @@ morie_iv_2sls <- function(data, outcome, endogenous, instruments,
   }
   out <- c(est_part, list(
     first_stage_F = first_F, stock_yogo_10 = sy_crit,
+    effective_F = eff_F, mop_critical_10 = mop_crit,
     weak_instruments = weak, ar_confidence_set = ar_set,
     method = "2SLS (native k-class, HC1) with Staiger-Stock gate",
     n = nrow(df), call = match.call()
@@ -270,6 +282,10 @@ print.morie_iv <- function(x, ...) {
                 x$estimate, x$std.error, x$conf.int[1], x$conf.int[2]))
     cat(sprintf("  First-stage F = %.2f (Stock-Yogo 10%% crit = %.2f)\n",
                 x$first_stage_F, x$stock_yogo_10))
+    if (is.finite(x$effective_F %||% NA_real_)) {
+      cat(sprintf("  Effective F (robust) = %.2f (Montiel Olea-Pflueger TSLS tau=10%% crit = %.2f)\n",
+                  x$effective_F, x$mop_critical_10))
+    }
   }
   invisible(x)
 }

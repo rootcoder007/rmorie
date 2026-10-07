@@ -37,6 +37,12 @@ accuracy a barrier method offers there anyway.
 \details{
 Formula: minimise f(x) - mu sum_i log(-g_i(x)) with g_i(x) <= 0.
 }
+\examples{
+# minimise (x - 2)^2 + (y - 1)^2 subject to x + y <= 2
+f <- function(z) (z[1] - 2)^2 + (z[2] - 1)^2
+r <- Ipfsfa(f, list(function(z) z[1] + z[2] - 2), x0 = c(0, 0))
+round(r$x, 3)   # (1.5, 0.5)
+}
 \references{
 Waechter and Biegler (2006), On the implementation of an
 interior-point filter line-search algorithm for large-scale

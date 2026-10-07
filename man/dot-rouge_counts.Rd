@@ -15,5 +15,4 @@ The value of \code{table}.
 \description{
 A step of the rouge_native implementation. Called by \code{morie_rouge_n}.
 See the file header for the source the module follows.
-source it follows.
 }

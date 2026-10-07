@@ -21,7 +21,6 @@ A list with \code{reduce_params}, \code{cls_params}, \code{reg_params},
 \description{
 A step of the yolovx_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_yolovx_decoupled_head(channels = 5L)

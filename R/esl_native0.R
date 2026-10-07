@@ -20,7 +20,6 @@
 #'
 #' A step of the esl_native0 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -86,7 +85,6 @@
 #'
 #' A step of the esl_native0 implementation. Called by \code{.esl_grow}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param depth Passed to \code{>=}.
@@ -181,7 +179,6 @@
 #'
 #' A step of the esl_native0 implementation. Called by \code{morie_esl_random_forest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node See Usage.
 #' @param X A matrix; indexed by row and column.
@@ -202,7 +199,6 @@
 #' A step of the esl_native0 implementation. Called by \code{morie_esl_bootstrap_err},
 #' \code{morie_esl_random_forest}, \code{morie_esl_residual_variance}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.

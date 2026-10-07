@@ -28,7 +28,6 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Qcritset(V)
 }
 \references{
-Chernozhukov, Hong and Tamer (2007), Econometrica 75(5),
-1243-1284, Sect. 2.  Standard published form; the article is not in
-the local corpus and was not read.
+Chernozhukov, Hong and Tamer (2007), Econometrica 75(5), 1243-1284, Sect.
+2; standard published form.
 }

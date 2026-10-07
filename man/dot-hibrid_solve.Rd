@@ -18,5 +18,4 @@ The value of \code{x}, as built in the body.
 A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at},
 \code{morie_hibrid_hibrid_prediction}.
 See the file header for the source the module follows.
-source it follows.
 }

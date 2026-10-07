@@ -67,7 +67,6 @@
 #' \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_corrected_logits},
 #' \code{morie_twoT_retrieve} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -88,7 +87,6 @@
 #' \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve},
 #' \code{morie_twoT_tower_embedding}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -111,7 +109,6 @@
 #'
 #' A step of the twoT_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param features Passed to \code{.twoT_as_vec}.
 #' @param W Passed to \code{.twoT_as_mat}.
@@ -151,7 +148,6 @@ morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) 
 #' A step of the twoT_native implementation. Called by
 #' \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Passed to \code{.twoT_as_vec}.
 #' @param probabilities Passed to \code{.twoT_as_vec}.
@@ -185,7 +181,6 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #'
 #' A step of the twoT_native implementation. Called by \code{morie_twoT_streaming_frequency}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hits Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param t Numeric; combined arithmetically in the body.
@@ -209,7 +204,6 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #'
 #' A step of the twoT_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hits Passed to \code{.twoT_get_items}.
 #' @param n_steps A count; the body uses it as \code{seq_len(...)}.
@@ -218,8 +212,8 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #' @return A list with \code{B}, \code{probability}, \code{n_items}, \code{note}.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_twoT_streaming_frequency(V, V)
+#' hits <- list(c(1L, 2L), c(2L), c(2L, 3L))   # the items seen at each of three steps
+#' morie_twoT_streaming_frequency(hits, n_steps = 3L, alpha = 0.1)
 #' @keywords internal
 morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
                                           init = NULL) {
@@ -257,7 +251,6 @@ morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
 #'
 #' A step of the twoT_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query_embeddings Passed to \code{.twoT_as_mat}.
 #' @param item_embeddings Passed to \code{.twoT_as_mat}.
@@ -308,7 +301,6 @@ morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
 #'
 #' A step of the twoT_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query_embedding Passed to \code{.twoT_as_vec}.
 #' @param item_embeddings Passed to \code{.twoT_as_mat}.
@@ -353,7 +345,6 @@ morie_twoT_retrieve <- function(query_embedding, item_embeddings,
 #'
 #' A step of the twoT_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -373,7 +364,7 @@ morie_twoT_cheatsheet <- function() {
         "directions.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_twoT <- morie_twoT_retrieve
 
 # public names resolved by fn/_lazy_map.json

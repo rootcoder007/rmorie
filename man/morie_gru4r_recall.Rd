@@ -19,3 +19,7 @@ morie_gru4r_recall(ranked, target, kk = 20)
 \description{
 1 if the target is in the top \code{k} ranked items, else 0.
 }
+\examples{
+morie_gru4r_recall(c(5L, 2L, 9L, 1L), target = 9L, kk = 3)
+morie_gru4r_recall(c(5L, 2L, 9L, 1L), target = 1L, kk = 3)
+}

@@ -26,7 +26,6 @@
 #' A step of the poissp_native implementation. Called by
 #' \code{morie_poissp_car_precision}, \code{morie_poissp_rho_bounds}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{A}, as built in the body.
@@ -83,6 +82,7 @@ morie_poissp_car_precision <- function(W, tau = 1.0, rho = 1.0) {
 #' morie_poissp_rho_bounds(W)
 #' @keywords internal
 morie_poissp_rho_bounds <- function(W) {
+  .morie_arg(W, "m")
   A <- .poissp_adjacency(W)
   n <- nrow(A)
   d <- rowSums(A)
@@ -102,7 +102,6 @@ morie_poissp_rho_bounds <- function(W) {
 #' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode},
 #' \code{.poissp_joint_hessian}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A vector; its length is taken.
 #' @return A numeric value.
@@ -122,7 +121,6 @@ morie_poissp_rho_bounds <- function(W) {
 #' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode},
 #' \code{morie_poissp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param m A matrix; passed to \code{diag}.
@@ -151,7 +149,6 @@ morie_poissp_rho_bounds <- function(W) {
 #' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode},
 #' \code{morie_poissp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param b A matrix; passed to \code{solve}.
@@ -172,7 +169,6 @@ morie_poissp_rho_bounds <- function(W) {
 #'
 #' A step of the poissp_native implementation. Called by \code{morie_poissp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param X A matrix; indexed by row and column.
@@ -220,7 +216,6 @@ morie_poissp_rho_bounds <- function(W) {
 #' A step of the poissp_native implementation. Called by \code{.poissp_laplace},
 #' \code{morie_poissp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; combined arithmetically in the body.
 #' @param m Numeric; passed to \code{log}.
@@ -239,7 +234,6 @@ morie_poissp_rho_bounds <- function(W) {
 #'
 #' A step of the poissp_native implementation. Called by \code{.poissp_laplace}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{0}.
@@ -260,7 +254,6 @@ morie_poissp_rho_bounds <- function(W) {
 #'
 #' A step of the poissp_native implementation. Called by \code{.poissp_laplace}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{eigen}.
 #' @param rank_deficit Numeric; combined arithmetically in the body. Defaults to \code{0L}.
@@ -280,7 +273,6 @@ morie_poissp_rho_bounds <- function(W) {
 #'
 #' A step of the poissp_native implementation. Called by \code{morie_poissp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param u A matrix; passed to \code{\%*\%}.
@@ -442,7 +434,6 @@ morie_poisson_spatial_glm <- morie_poissp
 #'
 #' A step of the poissp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

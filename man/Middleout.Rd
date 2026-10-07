@@ -23,9 +23,8 @@ below; rows are classified on that basis and reported separately so
 the reading stays checkable.
 }
 \examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-S <- c("a", "b", "c")
-Middleout(S, M)
+S <- rbind(c(1, 1), c(1, 0), c(0, 1), c(0.5, 0), c(0.5, 0))   # 0/1 rows aggregate, proportion rows disaggregate
+Middleout(middle = c(10, 20), S = S)
 }
 \references{
 Hyndman & Athanasopoulos, FPP3, Sec. 11.3.

@@ -17,7 +17,6 @@
 #' A step of the aft_native implementation. Called by \code{.morie_aft_fit},
 #' \code{morie_aft_residuals}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @param family Passed to \code{identical}.
@@ -92,7 +91,6 @@
 #'
 #' A step of the aft_native implementation. Called by \code{.morie_aft_common}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken.
 #' @param e Passed to \code{>}.
@@ -152,7 +150,6 @@
 #'
 #' A step of the aft_native implementation. Called by \code{.morie_aft_common}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken.
 #' @param e Numeric; passed to \code{sum}.
@@ -189,7 +186,6 @@
 #' A step of the aft_native implementation. Called by \code{morie_aft_generalized_gamma},
 #' \code{morie_aft_log_logistic}, \code{morie_aft_weibull}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Passed to \code{.morie_cox_prepare}.
 #' @param event Passed to \code{.morie_cox_prepare}.

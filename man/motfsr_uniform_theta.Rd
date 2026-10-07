@@ -19,5 +19,7 @@ The value of \code{theta}, as built in the body.
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_run}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+motfsr_uniform_theta(w = 3, L = 10, mu = 0.5)
 }

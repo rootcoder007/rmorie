@@ -54,7 +54,6 @@
 #'
 #' A step of the coin_native implementation. Called by \code{morie_oneway_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A list; the body reads \code{$mu}, \code{$Sigma}, \code{$T} from it.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
@@ -79,7 +78,6 @@
 #'
 #' A step of the coin_native implementation. Called by \code{morie_indep_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A list; the body reads \code{$mu}, \code{$Sigma}, \code{$T} from it.
 #' @param alternative The body requires: bad alternative. Defaults to \code{"two.sided"}.
@@ -142,7 +140,6 @@
 #' A step of the coin_native implementation. Called by \code{morie_indep_test},
 #' \code{morie_oneway_test}, \code{morie_wilcox_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param formula See Usage.
 #' @param data See Usage.

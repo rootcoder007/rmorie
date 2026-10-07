@@ -183,15 +183,16 @@ test_that(".morie_raw_to_hex errors on non-raw input", {
                regexp = "expected raw vector")
 })
 
-test_that(".morie_keystore_require errors if sodium is missing", {
-  skip_if_not_installed("jsonlite")
-  skip_if_not_installed("sodium")
-  if (requireNamespace("sodium", quietly = TRUE) &&
-      requireNamespace("jsonlite", quietly = TRUE)) {
-    expect_silent(rmorie:::.morie_keystore_require())
-  } else {
-    expect_error(rmorie:::.morie_keystore_require())
-  }
+test_that("the key store needs neither sodium nor jsonlite", {
+  # scrypt and ChaCha20-Poly1305 are native, the JSON reader is rmoriebricklayer's port
+  local_mocked_bindings(requireNamespace = function(package, ...) !package %in% c("sodium", "jsonlite"),
+                        .package = "base")
+  path <- tempfile(fileext = ".json")
+  on.exit(unlink(path), add = TRUE)
+  morie_crypto_keystore_create("pw", path = path)
+  morie_crypto_keystore_store("dana", as.raw(1:4), as.raw(8:1), "pw", path = path)
+  expect_identical(morie_crypto_keystore_load("dana", "pw", path = path)$sk, as.raw(8:1))
+  expect_identical(morie_crypto_keystore_list("pw", path = path), "dana")
 })
 
 # =================================================================== datasets.R

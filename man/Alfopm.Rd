@@ -27,6 +27,12 @@ pair stack.  Rows \code{i} and \code{j} of the MSA representation are
 projected, their outer product is averaged over sequences, flattened and
 projected to the pair channel width.
 }
+\examples{
+set.seed(6)
+m <- array(rnorm(2 * 3 * 4), c(2, 3, 4))   # 2 sequences, 3 residues, cm = 4
+r <- Alfopm(m, wa = matrix(rnorm(8), 2, 4), wb = matrix(rnorm(8), 2, 4), wo = matrix(rnorm(12), 3, 4))
+dim(r$z)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 10
 }

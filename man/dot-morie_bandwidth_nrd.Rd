@@ -15,7 +15,6 @@ A numeric value.
 \description{
 A step of the mass_native implementation. Called by \code{morie_kde2d}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 if (requireNamespace("MASS", quietly = TRUE)) {

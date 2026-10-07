@@ -18,7 +18,6 @@
 #' A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix},
 #' \code{stage_game_type}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{nrow}.
 #' @param name Passed to \code{sprintf}.
@@ -40,7 +39,6 @@
 #'
 #' A step of the nashq_native implementation. Called by \code{.nashq_indifference}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param b Passed to \code{cbind}.
@@ -79,7 +77,6 @@
 #'
 #' A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param payoff A matrix; indexed by row and column.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
@@ -105,7 +102,6 @@
 #' A step of the nashq_native implementation. Called by \code{.nashq_is_equilibrium},
 #' \code{.nashq_is_saddle}, \code{.nashq_select} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; indexed by row and column.
 #' @param p A vector; its length is taken and its elements indexed.
@@ -131,7 +127,6 @@
 #'
 #' A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param B A matrix; indexed by row and column.
@@ -159,7 +154,6 @@
 #' A step of the nashq_native implementation. Called by \code{.nashq_select},
 #' \code{stage_game_type}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param B A matrix; indexed by row and column.
@@ -219,7 +213,6 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
 #' A step of the nashq_native implementation. Called by \code{.nashq_select},
 #' \code{stage_game_type}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param B Passed to \code{.nashq_payoff}.
@@ -251,7 +244,6 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
 #'
 #' A step of the nashq_native implementation. Called by \code{morie_nashq}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Numeric; passed to \code{max}.
 #' @param B Numeric; passed to \code{max}.
@@ -299,7 +291,6 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 #'
 #' A step of the nashq_native implementation. Called by \code{morie_nashq}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Numeric; passed to \code{max}.
 #' @param B Numeric; passed to \code{max}.
@@ -349,7 +340,6 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 #'
 #' A step of the nashq_native implementation. Called by \code{morie_nashq}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{nrow}.
 #' @param A A vector; its length is taken.
@@ -380,7 +370,6 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 #'
 #' A step of the nashq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param states Coerced to list by the body, with \code{as.list}.
 #' @param actions A vector; its length is taken and its elements indexed.
@@ -536,7 +525,6 @@ nashqlearning <- morie_nashq
 #'
 #' A step of the nashq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -19,6 +19,5 @@ One of two values, depending on the branch taken.
 \description{
 A step of the phmmsr_native implementation. Called by \code{phmmsr_search_pipeline}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

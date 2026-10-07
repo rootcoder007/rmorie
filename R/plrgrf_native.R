@@ -51,7 +51,6 @@
 #'
 #' A step of the plrgrf_native implementation. Called by \code{local_centering}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param V Numeric; combined arithmetically in the body.
@@ -70,7 +69,6 @@
 #'
 #' A step of the plrgrf_native implementation. Called by \code{local_centering}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
@@ -98,7 +96,6 @@
 #'
 #' A step of the plrgrf_native implementation. Called by \code{morie_plrgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param W Passed to \code{.plrgrf_forest_predict}.
@@ -139,7 +136,6 @@ local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
 #'
 #' A step of the plrgrf_native implementation. Called by \code{morie_plrgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y_res A vector; its length is taken.
 #' @param w_res Numeric; combined arithmetically in the body.
@@ -196,7 +192,6 @@ residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
 #'
 #' A step of the plrgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W Coerced to numeric by the body, with \code{as.numeric}.
@@ -277,7 +272,6 @@ morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
 #'
 #' A step of the plrgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

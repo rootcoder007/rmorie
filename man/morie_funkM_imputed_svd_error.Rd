@@ -29,7 +29,6 @@ A list with \code{rmse_on_observed}, \code{fill}, \code{rank}, \code{note}.
 \description{
 A step of the funkM_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 ratings <- list(c(0, 0, 5), c(0, 1, 3), c(1, 0, 4), c(1, 2, 2),

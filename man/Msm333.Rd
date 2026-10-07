@@ -13,9 +13,14 @@ Msm333(...)
 The list returned by \code{Msm332()}.
 }
 \description{
-The stub generator stamped several extracted page fragments with the same
-function name, so the implementation lives once in \code{Msm332()} and this
-module re-exports it. Calling either path runs the same code.
+The same method as \code{Msm332()}, re-exported under this name; both run the same
+code.
+}
+\examples{
+set.seed(29)
+X <- matrix(rnorm(60), 30, 2)
+y <- 1 + X \%*\% c(2, -1) + rnorm(30, sd = 0.1)
+Msm333(X, as.numeric(y))$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

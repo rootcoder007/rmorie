@@ -28,7 +28,10 @@ Formula: l_p(beta; y) = l(beta; y) - lambda sum_c sum_j |beta_cj|
 penalty replaced by an L1 one.
 }
 \examples{
-Msm115(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L, beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+set.seed(18)
+X <- matrix(rnorm(40), 20, 2)
+y <- sample(0:2, 20, TRUE)
+Msm115(X, y, beta0 = c(0, 0), beta = matrix(0.3, 2, 2), lam = 1)$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

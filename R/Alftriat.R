@@ -18,6 +18,12 @@
 #' @return A list with \code{z}, the attention array \code{attn},
 #'   \code{estimate}, \code{n}, \code{mode} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 13-14
+#' @examples
+#' set.seed(8)
+#' z <- array(rnorm(3 * 3 * 2), c(3, 3, 2))
+#' w <- function() list(matrix(rnorm(4, sd = 0.5), 2, 2))
+#' r <- Alftriat(z, w(), w(), w(), wb = matrix(rnorm(2), 1, 2), wg = w(), wo = matrix(rnorm(4), 2, 2))
+#' dim(r$z)
 #' @export
 Alftriat <- function(z, wq, wk, wv, wb, wg, wo, mode = "starting") {
   if (!mode %in% c("starting", "ending"))

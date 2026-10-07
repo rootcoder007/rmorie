@@ -17,5 +17,4 @@ A list with \code{bp}, \code{dv}, \code{sq}, \code{ig}, \code{w}.
 \description{
 A step of the rangayyan_qrs implementation. Called by \code{QrsDetect}.
 See the file header for the source the module follows.
-source it follows.
 }

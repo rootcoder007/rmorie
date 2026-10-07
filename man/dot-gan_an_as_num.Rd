@@ -17,7 +17,6 @@ A step of the gan_an_native implementation. Called by
 \code{.gan_an_discrimination_loss_impl}, \code{.gan_an_residual_loss_impl},
 \code{morie_gan_an} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

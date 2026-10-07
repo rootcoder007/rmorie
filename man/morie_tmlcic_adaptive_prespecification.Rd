@@ -45,7 +45,6 @@ A list with \code{q_candidate}, \code{q_risks}, \code{q_names},
 \description{
 A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_cluster_ic}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(3)

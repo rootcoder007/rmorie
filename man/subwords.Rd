@@ -23,7 +23,6 @@ The value of \code{grams}, as built in the body.
 \description{
 A step of the fastxt_native implementation. Called by \code{fasttext}, \code{word_vector}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 subwords(word = 5L)

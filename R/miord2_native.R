@@ -12,7 +12,6 @@
 #'
 #' A step of the miord2_native implementation. Called by \code{morie_miord2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_gamma1}.
 #' @param X_obs A matrix; passed to \code{ncol}.

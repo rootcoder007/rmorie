@@ -29,6 +29,11 @@ probabilities underflows before the path is decided.
 Formula:
 \code{delta_t(j) = max_i [delta_{t-1}(i) + log A_ij] + log B_j(o_t)}.
 }
+\examples{
+trans <- matrix(c(0.7, 0.3, 0.4, 0.6), 2, byrow = TRUE)
+emit <- matrix(c(0.9, 0.1, 0.2, 0.8), 2, byrow = TRUE)
+Viterb(obs = c(0, 0, 1, 1, 0), trans = trans, emit = emit)$path
+}
 \references{
 Viterbi, A. J. (1967). IEEE Trans Inform Theory
 13:260-269.

@@ -25,7 +25,6 @@ NULL
 #' \code{.fairness_no_backend_result}, \code{morie_fairness_ctgan_debiaser},
 #' \code{morie_fairness_spatial_gan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param title Carried through into a list the body builds.
 #' @param call Carried through into a list the body builds.
@@ -53,7 +52,6 @@ NULL
 #' A step of the fairness_gan implementation. Called by
 #' \code{morie_fairness_ctgan_debiaser}, \code{morie_fairness_spatial_gan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A list with \code{kind}, \code{note}.
 #' @export
@@ -88,7 +86,6 @@ NULL
 #' A step of the fairness_gan implementation. Called by
 #' \code{morie_fairness_ctgan_debiaser}, \code{morie_fairness_spatial_gan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param title Passed to \code{.fairness_result}.
 #' @param call Passed to \code{.fairness_result}.
@@ -115,7 +112,6 @@ NULL
 #'
 #' A step of the fairness_gan implementation. Called by \code{morie_fairness_spatial_gan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sizes A vector; its length is taken and its elements indexed.
 #' @return The value of \code{params}, as built in the body.
@@ -135,7 +131,6 @@ NULL
 #'
 #' A step of the fairness_gan implementation. Called by \code{morie_fairness_spatial_gan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param params A vector; its length is taken and its elements indexed.
 #' @param x A matrix; passed to \code{\%*\%}.

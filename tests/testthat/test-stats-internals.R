@@ -100,10 +100,6 @@ test_that(".mt_combine_result builds a Fisher / Stouffer combined p result", {
 
 # ========================================================== weights.R
 
-test_that(".has_survey_pkg returns logical", {
-  expect_type(rmorie:::.has_survey_pkg(), "logical")
-})
-
 # ========================================================== tps_io.R
 
 test_that(".morie_tps_io_category_dir builds the right cache subpath", {

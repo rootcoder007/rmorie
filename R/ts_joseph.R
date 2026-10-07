@@ -29,7 +29,6 @@
 #' A step of the ts_joseph implementation. Called by \code{.morie_jo_pair},
 #' \code{morie_adfur}, \code{morie_autocorf} and 23 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param name Passed to \code{sprintf}. Defaults to \code{"x"}.
@@ -50,7 +49,6 @@
 #' A step of the ts_joseph implementation. Called by \code{morie_mapets},
 #' \code{morie_pinball}, \code{morie_relmae} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.morie_jo_vec}.
 #' @param yhat Passed to \code{.morie_jo_vec}.
@@ -70,7 +68,6 @@
 #' A step of the ts_joseph implementation. Called by \code{morie_mapets},
 #' \code{morie_smape}, \code{morie_stldecomp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -91,7 +88,6 @@
 #' A step of the ts_joseph implementation. Called by \code{.morie_jo_ols},
 #' \code{morie_adfur}, \code{morie_quantreg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{unlist}.
 #' @param b A vector; its length is taken.
@@ -130,7 +126,6 @@
 #' A step of the ts_joseph implementation. Called by \code{.morie_jo_fitpred},
 #' \code{morie_adfur}, \code{morie_quantreg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
 #' @param y Numeric; combined arithmetically in the body.
@@ -516,7 +511,6 @@ morie_fourfeat <- function(n, period, k, start = 0) {
 #'
 #' A step of the ts_joseph implementation. Called by \code{.morie_jo_daynum}, \code{morie_calfeat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; combined arithmetically in the body.
 #' @return A logical value.
@@ -527,7 +521,6 @@ morie_fourfeat <- function(n, period, k, start = 0) {
 #'
 #' A step of the ts_joseph implementation. Called by \code{morie_calfeat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; combined arithmetically in the body.
 #' @param m Numeric; combined arithmetically in the body.
@@ -886,7 +879,6 @@ morie_tsregmat <- function(x, lags, horizon = 1L) {
 #' A step of the ts_joseph implementation. Called by \code{morie_dirmulti},
 #' \code{morie_dirrec}, \code{morie_recmulti}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows A matrix; passed to \code{nrow}.
 #' @param y Passed to \code{.morie_jo_ols}.
@@ -1251,11 +1243,15 @@ morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
 #' @param gamma step size
 #' @return list(alpha, final, empirical, target, gamma, n, minalpha,
 #'   maxalpha)
-#' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_aci(V)
+#' # coverage indicators of a forecaster that covers about 88% of the time
+#' set.seed(1)
+#' inside <- runif(300) > 0.12
+#' r <- morie_aci(inside, alpha = 0.1, gamma = 0.01)
+#' c(r$empirical, r$final)
+#' @export
 morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
+  .morie_arg(inside, "lg")
   seqv <- as.logical(inside)
   if (length(seqv) == 0L) stop("inside must be non-empty.", call. = FALSE)
   alpha <- as.numeric(alpha)
@@ -1286,7 +1282,6 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' A step of the ts_joseph implementation. Called by \code{.morie_jo_glu},
 #' \code{.morie_jo_resblock}, \code{morie_itrans} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param w A matrix; the body checks with \code{is.matrix}.
 #' @param v A matrix; passed to \code{\%*\%}.
@@ -1305,7 +1300,6 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' A step of the ts_joseph implementation. Called by \code{morie_autoform},
 #' \code{morie_itrans}, \code{morie_tftnet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -1324,7 +1318,6 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock},
 #' \code{morie_itrans}, \code{morie_tftnet} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
@@ -1343,7 +1336,6 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #'
 #' A step of the ts_joseph implementation. Called by \code{morie_tftnet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
@@ -1354,7 +1346,6 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock},
 #' \code{morie_itrans}, \code{morie_tsmixer}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
@@ -1364,7 +1355,6 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #'
 #' A step of the ts_joseph implementation. Called by \code{.morie_jo_glu}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
@@ -1376,7 +1366,6 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #'
 #' A step of the ts_joseph implementation. Called by \code{morie_nhitsnet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken and its elements indexed.
 #' @param k Numeric; combined arithmetically in the body.
@@ -1398,7 +1387,6 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #'
 #' A step of the ts_joseph implementation. Called by \code{morie_nhitsnet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta A vector; its length is taken and its elements indexed.
 #' @param length_ A count; the body uses it as \code{seq_len(...)}.
@@ -1614,7 +1602,6 @@ morie_nhitsnet <- function(y, horizon, kernels, ratios, wf, wb) {
 #'
 #' A step of the ts_joseph implementation. Called by \code{morie_tftnet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gamma Passed to \code{.morie_jo_matvec}.
 #' @param w4 Passed to \code{.morie_jo_matvec}.
@@ -1690,7 +1677,6 @@ morie_tftnet <- function(a, w1, b1, w2, b2, w4, b4, w5, b5, wsel, bsel,
 #'
 #' A step of the ts_joseph implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.morie_jo_matvec}.
 #' @param w1 Passed to \code{.morie_jo_matvec}.

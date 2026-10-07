@@ -21,7 +21,6 @@ A numeric value.
 \description{
 A step of the phylby_native implementation. Called by \code{morie_phylby}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_phylby_swap_acceptance(beta_j = c(1, 2, 3, 4, 5, 6, 7, 8),

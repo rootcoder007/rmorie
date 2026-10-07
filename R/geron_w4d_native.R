@@ -2110,7 +2110,7 @@ morie_geron_span_corrupt <- function(tokens, noise_density = 0.15, mean_span = 3
     used <- c(used, rng_idx)
     if (sum(sapply(chosen, `[`, 2)) >= n_noise) break
   }
-  ord <- order(sapply(chosen, `[`, 1))
+  ord <- order(vapply(chosen, `[`, numeric(1), 1))
   chosen <- chosen[ord]
 
   inputs <- character(0)
@@ -2171,12 +2171,14 @@ morie_geron_t5_restore <- function(inputs, target) {
 #' @param noise_density,mean_span,seed,prefix As in the Python original.
 #' @return list with encoder_input, decoder_target, spans, restored, lossless,
 #'   n_masked, sentinels, text_to_text, estimate, n, method.
-#' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_t5(V)
+#' r <- morie_geron_t5("the quick brown fox jumps over the lazy dog")
+#' r$encoder_input
+#' r$lossless
+#' @export
 morie_geron_t5 <- function(src, tgt = NULL, noise_density = 0.15, mean_span = 3, seed = 0,
                            prefix = "translate:") {
+  .morie_arg(src, "c")
   toks <- .morie_w4d_tokens(src)
   sc <- morie_geron_span_corrupt(toks, noise_density, mean_span, seed)
   enc <- sc$inputs
@@ -2191,7 +2193,7 @@ morie_geron_t5 <- function(src, tgt = NULL, noise_density = 0.15, mean_span = 3,
     t2t <- c(trimws(paste(prefix, paste(toks, collapse = " "))), paste(tgt_toks, collapse = " "))
   }
 
-  n_masked <- sum(sapply(spans, `[`, 2))
+  n_masked <- sum(vapply(spans, `[`, numeric(1), 2))
 
   list(
     encoder_input = enc, decoder_target = dec, spans = spans, restored = rebuilt, lossless = lossless,
@@ -2535,10 +2537,11 @@ morie_geron_encoder_params <- function(d_model, d_ff, n_layers) {
 #'   n_layers, estimate, n, method.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_transformer(V)
+#' X <- matrix(c(1, 0, 0.5, 0.2, 1, 0, 0.3, 0.7), nrow = 4)   # four positions, two dimensions
+#' morie_geron_transformer(X, n_heads = 2, n_layers = 1)$total_params
 morie_geron_transformer <- function(X, n_heads = 2, d_model = NULL, n_layers = 2, d_ff = NULL,
                                     seed = 0, mask = NULL) {
+  .morie_arg(X, "m")
   Xa <- as.matrix(X)
   d <- if (is.null(d_model)) ncol(Xa) else as.integer(d_model)
   h <- as.integer(n_heads)
@@ -3537,6 +3540,7 @@ morie_geron_quantize <- function(z_e, codebook) {
 #' morie_geron_vq_vae(V)
 morie_geron_vq_vae <- function(X, codebook_size = 4, latent_dim = 2, epochs = 200, lr = 0.05,
                                beta = 0.25, seed = 0) {
+  .morie_arg(X, "m")
   A <- as.matrix(X)
   n <- nrow(A)
   d <- ncol(A)
@@ -4913,8 +4917,7 @@ morie_geron_tsne <- function(X, n_components = 2, perplexity = 5.0, seed = 0, n_
 #' @return list(a, b, sse).
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_fit_ab(V)
+#' morie_geron_fit_ab(min_dist = 0.1, spread = 1)
 morie_geron_fit_ab <- function(min_dist, spread = 1.0) {
   d <- seq(0.0, 3.0 * spread, length.out = 300)
   target <- ifelse(d <= min_dist, 1.0, exp(-(d - min_dist) / spread))

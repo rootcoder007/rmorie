@@ -25,12 +25,10 @@
 #' @param seed Seed for the fold shuffle.
 #' @return List with \code{estimate}, \code{se}, \code{K}, \code{n},
 #'   \code{folds}, \code{method}.
-#' @references Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo,
-#'   E., Hansen, C., Newey, W. and Robins, J. (2018), Double/debiased
-#'   machine learning for treatment and structural parameters, The
-#'   Econometrics Journal 21(1), C1-C68, doi:10.1111/ectj.12097,
-#'   Eq. 4.4, Definition 3.2, Theorem 3.2; local copy
-#'   fetched-wave3/chernozhukov-etal-2018-double-debiased-machine-learning-EJ21.pdf.
+#' @references Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C.,
+#'   Newey, W. and Robins, J. (2018), Double/debiased machine learning for treatment and
+#'   structural parameters, The Econometrics Journal 21(1), C1-C68,
+#'   doi:10.1111/ectj.12097, Eq. 4.4, Definition 3.2, Theorem 3.2.
 #' @export
 #' @examples
 #' Causdr2(y = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8),

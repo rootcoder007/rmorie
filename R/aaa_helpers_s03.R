@@ -20,7 +20,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.bkw_influence},
 #' \code{.ch_ols_se}, \code{.icc_balanced} and 343 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
@@ -41,7 +40,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.bkw_influence},
 #' \code{.cfa_cov}, \code{.ch_ols_se} and 236 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.
 #' @return A matrix, from \code{matrix}.
@@ -69,7 +67,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.s03crossprod},
 #' \code{Fevdc}, \code{Fnlm} and 11 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param B A matrix; indexed by row and column.
@@ -95,7 +92,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.bkw_influence},
 #' \code{.ch_ols_se}, \code{.jnt_lmm_ri} and 36 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param v A vector; its length is taken and its elements indexed.
@@ -122,7 +118,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.bkw_influence},
 #' \code{.btres_xtxinv}, \code{.ch_ols_se} and 7 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{t}.
 #' @return The value of \code{.s03matmul}.
@@ -138,7 +133,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.cfa_logdet},
 #' \code{.s03cholsolve}, \code{Fevdc} and 14 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
@@ -188,7 +182,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.bkw_influence},
 #' \code{.cfa_inv}, \code{.ch_ols_se} and 35 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param b A vector; indexed elementwise.
@@ -222,7 +215,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.btres_xtxinv},
 #' \code{.cfa_em}, \code{.htprd_ridge_cv} and 25 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param b Passed to \code{.s03cholsolve}.
@@ -246,7 +238,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.btnpqr_fit},
 #' \code{.btsieve_arfit}, \code{.dssoot_ols} and 36 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{t}.
 #' @param y Passed to \code{.s03matvec}.
@@ -338,7 +329,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.dnnact},
 #' \code{.dw_skipgram}, \code{.s03swish} and 21 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{exp}.
 #' @return One of two values, depending on the branch taken.
@@ -374,7 +364,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{Llamablock}, \code{Mbconv},
 #' \code{Swiglu}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @param beta Numeric; combined arithmetically in the body. Defaults to \code{1}.
@@ -386,7 +375,6 @@
 #'
 #' A step of the helpers_s03 implementation. Called by \code{Autoint}, \code{DeepF}, \code{Reglu}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Passed to \code{>}.
 #' @return One of two values, depending on the branch taken.
@@ -398,7 +386,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{Autoint}, \code{Bertrec},
 #' \code{Deitkd} and 7 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
@@ -423,7 +410,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{Dpgmm}, \code{Hdpgmm},
 #' \code{Hdplda} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
@@ -450,7 +436,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.btsieve_arfit},
 #' \code{.s03corr}, \code{.s03var} and 42 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
@@ -474,7 +459,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.s03sd}, \code{Btsubs},
 #' \code{Dic} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @param ddof Numeric; combined arithmetically in the body. Defaults to \code{1L}.
@@ -500,7 +484,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{Btbayes}, \code{Btcbb},
 #' \code{Btcicor} and 28 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{.s03var}.
 #' @param ddof Passed to \code{.s03var}. Defaults to \code{1L}.
@@ -517,7 +500,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.dnnheadweights},
 #' \code{.s03mad}, \code{Epicur} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -540,7 +522,6 @@
 #'
 #' A step of the helpers_s03 implementation. Called by \code{Irlsfn}, \code{Ogkcv}, \code{Ramsw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @param constant Numeric; combined arithmetically in the body. Defaults to \code{1.4826}.
@@ -561,7 +542,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.cstat_uno},
 #' \code{.dnnheadweights}, \code{.ot_quantiles} and 38 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @param p Numeric; combined arithmetically in the body.
@@ -591,7 +571,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.hrz3_u01}, \code{CnsRos},
 #' \code{Evangia} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken and its elements indexed.
 #' @return The value of \code{r}, as built in the body.
@@ -620,7 +599,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{Btcicor}, \code{Cv1gn},
 #' \code{Hetero} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param y A vector; indexed elementwise.
@@ -658,7 +636,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.bt_counts}, \code{.rfcand},
 #' \code{.s03mammen} and 22 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param i Coerced to integer by the body, with \code{as.integer}.
 #' @param base Numeric; combined arithmetically in the body. Defaults to \code{2L}.
@@ -680,7 +657,6 @@
 #'
 #' A step of the helpers_s03 implementation. Called by \code{.s03normdraws}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param base Iterated over elementwise, with \code{vapply}. Defaults to \code{2L}.
@@ -697,7 +673,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.drbsze_tquant},
 #' \code{Btbca}, \code{Btcicor} and 20 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{qnorm}.
 #' @return The value of \code{qnorm}.
@@ -712,7 +687,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.huber_k}, \code{Augmn},
 #' \code{Btbca} and 10 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
@@ -728,7 +702,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.ot_directions},
 #' \code{.vitdraw}, \code{MedCI} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{.s03unif}.
 #' @param base Passed to \code{.s03unif}. Defaults to \code{2L}.
@@ -744,7 +717,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.sgflrt_corr}, \code{Vbnpc},
 #' \code{Vinfer}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{lgamma}.
 #' @return The value of \code{lgamma}.
@@ -814,7 +786,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.s03maternk},
 #' \code{.sgflrt_corr}, \code{Maternvg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nu Numeric; combined arithmetically in the body.
 #' @param x Numeric; combined arithmetically in the body.
@@ -898,7 +869,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.s03drdid}, \code{.s03tmle},
 #' \code{.tmlcic_hier_cluster_arm} and 16 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. Passed to \code{.s03mat}.
 #' @param n A count; the body uses it as \code{matrix(...)}.
@@ -1119,7 +1089,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.morie_to_json},
 #' \code{.s03json_write}, \code{jsonlite_toJSON_or_stub} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{morie_jsonlt_to_json}.
 #' @param auto_unbox Passed to \code{morie_jsonlt_to_json}. Defaults to \code{TRUE}.
@@ -1152,7 +1121,6 @@
 #'
 #' A step of the helpers_s03 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param txt Passed to \code{morie_jsonlt_prettify}.
 #' @param indent Passed to \code{morie_jsonlt_prettify}. Defaults to \code{2L}.
@@ -1167,7 +1135,6 @@
 #' A step of the helpers_s03 implementation. Called by \code{.morie_datasette_get_json},
 #' \code{.morie_from_json}, \code{.siu_panel_extract} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param txt Passed to \code{morie_jsonlt_from_json}.
 #' @param ... Passed through.
@@ -1185,7 +1152,6 @@
 #'
 #' A step of the helpers_s03 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.s03json_toJSON}.
 #' @param path Passed to \code{writeLines}.
@@ -1206,7 +1172,6 @@
 #'
 #' A step of the helpers_s03 implementation. Called by \code{morie_dataset_load}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param con Passed to \code{readLines}.
 #' @param ... Passed through.

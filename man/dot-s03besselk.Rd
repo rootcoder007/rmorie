@@ -21,5 +21,4 @@ A numeric value.
 A step of the helpers_s03 implementation. Called by \code{.s03maternk},
 \code{.sgflrt_corr}, \code{Maternvg}.
 See the file header for the source the module follows.
-source it follows.
 }

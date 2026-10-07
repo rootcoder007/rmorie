@@ -15,5 +15,4 @@ A numeric value.
 \description{
 A step of the stlAn_native implementation. Called by \code{.mor_stl_loess_at}.
 See the file header for the source the module follows.
-source it follows.
 }

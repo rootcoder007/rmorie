@@ -28,6 +28,9 @@ Formula: \eqn{W_2^2 = ||m1 - m2||^2 + tr(S1 + S2 - 2 (S1^{1/2} S2
 S1^{1/2})^{1/2})} -- Peyre and Cuturi (2019) eq. (2.41)-(2.42), p. 34;
 Olkin and Pukelsheim (1982).
 }
+\examples{
+Otwsg(mu1 = c(0, 0), Sigma1 = diag(2), mu2 = c(3, 4), Sigma2 = diag(2))$W2   # 5: covariances agree
+}
 \references{
 Olkin, I. and Pukelsheim, F. (1982). Linear Algebra and its
 Applications 48:257-263. \doi{10.1016/0024-3795(82)90112-4}.

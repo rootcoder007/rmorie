@@ -2,12 +2,11 @@
 #' Effective reproduction number from susceptible depletion
 #'
 #' This is the susceptible-depletion Rt, not the renewal-equation Rt.
-#' The two are routinely confused: the stub this replaces cited Cori et
-#' al. (2013) for \code{R0 S / N}, which is not the estimator that paper
-#' defines. Cori's Rt comes from the incidence curve and a
-#' serial-interval distribution and lives elsewhere in this package
-#' (\code{Rtrenew}). DUPMAP.tsv lists this module as a duplicate of
-#' \code{epirf}; it is not, for the same reason.
+#' The two are routinely confused: \code{R0 S / N} is not the estimator
+#' Cori et al. (2013) define. Cori's Rt comes from the incidence curve and
+#' a serial-interval distribution and lives elsewhere in this package
+#' (\code{Rtrenew}). For the same reason this is not a duplicate of
+#' \code{epirf}.
 #'
 #' The herd-immunity threshold falls out: Rt crosses one when the
 #' susceptible fraction reaches \code{1 / R0}.

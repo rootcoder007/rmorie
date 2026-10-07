@@ -1,9 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' FlashAttention: IO-aware block-tiled exact attention
 #'
-#' Dao, Fu, Ermon, Rudra and Re (2022), "FlashAttention: fast and
-#' memory-efficient exact attention with IO-awareness", NeurIPS 2022,
-#' arXiv:2205.14135, read from the fetched PDF; and Dao (2023),
+#' Dao, Fu, Ermon, Rudra and Re (2022), "FlashAttention: fast and memory-efficient exact
+#' attention with IO-awareness", NeurIPS 2022, arXiv:2205.14135; and Dao (2023),
 #' "FlashAttention-2", arXiv:2307.08691.
 #'
 #' The claim in the title is the one that matters here: exact.  FlashAttention

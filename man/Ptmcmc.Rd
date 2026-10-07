@@ -50,9 +50,7 @@ str(r, max.level = 1)
 }
 \references{
 Earl, D. J. and Deem, M. W. (2005), Phys. Chem. Chem.
-Phys. 7, 3910-3916, eq. 4 (local: fetched-wave3/
-earl-deem-2005-parallel-tempering.pdf); Hukushima, K. and Nemoto,
-K. (1996), J. Phys. Soc. Japan 65(6), 1604-1608 (local:
-fetched-wave3/hukushima-nemoto-1996-exchange-mc.pdf); Metropolis
-et al. (1953), J. Chem. Phys. 21, 1087-1092.
+Phys. 7, 3910-3916, eq. 4; Hukushima, K. and Nemoto, K. (1996),
+J. Phys. Soc. Japan 65(6), 1604-1608; Metropolis et al. (1953),
+J. Chem. Phys. 21, 1087-1092.
 }

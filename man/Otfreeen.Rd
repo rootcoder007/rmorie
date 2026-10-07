@@ -25,6 +25,11 @@ Named list with \code{estimate}, \code{primal}, \code{dual_pairing},
 \deqn{F = \langle T,C\rangle - \varepsilon H(T) - \langle a,f\rangle - \langle b,g\rangle}
 Peyre & Cuturi (2019), eq. (4.30)-(4.32).  Zero at optimality.
 }
+\examples{
+a <- c(0.5, 0.5); b <- c(0.5, 0.5)
+C <- matrix(c(0, 1, 1, 0), 2)
+Otfreeen(T = diag(0.5, 2), C = C, a = a, b = b, f = c(0, 0), g = c(0, 0), epsilon = 0.1)$estimate
+}
 \references{
 Peyre & Cuturi (2019), eq. (4.30)-(4.32).
 }

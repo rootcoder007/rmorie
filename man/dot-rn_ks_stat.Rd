@@ -16,5 +16,4 @@ A numeric value.
 A step of the reds_native implementation. Called by \code{.rn_mc_p_fitted},
 \code{morie_multi_horizon_ks}.
 See the file header for the source the module follows.
-source it follows.
 }

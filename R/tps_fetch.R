@@ -69,36 +69,18 @@ morie_tps_list_categories <- function() {
 .morie_tps_fetch_arcgis_query <- function(base_url, where, offset,
                                     max_records = 2000L,
                                     timeout = 120) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop(
-      "morie_tps_fetch_category() needs the `httr2` package. ",
-      "Install with install.packages('httr2').",
-      call. = FALSE
-    )
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop(
-      "morie_tps_fetch_category() needs the `jsonlite` package. ",
-      "Install with install.packages('jsonlite').",
-      call. = FALSE
-    )
-  }
-  req <- httr2::request(paste0(base_url, "/query"))
-  req <- httr2::req_url_query(
-    req,
-    where = where,
-    outFields = "*",
-    returnGeometry = "true",
-    f = "geojson",
-    resultRecordCount = as.integer(max_records),
-    resultOffset = as.integer(offset)
+  body <- .morie_dataset_http_text(paste0(base_url, "/query"),
+    query = list(
+      where = where,
+      outFields = "*",
+      returnGeometry = "true",
+      f = "geojson",
+      resultRecordCount = as.integer(max_records),
+      resultOffset = as.integer(offset)
+    ),
+    timeout_s = as.integer(timeout)
   )
-  req <- httr2::req_timeout(req, timeout)
-  resp <- httr2::req_perform(req)
-  .morie_from_json(
-    httr2::resp_body_string(resp),
-    simplifyVector = FALSE
-  )
+  .morie_from_json(body, simplifyVector = FALSE)
 }
 
 

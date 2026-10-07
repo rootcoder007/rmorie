@@ -21,3 +21,6 @@ A step of the momento_native implementation. Called by \code{momento_reconstruct
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+momento_masked_loss(truth = c(1, 2, 3, 4), reconstruction = c(1.1, 2, 2.5, 4), mask = c(0, 1, 1, 0))$mse
+}

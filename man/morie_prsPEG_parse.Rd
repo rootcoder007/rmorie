@@ -20,6 +20,5 @@ A list with \code{estimate}, \code{matched}, \code{end}, \code{consumed},
 \description{
 A step of the prsPEG_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

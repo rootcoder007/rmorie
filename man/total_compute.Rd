@@ -17,7 +17,6 @@ A list with \code{compute}, \code{samples_seen}, \code{params}, \code{gmac_scale
 \description{
 A step of the opnclp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 total_compute(samples_seen = 5L, model_params = 5L)

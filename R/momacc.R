@@ -21,6 +21,8 @@
 #' Learning with Differential Privacy, CCS'16, arXiv:1607.00133. Lemma 3 for the
 #' sampled-Gaussian log moment, Theorem 2 for composability and the tail bound. Verified
 #' against the paper.
+#' @examples
+#' Dpacct(sigma = 1.1, sample_rate = 0.01, steps = 1000)$epsilon
 #' @export
 Dpacct <- function(sigma, sample_rate, steps, delta = 1e-05, max_order = 64) {
   sigma <- as.numeric(sigma)

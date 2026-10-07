@@ -50,7 +50,6 @@ A list with \code{estimate}, \code{plddt}, \code{plddt_mean}, \code{ptm},
 \description{
 A step of the alfesf_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # decode pLDDT logits: the score is the binned expectation

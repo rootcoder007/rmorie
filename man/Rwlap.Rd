@@ -21,8 +21,7 @@ Formula: P = T^-1 W; L_rw = I - T^-1 W
 Rwlap(W = 5L)
 }
 \references{
-von Luxburg (2007), A Tutorial on Spectral Clustering,
-Statistics and Computing 17(4), 395-416, Section 3, which defines
-L_rw = I - D^-1 W and notes it is "closely related to a random walk".
-Fetched from arXiv:0711.0189.
+von Luxburg (2007), A Tutorial on Spectral Clustering, Statistics and
+Computing 17(4), 395-416, Section 3, which defines L_rw = I - D^-1 W and notes it
+is "closely related to a random walk".
 }

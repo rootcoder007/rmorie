@@ -19,5 +19,4 @@ A matrix, from \code{solve}.
 \description{
 A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
 See the file header for the source the module follows.
-source it follows.
 }

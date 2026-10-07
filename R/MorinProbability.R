@@ -70,6 +70,7 @@ binomial_expansion <- function(a, b, n) {
 #' @rdname bernoulli_variance
 #' @export
 binomial_pmf_vector <- function(n, p) {
+  .morie_arg(n, "n")
   n <- .mrn_int(n, "n")
   p <- .mrn_prob(p, "p")
   pmf <- vapply(0:n, function(k) .mrn_binom(k, n, p), 0)
@@ -175,7 +176,10 @@ partial_permutations <- function(N, n) {
 
 #' @rdname bernoulli_variance
 #' @export
-permutations_count <- function(n) list(n = .mrn_int(n, "n"), permutations = factorial(n))
+permutations_count <- function(n) {
+  .morie_arg(n, "n")
+  list(n = .mrn_int(n, "n"), permutations = factorial(n))
+}
 
 #' @rdname bernoulli_variance
 #' @export

@@ -31,17 +31,15 @@ Drdiddyn(
 list: estimate, event_time, att, n_cells, method.
 }
 \description{
-Callaway and Sant'Anna (2021), Difference-in-differences with multiple
-time periods, Journal of Econometrics 225(2), 200-230
-(arXiv:1803.09015 -- FETCHED), define ATT(g, t) = E[Y_t(g) - Y_t(0) |
-G_g = 1] and the event-time aggregation over cohorts observed at each
-horizon; Sant'Anna and Zhao (2020), Journal of Econometrics 219(1),
-101-122 (arXiv:1812.01723 -- FETCHED), equation (2.6) supplies the
-doubly robust estimator for each (g, t) cell, with never-treated units
-as the comparison group and g-1 as the base period.  Negative horizons
-are pre-treatment placebo cells computed on the same footing; their
-being near zero IS the evidence for parallel trends, so they are
-reported rather than suppressed.
+Callaway and Sant'Anna (2021), Difference-in-differences with multiple time periods,
+Journal of Econometrics 225(2), 200-230 (arXiv:1803.09015), define ATT(g, t) =
+E[Y_t(g) - Y_t(0) | G_g = 1] and the event-time aggregation over cohorts observed
+at each horizon; Sant'Anna and Zhao (2020), Journal of Econometrics 219(1), 101-122
+(arXiv:1812.01723), equation (2.6) supplies the doubly robust estimator for each (g,
+t) cell, with never-treated units as the comparison group and g-1 as the base period.
+Negative horizons are pre-treatment placebo cells computed on the same footing; their
+being near zero IS the evidence for parallel trends, so they are reported rather than
+suppressed.
 }
 \examples{
 # see the parity harness for a worked panel

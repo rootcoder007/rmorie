@@ -41,6 +41,11 @@
 #'   and `identifiability`.
 #' @references Besag, York and Mollie (1991), Ann. Inst. Statist. Math.
 #'   43(1):1-59, Sec. 4, eqs (4.2)-(4.6); Schabenberger Ch 6, Sec 6.4.3.2
+#' @examples
+#' adjacency <- matrix(0, 4, 4)
+#' adjacency[cbind(1:3, 2:4)] <- 1; adjacency <- adjacency + t(adjacency)
+#' spbym(counts = c(5, 8, 12, 4), expected = c(6, 7, 9, 6), adjacency = adjacency,
+#'       kappa = 0.1, lam = 0.01)$relative_risk
 #' @export
 spbym <- function(counts, expected, adjacency, kappa, lam, max_iter = 200L,
                   tol = 1e-11) {

@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the tail2_t02 implementation. Called by \code{CttAlphaMax}.
 See the file header for the source the module follows.
-source it follows.
 }

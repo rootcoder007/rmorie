@@ -27,6 +27,11 @@ A list with \code{alpha}, \code{gamma}, \code{keep},
 Solves gamma = 2 E[k(X) | k(X) < gamma] for gamma by fixed point
 iteration. Homoskedastic unless conditional variances are supplied.
 }
+\examples{
+set.seed(22)
+ps <- plogis(rnorm(1000, 0, 2))
+morie_optimal_alpha(ps)[c("alpha", "gamma")]
+}
 \references{
 Crump, R. K. et al. (2009). Theorem 5.2.
 }

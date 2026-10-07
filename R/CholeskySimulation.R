@@ -18,6 +18,7 @@
 #' PivotedCholesky(matrix(c(4, 2, 2, 1), 2))
 #' @export
 PivotedCholesky <- function(A, tol = 1e-12, max_rank = NULL) {
+  .morie_arg(A, "m")
   A <- as.matrix(A)
   n <- nrow(A)
   d <- diag(A)

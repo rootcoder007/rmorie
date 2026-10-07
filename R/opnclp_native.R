@@ -22,7 +22,6 @@
 #'
 #' A step of the opnclp_native implementation. Called by \code{fit_power_law}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
@@ -37,7 +36,6 @@
 #'
 #' A step of the opnclp_native implementation. Called by \code{infonce}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -59,7 +57,6 @@
 #'
 #' A step of the opnclp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param samples_seen Coerced to numeric by the body, with \code{as.numeric}.
 #' @param model_params Coerced to numeric by the body, with \code{as.numeric}.
@@ -85,7 +82,6 @@ total_compute <- function(samples_seen, model_params) {
 #'
 #' A step of the opnclp_native implementation. Called by \code{compare_scaling}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.opnclp_vec}.
 #' @param y Passed to \code{.opnclp_vec}.
@@ -135,7 +131,6 @@ fit_power_law <- function(x, y) {
 #'
 #' A step of the opnclp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$alpha}, \code{$beta}, \code{$range} from it.
 #' @param compute Coerced to numeric by the body, with \code{as.numeric}.
@@ -166,7 +161,6 @@ fit_power_law <- function(x, y) {
 #'
 #' A step of the opnclp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x_a Passed to \code{fit_power_law}.
 #' @param y_a Passed to \code{fit_power_law}.
@@ -201,7 +195,6 @@ compare_scaling <- function(x_a, y_a, x_b, y_b,
 #'
 #' A step of the opnclp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param image_embeddings Passed to \code{.opnclp_mat}.
 #' @param text_embeddings Passed to \code{.opnclp_mat}.
@@ -269,7 +262,6 @@ infonce <- function(image_embeddings, text_embeddings,
 #'
 #' A step of the opnclp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -289,7 +281,7 @@ infonce <- function(image_embeddings, text_embeddings,
         "beyond the fitted range a prediction reaches.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 openclipscaling <- fit_power_law
 
 # public names resolved by fn/_lazy_map.json

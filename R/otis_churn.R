@@ -1134,13 +1134,11 @@ morie_otis_churn_analyze_all <- function(b01 = NULL, b02 = NULL,
         writeLines(format(r),
                    con = file.path(out_dir,
                                    sprintf("churn_%s.txt", nm)))
-        if (requireNamespace("jsonlite", quietly = TRUE)) {
-          writeLines(.morie_to_json(r$payload, pretty = TRUE,
-                                       auto_unbox = TRUE, null = "null",
-                                       force = TRUE),
-                     con = file.path(out_dir,
-                                     sprintf("churn_%s.json", nm)))
-        }
+        writeLines(.morie_to_json(r$payload, pretty = TRUE,
+                                     auto_unbox = TRUE, null = "null",
+                                     force = TRUE),
+                   con = file.path(out_dir,
+                                   sprintf("churn_%s.json", nm)))
       }, error = function(e) {
         warning(sprintf("Could not write %s output: %s", nm,
                         conditionMessage(e)))

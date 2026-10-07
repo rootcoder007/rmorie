@@ -22,7 +22,6 @@ A list with \code{distances}, \code{clusters}, \code{centers}, \code{covariances
 \description{
 A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -25,8 +25,8 @@ Btwcent(V)
 }
 \references{
 Brandes (2001), A faster algorithm for betweenness centrality, Journal of
-Mathematical Sociology 25:163-177. Paywalled and not held locally; the dependency
-recursion implemented here is the standard published form of the algorithm. Its output
-is checked in the batch's anchor file against brute-force enumeration of all shortest
-paths on a small graph.
+Mathematical Sociology 25:163-177. Paywalled and The dependency recursion implemented
+here is the standard published form of the algorithm. Its output is checked in the
+batch's anchor file against brute-force enumeration of all shortest paths on a small
+graph.
 }

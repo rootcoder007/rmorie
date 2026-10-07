@@ -2,7 +2,7 @@
 #' PPO's clipped surrogate objective
 #'
 #' Schulman, Wolski, Dhariwal, Radford and Klimov (2017), Proximal policy
-#' optimization algorithms, arXiv:1707.06347 (FETCHED as PDF), equation
+#' optimization algorithms, arXiv:1707.06347, equation
 #' (7): L^CLIP = E_t\[min(r_t A_t, clip(r_t, 1 - eps, 1 + eps) A_t)\] with
 #' r_t = pi_theta(a_t|s_t) / pi_old(a_t|s_t), the paper taking the minimum
 #' so the objective is a lower bound on the unclipped one.  Equation (9)
@@ -28,6 +28,7 @@ Ppoclip <- function(env, policy = NULL, clip_eps = 0.2, ratio = NULL,
                     adv = NULL, logp_new = NULL, logp_old = NULL,
                     v_pred = NULL, v_targ = NULL, entropy = NULL,
                     c1 = 0.5, c2 = 0.01) {
+  if (!is.null(env)) .morie_arg(env, "data")
   a <- .s03vec(if (!is.null(adv)) adv else env)
   if (!is.null(ratio)) {
     r <- .s03vec(ratio)

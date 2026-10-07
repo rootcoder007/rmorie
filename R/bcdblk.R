@@ -23,7 +23,8 @@
 #'   descent method for nondifferentiable minimization. JOTA 109:475-494.
 #' @export
 #' @examples
-#' Bcdblk(Q = 0.5, b = 5L, blocks = c("a", "b", "c"))
+#' Q <- matrix(c(4, 1, 0, 1, 3, 0, 0, 0, 2), 3)
+#' Bcdblk(Q, b = c(1, 2, 3), blocks = list(c(0, 1), 2), n_iter = 10)
 Bcdblk <- function(Q, b, blocks, x0 = NULL, n_iter = 20) {
   Qm <- as.matrix(Q)
   bv <- as.numeric(b)

@@ -29,6 +29,7 @@ morie_mhatf_multi_head_attention_full <- function(x, num_heads = 2L,
                                             W_v = NULL, W_o = NULL,
                                             seed = 0L,
                                             deterministic_seed = NULL) {
+  .morie_arg(x, "m")
   x <- as.matrix(x)
   seq_len <- nrow(x)
   d_model <- ncol(x)

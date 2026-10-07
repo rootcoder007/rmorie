@@ -47,7 +47,6 @@ A list with \code{H}, \code{X}, \code{V}, \code{messages}.
 \description{
 A step of the egnnL_native implementation. Called by \code{run_egnn}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

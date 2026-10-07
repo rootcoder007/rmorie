@@ -14,8 +14,8 @@
 #'   \code{total_leapfrog}, \code{warn}, \code{n}.
 #' @references Hoffman & Gelman (2014), Journal of Machine Learning
 #'   Research 15, 1593-1623; Betancourt (2017), arXiv:1701.02434.
-#'   Bayesian Data Analysis, 3rd edition, was fetched in full and
-#'   searched; it describes HMC but not the tree-depth diagnostic.
+#'   Bayesian Data Analysis, 3rd edition, describes HMC but not the
+#'   tree-depth diagnostic.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

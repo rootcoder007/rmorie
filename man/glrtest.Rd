@@ -25,7 +25,6 @@ The value of \code{morie_glr_test}.
 \description{
 A step of the glm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

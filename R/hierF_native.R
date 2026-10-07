@@ -17,7 +17,6 @@
 #'
 #' A step of the hierF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param groups A vector; its length is taken and its elements indexed.
 #' @param n_bottom A matrix; passed to \code{diag}.
@@ -46,7 +45,6 @@ summing_matrix <- function(groups, n_bottom) {
 #'
 #' A step of the hierF_native implementation. Called by \code{mint_reconcile}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; indexed elementwise.
 #' @param S A matrix; passed to \code{nrow}.
@@ -69,7 +67,6 @@ is_coherent <- function(y, S, tol = 1e-9) {
 #'
 #' A step of the hierF_native implementation. Called by \code{mint_P}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param residuals A matrix; passed to \code{nrow}.
 #' @param lam Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
@@ -115,7 +112,6 @@ shrink_covariance <- function(residuals, lam = NULL) {
 #'
 #' A step of the hierF_native implementation. Called by \code{mint_P}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{solve}.
 #' @param b A matrix; passed to \code{solve}.
@@ -143,7 +139,6 @@ shrink_covariance <- function(residuals, lam = NULL) {
 #'
 #' A step of the hierF_native implementation. Called by \code{mint_reconcile}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param S A matrix; indexed by row and column.
 #' @param W Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
@@ -207,7 +202,6 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
 #'
 #' A step of the hierF_native implementation. Called by \code{morie_hierF}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param base Coerced to numeric by the body, with \code{as.numeric}.
 #' @param S A matrix; passed to \code{as.matrix}.
@@ -263,7 +257,6 @@ hierarchical_forecast <- mint_reconcile
 #'
 #' A step of the hierF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param base Passed to \code{mint_reconcile}.
 #' @param S Passed to \code{mint_reconcile}.
@@ -289,7 +282,6 @@ morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
 #'
 #' A step of the hierF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

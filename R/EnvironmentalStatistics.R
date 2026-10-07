@@ -40,6 +40,7 @@
 #' EmpiricalBreakdownPoint(median, 1:9)$breakdown_point
 #' @export
 BudykoOlr <- function(T, A = 203.3, B = 2.09, S0 = 1361, albedo = 0.3) {
+  .morie_arg(T, "n")
   list(olr = A + B * T, equilibrium_temperature = ((1 - albedo) * S0 / 4 - A) / B, sensitivity = 1 / B)
 }
 

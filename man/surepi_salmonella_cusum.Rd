@@ -33,7 +33,6 @@ A list with \code{cusum}, \code{flag}, \code{estimate}, \code{n_flagged},
 \description{
 A step of the surepi_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 surepi_salmonella_cusum(counts = c(1, 2, 3, 4, 5, 6, 7, 8), mu0 = c(1, 2, 3, 4, 5, 6, 7, 8),

@@ -15,5 +15,4 @@ The value of \code{w}, as built in the body.
 \description{
 A step of the rgs_native implementation. Called by \code{morie_rgs_functional_regression}.
 See the file header for the source the module follows.
-source it follows.
 }

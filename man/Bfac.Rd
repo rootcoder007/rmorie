@@ -13,10 +13,9 @@ Bfac(log_lik_a, log_lik_b)
 the list returned by \code{Bayfac}.
 }
 \description{
-This stub and bayfac declare the same public function name, the same formula
-(the ratio of marginal likelihoods) and the same citation (Kass and Raftery
-1995).  They are one method under two module names; only the argument labels
-differ, log_lik_a and log_lik_b here against log_evidence_1 and
+\code{bfac} and \code{bayfac} are one method, the ratio of marginal
+likelihoods (Kass and Raftery 1995), under two names; only the argument
+labels differ, log_lik_a and log_lik_b here against log_evidence_1 and
 log_evidence_2 there.
 }
 \details{
@@ -26,10 +25,10 @@ likelihood integrated over the prior -- not of maximised likelihoods.
 Feeding in two maximised log-likelihoods gives a likelihood ratio, a
 different quantity and one that always favours the larger model.  The
 argument is treated here as what the formula requires, a log marginal
-likelihood, whatever the stub happened to name it.
+likelihood.
 
-There is exactly one implementation; this function delegates.  Recorded in
-ledger/wave2/DUPMAP.tsv as bfac -> bayfac.  Distinct from bayesf and bbf
+There is exactly one implementation; this function delegates to bayfac.
+Distinct from bayesf and bbf
 (BIC approximations) and from bfact (Savage-Dickey density ratio), which are
 different estimators of the same target and must not be collapsed.
 }

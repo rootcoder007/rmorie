@@ -26,7 +26,6 @@
 #'
 #' A step of the impFB_native implementation. Called by \code{.impFB_cost}, \code{morie_impFB}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r A matrix; passed to \code{nrow}.
 #' @return The value of \code{result}, as built in the body.
@@ -43,7 +42,6 @@
 #'
 #' A step of the impFB_native implementation. Called by \code{.impFB_cost}, \code{morie_impFB}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r A matrix; passed to \code{as.matrix}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{40}.
@@ -62,7 +60,6 @@
 #' A step of the impFB_native implementation. Called by \code{.impFB_als_step},
 #' \code{.impFB_explain}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -115,7 +112,6 @@
 #'
 #' A step of the impFB_native implementation. Called by \code{morie_impFB}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y A matrix; indexed by row and column.
 #' @param C_row A vector; indexed elementwise.
@@ -151,7 +147,6 @@
 #'
 #' A step of the impFB_native implementation. Called by \code{morie_impFB}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R Passed to \code{.impFB_preference}.
 #' @param X A matrix; passed to \code{\%*\%}.
@@ -174,7 +169,6 @@
 #'
 #' A step of the impFB_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R A matrix; passed to \code{as.matrix}.
 #' @param f Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
@@ -191,6 +185,7 @@
 #' @keywords internal
 morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
                        seed = 0, fast = TRUE) {
+  .morie_arg(R, "m")
   M <- as.matrix(R)
   storage.mode(M) <- "double"
   m <- nrow(M)
@@ -244,7 +239,6 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
 #'
 #' A step of the impFB_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y A matrix; indexed by row and column.
 #' @param C_row A vector; indexed elementwise.
@@ -293,7 +287,6 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
 #'
 #' A step of the impFB_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -314,7 +307,7 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
   ))
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 implicitfeedback <- morie_impFB
 
 # public names resolved by fn/_lazy_map.json

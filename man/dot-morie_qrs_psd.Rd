@@ -18,5 +18,4 @@ A list with \code{freqs}, \code{power}.
 A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl},
 \code{EdrSignal}, \code{HrvFreq} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

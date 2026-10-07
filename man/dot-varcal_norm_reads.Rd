@@ -16,5 +16,4 @@ The value of \code{lapply}.
 A step of the varcal_native implementation. Called by \code{morie_varcal},
 \code{varcal_encode_pileup}, \code{varcal_find_candidates} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

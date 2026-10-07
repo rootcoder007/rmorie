@@ -56,7 +56,6 @@
 #'
 #' A step of the sse4r_native implementation. Called by \code{morie_sse4r}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param item_embeddings A matrix; passed to \code{as.matrix}.
 #' @param user_embedding Coerced to numeric by the body, with \code{as.numeric}.
@@ -85,7 +84,6 @@
 #'
 #' A step of the sse4r_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param indices Coerced to integer by the body, with \code{as.integer}.
 #' @param table_size Coerced to integer by the body, with \code{as.integer}.
@@ -171,7 +169,6 @@
 #'
 #' A step of the sse4r_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @param table_size Coerced to integer by the body, with \code{as.integer}.
@@ -195,7 +192,6 @@
 #'
 #' A step of the sse4r_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_users Coerced to integer by the body, with \code{as.integer}.
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.
@@ -227,7 +223,6 @@
 #'
 #' A step of the sse4r_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sequence Passed to \code{.sse4r_personalise}.
 #' @param user_embedding Passed to \code{.sse4r_personalise}.
@@ -313,7 +308,6 @@ morie_sse4r <- function(sequence, user_embedding, item_table,
 #'
 #' A step of the sse4r_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -334,7 +328,7 @@ sse4r_cheatsheet <- function() {
          "observed rate is p(1-1/n), not p.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 ssept <- morie_sse4r
 
 # public names resolved by fn/_lazy_map.json

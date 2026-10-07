@@ -141,7 +141,7 @@ SEXP morie_crypto_chacha20poly1305_decrypt(
 
 // HKDF-SHA256 (RFC 5869).
 // Mirrors the Python hkdf_sha256(ikm, length=32, salt=b"", info=b"")
-// signature. Empty salt -> zero-filled 32-byte salt (RFC 5869 §2.2 spec
+// signature. Empty salt -> zero-filled 32-byte salt (RFC 5869 section 2.2 spec
 // + Python morie code path match).
 // The R-visible name is dot-prefixed so the auto-generated RcppExports
 // wrapper stays internal and does not collide with (or shadow) the

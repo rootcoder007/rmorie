@@ -17,7 +17,6 @@ The value of \code{lp}, as built in the body.
 \description{
 A step of the ibpfa_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 ibp_log_probability(Z = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)

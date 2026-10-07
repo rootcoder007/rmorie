@@ -21,7 +21,6 @@ A matrix, from \code{matrix}.
 \description{
 A step of the blip2v_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 query_tokens(n_queries = 5L, dim = 5L)

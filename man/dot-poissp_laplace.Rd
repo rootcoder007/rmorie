@@ -23,5 +23,4 @@ A numeric value.
 \description{
 A step of the poissp_native implementation. Called by \code{morie_poissp}.
 See the file header for the source the module follows.
-source it follows.
 }

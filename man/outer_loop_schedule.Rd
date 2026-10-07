@@ -19,7 +19,6 @@ A list with \code{indices}, \code{kind}, \code{n_non_bound}, \code{note}.
 \description{
 A step of the smoopt_native implementation. Called by \code{smo_platt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 outer_loop_schedule(alpha = 0.5, C = c(1, 2, 3, 4, 5, 6, 7, 8),

@@ -8,7 +8,6 @@
 #'
 #' A step of the felsen_native implementation. Called by \code{.felsen_prune}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Numeric; combined arithmetically in the body.
 #' @param pi A count; the body uses it as \code{rep(...)}.
@@ -25,7 +24,6 @@
 #'
 #' A step of the felsen_native implementation. Called by \code{morie_felsen}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node Character; the body checks with \code{is.character}.
 #' @param site A vector; indexed elementwise.
@@ -65,6 +63,10 @@
 #' @references Felsenstein, J. (1981). Evolutionary trees from DNA
 #'   sequences: a maximum likelihood approach. Journal of Molecular
 #'   Evolution, 17(6), 368-376.
+#' @examples
+#' tree <- list(list("A", 0.1), list(list(list("B", 0.2), list("C", 0.2)), 0.1))
+#' sites <- list(list(A = "A", B = "A", C = "G"), list(A = "C", B = "C", C = "C"))
+#' morie_felsen(tree, sites)$loglik
 #' @export
 morie_felsen <- function(tree, sites, pi = NULL) {
   if (is.null(pi)) pi <- rep(0.25, 4)

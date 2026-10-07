@@ -26,6 +26,12 @@ here is over all transpositions, the two-cycle case.
 Formula: for all \code{(i, j)},
 \code{c(x_s(i), y_i) + c(x_s(j), y_j) <= c(x_s(j), y_i) + c(x_s(i), y_j)}.
 }
+\examples{
+X <- c(0, 1); Y <- c(0, 1)
+Cost <- outer(X, Y, function(a, b) (a - b)^2)
+Otcw(X, Y, Cost, perm = c(1L, 0L))$is_cm   # crossed matching: improvable
+Otcw(X, Y, Cost, perm = c(0L, 1L))$is_cm   # identity: cyclically monotone
+}
 \references{
 Villani, C. (2003). AMS GSM 58, theorem 2.12.
 }

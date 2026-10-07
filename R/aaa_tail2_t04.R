@@ -23,7 +23,6 @@
 #'
 #' A step of the tail2_t04 implementation. Called by \code{BipartSpec}, \code{SignlessL}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @return The value of \code{A}, as built in the body.
@@ -51,7 +50,6 @@
 #'
 #' A step of the tail2_t04 implementation. Called by \code{BipartSpec}, \code{SignlessL}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
@@ -235,7 +233,6 @@ BipartSpec <- function(A) {
 #'
 #' A step of the tail2_t04 implementation. Called by \code{Dpll}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param clauses See Usage.
 #' @param lit Numeric; combined arithmetically in the body.

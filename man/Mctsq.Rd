@@ -19,12 +19,11 @@ v(z) (matrix case).}
 list: estimate, q, w, n, method.
 }
 \description{
-Schrittwieser et al. (2020), arXiv:1911.08265 (FETCHED), appendix B,
-writes Q(s,a) as the mean of the values backed up through the edge,
-W(s,a) / N(s,a) in the AlphaGo Zero notation (Silver et al., Nature
-550, 354-359).  With counts N(s,a,z) of each distinct backed-up return
-v(z) this is Q(s,a) = sum_z N(s,a,z) v(z) / N(s,a).  An unvisited edge
-gets \code{unvisited}, which AlphaGo Zero sets to zero.
+Schrittwieser et al. (2020), arXiv:1911.08265, appendix B, writes Q(s,a) as the mean
+of the values backed up through the edge, W(s,a) / N(s,a) in the AlphaGo Zero
+notation (Silver et al., Nature 550, 354-359). With counts N(s,a,z) of each distinct
+backed-up return v(z) this is Q(s,a) = sum_z N(s,a,z) v(z) / N(s,a). An unvisited
+edge gets \code{unvisited}, which AlphaGo Zero sets to zero.
 }
 \examples{
 Mctsq(c(3, 0), c(1.5, 0))$q

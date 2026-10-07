@@ -20,7 +20,6 @@
 #'
 #' A step of the causrddm implementation. Called by \code{Rddmanip}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mp A vector; its length is taken.
 #' @param val Passed to \code{.t4_olsfit}.
@@ -59,11 +58,10 @@
 #'   \code{statistic}, \code{p_value}, \code{fhat_left},
 #'   \code{fhat_right}, \code{bw}, \code{binsize}, \code{n},
 #'   \code{method}.
-#' @references McCrary (2008), Journal of Econometrics 142:698-714.  Paywalled at
-#' Elsevier; the coded form was read from McCrary's own implementation as distributed in
-#' Dimmery's rdd package, R/DCdensity.R (fetched from the CRAN GitHub mirror), which
-#' gives the binning, the 3.348 pilot bandwidth rule, the zero padding, the triangular
-#' weights and sethetahat verbatim.
+#' @references McCrary (2008), Journal of Econometrics 142:698-714. The coded form
+#' follows McCrary's own implementation as distributed in Dimmery's rdd package,
+#' R/DCdensity.R, which gives the binning, the 3.348 pilot bandwidth rule, the zero
+#' padding, the triangular weights and sethetahat verbatim.
 #' @export
 #' @examples
 #' set.seed(1)

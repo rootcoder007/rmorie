@@ -13,7 +13,6 @@
 #'
 #' A step of the prsclm_native implementation. Called by \code{morie_prsclm_prs_cs_clump}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -35,7 +34,6 @@
 #'
 #' A step of the prsclm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sumstats A list; the body reads \code{$beta}, \code{$p}, \code{$position},
 #' \code{$snp} from it.
@@ -197,7 +195,6 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
 #'
 #' A step of the prsclm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

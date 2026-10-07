@@ -45,7 +45,6 @@
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param channels Coerced to integer by the body, with \code{as.integer}.
 #' @param reduced Coerced to integer by the body, with \code{as.integer}. Defaults to \code{256}.
@@ -86,7 +85,6 @@ morie_yolovx_decoupled_head <- function(channels, reduced = 256,
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param box Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cx Coerced to numeric by the body, with \code{as.numeric}.
@@ -124,7 +122,6 @@ morie_yolovx_encode_box <- function(box, cx, cy, stride = 1.0) {
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ltrb Passed to \code{.s03vec}.
 #' @param cx Coerced to numeric by the body, with \code{as.numeric}.
@@ -156,7 +153,6 @@ morie_yolovx_decode_box <- function(ltrb, cx, cy, stride = 1.0) {
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; indexed elementwise.
 #' @param b A vector; indexed elementwise.
@@ -182,7 +178,6 @@ morie_yolovx_box_iou <- function(a, b) {
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param box Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grid_w Coerced to integer by the body, with \code{as.integer}.
@@ -193,8 +188,7 @@ morie_yolovx_box_iou <- function(a, b) {
 #' \code{n_candidates}, \code{single_center}, \code{note}.
 #' @export
 #' @examples
-#' morie_yolovx_center_sampling(box = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   grid_w = c(1, 2, 3, 4, 5, 6, 7, 8), grid_h = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_yolovx_center_sampling(box = c(1, 1, 5, 4), grid_w = 8L, grid_h = 6L)$n_candidates
 #' @keywords internal
 morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride = 1.0,
                                          radius = 1.5) {
@@ -334,7 +328,6 @@ morie_yolovx_simota_assign <- function(costs, ious, top_q = 10, max_k = NULL) {
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -357,7 +350,7 @@ morie_yolovx_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_yolovx_yoloxhead <- morie_yolovx_simota_assign
 # public names resolved by fn/_lazy_map.json
 morie_yolovx_yolo_decoupled_head <- morie_yolovx_simota_assign

@@ -14,6 +14,11 @@
 #' @param drop Optional multiplicative dropout mask, \code{n x cs}.
 #' @return A list with \code{s}, \code{estimate}, \code{n} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 20
+#' @examples
+#' set.seed(20)
+#' s <- matrix(rnorm(6), 3, 2)
+#' w <- function() matrix(rnorm(4, sd = 0.3), 2, 2)
+#' round(Alfstrtr(s, w(), w(), w())$s, 3)
 #' @export
 Alfstrtr <- function(s, w1, w2, w3, layernorm = TRUE, drop = NULL) {
   n <- nrow(s)

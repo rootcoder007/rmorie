@@ -28,6 +28,5 @@ The value of \code{path}, as built in the body.
 A step of the node2v_native implementation. Called by \code{.avalon_paths},
 \code{.depth_counts}, \code{.dmlqs_count_totters} and 13 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

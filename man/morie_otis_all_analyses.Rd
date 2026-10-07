@@ -4,12 +4,12 @@
 \alias{morie_otis_all_analyses}
 \title{Run the full OTIS analysis capsule}
 \usage{
-morie_otis_all_analyses(df, year, sex = NULL, out_dir = NULL)
+morie_otis_all_analyses(df, year = NULL, sex = NULL, out_dir = NULL)
 }
 \arguments{
 \item{df}{OTIS data.frame.}
 
-\item{year}{Integer fiscal year.}
+\item{year}{Integer fiscal year; \code{NULL} (default) takes the latest year in \code{df}.}
 
 \item{sex}{Optional gender filter passed to
 \code{morie_otis_rplace}.}

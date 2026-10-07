@@ -16,7 +16,6 @@ A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table},
 \description{
 A step of the prsLL_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):

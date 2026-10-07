@@ -61,6 +61,16 @@ effect \eqn{\theta(1)} holds the mediator at its treated value while
 \eqn{\Delta = \theta(1) + \delta(0) = \theta(0) + \delta(1)} holds
 by construction, which is worth checking on any result.
 }
+\examples{
+set.seed(2)
+n <- 1000
+x <- matrix(rnorm(n), n)
+d <- rbinom(n, 1, pnorm(0.5 * x[, 1]))
+m <- 0.5 * d + 0.5 * x[, 1] + rnorm(n)
+y <- 0.3 * d + 0.4 * m + x[, 1] + rnorm(n)
+r <- morie_causal_mediation(y, d, m, x)
+round(c(total = r$total_effect, direct = r$direct_treated, indirect = r$indirect_treated), 3)
+}
 \references{
 Huber, M. (2014). Identifying causal mechanisms
 (primarily) based on inverse probability weighting. \emph{Journal

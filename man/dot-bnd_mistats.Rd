@@ -17,5 +17,4 @@ A list with \code{n}, \code{mL}, \code{sL}, \code{mU}, \code{sU}.
 \description{
 A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}.
 See the file header for the source the module follows.
-source it follows.
 }

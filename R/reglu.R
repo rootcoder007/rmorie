@@ -1,11 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' ReGLU gated activation
 #'
-#' Shazeer (2020), arXiv:2002.05202 (FETCHED): ReGLU(x, W, V, b, c) =
-#' max(0, xW + b) * (xV + c), the rectifier in place of the sigmoid of
-#' Dauphin et al.'s (2017) original gated linear unit.  Because the gate
-#' is exactly zero on half its domain, the count of dead units is
-#' reported: it is the diagnostic that distinguishes ReGLU from its smooth
+#' Shazeer (2020), arXiv:2002.05202: ReGLU(x, W, V, b, c) = max(0, xW + b) * (xV + c),
+#' the rectifier in place of the sigmoid of Dauphin et al.'s (2017) original gated
+#' linear unit. Because the gate is exactly zero on half its domain, the count of dead
+#' units is reported: it is the diagnostic that distinguishes ReGLU from its smooth
 #' siblings.
 #'
 #' @param y the input x (first slot, for signature stability).

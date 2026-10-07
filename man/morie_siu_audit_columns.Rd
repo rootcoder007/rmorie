@@ -6,7 +6,7 @@
 \usage{
 morie_siu_audit_columns(
   case_numbers,
-  model = c("ollama", "gemini"),
+  model = c("ollama", "hosted", "gemini"),
   cache_dir = file.path(tempdir(), "morie", "siu"),
   max_html_chars = 80000L,
   max_examples_per_field = 5L,
@@ -41,7 +41,8 @@ retained per field (default 5).}
 \value{
 A data frame with columns \code{field}, \code{n_audited},
 \code{n_agree}, \code{n_disagree}, \code{n_unclear},
-\code{agree_rate}. Sorted ascending by \code{agree_rate} so the
+\code{agree_rate} (agreements over judged verdicts; \code{NA} when every
+verdict was unclear). Sorted ascending by \code{agree_rate} so the
 most-broken fields land at the top. The \code{"examples"}
 attribute holds nested data frames of flagged cases per field.
 }

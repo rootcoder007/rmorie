@@ -19,7 +19,6 @@ A list with \code{beta}, \code{rss}, \code{df}, \code{sigma2}, \code{xtx_inv},
 A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan},
 \code{morie_blinkg_select}, \code{morie_sdcfst}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)

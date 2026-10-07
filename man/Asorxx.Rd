@@ -17,17 +17,15 @@ list: r, estimate, r_min, r_normalised, e, a, b, trace_e, sum_ab,
 n_types, n, method.
 }
 \description{
-Newman (2003), "Mixing patterns in networks", Physical Review E 67(2),
-026126, doi:10.1103/PhysRevE.67.026126, fetched from arXiv
-(cond-mat/0209450) and read.  Equation (2) on p.2:
-r = (sum_i e_ii - sum_i a_i b_i) / (1 - sum_i a_i b_i), where e_ij is the
-fraction of all edges joining a vertex of type i to one of type j,
-a_i = sum_j e_ij and b_i = sum_j e_ji.  Equation (3) gives the lower bound
-r_min = -sum_i a_i b_i / (1 - sum_i a_i b_i), returned as r_min: r is not a
-correlation on [-1, 1].  It reaches 1 for perfect assortative mixing but its
-most negative attainable value depends on the type distribution, so calling
--0.3 "weak disassortativity" without comparing it to r_min is a mistake the
-output makes avoidable; r_normalised = r/|r_min| is supplied for r < 0.
+Newman (2003), "Mixing patterns in networks", Physical Review E 67(2), 026126,
+doi:10.1103/PhysRevE.67.026126 (arXiv cond-mat/0209450). Equation (2) on p.2: r =
+(sum_i e_ii - sum_i a_i b_i) / (1 - sum_i a_i b_i), where e_ij is the fraction of all
+edges joining a vertex of type i to one of type j, a_i = sum_j e_ij and b_i = sum_j
+e_ji. Equation (3) gives the lower bound r_min = -sum_i a_i b_i / (1 - sum_i a_i
+b_i), returned as r_min: r is not a correlation on [-1, 1]. It reaches 1 for
+perfect assortative mixing but its most negative attainable value depends on the type
+distribution, so calling -0.3 "weak disassortativity" without comparing it to r_min
+is a mistake the output makes avoidable; r_normalised = r/|r_min| is supplied for r < 0.
 }
 \details{
 This is the enumerative coefficient, for unordered categories.  It is a

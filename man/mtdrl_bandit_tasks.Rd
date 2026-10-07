@@ -26,5 +26,7 @@ The value of \code{tasks}, as built in the body.
 \description{
 A step of the mtdrl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+str(mtdrl_bandit_tasks(n_arms = 2, n_tasks = 3, seed = 1))
 }

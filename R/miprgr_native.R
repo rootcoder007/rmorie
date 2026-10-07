@@ -350,8 +350,9 @@ morie_miprgr_enumerate_integer <- function(A, b, c, integer_vars,
 #'   and the root relaxation value.
 #' @export
 #' @examples
-#' morie_miprgr_branch_and_bound(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   c = c(1, 2, 3, 4, 5, 6, 7, 8), integer_vars = c("a", "b", "c"))
+#' # maximise 5 x1 + 4 x2 subject to 6 x1 + 4 x2 <= 24, x1 + 2 x2 <= 6, x integer; A is a list of rows
+#' morie_miprgr_branch_and_bound(A = list(c(6, 4), c(1, 2)), b = c(24, 6), c = c(5, 4),
+#'   integer_vars = c(1L, 2L))
 #' @keywords internal
 morie_miprgr_branch_and_bound <- function(A, b, c, integer_vars,
                                           maximise = TRUE,
@@ -459,7 +460,6 @@ morie_miprgr <- morie_miprgr_branch_and_bound
 #'
 #' A step of the miprgr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{miprgr_solve_relaxation}.
 #' @param b Passed to \code{miprgr_solve_relaxation}.
@@ -472,6 +472,11 @@ morie_miprgr <- morie_miprgr_branch_and_bound
 #' @return A list with \code{estimate}, \code{value}, \code{x}, \code{feasible},
 #' \code{nodes}, \code{pruned}, \code{pruning}, \code{max_list_length},
 #' \code{root_bound}, \code{truncated}, \code{method}, \code{note}.
+#' @examples
+#' # maximise 5 x1 + 4 x2 subject to 6 x1 + 4 x2 <= 24, x1 + 2 x2 <= 6, integer x
+#' A <- matrix(c(6, 4, 1, 2), 2, byrow = TRUE)
+#' r <- miprgr_branch_and_bound(A, b = c(24, 6), c = c(5, 4), integer_vars = c(1, 2))
+#' c(r$value, r$x)
 #' @export
 miprgr_branch_and_bound <- function(A, b, c, integer_vars, maximise = TRUE,
                                     prune = TRUE, max_nodes = 5000,
@@ -566,9 +571,10 @@ miprgr_branch_and_bound <- function(A, b, c, integer_vars, maximise = TRUE,
 #'
 #' A step of the miprgr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(miprgr_cheatsheet())
 #' @export
 miprgr_cheatsheet <- function() {
   paste("miprgr: the LP relaxation is easy and usually FRACTIONAL,",
@@ -589,7 +595,6 @@ miprgr_cheatsheet <- function() {
 #'
 #' A step of the miprgr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -598,6 +603,9 @@ miprgr_cheatsheet <- function() {
 #' @param upper Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param maximise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{value}, \code{x}, \code{note}.
+#' @examples
+#' A <- matrix(c(6, 4, 1, 2), 2, byrow = TRUE)
+#' miprgr_enumerate_integer(A, b = c(24, 6), c = c(5, 4), integer_vars = c(1, 2), upper = 6)[c("value", "x")]
 #' @export
 miprgr_enumerate_integer <- function(A, b, c, integer_vars, upper = 10,
                                      maximise = TRUE) {
@@ -642,12 +650,13 @@ miprgr_enumerate_integer <- function(A, b, c, integer_vars, upper = 10,
 #'
 #' A step of the miprgr_native implementation. Called by \code{miprgr_branch_and_bound}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; indexed elementwise.
 #' @param integer_vars See Usage.
 #' @param tol Passed to \code{>}. Defaults to \code{1e-07}.
 #' @return A list with \code{index}, \code{fractionality}, \code{integral}.
+#' @examples
+#' miprgr_fractional_variable(c(1, 2.4, 3.5), integer_vars = c(1, 2, 3))
 #' @export
 miprgr_fractional_variable <- function(x, integer_vars, tol = 1e-7) {
   best <- NA_integer_
@@ -669,13 +678,15 @@ miprgr_fractional_variable <- function(x, integer_vars, tol = 1e-7) {
 #'
 #' A step of the miprgr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
 #' @param integer_vars See Usage.
 #' @return A list with \code{x}, \code{feasible}, \code{violations}, \code{note}.
+#' @examples
+#' A <- matrix(c(1, 1, 1, -1), 2, byrow = TRUE)
+#' miprgr_round_relaxation(c(1.4, 2.6), A, b = c(4, 1), integer_vars = c(1, 2))
 #' @export
 miprgr_round_relaxation <- function(x, A, b, integer_vars) {
   xr <- as.numeric(x)
@@ -696,7 +707,6 @@ miprgr_round_relaxation <- function(x, A, b, integer_vars) {
 #'
 #' A step of the miprgr_native implementation. Called by \code{miprgr_solve_relaxation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -704,6 +714,10 @@ miprgr_round_relaxation <- function(x, A, b, integer_vars) {
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-09}.
 #' @param max_iter Passed to \code{run_phase}. Defaults to \code{20000}.
 #' @return A list with \code{feasible}, \code{x}, \code{value}.
+#' @examples
+#' # maximise 3 x1 + 5 x2 subject to x1 <= 4, 2 x2 <= 12, 3 x1 + 2 x2 <= 18
+#' A <- rbind(c(1, 0), c(0, 2), c(3, 2))
+#' miprgr_simplex(A, b = c(4, 12, 18), c = c(3, 5))[c("x", "value")]   # (2, 6), 36
 #' @export
 miprgr_simplex <- function(A, b, c, tol = 1e-9, max_iter = 20000) {
   # Two-phase simplex with Bland's rule, maximising c'x.
@@ -842,7 +856,6 @@ miprgr_simplex <- function(A, b, c, tol = 1e-9, max_iter = 20000) {
 #'
 #' A step of the miprgr_native implementation. Called by \code{miprgr_branch_and_bound}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -852,6 +865,9 @@ miprgr_simplex <- function(A, b, c, tol = 1e-9, max_iter = 20000) {
 #' @param maximise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param solver Compared against \code{"simplex"}. Defaults to \code{"simplex"}.
 #' @return A list with \code{feasible}, \code{x}, \code{value}, \code{note}.
+#' @examples
+#' A <- rbind(c(1, 0), c(0, 2), c(3, 2))
+#' miprgr_solve_relaxation(A, b = c(4, 12, 18), c = c(3, 5))[c("x", "value")]
 #' @export
 miprgr_solve_relaxation <- function(A, b, c, bounds = list(),
                                     n = NULL, maximise = TRUE,

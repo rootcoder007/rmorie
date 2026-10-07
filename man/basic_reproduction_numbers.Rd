@@ -20,7 +20,6 @@ The value of \code{out}, as built in the body.
 A step of the hiatus_native implementation. Called by \code{.hiatus_simulate},
 \code{endemic_equilibrium}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 basic_reproduction_numbers(beta = 0.5, nu = 0.5, mu = 5L)

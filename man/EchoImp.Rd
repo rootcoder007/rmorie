@@ -19,9 +19,8 @@ A list with \code{x}, \code{n}, \code{a}, \code{n_0}, \code{method}.
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
-EchoImp(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, n = 5L)
+EchoImp(a = 0.5, n_0 = 5L, n = 0:15)
 }
 \keyword{internal}

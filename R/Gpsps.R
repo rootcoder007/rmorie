@@ -2,12 +2,11 @@
 #' Spectral mixture kernel GP
 #'
 #' Modelling the spectral density as a mixture of Gaussians and
-#' inverting Bochner's theorem gives the kernel below.  The stub this
-#' function replaces printed the exponent as exp(-tau^2 v), dropping the
-#' 2 pi^2; the arXiv PDF was checked and the factor is there.  It
-#' matters: without it the mu = 0 case is not a squared exponential with
-#' lengthscale 1/(2 pi sqrt(v)), and that mapping is the anchor the
-#' tests use.
+#' inverting Bochner's theorem gives the kernel below, with the factor
+#' 2 pi^2 in the exponent (checked against the arXiv PDF; a version
+#' printed as exp(-tau^2 v) circulates without it).  It matters: without
+#' it the mu = 0 case is not a squared exponential with lengthscale
+#' 1/(2 pi sqrt(v)), and that mapping is the anchor the tests use.
 #'
 #' Formula: k(tau) = sum_q w_q exp(-2 pi^2 tau^2 v_q) cos(2 pi tau mu_q).
 #'

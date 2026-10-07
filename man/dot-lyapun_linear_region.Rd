@@ -19,5 +19,4 @@ A list with \code{lo}, \code{hi}.
 \description{
 A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}.
 See the file header for the source the module follows.
-source it follows.
 }

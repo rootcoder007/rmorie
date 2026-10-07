@@ -14,12 +14,10 @@
 #' @return List with \code{mu_hat}, \code{V_mu}, \code{theta_hat},
 #'   \code{V_theta}, \code{shrinkage}, \code{log_post_tau}, \code{tau},
 #'   \code{J}.
-#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
-#'   Bayesian Data Analysis, 3rd edition, Section 5.4, equations (5.17),
-#'   (5.20) and (5.21). Fetched as the full text of the book from the
-#'   author's own copy. A flat prior on tau is used and the additive
-#'   constant dropped, so the value is comparable across tau but is not an
-#'   absolute density.
+#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013), Bayesian Data
+#'   Analysis, 3rd edition, Section 5.4, equations (5.17), (5.20) and (5.21). A flat
+#'   prior on tau is used and the additive constant dropped, so the value is comparable
+#'   across tau but is not an absolute density.
 #' @export
 #' @examples
 #' Hiermodel(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)

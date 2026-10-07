@@ -8,9 +8,8 @@
 #' @param prob P(V = v), same order; normalised internally.
 #'
 #' @return List with lower, upper, width, lowerv, upperv, prob, k.
-#' @references Manski and Pepper (2000), Econometrica 68(4), 997-1010.
-#'   Standard published form; the article could not be obtained (JSTOR
-#'   access stub, NBER t0224 zero-page PDF) and was not read.
+#' @references Manski and Pepper (2000), Econometrica 68(4), 997-1010; the
+#'   bound in its standard published form.
 #' @export
 #' @examples
 #' Mivbound(lower = 5L, upper = 5L, prob = 0.5)

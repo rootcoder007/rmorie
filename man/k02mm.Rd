@@ -19,7 +19,6 @@ One of two values, depending on the branch taken.
 \description{
 A step of the k02util implementation. Called by \code{matr}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 k02mm(y = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8),

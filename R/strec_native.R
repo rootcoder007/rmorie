@@ -76,7 +76,6 @@
 #' A step of the strec_native implementation. Called by \code{strec_attention_weights},
 #' \code{strec_stamp_scores}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{min}.
 #' @return A numeric value.
@@ -95,7 +94,6 @@
 #' A step of the strec_native implementation. Called by \code{strec_attention_weights},
 #' \code{strec_session_average}, \code{strec_stamp_scores}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
 #' @return The value of \code{list}.
@@ -118,7 +116,6 @@
 #'
 #' A step of the strec_native implementation. Called by \code{strec_stamp_scores}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
@@ -145,7 +142,6 @@ strec_trilinear <- function(a, b, c) {
 #' A step of the strec_native implementation. Called by \code{strec_attention_weights},
 #' \code{strec_stamp_scores}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param embeddings Passed to \code{.strec_as_rows}.
 #' @return A list with \code{m_s}, \code{m_t}, \code{length}, \code{note}.
@@ -177,7 +173,6 @@ strec_session_average <- function(embeddings) {
 #'
 #' A step of the strec_native implementation. Called by \code{strec_stamp_scores}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W A matrix; passed to \code{nrow}.
@@ -186,9 +181,8 @@ strec_session_average <- function(embeddings) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' strec_mlp_cell(S, M)
+#' W <- matrix(c(1, 0, 0.5, -1, 0.2, 0.3), nrow = 2)   # two outputs from three inputs
+#' strec_mlp_cell(m = c(1, 0.5, -0.5), W = W)
 #' @keywords internal
 strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
   v <- as.numeric(m)
@@ -216,7 +210,6 @@ strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
 #'
 #' A step of the strec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param embeddings Passed to \code{.strec_as_rows}.
 #' @param W1 A matrix; indexed by row and column.
@@ -288,7 +281,6 @@ strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
 #'
 #' A step of the strec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param embeddings Passed to \code{.strec_as_rows}.
 #' @param item_table Passed to \code{.strec_as_rows}.
@@ -349,7 +341,6 @@ strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = N
 #'
 #' A step of the strec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param probability Coerced to numeric by the body, with \code{as.numeric}.
 #' @param target_index Coerced to integer by the body, with \code{as.integer}.
@@ -377,7 +368,6 @@ strec_cross_entropy <- function(probability, target_index) {
 #'
 #' A step of the strec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -400,7 +390,7 @@ strec_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 strec_stamp <- strec_stamp_scores
 
 # Entry point

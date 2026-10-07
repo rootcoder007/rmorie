@@ -21,3 +21,6 @@ A step of the chronos_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+str(chronos_uniform_bins(lo = -1, hi = 1, n_bins = 5L))
+}

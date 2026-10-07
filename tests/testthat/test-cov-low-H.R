@@ -150,11 +150,16 @@ test_that(".morie_parse_file errors on unsupported format", {
   expect_error(rmorie:::.morie_parse_file(tmp, "weirdfmt", TRUE), "Unsupported parse format")
 })
 
-test_that("morie_fetch requires zip_member for zip format", {
-  expect_error(
-    morie_fetch("http://x.invalid/x.zip", format = "zip"),
-    "zip_member"
-  )
+test_that("morie_fetch takes a zip's first CSV when no member is named, and says so when there is none", {
+  skip_if(Sys.which("zip") == "", "zip utility not available")
+  d <- withr::local_tempdir()
+  withr::local_dir(d)
+  writeLines("not a table", "notes.txt")
+  utils::zip("none.zip", "notes.txt", flags = "-q")
+  expect_error(morie_fetch(paste0("file://", file.path(d, "none.zip")), format = "zip"), "zip_member")
+  utils::write.csv(data.frame(a = 1:3), "t.csv", row.names = FALSE)
+  utils::zip("one.zip", c("notes.txt", "t.csv"), flags = "-q")
+  expect_equal(nrow(morie_fetch(paste0("file://", file.path(d, "one.zip")), format = "zip")), 3L)
 })
 
 test_that("sptrn 1D order-1 recovers intercept + slope", {

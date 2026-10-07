@@ -219,6 +219,7 @@ PartyPositions <- function(points, party, statistic = c("mean", "median"), n_boo
 #' Dimensionality(cbind(1:4, 2 * (1:4)), n_sim = 0)$share
 #' @export
 Dimensionality <- function(X, n_sim = 100, seed = 0, quantile = 0.95) {
+  .morie_arg(X, "m")
   X <- as.matrix(X) * 1
   n <- nrow(X)
   m <- ncol(X)

@@ -18,8 +18,7 @@ A list with \code{n_conditions}, \code{max_deviation}, \code{independent}, \code
 Independence of k events (Deshmukh eq. 5.1)
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-S <- c("a", "b", "c")
-rmorie:::Indevk(S, V)
+# two events with P(A) = 0.5, P(B) = 0.4; joint holds one probability per subset mask
+rmorie:::Indevk(p = c(0.5, 0.4), joint = c(1, 0.5, 0.4, 0.2))
 }
 \keyword{internal}

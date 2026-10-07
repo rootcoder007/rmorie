@@ -20,8 +20,8 @@ A data.frame, or \code{NULL} if the table does not exist.
 Load a table from the MORIE cache
 }
 \examples{
-\dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 \donttest{
+if (morie_has("sql")) withAutoprint({
 db <- tempfile(fileext = ".db")
 morie_cache_store(
   data = data.frame(x = 1:5),
@@ -30,6 +30,6 @@ morie_cache_store(
 )
 morie_cache_load(table_name = "demo", db_path = db)
 file.remove(db)
+})
 }
-\dontshow{\}) # examplesIf}
 }

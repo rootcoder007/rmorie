@@ -17,7 +17,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

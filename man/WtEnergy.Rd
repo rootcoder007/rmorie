@@ -21,7 +21,6 @@ A list with \code{energies}, \code{relative}, \code{labels},
 \description{
 A step of the rangayyan_tf implementation. Called by \code{WtEntropy}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(6)

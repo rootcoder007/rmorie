@@ -2,7 +2,7 @@
 % Please edit documentation in R/egnnL_native.R
 \name{equivariantgnn}
 \alias{equivariantgnn}
-\title{Compact alias per ledger/NAMING.md}
+\title{Compact alias}
 \usage{
 equivariantgnn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 }
@@ -29,7 +29,6 @@ The value of \code{run_egnn}.
 \description{
 A step of the egnnL_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

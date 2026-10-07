@@ -23,5 +23,4 @@ A numeric value.
 \description{
 A step of the sa_opt_native implementation. Called by \code{morie_sa_opt}.
 See the file header for the source the module follows.
-source it follows.
 }

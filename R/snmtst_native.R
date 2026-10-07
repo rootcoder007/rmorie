@@ -26,7 +26,6 @@
 #'
 #' A step of the snmtst_native implementation. Called by \code{identified_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_pre A count; the body uses it as \code{seq_len(...)}.
@@ -48,7 +47,6 @@
 #'
 #' A step of the snmtst_native implementation. Called by \code{identified_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param post A vector; its length is taken.
 #' @param l_vec Optional; may be \code{NULL}. Coerced to numeric by the body, with
@@ -71,7 +69,6 @@
 #' A step of the snmtst_native implementation. Called by \code{breakdown_value},
 #' \code{fixed_length_ci}, \code{sensitivity_curve}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Passed to \code{.snmtst_split}.
 #' @param n_pre Passed to \code{.snmtst_split}.
@@ -154,7 +151,6 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
 #'
 #' A step of the snmtst_native implementation. Called by \code{identified_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param point Numeric; combined arithmetically in the body.
 #' @param c A vector; its length is taken.
@@ -217,7 +213,6 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
 #'
 #' A step of the snmtst_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Passed to \code{identified_set}.
 #' @param n_pre Passed to \code{identified_set}.
@@ -249,7 +244,6 @@ sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
 #'
 #' A step of the snmtst_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Passed to \code{identified_set}.
 #' @param n_pre Passed to \code{identified_set}.
@@ -297,7 +291,6 @@ breakdown_value <- function(beta, n_pre, n_post, family = "SD",
 #'
 #' A step of the snmtst_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Passed to \code{identified_set}.
 #' @param sigma Coerced to numeric by the body, with \code{as.numeric}.
@@ -341,7 +334,6 @@ fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
 #'
 #' A step of the snmtst_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -40,7 +40,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the strmkr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_strmkr_strauss_process(coords = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), r = 5L)

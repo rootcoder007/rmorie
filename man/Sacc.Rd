@@ -46,8 +46,6 @@ Theorem 1. At the fixed point V(s) = temp logsumexp(Q(s,.)/temp)
 Sacc(P = 1, R = 5L, gamma = 0.5)
 }
 \references{
-Haarnoja, T., Zhou, A., Abbeel, P. and Levine, S.
-(2018), ICML 2018, arXiv:1801.01290, Section 4.1, eqs. (2)-(4),
-Lemmas 1-2, Theorem 1. Local source:
-fetched-wave3/haarnoja-etal-2018-sac-arxiv1801.01290.pdf.
+Haarnoja, T., Zhou, A., Abbeel, P. and Levine, S. (2018), ICML 2018,
+arXiv:1801.01290, Section 4.1, eqs. (2)-(4), Lemmas 1-2, Theorem 1.
 }

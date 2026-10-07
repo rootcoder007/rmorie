@@ -26,7 +26,10 @@ beta | sigma2, y ~ N(beta-hat, sigma2 (X'X)^-1), with beta-hat the OLS
 estimator and s2 = y'(I - H)y/(n - p - 1).
 }
 \examples{
-Msm042(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
+set.seed(13)
+X <- matrix(rnorm(60), 30, 2)
+y <- 1 + X \%*\% c(0.5, -1) + rnorm(30)
+Msm042(X, as.numeric(y))$posterior_mean_beta
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

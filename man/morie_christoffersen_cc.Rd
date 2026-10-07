@@ -26,7 +26,7 @@ rate is right -- the failure Kupiec's test alone cannot see.
 morie_christoffersen_cc(c(rep(0, 40), 1, 1, 1, 0, 0, 1, rep(0, 54)), 0.05)$lr_ind
 }
 \references{
-Christoffersen, P. F. (1998), \emph{International
-Economic Review} 39(4), 841-862. Cross-checked against rugarch's
+Christoffersen, P. F. (1998). Evaluating interval
+forecasts. \emph{International Economic Review} 39(4), 841-862. Cross-checked against rugarch's
 \code{.LR.cc}.
 }

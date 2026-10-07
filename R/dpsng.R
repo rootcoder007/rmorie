@@ -1,12 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Test a Dirichlet-process partition cluster count against its prior
 #'
-#' Source READ FROM THE CORPUS PDF: Ghosal, S. and van der Vaart, A.
-#' (2017), Fundamentals of Nonparametric Bayesian Inference, section
-#' 4.1.5, Proposition 4.8, crediting Antoniak (1974), Annals of
-#' Statistics 2, 1152-1174.  (The Antoniak paper was located only as a
-#' scanned image PDF with no text layer and could not be read; the
-#' Ghosal and van der Vaart statement is a primary textbook source.)
+#' Source: Ghosal, S. and van der Vaart, A. (2017), Fundamentals of Nonparametric
+#' Bayesian Inference, section 4.1.5, Proposition 4.8, crediting Antoniak (1974), Annals
+#' of Statistics 2, 1152-1174. (The Antoniak paper was located only as a scanned image
+#' PDF with no text layer and could not be read; the Ghosal and van der Vaart statement
+#' is a primary textbook source.)
 #'
 #' Proposition 4.8: for an atomless base measure of total mass M the
 #' indicators D_i of "observation i is a new value" are INDEPENDENT

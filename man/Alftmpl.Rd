@@ -29,6 +29,16 @@ of template features at that same pair, and the templates are pooled by
 attention.  The attention runs over templates only, never across pairs,
 which is why it is pointwise: pair \code{ij} never sees pair \code{kl}.
 }
+\examples{
+set.seed(7)
+n <- 3; nt <- 2; ct <- 4; cz <- 4; c <- 2
+t <- array(rnorm(nt * n * n * ct), c(nt, n, n, ct))
+z <- array(rnorm(n * n * cz), c(n, n, cz))
+wq <- list(matrix(rnorm(c * cz), c, cz))
+wk <- list(matrix(rnorm(c * ct), c, ct)); wv <- list(matrix(rnorm(c * ct), c, ct))
+wo <- matrix(rnorm(cz * c), cz, c)
+dim(Alftmpl(t, z, wq, wk, wv, wo)$z)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 17
 }

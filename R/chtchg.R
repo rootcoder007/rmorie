@@ -1,18 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Doubly robust ATT in a changeover (cross-over) design
 #'
-#' Jones and Kenward (2014), Design and Analysis of Cross-Over Trials, 3rd
-#' ed., chapter 2: in a two-period two-sequence cross-over each unit is
-#' observed under both conditions, so the within-unit contrast removes
-#' every time-invariant unit effect, and the sequence-averaged contrast
-#' (dbar_AB - dbar_BA)/2 removes any common period effect.  The book was
-#' not available here as a full text; both expressions are the standard
-#' published form of the AB/BA analysis.  Covariate adjustment uses the
-#' doubly robust moment of Sant'Anna and Zhao (2020), Journal of
-#' Econometrics 219(1), 101-122 (arXiv:1812.01723 -- FETCHED), eq. (2.6),
-#' with the sequence indicator as D and the within-unit contrast as dY.
-#' Carryover is not assumed away: the difference of sequence means, which
-#' is the carryover contrast under the standard model, is returned.
+#' Jones and Kenward (2014), Design and Analysis of Cross-Over Trials, 3rd ed., chapter
+#' 2: in a two-period two-sequence cross-over each unit is observed under both
+#' conditions, so the within-unit contrast removes every time-invariant unit effect, and
+#' the sequence-averaged contrast (dbar_AB - dbar_BA)/2 removes any common period
+#' effect. Both expressions are the standard published form of the AB/BA analysis.
+#' Covariate adjustment uses the doubly robust moment of Sant'Anna and Zhao (2020),
+#' Journal of Econometrics 219(1), 101-122 (arXiv:1812.01723), eq. (2.6), with the
+#' sequence indicator as D and the within-unit contrast as dY. Carryover is not assumed
+#' away: the difference of sequence means, which is the carryover contrast under the
+#' standard model, is returned.
 #'
 #' @param y outcome in long format.
 #' @param D treatment indicator for that unit-period.

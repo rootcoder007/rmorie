@@ -23,5 +23,4 @@ The value of \code{b}, as built in the body.
 \description{
 A step of the tmldta_native implementation. Called by \code{.fit_g_dta}, \code{.fit_q_dta}.
 See the file header for the source the module follows.
-source it follows.
 }

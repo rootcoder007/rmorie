@@ -17,5 +17,4 @@ A list with \code{statistic}, \code{df}, \code{p.value}.
 \description{
 A step of the coin_native implementation. Called by \code{morie_oneway_test}.
 See the file header for the source the module follows.
-source it follows.
 }

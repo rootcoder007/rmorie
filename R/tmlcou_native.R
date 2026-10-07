@@ -22,7 +22,6 @@
 #'
 #' A step of the tmlcou_native implementation. Called by \code{morie_tmlcou}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -39,7 +38,6 @@
 #'
 #' A step of the tmlcou_native implementation. Called by \code{morie_tmlcou}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -240,7 +238,7 @@ morie_tmlcou <- function(y, D, X, offset = NULL, g = NULL,
                      "space; the logistic one cannot"))
 }
 
-#' Compact alias per ledger/NAMING.md
+#' Compact alias
 #' @rdname morie_tmlcou
 #' @export
 morie_tmlcountoutcome <- morie_tmlcou

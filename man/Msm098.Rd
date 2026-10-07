@@ -25,8 +25,10 @@ the Cholesky factor of G, the genetic block enters as Z_L L_g, the design
 used in Table 7.6.
 }
 \examples{
-Msm098(n = c(1, 2, 3, 4, 5, 6, 7, 8), X_E = c(1, 2, 3, 4, 5, 6, 7, 8),
-  Z_L = c(1, 2, 3, 4, 5, 6, 7, 8))
+set.seed(17)
+G <- crossprod(matrix(rnorm(16), 4)) / 4 + diag(0.1, 4)
+XE <- model.matrix(~ factor(c(1, 1, 2, 2)) - 1)
+Msm098(n = 4L, X_E = XE, Z_L = diag(4), L_g = t(chol(G)))$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

@@ -16,7 +16,6 @@ The value of \code{n}, as built in the body.
 A step of the blstn_native implementation. Called by \code{morie_karlin_altschul},
 \code{morie_score_distribution}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 lattice_check(x = 5L)

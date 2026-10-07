@@ -44,7 +44,6 @@ The value of \code{fit_ffm}.
 \description{
 A step of the ffmFM_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(3)

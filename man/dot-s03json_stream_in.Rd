@@ -17,5 +17,4 @@ The value of \code{lapply}.
 \description{
 A step of the helpers_s03 implementation. Called by \code{morie_dataset_load}.
 See the file header for the source the module follows.
-source it follows.
 }

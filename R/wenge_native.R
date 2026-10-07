@@ -46,7 +46,6 @@
 #' A step of the wenge_native implementation. Called by \code{.wenge_saturated_models},
 #' \code{.wenge_saturated_outcome}, \code{morie_wenge_mediation_functional}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param row Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A character value.
@@ -60,7 +59,6 @@
 #' A step of the wenge_native implementation. Called by
 #' \code{morie_wenge_mediation_functional}, \code{morie_wenge_weight_based_mediation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ev A vector; its length is taken and its elements indexed.
 #' @param Mm A matrix; indexed by row and column.
@@ -110,7 +108,6 @@
 #'
 #' A step of the wenge_native implementation. Called by \code{morie_wenge_mediation_functional}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yv A vector; its length is taken and its elements indexed.
 #' @param ev A vector; indexed elementwise.
@@ -143,7 +140,6 @@
 #' A step of the wenge_native implementation. Called by
 #' \code{morie_wenge_mediation_functional}, \code{morie_wenge_weight_based_mediation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yv A vector; its length is taken.
 #' @param ev Numeric; combined arithmetically in the body.
@@ -190,7 +186,6 @@
 #'
 #' A step of the wenge_native implementation. Called by \code{morie_wenge_weight_based_mediation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Passed to \code{.s03vec}.
 #' @param E Passed to \code{.s03vec}.
@@ -314,7 +309,6 @@ morie_wenge_mediation_functional <- function(Y, E, M, X, strategy = "em",
 #'
 #' A step of the wenge_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.s03vec}.
 #' @param M Optional; may be \code{NULL}. Passed to \code{morie_wenge_mediation_functional}.
@@ -383,7 +377,6 @@ morie_wenge_weight_based_mediation <- function(X, M, C, Y, strategy = "em",
 #'
 #' A step of the wenge_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -400,7 +393,7 @@ morie_wenge_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_wenge_weightbasedmediation <- morie_wenge_weight_based_mediation
 
 #' @rdname morie_wenge_weight_based_mediation

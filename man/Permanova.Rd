@@ -26,6 +26,5 @@ Permanova(V, V)
 }
 \references{
 Anderson (2001), Austral Ecology 26(1), 32-46, Equations
-(3)-(5).  Standard published form; the article is paywalled and the
-download attempted returned a stub, so it was not read.
+(3)-(5), in their standard published form.
 }

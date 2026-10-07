@@ -16,8 +16,7 @@ side-effect from R.}
 \item{out_dir}{Optional output directory.}
 }
 \value{
-A \code{morie_otis_analysis_result}. If the morie causal
-helpers aren't loaded, returns a "not yet ported" stub.
+A \code{morie_otis_analysis_result}.
 }
 \description{
 Wraps the full causal pipeline for the canonical

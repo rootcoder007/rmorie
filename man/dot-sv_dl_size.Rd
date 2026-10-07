@@ -19,5 +19,4 @@ A numeric value.
 \description{
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_build_sv_graph}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -62,7 +62,6 @@
 #' A step of the lcfsdq_native implementation. Called by \code{morie_lcfsdq},
 #' \code{morie_lcfsdq_nn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -115,7 +114,6 @@ morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
 #'
 #' A step of the lcfsdq_native implementation. Called by \code{morie_lcfsdq}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param coords A matrix; indexed by row and column.
 #' @return A list with \code{area}, \code{perimeter}, \code{bb}.

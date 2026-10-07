@@ -18,7 +18,6 @@
 #' \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration},
 #' \code{morie_qrntcq_quarantine_efficacy} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param shape Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.83}.
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.86}.
@@ -56,7 +55,6 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #'
 #' A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_quarantine_efficacy}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ts A vector; its length is taken and its elements indexed.
 #' @param ys A vector; indexed elementwise.
@@ -88,7 +86,6 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #' \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration},
 #' \code{morie_qrntcq_relative_utility}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t.Q Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t.R Coerced to numeric by the body, with \code{as.numeric}.
@@ -129,7 +126,6 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
 #'
 #' A step of the qrntcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t.Q Passed to \code{morie_qrntcq_quarantine_efficacy}.
 #' @param t.T Carried through into a list the body builds.
@@ -170,7 +166,6 @@ morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
 #'
 #' A step of the qrntcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param efficacy Coerced to numeric by the body, with \code{as.numeric}.
 #' @param days.in.quarantine Coerced to numeric by the body, with \code{as.numeric}.
@@ -189,7 +184,6 @@ morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
 #'
 #' A step of the qrntcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t.R.a Numeric; combined arithmetically in the body.
 #' @param t.R.b Numeric; combined arithmetically in the body.
@@ -225,7 +219,6 @@ morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
 #'
 #' A step of the qrntcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t.Q Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.
@@ -279,6 +272,8 @@ morie_qrntcq <- morie_qrntcq_gamma_generation_time
 #' @return A list with \code{efficacy}, \code{efficacy_detained},
 #'   \code{efficacy_released}, \code{false_negative}, \code{t_T},
 #'   \code{t_R}, \code{bound}, \code{note}.
+#' @examples
+#' efficacy_test_and_release(t_Q = 3, t_T = 6, t_R = 7, false_negative = 0.2)$efficacy
 #' @export
 #' @aliases testandrelease
 efficacy_test_and_release <- function(t_Q, t_T, t_R, false_negative,
@@ -320,9 +315,13 @@ efficacy_test_and_release <- function(t_Q, t_T, t_R, false_negative,
 #' @param t_max Maximum time when \code{grid} is \code{NULL}.
 #' @param n Number of grid points.
 #' @return A list with \code{t} and \code{density}.
+#' @examples
+#' gt <- gamma_generation_time()
+#' sum(gt$density * diff(gt$t)[1])   # the density integrates to one on its grid
 #' @export
 gamma_generation_time <- function(shape = 2.83, scale = 1.86, grid = NULL,
                                   t_max = 30.0, n = 3001L) {
+  .morie_arg(shape, "n1")
   if (as.numeric(shape) <= 0 || as.numeric(scale) <= 0)
     stop("qrntcq: the gamma shape and scale must be positive")
   if (is.null(grid)) {
@@ -357,6 +356,9 @@ gamma_generation_time <- function(shape = 2.83, scale = 1.86, grid = NULL,
 #' @return A list with \code{estimate}, \code{optimal_t_R},
 #'   \code{efficacy_at_optimum}, \code{utility_at_optimum}, \code{curve},
 #'   \code{t_Q}, \code{method}.
+#' @examples
+#' gt <- gamma_generation_time()
+#' optimal_duration(t_Q = 3, generation_time = gt)$optimal_t_R
 #' @export
 optimal_duration <- function(t_Q = 3.0, generation_time = NULL,
                               t_max = 20.0, step = 0.25) {
@@ -419,6 +421,9 @@ qrntcq_cheatsheet <- function() {
 #'   \code{remaining_mass}, \code{t_Q}, \code{t_R}, \code{max_attainable},
 #'   \code{pre_quarantine_mass} (and a \code{note} if no transmission
 #'   remains).
+#' @examples
+#' gt <- gamma_generation_time()
+#' quarantine_efficacy(t_Q = 3, t_R = 10, generation_time = gt)$efficacy
 #' @export
 #' @aliases quarantineefficacy
 quarantine_efficacy <- function(t_Q, t_R, generation_time = NULL,
@@ -464,10 +469,13 @@ quarantine_efficacy <- function(t_Q, t_R, generation_time = NULL,
 #' @return A list with \code{relative_utility}, \code{utility_a},
 #'   \code{utility_b}, \code{efficacy_a}, \code{efficacy_b},
 #'   \code{independent_of_infected_fraction}, \code{note}.
+#' @examples
+#' relative_utility(t_R_a = 7, t_R_b = 14, t_Q = 3)$relative_utility
 #' @export
 relative_utility <- function(t_R_a, t_R_b, t_Q = 3.0,
                              generation_time = NULL,
                              infected_fraction = NULL) {
+  .morie_arg(t_R_a, "n1")
   g <- if (is.null(generation_time)) gamma_generation_time()
        else generation_time
   ea <- quarantine_efficacy(t_Q, t_R_a, g)$efficacy
@@ -490,6 +498,8 @@ relative_utility <- function(t_R_a, t_R_b, t_Q = 3.0,
 #' @param efficacy Numeric efficacy.
 #' @param days_in_quarantine Positive number of days.
 #' @return Numeric.
+#' @examples
+#' utility(efficacy = 0.9, days_in_quarantine = 14)
 #' @export
 utility <- function(efficacy, days_in_quarantine) {
   d <- as.numeric(days_in_quarantine)

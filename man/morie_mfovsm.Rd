@@ -40,6 +40,5 @@ A list with \code{estimate}, \code{se}, \code{main_effect},
 \description{
 A step of the mfovsm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

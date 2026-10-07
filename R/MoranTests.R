@@ -44,6 +44,7 @@
 #' mirand(c(1, 2, 3, 4), W)$statistic
 #' @export
 miexp <- function(n) {
+  .morie_arg(n, "i1")
   n <- as.integer(n)
   if (n < 2) stop("n must be at least 2")
   e <- -1 / (n - 1)

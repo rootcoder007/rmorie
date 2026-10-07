@@ -18,5 +18,4 @@ Invisibly,the value of \code{w}, as built in the body.
 A step of the copynm_native implementation. Called by \code{.copynm_binary_supported},
 \code{copynm}.
 See the file header for the source the module follows.
-source it follows.
 }

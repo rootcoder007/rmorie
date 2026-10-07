@@ -36,6 +36,7 @@
 #' BivariateMoran(1:4, 1:4, W, nsim = 9)$statistic
 #' @export
 StGetisOrd <- function(z, coords, distance, time_window = 1L) {
+  .morie_arg(z, "n")
   Z <- as.matrix(z) * 1
   P <- as.matrix(coords)
   Tn <- nrow(Z)

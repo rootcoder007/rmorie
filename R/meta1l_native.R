@@ -26,19 +26,20 @@
 #' @return List with \code{estimate} (list s, t, x, r of mean CATEs),
 #'   \code{cate_s}, \code{cate_t}, \code{cate_x}, \code{cate_r},
 #'   \code{coef_r}, \code{n}, \code{n_treat}, \code{method}.
-#' @references Kunzel, S. R., Sekhon, J. S., Bickel, P. J. and Yu, B.
-#'   (2019), Metalearners for estimating heterogeneous treatment
-#'   effects using machine learning, PNAS 116(10), 4156-4165,
-#'   doi:10.1073/pnas.1804597116, Eqs. 3-9 and Remark 1; local copy
-#'   fetched-wave3/kunzel-sekhon-bickel-yu-2019-metalearners-heterogeneous-treatment-effects-PNAS116.pdf.
-#'   Nie, X. and Wager, S. (2021), Quasi-oracle estimation of
-#'   heterogeneous treatment effects, Biometrika 108(2), 299-319,
-#'   doi:10.1093/biomet/asaa076, Eq. 4; local copy
-#'   fetched-wave3/nie-wager-2021-quasi-oracle-heterogeneous-treatment-effects-Biometrika108.pdf.
-#'   Curth, A. and van der Schaar, M. (2021), Nonparametric estimation
-#'   of heterogeneous treatment effects: From theory to learning
-#'   algorithms, AISTATS 130, arXiv:2101.10943; local copy
-#'   fetched-wave3/curth-vanderschaar-2021-nonparametric-hte-theory-to-learning-AISTATS.pdf.
+#' @references Kunzel, S. R., Sekhon, J. S., Bickel, P. J. and Yu, B. (2019),
+#'   Metalearners for estimating heterogeneous treatment effects using machine learning,
+#'   PNAS 116(10), 4156-4165, doi:10.1073/pnas.1804597116, Eqs. 3-9 and Remark 1. Nie,
+#'   X. and Wager, S. (2021), Quasi-oracle estimation of heterogeneous treatment
+#'   effects, Biometrika 108(2), 299-319, doi:10.1093/biomet/asaa076, Eq. 4. Curth, A.
+#'   and van der Schaar, M. (2021), Nonparametric estimation of heterogeneous treatment
+#'   effects: From theory to learning algorithms, AISTATS 130, arXiv:2101.10943.
+#' @examples
+#' set.seed(8)
+#' n <- 300
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' w <- rbinom(n, 1, 0.5)
+#' y <- X[, 1] + w * (1 + X[, 2]) + rnorm(n)
+#' Meta1l(y, w, X)$estimate
 #' @export
 Meta1l <- function(y, w, X, ps = NULL) {
   yv <- as.numeric(y)

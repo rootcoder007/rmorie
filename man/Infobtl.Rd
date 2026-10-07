@@ -21,15 +21,13 @@ Infobtl(X, Y = NULL, beta = 5, T = 2, iters = 500, tol = 1e-14, pxy = NULL)
 list: estimate, lagrangian, ixt, ity, p_t_x, p_t, beta, method.
 }
 \description{
-Tishby, Pereira and Bialek (1999), The information bottleneck method,
-Allerton 37, 368-377 (physics/0004057 -- FETCHED).  The Lagrangian is L
-= I(X;T) - beta I(T;Y) and the self-consistent solution printed there is
-p(t|x) = p(t)/Z(x, beta) exp[-beta sum_y p(y|x) log(p(y|x)/p(y|t))],
-p(t) = sum_x p(x) p(t|x), p(y|t) = (1/p(t)) sum_x p(y|x) p(t|x) p(x),
-iterated to a fixed point.  The exponent is a Kullback-Leibler
-divergence -- the RELEVANT distortion, which is what distinguishes the
-information bottleneck from ordinary rate-distortion, where d comes from
-outside.
+Tishby, Pereira and Bialek (1999), The information bottleneck method, Allerton 37,
+368-377 (physics/0004057). The Lagrangian is L = I(X;T) - beta I(T;Y) and the
+self-consistent solution printed there is p(t|x) = p(t)/Z(x, beta) exp[-beta sum_y
+p(y|x) log(p(y|x)/p(y|t))], p(t) = sum_x p(x) p(t|x), p(y|t) = (1/p(t)) sum_x p(y|x)
+p(t|x) p(x), iterated to a fixed point. The exponent is a Kullback-Leibler divergence --
+the RELEVANT distortion, which is what distinguishes the information bottleneck from
+ordinary rate-distortion, where d comes from outside.
 }
 \details{
 Determinism: the iteration needs an initial p(t|x); a low-discrepancy

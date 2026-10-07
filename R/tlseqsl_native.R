@@ -227,8 +227,14 @@ morie_tlseqsl_discrete_super_learner <- function(X, y, library, V = 10,
 #' \code{note}.
 #' @export
 #' @examples
-#' morie_tlseqsl_ensemble_super_learner(X = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   y = c(1, 2, 3, 4, 5, 6, 7, 8), library = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' set.seed(8)
+#' X <- matrix(rnorm(40 * 2), 40)
+#' y <- 1 + 2 * X[, 1] - X[, 2] + rnorm(40, sd = 0.5)
+#' # a learner is a function of (X, y) returning a prediction function of one row
+#' sl_mean <- function(X, y) { m <- mean(y); function(x) m }
+#' sl_lm <- function(X, y) { b <- stats::lm.fit(cbind(1, X), y)$coefficients; function(x) sum(c(1, x) * b) }
+#' r <- morie_tlseqsl_ensemble_super_learner(X, y, library = list(mean = sl_mean, ols = sl_lm), V = 5)
+#' r$weights
 #' @keywords internal
 morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V = 10,
                                                  loss = "squared", seed = 0,
@@ -397,5 +403,5 @@ morie_tlseqsl_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_tlseqsl_sequentialsuperlearner <- morie_tlseqsl_sequential_super_learner

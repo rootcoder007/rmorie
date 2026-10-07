@@ -18,8 +18,8 @@ ggplot object or invisible NULL.
 \description{
 Renders Kulldorff-style circular candidate windows on the TPS canvas.
 Currently a thin layer over centroids + radius circles; the full
-likelihood-ratio overlay and significance ranking depend on the Python
-\code{morie.tps_satscan} module and are stubbed.
+likelihood-ratio overlay and significance ranking are not yet
+available in R (they live in the Python \code{morie.tps_satscan} module).
 }
 \examples{
 \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}

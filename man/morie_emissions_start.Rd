@@ -8,14 +8,14 @@
 \usage{
 morie_emissions_start(
   project_name = "morie",
-  output_dir = ".",
+  output_dir = NULL,
   output_file = "emissions.csv",
   pue = 1,
   wue = 0,
   country_iso_code = "",
   region = "",
-  save_to_file = TRUE,
-  capsule = TRUE,
+  save_to_file = !is.null(output_dir),
+  capsule = !is.null(output_dir),
   key = NULL,
   measure_power_secs = 1
 )
@@ -27,7 +27,8 @@ morie_emissions_track(expr, ...)
 \arguments{
 \item{project_name}{Label written to the CSV and the manifest.}
 
-\item{output_dir}{Where \code{emissions.csv} and the capsule go.}
+\item{output_dir}{Where \code{emissions.csv} and the capsule go. \code{NULL}
+(the default) writes nothing: the measurement is returned in R only.}
 
 \item{output_file}{CSV file name.}
 

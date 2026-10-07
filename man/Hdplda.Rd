@@ -32,12 +32,11 @@ Hdplda(
 list: estimate, loglik, phi, theta, beta, n_vocab, method.
 }
 \description{
-Teh, Jordan, Beal and Blei (2006), JASA 101(476), 1566-1581 (FETCHED),
-section 6.1: each document is a group, the topics are the shared atoms,
-and the number of topics is NOT fixed in advance -- the whole
-difference from latent Dirichlet allocation (Blei, Ng and Jordan 2003),
-where K is a hyperparameter.  The model is eq. (19) with a multinomial
-likelihood over the vocabulary.
+Teh, Jordan, Beal and Blei (2006), JASA 101(476), 1566-1581, section 6.1: each
+document is a group, the topics are the shared atoms, and the number of topics is NOT
+fixed in advance -- the whole difference from latent Dirichlet allocation (Blei, Ng
+and Jordan 2003), where K is a hyperparameter. The model is eq. (19) with a
+multinomial likelihood over the vocabulary.
 }
 \details{
 Determinism: topic-word distributions fitted by EM from a symmetric

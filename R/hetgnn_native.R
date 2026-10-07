@@ -14,7 +14,6 @@
 #'
 #' A step of the hetgnn_native implementation. Called by \code{han_forward}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A vector; indexed elementwise.
 #' @param types A vector; indexed elementwise.
@@ -59,7 +58,6 @@ metapath_neighbours <- function(edges, types, metapath) {
 #'
 #' A step of the hetgnn_native implementation. Called by \code{han_forward}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h_i Passed to \code{proj}.
 #' @param neighbours A vector; its length is taken and its elements indexed.
@@ -114,7 +112,6 @@ node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
 #'
 #' A step of the hetgnn_native implementation. Called by \code{han_forward}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z_per_metapath A vector; indexed elementwise.
 #' @param W A matrix; passed to \code{\%*\%}.
@@ -157,7 +154,6 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
 #'
 #' A step of the hetgnn_native implementation. Called by \code{morie_hetgnn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H A matrix; indexed by row and column.
 #' @param edges Passed to \code{metapath_neighbours}.
@@ -240,7 +236,6 @@ heterogeneous_gnn <- han_forward
 #'
 #' A step of the hetgnn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Passed to \code{han_forward}.
 #' @param edges Passed to \code{han_forward}.
@@ -279,7 +274,6 @@ morie_hetgnn <- function(H, edges, types, metapaths, a_vec, W_node,
 #'
 #' A step of the hetgnn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

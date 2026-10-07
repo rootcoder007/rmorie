@@ -73,7 +73,6 @@
 #' A step of the plsa_native implementation. Called by \code{.plsa_e_step},
 #' \code{.plsa_log_likelihood}, \code{.plsa_m_step} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{N}, \code{D}, \code{V}.
@@ -95,7 +94,6 @@
 #'
 #' A step of the plsa_native implementation. Called by \code{e_step}, \code{morie_plsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param Pz A vector; its length is taken.
@@ -129,7 +127,6 @@
 #'
 #' A step of the plsa_native implementation. Called by \code{m_step}, \code{morie_plsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param post A matrix; indexed by row and column.
@@ -168,7 +165,6 @@
 #' A step of the plsa_native implementation. Called by \code{.plsa_log_likelihood},
 #' \code{joint_probability}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Pz A vector; its length is taken.
 #' @param Pd_z A matrix; indexed by row and column.
@@ -192,7 +188,6 @@
 #'
 #' A step of the plsa_native implementation. Called by \code{.plsa_perplexity}, \code{morie_plsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param Pz Passed to \code{.plsa_joint_probability}.
@@ -212,7 +207,6 @@
 #'
 #' A step of the plsa_native implementation. Called by \code{probabilisticlsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
@@ -297,7 +291,6 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #'
 #' A step of the plsa_native implementation. Called by \code{perplexity}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param Pz Passed to \code{.plsa_log_likelihood}.
@@ -316,7 +309,6 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -335,11 +327,10 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 }
 
 # Compact aliases per ledger/NAMING.md
-#' Compact aliases per ledger/NAMING.md
+#' Compact aliases
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{morie_plsa}.
 #' @param K Passed to \code{morie_plsa}.
@@ -364,7 +355,6 @@ plsa <- probabilisticlsa
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_e_step}.
 #' @param Pz Passed to \code{.plsa_e_step}.
@@ -384,7 +374,6 @@ e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_m_step}.
 #' @param post Passed to \code{.plsa_m_step}.
@@ -395,17 +384,24 @@ e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 #' m_step(n_dw = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   post = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), K = 5L)
 #' @keywords internal
-m_step <- function(n_dw, post, K) .plsa_m_step(n_dw, post, K)
-#' .plsa_log_likelihood
+m_step <- function(n_dw, post, K) {
+  .morie_arg(n_dw, "m")
+  .plsa_m_step(n_dw, post, K)
+}
+#' Log-likelihood of a PLSA model
 #'
-#' Internal helper in plsa_native.R; see the file header for
-#' the source the module follows.
+#' \eqn{\sum_{d,w} n(d,w) \log \sum_z P(z) P(d|z) P(w|z)} for the aspect model
+#' of Hofmann (1999).
 #'
-#' @param n_dw Passed to \code{.plsa_check}.
-#' @param Pz Passed to \code{.plsa_joint_probability}.
-#' @param Pd_z Passed to \code{.plsa_joint_probability}.
-#' @param Pw_z Passed to \code{.plsa_joint_probability}.
-#' @return The value of \code{sum}.
+#' @param n_dw Document-by-word count matrix.
+#' @param Pz Topic probabilities \eqn{P(z)}.
+#' @param Pd_z Documents-by-topics matrix of \eqn{P(d|z)}.
+#' @param Pw_z Words-by-topics matrix of \eqn{P(w|z)}.
+#' @return The log-likelihood.
+#' @examples
+#' n_dw <- matrix(c(2, 0, 1, 3), 2)       # 2 documents x 2 words
+#' Pz <- c(0.5, 0.5); Pd_z <- matrix(0.5, 2, 2); Pw_z <- matrix(c(0.7, 0.3, 0.2, 0.8), 2)
+#' log_likelihood(n_dw, Pz, Pd_z, Pw_z)
 #' @export
 # the public alias the reference arm exports; the old line re-bound
 # the INTERNAL name to itself, clobbering the real helper with
@@ -415,7 +411,6 @@ log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, 
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Pz Passed to \code{.plsa_joint_probability}.
 #' @param Pd_z Passed to \code{.plsa_joint_probability}.
@@ -431,7 +426,6 @@ joint_probability <- function(Pz, Pd_z, Pw_z) .plsa_joint_probability(Pz, Pd_z, 
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_perplexity}.
 #' @param Pz Passed to \code{.plsa_perplexity}.

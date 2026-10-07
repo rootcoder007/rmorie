@@ -13,10 +13,9 @@
 #' @param iters Bisection steps (fixed budget).
 #' @return List with \code{estimate}, \code{psi_at_estimate},
 #'   \code{lower}, \code{upper}, \code{iters}, \code{n}.
-#' @references Kosorok (2008), Introduction to Empirical Processes and
-#'   Semiparametric Inference, Section 2.2.5 and Theorem 10.16. Fetched as
-#'   the full text of the book. The Huber psi is Huber (1964), Annals of
-#'   Mathematical Statistics 35(1), 73-101.
+#' @references Kosorok (2008), Introduction to Empirical Processes and Semiparametric
+#'   Inference, Section 2.2.5 and Theorem 10.16. The Huber psi is Huber (1964), Annals
+#'   of Mathematical Statistics 35(1), 73-101.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

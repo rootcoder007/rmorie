@@ -18,7 +18,6 @@ A list with \code{min_g}, \code{max_g}, \code{worst}, \code{satisfied},
 \description{
 A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

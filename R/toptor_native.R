@@ -19,7 +19,6 @@
 #'
 #' A step of the toptor_native implementation. Called by \code{topological_torsions}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_atoms A count; the body uses it as \code{seq_len(...)}.
 #' @param bonds See Usage.
@@ -44,7 +43,6 @@
 #'
 #' A step of the toptor_native implementation. Called by \code{topological_torsions}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_atoms A count; the body uses it as \code{rep(...)}.
 #' @param bonds See Usage.
@@ -108,7 +106,6 @@ torsion_similarity <- function(t1, t2) {
 #'
 #' A step of the toptor_native implementation. Called by \code{morie_toptor}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param torsion_sets Iterated over elementwise, with \code{lapply}.
 #' @param activities Coerced to numeric by the body, with \code{as.numeric}.
@@ -223,7 +220,7 @@ morie_toptor <- function(elements, bonds, reference = NULL,
   out
 }
 
-#' Compact alias per ledger/NAMING.md
+#' Compact alias
 #' @rdname morie_toptor
 #' @export
 morie_topological_torsion <- morie_toptor
@@ -233,7 +230,6 @@ morie_topological_torsion <- morie_toptor
 #'
 #' A step of the toptor_native implementation. Called by \code{morie_topological_torsions}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; indexed elementwise.
@@ -268,6 +264,9 @@ morie_topological_torsion <- morie_toptor
 #'   kept as themselves; everything else becomes \code{"Y"}.
 #' @return A named list mapping canonical codes to integer counts.
 #' @references Nilakantan, R. et al. (1987).
+#' @examples
+#' # pentan-1-ol skeleton; bonds use 0-based atom indices
+#' morie_topological_torsions(c("C", "C", "C", "C", "O"), list(c(0, 1), c(1, 2), c(2, 3), c(3, 4)))
 #' @export
 morie_topological_torsions <- function(elements, bonds, common_types = NULL) {
   els <- as.character(elements)
@@ -309,6 +308,8 @@ morie_topological_torsions <- function(elements, bonds, common_types = NULL) {
 #' Compact one-line summary of the toptor recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_toptor_cheatsheet()
 #' @export
 morie_toptor_cheatsheet <- function() {
   paste("toptor: topological torsion (Nilakantan 1987). Four",
@@ -328,6 +329,8 @@ morie_toptor_cheatsheet <- function() {
 #' @param t1,t2 Either torsion dictionaries or iterables of codes.
 #' @return A numeric similarity in \code{[0, 1]}.
 #' @references Nilakantan, R. et al. (1987).
+#' @examples
+#' morie_torsion_similarity(c("a", "b", "c"), c("a", "b", "d"))
 #' @export
 morie_torsion_similarity <- function(t1, t2) {
   s1 <- if (is.list(t1) && !is.null(names(t1))) names(t1) else as.character(t1)
@@ -347,6 +350,10 @@ morie_torsion_similarity <- function(t1, t2) {
 #' @return A list with the vector, descriptors, length, null mean and
 #'   sd, and the z-score.
 #' @references Nilakantan, R. et al. (1987).
+#' @examples
+#' sets <- list(list(a = 2, b = 1), list(a = 1, c = 1), list(b = 2, c = 1), list(a = 3))
+#' tv <- morie_trend_vector(sets, activities = c(5, 3, 1, 6), permutations = 30, seed = 1)
+#' tv$vector
 #' @export
 morie_trend_vector <- function(torsion_sets, activities,
                                 permutations = 40, seed = 0) {

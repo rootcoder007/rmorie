@@ -16,7 +16,6 @@ The value of \code{L}, as built in the body.
 A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at},
 \code{morie_cmlmer_compressed_lmm}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)

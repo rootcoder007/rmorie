@@ -16,7 +16,6 @@ The value of \code{e}, as built in the body.
 A step of the tail1_core implementation. Called by \code{.btdir_rows},
 \code{.btmbb_reps}, \code{.kvmse_rotation} and 32 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .t1_lcg()

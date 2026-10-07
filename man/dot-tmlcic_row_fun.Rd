@@ -17,5 +17,4 @@ The value of \code{function}.
 \description{
 A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_working_model}.
 See the file header for the source the module follows.
-source it follows.
 }

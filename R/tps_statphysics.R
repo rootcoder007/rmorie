@@ -43,8 +43,8 @@ NULL
 #' Each callable consumes one TPS category and returns a multi-section
 #' \code{morie_rich_result}. Cosine-corrected projection and DBSCAN
 #' delegation are deferred to companion modules (\code{tps_render},
-#' \code{tps_spatial_advanced}); when those collaborators are not
-#' available the routines fall back to a stop-stub explaining the gap.
+#' \code{tps_spatial_advanced}); when those are not available the
+#' routines stop with an error explaining what is missing.
 #'
 #' Functions
 #'
@@ -315,9 +315,6 @@ morie_tps_load_tps <- function(name, format = "geojson",
     stop("Unknown TPS layer: ", name, ". Known: ",
          paste(c(names(morie_tps_layer_urls()), names(hub)),
                collapse = ", "))
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("jsonlite required for morie_tps_load_tps().")
   }
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   out <- file.path(cache_dir, paste0("tps_hub_", name, ".csv"))
@@ -698,13 +695,13 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
 #'   cities. \emph{PNAS} 104: 7301-7306.
 #'
 #' @examples
-#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint({
 #'   rr <- morie_tps_urban_scaling_beta("Assault", year = 2024,
 #'                                       save_fig = FALSE)
 #'   print(rr$summary_lines)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_urban_scaling_beta <- function(category = "Assault",
                                            year = 2024L,
@@ -1289,12 +1286,12 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
 #'   Reviews} 12: 1-21.
 #'
 #' @examples
-#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint({
 #'   res <- morie_tps_statphysics_analyze_all(c("Assault", "Robbery"),
 #'                                              save_fig = FALSE)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_statphysics_analyze_all <- function(categories = NULL,
                                                 save_fig = TRUE,

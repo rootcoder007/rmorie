@@ -39,6 +39,13 @@ grad_i = x_i - xbar_i and hess -= (weighted second moment
 \item outer(xbar_i, xbar_i)) over each risk set; se = sqrt(diag(pinv(I))).
 }
 }
+\examples{
+set.seed(7)
+x <- rnorm(150)
+time <- rexp(150, exp(0.5 * x))
+g <- Ghosalcoxbvm(x, time = time, event = rbinom(150, 1, 0.8))
+c(g$beta, g$se)
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, sections 13.6.2 and 13.7.2.

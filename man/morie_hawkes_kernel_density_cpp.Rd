@@ -16,5 +16,7 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{.tps_hwka_kernel_density}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+morie_hawkes_kernel_density_cpp(c(0.5, 1, 2), "exponential", 1.5)
 }

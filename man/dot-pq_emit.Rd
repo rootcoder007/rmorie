@@ -18,5 +18,4 @@ Invisibly,nothing; the function is called for its effect.
 A step of the parquet implementation. Called by \code{.pq_wbinary}, \code{.pq_wfield},
 \code{.pq_wlisthdr} and 4 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

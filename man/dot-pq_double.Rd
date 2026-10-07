@@ -15,5 +15,4 @@ The value of \code{v}, as built in the body.
 \description{
 A step of the parquet implementation. Called by \code{.pq_scalar}.
 See the file header for the source the module follows.
-source it follows.
 }

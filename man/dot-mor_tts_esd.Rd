@@ -21,5 +21,4 @@ A list with \code{anoms}, \code{stats}, \code{lams}.
 \description{
 A step of the ttsAn_native implementation. Called by \code{morie_ttsAn}.
 See the file header for the source the module follows.
-source it follows.
 }

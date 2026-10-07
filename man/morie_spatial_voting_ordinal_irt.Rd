@@ -2,44 +2,79 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_ordinal_irt}
 \alias{morie_spatial_voting_ordinal_irt}
-\title{Ordinal IRT / Quinn factor model (stub)}
+\title{Ordinal IRT: the ordinal factor model of Quinn (2004)}
 \usage{
 morie_spatial_voting_ordinal_irt(
   Y,
   n_dims = 1L,
   n_samples = 500L,
   burn_in = 100L,
-  seed = 42L
+  seed = 42L,
+  lambda_prior_precision = 0
 )
 }
 \arguments{
-\item{Y}{Ordinal response matrix.}
+\item{Y}{Respondent-by-item matrix of ordinal responses (any ordered
+numeric coding; \code{NA} for missing).}
 
 \item{n_dims}{Latent dimensions.}
 
-\item{n_samples}{MCMC samples.}
+\item{n_samples}{Retained draws.}
 
-\item{burn_in}{Burn-in length.}
+\item{burn_in}{Sweeps discarded first.}
 
 \item{seed}{RNG seed.}
+
+\item{lambda_prior_precision}{Prior precision \eqn{L_0} of the
+loadings and intercepts.}
 }
 \value{
-List: \code{ideal_points}, \code{ideal_sd}, \code{discrimination},
-\code{difficulty}, \code{cutpoints}, \code{engine}.
+List: \code{ideal_points} and \code{ideal_sd} (respondents by
+dimension), \code{discrimination} (items by dimension),
+\code{intercept}, \code{cutpoints} (per item, posterior means, the
+first fixed at 0), \code{acceptance} (cutpoint steps after burn-in),
+\code{n_samples}, \code{engine}.
 }
 \description{
-Ordinal IRT / Quinn factor model (stub)
+Each ordinal response is a thresholded latent normal,
+\deqn{y^*_{ij} = \lambda_{j0} + \lambda_j^\top \phi_i + e_{ij},
+\quad e_{ij} \sim N(0, 1),}
+with \eqn{y_{ij} = c} when \eqn{\gamma_{j,c-1} < y^*_{ij} \le
+\gamma_{j,c}}, item-specific cutpoints \eqn{\gamma_{j0} = -\infty},
+\eqn{\gamma_{j1} = 0}, \eqn{\gamma_{jC} = \infty}, ideal points
+\eqn{\phi_i \sim N(0, I)}, loadings \eqn{\lambda_j \sim N(0, I / L_0)}
+and a flat prior on the free cutpoints.  \eqn{L_0 = 0} (the default)
+is the flat loading prior of \code{MCMCpack::MCMCordfactanal}.  Each
+item's categories are its observed values in increasing order.
+}
+\details{
+Each sweep updates the free cutpoints of every item by the Cowles
+(1996) Metropolis-Hastings step with \eqn{y^*} integrated out (step
+sizes tuned during burn-in only), then draws \eqn{y^*} from truncated
+normals and the loadings and ideal points from their Gaussian full
+conditionals.  Reflection (and, with several dimensions, rotation)
+leaves the model unchanged; each draw is reflected so the first item
+loads positively, or with several dimensions rotated onto the first
+draw.  On 200 simulated respondents and ten four-category items the
+posterior means agree with \code{MCMCordfactanal} (first loading
+constrained positive) to Monte Carlo error: ideal points correlate at
+0.9999 and loadings, intercepts and cutpoints differ by at most 0.05.
 }
 \examples{
-if (requireNamespace("MCMCpack", quietly = TRUE)) {
-  set.seed(1)
-  Y <- matrix(sample(1:3, 60, TRUE), 20, 3)
-  fit <- morie_spatial_voting_ordinal_irt(Y, n_samples = 100L,
-                                          burn_in = 50L)
-  head(fit$ideal_points)
-}
+set.seed(1)
+th <- rnorm(60)
+Y <- matrix(cut(outer(th, runif(6, 0.8, 1.5)) + rnorm(360),
+                c(-Inf, -0.5, 0.5, Inf), labels = FALSE), 60, 6)
+fit <- morie_spatial_voting_ordinal_irt(Y, n_samples = 150L,
+                                        burn_in = 100L)
+cor(fit$ideal_points[, 1], th)
 }
 \references{
-Quinn, K. M. (2004). "Bayesian Factor Analysis for Mixed
-Ordinal and Continuous Responses." \emph{Political Analysis}, 12(4).
+Quinn, K. M. (2004). Bayesian factor analysis for mixed
+ordinal and continuous responses. \emph{Political Analysis} 12(4),
+338-353.
+
+Cowles, M. K. (1996). Accelerating Monte Carlo Markov chain
+convergence for cumulative-link generalized linear models.
+\emph{Statistics and Computing} 6(2), 101-111.
 }

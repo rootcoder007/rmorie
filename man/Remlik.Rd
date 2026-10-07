@@ -24,14 +24,18 @@ List with \code{loglik}, \code{beta}, \code{n}, \code{p}, \code{q}.
 Formula: l_R(theta; y) = -0.5 log|X'V^-1 X| - 0.5 log|V| - 0.5 (y - X betatilde)' V^-1
 (y - X betatilde)
 }
+\examples{
+set.seed(21)
+g <- rep(1:10, each = 5)
+X <- cbind(1, rnorm(50)); Z <- model.matrix(~ factor(g) - 1)
+y <- X \%*\% c(1, 2) + Z \%*\% rnorm(10) + rnorm(50)
+Remlik(X, Z, as.numeric(y), D = diag(10))$loglik
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-doi:10.1007/978-3-030-89010-0.  Chapter 5, Sect. 5.2.1.2 p. 146.  REML differs from
-the ML log-likelihood of Eq. (5.2) by the -0.5 log|X'V^-1 X| term, which is what
-removes the downward bias of the ML variance estimate; betatilde is the generalized
-least squares estimator.  Delegates to the chapter routine in morie.fn._gp_core, which
-was verified against this book in the earlier tranches of this shelf recorded in
-ledger/SHELF_LEDGER.txt; the page and equation number above are that routine's own,
-re-read against the chapter PDF here.
+doi:10.1007/978-3-030-89010-0. Chapter 5, Sect. 5.2.1.2 p. 146. REML differs from the
+ML log-likelihood of Eq. (5.2) by the -0.5 log|X'V^-1 X| term, which is what removes
+the downward bias of the ML variance estimate; betatilde is the generalized least
+squares estimator.
 }

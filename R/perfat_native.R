@@ -9,7 +9,6 @@
 #' A step of the perfat_native implementation. Called by \code{draw_projections},
 #' \code{favor_attention}, \code{kernel_estimate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -26,7 +25,6 @@
 #' A step of the perfat_native implementation. Called by \code{draw_projections},
 #' \code{favor_features}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -41,7 +39,6 @@
 #'
 #' A step of the perfat_native implementation. Called by \code{favor_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @param d A count; the body uses it as \code{matrix(...)}.
@@ -97,7 +94,6 @@ draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
 #' A step of the perfat_native implementation. Called by \code{favor_attention},
 #' \code{kernel_estimate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param omegas A matrix; passed to \code{nrow}.
@@ -136,7 +132,6 @@ favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
 #'
 #' A step of the perfat_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{rbind}.
 #' @param y Passed to \code{rbind}.
@@ -145,8 +140,8 @@ favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
 #' @return The value of \code{.dot}.
 #' @export
 #' @examples
-#' kernel_estimate(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   omegas = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+#' omegas <- matrix(c(0.3, -0.2, 0.1, 0.4, 0.2, -0.1), nrow = 2)   # two random features in 3-d
+#' kernel_estimate(x = c(1, 0, 0.5), y = c(0.5, 1, 0), omegas = omegas)
 #' @keywords internal
 kernel_estimate <- function(x, y, omegas, kind = "positive") {
   f <- favor_features(rbind(x, y), omegas, kind = kind)
@@ -157,7 +152,6 @@ kernel_estimate <- function(x, y, omegas, kind = "positive") {
 #'
 #' A step of the perfat_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A matrix; passed to \code{as.matrix}.
 #' @param K A matrix; passed to \code{as.matrix}.
@@ -190,7 +184,6 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
 #'
 #' A step of the perfat_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A matrix; passed to \code{as.matrix}.
 #' @param K A matrix; passed to \code{as.matrix}.

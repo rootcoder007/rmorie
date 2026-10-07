@@ -16,5 +16,4 @@ Nothing; this branch always raises.
 A step of the sechsh_native implementation. Called by \code{build_chain},
 \code{chain_entry}, \code{verify_chain} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

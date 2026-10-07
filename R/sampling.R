@@ -81,6 +81,8 @@ morie_stratified_sample <- function(df, strata_col, n_per_stratum,
     # zero. Match that contract (allows zero-stratum allocs).
     alloc <- as.integer(round(strata_sizes / sum(strata_sizes) * total_n))
     alloc <- pmax(alloc, 0L)
+    # rounding can miss the total by a row or two: reconcile on the largest stratum, as morie does
+    alloc[which.max(alloc)] <- alloc[which.max(alloc)] + as.integer(total_n - sum(alloc))
     # Preserve stratum-name index so the per-row lookup below resolves
     # by character key, not by position. Without this, weights become NA.
     alloc <- stats::setNames(alloc, names(strata_sizes))
@@ -92,12 +94,19 @@ morie_stratified_sample <- function(df, strata_col, n_per_stratum,
     }
   }
 
+  drawn <- pmin(alloc, strata_sizes[names(alloc)])  # a stratum shorter than its allocation gives every row
+  empty <- names(drawn)[drawn == 0L & strata_sizes[names(drawn)] > 0L]
+  if (length(empty)) {
+    message(sprintf(
+      "stratified sample: %d row%s over %d strata leaves %s with no rows (the allocation rounds small strata to zero); raise the total or allocate per stratum",
+      sum(drawn), if (sum(drawn) == 1L) "" else "s", length(strata), paste(empty, collapse = ", ")))
+  }
   rows <- unlist(mapply(function(idx, m) {
     sample(idx, size = min(m, length(idx)), replace = FALSE)
   }, strata, alloc, SIMPLIFY = FALSE))
 
   out <- df[rows, , drop = FALSE]
-  weights <- strata_sizes[df[[strata_col]][rows]] / alloc[df[[strata_col]][rows]]
+  weights <- strata_sizes[df[[strata_col]][rows]] / drawn[df[[strata_col]][rows]]
   out$.weight <- as.numeric(weights)
   out
 }

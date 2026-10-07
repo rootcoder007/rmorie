@@ -13,7 +13,6 @@ The value of \code{.morie_env_true}.
 A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allowed},
 \code{.morie_safe_readRDS}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .morie_exec_disabled()

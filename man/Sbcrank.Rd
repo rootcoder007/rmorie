@@ -35,6 +35,5 @@ Sbcrank(V, V)
 \references{
 Talts, Betancourt, Simpson, Vehtari & Gelman (2018),
 arXiv:1804.06788 -- the primary source. Bayesian Data Analysis, 3rd
-edition, was fetched in full and searched; it predates
-simulation-based calibration and does NOT contain it.
+edition, predates simulation-based calibration and does not cover it.
 }

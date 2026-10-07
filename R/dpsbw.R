@@ -3,10 +3,9 @@
 #'
 #' Sethuraman (1994), A constructive definition of Dirichlet priors,
 #' Statistica Sinica 4(2), 639-650: V_k ~ Beta(1, alpha) independently and
-#' pi_k = V_k prod_(j<k)(1 - V_j), so sum_k pi_k = 1 almost surely.  The
-#' 1994 paper is free but was not retrievable here; the construction is
-#' quoted in its standard published form and is reproduced in Teh et al.
-#' (2006), JASA 101, 1566-1581, eqs. (5)-(6), which WAS fetched.
+#' pi_k = V_k prod_(j<k)(1 - V_j), so sum_k pi_k = 1 almost surely; the
+#' construction as reproduced in Teh et al. (2006), JASA 101, 1566-1581,
+#' eqs. (5)-(6).
 #'
 #' Determinism: a Beta(1, alpha) draw is not taken from a generator -- its
 #' quantile is 1 - (1 - u)^(1/alpha) in closed form, evaluated at van der

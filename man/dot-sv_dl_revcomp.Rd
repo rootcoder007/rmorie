@@ -15,7 +15,6 @@ A character value.
 \description{
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_deletion_type_reference}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 txt <- c('alpha', 'beta', 'gamma', 'delta')

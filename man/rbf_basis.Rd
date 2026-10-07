@@ -20,7 +20,6 @@ A list with \code{X}, \code{centres}, \code{width}.
 \description{
 A step of the polkrn_native implementation. Called by \code{morie_polkrn}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

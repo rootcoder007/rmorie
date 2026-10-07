@@ -22,6 +22,8 @@
 #' @references Rao, J. N. K. and Scott, A. J. (1981). The analysis of
 #'   categorical data from complex sample surveys. JASA, 76(374),
 #'   221-230.
+#' @examples
+#' morie_raoscot(p_hat = c(0.3, 0.3, 0.4), p0 = c(1, 1, 1) / 3, n = 500, deffs = c(1.5, 1.4, 1.6))[c("statistic", "corrected", "p_value")]
 #' @export
 morie_raoscot <- function(p_hat, p0, n, V = NULL, deffs = NULL) {
   ph <- as.numeric(p_hat)

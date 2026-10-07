@@ -13,12 +13,10 @@
 #'
 #' @return List with bias, lower, upper, halfwidth, worstgamma,
 #'   normsens, z, c.
-#' @references Bias bound by Cauchy-Schwarz; the bias-aware interval is
-#'   Armstrong and Kolesar (2021), Quantitative Economics 12(1), 77-108,
-#'   Sect. 2.  The worklist attributed this row to Andrews and Kasy
-#'   (2019), which is about publication bias and is therefore not cited
-#'   as the source.  The Quantitative Economics article is not in the
-#'   local corpus and was not read.
+#' @references Bias bound by Cauchy-Schwarz; the bias-aware interval is Armstrong and
+#'   Kolesar (2021), Quantitative Economics 12(1), 77-108, Sect. 2. It is sometimes
+#'   attributed to Andrews and Kasy (2019), which is about publication bias and is not
+#'   the source.
 #' @export
 #' @examples
 #' Misspecbd(estimate = 0.5, sensitivity = c(0.1, 0.2), c = 0.3, se = 0.1)

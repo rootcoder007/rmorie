@@ -9,7 +9,9 @@ morie_tps_hawkes_advanced_fit(
   kernel = "gamma",
   baseline = "sinusoidal",
   ds_name = "?",
-  max_n = 5000L
+  max_n = NULL,
+  method = "auto",
+  eps = 1e-09
 )
 }
 \arguments{
@@ -24,8 +26,14 @@ column.}
 
 \item{ds_name}{Dataset name used in titles and warnings.}
 
-\item{max_n}{Maximum number of events to retain (for tractable
-O(n^2) MLE on the non-Markovian path).}
+\item{max_n}{Maximum number of events to retain; \code{NULL} (the default) keeps every event.
+A subsample thins the process (and its clustering), so it is for quick looks only; it is
+the same subsample as morie's Python (splitmix64 keys).}
+
+\item{method}{Likelihood route: \code{"auto"}, \code{"exact"}, \code{"soe"},
+\code{"truncate"}, \code{"em"} or \code{"inar"} (see Details).}
+
+\item{eps}{Error level of \code{"soe"} and \code{"truncate"}.}
 }
 \value{
 A \code{morie_rich_result} with branching ratio,
@@ -40,11 +48,16 @@ Companion to the Markovian exponential / constant fit in
 sinusoidal) of Kwan-Chen-Dunsmuir (2024).
 }
 \details{
-If the optional packages \pkg{hawkes} or \pkg{emhawkes} are
-available the (exponential, constant) special case can delegate
-to their compiled likelihood routines; the non-Markovian kernels
-always use the base-R O(n^2) negative log-likelihood with
-L-BFGS-B optimisation under explicit box constraints.
+The fit is rmoriebricklayer's \code{core_hawkes_fit()} (the C++ routine morie's Python
+\code{fit_hawkes_general} calls): maximum likelihood with the analytic gradient by projected
+BFGS under box constraints, from the default start and from the exponential fit. \code{method}
+chooses how the likelihood is evaluated: \code{"exact"} (Ozaki's O(n) recursion for the
+exponential kernel; for Weibull and gamma the double sum stops where the kernel underflows to
+0), \code{"soe"} (Lomax, and gamma with shape < 1, as a sum of exponentials with relative error
+\code{eps}), \code{"truncate"} (kernel tail mass below \code{eps} left out), \code{"em"} (the
+EM algorithm) or \code{"inar"} (Kirchner's INAR estimator, constant baseline); \code{"auto"} is
+\code{"exact"} for the exponential kernel, \code{"truncate"} for Weibull and \code{"soe"} for
+Lomax and gamma.
 
 Goodness-of-fit is reported via time-rescaling residuals (Brown
 \emph{et al.} 2002) and a Kolmogorov-Smirnov test against

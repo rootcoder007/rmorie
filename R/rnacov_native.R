@@ -180,7 +180,6 @@ morie_rnacov_parse <- function(s) {
 #'
 #' A step of the rnacov_native implementation. Called by \code{morie_rnacov_nussinov}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{==}.
 #' @param b Passed to \code{==}.

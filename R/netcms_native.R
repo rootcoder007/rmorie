@@ -11,7 +11,6 @@
 #'
 #' A step of the netcms_native implementation. Called by \code{.netcms_lasso}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{abs}.
 #' @param t Numeric; combined arithmetically in the body.
@@ -23,7 +22,6 @@
 #'
 #' A step of the netcms_native implementation. Called by \code{morie_netcms}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param V A matrix; indexed by row and column.
 #' @param s12 A vector; its length is taken and its elements indexed.
@@ -71,6 +69,10 @@
 #'   Sec. 17.3.2.  Friedman, J., Hastie, T. and Tibshirani, R.
 #'   (2008). Biostatistics, 9, 432-441.  Epskamp, S., Borsboom, D.
 #'   and Fried, E. I. (2018). Behavior Research Methods, 50, 195-212.
+#' @examples
+#' set.seed(8)
+#' X <- matrix(rnorm(200 * 4), 200, 4); X[, 2] <- X[, 1] + rnorm(200, sd = 0.5)
+#' morie_netcms(data = X, lam = 0.1)$adjacency
 #' @export
 morie_netcms <- function(data = NULL, S = NULL, lam = 0.1,
                          tol = 1e-8, maxit = 500) {

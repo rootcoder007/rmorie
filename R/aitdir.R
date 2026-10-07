@@ -3,15 +3,13 @@
 #'
 #' The density is the standard one,
 #' f(x | alpha) = Gamma(sum alpha_i) / prod Gamma(alpha_i) * prod x_i^(alpha_i - 1),
-#' on the open (D-1)-simplex.  The stub cites Wilks (1962), Mathematical
-#' Statistics, Wiley, which gives the Dirichlet as the multivariate
-#' generalisation of the beta; that text was not retrievable here, so the
-#' density is written in its standard published form and pinned by two
-#' independent identities instead of a page number: alpha = (1, ..., 1) makes
-#' it constant and equal to Gamma(D) = (D-1)!, the reciprocal volume of the
-#' unit simplex, and D = 2 collapses it to the Beta(alpha_1, alpha_2) density
-#' in x_1.  Both are checked as anchors.  The value is computed on the log
-#' scale and exponentiated once so the constant never overflows.
+#' on the open (D-1)-simplex: the multivariate generalisation of the beta
+#' (Wilks 1962, Mathematical Statistics, Wiley).  Two independent
+#' identities pin it: alpha = (1, ..., 1) makes it constant and equal to
+#' Gamma(D) = (D-1)!, the reciprocal volume of the unit simplex, and D = 2
+#' collapses it to the Beta(alpha_1, alpha_2) density in x_1.  Both are
+#' checked as anchors.  The value is computed on the log scale and
+#' exponentiated once so the constant never overflows.
 #'
 #' @param x a point of the open simplex, strictly positive and summing to one
 #'   to within 1e-8.

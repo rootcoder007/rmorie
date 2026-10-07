@@ -19,6 +19,10 @@ exp(epsilon u(D, r) / (2 Delta u)) (McSherry & Talwar 2007; Dwork
 & Roth 2014, Definition 3.4).  Entry point onto this package's
 native \code{morie_dp_exponential_mechanism}.
 }
+\examples{
+set.seed(26)
+morie_expmc(candidates = c("a", "b", "c"), utility = c(1, 5, 2), sensitivity = 1, epsilon = 1)
+}
 \references{
 McSherry, F. and Talwar, K. (2007). Mechanism design
 via differential privacy. FOCS 2007, 94-103.

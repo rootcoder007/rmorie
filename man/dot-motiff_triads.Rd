@@ -17,5 +17,4 @@ A list with \code{ffl}, \code{cycle3}.
 \description{
 A step of the motiff_native implementation. Called by \code{morie_motiff}.
 See the file header for the source the module follows.
-source it follows.
 }

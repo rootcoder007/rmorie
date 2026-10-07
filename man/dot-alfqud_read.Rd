@@ -17,5 +17,4 @@ Nothing; this branch always raises.
 \description{
 A step of the alfqud_native implementation. Called by \code{morie_alfqud_step}.
 See the file header for the source the module follows.
-source it follows.
 }

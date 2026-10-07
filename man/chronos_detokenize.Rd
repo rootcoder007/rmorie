@@ -21,3 +21,8 @@ A step of the chronos_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+bins <- chronos_uniform_bins(lo = -3, hi = 3, n_bins = 12L)
+tok <- chronos_tokenize(c(10, 12, 9), bins)
+chronos_detokenize(tok$tokens, bins, scale = tok$scale)
+}

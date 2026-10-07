@@ -215,6 +215,7 @@ morie_ramsey_upper_bound <- function(k, l, use_known = TRUE) {
 #' @examples
 #' morie_ramsey_lower_bound_probabilistic(k = 5L)
 morie_ramsey_lower_bound_probabilistic <- function(k) {
+  .morie_arg(k, "i1")
   k <- as.integer(k)
   if (is.na(k) || k < 2L) {
     stop(sprintf("k must be at least 2; got %s", k), call. = FALSE)
@@ -260,6 +261,10 @@ morie_ramsey_lower_bound_probabilistic <- function(k) {
 #'   `total_triangles`, `goodman_minimum`, `identity_residual`.
 #' @references Goodman AW (1959) \emph{American Mathematical Monthly}
 #'   66(9):778-783.
+#' @examples
+#' set.seed(6)
+#' col <- matrix(rbinom(36, 1, 0.5), 6); col[lower.tri(col)] <- t(col)[lower.tri(col)]; diag(col) <- 0
+#' morie_goodman_triangles(col, brute_force = TRUE)[c("monochromatic", "identity_residual")]
 #' @export
 morie_goodman_triangles <- function(colouring, brute_force = FALSE) {
   A <- as.matrix(colouring)
@@ -334,6 +339,7 @@ morie_goodman_triangles <- function(colouring, brute_force = FALSE) {
 #' @examples
 #' morie_goodman_minimum(n = 5L)
 morie_goodman_minimum <- function(n) {
+  .morie_arg(n, "i1")
   n <- as.integer(n)
   if (is.na(n) || n < 3L) {
     stop(sprintf("n must be at least 3; got %s", n), call. = FALSE)

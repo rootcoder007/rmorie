@@ -30,7 +30,6 @@ A list with \code{d}, \code{d_fixed_reference}, \code{times},
 \description{
 A step of the rangayyan_ccf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sine <- function(n, cycles_hz, fs = 100, amp = 1, phase = 0) {

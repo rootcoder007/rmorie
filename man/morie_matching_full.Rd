@@ -2,7 +2,7 @@
 % Please edit documentation in R/matching.R
 \name{morie_matching_full}
 \alias{morie_matching_full}
-\title{Full matching via subclassification}
+\title{Optimal full matching}
 \usage{
 morie_matching_full(data, treatment, covariates, ps = NULL, n_subclasses = 10L)
 }
@@ -13,29 +13,46 @@ morie_matching_full(data, treatment, covariates, ps = NULL, n_subclasses = 10L)
 
 \item{covariates}{Character vector of covariates.}
 
-\item{ps}{Optional pre-computed propensity scores (ignored; retained
-for back-compat).}
+\item{ps}{Optional propensity scores, one per row of \code{data} (or named by its
+row names); estimated by logistic regression when \code{NULL}.}
 
-\item{n_subclasses}{Carried for back-compat (ignored under MatchIt).}
+\item{n_subclasses}{Ignored (the number of matched sets is part of the
+optimum); kept for back-compatibility.}
 }
 \value{
-A list of class \code{morie_match_result}.
+A list of class \code{morie_match_result}: \code{matched_data} (every
+matched row, with \code{distance}, \code{weights} and \code{subclass} columns),
+\code{match_pairs} (the treated-control links of the sets, with their
+distances) and \code{details$total_distance}.
 }
 \description{
-Thin wrapper around \code{MatchIt::matchit(method = "full")}, which
-calls \pkg{optmatch}.
+Native optimal full matching (Rosenbaum 1991; Hansen 2004): every unit is
+placed in a matched set of one treated unit and one or more controls, or one
+control and one or more treated units, so that the total within-set
+propensity-score distance is the smallest possible. It is computed exactly:
+an unrestricted full match is a minimum-weight edge cover of the
+treated-control distance graph, found here through a maximum-weight matching
+(a rectangular assignment problem, solved by shortest augmenting paths). The
+distance is the absolute difference of propensity scores from a logistic
+regression on \code{covariates} (or \code{ps}), and the weights are those of
+\code{MatchIt::matchit(method = "full", estimand = "ATT")}: 1 for treated units,
+treated/control counts of the set for controls, each group rescaled to its
+size. Cross-validated against MatchIt + optmatch in \code{tests/cross} (optmatch
+solves on distances rounded to a tolerance, so its total is never below this
+one). No MatchIt/optmatch at runtime.
 }
 \examples{
-\dontshow{if (morie_has("MatchIt", "optmatch")) withAutoprint(\{ # examplesIf}
-\donttest{
 set.seed(1)
 df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
                  x1 = rnorm(200), x2 = rnorm(200))
-morie_matching_full(df, "d", c("x1", "x2"))
-}
-\dontshow{\}) # examplesIf}
+fm <- morie_matching_full(df, "d", c("x1", "x2"))
+fm$details$total_distance
+head(fm$matched_data[, c("d", "subclass", "weights")])
 }
 \references{
-Hansen, B. B. (2004). Full matching in an observational
-study of coaching for the SAT. \emph{JASA}, 99(467), 609--618.
+Rosenbaum, P. R. (1991). A characterization of optimal designs
+for observational studies. \emph{JRSS B}, 53(3), 597--610.
+
+Hansen, B. B. (2004). Full matching in an observational study of coaching
+for the SAT. \emph{JASA}, 99(467), 609--618.
 }

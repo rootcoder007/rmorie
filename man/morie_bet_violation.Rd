@@ -33,7 +33,6 @@ A list with \code{max_shortfall}, \code{at_cut}, \code{subset_coverage},
 \description{
 A step of the bndpcb_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 \donttest{

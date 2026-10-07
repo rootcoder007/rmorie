@@ -35,6 +35,16 @@ Formula: Z = clr(Y); for each coordinate j target
 psi_j = E[Z_j(1)] - E[Z_j(0)]; sum_j psi_j = 0;
 the perturbation on the simplex is C(exp(psi))
 }
+\examples{
+set.seed(7)
+n <- 300
+A <- rbinom(n, 1, 0.5)
+Yc <- t(sapply(A, function(a) { p <- c(0.5, 0.3, 0.2) * if (a == 1) c(1.5, 1, 1) else 1; p / sum(p) }))
+clr <- function(p) log(p) - mean(log(p))
+Q1 <- matrix(clr(c(0.75, 0.3, 0.2) / 1.25), n, 3, byrow = TRUE); Q0 <- matrix(clr(c(0.5, 0.3, 0.2)), n, 3, byrow = TRUE)
+r <- Comptml(Yc, A, Q1, Q0, g1W = rep(0.5, n))
+round(c(r$effect, sum = r$sum_effect), 3)   # clr effects sum to zero
+}
 \references{
 Targeting machinery verified against the CRAN package tmle
 2.1.1 (Gruber & van der Laan); the bounded-continuous-outcome

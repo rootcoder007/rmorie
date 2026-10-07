@@ -31,10 +31,8 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Phylog(V, V)
 }
 \references{
-Rambaut, A., Lam, T. T., Max Carvalho, L. and Pybus,
-O. G. (2016), Exploring the temporal structure of
-heterochronous sequences using TempEst (formerly Path-O-Gen),
-Virus Evolution 2(1), vew007. Equation (1) and Section 2,
-Root-to-tip regression. Local source:
-library/pdf/fetched-wave3/Rambaut-2016-TempEst-VirusEvolution.pdf.
+Rambaut, A., Lam, T. T., Max Carvalho, L. and Pybus, O. G. (2016),
+Exploring the temporal structure of heterochronous sequences using TempEst
+(formerly Path-O-Gen), Virus Evolution 2(1), vew007. Equation (1) and Section 2,
+Root-to-tip regression.
 }

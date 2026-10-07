@@ -27,7 +27,6 @@
 #' A step of the samdec_native implementation. Called by \code{decode_mask},
 #' \code{two_way_block}, \code{upsample}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{dim}.
 #' @return Nothing; this branch always raises.
@@ -51,7 +50,6 @@
 #'
 #' A step of the samdec_native implementation. Called by \code{dynamic_mask_head}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
 #' @return A vector, from \code{as.numeric}.
@@ -76,7 +74,6 @@
 #'
 #' A step of the samdec_native implementation. Called by \code{two_way_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A matrix; indexed by row and column.
 #' @param K A matrix; passed to \code{nrow}.
@@ -109,7 +106,6 @@
 #'
 #' A step of the samdec_native implementation. Called by \code{decode_mask}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prompt_tokens Passed to \code{.samdec_mat}.
 #' @param image_tokens Passed to \code{.samdec_mat}.
@@ -148,7 +144,6 @@ two_way_block <- function(prompt_tokens, image_tokens) {
 #'
 #' A step of the samdec_native implementation. Called by \code{decode_mask}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param grid Passed to \code{.samdec_mat}.
 #' @param factor Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
@@ -186,7 +181,6 @@ upsample <- function(grid, factor = 2) {
 #'
 #' A step of the samdec_native implementation. Called by \code{decode_mask}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param output_token Passed to \code{.samdec_vec}.
 #' @param image_grid_vectors A matrix; passed to \code{as.matrix}.
@@ -194,9 +188,8 @@ upsample <- function(grid, factor = 2) {
 #' @return A list with \code{logits}, \code{probability}, \code{weights}, \code{note}.
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' dynamic_mask_head(S, M)
+#' grid <- matrix(c(1, 0, 0, 1, 1, 1), nrow = 3)   # three grid cells, two channels
+#' dynamic_mask_head(output_token = c(0.5, -0.2), image_grid_vectors = grid)
 #' @keywords internal
 dynamic_mask_head <- function(output_token, image_grid_vectors,
                               mlp = NULL) {
@@ -249,7 +242,6 @@ dynamic_mask_head <- function(output_token, image_grid_vectors,
 #'
 #' A step of the samdec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prob Coerced to numeric by the body, with \code{as.numeric}.
 #' @param target Coerced to numeric by the body, with \code{as.numeric}.
@@ -288,7 +280,6 @@ focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
 #'
 #' A step of the samdec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prob Coerced to numeric by the body, with \code{as.numeric}.
 #' @param target Coerced to numeric by the body, with \code{as.numeric}.
@@ -320,7 +311,6 @@ dice_loss <- function(prob, target) {
 #'
 #' A step of the samdec_native implementation. Called by \code{morie_samdec}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prompt_tokens Passed to \code{.samdec_mat}.
 #' @param image_tokens Passed to \code{.samdec_mat}.
@@ -385,7 +375,6 @@ decode_mask <- function(prompt_tokens, image_tokens, grid_shape,
 #'
 #' A step of the samdec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prompt_tokens Passed to \code{decode_mask}.
 #' @param image_tokens Passed to \code{decode_mask}.
@@ -412,7 +401,6 @@ sammaskdecoder <- decode_mask
 #'
 #' A step of the samdec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -15,7 +15,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the trmRew_native implementation. Called by \code{morie_trmRew_is_locally_confluent}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- morie_unifAlg_var("x")

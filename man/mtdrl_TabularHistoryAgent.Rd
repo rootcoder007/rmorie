@@ -19,5 +19,8 @@ The value of \code{agent}, as built in the body.
 \description{
 A step of the mtdrl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+ag <- mtdrl_TabularHistoryAgent(n_arms = 3)
+names(ag)
 }

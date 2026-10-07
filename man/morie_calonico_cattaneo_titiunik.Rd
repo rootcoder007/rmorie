@@ -2,7 +2,7 @@
 % Please edit documentation in R/rdrobu_native.R
 \name{morie_calonico_cattaneo_titiunik}
 \alias{morie_calonico_cattaneo_titiunik}
-\title{Alias kept from the generated stub's signature}
+\title{Alias kept for backward compatibility}
 \usage{
 morie_calonico_cattaneo_titiunik(y, x, cutoff = 0, ...)
 }
@@ -21,7 +21,6 @@ The value of \code{morie_rdrobu}.
 \description{
 A step of the rdrobu_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

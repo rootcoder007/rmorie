@@ -20,7 +20,6 @@ A matrix, from \code{matrix}.
 \description{
 A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_se3T_rotation_matrix(axis = c(0, 0, 1), angle = pi / 4)

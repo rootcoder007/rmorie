@@ -27,7 +27,8 @@ AR(p) process the PACF cuts off after lag p.
 morie_sample_pacf(c(1, 3, 2, 7, 6, 8, 5, 9), max_lag = 3)$pacf[1]
 }
 \references{
-Box, G. E. P. & Jenkins, G. M. (1976), sec. 3.2.6;
-Durbin, J. (1960), \emph{Revue de l'Institut International de
-Statistique} 28, 233-244.
+Box, G. E. P. & Jenkins, G. M. (1976). \emph{Time Series
+Analysis: Forecasting and Control}, revised ed. Holden-Day, sec. 3.2.6;
+Durbin, J. (1960). The fitting of time-series models. \emph{Revue de
+l'Institut International de Statistique} 28(3), 233-244.
 }

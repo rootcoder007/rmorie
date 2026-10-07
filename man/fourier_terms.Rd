@@ -19,3 +19,7 @@ A list of rows, each \code{2 * order} long.
 \description{
 Cosine and sine Fourier pairs, exactly periodic with \code{period}
 }
+\examples{
+f <- fourier_terms(t = c(0, 7, 14), period = 7, order = 1)
+f   # identical rows: exactly periodic
+}

@@ -23,6 +23,10 @@ Samples with replacement when the neighbourhood is smaller than the
 budget; the budget is what bounds the per-batch cost regardless of
 node degree.
 }
+\examples{
+adj <- list(`0` = c(1L, 2L), `1` = 0L, `2` = 0L)
+morie_gsageemd_sample(adj, v = 0, size = 3, rng = rmorie:::.ghc_rng(1))   # sampled with replacement
+}
 \references{
 Hamilton, W. L. et al. (2017).
 }

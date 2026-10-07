@@ -18,5 +18,4 @@ The value of \code{gsub}.
 A step of the sentpc_native implementation. Called by \code{morie_sentpc_decode},
 \code{unescape_whitespace}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -19,7 +19,7 @@ index grid has to be symmetric; reflecting a causal sequence about 0
 instead computes x/2, which is something else entirely.
 }
 \examples{
-S <- c("a", "b", "c")
-EvenPart(S)
+x <- c(2, -1, 4, 0, 1)
+EvenPart(x)
 }
 \keyword{internal}

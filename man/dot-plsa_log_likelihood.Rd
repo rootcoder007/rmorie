@@ -21,5 +21,4 @@ The value of \code{.plsa_log_likelihood}.
 \description{
 A step of the plsa_native implementation. Called by \code{.plsa_perplexity}, \code{morie_plsa}.
 See the file header for the source the module follows.
-source it follows.
 }

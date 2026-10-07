@@ -393,6 +393,10 @@ Otcostlp <- function(X, Y, p = 2) {
 #' @return Named list with `estimate`, `primal`, `dual_pairing`,
 #'   `entropy`, `epsilon`, `method`.
 #' @references Peyre & Cuturi (2019), eq. (4.30)-(4.32).
+#' @examples
+#' a <- c(0.5, 0.5); b <- c(0.5, 0.5)
+#' C <- matrix(c(0, 1, 1, 0), 2)
+#' Otfreeen(T = diag(0.5, 2), C = C, a = a, b = b, f = c(0, 0), g = c(0, 0), epsilon = 0.1)$estimate
 #' @export
 Otfreeen <- function(T, C, a, b, f, g, epsilon) {
   eps <- as.numeric(epsilon)
@@ -431,9 +435,9 @@ Otfreeen <- function(T, C, a, b, f, g, epsilon) {
 #' @references Peyre & Cuturi (2019), eq. (4.19).
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' Otbarmap(M, S)
+#' Tm <- matrix(c(0.4, 0.1, 0.1, 0.4), 2)   # a 2 x 2 coupling
+#' Y <- matrix(c(0, 1, 0, 1), 2)              # two destination points in the plane
+#' Otbarmap(Tm, Y)
 Otbarmap <- function(T, Y) {
   Tm <- .b2mat(T)
   B <- .b2mat(Y)

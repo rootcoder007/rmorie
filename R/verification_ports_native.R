@@ -124,6 +124,14 @@ morie_empirical_bayes <- function(estimates, standard_errors) {
 #'   classification perspective. \emph{Stat}, 1(1), 103-114. Murphy, S.
 #'   A. (2003). Optimal dynamic treatment regimes. \emph{Journal of the
 #'   Royal Statistical Society Series B}, 65(2), 331-355.
+#' @examples
+#' set.seed(10)
+#' n <- 400
+#' X <- matrix(rnorm(n), n)
+#' d <- rbinom(n, 1, 0.5)
+#' y <- 1 + d * X[, 1] + rnorm(n)
+#' v <- morie_regime_value(y, d, X, regime = as.integer(X[, 1] > 0))
+#' v$value
 #' @export
 morie_regime_value <- function(y, d, X, regime, propensity = NULL,
                                method = c("aipw", "ipw", "regression"),

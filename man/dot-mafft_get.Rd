@@ -20,5 +20,4 @@ One of two values, depending on the branch taken.
 A step of the mafft_native implementation. Called by \code{.mafft_site_score},
 \code{normalized_similarity_matrix}, \code{wsp_score}.
 See the file header for the source the module follows.
-source it follows.
 }

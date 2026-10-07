@@ -15,7 +15,6 @@ The value of \code{utils::read.csv}.
 \description{
 A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analyses}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .morie_nypd_load_sample()

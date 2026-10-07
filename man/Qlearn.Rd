@@ -67,11 +67,7 @@ Qlearn(P, R, 0.9, alpha = 0.5, epsilon = 0, n_episodes = 3,
        terminal = 1L)$estimate
 }
 \references{
-Sutton, R. S. and Barto, A. G. (2018). Reinforcement
-Learning: An Introduction, 2nd ed., MIT Press, Section 6.5, boxed
-algorithm p. 131, eq. 6.8.  Local source:
-fetched-wave3/sutton-barto-2018-reinforcement-learning-2nd-ed.pdf.
-Watkins, C. J. C. H. and Dayan, P. (1992). Q-learning. Machine
-Learning 8, 279-292.  Local source:
-fetched-wave3/watkins-dayan-1992-qlearning-ML8.pdf.
+Sutton, R. S. and Barto, A. G. (2018). Reinforcement Learning: An
+Introduction, 2nd ed., MIT Press, Section 6.5, boxed algorithm p. 131, eq. 6.8.
+Watkins, C. J. C. H. and Dayan, P. (1992). Q-learning. Machine Learning 8, 279-292.
 }

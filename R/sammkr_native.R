@@ -19,7 +19,6 @@
 #'
 #' A step of the sammkr_native implementation. Called by \code{iou}, \code{whole_part_subpart}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m See Usage.
 #' @return A vector, from \code{as.numeric}.
@@ -47,7 +46,6 @@
 #'
 #' A step of the sammkr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param masks A vector; its length is taken.
 #' @return A list with \code{mask}, \code{ambiguous_fraction}, \code{n_averaged}, \code{note}.
@@ -75,7 +73,6 @@ average_of_valid_masks <- function(masks) {
 #'
 #' A step of the sammkr_native implementation. Called by \code{rank_masks}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{.sammkr_flat}.
 #' @param b Passed to \code{.sammkr_flat}.
@@ -100,7 +97,6 @@ iou <- function(a, b, threshold = 0.5) {
 #'
 #' A step of the sammkr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param predictions A vector; its length is taken.
 #' @param target Passed to \code{loss_fn}.
@@ -127,7 +123,6 @@ min_loss_over_masks <- function(predictions, target, loss_fn) {
 #'
 #' A step of the sammkr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param masks A vector; its length is taken and its elements indexed.
 #' @param target_hierarchy Accepted by the signature and not used anywhere in the body.
@@ -161,7 +156,6 @@ whole_part_subpart <- function(masks, target_hierarchy = NULL) {
 #'
 #' A step of the sammkr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param masks A vector; its length is taken.
 #' @param predicted_iou Passed to \code{unlist}.
@@ -199,7 +193,6 @@ rank_masks <- function(masks, predicted_iou, target = NULL) {
 #'
 #' A step of the sammkr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

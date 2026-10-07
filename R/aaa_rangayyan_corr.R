@@ -1297,6 +1297,7 @@ Idft <- function(X) {
 #' Parseval(V)
 #' @keywords internal
 Parseval <- function(x) {
+  .morie_arg(x, "n")
   # eq (3.91), discrete form: sum |x(n)|^2 = (1/N) sum |X(k)|^2.  With the
   # unnormalized forward transform of eq (3.80) the spectral sum is N
   # times the time-domain energy, so omitting the 1/N inflates it by the

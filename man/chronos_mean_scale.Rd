@@ -21,3 +21,6 @@ A step of the chronos_native implementation. Called by \code{chronos_tokenize}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+chronos_mean_scale(c(10, 12, 9, 11))$scale   # mean absolute value
+}

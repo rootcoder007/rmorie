@@ -1,16 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' SIBTEST differential item functioning (Shealy and Stout 1993)
 #'
-#' Source FETCHED (reference implementation): \code{SIBTEST} in the CRAN
-#' package \pkg{mirt} (mirt 1.46.1, \code{R/SIBTEST.R}), implementing
-#' Shealy, R. and Stout, W. (1993), Psychometrika 58, 159-194.
-#' (\code{difR::sibTest} is a thin wrapper that delegates to it.)  The
-#' 1993 paper is paywalled here; the package source states the estimator
-#' explicitly.  Grouping examinees on the matching score k:
-#' \code{pstar_k = n_k / sum n_k},
-#' \code{beta = sum_k pstar_k (Ystar_R,k - Ystar_F,k)},
-#' \code{sigma = sqrt(sum_k pstar_k^2 (s2_F,k/n_F,k + s2_R,k/n_R,k))},
-#' \code{X2 = (beta/sigma)^2} on one degree of freedom.
+#' Source: \code{SIBTEST} in the CRAN package \pkg{mirt} (mirt 1.46.1,
+#' \code{R/SIBTEST.R}), implementing Shealy, R. and Stout, W. (1993), Psychometrika 58,
+#' 159-194. (\code{difR::sibTest} is a thin wrapper that delegates to it.) The 1993
+#' paper is paywalled here; the package source states the estimator explicitly. Grouping
+#' examinees on the matching score k: \code{pstar_k = n_k / sum n_k}, \code{beta = sum_k
+#' pstar_k (Ystar_R,k - Ystar_F,k)}, \code{sigma = sqrt(sum_k pstar_k^2 (s2_F,k/n_F,k +
+#' s2_R,k/n_R,k))}, \code{X2 = (beta/sigma)^2} on one degree of freedom.
 #'
 #' A level contributes only when both groups are present there and both
 #' within-cell variances are non-zero; \pkg{mirt} drops the rest and

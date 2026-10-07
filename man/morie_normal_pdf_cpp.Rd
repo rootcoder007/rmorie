@@ -16,5 +16,8 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{morie_normal_pdf}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+morie_normal_pdf_cpp(c(-1, 0, 1), 0, 1)
+dnorm(c(-1, 0, 1))
 }

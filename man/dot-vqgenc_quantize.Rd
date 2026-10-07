@@ -18,5 +18,4 @@ A list with \code{indices}, \code{codes}, \code{distance},
 \description{
 A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.
 See the file header for the source the module follows.
-source it follows.
 }

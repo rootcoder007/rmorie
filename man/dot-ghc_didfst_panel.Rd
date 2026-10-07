@@ -16,5 +16,4 @@ A list with \code{M}, \code{n}, \code{T}.
 A step of the didfst_native implementation. Called by \code{group_time_att},
 \code{panel_differences}, \code{placebo_did}.
 See the file header for the source the module follows.
-source it follows.
 }

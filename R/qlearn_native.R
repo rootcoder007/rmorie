@@ -16,7 +16,6 @@
 #' A step of the qlearn_native implementation. Called by \code{.mor_rl_eps},
 #' \code{.mor_rl_out}, \code{morie_ddqn} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Qs A vector; indexed elementwise.
 #' @param A Passed to \code{seq.int}.
@@ -53,7 +52,6 @@
 #'
 #' A step of the qlearn_native implementation. Called by \code{morie_qlearn}, \code{morie_sarsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
 #' @param Qs Passed to \code{.mor_rl_greedy}.
@@ -76,7 +74,6 @@
 #' A step of the qlearn_native implementation. Called by \code{morie_ddqn},
 #' \code{morie_qlearn}, \code{morie_sarsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param terminal Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
@@ -88,7 +85,6 @@
 #' A step of the qlearn_native implementation. Called by \code{morie_ddqn},
 #' \code{morie_qlearn}, \code{morie_sarsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A matrix; indexed by row and column.
 #' @param S A count; the body uses it as \code{seq_len(...)}.
@@ -134,6 +130,10 @@
 #'   \code{n_steps}, \code{n_episodes} and \code{method}.
 #' @references Watkins, C. J. C. H. and Dayan, P. (1992). Q-learning.
 #'   Machine Learning, 8, 279-292.
+#' @examples
+#' P <- list(matrix(c(0.9, 0.1, 0, 1), 2, byrow = TRUE), matrix(c(0.1, 0.9, 0, 1), 2, byrow = TRUE))
+#' R <- matrix(c(0, 1, 0, 0), 2, 2)
+#' morie_qlearn(P, R, gamma = 0.9, n_episodes = 50L, terminal = 1L)$policy
 #' @export
 morie_qlearn <- function(P, R, gamma, alpha = 0.1, epsilon = 0.1,
                          n_episodes = 100L, start = 0L, terminal = c(),

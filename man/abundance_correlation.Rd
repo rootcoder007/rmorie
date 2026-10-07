@@ -18,7 +18,6 @@ A list with \code{correlation}, \code{n_samples}.
 A step of the metabd_native implementation. Called by \code{composite_distance},
 \code{morie_metabd}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -21,7 +21,6 @@ A list with \code{a}, \code{b}.
 \description{
 A step of the scumap_native implementation. Called by \code{morie_scumap_umap_singlecell}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_scumap_fit_ab()

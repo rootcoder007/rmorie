@@ -28,3 +28,9 @@ A list with \code{estimate}, \code{x}, \code{fun},
 Minimises \code{1/2 ||Ax - b||^2 + lam * ||x||_1}; the prox is
 soft-thresholding at \code{lam * t}, not at \code{t}.
 }
+\examples{
+set.seed(4)
+A <- matrix(rnorm(100 * 5), 100, 5)
+b <- A \%*\% c(2, 0, 0, -1, 0) + rnorm(100, sd = 0.1)
+round(lasso_fista(A, as.numeric(b), lam = 5)$x, 3)
+}

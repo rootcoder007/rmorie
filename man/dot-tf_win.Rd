@@ -17,5 +17,4 @@ Nothing; this branch always raises.
 \description{
 A step of the rangayyan_tf implementation. Called by \code{IStft}, \code{Spectrogram}.
 See the file header for the source the module follows.
-source it follows.
 }

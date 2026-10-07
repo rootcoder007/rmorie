@@ -31,6 +31,11 @@ Formula: CPM quality \code{H = sum_c [e_c - gamma * C(n_c, 2)]}; a
 subset C of community S is well connected when
 \code{E(C, S \ C) >= gamma * |C| * (|S| - |C|)}.
 }
+\examples{
+A <- matrix(0, 6, 6)
+A[1:3, 1:3] <- 1; A[4:6, 4:6] <- 1; A[3, 4] <- A[4, 3] <- 1; diag(A) <- 0
+Sgtleid(A, labels = c(1, 1, 1, 2, 2, 2))$n_communities
+}
 \references{
 Traag, V. A., Waltman, L. & van Eck, N. J. (2019). From
 Louvain to Leiden: guaranteeing well-connected communities.

@@ -66,7 +66,6 @@
 #' A step of the sdpwts_native implementation. Called by \code{sdpwts_barrier},
 #' \code{sdpwts_solve_sdp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param F0 A matrix; passed to \code{as.matrix}.
@@ -100,7 +99,6 @@ sdpwts_lmi <- function(x, F0, Fs) {
 #'
 #' A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{as.matrix}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-1e-10}.
@@ -125,7 +123,6 @@ sdpwts_is_psd <- function(M, tol = -1e-10) {
 #'
 #' A step of the sdpwts_native implementation. Called by \code{.sdpwts_objective}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{sdpwts_lmi}.
 #' @param F0 Passed to \code{sdpwts_lmi}.
@@ -156,7 +153,6 @@ sdpwts_barrier <- function(x, F0, Fs) {
 #'
 #' A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param m Coerced to integer by the body, with \code{as.integer}.
@@ -180,7 +176,6 @@ sdpwts_central_path_gap <- function(t, m) {
 #'
 #' A step of the sdpwts_native implementation. Called by \code{.sdpwts_centre}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param c_vec Coerced to numeric by the body, with \code{as.numeric}.
@@ -258,7 +253,6 @@ sdpwts_central_path_gap <- function(t, m) {
 #'
 #' A step of the sdpwts_native implementation. Called by \code{sdpwts_min_eigenvalue_sdp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param F0 A matrix; passed to \code{as.matrix}.
@@ -321,7 +315,6 @@ sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
 #'
 #' A step of the sdpwts_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @param t0 Passed to \code{sdpwts_solve_sdp}. Defaults to \code{1}.
@@ -363,7 +356,6 @@ morie_sdpwts <- sdpwts_solve_sdp
 #'
 #' A step of the sdpwts_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

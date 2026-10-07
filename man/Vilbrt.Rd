@@ -29,9 +29,7 @@ There is exactly one implementation: this function delegates to
 Vilbrt(matrix(0.1, 2, 3), matrix(0.2, 2, 3))$estimate
 }
 \references{
-Lu, J., Batra, D., Parikh, D. and Lee, S. (2019),
-ViLBERT: Pretraining Task-Agnostic Visiolinguistic Representations
-for Vision-and-Language Tasks, NeurIPS 32, arXiv:1908.02265,
-Section 3.1 and Figure 2. Source PDF:
-fetched-wave3/lu-etal-2019-vilbert-arxiv1908.02265.pdf.
+Lu, J., Batra, D., Parikh, D. and Lee, S. (2019), ViLBERT: Pretraining
+Task-Agnostic Visiolinguistic Representations for Vision-and-Language Tasks,
+NeurIPS 32, arXiv:1908.02265, Section 3.1 and Figure 2.
 }

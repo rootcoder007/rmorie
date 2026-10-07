@@ -17,7 +17,7 @@ test_that("version, help and unknown verbs behave", {
   expect_match(h$text, "login \\[--email ADDRESS\\]")
   expect_match(.capture()$text, "usage: rmorie")
   u <- .capture("frobnicate")
-  expect_equal(u$status, 1L)
+  expect_equal(u$status, 2L)  # a usage error, like an unknown option
   expect_match(u$text, "unknown verb 'frobnicate'")
 })
 
@@ -37,7 +37,7 @@ test_that("login forwards the flags to morie_llm_login and logout forgets the ke
   expect_equal(seen$code, "123456")
   expect_false(seen$open_browser)
   expect_match(r$text, "Logged in to https://llm.rmorie.com")
-  expect_equal(.capture("login", "--email")$status, 1L)
+  expect_equal(.capture("login", "--email")$status, 2L)  # a flag without its value is a usage error
   r2 <- .capture("login", "--email", "vee@example.com", "--code", "1", "--to-email")
   expect_equal(r2$status, 0L)
   expect_true(seen$to_email)
@@ -135,8 +135,11 @@ test_that("list-modules, cheatsheet, pull and run-module verbs work", {
   expect_match(p$text, "3 rows, 2 cols")
   expect_equal(nrow(utils::read.csv(dest)), 3L)
   testthat::local_mocked_bindings(.package = .pkg,
-    morie_run_morie_module = function(module_name, cpads_csv, output_dir = NULL) list(a = 1, b = 2))
-  r <- .capture("run-module", "power-design", "--output-dir", tempdir())
+    morie_run_morie_module = function(module_name, cpads_csv, output_dir = NULL) {
+      utils::write.csv(data.frame(x = 1), file.path(output_dir, "a.csv"), row.names = FALSE)  # it wrote a table
+      list(a = 1, b = 2)
+    })
+  r <- .capture("run-module", "power-design", "--output-dir", withr::local_tempdir())
   expect_equal(r$status, 0L)
   expect_match(r$text, "Generated tables: a, b")
 })
@@ -155,12 +158,12 @@ test_that("provider set/show/unset store an endpoint the chain reads", {
   expect_equal(.capture("provider", "unset")$status, 0L)
   expect_null(.morie_llm_api_base())
   expect_match(.capture("provider", "bogus")$text, "usage: rmorie provider")
-  expect_equal(.capture("provider", "set", "--key", "x")$status, 1L)
+  expect_equal(.capture("provider", "set", "--key", "x")$status, 2L)  # --base-url missing: usage
 })
 
 
 test_that("output verbs: explain, inspect and verify", {
-  expect_match(.capture("explain", "power_two_proportion_gender.csv")$text, "effect_size")
+  expect_match(.capture("explain", "power_two_proportion_gender.csv")$text, "group1, group2")
   d <- withr::local_tempdir()
   f <- file.path(d, "t.csv")
   utils::write.csv(data.frame(statistic = c(1.5, 2), p_value = c(0.05, 0.01)), f, row.names = FALSE)
@@ -190,7 +193,9 @@ test_that("profile-dataset and sample work on a CSV", {
   expect_equal(nrow(utils::read.csv(file.path(d, "s.csv"))), 7L)
   expect_match(.capture("sample", f, "--n", "3", "--method", "stratified")$text, "strata-col")
   st <- .capture("sample", f, "--n", "2", "--method", "stratified", "--strata-col", "g")
-  expect_match(st$text, "Sampled 4 rows")
+  expect_match(st$text, "Sampled 2 rows")   # --n is the total; the strata share it
+  each <- .capture("sample", f, "--n", "2", "--method", "stratified", "--strata-col", "g", "--per-stratum")
+  expect_match(each$text, "Sampled 4 rows")
 })
 
 test_that("run-modules and pipeline run through the module runner", {
@@ -207,14 +212,19 @@ test_that("run-modules and pipeline run through the module runner", {
     morie_load_dataset = function(key, ...) data.frame(k = key),
     morie_run_morie_module = function(module_name, cpads_csv = NULL, output_dir = NULL, ...) {
       seen <<- cpads_csv
+      if (!is.null(output_dir)) {  # a module that writes nothing is reported as a failure by the verb
+        dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
+        utils::write.csv(data.frame(a = 1), file.path(output_dir, "a.csv"), row.names = FALSE)
+      }
       list(a = 1)
     })
-  expect_equal(.capture("run-module", "power-design", "--dataset", "ocp21")$status, 0L)
+  od <- withr::local_tempdir()
+  expect_equal(.capture("run-module", "power-design", "--dataset", "ocp21", "--output-dir", od)$status, 0L)
   testthat::local_mocked_bindings(.package = .pkg,
     morie_list_datasets = function(...) data.frame(key = c("ocp21", "bad1")),
     morie_load_dataset = function(key, ...) if (key == "bad1") stop("offline") else data.frame(k = key))
   od <- withr::local_tempdir()
-  a <- .capture("pull", "--all", "--out", od)
+  a <- .capture("pull", "--all", "--out", od, "-y")  # off a terminal, --all needs -y
   expect_equal(a$status, 0L)
   expect_true(file.exists(file.path(od, "ocp21.csv")))
   expect_match(a$text, "bad1 +FAILED: offline")
@@ -269,9 +279,7 @@ test_that("tutorial --dry-run, generate-template, exec and verify-earth-engine",
 })
 
 test_that("crypto keygen/encrypt/decrypt round-trip through files and the keystore", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_liboqs_available(), error = function(e) FALSE)) &&
-                isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE)),
-              "ML-KEM needs liboqs and ChaCha20 needs libsodium")
+  # native ML-KEM, ChaCha20-Poly1305 and keystore: no liboqs or libsodium needed
   expect_equal(.capture("crypto")$status, 2L)
   d <- withr::local_tempdir()
   withr::local_envvar(HOME = d, MORIE_KEYSTORE_PASSWORD = "pw-test")
@@ -309,11 +317,17 @@ test_that("ingest dispatches to the portal functions", {
 
 test_that("download-bootstrap, percysuits and update report honestly", {
   testthat::local_mocked_bindings(.package = .pkg,
-    morie_load_dataset = function(key, ...) data.frame(w = seq_len(3)))
+    morie_load_dataset = function(key, ...) data.frame(w = seq_len(3)),
+    morie_fetch_ckan = function(key, ...) data.frame(w = seq_len(3)),
+    morie_cache_store = function(...) invisible(NULL))
   r <- .capture("download-bootstrap", "--survey", "csads_2021")
   expect_equal(r$status, 0L)
-  expect_match(r$text, "OK: 3 rows cached")
-  expect_equal(.capture("download-bootstrap", "--survey", "zzz_1999")$status, 1L)
+  expect_match(r$text, "1 bootstrap file\\(s\\) cached")
+  # the key the usage line lists is accepted too (it was refused)
+  expect_equal(.capture("download-bootstrap", "--survey", "ocs22bt")$status, 0L)
+  r <- .capture("download-bootstrap", "--survey", "zzz_1999")
+  expect_equal(r$status, 1L)
+  expect_match(r$text, "Unknown survey 'zzz_1999'. Keys: ocs22bt")
   testthat::local_mocked_bindings(.package = .pkg, morie_llm_probe_ollama = function(...) FALSE)
   expect_equal(.capture("percysuits")$status, 1L)
   testthat::local_mocked_bindings(.package = .pkg,
@@ -328,7 +342,7 @@ test_that("verify-pollution and emissions verbs", {
   r <- .capture("verify-pollution", "--pollutant", "no2", "--demo")
   expect_equal(r$status, 0L)
   expect_match(r$text, "STATUS: ok")
-  expect_match(r$text, "source:   Atkinson")
+  expect_match(r$text, "source:   Huangfu & Atkinson")
   f <- .capture("verify-pollution", "--pollutant", "pm25", "--exposure-mean", "3", "--exposure-prevalence", "0.5")
   expect_equal(f$status, 1L)
   expect_match(f$text, "assumption_failure")

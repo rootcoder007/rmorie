@@ -19,7 +19,6 @@ A list with \code{c_crop}, \code{embedding}, \code{object_centred}, \code{note}.
 \description{
 A step of the sdxlcd_native implementation. Called by \code{morie_sdxlcd_condition_vector}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_sdxlcd_crop_conditioning()

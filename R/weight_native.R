@@ -14,7 +14,6 @@
 #' A step of the weight_native implementation. Called by \code{morie_weight_cbps},
 #' \code{morie_weight_entropy}, \code{morie_weight_ow} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights A vector; its length is taken.
 #' @param propensity Coerced to numeric by the body, with \code{as.numeric}.
@@ -43,8 +42,9 @@
 #' @param ... Ignored; accepted for S3 consistency.
 #' @return The value of `invisible`.
 #' @examples
-#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' rmorie:::print.morie_weight(D)
+#' w <- structure(list(method = "ps", estimand = "ATE", n = 3L, ess = 2.6, weights = c(1, 2, 0.5)),
+#'                class = "morie_weight")
+#' print(w)
 #' @export
 #' @keywords internal
 print.morie_weight <- function(x, ...) {
@@ -59,7 +59,6 @@ print.morie_weight <- function(x, ...) {
 #' A step of the weight_native implementation. Called by \code{morie_weight_cbps},
 #' \code{morie_weight_ps}, \code{morie_weight_super}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ps Numeric; combined arithmetically in the body.
 #' @param t01 Passed to \code{==}.
@@ -213,6 +212,7 @@ morie_weight_cbps <- function(data, treatment, covariates,
 #' morie_weight_ow(d, "t", "x")
 #' @export
 morie_weight_ow <- function(data, treatment, covariates) {
+  .morie_arg(data, "df")
   stopifnot(is.data.frame(data))
   t01 <- as.numeric(data[[treatment]])
   ps <- .fit_propensity(data, treatment, covariates)

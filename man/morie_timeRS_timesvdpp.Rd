@@ -2,7 +2,7 @@
 % Please edit documentation in R/timeRS_native.R
 \name{morie_timeRS_timesvdpp}
 \alias{morie_timeRS_timesvdpp}
-\title{Compact aliases per ledger/NAMING.md}
+\title{Compact aliases}
 \usage{
 morie_timeRS_timesvdpp(
   ratings,
@@ -41,7 +41,6 @@ The value of \code{.timeRS_fit_time_bias}.
 \description{
 A step of the timeRS_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

@@ -13,21 +13,25 @@ morie_otis_analyze_a01_dlrm(data = NULL, out_dir = NULL)
 morie_otis_analyze_a01_mrm(data = NULL, out_dir = NULL)
 }
 \arguments{
-\item{data}{Optional a01 data.frame.}
+\item{data}{The OTIS a01 table; \code{NULL} loads it.}
 
-\item{out_dir}{Optional output directory.}
+\item{out_dir}{Optional directory for the text and JSON rendering.}
 }
 \value{
 \code{morie_otis_analysis_result}.
 }
 \description{
-Runs the complete OTIS-RC methodology arc (IPW + AIPW + g-comp +
-PSM-NN + PSM-subclass + IRM-DML + match_first + ATC + PLR +
-SuperLearner) on the canonical alert-complexity -> regional-
-volatility formulation.
+Runs the ten-estimator DLRM (IPW, AIPW, g-computation, PSM 1:1, PSM
+subclassification, IRM-DML with ATE/ATTE/ATC, PSM-then-IRM-DML, ATC-AIPW,
+PLR, SuperLearner AIPW) on the canonical a01 formulation, T = alert-state
+complexity >= 2, Y = regional-volatility count, with an IRM-DML standard
+error comparison (pooled, by year, by person, two-way) and the Naive-arm
+sensitivity (any-flag treatment, binary outcome).
 }
 \examples{
 \donttest{
-morie_otis_analyze_a01_ruhela_formulations(otis_a01)
+a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+r <- morie_otis_analyze_a01_ruhela_formulations(a01)
+r$tables[[1L]]$rows[[1L]]
 }
 }

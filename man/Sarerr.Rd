@@ -31,11 +31,9 @@ that agree with each other at 1e-9 forever and are never checked
 against anything else, so this only adapts the calling convention:
 \code{sarre} takes \code{(x, y, w)}, this takes \code{(y, X, W)}.
 
-\code{ledger/wave2/DUPMAP.tsv} originally recorded \code{sarerr} as a
-duplicate of \code{lmerr}. That is wrong and the correction is
-appended there: \code{lmerr} is Anselin's Lagrange multiplier
-\emph{diagnostic} for spatial error dependence, a test statistic, not
-the estimator.
+This is not the same as \code{lmerr}: \code{lmerr} is Anselin's
+Lagrange multiplier \emph{diagnostic} for spatial error dependence, a
+test statistic, not the estimator.
 }
 \examples{
 # See the package vignettes for usage examples:

@@ -41,8 +41,7 @@ diag(W) <- 0
 Specclus(W, k = 2)
 }
 \references{
-von Luxburg (2007), A Tutorial on Spectral Clustering,
-Statistics and Computing 17(4), 395-416. Fetched from
-arXiv:0711.0189. Lloyd (1982), IEEE Transactions on Information
-Theory 28(2), 129-137, for the k-means step.
+von Luxburg (2007), A Tutorial on Spectral Clustering, Statistics and
+Computing 17(4), 395-416. Lloyd (1982), IEEE Transactions on Information Theory
+28(2), 129-137, for the k-means step.
 }

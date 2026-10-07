@@ -55,6 +55,13 @@ fixed tolerance -- so both language arms land on the same numbers. The
 SVD's sign convention cannot separate them either: \eqn{U diag(s) V'}
 is invariant to flipping the sign of a matched column pair.
 }
+\examples{
+set.seed(6)
+L <- outer(rnorm(10), rnorm(8))                # rank-one untreated outcomes
+D <- matrix(0, 10, 8); D[1:3, 6:8] <- 1
+y <- L + 2 * D + matrix(rnorm(80, sd = 0.1), 10, 8)
+Mscmcl(y, D, lam = 0.5)$att    # close to 2
+}
 \references{
 Athey, Bayati, Doudchenko, Imbens and Khosravi (2021),
 JASA 116(536), 1716-1730, \doi{10.1080/01621459.2021.1891924},

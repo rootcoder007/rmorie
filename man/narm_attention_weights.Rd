@@ -23,7 +23,6 @@ The value of \code{narm_softmax}.
 \description{
 A step of the narm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 narm_attention_weights(h_t = 5L, H = 0.5, A1 = c(1, 2, 3, 4, 5, 6, 7, 8),

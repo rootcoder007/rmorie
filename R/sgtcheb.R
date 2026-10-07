@@ -14,11 +14,12 @@
 #' @return List with \code{h}, \code{argmin}, \code{cut}, \code{vol_S},
 #'   \code{vol_complement}, \code{lambda1}, \code{upper_bound},
 #'   \code{lower_bound}, \code{lower_bound_sharp}, \code{n}.
-#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Section 2.2,
-#'   equations (2.1) and (2.2) for h_G(S) and h_G; Theorem 2.2 for
-#'   2 h_G >= lambda_1 > h_G^2 / 2; Theorem 2.3 for
-#'   lambda_1 >= 1 - sqrt(1 - h_G^2). Fetched from the author's own copy
-#'   of the chapter.
+#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Section 2.2, equations
+#'   (2.1) and (2.2) for h_G(S) and h_G; Theorem 2.2 for 2 h_G >= lambda_1 > h_G^2 / 2;
+#'   Theorem 2.3 for lambda_1 >= 1 - sqrt(1 - h_G^2).
+#' @examples
+#' W <- matrix(1, 4, 4); diag(W) <- 0; W[1, 4] <- W[4, 1] <- 0
+#' Sgtcheegerbound(W)$h
 #' @export
 Sgtcheegerbound <- function(W, max_n = 20) {
   W <- as.matrix(W)

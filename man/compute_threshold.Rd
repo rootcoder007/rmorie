@@ -33,6 +33,5 @@ A list with \code{b}, \code{from}, \code{b1}, \code{b2}, \code{note}.
 \description{
 A step of the smoopt_native implementation. Called by \code{smo_platt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

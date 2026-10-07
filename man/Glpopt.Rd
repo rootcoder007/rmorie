@@ -2,7 +2,7 @@
 % Please edit documentation in R/Glpopt.R
 \name{Glpopt}
 \alias{Glpopt}
-\title{Linear programme by the primal simplex method}
+\title{Linear programme by the two-phase primal simplex method}
 \usage{
 Glpopt(c, A, b, max_iter = 200)
 }
@@ -11,34 +11,46 @@ Glpopt(c, A, b, max_iter = 200)
 
 \item{A}{Constraint matrix.}
 
-\item{b}{Right-hand side, non-negative.}
+\item{b}{Right-hand side.}
 
-\item{max_iter}{Iteration cap.}
+\item{max_iter}{Iteration cap over both phases.}
 }
 \value{
 List with \code{estimate}, \code{x}, \code{objective},
 \code{dual}, \code{dual_objective}, \code{iterations},
-\code{status}, \code{n}, \code{method}.
+\code{status} ("optimal", "unbounded", "infeasible" or
+"iteration_limit"), \code{n}, \code{method}.  \code{x} and the
+objective are \code{NA} unless the status is "optimal".
 }
 \description{
 The GLPK problem form, minimise c'x subject to Ax <= b and x >= 0,
 solved by the textbook primal simplex on the slack tableau with
-Bland's rule so the iteration cannot cycle.  Only origin-feasible
-problems are accepted; a negative right-hand side needs a phase-one
-problem and is refused rather than silently mishandled.  The final
-objective row carries the simplex multipliers (negated, since the row
-is updated by subtraction), so strong duality is available as a check.
+Bland's rule so the iteration cannot cycle.  A row with a negative
+right-hand side is multiplied by -1 and given an artificial variable;
+phase one minimises the sum of the artificials, and a positive
+minimum means no x satisfies the constraints (status "infeasible").
+Artificials left in the basis at zero are pivoted out where the row
+allows, then phase two minimises c'x from that feasible basis.  When
+every b is non-negative the origin is feasible and phase one is
+skipped.  The final objective row carries the simplex multipliers
+(negated, since the row is updated by subtraction): y = -z on the
+slack columns, the same for flipped rows because their slack column
+is flipped too, so strong duality c'x = b'y is available as a check.
 }
 \details{
-Formula: pivot on the slack tableau until every reduced cost is
-non-negative; x* from the basis, y* from the objective row.
+Formula: phase one min 1'a over \link[=x; s; a]{sA | sI | I_flip} = s b;
+phase two pivots until every reduced cost is non-negative; x* from
+the basis, y* from the objective row.
 }
 \examples{
 Glpopt(c = c(-1, -2), A = matrix(c(1, 1, 1, 0, 0, 1), 3, 2, byrow = TRUE),
        b = c(4, 2, 3))
+# x1 + x2 >= 2 written as -x1 - x2 <= -2 needs phase one
+Glpopt(c = c(1, 3), A = rbind(c(-1, -1), c(1, 0)), b = c(-2, 5))$x
 }
 \references{
 Makhorin, GNU Linear Programming Kit reference manual;
 Bland (1977), Mathematics of Operations Research 2(2):103-107.
-\doi{10.1287/moor.2.2.103}
+\doi{10.1287/moor.2.2.103}; Dantzig, Orden and Wolfe (1955), Pacific
+Journal of Mathematics 5(2):183-195 (the two-phase method).
 }

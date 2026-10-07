@@ -17,5 +17,4 @@ A list with \code{loss}, \code{gradient_flows_to}, \code{note}.
 \description{
 A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.
 See the file header for the source the module follows.
-source it follows.
 }

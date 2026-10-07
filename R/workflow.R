@@ -20,7 +20,6 @@ morie_default_workflow_map <- function() {
 #' A step of the workflow implementation. Called by \code{morie_run_pipeline},
 #' \code{morie_run_workflow_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param script_map Character; the body checks with \code{is.character}.
 #' @return The value of \code{script_map}, as built in the body.
@@ -142,7 +141,9 @@ morie_run_pipeline <- function(
   verbose = TRUE
 ) {
   script_map <- validate_workflow_map(script_map)
-
+  if (!is.null(project_root) && !dir.exists(project_root)) {
+    stop("`project_root` does not exist: ", project_root, call. = FALSE)
+  }
   if (is.null(steps)) {
     steps <- names(script_map)
   }
@@ -153,6 +154,15 @@ morie_run_pipeline <- function(
   bad <- setdiff(steps, names(script_map))
   if (length(bad) > 0) {
     stop("Unknown steps: ", paste(bad, collapse = ", "), call. = FALSE)
+  }
+
+  if (is.null(project_root)) {
+    root <- tryCatch(morie_paths(NULL)$project_root, error = function(e) NULL)
+    if (is.null(root) || !any(file.exists(file.path(root, script_map)))) {
+      stop("no workflow scripts found: pass `project_root` (a checkout holding ", script_map[[1L]],
+           ") or a `script_map` of your own scripts; the module pipeline itself is morie_run_pipeline_modules() / ",
+           "`rmorie pipeline`", call. = FALSE)
+    }
   }
 
   out <- vector("list", length(steps))

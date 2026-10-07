@@ -61,7 +61,6 @@
 #'
 #' A step of the cssant_native implementation. Called by \code{morie_boryis}, \code{morie_cssant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D Passed to \code{.mor_did_panel}.
 #' @param unit Passed to \code{.mor_did_panel}.
@@ -165,6 +164,14 @@ morie_grouptimeatt <- function(Y, g, control = "notyet") {
 #'   post-treatment.
 #' @references Callaway, B. and Sant'Anna, P. H. C. (2021). Journal of
 #'   Econometrics, 225(2), 200-230, Section 4.
+#' @examples
+#' set.seed(17)
+#' nu <- 30; Tn <- 5
+#' g <- rep(c(3, 4, Inf), each = 10)
+#' Y <- matrix(rnorm(nu * Tn), nu, Tn)
+#' for (i in seq_len(nu)) if (is.finite(g[i])) Y[i, g[i]:Tn] <- Y[i, g[i]:Tn] + 1
+#' gt <- morie_grouptimeatt(Y, g)
+#' morie_aggregateatt(gt, g, n_units = nu)$overall
 #' @export
 morie_aggregateatt <- function(gt, g, n_units, weights_by = "cohort_size") {
   keys <- names(gt)[vapply(gt, function(v) isTRUE(v$post), logical(1))]

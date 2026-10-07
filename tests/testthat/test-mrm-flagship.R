@@ -45,9 +45,16 @@ test_that("morie_mrm_estimate_causal_effect composes native estimators", {
     methods = c("matching", "ate", "aipw", "dml"))
   expect_s3_class(eff, "morie_mrm_effect")
   expect_gte(nrow(eff$results), 3L)
-  expect_true(all(abs(eff$results$estimate - 0.8) < 0.4))
+  expect_true(all(abs(eff$results$estimate - 0.8) < 0.25))  # the bound morie's test sets
   expect_true(all(eff$results$p_adjusted >= eff$results$p_value - 1e-12))
   expect_equal(eff$consensus$estimate, 0.8, tolerance = 0.25)
+  # The estimators share one data set, so the consensus standard error is
+  # the weighted mean of theirs, never the independent-studies
+  # sqrt(1 / sum(w)), which halved the interval.
+  w <- 1 / eff$results$std_error^2
+  expect_equal(eff$consensus$estimate, sum(w * eff$results$estimate) / sum(w), tolerance = 1e-12)
+  expect_equal(eff$consensus$std_error, sum(w * eff$results$std_error) / sum(w), tolerance = 1e-12)
+  expect_gt(eff$consensus$std_error, sqrt(1 / sum(w)))
   expect_match(eff$citation, "Ruhela")
   expect_match(eff$citation, "rmorie")
 })

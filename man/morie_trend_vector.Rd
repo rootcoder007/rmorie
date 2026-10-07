@@ -22,6 +22,11 @@ sd, and the z-score.
 \description{
 The trend vector T = (1/N) sum (a_i - A) S_i and its randomisation test
 }
+\examples{
+sets <- list(list(a = 2, b = 1), list(a = 1, c = 1), list(b = 2, c = 1), list(a = 3))
+tv <- morie_trend_vector(sets, activities = c(5, 3, 1, 6), permutations = 30, seed = 1)
+tv$vector
+}
 \references{
 Nilakantan, R. et al. (1987).
 }

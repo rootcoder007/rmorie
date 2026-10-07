@@ -16,7 +16,6 @@ A list with \code{m_s}, \code{m_t}, \code{length}, \code{note}.
 A step of the strec_native implementation. Called by \code{strec_attention_weights},
 \code{strec_stamp_scores}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -21,5 +21,4 @@ The value of \code{b}, as built in the body.
 \description{
 A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
 See the file header for the source the module follows.
-source it follows.
 }

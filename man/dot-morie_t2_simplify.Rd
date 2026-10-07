@@ -17,5 +17,4 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the tail2_t04 implementation. Called by \code{Dpll}.
 See the file header for the source the module follows.
-source it follows.
 }

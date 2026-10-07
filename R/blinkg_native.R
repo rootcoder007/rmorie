@@ -75,7 +75,6 @@
 #'
 #' A step of the blinkg_native implementation. Called by \code{morie_blinkg_ld_filter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b Numeric; passed to \code{.w3_csum}.
@@ -103,7 +102,6 @@
 #' A step of the blinkg_native implementation. Called by \code{morie_blinkg_scan},
 #' \code{morie_blinkg_select}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @param covars A vector; its length is taken.
@@ -279,7 +277,6 @@ morie_blinkg_bin_filter <- function(order, positions, bin_size) {
 #'
 #' A step of the blinkg_native implementation. Called by \code{morie_blinkg_select}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rss Numeric; combined arithmetically in the body.
 #' @param n Numeric; combined arithmetically in the body.

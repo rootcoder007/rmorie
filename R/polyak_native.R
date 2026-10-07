@@ -62,7 +62,6 @@
 #'
 #' A step of the polyak_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param iterates Iterated over elementwise, with \code{lapply}.
 #' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
@@ -104,7 +103,6 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #'
 #' A step of the polyak_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prev Coerced to numeric by the body, with \code{as.numeric}.
 #' @param new Coerced to numeric by the body, with \code{as.numeric}.
@@ -132,7 +130,6 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #'
 #' A step of the polyak_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param target Coerced to numeric by the body, with \code{as.numeric}.
 #' @param online Coerced to numeric by the body, with \code{as.numeric}.
@@ -160,7 +157,6 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #'
 #' A step of the polyak_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param target Coerced to numeric by the body, with \code{as.numeric}.
 #' @param online Coerced to numeric by the body, with \code{as.numeric}.
@@ -188,7 +184,6 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #'
 #' A step of the polyak_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tau Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{halflife}, \code{approx}, \code{tau}, \code{note}.
@@ -214,7 +209,6 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #'
 #' A step of the polyak_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

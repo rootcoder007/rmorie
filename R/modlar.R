@@ -13,5 +13,8 @@
 #' @return List with Q, estimate, n_communities, n.
 #' @references Newman (2006), PNAS 103(23), 8577-8582,
 #'   \doi{10.1073/pnas.0601602103}.
+#' @examples
+#' A <- matrix(0, 6, 6); A[1:3, 1:3] <- 1; A[4:6, 4:6] <- 1; A[3, 4] <- A[4, 3] <- 1; diag(A) <- 0
+#' Modlar(A, communities = c(1, 1, 1, 2, 2, 2))$Q
 #' @export
 Modlar <- function(A, communities) Sgtmodq(A, communities)

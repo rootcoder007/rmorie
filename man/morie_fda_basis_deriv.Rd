@@ -29,7 +29,6 @@ _gp_core.fda_basis_derivative, including its polynomial convention u
 = (t - lo) / span, which differs from morie_fda_basis above.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_fda_basis_deriv(V, V)
+morie_fda_basis_deriv(t = seq(0, 1, length.out = 6), n_basis = 5L, p = 1L)
 }
 \keyword{internal}

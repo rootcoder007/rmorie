@@ -17,5 +17,4 @@ A list with \code{z}, \code{kl}.
 \description{
 A step of the glm_native implementation. Called by \code{morie_glr_test}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -17,7 +17,6 @@ A list with \code{text}, \code{n_captions}, \code{n_boxes}, \code{note}.
 \description{
 A step of the llavx_native implementation. Called by \code{morie_llavx}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- symbolic_representation(captions = c("a cat on a mat"),

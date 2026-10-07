@@ -34,5 +34,4 @@ A list with \code{edge_states}, \code{T}, \code{excluded_reverse}, \code{note}.
 \description{
 A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 See the file header for the source the module follows.
-source it follows.
 }

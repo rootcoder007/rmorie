@@ -11,7 +11,6 @@
 #'
 #' A step of the bnskt2_native implementation. Called by \code{.side_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows Passed to \code{do.call}.
 #' @param ys Coerced to numeric by the body, with \code{as.numeric}.
@@ -33,7 +32,6 @@
 #' A step of the bnskt2_native implementation. Called by \code{covariate_kink_test},
 #' \code{density_kink_test}, \code{local_polynomial_slope} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken and its elements indexed.
 #' @param y A vector; indexed elementwise.
@@ -72,7 +70,6 @@
 #'
 #' A step of the bnskt2_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{.side_fit}.
 #' @param y Passed to \code{.side_fit}.
@@ -106,7 +103,6 @@ local_polynomial_slope <- function(v, y, kink, bandwidth, order = 2L,
 #'
 #' A step of the bnskt2_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param V Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
@@ -174,7 +170,6 @@ rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
 #'
 #' A step of the bnskt2_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param V Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kink Coerced to numeric by the body, with \code{as.numeric}.
@@ -220,7 +215,6 @@ density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
 #'
 #' A step of the bnskt2_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param V Passed to \code{.side_fit}.
 #' @param Z Passed to \code{.side_fit}.
@@ -252,7 +246,6 @@ covariate_kink_test <- function(V, Z, kink, bandwidth, order = 2L,
 #'
 #' A step of the bnskt2_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

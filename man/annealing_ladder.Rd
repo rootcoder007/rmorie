@@ -21,7 +21,6 @@ Nothing; this branch always raises.
 \description{
 A step of the smcopt_native implementation. Called by \code{smcopt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 annealing_ladder(n_steps = 5L)

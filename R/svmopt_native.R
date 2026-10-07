@@ -31,7 +31,6 @@
 #'
 #' A step of the svmopt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}. Defaults to \code{"linear"}.
@@ -72,7 +71,6 @@ kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
 #'
 #' A step of the svmopt_native implementation. Called by \code{smo}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -102,7 +100,6 @@ dual_objective <- function(alpha, y, K) {
 #'
 #' A step of the svmopt_native implementation. Called by \code{solve_pair}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param i See Usage.
 #' @param j See Usage.
@@ -126,7 +123,6 @@ dual_objective <- function(alpha, y, K) {
 #'
 #' A step of the svmopt_native implementation. Called by \code{smo}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param i Passed to \code{.svmopt_bounds}.
 #' @param j Passed to \code{.svmopt_bounds}.
@@ -180,7 +176,6 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
 #'
 #' A step of the svmopt_native implementation. Called by \code{recover_bias}, \code{smo}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -221,7 +216,6 @@ kkt_violation <- function(alpha, y, grad, C) {
 #'
 #' A step of the svmopt_native implementation. Called by \code{smo}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -254,7 +248,6 @@ recover_bias <- function(alpha, y, grad, C) {
 #'
 #' A step of the svmopt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K A matrix; indexed by row and column.
@@ -319,7 +312,6 @@ smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
 #'
 #' A step of the svmopt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -37,7 +37,6 @@
 #'
 #' A step of the memb_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -51,7 +50,6 @@
 #'
 #' A step of the memb_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -70,7 +68,6 @@
 #'
 #' A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param l2 Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
@@ -126,7 +123,6 @@ logistic_trainer <- function(l2 = 1e-3, epochs = 300L, lr = 0.5, seed = 0) {
 #'
 #' A step of the memb_native implementation. Called by \code{morie_memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param k A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.
 #' @param smoothing A count; the body uses it as \code{rep(...)}. Defaults to \code{0.001}.
@@ -172,7 +168,6 @@ knn_trainer <- function(k = 1L, smoothing = 1e-3) {
 #'
 #' A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param model_predict Accepted by the signature and not used anywhere in the body.
 #' @param in_X A vector; its length is taken.
@@ -219,7 +214,6 @@ attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
 #'
 #' A step of the memb_native implementation. Called by \code{morie_memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param target_predict Accepted by the signature and not used anywhere in the body.
 #' @param c Numeric; combined arithmetically in the body.
@@ -316,7 +310,6 @@ synthesize <- function(target_predict, c, n_features, feature_values = NULL,
 #'
 #' A step of the memb_native implementation. Called by \code{morie_memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A vector; its length is taken and its elements indexed.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
@@ -347,7 +340,6 @@ synthesize_marginals <- function(X, n, seed = 0) {
 #'
 #' A step of the memb_native implementation. Called by \code{morie_memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A vector; indexed elementwise.
 #' @param fraction The body requires: memb: fraction must lie in \[0, 1\]. Defaults to \code{0.1}.
@@ -388,7 +380,6 @@ synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
 #'
 #' A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pred Coerced to integer by the body, with \code{as.integer}.
 #' @param truth Coerced to integer by the body, with \code{as.integer}.
@@ -417,7 +408,6 @@ precision_recall <- function(pred, truth) {
 #'
 #' A step of the memb_native implementation. Called by \code{memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param vec Coerced to numeric by the body, with \code{as.numeric}.
 #' @param top Optional; may be \code{NULL}. Numeric; passed to \code{min}.
@@ -436,7 +426,6 @@ precision_recall <- function(pred, truth) {
 #'
 #' A step of the memb_native implementation. Called by \code{morie_memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param target_predict Accepted by the signature and not used anywhere in the body.
 #' @param shadow_data See Usage.
@@ -538,7 +527,6 @@ membership_inference <- memb
 #'
 #' A step of the memb_native implementation. Called by \code{morie_memb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -563,7 +551,6 @@ membership_inference <- memb
 #'
 #' A step of the memb_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op A vector; its length is taken.
 #' @param ... Passed through.
@@ -595,7 +582,6 @@ morie_memb <- function(op, ...) {
 #' A step of the memb_native implementation. Called by \code{synthesize},
 #' \code{synthesize_marginals}, \code{synthesize_noisy}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return The value of \code{.ghc_rng}.

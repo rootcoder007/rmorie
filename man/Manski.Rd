@@ -22,14 +22,17 @@ case: \code{ate_lower}, \code{ate_upper}, \code{ate_width},
 \code{contains_zero}, \code{n}.
 }
 \description{
-\code{Manski} and \code{morie_bnd_manski} document the SAME method:
-the worst-case decomposition of each counterfactual mean over the
-outcome support, differenced for the ATE. Rather than carry a second
-implementation -- which would agree with the first at 1e-9 forever
-while doubling the surface -- this function forwards to
-\code{\link{morie_bnd_manski}} with the argument layout of its stub.
+\code{Manski} and \code{morie_bnd_manski} are the same method: the
+worst-case decomposition of each counterfactual mean over the outcome
+support, differenced for the ATE. This function forwards to
+\code{\link{morie_bnd_manski}} with its own argument layout.
 The ATE interval always has width exactly \eqn{y_{max} - y_{min}}
 and therefore always contains zero.
+}
+\examples{
+set.seed(16)
+y <- runif(80); D <- rbinom(80, 1, 0.5)
+Manski(y, D, y_min = 0, y_max = 1)[c("ate_lower", "ate_upper", "ate_width")]   # width 1
 }
 \references{
 Manski, C. F. (1990), Nonparametric Bounds on Treatment

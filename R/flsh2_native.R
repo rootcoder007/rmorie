@@ -23,10 +23,9 @@
 #'   \code{max_abs_error}, \code{row_max}, \code{row_sum},
 #'   \code{n_blocks}, \code{peak_score_memory}, \code{naive_score_memory},
 #'   \code{memory_ratio}, \code{estimate}, \code{n}, \code{method}.
-#' @references Dao, T., Fu, D. Y., Ermon, S., Rudra, A. and Re, C.
-#'   (2022), FlashAttention: Fast and Memory-Efficient Exact Attention
-#'   with IO-Awareness, NeurIPS 35, arXiv:2205.14135, Algorithm 1.
-#'   Source PDF: fetched-wave3/dao-etal-2022-flashattention-arxiv2205.14135.pdf.
+#' @references Dao, T., Fu, D. Y., Ermon, S., Rudra, A. and Re, C. (2022),
+#'   FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness,
+#'   NeurIPS 35, arXiv:2205.14135, Algorithm 1.
 #' @examples
 #' Flsh2(matrix(0, 1, 1), matrix(c(1, 3), 2, 1), matrix(c(1, 3), 2, 1))$output
 #' @export

@@ -134,7 +134,6 @@ morie_bats <- function(y, seasonal_periods = numeric(0),
 #'
 #' A step of the bats_native implementation. Called by \code{.fit_spec}, \code{morie_bats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; passed to \code{log}.
 #' @param omega Numeric; combined arithmetically in the body.
@@ -155,7 +154,6 @@ box_cox <- function(y, omega) {
 #'
 #' A step of the bats_native implementation. Called by \code{morie_bats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{exp}.
 #' @param omega Numeric; combined arithmetically in the body.
@@ -178,7 +176,6 @@ inv_box_cox <- function(z, omega) {
 #' A step of the bats_native implementation. Called by \code{bats_filter},
 #' \code{BatsSpec}, \code{morie_bats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m Numeric; combined arithmetically in the body.
 #' @param k Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.
@@ -210,7 +207,6 @@ seasonal_harmonics <- function(m, k = NULL) {
 #'
 #' A step of the bats_native implementation. Called by \code{morie_bats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param periods A vector; its length is taken and its elements indexed. Defaults to
 #' \code{numeric(0)}.
@@ -269,7 +265,6 @@ BatsSpec <- function(periods = numeric(0), harmonics = NULL,
 #' A step of the bats_native implementation. Called by \code{.fit_spec},
 #' \code{fit_seed_state}, \code{state_matrices}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec A list; the body reads \code{$harmonics}, \code{$p}, \code{$periods},
 #' \code{$q}, \code{$use_trend} from it.
@@ -292,7 +287,6 @@ n_states <- function(spec) {
 #'
 #' A step of the bats_native implementation. Called by \code{.fit_spec}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p},
 #' \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.
@@ -320,7 +314,6 @@ n_free <- function(spec) {
 #' A step of the bats_native implementation. Called by \code{morie_bats},
 #' \code{morie_rmrl}, \code{morie_rmrl_qlearn_flat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p},
 #' \code{$periods}, \code{$q}, \code{$use_box_cox} from it.
@@ -349,7 +342,6 @@ label <- function(spec) {
 #' A step of the bats_native implementation. Called by \code{.forecast},
 #' \code{.sarima_fit}, \code{bats_filter} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p},
 #' \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.
@@ -396,7 +388,6 @@ label <- function(spec) {
 #' A step of the bats_native implementation. Called by \code{.fit_spec},
 #' \code{.forecast}, \code{fit_seed_state} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z A vector; its length is taken and its elements indexed.
 #' @param spec A list; the body reads \code{$harmonics}, \code{$p}, \code{$periods},
@@ -512,7 +503,6 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
 #'
 #' A step of the bats_native implementation. Called by \code{.fit_spec}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z A vector; its length is taken.
 #' @param spec Passed to \code{n_states}.
@@ -555,7 +545,6 @@ fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
 #'
 #' A step of the bats_native implementation. Called by \code{state_matrices}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec A list; the body reads \code{$harmonics}, \code{$periods}, \code{$use_trend} from it.
 #' @param carry A list; the body reads \code{$buf}, \code{$dlag}, \code{$elag},
@@ -579,7 +568,6 @@ fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
 #' A step of the bats_native implementation. Called by \code{all_eigenvalues},
 #' \code{spectral_radius}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec Passed to \code{.flatten_carry}.
 #' @param theta Passed to \code{bats_filter}.
@@ -616,7 +604,6 @@ state_matrices <- function(spec, theta) {
 #' A step of the bats_native implementation. Called by \code{.fit_spec},
 #' \code{is_forecastable}, \code{morie_bats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec Passed to \code{state_matrices}.
 #' @param theta Passed to \code{state_matrices}.
@@ -641,7 +628,6 @@ spectral_radius <- function(spec, theta, tol = 1e-6) {
 #'
 #' A step of the bats_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec Passed to \code{state_matrices}.
 #' @param theta Passed to \code{state_matrices}.
@@ -664,7 +650,6 @@ all_eigenvalues <- function(spec, theta) {
 #'
 #' A step of the bats_native implementation. Called by \code{morie_bats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec Passed to \code{spectral_radius}.
 #' @param theta Passed to \code{spectral_radius}.
@@ -684,7 +669,6 @@ is_forecastable <- function(spec, theta, tol = 1e-8) {
 #'
 #' A step of the bats_native implementation. Called by \code{.fit_spec}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param resid A vector; its length is taken.
@@ -707,7 +691,6 @@ concentrated_loglik <- function(y, resid, omega) {
 #'
 #' A step of the bats_native implementation. Called by \code{.fit_spec}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p},
 #' \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.
@@ -774,7 +757,6 @@ concentrated_loglik <- function(y, resid, omega) {
 #'
 #' A step of the bats_native implementation. Called by \code{morie_bats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{box_cox}.
 #' @param spec A list; the body reads \code{$use_box_cox} from it.
@@ -811,8 +793,13 @@ concentrated_loglik <- function(y, resid, omega) {
   best_f <- Inf
   for (st in .starts(spec)) {
     res <- tryCatch(
-      optim(st, negll, method = "Nelder-Mead",
-            control = list(maxit = as.integer(maxiter))),
+      if (length(st) == 1L) {
+        optim(st, negll, method = "Brent", lower = lo[1L], upper = hi[1L],
+              control = list(maxit = as.integer(maxiter)))
+      } else {
+        optim(st, negll, method = "Nelder-Mead",
+              control = list(maxit = as.integer(maxiter)))
+      },
       error = function(e) list(par = st))
     xr <- as.numeric(res$par)
     fr <- negll(xr)
@@ -918,7 +905,6 @@ concentrated_loglik <- function(y, resid, omega) {
 #'
 #' A step of the bats_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

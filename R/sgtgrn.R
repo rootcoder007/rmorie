@@ -16,6 +16,9 @@
 #' @return List with \code{X_next}, \code{estimate}, \code{A_norm},
 #'   \code{n}, \code{f_out}.
 #' @references Kipf, T. N. & Welling, M. (2017). ICLR 2017, equation (2).
+#' @examples
+#' A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3)
+#' Sgtgrn(A, X = diag(3), W = matrix(1, 3, 2))$X_next
 #' @export
 Sgtgrn <- function(A_hat, X, W, activation = "relu") {
   A <- as.matrix(A_hat)

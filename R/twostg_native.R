@@ -11,7 +11,6 @@
 #'
 #' A step of the twostg_native implementation. Called by \code{Twostg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param delta A vector; indexed elementwise.
@@ -55,7 +54,6 @@
 #'
 #' A step of the twostg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Passed to \code{pmin}.
 #' @return A numeric value.
@@ -65,7 +63,6 @@
 #'
 #' A step of the twostg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Passed to \code{pmin}.
 #' @return A numeric value.
@@ -78,7 +75,6 @@
 #'
 #' A step of the twostg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -100,7 +96,6 @@
 #'
 #' A step of the twostg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Numeric; combined arithmetically in the body.
 #' @return A numeric value.

@@ -178,7 +178,6 @@ owate_weights <- function(pscore, sigma2_treated = NULL,
 #'
 #' A step of the tmlefp_native implementation. Called by \code{morie_tmlefp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param w A vector; indexed elementwise.
@@ -284,12 +283,12 @@ morie_tmlefp <- function(y, treatment, pscore,
        method = "optimal-overlap subpopulation and weights (Crump, Hotz, Imbens & Mitnik 2009)")
 }
 
-#' Compact alias per ledger/NAMING.md
+#' Compact alias
 #' @rdname morie_tmlefp
 #' @export
 morie_optimal_overlap <- morie_tmlefp
 
-#' Name carried over from the generated stub this replaced
+#' Name kept for backward compatibility
 #' @rdname morie_tmlefp
 #' @export
 morie_tmle_effective_pi <- morie_tmlefp
@@ -301,6 +300,9 @@ morie_tmle_effective_pi <- morie_tmlefp
 #'
 #' @param gamma Threshold, must be at least 4.
 #' @return A numeric value in (0, 1/2].
+#' @examples
+#' morie_alpha_from_gamma(4)     # gamma = 4 gives alpha = 1/2
+#' morie_alpha_from_gamma(100)   # alpha (1 - alpha) = 1/100
 #' @export
 morie_alpha_from_gamma <- function(gamma) {
   gamma <- as.numeric(gamma)
@@ -323,6 +325,10 @@ morie_alpha_from_gamma <- function(gamma) {
 #' @return A list with \code{alpha}, \code{gamma}, \code{keep},
 #'   \code{trim}, \code{no_trimming}, \code{k}.
 #' @references Crump, R. K. et al. (2009). Theorem 5.2.
+#' @examples
+#' set.seed(22)
+#' ps <- plogis(rnorm(1000, 0, 2))
+#' morie_optimal_alpha(ps)[c("alpha", "gamma")]
 #' @export
 morie_optimal_alpha <- function(pscore, sigma2_treated = NULL,
                                 sigma2_control = NULL, tol = 1e-12,
@@ -378,6 +384,10 @@ morie_optimal_alpha <- function(pscore, sigma2_treated = NULL,
 #' @return A list with \code{alpha_t}, \code{keep}, \code{trim},
 #'   \code{no_trimming}.
 #' @references Crump, R. K. et al. (2009). Theorem 5.3.
+#' @examples
+#' set.seed(11)
+#' ps <- runif(500, 0.02, 0.98)
+#' morie_optimal_alpha_att(ps, rbinom(500, 1, ps))$alpha_t
 #' @export
 morie_optimal_alpha_att <- function(pscore, treated, tol = 1e-12,
                                     max_iter = 200) {
@@ -416,6 +426,8 @@ morie_optimal_alpha_att <- function(pscore, treated, tol = 1e-12,
 #' @param sigma2_treated,sigma2_control Optional conditional variances.
 #' @return A numeric vector of weights, one per observation.
 #' @references Crump, R. K. et al. (2009). Theorem 5.4, Corollary 5.2.
+#' @examples
+#' morie_owate_weights(pscore = c(0.1, 0.5, 0.9))   # e (1 - e): largest at 0.5
 #' @export
 morie_owate_weights <- function(pscore, sigma2_treated = NULL,
                                 sigma2_control = NULL) {
@@ -435,6 +447,8 @@ morie_owate_weights <- function(pscore, sigma2_treated = NULL,
 #' Compact one-line summary of the tmlefp recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_tmlefp_cheatsheet()
 #' @export
 morie_tmlefp_cheatsheet <- function() {
   paste("tmlefp: optimal overlap (Crump, Hotz, Imbens & Mitnik 2009).",

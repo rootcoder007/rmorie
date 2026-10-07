@@ -18,7 +18,6 @@ A list with \code{estimate}, \code{pooled}, \code{layers}, \code{degrees},
 \description{
 A step of the xdeep_native implementation. Called by \code{xdeep_xdeepfm_score}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 xdeep_cin(X0 = 5L, Ws = c(1, 2, 3, 4, 5, 6, 7, 8))

@@ -30,6 +30,11 @@ theta_22 = 1/(w22 - w12' beta), theta_12 = -beta theta_22.  The
 nonzero pattern of Theta is the conditional-independence
 (partial-correlation) network of network psychometrics.
 }
+\examples{
+set.seed(8)
+X <- matrix(rnorm(200 * 4), 200, 4); X[, 2] <- X[, 1] + rnorm(200, sd = 0.5)
+morie_netcms(data = X, lam = 0.1)$adjacency
+}
 \references{
 Hastie, T., Tibshirani, R. and Friedman, J. (2009).
 The Elements of Statistical Learning, 2nd ed. Springer,

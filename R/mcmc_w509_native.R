@@ -28,8 +28,7 @@
 #' @references Pritchard, J. K., Seielstad, M. T., Perez-Lezaun, A.
 #'   and Feldman, M. W. (1999), Molecular Biology and Evolution
 #'   16(12), 1791-1798; Sisson, S. A., Fan, Y. and Beaumont, M. A.
-#'   (2018), arXiv:1802.09720, Sec 1.5 (local:
-#'   fetched-wave3/sisson-2018-abc-overview.pdf).
+#'   (2018), arXiv:1802.09720, Sec 1.5.
 #' @export
 #' @examples
 #' sim <- function(theta, e) theta[1] + 0.1 * rmorie:::.ghc_norm(e, 1L)
@@ -138,8 +137,7 @@ Bayisr <- function(samples, log_target, log_proposal, m, seed = 0L) {
 #' @return List with \code{estimate} (r), \code{log_r},
 #'   \code{n_iter}, \code{converged}, \code{method}.
 #' @references Meng, X.-L. and Wong, W. H. (1996), Statistica Sinica
-#'   6, 831-860, eq. (3.5), Sec. 4 (local:
-#'   fetched-wave3/meng-wong-1996-bridge-sampling-statsinica.pdf).
+#'   6, 831-860, eq. (3.5), Sec. 4.
 #' @export
 #' @examples
 #' set.seed(2)
@@ -204,11 +202,9 @@ Bridgs <- function(draws1, draws2, log_q1, log_q2, tol = 1e-12,
 #'   \code{accept_rate}, \code{swap_accept_rate},
 #'   \code{temperatures}, \code{n_iter}, \code{seed}, \code{method}.
 #' @references Earl, D. J. and Deem, M. W. (2005), Phys. Chem. Chem.
-#'   Phys. 7, 3910-3916, eq. 4 (local: fetched-wave3/
-#'   earl-deem-2005-parallel-tempering.pdf); Hukushima, K. and Nemoto,
-#'   K. (1996), J. Phys. Soc. Japan 65(6), 1604-1608 (local:
-#'   fetched-wave3/hukushima-nemoto-1996-exchange-mc.pdf); Metropolis
-#'   et al. (1953), J. Chem. Phys. 21, 1087-1092.
+#'   Phys. 7, 3910-3916, eq. 4; Hukushima, K. and Nemoto, K. (1996),
+#'   J. Phys. Soc. Japan 65(6), 1604-1608; Metropolis et al. (1953),
+#'   J. Chem. Phys. 21, 1087-1092.
 #' @export
 #' @examples
 #' r <- Ptmcmc(function(x) -0.5 * ((x - 1)^2) * ((x + 1)^2),

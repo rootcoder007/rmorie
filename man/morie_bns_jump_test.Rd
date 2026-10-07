@@ -31,7 +31,8 @@ a positive z is evidence of jumps.
 morie_bns_jump_test(c(0.01, -0.02, 0.015, -0.005, 0.02))$statistic
 }
 \references{
-Barndorff-Nielsen, O. E. & Shephard, N. (2006),
+Barndorff-Nielsen, O. E. & Shephard, N. (2006). Econometrics
+of testing for jumps in financial economics using bipower variation.
 \emph{Journal of Financial Econometrics} 4(1), 1-30. Cross-checked
 against \code{BNSjumpTest} in the highfrequency package.
 }

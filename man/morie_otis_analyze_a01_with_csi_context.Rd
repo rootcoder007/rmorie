@@ -8,16 +8,23 @@ morie_otis_analyze_a01_with_csi_context(
   data = NULL,
   variant = "total",
   rebase_to_year = 2023L,
+  tps_data = NULL,
   out_dir = NULL
 )
 }
 \arguments{
-\item{data}{Optional a01 data.frame.}
+\item{data}{Optional a01 data frame (\code{NULL} loads it).}
 
 \item{variant}{CSI variant: \code{"total"} or \code{"violent"}.}
 
 \item{rebase_to_year}{Anchor year for the CSI index column
 (default 2023). Use \code{NULL} to skip rebasing.}
+
+\item{tps_data}{Optional named list of TPS incident data frames, one per
+CSI category (names from \code{MORIE_TPS_CSI_CATEGORIES()}), each with an
+\code{OCC_YEAR} column. \code{NULL} loads them with
+\code{\link{morie_tps_load_dataset}}; categories that fail to load are
+listed in the warnings.}
 
 \item{out_dir}{Optional output directory.}
 }
@@ -25,13 +32,20 @@ morie_otis_analyze_a01_with_csi_context(
 \code{morie_otis_analysis_result}.
 }
 \description{
-Wires together \code{morie_otis_analyze_a01} (causal IRM-DML) with
-the Toronto Police Service / StatsCan CSI context. The R port
-requires the morie causal pipeline and TPS-CSI helpers to be loaded;
-otherwise returns a "not yet ported" stub.
+Runs \code{\link{morie_otis_analyze_a01}} (alert complexity -> regional
+volatility, MatchIt then IRM-DML) and sets it beside Toronto's Crime
+Severity Index for the OTIS years (2023-2025), computed with
+\code{\link{morie_tps_csi_per_year}} from TPS incident tables. The
+question it frames: did the OTIS effect arise while Toronto crime
+severity was rising or falling?
 }
 \examples{
 \donttest{
-morie_otis_analyze_a01_with_csi_context(otis_a01)
+a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+cats <- MORIE_TPS_CSI_CATEGORIES()
+tps <- stats::setNames(lapply(seq_along(cats), function(i)
+  data.frame(OCC_YEAR = rep(2022:2025, times = 10 * i))), cats)
+r <- morie_otis_analyze_a01_with_csi_context(a01, tps_data = tps)
+r$tables[[1L]]$rows
 }
 }

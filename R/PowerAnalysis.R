@@ -157,5 +157,6 @@ PowerAnova <- function(n = NULL, k = NULL, f = NULL, alpha = 0.05, power = NULL)
 #' @rdname PowerTTest
 #' @export
 CalculateInteractionPower <- function(sample_size, alpha = 0.05, effect_size = 0.2, df1 = 1) {
+  .morie_arg(sample_size, "n1")
   .pwa_anova(sample_size, 2, effect_size, alpha, df1 = df1)
 }

@@ -21,5 +21,9 @@ A list with \code{matrix}, \code{lookup}.
 \description{
 A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+d <- function(s, a) if (a == 0) 0.25 else 0.75
+pi_b <- offlrl_as_dist(d, S = c(0, 1), A = c(0, 1), name = "behaviour")
+pi_b$lookup(1, 1)
 }

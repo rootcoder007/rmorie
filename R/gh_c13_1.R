@@ -19,6 +19,9 @@
 #'   \code{method}.
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.2.
+#' @examples
+#' times <- c(2, 3, 3, 5, 6, 8, 9, 12); events <- c(1, 1, 0, 1, 0, 1, 1, 0)
+#' Ghosalsurvdppost(times, events, t_query = 6, alpha = 2)$survival_at_t
 #' @export
 Ghosalsurvdppost <- function(times, events, t_query, alpha = 2) {
   ts <- as.numeric(times)

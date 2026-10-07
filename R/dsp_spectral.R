@@ -323,6 +323,7 @@ morie_dsp_spectral_kurtosis <- function(psd, freqs) {
 #' morie_dsp_psd_to_db(c(1, 0.1, 0.01))
 #' @export
 morie_dsp_psd_to_db <- function(psd) {
+  .morie_arg(psd, "n")
   10 * log10(pmax(psd, 1e-20))
 }
 

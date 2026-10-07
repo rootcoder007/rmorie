@@ -72,7 +72,6 @@ gflops <- function(tokens, depth, width, mlp_ratio = 4.0) {
 #'
 #' A step of the dits16_native implementation. Called by \code{adaln_zero}, \code{dit_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.

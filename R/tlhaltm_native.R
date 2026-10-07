@@ -46,7 +46,16 @@ morie_tlhaltm <- function(rate_Q = NULL, rate_g = NULL, n = NULL,
                           donsker = TRUE,
                           mode = c("rate", "remainder",
                                    "efficiency", "split")) {
+  if (!is.null(rate_Q)) .morie_arg(rate_Q, "n1")
   mode <- match.arg(mode)
+  needs <- list(rate = c("rate_Q", "rate_g", "n"), remainder = c("err_Q", "err_g", "delta"),
+                split = "n", efficiency = c("err_Q", "err_g", "delta", "n"))[[mode]]
+  given <- list(rate_Q = rate_Q, rate_g = rate_g, n = n, err_Q = err_Q, err_g = err_g, delta = delta)
+  absent <- needs[vapply(given[needs], is.null, logical(1))]
+  if (length(absent)) {
+    stop(sprintf("mode = \"%s\" needs %s.", mode, paste0("`", absent, "`", collapse = ", ")),
+         call. = FALSE)
+  }
   if (mode == "rate") return(rate_condition(rate_Q, rate_g, n))
   if (mode == "remainder")
     return(remainder_bound(err_Q, err_g, delta))

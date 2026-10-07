@@ -32,5 +32,4 @@ Vcquant(V)
 }
 \references{
 Zandieh et al., arXiv:2504.19874, Algorithm 2 lines 2-12.
-Fetched from arXiv.
 }

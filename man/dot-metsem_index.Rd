@@ -18,5 +18,4 @@ A list with \code{out}, \code{inc}, \code{nodes}.
 A step of the metsem_native implementation. Called by \code{.metsem_drop},
 \code{morie_metsem_graph}.
 See the file header for the source the module follows.
-source it follows.
 }

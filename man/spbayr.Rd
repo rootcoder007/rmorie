@@ -62,6 +62,11 @@ and returned, so the count is never guessed.
 
 This specifies and diagnoses the model rather than sampling from it.
 }
+\examples{
+A <- matrix(0, 4, 4); A[cbind(1:3, 2:4)] <- 1; A <- A + t(A)
+r <- spbayr(counts = c(5, 8, 12, 4), expected = c(6, 7, 9, 6), adjacency = A, spatial_prior = "lcar", rho = 0.5)
+r$smr
+}
 \references{
 Schabenberger Ch 6, Sec 6.4, eqs (6.99)-(6.104); Tonui,
 Mwalili and Wanjoya (2018), Open Journal of Statistics 8:811-830

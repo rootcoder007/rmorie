@@ -20,6 +20,10 @@ Square numeric matrix.
 \eqn{L = I - D^{-1/2} A D^{-1/2}} (normalised) or \eqn{D - A}
 (unnormalised).
 }
+\examples{
+adj <- list(`0` = 1L, `1` = c(0L, 2L), `2` = 1L)   # path graph, 0-based ids
+morie_gtrf_laplacian(adj, n = 3, normalized = FALSE)
+}
 \references{
 Belkin, M. and Niyogi, P. (2003).
 }

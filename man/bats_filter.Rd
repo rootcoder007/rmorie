@@ -25,7 +25,6 @@ A list with \code{resid}, \code{fitted}, \code{carry}.
 A step of the bats_native implementation. Called by \code{.fit_spec},
 \code{.forecast}, \code{fit_seed_state} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

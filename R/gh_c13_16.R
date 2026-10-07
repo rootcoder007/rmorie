@@ -17,6 +17,9 @@
 #'   \code{method}.
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.7.1.
+#' @examples
+#' times <- c(2, 3, 3, 5, 6, 8, 9, 12); events <- c(1, 1, 0, 1, 0, 1, 1, 0)
+#' Ghosalbbcensored(times, events, t_query = 6)[c("estimate", "km_survival")]
 #' @export
 Ghosalbbcensored <- function(times, events, t_query) {
   ts <- as.numeric(times)

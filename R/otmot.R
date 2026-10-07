@@ -24,6 +24,11 @@
 #' @references Benamou, J.-D., Carlier, G., Cuturi, M., Nenna, L. and
 #'   Peyre, G. (2015). SIAM Journal on Scientific Computing
 #'   37(2):A1111-A1138. \doi{10.1137/141000439}.
+#' @examples
+#' m <- list(c(0.5, 0.5), c(0.5, 0.5), c(0.5, 0.5))
+#' C <- as.numeric(aperm(array(c(0, 1, 1, 2, 1, 2, 2, 3), c(2, 2, 2)), 3:1))   # sum of indices
+#' r <- Otmot(m, C, epsilon = 0.1)
+#' r$marg_err
 #' @export
 Otmot <- function(margins, C_tensor, epsilon, max_iter = 200) {
   ms <- lapply(margins, .ot_hist)

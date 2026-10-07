@@ -306,6 +306,7 @@ morie_datasets_vancouver_fire_halls <- function(offline = TRUE,
 #' @export
 morie_datasets_vancouver_community_centres <- function(offline = TRUE,
                                                        max_features = NULL) {
+  .morie_arg(offline, "lg1")
   df <- if (offline) {
     .morie_vancouver_fixture("vancouver_community_centres.csv")
   } else {

@@ -98,10 +98,8 @@ morie_nelson_aalen <- function(time, event) {
 #' @return list with `statistic`, `df`, `p_value`, `observed`, `expected`
 #' @export
 #' @examples
-#' if (requireNamespace("survival", quietly = TRUE)) {
-#'   morie_logrank_test(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
-#'     group = c("a", "b", "c"))
-#' }
+#' morie_logrank_test(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'   group = rep(c("a", "b"), 4))
 morie_logrank_test <- function(time, event, group) {
   lev <- sort(unique(group))
   k <- length(lev)

@@ -21,7 +21,6 @@
 #'
 #' A step of the ocrwit_native implementation. Called by \code{normalise_bbox}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{round}.
 #' @param lo Coerced to integer by the body, with \code{as.integer}.
@@ -40,7 +39,6 @@
 #' A step of the ocrwit_native implementation. Called by \code{patch_of_box},
 #' \code{segment_layout_boxes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param box A vector; its length is taken and its elements indexed.
 #' @param width Coerced to numeric by the body, with \code{as.numeric}.
@@ -75,7 +73,6 @@ normalise_bbox <- function(box, width, height, scale = 1000) {
 #'
 #' A step of the ocrwit_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param boxes A matrix; indexed by row and column.
 #' @param segment_ids Coerced to list by the body, with \code{as.list}.
@@ -125,7 +122,6 @@ segment_layout_boxes <- function(boxes, segment_ids, width, height,
 #'
 #' A step of the ocrwit_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_units Coerced to integer by the body, with \code{as.integer}.
 #' @param rate Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.
@@ -172,7 +168,6 @@ mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
 #'
 #' A step of the ocrwit_native implementation. Called by \code{word_patch_alignment}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param box Passed to \code{normalise_bbox}.
 #' @param width Passed to \code{normalise_bbox}.
@@ -208,7 +203,6 @@ patch_of_box <- function(box, width, height, patch_grid = 14) {
 #'
 #' A step of the ocrwit_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param text_boxes A vector; its length is taken and its elements indexed.
 #' @param masked_patches Passed to \code{unlist}.
@@ -257,7 +251,6 @@ word_patch_alignment <- function(text_boxes, masked_patches, width,
 #'
 #' A step of the ocrwit_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -277,7 +270,7 @@ word_patch_alignment <- function(text_boxes, masked_patches, width,
         "SEGMENT-level 2D position.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 layoutlmv3 <- word_patch_alignment
 
 # public names resolved by fn/_lazy_map.json
@@ -291,9 +284,10 @@ morie_ocrwit <- word_patch_alignment
 #'
 #' A step of the ocrwit_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(ocrwit_cheatsheet())
 #' @export
 ocrwit_cheatsheet <- function() {
   paste("ocrwit: document models pre-trained text and image with ",
@@ -313,13 +307,14 @@ ocrwit_cheatsheet <- function() {
 #'
 #' A step of the ocrwit_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_units Coerced to integer by the body, with \code{as.integer}.
 #' @param rate Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param block Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{masked}, \code{kept}, \code{rate}, \code{block}, \code{note}.
+#' @examples
+#' ocrwit_mask_units(n_units = 10, rate = 0.3, seed = 1)$masked
 #' @export
 ocrwit_mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
   n <- as.integer(n_units)
@@ -351,13 +346,14 @@ ocrwit_mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
 #' A step of the ocrwit_native implementation. Called by \code{ocrwit_patch_of_box},
 #' \code{ocrwit_segment_layout_boxes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param box A vector; indexed elementwise.
 #' @param width Coerced to numeric by the body, with \code{as.numeric}.
 #' @param height Coerced to numeric by the body, with \code{as.numeric}.
 #' @param scale Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000}.
 #' @return A vector, from \code{c}.
+#' @examples
+#' ocrwit_normalise_bbox(c(10, 20, 110, 70), width = 200, height = 100)
 #' @export
 ocrwit_normalise_bbox <- function(box, width, height, scale = 1000) {
   x0 <- as.numeric(box[[1]])
@@ -380,13 +376,14 @@ ocrwit_normalise_bbox <- function(box, width, height, scale = 1000) {
 #'
 #' A step of the ocrwit_native implementation. Called by \code{morie_ocrwit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param box Passed to \code{ocrwit_normalise_bbox}.
 #' @param width Passed to \code{ocrwit_normalise_bbox}.
 #' @param height Passed to \code{ocrwit_normalise_bbox}.
 #' @param patch_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{14}.
 #' @return A vector, from \code{sort}.
+#' @examples
+#' ocrwit_patch_of_box(c(10, 10, 60, 40), width = 100, height = 100)
 #' @export
 ocrwit_patch_of_box <- function(box, width, height, patch_grid = 14) {
   # the restored copy rounded the corners onto the patch grid, which
@@ -400,7 +397,6 @@ ocrwit_patch_of_box <- function(box, width, height, patch_grid = 14) {
 #'
 #' A step of the ocrwit_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param boxes Coerced to list by the body, with \code{as.list}.
 #' @param segment_ids Coerced to list by the body, with \code{as.list}.
@@ -408,6 +404,9 @@ ocrwit_patch_of_box <- function(box, width, height, patch_grid = 14) {
 #' @param height Passed to \code{ocrwit_normalise_bbox}.
 #' @param scale Passed to \code{ocrwit_normalise_bbox}. Defaults to \code{1000}.
 #' @return A list with \code{segment_boxes}, \code{per_token}, \code{n_segments}, \code{note}.
+#' @examples
+#' boxes <- list(c(10, 10, 50, 20), c(60, 10, 90, 20), c(10, 40, 80, 50))
+#' ocrwit_segment_layout_boxes(boxes, segment_ids = list(1, 1, 2), width = 100, height = 60)$segment_boxes
 #' @export
 ocrwit_segment_layout_boxes <- function(boxes, segment_ids, width, height,
                                          scale = 1000) {

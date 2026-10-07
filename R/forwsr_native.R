@@ -25,7 +25,6 @@
 #' \code{morie_forwsr_forward_search}, \code{morie_forwsr_lms_start} and 1 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -90,7 +89,6 @@
 #'
 #' A step of the forwsr_native implementation. Called by \code{morie_forwsr_ols_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{cbind}.
 #' @param b A vector; its length is taken.

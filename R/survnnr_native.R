@@ -335,6 +335,7 @@ morie_survnnr_risk_score <- function(fit_result, X) {
 #' @export
 #' @keywords internal
 morie_survnnr_baseline_hazard <- function(fit_result) {
+  .morie_arg(fit_result, "l")
   t <- fit_result$times
   e <- fit_result$events
   r <- exp(fit_result$risk)
@@ -463,7 +464,7 @@ morie_survnnr_cheatsheet <- function() {
         "supplies it when an absolute survival curve is wanted.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_survnnr_deep_surv <- morie_survnnr_fit
 
 # entry point

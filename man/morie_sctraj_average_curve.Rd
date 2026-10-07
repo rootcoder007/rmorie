@@ -19,7 +19,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the sctraj_native implementation. Called by \code{morie_sctraj}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 c1 <- cbind(seq(0, 1, length.out = 20), seq(0, 2, length.out = 20))

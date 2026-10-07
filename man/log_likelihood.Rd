@@ -2,23 +2,28 @@
 % Please edit documentation in R/plsa_native.R
 \name{log_likelihood}
 \alias{log_likelihood}
-\title{.plsa_log_likelihood}
+\title{Log-likelihood of a PLSA model}
 \usage{
 log_likelihood(n_dw, Pz, Pd_z, Pw_z)
 }
 \arguments{
-\item{n_dw}{Passed to \code{.plsa_check}.}
+\item{n_dw}{Document-by-word count matrix.}
 
-\item{Pz}{Passed to \code{.plsa_joint_probability}.}
+\item{Pz}{Topic probabilities \eqn{P(z)}.}
 
-\item{Pd_z}{Passed to \code{.plsa_joint_probability}.}
+\item{Pd_z}{Documents-by-topics matrix of \eqn{P(d|z)}.}
 
-\item{Pw_z}{Passed to \code{.plsa_joint_probability}.}
+\item{Pw_z}{Words-by-topics matrix of \eqn{P(w|z)}.}
 }
 \value{
-The value of \code{sum}.
+The log-likelihood.
 }
 \description{
-Internal helper in plsa_native.R; see the file header for
-the source the module follows.
+\eqn{\sum_{d,w} n(d,w) \log \sum_z P(z) P(d|z) P(w|z)} for the aspect model
+of Hofmann (1999).
+}
+\examples{
+n_dw <- matrix(c(2, 0, 1, 3), 2)       # 2 documents x 2 words
+Pz <- c(0.5, 0.5); Pd_z <- matrix(0.5, 2, 2); Pw_z <- matrix(c(0.7, 0.3, 0.2, 0.8), 2)
+log_likelihood(n_dw, Pz, Pd_z, Pw_z)
 }

@@ -15,5 +15,7 @@ One of two values, depending on the branch taken.
 \description{
 A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scanone}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mqtmpl_check_method("em")
 }

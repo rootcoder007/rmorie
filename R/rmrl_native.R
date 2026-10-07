@@ -39,7 +39,6 @@
 #' A step of the rmrl_native implementation. Called by \code{morie_rmrl},
 #' \code{morie_rmrl_qlearn_flat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ... Passed through.
 #' @return A character value.
@@ -57,7 +56,6 @@
 #'
 #' A step of the rmrl_native implementation. Called by \code{morie_rmrl_reward_machine}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param phi Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{function}.
@@ -141,7 +139,6 @@ morie_rmrl_reward_machine <- function(edges, u0 = 0, terminal = c()) {
 #' A step of the rmrl_native implementation. Called by \code{morie_rmrl},
 #' \code{morie_rmrl_qlearn_flat}, \code{morie_rmrl_reward_machine_run}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param machine A list; the body reads \code{$edges}, \code{$terminal} from it.
 #' @param u Coerced to character by the body, with \code{as.character}.
@@ -248,7 +245,6 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
 #'
 #' A step of the rmrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param machines A vector; its length is taken and its elements indexed.
 #' @param states Coerced to list by the body, with \code{as.list}.
@@ -416,7 +412,6 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma = 0.9,
 #'
 #' A step of the rmrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param machine A list; the body reads \code{$states}, \code{$terminal}, \code{$u0} from it.
 #' @param states Coerced to list by the body, with \code{as.list}.
@@ -519,7 +514,6 @@ morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
 #'
 #' A step of the rmrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

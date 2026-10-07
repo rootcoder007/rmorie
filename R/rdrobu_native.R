@@ -31,7 +31,6 @@
 #'
 #' A step of the rdrobu_native implementation. Called by \code{morie_calonico_cattaneo_titiunik}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{morie_causrddc}.
 #' @param x Passed to \code{morie_causrddc}.
@@ -76,11 +75,10 @@ morie_rdrobu <- function(y, x, cutoff = 0.0, alpha = 0.05, ...) {
 }
 
 # Alias kept from the generated stub's signature.
-#' Alias kept from the generated stub's signature
+#' Alias kept for backward compatibility
 #'
 #' A step of the rdrobu_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{morie_rdrobu}.
 #' @param x Passed to \code{morie_rdrobu}.
@@ -105,7 +103,6 @@ morie_rd_confidence_intervals <- morie_rdrobu
 #'
 #' A step of the rdrobu_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

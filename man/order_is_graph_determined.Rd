@@ -23,6 +23,5 @@ A list with \code{max_deviation}, \code{invariant}, \code{note}.
 \description{
 A step of the sortP_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

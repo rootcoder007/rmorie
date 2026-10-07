@@ -74,7 +74,6 @@
 #' A step of the svycox_native implementation. Called by \code{.svycox_score_residuals},
 #' \code{.svycox_svycoxph}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Coerced to numeric by the body, with \code{as.numeric}.
 #' @param event Coerced to integer by the body, with \code{as.integer}.
@@ -161,7 +160,6 @@
 #' A step of the svycox_native implementation. Called by \code{.svycox_score_residuals},
 #' \code{.svycox_svycoxph}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T Numeric; passed to \code{order}.
 #' @param E A vector; indexed elementwise.
@@ -230,7 +228,6 @@
 #' A step of the svycox_native implementation. Called by \code{.svycox_inverse},
 #' \code{.svycox_svycoxph}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{cbind}.
 #' @param b A vector; its length is taken.
@@ -277,7 +274,6 @@
 #'
 #' A step of the svycox_native implementation. Called by \code{.svycox_svycoxph}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
@@ -302,7 +298,6 @@
 #'
 #' A step of the svycox_native implementation. Called by \code{.svycox_svycoxph}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param contrib A matrix; indexed by row and column.
 #' @param w A vector; its length is taken and its elements indexed.
@@ -353,7 +348,6 @@
 #'
 #' A step of the svycox_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Passed to \code{.svycox_prep}.
 #' @param event Passed to \code{.svycox_prep}.
@@ -379,7 +373,6 @@
 #'
 #' A step of the svycox_native implementation. Called by \code{morie_svycox}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Passed to \code{.svycox_prep}.
 #' @param event Passed to \code{.svycox_prep}.
@@ -475,7 +468,6 @@
 #'
 #' A step of the svycox_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Passed to \code{.svycox_svycoxph}.
 #' @param event Passed to \code{.svycox_svycoxph}.

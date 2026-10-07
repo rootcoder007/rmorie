@@ -30,11 +30,17 @@ identically in the Python arm. This is the 1987 algorithm as
 printed (averaged updates), not the later Studier-Keppler
 variant.
 }
+\examples{
+# the additive four-taxon example: neighbor-joining recovers the tree
+D <- matrix(c(0, 5, 9, 9,
+              5, 0, 10, 10,
+              9, 10, 0, 8,
+              9, 10, 8, 0), 4, byrow = TRUE)
+Phylotr(D, labels = c("a", "b", "c", "d"))$joins[[1]]
+}
 \references{
-Saitou, N. and Nei, M. (1987), The neighbor-joining
-method: a new method for reconstructing phylogenetic trees,
-Molecular Biology and Evolution 4(4), 406-425. Equations (1),
-(4), (5), (6a), (6b), pp. 408-409; worked example Table 1,
-Table 2 and Figure 3, pp. 410-411. Local source:
-library/pdf/fetched-wave3/Saitou-Nei-1987-NeighborJoining-MBE.pdf.
+Saitou, N. and Nei, M. (1987), The neighbor-joining method: a new method
+for reconstructing phylogenetic trees, Molecular Biology and Evolution 4(4),
+406-425. Equations (1), (4), (5), (6a), (6b), pp. 408-409; worked example Table 1,
+Table 2 and Figure 3, pp. 410-411.
 }

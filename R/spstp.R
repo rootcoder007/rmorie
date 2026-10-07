@@ -51,6 +51,11 @@
 #'   `marginal_spatial`, `marginal_temporal`, `cstr`, `index_of_dispersion`,
 #'   `df`, `p_value`, `cell_counts` and `process_type`.
 #' @references Schabenberger Ch 9, Sec 9.5, eqs (9.20)-(9.23); Sec 3.3 eq (3.3)
+#' @examples
+#' set.seed(22)
+#' pts <- matrix(runif(120), 60, 2)
+#' s <- spstp(pts, region = c(0, 1, 0, 1), time_interval = c(0, 10), times = runif(60, 0, 10))
+#' c(s$intensity, s$p_value)
 #' @export
 spstp <- function(points, region, time_interval, times = NULL,
                   process_type = NULL, n_space_bins = 3L, n_time_bins = 3L) {

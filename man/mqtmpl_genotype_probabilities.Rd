@@ -22,5 +22,8 @@ A vector, from \code{c}.
 A step of the mqtmpl_native implementation. Called by \code{mqtmpl_cim_one},
 \code{mqtmpl_sample_genotypes}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+# Haldane recombination fractions to the flanking markers
+mqtmpl_genotype_probabilities(s_left = 0, s_right = 1, r_left = 0.05, r_right = 0.1)
 }

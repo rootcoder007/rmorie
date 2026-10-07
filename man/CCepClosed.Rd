@@ -27,7 +27,6 @@ A list with \code{cepstrum}, \code{quefrency}, \code{c0}, \code{positive},
 \description{
 A step of the rangayyan_cep implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 CCepClosed(gain = 5L, zeros_in = c(1, 2, 3, 4, 5, 6, 7, 8),

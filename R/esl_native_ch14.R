@@ -71,6 +71,7 @@ morie_esl_pca_transform <- function(model, X) {
 #' factor_analysis_ml(X, 1)$communalities
 #' @export
 factor_analysis_ml <- function(data, n_factors = 2, max_iter = 1000, tol = 1e-6) {
+  .morie_arg(data, "m")
   X <- as.matrix(data)
   S <- stats::cov(X)
   e <- eigen(S, symmetric = TRUE)

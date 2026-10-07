@@ -24,7 +24,7 @@ items into \eqn{k} blocks of the given sizes. The blocks are
 exchangeable, so only the multiset of \code{sizes} matters.
 }
 \examples{
-morie_gh_py_eppf_log(sizes = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L, theta = 0.5)
+morie_gh_py_eppf_log(sizes = c(3, 2, 1), d = 0.25, theta = 1)
 }
 \references{
 Ghosal, S. and van der Vaart, A. (2017).

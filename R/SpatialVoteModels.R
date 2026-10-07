@@ -200,6 +200,7 @@ UtilityMax <- function(x, ideal_point = NULL, utility = "quadratic", scale = 1) 
 #' @rdname LogitVote
 #' @export
 VoteTrading <- function(valuations) {
+  .morie_arg(valuations, "m")
   r <- VoteTradingRikerBrams(valuations)
   c(list(value = length(r$trades)), r)
 }

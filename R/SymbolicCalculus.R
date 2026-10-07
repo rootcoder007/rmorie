@@ -1439,6 +1439,7 @@ RischIntegration <- function(expr, x = "x") {
 #' @rdname RischIntegration
 #' @export
 SymbolicLimit <- function(expr, x = "x", x0 = 0, side = "both") {
+  .morie_arg(expr, "c1")
   if (!(side %in% c("both", "+", "-"))) stop("side must be 'both', '+' or '-'")
   e <- .sc_parse(expr)
   if (is.character(x0)) {
@@ -1560,6 +1561,7 @@ SymbolicLimit <- function(expr, x = "x", x0 = 0, side = "both") {
 #' @rdname RischIntegration
 #' @export
 MatrixSymbolic <- function(M, eigen_var = "t") {
+  .morie_arg(M, "data")
   rows <- lapply(seq_along(M), function(i) {
     lapply(M[[i]], function(v) if (is.character(v)) .sc_parse(v) else .sc_num(as.numeric(v)))
   })

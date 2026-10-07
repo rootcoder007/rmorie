@@ -21,6 +21,5 @@ A list with \code{ltrb}, \code{center}, \code{stride}.
 \description{
 A step of the yolovx_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

@@ -15,7 +15,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the prsLL_native implementation. Called by \code{morie_prsLL}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 tree <- .prsLL_node("A", list(

@@ -22,11 +22,10 @@ list: estimate, se, fold_tau, fold_n, full_tau, n, K, method.
 }
 \description{
 Sant'Anna and Zhao (2020), Journal of Econometrics 219(1), 101-122
-(arXiv:1812.01723 -- FETCHED), equations (2.6)-(2.7) for the estimand;
-Chernozhukov et al. (2018), Double/debiased machine learning, The
-Econometrics Journal 21(1), C1-C68 (arXiv:1608.00060), definition 3.1
-for the cross-fitting device: pi and mu_0 are estimated on the
-complement of each fold and evaluated on the fold, so the estimator
+(arXiv:1812.01723), equations (2.6)-(2.7) for the estimand; Chernozhukov et al.
+(2018), Double/debiased machine learning, The Econometrics Journal 21(1), C1-C68
+(arXiv:1608.00060), definition 3.1 for the cross-fitting device: pi and mu_0 are
+estimated on the complement of each fold and evaluated on the fold, so the estimator
 stays Neyman-orthogonal without a Donsker condition.
 }
 \details{

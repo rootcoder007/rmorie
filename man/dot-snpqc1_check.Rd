@@ -17,5 +17,4 @@ A step of the snpqc1_native implementation. Called by \code{morie_snpqc1},
 \code{morie_snpqc1_call_rates}, \code{morie_snpqc1_heterozygosity} and 5 others in the
 module.
 See the file header for the source the module follows.
-source it follows.
 }

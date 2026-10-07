@@ -16,8 +16,16 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (5.5) p.153. DOI 10.1007/978-3-030-89010-0.
+#' @examples
+#' set.seed(12)
+#' J <- 6; nT <- 2
+#' G <- crossprod(matrix(rnorm(J * J), J)) / J
+#' Y <- matrix(rnorm(J * nT, 5), J, nT)
+#' f <- Msm026(Y, Z = diag(J), G = G, Sigma_T = diag(nT), R_T = diag(nT))
+#' f$mu
 #' @export
 Msm026 <- function(Y, Z, G, Sigma_T, R_T) {
+  .morie_arg(Y, "m")
   f <- .gpmultitrait(Y, Z, G, Sigma_T, R_T)
   list(estimate = f$mu[1L], mu = f$mu, b = f$b, b_by_line = f$b_by_line,
        method = "multi-trait genomic LMM (MVSML 2022 eq. 5.5)")

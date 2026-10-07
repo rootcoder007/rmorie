@@ -76,28 +76,18 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 }
 
 
-# Internal: polite HTTP GET via httr2. Gated on the httr2 namespace so
-# the package's base footprint stays light.
+# Internal: polite HTTP GET through the package's libcurl backend, retried on a 5xx.
 #' Internal helper: Siu Fetch Http Get
 #' @noRd
 .siu_fetch_http_get <- function(url, timeout_s = 60L) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop(
-      "morie_siu_fetch_cases() needs the 'httr2' package: ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
+  for (try in 1:3) {
+    r <- .morie_http_get_with_status(url, timeout_s = as.integer(timeout_s), user_agent = .siu_fetch_user_agent)
+    st <- as.integer(r$status_code)
+    if (st > 0L && st < 500L) break
+    if (try < 3L) Sys.sleep(2^try)
   }
-  req <- httr2::request(url)
-  req <- httr2::req_user_agent(req, .siu_fetch_user_agent)
-  req <- httr2::req_timeout(req, timeout_s)
-  req <- httr2::req_retry(
-    req,
-    max_tries = 3L,
-    is_transient = function(resp) httr2::resp_status(resp) >= 500L
-  )
-  resp <- httr2::req_perform(req)
-  httr2::resp_body_string(resp, encoding = "UTF-8")
+  if (st == 0L || st >= 400L) stop(sprintf("%s answered HTTP %d", url, st), call. = FALSE)
+  enc2utf8(paste(r$body, collapse = ""))
 }
 
 
@@ -570,7 +560,7 @@ morie_siu_fetch_dataframe <- function(...) {
 #' @examples
 #' f <- morie_siu_parse_report(system.file("extdata",
 #'   "siu_synthetic_report.html", package = environmentName(environment(morie_siu_parse_report))))
-#' f[["number_of_subject_officers"]]
+#' f[["number_of_subject_officials"]]
 #' @export
 morie_siu_parse_report <- function(html, engine = "auto") {
   stopifnot(is.character(html), length(html) == 1L, !is.na(html))
@@ -594,8 +584,9 @@ morie_siu_parse_reports <- function(htmls, engine = "auto") {
 #' SIU director's-reports corpus: reviewed data first, fetch only what's new
 #'
 #' The right way to get SIU data in the morie ecosystem. Loads the
-#' panel-reviewed 65-column corpus bundled in \pkg{rmoriedata} (2,182
-#' English reports, subject-official coverage 100 percent, built by a
+#' panel-reviewed 66-column corpus bundled in \pkg{rmoriedata} 0.3.4 (4,613
+#' reports: 2,309 English, reviewed, and 2,304 French carrying their English
+#' report's case facts; subject-official coverage 100 percent, built by a
 #' multi-model reading panel plus deterministic residual resolution) --
 #' nothing is re-fetched or re-parsed for reports already reviewed. With
 #' \code{update = TRUE} it then discovers reports published AFTER the
@@ -612,7 +603,7 @@ morie_siu_parse_reports <- function(htmls, engine = "auto") {
 #' @param max_new Ceiling on how many new reports to fetch per call
 #'   (default 25; a normal refresh sees 0-15).
 #' @param quiet Suppress progress messages.
-#' @return A data.frame in the 65-column reviewed-corpus schema. New rows
+#' @return A data.frame in the 66-column reviewed-corpus schema. New rows
 #'   (if any) carry \code{panel_reviewed = FALSE}.
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
@@ -675,6 +666,9 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
             siu_forensics_investigators = "siu_forensics_investigators",
             number_of_witness_officials = "number_of_witness_officials",
             number_of_civilian_witnesses = "number_of_civilian_witnesses",
+            number_of_subject_officials = "number_of_subject_officials",
+            # the name rmoriebricklayer's parser used before 0.5.5 (one quantity: "subject
+            # officer" before the SIU Act 2019, "subject official" after, "SO" for either)
             number_of_subject_officers = "number_of_subject_officials",
             age_affected = "age_affected",
             sex_gender_affected = "sex_gender_affected",
@@ -726,10 +720,11 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
 #' corpus falls through to the deterministic rule set compiled in
 #' \pkg{rmoriebricklayer} (the foundation layer; rmorie's native copy of the
 #' same core when bricklayer is absent), whose rules were proven
-#' zero-wrong against all 2,182 reviewed reports; where even the rules
+#' zero-wrong against the reviewed English reports; where even the rules
 #' cannot answer, the reading panel ([morie_siu_panel()]) decides.
 #'
-#' @param text Plain report text (needed only for unreviewed reports).
+#' @param text Plain report text (needed only for unreviewed reports). A case number such as
+#'   \code{"17-OVI-201"} here is looked up in the reviewed corpus by case.
 #' @param drid Report id; supply whenever known.
 #' @param engine \code{"auto"}, \code{"bricklayer"} or \code{"native"} for
 #'   the rule-based step.
@@ -741,6 +736,23 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_resolve_so <- function(text = NULL, drid = NULL, engine = "auto") {
+  # a case number ("17-OVI-201") passed where the report text goes is looked up in the corpus by case
+  case_no <- if (is.character(text) && length(text) == 1L && grepl("^\\d{2}-[A-Z]{2,5}-\\d{3,4}$", text)) text else NULL
+  if (!is.null(case_no) && is.null(drid)) {
+    corpus <- if (requireNamespace("rmoriedata", quietly = TRUE)) {
+      tryCatch(rmoriedata::load_siu_reports(), error = function(e) NULL)
+    }
+    hits <- if (!is.null(corpus)) corpus[corpus$case_number == case_no, , drop = FALSE] else NULL
+    n <- if (!is.null(hits)) suppressWarnings(as.integer(hits$number_of_subject_officials)) else integer()
+    if (any(!is.na(n))) {
+      return(list(count = n[!is.na(n)][[1L]],
+                  reason = sprintf("panel-reviewed corpus (verified), case %s, drid %s",
+                                   case_no, hits$drid[!is.na(n)][[1L]])))
+    }
+    stop(sprintf("`text` is the report text; '%s' is a case number%s. Pass drid = <report id> or the report text.",
+                 case_no, if (is.null(corpus)) " and the reviewed corpus (rmoriedata) is not installed" else
+                   " with no verified count in the reviewed corpus"), call. = FALSE)
+  }
   if (!is.null(drid) && requireNamespace("rmoriedata", quietly = TRUE)) {
     corpus <- tryCatch(rmoriedata::load_siu_reports(),
                        error = function(e) NULL)

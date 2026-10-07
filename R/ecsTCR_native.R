@@ -86,7 +86,6 @@
 #'
 #' A step of the ecsTCR_native implementation. Called by \code{.ecstcr_ols}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
@@ -102,7 +101,6 @@
 #'
 #' A step of the ecsTCR_native implementation. Called by \code{.ecstcr_euler}, \code{.ecstcr_rk4}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T Numeric; combined arithmetically in the body.
 #' @param TD Numeric; combined arithmetically in the body.
@@ -121,7 +119,6 @@
 #'
 #' A step of the ecsTCR_native implementation. Called by \code{.ecstcr_analytic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T Numeric; combined arithmetically in the body.
 #' @param TD Numeric; combined arithmetically in the body.
@@ -153,7 +150,6 @@
 #'
 #' A step of the ecsTCR_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T Numeric; combined arithmetically in the body.
 #' @param TD Numeric; combined arithmetically in the body.
@@ -309,7 +305,6 @@ morie_ecsTCR_co2_forcing <- function(ratio, f2x = .ECSTCR_F2X)
 #'
 #' A step of the ecsTCR_native implementation. Called by \code{morie_ecsTCR}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param y Numeric; combined arithmetically in the body.

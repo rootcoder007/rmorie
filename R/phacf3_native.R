@@ -221,7 +221,6 @@ morie_phacf3_space <- function(features = .PHACF3_FEATURES,
 #'
 #' A step of the phacf3_native implementation. Called by \code{morie_phacf3}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.

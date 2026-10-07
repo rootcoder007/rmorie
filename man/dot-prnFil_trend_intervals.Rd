@@ -24,5 +24,4 @@ A list with \code{estimate}, \code{median}, \code{lower}, \code{upper},
 \description{
 A step of the prnFil_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

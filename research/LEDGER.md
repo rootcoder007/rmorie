@@ -67,6 +67,13 @@ assumptions the dark figure is an interval, not a point.
   co-offence multiplicity (library scan A13). R:
   `morie_dark_figure_hierarchy()`; empirical target: FBI CDE SRS-to-NIBRS
   transition years by agency.
+- Progress 2026-10-02 (Le Cam, library scan C10): `Research.P1LeCam` (P1LeCam.lean). On a
+  finite space, sum min(p, q) = 1 - TV (`sum_min`, `tv_nonneg`, `tv_le_one`) and for every
+  estimator E_p|T - theta_p| + E_q|T - theta_q| >= |theta_p - theta_q| (1 - TV)
+  (`two_point`), so the worse risk is at least |theta_p - theta_q| (1 - TV)/2 (`minimax`):
+  two recording mechanisms close in total variation but with true rates delta apart leave
+  every estimator a worst-case error of delta (1 - TV)/2. R: `morie_two_point_bound()`;
+  Python `two_point_bound()`.
 
 ## P2. Selection in police-recorded data: the record is the treatment
 
@@ -181,6 +188,16 @@ spillover.
   general, so `morie_spillover_ht_variance(form = "both")` reports the
   condition; the path-graph test shows the two forms differing when it
   fails (library scan B7).
+- Progress 2026-10-02 (Cheeger, library scan C14): `Research.P3` in P3Cheeger.lean:
+  the two-valued test vector of a hot-spot set S is degree-orthogonal to constants
+  (`testVec_orth`), with D-norm 1/vol S + 1/vol S^c (`testVec_dnorm`) and Dirichlet
+  form cut(S)(1/vol S + 1/vol S^c)^2 (`testVec_dirichlet`), so its Rayleigh
+  quotient is cut(S)(1/vol S + 1/vol S^c) (`rayleigh_testVec`) <= 2 h(S)
+  (`rayleigh_le_two_conductance`); with lambda_2 defined variationally,
+  lambda_2 <= 2 h(S) for every non-trivial S (`cheeger_easy`). The hard direction
+  lambda_2 >= h^2/2 is not proved. R: `morie_cheeger_bound()` (conductance, test
+  Rayleigh quotient, lambda_2 of the normalised Laplacian, exhaustive h_G on
+  small graphs); the test rebuilds every identity on random weighted graphs.
 
 ## P4. Predictive policing feedback: when does the loop run away?
 
@@ -293,6 +310,19 @@ biased is open.
   types and no period-2 effect, the arm that depletes the high-risk type
   less in period 1 shows a period-2 hazard ratio above one (Hernan &
   Robins Fine Point 17.2; library scan B15). R: `morie_hazard_selection()`.
+- Progress 2026-10-02 (separation, library scan A1): `Research.P5` in P5Separation.lean:
+  with labels as signs the logistic log-likelihood is a sum of strictly
+  increasing, negative terms (`ll1_strictMono`, `ll1_neg`); a completely
+  separating direction d makes loglik(b + t d) > loglik(b) for every b and t > 0
+  (`loglik_lt_shift`), quasi-complete separation likewise
+  (`loglik_lt_shift_quasi`), so no maximum-likelihood estimate exists
+  (`no_mle`, `no_mle_quasi`); the likelihood is bounded by 0 (`loglik_neg`) and
+  tends to 0 along d (`loglik_tendsto_zero`). The Baldus proportionality-review
+  logit that "would not converge" (Weisburd & Britt ch. 1) is this geometry, not
+  a specification problem. Albert-Anderson's converse (overlap => a finite MLE)
+  is not proved. R: `morie_logit_separation()` (exact linear programme through
+  lpSolve, glm heuristic otherwise; reports the direction, the margins and the
+  log-likelihood climbing along the direction).
 
 ## P6. The age-crime curve: invariant law or mixture artefact?
 
@@ -499,11 +529,21 @@ cluster size, the stationary rate and the share of "contagious" events.
   `stationary_rate` (mu/(1-n)), `cluster_size_diverges_of_ge_one`,
   `endogeneity_share` (= n). R: `morie_contagion_branching()`; the test
   simulates Poisson-offspring trees and recovers 1/(1-n).
-- Open: extinction probability as the smallest fixed point of the PGF
+- Open: (extinction done 2026-10-02, below)
   (needs convexity of the PGF; GS Theorem 5.4.5), the Bartlett
   non-identification of contagion vs heterogeneity from the K-function
   (library scan B20), and an application to TPS break-and-enter with
   constant vs KDE background (A17).
+- Progress 2026-10-02 (extinction): `Research.P10` in P10Extinction.lean: the generating
+  function of a finite offspring law is monotone on [0,1] with f(1) = 1 (`pgf_mono`,
+  `pgf_one`); the iterates from 0 are monotone, bounded by every fixed point, and converge
+  to a fixed point that lies below every fixed point in [0,1] (`iter_mono`,
+  `iter_le_fixed`, `iter_tendsto`, `extinction_fixed`, `extinction_le_fixed`): the
+  extinction probability. 1 - f(s) <= m(1-s) gives certain extinction when the mean
+  offspring m < 1 (`one_sub_pgf_le`, `subcritical_extinction_one`); 1 - f(s) >= (1-s) f'(s)
+  and continuity of f' give a fixed point below one when m > 1
+  (`one_sub_pgf_ge`, `supercritical_extinction_lt_one`). R: `morie_contagion_extinction()`;
+  Python `contagion_extinction()`.
 
 
 ## P11. Sentencing effects as intervals: what observational data can say before assumptions
@@ -525,9 +565,24 @@ Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
   (P11Monotone.lean): monotone treatment response gives the contrast the
   sign and the sharp interval [0, P(y=1,z=b) + P(y=0,z=a)] (library scan
   B4). R: `morie_sentence_effect_mtr()`.
-- Open: monotone treatment selection (Manski sec. 9.3), Imbens-Manski confidence sets (B25); application to OTIS/CPADS
+- Open: application to OTIS/CPADS
   custody-vs-community sentences and reconviction.
-
+- Progress 2026-10-02 (Imbens-Manski, library scan B25): `Research.P11` in P11Coverage.lean:
+  on a finite probability space P[H subset of C] <= P[theta in C] whenever theta
+  in H (`region_coverage_le`); for a strictly increasing CDF the coverage
+  F(c + Delta) - F(-c) is strictly increasing in c (`coverage_strictMono_c`), the
+  cutoff solving it is non-increasing in Delta (`im_cutoff_antitone`), lies
+  below the two-sided quantile with F(-c) <= alpha (`im_cutoff_between`), and the
+  two-sided quantile over-covers any region of positive width
+  (`two_sided_overcovers`). Existence of the cutoff is left to root finding. R:
+  `morie_bounds_confidence()`; the test checks the equation, the ordering of the
+  three cutoffs, monotonicity in Delta and the over-coverage on random bounds.
+- Progress 2026-10-02 (MTS, Manski & Pepper 2000): `Research.P11.Pop` in P11Selection.lean:
+  under monotone treatment selection E[y(b)] <= E[y | z=b] (`mts_mean_b_le`) and
+  E[y(a)] >= E[y | z=a] (`mts_mean_a_ge`), so the naive difference of observed means
+  overstates the effect (`mts_ate_le_naive`); with MTR as well the contrast lies in
+  [0, naive difference] (`mtr_mts_bounds`). R: `morie_sentence_effect_mts()`; Python
+  `sentence_effect_mts()`.
 
 ## P12. Ecological inference: when group-level correlations say anything about people
 
@@ -543,6 +598,193 @@ group-level correlation can differ in size and sign from the individual one.
   `morie_ecological_decompose()`; the test builds an exactly-orthogonal
   within part and reproduces Robinson's four-person sign reversal
   (individual +0.6, ecological -1).
-- Open: Duncan-Davis bounds for the individual proportion from group
-  marginals (Manski sec. 5.1; library scan B22), and an application with
+- Open: an application with
   PSDP/CPADS individual records against TPS neighbourhood aggregates.
+- Progress 2026-10-02 (Duncan-Davis, library scan B22): `Research.P12` in P12Bounds.lean:
+  on a finite weighted population the joint mass satisfies p + q - 1 <= pq <= min(p, q)
+  (`pq_ge`, `pq_le_p`, `pq_le_q`), so P(y | x) lies in [max(0,(p+q-1)/p), min(1, q/p)]
+  (`dd_bounds`) with both ends attained by admissible joint tables (`Cells.ends_attained`);
+  the complement rate is pinned by q = p r + (1-p) r' (`dd_complement`); the aggregate rate
+  is the m_g p_g-weighted mean, so its bounds are the weighted means of the neighbourhood
+  bounds (`dd_aggregate_bounds`). R: `morie_ecological_bounds()`; Python
+  `ecological_bounds()`.
+
+## P13. Pooling evaluations: when random effects say more than the sites did
+
+Hot-spots policing and other place-based evaluations are pooled across sites or
+studies (Weisburd & Britt ch. 11). The DerSimonian-Laird random-effects model
+estimates the between-site variance by a truncation, and a reader is told that
+"with homogeneity the random-effects result collapses to the fixed-effect one".
+
+- Estimand: the pooled effect and the between-site variance tau^2; what the
+  truncation does to both in a finite sample.
+- Progress 2026-10-02 (library scan A11): `Research.P13` (P13Meta.lean). On a
+  finite probability space E[max(X,0)] = E[X] + E[max(-X,0)] >= E[X]
+  (`truncation_bias`, `pos_part_ge`), and E[max(X,0)] > 0 as soon as one
+  outcome of positive probability has X > 0 (`pos_part_pos`): under homogeneity
+  E[Q] = k - 1 gives E[X] = 0 for X = (Q - (k-1))/c while Q > k - 1 keeps
+  positive probability, so E[tau2_DL] > 0 (`dl_biased_under_homogeneity`).
+  tau2_DL >= 0 and = 0 iff Q <= k - 1 (`tauDL_nonneg`, `tauDL_eq_zero_iff`).
+  For every tau^2 >= 0 the random-effects variance 1/sum 1/(v_i + tau^2) is at
+  least the fixed-effect variance 1/sum 1/v_i, with equality iff tau^2 = 0
+  (`re_var_ge`, `re_var_eq_iff`): the two methods coincide in a finite sample
+  only when the estimate happens to be truncated. R:
+  `morie_meta_random_effects()` (FE and DL-RE with the truncation flag and the
+  variance ratio) and `morie_meta_dl_bias()` (the size of the bias under
+  homogeneity by simulation on the shared Philox stream).
+- Progress 2026-10-02 (HKSJ): `Research.P13HKSJ` (P13HKSJ.lean). The HKSJ variance
+  q/sum w exceeds the Wald variance exactly when q >= 1 (`hksj_wider_iff`), q = 0 only
+  when every site equals the pooled value (`Q_eq_zero_iff`), and with equal weights the
+  HKSJ variance is the one-sample t variance s^2/k (`hksj_equal_weights`). R:
+  `morie_meta_hksj()` (DerSimonian-Laird or REML by golden-section search); Python
+  `meta_hksj()`.
+- Open: the chapter's hot-spots effects as the worked example.
+
+## P14. Judge-leniency designs: what the instrument identifies
+
+Pretrial detention, incarceration and sentence length are studied with the
+leniency of a randomly assigned judge as an instrument (Kling 2006; Dobbie,
+Goldin & Yang 2018; Aizer & Doyle 2015). The headline number is a Wald ratio;
+what it estimates depends on an assumption about judges that the data cannot
+check.
+
+- Estimand: the mean effect of detention among the defendants whose detention
+  the judge assignment changed (compliers), not the population effect.
+- Progress 2026-10-02: `Research.P14` (P14Instrument.lean). On a finite weighted
+  population with potential treatments d(z) and outcomes y(d): the intention-to-treat
+  contrast equals the compliers' effect mass minus the defiers' (`itt_decomposition`),
+  the first stage equals P(c) - P(d) (`first_stage_decomposition`); with no defiers
+  and P(c) > 0 the Wald ratio is the compliers' mean effect (`late_identification`);
+  with defiers it is (P(c) tau_c - P(d) tau_d)/(P(c) - P(d)) (`wald_with_defiers`), and
+  a two-person witness has every effect positive and Wald = -5 (`defiers_can_flip`).
+  R: `morie_judge_iv_population()` (exact decomposition on a specified population),
+  `morie_judge_iv()` (observed data: Wald, type shares under monotonicity, defier
+  sensitivity); Python `judge_iv_population()`, `judge_iv()`.
+- Progress 2026-10-02 (many judges): `Research.P14Slope` (P14Slope.lean). With judges
+  nested (k detains everyone j detains) the detention rate is monotone
+  (`propensity_mono`), the outcome difference is the effect over the marginal compliers
+  (`outcome_diff`), and |Y_k - Y_j| <= (hi - lo)(P_k - P_j) (`slope_bound`); a steeper
+  pair is not nested (`violation_refutes_monotonicity`), the Frandsen-Lefgren-Leslie test.
+  R: `morie_judge_slope_test()`; Python `judge_slope_test()`.
+- Open: an application to OTIS custody decisions by presiding judge.
+
+## P15. Sentencing disparity: what the "unexplained" part of a decomposition is
+
+Gaps in sentences between groups are routinely split into a part "explained by
+legal factors" and an "unexplained" remainder read as disparity or discrimination
+(Oaxaca 1973; Blinder 1973; the sentencing literature since Mustard 2001).
+
+- Estimand: the gap in mean outcomes and its exact algebraic split, under a
+  stated reference group and a stated coding of the covariates.
+- Progress 2026-10-02: `Research.P15` (P15Decomposition.lean). With group means
+  and least-squares coefficients (each fit through its means), the gap splits
+  exactly as explained-at-B's-prices plus unexplained-at-A's-means (`twofold_B`),
+  the mirror (`twofold_A`), and endowments + coefficients + interaction
+  (`threefold`); the two explained parts differ by exactly the interaction
+  (`reference_dependence`, `explained_eq_iff`); recentring a covariate keeps the
+  unexplained total but moves c (beta_A - beta_B)_j between the intercept's and
+  that covariate's attribution lines (`attribution_shift`). R:
+  `morie_disparity_decomposition()` (both references, the interaction, the
+  per-variable shift); Python `disparity_decomposition()`.
+- Progress 2026-10-02 (DFL): `Research.P15Reweight` (P15Reweight.lean). Reweighting
+  group 0 by psi(x) = m_1(x)/m_0(x) reproduces group 1's covariate distribution exactly
+  under common support (`reweighting_matches`, `reweighted_mass`); with group-0 outcomes a
+  function of x the reweighted mean is group 1's composition at group 0's structure
+  (`counterfactual_outcome`), and the gap splits into structure plus composition
+  (`decomposition`). R: `morie_dfl_reweight()`; Python `dfl_reweight()`.
+- Open: the distributional (recentered-influence-function) versions; an application to
+  OTIS sentence lengths by offence score.
+
+## P16. Court backlog: what a disposition-time statistic already says
+
+Courts report mean time to disposition and filings per year; backlog is argued
+about as if it were a third number.
+
+- Estimand: the time-average number of pending cases over a window.
+- Progress 2026-10-02: `Research.P16` (P16Backlog.lean). On a finite docket inside
+  [0, T] the integral of the pending count is the sum of the case durations
+  (`occupancy_integral`, a Lebesgue integral of indicator sums), so the time-average
+  load equals the filing rate times the mean disposition time (`little`); a reported
+  mean disposition time and filing rate determine the backlog (`little_backlog`),
+  and a backlog target fixes the mean disposition time that achieves it
+  (`little_target`). No probability model. R: `morie_court_backlog()` (reports the
+  censored cases, whose exclusion truncates the mean: a P1-type dark figure);
+  Python `court_backlog()`.
+- Progress 2026-10-02 (censoring): `Research.P16Censoring` (P16Censoring.lean). The true
+  cohort mean is at least (sum t + sum a)/(n + m) (`true_mean_ge`); the lower bound minus the
+  disposed mean is m/(n+m)(abar - tbar) (`lower_bound_sub`, `bias_lower`), so the published
+  mean understates the truth whenever the pending cases are older on average
+  (`disposed_understates`); no upper bound exists without a cap (`no_upper_bound`). R:
+  `morie_backlog_censoring()`; Python `backlog_censoring()`.
+- Open: an application to Ontario Court of Justice disposition statistics.
+
+## P17. Incapacitation: what a sentence year buys
+
+The incapacitation estimate behind every "lock them up" argument (Avi-Itzhak &
+Shinnar 1973; Blumstein, Cohen & Nagin 1978) is a steady-state identity.
+
+- Estimand: the long-run crime rate of an offender who offends at rate lambda while
+  free and serves S after each conviction (probability q per crime), and its gradient.
+- Progress 2026-10-02: `Research.P17` (P17Incapacitation.lean): lambda f/(f + S) at the
+  mean free time f = 1/(lambda q) equals lambda/(1 + lambda q S) (`steady_state_rate`), and
+  the realised rate on any N cycles with proportional crime counts is the same
+  expression at the sample mean free time (`cycle_rate`); the prevented share
+  lambda q S/(1 + lambda q S) is 1 - rate/lambda and strictly below one
+  (`prevented_share_eq`, `prevented_share_lt_one`); the rate is antitone in S and in q
+  (`rate_antitone_in_S`, `rate_antitone_in_q`); one more year prevents
+  lambda^2 q/((1+lambda q S)(1+lambda q(S+1))) > 0 crimes a year (`marginal_prevention_eq`,
+  `marginal_prevention_pos`); a uniform sentence removes the larger share from the
+  higher-rate group (`high_rate_more_prevented`). R: `morie_incapacitation()`; Python
+  `incapacitation()`.
+- Progress 2026-10-02 (replacement, desistance): `Research.P17Replacement`
+  (P17Replacement.lean). Replacement scales the prevented share by 1 - r, monotonically to
+  zero (`replaced_le`, `replaced_antitone`, `replaced_full`); under a non-increasing rate
+  path the crimes prevented by S periods from career age t0 lie between S lam(t0 + S) and
+  S lam(t0) (`prevented_ge_const`, `prevented_le_const`), fall when the sentence is served
+  later (`later_sentence_prevents_less`), and the entry-rate constant-lambda estimate is
+  an upper bound under both corrections (`prevented_net_le`). R:
+  `morie_incapacitation_career()`; Python `incapacitation_career()`.
+- Open: an application to OTIS custody lengths with Ontario reconviction rates.
+
+## P18. Selective labels: evaluating a release rule from the released alone
+
+Bail and pretrial-detention algorithms are judged against judges, but a
+failure (a missed court date, a new arrest) is observed only for defendants
+some judge released (Lakkaraju et al. 2017; Kleinberg et al. 2018).
+
+- Estimand: the failure rate of the set a proposed rule would release.
+- Progress 2026-10-02: `Research.P18` (P18Selective.lean). The reported rate is
+  the rate among the released (`observed_rate_is_conditional`); a rule's set
+  inside a more lenient judge's release set is scored exactly from that judge's
+  outcomes, the contraction argument (`nested_rate_identified`); otherwise the
+  rule's rate lies in [fails(M & R)/w(M), (fails(M & R) + w(M \ R))/w(M)]
+  (`unobserved_bounds`), an interval whose width is the unobserved share
+  (`unobserved_width`) with both ends attained (`unobserved_ends_attained`).
+  R: `morie_selective_labels()`; Python `selective_labels()`.
+- Open: the many-judge contraction with leniency quantiles; an application to
+  Ontario bail outcomes once a released-cohort file is public.
+
+## P19. Regression to the mean at selected hot spots
+
+Crime falls at the places chosen for being high even with no intervention
+(Galton 1886; Campbell & Stanley 1963); the hot-spots trials randomise within
+the selected set for exactly this reason (Sherman & Weisburd 1995).
+
+- Estimand: the change in the second period on the places selected on the first.
+- Progress 2026-10-02: `Research.P19` (P19Regression.lean). On a finite weighted
+  population whose two periods are exchangeable (a weight-preserving bijection swaps
+  them), the selected mass and the cross term reindex (`exchange_mass`,
+  `exchange_cross`), x1 (1{x1>c} - 1{x2>c}) >= c (1{x1>c} - 1{x2>c}) pointwise
+  (`indicator_bound`), hence sum_{x1>c} w (x2 - x1) <= 0 (`selected_change_nonpos`)
+  and the mirror for low-selected places (`low_selected_change_nonneg`). R:
+  `morie_regression_to_mean()` reports the observed, mirror and symmetrised change
+  (the statistic on the data plus its swapped copy, which the theorem makes
+  non-positive); Python `regression_to_mean()`.
+- Progress 2026-10-02 (shrinkage): `Research.P19Shrinkage` (P19Shrinkage.lean). Under
+  the finite noise law (sum w e = 0, sum w theta e = 0) the loss of the shrinkage
+  estimator (1 - B) y + B ybar is (1 - B)^2 S_e + B^2 S_theta (`loss_eq`), minimised at
+  B* = S_e/(S_e + S_theta) (`loss_min`, `bstar_mem`) where it never exceeds the raw loss
+  (`loss_bstar_eq`, `loss_bstar_le_raw`); the predicted fall of a place is B (y - ybar)
+  (`predicted_fall`), the size the sign theorem left open. R: `morie_hotspot_shrinkage()`,
+  `morie_shrinkage_loss()`; Python `hotspot_shrinkage()`, `shrinkage_loss()`.
+- Open: the sampling error of B* itself (S_theta is estimated from the same counts).

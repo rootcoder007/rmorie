@@ -23,5 +23,4 @@ A list with \code{d}, \code{ord}, \code{keep}.
 \description{
 A step of the cnvlfc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -20,7 +20,6 @@ A list with \code{var_theta}, \code{var_Theta}, \code{se_theta},
 \description{
 A step of the sarima_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 large_sample_se(theta = 0.5, Theta = 0.5, n = 5L)

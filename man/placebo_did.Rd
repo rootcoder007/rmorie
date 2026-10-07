@@ -22,3 +22,10 @@ A list mirroring the Python \code{RichResult} payload.
 Runs the estimator entirely inside the pre-period. Zero is
 consistent with parallel trends but does not establish it.
 }
+\examples{
+set.seed(3)
+Y <- matrix(rnorm(40 * 6), 40, 6)  # 40 units, 6 periods
+D <- rep(0:1, each = 20)
+Y[D == 1, 5:6] <- Y[D == 1, 5:6] + 1
+placebo_did(Y, D, event_time = 4)$estimate
+}

@@ -28,6 +28,14 @@ variance still comes out right because influence curves add.
 Formula: \code{psi = sum_s w_s psi_s / sum_s w_s} with
 \code{w_s = n_s / var(IC_s)}, \code{var = 1 / sum_s w_s}.
 }
+\examples{
+set.seed(18)
+n <- 600
+X <- matrix(rnorm(n), n)
+D <- rbinom(n, 1, plogis(X[, 1]))
+y <- 1 + D + X[, 1] + rnorm(n)
+Tmlfed(y, D, X, site = rep(1:3, each = 200))[c("estimate", "se", "site_psi")]
+}
 \references{
 Vo, van der Laan & Petersen (2023), federated targeted
 learning; the pooling rule is the standard influence-curve-weighted

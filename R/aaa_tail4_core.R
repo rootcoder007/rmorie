@@ -19,7 +19,6 @@ NULL
 #' A step of the tail4_core implementation. Called by \code{Beggtest}, \code{Boxpierce},
 #' \code{Dprime} and 11 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
@@ -34,7 +33,6 @@ NULL
 #'
 #' A step of the tail4_core implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
@@ -57,7 +55,6 @@ NULL
 #'
 #' A step of the tail4_core implementation. Called by \code{Pettitt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{rank}.
 #' @return The value of \code{rank}.
@@ -72,7 +69,6 @@ NULL
 #'
 #' A step of the tail4_core implementation. Called by \code{.t4_kendalltaub}, \code{Mktest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{table}.
 #' @return A vector, from \code{as.numeric}.
@@ -110,7 +106,6 @@ NULL
 #'
 #' A step of the tail4_core implementation. Called by \code{Pptest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u A vector; its length is taken and its elements indexed.
 #' @param lag A count; the body uses it as \code{seq_len(...)}.
@@ -136,7 +131,6 @@ NULL
 #' A step of the tail4_core implementation. Called by \code{.t4_poly4},
 #' \code{.t4_wls_int}, \code{Lctest} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{\%*\%}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -161,7 +155,6 @@ NULL
 #'
 #' A step of the tail4_core implementation. Called by \code{.t4_kendalltaub}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param y A vector; indexed elementwise.
@@ -223,7 +216,6 @@ NULL
 #' A step of the tail4_core implementation. Called by \code{Avgpathlen}, \code{Beggtest},
 #' \code{Boxpierce} and 13 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ... Passed through.
 #' @return The value of \code{out}, as built in the body.

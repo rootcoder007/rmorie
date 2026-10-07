@@ -34,6 +34,7 @@ the curves invalidates the p-value.
 morie_tarone_ware(c(1, 2, 3, 4, 5, 6), rep(1, 6), c(0, 1, 0, 1, 0, 1))$statistic
 }
 \references{
-Tarone, R. E. & Ware, J. (1977), \emph{Biometrika} 64(1),
+Tarone, R. E. & Ware, J. (1977). On distribution-free tests
+for equality of survival distributions. \emph{Biometrika} 64(1),
 156-160. Weights cross-checked against \code{comp.ten} in survMisc.
 }

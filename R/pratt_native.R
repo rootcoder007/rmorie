@@ -27,7 +27,6 @@
 #' A step of the pratt_native implementation. Called by \code{.pratt_attention},
 #' \code{.pratt_document_vector}, \code{.pratt_sentence_vector}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -52,7 +51,6 @@
 #' A step of the pratt_native implementation. Called by \code{.pratt_attention},
 #' \code{morie_pratt}, \code{morie_pratt_attention_entropy}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -70,7 +68,6 @@
 #' A step of the pratt_native implementation. Called by \code{.pratt_document_vector},
 #' \code{.pratt_sentence_vector}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Passed to \code{.pratt_mat}.
 #' @param W A matrix; passed to \code{t}.
@@ -103,7 +100,6 @@
 #'
 #' A step of the pratt_native implementation. Called by \code{morie_pratt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H_words Passed to \code{.pratt_attention}.
 #' @param W Passed to \code{.pratt_attention}.
@@ -124,7 +120,6 @@
 #'
 #' A step of the pratt_native implementation. Called by \code{morie_pratt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H_sentences Passed to \code{.pratt_attention}.
 #' @param W Passed to \code{.pratt_attention}.
@@ -145,7 +140,6 @@
 #'
 #' A step of the pratt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param word_states See Usage.
 #' @param Ww Passed to \code{.pratt_sentence_vector}.
@@ -202,7 +196,6 @@ morie_pratt_classify <- morie_pratt
 #'
 #' A step of the pratt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Passed to \code{.pratt_vec}.
 #' @return A list with \code{entropy}, \code{max_entropy}, \code{concentration}.
@@ -230,7 +223,6 @@ morie_pratt_attention_entropy <- function(alpha) {
 #'
 #' A step of the pratt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

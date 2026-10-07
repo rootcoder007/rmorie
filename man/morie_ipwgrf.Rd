@@ -50,6 +50,5 @@ A list with \code{estimate}, \code{ate}, \code{se}, \code{ci}, \code{scores},
 \description{
 A step of the ipwgrf_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

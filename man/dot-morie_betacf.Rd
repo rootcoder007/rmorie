@@ -19,5 +19,4 @@ The value of \code{h}, as built in the body.
 \description{
 A step of the dist_native implementation. Called by \code{.morie_betainc}.
 See the file header for the source the module follows.
-source it follows.
 }

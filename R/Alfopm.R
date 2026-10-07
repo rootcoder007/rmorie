@@ -16,6 +16,11 @@
 #' @return A list with the pair update \code{z}, the flattened outer product
 #'   means \code{o}, \code{estimate}, \code{n} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 10
+#' @examples
+#' set.seed(6)
+#' m <- array(rnorm(2 * 3 * 4), c(2, 3, 4))   # 2 sequences, 3 residues, cm = 4
+#' r <- Alfopm(m, wa = matrix(rnorm(8), 2, 4), wb = matrix(rnorm(8), 2, 4), wo = matrix(rnorm(12), 3, 4))
+#' dim(r$z)
 #' @export
 Alfopm <- function(m, wa, wb, wo, layernorm = TRUE) {
   s <- dim(m)[1]

@@ -19,5 +19,4 @@ A list with \code{forward}, \code{backward}, \code{jacobian_is_identity}, \code{
 \description{
 A step of the vqgenc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

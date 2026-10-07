@@ -9,7 +9,8 @@ morie_fetch_ckan(
   limit = Inf,
   db_path = NULL,
   resource_id = NULL,
-  con = NULL
+  con = NULL,
+  portal = NULL
 )
 }
 \arguments{
@@ -27,6 +28,9 @@ directly, so any catalogued dataset can be fetched without a built-in
 database; \code{dataset_key} then only labels the cache table.}
 
 \item{con}{Optional pre-opened DBI connection (overrides \code{db_path}).}
+
+\item{portal}{Optional CKAN portal base URL (e.g. \code{"https://data.ontario.ca"}); the
+default is open.canada.ca. The catalog gives it for resources on another portal.}
 }
 \value{
 A data.frame.
@@ -36,10 +40,10 @@ Fetch data from the CKAN API and cache it
 }
 \examples{
 \donttest{
-# Requires network access. Fetches the first 5000 rows of the
+# Requires network access. Fetches the first 200 rows of the
 # Canadian Postsecondary Alcohol and Drug Use Survey from the
 # Government of Canada CKAN datastore:
-cpads <- morie_fetch_ckan(dataset_key = "cpads", limit = 5000L)
+cpads <- morie_fetch_ckan(dataset_key = "cpads", limit = 200L)
 nrow(cpads)
 }
 }

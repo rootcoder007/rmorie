@@ -18,7 +18,6 @@ The value of \code{qnorm}.
 A step of the helpers_s03 implementation. Called by \code{.ot_directions},
 \code{.vitdraw}, \code{MedCI} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .s03normdraws(n = 3L)

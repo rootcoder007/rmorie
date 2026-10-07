@@ -22,6 +22,5 @@ A list with \code{forecast}, \code{residual}, \code{trace}.
 A step of the nbeats_native implementation. Called by \code{.ngnest_nbeats_stack},
 \code{nbeats_forecast}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

@@ -593,14 +593,12 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
     )
   }
   shipped <- read_one(shipped_path)
-  user <- if (!is.null(user_cache_dir)) {
-    read_one(file.path(
-      path.expand(user_cache_dir),
-      "canonical_overrides.csv"
-    ))
-  } else {
-    NULL
-  }
+  # corrections recorded with morie_siu_record_correction() persist in the user data directory;
+  # a cache_dir's own file (older recordings) is read after them
+  user <- rbind(
+    read_one(file.path(.siu_corrections_dir(), "canonical_overrides.csv")),
+    if (!is.null(user_cache_dir)) read_one(file.path(path.expand(user_cache_dir), "canonical_overrides.csv"))
+  )
   if (is.null(shipped) && is.null(user)) {
     return(NULL)
   }
@@ -608,13 +606,15 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
     shipped[, c("case_number", "field", "verified_value"), drop = FALSE],
     user[, c("case_number", "field", "verified_value"), drop = FALSE]
   )
-  # User overrides win on conflict: rev() so most-recent insertions
-  # land at the top of unique().
-  out <- out[!duplicated(rev(out)[, c("case_number", "field")]), ,
-    drop = FALSE
-  ]
+  # User overrides win on conflict: the LAST row of each (case, field) is kept (rev() on a
+  # data frame reverses its columns, not its rows, so the shipped value used to win)
+  out <- out[!duplicated(out[, c("case_number", "field")], fromLast = TRUE), , drop = FALSE]
   out
 }
+
+#' Internal helper: where recorded SIU corrections persist (the user data directory, not tempdir())
+#' @noRd
+.siu_corrections_dir <- function() file.path(tools::R_user_dir("morie", which = "data"), "siu")
 
 # Internal: apply a canonical-overrides table to a parsed SIU data
 # frame. Each row of `overrides` is (case_number, field, verified_value);
@@ -642,10 +642,11 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
 
 #' Record a verified correction to the SIU parser's output
 #'
-#' Saves a (case_number, field, verified_value) tuple to a local
-#' overrides CSV at \code{<cache_dir>/canonical_overrides.csv}. Every
-#' subsequent \code{morie_fetch_siu()} on that \code{cache_dir} will
-#' overlay these corrections onto the regex-parsed output. The shipped
+#' Saves a (case_number, field, verified_value) tuple to an overrides CSV,
+#' \code{canonical_overrides.csv}, in the user data directory
+#' (\code{tools::R_user_dir("morie", "data")}, sub-directory \code{siu}), so
+#' it outlives the R session. Every later \code{morie_fetch_siu()} overlays
+#' these corrections onto the regex-parsed output. The shipped
 #' \code{inst/extdata/siu_canonical_overrides.csv.gz} carries
 #' maintainer-confirmed corrections; this function lets users add
 #' their own without touching the package source.
@@ -661,7 +662,8 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
 #'   cached HTML (see \code{morie_siu_audit_case()}).
 #' @param note Optional one-line note describing the basis for the
 #'   correction (HTML excerpt, LLM verdict, etc.).
-#' @param cache_dir Directory holding the harvester's SIU.csv.
+#' @param cache_dir Directory for the overrides CSV (default: the user data
+#'   directory, which persists between sessions).
 #' @return Invisibly, the path to the updated overrides CSV.
 #' @examples
 #' \donttest{
@@ -680,13 +682,16 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
 #' @export
 morie_siu_record_correction <- function(case_number, field,
                                         verified_value, note = "",
-                                        cache_dir = file.path(tempdir(), "morie", "siu")) {
+                                        cache_dir = .siu_corrections_dir()) {
   stopifnot(
     is.character(case_number), length(case_number) == 1L,
     is.character(field), length(field) == 1L,
-    is.character(verified_value), length(verified_value) == 1L,
-    field %in% .siu_field_list()
+    is.character(verified_value), length(verified_value) == 1L
   )
+  if (!field %in% .siu_field_list()) {
+    stop(sprintf("'%s' is not an SIU field; the fields are: %s", field,
+                 paste(.siu_field_list(), collapse = ", ")), call. = FALSE)
+  }
   cache_dir <- path.expand(cache_dir)
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   path <- file.path(cache_dir, "canonical_overrides.csv")
@@ -796,6 +801,13 @@ morie_siu_refresh_manifest <- function(
   # max(live-discovery + margin, 6000) -- the live max currently sits
   # around drid ~5100, and 6000 gives headroom for ~one year of new
   # reports at the SIU's historical publish cadence.
+  # checked before any request: a bad path would otherwise only fail after the 25-minute crawl
+  if (!is.null(out_path) && (!is.character(out_path) || length(out_path) != 1L ||
+      is.na(out_path) || !nzchar(out_path) || !grepl("[.]csv[.]gz$", out_path) ||
+      !dir.exists(dirname(out_path)))) {
+    stop("`out_path` must be NULL or one .csv.gz file path in an existing directory",
+         call. = FALSE)
+  }
   if (is.null(max_drid)) max_drid <- max(.siu_discover_max_drid(), 6000L)
   min_drid <- as.integer(min_drid)
   max_drid <- as.integer(max_drid)
@@ -912,8 +924,8 @@ morie_siu_refresh_manifest <- function(
 #'   \code{report_html}, \code{news_html}, \code{report_text}
 #'   (HTML-stripped plain text of the report) and \code{news_text}.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' a <- morie_siu_audit_case(
@@ -921,8 +933,8 @@ morie_siu_refresh_manifest <- function(
 #'   cache_dir = file.path(tempdir(), "morie", "siu")
 #' )
 #' cat(substr(a$report_text, 1, 1000), "\n")
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_audit_case <- function(case_number,
                                  cache_dir = file.path(tempdir(), "morie", "siu"),
@@ -1013,10 +1025,26 @@ morie_siu_audit_case <- function(case_number,
 # linear single-pass approach (no std::regex backtracking risk).
 #' Internal helper: Siu Html To Text
 #' @noRd
+.siu_decode_numeric_entities <- function(h) {
+  m <- gregexpr("&#(x[0-9a-fA-F]+|[0-9]+);", h, perl = TRUE)
+  regmatches(h, m) <- lapply(regmatches(h, m), function(hits) {
+    vapply(hits, function(e) {
+      body <- sub("^&#(.*);$", "\\1", e)
+      code <- if (startsWith(tolower(body), "x")) strtoi(substring(body, 2L), 16L) else as.integer(body)
+      if (is.na(code) || code <= 0L) "" else intToUtf8(code)
+    }, character(1L), USE.NAMES = FALSE)
+  })
+  h
+}
+
 .siu_html_to_text <- function(h) {
   if (!nzchar(h)) {
     return("")
   }
+  # Page bytes read in a C or Latin-1 session are not marked UTF-8; mixing them with the UTF-8
+  # entity replacements below then fails ("input string 1 is invalid UTF-8"). Mark valid UTF-8
+  # as such and read anything else as Latin-1.
+  h <- if (validUTF8(h)) `Encoding<-`(h, "UTF-8") else iconv(h, "latin1", "UTF-8", sub = "")
   # Drop <script>...</script> and <style>...</style> chunks first.
   h <- gsub("(?is)<script\\b[^>]*>.*?</script>", " ", h, perl = TRUE)
   h <- gsub("(?is)<style\\b[^>]*>.*?</style>", " ", h, perl = TRUE)
@@ -1027,14 +1055,15 @@ morie_siu_audit_case <- function(case_number,
     "&apos;" = "'", "&#39;" = "'", "&nbsp;" = " ",
     "&rsquo;" = "'", "&lsquo;" = "'", "&ldquo;" = "\"",
     "&rdquo;" = "\"", "&ndash;" = "-", "&mdash;" = "-",
-    "&hellip;" = "..."
+    "&hellip;" = "...", "&eacute;" = "\u00e9", "&egrave;" = "\u00e8", "&ecirc;" = "\u00ea",
+    "&agrave;" = "\u00e0", "&acirc;" = "\u00e2", "&ccedil;" = "\u00e7", "&icirc;" = "\u00ee",
+    "&ocirc;" = "\u00f4", "&ucirc;" = "\u00fb", "&ugrave;" = "\u00f9", "&euml;" = "\u00eb",
+    "&iuml;" = "\u00ef", "&uuml;" = "\u00fc", "&ouml;" = "\u00f6", "&auml;" = "\u00e4",
+    "&copy;" = "\u00a9", "&reg;" = "\u00ae"
   )
   for (k in names(ents)) h <- gsub(k, ents[[k]], h, fixed = TRUE)
-  # Numeric entities (decimal + hex).
-  h <- gsub("&#([0-9]+);", "\\1",
-    h,
-    perl = TRUE
-  ) # leaves digits; cheap fallback
+  # Numeric entities (decimal and hex) become their character: &#039; is an apostrophe
+  h <- .siu_decode_numeric_entities(h)
   h <- gsub("\\s+", " ", h, perl = TRUE)
   trimws(h)
 }
@@ -1079,8 +1108,8 @@ morie_siu_audit_case <- function(case_number,
 #'   parser and external disagree, the \code{html_excerpt} is the
 #'   tie-breaker.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' # Caller supplies their own external table; nothing about the
@@ -1093,8 +1122,8 @@ morie_siu_audit_case <- function(case_number,
 #'   external_case_col = "case_id"
 #' )
 #' subset(cmp, !agree)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_compare <- function(case_number, external,
                               field_map = NULL,
@@ -1206,7 +1235,8 @@ morie_siu_compare <- function(case_number, external,
 #
 # Providers are configured via env vars so secrets never appear in
 # the package or in chat:
-#   GOOGLE_API_KEY     -> Gemini (default; cheapest)
+#   GEMINI_API_KEY (or GOOGLE_API_KEY) -> Gemini
+#   the stored hosted key (morie_llm_login) -> llm.rmorie.com ("hosted")
 #   ANTHROPIC_API_KEY  -> Claude
 # Both functions hard-fail with a clear message if the relevant env
 # var is missing.
@@ -1447,6 +1477,28 @@ morie_siu_compare <- function(case_number, external,
         x
       }
     ),
+    hosted = list(
+      # the hosted MORIE tier (llm.rmorie.com), with the key morie_llm_login() stored
+      env_required = "MORIE_HOSTED_KEY_OR_LOGIN",
+      build = function(env, prompt) {
+        base <- sub("/+$", "", .morie_llm_hosted_base())
+        list(
+          url = paste0(base, "/v1/chat/completions"),
+          headers = list("authorization" = paste("Bearer", env[["MORIE_HOSTED_KEY_OR_LOGIN"]]),
+                         "content-type" = "application/json"),
+          body = list(
+            model = Sys.getenv("MORIE_HOSTED_MODEL", unset = attr(morie_llm_hosted_models(), "default") %||% "default"),
+            temperature = 0,
+            messages = list(list(role = "user", content = prompt))
+          )
+        )
+      },
+      extract = function(resp) {
+        x <- resp$choices[[1L]]$message$content
+        if (is.null(x)) stop("the hosted tier returned empty text", call. = FALSE)
+        x
+      }
+    ),
     openai_compatible = list(
       # ANY OpenAI-compatible endpoint: Groq, Together, Mistral,
       # DeepSeek, xAI, LM Studio, vLLM, llama.cpp server, ...
@@ -1498,15 +1550,6 @@ morie_siu_compare <- function(case_number, external,
 #' @noRd
 .siu_llm_call_one <- function(model, prompt,
                               timeout_s = .siu_llm_default_timeout()) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop("LLM helpers require the 'httr2' package: ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("LLM helpers require the 'jsonlite' package", call. = FALSE)
-  }
   providers <- .siu_llm_providers()
   if (!model %in% names(providers)) {
     stop("Unknown LLM model: '", model, "'. Available: ",
@@ -1521,10 +1564,18 @@ morie_siu_compare <- function(case_number, external,
   if (p$env_required == "OLLAMA_HOST_OR_DEFAULT") {
     env_val <- Sys.getenv("OLLAMA_HOST", unset = "")
     if (!nzchar(env_val)) env_val <- "http://localhost:11434"
+  } else if (p$env_required == "MORIE_HOSTED_KEY_OR_LOGIN") {
+    env_val <- .morie_llm_hosted_key() %||% ""
+    if (!nzchar(env_val)) {
+      stop("not logged in to the hosted MORIE tier; run morie_llm_login() or morie_llm_login(email = \"you@example.com\") (shell: `rmorie login [--email ...]`) first, ",
+           "or use model = \"ollama\" with a local Ollama daemon.", call. = FALSE)
+    }
   } else {
     env_val <- Sys.getenv(p$env_required, unset = "")
+    if (!nzchar(env_val) && p$env_required == "GOOGLE_API_KEY") env_val <- Sys.getenv("GEMINI_API_KEY", unset = "")
     if (!nzchar(env_val)) {
-      stop("Env var '", p$env_required, "' is not set; cannot call ",
+      stop("Env var ", if (p$env_required == "GOOGLE_API_KEY") "'GEMINI_API_KEY' (or 'GOOGLE_API_KEY')" else paste0("'", p$env_required, "'"),
+        " is not set; cannot call ",
         model, ". Set it, or use model = \"ollama\" with a local ",
         "Ollama daemon for a free zero-config alternative.",
         call. = FALSE
@@ -1533,14 +1584,24 @@ morie_siu_compare <- function(case_number, external,
   }
   env <- setNames(list(env_val), p$env_required)
   req_spec <- p$build(env, prompt)
-  req <- httr2::request(req_spec$url)
-  if (!is.null(req_spec$headers)) {
-    req <- httr2::req_headers(req, !!!req_spec$headers)
+  hdr <- if (is.null(req_spec$headers)) character() else paste0(names(req_spec$headers), ": ", unlist(req_spec$headers))
+  resp <- .morie_http_post_with_status(req_spec$url, as.character(.morie_to_json(req_spec$body, auto_unbox = TRUE)),
+                                       "application/json", timeout_s = as.integer(timeout_s), headers = hdr)
+  if (resp$status_code == 0L) {
+    stop(sprintf("%s could not be reached (no network, or a proxy refused the connection)", model), call. = FALSE)
   }
-  req <- httr2::req_body_json(req, req_spec$body)
-  req <- httr2::req_timeout(req, timeout_s)
-  resp <- httr2::req_perform(req)
-  parsed <- httr2::resp_body_json(resp)
+  if (resp$status_code >= 400L) {
+    err <- tryCatch(.morie_from_json(resp$body, simplifyVector = FALSE)$error, error = function(e) NULL)
+    msg <- if (is.list(err)) err$message %||% "" else as.character(err %||% "")
+    if (!nzchar(paste(msg, collapse = ""))) msg <- substr(resp$body, 1L, 200L)
+    key <- if (identical(p$env_required, "GOOGLE_API_KEY")) "GEMINI_API_KEY (or GOOGLE_API_KEY)" else p$env_required
+    stop(if (resp$status_code %in% c(400L, 401L, 403L) && length(key) && nzchar(key)) {
+      sprintf("%s rejected %s (HTTP %d: %s)", model, key, resp$status_code, msg)
+    } else {
+      sprintf("%s answered HTTP %d: %s", model, resp$status_code, msg)
+    }, call. = FALSE)
+  }
+  parsed <- .morie_from_json(resp$body, simplifyVector = FALSE)
   p$extract(parsed)
 }
 
@@ -1590,6 +1651,7 @@ morie_siu_compare <- function(case_number, external,
   }
   stop("All LLM providers failed:\n  ",
     paste(errs, collapse = "\n  "),
+    "\nno provider in the chain (", paste(model, collapse = ", "), ") answered; the lines above say why for each",
     call. = FALSE
   )
 }
@@ -1743,7 +1805,8 @@ morie_siu_compare <- function(case_number, external,
 #' Credentials are read from environment variables only -- never
 #' hard-coded, never passed as function arguments -- so secrets do
 #' not leak into call traces, logs, or scripts. Set
-#' \code{GOOGLE_API_KEY} for Gemini, \code{ANTHROPIC_API_KEY} for
+#' \code{GEMINI_API_KEY} (or \code{GOOGLE_API_KEY}) for Gemini, the key stored by
+#' \code{\link{morie_llm_login}} for \code{"hosted"}, \code{ANTHROPIC_API_KEY} for
 #' Claude, or \code{OLLAMA_HOST} (e.g.
 #' \code{"http://localhost:11434"} or an OpenAI-compatible base URL) plus
 #' optionally \code{OLLAMA_MODEL} (else the first model the server serves) for
@@ -1784,7 +1847,7 @@ morie_siu_compare <- function(case_number, external,
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_llm_extract <- function(case_number,
-                                  model = c("ollama", "gemini"),
+                                  model = c("ollama", "hosted", "gemini"),
                                   cache_dir = file.path(tempdir(), "morie", "siu"),
                                   max_html_chars = 80000L,
                                   mock_response_text = NULL) {
@@ -1905,14 +1968,14 @@ morie_siu_llm_extract <- function(case_number,
 #'   \code{"agree"} / \code{"disagree"} / \code{"unclear"}), and
 #'   \code{reason} (a short sentence pointing to the report passage).
 #' @examples
-#' \dontshow{if (morie_has("ollama", "rmoriedata")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("ollama", "rmoriedata")) withAutoprint({
 #' # Local Ollama is the default provider (free, no key); the report
 #' # HTML is fetched live, so try() keeps offline checks graceful.
 #' a <- try(morie_siu_anomaly_check("17-OVI-201", model = "ollama"))
 #' if (!inherits(a, "try-error")) subset(a, verdict == "disagree")
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_anomaly_check <- function(case_number,
                                     model = c("ollama",
@@ -2112,18 +2175,24 @@ morie_siu_sanity_check <- function(df) {
     bad <- nzchar(v) & !grepl("^[0-9]+$", v)
     ifelse(bad, paste0(col, ":not-int"), "")
   }
-  check_yn <- function(v, col) {
-    bad <- nzchar(v) & !v %in% c("Yes", "No")
+  check_yn <- function(v, col, free_text = FALSE) {
+    # the reviewed corpus writes these as yes/no, true/false, y/n or "no charges"; the director's
+    # finding (free_text) may be the reasoning itself, so there only a short stray token is an issue
+    tok <- tolower(trimws(v))
+    ok <- tok %in% c("yes", "no", "true", "false", "y", "n", "na") | grepl("^(no |)charges( recommended| laid)?$", tok)
+    bad <- nzchar(v) & !ok & (!free_text | nchar(tok) <= 20L)
     ifelse(bad, paste0(col, ":not-Yes/No"), "")
   }
   check_gender <- function(v) {
-    bad <- nzchar(v) & !v %in% c("Male", "Female", "Non-binary")
+    # any case, and compound values ("female (Complainant #1) and male (Complainant #2)") are fine
+    bad <- nzchar(v) & !grepl("male|female|man|woman|boy|girl|non-?binary|trans|homme|femme|gar\u00e7on|fille",
+                              v, ignore.case = TRUE)
     ifelse(bad, "sex_gender_affected:bad-value", "")
   }
   check_officer_count <- function(v) {
-    # Should be "N SO" or "N SO M WO" or "N WO"
+    # "N SO", "N SO M WO", "N WO", or the reviewed corpus's bare count (or NA)
     bad <- nzchar(v) &
-      !grepl("^[0-9]+ (SO|WO)( [0-9]+ WO)?$", v)
+      !grepl("^[0-9]+ (SO|WO)( [0-9]+ WO)?$|^[0-9]+$|^NA$", v)
     ifelse(bad, "number_of_officers_involved:bad-format", "")
   }
   check_nonempty <- function(v, col) {
@@ -2175,14 +2244,14 @@ morie_siu_sanity_check <- function(df) {
     check_yn(df$charges_recommended, "charges_recommended"),
     check_yn(
       df$directors_decision_reasonable,
-      "directors_decision_reasonable"
+      "directors_decision_reasonable",
+      free_text = TRUE
     ),
     check_gender(df$sex_gender_affected),
     check_nonempty(df$police_service, "police_service"),
     check_nonempty(df$narrative_summary, "narrative_summary"),
     check_short(df$narrative_summary, "narrative_summary", 100L),
     check_chrome(df$narrative_summary, "narrative_summary"),
-    check_chrome(df$supplemental_materials, "supplemental_materials"),
     check_chrome(
       df$mental_health_or_race_indications,
       "mental_health_or_race_indications"
@@ -2527,7 +2596,8 @@ morie_siu_translate_fr_to_en <- function(
 #' @param progress Logical; print a per-case progress line.
 #' @return A data frame with columns \code{field}, \code{n_audited},
 #'   \code{n_agree}, \code{n_disagree}, \code{n_unclear},
-#'   \code{agree_rate}. Sorted ascending by \code{agree_rate} so the
+#'   \code{agree_rate} (agreements over judged verdicts; \code{NA} when every
+#'   verdict was unclear). Sorted ascending by \code{agree_rate} so the
 #'   most-broken fields land at the top. The \code{"examples"}
 #'   attribute holds nested data frames of flagged cases per field.
 #' @examples
@@ -2544,7 +2614,7 @@ morie_siu_translate_fr_to_en <- function(
 #' attr(audit, "examples")[[audit$field[1L]]]
 #' \dontshow{\}) # examplesIf}
 #' @export
-morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "gemini"),
+morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "hosted", "gemini"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),
                                     max_html_chars = 80000L,
                                     max_examples_per_field = 5L,
@@ -2622,9 +2692,13 @@ morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "gemini"),
     n_unclear = vapply(per_field, function(x) x$unclear, integer(1)),
     stringsAsFactors = FALSE
   )
-  out$agree_rate <- ifelse(out$n_audited > 0L,
-    out$n_agree / out$n_audited, NA_real_
-  )
+  # judged = agree + disagree: an "unclear" verdict (no model reachable, or no answer) is not a
+  # disagreement, and with nothing judged the rate is unknown, not 0
+  judged <- out$n_agree + out$n_disagree
+  out$agree_rate <- ifelse(judged > 0L, out$n_agree / judged, NA_real_)
+  if (nrow(out) && all(judged == 0L)) {
+    message("siu audit: no field was judged (every verdict 'unclear'): is a model reachable? (rmorie doctor)")
+  }
   out <- out[order(out$agree_rate, out$field), , drop = FALSE]
   rownames(out) <- NULL
   attr(out, "examples") <- setNames(

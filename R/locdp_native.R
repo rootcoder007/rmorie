@@ -116,7 +116,6 @@ morie_localdp  <- morie_locdp
 #'
 #' A step of the locdp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

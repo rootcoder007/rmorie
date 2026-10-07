@@ -18,5 +18,4 @@ The value of \code{.pq_emit}.
 A step of the parquet implementation. Called by \code{.pq_wbinary},
 \code{.pq_wlisthdr}, \code{.pq_wzigzag}.
 See the file header for the source the module follows.
-source it follows.
 }

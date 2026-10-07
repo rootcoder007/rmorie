@@ -22,7 +22,6 @@ of the cepstrum is anticausal -- which is why liftering windows for
 homomorphic deconvolution are two-sided.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-LogMaxPh(V)
+LogMaxPh(beta = 0.5, terms = 10, z = 0.3)
 }
 \keyword{internal}

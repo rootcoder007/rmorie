@@ -24,7 +24,6 @@ A list with \code{P}, \code{lambda}.
 \description{
 A step of the hierF_native implementation. Called by \code{mint_reconcile}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

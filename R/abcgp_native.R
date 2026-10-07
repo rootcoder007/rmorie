@@ -32,7 +32,6 @@
 #' A step of the abcgp_native implementation. Called by
 #' \code{.abcgp.gabc_log_likelihood}, \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values A vector; indexed elementwise.
 #' @return A numeric value.
@@ -57,7 +56,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.sobol_sequence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dim A count; the body uses it as \code{seq_len(...)}.
 #' @param bits A count; the body uses it as \code{seq_len(...)}.
@@ -93,7 +91,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.design_from_prior}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @param dim A count; the body uses it as \code{seq_len(...)}.
@@ -138,7 +135,6 @@
 #' \code{.abcgp.gabc_log_likelihood}, \code{.abcgp.mw_sampler},
 #' \code{.abcgp.synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{summary}.
 #' @param summary Optional; may be \code{NULL}. Passed to \code{is.null}.
@@ -154,7 +150,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.draw_mean},
 #' \code{.abcgp.gp_fit}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A matrix; indexed by row and column.
 #' @param jitter Defaults to \code{1e-12}.
@@ -184,7 +179,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
 #' \code{.abcgp.gp_predict}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -209,7 +203,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler},
 #' \code{.abcgp.synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param mu Numeric; combined arithmetically in the body.
@@ -231,7 +224,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
 #' \code{.abcgp.gp_predict}, \code{.abcgp.profile_nll}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -257,7 +249,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
@@ -275,7 +266,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
 #' \code{.abcgp.mle_lengthscale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nugget Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
@@ -296,7 +286,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mle_lengthscale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y Numeric; combined arithmetically in the body.
@@ -345,7 +334,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Passed to \code{.abcgp.profile_nll}.
@@ -387,7 +375,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param design A matrix; passed to \code{as.matrix}.
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
@@ -451,7 +438,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.implausible},
 #' \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$Ainv_r}, \code{$beta}, \code{$chol},
 #' \code{$design}, \code{$dim}, \code{$H}, \code{$HtAinvH_chol}, \code{$kernel},
@@ -483,7 +469,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$values} from it.
 #' @param theta Passed to \code{.abcgp.gp_predict}.
@@ -500,7 +485,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param prior_ppf A vector; its length is taken and its elements indexed.
@@ -547,7 +531,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Accepted by the signature and not used anywhere in the body.
 #' @param obs Passed to \code{.abcgp.summarise}.
@@ -607,7 +590,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param draws Iterated over elementwise, with \code{lapply}.
 #' @param obs Passed to \code{.abcgp.summarise}.
@@ -637,7 +619,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Passed to \code{.abcgp.gabc_log_likelihood}.
 #' @param obs Passed to \code{.abcgp.gabc_log_likelihood}.
@@ -711,7 +692,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_prior Accepted by the signature and not used anywhere in the body.
 #' @param theta Passed to \code{log_prior}.
@@ -731,7 +711,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alphas A vector; its length is taken.
 #' @param tau Passed to \code{<=}.
@@ -757,7 +736,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -776,7 +754,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu A vector; its length is taken.
 #' @param cov Numeric; combined arithmetically in the body.
@@ -796,7 +773,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Passed to \code{.abcgp.mw_sampler}.
 #' @param obs Passed to \code{.abcgp.mw_sampler}.
@@ -823,7 +799,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Passed to \code{.abcgp.mw_sampler}.
 #' @param obs Passed to \code{.abcgp.mw_sampler}.
@@ -857,7 +832,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gps_abc},
 #' \code{.abcgp.synthetic_abc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Accepted by the signature and not used anywhere in the body.
 #' @param obs Passed to \code{.abcgp.synthetic_log_likelihood}.
@@ -1082,6 +1056,13 @@ morie_abcgp <- function(sim, obs, X_grid = NULL, kernel = "sqexp",
 #' @param delta_s See Usage.
 #' @param n_alpha See Usage.
 #' @param seed See Usage.
+#' @examples
+#' \donttest{
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' obs <- c(0.5, 1, 1.5)
+#' fit <- abc_gp_emulator(sim, obs, prior_ppf = list(-2, 4), n_waves = 2L, n_design = 12L, n_sim = 5L)
+#' names(fit)
+#' }
 #' @export
 #' @aliases abcgpemulator
 abc_gp_emulator <- function(sim, obs, X_grid = NULL, kernel = "sqexp",
@@ -1160,6 +1141,8 @@ abc_gp_emulator <- function(sim, obs, X_grid = NULL, kernel = "sqexp",
 #' @param skip Drop that many leading Sobol points (default 1, so the
 #'   origin is not sent to the prior corner).
 #' @return Numeric matrix with \code{n} rows.
+#' @examples
+#' design_from_prior(5, list(c(0, -1), c(1, 1)))
 #' @export
 design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
   if (is.list(prior_ppf) && length(prior_ppf) == 2L &&
@@ -1188,7 +1171,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_prior Accepted by the signature and not used anywhere in the body.
 #' @param theta Passed to \code{log_prior}.
@@ -1210,7 +1192,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{gp_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nugget Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
@@ -1230,7 +1211,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{gp_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
@@ -1248,7 +1228,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_draw_mean},
 #' \code{.gp_mvn_logpdf}, \code{.gp_profile_nll} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A matrix; indexed by row and column.
 #' @param jitter Defaults to \code{1e-12}.
@@ -1281,7 +1260,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_mvn_logpdf},
 #' \code{.gp_profile_nll}, \code{gp_fit} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -1308,7 +1286,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_profile_nll},
 #' \code{gp_fit}, \code{gp_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -1333,7 +1310,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu A vector; its length is taken.
 #' @param cov Numeric; combined arithmetically in the body.
@@ -1354,7 +1330,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alphas A vector; its length is taken.
 #' @param tau Passed to \code{<=}.
@@ -1398,7 +1373,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -1418,7 +1392,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{gp_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y Passed to \code{.gp_profile_nll}.
@@ -1459,7 +1432,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler},
 #' \code{synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param mu Numeric; combined arithmetically in the body.
@@ -1481,7 +1453,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{gps_abc}, \code{synthetic_abc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Accepted by the signature and not used anywhere in the body.
 #' @param obs Passed to \code{.gp_summarise}.
@@ -1564,7 +1535,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mle_lengthscale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y Numeric; combined arithmetically in the body.
@@ -1608,7 +1578,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler},
 #' \code{gabc_log_likelihood}, \code{synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{summary}.
 #' @param summary Optional; may be \code{NULL}. Passed to \code{is.null}.
@@ -1635,6 +1604,9 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' @param seed Random seed.
 #' @param bootstrap Number of bootstrap replications for the nugget.
 #' @return List \code{log_lik, nugget_variance}.
+#' @examples
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' gabc_log_likelihood(sim, obs = c(0.5, 1, 1.5), theta = 1, n_sim = 5L, epsilon = 0.5)$log_lik
 #' @export
 gabc_log_likelihood <- function(sim, obs, theta, n_sim = 50L, epsilon = 1.0,
                                 summary = NULL, kernel = "gaussian",
@@ -1685,6 +1657,9 @@ gabc_log_likelihood <- function(sim, obs, theta, n_sim = 50L, epsilon = 1.0,
 #' @param lengthscale See Usage.
 #' @param kernel See Usage.
 #' @param tau2 See Usage.
+#' @examples
+#' fit <- gp_fit(design = seq(0, 1, length.out = 6), values = cos(3 * seq(0, 1, length.out = 6)))
+#' names(fit)
 #' @export
 gp_fit <- function(design, values, nugget = NULL, lengthscale = NULL,
                    kernel = "sqexp", tau2 = NULL) {
@@ -1736,6 +1711,9 @@ gp_fit <- function(design, values, nugget = NULL, lengthscale = NULL,
 #' Posterior mean and sd at theta
 #' @param fit See Usage.
 #' @param theta See Usage.
+#' @examples
+#' fit <- gp_fit(design = c(0, 0.25, 0.5, 0.75, 1), values = sin(2 * pi * c(0, 0.25, 0.5, 0.75, 1)))
+#' gp_predict(fit, theta = 0.6)
 #' @export
 gp_predict <- function(fit, theta) {
   X <- fit$design
@@ -1775,6 +1753,13 @@ gp_predict <- function(fit, theta) {
 #' @param delta_s See Usage.
 #' @param n_alpha See Usage.
 #' @param max_sim See Usage.
+#' @examples
+#' \donttest{
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' r <- gps_abc(sim, obs = c(0.5, 1, 1.5), log_prior = function(th) dnorm(th, 0, 5, log = TRUE),
+#'              theta0 = 0, n_iter = 60L, n_sim = 5L, epsilon = 0.5)
+#' names(r)
+#' }
 #' @export
 gps_abc <- function(sim, obs, log_prior, theta0, n_iter = 200L, n_sim = 10L,
                     epsilon = 0, proposal_sd = 0.5, summary = NULL,
@@ -1803,6 +1788,13 @@ gps_abc <- function(sim, obs, log_prior, theta0, n_iter = 200L, n_sim = 10L,
 #' @param kernel See Usage.
 #' @param accept_kernel See Usage.
 #' @param seed See Usage.
+#' @examples
+#' \donttest{
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' hm <- history_match(sim, obs = c(0.5, 1, 1.5), prior_ppf = list(-2, 4), n_waves = 2L,
+#'                     n_design = 12L, n_sim = 5L)
+#' names(hm)
+#' }
 #' @export
 history_match <- function(sim, obs, prior_ppf, n_waves = 3L, n_design = 32L,
                           n_sim = 50L, epsilon = 1, summary = NULL,
@@ -1863,6 +1855,10 @@ history_match <- function(sim, obs, prior_ppf, n_waves = 3L, n_design = 32L,
 #' @param theta See Usage.
 #' @param threshold See Usage.
 #' @param n_sd See Usage.
+#' @examples
+#' fit <- gp_fit(design = seq(0, 1, length.out = 6), values = -20 * (seq(0, 1, length.out = 6) - 0.5)^2)
+#' implausible(fit, theta = 0.5)    # near the peak: not ruled out
+#' implausible(fit, theta = 0.98)
 #' @export
 implausible <- function(fit, theta, threshold = 10, n_sd = 3) {
   pr <- gp_predict(fit, theta)
@@ -1883,6 +1879,8 @@ implausible <- function(fit, theta, threshold = 10, n_sd = 3) {
 #' @param skip Drop that many leading points.
 #' @return Numeric matrix with \code{n} rows and \code{dim} columns.
 #' @references Sobol, I. M. (1967). Bratley, P. & Fox, B. L. (1988).
+#' @examples
+#' sobol_sequence(4, dim = 2)
 #' @export
 sobol_sequence <- function(n, dim, skip = 0L) {
   n <- as.integer(n)
@@ -1939,6 +1937,14 @@ sobol_sequence <- function(n, dim, skip = 0L) {
 #' @param proposal_sd See Usage.
 #' @param summary See Usage.
 #' @param seed See Usage.
+#' @examples
+#' \donttest{
+#' sim <- function(theta, e) theta + c(-0.5, 0, 0.5)
+#' log_prior <- function(theta) dnorm(theta, 0, 5, log = TRUE)
+#' r <- synthetic_abc(sim, obs = c(0.5, 1, 1.5), log_prior = log_prior, theta0 = 0,
+#'                    n_iter = 100L, n_sim = 5L, epsilon = 0.5)
+#' names(r)
+#' }
 #' @export
 synthetic_abc <- function(sim, obs, log_prior, theta0, n_iter = 200L,
                           n_sim = 20L, epsilon = 0, proposal_sd = 0.5,
@@ -1957,6 +1963,10 @@ synthetic_abc <- function(sim, obs, log_prior, theta0, n_iter = 200L,
 #' @param obs See Usage.
 #' @param epsilon See Usage.
 #' @param summary See Usage.
+#' @examples
+#' set.seed(11)
+#' draws <- replicate(100, rnorm(2), simplify = FALSE)
+#' synthetic_log_likelihood(draws, obs = c(0.1, -0.2))$log_lik
 #' @export
 synthetic_log_likelihood <- function(draws, obs, epsilon = 0, summary = NULL) {
   rows <- lapply(draws, function(z) .gp_summarise(z, summary))

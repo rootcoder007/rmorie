@@ -15,3 +15,7 @@ A numeric value in (0, 1/2].
 \description{
 Uses the conjugate form to keep precision when gamma is large.
 }
+\examples{
+morie_alpha_from_gamma(4)     # gamma = 4 gives alpha = 1/2
+morie_alpha_from_gamma(100)   # alpha (1 - alpha) = 1/100
+}

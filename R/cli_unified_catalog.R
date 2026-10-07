@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Emit a unified catalog CSV for the rmorie-cli binary
+#' Emit a unified catalog CSV for the rmorie command line
 #'
 #' Walks `morie_datasets_browse()` (9242 datasets across all portals)
 #' and writes a single CSV with the columns the C++ `rmorie` binary's

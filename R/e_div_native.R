@@ -24,7 +24,6 @@
 #'
 #' A step of the e_div_native implementation. Called by \code{morie_e_div}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Passed to \code{dist}.
 #' @param alpha Numeric; combined arithmetically in the body.
@@ -41,7 +40,6 @@
 #'
 #' A step of the e_div_native implementation. Called by \code{morie_e_div}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A matrix; indexed by row and column.
 #' @return The value of \code{P}, as built in the body.
@@ -59,7 +57,6 @@
 #'
 #' A step of the e_div_native implementation. Called by \code{.mor_ed_qhat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P A matrix; indexed by row and column.
 #' @param a1 Numeric; combined arithmetically in the body.
@@ -76,7 +73,6 @@
 #'
 #' A step of the e_div_native implementation. Called by \code{.mor_ed_best_split}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P Passed to \code{.mor_ed_block}.
 #' @param a Numeric; combined arithmetically in the body.
@@ -100,7 +96,6 @@
 #'
 #' A step of the e_div_native implementation. Called by \code{morie_e_div}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P Passed to \code{.mor_ed_qhat}.
 #' @param a Numeric; combined arithmetically in the body.

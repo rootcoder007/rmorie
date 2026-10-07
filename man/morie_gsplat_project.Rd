@@ -21,6 +21,11 @@ A list with \code{projected} (2x2) and \code{dim}.
 to perspective projection that keeps the splat closed-form and
 therefore fast.
 }
+\examples{
+S <- diag(c(1, 2, 3))
+J <- rbind(c(1, 0, 0), c(0, 1, 0))
+morie_gsplat_project(S, W = diag(3), J = J)$projected   # drops the depth axis
+}
 \references{
 Zwicker, M. et al. (2001); Kerbl, B. et al. (2023).
 }

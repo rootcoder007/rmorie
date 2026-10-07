@@ -25,6 +25,22 @@
 #' @return A list with the update \code{s}, \code{attn}, the local output
 #'   \code{points}, \code{estimate}, \code{n} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 22
+#' @examples
+#' \donttest{
+#' w <- function(r, c, k) matrix(sin(seq_len(r * c) * k + k), r, c)
+#' rot <- function(a) { q <- c(1, a) / sqrt(1 + sum(a^2))
+#'   rbind(c(1 - 2 * (q[3]^2 + q[4]^2), 2 * (q[2] * q[3] - q[1] * q[4]), 2 * (q[2] * q[4] + q[1] * q[3])),
+#'         c(2 * (q[2] * q[3] + q[1] * q[4]), 1 - 2 * (q[2]^2 + q[4]^2), 2 * (q[3] * q[4] - q[1] * q[2])),
+#'         c(2 * (q[2] * q[4] - q[1] * q[3]), 2 * (q[3] * q[4] + q[1] * q[2]), 1 - 2 * (q[2]^2 + q[3]^2))) }
+#' s <- rbind(c(0.2, 0.5), c(-0.3, 0.1), c(0.4, -0.6))
+#' z <- array(cos(seq_len(18) * 0.41), c(3, 3, 2))
+#' fr <- list(list(R = rot(c(0.1, 0, 0)), t = c(0, 0, 0)), list(R = rot(c(0, 0.2, 0)), t = c(1, 0, 0)),
+#'            list(R = rot(c(0, 0, 0.3)), t = c(0, 1, 1)))
+#' r <- Alfipa(s, z, fr, list(w(2, 2, 0.1)), list(w(2, 2, 0.2)), list(w(2, 2, 0.3)),
+#'             list(list(w(3, 2, 0.4))), list(list(w(3, 2, 0.5))), list(list(w(3, 2, 0.6))),
+#'             wb = w(1, 2, 0.7), gamma = 0.9, wo = w(2, 8, 0.8))
+#' round(r$attn[[1]], 3)
+#' }
 #' @export
 Alfipa <- function(s, z, frames, wq, wk, wv, wqp, wkp, wvp, wb, gamma, wo) {
   n <- nrow(s)

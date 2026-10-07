@@ -17,5 +17,7 @@ The value of \code{feat}, as built in the body.
 \description{
 A step of the mtdrl_native implementation. Called by \code{mtdrl_run}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mtdrl_history_features(history = list(list(action = 1, reward = 1), list(action = 2, reward = 0)), n_arms = 2)
 }

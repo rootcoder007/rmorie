@@ -16,7 +16,6 @@
 #'
 #' A step of the timesf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param history Passed to \code{morie_timesfm}.
 #' @param predictor Passed to \code{morie_timesfm}.
@@ -32,7 +31,7 @@ morie_timesf <- function(history, predictor, horizon, input_patch_len,
                 output_patch_len)
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 .timesf_foundation <- morie_timesf
 
 # public name resolved by fn/_lazy_map.json
@@ -43,7 +42,6 @@ morie_timesf <- function(history, predictor, horizon, input_patch_len,
 #'
 #' A step of the timesf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

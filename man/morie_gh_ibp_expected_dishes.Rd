@@ -20,8 +20,7 @@ number of distinct features ("dishes") sampled by \code{n} customers
 in a one-parameter Indian buffet process.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_ibp_expected_dishes(V, V)
+morie_gh_ibp_expected_dishes(n = 10, alpha = 3)
 }
 \references{
 Ghosal, S. and van der Vaart, A. (2017).

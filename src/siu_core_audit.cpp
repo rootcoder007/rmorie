@@ -67,11 +67,11 @@ const char* kRules =
     "3. NEVER answer None/not_stated/unknown out of laziness. None is correct "
     "ONLY after reading the whole report and finding the field genuinely "
     "absent. A lazy None is a serious error.\n"
-    "4. COUNT fields (number_of_subject_officers, number_of_witness_officials, "
+    "4. COUNT fields (number_of_subject_officials, number_of_witness_officials, "
     "number_of_civilian_witnesses, investigators): give the COUNT of distinct "
     "entities -- counting is NOT inference. Officers are designated explicitly; "
-    "a witness-officer-only case has number_of_subject_officers = 0, a REAL "
-    "value, never not_stated. Use the canonical key number_of_subject_officers "
+    "a witness-officer-only case has number_of_subject_officials = 0, a REAL "
+    "value, never not_stated. Use the canonical key number_of_subject_officials "
     "(never officials/officils).\n"
     "5. Dates in ISO (YYYY-MM-DD) when stated.\n";
 

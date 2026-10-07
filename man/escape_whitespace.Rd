@@ -14,3 +14,6 @@ escape_whitespace(text, add_prefix = TRUE)
 \description{
 Escape whitespace as U+2581, optionally prefixing the marker
 }
+\examples{
+escape_whitespace("a b\tc")
+}

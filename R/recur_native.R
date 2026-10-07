@@ -12,7 +12,6 @@
 #' A step of the recur_native implementation. Called by \code{Agrec}, \code{Pwpgt},
 #' \code{Shfrm} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param start Coerced to numeric by the body, with \code{as.numeric}.
 #' @param stop Coerced to numeric by the body, with \code{as.numeric}.

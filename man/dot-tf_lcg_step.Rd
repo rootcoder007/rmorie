@@ -15,5 +15,4 @@ The value of \code{r}, as built in the body.
 \description{
 A step of the rangayyan_tf implementation. Called by \code{.tf_lcg_seed}, \code{EmdEns}.
 See the file header for the source the module follows.
-source it follows.
 }

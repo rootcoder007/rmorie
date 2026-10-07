@@ -18,6 +18,10 @@
 #' @return The ATE list of \code{\link{morie_bndest}}.
 #' @references Manski, C. F. (1990). Nonparametric bounds on treatment
 #'   effects. American Economic Review, 80(2), 319-323.
+#' @examples
+#' set.seed(9)
+#' y <- runif(60); D <- rbinom(60, 1, 0.5)
+#' morie_manski(y, D, y_min = 0, y_max = 1)[c("ate_lower", "ate_upper")]
 #' @export
 morie_manski <- function(y, D, y_min, y_max) {
   morie_bndest(y, NULL, c(y_min, y_max), treatment = D)

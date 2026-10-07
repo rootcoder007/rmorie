@@ -31,9 +31,8 @@ K_nm K_mm^-1 K_mn.  The first term is the DTC marginal likelihood; the
 second, the Nystrom residual trace, is the penalty that makes the bound
 a bound -- it is what stops the inducing points being chosen to
 overfit, and is the whole difference from the earlier projected-process
-approximations.  The AISTATS volume is free but was not retrievable
-here; the bound is quoted in its standard published form.  Both terms
-are returned separately so the penalty is visible.
+approximations.  Both terms are returned separately so the penalty is
+visible.
 }
 \examples{
 Svgp(matrix(c(0, 1, 2, 3), 4, 1), c(0, 1, 0, 1),

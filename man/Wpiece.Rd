@@ -33,6 +33,4 @@ Chang, M.-W., Lee, K. and Toutanova, K. (2019), BERT: Pre-training
 of Deep Bidirectional Transformers for Language Understanding,
 NAACL-HLT 2019, arXiv:1810.04805. Wu, Y. et al. (2016), Googles
 Neural Machine Translation System, arXiv:1609.08144, Section 4.1.
-Source PDFs: fetched-wave3/devlin-etal-2019-bert-arxiv1810.04805.pdf
-and fetched-wave3/wu-etal-2016-gnmt-wordpiece-arxiv1609.08144.pdf.
 }

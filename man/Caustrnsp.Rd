@@ -40,13 +40,10 @@ set.seed(1)
 Caustrnsp(y = rnorm(60), z = rbinom(60, 1, 0.5), s = runif(60, 0.1, 0.9))
 }
 \references{
-Tipton, E. and Hartman, E. (2023), Generalizability and
-transportability, Ch. 3 Eqs. 3.10-3.12 in Zubizarreta, Stuart,
-Small and Rosenbaum (eds), Handbook of Matching and Weighting
-Adjustments for Causal Inference, Chapman and Hall/CRC,
-doi:10.1201/9781003102670 (local PDF, WD_BLACK library).
-Pearl, J. and Bareinboim, E. (2014), External validity: From
-do-calculus to transportability across populations, Statistical
-Science 29(4), 579-595, doi:10.1214/14-STS486; local copy
-fetched-wave3/pearl-bareinboim-2014-external-validity-transportability-StatSci29.pdf.
+Tipton, E. and Hartman, E. (2023), Generalizability and transportability,
+Ch. 3 Eqs. 3.10-3.12 in Zubizarreta, Stuart, Small and Rosenbaum (eds), Handbook of
+Matching and Weighting Adjustments for Causal Inference, Chapman and Hall/CRC,
+doi:10.1201/9781003102670. Pearl, J. and Bareinboim, E. (2014), External validity:
+From do-calculus to transportability across populations, Statistical Science 29(4),
+579-595, doi:10.1214/14-STS486.
 }

@@ -21,7 +21,6 @@ One of two values, depending on the branch taken.
 \description{
 A step of the dist_native implementation. Called by \code{Qf}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 Pf(4.26, 3, 10)

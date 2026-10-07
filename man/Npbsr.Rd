@@ -21,10 +21,9 @@ List with \code{estimate}, \code{times}, \code{S_post},
 \code{H_post}, \code{c}, \code{lam0}, \code{n}.
 }
 \description{
-DUPLICATE: Hjort's beta-process posterior for right-censored
-survival is already implemented as
-\code{morie_ghosal_survival_beta_process} in \code{ghsrv.R}; per
-ledger/wave2/DUPMAP.tsv this is an alias, not a second copy.
+DUPLICATE: Hjort's beta-process posterior for right-censored survival is already
+implemented as \code{morie_ghosal_survival_beta_process} in \code{ghsrv.R}; this is
+an alias, not a second copy.
 }
 \details{
 Formula: with \code{H ~ BP(c, H_0)} the posterior is again a beta

@@ -15,5 +15,4 @@ A matrix, from \code{t}.
 \description{
 A step of the boot_native implementation. Called by \code{.morie_empinf_reg}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -13,7 +13,6 @@
 #' A step of the rangayyan_cep implementation. Called by \code{CardioResp},
 #' \code{CCepstrum}, \code{Cepstrum} and 11 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return A list with \code{re}, \code{im}.
@@ -41,7 +40,6 @@
 #' A step of the rangayyan_cep implementation. Called by \code{CCepstrum},
 #' \code{Cepstrum}, \code{HomDeconv} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param re A vector; its length is taken.
 #' @param im Numeric; combined arithmetically in the body.
@@ -60,7 +58,6 @@
 #'
 #' A step of the rangayyan_cep implementation. Called by \code{CCepstrum}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param phase A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -337,7 +334,6 @@ CCepSum <- function(x, h) {
 #'
 #' A step of the rangayyan_cep implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gain Coerced to complex by the body, with \code{as.complex}.
 #' @param r Coerced to integer by the body, with \code{as.integer}.
@@ -406,7 +402,6 @@ RatZ <- function(gain, r, zeros_in, zeros_out, poles_in, poles_out,
 #'
 #' A step of the rangayyan_cep implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gain Coerced to complex by the body, with \code{as.complex}.
 #' @param zeros_in Coerced to complex by the body, with \code{as.complex}.
@@ -460,7 +455,6 @@ CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
 #'
 #' A step of the rangayyan_cep implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param zeros_in Coerced to complex by the body, with \code{as.complex}.
 #' @param zeros_out Coerced to complex by the body, with \code{as.complex}.
@@ -869,7 +863,6 @@ HomPred <- function(y, cutoff) {
 #'
 #' A step of the rangayyan_cep implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
@@ -991,7 +984,6 @@ MinPhase <- function(x) {
 #'
 #' A step of the rangayyan_cep implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.

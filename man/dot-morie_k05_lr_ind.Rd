@@ -14,9 +14,8 @@ A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11},
 \code{pi01}, \code{pi11}, \code{pi}.
 }
 \description{
-A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}.
-See the file header for the source the module follows.
-source it follows.
+Helper step. Called by \code{morie_christoffersen_cc}. See the file header for the
+source the module follows. source it follows.
 }
 \examples{
 res <- .morie_k05_lr_ind(h = 0.5)

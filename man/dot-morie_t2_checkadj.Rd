@@ -15,5 +15,4 @@ The value of \code{A}, as built in the body.
 \description{
 A step of the tail2_t04 implementation. Called by \code{BipartSpec}, \code{SignlessL}.
 See the file header for the source the module follows.
-source it follows.
 }

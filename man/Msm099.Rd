@@ -13,9 +13,13 @@ Msm099(...)
 The list returned by \code{Msm092()}.
 }
 \description{
-The stub generator stamped several extracted page fragments with the same
-function name, so the implementation lives once in \code{Msm092()} and this
-module re-exports it. Calling either path runs the same code.
+The same method as \code{Msm092()}, re-exported under this name; both run the same
+code.
+}
+\examples{
+set.seed(16)
+XE <- model.matrix(~ factor(rep(1:2, 5)) - 1)
+Msm099(n = 10, X_E = XE, X = matrix(rnorm(20), 10, 2))$widths
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

@@ -17,7 +17,6 @@ The value of \code{.warpL_rank_weight}.
 \description{
 A step of the warpL_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_warpL_rank_weight(rank = 5L, alphas = c(1, 2, 3, 4, 5, 6, 7, 8))

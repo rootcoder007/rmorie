@@ -11,9 +11,8 @@
 #' @return List with \code{p_value}, \code{p_two_sided},
 #'   \code{n_extreme}, \code{t_obs_mean}, \code{t_rep_mean}, \code{S},
 #'   \code{extreme}.
-#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
-#'   Bayesian Data Analysis, 3rd edition, Section 6.3. Fetched as the full
-#'   text of the book from the author's own copy.
+#' @references Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013), Bayesian Data
+#'   Analysis, 3rd edition, Section 6.3.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -19,7 +19,6 @@ A list with \code{embedding}, \code{sparse}, \code{note}.
 \description{
 A step of the samseg_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)

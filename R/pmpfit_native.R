@@ -168,6 +168,7 @@ morie_pmpfit_expected <- function(n, alpha, theta) {
 #' morie_pmpfit_tail(n = 5L)
 #' @keywords internal
 morie_pmpfit_tail <- function(n, theta = 1.0, alphas = c(0.0, 0.3, 0.6)) {
+  .morie_arg(n, "i1")
   th <- as.numeric(theta)
   N <- as.integer(n)
   out <- list()
@@ -220,7 +221,6 @@ morie_pmpfit_cheatsheet <- function() {
 #'
 #' A step of the pmpfit_native implementation. Called by \code{morie_pmpfit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_gamma}.
 #' @param a Passed to \code{.ghc_gamma}.
@@ -240,7 +240,6 @@ morie_pmpfit_cheatsheet <- function() {
 #'
 #' A step of the pmpfit_native implementation. Called by \code{.ghc_beta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
 #' @param shape Numeric; combined arithmetically in the body.

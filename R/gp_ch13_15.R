@@ -252,6 +252,7 @@ morie_fda_beta_function <- function(t, beta_coefs, L1,
 #' @noRd
 #' @export
 morie_fda_bic <- function(loglik, n_params, n_obs) {
+  .morie_arg(loglik, "n")
   # p.582: BIC = -2 loglik + (L + 1) log(n); the +1 is the intercept
   -2 * loglik + (n_params + 1) * log(n_obs)
 }

@@ -37,6 +37,11 @@
 #' @references Voight, B. F., Kudaravalli, S., Wen, X. and Pritchard,
 #'   J. K. (2006). A map of recent positive selection in the human
 #'   genome. PLoS Biology, 4(3), e72.
+#' @examples
+#' set.seed(2)
+#' hap <- matrix(rbinom(30 * 9, 1, 0.5), 30, 9)
+#' hap[hap[, 5] == 1, ] <- 1             # chromosomes carrying the derived allele share one long haplotype
+#' morie_ihstst(hap, core = 4)$estimate  # negative: long derived-allele haplotypes
 #' @export
 morie_ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
                          standardize = NULL) {

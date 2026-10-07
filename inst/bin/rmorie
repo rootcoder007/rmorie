@@ -1,4 +1,11 @@
 #!/bin/sh
-# rmorie command-line launcher (installed by rmorie::install_cli()).
-# Runs morie_cli() from whichever arm of the package is installed.
-exec Rscript --vanilla -e 'suppressPackageStartupMessages({ p <- if (requireNamespace("rmorie", quietly = TRUE)) "rmorie" else "morie"; q <- getNamespace(p)$morie_cli(); quit(status = as.integer(q)) })' --args "$@"
+# rmorie command-line launcher (installed by rmorie::install_cli(), which writes a pinned copy).
+# Run from inside an installed package (<lib>/<pkg>/bin/rmorie) it runs THAT package's morie_cli():
+# rmorie or morie's R arm, from the library it lives in, not whichever rmorie R finds first.
+# Rscript adds the --args separator itself; passing one explicitly makes R 4.6's commandArgs(TRUE)
+# return it as the first argument ("unknown verb --args"), so the arguments follow the expression.
+self=$(readlink -f "$0" 2>/dev/null || printf '%s' "$0")
+MORIE_CLI_PKG=$(basename "$(dirname "$(dirname "$self")")")
+MORIE_CLI_LIB=$(dirname "$(dirname "$(dirname "$self")")")
+export MORIE_CLI_PKG MORIE_CLI_LIB
+exec Rscript --no-save --no-restore -e 'suppressPackageStartupMessages({ p <- Sys.getenv("MORIE_CLI_PKG"); l <- Sys.getenv("MORIE_CLI_LIB"); if (p %in% c("rmorie", "morie") && file.exists(file.path(l, p, "DESCRIPTION"))) .libPaths(c(l, .libPaths())) else p <- if (requireNamespace("rmorie", quietly = TRUE)) "rmorie" else "morie"; q <- getNamespace(p)$morie_cli(); quit(status = as.integer(q)) })' "$@"

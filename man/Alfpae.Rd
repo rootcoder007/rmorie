@@ -29,6 +29,12 @@ representation: aligning on \code{i} and reading off \code{j} is a
 different question from the reverse, so the matrix is deliberately
 non-symmetric.
 }
+\examples{
+set.seed(7)
+z <- array(rnorm(3 * 3 * 4), c(3, 3, 4))
+r <- Alfpae(z, w = matrix(rnorm(64 * 4), 64, 4))
+round(r$pae, 2)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. section 1.9.7
 }

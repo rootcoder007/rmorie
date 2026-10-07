@@ -35,6 +35,13 @@ Formula: fluctuate on H1 = A/g1(W), H0 = (1-A)/g0(W);
 psi = mean(Q*(1,W)) - mean(Q*(0,W));
 se = sqrt(var(IC)/n)
 }
+\examples{
+set.seed(17)
+n <- 400
+A <- rbinom(n, 1, 0.5)
+Y <- rbinom(n, 1, 0.3 + 0.2 * A)
+Tmlerd(Y, A, QAW = ifelse(A == 1, 0.5, 0.3), Q1W = rep(0.5, n), Q0W = rep(0.3, n), g1W = rep(0.5, n))[c("estimate", "se")]
+}
 \references{
 Verified against the reference implementation in the CRAN
 package tmle 2.1.1 (Gruber & van der Laan), its fluctuation glm and

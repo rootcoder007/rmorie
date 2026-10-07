@@ -1,13 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' VAR impulse response function -- alias of \code{\link{Irfun}}
 #'
-#' DUPLICATE, resolved by aliasing (wave-2 DUPMAP: varimp -> irfun). Both
-#' names denote the orthogonalised impulse response of a VAR(p): the MA
-#' recursion Phi_0 = I, Phi_h = sum_\{j=1..min(h,p)\} A_j Phi_\{h-j\}, with
-#' shocks orthogonalised by the lower Cholesky factor P of Sigma_u, so
-#' Theta_h = Phi_h P. The name is a trap -- it reads as "variable
-#' importance", but the stub docstring and the wave-2 categorisation both
-#' give VAR impulse response, which is what is aliased here.
+#' Same quantity as \code{irfun}: the orthogonalised impulse response of a
+#' VAR(p), the MA recursion Phi_0 = I, Phi_h = sum_\{j=1..min(h,p)\} A_j
+#' Phi_\{h-j\}, with shocks orthogonalised by the lower Cholesky factor P of
+#' Sigma_u, so Theta_h = Phi_h P. Despite the name this is not "variable
+#' importance"; it is the VAR impulse response.
 #'
 #' @param coef m by (1 + m p) coefficient matrix from \code{Varest}.
 #' @param sigma_u m by m residual covariance.

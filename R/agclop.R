@@ -1,15 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' One SGD step with momentum and L2 weight decay
 #'
-#' Silver et al. (2018), arXiv:1712.01815 (FETCHED): the parameters are
-#' "updated by stochastic gradient descent with momentum", and the loss of
-#' Silver et al. (2017), Nature 550, 354-359 -- reproduced in the
-#' AlphaZero paper as l = (z - v)^2 - pi' log p + c ||theta||^2 -- carries
-#' an explicit L2 term.  Because that penalty sits inside the loss its
-#' gradient is 2 c theta, so the update is v <- mu v + (g + lambda theta),
-#' theta <- theta - lr v with lambda = 2c.  This is the L2-regularisation
-#' form, in which decay passes through the momentum buffer, not the
-#' decoupled AdamW form; the two differ whenever mu is nonzero.
+#' Silver et al. (2018), arXiv:1712.01815: the parameters are "updated by stochastic
+#' gradient descent with momentum", and the loss of Silver et al. (2017), Nature 550,
+#' 354-359 -- reproduced in the AlphaZero paper as l = (z - v)^2 - pi' log p + c
+#' ||theta||^2 -- carries an explicit L2 term. Because that penalty sits inside the loss
+#' its gradient is 2 c theta, so the update is v <- mu v + (g + lambda theta), theta <-
+#' theta - lr v with lambda = 2c. This is the L2-regularisation form, in which decay
+#' passes through the momentum buffer, not the decoupled AdamW form; the two differ
+#' whenever mu is nonzero.
 #'
 #' @param theta current parameters, flattened.
 #' @param grad gradient of the data term.

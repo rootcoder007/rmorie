@@ -21,7 +21,6 @@ The value of \code{Qexp}.
 \description{
 A step of the dist_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 Rexp(n = 5L)

@@ -25,6 +25,12 @@
 #'   \code{n_events}, \code{n}, \code{method}.
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, sections 13.6.2 and 13.7.2.
+#' @examples
+#' set.seed(7)
+#' x <- rnorm(150)
+#' time <- rexp(150, exp(0.5 * x))
+#' g <- Ghosalcoxbvm(x, time = time, event = rbinom(150, 1, 0.8))
+#' c(g$beta, g$se)
 #' @export
 Ghosalcoxbvm <- function(x, time = NULL, event = NULL, beta_grid = NULL) {
   X <- if (is.matrix(x)) x else matrix(as.numeric(x), nrow = 1L)

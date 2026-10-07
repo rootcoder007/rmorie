@@ -17,10 +17,8 @@ The value of \code{stats::qt}.
 \description{
 A step of the k02util implementation. Called by \code{mahks}, \code{mahsj}, \code{matau2pi}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-k02tq(V, V)
+k02tq(p = c(0.9, 0.975), df = 10)
 }
 \keyword{internal}

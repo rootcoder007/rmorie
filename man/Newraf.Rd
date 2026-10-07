@@ -38,6 +38,10 @@ and the method descends on its negative.
 Determinism: a fixed iteration cap with a gradient-norm stopping
 rule; no line search, no random restarts.
 }
+\examples{
+f <- function(x) sum((x - c(1, 2))^2); g <- function(x) 2 * (x - c(1, 2)); H <- function(x) diag(2, 2)
+Newraf(f, g, H, x0 = c(0, 0))$x   # one step on a quadratic
+}
 \references{
 Newton, I. (1669/1711). De analysi per aequationes
 numero terminorum infinitas; Raphson, J. (1690). Analysis

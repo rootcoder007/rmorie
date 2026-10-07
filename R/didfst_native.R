@@ -359,6 +359,14 @@ morie_didfst <- morie_didfst_panel_differences
 #' @param horizon Optional event-time cap for \code{"event"}.
 #' @return A list with \code{estimate}, \code{scheme} (and
 #'   \code{profile} for the by-event-time and by-cohort schemes).
+#' @examples
+#' set.seed(8)
+#' n <- 30; Tn <- 5
+#' first <- rep(c(3, 4, Inf), each = 10)
+#' Y <- matrix(rnorm(n * Tn), n, Tn)
+#' for (i in seq_len(n)) if (is.finite(first[i])) Y[i, first[i]:Tn] <- Y[i, first[i]:Tn] + 1
+#' gt <- group_time_att(Y, first, comparison = "never-treated")
+#' aggregate_att(gt, scheme = "event")$profile
 #' @export
 aggregate_att <- function(gt, scheme = "simple", horizon = NULL) {
   if (!(scheme %in% c("simple", "event", "cohort")))
@@ -398,6 +406,10 @@ aggregate_att <- function(gt, scheme = "simple", horizon = NULL) {
 #' @return A list with \code{estimate}, \code{treated_change},
 #'   \code{control_change}, \code{treated_weight},
 #'   \code{control_weight}.
+#' @examples
+#' delta <- c(1.2, 0.9, 1.4, 0.2, 0.1, 0.3)
+#' D <- c(1, 1, 1, 0, 0, 0)
+#' did_estimate(delta, D)$estimate   # mean(1.2, 0.9, 1.4) - mean(0.2, 0.1, 0.3)
 #' @export
 did_estimate <- function(delta, D, weights = NULL) {
   d <- as.numeric(delta)
@@ -439,6 +451,17 @@ did_estimate <- function(delta, D, weights = NULL) {
 #' @param kind Forest subsampling scheme passed to \code{hntfst}.
 #' @param clusters Optional cluster IDs.
 #' @return A list mirroring the Python \code{RichResult} payload.
+#' @examples
+#' \donttest{
+#' set.seed(4)
+#' n <- 200
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' D <- rbinom(n, 1, 0.5)
+#' Y <- matrix(rnorm(n * 4), n, 4)
+#' Y[, 3:4] <- Y[, 3:4] + D * (1 + X[, 1])
+#' f <- did_forest(Y, D, X, event_time = 3, n_trees = 50L)
+#' names(f)
+#' }
 #' @export
 #' @aliases didforest
 did_forest <- function(Y, D, X, event_time, x_eval = NULL,
@@ -487,7 +510,6 @@ did_forest <- function(Y, D, X, event_time, x_eval = NULL,
 #' A step of the didfst_native implementation. Called by \code{group_time_att},
 #' \code{panel_differences}, \code{placebo_did}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{M}, \code{n}, \code{T}.
@@ -515,6 +537,14 @@ did_forest <- function(Y, D, X, event_time, x_eval = NULL,
 #' @return A list with \code{att} (named list keyed by \code{(g,t)}),
 #'   \code{cohorts}, \code{T}, \code{n}, \code{comparison},
 #'   \code{estimate}, \code{method}.
+#' @examples
+#' set.seed(10)
+#' n <- 30; Tn <- 5
+#' first <- rep(c(3, 4, Inf), each = 10)
+#' Y <- matrix(rnorm(n * Tn), n, Tn)
+#' for (i in seq_len(n)) if (is.finite(first[i])) Y[i, first[i]:Tn] <- Y[i, first[i]:Tn] + 1
+#' g <- group_time_att(Y, first, comparison = "never-treated")
+#' g$estimate
 #' @export
 group_time_att <- function(Y, first_treated, comparison = "not-yet-treated") {
   pp <- .ghc_didfst_panel(Y)
@@ -576,6 +606,10 @@ group_time_att <- function(Y, first_treated, comparison = "not-yet-treated") {
 #' @param Y Balanced n-by-T panel.
 #' @param event_time \code{H}, in 1-based period numbers.
 #' @return Numeric vector of length n.
+#' @examples
+#' Y <- matrix(c(1, 2, 4, 5,
+#'               2, 2, 3, 3), 2, byrow = TRUE)
+#' panel_differences(Y, event_time = 3)   # mean(post) - mean(pre) per unit
 #' @export
 panel_differences <- function(Y, event_time) {
   pp <- .ghc_didfst_panel(Y)
@@ -602,6 +636,12 @@ panel_differences <- function(Y, event_time) {
 #' @param event_time \code{H}.
 #' @param split Pre-period split point.
 #' @return A list mirroring the Python \code{RichResult} payload.
+#' @examples
+#' set.seed(3)
+#' Y <- matrix(rnorm(40 * 6), 40, 6)  # 40 units, 6 periods
+#' D <- rep(0:1, each = 20)
+#' Y[D == 1, 5:6] <- Y[D == 1, 5:6] + 1
+#' placebo_did(Y, D, event_time = 4)$estimate
 #' @export
 placebo_did <- function(Y, D, event_time, split = NULL) {
   pp <- .ghc_didfst_panel(Y)

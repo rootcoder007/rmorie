@@ -12,3 +12,6 @@ A character string.
 \description{
 Compact one-line summary of the toptor recipe
 }
+\examples{
+morie_toptor_cheatsheet()
+}

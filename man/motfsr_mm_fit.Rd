@@ -50,5 +50,11 @@ A list with \code{theta}, \code{motif}, \code{background}, \code{lambda1},
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_run}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+\donttest{
+seqs <- c("ACGTACGTAC", "TGCAACGTTG", "ACGTTGCAAC", "GGACGTACGT")
+f <- motfsr_mm_fit(seqs, w = 4)
+c(f$converged, round(f$lambda1, 3))
+}
 }

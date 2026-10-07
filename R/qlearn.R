@@ -53,13 +53,9 @@
 #' @return List with \code{estimate} (the learned (S, A) Q table),
 #'   \code{policy} (0-based greedy actions), \code{v}, \code{n_steps},
 #'   \code{n_episodes}, \code{method}.
-#' @references Sutton, R. S. and Barto, A. G. (2018). Reinforcement
-#'   Learning: An Introduction, 2nd ed., MIT Press, Section 6.5, boxed
-#'   algorithm p. 131, eq. 6.8.  Local source:
-#'   fetched-wave3/sutton-barto-2018-reinforcement-learning-2nd-ed.pdf.
-#'   Watkins, C. J. C. H. and Dayan, P. (1992). Q-learning. Machine
-#'   Learning 8, 279-292.  Local source:
-#'   fetched-wave3/watkins-dayan-1992-qlearning-ML8.pdf.
+#' @references Sutton, R. S. and Barto, A. G. (2018). Reinforcement Learning: An
+#'   Introduction, 2nd ed., MIT Press, Section 6.5, boxed algorithm p. 131, eq. 6.8.
+#'   Watkins, C. J. C. H. and Dayan, P. (1992). Q-learning. Machine Learning 8, 279-292.
 #' @examples
 #' P <- list(matrix(c(0, 1, 0, 1), 2, byrow = TRUE))
 #' R <- matrix(c(1, 0), 2)

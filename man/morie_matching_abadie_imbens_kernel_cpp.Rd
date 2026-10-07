@@ -18,5 +18,8 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{morie_matching_abadie_imbens_se}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+y <- c(3, 5, 2, 4, 6); t <- c(1, 1, 0, 0, 0)
+morie_matching_abadie_imbens_kernel_cpp(y, t, treated_pos = c(0L, 1L), control_pos = c(2L, 3L))
 }

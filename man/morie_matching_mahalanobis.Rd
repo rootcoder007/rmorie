@@ -43,7 +43,9 @@ prior to distance matching.}
 A list of class \code{morie_match_result}.
 }
 \description{
-Thin wrapper around \code{MatchIt::matchit(distance = "mahalanobis")}.
+Native nearest-neighbour matching on the Mahalanobis distance of the
+covariates (cross-validated against \code{MatchIt::matchit(distance =
+"mahalanobis")}).
 }
 \examples{
 \donttest{

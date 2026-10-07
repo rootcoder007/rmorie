@@ -23,6 +23,14 @@
 #'   adjustment of a sampled frequency table when the expected marginal
 #'   totals are known. Annals of Mathematical Statistics 11(4):427-444.
 #'   \doi{10.1214/aoms/1177731829}.
+#' @examples
+#' y <- c(10, 12, 9, 15, 11, 14)
+#' w <- rep(1, 6)
+#' sex <- c("f", "m", "f", "m", "f", "m"); age <- c("y", "y", "o", "o", "y", "o")
+#' margins <- list(list(labels = sex, targets = c(f = 300, m = 300)),
+#'                 list(labels = age, targets = c(y = 250, o = 350)))
+#' r <- Raklng(y, w, margins)
+#' c(r$estimate, r$max_margin_error)
 #' @export
 Raklng <- function(y, weights, margins, tol = 1e-12, max_iter = 200) {
   y <- as.numeric(unlist(y))

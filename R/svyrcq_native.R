@@ -9,7 +9,6 @@
 #'
 #' A step of the svyrcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -112,7 +111,6 @@ morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
 #'
 #' A step of the svyrcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

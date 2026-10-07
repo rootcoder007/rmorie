@@ -1,0 +1,298 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#' Internal helper: a table whose first row is a title, its real header a few rows down
+#'
+#' CIHI sheets open with a title ("Table 1 Hospital Stays for ...") in A1 and the column names
+#' on a later row, so the reader names the columns after the title and placeholders (...2,
+#' ...3). The first row filled across most columns is the header; the table ends at the first
+#' blank row (what follows is notes, or further tables stacked on the same tab).
+#' @noRd
+.morie_xlsx_promote_header <- function(df) {
+  nm <- names(df)
+  if (ncol(df) < 2L || !nrow(df)) return(df)
+  placeholder <- grepl("^\\.\\.\\.[0-9]+$", nm) | !nzchar(trimws(nm))
+  if (mean(placeholder[-1L]) < 0.5) return(df)  # the sheet's own header row was read as names
+  cell_set <- function(v) !is.na(v) & nzchar(trimws(as.character(v)))
+  head_rows <- df[seq_len(min(nrow(df), 20L)), , drop = FALSE]
+  # the share is of the columns the table uses: a stray note far to the right widens the
+  # sheet (cihi820b: a 5-column table on a 13-column tab) without being part of it
+  used <- vapply(head_rows, function(v) any(cell_set(v)), logical(1))
+  need <- max(2L, ceiling(0.8 * sum(used)))
+  filled <- Reduce(`+`, lapply(head_rows, function(v) as.integer(cell_set(v))))
+  hdr <- which(filled >= need)[1L]
+  if (is.na(hdr)) return(df)
+  new <- trimws(as.character(unlist(df[hdr, ], use.names = FALSE)))
+  body <- df[-seq_len(hdr), , drop = FALSE]
+  blank <- !Reduce(`|`, lapply(body, cell_set))
+  if (any(blank)) {
+    cut <- which(blank)[1L]
+    if (any(!blank[seq.int(cut, length(blank))])) {
+      message("note: ", attr(df, "morie_sheet") %||% "the sheet",
+              ": rows after the table's first blank line (notes, or further tables on the tab) are left out")
+    }
+    body <- body[seq_len(cut - 1L), , drop = FALSE]
+  }
+  unnamed <- is.na(new) | !nzchar(new)
+  # an unnamed column with nothing in it is not part of the table
+  keep <- !unnamed | vapply(body, function(v) any(cell_set(v)), logical(1))
+  body <- body[, keep, drop = FALSE]
+  new <- new[keep]
+  unnamed <- unnamed[keep]
+  new[unnamed] <- paste0("...", which(unnamed))
+  names(body) <- make.unique(new)
+  rownames(body) <- NULL
+  body[] <- lapply(body, function(v) if (is.character(v)) utils::type.convert(trimws(v), as.is = TRUE) else v)
+  body <- .morie_xlsx_fill_merged(body)
+  attr(body, "morie_sheet") <- attr(df, "morie_sheet")
+  .morie_xlsx_one_line_names(body)
+}
+
+#' Internal helper: the data sheet of a workbook (cover sheets skipped, the most cells wins)
+#'
+#' CIHI and other publishers put an "Instructions" or "Notes to readers" sheet first; the
+#' data table is a later sheet. A workbook over 50 MB is streamed instead (readxl builds the
+#' whole sheet in memory: the 93 MB CIHI indicator library needs more than 5 GB).
+#' @noRd
+.morie_xlsx_data_sheet <- function(path, ...) {
+  .morie_xlsx_tidy_numbers(.morie_xlsx_promote_header(.morie_xlsx_data_sheet_raw(path, ...)))
+}
+
+# Numbers a reader left as text (a column readxl typed as text because of a title row, or one
+# holding a "#" rank marker): Excel's binary approximation "51.959413779999998" becomes the 15
+# significant digits R and Python print ("51.95941378"), and a column that is all numbers
+# becomes numeric.
+.morie_xlsx_tidy_numbers <- function(df) {
+  num_re <- "^-?([0-9]+\\.?[0-9]*|\\.[0-9]+)([eE][-+]?[0-9]+)?$"
+  for (j in which(vapply(df, is.character, logical(1)))) {
+    v <- trimws(df[[j]])
+    filled <- !is.na(v) & nzchar(v)
+    isnum <- filled & grepl(num_re, v)
+    if (!any(isnum)) next
+    if (all(isnum[filled])) {
+      x <- rep(NA_real_, length(v))
+      x[filled] <- as.numeric(v[filled])
+      df[[j]] <- if (all(is.na(x) | x == round(x)) && all(abs(x) < .Machine$integer.max, na.rm = TRUE)) as.integer(x) else x
+    } else {
+      v[isnum] <- as.character(as.numeric(v[isnum]))
+      df[[j]] <- v
+    }
+  }
+  df
+}
+
+# filled cells, not the rectangle: a stray note far to the right widens a sheet
+# without adding data (cihi820b: a 5-column table on a 13-column tab), as morie's Python
+.morie_xlsx_filled <- function(df) {
+  sum(vapply(df, function(v) sum(!is.na(v) & nzchar(trimws(as.character(v)))), numeric(1)))
+}
+
+.morie_xlsx_data_sheet_raw <- function(path, ...) {
+  if (!file.exists(path)) stop("no such file: ", path, call. = FALSE)
+  if (file.size(path) > 50e6) return(.morie_xlsx_one_line_names(.morie_xlsx_stream(path)))
+  cover <- "^(instructions?|notes?( to readers?)?|(table of )?contents|about|read ?me|cover|footnotes?|glossary|definitions|methodology)$"
+  if (!requireNamespace("readxl", quietly = TRUE)) {
+    # no readxl: the package's own reader, sheet by sheet (the cover sheets skipped, most cells wins)
+    members <- tryCatch(utils::unzip(path, list = TRUE)$Name, error = function(e) character())
+    if (!"xl/workbook.xml" %in% members) stop(basename(path), " is not an Excel workbook (.xlsx)", call. = FALSE)
+    con <- unz(path, "xl/workbook.xml")
+    wb <- paste(readLines(con, warn = FALSE, encoding = "UTF-8"), collapse = "")
+    close(con)
+    names_all <- names(.morie_xlsx_sheet_ids(wb))
+    cand <- names_all[!grepl(cover, trimws(names_all), ignore.case = TRUE)]
+    if (!length(cand)) cand <- names_all
+    best <- NULL
+    best_cells <- -1
+    for (nm in cand) {
+      df <- tryCatch(.morie_xlsx_stream(path, nm), error = function(e) NULL)
+      cells <- if (is.null(df)) -1 else .morie_xlsx_filled(df)
+      if (cells > best_cells) {
+        best <- df
+        best_cells <- cells
+        attr(best, "morie_sheet") <- nm
+      }
+    }
+    if (is.null(best)) stop("no readable sheet in ", basename(path), call. = FALSE)
+    return(.morie_xlsx_one_line_names(best))
+  }
+  sheets <- readxl::excel_sheets(path)
+  data_sheets <- sheets[!grepl(cover, trimws(sheets), ignore.case = TRUE)]
+  if (!length(data_sheets)) data_sheets <- sheets
+  best <- NULL
+  best_cells <- -1
+  for (nm in data_sheets) {
+    # readxl names blank header cells ...17, ...18 and says so for each: that is not news here
+    df <- tryCatch(suppressMessages(as.data.frame(readxl::read_excel(path, sheet = nm, ...))), error = function(e) NULL)
+    cells <- if (is.null(df)) -1 else .morie_xlsx_filled(df)
+    if (cells > best_cells) {
+      best <- df
+      best_cells <- cells
+      attr(best, "morie_sheet") <- nm
+    }
+  }
+  if (is.null(best)) stop("no readable sheet in ", basename(path), call. = FALSE)
+  .morie_xlsx_one_line_names(best)
+}
+
+#' Internal helper: stream the first sheet of a large workbook to CSV, then read the CSV
+#'
+#' Reads the sheet XML out of the zip in 4 MB pieces and parses whole rows with vectorised
+#' regular expressions, so memory stays near the size of the result, not of the XML tree.
+#' The intermediate CSV goes to the user cache (a download sits in tempdir(), which on some
+#' systems is RAM) and is removed once read; the caller caches the table itself.
+#' @noRd
+.morie_xlsx_stream <- function(path, sheet_name = NULL,
+                               label = getOption("morie.xlsx.label", basename(path))) {
+  dir.create(morie_cache_dir("xlsx"), recursive = TRUE, showWarnings = FALSE)
+  csv <- file.path(morie_cache_dir("xlsx"), sub("\\.xlsx$", ".csv", basename(path), ignore.case = TRUE))
+  on.exit(unlink(csv), add = TRUE)
+  members <- utils::unzip(path, list = TRUE)$Name
+  rd <- function(m) {
+    con <- unz(path, m, open = "rb")
+    on.exit(close(con))
+    out <- character()
+    repeat {
+      piece <- readChar(con, 16e6, useBytes = TRUE)
+      if (!length(piece) || !nzchar(piece)) break
+      out <- c(out, piece)
+    }
+    paste(out, collapse = "")
+  }
+  unxml <- function(x) {
+    x <- gsub("&lt;", "<", gsub("&gt;", ">", gsub("&quot;", "\"", gsub("&apos;", "'", x, fixed = TRUE), fixed = TRUE), fixed = TRUE), fixed = TRUE)
+    x <- gsub("&#10;", "\n", x, fixed = TRUE)
+    x <- gsub("&amp;", "&", x, fixed = TRUE)
+    if (any(grepl("&#", x, fixed = TRUE))) {
+      m <- gregexpr("&#(x[0-9A-Fa-f]+|[0-9]+);", x, perl = TRUE)
+      regmatches(x, m) <- lapply(regmatches(x, m), function(e) vapply(e, function(s) {
+        v <- substr(s, 3L, nchar(s) - 1L)
+        intToUtf8(if (startsWith(v, "x")) strtoi(substring(v, 2L), 16L) else as.integer(v))
+      }, ""))
+    }
+    x
+  }
+  # the named sheet (else the first in workbook order), through the relationship map
+  wb <- rd("xl/workbook.xml")
+  sheets <- .morie_xlsx_sheet_ids(wb)
+  rid <- if (!is.null(sheet_name) && sheet_name %in% names(sheets)) sheets[[sheet_name]] else sheets[[1L]]
+  rels <- rd("xl/_rels/workbook.xml.rels")
+  target <- regmatches(rels, regexpr(sprintf('<Relationship [^>]*Id="%s"[^>]*>', rid), rels))
+  target <- sub('^.*Target="([^"]+)".*$', "\\1", target)
+  sheet <- if (length(target)) sub("^/", "", if (startsWith(target, "/")) target else paste0("xl/", target)) else "xl/worksheets/sheet1.xml"
+  shared <- character()
+  if ("xl/sharedStrings.xml" %in% members) {
+    ss <- rd("xl/sharedStrings.xml")
+    si <- regmatches(ss, gregexpr("(?s)<si>.*?</si>", ss, perl = TRUE, useBytes = TRUE))[[1L]]
+    si <- gsub("(?s)<rPh.*?</rPh>", "", si, perl = TRUE, useBytes = TRUE)  # phonetic runs are not text
+    Encoding(si) <- "UTF-8"
+    shared <- unxml(gsub("<[^>]+>", "", si))
+    rm(ss, si)
+  }
+  letters_to_col <- function(l) {
+    u <- unique(l)
+    v <- vapply(strsplit(u, ""), function(ch) Reduce(function(a, b) a * 26L + b, match(ch, LETTERS)), 1L)
+    v[match(l, u)]
+  }
+  tmp <- paste0(csv, ".part")
+  out <- file(tmp, "wb")  # raw UTF-8 bytes: a text connection re-encodes to the locale (C gives "<U+00E9>")
+  con <- unz(path, sheet, open = "rb")
+  open_cons <- TRUE
+  on.exit(if (open_cons) {
+    close(out)
+    close(con)
+  }, add = TRUE)
+  on.exit(unlink(tmp), add = TRUE)  # gone after the rename; a half-written file when interrupted
+  ncol_max <- NA_integer_
+  buf <- ""
+  done <- 0L
+  repeat {
+    piece <- readChar(con, 4e6, useBytes = TRUE)
+    eof <- !length(piece) || !nzchar(piece)
+    if (!eof) buf <- paste0(buf, piece)
+    Encoding(buf) <- "bytes"  # a piece can end inside a UTF-8 character: cut on byte offsets
+    cut <- if (eof) nchar(buf, type = "bytes") else {
+      ends <- gregexpr("</row>", buf, fixed = TRUE, useBytes = TRUE)[[1L]]
+      if (ends[[1L]] < 0L) next
+      ends[[length(ends)]] + 5L
+    }
+    txt <- substr(buf, 1L, cut)
+    buf <- substr(buf, cut + 1L, nchar(buf, type = "bytes"))
+    Encoding(txt) <- "UTF-8"  # whole rows: complete characters again
+    cells <- regmatches(txt, gregexpr('(?s)<c r="[A-Z]+[0-9]+"[^>]*?(/>|>.*?</c>)', txt, perl = TRUE, useBytes = TRUE))[[1L]]
+    Encoding(cells) <- "UTF-8"
+    if (length(cells)) {
+      ref <- sub('^<c r="([A-Z]+[0-9]+)".*$', "\\1", substr(cells, 1L, 40L))
+      row <- as.integer(sub("^[A-Z]+", "", ref))
+      col <- letters_to_col(sub("[0-9]+$", "", ref))
+      head <- sub("(?s)>.*$", "", cells, perl = TRUE)
+      val <- ifelse(grepl("<v>", cells, fixed = TRUE), sub("(?s)^.*?<v>(.*?)</v>.*$", "\\1", cells, perl = TRUE), "")
+      is_s <- grepl('\\bt="s"', head)
+      val[is_s] <- shared[as.integer(val[is_s]) + 1L]
+      is_i <- grepl('t="inlineStr"', head, fixed = TRUE)
+      val[is_i] <- gsub("<[^>]+>", "", sub("(?s)^.*?<is>(.*?)</is>.*$", "\\1", cells[is_i], perl = TRUE))
+      val[!is_s] <- unxml(val[!is_s])
+      # a number cell holds Excel's binary approximation ("51.959413779999998"): the 15
+      # significant digits R and Python print, the workbook's own ("51.95941378")
+      num <- !is_s & !is_i & !grepl('t="(str|b|e)"', head) & grepl("^-?[0-9.]+([eE][-+]?[0-9]+)?$", val)
+      if (any(num)) val[num] <- as.character(as.numeric(val[num]))
+      if (is.na(ncol_max)) ncol_max <- max(col)  # the header row fixes the width
+      keep <- col <= ncol_max
+      rows <- sort(unique(row))
+      m <- matrix("", length(rows), ncol_max)
+      m[cbind(match(row[keep], rows), col[keep])] <- val[keep]
+      q <- matrix(paste0('"', gsub('"', '""', enc2utf8(m), fixed = TRUE), '"'), nrow(m))
+      writeLines(do.call(paste, c(asplit(q, 2L), sep = ",")), out, useBytes = TRUE)
+      done <- done + length(rows)
+      if (isTRUE(getOption("morie.progress"))) message(sprintf("\r%s: %s rows to CSV", label, format(done, big.mark = ",")), appendLF = FALSE)
+    }
+    if (eof) break
+  }
+  if (isTRUE(getOption("morie.progress"))) message(sprintf("\r%s: %s rows to CSV", label, format(done, big.mark = ",")))
+  close(out)
+  close(con)
+  open_cons <- FALSE
+  file.rename(tmp, csv)
+  # rows with no cells at all (<row r="9"/>, formatting only) are not data
+  df <- utils::read.csv(csv, stringsAsFactors = FALSE, check.names = FALSE, encoding = "UTF-8")
+  # as readxl reads a sheet: text cells trimmed, an empty cell missing
+  for (j in which(vapply(df, is.character, logical(1)))) {
+    v <- trimws(df[[j]])
+    v[!nzchar(v)] <- NA_character_
+    df[[j]] <- v
+  }
+  df
+}
+
+# header cells wrapped inside the workbook ("Number of \nhospital stays") become one-line names
+.morie_xlsx_one_line_names <- function(df) {
+  nm <- gsub("[[:space:]]+", " ", trimws(names(df)))
+  blank <- is.na(nm) | !nzchar(nm)
+  nm[blank] <- paste0("...", which(blank))  # readxl's name for a blank header cell, whichever reader ran
+  names(df) <- nm
+  df
+}
+
+# sheet name -> relationship id, in workbook order, from xl/workbook.xml
+.morie_xlsx_sheet_ids <- function(wb) {
+  tags <- regmatches(wb, gregexpr("<sheet [^>]*>", wb, perl = TRUE))[[1L]]
+  ids <- sub('^.*r:id="([^"]+)".*$', "\\1", tags)
+  nm <- sub('^.*name="([^"]+)".*$', "\\1", tags)
+  nm <- gsub("&amp;", "&", gsub("&apos;", "'", nm, fixed = TRUE), fixed = TRUE)
+  stats::setNames(as.list(ids), nm)
+}
+
+
+# A label column merged down its block (CIHI: the jurisdiction once per province, on the
+# block's first row) reads as blanks below the first row; each row is "jurisdiction x item",
+# so carry the label down. Only the first column, only when it is text, starts filled, and is
+# blank on rows that hold data.
+.morie_xlsx_fill_merged <- function(df) {
+  if (ncol(df) < 2L || nrow(df) < 2L || !is.character(df[[1L]])) return(df)
+  v <- df[[1L]]
+  blank <- is.na(v) | !nzchar(trimws(v))
+  if (blank[1L] || !any(blank)) return(df)
+  other <- Reduce(`|`, lapply(df[-1L], function(x) !is.na(x) & nzchar(trimws(as.character(x)))))
+  if (!any(blank & other)) return(df)
+  last <- v[1L]
+  for (i in seq_along(v)) if (blank[i] && other[i]) v[i] <- last else if (!blank[i]) last <- v[i]
+  df[[1L]] <- v
+  df
+}

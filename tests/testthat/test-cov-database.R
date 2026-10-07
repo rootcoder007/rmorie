@@ -147,14 +147,13 @@ test_that("morie_fetch_ckan paginates a mocked CKAN datastore", {
   )
   page_empty <- '{"success":true,"result":{"total":3,"records":[]}}'
   calls <- 0L
+  # the datastore pages come through the status-aware HTTP helper; no resource file behind
+  # this resource, so the pages are the route
   testthat::local_mocked_bindings(
-    readLines = function(con, ...) {
+    .morie_http_get_with_status = function(url, ...) {
       calls <<- calls + 1L
-      if (calls == 1L) page1 else if (calls == 2L) page2 else page_empty
-    }, .package = "base"
-  )
-  # no resource file behind this resource: the datastore pages are the route
-  testthat::local_mocked_bindings(
+      list(status_code = 200L, body = if (calls == 1L) page1 else if (calls == 2L) page2 else page_empty)
+    },
     .morie_ckan_resource_meta = function(rid, ckan_base) list(url = NULL, size = NULL),
     .package = if (isNamespaceLoaded("rmorie")) "rmorie" else "morie"
   )

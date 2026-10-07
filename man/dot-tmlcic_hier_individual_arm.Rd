@@ -32,5 +32,4 @@ A list with \code{psi}, \code{D}, \code{info}.
 \description{
 A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}.
 See the file header for the source the module follows.
-source it follows.
 }

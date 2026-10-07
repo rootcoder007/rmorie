@@ -23,5 +23,4 @@ A list with \code{dist}, \code{coef}, \code{log_scale}, \code{scale},
 \description{
 A step of the survival_more implementation. Called by \code{Aftfit}, \code{Parasurv}.
 See the file header for the source the module follows.
-source it follows.
 }

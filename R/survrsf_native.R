@@ -1015,7 +1015,7 @@ morie_survrsf_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_survrsf_random_survival_forest <- morie_survrsf_forest
 
 #' @rdname morie_survrsf_forest

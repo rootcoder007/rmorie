@@ -18,5 +18,4 @@ The value of \code{repeat}.
 \description{
 A step of the pmpfit_native implementation. Called by \code{.ghc_beta}.
 See the file header for the source the module follows.
-source it follows.
 }

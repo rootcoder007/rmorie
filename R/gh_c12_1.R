@@ -22,6 +22,7 @@
 #' @examples
 #' Ghosalinfdimbvm()
 Ghosalinfdimbvm <- function(theta0 = 0.4, n = 2000, seed = 42) {
+  .morie_arg(theta0, "n1")
   n <- as.integer(n)
   if (n < 1L) stop("n must be positive")
   if (theta0 <= 0 || theta0 >= 1)

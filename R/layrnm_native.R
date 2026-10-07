@@ -19,9 +19,8 @@
 #' @param eps Positive stabiliser inside the square root. Default 1e-5.
 #' @return List with \code{output}, \code{normalized}, \code{mean},
 #'   \code{variance}, \code{estimate}, \code{n}, \code{method}.
-#' @references Ba, J. L., Kiros, J. R. and Hinton, G. E. (2016),
-#'   Layer Normalization, arXiv:1607.06450, Section 3. Source PDF:
-#'   fetched-wave3/ba-kiros-hinton-2016-layer-normalization-arxiv1607.06450.pdf.
+#' @references Ba, J. L., Kiros, J. R. and Hinton, G. E. (2016), Layer Normalization,
+#'   arXiv:1607.06450, Section 3.
 #' @examples
 #' Layrnm(c(1, 3), eps = 0)$normalized
 #' @export

@@ -19,7 +19,6 @@
 #'
 #' A step of the qpdual_native implementation. Called by \code{morie_qpdual}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gradient A vector; its length is taken and its elements indexed.
 #' @param domain Compared against \code{"simplex"}.

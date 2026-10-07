@@ -19,7 +19,6 @@ A list with \code{moments}, \code{labels}, \code{levels}, \code{wavelet}, \code{
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(6)

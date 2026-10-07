@@ -11,9 +11,8 @@
 #' @param n Number of vertices (default: the largest label seen).
 #' @return List with \code{W}, \code{L}, \code{degree}, \code{volume},
 #'   \code{n}, \code{m}.
-#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.4,
-#'   for the weighted definition with loops. Fetched from the author's own
-#'   copy of the chapter.
+#' @references Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.4, for the
+#'   weighted definition with loops.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)

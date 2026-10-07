@@ -25,5 +25,4 @@ A list with \code{out1}, \code{out2}.
 \description{
 A step of the mafft_native implementation. Called by \code{group_align}.
 See the file header for the source the module follows.
-source it follows.
 }

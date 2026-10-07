@@ -80,7 +80,6 @@
 #' A step of the dreamr_native implementation. Called by
 #' \code{morie_dreamr_lambda_return}, \code{morie_dreamr_value_update}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param name Passed to \code{sprintf}.
@@ -101,7 +100,6 @@
 #'
 #' A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_return}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param vals A vector; its length is taken.
 #' @param name Passed to \code{sprintf}.
@@ -120,7 +118,6 @@
 #'
 #' A step of the dreamr_native implementation. Called by \code{morie_dreamr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param state Carried through into a list the body builds.
 #' @param action_model Passed to \code{c}.
@@ -184,7 +181,6 @@ morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
 #'
 #' A step of the dreamr_native implementation. Called by \code{morie_dreamr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rewards Passed to \code{.dreamr_vec}.
 #' @param values Passed to \code{.dreamr_vec}.
@@ -271,7 +267,6 @@ morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95
 #'
 #' A step of the dreamr_native implementation. Called by \code{morie_dreamr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values Passed to \code{.dreamr_vec}.
 #' @param targets Passed to \code{.dreamr_vec}.
@@ -303,7 +298,6 @@ morie_dreamr_value_update <- function(values, targets) {
 #'
 #' A step of the dreamr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param state Passed to \code{morie_dreamr_imagine}.
 #' @param action_model Passed to \code{morie_dreamr_imagine}.
@@ -360,7 +354,6 @@ morie_dreamer <- morie_dreamr
 #'
 #' A step of the dreamr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -4,9 +4,11 @@
 
 ad_y <- c(0, 3, 0, 0, 5, 0, 2, 0, 0, 0, 4, 1, 0, 0, 6)
 
+# TSB initialised as tsbF's default (init = "global"): the mean positive
+# demand and the demand rate, as the Python arm's ADIDA uses
 tsb <- function(y, a = 0.1, b = 0.05) {
   pos <- y[y > 0]
-  z <- if (length(pos)) pos[1] else 0
+  z <- mean(pos)
   p <- length(pos) / length(y)
   for (v in y) {
     if (v > 0) {
@@ -38,9 +40,13 @@ test_that("zero fraction, buckets and disaggregation", {
 test_that("TSB base forecast and the ADIDA pipeline", {
   expect_equal(intermittent_forecast(ad_y)$forecast, tsb(ad_y), tolerance = 1e-12)
   expect_equal(intermittent_forecast(ad_y, alpha = 0.3, beta = 0.2)$forecast, tsb(ad_y, 0.3, 0.2), tolerance = 1e-12)
-  expect_equal(intermittent_forecast(c(0, 0, 0))$forecast, 0)
-  expect_error(intermittent_forecast(ad_y, method = "croston"), "not implemented")
-  expect_error(intermittent_forecast(ad_y, horizon = 2), "horizon = 1")
+  expect_error(intermittent_forecast(c(0, 0, 0)), "no positive demand")
+  # the values morie's Python tsbF.intermittent_forecast gives
+  y12 <- ad_y[1:12]
+  expect_equal(intermittent_forecast(y12)$forecast[1], 1.2593144711615354, tolerance = 1e-12)
+  expect_equal(intermittent_forecast(y12, method = "croston")$forecast[1], 1.2367857968034772, tolerance = 1e-12)
+  expect_equal(intermittent_forecast(y12, method = "sba")$forecast[1], 1.1749465069633034, tolerance = 1e-12)
+  expect_error(intermittent_forecast(ad_y, method = "naive"), "method must be one of")
   r <- morie_adida(ad_y, 3, horizon = 5)
   agg <- aggregate_buckets(ad_y, 3)
   fa <- tsb(agg)

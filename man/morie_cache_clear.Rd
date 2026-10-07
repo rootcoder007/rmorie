@@ -29,12 +29,12 @@ opted in to persistent caching by passing
 fetchers.
 }
 \examples{
-\dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 \donttest{
+if (morie_has("sql")) withAutoprint({
 # Non-interactive: skip the confirmation prompt.
 morie_cache_clear("siu", confirm = FALSE)
+})
 }
-\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{morie_cache_dir}}

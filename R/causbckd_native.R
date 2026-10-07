@@ -21,10 +21,8 @@
 #' @return List with \code{estimate}, \code{se}, \code{strata},
 #'   \code{n}, \code{method}. A stratum with an empty arm is a
 #'   positivity violation and raises an error.
-#' @references Pearl, J. (2009), Causal inference in statistics: An
-#'   overview, Statistics Surveys 3, 96-146, doi:10.1214/09-SS057,
-#'   Eq. 25, Section 3.3.1; local copy
-#'   fetched-wave3/pearl-2009-causal-inference-statistics-overview-StatSurveys3.pdf.
+#' @references Pearl, J. (2009), Causal inference in statistics: An overview, Statistics
+#'   Surveys 3, 96-146, doi:10.1214/09-SS057, Eq. 25, Section 3.3.1.
 #' @export
 #' @examples
 #' set.seed(1)

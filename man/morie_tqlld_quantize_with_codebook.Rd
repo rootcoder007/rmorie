@@ -18,3 +18,9 @@ A list with \code{estimate}, \code{indices}, \code{values},
 \description{
 Quantise samples with a fixed codebook
 }
+\examples{
+set.seed(3)
+cb <- morie_tqlld_lloyd_max_codebook(levels = 4L)$codebook
+q <- morie_tqlld_quantize_with_codebook(rnorm(1000), cb)
+q$mse   # close to the Lloyd-Max distortion 0.1175
+}

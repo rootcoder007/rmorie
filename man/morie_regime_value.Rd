@@ -40,6 +40,15 @@ share of units whose estimated effect lies within a tenth of a
 standard deviation of zero -- a boundary-mass heuristic, not a
 per-unit standard-error test.
 }
+\examples{
+set.seed(10)
+n <- 400
+X <- matrix(rnorm(n), n)
+d <- rbinom(n, 1, 0.5)
+y <- 1 + d * X[, 1] + rnorm(n)
+v <- morie_regime_value(y, d, X, regime = as.integer(X[, 1] > 0))
+v$value
+}
 \references{
 Zhang, B., Tsiatis, A. A., Davidian, M., Zhang, M. and
 Laber, E. (2012). Estimating optimal treatment regimes from a

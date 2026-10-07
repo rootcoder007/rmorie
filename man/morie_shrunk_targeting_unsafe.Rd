@@ -18,3 +18,8 @@ and the un-targeted mean score.
 \description{
 The thing not to do: penalise the fluctuation
 }
+\examples{
+set.seed(13)
+Q <- runif(50); H <- rnorm(50); Y <- Q + 0.1 * H + rnorm(50, sd = 0.1)
+morie_shrunk_targeting_unsafe(Q, H, Y, ridge = 10)$epsilon
+}

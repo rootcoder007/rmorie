@@ -29,7 +29,6 @@ A list with \code{average_envelope}, \code{n_cycles}, \code{cycle_len},
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 \donttest{

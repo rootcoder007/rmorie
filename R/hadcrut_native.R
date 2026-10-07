@@ -93,6 +93,7 @@
 morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
                                   has_land = TRUE, has_sst = TRUE,
                                   rule = "hadcrut5") {
+  .morie_arg(land_fraction, "n")
   if (!(rule %in% .HADCRUT_WEIGHT_RULES))
     stop("rule must be one of ", paste(.HADCRUT_WEIGHT_RULES, collapse = ", "))
   lf <- as.numeric(land_fraction)

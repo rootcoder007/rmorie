@@ -22,6 +22,10 @@
 #'   scanned excerpt available to this batch, so the estimator and
 #'   variance are taken from the reference implementation in the CRAN
 #'   package samplingbook 1.2.4, function submean with method = "ratio".
+#' @examples
+#' set.seed(1)
+#' Y <- list(rnorm(5, 10), rnorm(4, 12), rnorm(6, 11))
+#' Twostage(Y, Nl = c(20, 15, 25), M = 10, N = 200)$estimate
 #' @export
 Twostage <- function(Y, Nl, M, N, level = 0.95) {
   m <- length(Y)

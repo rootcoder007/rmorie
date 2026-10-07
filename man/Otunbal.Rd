@@ -34,6 +34,11 @@ b)}, solved by \code{u <- (a/(K v))^(lam/(lam+eps))},
 \eqn{v <- (b/(K' u))^(lam/(lam+eps))} -- Peyre and Cuturi (2019)
 eq. (10.8)-(10.9), p. 163; Chizat et al. (2018).
 }
+\examples{
+C <- outer(1:3, 1:3, function(i, j) (i - j)^2)
+r <- Otunbal(a = c(0.5, 0.5, 0), b = c(0, 0.5, 1), C = C, epsilon = 0.1, lam = 1)
+c(r$mass_a, r$mass_b, r$mass)   # unequal totals: mass is created and destroyed at a KL price
+}
 \references{
 Chizat, L., Peyre, G., Schmitzer, B. and Vialard, F.-X.
 (2018). Mathematics of Computation 87(314):2563-2609.

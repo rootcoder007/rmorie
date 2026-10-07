@@ -62,7 +62,6 @@ A list with \code{x}, \code{acq}, \code{n_starts}, \code{evaluations}.
 \description{
 A step of the bayopt_native implementation. Called by \code{bayopt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

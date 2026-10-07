@@ -15,7 +15,6 @@ The value of \code{tree}, as built in the body.
 \description{
 A step of the ssmpar_native implementation. Called by \code{parallel_scan}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .ssmpar_upsweep(P = 0.5)

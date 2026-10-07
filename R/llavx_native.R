@@ -26,7 +26,6 @@
 #'
 #' A step of the llavx_native implementation. Called by \code{morie_llavx}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param captions Coerced to list by the body, with \code{as.list}.
 #' @param boxes Coerced to list by the body, with \code{as.list}.
@@ -64,7 +63,6 @@ symbolic_representation <- function(captions, boxes) {
 #'
 #' A step of the llavx_native implementation. Called by \code{morie_llavx}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param symbolic A list; the body reads \code{$text} from it.
 #' @param kind Carried through into a list the body builds. Defaults to \code{"conversation"}.
@@ -92,7 +90,6 @@ instruction_prompt <- function(symbolic, kind = "conversation") {
 #'
 #' A step of the llavx_native implementation. Called by \code{morie_llavx}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param patch_features Iterated over elementwise, with \code{lapply}.
 #' @param W A vector; its length is taken and its elements indexed.
@@ -128,7 +125,6 @@ project_patches <- function(patch_features, W, b = NULL) {
 #'
 #' A step of the llavx_native implementation. Called by \code{morie_llavx}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param visual_tokens Iterated over elementwise, with \code{lapply}.
 #' @param text_embeddings Iterated over elementwise, with \code{lapply}.
@@ -160,7 +156,6 @@ llava_visual_chat <- build_sequence
 #'
 #' A step of the llavx_native implementation. Called by \code{morie_llavx}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param stage Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{stage}, \code{trainable}, \code{frozen}, \code{data}, \code{note}.
@@ -188,7 +183,6 @@ training_stage <- function(stage) {
 #'
 #' A step of the llavx_native implementation. Called by \code{morie_llavx}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -212,7 +206,6 @@ training_stage <- function(stage) {
 #'
 #' A step of the llavx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op A vector; its length is taken.
 #' @param ... Passed through.

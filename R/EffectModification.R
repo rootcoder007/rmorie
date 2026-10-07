@@ -33,6 +33,7 @@
 #' SubmaxTest(c(40, 30), rep(m$mu, 2), rep(m$nu, 2), SubmaxComparisons(1), nsim = 2000)$D
 #' @export
 TruncatedProductPvalue <- function(p, alpha_tilde = 0.05) {
+  .morie_arg(p, "n")
   p <- as.numeric(p)
   L <- length(p)
   a <- alpha_tilde

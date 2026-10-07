@@ -18,7 +18,6 @@
 #'
 #' A step of the cgmth_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param grad_f Accepted by the signature and not used anywhere in the body.

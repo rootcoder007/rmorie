@@ -12,7 +12,6 @@ A character value.
 \description{
 A step of the lyapun_native implementation. Called by \code{morie_lyapun}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .lyapun_cheatsheet()

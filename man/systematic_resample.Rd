@@ -20,3 +20,6 @@ One uniform, J evenly spaced points through the cumulative weights;
 the count particle j receives differs from \code{J * w_j} by less
 than one, deterministically.
 }
+\examples{
+systematic_resample(c(0.1, 0.2, 0.3, 0.4), u = 0.5)
+}

@@ -20,12 +20,10 @@
 #' @param model Optional scoring model.
 #' @param seed RNG seed for the corruption draw. Default 0.
 #' @return List as returned by \code{morie_geron_bart}.
-#' @references Lewis, M., Liu, Y., Goyal, N., Ghazvininejad, M.,
-#'   Mohamed, A., Levy, O., Stoyanov, V. and Zettlemoyer, L. (2020),
-#'   BART: Denoising Sequence-to-Sequence Pre-training for Natural
-#'   Language Generation, Translation, and Comprehension, ACL 2020,
-#'   arXiv:1910.13461, Section 2.2. Source PDF:
-#'   fetched-wave3/lewis-etal-2020-bart-denoising-seq2seq-arxiv1910.13461.pdf.
+#' @references Lewis, M., Liu, Y., Goyal, N., Ghazvininejad, M., Mohamed, A., Levy, O.,
+#'   Stoyanov, V. and Zettlemoyer, L. (2020), BART: Denoising Sequence-to-Sequence
+#'   Pre-training for Natural Language Generation, Translation, and Comprehension, ACL
+#'   2020, arXiv:1910.13461, Section 2.2.
 #' @examples
 #' Barte(c("a", "b", "c", "d"), c("a", "b", "c", "d"))$estimate
 #' @export

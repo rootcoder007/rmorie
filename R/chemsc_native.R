@@ -158,7 +158,6 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 #' A step of the chemsc_native implementation. Called by \code{morie_chemsc_hbond},
 #' \code{morie_chemsc_lipophilic}, \code{morie_chemsc_metal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Passed to \code{morie_chemsc_block}.
 #' @param d_ideal Passed to \code{morie_chemsc_block}.
@@ -180,7 +179,6 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 #' A step of the chemsc_native implementation. Called by \code{morie_chemsc_clash},
 #' \code{morie_chemsc_hbond}, \code{morie_chemsc_lipophilic} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param base A vector; indexed elementwise.
 #' @param over Optional; may be \code{NULL}. A vector; indexed elementwise.
@@ -211,6 +209,7 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 #' @keywords internal
 morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
                                par = NULL) {
+  .morie_arg(r, "n")
   p <- .chemsc_par(.CHEMSC_HBOND, par)
   v <- .chemsc_B(r - p$R_IDEAL, p$DELTA_R_IDEAL, p$DELTA_R_MAX,
                  p$HBOND_R_SIGMA, smoothing)
@@ -445,7 +444,6 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
 #'
 #' A step of the chemsc_native implementation. Called by \code{morie_chemsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -463,7 +461,6 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
 #'
 #' A step of the chemsc_native implementation. Called by \code{morie_chemsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.

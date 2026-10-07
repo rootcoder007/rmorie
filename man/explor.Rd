@@ -51,7 +51,6 @@ The value of \code{payload}, as built in the body.
 \description{
 A step of the explor_native implementation. Called by \code{morie_explor}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 explor(states = c(1, 2, 3, 4, 5, 6, 7, 8), actions = c(1, 2, 3, 4, 5, 6, 7, 8),

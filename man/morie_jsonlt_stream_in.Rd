@@ -45,3 +45,11 @@ handler); \code{stream_out}: invisible.
 \description{
 Stream newline-delimited JSON (jsonlite's stream_in / stream_out)
 }
+\examples{
+con <- textConnection(c('{"a":1,"b":"x"}', '{"a":2,"b":"y"}'))
+morie_jsonlt_stream_in(con, verbose = FALSE)
+con <- textConnection("ndjson", "w")
+morie_jsonlt_stream_out(data.frame(a = 1:3, b = c("x", "y", "z")), con, verbose = FALSE)
+close(con)
+ndjson
+}

@@ -19,7 +19,6 @@ The value of \code{list}.
 \description{
 A step of the dpoF_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 optimal_policy(logp_ref = c(1, 2, 3, 4, 5, 6, 7, 8), reward = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)

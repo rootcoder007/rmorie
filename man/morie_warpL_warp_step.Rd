@@ -37,6 +37,5 @@ A list with \code{estimate}, \code{updated}, \code{loss}, \code{user},
 \description{
 A step of the warpL_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

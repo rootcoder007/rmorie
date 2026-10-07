@@ -21,6 +21,5 @@ A list with \code{variance}, \code{info}.
 \description{
 A step of the clrgrf_native implementation. Called by \code{morie_clrgrf}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

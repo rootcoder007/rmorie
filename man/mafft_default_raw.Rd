@@ -17,5 +17,7 @@ A list with \code{M}, \code{f}.
 \description{
 A step of the mafft_native implementation. Called by \code{normalized_similarity_matrix}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+str(mafft_default_raw("nt"), max.level = 1)
 }

@@ -56,7 +56,6 @@ A list with \code{estimate}, \code{alignment}, \code{score}, \code{method},
 \description{
 A step of the mafft_native implementation. Called by \code{morie_mafft}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- mafft_alignment(c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA"),

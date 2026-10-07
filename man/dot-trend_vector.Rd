@@ -22,5 +22,4 @@ A list with \code{vector}, \code{descriptors}, \code{length},
 \description{
 A step of the toptor_native implementation. Called by \code{morie_toptor}.
 See the file header for the source the module follows.
-source it follows.
 }

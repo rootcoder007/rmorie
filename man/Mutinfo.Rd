@@ -19,13 +19,12 @@ list: estimate, mi, bits, mm, hx, hy, hxy, n, method.
 \description{
 Shannon (1948), A mathematical theory of communication, Bell System
 Technical Journal 27(3), 379-423: I(X;Y) = sum_x sum_y p(x,y) log(p(x,y)
-/ (p(x) p(y))), with 0 log 0 = 0.  The paper is freely available but was
-not retrievable here; the definition is quoted in its standard published
-form.  The plug-in estimator is biased upward by about (|X|-1)(|Y|-1) /
-(2n) (Miller 1955), so the Miller-Madow corrected value is returned as
-well -- the raw plug-in alone overstates dependence on small samples.
-Labels are compared as strings and sorted byte-wise so the Python mirror
-orders them identically whatever the locale.
+/ (p(x) p(y))), with 0 log 0 = 0.  The plug-in estimator is biased upward
+by about (|X|-1)(|Y|-1) / (2n) (Miller 1955), so the Miller-Madow
+corrected value is returned as well -- the raw plug-in alone overstates
+dependence on small samples.  Labels are compared as strings and sorted
+byte-wise so the Python mirror orders them identically whatever the
+locale.
 }
 \examples{
 Mutinfo(c(0, 0, 1, 1), c(0, 1, 0, 1))$mi

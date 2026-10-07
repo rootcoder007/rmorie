@@ -19,5 +19,7 @@ A list with \code{p}, \code{focus}, \code{mass}.
 \description{
 A step of the tagRC_native implementation. Called by \code{morie_tagRC}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+tagRC_preference_vector(nodes = c("u1", "u2", "jazz", "i1"), focus = "u1")$p
 }

@@ -11,7 +11,6 @@
 #'
 #' A step of the hindsr_native implementation. Called by \code{hindsr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq Iterated over elementwise, with \code{lapply}.
 #' @param name Passed to \code{sprintf}.
@@ -29,7 +28,6 @@
 #'
 #' A step of the hindsr_native implementation. Called by \code{hindsr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Accepted by the signature and not used anywhere in the body.
 #' @param a Accepted by the signature and not used anywhere in the body.
@@ -52,7 +50,6 @@
 #'
 #' A step of the hindsr_native implementation. Called by \code{hindsr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param strategy One of \code{"episode"}, \code{"final"}, \code{"future"}.
 #' @param episode A vector; indexed elementwise.
@@ -88,7 +85,6 @@
 #'
 #' A step of the hindsr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param episodes Passed to \code{._as_states}.
 #' @param actions Optional; may be \code{NULL}. Iterated over elementwise, with \code{lapply}.
@@ -215,7 +211,6 @@ morie_hindsr <- hindsr
 #'
 #' A step of the hindsr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

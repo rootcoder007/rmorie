@@ -25,14 +25,12 @@
 #'   \code{ci_lower}, \code{ci_upper}, \code{a}, \code{b},
 #'   \code{c_prime}, \code{B}, \code{n}, \code{conf_level},
 #'   \code{method}.
-#' @references Preacher, K. J. and Hayes, A. F. (2004), SPSS and SAS
-#'   procedures for estimating indirect effects in simple mediation
-#'   models, Behavior Research Methods, Instruments, and Computers
-#'   36(4), 717-731, doi:10.3758/BF03206553, procedure p. 722; local
-#'   copy fetched-wave3/preacher-hayes-2004-spss-sas-indirect-effects-BRM36.pdf.
-#'   Shrout, P. E. and Bolger, N. (2002), Mediation in experimental and
-#'   nonexperimental studies: New procedures and recommendations,
-#'   Psychological Methods 7(4), 422-445, doi:10.1037/1082-989X.7.4.422.
+#' @references Preacher, K. J. and Hayes, A. F. (2004), SPSS and SAS procedures for
+#'   estimating indirect effects in simple mediation models, Behavior Research Methods,
+#'   Instruments, and Computers 36(4), 717-731, doi:10.3758/BF03206553, procedure p. 722.
+#'   Shrout, P. E. and Bolger, N. (2002), Mediation in experimental and nonexperimental
+#'   studies: New procedures and recommendations, Psychological Methods 7(4), 422-445,
+#'   doi:10.1037/1082-989X.7.4.422.
 #' @export
 #' @examples
 #' Bsmed(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8),

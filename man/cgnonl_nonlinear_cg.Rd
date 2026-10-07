@@ -52,5 +52,10 @@ A list with \code{x}, \code{fun}, \code{grad}, \code{gnorm}, \code{n_iter},
 \description{
 A step of the cgnonl_native implementation. Called by \code{morie_cgnonl}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+f <- function(x) sum((x - c(1, -2))^2) + x[1]^2 * x[2]^2 / 10
+g <- function(x) c(2 * (x[1] - 1) + x[1] * x[2]^2 / 5, 2 * (x[2] + 2) + x[1]^2 * x[2] / 5)
+r <- cgnonl_nonlinear_cg(f, g, x0 = c(0, 0), beta = "polak-ribiere")
+c(r$x, r$converged)
 }

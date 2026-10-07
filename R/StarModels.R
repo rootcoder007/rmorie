@@ -246,6 +246,7 @@ StarmaFit <- function(x, weights, ar, ma, center = TRUE, max_iter = 500) {
 #' @rdname StLag
 #' @export
 StarmaForecast <- function(fit, x, weights, h = 1) {
+  .morie_arg(fit, "l")
   phi <- if (!is.null(fit$phi)) fit$phi else fit$coefficients
   theta <- if (!is.null(fit$theta)) fit$theta else matrix(0, 0, 3)
   ar <- fit$ar

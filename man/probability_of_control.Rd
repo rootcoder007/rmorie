@@ -21,7 +21,6 @@ A list with \code{estimate}, \code{probability_of_control}, \code{se},
 \description{
 A step of the ttrace_native implementation. Called by \code{morie_ttrace}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- probability_of_control(reps = 20, seed = 1, R0 = 1.5,

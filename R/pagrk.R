@@ -1,9 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' PageRank
 #'
-#' DUPLICATE: PageRank is already implemented as \code{Pgrank}; per
-#' ledger/wave2/DUPMAP.tsv this is an alias, not a third power
-#' iteration.
+#' DUPLICATE: PageRank is already implemented as \code{Pgrank}; this is an alias, not a
+#' third power iteration.
 #'
 #' Formula: \code{x = (1 - alpha)/n + alpha A^T D^-1 x}, with the mass
 #' of dangling nodes spread uniformly so the vector sums to one.

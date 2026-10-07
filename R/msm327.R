@@ -17,9 +17,10 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (15.3) p.652. DOI 10.1007/978-3-030-89010-0.
-#' @export
 #' @examples
-#' Msm327(theta_hat = c(1, 2, 3, 4, 5, 6, 7, 8), mu_hat = 5L)
+#' # P(altered zero) 0.3, Poisson rate 2: (1 - 0.3) * 2 / (1 - exp(-2)), the zero-truncated mean
+#' Msm327(theta_hat = 0.3, mu_hat = 2)$estimate
+#' @export
 Msm327 <- function(theta_hat, mu_hat) {
   v <- .gpzappredict(theta_hat, mu_hat)
   list(estimate = v, y_hat = v, method = "ZAP_RF prediction (MVSML 2022 eq. 15.3)")

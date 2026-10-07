@@ -19,7 +19,6 @@
 #'
 #' A step of the exp3_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
 #' @param gamma_ Coerced to numeric by the body, with \code{as.numeric}.
@@ -80,7 +79,6 @@ exp3 <- morie_exp3
 #'
 #' A step of the exp3_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

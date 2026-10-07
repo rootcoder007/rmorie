@@ -21,7 +21,6 @@ A character value.
 \description{
 A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

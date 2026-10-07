@@ -28,7 +28,6 @@
 #'
 #' A step of the ml_geron implementation. Called by \code{.morie_gr_crc32}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -63,7 +62,6 @@
 #'
 #' A step of the ml_geron implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param value See Usage.
 #' @return The value of \code{.morie_gr_xor32}.
@@ -99,9 +97,8 @@
 #' @return list(bias2, variance, noise, total, mse, residual, b, n)
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' morie_bvdecomp(M, S)
+#' preds <- rbind(c(1, 2, 3), c(1.5, 2.5, 2.5))   # two bootstrap models, three test points
+#' morie_bvdecomp(preds, truth = c(1, 2, 3), noisevar = 0.1)
 morie_bvdecomp <- function(preds, truth, noisevar = 0) {
   p <- as.matrix(preds)
   storage.mode(p) <- "double"
@@ -362,7 +359,6 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 #'
 #' A step of the ml_geron implementation. Called by \code{morie_trkassign}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq_ A vector; its length is taken and its elements indexed.
 #' @param k Numeric; combined arithmetically in the body.
@@ -383,7 +379,6 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 #'
 #' A step of the ml_geron implementation. Called by \code{morie_trkassign}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq_ A vector; its length is taken and its elements indexed.
 #' @param k Numeric; combined arithmetically in the body.

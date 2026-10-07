@@ -17,7 +17,6 @@
 #'
 #' A step of the tail2_t01 implementation. Called by \code{KappaCoh}, \code{KappaWt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{c}.
 #' @param b Passed to \code{c}.
@@ -68,7 +67,6 @@ KappaCoh <- function(rater1, rater2) {
 #'
 #' A step of the tail2_t01 implementation. Called by \code{KappaWt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights A matrix; passed to \code{as.matrix}.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
@@ -188,7 +186,6 @@ CooksD <- function(y, X) {
 #'
 #' A step of the tail2_t01 implementation. Called by \code{PnaAgg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param name One of \code{"max"}, \code{"mean"}, \code{"min"}, \code{"std"}.
 #' @param vals A vector; its length is taken.

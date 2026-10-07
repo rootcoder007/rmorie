@@ -25,5 +25,4 @@ The value of \code{.trupek_steihaug}.
 \description{
 A step of the trupek_native implementation. Called by \code{morie_trupek_trust_region}.
 See the file header for the source the module follows.
-source it follows.
 }

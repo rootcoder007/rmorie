@@ -23,16 +23,15 @@ Lineembed(G, dim = 2, order = 1, U = NULL, Uc = NULL, steps = 0, lr = 0.05)
 list: estimate, O, O_start, U, Uc, n, method.
 }
 \description{
-Tang, Qu, Wang, Zhang, Yan and Mei (2015), LINE: large-scale
-information network embedding, WWW 24, 1067-1077 (arXiv:1503.03578 --
-FETCHED).  First-order proximity, eqs. (1)-(3): p_1(v_i, v_j) = 1/(1 +
-exp(-u_i' u_j)) and O_1 = -sum_(i,j) w_ij log p_1.  Second-order, eqs.
-(4)-(6): p_2(v_j | v_i) = softmax_j(u'_j . u_i) and O_2 = -sum_(i,j)
-w_ij log p_2.  Both are the KL divergence between the empirical and the
-modelled proximity with the constants dropped, exactly as derived.
-Embeddings are supplied or fitted by fixed full-batch gradient steps;
-there is no negative sampling and no edge sampling, since both need a
-generator and the objectives above are what is being computed.
+Tang, Qu, Wang, Zhang, Yan and Mei (2015), LINE: large-scale information network
+embedding, WWW 24, 1067-1077 (arXiv:1503.03578). First-order proximity, eqs. (1)-(3):
+p_1(v_i, v_j) = 1/(1 + exp(-u_i' u_j)) and O_1 = -sum_(i,j) w_ij log p_1.
+Second-order, eqs. (4)-(6): p_2(v_j | v_i) = softmax_j(u'_j . u_i) and O_2 = -sum_(i,j)
+w_ij log p_2. Both are the KL divergence between the empirical and the modelled
+proximity with the constants dropped, exactly as derived. Embeddings are supplied or
+fitted by fixed full-batch gradient steps; there is no negative sampling and no edge
+sampling, since both need a generator and the objectives above are what is being
+computed.
 }
 \examples{
 A <- matrix(c(0, 1, 1, 0), 2, 2)

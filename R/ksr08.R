@@ -19,9 +19,8 @@
 #' @return List with \code{estimate}, \code{boot_mean}, \code{boot_sd},
 #'   \code{process_sd}, \code{ci_lower}, \code{ci_upper}, \code{mu},
 #'   \code{tau}, \code{B}, \code{n}.
-#' @references Kosorok (2008), Introduction to Empirical Processes and
-#'   Semiparametric Inference, Section 2.2.3. Fetched as the full text of
-#'   the book.
+#' @references Kosorok (2008), Introduction to Empirical Processes and Semiparametric
+#'   Inference, Section 2.2.3.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

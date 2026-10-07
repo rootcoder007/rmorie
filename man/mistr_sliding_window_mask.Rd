@@ -19,5 +19,7 @@ The value of \code{mask}, as built in the body.
 \description{
 A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mistr_sliding_window_mask(L = 5, window = 2)
 }

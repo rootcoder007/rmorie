@@ -1,14 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Density-shift detection on a stream by Kullback-Leibler divergence
 #'
-#' The stub carried the label "Gulenko et al (2019)".  No paper by that
-#' author group in that year on density-shift detection could be matched
-#' against Crossref (the closest, Gulenko et al 2018, CloudNet, is
-#' packet-level anomaly detection for black-box services, a different
-#' problem).  The attribution is recorded as UNVERIFIED and the method
-#' is implemented from the formula the stub states, using the
-#' closed-form Gaussian divergence.  KL is not symmetric, and is zero
-#' exactly when the two windows agree; both are checked.
+#' The method is the closed-form Gaussian Kullback-Leibler divergence
+#' between the two windows; its usual attribution ("Gulenko et al 2019")
+#' matches no traceable paper on density-shift detection and is not
+#' relied on.  KL is not symmetric, and is zero exactly when the two
+#' windows agree; both are checked.
 #'
 #' Formula: KL(p || q) = log(s_q/s_p) + (s_p^2 + (m_p - m_q)^2)/(2 s_q^2) - 1/2.
 #'

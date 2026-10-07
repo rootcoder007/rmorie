@@ -25,6 +25,14 @@ Both the propensity \code{g} and the outcome regression
 \code{bar Q} are fitted by post-lasso; the one-dimensional
 targeting step is unpenalised.
 }
+\examples{
+set.seed(11)
+n <- 300
+X <- matrix(rnorm(n * 5), n)
+D <- rbinom(n, 1, plogis(X[, 1]))
+y <- plogis(-0.3 + 0.5 * D + X[, 1] + rnorm(n, sd = 0.3))
+morie_penalised_tmle(y, D, X, penalty = 0.05)$estimate
+}
 \references{
 Belloni, A. & Chernozhukov, V. (2013); van der Laan,
 M. J. & Gruber, S. (2016).

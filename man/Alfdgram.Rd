@@ -28,6 +28,13 @@ through a softmax.  Symmetrising is the point: a distance is symmetric,
 and feeding the head \code{z_ij + z_ji} guarantees the prediction
 respects that whatever the trunk produced.
 }
+\examples{
+set.seed(12)
+n <- 4; cz <- 3
+z <- array(rnorm(n * n * cz), c(n, n, cz))
+w <- matrix(rnorm(64 * cz), 64, cz)
+dim(Alfdgram(z, w)$p)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. section 1.9.8
 }

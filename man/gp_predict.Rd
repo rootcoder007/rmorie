@@ -14,3 +14,7 @@ gp_predict(fit, theta)
 \description{
 Posterior mean and sd at theta
 }
+\examples{
+fit <- gp_fit(design = c(0, 0.25, 0.5, 0.75, 1), values = sin(2 * pi * c(0, 0.25, 0.5, 0.75, 1)))
+gp_predict(fit, theta = 0.6)
+}

@@ -52,7 +52,6 @@
 #'
 #' A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tau Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cost Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
@@ -69,7 +68,6 @@
 #'
 #' A step of the itrgrf_native implementation. Called by \code{.itrgrf_rule_value}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param W A vector; indexed elementwise.
@@ -104,7 +102,6 @@
 #'
 #' A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.itrgrf_dr_scores}.
 #' @param W Passed to \code{.itrgrf_dr_scores}.
@@ -126,7 +123,6 @@
 #'
 #' A step of the itrgrf_native implementation. Called by \code{morie_itrgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
@@ -163,7 +159,6 @@
 #'
 #' A step of the itrgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W Coerced to numeric by the body, with \code{as.numeric}.
@@ -286,7 +281,6 @@ morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
 #'
 #' A step of the itrgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -303,5 +297,5 @@ morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 itrforest <- morie_itrgrf

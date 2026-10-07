@@ -19,5 +19,4 @@ The value of \code{[}.
 \description{
 A step of the mafft_native implementation. Called by \code{find_homologous_segments}.
 See the file header for the source the module follows.
-source it follows.
 }

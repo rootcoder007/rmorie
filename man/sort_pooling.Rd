@@ -21,7 +21,6 @@ A list with \code{pooled}, \code{order}, \code{n_truncated}, \code{n_padded},
 \description{
 A step of the sortP_native implementation. Called by \code{order_is_graph_determined}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sort_pooling(features = c(1, 2, 3, 4, 5, 6, 7, 8), k_keep = 5L)

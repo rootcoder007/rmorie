@@ -35,8 +35,12 @@ spwkth <- function(cov_func, omega = NULL, h_max = 200, n = 40001) {
   var <- as.numeric(cov_func(0))[1]
   dh <- h[2] - h[1]
   w_nyq <- 0.5 * pi / dh
-  wide <- seq(-w_nyq, w_nyq, length.out = 20001)
-  sw <- vapply(wide, function(w) trap(cos(w * h) * ch, h) / (2 * pi), numeric(1))
+  # integral of s over [-w_nyq, w_nyq]: the omega integral of cos(w h) is exact,
+  # 2 sin(w_nyq h) / h (2 w_nyq at h = 0), so one sum over the h grid instead of a
+  # 20,001-point omega grid of h-sums (37 s for the default 40,001 nodes)
+  wt <- rep(dh, length(h))
+  wt[c(1L, length(h))] <- dh / 2
+  kern <- ifelse(h == 0, 2 * w_nyq, 2 * sin(w_nyq * h) / h)
   list(omega = omega, spectral_density = s, variance = var,
-       integrated_density = trap(sw, wide), nyquist_omega = w_nyq)
+       integrated_density = sum(wt * ch * kern) / (2 * pi), nyquist_omega = w_nyq)
 }

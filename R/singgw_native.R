@@ -30,12 +30,16 @@
 #' @return List with \code{estimate} (H), \code{Hinv}, \code{Gw},
 #'   \code{genotyped}, \code{w}, \code{n}, \code{n_genotyped},
 #'   \code{method}.
-#' @references Christensen, O. F. and Lund, M. S. (2010). Genomic
-#'   prediction when some animals are not genotyped. Genetics
-#'   Selection Evolution 42, 2; eqs. (4), (6), (8), p. 3
-#'   (fetched-wave3 PDF). Legarra, A., Aguilar, I. and Misztal, I.
-#'   (2009). Journal of Dairy Science 92(9), 4656-4663. Aguilar, I.,
-#'   et al. (2010). Journal of Dairy Science 93(2), 743-752.
+#' @references Christensen, O. F. and Lund, M. S. (2010). Genomic prediction when some
+#'   animals are not genotyped. Genetics Selection Evolution 42, 2; eqs. (4), (6), (8),
+#'   p. 3. Legarra, A., Aguilar, I. and Misztal, I. (2009). Journal of Dairy Science
+#'   92(9), 4656-4663. Aguilar, I., et al. (2010). Journal of Dairy Science 93(2),
+#'   743-752.
+#' @examples
+#' A <- diag(4); A[1, 2] <- A[2, 1] <- 0.5
+#' G <- matrix(c(1, 0.45, 0.45, 1.05), 2)
+#' r <- Singgw(A, G, genotyped = c(1, 2), w = 0.05)
+#' round(r$estimate, 3)
 #' @export
 Singgw <- function(A, G, genotyped, w = 0.0) {
   A <- as.matrix(A)

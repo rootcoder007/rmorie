@@ -10,12 +10,12 @@
 #' @param moments Interval data, an (n, 2) matrix.
 #' @param alpha Miss probability, default 0.05.
 #' @return The payload of \code{Bndinf}.
+#' @return The payload of \code{Bndinf}.
 #' @references Imbens, G. W. and Manski, C. F. (2004). Confidence intervals
-#'   for partially identified parameters. Econometrica 72(6), 1845-1857 --
-#'   the stub's attribution; the set reported is the criterion level set of
-#'   Chernozhukov, Hong and Tamer (2007) as given in equation (4.10) of
-#'   Molinari, F. (2021), Handbook of Econometrics 7A (arXiv:2004.11751
-#'   p. 97).
+#'   for partially identified parameters. Econometrica 72(6), 1845-1857.
+#'   The set reported is the criterion level set of Chernozhukov, Hong and
+#'   Tamer (2007) as given in equation (4.10) of Molinari, F. (2021),
+#'   Handbook of Econometrics 7A (arXiv:2004.11751 p. 97).
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

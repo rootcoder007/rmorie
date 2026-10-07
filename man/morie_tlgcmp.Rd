@@ -56,6 +56,5 @@ The value of \code{g_computation}.
 \description{
 A step of the tlgcmp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

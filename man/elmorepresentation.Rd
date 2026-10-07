@@ -2,7 +2,7 @@
 % Please edit documentation in R/elmo_native.R
 \name{elmorepresentation}
 \alias{elmorepresentation}
-\title{Compact alias per ledger/NAMING.md}
+\title{Compact alias}
 \usage{
 elmorepresentation(X, layers, raw_weights = NULL, gamma = 1)
 }
@@ -21,7 +21,6 @@ The value of \code{elmo_representation}.
 \description{
 A step of the elmo_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

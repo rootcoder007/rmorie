@@ -20,9 +20,8 @@ The value of \code{morie_dp_laplace_mechanism}.
 }
 \description{
 Alias of \code{morie_dp_laplace_mechanism}: releases
-\eqn{f(D) + Lap(\Delta f / \epsilon)}. The generated stub for module
-laplc described exactly the mechanism already shipped, so this is an
-alias, not a second implementation.
+\eqn{f(D) + Lap(\Delta f / \epsilon)}.  \code{laplc} is the same
+mechanism under a short name, not a second implementation.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -33,10 +32,9 @@ Dwork, C., McSherry, F., Nissim, K., and Smith, A. (2006).
 Calibrating noise to sensitivity in private data analysis. Theory of
 Cryptography (TCC 2006), LNCS 3876, 265-284.
 
-Dwork, C., and Roth, A. (2014). The algorithmic foundations
-of differential privacy. Foundations and Trends in Theoretical
-Computer Science 9(3-4), 211-487. Definition 3.3 and Theorem 3.6.
-Local source: fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
+Dwork, C., and Roth, A. (2014). The algorithmic foundations of
+differential privacy. Foundations and Trends in Theoretical Computer Science
+9(3-4), 211-487. Definition 3.3 and Theorem 3.6.
 
 Delegating wrapper (not a bare assignment) so that source collation
 order does not matter at load time; the body is a single call to the

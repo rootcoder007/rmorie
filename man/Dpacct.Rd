@@ -25,6 +25,9 @@ List with \code{epsilon}, \code{order}, \code{logmgf}, \code{delta}, \code{sigma
 Formula: alpha(lam) <= T q^2 lam(lam+1)/((1-q) sigma^2); delta = min_lam
 exp(alpha(lam) - lam eps)
 }
+\examples{
+Dpacct(sigma = 1.1, sample_rate = 0.01, steps = 1000)$epsilon
+}
 \references{
 Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar and Zhang (2016), Deep
 Learning with Differential Privacy, CCS'16, arXiv:1607.00133. Lemma 3 for the

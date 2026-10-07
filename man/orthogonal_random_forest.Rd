@@ -58,7 +58,6 @@ A list with \code{estimate}, \code{theta}, \code{denominator}, \code{n},
 \description{
 A step of the orfgrf_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 orthogonal_random_forest(Y = c(1, 2, 3, 4, 5, 6, 7, 8),

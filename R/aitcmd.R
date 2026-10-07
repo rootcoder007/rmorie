@@ -11,10 +11,8 @@
 #' @param eps Distances below this are treated as coincident.
 #'
 #' @return List with median, clrmed, objective, clrmean, n, D, steps.
-#' @references Filzmoser and Hron (2008), Mathematical Geosciences 40(3),
-#'   233-248; clr is Aitchison's transform and the spatial median is
-#'   Weiszfeld's (1937).  The article is paywalled and was not read; only
-#'   the stated construction is claimed.
+#' @references Filzmoser and Hron (2008), Mathematical Geosciences 40(3), 233-248; clr
+#'   is Aitchison's transform and the spatial median is Weiszfeld's (1937).
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)

@@ -23,5 +23,4 @@ A list with \code{m}, \code{s}, \code{used}.
 \description{
 A step of the surepi_native implementation. Called by \code{.surepi_stat}.
 See the file header for the source the module follows.
-source it follows.
 }

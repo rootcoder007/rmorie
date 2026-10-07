@@ -8,7 +8,23 @@
 # morie.datahub (Python).
 
 .morie_data_url <- function() {
-  sub("/+$", "", Sys.getenv("MORIE_DATA_URL", "https://data.rmorie.com"))
+  env <- sub("/+$", "", trimws(Sys.getenv("MORIE_DATA_URL", unset = "")))
+  if (nzchar(env)) return(env)
+  # the signed services document (through rmoriebricklayer) names the data service;
+  # a bricklayer too old to read it leaves the default
+  svc <- NULL
+  if (requireNamespace("rmoriebricklayer", quietly = TRUE)) {
+    ns <- asNamespace("rmoriebricklayer")
+    if (exists("bricklayer_services", envir = ns, inherits = FALSE)) {
+      svc <- tryCatch(get("bricklayer_services", envir = ns)(offline = TRUE)$data, error = function(e) NULL)
+    }
+  }
+  if (is.null(svc)) return("https://data.rmorie.com")
+  if (!identical(svc$mode, "key") || !nzchar(svc$base_url %||% "")) {
+    stop("the curated-data service is not available right now (see ",
+         svc$request_access %||% ACCESS_REQUEST_URL, ")", call. = FALSE)
+  }
+  svc$base_url
 }
 
 .morie_data_manifest_path <- function() {
@@ -20,7 +36,8 @@
 .morie_data_get <- function(path, dest, timeout = 600, size = NULL) {
   key <- .morie_llm_hosted_key()
   if (is.null(key)) {
-    stop("data.rmorie.com needs your MORIE key: run `rmorie login` (R: morie_llm_login()) once.", call. = FALSE)
+    stop(paste0("the curated tables need your MORIE key: ", .morie_llm_access_hint(),
+                "; `rmorie login` (GitHub) or `rmorie login --email you@example.com` also sign in", .morie_httr2_note(), "."), call. = FALSE)
   }
   label <- sub("^/", "", path)
   if (is.null(size) && grepl("\\.csv\\.gz$", path)) {
@@ -51,7 +68,7 @@
 
 #' Curated datasets at data.rmorie.com
 #'
-#' The MORIE project keeps 160 databases materialised from Google BigQuery
+#' The MORIE project keeps 160 databases materialised from Google BigQuery public datasets, plus the Health Infobase tables and the OTIS research files,
 #' public datasets (Chicago crime, EPA air quality, US census, FEC, FDA,
 #' NOAA, NHTSA, Hacker News, Ethereum, World Bank, ...) and serves their
 #' tables from the edge. They open with the key \code{\link{morie_llm_login}}
@@ -141,7 +158,7 @@ morie_load_hosted_dataset <- function(key, db_path = NULL, refresh = FALSE) {
   tmp <- tempfile(fileext = ".csv.gz")
   on.exit(unlink(tmp), add = TRUE)
   .morie_data_get(sprintf("/%s/%s.csv.gz", parts[[1L]], paste(parts[-1L], collapse = "/")), tmp)
-  df <- utils::read.csv(gzfile(tmp), stringsAsFactors = FALSE)
-  morie_cache_store(df, table, db_path = db_path)
+  df <- utils::read.csv(gzfile(tmp), stringsAsFactors = FALSE, skipNul = TRUE)  # some sources carry NUL bytes
+  .morie_cache_store_soft(df, table, db_path = db_path)
   df
 }

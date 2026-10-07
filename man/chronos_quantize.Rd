@@ -20,3 +20,7 @@ A step of the chronos_native implementation. Called by \code{chronos_tokenize}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+bins <- chronos_uniform_bins(lo = -3, hi = 3, n_bins = 12L)
+chronos_quantize(c(-2.5, 0, 0.4, 5), bins)$tokens
+}

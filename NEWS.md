@@ -1,10 +1,316 @@
+# rmorie 1.4.0 - 2026-10-03
+
+* Sign-in and errors, after rmoriebricklayer 0.5.9's network review: the page the sign-in
+  service names is handed to the browser only when it is an https address of a public host,
+  and a gateway's error text is redacted of the key it was sent (by value and by shape)
+  before it becomes an R condition.
+* The hosted MORIE tier is the last resort: `morie_llm_detect_provider()` and the fallback
+  chain in `morie_llm_ask()` / `morie_llm_ask_multi()` now try a local Ollama, then your own
+  Gemini / OpenAI-compatible / OpenAI keys, and only then the hosted tier. Its address, model
+  and sign-in service come from the signed services document at rmorie.com (through
+  `rmoriebricklayer::bricklayer_services()`; an older bricklayer keeps the previous defaults),
+  so they can change without a release. Keys are personal and issued on request at
+  <https://rmorie.com/access>; every hint says so (`rmorie login --token`, GitHub and emailed-code
+  sign-ins keep working). The curated-data address follows the same document.
+* The 19 OTIS Ruhela-formulation analyses that returned a "not yet ported" placeholder run:
+  `morie_otis_analyze_{a01,b01,b02}_ruhela_formulations()` (the ten-estimator DLRM with the IRM-DML
+  standard-error comparison and the Naive arm), the per-year driver and its a01/b01 forms, the a01,
+  b01 and b02 alternative-treatment and gender-subgroup formulations, and
+  `morie_otis_analyze_a01_with_csi_context()` (TPS tables passed as `tps_data=` or loaded). New
+  estimators behind them: `morie_otis_gcomputation()`, `morie_otis_atc()`, `morie_otis_balance()`
+  and `morie_otis_per_year_irm_dml()`. An aggregate analysis given a table without its columns says
+  which columns are missing.
+* Weak-instrument tests computed from the data: `morie_iv_montiel_olea_pflueger()` (effective F,
+  robust to heteroskedasticity, clustering and serial correlation, with Patnaik critical values for
+  the simplified, TSLS and LIML tests) and a native `morie_iv_kleibergen_paap()` (rk statistic and rk
+  Wald F by the Kleibergen-Paap SVD, robust or clustered; it returned the Cragg-Donald statistic).
+  `morie_iv_2sls()` reports the effective F and its critical value beside the iid quantities, and
+  `morie_iv_stock_yogo()` outside its rows points to both instead of "TODO: extend".
+* The spatial-voting estimators that returned a substitute run their own models, each checked
+  against its reference implementation: `morie_spatial_voting_alpha_nominate()` (Carroll et al.
+  2013 slice sampler; it returned an EM-IRT fit; agrees with anominate on alpha, beta and the ideal
+  points, r = 0.9998), `morie_spatial_voting_bayesian_am()` (Hare et al. 2015; it returned
+  basicspace's deterministic AM; matches the authors' JAGS model to the third decimal),
+  `morie_spatial_voting_bayesian_mds()` and `morie_spatial_voting_bayesian_unfolding()` (Bakker and
+  Poole 2013 lognormal model; they returned smacof's stress solution), `morie_spatial_voting_ordinal_irt()`
+  (Quinn 2004 with item cutpoints; it reported MCMCpack's loadings as ideal points, and its fallback
+  shared one set of cutpoints across items and rescaled the draws every sweep) and
+  `morie_spatial_voting_dynamic_irt()` (Martin and Quinn 2002 Gibbs sampler). Without basicspace,
+  `morie_spatial_voting_aldrich_mckelvey()` computes Aldrich and McKelvey's closed form (it fitted a
+  different regression) and `morie_spatial_voting_blackbox()` fits the observed cells only (it filled
+  missing cells with zeros); both now match basicspace, which `morie_spatial_voting_blackbox()`
+  never reached because it passed `missing = NA`.
+* Every exported function has a runnable example, and a bad first argument (wrong type, shape or
+  missing values) stops with a plain-language message naming the argument.
+* Without DBI, a cache given as `db_path=` keeps its files beside that path; every such cache shared
+  one directory, so a table cached for one database was read back for another.
+
+* `morie_estimate_ate()` (and the MRM "ipw ate" row) reports the HC3 sandwich standard error of the
+  weighted regression `y ~ t` whose coefficient its Hajek estimate is, as morie's Python does. It
+  used the Horvitz-Thompson influence function, which is not centred on the group means: the
+  standard error ran 45-57% above Python's and 69% above the sampling SD in simulation (95%
+  intervals that covered the truth 100% of the time). The two arms now agree to 1e-12.
+* `morie_estimate_double_ml()` cross-fits both nuisances on one sample split, its folds drawn from
+  the splitmix64 uniforms rmoriebricklayer and morie's Python share (R's `sample()` and numpy's
+  permutation never agreed, so one seed gave different folds in the two languages).
+* `morie_kendall_tau()` and `morie_wilcoxon_signed_rank_test()` use base R's default p-values (exact
+  below 50 pairs without ties), as morie's Python does; they forced the normal approximation.
+  `exact =` chooses.
+* `morie_hawkes_fit()` fits 50 events or more with `rmoriebricklayer::core_hawkes_fit()` (bounded,
+  analytic gradient): 1,083 Weibull or Lomax events take under a second instead of 32-38 s, and a
+  Lomax fit that tends to its exponential limit stops at the bound with a note that its shape is not
+  identified, instead of reporting alpha = 4.8e8. The result also carries `at_bound`.
+* `morie_tps_hawkes_advanced_fit()` refuses a kernel/method pair no fit can serve (`soe` on a kernel
+  that is not completely monotone, `inar` with a sinusoidal baseline) with an error, as Python does;
+  it returned an empty result with the reason in `$warnings`.
+* `rmorie analyze tps` runs: `'{"datasets":["Assault"],"nrows":5000}'` (names as `morie_tps_load()`
+  takes) or `'{"data":"FILE.csv"}'`; without either it exits 1 with the usage (it exited 0 with
+  "not_available").
+* `morie_datasets_ckan_package()` read no package (the resource list arrives as a data frame) and
+  now returns every CSV, a bilingual package's English and French copies under "(en)" and "(fr)";
+  CKAN CSVs in Windows-1252 (Ontario's library statistics) are read instead of stopping on "invalid
+  multibyte string".
+* A read-only or full home directory no longer stops `pull --out` or a loader: the cache is skipped
+  with a message naming the directory, and the data are returned; a failed cache write names the path
+  instead of a later "cannot open the connection".
+* `pull cihi820b` and the other CIHI workbooks: a jurisdiction merged down its block is carried to
+  every row (112 of 133 rows were blank), Excel's number noise (`51.959413779999998`) is written as
+  the workbook's digits, and `pull` writes CSV as morie's Python does (quotes only where needed, an
+  empty field for a missing value), so the two arms' files compare equal. The progress line names the
+  dataset, one line each.
+* `download-bootstrap` keeps a table that is already cached (`--refresh` downloads again), keeps one
+  copy instead of two 230 MB files, and says "the CKAN datastore answered HTTP 500" rather than
+  "unreachable" when the server answered.
+* `spwkth()` computes its integrated density in milliseconds (the omega integral is exact, not a
+  20,001-point quadrature: 37 s before). Slow examples were trimmed and the `morie_entheo_*` examples
+  say how to get the DMT_Imaging data instead of printing an error.
+* DESCRIPTION requires rmoriedata (>= 0.3.4) and pins Remotes to rmoriebricklayer@v0.5.5 and
+  rmoriedata@v0.3.4; the README installs both from r-universe (CRAN carries older versions) and
+  describes the 0.3.4 SIU corpus (4,613 reports, 66 columns, English and French).
+* **Security: `morie_crypto_hybrid_encrypt()` and `rmorie crypto encrypt` now keep files private.**
+  The R arm still wrote the 1.3.x container, whose wrapping key was derived from the KEM ciphertext
+  and the public key alone (the shared secret was computed and discarded), so anyone holding the
+  file and the PUBLIC key could open it. The wrapping key now comes from
+  `HKDF(shared_secret || kem_ct || pk)` behind the 1.4.0 marker `MORIEHYB 0x02`, the same bytes
+  morie writes: rmorie and morie open each other's files, and a 1.3.x file still opens, with a
+  warning to encrypt it again. Files encrypted with rmorie 1.3.x or an earlier 1.4.0 build should
+  be encrypted again. `morie_crypto_hybrid_container_version()` tells the two apart.
+* `rmorie crypto keygen --output DIR` writes marked key files (`MORIEPK`/`MORIESK`, as morie) and
+  the secret key owner-only (mode 600; it was world-readable), and refuses to replace an existing
+  secret key without `--force`. `decrypt --key` takes a `.moriesk` file as well as a keystore name
+  (a key pair from `keygen --output` could not decrypt anything); `encrypt` and `decrypt` take
+  `--out` and refuse to overwrite an existing file without `--force`; the wrong kind of key file,
+  a missing one and a 1.3.x public key are each refused with their own message.
+* `morie_mrm_estimate_causal_effect()`'s consensus standard error is the weighted mean of the
+  estimators' standard errors. It pooled them as independent studies (`sqrt(1 / sum(w))`), but all
+  four run on the same rows, so the interval was about half as wide as it should be: in 300
+  simulated data sets (n = 500, true effect 0.8) its 95% interval covered the truth 70% of the time
+  (morie's run); it now covers 96%.
+* `morie_matching_att_matched()` counts a control matched to several treated units once per pair
+  squared (Abadie and Imbens 2006), not once per pair: with matching with replacement its interval
+  covered the truth 83% of the time in the same simulation; it now covers 93% (95% in morie). With
+  every control used once the standard error is unchanged.
+* Citations without a title now carry the publisher's title, and the citation gate also catches a
+  reference written "Author (year), \emph{Journal} ...", which it had missed.
+* `morie_mrm_estimate_causal_effect()`'s matching estimate matches with replacement and takes the
+  ATT from the matched pairs. Without replacement, when controls were no more numerous than treated
+  units, nearly every control was used and nothing was balanced: on the package's own simulated
+  design (true effect 0.8) it returned the unadjusted difference, 1.13, while IPW, AIPW and DML gave
+  0.85. It now gives 0.92, the same ATT and standard error as morie to ten decimals.
+* SIU `police_service` is the service of the subject officials, read from the director's analysis
+  (rmorie's own copy of the SIU core, as in rmoriebricklayer 0.5.5), not the force that notified the
+  SIU.
+* Without jsonlite, JSON is read by rmoriebricklayer's port of jsonlite's reader, so every caller
+  sees the same object either way: the Socrata by-id loaders returned `list()` on the default
+  install, because rows carrying a nested location object were left a bare list of records.
+
+* HQC (`morie_crypto_hqc_keygen()` / `_encaps()` / `_decaps()`) runs without liboqs through
+  rmoriebricklayer's native HQC-1 (v5.0.0, a 32-byte secret; liboqs builds use round 4, 64 bytes);
+  the ML-KEM and ML-DSA wrappers check key and ciphertext sizes before either backend, with the same
+  words. The post-quantum and hybrid tests run on every install, and the network-gated tests probe a
+  web host on port 443 (port 53 answered only on DNS servers, so 13 of them could never run).
+
+* `morie_granger_test()` and `morie_transfer_entropy_gaussian()` refuse a constant or perfectly
+  predictable response (an exact fit leaves round-off, not 0, in the residual sum, so the test
+  passed and returned noise), with the same values as morie's Python on every other series.
+
+* Hawkes fits in seconds instead of tens of minutes. `morie_tps_hawkes_advanced_fit()`,
+  `morie_tps_compare_hawkes_kernels()` and `morie_tps_hawkes_markovian_vs_nonmarkovian()` fit
+  through rmoriebricklayer's `core_hawkes_fit()` (analytic gradient, projected BFGS in C++, the
+  routine morie's Python calls) and take a `method`: `"exact"` (Ozaki's O(n) recursion for the
+  exponential kernel), `"soe"` (Lomax, and gamma with shape < 1, as sums of exponentials with
+  relative error `eps`; Beylkin & Monzon 2010), `"truncate"` (kernel tail mass below `eps` left
+  out), `"em"` (Veen & Schoenberg 2008) and `"inar"` (Kirchner 2017); `"auto"` is exact for the
+  exponential kernel, truncate for Weibull and soe for Lomax and gamma. The reported `nll` is always
+  the exact likelihood, so AIC compares across routes. They fit every event by default (`max_n =
+  NULL`; a requested subsample is deterministic), prepare the event times as morie does, and the KS
+  p-value is exact up to n = 10,000, so the two arms return the same estimate on the same data.
+
+* Native engines everywhere a result could depend on what is installed. Survey designs are native
+  (`morie_survey_design()` takes strata, clusters, `nest` and a finite-population correction; the
+  mean and GLM standard errors are the Taylor linearisation of `survey::svyrecvar`, equal to
+  `survey` to 1e-12; a `survey::svydesign` object is read into the same form). Before, an
+  installed `survey` changed the object type and stratified or clustered designs fell back to
+  unclustered SEs. `morie_matching_full()` is exact optimal full matching (a minimum-weight edge
+  cover; its total equals optmatch's at a tight tolerance and is below it at the default one),
+  `morie_matching_subclassify()` and `morie_matching_variable_ratio()` follow MatchIt's rules with
+  identical subclasses, pairs and weights, and the OTIS `match_first` step uses the same matcher
+  whether or not MatchIt is installed (it used a random-order logit match without it).
+  `morie_estimate_g_computation()` and `estimate_ate_gcomputation()` report stdReg's sandwich SE,
+  computed natively (equal to `stdReg::stdGlm` to 1e-16); before, without stdReg the SE was
+  `sd(mu1 - mu0) / sqrt(n)` or a bootstrap, which leaves out the outcome model's uncertainty.
+  `morie_causal_weighting()` is native for "glm", "cbps" and ATT entropy balancing and uses
+  WeightIt only for other methods. Changed results: `morie_matching_nearest_neighbor()` with
+  `n_neighbors > 1` now matches in rounds as MatchIt does (every treated unit gets its first
+  control before any gets a second), pair-identical to MatchIt; it gave each treated unit all its
+  controls in turn before. Bad input: `BayesOutbreak()`, `DlaAggregate()`, `morie_dsp_ruler_fd()`
+  and two prime helpers no longer hang, `DiffEnt()` no longer opens a PDF device, and
+  `morie_siu_refresh_manifest()` checks `out_path` before its 6,000-request crawl. All six CIHI
+  workbooks read without readxl (only a binary `.xls` needs it), with the real header row even
+  when a note widens the sheet. Two-proportion effect sizes add the risk difference and odds
+  ratio beside Cohen's h, and the frequentist test table adds Bonferroni and Benjamini-Hochberg
+  p-values over the family.
+  The key store no longer needs the sodium package and its files are now morie's: scrypt and
+  ChaCha20-Poly1305 are native (RFC 7914 and RFC 8439 vectors), so a store written by the Python
+  arm opens here and the other way round; entries sealed by rmorie 1.3.x still open. Without
+  libsodium, ChaCha20-Poly1305, HKDF and the random bytes run on the same native code (identical
+  output), so the hybrid ML-KEM envelope and `rmorie selftest` work on every build.
+
+* Fresh-user test, fourth pass. `morie_psymet_omega()` now factors by principal axes and
+  takes `hier` from the Schmid-Leiman transformation (promax-rotated factors, one general
+  factor from their correlations), so a multi-factor scale no longer reports omega
+  hierarchical near 1. Items that load negatively on the general factor are reverse-keyed and
+  scored the other way round first, as `psych::omega()` does (a message names them); on the
+  `psych::bfi` items and `psych::sim.hierarchical()` data it agrees with
+  `psych::omega(fm = "pa", rotate = "Promax")` within 0.01 (the rotations differ in detail).
+  The two-proportion power table applies Kish's design effect of the weights (`n_eq_eff`,
+  `power_deff`) instead of placeholders, and `power_srs` uses the observed group sizes.
+  `rmorie verify` reports a declared placeholder table and a header-only table as such;
+  `rmorie analyze` exits 1 when every analysis of the subject failed; a small stratified total
+  names the strata it leaves empty; `ask --model` names the model no provider answered for, and
+  the SIU extraction chain ends with the same cause line; connection warnings no longer leak
+  before a download error; `login` says it is still waiting; `run-module` prints no completion
+  line when nothing was written; the OTIS grid names the columns a pair lacks; both spellings
+  of a NAPS key resolve; `emissions --country` with an unknown code says the location is
+  detected; `morie_siu_resolve_so()` accepts a case number. The REML heterogeneity estimate is
+  the converged optimum (metafor's default stopping threshold leaves it 0.3% off). The native SIU
+  parser reads ordinal dates ("August 3rd, 2017") and French months, and names the police service from
+  the sentence that notified the SIU (17-OVI-201 now reads Guelph Police Service, 2017-08-03); SIU page
+  text decodes in a C locale; ebac-core and ebac-integrations no longer print the expected design-weight
+  glm warning (other glm warnings still show); the causal-effects table drops an always-empty column.
+
+* Research: four new problems join the Lean-backed programme, each with its R function and
+  tests. `morie_meta_random_effects()` and `morie_meta_dl_bias()` (pooling evaluations:
+  the DerSimonian-Laird truncation is biased upward under homogeneity and the random-effects
+  variance is never below the fixed-effect one, `Research.P13`); `morie_logit_separation()`
+  (complete or quasi-complete separation makes the logistic likelihood climb without a
+  maximiser, the Baldus proportionality-review logit, `Research.P5`);
+  `morie_bounds_confidence()` (Imbens-Manski intervals for partially identified sentencing
+  effects, `Research.P11`); `morie_cheeger_bound()` (the conductance of a hot-spot set
+  bounds the spectral gap of the street graph, `Research.P3`). The Python package carries
+  every research function at parity.
+
+* Research: seven more problems join the Lean-backed programme, each with its R
+  function and tests: Duncan-Davis bounds (`morie_ecological_bounds()`,
+  `Research.P12`), monotone treatment selection (`morie_sentence_effect_mts()`,
+  `Research.P11`), the extinction probability of a near-repeat chain
+  (`morie_contagion_extinction()`, `Research.P10`), judge-leniency designs and what the
+  Wald ratio identifies (`morie_judge_iv()`, `morie_judge_iv_population()`,
+  `Research.P14`), the Oaxaca-Blinder decomposition of a sentencing gap with both
+  references and the interaction (`morie_disparity_decomposition()`, `Research.P15`),
+  Little's law on a court docket (`morie_court_backlog()`, `Research.P16`) and the
+  incapacitation identity with its marginal year (`morie_incapacitation()`,
+  `Research.P17`), and selective labels for release rules (`morie_selective_labels()`,
+  `Research.P18`), and regression to the mean at selected hot spots
+  (`morie_regression_to_mean()`, `Research.P19`).
+
+* Research: seven continuations close the ledger's open items, each with a Lean theorem,
+  an R function and tests, at parity with Python: `morie_two_point_bound()` (Le Cam's
+  two-point lower bound for the dark figure, `Research.P1LeCam`), `morie_meta_hksj()`
+  (the Hartung-Knapp-Sidik-Jonkman interval with DerSimonian-Laird or REML heterogeneity,
+  `Research.P13HKSJ`), `morie_judge_slope_test()` (the many-judge slope test of
+  monotonicity, `Research.P14Slope`), `morie_dfl_reweight()` (DiNardo-Fortin-Lemieux
+  reweighting, `Research.P15Reweight`), `morie_backlog_censoring()` (the disposed-cases
+  mean as a bound, `Research.P16Censoring`), `morie_incapacitation_career()` (desistance and
+  replacement, `Research.P17Replacement`) and `morie_hotspot_shrinkage()` with
+  `morie_shrinkage_loss()` (empirical-Bayes shrinkage and the size of the
+  regression-to-the-mean fall, `Research.P19Shrinkage`). The Lean audit now covers 264
+  theorems in 58 files, 0 sorry, standard axioms only.
+
+* The pollution concentration-response coefficients match their sources (both arms): NO2 all-cause
+  mortality RR 1.02 per 10 micrograms per cubic metre (Huangfu and Atkinson 2020, the WHO 2021 review)
+  instead of 1.04, and PM2.5 all-cause mortality log-linear at RR 1.08 per 10 (Chen and Hoek 2020,
+  WHO 2021) instead of an IER triple with no source; the Burnett IER stays for IHD and stroke, so
+  `verify-pollution` burdens are smaller than 1.3.x reported.
+
+* Fixes from the 1.4.0 fresh-user test agents (tests in `test-agent-round-1_4_0.R`): the dataset
+  catalog carries the 24 NAPS air-quality keys and the CCHS 2022 PUMF, so both arms list the same 71
+  keys (`morie_fetch_naps()` fetches ECCC's hourly files; a zip with no member named yields its first
+  CSV); `rmorie list-datasets` prints a route for every key and the footer; `rmorie pull`,
+  `inspect` and `verify` without a path exit 2; `exec` sees the package's functions; `edit` refuses a
+  terminal editor when stdin is not a terminal; `generate-template` takes the module as a positional
+  argument, fills the module description, rejects an unknown module and never overwrites without
+  `--force`; `emissions --seconds Inf` is refused; `verify-pollution` validates its numeric flags, uses
+  one reference concentration throughout and counts avoided deaths over the exposed share; the ArcGIS
+  downloads show their progress; the synthetic-CPADS notice is given once per session; the launcher
+  written by `install_cli()` pins its library with `.libPaths()` so an `R_LIBS` in `~/.Renviron` cannot
+  replace it; the liboqs message is one sentence; a login instruction always names the email route.
+  Round three from the same agent: `verify` fails p-values outside [0, 1] and reversed confidence intervals;
+  `--module` selects the module's own tables (directory or name prefix) and an unknown module is refused;
+  a stratum shorter than its allocation carries weight 1 under `--per-stratum`; `run-modules`/`pipeline`
+  reject an unknown module before loading data; `run-module` fails when a module wrote nothing and says
+  what the artifact modules collect; `otis-analysis` and `mapq-psychometrics` say they run on synthetic
+  frames; `morie_run_pipeline()` refuses a missing `project_root`; `morie_bricklayer(check = TRUE)` no
+  longer mistakes the R launcher for the rmorie-cli binary; `morie_siu_sanity_check()` accepts the
+  reviewed corpus's bare officer counts and reasoning text; HTML entities in SIU text are decoded
+  (`&#039;`, accented names); `emissions --country` names an unknown code; the OTIS causal grid returns an
+  empty table with a message; the fallback cause names a rejected `GEMINI_API_KEY`; a failed read says
+  why and what the Wayback Machine said; `pull --out` names a file it cannot write; `sample --seed`
+  must be a number; the `morie_write_audit_markdown()` example runs; hyphenated catalog keys (the NAPS
+  keys) resolve as written; `emissions --seconds` tops out at a day; the first-paper template reads as a
+  sentence and names the rmorie command; `verify-pollution` defaults the counterfactual to 10 for NO2 and
+  5.8 for PM2.5; the `morie_cluster()` examples label their cases (the UL1.2 warning stays, by the
+  standard); `morie_bricklayer()` and `agent()` no longer speak of a separate, proprietary rmorie-cli:
+  the command line is this package's launcher (`install_cli()`).
+
+* Fixes from the 1.3.9 stress test (every one with a test in `test-stress-1_4_0.R`): `rmorie verify`
+  no longer fails a table whose text column is blank throughout; `inspect`/`verify --module`
+  match the hyphenated module name against the tables it wrote; `verify-pollution` refuses
+  `--exposure-mean` without `--exposure-prevalence` instead of assuming prevalence 0;
+  `emissions --seconds` validates its value and the sampler thread is joined at exit (no more
+  core dump after an R error); `sample --n` is the total for stratified draws (`--per-stratum`
+  for N each) and the `.weight` column is announced and droppable (`--no-weight`); `run-module`
+  rejects an unknown name before loading data; `exec` prints what the code printed with a final
+  newline; `agent --help` and `perseus --help` describe the verb; `login --to-email` needs
+  `--email`; `download-bootstrap` asks for `--survey` instead of starting a 376 MB download;
+  `analyze` and `explain` use the same usage exit code; the tutorial says so when stdin is closed;
+  `ask`/`percy` name why no model answered (rejected hosted key, unreachable endpoint) and the
+  local fallback text carries a `fallback` attribute; `install_cli()` writes a launcher pinned to
+  the library it was installed from and honours `~/.Renviron`; the duckdb banner is silenced on
+  listing verbs; `morie_load_dataset()`, `morie_spillover_ht()` and `morie_run_pipeline()` give
+  worded errors; `morie_otis_causal_grid()` skips a pair whose columns the frame lacks;
+  `morie_install_extras()` looks packages up without loading them; `morie_emissions_track()`
+  writes nothing unless `output_dir` is given; `morie_matching_multi_treatment()` skips the
+  reference level for integer treatments; `morie_siu_sanity_check()` accepts the corpus's yes/no,
+  true/false and lower-case gender values; the SIU LLM chain reads `GEMINI_API_KEY` and knows the
+  hosted tier; the README SIU calls match the functions; the crypto message names rmorie and
+  `SystemRequirements` lists liboqs. The 116 example topics that emitted R warnings now run clean
+  (corrected examples, and informational notes demoted from warnings to messages; `morie_cluster()` keeps its UL1.2 warning for unlabelled cases, by the standard).
+
+* Datasets: the fourteen Health Infobase tables (CPADS, CSADS, CSUS) download from
+  the portal and fall back to the copy at data.rmorie.com (`hib/...` keys); the three
+  OTIS research environments are fetched from data.rmorie.com as R objects
+  (`morie_load_dataset("otisfin")` returns the environment); the Ontario correctional
+  institution locations join the catalog as `otisloc`. The message for a missing
+  own file now says what it means.
+
 # rmorie 1.3.9 - 2026-10-01
 
 * The `causal-estimators` module runs again on the synthetic CPADS frame: its
   AIPW line now lines the propensity rows up with the outcome rows by name
   instead of predicting from a frame without the label covariates.
 
-* The hosted tier lists Cloudflare Workers AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf) beside the
+* The hosted tier lists additional AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf) beside the
   ollama.com ones, and falls back to them when a cloud model is rate
   limited; `rmorie ask --model gpt-oss-120b:cf` picks one.
 

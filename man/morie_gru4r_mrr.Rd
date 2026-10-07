@@ -19,3 +19,6 @@ Scalar.
 \description{
 1 / position of the target within the top k, or 0 if absent.
 }
+\examples{
+morie_gru4r_mrr(c(5L, 2L, 9L, 1L), target = 9L, kk = 3)   # 1/3
+}

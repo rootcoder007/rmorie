@@ -200,5 +200,5 @@ morie_tlhoest_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_tlhoest_higherordertmle <- morie_tlhoest

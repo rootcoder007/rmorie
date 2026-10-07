@@ -17,5 +17,4 @@ One of two values, depending on the branch taken.
 \description{
 A step of the vepan_native implementation. Called by \code{.vepan_coding_terms}.
 See the file header for the source the module follows.
-source it follows.
 }

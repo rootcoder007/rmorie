@@ -18,7 +18,6 @@
 #' A step of the bounds_native implementation. Called by
 #' \code{morie_efficiency_bound_ate}, \code{morie_text_ate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -115,6 +114,10 @@ morie_permutation_attention_masks <- function(permutation) {
 #' @return A list with `loss`, `token_nll`, `scored_positions`,
 #'   `perplexity`, `order_invariant`, `mean_context_length`.
 #' @references Yang et al (2019) arXiv:1906.08237, eq (3) and (5).
+#' @examples
+#' set.seed(10)
+#' logits <- matrix(rnorm(4 * 5), 4, 5)
+#' morie_permutation_lm_loss(logits, targets = c(0, 3, 1, 4), permutation = c(2, 0, 3, 1))$loss
 #' @export
 morie_permutation_lm_loss <- function(logits, targets, permutation,
                                       num_predict = NULL,

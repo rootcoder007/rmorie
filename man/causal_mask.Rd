@@ -15,7 +15,6 @@ The value of \code{mask}, as built in the body.
 \description{
 A step of the sasRec_native implementation. Called by \code{self_attention}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 causal_mask(n = 5L)

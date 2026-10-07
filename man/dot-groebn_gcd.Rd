@@ -17,7 +17,6 @@ One of two values, depending on the branch taken.
 \description{
 A step of the groebn_native implementation. Called by \code{.groebn_fr}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 .groebn_gcd(12L, 18L)

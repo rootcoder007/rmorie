@@ -83,8 +83,8 @@ if [ -n "${OQS_LIBS}" ]; then
   if ${CC:-cc} ${OQS_CFLAGS} -o "${RUN_OUT}" "${RUN_SRC}" ${OQS_LIBS} >/dev/null 2>&1 && "${RUN_OUT}" >/dev/null 2>&1; then
     :
   else
-    echo "configure: liboqs was found but its probe will not run; building without post-quantum support" >&2
-    OQS_CFLAGS=""
+    echo "configure: liboqs was found (${OQS_LIBS}) but a program linked against it will not run (is its directory on the loader path? two copies, e.g. /usr/local and /usr, can disagree); building without liboqs: ML-KEM and ML-DSA use rmoriebricklayer's built-in FIPS 203/204 code" >&2
+    OQS_CFLAGS="-DMORIE_OQS_UNLOADABLE"
     OQS_LIBS=""
   fi
   rm -f "${RUN_SRC}" "${RUN_OUT}" 2>/dev/null

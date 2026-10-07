@@ -22,6 +22,11 @@
 #' @references Salanti, G., Higgins, J. P. T., Ades, A. E. and Ioannidis,
 #'   J. P. A. (2008). Statistical Methods in Medical Research
 #'   17(3):279-301. \doi{10.1177/0962280207080643}.
+#' @examples
+#' yi <- c(0.30, 0.25, 0.35, 0.50, 0.20)
+#' vi <- c(0.02, 0.03, 0.02, 0.04, 0.03)
+#' design <- rbind(c(1, 2), c(1, 2), c(1, 2), c(1, 3), c(2, 3))
+#' Manlmm(yi, vi, design)[c("theta", "se_theta")]
 #' @export
 Manlmm <- function(yi, vi, design) {
   y <- as.numeric(yi)

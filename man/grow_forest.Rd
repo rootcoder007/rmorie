@@ -53,7 +53,6 @@ A step of the hntfst_native implementation. Called by \code{.center_cate},
 \code{.frfgrf_forest_fit_check}, \code{.ipwgrf_forest_nuisances} and 6 others in the
 module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

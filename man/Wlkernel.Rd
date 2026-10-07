@@ -20,8 +20,8 @@ list: estimate, kernel, per_iter, n_labels, method.
 }
 \description{
 Shervashidze, Schweitzer, van Leeuwen, Mehlhorn and Borgwardt (2011),
-Weisfeiler-Lehman graph kernels, JMLR 12, 2539-2561 (FETCHED as PDF
-from jmlr.org).  Algorithm 1 gives one iteration of the 1-dimensional
+Weisfeiler-Lehman graph kernels, JMLR 12, 2539-2561.  Algorithm 1 gives
+one iteration of the 1-dimensional
 Weisfeiler-Lehman test: assign each node the multiset of its
 neighbours' previous labels, sort it, prepend the node's own previous
 label, and compress to a fresh label.  Equation (2) is the kernel,

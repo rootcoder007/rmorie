@@ -19,7 +19,6 @@ A list with \code{fully_connected}, \code{bilinear}, \code{ratio}, \code{note}.
 \description{
 A step of the narm_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 narm_decoder_parameters(n_items = c(1, 2, 3, 4, 5, 6, 7, 8),

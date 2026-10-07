@@ -31,5 +31,4 @@ A list with \code{prog}, \code{s}, \code{c}, \code{seen}.
 \description{
 A step of the alfqud_native implementation. Called by \code{morie_alfqud}.
 See the file header for the source the module follows.
-source it follows.
 }

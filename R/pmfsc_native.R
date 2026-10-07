@@ -124,7 +124,6 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
 #' A step of the pmfsc_native implementation. Called by \code{morie_pmfsc_derive},
 #' \code{morie_pmfsc_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{paste0}.
 #' @param b Passed to \code{paste0}.
@@ -281,7 +280,6 @@ morie_pmfsc_score <- function(pairs, potential,
 #'
 #' A step of the pmfsc_native implementation. Called by \code{morie_pmfsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.

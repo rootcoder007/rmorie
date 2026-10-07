@@ -7,7 +7,8 @@
 morie_wilcoxon_signed_rank_test(
   x1,
   x2,
-  alternative = c("two.sided", "greater", "less")
+  alternative = c("two.sided", "greater", "less"),
+  exact = NULL
 )
 }
 \arguments{
@@ -16,6 +17,9 @@ morie_wilcoxon_signed_rank_test(
 \item{x2}{Numeric vector (after).}
 
 \item{alternative}{\code{"two.sided"}, \code{"greater"}, or \code{"less"}.}
+
+\item{exact}{Exact p-value? \code{NULL} (default): exact below 50 pairs without ties or
+zero differences, as \code{\link[stats:wilcox.test]{stats::wilcox.test()}}.}
 }
 \value{
 Named list: \code{V}, \code{p_value}.

@@ -2,28 +2,28 @@
 % Please edit documentation in R/survey.R
 \name{morie_survey_mean}
 \alias{morie_survey_mean}
-\title{Survey-weighted mean (delegates to \code{survey::svymean} when available)}
+\title{Survey-weighted mean with its design-based standard error}
 \usage{
 morie_survey_mean(design, variable)
 }
 \arguments{
-\item{design}{A \code{survey::svydesign} object (when interfacing with
-the \code{survey} package directly).}
+\item{design}{A design from \code{\link[=morie_survey_design]{morie_survey_design()}}. A \code{survey::svydesign}
+object is accepted too and read into the same native form (one-stage designs).}
 
 \item{variable}{Character; column name of the outcome variable in
 the \code{design} object (\code{morie_survey_mean}).}
 }
 \value{
-A named \code{list} (see Details).
+A named \code{list}: \code{mean}, \code{se}.
 }
 \description{
-Survey-weighted mean (delegates to \code{survey::svymean} when available)
+The Hajek mean \eqn{\sum w y / \sum w} and the Taylor-linearisation SE under the design
+(strata, clusters, finite-population correction), as \code{survey::svymean} computes them. A
+missing value in the variable gives \code{NA}, as there.
 }
 \examples{
-\dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 df <- data.frame(y = rnorm(40), w = runif(40, 0.5, 2))
 d <- morie_survey_design(df, "w")
 str(morie_survey_mean(d, "y"), max.level = 1)
-\dontshow{\}) # examplesIf}
 }

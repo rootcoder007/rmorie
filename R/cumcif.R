@@ -4,11 +4,9 @@
 #'
 #' Formula: F_k(t) = integral_0^t S(u-) lambda_k(u) du
 #'
-#' \code{cumcif} and \code{crrcim} document the SAME Aalen-Johansen
-#' estimator.  A second implementation would agree with the first at
-#' 1e-9 forever and establish nothing, so this function forwards.  Here
-#' \code{cause} carries the per-subject event-type vector, matching this
-#' module's own stub signature.
+#' \code{cumcif} and \code{crrcim} are the same Aalen-Johansen
+#' estimator; this function forwards.  Here \code{cause} carries the
+#' per-subject event-type vector.
 #'
 #' @param time Follow-up time per subject.
 #' @param cause 0 for censored, otherwise the cause label, per subject.

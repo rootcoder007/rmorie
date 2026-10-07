@@ -38,7 +38,6 @@ y <- rbinom(20, 1, 0.5)
 Bayeslogit(X, y)
 }
 \references{
-Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
-Bayesian Data Analysis, 3rd edition, Section 4.1 and Chapter 16.
-Fetched as the full text of the book from the author's own copy.
+Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013), Bayesian Data
+Analysis, 3rd edition, Section 4.1 and Chapter 16.
 }

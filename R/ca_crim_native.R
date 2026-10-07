@@ -203,6 +203,7 @@ morie_logit_link <- function(p = 0.5, xb = 0, b = 0) {
 morie_logistic_effects <- function(ybar, b, se, n_correct, n_total,
                                    neg2ll_null, neg2ll_full,
                                    neg2ll_reduced = NA, n = NA) {
+  .morie_arg(ybar, "n1")
   stopifnot(ybar > 0, ybar < 1, se > 0)
   chi2 <- neg2ll_null - neg2ll_full
   out <- list(
@@ -436,11 +437,16 @@ morie_rct_tests <- function(r_yt = NA, r_yx = NA, r_tx = NA, s_y = NA,
 #' @param groups List of numeric vectors (one-way form).
 #' @param y,treatment,block Long-format vectors (block form).
 #' @return List with the one-way and, when supplied, block results.
-#' @export
 #' @examples
-#' morie_experiment_anova()
+#' # one-way ANOVA on three groups
+#' r <- morie_experiment_anova(groups = list(c(4.1, 5.0, 4.6),
+#'                                           c(6.2, 5.8, 6.6),
+#'                                           c(5.1, 4.9, 5.5)))
+#' c(F = r$f, df1 = r$df1, df2 = r$df2)
+#' @export
 morie_experiment_anova <- function(groups = NULL, y = NULL,
                                    treatment = NULL, block = NULL) {
+  if (!is.null(groups)) .morie_arg(groups, "l")
   out <- list()
   if (!is.null(groups)) {
     groups <- lapply(groups, as.numeric)

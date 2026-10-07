@@ -32,9 +32,9 @@
 #'   disequilibrium in finite populations. Theoretical and Applied
 #'   Genetics 38(6), 226-231 (r-squared definition, sec. 2).
 #'   Lewontin, R. C. (1964). Genetics 49(1), 49-67 (D, D-prime).
-#'   PLINK 1.9 LD documentation (genotype-allele-count correlation),
-#'   fetched 2026-08-09. EM phase resolution follows CRAN package
-#'   genetics R/LD.R as documented in twoldp.R.
+#'   PLINK 1.9 LD documentation (genotype-allele-count correlation).
+#'   EM phase resolution follows CRAN package genetics R/LD.R as
+#'   documented in twoldp.R.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

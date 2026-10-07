@@ -32,6 +32,5 @@ The value of \code{decode_mask}.
 \description{
 A step of the samdec_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

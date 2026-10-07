@@ -17,7 +17,6 @@
 #' A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2},
 #' \code{.morie_spx_topeigs}, \code{SpecRad} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -35,7 +34,6 @@
 #' A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq},
 #' \code{.morie_spx_sarneg2}, \code{.morie_spx_topeigs} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param b Numeric; combined arithmetically in the body.
@@ -55,7 +53,6 @@
 #' A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq},
 #' \code{.morie_spx_sarneg2}, \code{MantelZ} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param B A matrix; indexed by row and column.
@@ -75,7 +72,6 @@
 #'
 #' A step of the sp_fill implementation. Called by \code{MantelZ}, \code{MoranRes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{diag}.
 #' @return The value of \code{.morie_fsum}.
@@ -131,7 +127,6 @@
 #'
 #' A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @return A vector, from \code{c}.
@@ -177,7 +172,6 @@
 #' A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2},
 #' \code{ShiftInt}, \code{SpErrMod}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{t}.
 #' @param y Passed to \code{.morie_spx_matvec}.
@@ -199,7 +193,6 @@
 #'
 #' A step of the sp_fill implementation. Called by \code{.morie_spx_topeigs}, \code{SpecRad}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; indexed elementwise.
 #' @return One of two values, depending on the branch taken.
@@ -256,7 +249,6 @@
 #'
 #' A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{MsCoh}, \code{SpecAnom}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return A list with \code{re}, \code{im}.
@@ -282,7 +274,6 @@
 #'
 #' A step of the sp_fill implementation. Called by \code{SpecAnom}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param re A vector; its length is taken.
 #' @param im Numeric; combined arithmetically in the body.
@@ -301,7 +292,6 @@
 #'
 #' A step of the sp_fill implementation. Called by \code{MedPolish}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -323,7 +313,6 @@
 #' A step of the sp_fill implementation. Called by \code{MantelM2}, \code{Pcf},
 #' \code{SpAcf} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -341,7 +330,6 @@
 #' A step of the sp_fill implementation. Called by \code{LisaClust}, \code{MantelZ},
 #' \code{MoranRes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{abs}.
 #' @return A numeric value.
@@ -357,7 +345,6 @@
 #' A step of the sp_fill implementation. Called by \code{LisaClust}, \code{LisaI},
 #' \code{MantelM2} and 7 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param w A matrix; passed to \code{as.matrix}.
 #' @param n Optional; may be \code{NULL}. Passed to \code{is.null}.
@@ -382,7 +369,6 @@
 #' A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{LisaClust},
 #' \code{LisaI} and 16 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param name Passed to \code{sprintf}. Defaults to \code{"x"}.
@@ -1124,7 +1110,6 @@ SpecRad <- function(g, iters = 400L) {
 #'
 #' A step of the sp_fill implementation. Called by \code{SpErrMod}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param X Passed to \code{.morie_spx_matmul}.
@@ -1593,7 +1578,6 @@ ShrinkPred <- function(y, cluster, sigma2_u, sigma2_e) {
 #'
 #' A step of the sp_fill implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param queries Passed to \code{.morie_spx_chkv}.
 #' @param threshold Coerced to numeric by the body, with \code{as.numeric}.

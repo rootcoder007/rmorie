@@ -1,10 +1,9 @@
 # morie.fn -- function file (rootcoder007/morie)
 #' Laplace mechanism -- alias of the shipped implementation in dpglap
 #'
-#' The generated stub for this module described the Laplace mechanism
-#' M(D) = f(D) + Lap(sensitivity/epsilon).  That exact mechanism already
-#' ships as \code{dpglap.dp_laplace_mechanism} (Dwork-Roth Definition 3.3),
-#' so this module aliases it rather than adding a second implementation.
+#' The Laplace mechanism M(D) = f(D) + Lap(sensitivity/epsilon), which
+#' ships as \code{dpglap.dp_laplace_mechanism} (Dwork-Roth Definition 3.3);
+#' this name is an alias, not a second implementation.
 #'
 #' References
 #' Dwork, C., McSherry, F., Nissim, K., & Smith, A. (2006). Calibrating
@@ -61,7 +60,7 @@ morie_laplc <- function(value, sensitivity, epsilon, seed = NULL) {
   )
 }
 
-#' Legacy stub name, kept for compatibility
+#' Legacy name, kept for compatibility
 #' @noRd
 morie_laplace_mechanism <- morie_laplc
 

@@ -36,6 +36,14 @@ into \code{b1 mean(e) / mean(Y)} and \code{b2 mean(nu) / mean(Y)}.
 With \code{b2 = 0} it collapses to the ordinary attributable
 fraction.
 }
+\examples{
+set.seed(19)
+n <- 100
+net <- matrix(rbinom(n * n, 1, 0.05), n); net <- (net + t(net) > 0) * 1
+e <- rbinom(n, 1, 0.3)
+y <- 1 + 2 * e + 0.5 * as.numeric(net \%*\% e) / pmax(rowSums(net), 1) + rnorm(n)
+Netparf(y, e, net)[c("paf_direct", "paf_spillover")]
+}
 \references{
 Halloran, M. E. & Hudgens, M. G. (2016). Dependent
 happenings: a recent methodological review. Current Epidemiology

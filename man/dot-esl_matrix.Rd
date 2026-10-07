@@ -20,7 +20,6 @@ A list with \code{X}, \code{y}.
 A step of the esl_native0 implementation. Called by \code{morie_esl_bootstrap_err},
 \code{morie_esl_random_forest}, \code{morie_esl_residual_variance}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

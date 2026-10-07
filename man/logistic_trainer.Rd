@@ -21,7 +21,6 @@ The value of \code{train}, as built in the body.
 \description{
 A step of the memb_native implementation. Called by \code{memb}, \code{morie_memb}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 logistic_trainer()

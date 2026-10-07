@@ -363,9 +363,8 @@ Cfinvpmf <- function(t, phi_re, phi_im, x) {
 #' @param joint Argument `joint`; see Usage.
 #' @return A list with `n_conditions`, `max_deviation`, `independent`, `k`.
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' S <- c("a", "b", "c")
-#' rmorie:::Indevk(S, V)
+#' # two events with P(A) = 0.5, P(B) = 0.4; joint holds one probability per subset mask
+#' rmorie:::Indevk(p = c(0.5, 0.4), joint = c(1, 0.5, 0.4, 0.2))
 #' @keywords internal
 Indevk <- function(p, joint) {
   pv <- as.numeric(p)
@@ -613,10 +612,10 @@ morie_unclr_alr <- function(x) log(x[-length(x)] / x[length(x)])
 #' @return A numeric value.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_unclr_alr_inv(V, V)
+#' morie_unclr_alr_inv(z = c(0.5, -0.2), total = 100)
 #' @keywords internal
 morie_unclr_alr_inv <- function(z, total) {
+  .morie_arg(z, "n")
   e <- c(exp(z), 1)
   total * e / sum(e)
 }
@@ -634,7 +633,8 @@ morie_unclr_alr_inv <- function(z, total) {
 #' @return A list with \code{X}, \code{n}, \code{n_parts}, \code{n_iter}, \code{n_censored}.
 #' @export
 #' @examples
-#' morie_unclr_lr_impute(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L, n_iter = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' X <- rbind(c(60, 30, 10), c(70, 2, 28), c(50, 45, 5))   # compositions; parts under their limit are censored
+#' morie_unclr_lr_impute(X, dl = c(5, 5, 5), n_iter = 5L)$X
 #' @keywords internal
 morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
   Xm <- as.matrix(X)

@@ -47,14 +47,10 @@
 #' @return The value of \code{.s03json_fromJSON}.
 #' @export
 .morie_datasette_get_json <- function(url, timeout = 60) {
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("Package 'jsonlite' is required for the Datasette connector. ",
-         "install.packages('jsonlite')", call. = FALSE)
-  }
   con <- url(url, open = "rb")
   on.exit(close(con), add = TRUE)
-  .s03json_fromJSON(rawToChar(readBin(con, "raw", n = 64L * 1024L^2)),
-                     simplifyVector = TRUE)
+  .morie_from_json(rawToChar(readBin(con, "raw", n = 64L * 1024L^2)),
+                   simplifyVector = TRUE)
 }
 
 #' List the databases served by a Datasette instance
@@ -74,6 +70,7 @@
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasette_databases <- function(base_url = NULL, timeout = 60) {
+  .morie_arg(base_url, "c1null")
   base <- .morie_datasette_base(base_url)
   out <- .morie_datasette_get_json(paste0(base, "/-/databases.json"),
                                    timeout = timeout)

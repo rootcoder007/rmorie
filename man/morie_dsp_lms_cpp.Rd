@@ -18,5 +18,10 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{morie_dsp_lms}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(2)
+x <- rnorm(300)
+d <- stats::filter(x, c(0.6, -0.2), sides = 1); d[is.na(d)] <- 0
+str(morie_dsp_lms_cpp(x, as.numeric(d), 2L, 0.05))
 }

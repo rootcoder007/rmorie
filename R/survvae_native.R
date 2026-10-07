@@ -603,9 +603,12 @@ morie_survvae_predict_survival <- function(fit_result, x, times) {
 #' @references Nagpal et al. (2021), Sec. III.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' morie_survvae_risk_score(D, V)
+#' fit <- list(W = list(c(0.5, -0.3), c(-0.2, 0.4)), bias = c(0.1, -0.1),
+#'             shapes = c(1.2, 0.8), scales = c(2, 1), K = 2L, primitive = "weibull",
+#'             times = c(1.3, 0.7, 2.4, 1.9, 0.5, 3.1, 1.1, 2.2))
+#' X <- list(c(0.1, 1), c(-0.4, 0.5), c(0.8, -0.2))
+#' morie_survvae_risk_score(fit, X)
+#' morie_survvae_risk_score(fit, X, horizon = 1)
 #' @keywords internal
 morie_survvae_risk_score <- function(fit_result, X, horizon = NULL) {
   if (is.null(horizon)) {

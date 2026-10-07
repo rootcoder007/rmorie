@@ -19,5 +19,8 @@ The value of \code{[[}.
 \description{
 A step of the offlrl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+mat <- list(`0|1` = 0.25, `1|1` = 0.75)
+offlrl_lookup(mat, 1, 1)
 }

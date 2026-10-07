@@ -33,7 +33,6 @@
 #' A step of the lyapun_native implementation. Called by \code{autocorrelation_lag},
 #' \code{divergence_curve}, \code{mean_period} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{out}, as built in the body.
@@ -56,7 +55,6 @@
 #' A step of the lyapun_native implementation. Called by \code{divergence_curve},
 #' \code{morie_lyapun}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param m A count; the body uses it as \code{seq_len(...)}.
@@ -94,7 +92,6 @@ morie_lyapun_embed <- function(y, m, tau) {
 #' A step of the lyapun_native implementation. Called by \code{divergence_curve},
 #' \code{morie_lyapun}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param threshold Optional; may be \code{NULL}. Passed to \code{is.null}.
@@ -127,7 +124,6 @@ autocorrelation_lag <- function(y, threshold = NULL) {
 #' A step of the lyapun_native implementation. Called by \code{divergence_curve},
 #' \code{morie_lyapun}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param dt Numeric; combined arithmetically in the body. Defaults to \code{1}.
@@ -162,7 +158,6 @@ mean_period <- function(y, dt = 1.0) {
 #'
 #' A step of the lyapun_native implementation. Called by \code{divergence_curve}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pts A vector; its length is taken and its elements indexed.
 #' @param min_sep Passed to \code{<=}.
@@ -202,7 +197,6 @@ mean_period <- function(y, dt = 1.0) {
 #' A step of the lyapun_native implementation. Called by \code{divergence_curve},
 #' \code{lyapunov_exponent}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pts A vector; indexed elementwise.
 #' @param a See Usage.
@@ -223,7 +217,6 @@ mean_period <- function(y, dt = 1.0) {
 #' A step of the lyapun_native implementation. Called by \code{lyapunov_exponent},
 #' \code{morie_lyapun}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param m Optional; may be \code{NULL}. Passed to \code{morie_lyapun_embed}.
@@ -300,7 +293,6 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 #'
 #' A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param curve A vector; its length is taken and its elements indexed.
 #' @param lo_frac Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
@@ -331,7 +323,6 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 #'
 #' A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param xs A vector; its length is taken and its elements indexed.
 #' @param ys A vector; indexed elementwise.
@@ -360,7 +351,6 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 #'
 #' A step of the lyapun_native implementation. Called by \code{morie_lyapun}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{divergence_curve}.
 #' @param embedding Passed to \code{divergence_curve}.
@@ -486,7 +476,6 @@ largest_lyapunov <- lyapunov_exponent
 #'
 #' A step of the lyapun_native implementation. Called by \code{morie_lyapun}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -510,7 +499,6 @@ largest_lyapunov <- lyapunov_exponent
 #'
 #' A step of the lyapun_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op A vector; its length is taken.
 #' @param ... Passed through.
@@ -543,7 +531,6 @@ morie_lyapun <- function(op, ...) {
 #' A step of the lyapun_native implementation. Called by \code{.lyapun_embed},
 #' \code{autocorrelation_lag}, \code{divergence_curve} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
@@ -562,7 +549,6 @@ morie_lyapun <- function(op, ...) {
 #'
 #' A step of the lyapun_native implementation. Called by \code{divergence_curve}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param m A count; the body uses it as \code{seq_len(...)}.

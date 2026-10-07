@@ -24,5 +24,4 @@ A list with \code{weights}, \code{fitted}.
 \description{
 A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
 See the file header for the source the module follows.
-source it follows.
 }

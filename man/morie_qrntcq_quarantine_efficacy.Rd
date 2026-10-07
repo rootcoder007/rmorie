@@ -24,7 +24,6 @@ A step of the qrntcq_native implementation. Called by
 \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration},
 \code{morie_qrntcq_relative_utility}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_qrntcq_quarantine_efficacy(t.Q = 5L, t.R = 5L)

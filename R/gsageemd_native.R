@@ -275,6 +275,11 @@ morie_gsageemd <- morie_gsageemd_embed
 #' @param normalize L2-normalise the output.
 #' @return Matrix of new node representations.
 #' @references Hamilton, W. L. et al. (2017).
+#' @examples
+#' H <- diag(3)
+#' adj <- list(`0` = 1L, `1` = c(0L, 2L), `2` = 1L)  # 0-based node ids
+#' W <- matrix(0.5, 2, 6)
+#' morie_gsageemd_layer(H, adj, W)
 #' @export
 morie_gsageemd_layer <- function(H, adj, W, how = "mean", sizes = NULL,
                                  rng = NULL, normalize = TRUE) {
@@ -311,6 +316,8 @@ morie_gsageemd_layer <- function(H, adj, W, how = "mean", sizes = NULL,
 #' @param z_negatives List of negative embeddings.
 #' @return Scalar loss.
 #' @references Hamilton, W. L. et al. (2017).
+#' @examples
+#' morie_gsageemd_loss(z_u = c(1, 0), z_v = c(0.9, 0.1), z_negatives = list(c(-1, 0), c(0, -1)))
 #' @export
 morie_gsageemd_loss <- function(z_u, z_v, z_negatives) {
   dot <- function(a, b) sum(a * b)
@@ -334,6 +341,9 @@ morie_gsageemd_loss <- function(z_u, z_v, z_negatives) {
 #' @param rng Generator environment (shared with the Python arm).
 #' @return Integer vector of neighbour ids.
 #' @references Hamilton, W. L. et al. (2017).
+#' @examples
+#' adj <- list(`0` = c(1L, 2L), `1` = 0L, `2` = 0L)
+#' morie_gsageemd_sample(adj, v = 0, size = 3, rng = rmorie:::.ghc_rng(1))   # sampled with replacement
 #' @export
 morie_gsageemd_sample <- function(adj, v, size, rng) {
   nb <- sort(as.integer(adj[[as.character(v)]]))

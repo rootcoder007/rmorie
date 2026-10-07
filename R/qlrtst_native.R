@@ -43,7 +43,6 @@
 #'
 #' A step of the qlrtst_native implementation. Called by \code{morie_qlrtst}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{t}.
 #' @param y A matrix; passed to \code{\%*\%}.

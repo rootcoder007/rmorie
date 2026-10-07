@@ -32,7 +32,6 @@ The value of \code{.timeRS_user_bias}.
 \description{
 A step of the timeRS_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_timeRS_user_bias(b_u = 0.2, alpha_u = 0.05, t = 300, t_user = 200)

@@ -23,7 +23,6 @@ A list with \code{estimate}, \code{score}, \code{method}, \code{note}.
 \description{
 A step of the comet_native implementation. Called by \code{morie_comet}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

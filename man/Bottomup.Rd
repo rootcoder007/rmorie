@@ -19,9 +19,8 @@ Named list with \code{estimate}, \code{total}, \code{bottom}, \code{n}, \code{me
 Hyndman & Athanasopoulos, FPP 3rd ed., Sec. 11.3.
 }
 \examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-S <- c("a", "b", "c")
-Bottomup(S, M)
+S <- rbind(c(1, 1, 1), c(1, 1, 0), c(0, 0, 1), diag(3))   # total, two aggregates, the bottoms
+Bottomup(bottoms = c(10, 20, 30), S = S)
 }
 \references{
 Hyndman & Athanasopoulos, FPP3, Sec. 11.3.

@@ -22,6 +22,10 @@ A named list mapping canonical codes to integer counts.
 Returns a list keyed by the canonical 4-tuple of \code{(NPI, TYPE,
 NBR)} codes; values are the multiplicity of each.
 }
+\examples{
+# pentan-1-ol skeleton; bonds use 0-based atom indices
+morie_topological_torsions(c("C", "C", "C", "C", "O"), list(c(0, 1), c(1, 2), c(2, 3), c(3, 4)))
+}
 \references{
 Nilakantan, R. et al. (1987).
 }

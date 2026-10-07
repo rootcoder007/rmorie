@@ -24,5 +24,4 @@ A list with \code{fe1}, \code{fm}, \code{ey}.
 A step of the wenge_native implementation. Called by
 \code{morie_wenge_mediation_functional}, \code{morie_wenge_weight_based_mediation}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -32,6 +32,5 @@ The value of \code{.warpL_sample_violation}.
 \description{
 A step of the warpL_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

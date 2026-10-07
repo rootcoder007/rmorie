@@ -33,9 +33,8 @@ Vbnopt(
 As \code{\link{Vinfer}}.
 }
 \description{
-DUPLICATE, resolved by aliasing (the wave-2 DUPMAP pairs vbnopt and
-vinfer with each other; one is implemented, the other re-exports it).
-Both name the same procedure from the same paper: Jordan,
+\code{vbnopt} and \code{vinfer} are one procedure under two names; one
+is implemented, the other re-exports it.  The procedure is from Jordan,
 Ghahramani, Jaakkola and Saul (1999), Machine Learning 37(2):183-233,
 doi:10.1023/A:1007665907178 -- maximise ELBO(q) = E_q[log p(x,z)] -
 E_q[log q(z)] over a factorised q by the coordinate update

@@ -60,7 +60,6 @@
 #'
 #' A step of the phmmsr_native implementation. Called by \code{phmmsr_msv_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param profile A vector; its length is taken and its elements indexed.
 #' @return The value of \code{m}, as built in the body.
@@ -90,7 +89,6 @@
 #'
 #' A step of the phmmsr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param length Coerced to integer by the body, with \code{as.integer}.
 #' @param vector_width Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
@@ -126,7 +124,6 @@ phmmsr_striped_layout <- function(length, vector_width = 4) {
 #'
 #' A step of the phmmsr_native implementation. Called by \code{phmmsr_search_pipeline}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq Coerced to list by the body, with \code{as.list}.
 #' @param profile Passed to \code{.phmmsr_to_matrix}.
@@ -185,7 +182,6 @@ phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {
 #'
 #' A step of the phmmsr_native implementation. Called by \code{phmmsr_search_pipeline}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param score Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
@@ -210,7 +206,6 @@ phmmsr_gumbel_pvalue <- function(score, mu, lam) {
 #'
 #' A step of the phmmsr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param floor Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-30}.
@@ -244,7 +239,6 @@ phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
 #'
 #' A step of the phmmsr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sequences A vector; its length is taken and its elements indexed.
 #' @param profile Passed to \code{phmmsr_msv_score}.
@@ -301,7 +295,6 @@ phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
 #'
 #' A step of the phmmsr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -323,7 +316,7 @@ phmmsr_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 hmmersearch <- phmmsr_search_pipeline
 
 # public names resolved by fn/_lazy_map.json

@@ -17,7 +17,6 @@ The value of \code{list}.
 \description{
 A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- morie_unifAlg_var("x")

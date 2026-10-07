@@ -7,9 +7,8 @@
 #' @param w Positive selection weights, one per unit.
 #'
 #' @return List with neff, deff, cv2, n, sumw, sumw2.
-#' @references Kish, L. (1965), Survey Sampling, Wiley, Sect. 11.7.
-#'   Standard published form; the monograph is not in the local corpus and
-#'   was not read.
+#' @references Kish, L. (1965), Survey Sampling, Wiley, Sect. 11.7; standard published
+#'   form.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/causal.R
 \name{morie_causal_weighting}
 \alias{morie_causal_weighting}
-\title{Estimate balancing weights via \pkg{WeightIt}}
+\title{Estimate balancing weights}
 \usage{
 morie_causal_weighting(
   data,
@@ -29,33 +29,31 @@ method accepted by \code{WeightIt::weightit()}.}
 defaults to \code{"ATE"}.}
 
 \item{...}{Additional arguments forwarded to
-\code{WeightIt::weightit()}.}
+\code{WeightIt::weightit()} (non-native methods only).}
 }
 \value{
 Named list with elements \code{weights} (numeric vector),
 \code{propensity_scores} (numeric vector or \code{NULL}),
 \code{method}, \code{estimand}, \code{ess} (effective sample
-size), and \code{weightit} (the original WeightIt object).
+size), and \code{weightit} (the WeightIt object for a non-native
+method, \code{NULL} otherwise).
 }
 \description{
-Thin wrapper around \code{WeightIt::weightit()} exposing the full
-WeightIt method palette (\code{"glm"}, \code{"cbps"},
-\code{"ebal"}, \code{"ps"}, \code{"energy"}, \code{"optweight"},
-and any future additions). Provides MORIE callers with a stable
-\code{morie_*} entry point for balancing weights while preserving
-the underlying object so callers can pipe into
-\code{survey::svyglm} or \code{cobalt::bal.tab} downstream.
-}
-\details{
-Hard-errors if \pkg{WeightIt} is not installed -- the multi-method
-weighting machinery has no compact inline equivalent.
+Balancing weights under a \code{WeightIt}-style method name. The methods
+this package has engines for run natively and give the same weights
+whatever is installed: \code{"glm"} / \code{"ps"} (logistic propensity
+weights, \code{\link{morie_weight_ps}}), \code{"cbps"}
+(\code{\link{morie_weight_cbps}}) and, for the ATT, \code{"ebal"} /
+\code{"entropy"} (\code{\link{morie_weight_entropy}}). Any other method
+(\code{"energy"}, \code{"optweight"}, \code{"bart"}, ...) is passed to
+\code{WeightIt::weightit()}, which must then be installed; the error says
+so and names the native methods.
 }
 \examples{
 set.seed(1)
-if (requireNamespace("WeightIt", quietly = TRUE) && requireNamespace("sandwich", quietly = TRUE)) {
-  morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4),
-      x = rnorm(20)), treatment = "t", covariates = "x")
-}
+w <- morie_causal_weighting(data = data.frame(t = rbinom(40, 1, 0.4),
+    x = rnorm(40)), treatment = "t", covariates = "x")
+w$ess
 }
 \references{
 Greifer N (2024). WeightIt: Weighting for Covariate Balance in

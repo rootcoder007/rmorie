@@ -33,6 +33,15 @@
 #' @references Sun & Abraham (2021), Journal of Econometrics
 #'   225(2):175-199, doi:10.1016/j.jeconom.2020.09.006; Borusyak &
 #'   Jaravel (2017), "Revisiting Event Study Designs", working paper.
+#' @examples
+#' set.seed(8)
+#' units <- 1:30; periods <- 1:6
+#' d <- expand.grid(time = periods, unit = units)
+#' cohort <- rep(c(4, Inf), each = 15)[d$unit]
+#' d$D <- as.integer(d$time >= cohort)
+#' d$y <- rnorm(nrow(d)) + 2 * d$D + d$unit / 10
+#' e <- Evstud(d$y, d$D, d$unit, d$time, cohort)
+#' round(e$coef, 2)
 #' @export
 Evstud <- function(y, D, unit, time, cohort, max_lead = NULL, max_lag = NULL,
                    ref = -1) {

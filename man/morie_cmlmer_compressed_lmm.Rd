@@ -49,7 +49,6 @@ A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p_value},
 \description{
 A step of the cmlmer_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 b <- c(1.5, 2.5, 3.5)

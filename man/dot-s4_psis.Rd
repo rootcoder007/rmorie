@@ -15,5 +15,4 @@ A list with \code{lw}, \code{k}.
 \description{
 A step of the s04core implementation. Called by \code{Infcrt}, \code{Khatd}, \code{Loopr}.
 See the file header for the source the module follows.
-source it follows.
 }

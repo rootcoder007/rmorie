@@ -19,5 +19,4 @@ A list with \code{adj}, \code{vw}, \code{mapping}.
 \description{
 A step of the grclus_native implementation. Called by \code{.grclus_bisect}.
 See the file header for the source the module follows.
-source it follows.
 }

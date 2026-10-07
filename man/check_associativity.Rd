@@ -21,7 +21,6 @@ A list with \code{left}, \code{right}, \code{deviation}, \code{associative}, \co
 \description{
 A step of the ssmpar_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 check_associativity(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))

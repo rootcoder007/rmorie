@@ -10,7 +10,6 @@
 #'
 #' A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A matrix; indexed by row and column.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
@@ -25,7 +24,6 @@
 #'
 #' A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A matrix; indexed by row and column.
 #' @param core A vector; indexed elementwise.
@@ -65,7 +63,6 @@
 #'
 #' A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A vector; its length is taken.
 #' @param n Numeric; combined arithmetically in the body.
@@ -108,7 +105,6 @@
 #'
 #' A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node Passed to \code{c}.
 #' @param children A vector; indexed elementwise.

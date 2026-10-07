@@ -22,6 +22,7 @@
 #' @export
 spnsr <- function(nugget = 0, sill = 1, range = 1, target_dist = NULL,
                   model = "exponential") {
+  .morie_arg(nugget, "n1")
   if (nugget < 0 || sill < 0) stop("`nugget` and `sill` must be >= 0")
   if (range <= 0) stop("`range` must be > 0")
   d <- if (is.null(target_dist)) 0.5 else as.numeric(target_dist)

@@ -22,8 +22,13 @@
 #' @references Chizat, L., Peyre, G., Schmitzer, B. and Vialard, F.-X.
 #'   (2018). Mathematics of Computation 87(314):2563-2609.
 #'   \doi{10.1090/mcom/3303}.
+#' @examples
+#' C <- outer(1:3, 1:3, function(i, j) (i - j)^2)
+#' r <- Otunbal(a = c(0.5, 0.5, 0), b = c(0, 0.5, 1), C = C, epsilon = 0.1, lam = 1)
+#' c(r$mass_a, r$mass_b, r$mass)   # unequal totals: mass is created and destroyed at a KL price
 #' @export
 Otunbal <- function(a, b, C, epsilon, lam, max_iter = 200) {
+  .morie_arg(a, "n")
   aa <- .ot_hist(a)
   bb <- .ot_hist(b)
   Cm <- as.matrix(C)

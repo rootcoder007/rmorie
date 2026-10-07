@@ -27,3 +27,7 @@ remains).
 mass remaining after t_Q}. Transmission before \code{t_Q} is
 already gone, so the denominator is the mass from \code{t_Q} on.
 }
+\examples{
+gt <- gamma_generation_time()
+quarantine_efficacy(t_Q = 3, t_R = 10, generation_time = gt)$efficacy
+}

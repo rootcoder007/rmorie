@@ -23,5 +23,4 @@ A list with \code{estimate}, \code{indices}, \code{codes},
 \description{
 A step of the vqgenc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

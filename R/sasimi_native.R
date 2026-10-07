@@ -59,7 +59,6 @@ COEFFICIENTS <- c("tanimoto", "dice", "cosine")
 #' A step of the sasimi_native implementation. Called by \code{sasimi_counts},
 #' \code{sasimi_nearest_neighbours}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bits A vector; its length is taken.
 #' @param n_bits Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -114,7 +113,6 @@ sasimi_fingerprint <- function(bits, n_bits = NULL) {
 #' A step of the sasimi_native implementation. Called by \code{morie_sasimi},
 #' \code{sasimi_cosine}, \code{sasimi_dice} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fp_a Passed to \code{sasimi_fingerprint}.
 #' @param fp_b Passed to \code{sasimi_fingerprint}.
@@ -141,7 +139,6 @@ sasimi_counts <- function(fp_a, fp_b) {
 #' A step of the sasimi_native implementation. Called by \code{sasimi_cosine},
 #' \code{sasimi_dice}, \code{sasimi_tanimoto} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A list; the body reads \code{$a}, \code{$b} from it.
 #' @return One of two values, depending on the branch taken.
@@ -157,7 +154,6 @@ sasimi_counts <- function(fp_a, fp_b) {
 #'
 #' A step of the sasimi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fp_a Passed to \code{sasimi_counts}.
 #' @param fp_b Passed to \code{sasimi_counts}.
@@ -178,7 +174,6 @@ sasimi_tanimoto <- function(fp_a, fp_b) {
 #'
 #' A step of the sasimi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fp_a Passed to \code{sasimi_counts}.
 #' @param fp_b Passed to \code{sasimi_counts}.
@@ -199,7 +194,6 @@ sasimi_dice <- function(fp_a, fp_b) {
 #'
 #' A step of the sasimi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fp_a Passed to \code{sasimi_counts}.
 #' @param fp_b Passed to \code{sasimi_counts}.
@@ -223,7 +217,6 @@ sasimi_cosine <- function(fp_a, fp_b) {
 #'
 #' A step of the sasimi_native implementation. Called by \code{morie_sasimi}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fp_a Passed to \code{sasimi_counts}.
 #' @param fp_b Passed to \code{sasimi_counts}.
@@ -257,7 +250,6 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 #' A step of the sasimi_native implementation. Called by \code{morie_sasimi},
 #' \code{sasimi_distance}, \code{sasimi_nearest_neighbours} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param name One of \code{"cosine"}, \code{"dice"}, \code{"tanimoto"}.
 #' @return Nothing; this branch always raises.
@@ -275,7 +267,6 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 #'
 #' A step of the sasimi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fp_a See Usage.
 #' @param fp_b See Usage.
@@ -295,7 +286,6 @@ sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
 #'
 #' A step of the sasimi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fps Iterated over elementwise, with \code{lapply}.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
@@ -331,19 +321,20 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 #'
 #' A step of the sasimi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Passed to \code{sasimi_fingerprint}.
 #' @param fps A vector; its length is taken and its elements indexed.
 #' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{result}, as built in the body.
-#' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' sasimi_nearest_neighbours(V, V)
+#' # fingerprints as on-bit indices; the query's own copy ranks first
+#' fps <- list(c(1, 4, 7, 9), c(1, 4, 8), c(2, 3), c(1, 4, 7))
+#' sasimi_nearest_neighbours(c(1, 4, 7, 9), fps, k = 2)
+#' @export
 #' @keywords internal
 sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimoto") {
+  .morie_arg(query, "n")
   if (as.integer(k) < 1L) {
     stop("sasimi: k must be at least 1")
   }
@@ -372,7 +363,6 @@ sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimot
 #'
 #' A step of the sasimi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fp_a Passed to \code{sasimi_counts}.
 #' @param fp_b Passed to \code{sasimi_counts}.

@@ -2,7 +2,7 @@
 // Greedy k-dimensional nearest-neighbour assignment on WHITENED
 // coordinates (Mahalanobis matching, module 2). Streaming scan per
 // treated unit with an availability mask: O(nt * nc * k) compute,
-// O(nt + nc) memory — no distance matrix, unlike the O(n^2)-memory
+// O(nt + nc) memory -- no distance matrix, unlike the O(n^2)-memory
 // reference paths.
 #include <Rcpp.h>
 #include <vector>

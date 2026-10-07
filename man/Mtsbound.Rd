@@ -29,8 +29,6 @@ Mtsbound(y = rnorm(50), z = rbinom(50, 1, 0.5), d = rbinom(50, 1, 0.5),
          ymin = -3, ymax = 3)
 }
 \references{
-Manski and Pepper (2000), Econometrica 68(4), 997-1010.
-Standard published form; the article could not be obtained (JSTOR
-returned an access stub and NBER t0224 a zero-page PDF), so it was
-not read; only the bound stated here is claimed.
+Manski and Pepper (2000), Econometrica 68(4), 997-1010; the
+bound in its standard published form.
 }

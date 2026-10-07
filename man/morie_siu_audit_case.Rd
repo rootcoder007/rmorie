@@ -42,8 +42,8 @@ by \code{morie_fetch_siu(cache_html = TRUE)}) when available, and
 falls back to a polite live fetch when the cache is missing.
 }
 \examples{
-\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
+if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
 # Materialize the corpus cache first (fast via rmoriedata):
 morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 a <- morie_siu_audit_case(
@@ -51,6 +51,6 @@ a <- morie_siu_audit_case(
   cache_dir = file.path(tempdir(), "morie", "siu")
 )
 cat(substr(a$report_text, 1, 1000), "\n")
+})
 }
-\dontshow{\}) # examplesIf}
 }

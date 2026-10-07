@@ -17,3 +17,6 @@ Numeric scalar.
 \description{
 Signed shortest difference \code{a - b}, in \code{[-pi, pi)}
 }
+\examples{
+morie_tqang_angular_difference(0.1, 2 * pi - 0.1)   # 0.2, not 0.2 - 2 pi
+}

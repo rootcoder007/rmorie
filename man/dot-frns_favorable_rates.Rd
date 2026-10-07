@@ -19,5 +19,4 @@ The value of \code{rates}, as built in the body.
 \description{
 A step of the frns_metrics implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -62,6 +62,13 @@ morie_anamorphosis <- function(z, y_new) {
 #' @return A list with `prediction`, `naive_prediction`, `correction`,
 #'   `mspe`, `kriging_variance`, `lagrange` and `mu_y`.
 #' @references Schabenberger Ch 5, Sec 5.6.2
+#' @examples
+#' set.seed(23)
+#' coords <- matrix(runif(20), 10, 2)
+#' z <- rnorm(10, 1, 0.3)                    # Y scale; Z = exp(Y) is lognormal
+#' gam <- function(h) 0.09 * (1 - exp(-h / 0.3))
+#' sptgk(coords, z, target = c(0.5, 0.5), phi = exp, dphi = exp, d2phi = exp,
+#'       semivariogram_fn = gam)[c("prediction", "naive_prediction", "correction")]
 #' @export
 sptgk <- function(coords, z, target, phi, dphi, d2phi, semivariogram_fn) {
   z <- as.numeric(z)

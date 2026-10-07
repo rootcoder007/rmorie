@@ -15,5 +15,4 @@ The value of \code{setdiff}.
 \description{
 A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -22,5 +22,7 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_run}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+motfsr_lambda_grid(n_starts_total = 100, n_seqs = 10, w = 6, lambda0 = NULL)
 }

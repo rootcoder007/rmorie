@@ -17,6 +17,10 @@
 #' convex sets, USSR Computational Mathematics and Mathematical Physics 7:200-217. Not
 #' held locally; alternating diagonal scaling to fixed margins (RAS, Sinkhorn-Knopp) is
 #' the standard published form of the method.
+#' @examples
+#' K <- matrix(c(2, 1, 1, 3), 2)
+#' M <- Rasscale(K, row_target = c(4, 6), col_target = c(5, 5))
+#' M$estimate
 #' @export
 Rasscale <- function(K, row_target, col_target, max_iter = 200) {
   K <- as.matrix(K)

@@ -65,7 +65,6 @@
 #' A step of the sdne_native implementation. Called by \code{.sdne_first_order_loss},
 #' \code{.sdne_penalty_matrix}, \code{.sdne_proximity_counts} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -92,7 +91,6 @@
 #'
 #' A step of the sdne_native implementation. Called by \code{.sdne_second_order_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adjacency Passed to \code{.sdne_mat}.
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
@@ -115,7 +113,6 @@
 #'
 #' A step of the sdne_native implementation. Called by \code{morie_sdne}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adjacency Passed to \code{.sdne_mat}.
 #' @param reconstruction Passed to \code{.sdne_mat}.
@@ -143,7 +140,6 @@
 #'
 #' A step of the sdne_native implementation. Called by \code{morie_sdne}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adjacency Passed to \code{.sdne_mat}.
 #' @param embeddings Passed to \code{.sdne_mat}.
@@ -174,7 +170,6 @@
 #'
 #' A step of the sdne_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adjacency Passed to \code{.sdne_mat}.
 #' @return A list with \code{first_order_pairs}, \code{second_order_pairs},
@@ -207,7 +202,6 @@
 #'
 #' A step of the sdne_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adjacency Passed to \code{.sdne_second_order_loss}.
 #' @param reconstruction Passed to \code{.sdne_second_order_loss}.
@@ -250,7 +244,6 @@ morie_sdne <- function(adjacency, reconstruction, embeddings, beta = 5.0,
 #'
 #' A step of the sdne_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -271,5 +264,5 @@ morie_sdne_cheatsheet <- function() {
          "all-zero output wins, so put beta > 1 on the edges.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_structuraldeepnetwork <- morie_sdne

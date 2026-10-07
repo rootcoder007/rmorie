@@ -26,7 +26,6 @@ A list with \code{Y_hat}, \code{echo_log}, \code{series}, \code{series_valid},
 \description{
 A step of the rangayyan_tf implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 EchoLogSp(a = 0.5, n_0 = 8L, omega = seq(0, pi, length.out = 16))

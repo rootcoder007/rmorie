@@ -13,9 +13,14 @@ Msm045(...)
 The list returned by \code{Msm042()}.
 }
 \description{
-The stub generator stamped several extracted page fragments with the same
-function name, so the implementation lives once in \code{Msm042()} and this
-module re-exports it. Calling either path runs the same code.
+The same method as \code{Msm042()}, re-exported under this name; both run the same
+code.
+}
+\examples{
+set.seed(13)
+X <- matrix(rnorm(60), 30, 2)
+y <- 1 + X \%*\% c(0.5, -1) + rnorm(30)
+Msm045(X, as.numeric(y))$posterior_sd_beta
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

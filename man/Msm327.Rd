@@ -27,7 +27,8 @@ mu all carry the mu. The printed form is also not a count: it decreases
 towards zero as mu grows. The internally consistent formula is implemented.
 }
 \examples{
-Msm327(theta_hat = c(1, 2, 3, 4, 5, 6, 7, 8), mu_hat = 5L)
+# P(altered zero) 0.3, Poisson rate 2: (1 - 0.3) * 2 / (1 - exp(-2)), the zero-truncated mean
+Msm327(theta_hat = 0.3, mu_hat = 2)$estimate
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

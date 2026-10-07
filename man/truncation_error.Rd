@@ -19,7 +19,6 @@ A list with \code{expected_tail}, \code{kept}, \code{alpha}, \code{K},
 A step of the slowdp_native implementation. Called by \code{decay_diagnostics},
 \code{sticks_for_tolerance}, \code{truncated_dp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 truncation_error(alpha = 0.5, K = 5L)

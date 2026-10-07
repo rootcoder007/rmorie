@@ -24,7 +24,6 @@ A list with \code{lower}, \code{upper}, \code{width}, \code{empty},
 \description{
 A step of the bndpcb_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_bet_proof_interval(x = 5L)

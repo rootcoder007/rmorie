@@ -30,5 +30,4 @@ A list with \code{T}, \code{E}, \code{M}, \code{w}, \code{h}, \code{c},
 A step of the svycox_native implementation. Called by \code{.svycox_score_residuals},
 \code{.svycox_svycoxph}.
 See the file header for the source the module follows.
-source it follows.
 }

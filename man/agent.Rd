@@ -22,8 +22,8 @@ server serves. Defaults to the CLI's default model.}
 Character scalar: the agent's combined stdout/stderr.
 }
 \description{
-Thin wrapper that shells out to the \code{rmorie} command-line agent (a
-separate, optional binary from \pkg{rmorie-cli}). The agent can run R,
+Thin wrapper that shells out to the \code{rmorie} command-line agent (the
+launcher \code{\link{install_cli}} writes). The agent can run R,
 read/write files, remember notes, and use any configured model backend
 (Anthropic, OpenAI-compatible, Google Gemini, or a local Ollama model).
 The CLI is the single implementation; this function only forwards to it,

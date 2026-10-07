@@ -38,6 +38,11 @@
 #' @references Earl, D. J. and Deem, M. W. (2005). Parallel
 #'   tempering: theory, applications, and new perspectives. Physical
 #'   Chemistry Chemical Physics, 7, 3910-3916.
+#' @examples
+#' # a bimodal target; the hot replicas carry the cold chain between the modes
+#' log_p <- function(x) log(0.5 * dnorm(x, -4) + 0.5 * dnorm(x, 4))
+#' r <- morie_ptmcmc(log_p, temperatures = c(1, 3, 9), x0 = 0, n_iter = 2000L, seed = 1)
+#' mean(r$chain > 0)
 #' @export
 morie_ptmcmc <- function(log_p, temperatures, x0, n_iter = 1000L, step = 1,
                          seed = 0, swap_every = 1L) {

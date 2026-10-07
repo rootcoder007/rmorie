@@ -17,5 +17,7 @@ The value of \code{pairs}, as built in the body.
 \description{
 A step of the node2v_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+node2v_skipgram_pairs(list(c(1, 2, 3, 4)), window = 1)
 }

@@ -2,45 +2,73 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_bayesian_mds}
 \alias{morie_spatial_voting_bayesian_mds}
-\title{Bayesian MDS (stub) -- log-normal distances via Metropolis}
+\title{Bayesian metric multidimensional scaling (Bakker and Poole 2013)}
 \usage{
 morie_spatial_voting_bayesian_mds(
   D,
   n_dims = 2L,
   n_samples = 1000L,
   burn_in = 200L,
-  sigma_init = 1
+  sigma_init = 1,
+  seed = 42L
 )
 }
 \arguments{
-\item{D}{Distance matrix.}
+\item{D}{Symmetric dissimilarity matrix.}
 
 \item{n_dims}{Dimensions.}
 
-\item{n_samples}{MCMC samples.}
+\item{n_samples}{Retained draws.}
 
-\item{burn_in}{Burn-in length.}
+\item{burn_in}{Sweeps discarded first.}
 
-\item{sigma_init}{Initial sigma.}
+\item{sigma_init}{Starting value of \eqn{\sigma}.}
+
+\item{seed}{RNG seed.}
 }
 \value{
-List: \code{positions}/\code{coords} (posterior-mean or modal
-configuration), fit diagnostics, and an \code{engine} tag.
+List: \code{positions} (aligned posterior mean),
+\code{positions_sd}, \code{distance_mean} (posterior mean of every
+pairwise distance, invariant to the alignment), \code{sigma},
+\code{tau}, \code{draws} (aligned draws, draw index first),
+\code{n_samples}, \code{engine}.
 }
 \description{
-Bayesian MDS (stub) -- log-normal distances via Metropolis
+Each observed dissimilarity is lognormal about the distance between the
+two objects' coordinates,
+\deqn{\log \delta_{ij} \sim N(\log d_{ij}, 1 / \tau), \quad
+d_{ij} = \lVert x_i - x_j \rVert,}
+with \eqn{x_{ik} \sim N(0, 10^2)} and \eqn{\tau \sim U(0, 10)}, the
+priors of the authors' JAGS code (\code{asmcjr::BMDS}).  The upper
+bound on \eqn{\tau} keeps \eqn{\sigma = \tau^{-1/2}} at or above 0.316,
+so dissimilarities measured more precisely than that are fitted with
+\eqn{\sigma} near the bound.  Zero, negative or missing
+dissimilarities are left out of the likelihood.
+}
+\details{
+Coordinates are slice sampled one at a time (Neal 2003) and \eqn{\tau}
+is drawn exactly from its truncated gamma full conditional.  The
+likelihood is invariant to translation, rotation and reflection, so
+the chain runs unconstrained and every draw is then aligned
+(translation and rotation, no rescaling) onto the posterior mean
+configuration.  The JAGS code instead pins one object at the origin and
+a second to an axis; pinning that second object adds an implicit
+\eqn{1/d} prior on its distance to the first, so distances involving
+those two objects differ slightly between the two programs.  On a
+simulated set of 12 objects the posterior mean distances among the
+other ten agree with JAGS to within 0.05 (mean distance 2.0), the
+size of the Monte Carlo error.
 }
 \examples{
-if (requireNamespace("smacof", quietly = TRUE)) {
-  \donttest{
-  # A real dissimilarity matrix (the all-zero matrix is degenerate
-  # and makes the stress majorizer divide by zero).
-  set.seed(1)
-  X <- matrix(rnorm(30), 10, 3)
-  morie_spatial_voting_bayesian_mds(as.matrix(dist(X)))
-  }
-}
+set.seed(1)
+X <- matrix(rnorm(16), 8, 2)
+D <- as.matrix(dist(X))
+fit <- morie_spatial_voting_bayesian_mds(D, n_samples = 150L,
+                                         burn_in = 100L)
+# posterior mean distances against the true ones
+cor(fit$distance_mean[upper.tri(D)], D[upper.tri(D)])
 }
 \references{
-Oh & Raftery (2001) JASA 96(455).
+Bakker, R. and Poole, K. T. (2013). Bayesian metric
+multidimensional scaling. \emph{Political Analysis} 21(1), 125-140.
 }

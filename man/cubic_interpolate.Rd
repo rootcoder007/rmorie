@@ -25,7 +25,6 @@ The value of \code{t}, as built in the body.
 \description{
 A step of the cgnonl_native implementation. Called by \code{line_search_fr}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 cubic_interpolate(ta = 0, fa = 1, da = -1, tb = 1, fb = 0.5, db = 0.2)

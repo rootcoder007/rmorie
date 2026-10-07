@@ -17,7 +17,6 @@ A list with \code{assignment}, \code{sizes}, \code{nested}, \code{note}.
 \description{
 A step of the sammkr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 whole_part_subpart(list(c(1, 1, 1, 0), c(1, 1, 0, 0), c(1, 0, 0, 0)))

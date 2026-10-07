@@ -27,6 +27,9 @@
 #' @references Kennedy, J. & Eberhart, R. (1995). Particle swarm
 #'   optimization. Proceedings of ICNN'95, volume 4, pages 1942-1948.
 #'   \doi{10.1109/ICNN.1995.488968}.
+#' @examples
+#' rosen <- function(x) (1 - x[1])^2 + 100 * (x[2] - x[1]^2)^2
+#' Psoop(rosen, bounds = list(c(-2, 2), c(-1, 3)), n_particles = 30, maxiter = 150)$x
 #' @export
 Psoop <- function(f, bounds, n_particles = 20, w = 0.7, c1 = 1.5, c2 = 1.5,
                   maxiter = 200) {

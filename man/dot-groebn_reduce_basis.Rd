@@ -17,7 +17,6 @@ The value of \code{[}.
 \description{
 A step of the groebn_native implementation. Called by \code{.groebn_buchberger}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # <x^3 - 2xy, x^2 y - 2y^2 + x>; a name "i_j" is the monomial x^i y^j

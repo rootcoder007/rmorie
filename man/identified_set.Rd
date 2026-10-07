@@ -38,7 +38,6 @@ A list with \code{lower}, \code{upper}, \code{estimate},
 A step of the snmtst_native implementation. Called by \code{breakdown_value},
 \code{fixed_length_ci}, \code{sensitivity_curve}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)

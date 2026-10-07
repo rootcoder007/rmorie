@@ -24,3 +24,11 @@ morie_jsonlt_write_json(x, path, ...)
 \description{
 Read and write JSON files
 }
+\examples{
+f <- tempfile(fileext = ".json")
+writeLines('{"a": 1, "b": [1, 2, 3]}', f)
+str(morie_jsonlt_read_json(f, simplifyVector = TRUE))
+f <- tempfile(fileext = ".json")
+morie_jsonlt_write_json(list(a = 1, b = "x"), f)
+readLines(f)
+}

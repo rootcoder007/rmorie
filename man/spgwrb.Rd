@@ -83,8 +83,11 @@ instead a neighbour count and the criterion is evaluated at every integer
 from 2 up to \code{n}.
 }
 \examples{
-spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
-  coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+set.seed(1)
+coords <- cbind(runif(30), runif(30))
+x <- cbind(1, rnorm(30))
+y <- as.numeric(x \%*\% c(1, 2)) + coords[, 1] + rnorm(30, sd = 0.3)
+spgwrb(x, y, coords, criterion = "aicc")$optimal_bandwidth
 }
 \references{
 Schabenberger Ch 6, Sec 6.1.3.1, pp. 316-317 -- the model, the

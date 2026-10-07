@@ -19,5 +19,4 @@ A list with \code{term}, \code{n_rated}, \code{scale}, \code{exponent}, \code{ra
 \description{
 A step of the svdpp_native implementation. Called by \code{.svdpp_predict}.
 See the file header for the source the module follows.
-source it follows.
 }

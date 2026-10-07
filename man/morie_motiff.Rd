@@ -38,6 +38,13 @@ Z = (N_real - mean N_rand)/sd N_rand over a degree-preserving
 randomized ensemble; p = fraction of randomizations with count
 at or above the real count (P < 0.01 motif cutoff).  Feed-forward loop and 3-cycle.
 }
+\examples{
+\donttest{
+set.seed(22)
+A <- matrix(rbinom(15 * 15, 1, 0.15), 15); diag(A) <- 0
+morie_motiff(A, motif = "ffl", n_random = 30, seed = 1)[c("count", "z_score")]
+}
+}
 \references{
 Milo, R. et al. (2002). Network motifs: simple
 building blocks of complex networks. Science, 298(5594),

@@ -76,6 +76,7 @@ horowitz_fredholm_eq <- function(m, k, alpha = 1e-3, weights = NULL) {
 #' @rdname definite_integral
 #' @export
 gibbons_are_scale_tests <- function(distribution = "normal") {
+  .morie_arg(distribution, "c1")
   if (distribution != "normal") stop("scale-test AREs are tabulated here for the normal only")
   list(are_mood_f = 15 / (2 * pi^2), are_klotz_f = 1, distribution = "normal",
        method = "ARE(Mood, F) = 15/(2 pi^2); ARE(Klotz, F) = 1 (Sec. 13.3.3)")

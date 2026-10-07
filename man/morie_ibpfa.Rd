@@ -19,7 +19,6 @@ The value of \code{sample_ibp}.
 \description{
 A step of the ibpfa_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_ibpfa(n = 5L, alpha = 0.5)

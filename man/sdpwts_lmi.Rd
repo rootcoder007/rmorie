@@ -20,7 +20,6 @@ The value of \code{out}, as built in the body.
 A step of the sdpwts_native implementation. Called by \code{sdpwts_barrier},
 \code{sdpwts_solve_sdp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sdpwts_lmi(x = 2, F0 = matrix(c(0, 1, 1, 0), 2), Fs = list(diag(2)))

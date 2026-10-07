@@ -56,10 +56,8 @@
 
 #' .morie_k05_hits
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc},
-#' \code{morie_kupiec_var_test}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_christoffersen_cc}, \code{morie_kupiec_var_test}.
+#' See the file header for the source the module follows. source it follows.
 #'
 #' @param hits Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{h}, \code{t}, \code{n}.
@@ -73,10 +71,8 @@
 
 #' .morie_k05_lr_uc
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc},
-#' \code{morie_kupiec_var_test}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_christoffersen_cc}, \code{morie_kupiec_var_test}.
+#' See the file header for the source the module follows. source it follows.
 #'
 #' @param p Numeric; passed to \code{log}.
 #' @param t Numeric; combined arithmetically in the body.
@@ -105,7 +101,8 @@
 #' @param alpha the VaR tail probability the model claims.
 #' @return list: statistic, pvalue, n_obs, n_exceedances,
 #'   expected_exceedances, rate, df, alpha, method.
-#' @references Kupiec, P. H. (1995), \emph{Journal of Derivatives}
+#' @references Kupiec, P. H. (1995). Techniques for verifying the
+#'   accuracy of risk measurement models. \emph{Journal of Derivatives}
 #'   3(2), 73-84. Cross-checked against rugarch's \code{.LR.uc}.
 #' @examples
 #' morie_kupiec_var_test(c(rep(0, 90), rep(1, 10)), 0.05)$statistic
@@ -122,9 +119,8 @@ morie_kupiec_var_test <- function(hits, alpha = 0.05) {
 
 #' .morie_k05_lr_ind
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_christoffersen_cc}. See the file header for the
+#' source the module follows. source it follows.
 #'
 #' @param h A vector; its length is taken and its elements indexed.
 #' @return A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11},
@@ -163,8 +159,8 @@ morie_kupiec_var_test <- function(hits, alpha = 0.05) {
 #' @param alpha the VaR tail probability the model claims.
 #' @return list: statistic (LR_cc), pvalue, lr_uc, pvalue_uc, lr_ind,
 #'   pvalue_ind, transition counts n00..n11, df, method.
-#' @references Christoffersen, P. F. (1998), \emph{International
-#'   Economic Review} 39(4), 841-862. Cross-checked against rugarch's
+#' @references Christoffersen, P. F. (1998). Evaluating interval
+#'   forecasts. \emph{International Economic Review} 39(4), 841-862. Cross-checked against rugarch's
 #'   \code{.LR.cc}.
 #' @examples
 #' morie_christoffersen_cc(c(rep(0, 40), 1, 1, 1, 0, 0, 1, rep(0, 54)), 0.05)$lr_ind
@@ -215,9 +211,8 @@ morie_var_backtest <- function(hits, alpha = 0.05) {
 
 #' .morie_k05_bns_one
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_bns_jump_test}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_bns_jump_test}. See the file header for the source
+#' the module follows. source it follows.
 #'
 #' @param r A vector; its length is taken.
 #' @return A list with \code{rv}, \code{bpv}, \code{tpq}, \code{z}.
@@ -251,7 +246,8 @@ morie_var_backtest <- function(hits, alpha = 0.05) {
 #'   never straddle a boundary, the overnight return is not diffusive.
 #' @return list: statistic (z), pvalue, rv, bpv, tpq, jump_component,
 #'   n_returns, days, method.
-#' @references Barndorff-Nielsen, O. E. & Shephard, N. (2006),
+#' @references Barndorff-Nielsen, O. E. & Shephard, N. (2006). Econometrics
+#'   of testing for jumps in financial economics using bipower variation.
 #'   \emph{Journal of Financial Econometrics} 4(1), 1-30. Cross-checked
 #'   against \code{BNSjumpTest} in the highfrequency package.
 #' @examples
@@ -289,9 +285,8 @@ morie_bns_jump_test <- function(r_intraday, block_index = NULL) {
 
 #' .morie_k05_tk
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_snht}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_snht}. See the file header for the source the
+#' module follows. source it follows.
 #'
 #' @param x A vector; indexed elementwise.
 #' @param n Numeric; combined arithmetically in the body.
@@ -320,8 +315,8 @@ morie_bns_jump_test <- function(r_intraday, block_index = NULL) {
 #'   from morie's Philox stream, so the Python mirror reproduces it.
 #' @param seed seed for that stream.
 #' @return list: statistic (T), pvalue, change_point, tk, n, n_mc, seed, method.
-#' @references Alexandersson, H. (1986), \emph{Journal of Climatology}
-#'   6, 661-675. Cross-checked against \code{snh.test} in the trend package.
+#' @references Alexandersson, H. (1986). A homogeneity test applied to
+#'   precipitation data. \emph{Journal of Climatology} 6(6), 661-675. Cross-checked against \code{snh.test} in the trend package.
 #' @examples
 #' morie_snht(c(0.1, -0.1, 0.05, -0.05, 10.1, 9.9, 10.05, 9.95), n_mc = 0)$change_point
 #' @export
@@ -355,10 +350,8 @@ morie_snht <- function(x, n_mc = 1999, seed = 0) {
 
 #' .morie_k05_acvf
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_sample_acf},
-#' \code{morie_sample_pacf}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_sample_acf}, \code{morie_sample_pacf}. See the
+#' file header for the source the module follows. source it follows.
 #'
 #' @param v Numeric; passed to \code{mean}.
 #' @param n Numeric; combined arithmetically in the body.
@@ -404,9 +397,8 @@ morie_sample_acf <- function(y, max_lag = 20) {
 
 #' R is indexed from 1 for lag 0, so r\[k + 1\] is lag k
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_sample_pacf}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Helper step. Called by \code{morie_sample_pacf}. See the file header for the source
+#' the module follows. source it follows.
 #'
 #' @param r A vector; indexed elementwise.
 #' @param max_lag A count; the body uses it as \code{seq_len(...)}.
@@ -445,9 +437,10 @@ morie_sample_acf <- function(y, max_lag = 20) {
 #' @param max_lag highest lag; clipped to n-1.
 #' @return list: pacf (index 1 is lag 1), lags, acf, n, max_lag,
 #'   ci_bound, method.
-#' @references Box, G. E. P. & Jenkins, G. M. (1976), sec. 3.2.6;
-#'   Durbin, J. (1960), \emph{Revue de l'Institut International de
-#'   Statistique} 28, 233-244.
+#' @references Box, G. E. P. & Jenkins, G. M. (1976). \emph{Time Series
+#'   Analysis: Forecasting and Control}, revised ed. Holden-Day, sec. 3.2.6;
+#'   Durbin, J. (1960). The fitting of time-series models. \emph{Revue de
+#'   l'Institut International de Statistique} 28(3), 233-244.
 #' @examples
 #' morie_sample_pacf(c(1, 3, 2, 7, 6, 8, 5, 9), max_lag = 3)$pacf[1]
 #' @export

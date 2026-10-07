@@ -24,5 +24,13 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{morie_spatial_voting_dw_nominate}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(27)
+votes <- matrix(rbinom(30, 1, 0.5), 6, 5)        # legislators x roll calls
+X <- matrix(rnorm(6, sd = 0.5), 6, 1)             # starting ideal points (1 dimension)
+nv <- matrix(1, 5, 1); mid <- matrix(0, 5, 1)     # roll-call normal vectors and midpoints
+r <- morie_spatial_nominate_iterate_cpp(votes, X, w = 1, nv = nv, mid = mid,
+                                        beta = 15, max_iter = 5L)
+str(r, max.level = 1)
 }

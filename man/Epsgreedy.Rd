@@ -22,12 +22,11 @@ list: estimate, q, counts, total_reward, regret, p_greedy, n,
 method.
 }
 \description{
-Sutton and Barto (2018), 2nd ed. (FETCHED from incompleteideas.net),
-section 2.2: "behave greedily most of the time, but every once in a
-while, say with small probability eps, instead select randomly from
-among all the actions with equal probability", so P(a) = 1 - eps +
-eps/k for the greedy action and eps/k otherwise; the values are the
-sample averages of section 2.4, Q_(n+1) = Q_n + (1/n)(R_n - Q_n).
+Sutton and Barto (2018), 2nd ed., section 2.2: "behave greedily most of the time, but
+every once in a while, say with small probability eps, instead select randomly from
+among all the actions with equal probability", so P(a) = 1 - eps + eps/k for the
+greedy action and eps/k otherwise; the values are the sample averages of section 2.4,
+Q_(n+1) = Q_n + (1/n)(R_n - Q_n).
 }
 \details{
 Determinism: exploration decisions come from the van der Corput

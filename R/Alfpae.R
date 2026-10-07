@@ -18,6 +18,11 @@
 #' @return A list with the \code{pae} matrix, the distributions \code{p},
 #'   \code{estimate}, \code{n} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. section 1.9.7
+#' @examples
+#' set.seed(7)
+#' z <- array(rnorm(3 * 3 * 4), c(3, 3, 4))
+#' r <- Alfpae(z, w = matrix(rnorm(64 * 4), 64, 4))
+#' round(r$pae, 2)
 #' @export
 Alfpae <- function(z, w, bins = NULL) {
   if (is.null(bins)) bins <- 0.25 + 0.5 * (seq_len(64) - 1)

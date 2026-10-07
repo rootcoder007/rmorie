@@ -23,7 +23,6 @@ A vector, from \code{sort}.
 \description{
 A step of the nrfrad_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sample_pdf(bins = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), n_samples = 5L)

@@ -22,6 +22,13 @@ A list with \code{output} and \code{note}.
 Standard scaled dot-product softmax attention, but only over the
 neighbours: dense attention would throw the graph away.
 }
+\examples{
+set.seed(9)
+H <- matrix(rnorm(8), 4, 2)
+adj <- list(`0` = 1L, `1` = c(0L, 2L), `2` = c(1L, 3L), `3` = 2L)  # 0-based node ids
+I2 <- diag(2)
+morie_gtrf_attention(H, adj, I2, I2, I2)$output
+}
 \references{
 Dwivedi, V. P. and Bresson, X. (2020).
 }

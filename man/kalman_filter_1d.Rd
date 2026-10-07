@@ -29,3 +29,9 @@ A list with \code{filtered_mean} and \code{loglik}.
 starting at \code{(m0, p0)}. Provided so the particle filter can
 be checked against the exact answer.
 }
+\examples{
+set.seed(15)
+x <- cumsum(rnorm(30, sd = 0.3)); y <- x + rnorm(30, sd = 0.5)
+k <- kalman_filter_1d(y, a = 1, q = 0.09, c = 1, r = 0.25)
+c(k$loglik, tail(k$filtered_mean, 1))
+}

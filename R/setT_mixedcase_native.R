@@ -219,6 +219,12 @@ Sett <- morie_setT
 #' @param Z See Usage.
 #' @param S See Usage.
 #' @param params See Usage.
+#' @examples
+#' set.seed(14)
+#' d <- 2
+#' params <- list(Wq = diag(d), Wk = diag(d), Wv = diag(d), W1 = diag(d), b1 = rep(0, d),
+#'                W2 = diag(d), b2 = rep(0, d))
+#' setT(Z = matrix(rnorm(10), 5, d), S = matrix(0, 1, d), params = params)$output
 #' @export
 setT <- function(Z, S, params) {
   Za <- as.matrix(Z)
@@ -249,11 +255,17 @@ setT <- function(Z, S, params) {
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
-#' Back-compatible wrapper over `setT` (old stub name)
+#' Back-compatible wrapper over `setT` (old name)
 #' @param X See Usage.
 #' @param k See Usage.
 #' @param S See Usage.
 #' @param params See Usage.
+#' @examples
+#' set.seed(3)
+#' d <- 2
+#' params <- list(Wq = diag(d), Wk = diag(d), Wv = diag(d), W1 = diag(d), b1 = rep(0, d),
+#'                W2 = diag(d), b2 = rep(0, d))
+#' set_transformer(X = matrix(rnorm(10), 5, d), S = matrix(0, 1, d), params = params)$output
 #' @export
 set_transformer <- function(X = NULL, k = NULL, S = NULL,
                             params = NULL) {

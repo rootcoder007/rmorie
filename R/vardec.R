@@ -1,13 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' VAR forecast error variance decomposition -- alias of \code{\link{Fevdc}}
 #'
-#' DUPLICATE, resolved by aliasing (wave-2 DUPMAP: vardec -> fevdc). Both
-#' names denote the same quantity: with P the lower Cholesky factor of
+#' Same quantity as \code{Fevdc}: with P the lower Cholesky factor of
 #' Sigma_u and Theta_s the MA coefficient matrices of the fitted VAR, the
 #' share of the h-step forecast error variance of variable i due to
 #' orthogonalised shock j is the ratio of sum_s (Theta_s P)\[i, j\]^2 to its
-#' row total. \code{Fevdc} implements it; this is a re-export, not a
-#' second copy.
+#' row total. \code{Fevdc} implements it; this is a re-export.
 #'
 #' @param var_coefficients VAR(1) coefficient matrix A (k by k).
 #' @param sigma_u Residual covariance matrix (k by k).

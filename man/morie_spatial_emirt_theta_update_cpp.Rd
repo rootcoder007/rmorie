@@ -18,5 +18,10 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{morie_spatial_voting_em_irt}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(3)
+votes <- matrix(sample(c(-1, 1), 30, TRUE), 6, 5)   # legislators x roll calls
+morie_spatial_emirt_theta_update_cpp(theta = matrix(rnorm(6), 6, 1), a = matrix(1, 5, 1),
+                                     d = rep(0, 5), votes = votes)
 }

@@ -20,16 +20,13 @@ list: statistic, g2, chisq, expected, df, pvalue,
 pvalue_chisq, reject, n.
 }
 \description{
-Source READ FROM THE CORPUS PDF, page rendered with pdftoppm:
-Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
-section 8.5, printed page 851, equations (8.95) and (8.96):
-\code{chi2 = sum (y_ij - n p_ij)^2 / (n p_ij)} and
-\code{G2 = 2 sum y_ij log(y_ij / (n p_ij))}, with \code{sum y_ij = n}
-and p_ij the cell probabilities estimated under the model.  The book
-calls (8.95) the Pearson-residual statistic and (8.96) the
-likelihood-quotient statistic, notes that G2 is usually preferred
-because its minimum comes from the maximum-likelihood estimate, and
-states that both are asymptotically chi-squared.
+Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+section 8.5, printed page 851, equations (8.95) and (8.96): \code{chi2 = sum (y_ij -
+n p_ij)^2 / (n p_ij)} and \code{G2 = 2 sum y_ij log(y_ij / (n p_ij))}, with \code{sum
+y_ij = n} and p_ij the cell probabilities estimated under the model. The book calls
+(8.95) the Pearson-residual statistic and (8.96) the likelihood-quotient statistic,
+notes that G2 is usually preferred because its minimum comes from the
+maximum-likelihood estimate, and states that both are asymptotically chi-squared.
 }
 \details{
 The default model is independence (8.97),

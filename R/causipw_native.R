@@ -26,12 +26,10 @@
 #' @return List with \code{estimate}, \code{alpha}, \code{n},
 #'   \code{n_kept}, \code{n_treat_kept}, \code{n_control_kept},
 #'   \code{mean_treated}, \code{mean_control}, \code{method}.
-#' @references Crump, R. K., Hotz, V. J., Imbens, G. W. and Mitnik,
-#'   O. A. (2009), Dealing with limited overlap in estimation of
-#'   average treatment effects, Biometrika 96(1), 187-199,
-#'   doi:10.1093/biomet/asn055; Corollary 5.1 and Section 5 in the
-#'   NBER TWP 330 (2006) version; local copy
-#'   fetched-wave3/crump-hotz-imbens-mitnik-2009-limited-overlap-biometrika.pdf.
+#' @references Crump, R. K., Hotz, V. J., Imbens, G. W. and Mitnik, O. A. (2009),
+#'   Dealing with limited overlap in estimation of average treatment effects, Biometrika
+#'   96(1), 187-199, doi:10.1093/biomet/asn055; Corollary 5.1 and Section 5 in the NBER
+#'   TWP 330 (2006) version.
 #' @export
 #' @examples
 #' set.seed(1)

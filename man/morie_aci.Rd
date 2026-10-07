@@ -27,6 +27,9 @@ Inference Under Distribution Shift, NeurIPS 34 (arXiv:2106.00170),
 the book's Reference 13.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_aci(V)
+# coverage indicators of a forecaster that covers about 88\% of the time
+set.seed(1)
+inside <- runif(300) > 0.12
+r <- morie_aci(inside, alpha = 0.1, gamma = 0.01)
+c(r$empirical, r$final)
 }

@@ -31,8 +31,11 @@ Window Extension of Large Language Models", arXiv:2309.00071 (ICLR
 gamma; Eq 20 blend h(theta_d) = (1 - gamma) theta_d / s +
 gamma theta_d; Eq 22 temperature sqrt(1/t) = 0.1 ln(s) + 1.
 }
+\examples{
+y <- Yarn(base = 10000, s = 4, d = 64, L = 4096)
+y$temperature
+}
 \references{
-Peng, B., Quesnelle, J., Fan, H. and Shippole, E.
-(2023), arXiv:2309.00071, Sections 3.2-3.4, Eqs 17/18/20/22.
-Local source: fetched-wave3/peng-etal-2023-yarn-arxiv2309.00071.pdf.
+Peng, B., Quesnelle, J., Fan, H. and Shippole, E. (2023),
+arXiv:2309.00071, Sections 3.2-3.4, Eqs 17/18/20/22.
 }

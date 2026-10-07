@@ -28,7 +28,6 @@ M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 Wgtlap(M)
 }
 \references{
-Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.4,
-for the weighted definition with loops. Fetched from the author's own
-copy of the chapter.
+Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.4, for the
+weighted definition with loops.
 }

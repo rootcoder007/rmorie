@@ -121,15 +121,14 @@ memory rather than from the source.  There is no validation split and no early
 stopping on a held-out set; training stops on the Chapter 10 Step 14
 criterion, E(w) <= tol.
 
-DETERMINISM.  Chapter 10 Step 1 says "initialize the weights to small random
-values".  Weights are instead laid down by a linear congruential generator,
-seeded by seed, walked in a fixed order over the layers.  An LCG is used
-rather than the low-discrepancy van der Corput draws available in the s03
-helpers on purpose: a van der Corput stream strided across several parameter
-blocks makes those blocks correlated, which has already produced a silently
-wrong module on this shelf, and a correlated weight initialisation breaks the
-symmetry-breaking that a hidden layer needs.  Pass init to supply weights
-directly.
+DETERMINISM. Chapter 10 Step 1 says "initialize the weights to small random values".
+Weights are instead laid down by a linear congruential generator, seeded by seed,
+walked in a fixed order over the layers. An LCG is used rather than the
+low-discrepancy van der Corput draws available in the s03 helpers on purpose: a van
+der Corput stream strided across several parameter blocks makes those blocks
+correlated, which has already produced a silently wrong module on this package, and a
+correlated weight initialisation breaks the symmetry-breaking that a hidden layer
+needs. Pass init to supply weights directly.
 }
 \examples{
 X <- matrix(c(0.33, 0.95, 0.27, 1.3), 4, 1)

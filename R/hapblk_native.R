@@ -9,15 +9,14 @@
 #'
 #' A step of the hapblk_native implementation. Called by \code{morie_hapblk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h A vector; indexed elementwise.
 #' @param grid Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A vector, from \code{c}.
 #' @export
 #' @examples
-#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
-#' res <- .hapblk_ci(h = A)
+#' # haplotype counts AB, Ab, aB, ab
+#' res <- .hapblk_ci(h = c(40, 10, 10, 40))
 #' res
 .hapblk_ci <- function(h, grid = 200) {
   n <- sum(h)

@@ -26,12 +26,9 @@
 #' @return List with \code{estimate} (values of the final policy),
 #'   \code{policy} (0-based actions), \code{q}, \code{n_improve},
 #'   \code{n_eval}, \code{policy_stable}, \code{method}.
-#' @references Sutton, R. S. and Barto, A. G. (2018). Reinforcement
-#'   Learning: An Introduction, 2nd ed., MIT Press, Section 4.3, boxed
-#'   algorithm p. 80.  Local source:
-#'   fetched-wave3/sutton-barto-2018-reinforcement-learning-2nd-ed.pdf.
-#'   Howard, R. A. (1960). Dynamic Programming and Markov Processes,
-#'   MIT Press.
+#' @references Sutton, R. S. and Barto, A. G. (2018). Reinforcement Learning: An
+#'   Introduction, 2nd ed., MIT Press, Section 4.3, boxed algorithm p. 80. Howard, R. A.
+#'   (1960). Dynamic Programming and Markov Processes, MIT Press.
 #' @examples
 #' P <- list(matrix(c(1, 0, 0, 1), 2, byrow = TRUE),
 #'           matrix(c(0, 1, 0, 1), 2, byrow = TRUE))
@@ -40,6 +37,7 @@
 #' @export
 Mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000L,
                    max_improve = 1000L, pi0 = NULL) {
+  .morie_arg(P, "l")
   ar <- .w505_mdp_args(P, R)
   Pm <- ar$P
   R <- ar$R

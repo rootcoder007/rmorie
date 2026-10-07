@@ -29,11 +29,9 @@
 #'   \code{n2_left_full}, \code{n2_right_full}, \code{r_left},
 #'   \code{r_right}, \code{h_unregularized}, \code{kernel_constant},
 #'   \code{n}, \code{method}.
-#' @references Imbens, G. and Kalyanaraman, K. (2009), NBER Working
-#'   Paper 14726, Section 4.4 eqs (4.8)-(4.13) and Section 6.2;
-#'   published as Review of Economic Studies 79(3), 933-959 (2012),
-#'   \doi{10.1093/restud/rdr043}. Local source:
-#'   fetched-wave3/imbens-kalyanaraman-2009-w14726-optimal-bandwidth-rdd.pdf.
+#' @references Imbens, G. and Kalyanaraman, K. (2009), NBER Working Paper 14726, Section
+#'   4.4 eqs (4.8)-(4.13) and Section 6.2; published as Review of Economic Studies
+#'   79(3), 933-959 (2012), \doi{10.1093/restud/rdr043}.
 #' @export
 #' @examples
 #' set.seed(1)

@@ -99,6 +99,12 @@
 #' @references Belloni, A., Chernozhukov, V. & Hansen, C. (2014). Review
 #'   of Economic Studies 81(2):608-650; van der Laan, M. J. & Rubin, D.
 #'   (2006). IJB 2(1):11.
+#' @examples
+#' set.seed(2)
+#' n <- 200; X <- matrix(rnorm(n * 5), n)
+#' D <- rbinom(n, 1, plogis(X[, 1]))
+#' y <- 1 + 0.5 * D + X[, 1] + rnorm(n)
+#' Tmlphd(y, D, X, lam = 0.01)$estimate
 #' @export
 Tmlphd <- function(y, D, X, lam) {
   yv <- as.numeric(y)

@@ -223,6 +223,7 @@ ProcessConvolutionCovariance <- function(coords, kernels, sigma2 = 1, normalize 
 #' @rdname WishartMoments
 #' @export
 ArmaAcf <- function(ar = numeric(0), ma = numeric(0), lag_max = NULL) {
+  .morie_arg(ar, "n0")
   p <- length(ar)
   q <- length(ma)
   if (p == 0 && q == 0) stop("empty model")

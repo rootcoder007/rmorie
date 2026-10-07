@@ -23,7 +23,6 @@
 #'
 #' A step of the tmldgp_native implementation. Called by \code{morie_tmldgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -41,7 +40,6 @@
 #' A step of the tmldgp_native implementation. Called by \code{morie_tmldgp},
 #' \code{shrunk_targeting_unsafe}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -60,7 +58,6 @@
 #'
 #' A step of the tmldgp_native implementation. Called by \code{lasso_path}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{abs}.
 #' @param t Numeric; combined arithmetically in the body.
@@ -269,7 +266,7 @@ morie_tmldgp <- function(y, D, X, penalty = 0.05, iters = 100) {
                      "score equation"))
 }
 
-#' Compact alias per ledger/NAMING.md
+#' Compact alias
 #' @rdname morie_tmldgp
 #' @export
 morie_penalisedtmle <- morie_tmldgp
@@ -289,11 +286,15 @@ morie_tmle_doubly_robust_pen <- morie_tmldgp
 #' @param y Numeric response vector.
 #' @param lam Non-negative penalty strength.
 #' @param iters Maximum coordinate-descent iterations.
-#' @tol Convergence tolerance on the maximum coefficient update.
-#' @param tol See Usage.
+#' @param tol Convergence tolerance on the maximum coefficient update.
 #' @return A list with \code{beta}, \code{intercept}, \code{support},
 #'   \code{lambda}.
 #' @references Belloni, A. & Chernozhukov, V. (2013).
+#' @examples
+#' set.seed(17)
+#' X <- matrix(rnorm(100 * 4), 100, 4)
+#' y <- 1 + X %*% c(2, 0, 0, -1) + rnorm(100, sd = 0.1)
+#' morie_lasso_path(X, as.numeric(y), lam = 0.1)$support
 #' @export
 morie_lasso_path <- function(X, y, lam, iters = 500L, tol = 1e-9) {
   rows <- as.matrix(X)
@@ -350,6 +351,13 @@ morie_lasso_path <- function(X, y, lam, iters = 500L, tol = 1e-9) {
 #' @return A list with the estimate, SE, CI, EIC, and support.
 #' @references Belloni, A. & Chernozhukov, V. (2013); van der Laan,
 #'   M. J. & Gruber, S. (2016).
+#' @examples
+#' set.seed(11)
+#' n <- 300
+#' X <- matrix(rnorm(n * 5), n)
+#' D <- rbinom(n, 1, plogis(X[, 1]))
+#' y <- plogis(-0.3 + 0.5 * D + X[, 1] + rnorm(n, sd = 0.3))
+#' morie_penalised_tmle(y, D, X, penalty = 0.05)$estimate
 #' @export
 morie_penalised_tmle <- function(y, D, X, penalty = 0.05, iters = 100) {
   yv <- as.numeric(y)
@@ -415,6 +423,12 @@ morie_penalised_tmle <- function(y, D, X, penalty = 0.05, iters = 100) {
 #' @return A list with \code{support}, \code{coef}, \code{intercept},
 #'   \code{predict}, and the underlying lasso \code{beta}.
 #' @references Belloni, A. & Chernozhukov, V. (2013).
+#' @examples
+#' set.seed(12)
+#' X <- matrix(rnorm(100 * 4), 100, 4)
+#' y <- 1 + X %*% c(2, 0, 0, -1) + rnorm(100, sd = 0.1)
+#' pl <- morie_post_lasso(X, as.numeric(y), lam = 0.2)
+#' round(pl$coef, 2)
 #' @export
 morie_post_lasso <- function(X, y, lam) {
   rows <- as.matrix(X)
@@ -452,6 +466,10 @@ morie_post_lasso <- function(X, y, lam) {
 #' @param ridge Optional ridge on \code{epsilon}.
 #' @return A list with the would-be \code{epsilon}, the updated fit,
 #'   and the un-targeted mean score.
+#' @examples
+#' set.seed(13)
+#' Q <- runif(50); H <- rnorm(50); Y <- Q + 0.1 * H + rnorm(50, sd = 0.1)
+#' morie_shrunk_targeting_unsafe(Q, H, Y, ridge = 10)$epsilon
 #' @export
 morie_shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1.0) {
   q <- as.numeric(Q)
@@ -479,6 +497,8 @@ morie_shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1.0) {
 #' Compact one-line summary of the tmldgp recipe
 #'
 #' @return A character string.
+#' @examples
+#' morie_tmldgp_cheatsheet()
 #' @export
 morie_tmldgp_cheatsheet <- function() {
   paste("tmldgp: in high dimensions regularise the NUISANCES and",

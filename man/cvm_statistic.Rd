@@ -25,7 +25,6 @@ A list with \code{statistic}, \code{per_instrument}, \code{form},
 \description{
 A step of the bnskmt_native implementation. Called by \code{compare_forms}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

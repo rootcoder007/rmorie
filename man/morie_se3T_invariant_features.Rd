@@ -20,7 +20,6 @@ A list with \code{distance}, \code{direction}, \code{note}.
 \description{
 A step of the se3T_native implementation. Called by \code{morie_se3T_se3_attention}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_se3T_invariant_features(positions = c(1, 2, 3, 4, 5, 6, 7, 8),

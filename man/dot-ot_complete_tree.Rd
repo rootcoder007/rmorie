@@ -19,5 +19,4 @@ The value of \code{.ot_sortbasis}.
 \description{
 A step of the helpers_ot implementation. Called by \code{.ot_emd}.
 See the file header for the source the module follows.
-source it follows.
 }

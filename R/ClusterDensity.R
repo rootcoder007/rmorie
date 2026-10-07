@@ -110,6 +110,7 @@ Denclue <- function(X, h, xi, eps = NULL, tol = 1e-10, maxit = 1000L) {
 #' @rdname Denclue
 #' @export
 FlameClustering <- function(X, knn = 10L, outlier_threshold = -2, steps = 500L, epsilon = 1e-6) {
+  .morie_arg(X, "m")
   X <- as.matrix(X)
   n <- nrow(X)
   kmax <- min(floor(sqrt(n)) + 10, n - 1)

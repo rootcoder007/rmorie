@@ -17,7 +17,6 @@ A step of the se3T_native implementation. Called by
 \code{morie_se3T_check_equivariance}, \code{morie_se3T_radial_kernel},
 \code{morie_se3T_rotation_matrix} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

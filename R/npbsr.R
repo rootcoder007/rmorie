@@ -1,10 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Nonparametric Bayes survival via a beta process
 #'
-#' DUPLICATE: Hjort's beta-process posterior for right-censored
-#' survival is already implemented as
-#' \code{morie_ghosal_survival_beta_process} in \code{ghsrv.R}; per
-#' ledger/wave2/DUPMAP.tsv this is an alias, not a second copy.
+#' DUPLICATE: Hjort's beta-process posterior for right-censored survival is already
+#' implemented as \code{morie_ghosal_survival_beta_process} in \code{ghsrv.R}; this is
+#' an alias, not a second copy.
 #'
 #' Formula: with \code{H ~ BP(c, H_0)} the posterior is again a beta
 #' process and \code{dH_post(t) = (c dH_0(t) + dN(t)) / (c + Y(t-))},

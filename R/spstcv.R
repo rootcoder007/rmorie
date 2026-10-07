@@ -40,6 +40,10 @@
 #'   `temporal_only`, `sill`, and when a design is supplied `valid` and
 #'   `min_eigenvalue`.
 #' @references Schabenberger Ch 9, Sec 9.2, eqs (9.5)-(9.6)
+#' @examples
+#' cs <- function(h) exp(-h / 2); ct <- function(k) exp(-abs(k))
+#' spstcv(spatial_h = 1, temporal_u = 2, cov_spatial = cs, cov_temporal = ct)$st_covariance
+#' exp(-0.5) * exp(-2)
 #' @export
 spstcv <- function(spatial_h, temporal_u, cov_spatial, cov_temporal,
                    form = "product", coords = NULL, times = NULL) {

@@ -18,6 +18,11 @@
 #'   (2024). Difference-in-differences with a continuous treatment.
 #'   arXiv:2107.02637, Section 3.  Sant'Anna, P. H. C. and Zhao, J.
 #'   (2020). Journal of Econometrics 219(1), 101-122, equation (2.6).
+#' @examples
+#' set.seed(12)
+#' dose <- c(rep(0, 100), sample(1:3, 200, TRUE))
+#' y <- 0.5 * dose + rnorm(300)
+#' Drctf(y, dose)[c("doses", "att")]
 #' @export
 Drctf <- function(y, D_dose, X = NULL) {
   yv <- .s03vec(y)

@@ -29,9 +29,8 @@ tau-equivalence (all loadings equal) omega coincides with Cronbach's
 alpha; otherwise omega is the larger of the two.
 }
 \examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-S <- c("a", "b", "c")
-Ctomeg(M, S)
+X <- cbind(c(1, 2, 3, 4, 5, 6), c(2, 2, 4, 4, 6, 7), c(1, 3, 3, 5, 5, 6))
+Ctomeg(X, factor_loadings = c(0.8, 0.9, 0.7))
 }
 \references{
 McDonald (1999), Test Theory: A Unified Treatment,

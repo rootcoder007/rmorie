@@ -37,5 +37,11 @@ A list with \code{estimate}, \code{peak_lod}, \code{peak_position},
 \description{
 A step of the mqtmpl_native implementation. Called by \code{mqtmpl_permutation_threshold}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(2)
+n <- 40
+m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+mqtmpl_scanone(y, list(m1, m2), c(0, 0.1), method = "mr")$peak_lod
 }

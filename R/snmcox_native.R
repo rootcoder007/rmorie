@@ -38,6 +38,7 @@
 #'   psi = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
 morie_snmcox_blip_down <- function(time, treat_times, psi) {
+  .morie_arg(time, "n")
   T <- as.numeric(time)
   if (T < 0) stop("snmcox: a failure time cannot be negative")
   p <- as.numeric(psi)
@@ -67,7 +68,6 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #'
 #' A step of the snmcox_native implementation. Called by \code{morie_snmcox_gest_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{crossprod}.
 #' @param L Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
@@ -93,7 +93,6 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #'
 #' A step of the snmcox_native implementation. Called by \code{.snmcox_treat_model}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -314,7 +313,6 @@ morie_snm_cox <- morie_snmcox
 #'
 #' A step of the snmcox_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -81,6 +81,12 @@ intensity by Berman-Turner quadrature with grid counting weights.
 second-order and nearest-neighbour summaries. Philox streams as the
 Python arm.
 }
+\examples{
+xy <- AreaInteractionSimulate(beta = 50, eta = 2, r = 0.05, window = c(0, 1, 0, 1),
+                              n_steps = 200, grid = 40, seed = 1)
+xy$n
+head(xy$points)
+}
 \references{
 Baddeley, A. J. and van Lieshout, M. N. M. (1995). Ann. Inst.
 Statist. Math. 47, 601-619. Geyer, C. J. and Moller, J. (1994). Scand. J.

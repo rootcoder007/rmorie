@@ -37,9 +37,13 @@ The marginal posterior of mu is t with nu_n degrees of freedom,
 centre mu_n and scale^2 sigma_n^2/kappa_n; the posterior predictive
 for one new observation has scale^2 sigma_n^2 (kappa_n + 1)/kappa_n.
 }
+\examples{
+set.seed(10)
+y <- rnorm(50, 3, 2)
+Nignst(y, mu0 = 0, kappa0 = 1, nu0 = 1, sigma0_sq = 1)[c("mu_n", "sigma_n_sq")]
+}
 \references{
-Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B.,
-Vehtari, A. and Rubin, D. B. (2013), Bayesian Data Analysis,
-3rd ed., Chapman and Hall/CRC, Section 3.3, Eqs. 3.7-3.8; local
-copy fetched-wave3/gelman-etal-2013-bayesian-data-analysis-3ed.pdf.
+Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A. and
+Rubin, D. B. (2013), Bayesian Data Analysis, 3rd ed., Chapman and Hall/CRC, Section
+3.3, Eqs. 3.7-3.8.
 }

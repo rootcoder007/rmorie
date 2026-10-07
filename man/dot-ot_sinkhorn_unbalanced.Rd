@@ -25,5 +25,4 @@ A numeric value.
 \description{
 A step of the helpers_ot implementation. Called by \code{Otunbal}.
 See the file header for the source the module follows.
-source it follows.
 }

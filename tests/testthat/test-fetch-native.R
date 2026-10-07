@@ -96,3 +96,36 @@ test_that("json shim honours simplifyVector when falling back", {
   simp <- rmorie:::.morie_from_json('[1, 2, 3]')
   expect_equal(as.numeric(unlist(simp)), c(1, 2, 3))
 })
+
+test_that("an array of records with nested fields is a data frame, as jsonlite gives", {
+  # a Socrata row carries a location object: a nested data frame; an array field: a list column
+  df <- morie_fetch_json('[{"a":1,"b":"x","loc":{"lat":41.8},"t":[1,2]},{"a":2,"loc":{"lat":41.9},"t":[3]}]')
+  expect_s3_class(df, "data.frame")
+  expect_identical(dim(df), c(2L, 4L))
+  expect_identical(df$a, c(1, 2))
+  expect_identical(df$b, c("x", NA))
+  expect_s3_class(df$loc, "data.frame")
+  expect_identical(df$loc$lat, c(41.8, 41.9))
+  expect_type(df$t, "list")
+  expect_identical(df$t[[2]], 3)
+})
+
+test_that("nested objects become nested data frames and records come back out", {
+  df <- morie_fetch_json('[{"id":"a","p":{"t":"x","tags":["u","v"]}},{"id":"b","p":{"t":"y","tags":[]}}]')
+  expect_s3_class(df$p, "data.frame")
+  expect_identical(df$p$t, c("x", "y"))
+  recs <- rmorie:::.morie_json_records(df)
+  expect_length(recs, 2L)
+  expect_identical(recs[[1]]$id, "a")
+  expect_identical(recs[[1]]$p$t, "x")
+  expect_identical(recs[[1]]$p$tags, c("u", "v"))
+  expect_identical(rmorie:::.morie_json_records(list(1, 2)), list(1, 2))
+})
+
+test_that("without jsonlite the reader returns what jsonlite returns", {
+  txt <- '[{"a":1,"b":"x","loc":{"lat":41.8,"type":"Point"},"t":[1,2]},{"a":2,"loc":{"lat":41.9},"t":[3]},{"a":3}]'
+  want <- jsonlite::fromJSON(txt)
+  local_mocked_bindings(requireNamespace = function(package, ...) package != "jsonlite", .package = "base")
+  expect_identical(rmorie:::.morie_from_json(txt), want)
+  expect_identical(rmorie:::.morie_from_json(txt, simplifyVector = FALSE)[[1]]$loc$type, "Point")
+})

@@ -18,3 +18,6 @@ A list of rows, each a numeric vector.
 The delta column is \code{a_j(t)(t - s_j)}, which already carries
 the \code{-s_j delta_j} offset -- so continuity holds by construction.
 }
+\examples{
+trend_matrix(t = c(0, 1, 2, 3), cps = 1.5)
+}

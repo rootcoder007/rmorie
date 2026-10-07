@@ -3,14 +3,14 @@
 \name{morie_otis_analyze_b01_ruhela_per_year}
 \alias{morie_otis_analyze_b01_ruhela_per_year}
 \alias{morie_otis_analyze_b01_mrm_per_year}
-\title{Per-year full-DLRM on b01 canonical formulation}
+\title{Per-year full-DLRM on the b01 canonical formulation}
 \usage{
 morie_otis_analyze_b01_ruhela_per_year(data = NULL, out_dir = NULL)
 
 morie_otis_analyze_b01_mrm_per_year(data = NULL, out_dir = NULL)
 }
 \arguments{
-\item{data}{Optional b01 data.frame.}
+\item{data}{The OTIS b01 table; \code{NULL} loads it.}
 
 \item{out_dir}{Optional output directory.}
 }
@@ -18,10 +18,12 @@ morie_otis_analyze_b01_mrm_per_year(data = NULL, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-Per-year full-DLRM on b01 canonical formulation
+As \code{\link{morie_otis_analyze_a01_ruhela_per_year}}, on b01.
 }
 \examples{
-if (requireNamespace("MASS", quietly = TRUE)) {
-  \donttest{ morie_otis_analyze_b01_ruhela_per_year() }
+\donttest{
+b01 <- morie_synth_otis("b01", n = 800L, seed = 1L)
+r <- morie_otis_analyze_b01_ruhela_per_year(b01)
+r$summary_lines$`Years analysed`
 }
 }

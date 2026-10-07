@@ -14,15 +14,13 @@
 #' \strong{Treatment-effect estimators (legacy)}
 #' \itemize{
 #'   \item \code{estimate_ate()} -- IPW-weighted OLS ATE.
-#'   \item \code{estimate_plr()} -- Partially Linear Regression via
-#'     \pkg{DoubleML}; falls back to base R cross-fit ridge.
-#'   \item \code{estimate_pliv()} -- Partially Linear IV (LATE) via
-#'     \pkg{DoubleML}; falls back to 2SLS.
-#'   \item \code{estimate_ate_gcomputation()} -- G-computation ATE.
-#'     Thin wrapper over \code{stdReg::stdGlm()} when installed; falls
-#'     back to inline bootstrap standardisation otherwise.
-#'   \item \code{sensitivity_rosenbaum()} -- Rosenbaum bounds. Thin
-#'     wrapper over \code{rbounds::psens()} when installed; otherwise
+#'   \item \code{estimate_plr()} -- Partially Linear Regression, native
+#'     cross-fit (cross-validated against \pkg{DoubleML}).
+#'   \item \code{estimate_pliv()} -- Partially Linear IV (LATE), native
+#'     (cross-validated against \pkg{DoubleML}).
+#'   \item \code{estimate_ate_gcomputation()} -- G-computation ATE with
+#'     stdReg's sandwich SE, native.
+#'   \item \code{sensitivity_rosenbaum()} -- Rosenbaum bounds, native
 #'     normal-approximation Wilcoxon signed-rank bounds.
 #'   \item \code{e_value()} -- VanderWeele-Ding E-value. Thin wrapper
 #'     native VanderWeele-Ding continuous-scale E-value (module 26).
@@ -213,18 +211,16 @@ estimate_plr <- function(data, treatment, outcome, covariates,
 #' @return Named list with `late`, `se`, `ci_lower`, `ci_upper`,
 #'   `pval`, `n_obs`, `method`.
 #' @examples
-#' if (requireNamespace("stdReg", quietly = TRUE)) {
-#'   set.seed(1)
-#'   n <- 80
-#'   x1 <- rnorm(n)
-#'   x2 <- rnorm(n)
-#'   z <- rbinom(n, 1, 0.5)
-#'   d <- as.integer(plogis(0.3 + 0.8 * z + 0.4 * x1) > runif(n))
-#'   y <- 1 + 0.5 * d + 0.3 * x1 + rnorm(n)
-#'   df <- data.frame(y, d, z, x1, x2)
-#'   res <- suppressWarnings(estimate_pliv(df, "d", "y", "z", c("x1", "x2")))
-#'   res$late
-#' }
+#' set.seed(1)
+#' n <- 80
+#' x1 <- rnorm(n)
+#' x2 <- rnorm(n)
+#' z <- rbinom(n, 1, 0.5)
+#' d <- as.integer(plogis(0.3 + 0.8 * z + 0.4 * x1) > runif(n))
+#' y <- 1 + 0.5 * d + 0.3 * x1 + rnorm(n)
+#' df <- data.frame(y, d, z, x1, x2)
+#' res <- suppressWarnings(estimate_pliv(df, "d", "y", "z", c("x1", "x2")))
+#' res$late
 #' @export
 estimate_pliv <- function(data, treatment, outcome, instrument,
                           covariates, n_folds = 5L,
@@ -292,13 +288,14 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
 
 # -- G-computation (outcome regression / standardisation) -------------
 
-#' G-computation ATE with bootstrap SE
+#' G-computation ATE with its sandwich SE
 #'
-#' Thin wrapper over \code{stdReg::stdGlm()} (Sjolander's
-#' regression-standardisation back end) when \pkg{stdReg} is
-#' installed. Without \pkg{stdReg}, falls back to an inline outcome-
-#' regression + bootstrap implementation (500 resamples, seed 42)
-#' that mirrors the legacy rmorie behaviour.
+#' Regression standardisation: one GLM for the outcome, its predictions
+#' with the treatment set to 1 and to 0 averaged over the sample, and the
+#' M-estimation sandwich SE of \code{stdReg::stdGlm()} (Sjolander 2016),
+#' computed natively (the same estimate and SE as
+#' \code{\link{morie_estimate_g_computation}}, cross-validated against
+#' stdReg). The 95\% interval is the estimate +/- 1.96 SE.
 #'
 #' @param data         Data frame with all required columns.
 #' @param treatment    Binary treatment column (0/1).
@@ -308,19 +305,17 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
 #' @return Named list with `ate`, `se`, `ci_lower`, `ci_upper`,
 #'   `n_obs`, `outcome_model`.
 #' @examples
-#' if (requireNamespace("stdReg", quietly = TRUE)) {
-#'   set.seed(1)
-#'   n <- 300
-#'   X <- matrix(rnorm(n * 3), n, 3)
-#'   tr <- rbinom(n, 1, plogis(X[, 1]))
-#'   y <- 2.5 * tr + drop(X %*% c(1, 0.5, -0.7)) + rnorm(n)
-#'   d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
-#'   res <- estimate_ate_gcomputation(d,
-#'     treatment = "d", outcome = "y",
-#'     covariates = c("x1", "x2", "x3")
-#'   )
-#'   res$ate
-#' }
+#' set.seed(1)
+#' n <- 300
+#' X <- matrix(rnorm(n * 3), n, 3)
+#' tr <- rbinom(n, 1, plogis(X[, 1]))
+#' y <- 2.5 * tr + drop(X %*% c(1, 0.5, -0.7)) + rnorm(n)
+#' d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
+#' res <- estimate_ate_gcomputation(d,
+#'   treatment = "d", outcome = "y",
+#'   covariates = c("x1", "x2", "x3")
+#' )
+#' res$ate
 #' @export
 estimate_ate_gcomputation <- function(data, treatment, outcome,
                                       covariates,
@@ -348,123 +343,19 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
     stop("G-computation requires at least 10 complete observations.")
   }
 
-  if (requireNamespace("stdReg", quietly = TRUE)) {
-    fml <- stats::as.formula(
-      paste0(
-        outcome, " ~ ",
-        paste(c(treatment, covariates), collapse = " + ")
-      )
-    )
-    fam <- if (outcome_model == "linear") {
-      stats::gaussian()
-    } else {
-      stats::binomial()
-    }
-    mod <- stats::glm(fml, data = df, family = fam)
-    fitobj <- stdReg::stdGlm(
-      fit = mod, data = df, X = treatment,
-      x = c(0, 1)
-    )
-    sm <- summary(fitobj,
-      contrast = "difference",
-      reference = 0, CI.level = 0.95
-    )
-    est <- sm$est.table
-    return(list(
-      ate           = as.numeric(est[2, "Estimate"]),
-      se            = as.numeric(est[2, "Std. Error"]),
-      ci_lower      = as.numeric(est[2, "lower 0.95"]),
-      ci_upper      = as.numeric(est[2, "upper 0.95"]),
-      n_obs         = n_obs,
-      outcome_model = outcome_model,
-      method        = "stdReg::stdGlm"
-    ))
-  }
-
-  feature_cols <- c(treatment, covariates)
-  fit_and_predict_ate <- function(boot_df) {
-    means <- colMeans(boot_df[, feature_cols, drop = FALSE])
-    sds <- apply(boot_df[, feature_cols, drop = FALSE], 2, stats::sd)
-    sds[sds == 0] <- 1
-    xs <- sweep(sweep(
-      boot_df[, feature_cols, drop = FALSE], 2,
-      means, "-"
-    ), 2, sds, "/")
-    df_fit <- as.data.frame(xs)
-    df_fit[[outcome]] <- boot_df[[outcome]]
-    if (outcome_model == "linear") {
-      mod <- stats::lm(stats::as.formula(paste0(outcome, " ~ .")),
-        data = df_fit
-      )
-    } else {
-      mod <- stats::glm(stats::as.formula(paste0(outcome, " ~ .")),
-        data = df_fit, family = stats::binomial()
-      )
-    }
-    x_t1 <- boot_df[, feature_cols, drop = FALSE]
-    x_t1[[treatment]] <- 1
-    x_t0 <- boot_df[, feature_cols, drop = FALSE]
-    x_t0[[treatment]] <- 0
-    x_t1_s <- as.data.frame(sweep(
-      sweep(x_t1, 2, means, "-"),
-      2, sds, "/"
-    ))
-    x_t0_s <- as.data.frame(sweep(
-      sweep(x_t0, 2, means, "-"),
-      2, sds, "/"
-    ))
-    if (outcome_model == "linear") {
-      y1_hat <- stats::predict(mod, newdata = x_t1_s)
-      y0_hat <- stats::predict(mod, newdata = x_t0_s)
-    } else {
-      y1_hat <- stats::predict(mod,
-        newdata = x_t1_s,
-        type = "response"
-      )
-      y0_hat <- stats::predict(mod,
-        newdata = x_t0_s,
-        type = "response"
-      )
-    }
-    mean(y1_hat - y0_hat)
-  }
-
-  ate <- fit_and_predict_ate(df)
-  .rmorie_local_seed(42)
-  boot_ates <- rep(NA_real_, 500L)
-  for (b in seq_len(500L)) {
-    idx <- sample.int(n_obs, n_obs, replace = TRUE)
-    boot_ates[b] <- tryCatch(
-      fit_and_predict_ate(df[idx, , drop = FALSE]),
-      error = function(e) NA_real_
-    )
-  }
-  boot_ates <- boot_ates[is.finite(boot_ates)]
-  if (length(boot_ates) < 50L) {
-    warning("Fewer than 50 successful bootstrap iterations; ",
-      "SE may be unreliable.",
-      call. = FALSE
-    )
-  }
-  se <- if (length(boot_ates) > 1L) stats::sd(boot_ates) else NA_real_
-  ci_lo <- if (length(boot_ates)) {
-    as.numeric(stats::quantile(boot_ates, 0.025))
-  } else {
-    NA_real_
-  }
-  ci_hi <- if (length(boot_ates)) {
-    as.numeric(stats::quantile(boot_ates, 0.975))
-  } else {
-    NA_real_
-  }
+  fml <- stats::as.formula(paste0(outcome, " ~ ", paste(c(treatment, covariates), collapse = " + ")))
+  fam <- if (outcome_model == "linear") stats::gaussian() else stats::binomial()
+  mod <- stats::glm(fml, data = df, family = fam)
+  g <- .morie_gformula_std(mod, df, treatment)
+  z <- stats::qnorm(0.975)
   list(
-    ate           = ate,
-    se            = se,
-    ci_lower      = ci_lo,
-    ci_upper      = ci_hi,
+    ate           = g$ate,
+    se            = g$se,
+    ci_lower      = g$ate - z * g$se,
+    ci_upper      = g$ate + z * g$se,
     n_obs         = n_obs,
     outcome_model = outcome_model,
-    method        = "inline bootstrap (stdReg not installed)"
+    method        = "g-formula, sandwich SE (stdReg's estimator, native)"
   )
 }
 

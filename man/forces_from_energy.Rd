@@ -19,7 +19,6 @@ A list with \code{estimate}, \code{forces}, \code{net_force}, \code{method}, \co
 \description{
 A step of the schN_native implementation. Called by \code{invariance_error}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

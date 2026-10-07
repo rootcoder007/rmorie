@@ -176,7 +176,9 @@ print.morie_mrm_reconciliation <- function(x, ...) {
 #' @return An object of class \code{morie_mrm_effect}: list with
 #'   \code{results} (data frame: method, estimate, std_error,
 #'   ci_lower, ci_upper, p_value, p_adjusted), \code{consensus}
-#'   (inverse-variance pooled estimate), \code{correction},
+#'   (inverse-variance pooled estimate; its standard error is the
+#'   weighted mean of the standard errors, because the estimators share
+#'   one data set and are not independent), \code{correction},
 #'   \code{spec}, \code{citation}.
 #' @examples
 #' set.seed(1)
@@ -223,12 +225,11 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
   run <- function(fn) tryCatch(fn(), error = function(e) e)
   if ("matching" %in% methods) {
     r <- run(function() {
-      m <- morie_matching_nearest_neighbor(data, treatment, covariates)
-      md <- m$matched_data
-      tt <- stats::t.test(md[[outcome]][md[[treatment]] == 1],
-                          md[[outcome]][md[[treatment]] == 0])
-      list(estimate = unname(diff(rev(tt$estimate))),
-           se = unname(tt$stderr), p = tt$p.value,
+      # with replacement: without it, scarce controls are all used up and nothing is balanced
+      m <- morie_matching_nearest_neighbor(data, treatment, covariates, replace = TRUE)
+      a <- morie_matching_att_matched(data, outcome, treatment, m$match_pairs)
+      list(estimate = a$estimate, se = a$std_error,
+           p = 2 * stats::pnorm(-abs(a$estimate / a$std_error)),
            diag = list(n_pairs = nrow(m$match_pairs)))
     })
     rows[["matching (rmorie native)"]] <- r
@@ -279,9 +280,14 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
     ci_lower = est - z * se, ci_upper = est + z * se,
     p_value = p, p_adjusted = p_adj,
     stringsAsFactors = FALSE, row.names = NULL)
+  # The estimators share one data set, so their errors are strongly
+  # correlated and sqrt(1 / sum(w)) (independent studies) is far too
+  # small. The weighted mean of the standard errors is the standard
+  # error of the pooled estimate under perfect correlation, an upper
+  # bound under any correlation (Minkowski).
   w <- 1 / se^2
   consensus <- list(estimate = sum(w * est) / sum(w),
-                    std_error = sqrt(1 / sum(w)))
+                    std_error = sum(w * se) / sum(w))
   for (nm in names(rows)[!ok]) {
     diagnostics[[nm]] <- conditionMessage(rows[[nm]])
   }
@@ -305,8 +311,14 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
 #' @param ... Ignored; accepted for S3 consistency.
 #' @return The value of `invisible`.
 #' @examples
-#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' rmorie:::print.morie_mrm_effect(D)
+#' set.seed(92)
+#' n <- 200
+#' x1 <- rnorm(n); x2 <- rnorm(n)
+#' t <- rbinom(n, 1, plogis(0.5 * x1))
+#' y <- 0.8 * t + x1 + 0.5 * x2 + rnorm(n)
+#' df <- data.frame(y = y, t = t, x1 = x1, x2 = x2)
+#' eff <- morie_mrm_estimate_causal_effect(df, "t", "y", c("x1", "x2"), methods = c("ate", "aipw"))
+#' print(eff)
 #' @export
 #' @keywords internal
 print.morie_mrm_effect <- function(x, ...) {

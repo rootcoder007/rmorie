@@ -4,13 +4,16 @@
 \alias{morie_spatial_voting_blackbox}
 \title{Blackbox / Basic Space scaling}
 \usage{
-morie_spatial_voting_blackbox(X, n_dims = 2L)
+morie_spatial_voting_blackbox(X, n_dims = 2L, minscale = 8L)
 }
 \arguments{
 \item{X}{A respondent-by-issue numeric matrix of responses
 (\code{NA} for missing).}
 
 \item{n_dims}{Number of dimensions to extract.}
+
+\item{minscale}{Minimum number of responses for a respondent to be
+scaled (capped at the number of issues).}
 }
 \value{
 A list with \code{ideal_points}, \code{stimuli_weights}, \code{eigenvalues},
@@ -19,16 +22,27 @@ A list with \code{ideal_points}, \code{stimuli_weights}, \code{eigenvalues},
 }
 \description{
 Recovers respondent ideal points from an issue-scale response matrix
-via SVD on the column-centred matrix.  Implements Poole's (1998)
-decomposition \eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0}.  Delegates to
-\code{basicspace::blackbox} when available.
+by Poole's (1998) decomposition
+\eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0}, fitted
+by least squares over the observed cells only.  Respondents with fewer
+than \code{minscale} responses are not scaled (their rows are \code{NA}).
+\code{basicspace::blackbox} computes it when installed and the matrix has at
+least eight issues; otherwise it is computed here, by the EM low-rank
+fit: missing cells are filled with the current fit, the column means
+and the leading singular vectors of the centred matrix recomputed, and
+the two steps repeated until the filled cells stop moving.  With no
+missing cells this is one SVD; either way \eqn{\Psi = U D^{1/2}} and
+\eqn{W = V D^{1/2}}, the scaling \code{basicspace} reports, and the two
+paths give the same fitted values.
 }
 \examples{
-if (requireNamespace("basicspace", quietly = TRUE)) {
-  set.seed(1)
-  X <- matrix(rnorm(30 * 6), 30, 6)
-  morie_spatial_voting_blackbox(X, n_dims = 2)
-}
+set.seed(1)
+X <- matrix(rnorm(30 * 2), 30, 2) \%*\% matrix(rnorm(2 * 8), 2, 8) +
+  matrix(rnorm(240, 0, 0.3), 30, 8)
+X[sample(240, 10)] <- NA
+fit <- morie_spatial_voting_blackbox(X, n_dims = 2)
+fit$engine
+head(fit$ideal_points)
 }
 \references{
 Poole, K. T. (1998); Armstrong et al. (2021).

@@ -20,7 +20,6 @@ A logical value.
 A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete},
 \code{morie_trmRew_is_terminating}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_trmRew_lpo_greater(s = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8),

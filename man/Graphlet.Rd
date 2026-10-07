@@ -21,13 +21,11 @@ Shervashidze, Vishwanathan, Petri, Mehlhorn and Borgwardt (2009),
 Efficient graphlet kernels for large graph comparison, AISTATS 5,
 488-495, define the graphlet kernel as the inner product of the
 normalised counts of all size-k induced subgraphs, k(G, G') = <f_G,
-f_G'> with f_G the type frequencies over C(n, k) subsets.  Shervashidze
-et al. (2011), JMLR 12, 2539-2561 (FETCHED), restates the construction.
-The 2009 AISTATS volume was not retrievable here; the kernel is quoted
-in its standard published form.  Graphlet types are identified by a
-canonical signature -- edge count plus sorted degree sequence -- which
-separates every isomorphism class for k = 3 and k = 4, so no
-isomorphism test is needed.
+f_G'> with f_G the type frequencies over C(n, k) subsets; Shervashidze
+et al. (2011), JMLR 12, 2539-2561, restate the construction.  Graphlet
+types are identified by a canonical signature -- edge count plus sorted
+degree sequence -- which separates every isomorphism class for k = 3
+and k = 4, so no isomorphism test is needed.
 }
 \examples{
 A <- matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3)

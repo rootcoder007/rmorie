@@ -13,7 +13,6 @@
 #'
 #' A step of the ibpfa_native implementation. Called by \code{morie_ibpfa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
@@ -78,7 +77,6 @@ sample_ibp <- function(n, alpha, seed = 0L) {
 #'
 #' A step of the ibpfa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
@@ -104,7 +102,6 @@ expected_features <- function(n, alpha) {
 #'
 #' A step of the ibpfa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{Z}, \code{order}, \code{note}.
@@ -136,7 +133,6 @@ left_ordered_form <- function(Z) {
 #'
 #' A step of the ibpfa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{as.matrix}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
@@ -166,7 +162,6 @@ ibp_log_probability <- function(Z, alpha) {
 #'
 #' A step of the ibpfa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{as.matrix}.
 #' @param i Numeric; combined arithmetically in the body.
@@ -205,7 +200,6 @@ indian_buffet_factor <- sample_ibp
 #'
 #' A step of the ibpfa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{sample_ibp}.
 #' @param alpha Passed to \code{sample_ibp}.
@@ -223,7 +217,6 @@ morie_ibpfa <- function(n, alpha, seed = 0L) {
 #'
 #' A step of the ibpfa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

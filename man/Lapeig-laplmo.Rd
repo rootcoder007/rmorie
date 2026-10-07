@@ -27,9 +27,13 @@ their eigenspace; only the eigenvalues and the projector are defined.
 Formula: Lcal u = lambda u, lambda_0 <= ... <= lambda_\{k-1\};
 Fiedler vector = u for the smallest lambda > tol
 }
+\examples{
+W <- matrix(0, 6, 6); W[1:3, 1:3] <- 1; W[4:6, 4:6] <- 1; W[3, 4] <- W[4, 3] <- 0.1; diag(W) <- 0
+e <- Lapeig(W, k = 2)
+sign(e$fiedler)   # splits the two triangles
+}
 \references{
-Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.2,
-which writes Lcal as an operator on functions g : V -> R and works
-with its harmonic eigenfunctions. Fetched from the author's own copy
-of the chapter.
+Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.2, which writes
+Lcal as an operator on functions g : V -> R and works with its harmonic
+eigenfunctions.
 }

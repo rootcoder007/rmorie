@@ -37,6 +37,12 @@ Algorithm 1 of Hamilton et al. 2017 for a single depth: aggregate
 the neighbourhood, concatenate with the node's own previous
 representation, linear transform with ReLU, optionally L2-normalise.
 }
+\examples{
+H <- diag(3)
+adj <- list(`0` = 1L, `1` = c(0L, 2L), `2` = 1L)  # 0-based node ids
+W <- matrix(0.5, 2, 6)
+morie_gsageemd_layer(H, adj, W)
+}
 \references{
 Hamilton, W. L. et al. (2017).
 }

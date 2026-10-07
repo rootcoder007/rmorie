@@ -64,7 +64,6 @@
 #' A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step},
 #' \code{.wrd2v_sg_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -83,7 +82,6 @@
 #'
 #' A step of the wrd2v_native implementation. Called by \code{.wrd2v_neg_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{exp}.
 #' @return One of two values, depending on the branch taken.
@@ -102,7 +100,6 @@
 #' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_analogy},
 #' \code{morie_wrd2v_wrd2v}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -126,7 +123,6 @@
 #'
 #' A step of the wrd2v_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param architecture Compared against \code{"cbow"}.
 #' @param D Numeric; combined arithmetically in the body.
@@ -166,7 +162,6 @@ morie_wrd2v_training_complexity <- function(architecture, D, V, N = NULL,
 #'
 #' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts A vector; indexed elementwise.
 #' @param power Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.75}.
@@ -194,7 +189,6 @@ morie_wrd2v_noise_distribution <- function(counts, power = 0.75) {
 #'
 #' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts A vector; indexed elementwise.
 #' @param t Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
@@ -205,6 +199,8 @@ morie_wrd2v_noise_distribution <- function(counts, power = 0.75) {
 #' morie_wrd2v_subsample_probability(V)
 #' @keywords internal
 morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
+  # counts may be a named list of word counts, as the trainer passes them
+  .morie_arg(unlist(counts), "n0", "counts")
   # Discard probability 1 - sqrt(t / f(w)) (2013b eq. 5). Clamped at 0.
   total <- sum(unlist(counts))
   if (total <= 0.0) {
@@ -227,7 +223,6 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #' A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step},
 #' \code{.wrd2v_sg_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param O A matrix; passed to \code{\%*\%}.
 #' @param h A matrix; passed to \code{\%*\%}.
@@ -241,7 +236,6 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #'
 #' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param st A list; the body reads \code{$O}, \code{$W} from it.
 #' @param c See Usage.
@@ -268,7 +262,6 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #'
 #' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param st A list; the body reads \code{$O}, \code{$W} from it.
 #' @param c See Usage.
@@ -305,7 +298,6 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #'
 #' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param st A list; the body reads \code{$O}, \code{$W} from it.
 #' @param ctx A vector; its length is taken.
@@ -335,7 +327,6 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #'
 #' A step of the wrd2v_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param corpus Iterated over elementwise, with \code{lapply}.
 #' @param size A count; the body uses it as \code{matrix(...)}. Defaults to \code{16}.
@@ -582,7 +573,6 @@ morie_wrd2v_analogy <- function(vectors, a, b, c, topn = 1) {
 #'
 #' A step of the wrd2v_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -603,7 +593,7 @@ morie_wrd2v_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_wrd2v_word2vec <- morie_wrd2v_wrd2v
 
 #' @rdname morie_wrd2v_wrd2v

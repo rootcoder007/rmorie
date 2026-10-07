@@ -493,6 +493,7 @@ DarcyFlow <- function(head, K, res = 1, porosity = NULL) {
 #' @rdname StreamSegments
 #' @export
 BreachDepressions <- function(dem, epsilon = 0) {
+  .morie_arg(dem, "m")
   Z <- as.matrix(dem) * 1
   G <- Z
   nr <- nrow(Z)

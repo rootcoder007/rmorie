@@ -24,6 +24,11 @@ List with \code{prss}, \code{rss}, \code{penalty}, \code{lambda}, \code{n}, \cod
 \description{
 Formula: PRSS(beta, lambda) = sum_i (y_i - b0 - sum_j x_ij b_j)^2 + lambda sum_j b_j^2
 }
+\examples{
+X <- cbind(c(1, 2, 3, 4), c(0, 1, 0, 1))
+y <- c(1.1, 2.3, 2.9, 4.2)
+Ridgeobj(X, y, beta = c(0.1, 1, 0.2), lam = 0.5)[c("prss", "rss", "penalty")]
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,

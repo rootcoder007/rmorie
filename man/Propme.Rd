@@ -37,6 +37,9 @@ rather than redefined. Variance forms:
 (a^2 b^2 / c'^4) s_{c'}^2}, the first-order (uncorrected) solutions
 in the same paper.
 }
+\examples{
+Propme(a = 0.5, b = 0.4, c_prime = 0.3)[c("estimate", "indirect", "total", "ratio")]
+}
 \references{
 MacKinnon, D. P., Warsi, G. and Dwyer, J. H. (1995), A
 simulation study of mediated effect measures, Multivariate

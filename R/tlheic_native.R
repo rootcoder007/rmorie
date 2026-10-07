@@ -28,7 +28,6 @@
 #'
 #' A step of the tlheic_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param psi_of_P Passed to \code{numerical_derivative}.
 #' @param basis Passed to \code{estimate_eic}.
@@ -70,7 +69,6 @@ morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
 #' A step of the tlheic_native implementation. Called by \code{estimate_eic},
 #' \code{morie_tlheic}, \code{verify_gradient}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param psi_of_P Accepted by the signature and not used anywhere in the body.
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
@@ -107,7 +105,6 @@ numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
 #' A step of the tlheic_native implementation. Called by \code{morie_tlheic},
 #' \code{verify_gradient}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D Coerced to numeric by the body, with \code{as.numeric}.
 #' @param score Coerced to numeric by the body, with \code{as.numeric}.
@@ -135,7 +132,6 @@ gradient_inner_product <- function(D, score, weights = NULL) {
 #'
 #' A step of the tlheic_native implementation. Called by \code{morie_tlheic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param psi_of_P Passed to \code{numerical_derivative}.
 #' @param basis A matrix; passed to \code{as.matrix}.
@@ -185,7 +181,6 @@ estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
 #'
 #' A step of the tlheic_native implementation. Called by \code{morie_tlheic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param psi_of_P Passed to \code{numerical_derivative}.
 #' @param D A vector; its length is taken.
@@ -225,7 +220,6 @@ verify_gradient <- function(psi_of_P, D, score, weights = NULL,
 #'
 #' A step of the tlheic_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

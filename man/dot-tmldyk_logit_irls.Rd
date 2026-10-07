@@ -23,5 +23,4 @@ The value of \code{b}, as built in the body.
 \description{
 A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 See the file header for the source the module follows.
-source it follows.
 }

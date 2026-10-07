@@ -21,5 +21,11 @@ A list with \code{scores}, \code{hits}.
 \description{
 A step of the motfsr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+# log-odds against a uniform background, one vector over A, C, G, T per motif position
+pwm <- list(c(0.9, 0.05, 0.025, 0.025), c(0.05, 0.9, 0.025, 0.025), c(0.05, 0.05, 0.85, 0.05))
+spec <- lapply(pwm, function(p) log2(p / 0.25))
+s <- motfsr_score_sequence(spec, "TTACGTT", alphabet = c("A", "C", "G", "T"), threshold = 3)
+s$hits   # 0-based start of "ACG"
 }

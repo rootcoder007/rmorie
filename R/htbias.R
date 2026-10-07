@@ -1,15 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Best-linear-predictor calibration test for heterogeneous treatment effects
 #'
-#' Source FETCHED (reference implementation): \code{test_calibration} in
-#' the CRAN package \pkg{grf} (grf 2.6.1, \code{R/forest_summary.R}),
-#' implementing the calibration check of Chernozhukov, Demirer, Duflo
-#' and Fernandez-Val (2018), arXiv 1712.04802, in the form Athey and
-#' Wager (2019) use.  The package source regresses, with no intercept,
-#' \code{target = Y - Yhat} on
-#' \code{(W - What) * mean(tauhat)} and
-#' \code{(W - What) * (tauhat - mean(tauhat))}, with HC3 sandwich SEs
-#' and p-values converted to one-sided.
+#' Source: \code{test_calibration} in the CRAN package \pkg{grf} (grf 2.6.1,
+#' \code{R/forest_summary.R}), implementing the calibration check of Chernozhukov,
+#' Demirer, Duflo and Fernandez-Val (2018), arXiv 1712.04802, in the form Athey and
+#' Wager (2019) use. The package source regresses, with no intercept, \code{target = Y -
+#' Yhat} on \code{(W - What) * mean(tauhat)} and \code{(W - What) * (tauhat -
+#' mean(tauhat))}, with HC3 sandwich SEs and p-values converted to one-sided.
 #'
 #' The coefficient on the mean term tests whether the average treatment
 #' effect is right; the coefficient on the differential term is 1 when
@@ -24,10 +21,9 @@
 #'
 #' @param y Numeric outcome of length n.
 #' @param D Numeric treatment assignment of length n.
-#' @param tau_hat Out-of-fold CATE predictions, one per unit.  The third
-#'   argument of the pasted stub was called X; it is the CATE prediction
-#'   vector the best linear predictor is calibrated against, not a
-#'   covariate matrix.
+#' @param tau_hat Out-of-fold CATE predictions, one per unit: the vector
+#'   the best linear predictor is calibrated against, not a covariate
+#'   matrix.
 #' @param y_hat Optional out-of-fold predictions of E\[Y|X\]; defaults to
 #'   \code{mean(y)}.
 #' @param w_hat Optional out-of-fold propensity scores; defaults to

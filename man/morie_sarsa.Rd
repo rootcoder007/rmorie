@@ -58,6 +58,11 @@ Barto (2018), Eq. (6.7),
 Q(s,a)]}.  Contrast \code{\link{morie_qlearn}}, which bootstraps
 off-policy from the greedy action.
 }
+\examples{
+P <- list(matrix(c(0.9, 0.1, 0, 1), 2, byrow = TRUE), matrix(c(0.1, 0.9, 0, 1), 2, byrow = TRUE))
+R <- matrix(c(0, 1, 0, 0), 2, 2)
+morie_sarsa(P, R, gamma = 0.9, n_episodes = 50L, terminal = 1L)$policy
+}
 \references{
 Rummery, G. A. and Niranjan, M. (1994). On-line
 Q-learning using connectionist systems. Cambridge University

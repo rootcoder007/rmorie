@@ -19,5 +19,4 @@ A list with \code{score}, \code{qi}, \code{sj}, \code{ln}.
 \description{
 A step of the blastp_native implementation. Called by \code{morie_blastp}.
 See the file header for the source the module follows.
-source it follows.
 }

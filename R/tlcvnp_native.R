@@ -31,7 +31,6 @@
 #'
 #' A step of the tlcvnp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{cv_tmle_smoothed}.
 #' @param x0 Passed to \code{cv_tmle_smoothed}.
@@ -56,7 +55,6 @@ morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
 #'
 #' A step of the tlcvnp_native implementation. Called by \code{smoothed_parameter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel One of \code{"epanechnikov"}, \code{"uniform"}. Defaults to \code{"epanechnikov"}.
@@ -82,7 +80,6 @@ kernel_smooth <- function(u, kernel = "epanechnikov") {
 #' A step of the tlcvnp_native implementation. Called by \code{cv_tmle_smoothed},
 #' \code{select_bandwidth}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
@@ -116,7 +113,6 @@ smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
 #'
 #' A step of the tlcvnp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param true_density Accepted by the signature and not used anywhere in the body.
 #' @param x0 Accepted by the signature and not used anywhere in the body.
@@ -140,7 +136,6 @@ smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
 #'
 #' A step of the tlcvnp_native implementation. Called by \code{cv_tmle_smoothed}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{smoothed_parameter}.
 #' @param x0 Passed to \code{smoothed_parameter}.
@@ -198,7 +193,6 @@ select_bandwidth <- function(X, x0, bandwidths,
 #'
 #' A step of the tlcvnp_native implementation. Called by \code{morie_tlcvnp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x0 Passed to \code{select_bandwidth}.
@@ -254,7 +248,6 @@ cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
 #'
 #' A step of the tlcvnp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

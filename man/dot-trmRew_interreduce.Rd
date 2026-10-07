@@ -17,5 +17,4 @@ The value of \code{.trmRew_canonical}.
 \description{
 A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete}.
 See the file header for the source the module follows.
-source it follows.
 }

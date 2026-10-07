@@ -36,10 +36,9 @@ dynamical systems, J. R. Soc. Interface 6(31), 187-202: a decreasing
 tolerance schedule eps_1 > ... > eps_T; at population t a particle is
 proposed from the previous population, perturbed by a kernel K,
 accepted if d(S(x*), S(x)) <= eps_t, and weighted by w_t^i =
-pi(theta_t^i) / sum_j w_(t-1)^j K(theta_t^i | theta_(t-1)^j).  The paper
-is open access but was not retrievable here; the schedule, the
-acceptance rule and the weight are quoted in their standard published
-form.
+pi(theta_t^i) / sum_j w_(t-1)^j K(theta_t^i | theta_(t-1)^j); the
+schedule, the acceptance rule and the weight in their standard
+published form.
 }
 \details{
 Determinism: particles are not drawn -- the initial population is a

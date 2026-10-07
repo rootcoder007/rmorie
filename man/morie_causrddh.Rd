@@ -34,6 +34,12 @@ get the third derivative and from it side-specific pilot windows,
 then a quadratic on each side for the second derivatives; step 3
 combines them with the regularisation terms of their eq. (4.10).
 }
+\examples{
+set.seed(3)
+x <- runif(500, -1, 1)
+y <- 0.5 * (x >= 0) + x + rnorm(500, sd = 0.3)
+morie_causrddh(x, y, cutoff = 0)$estimate
+}
 \references{
 Imbens, G. and Kalyanaraman, K. (2012). Optimal
 bandwidth choice for the regression discontinuity estimator.

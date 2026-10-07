@@ -23,7 +23,6 @@ A list with \code{sigma2_a}, \code{sigma2_e}, \code{icc}, \code{icc_lower},
 \description{
 A step of the vcomp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

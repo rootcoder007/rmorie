@@ -15,6 +15,10 @@
 #' @references Trott, O. & Olson, A. J. (2010). AutoDock Vina. Journal
 #'   of Computational Chemistry 31:455-461. Weights are table 1;
 #'   equation (9) is \code{g(c_inter) = c_inter / (1 + w N_rot)}.
+#' @examples
+#' receptor <- cbind(c(0, 2, 4), c(0, 0, 0), c(0, 0, 0), c(1.9, 1.8, 1.9), c(1, 2, 0))
+#' ligand <- cbind(c(0, 2), c(4, 4), c(0, 0), c(1.9, 1.8), c(1, 2))
+#' Vinasc(receptor, ligand, n_rot = 2)$estimate
 #' @export
 Vinasc <- function(receptor, ligand_pose, n_rot = 0) {
   R <- as.matrix(receptor)

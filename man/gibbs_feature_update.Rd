@@ -23,6 +23,5 @@ A list with \code{p_on}, \code{prior}, \code{z}, \code{note}.
 \description{
 A step of the ibpfa_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

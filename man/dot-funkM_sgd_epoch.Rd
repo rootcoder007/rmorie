@@ -33,7 +33,6 @@ A list with \code{rmse} for the epoch just run and the updated
 \description{
 A step of the funkM_native implementation. Called by \code{morie_funkM}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

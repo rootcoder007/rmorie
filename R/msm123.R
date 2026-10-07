@@ -17,9 +17,13 @@
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (8.1) p.254. DOI 10.1007/978-3-030-89010-0.
-#' @export
 #' @examples
-#' Msm123(K = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+#' set.seed(19)
+#' xx <- seq(0, 1, length.out = 8)
+#' K <- exp(-outer(xx, xx, "-")^2 / 0.1)
+#' y <- sin(2 * pi * xx)
+#' Msm123(K, y, beta = rep(0, 8), lam = 0.1)$estimate
+#' @export
 Msm123 <- function(K, y, beta, eta0 = 0, lam = 1, loss = "squared") {
   f <- .gprkhspredict(K, beta, eta0)
   ys <- .gpflat(y)

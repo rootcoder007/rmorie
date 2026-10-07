@@ -45,7 +45,6 @@
 #'
 #' A step of the evt_native implementation. Called by \code{morie_evt_gev_lmoments}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.evt_pwm}.
 #' @return A list with \code{l1}, \code{l2}, \code{l3}, \code{t3}.
@@ -72,7 +71,6 @@
 #'
 #' A step of the evt_native implementation. Called by \code{morie_evt_dedh}, \code{morie_evt_hill}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param k Numeric; combined arithmetically in the body.

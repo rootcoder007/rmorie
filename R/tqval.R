@@ -14,7 +14,6 @@
 #' @return List with \code{reconstruction}, \code{mse},
 #'   \code{residual_norm}, \code{mean_mse}, \code{n}, \code{d}, \code{b}.
 #' @references Zandieh et al., arXiv:2504.19874, Algorithm 2 lines 2-12.
-#'   Fetched from arXiv.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

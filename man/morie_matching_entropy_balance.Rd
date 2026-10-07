@@ -32,8 +32,8 @@ A numeric vector of weights aligned to the rows of \code{data}
 after dropping NAs.  Treated units receive weight 1.
 }
 \description{
-Thin wrapper around \code{WeightIt::weightit(method = "ebal")} (or
-\code{ebal::ebalance} if \pkg{WeightIt} is unavailable).  Computes
+Native entropy balancing (cross-validated against
+\code{WeightIt::weightit(method = "ebal")} and \code{ebal::ebalance}):
 weights for the control group so that the weighted moments of the
 covariates match those of the treated group.
 }

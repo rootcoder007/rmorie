@@ -35,7 +35,7 @@ struct CurlGlobal {
 const CurlGlobal kCurlGlobal;
 
 const char* kUserAgent =
-  "morie/1.0.2 (+https://github.com/rootcoder007/morie)";
+  "morie/1.4.0 (+https://github.com/rootcoder007/morie)";
 
 // libcurl write callback: append received bytes to a std::string.
 size_t write_cb(char* ptr, size_t size, size_t nmemb, void* userdata) {
@@ -706,12 +706,12 @@ const AcronymMap kSiuPoliceAcronyms[] = {
   // name so downstream analyses don't have to split on language.
   {"SPT",   "Toronto Police Service"},           // Service de Police de Toronto
   {"PPO",   "Ontario Provincial Police"},        // Police provinciale de l'Ontario
-  {"SPRH",  "Halton Regional Police Service"},   // SP régional de Halton
-  {"SPRY",  "York Regional Police"},             // SP régional de York
-  {"SPRP",  "Peel Regional Police"},             // SP régional de Peel
-  {"SPRD",  "Durham Regional Police Service"},   // SP régional de Durham
-  {"SPRN",  "Niagara Regional Police Service"},  // SP régional de Niagara
-  {"SPRW",  "Waterloo Regional Police Service"}, // SP régional de Waterloo
+  {"SPRH",  "Halton Regional Police Service"},   // SP regional de Halton
+  {"SPRY",  "York Regional Police"},             // SP regional de York
+  {"SPRP",  "Peel Regional Police"},             // SP regional de Peel
+  {"SPRD",  "Durham Regional Police Service"},   // SP regional de Durham
+  {"SPRN",  "Niagara Regional Police Service"},  // SP regional de Niagara
+  {"SPRW",  "Waterloo Regional Police Service"}, // SP regional de Waterloo
   {"SPO",   "Ottawa Police Service"},            // Service de Police d'Ottawa
   {"SPL",   "London Police Service"},            // Service de Police de London
   {"SPH",   "Hamilton Police Service"},          // Service de Police de Hamilton
@@ -819,8 +819,8 @@ Rcpp::CharacterVector siu_parse_report(std::string html, int drid,
     html.find("Notification de l\xE2\x80\x99UES")
       != std::string::npos ||
     html.find("Rapport du directeur") != std::string::npos ||
-    // L'enqu* (matches "L'enquête" without spelling out the
-    // accented "ête"). The `\x99` hex escape gets terminated by
+    // L'enqu* (matches "L'enquete" without spelling out the
+    // accented "ete"). The `\x99` hex escape gets terminated by
     // adjacent-string concatenation so the trailing `e` of "enqu"
     // isn't slurped into the hex sequence.
     html.find("L\xE2\x80\x99" "enqu") != std::string::npos ||
@@ -836,20 +836,20 @@ Rcpp::CharacterVector siu_parse_report(std::string html, int drid,
   // (b) some 2014 English reports that use "Overview" instead of
   //     "The Investigation" as the section_4 heading
   // (c) some French-only reports whose section headings are in
-  //     French ("L'enquête", "Aperçu", etc.).
+  //     French ("L'enquete", "Apercu", etc.).
   // Title-based lookup with multiple fallbacks works for all three.
   std::string investigation = section_text_by_title(html, "investigation");
   if (investigation.empty()) {
     investigation = section_text_by_title(html, "overview");
   }
   if (investigation.empty()) {
-    // French "L'enquête" (= the investigation). Match the unaccented
+    // French "L'enquete" (= the investigation). Match the unaccented
     // stem "enqu" so this hits whether or not the input was
     // accent-stripped earlier.
     investigation = section_text_by_title(html, "enqu");
   }
   if (investigation.empty()) {
-    // French "Aperçu" (= overview).
+    // French "Apercu" (= overview).
     investigation = section_text_by_title(html, "aper");
   }
   std::string narrative = section_text_by_title(html, "narrative");

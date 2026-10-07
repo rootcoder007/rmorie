@@ -17,9 +17,8 @@ Pagrk(A, alpha = 0.85, n_iter = 100)
 List with \code{pr}, \code{estimate}, \code{top}, \code{n}.
 }
 \description{
-DUPLICATE: PageRank is already implemented as \code{Pgrank}; per
-ledger/wave2/DUPMAP.tsv this is an alias, not a third power
-iteration.
+DUPLICATE: PageRank is already implemented as \code{Pgrank}; this is an alias, not a
+third power iteration.
 }
 \details{
 Formula: \code{x = (1 - alpha)/n + alpha A^T D^-1 x}, with the mass

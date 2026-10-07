@@ -60,7 +60,6 @@
 #' A step of the vidgen_native implementation. Called by
 #' \code{morie_vidgen_space_only_conv}, \code{morie_vidgen_spatial_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{do.call}.
@@ -80,7 +79,6 @@
 #' A step of the vidgen_native implementation. Called by
 #' \code{morie_vidgen_reconstruction_guidance}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
@@ -98,7 +96,6 @@
 #' A step of the vidgen_native implementation. Called by
 #' \code{morie_vidgen_spatial_attention}, \code{morie_vidgen_temporal_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param mask Optional; may be \code{NULL}. A matrix; indexed by row and column.
@@ -147,16 +144,14 @@
 #'
 #' A step of the vidgen_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param video Iterated over elementwise, with \code{lapply}.
 #' @param kernel Passed to \code{.vidgen_mat}.
 #' @return A list with \code{video}, \code{frames}, \code{note}.
 #' @export
 #' @examples
-#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' S <- c("a", "b", "c")
-#' morie_vidgen_space_only_conv(D, S)
+#' video <- list(matrix(1:9, 3), matrix(9:1, 3))   # two 3 x 3 frames
+#' morie_vidgen_space_only_conv(video, kernel = matrix(1 / 4, 2, 2))$frames
 #' @keywords internal
 morie_vidgen_space_only_conv <- function(video, kernel) {
   V <- lapply(video, .vidgen_mat)
@@ -196,7 +191,6 @@ morie_vidgen_space_only_conv <- function(video, kernel) {
 #'
 #' A step of the vidgen_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param video See Usage.
 #' @return A list with \code{video}, \code{weights}, \code{note}.
@@ -225,7 +219,6 @@ morie_vidgen_spatial_attention <- function(video) {
 #'
 #' A step of the vidgen_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param video Iterated over elementwise, with \code{lapply}.
 #' @param identity A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -277,7 +270,6 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
 #'
 #' A step of the vidgen_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param video Iterated over elementwise, with \code{lapply}.
 #' @param block Accepted by the signature and not used anywhere in the body.
@@ -295,7 +287,6 @@ morie_vidgen_as_image_model <- function(video, block) {
 #'
 #' A step of the vidgen_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param frames Coerced to integer by the body, with \code{as.integer}.
 #' @param spatial_positions Coerced to integer by the body, with \code{as.integer}.
@@ -324,7 +315,6 @@ morie_vidgen_attention_cost <- function(frames, spatial_positions) {
 #'
 #' A step of the vidgen_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x_hat Iterated over elementwise, with \code{lapply}.
 #' @param observed Iterated over elementwise, with \code{lapply}.
@@ -407,7 +397,6 @@ morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
 #'
 #' A step of the vidgen_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -430,7 +419,7 @@ morie_vidgen_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_vidgen_videodiffusion <- morie_vidgen_reconstruction_guidance
 
 # public names resolved by fn/_lazy_map.json

@@ -21,7 +21,6 @@ A list with \code{mu}, \code{al}, \code{h}.
 \description{
 A step of the abcnnt_native implementation. Called by \code{flow_forward}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # a layer straight out of a flow, so only exported functions are needed

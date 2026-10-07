@@ -25,7 +25,6 @@ A list with \code{loglik}, \code{min_ess}.
 \description{
 A step of the pftrep_native implementation. Called by \code{replicated_pfilter}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

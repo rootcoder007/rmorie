@@ -16,5 +16,8 @@ The value of \code{mapply}.
 A step of the mafft_native implementation. Called by \code{iterative_refine},
 \code{progressive_align}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+chain <- rbind(c(1, 10, 3), c(20, 30, 4))   # rows: start in a, start in b, length
+mafft_anchors_from(chain)
 }

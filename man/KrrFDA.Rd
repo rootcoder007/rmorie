@@ -31,10 +31,9 @@ controls smoothness, and it is what keeps the near-singular Gram matrix
 of any smooth kernel invertible.
 }
 \details{
-An alias. The solver is \code{\link{Krreg}};
-\code{ledger/wave2/DUPMAP.tsv} records \code{krrFDA} as a duplicate of
-\code{krreg} and it is the same dual solve, so only the argument order
-and the penalty's name differ here.
+An alias. The solver is \code{\link{Krreg}}; \code{krrFDA} is the same method as
+\code{krreg} and it is the same dual solve, so only the argument order and the
+penalty's name differ here.
 
 Formula: \code{alpha = (K + lambda I)^{-1} y}.
 }

@@ -15,5 +15,4 @@ A numeric value.
 \description{
 A step of the frfgrf_native implementation. Called by \code{.frfgrf_regularity_walk}.
 See the file header for the source the module follows.
-source it follows.
 }

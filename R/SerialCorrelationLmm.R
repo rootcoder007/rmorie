@@ -33,6 +33,7 @@
 #' LmmSerialCovariance(c(0, 1), 1, 2, 0.5, 0.25)
 #' @export
 SerialCorrelation <- function(u, phi, kind = "exponential") {
+  .morie_arg(u, "n")
   a <- abs(u)
   switch(kind,
     exponential = exp(-phi * a),

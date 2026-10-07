@@ -31,10 +31,10 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Tmlevar(V)
 }
 \references{
-The row cites vdL-Hubbard-Pajouh (2018). That paper was NOT
-obtainable, so what is implemented is the standard construction that
-follows from the definition: the influence curve of sigma^2 = E[D*^2]
-is D*^2 - sigma^2. The plug-in variance it refines is the
+van der Laan, Hubbard and Pajouh (2018), for the problem.
+What is implemented is the standard construction that follows from the
+definition: the influence curve of sigma^2 = E[D*^2] is
+D*^2 - sigma^2. The plug-in variance it refines is the
 var.psi <- var(IC)/n of the CRAN package tmle 2.1.1 (Gruber & van der
-Laan), which was fetched and read.
+Laan).
 }

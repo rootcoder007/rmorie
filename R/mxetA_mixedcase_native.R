@@ -35,6 +35,7 @@
 #' morie_mxetA(V)
 #' @keywords internal
 morie_mxetA <- function(F, n_sim = 1, seed = 0, max_points = 100000L) {
+  .morie_arg(F, "m0")
   Fm <- as.matrix(F)
   nt <- nrow(Fm)
   m <- ncol(Fm)

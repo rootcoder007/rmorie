@@ -25,7 +25,6 @@
 #' A step of the meglt_native implementation. Called by \code{coherence},
 #' \code{nuclear_norm}, \code{relative_error} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
@@ -49,7 +48,6 @@
 #' A step of the meglt_native implementation. Called by \code{coherence},
 #' \code{nuclear_norm}, \code{svt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{nrow}.
 #' @return A list with \code{U}, \code{s}, \code{Vt}.
@@ -69,7 +67,6 @@
 #'
 #' A step of the meglt_native implementation. Called by \code{morie_meglt}, \code{svt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.meglt_mat}.
 #' @return A numeric value.
@@ -88,7 +85,6 @@ nuclear_norm <- function(A) {
 #'
 #' A step of the meglt_native implementation. Called by \code{morie_meglt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.meglt_mat}.
 #' @param rank Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
@@ -132,7 +128,6 @@ coherence <- function(A, rank = NULL) {
 #'
 #' A step of the meglt_native implementation. Called by \code{morie_meglt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param r Coerced to integer by the body, with \code{as.integer}.
@@ -160,7 +155,6 @@ sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
 #'
 #' A step of the meglt_native implementation. Called by \code{morie_meglt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M Passed to \code{.meglt_mat}.
 #' @param observed Iterated over elementwise, with \code{sapply}.
@@ -233,7 +227,6 @@ svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
 #'
 #' A step of the meglt_native implementation. Called by \code{morie_meglt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A vector; indexed elementwise.
 #' @param M Passed to \code{.meglt_mat}.
@@ -266,7 +259,6 @@ matrix_completion_low_rank <- svt
 #'
 #' A step of the meglt_native implementation. Called by \code{morie_meglt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -288,7 +280,6 @@ matrix_completion_low_rank <- svt
 #'
 #' A step of the meglt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op A vector; its length is taken.
 #' @param ... Passed through.

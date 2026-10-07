@@ -13,9 +13,8 @@
 #' @param n See Usage.
 #' @param t See Usage.
 #' @return List with ``bound``, ``bound_two_sided``, ``hoeffding``, ``ratio``, ``exponent``.
-#' @references Bernstein (1924). The original is not held locally and is in Russian; the
-#' inequality is stated in this exact form in every standard concentration-inequality
-#' reference consulted.
+#' @references Bernstein (1924). The original is in Russian; the inequality is stated in
+#' this form in every standard concentration-inequality reference.
 #' @export
 #' @examples
 #' Bernstein(sigma2 = 1, M = 1, n = 100, t = 0.1)

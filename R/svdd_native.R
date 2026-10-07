@@ -6,7 +6,6 @@
 #'
 #' A step of the svdd_native implementation. Called by \code{morie_svdd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param name Passed to \code{sprintf}.
@@ -30,7 +29,6 @@
 #'
 #' A step of the svdd_native implementation. Called by \code{morie_svdd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param Y Optional; may be \code{NULL}. A matrix; indexed by row and column.
@@ -88,7 +86,6 @@
 #'
 #' A step of the svdd_native implementation. Called by \code{morie_svdd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param K A matrix; indexed by row and column.
 #' @param C Numeric; combined arithmetically in the body.
@@ -169,7 +166,6 @@
 #'
 #' A step of the svdd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.morie_svdd_mat}.
 #' @param C Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
@@ -338,7 +334,6 @@ morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
 #'
 #' A step of the svdd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -355,5 +350,5 @@ morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
          "makes nu the outlier fraction. C >= 1 gives the exact MEB.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_support_vector_data_description <- morie_svdd

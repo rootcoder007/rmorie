@@ -19,17 +19,16 @@ morie_crypto_hkdf_sha256(ikm, length = 32L, salt = raw(0), info = raw(0))
 Derived key material as raw vector of length \code{length}.
 }
 \description{
-Phase 3JJJ1. Mirrors the Python
+Mirrors the Python
 \verb{morie.crypto.hkdf_sha256(ikm, length=32, salt=b"", info=b"")}
 byte-for-byte. Empty \code{salt} defaults to a 32-byte zero-filled
-salt per RFC 5869 Section 2.2 (matches Python).
+salt per RFC 5869 Section 2.2 (matches Python). libsodium's HMAC when
+rmorie is linked against it, the native one otherwise.
 }
 \examples{
-if (morie_crypto_sodium_available()) {
-  out <- morie_crypto_hkdf_sha256("seed",
-    len = 32L, salt = "salt",
-    info = "ctx"
-  )
-  length(out)
-}
+out <- morie_crypto_hkdf_sha256("seed",
+  len = 32L, salt = "salt",
+  info = "ctx"
+)
+length(out)
 }

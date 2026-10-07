@@ -15,13 +15,12 @@ Gradclip(grad, max_norm = 1)
 list: estimate, clipped, norm, scale, was_clipped, method.
 }
 \description{
-Pascanu, Mikolov and Bengio (2013), On the difficulty of training
-recurrent neural networks, ICML 28, 1310-1318 (arXiv:1211.5063),
-algorithm 1: if ||g|| >= threshold then g <- threshold g / ||g||, with
-the norm taken over the concatenation of every parameter's gradient.
-AlphaZero (Silver et al., arXiv:1712.01815 -- FETCHED) does not state a
-clipping threshold, so the routine is documented as the standard
-stabiliser it is rather than attributed to that paper.
+Pascanu, Mikolov and Bengio (2013), On the difficulty of training recurrent neural
+networks, ICML 28, 1310-1318 (arXiv:1211.5063), algorithm 1: if ||g|| >= threshold
+then g <- threshold g / ||g||, with the norm taken over the concatenation of every
+parameter's gradient. AlphaZero (Silver et al., arXiv:1712.01815) does not state a
+clipping threshold, so the routine is documented as the standard stabiliser it is
+rather than attributed to that paper.
 }
 \examples{
 Gradclip(c(3, 4), 1)$norm

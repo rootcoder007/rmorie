@@ -18,5 +18,4 @@ A numeric value.
 A step of the helpers_s03 implementation. Called by \code{Llamablock}, \code{Mbconv},
 \code{Swiglu}.
 See the file header for the source the module follows.
-source it follows.
 }

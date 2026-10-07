@@ -3,17 +3,9 @@
 # Instrumental Variables (IV) and Two-Stage Least Squares (2SLS) estimators
 # for morie.  Ports the public API of `src/morie/iv.py` (~2166 LOC) to R.
 #
-# Strategy: prefer CRAN wrappers.  Linear IV / 2SLS / LIML / over-identified
-# Module 17 (feat/native-specializations): the IV family is native.
-# 2SLS / LIML run on the k-class engine, GMM on the native two-step /
-# CUE engines (R/iv_native.R); tests/cross validates against ivreg,
-# AER and gmm where installed. The historical wording below described
-# R so the package still installs in a minimal environment.
-#
-# Internal mathematical helpers that merely replicate `ivreg`'s
-# internals (e.g. Kleibergen-Paap rank statistic, Stock-Yogo critical-
-# value tables, exact conditional-LR test) are stubbed with informative
-# the pre-module-17 dispatch strategy and is retained only as history.
+# The IV family is native (module 17): 2SLS / LIML on the k-class engine, GMM on
+# the two-step / CUE engines (R/iv_native.R); tests/cross validates against ivreg,
+# AER and gmm where installed.
 #
 # Public R names mirror the Python module under the `morie_iv_*` prefix.
 
@@ -29,7 +21,7 @@ NULL
 
 #' Shared parameters for morie_iv_* estimators and diagnostics
 #'
-#' Roxygen-only stub holding the @param entries shared across the IV
+#' Roxygen-only block holding the @param entries shared across the IV
 #' family (Anderson-Rubin, conditional-LR, Hansen J, Sargan, etc.).
 #' Functions reference these via `@inheritParams morie_iv_params` so
 #' each `@param` is documented once and the Rd files stay consistent.
@@ -66,22 +58,12 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Morie Iv Have Ivreg
-#' @noRd
-.morie_iv_have_ivreg <- function() {
-  requireNamespace("ivreg", quietly = TRUE)
-}
-#' Internal helper: Morie Iv Have AER
-#' @noRd
-.morie_iv_have_AER <- function() {
-  requireNamespace("AER", quietly = TRUE)
-}
-
 #' @param outcome See Usage.
 #' @param endogenous See Usage.
 #' @param instruments See Usage.
 #' @param exogenous See Usage.
 #' @keywords internal
+#' @noRd
 .morie_iv_build_formula <- function(outcome, endogenous, instruments,
                                     exogenous = NULL) {
   exo <- if (length(exogenous)) paste(exogenous, collapse = " + ") else "1"
@@ -103,6 +85,7 @@ NULL
 #' @param dof See Usage.
 #' @param details See Usage.
 #' @keywords internal
+#' @noRd
 .morie_iv_result <- function(coef_vec, se_vec, n_obs, method, alpha = 0.05,
                              dof = NA, details = list()) {
   z <- coef_vec / se_vec
@@ -135,6 +118,7 @@ NULL
 #' @param robust See Usage.
 #' @param alpha See Usage.
 #' @keywords internal
+#' @noRd
 .morie_iv_base_2sls <- function(data, outcome, endogenous, instruments,
                                 exogenous = NULL, robust = TRUE, alpha = 0.05) {
   vars <- unique(c(outcome, endogenous, instruments, exogenous))
@@ -481,17 +465,29 @@ morie_iv_cragg_donald <- function(data, endogenous, instruments,
                         outcome_used = if (is.null(outcome)) endogenous[1] else outcome))
 }
 
-#' Stock-Yogo critical values
-#' @inheritParams morie_iv_params
-#' @return A named \code{list} of Stock-Yogo weak-instrument critical values.
+#' Stock-Yogo critical values (TSLS maximal size, one endogenous regressor)
+#'
+#' The first-stage F thresholds of Stock and Yogo (2005, Table 5.2) for a
+#' nominal 5 percent TSLS Wald test whose actual size is at most 10, 15, 20 or
+#' 25 percent, for one endogenous regressor and one to three instruments: the
+#' rows widely reprinted in textbooks. They assume iid errors. Outside those
+#' rows, or with heteroskedastic, clustered or serially correlated errors, use
+#' \code{\link{morie_iv_montiel_olea_pflueger}} (effective F with critical
+#' values computed from the data) or \code{\link{morie_iv_kleibergen_paap}}
+#' (rk Wald F, rule of thumb 10).
+#'
+#' @param n_endogenous Number of endogenous regressors.
+#' @param n_instruments Number of excluded instruments.
+#' @return A named \code{list} of critical values (\code{10pct} ...
+#'   \code{25pct}).
+#' @references Stock, J. H. and Yogo, M. (2005). Testing for weak instruments
+#'   in linear IV regression. In Andrews and Stock (eds), \emph{Identification
+#'   and Inference for Econometric Models}, Cambridge University Press, 80-108.
 #' @examples
 #' out <- morie_iv_stock_yogo(n_endogenous = 1, n_instruments = 1)
 #' out
 #' @export
 morie_iv_stock_yogo <- function(n_endogenous = 1, n_instruments = 1) {
-  # TODO: ship full Stock & Yogo (2005, Table 5.2) lookup table -- currently
-  # only the 10/15/20/25 percent maximal-bias thresholds for the leading
-  # 1-endogenous case are reproduced.  Replicates iv.py:stock_yogo_critical_values.
   tab <- list("1_1" = c(`10pct` = 16.38, `15pct` = 8.96,
                         `20pct` = 6.66, `25pct` = 5.53),
               "1_2" = c(`10pct` = 19.93, `15pct` = 11.59,
@@ -499,29 +495,15 @@ morie_iv_stock_yogo <- function(n_endogenous = 1, n_instruments = 1) {
               "1_3" = c(`10pct` = 22.30, `15pct` = 12.83,
                         `20pct` = 9.54, `25pct` = 7.80))
   key <- paste(n_endogenous, n_instruments, sep = "_")
-  if (!key %in% names(tab))
-    stop("Stock-Yogo: combination not in shipped table. TODO: extend.")
+  if (!key %in% names(tab)) {
+    stop(sprintf(paste0(
+      "Stock-Yogo critical values are included here only for 1 endogenous ",
+      "regressor and 1-3 instruments (asked: %s and %s). Use ",
+      "morie_iv_montiel_olea_pflueger() for computed critical values, or ",
+      "morie_iv_kleibergen_paap() against the rule of thumb of 10."),
+      n_endogenous, n_instruments), call. = FALSE)
+  }
   as.list(tab[[key]])
-}
-
-#' Kleibergen-Paap rank statistic
-#' @inheritParams morie_iv_params
-#' @return A named list with elements \code{statistic}, \code{p_value}, \code{name}, \code{details}.
-#' @examples
-#' set.seed(1)
-#' n <- 300
-#' z <- rbinom(n, 1, 0.5); u <- rnorm(n)
-#' d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
-#' y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
-#' df <- data.frame(y, d, z)
-#' out <- morie_iv_kleibergen_paap(df, "d", "z")
-#' out$statistic
-#' @export
-morie_iv_kleibergen_paap <- function(data, endogenous, instruments,
-                                     exogenous = NULL) {
-  # TODO: native non-i.i.d. KP rank test (Kleibergen & Paap, 2006).  For now
-  # delegate to ivreg's weak-instrument diagnostic, which uses KP under HC.
-  morie_iv_cragg_donald(data, endogenous, instruments, exogenous)
 }
 
 #' Anderson-Rubin (AR) weak-IV-robust test

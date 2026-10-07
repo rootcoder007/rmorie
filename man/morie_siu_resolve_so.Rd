@@ -7,7 +7,8 @@
 morie_siu_resolve_so(text = NULL, drid = NULL, engine = "auto")
 }
 \arguments{
-\item{text}{Plain report text (needed only for unreviewed reports).}
+\item{text}{Plain report text (needed only for unreviewed reports). A case number such as
+\code{"17-OVI-201"} here is looked up in the reviewed corpus by case.}
 
 \item{drid}{Report id; supply whenever known.}
 
@@ -25,7 +26,7 @@ nothing re-derives an established answer. Only a report outside the
 corpus falls through to the deterministic rule set compiled in
 \pkg{rmoriebricklayer} (the foundation layer; rmorie's native copy of the
 same core when bricklayer is absent), whose rules were proven
-zero-wrong against all 2,182 reviewed reports; where even the rules
+zero-wrong against the reviewed English reports; where even the rules
 cannot answer, the reading panel (\code{\link[=morie_siu_panel]{morie_siu_panel()}}) decides.
 }
 \examples{

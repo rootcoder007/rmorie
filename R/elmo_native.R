@@ -47,7 +47,6 @@ layer_weights <- function(raw) {
 #'
 #' A step of the elmo_native implementation. Called by \code{bilm_forward}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @param h A vector; its length is taken.
@@ -175,7 +174,6 @@ bilm_forward <- function(X, layers) {
 #'
 #' A step of the elmo_native implementation. Called by \code{elmo_representation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reps A vector; its length is taken and its elements indexed.
 #' @param raw_weights A vector; its length is taken.
@@ -221,7 +219,6 @@ elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
 #' A step of the elmo_native implementation. Called by \code{elmo},
 #' \code{elmorepresentation}, \code{morie_elmo}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{bilm_forward}.
 #' @param layers Passed to \code{bilm_forward}.
@@ -260,7 +257,6 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
 #'
 #' A step of the elmo_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -277,12 +273,11 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
          "meaning token k, and the shapes will not tell you.")
 }
 
-# compact alias per ledger/NAMING.md
-#' Compact alias per ledger/NAMING.md
+# compact alias
+#' Compact alias
 #'
 #' A step of the elmo_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{elmo_representation}.
 #' @param layers Passed to \code{elmo_representation}.
@@ -310,7 +305,6 @@ elmorepresentation <- function(X, layers, raw_weights = NULL,
 #'
 #' A step of the elmo_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{elmo_representation}.
 #' @param layers Passed to \code{elmo_representation}.
@@ -337,7 +331,6 @@ elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #'
 #' A step of the elmo_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{elmo_representation}.
 #' @param layers Passed to \code{elmo_representation}.
@@ -364,7 +357,6 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #'
 #' A step of the elmo_native implementation. Called by \code{.elmo_representation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param layers A vector; its length is taken and its elements indexed.
@@ -421,7 +413,6 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #'
 #' A step of the elmo_native implementation. Called by \code{.elmo_representation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reps A vector; its length is taken and its elements indexed.
 #' @param raw_weights A vector; its length is taken.
@@ -461,7 +452,6 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #'
 #' A step of the elmo_native implementation. Called by \code{morie_elmo}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.bilm_forward}.
 #' @param layers Passed to \code{.bilm_forward}.
@@ -491,7 +481,6 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #'
 #' A step of the elmo_native implementation. Called by \code{.lstm_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -507,7 +496,6 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #' A step of the elmo_native implementation. Called by \code{.elmo_mix},
 #' \code{.elmo_representation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param raw A vector; its length is taken.
 #' @return A vector, from \code{as.numeric}.
@@ -527,7 +515,6 @@ morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #'
 #' A step of the elmo_native implementation. Called by \code{.bilm_forward}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h A vector; its length is taken.

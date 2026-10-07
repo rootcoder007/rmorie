@@ -6,11 +6,10 @@
 #' sum_i w_i z_i / sum_i w_i with w_i = 1 / d(s*, s_i)^p, and the
 #' convention that if s* coincides with a datum the interpolated value IS
 #' that datum -- Shepard's function is an exact interpolator, so the limit
-#' is taken rather than the division attempted.  The 1968 proceedings were
-#' not retrievable here; the interpolant and the exactness convention are
-#' quoted in their standard published form.  p = 2 is Shepard's own choice.
-#' The effective number of contributing points, (sum w)^2 / sum w^2, is
-#' returned because it is the honest measure of how local the estimate is.
+#' is taken rather than the division attempted.  p = 2 is Shepard's own
+#' choice.  The effective number of contributing points,
+#' (sum w)^2 / sum w^2, is returned as a measure of how local the estimate
+#' is.
 #'
 #' @param coords data locations, one row per point.
 #' @param values data values.

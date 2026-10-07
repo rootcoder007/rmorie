@@ -75,7 +75,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{.limmav_ebayes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return A numeric value.
@@ -103,7 +102,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{.limmav_trigamma_inverse}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -126,7 +124,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{.limmav_trigamma_inverse}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -148,7 +145,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{.limmav_ebayes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{sqrt}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
@@ -180,7 +176,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{morie_limmav}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{abs}.
 #' @return A numeric value.
@@ -203,7 +198,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{morie_limmav}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -236,7 +230,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{morie_limmav}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param df A vector; its length is taken.
@@ -293,7 +286,6 @@
 #' A step of the limmav_native implementation. Called by \code{.limmav_voom_weights},
 #' \code{.limmav_weighted_lm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -333,7 +325,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts A matrix; passed to \code{nrow}.
 #' @param lib_sizes Optional; may be \code{NULL}. Coerced to numeric by the body, with
@@ -370,7 +361,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param y A vector; its length is taken and its elements indexed.
@@ -449,7 +439,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{morie_limmav}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts Passed to \code{.limmav_log_cpm}.
 #' @param design A matrix; passed to \code{as.matrix}.
@@ -534,7 +523,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{morie_limmav}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.limmav_ols}.
 #' @param X Passed to \code{.limmav_ols}.
@@ -572,7 +560,6 @@
 #'
 #' A step of the limmav_native implementation. Called by \code{morie_limmav}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Numeric; combined arithmetically in the body.
 #' @param df Numeric; combined arithmetically in the body.
@@ -633,7 +620,6 @@
 #'
 #' A step of the limmav_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts Passed to \code{.limmav_voom_weights}.
 #' @param design A vector; its length is taken and its elements indexed.
@@ -782,7 +768,6 @@ morie_limmavoom <- morie_limmav
 #'
 #' A step of the limmav_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

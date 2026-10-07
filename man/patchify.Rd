@@ -22,7 +22,6 @@ A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{stride},
 A step of the patchT_native implementation. Called by
 \code{channel_independent_tokens}, \code{channel_mixed_tokens}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 patchify(x = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)

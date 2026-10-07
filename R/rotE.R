@@ -1,14 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' RotatE knowledge-graph embedding score
 #'
-#' Sun, Deng, Nie and Tang (2019), RotatE: knowledge graph embedding by
-#' relational rotation in complex space, ICLR (arXiv:1902.10197 --
-#' FETCHED), states verbatim: "Given a triplet (h, r, t), we expect that t
-#' = h o r, where h, r, t in C^k are the embeddings, the modulus |r_i| = 1
-#' and o denotes the Hadamard (element-wise) product", so the score of its
-#' table 1 is d_r(h, t) = ||h o r - t||.  The unit modulus is what makes
-#' the relation a rotation rather than a general scaling, and it is
-#' enforced here rather than assumed: relations are supplied as phases.
+#' Sun, Deng, Nie and Tang (2019), RotatE: knowledge graph embedding by relational
+#' rotation in complex space, ICLR (arXiv:1902.10197), states verbatim: "Given a triplet
+#' (h, r, t), we expect that t = h o r, where h, r, t in C^k are the embeddings, the
+#' modulus |r_i| = 1 and o denotes the Hadamard (element-wise) product", so the score of
+#' its table 1 is d_r(h, t) = ||h o r - t||. The unit modulus is what makes the relation
+#' a rotation rather than a general scaling, and it is enforced here rather than
+#' assumed: relations are supplied as phases.
 #'
 #' @param triples flat vector \[h_re, h_im, theta, t_re, t_im\] when the
 #'   components are not given separately.

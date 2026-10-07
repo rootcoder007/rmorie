@@ -24,7 +24,6 @@
 #'
 #' A step of the fmFM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param w0 Coerced to numeric by the body, with \code{as.numeric}.
@@ -58,7 +57,6 @@ predict_naive <- function(x, w0, w, V) {
 #'
 #' A step of the fmFM_native implementation. Called by \code{fit_fm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param w0 Coerced to numeric by the body, with \code{as.numeric}.
@@ -87,7 +85,6 @@ predict_naive <- function(x, w0, w, V) {
 #'
 #' A step of the fmFM_native implementation. Called by \code{fit_fm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param V A vector; indexed elementwise.
@@ -138,7 +135,6 @@ design_mf <- function(u, i, n_users, n_items) {
 #'
 #' A step of the fmFM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -208,7 +204,6 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
 #'
 #' A step of the fmFM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -228,7 +223,7 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
          "encoding.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 factorizationmachine <- fit_fm
 
 # public names resolved by fn/_lazy_map.json

@@ -21,7 +21,6 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the smoopt_native implementation. Called by \code{smo_platt}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

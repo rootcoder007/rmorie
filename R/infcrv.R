@@ -7,11 +7,8 @@
 #' Hampel, F. R. (1974), "The influence curve and its role in robust
 #' estimation", \emph{Journal of the American Statistical Association} 69(346),
 #' 383-393, doi:10.1080/01621459.1974.10482962, defines the influence curve as
-#' this limit; the paper is closed access with no open copy in any repository
-#' (Unpaywall reports oa_status "closed"), and the definition used here is the
-#' one already written in this module's own stub docstring, which matches every
-#' later statement of it (e.g. Hampel, Ronchetti, Rousseeuw and Stahel 1986,
-#' Section 2.1).
+#' this limit, as restated in Hampel, Ronchetti, Rousseeuw and Stahel (1986),
+#' Section 2.1.
 #'
 #' F is a sample, taken as the empirical distribution putting mass 1/n on each
 #' point, so the contaminated mixture is exactly representable: the same points

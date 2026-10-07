@@ -9,7 +9,6 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 if (morie_crypto_liboqs_available()) {

@@ -17,5 +17,4 @@ A list with \code{beta}, \code{mse}.
 \description{
 A step of the causrddm implementation. Called by \code{Rddmanip}.
 See the file header for the source the module follows.
-source it follows.
 }

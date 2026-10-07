@@ -23,6 +23,7 @@
 #' Survip(3.841458820694124, 1, 1)
 #' @export
 Survip <- function(test_stat, DEFF = 1, df = 1) {
+  .morie_arg(test_stat, "n")
   x <- as.numeric(test_stat)
   d <- as.numeric(DEFF)
   k <- as.integer(df)

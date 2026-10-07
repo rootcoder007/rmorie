@@ -21,5 +21,4 @@ The value of \code{best_h}, as built in the body.
 \description{
 A step of the tmlcps_native implementation. Called by \code{effect_curve}.
 See the file header for the source the module follows.
-source it follows.
 }

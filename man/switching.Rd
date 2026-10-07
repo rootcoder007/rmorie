@@ -19,7 +19,6 @@ A list with \code{scores}, \code{chosen}, \code{ranking}, \code{note}.
 \description{
 A step of the hybRC_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- switching(list(content = c(a = 0.9, b = 0.2),

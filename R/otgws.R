@@ -29,6 +29,10 @@
 #'   \code{m}, \code{iters}.
 #' @references Peyre, G., Cuturi, M. and Solomon, J. (2016). Proceedings
 #'   of Machine Learning Research 48:2664-2672 (ICML).
+#' @examples
+#' Cx <- as.matrix(dist(1:3)); Cy <- as.matrix(dist(c(10, 11, 12)))
+#' r <- Otgws(Cx, Cy, a = rep(1 / 3, 3), b = rep(1 / 3, 3), epsilon = 0.05)
+#' round(r$T, 3)   # the identity coupling: same pattern of distances
 #' @export
 Otgws <- function(Cx, Cy, a, b, epsilon, max_iter = 20, inner_iter = 200) {
   A <- as.matrix(Cx)

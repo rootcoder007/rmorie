@@ -23,5 +23,9 @@ A list with \code{feasible}, \code{x}, \code{value}.
 \description{
 A step of the miprgr_native implementation. Called by \code{miprgr_solve_relaxation}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+# maximise 3 x1 + 5 x2 subject to x1 <= 4, 2 x2 <= 12, 3 x1 + 2 x2 <= 18
+A <- rbind(c(1, 0), c(0, 2), c(3, 2))
+miprgr_simplex(A, b = c(4, 12, 18), c = c(3, 5))[c("x", "value")]   # (2, 6), 36
 }

@@ -61,6 +61,7 @@ AmplifyGamma <- function(gamma, lam) {
 #' @rdname GammaFromLambdaDelta
 #' @export
 UStatisticSensitivity <- function(d, gamma = 1, m = 2, m1 = 2, m2 = 2, exact = NULL, alternative = "greater") {
+  .morie_arg(d, "n")
   I <- length(d)
   if (is.null(exact)) exact <- I <= 50
   pr <- gamma / (1 + gamma)

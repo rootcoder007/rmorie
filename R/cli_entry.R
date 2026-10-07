@@ -57,37 +57,57 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
     Sys.setenv(MORIE_CACHE_DB = .morie_cli_cache_db())
     on.exit(Sys.unsetenv("MORIE_CACHE_DB"), add = TRUE)
   }
+  # launchers of older versions passed an explicit --args separator, which R >= 4.6 keeps
+  if (length(args) && identical(args[[1L]], "--args")) args <- args[-1L]
   verb <- if (length(args)) args[[1L]] else "help"
   rest <- args[-1L]
   pkg <- utils::packageName()
   if (!verb %in% c("help", "--help", "-h") && any(rest %in% c("--help", "-h"))) {
     return(.cli_verb_help(verb, out))  # `VERB --help` describes the verb; it never runs it
   }
+  bad <- .cli_unknown_options(verb, rest)
+  if (length(bad)) {
+    # an option the verb does not take is refused, not run as data (exec evaluated it, ask sent it)
+    out(sprintf("rmorie %s: unknown option %s (rmorie %s --help)\n", verb, bad[[1L]], verb))
+    return(invisible(2L))
+  }
   flag <- function(name) {
     i <- match(name, rest)
     if (is.na(i)) return(NULL)
-    if (i == length(rest)) stop(sprintf("%s needs a value", name), call. = FALSE)
+    if (i == length(rest) || startsWith(rest[[i + 1L]], "--"))
+      stop(structure(class = c("cli_usage", "error", "condition"),
+                     list(message = sprintf("%s needs a value", name), call = NULL)))
     rest[[i + 1L]]
   }
   has <- function(name) name %in% rest
   status <- 0L
-  tryCatch({
+  opened <- NULL
+  tryCatch(withCallingHandlers({
     switch(verb,
       login = {
         if (has("--token")) {
           tok <- if (match("--token", rest) < length(rest)) rest[[match("--token", rest) + 1L]] else ""
-          if (!nzchar(tok)) tok <- trimws(readline("Paste your MORIE key: "))
-          if (!isTRUE(.morie_llm_probe_token(tok))) {
+          # the launcher runs Rscript: .cli_readline() reads a typed or piped line (echo KEY | rmorie login --token)
+          if (!nzchar(tok)) tok <- .cli_readline("Paste your MORIE key: ")
+          if (is.na(tok) || !nzchar(tok)) {
+            out("--token needs a value: rmorie login --token KEY, or paste the key when asked\n")
+            status <- 2L
+          } else if (!isTRUE(.morie_llm_probe_token(tok))) {
             out("the gateway did not accept that key; nothing stored (rmorie login mints one)\n")
             status <- 1L
           } else {
             morie_llm_login(token = tok)
           }
         } else {
+          if (has("--to-email") && is.null(flag("--email"))) {
+            out("--to-email needs --email ADDRESS (the key is emailed to that address)\n")
+            status <- 2L
+          } else {
           key <- morie_llm_login(open_browser = !has("--no-browser") && interactive(),
                                  email = flag("--email"), code = flag("--code"),
                                  to_email = has("--to-email"))
           if (nzchar(key)) out(sprintf("Logged in to %s\n", .morie_llm_hosted_base()))
+          }
         }
       },
       logout = { morie_llm_logout() },
@@ -95,7 +115,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         rows <- list(
           c("Ollama (local)", if (morie_llm_probe_ollama()) "reachable" else "not reachable",
             .morie_llm_ollama_base()),
-          c("Hosted LLM", if (is.null(.morie_llm_hosted_key())) "not logged in -- rmorie login"
+          c("Hosted LLM", if (is.null(.morie_llm_hosted_key())) paste0("not logged in -- rmorie login (GitHub) or rmorie login --email you@example.com", .morie_httr2_note())
                           else if (morie_llm_probe_hosted()) "logged in, gateway answering"
                           else if (.morie_llm_hosted_rejected()) "key rejected by the gateway -- rmorie login again"
                           else "logged in, gateway not reachable",
@@ -112,11 +132,16 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       },
       models = {
         if (is.null(.morie_llm_hosted_key())) {
-          out("Hosted LLM: not logged in -- rmorie login\n")
+          out(paste0("Hosted LLM: not logged in -- rmorie login (GitHub) or rmorie login --email you@example.com", .morie_httr2_note(), "\n"))
         } else {
           hm <- morie_llm_hosted_models()
           if (!length(hm)) {
-            out(sprintf("Hosted LLM (%s): logged in, but the gateway did not accept the key or did not answer; run rmorie login again, or rmorie doctor\n", .morie_llm_hosted_base() %||% "disabled"))
+            out(if (.morie_llm_hosted_rejected()) {
+              sprintf("Hosted LLM (%s): the gateway rejected your key -- run rmorie login again\n", .morie_llm_hosted_base())
+            } else {
+              sprintf("Hosted LLM (%s): logged in, but the gateway is not reachable (offline?) -- rmorie doctor says more\n", .morie_llm_hosted_base() %||% "disabled")
+            })
+            status <- 1L
           } else {
             out(sprintf("Hosted LLM (%s); default marked *:\n", .morie_llm_hosted_base()))
             for (m in hm) out(sprintf("  %s %s\n", if (identical(m, attr(hm, "default"))) "*" else " ", m))
@@ -139,74 +164,136 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         if (!is.null(mdl)) rest <- rest[-(match("--model", rest) + 0:1)]
         if (!length(rest) || identical(rest[[1L]], "--help")) {
           out("usage: rmorie ask [--model NAME] PROMPT...\n")
+          status <- 2L
         } else {
           provider <- morie_llm_detect_provider()
           if (identical(provider, "local")) {
             out(paste0(.morie_llm_local_fallback(paste(rest, collapse = " ")), "\n"))
-            out("no LLM backend was reachable; this is the local fallback text (rmorie login, or start Ollama)\n")
+            out(.cli_llm_fallback_cause(mdl))
             status <- 1L
           } else {
             ans <- morie_llm_ask(paste(rest, collapse = " "), model = mdl, provider = provider)
-            out(paste0(ans, "\n"))
-            if (identical(ans, .morie_llm_local_fallback(paste(rest, collapse = " ")))) {
-              out(if (!is.null(mdl)) sprintf("no provider answered for model '%s' (rmorie models lists the names)\n", mdl)
-                  else "the providers were reachable but none answered; this is the local fallback text\n")
+            out(paste0(trimws(ans), "\n"))  # some models open with blank lines
+            if (isTRUE(attr(ans, "fallback"))) {
+              out(.cli_llm_fallback_cause(mdl))
               status <- 1L
             }
           }
         }
       },
       `list-modules` = {
-        for (m in morie_module_names()) out(paste0("  ", m, "\n"))
+        d <- .morie_module_descriptions()
+        w <- max(nchar(names(d)))
+        for (m in morie_module_names()) {
+          out(sprintf("  %-*s  %s\n", w, m, d[[m]] %||% ""))
+          if (has("--outputs")) out(paste0(strrep(" ", w + 4L), paste(.morie_module_outputs[[m]], collapse = ", "), "\n"))
+        }
+        out("\nrmorie list-modules --outputs also lists the files each module writes.\n")
       },
       `run-module` = {
         if (!length(rest) || identical(rest[[1L]], "--help")) {
           out("usage: rmorie run-module NAME [--output-dir DIR] [--cpads FILE | --dataset KEY]   (names: rmorie list-modules; keys: rmorie list-datasets)\n")
           if (length(rest)) status <- 0L else status <- 2L
+        } else if (!rest[[1L]] %in% morie_module_names()) {
+          out(sprintf("Unknown module: %s (rmorie list-modules names them)\n", rest[[1L]]))
+          status <- 1L
         } else {
           od <- flag("--output-dir") %||% file.path("morie-output", rest[[1L]])
           cp <- flag("--cpads")
-          if (is.null(cp) && !is.null(flag("--dataset"))) cp <- .cpads_dataset_csv(flag("--dataset"))
+          if (rest[[1L]] %in% c("otis-analysis", "mapq-psychometrics") && (!is.null(cp) || !is.null(flag("--dataset")))) {
+            # these two bring their own frame; the option would otherwise be dropped without a word
+            out(sprintf("note: %s runs on its own bundled frame; --cpads / --dataset are ignored\n", rest[[1L]]))
+            cp <- NULL
+          } else if (is.null(cp) && !is.null(flag("--dataset"))) cp <- .cpads_dataset_csv(flag("--dataset"))
+          before <- .cli_file_stamps(od)
           res <- if (is.null(cp)) morie_run_morie_module(rest[[1L]], output_dir = od)
                  else morie_run_morie_module(rest[[1L]], cpads_csv = cp, output_dir = od)
-          out(sprintf("Completed module: %s\n", rest[[1L]]))
-          if (is.list(res) && length(names(res))) out(sprintf("Generated tables: %s\n", paste(names(res), collapse = ", ")))
-          out(sprintf("Written to %s (%d files)\n", od, length(list.files(od))))
+          n_files <- .cli_files_written(od, before)
+          if (n_files > 0L) {
+            out(sprintf("Completed module: %s\n", rest[[1L]]))
+            if (is.list(res) && length(names(res))) out(sprintf("Generated tables: %s\n", paste(names(res), collapse = ", ")))
+            out(sprintf("Written to %s (%d files)\n", od, n_files))
+          }
+          if (n_files == 0L) {
+            out(sprintf("%s wrote nothing%s\n", rest[[1L]],
+                        if (rest[[1L]] %in% c("figures", "tables", "meta-synthesis", "final-report")) ": it collects the figures and tables a project checkout wrote (data/manifest/outputs); run the analysis modules into that tree first" else ""))
+            status <- 1L
+          }
         }
       },
-      `list-datasets` = {
-        d <- morie_list_datasets()
-        out(paste0(utils::capture.output(print(d, row.names = FALSE)), collapse = "\n"))
-        out("\n")
-      },
+      `list-datasets` = status <- .cli_list_datasets(out),
       pull = {
-        if (!length(rest) || identical(rest[[1L]], "--help")) {
+        if (!length(rest) || !nzchar(trimws(rest[[1L]]))) {  # `pull ""` is a usage error too
           out("usage: rmorie pull KEY [--out FILE.csv] | pull --all [--out DIR]   (keys: rmorie list-datasets)\n")
+          status <- 2L
+        } else if (identical(rest[[1L]], "--help")) {
+          out("usage: rmorie pull KEY [--out FILE.csv] | pull --all [--out DIR]   (keys: rmorie list-datasets)\n")
+        } else if (identical(rest[[1L]], "--all") && !has("-y") && !has("--yes") &&
+                   (.cli_stdin_closed() || !tolower(trimws(.cli_readline(sprintf(
+                     "pull --all writes every catalog dataset to %s (several GB). Continue? [y/N] ",
+                     normalizePath(flag("--out") %||% "datasets", mustWork = FALSE))) %||% "")) %in% c("y", "yes"))) {
+          # several GB: ask on a terminal, and need -y where nobody can answer
+          out(if (.cli_stdin_closed()) "pull --all downloads several GB; no terminal to confirm on: pass -y\n" else "pull --all: nothing downloaded\n")
+          status <- if (.cli_stdin_closed()) 2L else 1L
         } else if (identical(rest[[1L]], "--all")) {
           d <- morie_list_datasets()
           od <- flag("--out") %||% "datasets"
           dir.create(od, recursive = TRUE, showWarnings = FALSE)
           for (k in d$key) {
+            miss <- .morie_own_file_missing(k)
+            if (!is.null(miss)) {
+              out(sprintf("  %-12s skipped: your own research file is not at %s\n", k, miss))
+              next
+            }
             r <- tryCatch(morie_load_dataset(k), error = function(e) e)
             if (inherits(r, "error")) {
               out(sprintf("  %-12s FAILED: %s\n", k, conditionMessage(r)))
             } else {
-              utils::write.csv(r, file.path(od, paste0(k, ".csv")), row.names = FALSE)
+              .morie_write_csv_minimal(r, file.path(od, paste0(k, ".csv")))
               out(sprintf("  %-12s %s rows -> %s\n", k, format(nrow(r), big.mark = ","), file.path(od, paste0(k, ".csv"))))
             }
           }
+        } else if (!is.null(miss <- .morie_own_file_missing(rest[[1L]]))) {
+          # pull writes real data only: the synthetic panel the analyses fall back on is not the file
+          out(sprintf("%s is your own research file and it is not at %s: put it there (MORIE_DATA_DIR moves the data directory). The analyses use a synthetic toy panel until then.\n",
+                      rest[[1L]], miss))
+          status <- 1L
         } else {
           dest <- flag("--out") %||% paste0(gsub("[^A-Za-z0-9_.-]", "_", rest[[1L]]), ".csv")
-          df <- morie_load_dataset(rest[[1L]])
-          utils::write.csv(df, dest, row.names = FALSE)
-          out(sprintf("wrote %s  (%d rows, %d cols)\n", dest, nrow(df), ncol(df)))
+          df <- withCallingHandlers(morie_load_dataset(rest[[1L]]), warning = function(w) {
+            # connection-layer warnings (url(), download.file) precede an error that already names the cause
+            if (grepl("cannot open|URL|InternetOpenUrl|download|connection|proxy", conditionMessage(w), ignore.case = TRUE)) {
+              invokeRestart("muffleWarning")
+            }
+          })
+          dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
+          if (is.environment(df)) {
+            # an R environment (research objects), not a table: hand over the file itself
+            src <- attr(df, "morie_path")
+            dest <- sub("\\.csv$", "", dest, ignore.case = TRUE)
+            dest <- paste0(dest, ".", tools::file_ext(src))
+            if (!isTRUE(file.copy(src, dest, overwrite = TRUE))) stop(sprintf("cannot write %s", dest), call. = FALSE)
+            out(sprintf("%s is an R environment (%d objects), not a table: copied it to %s; open it with load(\"%s\") or morie_load_dataset(\"%s\")\n",
+                        rest[[1L]], length(ls(df)), dest, dest, rest[[1L]]))
+          } else {
+          wrote <- tryCatch({
+            .morie_write_csv_minimal(df, dest)
+            TRUE
+          }, error = function(e) {
+            out(sprintf("cannot write %s: %s\n", dest, conditionMessage(e)))
+            FALSE
+          })
+          if (wrote) out(sprintf("wrote %s  (%d rows, %d cols)\n", dest, nrow(df), ncol(df))) else status <- 1L
+          }
         }
       },
       provider = {
         sub <- if (length(rest)) rest[[1L]] else "show"
         if (identical(sub, "set")) {
-          morie_llm_provider_set(flag("--base-url") %||% stop("provider set needs --base-url", call. = FALSE),
-                                 flag("--key") %||% stop("provider set needs --key", call. = FALSE),
+          morie_llm_provider_set(flag("--base-url") %||% stop(structure(class = c("cli_usage", "error", "condition"),
+                                 list(message = "provider set needs --base-url URL", call = NULL))),
+                                 flag("--key") %||% stop(structure(class = c("cli_usage", "error", "condition"),
+                                                                   list(message = "provider set needs --key KEY", call = NULL))),
                                  model = flag("--model"))
         } else if (identical(sub, "unset")) {
           morie_llm_provider_unset()
@@ -220,6 +307,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       explain = {
         if (!length(rest) || identical(rest[[1L]], "--help")) {
           out("usage: rmorie explain FILENAME\n")
+          if (!length(rest)) status <- 2L
         } else {
           txt <- explain_file(rest[[1L]])
           out(paste0(txt, "\n"))
@@ -227,11 +315,11 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         }
       },
       inspect = {
-        if (!length(rest) || identical(rest[[1L]], "--help")) out("usage: rmorie inspect PATH [--module NAME]\n")
+        if (identical(rest[1L], "--help")) out("usage: rmorie inspect PATH [--module NAME]\n")
         else status <- .cli_inspect(rest, flag, out)
       },
       verify = {
-        if (!length(rest) || identical(rest[[1L]], "--help")) out("usage: rmorie verify PATH [--module NAME]\n")
+        if (identical(rest[1L], "--help")) out("usage: rmorie verify PATH [--module NAME]\n")
         else status <- .cli_verify(rest, flag, out)
       },
       `profile-dataset` = status <- .cli_profile_dataset(rest, flag, has, out),
@@ -244,11 +332,11 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       chat = status <- .cli_chat(rest, flag, out),
       selftest = status <- .cli_selftest(out),
       tutorial = status <- .cli_tutorial(has, out),
-      `generate-template` = status <- .cli_generate_template(flag, out),
+      `generate-template` = status <- .cli_generate_template(rest, flag, has, out),
       update = status <- .cli_update(has, out),
       crypto = status <- .cli_crypto(rest, flag, out),
       ingest = status <- .cli_ingest(rest, flag, has, out),
-      `download-bootstrap` = status <- .cli_download_bootstrap(flag, out),
+      `download-bootstrap` = status <- .cli_download_bootstrap(flag, out, has),
       exec = status <- .cli_exec(rest, flag, out),
       edit = status <- .cli_edit(rest, out),
       percysuits = status <- .cli_percysuits(flag, has, out),
@@ -270,7 +358,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  rmorie list-datasets\n",
         "  rmorie pull ocp21 --out cpads.csv            # the real CPADS PUMF; cached, then the modules use it\n",
         "  rmorie pull --all --out datasets/            # every dataset the catalog knows\n",
-        "  rmorie pull chicago_crime/incidents          # curated tables at data.rmorie.com (after rmorie login)\n\n",
+        "  rmorie pull chicago_crime/incidents          # curated tables at data.rmorie.com (after rmorie login, GitHub or --email)\n\n",
         "ASK A MODEL\n",
         "  rmorie login                                 # hosted tier, free: GitHub or email sign-in\n",
         "  rmorie models                                # what you can ask, default marked *\n",
@@ -290,11 +378,25 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "PYTHON SIDE\n",
         "  pip install morie   then   morie cheatsheet\n")),
       analyze = {
-        if (!length(rest)) stop("usage: rmorie analyze SUBJECT [JSON]", call. = FALSE)
-        res <- cli_main(rest[[1L]], if (length(rest) > 1L) rest[[2L]] else "{}")
-        if (is.character(res)) out(paste0(res, "\n"))
-        if (is.character(res) && grepl("\"status\"\\s*:\\s*\"error\"", res)) status <- 1L
+        if (!length(rest)) {
+          out("usage: rmorie analyze SUBJECT [JSON]   (subjects: otis, siu, tps, nypd, cpd; JSON keys: otis {\"data\":FILE,\"year\":2023,\"sex\":\"Male\"}, siu {\"data\":FILE}, tps {\"datasets\":[\"Assault\"],\"nrows\":5000} or {\"data\":FILE})\n")
+          status <- 2L
+        } else if (length(rest) > 1L && !.cli_json_object(rest[[2L]])) {
+          out(sprintf("rmorie analyze: the second argument must be a JSON object, e.g. '{\"data\":\"FILE.csv\"}'; got: %s\n", rest[[2L]]))
+          status <- 2L
+        } else {
+          res <- cli_main(rest[[1L]], if (length(rest) > 1L) rest[[2L]] else "{}")
+          if (is.character(res)) out(paste0(res, "\n"))
+          if ((is.list(res) && identical(res$status, "error")) ||
+              (is.character(res) && grepl("\"status\"\\s*:\\s*\"error\"", res))) status <- 1L
+          if (status == 0L && .cli_analyze_all_failed(res)) {
+            out("every analysis in this subject failed (each entry's warnings field says why)\n")
+            status <- 1L
+          }
+        }
       },
+      `--version` = ,
+      `-v` = ,
       version = out(sprintf("%s %s\n", pkg, as.character(utils::packageVersion(pkg)))),
       help = ,
       `--help` = ,
@@ -308,7 +410,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  models                                                 models you can ask (hosted + local)\n",
         "  ask [--model NAME] PROMPT...                           ask the active provider\n",
         "  analyze SUBJECT [JSON]                                 run an analysis subject\n",
-        "  list-modules                                           the CPADS analysis modules\n",
+        "  list-modules [--outputs]                               the analysis modules (--outputs: the files each writes)\n",
         "  run-module NAME [--output-dir DIR] [--cpads FILE | --dataset KEY]   run one module (--dataset ocp21 = the real PUMF)\n",
         "  list-datasets                                          built-in dataset keys and cache state\n",
         "  pull KEY [--out FILE.csv] | pull --all [--out DIR]     download a dataset (or every one) as CSV; cached for the modules\n",
@@ -319,23 +421,23 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  inspect PATH [--module NAME]                           schema, rows and preview of output CSVs\n",
         "  verify PATH [--module NAME]                            validate statistical outputs (exit 1 on failure)\n",
         "  profile-dataset PATH [--treatment C] [--outcome C] [--suggest]   variable types, roles, analysis plan\n",
-        "  sample PATH --n N [--method srs|stratified|cluster|pps] [--output F]   draw a sample\n",
+        "  sample PATH --n N [--method srs|stratified|cluster|pps] [--output F]   draw N rows (stratified: N in total, --per-stratum for N each; .weight = design weight)\n",
         "  run-modules [--modules a,b] [--cpads FILE] [--output-dir DIR]   run several modules\n",
         "  pipeline (--all | --modules a,b) [--output-dir DIR] [--no-carbon]   run modules, track CO2, seal a capsule\n",
-        "  emissions [--seconds N] [--output-dir DIR] [--no-capsule]   measure this machine's compute emissions\n",
+        "  emissions [--seconds N] [--output-dir DIR] [--country ISO3] [--no-capsule]   measure this machine's compute emissions (--country CAN; detected when omitted)\n",
         "  verify-pollution --pollutant no2|pm25 (--demo | --exposure-csv F | --exposure-mean X ...)   pollution -> health pipeline\n",
         "  percy | agent [--model NAME] [--context TEXT] QUESTION   talk to Perseus (same fallback chain as ask)\n",
         "  chat [--model NAME]                                    interactive conversation\n",
         "  selftest                                               smoke test of the subsystems\n",
         "  tutorial [--dry-run]                                   first-time walkthrough\n",
-        "  generate-template [--module NAME] [--out FILE]         methods + results scaffold for a first paper\n",
+        "  generate-template [MODULE | --module NAME] [--out FILE] [--force]   methods + results scaffold for a first paper\n",
         "  update [--yes]                                         check for a newer release, optionally install\n",
         "  crypto keygen|encrypt|decrypt ...                      post-quantum file encryption (ML-KEM-768 + ChaCha20)\n",
         "  ingest ckan|tps|siu|a2aj ...                           pull open-data feeds\n",
-        "  download-bootstrap [--survey all|csads_2021|...]       cache the survey bootstrap-weight files\n",
+        "  download-bootstrap --survey KEY|all                    cache the survey bootstrap-weight files (hundreds of MB each)\n",
         "  exec 'R CODE' | --file F                               evaluate R code\n",
         "  edit FILE                                              open a file in your editor\n",
-        "  percysuits [--dry-run]                                 pull the Perseus model set into Ollama\n",
+        "  percysuits [--dry-run] [--host URL]                    pull the Perseus model set into Ollama\n",
         "  verify-earth-engine                                    (Python side only)\n",
         "  version                                                package version\n",
         "  help | -h | --help                                     this list; VERB --help for one verb\n\n",
@@ -343,15 +445,24 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "\"https://cloud.r-project.org\"))\n",
         "Launcher on PATH:   Rscript -e 'rmorie::install_cli()'\n",
         "Python side:        pip install morie   (then: morie r-install)\n")),
-      stop(sprintf("unknown verb '%s' (try: rmorie help)", verb), call. = FALSE))
-  }, error = function(e) {
+      stop(structure(class = c("cli_usage", "error", "condition"),
+                     list(message = sprintf("unknown verb '%s' (try: rmorie help)", verb), call = NULL))))
+  }, warning = function(w) {
+    # R reports a refused file as a warning naming the path, then a bare "cannot open the connection"
+    # error; keep the path and the reason, and do not let the raw warning leak after the message
+    if (!grepl("cannot open file '", conditionMessage(w), fixed = TRUE)) return(invisible())
+    opened <<- sub("^.*cannot open file '(.*)': (.*)$", "\\1: \\2", conditionMessage(w))
+    invokeRestart("muffleWarning")
+  }), error = function(e) {
     msg <- conditionMessage(e)
-    if (grepl("cannot open (the connection|file)|[Pp]ermission denied", msg)) {
-      # a write that the file system refused: say where, in words
-      msg <- paste0("cannot write in ", getwd(), " (permission denied, or the path does not exist): ", msg)
+    if (!is.null(opened) && grepl("cannot open (the connection|file)", msg)) {
+      msg <- paste0("cannot open ", opened)
+    } else if (grepl("cannot open (the connection|file)|[Pp]ermission denied", msg) &&
+               !grepl("could not be reached|cannot open the connection to '", msg)) {  # a URL: the network, not a path
+      msg <- paste0(msg, " (permission denied, or the path does not exist)")
     }
     out(paste0("rmorie ", verb, ": ", msg, "\n"))
-    status <<- 1L
+    status <<- if (inherits(e, "cli_usage")) 2L else 1L
   })
   invisible(status)
 }
@@ -374,22 +485,54 @@ install_cli <- function(dir = file.path(path.expand("~"), ".local", "bin"), name
   src <- system.file("bin", "rmorie", package = utils::packageName())
   if (!nzchar(src)) stop("the launcher is missing from this installation")
   dir.create(dir, recursive = TRUE, showWarnings = FALSE)
+  # the launcher pins the library this copy of the package lives in, so the shell runs the same
+  # rmorie as the R session that installed it, whatever R_LIBS the shell or ~/.Renviron sets: the
+  # pin is applied inside R with .libPaths(), after Rscript has read every environment file
+  lib <- normalizePath(dirname(system.file(package = utils::packageName())), winslash = "/")
+  pkg <- utils::packageName()
   if (.Platform$OS.type == "windows") {
     target <- file.path(dir, paste0(name, ".cmd"))
-    writeLines(sprintf("@echo off\r\nRscript --vanilla -e \"%s::morie_cli()\" --args %%*",
-                       utils::packageName()), target)
+    writeLines(sprintf(paste0("@echo off\r\n",
+                              "Rscript --no-save --no-restore -e \".libPaths(c('%s', .libPaths())); q <- %s::morie_cli(); quit(status = as.integer(q))\" %%*"),
+                       lib, pkg), target)
   } else {
     target <- file.path(dir, name)
     if (file.exists(target) || !is.na(Sys.readlink(target))) unlink(target)
-    ok <- file.symlink(src, target)
-    if (!isTRUE(ok)) {
-      file.copy(src, target, overwrite = TRUE)
-      Sys.chmod(target, "0755")
-    }
-    Sys.chmod(src, "0755")
+    writeLines(c("#!/bin/sh",
+                 sprintf("# rmorie command-line launcher (written by %s::install_cli()); runs the package installed in", pkg),
+                 sprintf("# %s (pinned with .libPaths() inside R, so R_LIBS in the shell or ~/.Renviron cannot replace it)", lib),
+                 sprintf("exec Rscript --no-save --no-restore -e 'suppressPackageStartupMessages({ .libPaths(c(\"%s\", .libPaths())); q <- %s::morie_cli(); quit(status = as.integer(q)) })' \"$@\"", lib, pkg)),
+               target)
+    Sys.chmod(target, "0755")
   }
   on_path <- dir %in% strsplit(Sys.getenv("PATH"), .Platform$path.sep)[[1L]]
   message(sprintf("Installed %s%s", target,
                   if (on_path) "" else sprintf("; add %s to your PATH", dir)))
   invisible(target)
+}
+
+# The CSV `pull` writes, as morie's Python writes it (pandas' to_csv): a field is quoted only
+# when it holds a comma, a quote or a line break, a missing value is an empty field, numbers in
+# R's 15 significant digits, UTF-8. write.csv quoted every text field and wrote NA, so the two
+# arms' files for one dataset did not compare equal.
+.morie_write_csv_minimal <- function(df, path) {
+  df <- as.data.frame(df, stringsAsFactors = FALSE)
+  q <- function(v) {
+    v <- enc2utf8(as.character(v))
+    need <- !is.na(v) & grepl("[,\"\r\n]", v)
+    v[need] <- paste0("\"", gsub("\"", "\"\"", v[need], fixed = TRUE), "\"")
+    v[is.na(v)] <- ""
+    v
+  }
+  cols <- lapply(df, function(v) {
+    if (is.factor(v)) v <- as.character(v)
+    if (inherits(v, c("Date", "POSIXt"))) v <- format(v)
+    q(v)
+  })
+  lines <- c(paste(q(names(df)), collapse = ","),
+             if (nrow(df)) do.call(paste, c(unname(cols), sep = ",")))
+  con <- file(path, open = "wb")
+  on.exit(close(con), add = TRUE)
+  writeLines(lines, con, sep = "\n", useBytes = TRUE)
+  invisible(path)
 }

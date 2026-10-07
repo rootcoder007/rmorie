@@ -16,12 +16,9 @@ The value of \code{out}, as built in the body.
 A step of the snpqc1_native implementation. Called by \code{morie_snpqc1},
 \code{morie_snpqc1_sex_check}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
-if (morie_crypto_sodium_available()) {
-  S <- c("a", "b", "c")
-  morie_snpqc1_maf(S)
-}
+G <- rbind(c(0, 1, 2, NA), c(1, 1, 0, 2), c(2, NA, 1, 0))
+morie_snpqc1_maf(G)
 }
 \keyword{internal}

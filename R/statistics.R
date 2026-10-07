@@ -991,7 +991,7 @@ runs_test <- function(x, cutoff = NULL) {
 
 #' D'Agostino-Pearson omnibus normality test
 #'
-#' API stub: implemented via the K2 statistic = Z(skew)^2 + Z(kurt)^2
+#' Implemented via the K2 statistic = Z(skew)^2 + Z(kurt)^2
 #' (D'Agostino & Pearson 1973). Recommended n >= 20.
 #'
 #' @param x Numeric vector.

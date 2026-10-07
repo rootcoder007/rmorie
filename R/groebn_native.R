@@ -45,7 +45,6 @@
 #'
 #' A step of the groebn_native implementation. Called by \code{.groebn_fr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -67,7 +66,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_add},
 #' \code{.groebn_mul}, \code{.groebn_poly}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; indexed elementwise.
 #' @param q A vector; indexed elementwise.
@@ -85,7 +83,6 @@
 #'
 #' A step of the groebn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; indexed elementwise.
 #' @param q A vector; indexed elementwise.
@@ -103,7 +100,6 @@
 #'
 #' A step of the groebn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
@@ -117,7 +113,6 @@
 #'
 #' A step of the groebn_native implementation. Called by \code{.groebn_mul}, \code{.groebn_scale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; indexed elementwise.
 #' @param q A vector; indexed elementwise.
@@ -136,7 +131,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_divide},
 #' \code{.groebn_reduce_basis}, \code{.groebn_spoly}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; indexed elementwise.
 #' @param q A vector; indexed elementwise.
@@ -156,7 +150,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_add},
 #' \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; indexed elementwise.
 #' @return A logical value.
@@ -170,7 +163,6 @@
 #'
 #' A step of the groebn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; indexed elementwise.
 #' @param q A vector; indexed elementwise.
@@ -185,7 +177,6 @@
 #'
 #' A step of the groebn_native implementation. Called by \code{.groebn_poly}, \code{.groebn_scale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return Nothing; this branch always raises.
@@ -223,7 +214,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
 #' \code{.groebn_monomials}, \code{.groebn_reduce_basis}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param order One of \code{"grevlex"}, \code{"grlex"}, \code{"lex"}.
 #' @return One of two values, depending on the branch taken.
@@ -266,7 +256,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_divide},
 #' \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
@@ -430,7 +419,6 @@
 #'
 #' A step of the groebn_native implementation. Called by \code{.groebn_leading_monomial}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Passed to \code{names}.
 #' @param order Passed to \code{.groebn_key}. Defaults to \code{"lex"}.
@@ -459,7 +447,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
 #' \code{.groebn_divide}, \code{.groebn_leading_coeff} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Passed to \code{.groebn_monomials}.
 #' @param order Passed to \code{.groebn_monomials}. Defaults to \code{"lex"}.
@@ -479,7 +466,6 @@
 #'
 #' A step of the groebn_native implementation. Called by \code{.groebn_reduce_basis}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f A vector; indexed elementwise.
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
@@ -499,7 +485,6 @@
 #'
 #' A step of the groebn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f A vector; indexed elementwise.
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
@@ -553,7 +538,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_divide},
 #' \code{.groebn_spoly}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Passed to \code{.groebn_add}.
 #' @param g Iterated over elementwise, with \code{lapply}.
@@ -574,7 +558,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_divide},
 #' \code{.groebn_spoly}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f A vector; its length is taken and its elements indexed.
 #' @param g A vector; its length is taken and its elements indexed.
@@ -614,7 +597,6 @@
 #'
 #' A step of the groebn_native implementation. Called by \code{.groebn_reduce_basis}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Iterated over elementwise, with \code{lapply}.
 #' @param c Passed to \code{.groebn_as_fr}.
@@ -633,7 +615,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_divide},
 #' \code{.groebn_reduce_basis}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{<=}.
 #' @param b Passed to \code{<=}.
@@ -652,7 +633,6 @@
 #'
 #' A step of the groebn_native implementation. Called by \code{.groebn_spoly}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{pmax}.
 #' @param b Passed to \code{pmax}.
@@ -705,7 +685,6 @@
 #'
 #' A step of the groebn_native implementation. Called by \code{.groebn_normal_form}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f See Usage.
 #' @param G Iterated over elementwise, with \code{Filter}.
@@ -758,7 +737,6 @@
 #' A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
 #' \code{.groebn_ideal_member}, \code{.groebn_reduce_basis}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Passed to \code{.groebn_divide}.
 #' @param G Passed to \code{.groebn_divide}.
@@ -867,7 +845,6 @@
 #'
 #' A step of the groebn_native implementation. Called by \code{.groebn_buchberger}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param G Iterated over elementwise, with \code{Filter}.
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.

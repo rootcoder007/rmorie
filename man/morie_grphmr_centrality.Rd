@@ -26,3 +26,8 @@ Adds a learnable vector indexed by node degree to the input
 features. Attention is computed from features, so without this a hub
 and a leaf with identical features are indistinguishable.
 }
+\examples{
+adj <- list(c(2, 3), c(1), c(1))         # a star: node 1 has degree 2
+z_in <- list(c(0, 0), c(1, 0), c(0, 1))  # one vector per degree 0, 1, 2
+morie_grphmr_centrality(adj, n = 3, z_in = z_in)$encoding
+}

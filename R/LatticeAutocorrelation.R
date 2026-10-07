@@ -172,6 +172,7 @@ Lacgear <- function(y, W, randomisation = TRUE) {
 #' @rdname Lacgear
 #' @export
 Lacgetg <- function(y, W) {
+  .morie_arg(y, "n")
   .lat_getis(as.numeric(y), as.matrix(W))
 }
 

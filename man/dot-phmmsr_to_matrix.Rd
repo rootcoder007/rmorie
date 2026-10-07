@@ -15,5 +15,4 @@ The value of \code{m}, as built in the body.
 \description{
 A step of the phmmsr_native implementation. Called by \code{phmmsr_msv_score}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -18,3 +18,8 @@ implausible(fit, theta, threshold = 10, n_sd = 3)
 \description{
 Wilkinson implausibility rule, eq. (3)
 }
+\examples{
+fit <- gp_fit(design = seq(0, 1, length.out = 6), values = -20 * (seq(0, 1, length.out = 6) - 0.5)^2)
+implausible(fit, theta = 0.5)    # near the peak: not ruled out
+implausible(fit, theta = 0.98)
+}

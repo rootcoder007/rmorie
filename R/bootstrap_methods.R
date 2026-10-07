@@ -73,27 +73,12 @@
 # Internal helpers
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Boot Have Boot
-#' @noRd
-.boot_have_boot <- function() requireNamespace("boot", quietly = TRUE)
 #' Internal helper: Boot Have Bootstrap
 #' @noRd
 .boot_have_bootstrap <- function() requireNamespace("bootstrap", quietly = TRUE)
-#' Internal helper: Boot Have Resample
-#' @noRd
-.boot_have_resample <- function() requireNamespace("resample", quietly = TRUE)
 #' Internal helper: Boot Have Rsample
 #' @noRd
 .boot_have_rsample <- function() requireNamespace("rsample", quietly = TRUE)
-#' Internal helper: Boot Have Simpleboot
-#' @noRd
-.boot_have_simpleboot <- function() requireNamespace("simpleboot", quietly = TRUE)
-#' Internal helper: Boot Have Coin
-#' @noRd
-.boot_have_coin <- function() requireNamespace("coin", quietly = TRUE)
-#' Internal helper: Boot Have Ipred
-#' @noRd
-.boot_have_ipred <- function() requireNamespace("ipred", quietly = TRUE)
 
 # Result container constructors (unchanged shapes).
 
@@ -1417,6 +1402,7 @@ morie_boot_run <- function(data, statistic, R = 2000L, strata = NULL, ...) {
 morie_boot_basic_ci <- function(boot_obj,
                                 type = c("perc", "bca", "basic", "norm"),
                                 conf = 0.95) {
+  .morie_arg(boot_obj, "l")
   type <- match.arg(type, several.ok = TRUE)
   morie_boot_ci(boot_obj, conf = conf, type = type)
 }

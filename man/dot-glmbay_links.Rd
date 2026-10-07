@@ -15,5 +15,4 @@ Nothing; this branch always raises.
 \description{
 A step of the glmbay_native implementation. Called by \code{morie_glmbay_bayesian_glm}.
 See the file header for the source the module follows.
-source it follows.
 }

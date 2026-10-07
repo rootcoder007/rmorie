@@ -21,7 +21,6 @@ A list with \code{tokens}, \code{n_prompts}, \code{sparse}, \code{note}.
 \description{
 A step of the samseg_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 e <- encode_point_prompt(points = list(c(10, 20), c(30, 40)),

@@ -17,7 +17,6 @@
 #'
 #' A step of the flxipt_native implementation. Called by \code{.flxipt_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A matrix; indexed by row and column.
 #' @param spec A list; the body reads \code{$cols}, \code{$kind} from it.
@@ -63,7 +62,6 @@
 #'
 #' A step of the flxipt_native implementation. Called by \code{super_learner}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{>=}.
 #' @param ridge_penalties Defaults to \code{c(0, 1, 10)}.
@@ -98,7 +96,6 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #'
 #' A step of the flxipt_native implementation. Called by \code{.flxipt_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -145,7 +142,6 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #'
 #' A step of the flxipt_native implementation. Called by \code{.flxipt_fit}, \code{super_learner}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y A matrix; passed to \code{\%*\%}.
@@ -170,7 +166,6 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #'
 #' A step of the flxipt_native implementation. Called by \code{.flxipt_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -189,7 +184,6 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #'
 #' A step of the flxipt_native implementation. Called by \code{super_learner}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; indexed elementwise.
 #' @param W Passed to \code{.flxipt_expand}.
@@ -221,7 +215,6 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #'
 #' A step of the flxipt_native implementation. Called by \code{super_learner}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param V Numeric; combined arithmetically in the body.
@@ -241,7 +234,6 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #'
 #' A step of the flxipt_native implementation. Called by \code{.flxipt_nnls_simplex}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
@@ -339,7 +331,6 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' A step of the flxipt_native implementation. Called by
 #' \code{morie_tmlcic_adaptive_prespecification}, \code{super_learner}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; combined arithmetically in the body.
 #' @param Z A matrix; indexed by row and column.
@@ -373,7 +364,6 @@ cv_risk <- function(y, Z, loss = "l2") {
 #'
 #' A step of the flxipt_native implementation. Called by \code{flexible_iptw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
@@ -484,7 +474,6 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 #'
 #' A step of the flxipt_native implementation. Called by \code{iptw_ate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H Passed to \code{super_learner}.
@@ -551,7 +540,6 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
 #'
 #' A step of the flxipt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
@@ -616,7 +604,6 @@ iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
 #'
 #' A step of the flxipt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -632,7 +619,7 @@ iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
          "with g from the ensemble (Pirracchio 2015 eq. 3).")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 flexibleiptw <- flexible_iptw
 
 # house entry point: the package exports one morie_<module>

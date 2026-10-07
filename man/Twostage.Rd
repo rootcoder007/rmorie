@@ -32,6 +32,11 @@ Formula: Yhat = sum_l N_l ybar_l / sum_l N_l;
 V = (M/N)^2 [ ((M-m)/M)/(m(m-1)) * sum (N_l ybar_l - N_l Yhat)^2
 + (1/(mM)) * sum N_l^2 ((N_l-n_l)/N_l) s_l^2 / n_l ]
 }
+\examples{
+set.seed(1)
+Y <- list(rnorm(5, 10), rnorm(4, 12), rnorm(6, 11))
+Twostage(Y, Nl = c(20, 15, 25), M = 10, N = 200)$estimate
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 10 (subsampling / two-stage sampling). Chapter 10 was NOT in the

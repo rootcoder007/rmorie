@@ -235,13 +235,14 @@ morie_muzero_mcts_search <- morie_muzero
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prior Numeric; combined arithmetically in the body.
 #' @param alpha Passed to \code{<=}.
 #' @param frac Numeric; combined arithmetically in the body.
 #' @param seed Passed to \code{set.seed}.
 #' @return A numeric value.
+#' @examples
+#' muzero_add_noise(prior = c(0.5, 0.3, 0.2), alpha = 0.3, frac = 0.25, seed = 1)
 #' @export
 muzero_add_noise <- function(prior, alpha, frac, seed) {
   if (alpha <= 0) stop("muzero: dirichlet_alpha must be > 0")
@@ -258,13 +259,22 @@ muzero_add_noise <- function(prior, alpha, frac, seed) {
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param path A vector; its length is taken and its elements indexed.
 #' @param value See Usage.
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @param mm A list; the body reads \code{$update} from it.
 #' @return The value of \code{for}.
+#' @examples
+#' node <- function(reward) {
+#'   e <- new.env(); e$value_sum <- 0; e$visits <- 0; e$reward <- reward
+#'   e$value <- function() if (e$visits == 0) 0 else e$value_sum / e$visits
+#'   e
+#' }
+#' root <- node(0); child <- node(1)
+#' mm <- muzero_MinMax()
+#' muzero_backup(list(root, child), value = 0.5, gamma = 0.9, mm = mm)
+#' c(child$value(), root$value())   # 0.5, then 1 + 0.9 * 0.5
 #' @export
 muzero_backup <- function(path, value, gamma, mm) {
   g <- value
@@ -282,9 +292,10 @@ muzero_backup <- function(path, value, gamma, mm) {
 #'
 #' A step of the muzero_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(muzero_cheatsheet())
 #' @export
 muzero_cheatsheet <- function() {
   paste(paste0(
@@ -304,10 +315,12 @@ muzero_cheatsheet <- function() {
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_add_noise}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{repeat}.
+#' @examples
+#' set.seed(5)
+#' mean(replicate(2000, muzero_gamma_rv(2)))
 #' @export
 muzero_gamma_rv <- function(alpha) {
   if (alpha < 1) {
@@ -330,9 +343,12 @@ muzero_gamma_rv <- function(alpha) {
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{env}, as built in the body.
+#' @examples
+#' mm <- muzero_MinMax()
+#' mm$update(2); mm$update(6)
+#' mm$normalize(4)
 #' @export
 muzero_MinMax <- function() {
   env <- new.env(parent = emptyenv())
@@ -354,10 +370,13 @@ muzero_MinMax <- function() {
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prior A vector; indexed elementwise. Defaults to \code{0}.
 #' @return The value of \code{env}, as built in the body.
+#' @examples
+#' nd <- muzero_Node(prior = 0.4)
+#' nd$value_sum <- 3; nd$visits <- 2
+#' c(nd$prior, nd$value(), nd$expanded)
 #' @export
 muzero_Node <- function(prior = 0) {
   env <- new.env(parent = emptyenv())
@@ -386,7 +405,6 @@ muzero_Node <- function(prior = 0) {
 #'
 #' A step of the muzero_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param observation Passed to \code{representation}.
 #' @param actions Coerced to list by the body, with \code{as.list}.
@@ -406,6 +424,14 @@ muzero_Node <- function(prior = 0) {
 #' @return A list with \code{estimate}, \code{policy}, \code{action}, \code{value},
 #' \code{visits}, \code{Q}, \code{prior}, \code{n_dynamics_calls},
 #' \code{n_prediction_calls}, \code{simulations}, \code{method}.
+#' @examples
+#' # a one-step deterministic game: action 1 pays 1, action 0 pays 0
+#' rep_fn <- function(obs) obs
+#' dyn <- function(h, a) list(state = h, reward = as.numeric(a == 1))
+#' pred <- function(h) list(policy = c(0.5, 0.5), value = 0)
+#' s <- muzero_search(0, actions = c(0, 1), representation = rep_fn, dynamics = dyn,
+#'                    prediction = pred, simulations = 30, seed = 1)
+#' s$action
 #' @export
 muzero_search <- function(observation, actions, representation, dynamics,
                           prediction, simulations = 50, gamma = 0.997,
@@ -502,7 +528,6 @@ muzero_search <- function(observation, actions, representation, dynamics,
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A list; the body reads \code{$children} from it.
 #' @param A_keys A vector; indexed elementwise.
@@ -510,6 +535,11 @@ muzero_search <- function(observation, actions, representation, dynamics,
 #' @param c1 Numeric; combined arithmetically in the body.
 #' @param c2 Numeric; combined arithmetically in the body.
 #' @return The value of \code{best_a}, as built in the body.
+#' @examples
+#' mm <- muzero_MinMax(); mm$update(0); mm$update(1)
+#' root <- muzero_Node(1); root$visits <- 3
+#' root$expand(state = 0, prior = c(0.7, 0.3), actions = c("0", "1"))
+#' muzero_select(root, A_keys = c("0", "1"), mm = mm, c1 = 1.25, c2 = 19652)
 #' @export
 muzero_select <- function(node, A_keys, mm, c1, c2) {
   total <- 0

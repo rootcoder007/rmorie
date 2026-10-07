@@ -24,7 +24,6 @@
 #'
 #' A step of the airl_native implementation. Called by \code{morie_airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -39,7 +38,6 @@
 #'
 #' A step of the airl_native implementation. Called by \code{morie_soft_value_iteration}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s A vector; its length is taken.
 #' @return A character value.
@@ -64,7 +62,6 @@
 #'
 #' A step of the airl_native implementation. Called by \code{morie_airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @return A character value.
@@ -388,6 +385,14 @@ morie_soft_value_iteration <- function(states, actions, step, reward,
 #' @return List with reward (line 6 of Algorithm 1), g, h, f_policy,
 #'   f_expert, D_policy, D_expert, accuracy, log_likelihood, gamma,
 #'   state_only, method.
+#' @examples
+#' \donttest{
+#' set.seed(19)
+#' es <- sample(0:3, 50, TRUE); ea <- rep(1, 50); en <- pmin(es + 1, 3)
+#' ps <- sample(0:3, 50, TRUE); pa <- rep(0, 50); pn <- pmax(ps - 1, 0)
+#' r <- airl(es, ea, en, rep(log(0.5), 50), ps, pa, pn, rep(log(0.5), 50), epochs = 200L)
+#' r$accuracy
+#' }
 #' @export
 airl <- function(expert_states, expert_actions, expert_next,
                  expert_log_policy, policy_states, policy_actions,
@@ -414,7 +419,6 @@ airl <- function(expert_states, expert_actions, expert_next,
 #'
 #' A step of the airl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
@@ -429,7 +433,6 @@ airl <- function(expert_states, expert_actions, expert_next,
 #'
 #' A step of the airl_native implementation. Called by \code{airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Character; passed to \code{grepl}.
 #' @return One of two values, depending on the branch taken.
@@ -449,7 +452,6 @@ airl <- function(expert_states, expert_actions, expert_next,
 #'
 #' A step of the airl_native implementation. Called by \code{airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{max}.
 #' @param floor Numeric; passed to \code{max}. Defaults to \code{1e-300}.
@@ -467,7 +469,6 @@ airl <- function(expert_states, expert_actions, expert_next,
 #'
 #' A step of the airl_native implementation. Called by \code{airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param S A vector; its length is taken.
 #' @param A A vector; its length is taken.
@@ -504,6 +505,10 @@ airl <- function(expert_states, expert_actions, expert_next,
 #' @param gamma See Usage.
 #' @param iters See Usage.
 #' @param tol See Usage.
+#' @examples
+#' step <- function(s, a) min(max(s + a, 0), 3)
+#' v <- soft_value_iteration(states = 0:3, actions = c(-1, 1), step = step, reward = function(s) as.numeric(s == 3))
+#' v
 #' @export
 soft_value_iteration <- function(states, actions, step, reward, gamma = 0.9,
                                  iters = 2000L, tol = 1e-14) {

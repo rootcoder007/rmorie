@@ -27,12 +27,9 @@ The value of \code{res}, as built in the body.
 \description{
 A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
-if (morie_crypto_sodium_available()) {
-  S <- c("a", "b", "c")
-  morie_snpqc1_sex_check(S)
-}
+X <- rbind(c(0, 2, 0, 2, 0), c(1, 1, 0, 1, 2), c(2, 0, 2, 2, 0))   # X-chromosome genotypes
+morie_snpqc1_sex_check(X, reported_sex = c(1L, 2L, 1L))
 }
 \keyword{internal}

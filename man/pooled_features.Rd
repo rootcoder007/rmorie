@@ -20,7 +20,6 @@ A list with \code{features}, \code{dim}, \code{hyp_ref_diff},
 \description{
 A step of the comet_native implementation. Called by \code{estimator_score}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 pooled_features(hyp = c(1, 2, 3, 4, 5, 6, 7, 8), src = c(1, 2, 3, 4, 5, 6, 7, 8),

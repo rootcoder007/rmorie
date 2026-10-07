@@ -45,6 +45,12 @@
 #'   verified against Crossref (NBER working paper w25132). The article
 #'   was not in the local corpus; the objective and the soft-impute step
 #'   above are its standard published form, stated in full.
+#' @examples
+#' set.seed(6)
+#' L <- outer(rnorm(10), rnorm(8))                # rank-one untreated outcomes
+#' D <- matrix(0, 10, 8); D[1:3, 6:8] <- 1
+#' y <- L + 2 * D + matrix(rnorm(80, sd = 0.1), 10, 8)
+#' Mscmcl(y, D, lam = 0.5)$att    # close to 2
 #' @export
 Mscmcl <- function(y, D, lam, max_iter = 500, tol = 1e-10) {
   Y <- as.matrix(y)

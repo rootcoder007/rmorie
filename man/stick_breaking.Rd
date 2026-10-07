@@ -22,7 +22,6 @@ A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass},
 \description{
 A step of the slowdp_native implementation. Called by \code{truncated_dp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 stick_breaking(alpha = 0.5, K = 5L)

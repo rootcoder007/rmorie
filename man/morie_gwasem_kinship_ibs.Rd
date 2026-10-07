@@ -15,6 +15,10 @@ n x n symmetric numeric matrix.
 \description{
 \eqn{\hat S_{ik} = 1 - \frac{1}{2M}\sum_j |g_{ij} - g_{kj}|}.
 }
+\examples{
+g <- rbind(c(0, 1, 2, 1), c(0, 1, 2, 2), c(2, 1, 0, 0))
+morie_gwasem_kinship_ibs(g)
+}
 \references{
 Kang, H. M. et al. (2010).
 }

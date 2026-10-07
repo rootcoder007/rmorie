@@ -16,7 +16,6 @@ The value of \code{pnorm}.
 A step of the genemt_native implementation. Called by
 \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

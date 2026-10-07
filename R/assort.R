@@ -1,16 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Degree assortativity: Pearson correlation over edge endpoints
 #'
-#' Newman (2002), "Assortative mixing in networks", Physical Review Letters
-#' 89(20), 208701, doi:10.1103/PhysRevLett.89.208701, and Newman (2003),
-#' "Mixing patterns in networks", Physical Review E 67(2), 026126,
-#' doi:10.1103/PhysRevE.67.026126, fetched from arXiv (cond-mat/0209450) and
-#' read.  Equation (26) of the 2003 paper is the computational form,
-#' r = (sum_i j_i k_i - M^-1 sum_i j_i sum_i k_i) /
-#' sqrt((sum_i j_i^2 - M^-1 (sum_i j_i)^2)(sum_i k_i^2 - M^-1 (sum_i k_i)^2)),
-#' "where j_i and k_i are the excess in-degree and out-degree of the vertices
-#' that the ith edge leads into and out of respectively, and M is again the
-#' number of edges. For an undirected network we can use the same formula."
+#' Newman (2002), "Assortative mixing in networks", Physical Review Letters 89(20),
+#' 208701, doi:10.1103/PhysRevLett.89.208701, and Newman (2003), "Mixing patterns in
+#' networks", Physical Review E 67(2), 026126, doi:10.1103/PhysRevE.67.026126 (arXiv
+#' cond-mat/0209450). Equation (26) of the 2003 paper is the computational form, r =
+#' (sum_i j_i k_i - M^-1 sum_i j_i sum_i k_i) / sqrt((sum_i j_i^2 - M^-1 (sum_i
+#' j_i)^2)(sum_i k_i^2 - M^-1 (sum_i k_i)^2)), "where j_i and k_i are the excess
+#' in-degree and out-degree of the vertices that the ith edge leads into and out of
+#' respectively, and M is again the number of edges. For an undirected network we can
+#' use the same formula."
 #'
 #' Two things decide whether this is right.  Excess degree versus plain degree:
 #' the paper says excess, degree minus one, and for an undirected graph it

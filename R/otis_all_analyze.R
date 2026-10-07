@@ -972,34 +972,18 @@ print.morie_otis_analysis_result <- function(x, ...) {
 # CAUSAL / Ruhela-formulation / DLRM ANALYZERS
 # ===========================================================================
 #
-# The R port delegates the heavy estimator stack (IRM-DML, IPW, AIPW,
-# g-computation, PSM, PLR, SuperLearner) to the existing morie causal
-# helpers in mrm_otis.R / mrm_dml.R when available. If those helpers
-# are not present in the loaded morie package, each analyzer below
-# falls back to stop("not yet ported -- requires morie causal helpers").
-# This mirrors the agent-prompt directive: never ship wrong math.
+# The estimator stack (IPW, AIPW, g-computation, PSM, IRM-DML, PLR,
+# SuperLearner, ATC, balance) lives in otis_causal.R.
 
-#' Internal helper: Otis Causal Available
+#' Internal helper: the result an aggregate analysis returns when its table
+#' lacks columns it needs (a result, not an error, so analyze_all carries on)
 #' @noRd
-.otis_causal_available <- function() {
-  exists("morie_otis_irm_dml", mode = "function") &&
-    exists("morie_otis_make_pair_alert_to_volatility_ruhela",
-           mode = "function")
-}
-
-#' Internal helper: Otis Not Yet Ported
-#' @noRd
-.otis_not_yet_ported <- function(fn_name, reason = "") {
-  msg <- sprintf("%s: not yet ported to R (%s)", fn_name,
-                 if (nzchar(reason)) reason else
-                 "requires full morie causal pipeline")
+.otis_missing_columns <- function(fn_name, data, need) {
+  miss <- paste(setdiff(need, names(data)), collapse = ", ")
+  msg <- sprintf("%s: missing required columns: %s", fn_name, miss)
   .otis_wrap(
-    title = sprintf("%s -- not yet ported", fn_name),
-    summary_lines = list(status = "stub",
-                          reason = msg,
-                          recommendation = paste(
-                            "Use the Python implementation in",
-                            "src/morie/otis_all_analyze.py for now.")),
+    title = sprintf("%s -- missing columns", fn_name),
+    summary_lines = list(status = "missing columns", missing = miss),
     warnings = msg,
     interpretation = msg
   )
@@ -1023,8 +1007,7 @@ print.morie_otis_analysis_result <- function(x, ...) {
 #'   requires you supply the data because we don't ship the loader
 #'   side-effect from R.
 #' @param out_dir Optional output directory.
-#' @return A \code{morie_otis_analysis_result}. If the morie causal
-#'   helpers aren't loaded, returns a "not yet ported" stub.
+#' @return A \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
 #' \donttest{
@@ -1032,10 +1015,6 @@ print.morie_otis_analysis_result <- function(x, ...) {
 #' morie_otis_analyze_a01(otis_a01)
 #' }
 morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
-  if (!.otis_causal_available()) {
-    return(.otis_not_yet_ported("morie_otis_analyze_a01",
-      "requires morie_otis_irm_dml + make_pair_alert_to_volatility"))
-  }
   pair <- if (is.null(data))
     morie_otis_make_pair_alert_to_volatility_a01()
   else
@@ -1076,64 +1055,333 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
 # ---------------------------------------------------------------------------
 # Ruhela formulations: full DLRM driver
 # ---------------------------------------------------------------------------
-#
-# These delegate to the morie causal helpers. When those helpers are
-# absent (R-only build), each entry point returns a stub RichResult.
+
+#' Internal helper: 0/1 indicators the alternative formulations treat on
+#' @noRd
+.otis_female <- function(x) as.integer(!is.na(x) & tolower(as.character(x)) == "female")
+#' @noRd
+.otis_toronto <- function(x) as.integer(!is.na(x) & tolower(as.character(x)) == "toronto")
+#' @noRd
+.otis_age50 <- function(x) as.integer(!is.na(x) & grepl("50", as.character(x), fixed = TRUE))
+
+#' Internal helper: the caller's OTIS table, or the published one by id
+#' @noRd
+.otis_ruhela_input <- function(data, id) {
+  if (!is.null(data)) return(data)
+  tryCatch(
+    if (id == "a01") morie_otis_load() else morie_load_dataset(paste0("otis", id)),
+    error = function(e) stop(sprintf(
+      "pass data = the OTIS %s table; it could not be loaded here (%s)",
+      id, conditionMessage(e)), call. = FALSE))
+}
+
+#' Internal helper: stop naming the columns a table lacks
+#' @noRd
+.otis_require_cols <- function(df, cols, id) {
+  miss <- setdiff(cols, names(df))
+  if (length(miss)) {
+    stop(sprintf("the OTIS %s table is missing column(s): %s", id,
+                 paste(miss, collapse = ", ")), call. = FALSE)
+  }
+  invisible(TRUE)
+}
+
+#' Internal helper: the ten-estimator DLRM on one Ruhela formulation
+#'
+#' Mirrors python \code{_ruhela_formulations_on}: an explicit
+#' (treatment, outcome, covariates) triple, or by default the canonical
+#' alert-complexity -> regional-volatility pair with its Naive arm.
+#' Each estimator that fails records its error in its table row.
+#' @noRd
+.otis_ruhela_formulations_on <- function(df, ds_id, source_label, title,
+                                         interpretation,
+                                         cluster_col = "EndFiscalYear",
+                                         treatment = NULL, outcome = NULL,
+                                         covariates = NULL) {
+  naive <- NULL
+  if (!is.null(treatment)) {
+    cols <- c(treatment, outcome, covariates)
+    .otis_require_cols(df, cols, ds_id)
+    data <- df[stats::complete.cases(df[, cols, drop = FALSE]), cols, drop = FALSE]
+    label <- sprintf("%s: T=%s, Y=%s", ds_id, treatment, outcome)
+  } else {
+    both <- morie_otis_make_pair_alert_to_volatility_all(df)
+    data <- both$ruhela$data
+    treatment <- both$ruhela$T
+    outcome <- both$ruhela$Y
+    covariates <- both$ruhela$covariates
+    naive <- both$naive
+    label <- sprintf("%s: T_high_ac -> Y_vm_count (canonical)", ds_id)
+  }
+  cl <- if (cluster_col %in% names(data)) cluster_col else NULL
+  fit <- function(f, ...) f(data, treatment, outcome, covariates, ...)
+  ci <- function(v) sprintf("[%+.3f, %+.3f]", v[1L], v[2L])
+  err_row <- function(idx, e) c(idx, "--", "err", substr(conditionMessage(e), 1L, 30L),
+                                "--", "--", "--")
+  rows <- list()
+  ensemble <- list()
+  add <- function(idx, name, estimand, f) {
+    est <- tryCatch(f(), error = function(e) e)
+    if (inherits(est, "error")) {
+      rows[[length(rows) + 1L]] <<- err_row(idx, est)
+      return(invisible(NULL))
+    }
+    notes <- unlist(est$notes)
+    rows[[length(rows) + 1L]] <<- c(
+      idx, estimand, sprintf("%+.4f", est$ate), sprintf("%.4f", est$ate_se),
+      ci(est$ate_ci95), sprintf("%.2e", est$ate_pval),
+      if (length(notes)) paste(utils::head(notes, 2L), collapse = ", ") else "--")
+    ensemble[[length(ensemble) + 1L]] <<- list(
+      estimator = name, estimand = estimand, estimate = est$ate,
+      se = est$ate_se, p = est$ate_pval, n = est$n, notes = notes)
+  }
+  add("1. IPW (Hajek)", "IPW", "ATE", function() fit(morie_otis_ipw_ate))
+  add("2. AIPW (RRZ DR)", "AIPW", "ATE", function() fit(morie_otis_aipw_ate))
+  add("3. g-computation", "g-computation", "ATE",
+      function() fit(morie_otis_gcomputation, n_bootstrap = 200L))
+  add("4. PSM 1:1 NN", "PSM-NN", "ATT", function() fit(morie_otis_psm, k = 1L))
+  add("5. PSM subclass (5)", "PSM-subclass", "ATE",
+      function() fit(morie_otis_psm_subclass, n_strata = 5L))
+
+  irm <- tryCatch(fit(morie_otis_irm_dml, cluster_cols = cl), error = function(e) e)
+  if (inherits(irm, "error")) {
+    rows[[length(rows) + 1L]] <- err_row("6. IRM-DML", irm)
+    irm <- NULL
+  } else {
+    for (k in c("ate", "atte", "atc")) {
+      rows[[length(rows) + 1L]] <- c(
+        "6. IRM-DML", toupper(k), sprintf("%+.4f", irm[[k]]),
+        sprintf("%.4f", irm[[paste0(k, "_se")]]), ci(irm[[paste0(k, "_ci95")]]),
+        sprintf("%.2e", irm[[paste0(k, "_pval")]]),
+        if (k == "ate") paste0("cluster=", irm$se_kind) else "--")
+    }
+    ensemble[[length(ensemble) + 1L]] <- c(list(estimator = "IRM-DML"),
+      irm[c("ate", "ate_se", "atte", "atte_se", "atc", "atc_se", "n")])
+  }
+  mf <- tryCatch(fit(morie_otis_irm_dml, cluster_cols = cl, match_first = TRUE),
+                 error = function(e) e)
+  if (inherits(mf, "error")) {
+    rows[[length(rows) + 1L]] <- err_row("7. PSM->IRM-DML", mf)
+    mf <- NULL
+  } else {
+    rows[[length(rows) + 1L]] <- c(
+      "7. PSM->IRM-DML (match_first)", "ATE", sprintf("%+.4f", mf$ate),
+      sprintf("%.4f", mf$ate_se), ci(mf$ate_ci95), sprintf("%.2e", mf$ate_pval),
+      sprintf("matched_n=%d", mf$n))
+  }
+  add("8. ATC (AIPW)", "ATC-AIPW", "ATC", function() fit(morie_otis_atc))
+  add("9. PLR (Chernozhukov 2018)", "PLR", "theta", function() fit(morie_otis_plr))
+  add("10. SuperLearner AIPW", "SuperLearner-AIPW", "ATE",
+      function() fit(morie_otis_aipw_superlearner))
+
+  # Same IRM-DML point estimate, four standard errors
+  multi_se <- list()
+  if (!is.null(irm)) {
+    flavours <- list("pooled (iid)" = character(0),
+                     "cluster: EndFiscalYear" = "EndFiscalYear",
+                     "cluster: UniqueIndividual_ID" = "UniqueIndividual_ID",
+                     "multi-way: yr x id" = c("EndFiscalYear", "UniqueIndividual_ID"))
+    for (lab in names(flavours)) {
+      cc <- flavours[[lab]]
+      if (!all(cc %in% names(data))) {
+        multi_se[[length(multi_se) + 1L]] <- c(lab, "--", "n/a (col missing)", "--", "--")
+        next
+      }
+      f <- tryCatch(fit(morie_otis_irm_dml, cluster_cols = if (length(cc)) cc),
+                    error = function(e) e)
+      multi_se[[length(multi_se) + 1L]] <- if (inherits(f, "error")) {
+        c(lab, "--", "err", substr(conditionMessage(f), 1L, 30L), "--")
+      } else {
+        c(lab, sprintf("%+.4f", f$ate), sprintf("%.4f", f$ate_se), ci(f$ate_ci95),
+          sprintf("%.2e", f$ate_pval))
+      }
+    }
+  }
+
+  naive_rows <- list()
+  if (!is.null(naive)) {
+    runs <- list(IPW = morie_otis_ipw_ate, AIPW = morie_otis_aipw_ate,
+                 "g-comp" = morie_otis_gcomputation)
+    for (lab in names(runs)) {
+      r <- tryCatch(runs[[lab]](naive$data, naive$T, naive$Y, naive$covariates),
+                    error = function(e) e)
+      naive_rows[[length(naive_rows) + 1L]] <- if (inherits(r, "error")) {
+        c(lab, "err", substr(conditionMessage(r), 1L, 30L), "--", "--")
+      } else {
+        c(lab, sprintf("%+.4f", r$ate), sprintf("%.4f", r$ate_se), ci(r$ate_ci95),
+          sprintf("%.2e", r$ate_pval))
+      }
+    }
+  }
+
+  balance <- tryCatch(morie_otis_balance(data, treatment, covariates),
+                      error = function(e) e)
+  balance_summary <- if (inherits(balance, "error")) {
+    paste("err:", conditionMessage(balance))
+  } else {
+    sprintf("max |SMD| = %.3f", max(abs(balance$smd_raw), na.rm = TRUE))
+  }
+
+  tables <- list(list(
+    title = sprintf("Ruhela formulations (full DLRM) on %s -- %s:", ds_id, label),
+    headers = c("Estimator", "Estimand", "Estimate", "SE", "95% CI", "p-value", "Notes"),
+    rows = rows))
+  if (length(multi_se)) {
+    tables[[length(tables) + 1L]] <- list(
+      title = paste("IRM-DML SE comparison: pooled vs clustered on EndFiscalYear,",
+                    "UniqueIndividual_ID, multi-way (year x id):"),
+      headers = c("SE flavour", "ATE", "SE", "95% CI", "p-value"),
+      rows = multi_se)
+  }
+  if (length(naive_rows)) {
+    tables[[length(tables) + 1L]] <- list(
+      title = paste("Naive-arm sensitivity (any-flag, vm-binary): concordance",
+                    "with Ruhela in sign, smaller magnitude"),
+      headers = c("Estimator", "ATE", "SE", "95% CI", "p-value"),
+      rows = naive_rows)
+  }
+  .otis_wrap(
+    title = title,
+    summary_lines = list(
+      "Source file" = source_label,
+      "Dataset id" = ds_id,
+      "Formulation" = label,
+      "Cluster axis (primary)" = cluster_col,
+      "n" = nrow(data),
+      "Treated prevalence" = sprintf("%.1f%%", 100 * mean(.otis_binarise(data[[treatment]]))),
+      "Pre-balance (covariate SMD)" = balance_summary,
+      "Propensity calibration" = "none"),
+    tables = tables,
+    interpretation = interpretation,
+    payload = list(
+      ensemble = ensemble,
+      match_first = mf,
+      multi_se = multi_se,
+      naive_arm = naive_rows,
+      balance = if (!inherits(balance, "error")) balance,
+      formulation = list(label = label, treatment = treatment, outcome = outcome,
+                         covariates = covariates, n_rows = nrow(data)),
+      ds_id = ds_id, cluster_col = cluster_col))
+}
 
 #' OTIS a01 Ruhela formulations (full DLRM)
 #'
-#' Runs the complete OTIS-RC methodology arc (IPW + AIPW + g-comp +
-#' PSM-NN + PSM-subclass + IRM-DML + match_first + ATC + PLR +
-#' SuperLearner) on the canonical alert-complexity -> regional-
-#' volatility formulation.
+#' Runs the ten-estimator DLRM (IPW, AIPW, g-computation, PSM 1:1, PSM
+#' subclassification, IRM-DML with ATE/ATTE/ATC, PSM-then-IRM-DML, ATC-AIPW,
+#' PLR, SuperLearner AIPW) on the canonical a01 formulation, T = alert-state
+#' complexity >= 2, Y = regional-volatility count, with an IRM-DML standard
+#' error comparison (pooled, by year, by person, two-way) and the Naive-arm
+#' sensitivity (any-flag treatment, binary outcome).
 #'
-#' @param data Optional a01 data.frame.
-#' @param out_dir Optional output directory.
+#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
 #' \donttest{
-#' morie_otis_analyze_a01_ruhela_formulations(otis_a01)
+#' a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_a01_ruhela_formulations(a01)
+#' r$tables[[1L]]$rows[[1L]]
 #' }
-morie_otis_analyze_a01_ruhela_formulations <- function(data = NULL,
-                                                         out_dir = NULL) {
-  .otis_not_yet_ported(
-    "morie_otis_analyze_a01_ruhela_formulations",
-    "DLRM stack (IPW/AIPW/g-comp/PSM/IRM-DML/PLR/SuperLearner)")
+morie_otis_analyze_a01_ruhela_formulations <- function(data = NULL, out_dir = NULL) {
+  work <- .otis_ruhela_input(data, "a01")
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "a01",
+    source_label = "a01_restrictive_confinement_detailed_dataset.csv",
+    title = paste0(
+      "OTIS a01 -- Ruhela formulations (full DLRM) on the canonical ",
+      "formulation (T = ac >= 2 -> Y = vm count)"),
+    interpretation = paste0(
+      "Ruhela formulations on the canonical OTIS-RC dataset (a01). ",
+      "The Ruhela formulation (T = ac >= 2 alert-state complexity, ",
+      "Y = vm regional-volatility count) is the published ",
+      "Goffmanian contrast in notez1a.qmd section res_pool. ",
+      "Concordance across IPW (single-robust on propensity), ",
+      "g-computation (single-robust on outcome), AIPW ",
+      "(doubly-robust), PSM-NN (ATT, nonparametric), PSM-subclass ",
+      "(ATE, nonparametric), IRM-DML and the MatchIt-then-DoubleML ",
+      "pipeline is the strongest practical signal of ",
+      "identification. Naive-arm sensitivity (any-flag, vm-binary) ",
+      "shows the same Goffmanian sign at smaller magnitude."))
+  .otis_emit(res, out_dir, "a01")
 }
 
 #' OTIS b01 Ruhela formulations (full DLRM)
 #'
-#' @param data Optional b01 data.frame.
-#' @param out_dir Optional output directory.
+#' The DLRM of \code{\link{morie_otis_analyze_a01_ruhela_formulations}} on the
+#' b01 segregation placements.
+#'
+#' @param data The OTIS b01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
 #' \donttest{
-#' morie_otis_analyze_b01_ruhela_formulations(otis_b01)
+#' b01 <- morie_synth_otis("b01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_b01_ruhela_formulations(b01)
+#' r$tables[[1L]]$rows[[1L]]
 #' }
-morie_otis_analyze_b01_ruhela_formulations <- function(data = NULL,
-                                                         out_dir = NULL) {
-  .otis_not_yet_ported(
-    "morie_otis_analyze_b01_ruhela_formulations",
-    "DLRM stack (IPW/AIPW/g-comp/PSM/IRM-DML/PLR/SuperLearner)")
+morie_otis_analyze_b01_ruhela_formulations <- function(data = NULL, out_dir = NULL) {
+  work <- .otis_ruhela_input(data, "b01")
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "b01",
+    source_label = "b01_segregation_detailed_dataset.csv",
+    title = paste0(
+      "OTIS b01 -- Ruhela formulations (full DLRM) ",
+      "(segregation-detailed complement)"),
+    interpretation = paste0(
+      "Ruhela formulations on b01 segregation-placement records, ",
+      "complementing the a01 RC analysis. Same Ruhela formulation ",
+      "and DLRM ensemble; the larger ATE magnitude (~3x a01) ",
+      "reflects segregation being a stronger institutional contrast ",
+      "than restrictive confinement, and per-placement rather than ",
+      "per-day units of analysis."))
+  .otis_emit(res, out_dir, "b01")
 }
 
 #' OTIS b02 Ruhela formulations: T=Female -> seg-day count
 #'
-#' @param data Optional b02 data.frame.
-#' @param out_dir Optional output directory.
+#' b02 has no alert columns, so the formulation tests gender disparity in
+#' segregation-day burden: T = Female, Y = TotalAggregatedDays_Segregation,
+#' adjusting for region, age band and fiscal year. Same DLRM ensemble; no
+#' Naive arm.
+#'
+#' @param data The OTIS b02 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
 #' \donttest{
-#' morie_otis_analyze_b02_ruhela_formulations(otis_b02)
+#' b02 <- morie_synth_otis("b02", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_b02_ruhela_formulations(b02)
+#' r$tables[[1L]]$rows[[1L]]
 #' }
-morie_otis_analyze_b02_ruhela_formulations <- function(data = NULL,
-                                                         out_dir = NULL) {
-  .otis_not_yet_ported(
-    "morie_otis_analyze_b02_ruhela_formulations",
-    "DLRM stack on b02 gender disparity")
+morie_otis_analyze_b02_ruhela_formulations <- function(data = NULL, out_dir = NULL) {
+  work <- .otis_ruhela_input(data, "b02")
+  need <- c("Gender", "TotalAggregatedDays_Segregation",
+            "Region_MostRecentPlacement", "Age_Category", "EndFiscalYear")
+  .otis_require_cols(work, need, "b02")
+  work <- work[stats::complete.cases(work[, need, drop = FALSE]), , drop = FALSE]
+  work$T_female <- .otis_female(work$Gender)
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "b02",
+    source_label = "b02_segregation_detailed_total_days.csv",
+    title = paste0(
+      "OTIS b02 -- Ruhela formulations: T=Female -> Y=Total seg ",
+      "days within FY"),
+    interpretation = paste0(
+      "Ruhela formulation on b02 testing gender disparity in ",
+      "segregation-day burden. Per-person-year aggregated days in ",
+      "segregation as the count outcome; Female indicator as the ",
+      "treatment. Same DLRM ensemble as a01/b01; no Naive arm ",
+      "because b02 lacks the alert columns to construct one."),
+    treatment = "T_female",
+    outcome = "TotalAggregatedDays_Segregation",
+    covariates = c("Region_MostRecentPlacement", "Age_Category", "EndFiscalYear"))
+  .otis_emit(res, out_dir, "b02")
 }
 
 # DLRM short aliases
@@ -1147,11 +1395,6 @@ morie_otis_analyze_b01_dlrm <- morie_otis_analyze_b01_ruhela_formulations
 #' @export
 morie_otis_analyze_b02_dlrm <- morie_otis_analyze_b02_ruhela_formulations
 
-# 3MMM.26 (2026-05-25): morie_otis_analyze_{a01,b01}_dual were
-# deprecated aliases of *_ruhela_formulations. Removed outright --
-# no CRAN release shipped them and we are pre-v1.0 alpha, so no
-# back-compat obligation. Callers must use *_ruhela_formulations.
-
 
 # ---------------------------------------------------------------------------
 # Per-year Ruhela formulations
@@ -1159,23 +1402,36 @@ morie_otis_analyze_b02_dlrm <- morie_otis_analyze_b02_ruhela_formulations
 
 #' Per-fiscal-year full-DLRM Ruhela formulation driver
 #'
-#' Runs the complete 10-estimator DLRM separately on each fiscal year.
-#' This is a heavy operation (~7x the single-year runtime).
+#' Runs the DLRM estimator battery separately in each fiscal year through
+#' \code{\link{morie_otis_per_year_irm_dml}} with \code{full_battery = TRUE}
+#' and tabulates one row per (year, estimator). Stable signs across
+#' estimators within a year argue against misspecification; stable
+#' magnitudes across years argue for temporal stationarity.
 #'
-#' @param data Long-format data.frame with treatment / outcome / cov.
+#' @param data Data frame holding the treatment, outcome, covariates and
+#'   year column.
 #' @param ds_id Dataset id label.
 #' @param treatment Treatment column name.
 #' @param outcome Outcome column name.
 #' @param covariates Character vector of covariate column names.
 #' @param year_col Year column (default \code{"EndFiscalYear"}).
-#' @param cluster_col Cluster axis for SE, or \code{NULL}.
+#' @param cluster_col Cluster axis for the IRM-DML SE, or \code{NULL}.
 #' @param out_dir Optional output directory.
-#' @return \code{morie_otis_analysis_result}.
+#' @return \code{morie_otis_analysis_result}; \code{payload$by_year} holds
+#'   the per-year fits.
 #' @export
 #' @examples
 #' \donttest{
-#' morie_otis_analyze_ruhela_per_year(df, ds_id = "a01",
-#'   treatment = "T", outcome = "Y", covariates = c("Gender"))
+#' set.seed(1)
+#' n <- 400L
+#' x <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.4 * x))
+#' df <- data.frame(T = d, Y = 0.5 * d + x + rnorm(n), x = x,
+#'                  EndFiscalYear = rep(2023:2024, each = n / 2))
+#' r <- morie_otis_analyze_ruhela_per_year(df, ds_id = "demo", treatment = "T",
+#'                                         outcome = "Y", covariates = "x",
+#'                                         cluster_col = NULL)
+#' head(r$tables[[1L]]$rows, 3L)
 #' }
 morie_otis_analyze_ruhela_per_year <- function(data, ds_id,
                                                  treatment, outcome,
@@ -1183,41 +1439,118 @@ morie_otis_analyze_ruhela_per_year <- function(data, ds_id,
                                                  year_col = "EndFiscalYear",
                                                  cluster_col = "EndFiscalYear",
                                                  out_dir = NULL) {
-  .otis_not_yet_ported(
-    sprintf("morie_otis_analyze_ruhela_per_year(%s)", ds_id),
-    "per-year DLRM \u00d7 estimator triangulation")
+  .otis_require_cols(data, c(treatment, outcome, covariates, year_col), ds_id)
+  by_year <- morie_otis_per_year_irm_dml(
+    data, treatment, outcome, covariates, year_col = year_col,
+    cluster_cols = cluster_col, full_battery = TRUE)
+  rows <- list()
+  add <- function(...) rows[[length(rows) + 1L]] <<- c(...)
+  ci <- function(v, s) sprintf("[%+.3f, %+.3f]", v - 1.96 * s, v + 1.96 * s)
+  for (yr in names(by_year)) {
+    res <- by_year[[yr]]
+    for (k in c("ipw", "aipw", "gcomp", "psm_nn", "psm_subclass", "atc", "plr",
+                "superlearner")) {
+      e <- res[[k]]
+      if (!is.null(e$error)) {
+        add(yr, toupper(k), "err", "--", "--", "--", substr(e$error, 1L, 30L))
+      } else {
+        add(yr, toupper(k), sprintf("%+.4f", e$ate), sprintf("%.4f", e$se),
+            sprintf("[%+.3f, %+.3f]", e$ci95[1L], e$ci95[2L]),
+            sprintf("%.2e", e$p), sprintf("n=%d", e$n))
+      }
+    }
+    irm <- res$irm_dml
+    if (!is.null(irm$error)) {
+      add(yr, "IRM-DML", "err", "--", "--", "--", substr(irm$error, 1L, 30L))
+    } else {
+      for (k in c("ate", "atte", "atc")) {
+        v <- irm[[k]]
+        s <- irm[[paste0(k, "_se")]]
+        add(yr, paste("IRM-DML", toupper(k)), sprintf("%+.4f", v), sprintf("%.4f", s),
+            ci(v, s), "--", sprintf("n=%d %s", irm$n, irm$se_kind))
+      }
+    }
+    mf <- res$match_first
+    if (!is.null(mf$error)) {
+      add(yr, "PSM->IRM-DML", "err", "--", "--", "--", substr(mf$error, 1L, 30L))
+    } else {
+      add(yr, "PSM->IRM-DML", sprintf("%+.4f", mf$ate), sprintf("%.4f", mf$ate_se),
+          ci(mf$ate, mf$ate_se), "--", sprintf("matched_n=%d", mf$n))
+    }
+  }
+  res <- .otis_wrap(
+    title = sprintf(paste("OTIS %s -- per-fiscal-year full DLRM-on-Ruhela-formulations",
+                          "suite (10 estimators x N years)"), ds_id),
+    summary_lines = list(
+      "Dataset id" = ds_id,
+      "Treatment" = treatment,
+      "Outcome" = outcome,
+      "Year column" = year_col,
+      "Cluster axis" = if (is.null(cluster_col)) "iid" else cluster_col,
+      "Years analysed" = length(by_year),
+      "Estimators per year" = 10L),
+    tables = list(list(
+      title = paste("Per-year x estimator: ATE / SE / 95% CI / p / n. Triangulation",
+                    "across IPW + AIPW + g-comp + PSM (NN+subclass) + IRM-DML",
+                    "(ATE+ATTE+ATC) + match_first + ATC-AIPW + PLR + SuperLearner."),
+      headers = c("FY", "Estimator", "Estimate", "SE", "95% CI", "p", "Notes"),
+      rows = rows)),
+    interpretation = paste(
+      "Per-year x per-estimator triangulation. Stable signs across estimators",
+      "within each FY = no-misspecification robustness; stable magnitudes",
+      "across FYs = temporal stationarity. Use this to identify FYs where",
+      "some estimators disagree -- typical sign of finite-sample fragility",
+      "or genuine effect heterogeneity."),
+    payload = list(by_year = by_year, ds_id = ds_id, treatment = treatment,
+                   outcome = outcome))
+  .otis_emit(res, out_dir, paste0(ds_id, "-per-year"))
 }
 
-#' Per-year full-DLRM on a01 canonical formulation
+#' Per-year full-DLRM on the a01 canonical formulation
 #'
-#' @param data Optional a01 data.frame.
+#' \code{\link{morie_otis_analyze_ruhela_per_year}} on the a01 person-year
+#' cell frame (T = alert complexity >= 2, Y = regional-volatility count),
+#' clustered on fiscal year.
+#'
+#' @param data The OTIS a01 table; \code{NULL} loads it.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_a01_ruhela_per_year() }
+#' \donttest{
+#' a01 <- morie_synth_otis("a01", n = 800L, seed = 1L)
+#' r <- morie_otis_analyze_a01_ruhela_per_year(a01)
+#' r$summary_lines$`Years analysed`
+#' }
 morie_otis_analyze_a01_ruhela_per_year <- function(data = NULL,
                                                      out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_a01_ruhela_per_year",
-    "per-year DLRM on a01 cell frame")
+  pair <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "a01"))
+  morie_otis_analyze_ruhela_per_year(pair$data, ds_id = "a01", treatment = pair$T,
+                                      outcome = pair$Y, covariates = pair$covariates,
+                                      out_dir = out_dir)
 }
 
-#' Per-year full-DLRM on b01 canonical formulation
+#' Per-year full-DLRM on the b01 canonical formulation
 #'
-#' @param data Optional b01 data.frame.
+#' As \code{\link{morie_otis_analyze_a01_ruhela_per_year}}, on b01.
+#'
+#' @param data The OTIS b01 table; \code{NULL} loads it.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' if (requireNamespace("MASS", quietly = TRUE)) {
-#'   \donttest{ morie_otis_analyze_b01_ruhela_per_year() }
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 800L, seed = 1L)
+#' r <- morie_otis_analyze_b01_ruhela_per_year(b01)
+#' r$summary_lines$`Years analysed`
 #' }
 morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
                                                      out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_b01_ruhela_per_year",
-    "per-year DLRM on b01 cell frame")
+  pair <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "b01"))
+  morie_otis_analyze_ruhela_per_year(pair$data, ds_id = "b01", treatment = pair$T,
+                                      outcome = pair$Y, covariates = pair$covariates,
+                                      out_dir = out_dir)
 }
-
 
 # ---------------------------------------------------------------------------
 # Aggregate Ruhela formulations -- Poisson + NB GLM IRR
@@ -1470,8 +1803,7 @@ IRR > 1 ==> treatment increases the count rate; IRR < 1 ",
 morie_otis_analyze_b03_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Alert_Presence", "Number_SegregationPlacements")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("b03_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("b03_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_alert <- as.integer(tolower(trimws(
@@ -1507,8 +1839,7 @@ morie_otis_analyze_b04_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_AtTimeOfPlacement", "Gender",
             "Measure", "NumberConsecutiveDays_Segregation")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("b04_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("b04_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work <- work[trimws(as.character(work$Measure)) == "Median", ,
@@ -1558,8 +1889,7 @@ morie_otis_analyze_b05_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Consecutive_Duration",
             "Number_SegregationPlacements")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("b05_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("b05_ruhela_aggregate", data, need))
   .otis_emit(
     .otis_wrap(
       "b05 aggregate Ruhela", list(),
@@ -1594,8 +1924,7 @@ morie_otis_analyze_b06_ruhela_aggregate <- function(data, out_dir = NULL) {
             "Institution_AtTimeOfPlacement",
             "Number_SegregationPlacements")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("b06_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("b06_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_disciplinary <- as.integer(grepl(
@@ -1630,8 +1959,7 @@ morie_otis_analyze_b07_ruhela_aggregate <- function(data, out_dir = NULL) {
             "Number_Segregation_Placements_With_Alert",
             "Number_Segregation_Placements_Without_Alert")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("b07_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("b07_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   long_with <- data.frame(
@@ -1681,8 +2009,7 @@ morie_otis_analyze_b08_ruhela_aggregate <- function(data, out_dir = NULL) {
             "Institution_AtTimeOfPlacement", "Gender",
             "Measure", "NumberConsecutiveDays_Segregation")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("b08_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("b08_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work <- work[trimws(as.character(work$Measure)) == "Median", ,
@@ -1720,8 +2047,7 @@ morie_otis_analyze_b09_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "NumberPlacements_Segregation", "Gender",
             "NumberIndividuals_Segregation")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("b09_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("b09_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_female <- .otis_female_indicator(work$Gender)
@@ -1753,8 +2079,7 @@ morie_otis_analyze_c01_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c01_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c01_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_female <- .otis_female_indicator(work$Gender)
@@ -1783,8 +2108,7 @@ morie_otis_analyze_c01_ruhela_aggregate_region_cluster <- function(data,
   need <- c("EndFiscalYear", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c01_ruhela_aggregate_region_cluster",
-                                "missing required columns"))
+    return(.otis_missing_columns("c01_ruhela_aggregate_region_cluster", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_female <- .otis_female_indicator(work$Gender)
@@ -1817,8 +2141,7 @@ morie_otis_analyze_c02_ruhela_aggregate <- function(data, out_dir = NULL) {
             "Institution_MostRecentPlacement", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c02_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c02_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_female <- .otis_female_indicator(work$Gender)
@@ -1851,8 +2174,7 @@ morie_otis_analyze_c03_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Race", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c03_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c03_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_indigenous <- .otis_indigenous_indicator(work$Race)
@@ -1884,8 +2206,7 @@ morie_otis_analyze_c04_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Race", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c04_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c04_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_indigenous <- .otis_indigenous_indicator(work$Race)
@@ -1918,8 +2239,7 @@ morie_otis_analyze_c04_ruhela_aggregate_region_cluster <- function(data,
   need <- c("EndFiscalYear", "Race", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c04_ruhela_aggregate_region_cluster",
-                                "missing required columns"))
+    return(.otis_missing_columns("c04_ruhela_aggregate_region_cluster", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_indigenous <- .otis_indigenous_indicator(work$Race)
@@ -1947,8 +2267,7 @@ morie_otis_analyze_c05_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Religion", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c05_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c05_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_minority_religion <- .otis_minority_religion_indicator(
@@ -1981,8 +2300,7 @@ morie_otis_analyze_c06_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Age_Category", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c06_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c06_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_50plus <- .otis_age_50plus_indicator(work$Age_Category)
@@ -2011,8 +2329,7 @@ morie_otis_analyze_c07_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Alert_Type", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c07_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c07_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   no_alert_strs <- c("no alert", "none", "no_alert", "no")
@@ -2053,8 +2370,7 @@ morie_otis_analyze_c08_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Religion", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c08_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c08_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_minority_religion <- .otis_minority_religion_indicator(
@@ -2084,8 +2400,7 @@ morie_otis_analyze_c09_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Age_Category", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c09_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c09_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_50plus <- .otis_age_50plus_indicator(work$Age_Category)
@@ -2115,8 +2430,7 @@ morie_otis_analyze_c10_ruhela_aggregate <- function(data, out_dir = NULL) {
             "Institution_MostRecentPlacement", "Gender", "Measure",
             "TotalAggregatedDays_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c10_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c10_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work <- work[trimws(as.character(work$Measure)) == "Median", ,
@@ -2151,8 +2465,7 @@ morie_otis_analyze_c11_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Aggregate_Duration",
             "NumberIndividuals_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c11_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c11_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   long_bins <- c("16 to 20 days", "21 to 25 days", "26 to 30 days",
@@ -2186,8 +2499,7 @@ morie_otis_analyze_c12_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_MostRecentPlacement", "Gender",
             "Measure", "TotalAggregatedDays_RestrictiveConfinement")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("c12_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("c12_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work <- work[trimws(as.character(work$Measure)) == "Median", ,
@@ -2220,8 +2532,7 @@ morie_otis_analyze_c12_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_d02_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Gender", "Number_CustodialDeaths")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("d02_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("d02_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_female <- .otis_female_indicator(work$Gender)
@@ -2250,8 +2561,7 @@ morie_otis_analyze_d02_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_d03_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Race", "Number_CustodialDeaths")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("d03_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("d03_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_indigenous <- .otis_indigenous_indicator(work$Race)
@@ -2280,8 +2590,7 @@ morie_otis_analyze_d03_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_d04_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Religion", "Number_CustodialDeaths")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("d04_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("d04_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_minority_religion <- .otis_minority_religion_indicator(
@@ -2308,8 +2617,7 @@ morie_otis_analyze_d04_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_d05_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Age_Category", "Number_CustodialDeaths")
   if (!all(need %in% names(data)))
-    return(.otis_not_yet_ported("d05_ruhela_aggregate",
-                                "missing required columns"))
+    return(.otis_missing_columns("d05_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
                drop = FALSE]
   work$T_50plus <- .otis_age_50plus_indicator(work$Age_Category)
@@ -2329,173 +2637,467 @@ morie_otis_analyze_d05_ruhela_aggregate <- function(data, out_dir = NULL) {
 # ---------------------------------------------------------------------------
 # Alt-T per-row Ruhela formulations (a01 / b01 / b02)
 # ---------------------------------------------------------------------------
-# These require the morie causal cell frame; stubbed when unavailable.
 
 #' a01 alt-T Ruhela: Female -> vm count
-#' @param data Optional a01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' The a01 person-year cell frame with T = Female and Y = regional-volatility
+#' count, adjusting for age band and fiscal year; full DLRM ensemble.
+#'
+#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_a01_ruhela_alt_gender() }
-morie_otis_analyze_a01_ruhela_alt_gender <- function(data = NULL,
-                                                       out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_a01_ruhela_alt_gender",
-                       "DLRM on alt-T cell frame")
+#' \donttest{
+#' a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_a01_ruhela_alt_gender(a01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_a01_ruhela_alt_gender <- function(data = NULL, out_dir = NULL) {
+  work <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "a01"))$data
+  work$T_female <- .otis_female(work$Gender)
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "a01-altG",
+    source_label = paste0(
+      "a01_restrictive_confinement_detailed_dataset.csv (alt-T: ",
+      "Gender)"),
+    title = paste0(
+      "OTIS a01 -- Alt-T Ruhela formulation: T=Female -> Y=vm count ",
+      "(regional volatility)"),
+    interpretation = paste0(
+      "Alternative-treatment Ruhela formulation on the a01 cell ",
+      "frame. Same Y (vm count) as the canonical formulation; T ",
+      "swapped to Female indicator. Tests whether gender alone ",
+      "drives intra-year regional volatility."),
+    treatment = "T_female",
+    outcome = "Y_vm_count",
+    covariates = c("Age_Category", "EndFiscalYear"))
+  .otis_emit(res, out_dir, "a01-altG")
 }
 
 #' a01 alt-T Ruhela: Age 50+ -> vm count
-#' @param data Optional a01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' T = age band containing 50, Y = regional-volatility count, adjusting for
+#' gender and fiscal year; full DLRM ensemble.
+#'
+#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_a01_ruhela_alt_age() }
-morie_otis_analyze_a01_ruhela_alt_age <- function(data = NULL,
-                                                    out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_a01_ruhela_alt_age",
-                       "DLRM on alt-T cell frame")
+#' \donttest{
+#' a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_a01_ruhela_alt_age(a01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_a01_ruhela_alt_age <- function(data = NULL, out_dir = NULL) {
+  work <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "a01"))$data
+  work$T_50plus <- .otis_age50(work$Age_Category)
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "a01-altA",
+    source_label = paste0(
+      "a01_restrictive_confinement_detailed_dataset.csv (alt-T: Age ",
+      "50+)"),
+    title = paste0(
+      "OTIS a01 -- Alt-T Ruhela formulation: T=Age 50+ -> Y=vm ",
+      "count"),
+    interpretation = paste0(
+      "Alternative-treatment Ruhela formulation: age 50+ as the ",
+      "binary treatment. Tests whether older adults experience ",
+      "different intra-year regional churn than younger adults."),
+    treatment = "T_50plus",
+    outcome = "Y_vm_count",
+    covariates = c("Gender", "EndFiscalYear"))
+  .otis_emit(res, out_dir, "a01-altA")
 }
 
 #' a01 alt-T Ruhela: Toronto region -> vm count
-#' @param data Optional a01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' T = placement region Toronto, Y = regional-volatility count, adjusting for
+#' gender, age band and fiscal year; full DLRM ensemble.
+#'
+#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_a01_ruhela_alt_toronto() }
-morie_otis_analyze_a01_ruhela_alt_toronto <- function(data = NULL,
-                                                        out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_a01_ruhela_alt_toronto",
-                       "DLRM on alt-T cell frame")
+#' \donttest{
+#' a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_a01_ruhela_alt_toronto(a01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_a01_ruhela_alt_toronto <- function(data = NULL, out_dir = NULL) {
+  work <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "a01"))$data
+  work$T_toronto <- .otis_toronto(work$regA)
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "a01-altT",
+    source_label = paste0(
+      "a01_restrictive_confinement_detailed_dataset.csv (alt-T: ",
+      "Toronto region)"),
+    title = paste0(
+      "OTIS a01 -- Alt-T Ruhela formulation: T=Toronto region -> ",
+      "Y=vm count"),
+    interpretation = paste0(
+      "Alternative-treatment Ruhela formulation: Toronto-region ",
+      "placement as the binary treatment. Tests whether the Toronto ",
+      "region's institutional density translates into different ",
+      "intra-year regional churn."),
+    treatment = "T_toronto",
+    outcome = "Y_vm_count",
+    covariates = c("Gender", "Age_Category", "EndFiscalYear"))
+  .otis_emit(res, out_dir, "a01-altT")
 }
 
 #' b01 alt-T Ruhela: Female -> vm count
-#' @param data Optional b01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' As \code{\link{morie_otis_analyze_a01_ruhela_alt_gender}}, on the b01 cell frame.
+#'
+#' @param data The OTIS b01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_b01_ruhela_alt_gender() }
-morie_otis_analyze_b01_ruhela_alt_gender <- function(data = NULL,
-                                                       out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_b01_ruhela_alt_gender",
-                       "DLRM on alt-T cell frame")
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_b01_ruhela_alt_gender(b01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_b01_ruhela_alt_gender <- function(data = NULL, out_dir = NULL) {
+  work <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "b01"))$data
+  work$T_female <- .otis_female(work$Gender)
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "b01-altG",
+    source_label = "b01_segregation_detailed_dataset.csv (alt-T: Gender)",
+    title = paste0(
+      "OTIS b01 -- Alt-T Ruhela formulation: T=Female -> Y=vm count ",
+      "(regional volatility)"),
+    interpretation = paste0(
+      "Alternative-treatment Ruhela formulation on the b01 cell ",
+      "frame. Same Y (vm count) as canonical; T = Female indicator. ",
+      "Tests whether gender alone drives intra-year regional ",
+      "volatility on segregation records (vs the per-day RC records ",
+      "of a01)."),
+    treatment = "T_female",
+    outcome = "Y_vm_count",
+    covariates = c("Age_Category", "EndFiscalYear"))
+  .otis_emit(res, out_dir, "b01-altG")
 }
 
 #' b01 alt-T Ruhela: Age 50+ -> vm count
-#' @param data Optional b01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' As \code{\link{morie_otis_analyze_a01_ruhela_alt_age}}, on the b01 cell frame.
+#'
+#' @param data The OTIS b01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_b01_ruhela_alt_age() }
-morie_otis_analyze_b01_ruhela_alt_age <- function(data = NULL,
-                                                    out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_b01_ruhela_alt_age",
-                       "DLRM on alt-T cell frame")
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_b01_ruhela_alt_age(b01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_b01_ruhela_alt_age <- function(data = NULL, out_dir = NULL) {
+  work <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "b01"))$data
+  work$T_50plus <- .otis_age50(work$Age_Category)
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "b01-altA",
+    source_label = "b01_segregation_detailed_dataset.csv (alt-T: Age 50+)",
+    title = paste0(
+      "OTIS b01 -- Alt-T Ruhela formulation: T=Age 50+ -> Y=vm ",
+      "count"),
+    interpretation = paste0(
+      "Alt-T RF on b01: age 50+ as binary treatment. Tests whether ",
+      "older adults experience different intra-year regional churn ",
+      "than younger adults on segregation records."),
+    treatment = "T_50plus",
+    outcome = "Y_vm_count",
+    covariates = c("Gender", "EndFiscalYear"))
+  .otis_emit(res, out_dir, "b01-altA")
 }
 
 #' b01 alt-T Ruhela: Toronto region -> vm count
-#' @param data Optional b01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' As \code{\link{morie_otis_analyze_a01_ruhela_alt_toronto}}, on the b01 cell frame.
+#'
+#' @param data The OTIS b01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_b01_ruhela_alt_toronto() }
-morie_otis_analyze_b01_ruhela_alt_toronto <- function(data = NULL,
-                                                        out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_b01_ruhela_alt_toronto",
-                       "DLRM on alt-T cell frame")
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_b01_ruhela_alt_toronto(b01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_b01_ruhela_alt_toronto <- function(data = NULL, out_dir = NULL) {
+  work <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "b01"))$data
+  work$T_toronto <- .otis_toronto(work$regA)
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "b01-altT",
+    source_label = "b01_segregation_detailed_dataset.csv (alt-T: Toronto region)",
+    title = paste0(
+      "OTIS b01 -- Alt-T Ruhela formulation: T=Toronto region -> ",
+      "Y=vm count"),
+    interpretation = paste0(
+      "Alt-T RF on b01: Toronto-region placement as binary ",
+      "treatment. Tests whether Toronto's institutional density ",
+      "translates into different intra-year regional churn on ",
+      "segregation records."),
+    treatment = "T_toronto",
+    outcome = "Y_vm_count",
+    covariates = c("Gender", "Age_Category", "EndFiscalYear"))
+  .otis_emit(res, out_dir, "b01-altT")
 }
 
-#' b02 alt-T Ruhela: Toronto region -> total seg days
-#' @param data Optional b02 data.frame.
-#' @param out_dir Optional output directory.
+#' b02 alt-T Ruhela: Toronto region -> seg-day count
+#'
+#' T = most recent placement region Toronto, Y = TotalAggregatedDays_Segregation,
+#' adjusting for gender, age band and fiscal year; full DLRM ensemble.
+#'
+#' @param data The OTIS b02 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_b02_ruhela_alt_region() }
-morie_otis_analyze_b02_ruhela_alt_region <- function(data = NULL,
-                                                       out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_b02_ruhela_alt_region",
-                       "DLRM on b02 alt-T")
+#' \donttest{
+#' b02 <- morie_synth_otis("b02", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_b02_ruhela_alt_region(b02)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_b02_ruhela_alt_region <- function(data = NULL, out_dir = NULL) {
+  work <- .otis_ruhela_input(data, "b02")
+  need <- c("Gender", "TotalAggregatedDays_Segregation",
+            "Region_MostRecentPlacement", "Age_Category", "EndFiscalYear")
+  .otis_require_cols(work, need, "b02")
+  work <- work[stats::complete.cases(work[, need, drop = FALSE]), , drop = FALSE]
+  work$T_toronto <- .otis_toronto(work$Region_MostRecentPlacement)
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "b02-altR",
+    source_label = paste0(
+      "b02_segregation_detailed_total_days.csv (alt-T: Toronto ",
+      "region)"),
+    title = paste0(
+      "OTIS b02 -- Alt-T Ruhela formulation: T=Toronto region -> ",
+      "Y=Total seg days within FY"),
+    interpretation = paste0(
+      "Alt-T RF on b02: Toronto-region indicator. Tests whether ",
+      "Toronto's institutional density translates into different ",
+      "seg-day burden than other regions, controlling for gender, ",
+      "age, and year."),
+    treatment = "T_toronto",
+    outcome = "TotalAggregatedDays_Segregation",
+    covariates = c("Gender", "Age_Category", "EndFiscalYear"))
+  .otis_emit(res, out_dir, "b02-altR")
 }
 
-#' b02 alt-T Ruhela: Age 50+ -> total seg days
-#' @param data Optional b02 data.frame.
-#' @param out_dir Optional output directory.
+#' b02 alt-T Ruhela: Age 50+ -> seg-day count
+#'
+#' T = age band containing 50, Y = TotalAggregatedDays_Segregation, adjusting
+#' for gender, region and fiscal year; full DLRM ensemble.
+#'
+#' @param data The OTIS b02 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_b02_ruhela_alt_age() }
-morie_otis_analyze_b02_ruhela_alt_age <- function(data = NULL,
-                                                    out_dir = NULL) {
-  .otis_not_yet_ported("morie_otis_analyze_b02_ruhela_alt_age",
-                       "DLRM on b02 alt-T")
+#' \donttest{
+#' b02 <- morie_synth_otis("b02", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_b02_ruhela_alt_age(b02)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_b02_ruhela_alt_age <- function(data = NULL, out_dir = NULL) {
+  work <- .otis_ruhela_input(data, "b02")
+  need <- c("Gender", "TotalAggregatedDays_Segregation",
+            "Region_MostRecentPlacement", "Age_Category", "EndFiscalYear")
+  .otis_require_cols(work, need, "b02")
+  work <- work[stats::complete.cases(work[, need, drop = FALSE]), , drop = FALSE]
+  work$T_50plus <- .otis_age50(work$Age_Category)
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "b02-altA",
+    source_label = "b02_segregation_detailed_total_days.csv (alt-T: Age 50+)",
+    title = paste0(
+      "OTIS b02 -- Alt-T Ruhela formulation: T=Age 50+ -> Y=Total ",
+      "seg days within FY"),
+    interpretation = paste0(
+      "Alt-T RF on b02: Age 50+ indicator. Tests whether older ",
+      "adults experience different seg-day burden than younger ",
+      "adults, controlling for gender, region, and year."),
+    treatment = "T_50plus",
+    outcome = "TotalAggregatedDays_Segregation",
+    covariates = c("Gender", "Region_MostRecentPlacement", "EndFiscalYear"))
+  .otis_emit(res, out_dir, "b02-altA")
 }
-
 
 # ---------------------------------------------------------------------------
 # Subgroup Ruhela formulations (effect heterogeneity by gender)
 # ---------------------------------------------------------------------------
 
 #' a01 subgroup Ruhela: Female-only cell frame
-#' @param data Optional a01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' The canonical formulation (T = alert complexity >= 2, Y = vm count) on
+#' female person-years only, without the gender covariate. Fewer than 100
+#' female person-years returns a result carrying that warning instead.
+#'
+#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_a01_ruhela_subgroup_female() }
-morie_otis_analyze_a01_ruhela_subgroup_female <- function(data = NULL,
-                                                            out_dir = NULL) {
-  .otis_not_yet_ported(
-    "morie_otis_analyze_a01_ruhela_subgroup_female",
-    "DLRM on female subset of a01 cell frame")
+#' \donttest{
+#' a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_a01_ruhela_subgroup_female(a01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_a01_ruhela_subgroup_female <- function(data = NULL, out_dir = NULL) {
+  pair <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "a01"))
+  work <- pair$data[.otis_female(pair$data$Gender) == 1L, , drop = FALSE]
+  if (nrow(work) < 100L) {
+    return(.otis_wrap(title = "a01 subgroup Female Ruhela", summary_lines = list(),
+                      warnings = sprintf("only %d female cells; too few", nrow(work))))
+  }
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "a01-subF",
+    source_label = paste0(
+      "a01_restrictive_confinement_detailed_dataset.csv (subgroup: ",
+      "Female)"),
+    title = paste0(
+      "OTIS a01 -- Subgroup Ruhela formulation: Female-only cell ",
+      "frame, T_high_ac -> vm count"),
+    interpretation = paste0(
+      "Subgroup analysis: canonical Ruhela formulation restricted ",
+      "to female cells. Compare to ",
+      "morie_otis_analyze_a01_ruhela_subgroup_male for ",
+      "effect-heterogeneity-by-gender. If the female ATE is smaller ",
+      "/ larger than the male ATE, alert-complexity-driven regional ",
+      "volatility is gender-conditional."),
+    treatment = pair$T,
+    outcome = pair$Y,
+    covariates = setdiff(pair$covariates, "Gender"))
+  .otis_emit(res, out_dir, "a01-subF")
 }
 
 #' a01 subgroup Ruhela: Male-only cell frame
-#' @param data Optional a01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' The canonical formulation on male (non-female) person-years only, without
+#' the gender covariate.
+#'
+#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_a01_ruhela_subgroup_male() }
-morie_otis_analyze_a01_ruhela_subgroup_male <- function(data = NULL,
-                                                          out_dir = NULL) {
-  .otis_not_yet_ported(
-    "morie_otis_analyze_a01_ruhela_subgroup_male",
-    "DLRM on male subset of a01 cell frame")
+#' \donttest{
+#' a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_a01_ruhela_subgroup_male(a01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_a01_ruhela_subgroup_male <- function(data = NULL, out_dir = NULL) {
+  pair <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "a01"))
+  work <- pair$data[.otis_female(pair$data$Gender) == 0L, , drop = FALSE]
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "a01-subM",
+    source_label = paste0(
+      "a01_restrictive_confinement_detailed_dataset.csv (subgroup: ",
+      "Male)"),
+    title = paste0(
+      "OTIS a01 -- Subgroup Ruhela formulation: Male-only cell ",
+      "frame, T_high_ac -> vm count"),
+    interpretation = paste0(
+      "Subgroup analysis: canonical Ruhela formulation restricted ",
+      "to male cells. Companion to ",
+      "morie_otis_analyze_a01_ruhela_subgroup_female for ",
+      "effect-heterogeneity-by-gender."),
+    treatment = pair$T,
+    outcome = pair$Y,
+    covariates = setdiff(pair$covariates, "Gender"))
+  .otis_emit(res, out_dir, "a01-subM")
 }
 
 #' b01 subgroup Ruhela: Female-only cell frame
-#' @param data Optional b01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' As \code{\link{morie_otis_analyze_a01_ruhela_subgroup_female}}, on b01.
+#'
+#' @param data The OTIS b01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_b01_ruhela_subgroup_female() }
-morie_otis_analyze_b01_ruhela_subgroup_female <- function(data = NULL,
-                                                            out_dir = NULL) {
-  .otis_not_yet_ported(
-    "morie_otis_analyze_b01_ruhela_subgroup_female",
-    "DLRM on female subset of b01 cell frame")
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_b01_ruhela_subgroup_female(b01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_b01_ruhela_subgroup_female <- function(data = NULL, out_dir = NULL) {
+  pair <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "b01"))
+  work <- pair$data[.otis_female(pair$data$Gender) == 1L, , drop = FALSE]
+  if (nrow(work) < 100L) {
+    return(.otis_wrap(title = "b01 subgroup Female Ruhela", summary_lines = list(),
+                      warnings = sprintf("only %d female cells; too few", nrow(work))))
+  }
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "b01-subF",
+    source_label = "b01_segregation_detailed_dataset.csv (subgroup: Female)",
+    title = paste0(
+      "OTIS b01 -- Subgroup Ruhela formulation: Female-only cell ",
+      "frame, T_high_ac -> vm count"),
+    interpretation = paste0(
+      "Subgroup analysis on b01 (segregation records, ",
+      "per-placement). Compare to ",
+      "morie_otis_analyze_a01_ruhela_subgroup_female to see whether ",
+      "the gender-conditional pattern in alert-complexity -> vm ",
+      "holds across the two unit-of-analysis variants (per-day RC ",
+      "vs per-placement seg)."),
+    treatment = pair$T,
+    outcome = pair$Y,
+    covariates = setdiff(pair$covariates, "Gender"))
+  .otis_emit(res, out_dir, "b01-subF")
 }
 
 #' b01 subgroup Ruhela: Male-only cell frame
-#' @param data Optional b01 data.frame.
-#' @param out_dir Optional output directory.
+#'
+#' As \code{\link{morie_otis_analyze_a01_ruhela_subgroup_male}}, on b01.
+#'
+#' @param data The OTIS b01 table; \code{NULL} loads it.
+#' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_b01_ruhela_subgroup_male() }
-morie_otis_analyze_b01_ruhela_subgroup_male <- function(data = NULL,
-                                                          out_dir = NULL) {
-  .otis_not_yet_ported(
-    "morie_otis_analyze_b01_ruhela_subgroup_male",
-    "DLRM on male subset of b01 cell frame")
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 300L, seed = 1L)
+#' r <- morie_otis_analyze_b01_ruhela_subgroup_male(b01)
+#' r$tables[[1L]]$rows[[1L]]
+#' }
+morie_otis_analyze_b01_ruhela_subgroup_male <- function(data = NULL, out_dir = NULL) {
+  pair <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "b01"))
+  work <- pair$data[.otis_female(pair$data$Gender) == 0L, , drop = FALSE]
+  res <- .otis_ruhela_formulations_on(
+    work,
+    ds_id = "b01-subM",
+    source_label = "b01_segregation_detailed_dataset.csv (subgroup: Male)",
+    title = paste0(
+      "OTIS b01 -- Subgroup Ruhela formulation: Male-only cell ",
+      "frame, T_high_ac -> vm count"),
+    interpretation = paste0(
+      "Male-only subgroup analysis on b01. Companion to ",
+      "morie_otis_analyze_b01_ruhela_subgroup_female for ",
+      "effect-heterogeneity-by-gender on segregation records."),
+    treatment = pair$T,
+    outcome = pair$Y,
+    covariates = setdiff(pair$covariates, "Gender"))
+  .otis_emit(res, out_dir, "b01-subM")
 }
-
 
 # ---------------------------------------------------------------------------
 # Mandela classification (Mandela-RF)
@@ -3407,31 +4009,101 @@ morie_otis_analyze_ruhela_master <- function(datasets,
 
 #' OTIS a01 causal pipeline + Toronto Crime Severity Index context
 #'
-#' Wires together \code{morie_otis_analyze_a01} (causal IRM-DML) with
-#' the Toronto Police Service / StatsCan CSI context. The R port
-#' requires the morie causal pipeline and TPS-CSI helpers to be loaded;
-#' otherwise returns a "not yet ported" stub.
+#' Runs \code{\link{morie_otis_analyze_a01}} (alert complexity -> regional
+#' volatility, MatchIt then IRM-DML) and sets it beside Toronto's Crime
+#' Severity Index for the OTIS years (2023-2025), computed with
+#' \code{\link{morie_tps_csi_per_year}} from TPS incident tables. The
+#' question it frames: did the OTIS effect arise while Toronto crime
+#' severity was rising or falling?
 #'
-#' @param data Optional a01 data.frame.
+#' @param data Optional a01 data frame (\code{NULL} loads it).
 #' @param variant CSI variant: \code{"total"} or \code{"violent"}.
 #' @param rebase_to_year Anchor year for the CSI index column
 #'   (default 2023). Use \code{NULL} to skip rebasing.
+#' @param tps_data Optional named list of TPS incident data frames, one per
+#'   CSI category (names from \code{MORIE_TPS_CSI_CATEGORIES()}), each with an
+#'   \code{OCC_YEAR} column. \code{NULL} loads them with
+#'   \code{\link{morie_tps_load_dataset}}; categories that fail to load are
+#'   listed in the warnings.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
 #' \donttest{
-#' morie_otis_analyze_a01_with_csi_context(otis_a01)
+#' a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+#' cats <- MORIE_TPS_CSI_CATEGORIES()
+#' tps <- stats::setNames(lapply(seq_along(cats), function(i)
+#'   data.frame(OCC_YEAR = rep(2022:2025, times = 10 * i))), cats)
+#' r <- morie_otis_analyze_a01_with_csi_context(a01, tps_data = tps)
+#' r$tables[[1L]]$rows
 #' }
 morie_otis_analyze_a01_with_csi_context <- function(data = NULL,
                                                      variant = "total",
                                                      rebase_to_year = 2023L,
+                                                     tps_data = NULL,
                                                      out_dir = NULL) {
-  .otis_not_yet_ported(
-    "morie_otis_analyze_a01_with_csi_context",
-    "requires morie_otis causal + tps_csi helpers")
+  variant <- match.arg(variant, c("total", "violent"))
+  otis <- morie_otis_analyze_a01(.otis_ruhela_input(data, "a01"))
+  cats <- MORIE_TPS_CSI_CATEGORIES()
+  load_errors <- character(0)
+  if (is.null(tps_data)) {
+    tps_data <- list()
+    for (cat in cats) {
+      d <- tryCatch(morie_tps_load_dataset(cat), error = function(e) e)
+      if (inherits(d, "error")) {
+        load_errors <- c(load_errors, sprintf("%s: %s", cat, conditionMessage(d)))
+      } else {
+        tps_data[[cat]] <- d
+      }
+    }
+  }
+  counts <- list()
+  for (cat in intersect(names(tps_data), cats)) {
+    y <- suppressWarnings(as.integer(tps_data[[cat]][["OCC_YEAR"]]))
+    tab <- table(y[!is.na(y)])
+    for (yk in names(tab)) {
+      if (is.null(counts[[yk]])) counts[[yk]] <- list()
+      counts[[yk]][[cat]] <- as.integer(tab[[yk]])
+    }
+  }
+  if (!length(counts)) {
+    otis$warnings <- c(otis$warnings, "CSI context unavailable: no TPS tables loaded",
+                       load_errors)
+    return(.otis_emit(otis, out_dir, "a01-csi"))
+  }
+  by_year <- morie_tps_csi_per_year(counts, variant = variant,
+                                    rebase_to_year = rebase_to_year)
+  overlap <- by_year[by_year$year %in% 2023:2025, , drop = FALSE]
+  rows <- lapply(seq_len(nrow(overlap)), function(i) {
+    r <- overlap[i, ]
+    as.character(c(as.integer(r$year), round(r$raw_weighted_sum), as.integer(r$total_count),
+                   round(r$csi_per_capita, 2),
+                   if ("csi_index" %in% names(r) && !is.na(r$csi_index)) round(r$csi_index, 2) else "--"))
+  })
+  res <- .otis_wrap(
+    title = "OTIS a01 (alert->vm) + Toronto Crime Severity Index context",
+    summary_lines = c(otis$summary_lines, list(
+      "-- CSI context (StatsCan), variant" = variant,
+      "-- Rebase year" = if (is.null(rebase_to_year)) "none" else rebase_to_year,
+      "-- Years with CSI data" = paste(sort(by_year$year), collapse = ", "))),
+    tables = list(list(
+      title = sprintf("Toronto CSI by year (variant=%s, rebased to %s=100):", variant,
+                      if (is.null(rebase_to_year)) "none" else rebase_to_year),
+      headers = c("year", "weighted_sum", "incidents", "csi_per_capita", "csi_index"),
+      rows = rows)),
+    interpretation = paste0(
+      otis$interpretation, "\n\nCSI context: Toronto's Crime Severity Index (",
+      variant, ") is shown alongside the OTIS estimate. The OTIS-observed ",
+      "regional volatility effect happens inside this broader Toronto ",
+      "crime-severity environment; rising CSI alongside a rising vm-effect ",
+      "would suggest a coupling, falling CSI with a stable vm-effect would ",
+      "suggest the OTIS dynamic is internal to corrections rather than a ",
+      "reflection of street crime trends."),
+    warnings = c(otis$warnings, load_errors),
+    payload = list(otis = otis$payload, csi_by_year = by_year,
+                   variant = variant, rebase_to_year = rebase_to_year))
+  .otis_emit(res, out_dir, "a01-csi")
 }
-
 
 # ---------------------------------------------------------------------------
 # MRM-prefixed aliases (renamed 2026-05-10)

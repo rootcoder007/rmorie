@@ -30,8 +30,7 @@
 #' @return Numeric angle in radians.
 #' @export
 #' @examples
-#' morie_dimNet_angle_between(r_k = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   r_j = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), r_i = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_dimNet_angle_between(r_k = c(1, 0, 0), r_j = c(0, 0, 0), r_i = c(0, 1, 0))   # pi / 2
 #' @keywords internal
 morie_dimNet_angle_between <- function(r_k, r_j, r_i) {
   a <- as.numeric(r_k)
@@ -102,8 +101,7 @@ morie_dimNet_bessel_basis <- function(d, cutoff = 5.0, n_basis = 8L) {
 #' @return Numeric vector of length \code{n_basis}.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_dimNet_spherical_harmonic_basis(V)
+#' morie_dimNet_spherical_harmonic_basis(angle = pi / 3, n_basis = 4L)
 #' @keywords internal
 morie_dimNet_spherical_harmonic_basis <- function(angle, n_basis = 4L) {
   x <- cos(as.numeric(angle))

@@ -23,7 +23,6 @@
 #'
 #' A step of the masrcn_native implementation. Called by \code{roi_align}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param F A vector; its length is taken and its elements indexed.
 #' @param y Numeric; combined arithmetically in the body.
@@ -52,7 +51,6 @@
 #' A step of the masrcn_native implementation. Called by \code{mask_loss},
 #' \code{roi_align}, \code{roi_pool}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
@@ -76,7 +74,6 @@
 #' A step of the masrcn_native implementation. Called by \code{alignment_error},
 #' \code{morie_masrcn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param features Passed to \code{.masrcn_mat}.
 #' @param box A vector; indexed elementwise.
@@ -134,7 +131,6 @@ roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
 #'
 #' A step of the masrcn_native implementation. Called by \code{morie_masrcn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param features Passed to \code{.masrcn_mat}.
 #' @param box A vector; indexed elementwise.
@@ -186,7 +182,6 @@ roi_align <- function(features, box, out_size = 2L, stride = 1.0,
 #'
 #' A step of the masrcn_native implementation. Called by \code{morie_masrcn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param features Passed to \code{roi_pool}.
 #' @param box Passed to \code{roi_pool}.
@@ -213,7 +208,6 @@ alignment_error <- function(features, box, out_size = 2L, stride = 1.0) {
 #'
 #' A step of the masrcn_native implementation. Called by \code{morie_masrcn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param logits Passed to \code{.masrcn_mat}.
 #' @param target Passed to \code{.masrcn_mat}.
@@ -262,7 +256,6 @@ mask_loss <- function(logits, target, decoupled = TRUE) {
 #'
 #' A step of the masrcn_native implementation. Called by \code{morie_masrcn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param l_cls Coerced to numeric by the body, with \code{as.numeric}.
 #' @param l_box Coerced to numeric by the body, with \code{as.numeric}.
@@ -287,7 +280,6 @@ mask_rcnn_segmentation <- roi_align
 #'
 #' A step of the masrcn_native implementation. Called by \code{morie_masrcn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -311,7 +303,6 @@ mask_rcnn_segmentation <- roi_align
 #'
 #' A step of the masrcn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op A vector; its length is taken.
 #' @param ... Passed through.

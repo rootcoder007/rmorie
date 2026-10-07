@@ -19,5 +19,9 @@ A numeric value.
 \description{
 A step of the node2v_native implementation. Called by \code{node2v_transition_probabilities}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+adj <- list(`1` = c(2, 3), `2` = c(1), `3` = c(1))
+node2v_dist(adj, t = 1, x = 2)
+node2v_dist(adj, t = 1, x = 1)
 }

@@ -79,7 +79,6 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
 #'
 #' A step of the rgemgfd implementation. Called by \code{rgemgfd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kmax Coerced to integer by the body, with \code{as.integer}.

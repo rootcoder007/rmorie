@@ -21,6 +21,10 @@
 #'   convergence of iterative simulations, Journal of Computational and
 #'   Graphical Statistics 7(4):434-455.
 #'   \doi{10.1080/10618600.1998.10474787}
+#' @examples
+#' set.seed(5)
+#' chain <- rnorm(5000)
+#' Klmcmc(chain, target = dnorm, bins = 20)$kl    # near 0 for a well-mixed chain
 #' @export
 Klmcmc <- function(chain, target, bins = 20, lo = NULL, hi = NULL) {
   x <- .s03vec(chain)

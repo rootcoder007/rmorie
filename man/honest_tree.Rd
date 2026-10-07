@@ -46,7 +46,6 @@ A list with \code{tree}, \code{info}.
 A step of the hntfst_native implementation. Called by \code{.frfgrf_honesty_test},
 \code{grow_forest}, \code{honest_forest}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

@@ -25,5 +25,4 @@ The value of \code{beta}, as built in the body.
 \description{
 A step of the netcms_native implementation. Called by \code{morie_netcms}.
 See the file header for the source the module follows.
-source it follows.
 }

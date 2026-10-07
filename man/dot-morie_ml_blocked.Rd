@@ -21,5 +21,4 @@ A logical value.
 \description{
 A step of the causal_molak implementation. Called by \code{.morie_ml_dsep}.
 See the file header for the source the module follows.
-source it follows.
 }

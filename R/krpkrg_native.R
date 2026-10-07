@@ -9,7 +9,6 @@
 #'
 #' A step of the krpkrg_native implementation. Called by \code{morie_krpkrg_ordinary_kriging}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h Numeric; combined arithmetically in the body.
 #' @param model One of \code{"exponential"}, \code{"gaussian"}, \code{"spherical"}.
@@ -39,7 +38,6 @@
 #'
 #' A step of the krpkrg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param coords A matrix; passed to \code{as.matrix}.
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
@@ -118,7 +116,6 @@ morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
 #'
 #' A step of the krpkrg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

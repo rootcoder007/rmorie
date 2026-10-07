@@ -23,6 +23,5 @@ A vector, from \code{as.numeric}.
 \description{
 A step of the slvgrf_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

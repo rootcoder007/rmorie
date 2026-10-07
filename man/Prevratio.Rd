@@ -29,6 +29,9 @@ List with \code{pr}, \code{log_pr}, \code{se_log}, \code{ci_lower}, \code{ci_upp
 \description{
 Formula: PR = p_e / p_u; se(log PR) = sqrt((1-p_e)/(p_e n_e) + (1-p_u)/(p_u n_u))
 }
+\examples{
+Prevratio(prev_exposed = 0.3, prev_unexposed = 0.15, n_exposed = 200, n_unexposed = 300)
+}
 \references{
 Barros and Hirakata (2003), Alternatives for logistic regression in
 cross-sectional studies: an empirical comparison of models that directly estimate the

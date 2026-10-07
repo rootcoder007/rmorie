@@ -17,5 +17,4 @@ A list with \code{root}, \code{children}, \code{node_size}.
 \description{
 A step of the hdbsc_native implementation. Called by \code{morie_hdbsc}.
 See the file header for the source the module follows.
-source it follows.
 }

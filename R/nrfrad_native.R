@@ -26,7 +26,6 @@
 #' \code{density_is_view_independent}, \code{positional_encoding}, \code{ray_points} and
 #' 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; the body checks with \code{is.numeric}.
 #' @return One of two values, depending on the branch taken.
@@ -49,7 +48,6 @@
 #'
 #' A step of the nrfrad_native implementation. Called by \code{volume_render}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param colour A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -70,7 +68,6 @@
 #'
 #' A step of the nrfrad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{.nrfrad_vec}.
 #' @param L Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
@@ -100,7 +97,6 @@ positional_encoding <- function(p, L = 10, include_input = TRUE) {
 #'
 #' A step of the nrfrad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param origin Passed to \code{.nrfrad_vec}.
 #' @param direction Passed to \code{.nrfrad_vec}.
@@ -147,7 +143,6 @@ ray_points <- function(origin, direction, t_near, t_far, n_samples,
 #'
 #' A step of the nrfrad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sigma Passed to \code{.nrfrad_vec}.
 #' @param colour Passed to \code{.nrfrad_mat}.
@@ -199,7 +194,6 @@ volume_render <- function(sigma, colour, t) {
 #'
 #' A step of the nrfrad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bins Passed to \code{.nrfrad_vec}.
 #' @param weights Passed to \code{.nrfrad_vec}.
@@ -239,7 +233,6 @@ sample_pdf <- function(bins, weights, n_samples, seed = 0, eps = 1e-5) {
 #'
 #' A step of the nrfrad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param model Accepted by the signature and not used anywhere in the body.
 #' @param point Passed to \code{.nrfrad_vec}.
@@ -274,7 +267,6 @@ density_is_view_independent <- function(model, point, directions,
 #'
 #' A step of the nrfrad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -295,7 +287,7 @@ density_is_view_independent <- function(model, point, directions,
         "a PDF.", sep = "")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 neuralradiancefield <- volume_render
 
 # public names resolved by fn/_lazy_map.json

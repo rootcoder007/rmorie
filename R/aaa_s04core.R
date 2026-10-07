@@ -16,7 +16,6 @@ NULL
 #' A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle},
 #' \code{.tmlphd_lasso_logit} and 23 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
@@ -31,7 +30,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{Tmlhrz}, \code{Tmlmpc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -46,7 +44,6 @@ NULL
 #' A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle},
 #' \code{.tmlmpi_cdf_bank} and 25 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{pmax}.
 #' @param lo Passed to \code{pmax}.
@@ -59,7 +56,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{Tukeyw}, \code{Tukrr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return One of two values, depending on the branch taken.
@@ -83,7 +79,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{Nprphet}, \code{Winz}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param p Numeric; combined arithmetically in the body.
@@ -113,7 +108,6 @@ NULL
 #'
 #' A step of the s04core implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A numeric value.
@@ -128,7 +122,6 @@ NULL
 #'
 #' A step of the s04core implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
@@ -143,7 +136,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{Gat}, \code{Gpmoe}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -162,7 +154,6 @@ NULL
 #' A step of the s04core implementation. Called by \code{.s4_tmle}, \code{Hmstrn},
 #' \code{Medmsm} and 19 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -197,7 +188,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{Gpmoe}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param Z A matrix; indexed by row and column.
@@ -225,7 +215,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{Gpmoe}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param K A matrix; passed to \code{nrow}.
 #' @param Ks A matrix; passed to \code{crossprod}.
@@ -250,7 +239,6 @@ NULL
 #'
 #' A step of the s04core implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
@@ -276,7 +264,6 @@ NULL
 #'
 #' A step of the s04core implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
@@ -293,7 +280,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{.s4_rnd}, \code{Tqhs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{>=}.
 #' @return The value of \code{ifelse}.
@@ -360,7 +346,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{Matrim}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return The value of \code{r}, as built in the body.
@@ -411,7 +396,6 @@ NULL
 #' A step of the s04core implementation. Called by \code{Causmnde}, \code{Intmd4},
 #' \code{Intvse} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta A vector; indexed elementwise.
 #' @param beta A vector; indexed elementwise.
@@ -441,7 +425,6 @@ NULL
 #' A step of the s04core implementation. Called by \code{Tmlfed}, \code{Tmlnte},
 #' \code{Tmlper} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param D Numeric; combined arithmetically in the body.
@@ -622,7 +605,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{Icc12c}, \code{IccA}, \code{IccC}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param subject Coerced to numeric by the body, with \code{as.numeric}.
@@ -698,7 +680,6 @@ NULL
 #'
 #' A step of the s04core implementation. Called by \code{Infcrt}, \code{Khatd}, \code{Loopr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lw A vector; its length is taken and its elements indexed.
 #' @return A list with \code{lw}, \code{k}.

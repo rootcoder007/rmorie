@@ -25,7 +25,6 @@
 #' A step of the comet_native implementation. Called by \code{.comet_dist},
 #' \code{kendall_tau}, \code{pooled_features} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -40,7 +39,6 @@
 #'
 #' A step of the comet_native implementation. Called by \code{estimator_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hyp Passed to \code{.comet_vec}.
 #' @param src Passed to \code{.comet_vec}.
@@ -75,7 +73,6 @@ pooled_features <- function(hyp, src, ref) {
 #'
 #' A step of the comet_native implementation. Called by \code{morie_comet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hyp Passed to \code{pooled_features}.
 #' @param src Passed to \code{pooled_features}.
@@ -109,7 +106,6 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 #'
 #' A step of the comet_native implementation. Called by \code{triplet_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{.comet_vec}.
 #' @param b Passed to \code{.comet_vec}.
@@ -127,7 +123,6 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 #'
 #' A step of the comet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param better Passed to \code{.comet_dist}.
 #' @param worse Passed to \code{.comet_dist}.
@@ -156,7 +151,6 @@ triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
 #'
 #' A step of the comet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Passed to \code{.comet_vec}.
 #' @param human Passed to \code{.comet_vec}.
@@ -194,7 +188,6 @@ kendall_tau <- function(scores, human) {
 #'
 #' A step of the comet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hyp Passed to \code{.comet_vec}.
 #' @param src Passed to \code{.comet_vec}.
@@ -234,7 +227,6 @@ comet <- estimator_score
 #'
 #' A step of the comet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hyp Passed to \code{estimator_score}.
 #' @param src Passed to \code{estimator_score}.
@@ -257,7 +249,6 @@ morie_comet <- function(hyp, src, ref, W, b = NULL) {
 #'
 #' A step of the comet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -25,5 +25,9 @@ The value of \code{tot}, as built in the body.
 \description{
 A step of the motfsr_native implementation. Called by \code{motfsr_mm_fit}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+# theta: background distribution, then one distribution per motif position
+theta <- list(rep(0.25, 4), c(0.7, 0.1, 0.1, 0.1), c(0.1, 0.7, 0.1, 0.1))
+motfsr_log_component(theta, coded = list(c(0, 1, 2, 3)), i = 1, j = 1, w = 2, comp = 1)   # log(0.7) + log(0.7)
 }

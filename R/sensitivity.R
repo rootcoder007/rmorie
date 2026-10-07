@@ -232,6 +232,7 @@ e_value_or <- function(odds_ratio, ci_lower = NULL, ci_upper = NULL,
 #' res$e_value_point
 #' @export
 e_value_hr <- function(hr, ci_lower = NULL, ci_upper = NULL, rare = FALSE) {
+  .morie_arg(hr, "n1")
   hr_to_rr <- function(x) {
     if (is.null(x) || x <= 0) return(NULL)
     if (rare || x == 1) x
@@ -887,10 +888,6 @@ sensitivity_summary <- function(estimate, se, rr = NULL,
 # =====================================================================
 # Phase 1.g wrapper-as-extender entry points
 # =====================================================================
-
-#' Internal helper: Morie Sens Need
-#' @noRd
-
 
 #' E-values for the EValue dispatch family (extender)
 #'

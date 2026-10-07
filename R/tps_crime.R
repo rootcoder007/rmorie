@@ -470,6 +470,7 @@ morie_tps_bivariate_morans_i <- function(dfs, cat_a, cat_b,
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
 morie_tps_category_correlation_matrix <- function(dfs) {
+  .morie_arg(dfs, "l")
   stopifnot(is.list(dfs))
   cats <- sort(names(dfs))
   series <- list()

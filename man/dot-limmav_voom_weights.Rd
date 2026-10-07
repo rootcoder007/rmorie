@@ -22,5 +22,4 @@ A list with \code{log_cpm}, \code{weights}, \code{mean_log_count},
 \description{
 A step of the limmav_native implementation. Called by \code{morie_limmav}.
 See the file header for the source the module follows.
-source it follows.
 }

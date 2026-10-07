@@ -49,6 +49,5 @@ A list with \code{estimate}, \code{value}, \code{se}, \code{ci}, \code{rule},
 \description{
 A step of the itrgrf_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

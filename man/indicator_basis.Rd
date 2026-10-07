@@ -19,7 +19,6 @@ A list with \code{design}, \code{columns}, \code{n_basis}, \code{max_order}.
 \description{
 A step of the tlhal_native implementation. Called by \code{hal_fit}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

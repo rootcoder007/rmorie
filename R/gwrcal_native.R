@@ -22,7 +22,6 @@
 #'
 #' A step of the gwrcal_native implementation. Called by \code{.gwr_cv_score}, \code{.gwr_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d A vector; its length is taken.
 #' @param h Numeric; combined arithmetically in the body.
@@ -50,7 +49,6 @@
 #'
 #' A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param C A matrix; indexed by row and column.
 #' @return A vector, from \code{c}.
@@ -72,7 +70,6 @@
 #'
 #' A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param C A matrix; indexed by row and column.
 #' @return The value of \code{D}, as built in the body.
@@ -133,7 +130,6 @@
 #'
 #' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}, \code{morie_gwrcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A matrix; passed to \code{crossprod}.
 #' @param X A matrix; indexed by row and column.
@@ -221,7 +217,6 @@
 #' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion},
 #' \code{morie_gwrcal}, \code{morie_gwrcal_global_aicc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param sigma2 Numeric; passed to \code{log}.
@@ -239,7 +234,6 @@
 #'
 #' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param sigma2 Numeric; passed to \code{log}.
@@ -255,7 +249,6 @@
 #'
 #' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A matrix; passed to \code{crossprod}.
 #' @param X A matrix; indexed by row and column.
@@ -323,7 +316,6 @@
 #'
 #' A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param X Passed to \code{.gwr_cv_score}.
@@ -346,7 +338,6 @@
 #'
 #' A step of the gwrcal_native implementation. Called by \code{morie_gwrcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fn Accepted by the signature and not used anywhere in the body.
 #' @param lo See Usage.

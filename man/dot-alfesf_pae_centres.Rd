@@ -17,7 +17,6 @@ A numeric value.
 \description{
 A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # bin midpoints in angstroms, at the given bin width

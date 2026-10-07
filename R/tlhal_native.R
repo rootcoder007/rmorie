@@ -31,7 +31,6 @@
 #'
 #' A step of the tlhal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{cv_select_lambda}.
 #' @param y Passed to \code{cv_select_lambda}.
@@ -78,7 +77,6 @@ morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
 #'
 #' A step of the tlhal_native implementation. Called by \code{hal_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param knots Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
@@ -144,7 +142,6 @@ indicator_basis <- function(X, knots = NULL, max_order = 2L) {
 #'
 #' A step of the tlhal_native implementation. Called by \code{hal_fit}, \code{morie_tlhal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -162,7 +159,6 @@ variation_norm <- function(beta) {
 #'
 #' A step of the tlhal_native implementation. Called by \code{cv_select_lambda}, \code{morie_tlhal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{indicator_basis}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -231,7 +227,6 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
 #'
 #' A step of the tlhal_native implementation. Called by \code{hal_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{abs}.
 #' @param lam Numeric; combined arithmetically in the body.
@@ -257,7 +252,6 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
 #'
 #' A step of the tlhal_native implementation. Called by \code{cv_select_lambda}, \code{morie_tlhal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param model A list; the body reads \code{$beta}, \code{$columns}, \code{$intercept} from it.
 #' @param X A matrix; passed to \code{as.matrix}.
@@ -294,7 +288,6 @@ hal_predict <- function(model, X) {
 #'
 #' A step of the tlhal_native implementation. Called by \code{morie_tlhal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -353,7 +346,6 @@ cv_select_lambda <- function(X, y, lambdas, V = 5L, seed = 0L,
 #'
 #' A step of the tlhal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -26,6 +26,14 @@ List with estimate, mu, beta, b, method.
 Formula: Y = (1_IJ (x) I_nT) mu + X beta + Z b + eps (eq. 5.5a), the
 multi-trait model of eq. (5.5) extended with a fixed-effects term X beta.
 }
+\examples{
+set.seed(12)
+J <- 6; nT <- 2
+G <- crossprod(matrix(rnorm(J * J), J)) / J
+Y <- matrix(rnorm(J * nT, 5), J, nT)
+Msm028(Y, Z = diag(J), G = G, Sigma_T = diag(nT), R_T = diag(nT),
+       X = matrix(rnorm(J * nT), J * nT, 1))$beta
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,

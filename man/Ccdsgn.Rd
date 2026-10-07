@@ -11,7 +11,7 @@ Ccdsgn(cases, controls, exposed = NULL, unexposed = NULL, conf = 0.95)
 
 \item{controls}{Either (c, d) counts, or a 0/1 exposure indicator.}
 
-\item{exposed, unexposed}{Ignored; kept for the stub signature.}
+\item{exposed, unexposed}{Ignored; kept for backward compatibility.}
 
 \item{conf}{Confidence level.}
 }

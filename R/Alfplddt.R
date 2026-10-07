@@ -20,6 +20,11 @@
 #' @return A list with \code{plddt}, the bin distributions \code{p}, the
 #'   \code{loss}, \code{estimate}, \code{n} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 29
+#' @examples
+#' set.seed(14)
+#' s <- matrix(rnorm(6), 3, 2)
+#' r <- Alfplddt(s, w1 = matrix(rnorm(4), 2, 2), w2 = matrix(rnorm(4), 2, 2), w3 = matrix(rnorm(100), 50, 2))
+#' round(r$plddt, 1)
 #' @export
 Alfplddt <- function(s, w1, w2, w3, bins = NULL, rtrue = NULL) {
   if (is.null(bins)) bins <- 1 + 2 * (seq_len(50) - 1)

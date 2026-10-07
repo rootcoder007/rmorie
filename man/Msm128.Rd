@@ -27,7 +27,10 @@ directly.
 }
 }
 \examples{
-Msm128(K = 5L, y = 5L)
+xx <- seq(0, 1, length.out = 8)
+K <- exp(-outer(xx, xx, "-")^2 / 0.1)
+f <- Msm128(K, sin(2 * pi * xx), lam = 0.1)
+names(f)
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

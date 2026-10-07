@@ -77,7 +77,6 @@
 #'
 #' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
@@ -102,7 +101,6 @@
 #' A step of the prgrl_native implementation. Called by \code{curriculum_schedule},
 #' \code{easy_only_fit}, \code{prgrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to vector by the body, with \code{as.vector}.
 #' @return A vector, from \code{as.numeric}.
@@ -119,7 +117,6 @@
 #'
 #' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
@@ -142,7 +139,6 @@
 #'
 #' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
@@ -157,7 +153,6 @@
 #'
 #' A step of the prgrl_native implementation. Called by \code{is_curriculum}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Numeric; passed to \code{sum}.
 #' @return A numeric value.
@@ -179,7 +174,6 @@ entropy <- function(q) {
 #'
 #' A step of the prgrl_native implementation. Called by \code{prgrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param difficulty Passed to \code{.prgrl_to_vec}.
 #' @param n_steps A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5}.
@@ -222,7 +216,6 @@ curriculum_schedule <- function(difficulty, n_steps = 5, hard_first = FALSE) {
 #'
 #' A step of the prgrl_native implementation. Called by \code{prgrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights A vector; its length is taken and its elements indexed.
 #' @param p Optional; may be \code{NULL}. A vector; indexed elementwise.
@@ -291,7 +284,6 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #'
 #' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A vector; indexed elementwise.
 #' @param y A vector; indexed elementwise.
@@ -324,7 +316,6 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #'
 #' A step of the prgrl_native implementation. Called by \code{easy_only_fit}, \code{prgrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A vector; its length is taken and its elements indexed.
 #' @param y A vector; indexed elementwise.
@@ -354,7 +345,6 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #'
 #' A step of the prgrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.prgrl_to_rows}.
 #' @param y Passed to \code{.prgrl_to_vec}.
@@ -484,7 +474,6 @@ prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
 #'
 #' A step of the prgrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.prgrl_to_rows}.
 #' @param y Passed to \code{.prgrl_to_vec}.
@@ -562,7 +551,6 @@ easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
 #'
 #' A step of the prgrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

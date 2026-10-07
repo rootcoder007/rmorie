@@ -17,5 +17,4 @@ The value of \code{[}.
 \description{
 A step of the causal_molak implementation. Called by \code{morie_docalc}, \code{morie_dointerv}.
 See the file header for the source the module follows.
-source it follows.
 }

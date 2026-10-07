@@ -19,7 +19,6 @@ A list with \code{posterior}, \code{call}, \code{quality}, \code{scores}, \code{
 \description{
 A step of the varcal_native implementation. Called by \code{morie_varcal}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

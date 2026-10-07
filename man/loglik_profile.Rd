@@ -27,7 +27,6 @@ A list with \code{estimate}, \code{mle}, \code{grid}, \code{loglik},
 \description{
 A step of the pftrep_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

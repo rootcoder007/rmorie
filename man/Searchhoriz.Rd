@@ -30,16 +30,13 @@ Searchhoriz(
 list: estimate, bootstrap, reward_part, depth, state, method.
 }
 \description{
-Schrittwieser et al. (2020), arXiv:1911.08265 (FETCHED), appendix B,
-writes the backup for a search truncated at depth l as
-G^k = sum_\{tau = 0\}^\{l - 1 - k\} gamma^tau r_(k+1+tau) + gamma^(l-k) v^l:
-the discounted rewards down to the truncation depth plus the discounted
-network value at the truncated leaf.  Silver et al. (2018),
-arXiv:1712.01815 (FETCHED), uses the undiscounted two-player special
-case.  This is the n-step return of Sutton and Barto (2018),
-Reinforcement Learning: An Introduction, 2nd ed., eq. (7.1) (FETCHED
-from incompleteideas.net), with the bootstrap supplied by the value
-network.
+Schrittwieser et al. (2020), arXiv:1911.08265, appendix B, writes the backup for a
+search truncated at depth l as G^k = sum_\{tau = 0\}^\{l - 1 - k\} gamma^tau
+r_(k+1+tau) + gamma^(l-k) v^l: the discounted rewards down to the truncation depth
+plus the discounted network value at the truncated leaf. Silver et al. (2018),
+arXiv:1712.01815, uses the undiscounted two-player special case. This is the n-step
+return of Sutton and Barto (2018), Reinforcement Learning: An Introduction, 2nd ed.,
+eq. (7.1), with the bootstrap supplied by the value network.
 }
 \examples{
 Searchhoriz(2, 0, c(1, 1, 1), c(0, 0, 5))$estimate

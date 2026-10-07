@@ -23,5 +23,4 @@ A list with \code{x}, \code{fun}, \code{nit}, \code{success}.
 \description{
 A step of the remlfn_native implementation. Called by \code{morie_remlfn}.
 See the file header for the source the module follows.
-source it follows.
 }

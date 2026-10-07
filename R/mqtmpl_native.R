@@ -11,9 +11,10 @@
 #
 # Native implementation mirroring Python morie.fn.mqtmpl exactly: the
 # same forward-backward HMM with the same emission/transition logic,
-# the same EM/marker-regression/multiple-imputation scans, the same
-# permutation threshold, and the same refusal of Haley-Knott with the
-# same reason.
+# the same EM/marker-regression/multiple-imputation scans and the same
+# permutation threshold.  Haley-Knott regression (Haley & Knott 1992)
+# regresses the phenotype on E[g | markers] from that HMM; it matches
+# qtl::scanone(method = "hk") to 1e-13, with and without covariates.
 
 .GHC_MQTMPL_LOG10E <- 0.4342944819032518
 
@@ -45,15 +46,8 @@
 #' morie_mqtmpl_method_status()
 #' @keywords internal
 morie_mqtmpl_method_status <- function(method = NULL) {
-  avail <- c("em", "mr", "imp")
-  unsourced <- list(
-    hk = paste0("Haley-Knott regression is named but not defined in ",
-                "Broman et al. (2003); the primary source, Haley, C. ",
-                "S. & Knott, S. A. (1992) 'A simple regression ",
-                "method for mapping quantitative trait loci in line ",
-                "crosses using flanking markers', Heredity 69(4), ",
-                "315-324, doi:10.1038/hdy.1992.131, is not in the ",
-                "corpus"))
+  avail <- c("em", "mr", "hk", "imp")
+  unsourced <- list()
   if (is.null(method))
     return(list(methods = c("em", "mr", "hk", "imp"),
                 available = avail, unavailable = unsourced))
@@ -70,10 +64,6 @@ morie_mqtmpl_method_status <- function(method = NULL) {
   if (!(method %in% c("em", "mr", "hk", "imp")))
     stop(paste0("mqtmpl: method must be one of em, mr, hk, imp, got ",
                 method))
-  if (!(method %in% c("em", "mr", "imp")))
-    stop(paste0("mqtmpl: the '", method,
-                "' scan method is not implemented -- ",
-                morie_mqtmpl_method_status(method)$reason))
 }
 
 #' Forward-backward posterior genotype probabilities
@@ -212,6 +202,8 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
 #' @param y Phenotype.
 #' @param genotype_column A column of imputed genotypes.
 #' @param model_dimension Degrees of freedom in the model.
+#' @param covariates Optional matrix of additive covariates, fitted
+#'   alongside the genotype column.
 #' @return The log weight.
 #' @export
 #' @examples
@@ -219,11 +211,18 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
 #' morie_mqtmpl_imputation_weights(V, V)
 #' @keywords internal
 morie_mqtmpl_imputation_weights <- function(y, genotype_column,
-                                             model_dimension = 2) {
+                                             model_dimension = 2,
+                                             covariates = NULL) {
   n <- length(y)
   if (n != length(genotype_column))
     stop("mqtmpl: one genotype per phenotype")
   g <- as.numeric(genotype_column)
+  if (!is.null(covariates) && NCOL(covariates) > 0L) {
+    # additive covariates in the model: the genotype column joins them
+    X <- cbind(1, covariates, if (any(g != g[1L])) g)
+    rss <- max(sum(qr.resid(qr(X), y)^2), 1e-300)
+    return(-0.5 * as.numeric(model_dimension) * log(n) - 0.5 * n * log(rss))
+  }
   my <- mean(y)
   mg <- mean(g)
   sgg <- sum((g - mg)^2)
@@ -241,7 +240,8 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
 #' @keywords internal
 #' @noRd
 .ghc_mqtmpl_scan_imp <- function(y, markers, positions, step, n_imp,
-                                  error_rate, seed) {
+                                  error_rate, seed, cov = NULL) {
+  k_cov <- if (is.null(cov)) 0L else NCOL(cov)
   n <- length(y)
   grid <- seq(from = as.numeric(positions[1]),
               to = as.numeric(positions[length(positions)]),
@@ -252,12 +252,15 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
                                               numeric(1))
   draws <- morie_mqtmpl_sample_genotypes(geno, positions, grid, n_imp,
                                           error_rate, seed)
-  null <- morie_mqtmpl_imputation_weights(y, rep(0, n), model_dimension = 1)
+  null <- morie_mqtmpl_imputation_weights(y, rep(0, n),
+                                          model_dimension = 1 + k_cov,
+                                          covariates = cov)
   lods <- numeric(length(grid))
   for (gi in seq_along(grid)) {
     ws <- vapply(seq_along(draws), function(k)
       morie_mqtmpl_imputation_weights(y,
-        vapply(seq_len(n), function(i) draws[[k]][[i]][gi], numeric(1))),
+        vapply(seq_len(n), function(i) draws[[k]][[i]][gi], numeric(1)),
+        model_dimension = 2 + k_cov, covariates = cov),
       numeric(1))
     top <- max(ws)
     avg <- top + log(sum(exp(ws - top)) / length(ws))
@@ -267,6 +270,7 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
   list(estimate = lods[k], peak_lod = lods[k],
        peak_position = grid[k], position = grid, lod = lods,
        method_used = "imp", n_imputations = as.integer(n_imp),
+       n_covariates = k_cov,
        note = paste0("weights are n^(-v/2) RSS^(-n/2) on the log ",
                      "scale; the draws depend on the markers only, ",
                      "so a new model reuses them and only the ",
@@ -400,6 +404,51 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
        fit = fits[[k]])
 }
 
+# Grid for interval mapping: every `step` cM from the first marker to the
+# last, plus the markers themselves (as R/qtl's calc.genoprob places its
+# pseudomarkers).
+.ghc_mqtmpl_grid <- function(positions, step) {
+  pos <- as.numeric(positions)
+  sort(unique(round(c(seq(pos[1L], pos[length(pos)], by = as.numeric(step)),
+                      pos), 10)))
+}
+
+# P(genotype 1) for every individual at every grid point: the HMM run over
+# markers and pseudomarkers together, a pseudomarker carrying no call.
+.ghc_mqtmpl_grid_probs <- function(markers, positions, grid, error_rate) {
+  n <- length(markers[[1L]])
+  at <- match(round(as.numeric(positions), 10), grid)
+  geno <- lapply(seq_len(n), function(i) {
+    g <- rep(NA_real_, length(grid))
+    g[at] <- vapply(markers, function(mk) as.numeric(mk[i]), numeric(1))
+    g
+  })
+  post <- morie_mqtmpl_hmm_genotype_probabilities(geno, grid, error_rate)
+  t(vapply(post, function(p) p[, 2L], numeric(length(grid))))
+}
+
+# Haley-Knott regression: at each grid point regress the phenotype on the
+# covariates and the expected genotype E[g | markers] = P(g = 1);
+# LOD = (n / 2) log10(RSS0 / RSS1), RSS0 from the covariates alone.
+.ghc_mqtmpl_scan_hk <- function(y, markers, positions, step, cov,
+                                error_rate) {
+  n <- length(y)
+  grid <- .ghc_mqtmpl_grid(positions, step)
+  P <- .ghc_mqtmpl_grid_probs(markers, positions, grid, error_rate)
+  X0 <- if (is.null(cov) || NCOL(cov) == 0L) matrix(1, n, 1L) else cbind(1, cov)
+  rss0 <- sum(qr.resid(qr(X0), y)^2)
+  lods <- vapply(seq_along(grid), function(k) {
+    rss1 <- max(sum(qr.resid(qr(cbind(X0, P[, k])), y)^2), 1e-300)
+    0.5 * n * log10(rss0 / rss1)
+  }, numeric(1))
+  k <- which.max(lods)
+  list(estimate = lods[k], peak_lod = lods[k], peak_position = grid[k],
+       position = grid, lod = lods, method_used = "hk",
+       n_covariates = ncol(X0) - 1L, error_rate = as.numeric(error_rate),
+       method = paste0("Haley-Knott regression scan; Haley & Knott ",
+                       "(1992), Broman et al. (2003)"))
+}
+
 #' Single-QTL genome scan
 #'
 #' @param y Phenotype vector.
@@ -430,10 +479,14 @@ morie_mqtmpl_scanone <- function(y, markers, positions,
   if (any(vapply(markers, function(r) length(r) != n, logical(1))))
     stop(paste0("mqtmpl: every marker must be typed on all ", n,
                 " individuals"))
+  cov_m <- if (length(covariates) == 0L) NULL else do.call(cbind, covariates)
   if (method == "imp")
     return(.ghc_mqtmpl_scan_imp(y, markers, positions, step,
                                 mqtmpl_kw_n_imp(covariates),
-                                error_rate, 0))
+                                error_rate, 0, cov = cov_m))
+  if (method == "hk")
+    return(.ghc_mqtmpl_scan_hk(y, markers, positions, step, cov_m,
+                               error_rate))
   if (method == "mr") {
     out_pos <- c()
     out_lod <- c()
@@ -561,18 +614,20 @@ morie_mqtmpl_qtl_genome_scan <- morie_mqtmpl_scanone
 #'
 #' A step of the mqtmpl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(mqtmpl_cheatsheet())
 #' @export
 mqtmpl_cheatsheet <- function() {
   paste(paste0(
     "mqtmpl: the scanning layer. Genotypes come from a forward-ba",
     "ckward HMM that tolerates missing calls and a genotyping err",
     "or rate, and collapses to the flanking-marker formula when b",
-    "oth are absent. Scans by EM or marker regression; Haley-Knot",
-    "t and multiple imputation are named and REFUSED, with citati",
-    "ons. Genome-wide significance is a permutation threshold, be",
+    "oth are absent. Scans by EM, marker regression, Haley-Knott ",
+    "regression on E[g | markers], or multiple imputation (Sen-Ch",
+    "urchill weights), each with additive covariates. Genome-wide",
+    " significance is a permutation threshold, be",
     "cause the maximum over correlated positions is not chi-squar",
     "ed anything."
   ))
@@ -583,19 +638,16 @@ mqtmpl_cheatsheet <- function() {
 #'
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scanone}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param method Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
+#' @examples
+#' mqtmpl_check_method("em")
 #' @export
 mqtmpl_check_method <- function(method) {
   if (!(method %in% mqtmpl_METHODS)) {
     stop(sprintf("mqtmpl: method must be one of %s, got %s",
                  paste(mqtmpl_METHODS, collapse = ", "), method))
-  }
-  if (!(method %in% mqtmpl_AVAILABLE)) {
-    stop(sprintf("mqtmpl: the '%s' scan method is not implemented -- %s",
-                 method, mqtmpl_UNSOURCED[[method]]))
   }
 }
 
@@ -670,13 +722,15 @@ mqtmpl_cim_one <- function(y, left, right, r_left, r_right, cofactors) {
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_cim_one},
 #' \code{mqtmpl_sample_genotypes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s_left Accepted by the signature and not used anywhere in the body.
 #' @param s_right Accepted by the signature and not used anywhere in the body.
 #' @param r_left Numeric; combined arithmetically in the body.
 #' @param r_right Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
+#' @examples
+#' # Haldane recombination fractions to the flanking markers
+#' mqtmpl_genotype_probabilities(s_left = 0, s_right = 1, r_left = 0.05, r_right = 0.1)
 #' @export
 mqtmpl_genotype_probabilities <- function(s_left, s_right, r_left, r_right) {
   # Backcross coding, 0/1 at each flanking marker, no interference: the
@@ -702,10 +756,12 @@ mqtmpl_genotype_probabilities <- function(s_left, s_right, r_left, r_right) {
 #' \code{mqtmpl_hmm_genotype_probabilities}, \code{mqtmpl_sample_genotypes},
 #' \code{mqtmpl_scan_cim}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Numeric; combined arithmetically in the body.
 #' @return A numeric value.
+#' @examples
+#' mqtmpl_haldane(c(0.05, 0.1, 0.5))
+#' 0.5 * (1 - exp(-2 * c(0.05, 0.1, 0.5)))
 #' @export
 mqtmpl_haldane <- function(d) {
   d <- as.numeric(d)
@@ -717,12 +773,14 @@ mqtmpl_haldane <- function(d) {
 #'
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_sample_genotypes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Iterated over elementwise, with \code{sapply}.
 #' @param positions A vector; its length is taken and its elements indexed.
 #' @param error_rate Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' # backcross calls coded 0/1; two individuals, three markers (cM); NA is a missing call
+#' mqtmpl_hmm_genotype_probabilities(genotypes = list(c(0, NA, 1), c(1, 1, 0)), positions = c(0, 10, 20))
 #' @export
 mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions, error_rate = 0) {
   e <- as.numeric(error_rate)
@@ -787,12 +845,15 @@ mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions, error_rate =
 #'
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scan_imp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param genotype_column A vector; its length is taken.
 #' @param model_dimension Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
+#' @examples
+#' set.seed(8)
+#' g <- rbinom(30, 1, 0.5)
+#' mqtmpl_imputation_weights(y = 1 + g + rnorm(30), genotype_column = g)
 #' @export
 mqtmpl_imputation_weights <- function(y, genotype_column, model_dimension = 2) {
   n <- length(y)
@@ -817,15 +878,13 @@ mqtmpl_imputation_weights <- function(y, genotype_column, model_dimension = 2) {
 #'
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scanone}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param covariates A vector; its length is taken.
 #' @return A numeric value.
+#' @examples
+#' mqtmpl_kw_n_imp(list())
 #' @export
 mqtmpl_kw_n_imp <- function(covariates) {
-  if (length(covariates) > 0L) {
-    stop("mqtmpl: covariates are not implemented for the imputation scan")
-  }
   64L
 }
 
@@ -834,11 +893,14 @@ mqtmpl_kw_n_imp <- function(covariates) {
 #'
 #' A step of the mqtmpl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scan_result A list; the body reads \code{$lod}, \code{$position} from it.
 #' @param drop Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.5}.
 #' @return A list with \code{peak}, \code{lower}, \code{upper}, \code{drop}, \code{peak_lod}.
+#' @examples
+#' scan <- list(position = seq(0, 1, by = 0.1),
+#'              lod = c(0.2, 0.5, 1.4, 2.9, 4.1, 3.6, 2.2, 1.0, 0.4, 0.2, 0.1))
+#' mqtmpl_lod_support_interval(scan, drop = 1.5)
 #' @export
 mqtmpl_lod_support_interval <- function(scan_result, drop = 1.5) {
   lod <- scan_result$lod
@@ -858,10 +920,11 @@ mqtmpl_lod_support_interval <- function(scan_result, drop = 1.5) {
 #'
 #' A step of the mqtmpl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param method Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{method}, \code{available}, \code{reason}.
+#' @examples
+#' mqtmpl_method_status("em")
 #' @export
 mqtmpl_method_status <- function(method = NULL) {
   if (is.null(method)) {
@@ -881,7 +944,6 @@ mqtmpl_method_status <- function(method = NULL) {
 #'
 #' A step of the mqtmpl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param markers Passed to \code{mqtmpl_scanone}.
@@ -894,6 +956,15 @@ mqtmpl_method_status <- function(method = NULL) {
 #' @param ... Passed through.
 #' @return A list with \code{estimate}, \code{threshold}, \code{alpha}, \code{n_perm},
 #' \code{null_maxima}, \code{median_null}, \code{method}.
+#' @examples
+#' \donttest{
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' thr <- mqtmpl_permutation_threshold(y, list(m1, m2), c(0, 0.1), n_perm = 20, method = "mr")
+#' thr$threshold
+#' }
 #' @export
 mqtmpl_permutation_threshold <- function(y, markers, positions, n_perm = 100,
                                          alpha = 0.05, method = "em",
@@ -907,7 +978,6 @@ mqtmpl_permutation_threshold <- function(y, markers, positions, n_perm = 100,
 #'
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scan_imp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes A vector; its length is taken.
 #' @param positions A vector; its length is taken and its elements indexed.
@@ -916,6 +986,10 @@ mqtmpl_permutation_threshold <- function(y, markers, positions, n_perm = 100,
 #' @param error_rate Passed to \code{mqtmpl_hmm_genotype_probabilities}. Defaults to \code{0}.
 #' @param seed Passed to \code{set.seed}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' g <- mqtmpl_sample_genotypes(genotypes = list(c(0, NA, 1), c(1, 1, 0)), positions = c(0, 0.1, 0.2),
+#'                              grid = c(0.05, 0.15), n_imp = 4, seed = 1)
+#' str(g, max.level = 1)
 #' @export
 mqtmpl_sample_genotypes <- function(genotypes, positions, grid, n_imp = 16,
                                     error_rate = 0, seed = 0) {
@@ -930,7 +1004,6 @@ mqtmpl_sample_genotypes <- function(genotypes, positions, grid, n_imp = 16,
 #'
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scanone}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{mqtmpl_cim_one}.
 #' @param markers A vector; its length is taken and its elements indexed.
@@ -940,6 +1013,12 @@ mqtmpl_sample_genotypes <- function(genotypes, positions, grid, n_imp = 16,
 #' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.02}.
 #' @return A list with \code{estimate}, \code{peak_lod}, \code{peak_position},
 #' \code{position}, \code{lod}, \code{fit}.
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' mqtmpl_scan_cim(y, list(m1, m2), c(0, 0.1), step = 0.05)$peak_position
 #' @export
 mqtmpl_scan_cim <- function(y, markers, positions, cofactors = list(),
                             window = 0, step = 0.02) {
@@ -989,7 +1068,6 @@ mqtmpl_scan_cim <- function(y, markers, positions, cofactors = list(),
 #'
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scanone}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param markers A vector; its length is taken and its elements indexed.
@@ -1001,6 +1079,12 @@ mqtmpl_scan_cim <- function(y, markers, positions, cofactors = list(),
 #' @return A list with \code{estimate}, \code{peak_lod}, \code{peak_position},
 #' \code{position}, \code{lod}, \code{method_used}, \code{n_imputations}, \code{note},
 #' \code{method}.
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' mqtmpl_scan_imp(y, list(m1, m2), c(0, 0.1), step = 0.05, n_imp = 8, error_rate = 0.01, seed = 1)$peak_position
 #' @export
 mqtmpl_scan_imp <- function(y, markers, positions, step, n_imp,
                             error_rate, seed) {
@@ -1037,7 +1121,6 @@ mqtmpl_scan_imp <- function(y, markers, positions, step, n_imp,
 #'
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_permutation_threshold}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param markers A vector; its length is taken and its elements indexed.
@@ -1049,6 +1132,12 @@ mqtmpl_scan_imp <- function(y, markers, positions, step, n_imp,
 #' @return A list with \code{estimate}, \code{peak_lod}, \code{peak_position},
 #' \code{position}, \code{lod}, \code{method_used}, \code{n_covariates},
 #' \code{error_rate}, \code{method}.
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' mqtmpl_scanone(y, list(m1, m2), c(0, 0.1), method = "mr")$peak_lod
 #' @export
 mqtmpl_scanone <- function(y, markers, positions, method = "em", step = 0.02,
                            covariates = list(), error_rate = 0) {
@@ -1061,11 +1150,14 @@ mqtmpl_scanone <- function(y, markers, positions, method = "em", step = 0.02,
 #'
 #' A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scanone}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param g Numeric; passed to \code{mean}.
 #' @return A list with \code{lod}, \code{rss}, \code{rss0}.
+#' @examples
+#' set.seed(2)
+#' g <- rbinom(50, 1, 0.5)
+#' mqtmpl_single_marker(y = 1 + 0.8 * g + rnorm(50), g = g)$lod
 #' @export
 mqtmpl_single_marker <- function(y, g) {
   n <- length(y)
@@ -1088,19 +1180,10 @@ mqtmpl_single_marker <- function(y, g) {
 }
 
 # -- restored: morie-only objects kept through the rmorie sync --
-mqtmpl_AVAILABLE <- c("em", "mr", "imp")
+mqtmpl_AVAILABLE <- c("em", "mr", "hk", "imp")
 
 mqtmpl_LOG10E <- log10(exp(1))
 
 mqtmpl_METHODS <- c("em", "mr", "hk", "imp")
 
-mqtmpl_UNSOURCED <- list(
-  hk = paste0(
-    "Haley-Knott regression is named but not defined in Broman et",
-    " al. (2003); the primary source, Haley, C. S. & Knott, S. A.",
-    " (1992) 'A simple regression method for mapping quantitative",
-    " trait loci in line crosses using flanking markers', Heredit",
-    "y 69(4), 315-324, doi:10.1038/hdy.1992.131, is not in the co",
-    "rpus"
-  )
-)
+mqtmpl_UNSOURCED <- list()

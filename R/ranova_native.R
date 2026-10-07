@@ -13,7 +13,6 @@
 #'
 #' A step of the ranova_native implementation. Called by \code{morie_ranova}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; indexed elementwise.
 #' @param group Coerced to character by the body, with \code{as.character}.
@@ -88,7 +87,6 @@ morie_ranova <- function(y, group) {
 #'
 #' A step of the ranova_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gs A vector; its length is taken and its elements indexed.
 #' @param ns A vector; indexed elementwise.

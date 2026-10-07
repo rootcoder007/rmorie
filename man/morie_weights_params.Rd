@@ -86,7 +86,7 @@ estimates.}
 \item{...}{Additional method-specific arguments.}
 }
 \description{
-Roxygen-only stub holding the @param entries shared across the
+Roxygen-only block holding the @param entries shared across the
 weights family (design / calibration / replication / trimming /
 diagnostics). Functions reference these via
 \verb{@inheritParams morie_weights_params}.

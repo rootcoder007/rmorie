@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Join-count statistics for binary spatial data (Cliff and Ord 1981)
 #'
-#' Source FETCHED (reference implementation): \code{spdep::joincount.test}
+#' Source: the reference implementation \code{spdep::joincount.test}
 #' (Bivand, spdep 1.4-2, \code{R/jc.R}), whose comments cite Cliff, A. D.
 #' and Ord, J. K. (1981), Spatial Processes: Models and Applications,
 #' Pion, page 20, equations (1.31) and (1.32) for nonfree sampling:

@@ -105,6 +105,7 @@ GcnLayer <- function(A, H, Wt, activation = "relu", self_loops = TRUE) {
 #' @rdname CurveFpca
 #' @export
 SgcRidge <- function(A, X, y, k = 2, l2 = 1, self_loops = TRUE) {
+  .morie_arg(A, "m")
   S <- .sf_norm_adj(A, self_loops)
   F_ <- unname(as.matrix(X)) * 1
   for (r in seq_len(k)) F_ <- S %*% F_

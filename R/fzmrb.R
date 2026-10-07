@@ -15,6 +15,7 @@
 #' #   vignette(package = "morie")
 #' @export
 fzmrb <- function(x, t = NULL, h = NULL) {
+  .morie_arg(x, "n")
   x <- as.numeric(x)
   n <- length(x)
   if (any(x <= 0)) stop("fzmrb requires strictly positive x")

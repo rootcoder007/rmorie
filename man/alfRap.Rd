@@ -17,7 +17,6 @@ A numeric value.
 \description{
 A step of the alf_core implementation. Called by \code{Alfipa}, \code{alfRcomp}, \code{Alfschn}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 Tf <- list(R = diag(2), t = c(1, -1))

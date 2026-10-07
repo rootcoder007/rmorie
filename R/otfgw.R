@@ -23,6 +23,11 @@
 #'   \code{gromov_part}, \code{n}, \code{m}, \code{iters}.
 #' @references Vayer, T., Chapel, L., Flamary, R., Tavenard, R. and
 #'   Courty, N. (2020). Algorithms 13(9):212. \doi{10.3390/a13090212}.
+#' @examples
+#' M <- matrix(c(0, 1, 1, 0), 2)
+#' Cx <- matrix(c(0, 1, 1, 0), 2)
+#' r <- Otfgw(M, Cx, Cx, a = c(0.5, 0.5), b = c(0.5, 0.5), alpha = 0.5)
+#' round(r$T, 3)
 #' @export
 Otfgw <- function(M, Cx, Cy, a, b, alpha = 0.5, max_iter = 20) {
   Mm <- as.matrix(M)

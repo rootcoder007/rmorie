@@ -28,6 +28,6 @@ Multi-head attention (heads via \code{morie_geron_scaled_dot_product}),
 residual + layer norm, position-wise feedforward, residual + layer norm.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_geron_transformer(V)
+X <- matrix(c(1, 0, 0.5, 0.2, 1, 0, 0.3, 0.7), nrow = 4)   # four positions, two dimensions
+morie_geron_transformer(X, n_heads = 2, n_layers = 1)$total_params
 }

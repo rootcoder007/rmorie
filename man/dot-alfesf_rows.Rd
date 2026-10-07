@@ -17,7 +17,6 @@ The value of \code{m}, as built in the body.
 \description{
 A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 .alfesf_rows(matrix(1:6, nrow = 2), "features")

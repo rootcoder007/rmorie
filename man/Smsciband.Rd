@@ -74,11 +74,10 @@ bhat_n = bt_n + (lambda/n)^(s/(2s+1)) Q_n^-1 A_n, and
 t = (n h)^(1/2)(bhat_nj - bt_j) / V_nj^(1/2) is asymptotically
 N(0,1) (page 115).
 
-Subsampling (Politis and Romano 1994; Delgado et al. 2001) is the
-book's remedy on page 107 for the UNSMOOTHED estimator, whose limit
-is nonstandard and for which the bootstrap fails (Abrevaya and Huang
-2005).  The smoothed estimator does not need it, and an analytic
-interval is the only one compatible with this shelf's determinism
+Subsampling (Politis and Romano 1994; Delgado et al. 2001) is the book's remedy on
+page 107 for the UNSMOOTHED estimator, whose limit is nonstandard and for which the
+bootstrap fails (Abrevaya and Huang 2005). The smoothed estimator does not need it,
+and an analytic interval is the only one compatible with this package's determinism
 rule.
 }
 \examples{

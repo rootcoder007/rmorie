@@ -18,7 +18,6 @@ A list with \code{attention_ops}, \code{rnn_ops},
 \description{
 A step of the sasRec_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 complexity(n = 5L, d = 5L)

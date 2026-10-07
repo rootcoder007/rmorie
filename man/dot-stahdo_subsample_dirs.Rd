@@ -23,5 +23,4 @@ A list with \code{dirs}, \code{exhaustive}.
 \description{
 A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}.
 See the file header for the source the module follows.
-source it follows.
 }

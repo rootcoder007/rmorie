@@ -31,11 +31,9 @@ exactly one implementation: this function delegates to
 Gpt2(matrix(0.1, 2, 4), n_layers = 1, n_heads = 1)$estimate
 }
 \references{
-Radford, A., Wu, J., Child, R., Luan, D., Amodei, D.
-and Sutskever, I. (2019), Language Models are Unsupervised
-Multitask Learners, OpenAI technical report, Section 2.3 and
-Table 2. Radford, A., Narasimhan, K., Salimans, T. and
-Sutskever, I. (2018), Improving Language Understanding by
-Generative Pre-Training, OpenAI. Source PDF:
-fetched-wave3/radford-etal-2019-gpt2-unsupervised-multitask-learners.pdf.
+Radford, A., Wu, J., Child, R., Luan, D., Amodei, D. and Sutskever, I.
+(2019), Language Models are Unsupervised Multitask Learners, OpenAI technical
+report, Section 2.3 and Table 2. Radford, A., Narasimhan, K., Salimans, T. and
+Sutskever, I. (2018), Improving Language Understanding by Generative Pre-Training,
+OpenAI.
 }

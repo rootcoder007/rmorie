@@ -2,7 +2,7 @@
 % Please edit documentation in R/egcn_native.R
 \name{equivariantgraphconv}
 \alias{equivariantgraphconv}
-\title{Compact alias per ledger/NAMING.md}
+\title{Compact alias}
 \usage{
 equivariantgraphconv(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
 }
@@ -29,12 +29,14 @@ The value of \code{run_egnn}.
 \description{
 A step of the egcn_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
-set.seed(1)
-r <- equivariantgraphconv(H = rnorm(10), X = rnorm(10), layers = rnorm(10), phi_e = rnorm(10),
-  phi_x = rnorm(10), phi_h = rnorm(10))
-TRUE
+H <- list(c(1, 0), c(0, 1), c(1, 1))              # node features
+X <- list(c(0, 0, 0), c(1, 0, 0), c(0, 1, 0))     # node coordinates
+phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+phi_x <- function(m) sum(m)
+phi_h <- function(h, m) h + m[seq_along(h)]
+r <- equivariantgraphconv(H, X, layers = 1L, phi_e, phi_x, phi_h)
+r$layers
 }
 \keyword{internal}

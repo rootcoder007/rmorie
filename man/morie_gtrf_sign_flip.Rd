@@ -17,6 +17,11 @@ Sign-flipped encoding.
 \description{
 Flips each eigenvector's sign with probability 1/2, per the paper.
 }
+\examples{
+set.seed(4)
+pe <- matrix(1:6, 3, 2)
+morie_gtrf_sign_flip(pe, rng = rmorie:::.ghc_rng(1))
+}
 \references{
 Dwivedi, V. P. and Bresson, X. (2020).
 }

@@ -32,6 +32,13 @@
 #'   strategies. Statistics in Medicine 27(23), 4678-4721.  Petersen,
 #'   M., Schwab, J., Gruber, S., Blaser, N., Schomaker, M. and van der
 #'   Laan, M. (2014). Journal of Causal Inference 2(2), 147-185.
+#' @examples
+#' set.seed(7)
+#' n <- 300; Tn <- 2
+#' H <- matrix(rnorm(n * Tn), n, Tn)
+#' D <- matrix(rbinom(n * Tn, 1, plogis(H)), n, Tn)
+#' y <- rowSums(D * H) + rnorm(n)
+#' Dyntmt(y, D, H, regime_fn = function(h) as.integer(h > 0))[c("estimate", "naive_mean", "ess")]
 #' @export
 Dyntmt <- function(y, D_history, H_history, regime_fn = NULL) {
   yv <- .s03vec(y)

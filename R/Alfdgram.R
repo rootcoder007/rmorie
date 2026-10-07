@@ -17,6 +17,12 @@
 #'   \code{dist}, the \code{loss}, \code{estimate}, \code{n} and
 #'   \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. section 1.9.8
+#' @examples
+#' set.seed(12)
+#' n <- 4; cz <- 3
+#' z <- array(rnorm(n * n * cz), c(n, n, cz))
+#' w <- matrix(rnorm(64 * cz), 64, cz)
+#' dim(Alfdgram(z, w)$p)
 #' @export
 Alfdgram <- function(z, w, bins = NULL, dtrue = NULL) {
   if (is.null(bins)) {

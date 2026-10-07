@@ -180,7 +180,6 @@ morie_tokenizer_decode <- function(tok, ids) {
 #'
 #' A step of the tokenizer implementation. Called by \code{morie_tokenizer_encode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tok A list; the body reads \code{$token_to_id} from it.
 #' @param text A vector; its length is taken.

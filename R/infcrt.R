@@ -20,6 +20,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Infcrt(V)
 Infcrt <- function(log_lik_samples) {
+  .morie_arg(log_lik_samples, "m")
   L <- as.matrix(log_lik_samples)
   Sn <- nrow(L)
   n <- ncol(L)

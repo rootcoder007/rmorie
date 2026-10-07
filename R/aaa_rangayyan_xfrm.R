@@ -572,6 +572,7 @@ TwidCS <- function(npoints, n, k) {
 #' DftRI(V)
 #' @keywords internal
 DftRI <- function(x) {
+  .morie_arg(x, "n")
   # eq (3.85): the real part is the projection onto the k-th cosine, the
   # imaginary part is MINUS the projection onto the corresponding sine.
   xs <- as.numeric(x)
@@ -848,8 +849,8 @@ CircConv <- function(x, h, npoints = NULL) {
 #' @return A vector, from \code{c}.
 #' @export
 #' @examples
-#' S <- c("a", "b", "c")
-#' EvenPart(S)
+#' x <- c(2, -1, 4, 0, 1)
+#' EvenPart(x)
 #' @keywords internal
 EvenPart <- function(x, n = NULL) {
   # eq (3.92): x_e(n) = 0.5 [x(n) + x(-n)].  x(-n) must exist, so the
@@ -869,8 +870,8 @@ EvenPart <- function(x, n = NULL) {
 #' @return A vector, from \code{c}.
 #' @export
 #' @examples
-#' S <- c("a", "b", "c")
-#' OddPart(S)
+#' x <- c(2, -1, 4, 0, 1)
+#' OddPart(x)
 #' @keywords internal
 OddPart <- function(x, n = NULL) {
   # eq (3.93): x_o(n) = 0.5 [x(n) - x(-n)]; forced to 0 at the origin.
@@ -886,8 +887,8 @@ OddPart <- function(x, n = NULL) {
 #' @return A vector, from \code{c}.
 #' @export
 #' @examples
-#' S <- c("a", "b", "c")
-#' EvenOdd(S)
+#' x <- c(2, -1, 4, 0, 1)   # odd length: n = 0 is the middle sample
+#' EvenOdd(x)
 #' @keywords internal
 EvenOdd <- function(x, n = NULL) {
   # eqs (3.92)-(3.94).  Eq (3.94) is an identity, so the reconstruction
@@ -1109,8 +1110,7 @@ LogSeries <- function(x, terms = 20) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' LogMinPh(V)
+#' LogMinPh(alpha = 0.5, terms = 10, z = 2)
 #' @keywords internal
 LogMinPh <- function(alpha, terms = 20, z = NULL) {
   # eq (4.70): log(1 - alpha z^-1) = -sum alpha^n/n z^-n, |z| > |alpha|.
@@ -1150,8 +1150,7 @@ LogMinPh <- function(alpha, terms = 20, z = NULL) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' LogMaxPh(V)
+#' LogMaxPh(beta = 0.5, terms = 10, z = 0.3)
 #' @keywords internal
 LogMaxPh <- function(beta, terms = 20, z = NULL) {
   # eq (4.71): log(1 - beta z) = -sum beta^n/n z^n, |z| < 1/|beta|.  The

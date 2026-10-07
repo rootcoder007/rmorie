@@ -23,5 +23,4 @@ A numeric value.
 \description{
 A step of the e_div_native implementation. Called by \code{.mor_ed_qhat}.
 See the file header for the source the module follows.
-source it follows.
 }

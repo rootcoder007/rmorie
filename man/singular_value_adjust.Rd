@@ -14,3 +14,7 @@ singular_value_adjust(a, cap = .EIGENVALUE_CAP)
 \description{
 SVD cap on the prewhitening matrix
 }
+\examples{
+A <- diag(c(1e8, 1, 1e-3))
+singular_value_adjust(A)
+}

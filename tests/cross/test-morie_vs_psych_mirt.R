@@ -54,3 +54,19 @@ test_that("native 2PL matches mirt item parameters", {
   expect_equal(unname(mine$difficulty), unname(cf[, "b"]),
                tolerance = 0.1)
 })
+
+test_that("native omega_h tracks psych's Schmid-Leiman omega (fm = pa, Promax)", {
+  skip_if_not_installed("psych")
+  set.seed(9)
+  n <- 600
+  g <- rnorm(n)
+  # each factor count on data with that many group factors (a misspecified fit is not a comparison)
+  for (nf in 2:3) {
+    S <- matrix(rnorm(n * nf), n)
+    X <- do.call(cbind, lapply(seq_len(nf), function(f) sapply(1:4, function(j) 0.5 * g + 0.55 * S[, f] + rnorm(n, sd = 0.6))))
+    ref <- suppressWarnings(suppressMessages(psych::omega(X, nfactors = nf, fm = "pa", rotate = "Promax", plot = FALSE)))
+    mine <- morie_psymet_omega(X, nf = nf)
+    expect_equal(mine$total, unname(ref$omega.tot), tolerance = 1e-3)
+    expect_equal(mine$hier, unname(ref$omega_h), tolerance = 2e-3)
+  }
+})

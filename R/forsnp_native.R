@@ -9,7 +9,6 @@
 #'
 #' A step of the forsnp_native implementation. Called by \code{morie_forsnp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a1 Passed to \code{==}.
 #' @param a2 Passed to \code{==}.

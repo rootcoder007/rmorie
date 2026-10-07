@@ -27,6 +27,12 @@
 #'   \code{embed_dim}, \code{norm}, \code{method}.
 #' @references Radford et al. (2021), ICML 139:8748-8763;
 #'   Dosovitskiy et al. (2021), ICLR 2021.
+#' @examples
+#' \donttest{
+#' img <- matrix(runif(32 * 32), 32, 32)
+#' e <- Clipxi(img, backbone = "vit-b/32")
+#' c(e$n_patches, length(e$embedding))
+#' }
 #' @export
 Clipxi <- function(image, backbone = "vit-l/14", seed = 42) {
   key <- tolower(as.character(backbone))

@@ -93,6 +93,7 @@ morie_siu_to_iso_date <- function(x, engine = "auto") {
 #' @rdname morie_siu_schema
 #' @export
 morie_siu_strip_boilerplate <- function(text) {
+  .morie_arg(text, "c")
   stopifnot(is.character(text), length(text) == 1L, !is.na(text))
   .siu_core_strip_boilerplate(text)
 }
@@ -100,6 +101,7 @@ morie_siu_strip_boilerplate <- function(text) {
 #' @rdname morie_siu_schema
 #' @export
 morie_siu_report_url <- function(drid) {
+  .morie_arg(drid, "iv")
   drid <- as.integer(drid)
   stopifnot(!anyNA(drid), all(drid > 0L))
   sprintf("https://www.siu.on.ca/en/directors_report_details.php?drid=%d", drid)

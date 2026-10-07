@@ -36,6 +36,7 @@
 #' ToroidalShiftTest(matrix(1:4, 2, byrow = TRUE), matrix(1:4, 2, byrow = TRUE))$statistic
 #' @export
 BlockBootstrapGrid <- function(grid, block, nboot = 200L, seed = 1, statistic = mean, alpha = 0.05) {
+  .morie_arg(grid, "m")
   G <- as.matrix(grid) * 1
   nr <- nrow(G)
   nc <- ncol(G)
@@ -104,6 +105,7 @@ BootstrapBands <- function(replicates, estimate = NULL, alpha = 0.05) {
 #' @rdname BlockBootstrapGrid
 #' @export
 ToroidalShiftTest <- function(a, b, exact = TRUE, nshift = 199L, seed = 1) {
+  .morie_arg(a, "m")
   A <- as.matrix(a) * 1
   B <- as.matrix(b) * 1
   nr <- nrow(A)

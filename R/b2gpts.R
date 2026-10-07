@@ -82,6 +82,7 @@
 #' Gpreg(matrix(c(0, 1, 2), 3, 1), c(0, 1, 0.5), matrix(c(0.5), 1, 1))$estimate
 #' @export
 Gpreg <- function(X, y, X_test, kernel = NULL, noise = 0) {
+  .morie_arg(X, "m")
   A <- .b2mat(X)
   B <- .b2mat(X_test)
   yv <- as.numeric(y)
@@ -220,6 +221,7 @@ Gpresid <- function(X, y, y_pred, kernel = NULL, noise = 0) {
 #' Srfintp(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 Srfintp <- function(coords, values, grid, method = "gp", kernel = NULL, noise = 0) {
+  .morie_arg(coords, "m")
   if (!(method %in% c("gp", "kriging"))) stop("method must be 'gp' or 'kriging'", call. = FALSE)
   g <- Gpreg(coords, values, grid, kernel, noise)
   list(estimate = g$estimate, variance = g$variance, method_used = method,
@@ -294,9 +296,8 @@ Snaivefc <- function(y, m, h = 1L) {
 #' @references Hyndman & Athanasopoulos, FPP3, Sec. 11.3.
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' Bottomup(S, M)
+#' S <- rbind(c(1, 1, 1), c(1, 1, 0), c(0, 0, 1), diag(3))   # total, two aggregates, the bottoms
+#' Bottomup(bottoms = c(10, 20, 30), S = S)
 Bottomup <- function(bottoms, S) {
   bv <- as.numeric(bottoms)
   Sm <- .b2mat(S)
@@ -347,9 +348,8 @@ Topdown <- function(top, props) {
 #' @references Hyndman & Athanasopoulos, FPP3, Sec. 11.3.
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' Middleout(S, M)
+#' S <- rbind(c(1, 1), c(1, 0), c(0, 1), c(0.5, 0), c(0.5, 0))   # 0/1 rows aggregate, proportion rows disaggregate
+#' Middleout(middle = c(10, 20), S = S)
 Middleout <- function(middle, S) {
   mv <- as.numeric(middle)
   Sm <- .b2mat(S)

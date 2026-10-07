@@ -20,11 +20,9 @@ list: statistic, p_value, df1, df2, rss0, rss1, p0, p1, n,
 method.
 }
 \description{
-Source READ FROM THE CORPUS PDF: Hastie, Tibshirani and Friedman,
-The Elements of Statistical Learning (2nd ed., 2009), section 3.2,
-equation (3.13):
-\code{F = ((RSS0 - RSS1)/(p1 - p0)) / (RSS1/(N - p1 - 1))}, which
-under the Gaussian null is \code{F(p1 - p0, N - p1 - 1)}.
+Source: Hastie, Tibshirani and Friedman, The Elements of Statistical Learning (2nd
+ed., 2009), section 3.2, equation (3.13): \code{F = ((RSS0 - RSS1)/(p1 - p0)) /
+(RSS1/(N - p1 - 1))}, which under the Gaussian null is \code{F(p1 - p0, N - p1 - 1)}.
 }
 \examples{
 set.seed(1)

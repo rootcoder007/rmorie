@@ -21,3 +21,6 @@ A list with \code{weights}, \code{uniform},
 Sample the steps that actually carry loss instead of drawing
 uniformly.
 }
+\examples{
+importance_weights(step_losses = c(0.9, 0.5, 0.2, 0.1, 0.05))$weights
+}

@@ -19,5 +19,4 @@ The value of \code{parts}, as built in the body.
 \description{
 A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}.
 See the file header for the source the module follows.
-source it follows.
 }

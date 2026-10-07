@@ -20,7 +20,6 @@
 #'
 #' A step of the tmlcps_native implementation. Called by \code{.smooth_at}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -35,7 +34,6 @@
 #'
 #' A step of the tmlcps_native implementation. Called by \code{.cv_bandwidth}, \code{effect_curve}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param xv A vector; its length is taken.
 #' @param av Numeric; combined arithmetically in the body.
@@ -64,7 +62,6 @@
 #'
 #' A step of the tmlcps_native implementation. Called by \code{effect_curve}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param xv A vector; its length is taken and its elements indexed.
 #' @param av A vector; indexed elementwise.
@@ -276,7 +273,7 @@ morie_tmlcps <- function(y, A, X, a_grid = NULL, fit = "kernel",
                        "Theorem 1 and Sec. 3.2"))
 }
 
-#' Compact alias per ledger/NAMING.md
+#' Compact alias
 #' @rdname morie_tmlcps
 #' @export
 morie_tmlcontinuoustreatment <- morie_tmlcps

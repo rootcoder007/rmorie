@@ -33,7 +33,8 @@ and the root relaxation value.
 Branch and bound (Dakin 1965 Fig. 2, marked list)
 }
 \examples{
-morie_miprgr_branch_and_bound(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
-  c = c(1, 2, 3, 4, 5, 6, 7, 8), integer_vars = c("a", "b", "c"))
+# maximise 5 x1 + 4 x2 subject to 6 x1 + 4 x2 <= 24, x1 + 2 x2 <= 6, x integer; A is a list of rows
+morie_miprgr_branch_and_bound(A = list(c(6, 4), c(1, 2)), b = c(24, 6), c = c(5, 4),
+  integer_vars = c(1L, 2L))
 }
 \keyword{internal}

@@ -29,6 +29,5 @@ A list with \code{risk}, \code{predictions}, \code{losses}, \code{n_scored}, \co
 \description{
 A step of the tlonsl_native implementation. Called by \code{morie_tlonsl_online_super_learner}.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

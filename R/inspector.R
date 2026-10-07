@@ -33,10 +33,6 @@ morie_inspect_output <- function(path) {
   result$contents_preview <- tryCatch(
     {
       if (ext == "json") {
-        if (!requireNamespace("jsonlite", quietly = TRUE)) {
-          result$status <- "jsonlite-unavailable"
-          return(result)
-        }
         obj <- .morie_from_json(path)
         if (is.list(obj)) names(obj) else utils::head(obj)
       } else if (ext == "csv") {
@@ -95,11 +91,6 @@ morie_verify_statistical_output <- function(path) {
   if (!file.exists(path)) {
     out$checks$file_exists <- FALSE
     return(out)
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("jsonlite is required for morie_verify_statistical_output().",
-      call. = FALSE
-    )
   }
 
   obj <- tryCatch(.morie_from_json(path), error = function(e) NULL)

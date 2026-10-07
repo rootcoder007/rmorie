@@ -68,7 +68,6 @@ A list with \code{estimate}, \code{x_best}, \code{y_best}, \code{X}, \code{y},
 \description{
 A step of the bayopt_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

@@ -64,7 +64,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map},
 #' \code{.pq_scalar} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e A list; the body reads \code{$buf}, \code{$pos} from it.
 #' @return The value of \code{b}, as built in the body.
@@ -80,7 +79,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_binary}, \code{.pq_list},
 #' \code{.pq_map} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_byte}.
 #' @return The value of \code{repeat}.
@@ -102,7 +100,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_scalar}, \code{.pq_struct}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_varint}.
 #' @return One of two values, depending on the branch taken.
@@ -118,7 +115,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_scalar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e A list; the body reads \code{$buf}, \code{$pos} from it.
 #' @return The value of \code{out}, as built in the body.
@@ -134,7 +130,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_scalar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e A list; the body reads \code{$buf}, \code{$pos} from it.
 #' @return The value of \code{v}, as built in the body.
@@ -152,7 +147,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map},
 #' \code{.pq_struct}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e A list; the body reads \code{$pos} from it.
 #' @param ttype Passed to \code{==}.
@@ -196,7 +190,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_scalar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_byte}.
 #' @return The value of \code{lapply}.
@@ -216,7 +209,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_scalar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_varint}.
 #' @return The value of \code{out}, as built in the body.
@@ -242,7 +234,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_column_values},
 #' \code{.pq_read_footer}, \code{.pq_scalar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_byte}.
 #' @return The value of \code{repeat}.
@@ -267,7 +258,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_column_values},
 #' \code{morie_read_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param st A vector; indexed elementwise.
 #' @param id Coerced to character by the body, with \code{as.character}.
@@ -302,7 +292,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_wbinary}, \code{.pq_wfield},
 #' \code{.pq_wlisthdr} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e A list; the body reads \code{$n}, \code{$parts} from it.
 #' @param r See Usage.
@@ -319,7 +308,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_wbinary},
 #' \code{.pq_wlisthdr}, \code{.pq_wzigzag}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_emit}.
 #' @param n Numeric; combined arithmetically in the body.
@@ -343,7 +331,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_wfield}, \code{.pq_wi32},
 #' \code{.pq_wi64} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_wvarint}.
 #' @param n Numeric; combined arithmetically in the body.
@@ -357,7 +344,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wlistbin}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_wvarint}.
 #' @param b A vector; its length is taken.
@@ -374,7 +360,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wi32},
 #' \code{.pq_wi64} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_emit}.
 #' @param fid Numeric; combined arithmetically in the body.
@@ -397,7 +382,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_wfield}.
 #' @param fid Passed to \code{.pq_wfield}.
@@ -415,7 +399,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_wfield}.
 #' @param fid Passed to \code{.pq_wfield}.
@@ -433,7 +416,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_wfield}.
 #' @param fid Passed to \code{.pq_wfield}.
@@ -452,7 +434,6 @@
 #' A step of the parquet implementation. Called by \code{.pq_wlistbin},
 #' \code{.pq_wlisti32}, \code{.pq_wliststruct}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_emit}.
 #' @param size Passed to \code{.pq_wvarint}.
@@ -472,7 +453,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_wfield}.
 #' @param fid Passed to \code{.pq_wfield}.
@@ -491,7 +471,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_wfield}.
 #' @param fid Passed to \code{.pq_wfield}.
@@ -510,7 +489,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_wfield}.
 #' @param fid Passed to \code{.pq_wfield}.
@@ -529,7 +507,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.pq_wfield}.
 #' @param fid Passed to \code{.pq_wfield}.
@@ -547,7 +524,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e A list; the body reads \code{$parts} from it.
 #' @return The value of \code{do.call}.
@@ -563,7 +539,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_column_values}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param data A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -742,7 +717,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_column_values}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{>}.
 #' @return The value of \code{w}, as built in the body.
@@ -763,7 +737,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_column_values}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param buf A vector; indexed elementwise.
 #' @param pos Numeric; combined arithmetically in the body.
@@ -847,7 +820,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{.pq_column_values}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param buf A vector; indexed elementwise.
 #' @param pos Numeric; combined arithmetically in the body.
@@ -930,7 +902,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_read_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param vals Iterated over elementwise, with \code{vapply}.
 #' @param ptype Passed to \code{==}.
@@ -992,7 +963,6 @@
 #'
 #' A step of the parquet implementation. Called by \code{morie_read_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param con Passed to \code{seek}.
 #' @param size Numeric; combined arithmetically in the body.
@@ -1442,7 +1412,6 @@ morie_read_parquet <- function(path, columns = NULL) {
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @param inf Accepted by the signature and not used anywhere in the body.
@@ -1486,7 +1455,6 @@ morie_read_parquet <- function(path, columns = NULL) {
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values A vector; its length is taken and its elements indexed.
 #' @param ptype Passed to \code{==}.
@@ -1536,7 +1504,6 @@ morie_read_parquet <- function(path, columns = NULL) {
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param levels A vector; its length is taken.
 #' @param width Passed to \code{==}.

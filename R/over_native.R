@@ -49,7 +49,6 @@
 #'
 #' A step of the over_native implementation. Called by \code{.mor_ks_2samp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Numeric; combined arithmetically in the body.
 #' @param n Numeric; passed to \code{sqrt}.
@@ -82,7 +81,6 @@
 #'
 #' A step of the over_native implementation. Called by \code{morie_over}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.

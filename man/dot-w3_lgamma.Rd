@@ -16,7 +16,6 @@ A numeric value.
 A step of the helpers_w3num implementation. Called by \code{.bnppvl_log_beta},
 \code{.w3_betainc}, \code{.w3_gammcf} and 4 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)

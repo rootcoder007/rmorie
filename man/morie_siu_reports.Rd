@@ -16,13 +16,14 @@ morie_siu_reports(update = FALSE, max_new = 25L, quiet = FALSE)
 \item{quiet}{Suppress progress messages.}
 }
 \value{
-A data.frame in the 65-column reviewed-corpus schema. New rows
+A data.frame in the 66-column reviewed-corpus schema. New rows
 (if any) carry \code{panel_reviewed = FALSE}.
 }
 \description{
 The right way to get SIU data in the morie ecosystem. Loads the
-panel-reviewed 65-column corpus bundled in \pkg{rmoriedata} (2,182
-English reports, subject-official coverage 100 percent, built by a
+panel-reviewed 66-column corpus bundled in \pkg{rmoriedata} 0.3.4 (4,613
+reports: 2,309 English, reviewed, and 2,304 French carrying their English
+report's case facts; subject-official coverage 100 percent, built by a
 multi-model reading panel plus deterministic residual resolution) --
 nothing is re-fetched or re-parsed for reports already reviewed. With
 \code{update = TRUE} it then discovers reports published AFTER the

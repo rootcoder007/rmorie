@@ -1,15 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' RetNet's retention mechanism, in both its forms
 #'
-#' Sun et al. (2023), Retentive network: a successor to transformer for
-#' large language models, arXiv:2307.08621 (FETCHED).  The recurrent form,
-#' eqs. (5)-(6), is S_n = gamma S_(n-1) + K_n' V_n and O_n = Q_n S_n; the
-#' parallel form contracts the same computation into a masked matrix
-#' product, Retention(X) = (Q K' * D) V with D_(nm) = gamma^(n-m) for n >=
-#' m and 0 otherwise.  The paper's claim is that the two agree exactly, so
-#' both are computed and their maximum discrepancy is returned as
-#' max_gap -- the check that the identity holds in this implementation,
-#' not merely in the paper.
+#' Sun et al. (2023), Retentive network: a successor to transformer for large language
+#' models, arXiv:2307.08621. The recurrent form, eqs. (5)-(6), is S_n = gamma S_(n-1) +
+#' K_n' V_n and O_n = Q_n S_n; the parallel form contracts the same computation into a
+#' masked matrix product, Retention(X) = (Q K' * D) V with D_(nm) = gamma^(n-m) for n >=
+#' m and 0 otherwise. The paper's claim is that the two agree exactly, so both are
+#' computed and their maximum discrepancy is returned as max_gap -- the check that the
+#' identity holds in this implementation, not merely in the paper.
 #'
 #' @param y alternative slot for Q (first, for signature stability).
 #' @param Q,K,V query, key and value sequences, one row per step.

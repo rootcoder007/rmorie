@@ -58,11 +58,10 @@ test_that("morie_tps_fetch_category errors when overwrite=TRUE + no httr2 path",
   # Pre-stage AND overwrite=TRUE — will try to fetch, hitting the
   # network. With TEST-NET-1 unreachable URL it'd take 120s; just
   # validate it errors cleanly when httr2 isn't found.
+  # overwrite = TRUE always fetches: offline that is an error naming the host
   testthat::with_mocked_bindings(
-    requireNamespace = function(package, ...) {
-      if (identical(package, "httr2")) FALSE else TRUE
-    },
-    .package = "base",
+    .morie_dataset_http_text = function(url, ...) stop("could not reach services.arcgis.com (offline)"),
+    .package = "rmorie",
     {
       out <- tryCatch(
         morie_tps_fetch_category("Assault", cache_dir = cache,
@@ -70,6 +69,7 @@ test_that("morie_tps_fetch_category errors when overwrite=TRUE + no httr2 path",
         error = function(e) e
       )
       expect_true(inherits(out, "error"))
+      expect_match(conditionMessage(out), "could not reach")
     }
   )
 })
@@ -127,16 +127,16 @@ test_that("morie_ingest_cihi_xlsx errors on non-string url", {
   )
 })
 
-test_that("morie_ingest_cihi_xlsx errors cleanly when httr2 absent", {
+test_that("morie_ingest_cihi_xlsx errors cleanly when the download fails", {
   testthat::with_mocked_bindings(
-    requireNamespace = function(package, ...) {
-      if (identical(package, "httr2")) FALSE else TRUE
-    },
-    .package = "base",
+    .morie_dataset_http_bytes = function(url, ...) stop("could not reach example.com (offline)"),
+    # the download path, not the readxl check: readxl is absent in the minimal-deps jobs
+    morie_ensure_extras = function(...) invisible(TRUE),
+    .package = "rmorie",
     {
       expect_error(
-        morie_ingest_cihi_xlsx(url = "https://example.com/x.xlsx"),
-        regexp = "httr2"
+        morie_ingest_cihi_xlsx(url = "https://example.com/x.xlsx", wayback_url = ""),
+        regexp = "download failed"
       )
     }
   )

@@ -16,3 +16,7 @@ expand(prk, info = raw(0), length = 32L)
 \description{
 HKDF Expand: counter-mode OKM
 }
+\examples{
+prk <- extract(as.raw(rep(0x0b, 22)), as.raw(0:12))$prk
+expand(prk, info = as.raw(0xf0:0xf9), length = 42L)$okm   # RFC 5869 test case 1
+}

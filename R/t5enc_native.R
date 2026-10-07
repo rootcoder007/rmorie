@@ -63,7 +63,6 @@
 #'
 #' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param task Coerced to character by the body, with \code{as.character}.
 #' @param text Coerced to character by the body, with \code{as.character}.
@@ -84,7 +83,6 @@ t5enc_task_prefix <- function(task, text) {
 #'
 #' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tokens Coerced to character by the body, with \code{as.character}.
 #' @param rate Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.15}.
@@ -179,7 +177,6 @@ t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
 #'
 #' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param relative_position Coerced to integer by the body, with \code{as.integer}.
 #' @param bidirectional A flag; the body branches on it. Defaults to \code{TRUE}.
@@ -221,7 +218,6 @@ t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
 #'
 #' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param value Coerced to numeric by the body, with \code{as.numeric}.
 #' @param increment Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.
@@ -246,7 +242,6 @@ t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) 
 #'
 #' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param text Coerced to character by the body, with \code{as.character}.
 #' @param labels Optional; may be \code{NULL}. Coerced to character by the body, with
@@ -279,7 +274,6 @@ t5enc_parse_prediction <- function(text, labels = NULL) {
 #'
 #' A step of the t5enc_native implementation. Called by \code{morie_t5enc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -303,7 +297,7 @@ t5enc_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 t5encoder <- t5enc_span_corruption
 
 # public names resolved by fn/_lazy_map.json
@@ -314,7 +308,6 @@ t5 <- t5enc_span_corruption
 #'
 #' A step of the t5enc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param method Passed to \code{match.arg}.
 #' @param ... Passed through.

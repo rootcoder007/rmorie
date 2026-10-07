@@ -17,6 +17,9 @@
 #'   Cross-checked against the reference implementation in the CRAN
 #'   package samplingbook 1.2.4, whose sample.size.mean computes
 #'   S^2 / (e^2/q^2 + S^2/N) -- the same quantity rearranged.
+#' @examples
+#' Nsamp(e = 2, S = 10)$n
+#' Nsamp(e = 2, S = 10, N = 500)$n
 #' @export
 Nsamp <- function(e, S, N = Inf, level = 0.95) {
   e <- as.numeric(e)

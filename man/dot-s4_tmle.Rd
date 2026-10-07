@@ -23,7 +23,6 @@ A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{H}, \code{Q1},
 A step of the s04core implementation. Called by \code{Tmlfed}, \code{Tmlnte},
 \code{Tmlper} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)

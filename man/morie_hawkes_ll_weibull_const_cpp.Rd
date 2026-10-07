@@ -22,5 +22,8 @@ The value of \code{.Call}.
 \description{
 A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+morie_hawkes_ll_weibull_const_cpp(t = c(0.5, 1.2, 2.0, 3.1), T_horizon = 4, a0 = 0.8,
+                                  eta = 0.3, alpha = 1.5, lam = 1)
 }

@@ -24,5 +24,4 @@ The value of \code{x}, as built in the body.
 A step of the dist_native implementation. Called by \code{Qbeta}, \code{Qf},
 \code{Qgamma} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

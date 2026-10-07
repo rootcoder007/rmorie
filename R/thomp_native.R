@@ -16,7 +16,6 @@
 #'
 #' A step of the thomp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; its length is taken and its elements indexed.
 #' @param T A count; the body uses it as \code{seq_len(...)}.

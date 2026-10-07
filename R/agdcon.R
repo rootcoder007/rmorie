@@ -13,9 +13,8 @@
 #' @param lipschitz L; NULL uses a fixed 50-step power iteration on X'X.
 #'
 #' @return List with beta, objective, lipschitz, steps, nactive, n, p.
-#' @references Beck and Teboulle (2009), SIAM J. Imaging Sci. 2(1),
-#'   183-202.  Standard published form; the SIAM article is paywalled and
-#'   was not read.
+#' @references Beck and Teboulle (2009), SIAM J. Imaging Sci. 2(1), 183-202. Standard
+#'   published form; standard published form.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

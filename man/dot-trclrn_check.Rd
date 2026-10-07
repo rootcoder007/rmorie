@@ -24,5 +24,4 @@ A list with \code{y}, \code{a}, \code{Xm}, \code{p}, \code{n}, \code{arms}.
 A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree},
 \code{trclrn_rule_value}.
 See the file header for the source the module follows.
-source it follows.
 }

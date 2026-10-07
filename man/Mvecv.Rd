@@ -22,8 +22,8 @@ covered, h, n, p, method.
 \description{
 Rousseeuw, P. J. (1985), "Multivariate estimation with high breakdown
 point", in Mathematical Statistics and Applications, Vol. B, Reidel,
-283-297.  The MVE criterion is the one stated in the stub docstring, the
-smallest-volume ellipsoid covering h points, and it is applied here to the
+283-297.  The MVE criterion, the smallest-volume ellipsoid covering h
+points, is applied here to the
 JOINT matrix Z = [X | y], exactly as Mcdcv applies the MCD, so that a
 scatter estimator becomes a regression estimator:
 beta = Sigma_XX^-1 Sigma_Xy, alpha = mu_y - beta mu_X.  The inflation factor

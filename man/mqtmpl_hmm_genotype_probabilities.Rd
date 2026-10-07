@@ -19,5 +19,8 @@ The value of \code{out}, as built in the body.
 \description{
 A step of the mqtmpl_native implementation. Called by \code{mqtmpl_sample_genotypes}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+# backcross calls coded 0/1; two individuals, three markers (cM); NA is a missing call
+mqtmpl_hmm_genotype_probabilities(genotypes = list(c(0, NA, 1), c(1, 1, 0)), positions = c(0, 10, 20))
 }

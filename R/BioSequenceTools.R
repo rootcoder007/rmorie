@@ -34,6 +34,7 @@
 #' ProteinDisorder("MKKEEEKKPSEESKEDKKSEEGAPLLIVAVLLFAGIVLLVAWFILK", window = 11)$regions
 #' @export
 OlcAssembly <- function(long_reads, min_overlap = 3L, max_error = 0) {
+  .morie_arg(long_reads, "c")
   reads <- toupper(as.character(long_reads))
   n <- length(reads)
   keep <- integer(0)

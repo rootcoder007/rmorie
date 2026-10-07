@@ -208,6 +208,7 @@ Diophs <- function(a, b, c) {
 #' DiopT(5)
 #' @export
 DiopT <- function(n) {
+  .morie_arg(n, "i1")
   nn <- as.integer(n)
   if (nn < 1) stop("order must be at least 1", call. = FALSE)
   a <- 0
@@ -304,6 +305,7 @@ ContFr <- function(x, n) {
 #' Conti(4)
 #' @export
 Conti <- function(n) {
+  .morie_arg(n, "i1")
   pit <- c(3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 2, 1)
   nn <- as.integer(n)
   if (nn < 1 || nn > length(pit))

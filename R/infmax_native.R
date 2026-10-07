@@ -65,7 +65,6 @@
 #'
 #' A step of the infmax_native implementation. Called by \code{.infmax_jsd_estimator}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
@@ -88,7 +87,6 @@
 #'
 #' A step of the infmax_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param joint_scores Passed to \code{unlist}.
 #' @param marginal_scores Passed to \code{unlist}.
@@ -115,7 +113,6 @@
 #'
 #' A step of the infmax_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param joint_scores Passed to \code{unlist}.
 #' @param marginal_scores Passed to \code{unlist}.
@@ -144,7 +141,6 @@
 #'
 #' A step of the infmax_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param global_features Iterated over elementwise, with \code{lapply}.
 #' @param feature_maps Iterated over elementwise, with \code{lapply}.
@@ -194,7 +190,6 @@
 #'
 #' A step of the infmax_native implementation. Called by \code{morie_infmax}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param global_features Iterated over elementwise, with \code{lapply}.
 #' @param feature_maps Iterated over elementwise, with \code{lapply}.
@@ -256,7 +251,6 @@
 #'
 #' A step of the infmax_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -276,7 +270,7 @@
          "global feature, ONE estimator, and no autoregression.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 .infmax_deepinfomax <- .infmax_local_objective
 
 # public names resolved by fn/_lazy_map.json
@@ -287,7 +281,6 @@
 #'
 #' A step of the infmax_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param global_features Passed to \code{.infmax_local_objective}.
 #' @param feature_maps Passed to \code{.infmax_local_objective}.

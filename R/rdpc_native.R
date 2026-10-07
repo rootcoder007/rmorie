@@ -26,6 +26,8 @@
 #'   \code{alpha}, \code{sigma}, \code{sensitivity}, \code{method}.
 #' @references Mironov, I. (2017). Renyi differential privacy. IEEE
 #'   Computer Security Foundations Symposium, 263-275.
+#' @examples
+#' morie_rdpc(alpha = 2, sigma = 1)$epsilon_rdp   # 2 * 1 / 2
 #' @export
 morie_rdpc <- function(alpha, sigma, sensitivity = 1) {
   alpha <- as.numeric(alpha)

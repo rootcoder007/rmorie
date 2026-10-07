@@ -21,6 +21,29 @@
 #' @return A list with \code{m}, \code{z}, the single representation
 #'   \code{s}, \code{estimate}, \code{nblock} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 6
+#' @examples
+#' \donttest{
+#' # one Evoformer block at toy width (cm = cz = 2); every weight a small fixed matrix
+#' set.seed(25)
+#' m <- array(rnorm(8), c(2, 2, 2)); z <- array(rnorm(8), c(2, 2, 2))
+#' nw <- function(r, c) matrix(rnorm(r * c, sd = 0.3), r, c)
+#' w <- list(rowq = list(nw(2, 2)), rowk = list(nw(2, 2)), rowv = list(nw(2, 2)),
+#'           rowg = list(nw(2, 2)), rowo = nw(2, 2), rowb = nw(1, 2),
+#'           colq = list(nw(2, 2)), colk = list(nw(2, 2)), colv = list(nw(2, 2)),
+#'           colg = list(nw(2, 2)), colo = nw(2, 2), mt1 = nw(3, 2), mt2 = nw(2, 3),
+#'           opa = nw(2, 2), opb = nw(2, 2), opo = nw(2, 4),
+#'           tmoag = nw(2, 2), tmoav = nw(2, 2), tmobg = nw(2, 2), tmobv = nw(2, 2),
+#'           tmog = nw(2, 2), tmoo = nw(2, 2),
+#'           tmiag = nw(2, 2), tmiav = nw(2, 2), tmibg = nw(2, 2), tmibv = nw(2, 2),
+#'           tmig = nw(2, 2), tmio = nw(2, 2),
+#'           tasq = list(nw(2, 2)), task = list(nw(2, 2)), tasv = list(nw(2, 2)),
+#'           tasb = nw(1, 2), tasg = list(nw(2, 2)), taso = nw(2, 2),
+#'           taeq = list(nw(2, 2)), taek = list(nw(2, 2)), taev = list(nw(2, 2)),
+#'           taeb = nw(1, 2), taeg = list(nw(2, 2)), taeo = nw(2, 2),
+#'           pt1 = nw(3, 2), pt2 = nw(2, 3), sout = nw(3, 2))
+#' r <- Alfevo(m, z, w)
+#' dim(r$s)
+#' }
 #' @export
 Alfevo <- function(m, z, w, nblock = 1, drop = NULL) {
   s <- dim(m)[1]

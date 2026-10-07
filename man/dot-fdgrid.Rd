@@ -15,7 +15,6 @@ A numeric value.
 \description{
 A step of the helpers_fda implementation. Called by \code{Scfd}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .fdgrid(n = 3L)

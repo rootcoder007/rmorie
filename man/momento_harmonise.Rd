@@ -22,3 +22,8 @@ A step of the momento_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+s <- list(sin(1:24), cos(1:10))
+h <- momento_harmonise(s, patch_len = 8)
+c(h$n_series, h$n_patches)
+}

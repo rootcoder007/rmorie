@@ -18,5 +18,4 @@ The value of \code{adj}, as built in the body.
 A step of the avalon_native implementation. Called by \code{morie_avalon_features},
 \code{morie_avalon_rings}, \code{morie_cypin_descriptors} and 3 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

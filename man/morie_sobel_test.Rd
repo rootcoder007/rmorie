@@ -36,7 +36,11 @@ the method, not of this implementation.
 morie_sobel_test(0.5, 0.4, 0.1, 0.08)$statistic
 }
 \references{
-Sobel, M. E. (1982), \emph{Sociological Methodology} 13,
-290-312; Aroian, L. A. (1947), \emph{Ann. Math. Statist.} 18,
-265-271; Goodman, L. A. (1960), \emph{JASA} 55, 708-713.
+Sobel, M. E. (1982). Asymptotic confidence intervals for
+indirect effects in structural equation models. \emph{Sociological
+Methodology} 13, 290-312; Aroian, L. A. (1947). The probability
+function of the product of two normally distributed variables.
+\emph{Annals of Mathematical Statistics} 18(2), 265-271; Goodman, L. A.
+(1960). On the exact variance of products. \emph{Journal of the
+American Statistical Association} 55, 708-713.
 }

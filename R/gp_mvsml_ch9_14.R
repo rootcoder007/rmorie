@@ -518,8 +518,7 @@ Basmat <- function(t, n_basis, kind = "fourier", period = NULL) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_fda_basis_deriv(V, V)
+#' morie_fda_basis_deriv(t = seq(0, 1, length.out = 6), n_basis = 5L, p = 1L)
 #' @keywords internal
 morie_fda_basis_deriv <- function(t, n_basis, p = 1L, kind = "fourier",
                                   period = NULL) {
@@ -573,8 +572,7 @@ morie_fda_basis_deriv <- function(t, n_basis, p = 1L, kind = "fourier",
 #' @param beta Argument `beta`; see Usage.
 #' @return The value of `out`, as built in the body.
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' rmorie:::Penmat(V, V)
+#' rmorie:::Penmat(t = seq(0, 1, length.out = 50), L1 = 5L, p = 2L)
 #' @keywords internal
 Penmat <- function(t, L1, p = 2L, kind = "fourier", period = NULL,
                    beta = NULL) {

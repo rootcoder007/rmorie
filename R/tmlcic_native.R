@@ -50,7 +50,6 @@
 #' A step of the tmlcic_native implementation. Called by \code{.tmlcic_hier_cluster_arm},
 #' \code{.tmlcic_hier_individual_arm}, \code{morie_tmlcic_candidate_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -69,7 +68,6 @@
 #' \code{.tmlcic_hier_cluster_arm}, \code{.tmlcic_hier_individual_arm} and 1 others in
 #' the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
@@ -89,7 +87,6 @@
 #' \code{.tmlcic_fit_working_model}, \code{.tmlcic_hier_cluster_arm} and 1 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -170,8 +167,7 @@
 #' @return The value of \code{lib}, as built in the body.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_tmlcic_default_library(V)
+#' length(morie_tmlcic_default_library(p = 3L))
 #' @keywords internal
 morie_tmlcic_default_library <- function(p, interactions = TRUE) {
   # The chapter's example library: the unadjusted model, one main term
@@ -199,7 +195,6 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #'
 #' A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_working_model}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A matrix; indexed by row and column.
 #' @param cand A list; the body reads \code{$cols}, \code{$interact} from it.
@@ -221,7 +216,6 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #'
 #' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_candidate_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; indexed elementwise.
 #' @param A A vector; indexed elementwise.
@@ -245,7 +239,6 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #' A step of the tmlcic_native implementation. Called by
 #' \code{morie_tmlcic_adaptive_prespecification}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A vector; indexed elementwise.
 #' @param W A matrix; indexed by row and column.
@@ -268,7 +261,6 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #' A step of the tmlcic_native implementation. Called by
 #' \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param A A vector; indexed elementwise.
@@ -334,7 +326,6 @@ morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows = NULL,
 #' A step of the tmlcic_native implementation. Called by
 #' \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param A A vector; indexed elementwise.
@@ -385,7 +376,6 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
 #'
 #' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_cluster_ic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cluster Optional; may be \code{NULL}. Coerced to character by the body, with
 #' \code{as.character}.
@@ -418,7 +408,6 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
 #'
 #' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_cluster_ic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A vector; indexed elementwise.
 #' @param y A vector; indexed elementwise.
@@ -477,7 +466,6 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #' A step of the tmlcic_native implementation. Called by
 #' \code{morie_tmlcic_adaptive_prespecification}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A vector; indexed elementwise.
 #' @param y A vector; indexed elementwise.
@@ -524,7 +512,6 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #' A step of the tmlcic_native implementation. Called by
 #' \code{morie_tmlcic_adaptive_prespecification}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param groups See Usage.
 #' @param n_folds Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -558,7 +545,6 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #'
 #' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_cluster_ic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param A Passed to \code{morie_tmlcic_candidate_tmle}.
@@ -659,7 +645,6 @@ morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
 #'
 #' A step of the tmlcic_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.s03vec}.
 #' @param D Passed to \code{.s03vec}.
@@ -881,7 +866,6 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
 #'
 #' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; indexed elementwise.
 #' @param groups A vector; its length is taken and its elements indexed.
@@ -909,7 +893,6 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
 #'
 #' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yc Numeric; combined arithmetically in the body.
 #' @param Aj A vector; indexed elementwise.
@@ -966,7 +949,6 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
 #'
 #' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_tmle_hierarchical}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param Ai A vector; indexed elementwise.
@@ -1031,7 +1013,6 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
 #'
 #' A step of the tmlcic_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.s03vec}.
 #' @param A Passed to \code{.s03vec}.
@@ -1195,7 +1176,6 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm = "both",
 #'
 #' A step of the tmlcic_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -1215,7 +1195,7 @@ morie_tmlcic_cheatsheet <- function() {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_tmlcic_tmleclusteric <- morie_tmlcic_tmle_cluster_ic
 
 #' @rdname morie_tmlcic_tmle_cluster_ic

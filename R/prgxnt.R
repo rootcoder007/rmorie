@@ -13,6 +13,8 @@
 #' an upper bound for the entropy of English, Computational Linguistics 18:31-40. Not
 #' held locally; perplexity as the exponentiated per-token cross-entropy is the standard
 #' published definition.
+#' @examples
+#' Perplex(log(c(0.25, 0.25, 0.25, 0.25)))$perplexity   # uniform over 4 tokens: 4
 #' @export
 Perplex <- function(log_probs, N = NULL) {
   lp <- .t1_vec(log_probs)

@@ -19,7 +19,6 @@ A list with \code{epsilon}, \code{delta}.
 A step of the dp_native implementation. Called by \code{morie_dp_changepoint},
 \code{morie_dp_count}, \code{morie_dp_covariance} and 12 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .morie_dp_check_budget(epsilon = 0.5)

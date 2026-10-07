@@ -36,7 +36,6 @@ the parent interval. That Jacobian is the piece it is easy to drop,
 and dropping it silently tilts every acceptance ratio.
 }
 \examples{
-set.seed(1)
-r <- morie_bnppvl_log_prior(q = matrix(rnorm(20), 5, 4), m = matrix(rnorm(20), 5, 4)); TRUE
+morie_bnppvl_log_prior(q = seq(0, 1, length.out = 9), m = 3L)
 }
 \keyword{internal}

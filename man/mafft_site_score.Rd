@@ -28,5 +28,8 @@ The value of \code{tot}, as built in the body.
 A step of the mafft_native implementation. Called by \code{find_homologous_segments},
 \code{mafft_nw}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+sc <- normalized_similarity_matrix(seq_type = "aa")
+mafft_site_score(sc$M, list("MKV"), list("MRV"), 1, 1, 2L, 2L)
 }

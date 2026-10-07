@@ -39,7 +39,6 @@ The value of \code{calls}, as built in the body.
 \description{
 A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_structural_variant}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

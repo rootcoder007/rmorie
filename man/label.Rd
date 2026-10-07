@@ -17,7 +17,6 @@ A character value.
 A step of the bats_native implementation. Called by \code{morie_bats},
 \code{morie_rmrl}, \code{morie_rmrl_qlearn_flat}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 spec <- BatsSpec(periods = c(4), use_trend = TRUE)

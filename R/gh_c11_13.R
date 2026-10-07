@@ -26,6 +26,7 @@
 Ghosalgpadaptthm <- function(n = 60, l_true = 0.2,
                              l_grid = c(0.05, 0.2, 0.8), noise = 0.1,
                              seed = 42) {
+  .morie_arg(n, "i1")
   n <- as.integer(n)
   if (n < 2L) stop("n must be at least 2")
   if (l_true <= 0) stop("l_true must be positive")

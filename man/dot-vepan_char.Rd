@@ -18,7 +18,6 @@ The value of \code{substr}.
 A step of the vepan_native implementation. Called by \code{.vepan_cds_frame},
 \code{.vepan_coding_terms}, \code{.vepan_hgvs_c}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 txt <- c('alpha', 'beta', 'gamma', 'delta')

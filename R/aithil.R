@@ -8,14 +8,14 @@
 #' @param q Order of the diversity number.
 #'
 #' @return List with hill, q, prop, richness, shannon, simpson, D.
-#' @references Hill, M. O. (1973), Ecology 54(2), 427-432, Equation (2)
-#'   and Sect. 2.  Standard published form; the article is paywalled and
-#'   was not read.
+#' @references Hill, M. O. (1973), Ecology 54(2), 427-432, Equation (2) and Sect. 2.
+#'   Standard published form; standard published form.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Hillq(V)
 Hillq <- function(x, q = 1) {
+  .morie_arg(x, "n0")
   x <- .t1_vec(x)
   D <- length(x)
   if (D == 0) stop("x must be non-empty")

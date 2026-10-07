@@ -19,5 +19,4 @@ A list with \code{score}, \code{variance}, \code{n}.
 \description{
 A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
 See the file header for the source the module follows.
-source it follows.
 }

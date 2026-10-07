@@ -21,5 +21,4 @@ A vector, from \code{c}.
 \description{
 A step of the bndest_native implementation. Called by \code{morie_bndest}.
 See the file header for the source the module follows.
-source it follows.
 }

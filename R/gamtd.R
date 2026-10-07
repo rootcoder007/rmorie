@@ -1,13 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' The n-step TD return and its update
 #'
-#' Sutton and Barto (2018), 2nd ed. (FETCHED from incompleteideas.net),
-#' equation (7.1): G_(t:t+n) = R_(t+1) + gamma R_(t+2) + ... +
-#' gamma^(n-1) R_(t+n) + gamma^n V_(t+n-1)(S_(t+n)) "for all n, t such
-#' that n >= 1 and 0 <= t < T - n", with G_(t:t+n) = G_t once t + n >= T,
-#' i.e. the bootstrap term is dropped past the end of the episode.
-#' Equation (7.2) gives the update V(S_t) <- V(S_t) + alpha \[G_(t:t+n) -
-#' V(S_t)\].  n = 1 recovers TD(0) and n >= T recovers Monte Carlo.
+#' Sutton and Barto (2018), 2nd ed., equation (7.1): G_(t:t+n) = R_(t+1) + gamma R_(t+2) +
+#' ... + gamma^(n-1) R_(t+n) + gamma^n V_(t+n-1)(S_(t+n)) "for all n, t such that n >= 1
+#' and 0 <= t < T - n", with G_(t:t+n) = G_t once t + n >= T, i.e. the bootstrap term is
+#' dropped past the end of the episode. Equation (7.2) gives the update V(S_t) <- V(S_t) +
+#' alpha \[G_(t:t+n) - V(S_t)\]. n = 1 recovers TD(0) and n >= T recovers Monte Carlo.
 #'
 #' @param traj the rewards R_1..R_T.
 #' @param V current value estimates.

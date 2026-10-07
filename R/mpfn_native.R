@@ -161,9 +161,10 @@ morie_mpfn_readout <- function(H, how = "sum", H0 = NULL, i_fn = NULL,
 #' @return A list with invariant, max_deviation, readout.
 #' @export
 #' @examples
-#' morie_mpfn_is_permutation_invariant(H = 0.5,
-#'   adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
-#'   edge_features = c(1, 2, 3, 4, 5, 6, 7, 8), perm = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' H <- matrix(c(1, 2, 3, 0.5, -1, 2), 3, 2)              # three nodes, two features
+#' adj <- list("0" = c(2L, 1L), "1" = 0L, "2" = 0L)        # 0-based adjacency
+#' edge_features <- list("0_1" = 2, "2_0" = 0.5)
+#' morie_mpfn_is_permutation_invariant(H, adj, edge_features, perm = c(2L, 0L, 1L), T = 2L)
 #' @keywords internal
 morie_mpfn_is_permutation_invariant <- function(H, adj, edge_features,
                                                  perm, T = 3L,
@@ -205,9 +206,10 @@ morie_mpfn_messagepassing <- morie_mpfn_message_passing
 #'
 #' A step of the mpfn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(mpfn_cheatsheet())
 #' @export
 mpfn_cheatsheet <- function() {
   paste(paste0(
@@ -227,7 +229,6 @@ mpfn_cheatsheet <- function() {
 #'
 #' A step of the mpfn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H A vector; its length is taken and its elements indexed.
 #' @param adj A vector; its length is taken and its elements indexed.
@@ -237,6 +238,11 @@ mpfn_cheatsheet <- function() {
 #' @param how Passed to \code{mpfn_readout}. Defaults to \code{"sum"}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{invariant}, \code{max_deviation}, \code{readout}.
+#' @examples
+#' H <- list(c(1, 0), c(0, 1), c(1, 1))
+#' adj <- list(`1` = c(2L, 3L), `2` = 1L, `3` = 1L)        # 1-based node labels
+#' ef <- list(`1,2` = 0.5, `1,3` = 2)                      # edge features keyed "v,w"
+#' mpfn_is_permutation_invariant(H, adj, ef, perm = c(3L, 1L, 2L))$invariant
 #' @export
 mpfn_is_permutation_invariant <- function(H, adj, edge_features, perm, T = 3,
                                           how = "sum", tol = 1e-9) {
@@ -266,13 +272,14 @@ mpfn_is_permutation_invariant <- function(H, adj, edge_features, perm, T = 3,
 #'
 #' A step of the mpfn_native implementation. Called by \code{mpfn_message_passing}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h_v Accepted by the signature and not used anywhere in the body.
 #' @param h_w Coerced to numeric by the body, with \code{as.numeric}.
 #' @param e_vw A vector; its length is taken and its elements indexed.
 #' @param A Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
+#' @examples
+#' mpfn_message(h_v = c(1, 0), h_w = c(0.5, 2), e_vw = 2)
 #' @export
 mpfn_message <- function(h_v, h_w, e_vw, A = NULL) {
   hw <- as.numeric(h_w)
@@ -289,7 +296,6 @@ mpfn_message <- function(h_v, h_w, e_vw, A = NULL) {
 #'
 #' A step of the mpfn_native implementation. Called by \code{mpfn_is_permutation_invariant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H0 Iterated over elementwise, with \code{lapply}.
 #' @param adj A vector; indexed elementwise.
@@ -298,6 +304,10 @@ mpfn_message <- function(h_v, h_w, e_vw, A = NULL) {
 #' @param A Passed to \code{mpfn_message}.
 #' @param update Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{H}, as built in the body.
+#' @examples
+#' H <- list(c(1, 0), c(0, 1), c(1, 1))
+#' adj <- list(`1` = c(2L, 3L), `2` = 1L, `3` = 1L)
+#' mpfn_message_passing(H, adj, edge_features = list(), T = 2)
 #' @export
 mpfn_message_passing <- function(H0, adj, edge_features, T = 3, A = NULL,
                                  update = NULL) {
@@ -331,7 +341,6 @@ mpfn_message_passing <- function(H0, adj, edge_features, T = 3, A = NULL,
 #'
 #' A step of the mpfn_native implementation. Called by \code{mpfn_is_permutation_invariant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Iterated over elementwise, with \code{lapply}.
 #' @param how One of \code{"gated"}, \code{"mean"}, \code{"sum"}. Defaults to \code{"sum"}.
@@ -339,6 +348,10 @@ mpfn_message_passing <- function(H0, adj, edge_features, T = 3, A = NULL,
 #' @param i_fn The body requires: mpfn: the gated readout needs H0, i_fn and j_fn.
 #' @param j_fn The body requires: mpfn: the gated readout needs H0, i_fn and j_fn.
 #' @return The value of \code{acc}, as built in the body.
+#' @examples
+#' H <- list(c(1, 2), c(3, 4), c(5, 6))
+#' mpfn_readout(H, how = "sum")
+#' mpfn_readout(H, how = "mean")
 #' @export
 mpfn_readout <- function(H, how = "sum", H0 = NULL, i_fn = NULL, j_fn = NULL) {
   if (!(how %in% c("sum", "mean", "gated"))) {
@@ -373,10 +386,11 @@ mpfn_readout <- function(H, how = "sum", H0 = NULL, i_fn = NULL, j_fn = NULL) {
 #'
 #' A step of the mpfn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
+#' @examples
+#' mpfn_sig(c(-2, 0, 3))
 #' @export
 mpfn_sig <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
@@ -389,7 +403,6 @@ mpfn_sig <- function(x) {
 #'
 #' A step of the mpfn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h A vector; its length is taken.
 #' @param m Passed to \code{lin}.
@@ -400,6 +413,10 @@ mpfn_sig <- function(x) {
 #' @param Wh Passed to \code{lin}.
 #' @param Uh Passed to \code{lin}.
 #' @return A numeric value.
+#' @examples
+#' set.seed(13)
+#' mk <- function() matrix(rnorm(4, sd = 0.5), 2, 2)
+#' mpfn_update_gru(h = c(0, 0), m = c(1, -1), mk(), mk(), mk(), mk(), mk(), mk())
 #' @export
 mpfn_update_gru <- function(h, m, Wz, Uz, Wr, Ur, Wh, Uh) {
   n <- length(h)

@@ -18,7 +18,6 @@ A numeric value.
 A step of the ecfp4_native implementation. Called by \code{.mor_fp_invariants},
 \code{.mor_fp_morgan}, \code{morie_rdkfp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

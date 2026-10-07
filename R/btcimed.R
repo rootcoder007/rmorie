@@ -60,7 +60,6 @@ Btcimed <- function(x, B = 200L, alpha = 0.05, rng = 2L, exhaustive = FALSE) {
 #'
 #' A step of the btcimed implementation. Called by \code{Btcimed}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sorted_vals A vector; its length is taken and its elements indexed.
 #' @return One of two values, depending on the branch taken.

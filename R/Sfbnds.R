@@ -49,6 +49,7 @@
 #' set.seed(1)
 #' Sfbnds(y = rbinom(40, 1, 0.5), D = rbinom(40, 1, 0.5), Z = rbinom(40, 1, 0.5))
 Sfbnds <- function(y, D, Z) {
+  .morie_arg(y, "n")
   chk <- function(v, nm) {
     x <- .s03vec(v)
     if (length(x) == 0L) stop(sprintf("sharp_bounds_balke_pearl: %s is empty", nm))

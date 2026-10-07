@@ -14,7 +14,6 @@
 #'
 #' A step of the crkbsg_native implementation. Called by \code{morie_crkbsg_cokriging}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -42,7 +41,6 @@
 #'
 #' A step of the crkbsg_native implementation. Called by \code{morie_crkbsg_cokriging}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h Numeric; combined arithmetically in the body.
 #' @param model One of \code{"exponential"}, \code{"gaussian"}, \code{"spherical"}.
@@ -67,7 +65,6 @@
 #'
 #' A step of the crkbsg_native implementation. Called by \code{morie_crkbsg_cokriging}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -133,7 +130,6 @@
 #'
 #' A step of the crkbsg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param coords Passed to \code{.crkbsg_rows}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -288,7 +284,6 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
 #'
 #' A step of the crkbsg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -16,7 +16,6 @@ The value of \code{lo}, as built in the body.
 A step of the helpers_w3num implementation. Called by \code{.w3_ols},
 \code{morie_cypin_fit}, \code{morie_hyper2} and 3 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)

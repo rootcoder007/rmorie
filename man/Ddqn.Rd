@@ -69,14 +69,9 @@ Ddqn(P, R, 0.9, alpha = 0.5, epsilon = 0, n_episodes = 4,
      terminal = 1L)$estimate
 }
 \references{
-Sutton, R. S. and Barto, A. G. (2018). Reinforcement
-Learning: An Introduction, 2nd ed., MIT Press, Section 6.7, boxed
-algorithm p. 136, eq. 6.10.  Local source:
-fetched-wave3/sutton-barto-2018-reinforcement-learning-2nd-ed.pdf.
-van Hasselt, H. (2010). Double Q-learning. NeurIPS 23, 2613-2621.
-Local source: fetched-wave3/hasselt-2010-double-qlearning-neurips.pdf.
-van Hasselt, H., Guez, A. and Silver, D. (2016). Deep
-reinforcement learning with Double Q-learning. AAAI 2016
-(arXiv:1509.06461), eq. 4.  Local source:
-fetched-wave3/hasselt-guez-silver-2016-ddqn-arxiv1509.06461.pdf.
+Sutton, R. S. and Barto, A. G. (2018). Reinforcement Learning: An
+Introduction, 2nd ed., MIT Press, Section 6.7, boxed algorithm p. 136, eq. 6.10.
+van Hasselt, H. (2010). Double Q-learning. NeurIPS 23, 2613-2621. van Hasselt, H.,
+Guez, A. and Silver, D. (2016). Deep reinforcement learning with Double Q-learning.
+AAAI 2016 (arXiv:1509.06461), eq. 4.
 }

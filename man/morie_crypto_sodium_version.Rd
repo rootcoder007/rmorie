@@ -14,7 +14,5 @@ Phase 3JJJ1. Returns the included libsodium version (e.g.,
 \code{"1.0.20"}); empty string if libsodium wasn't linked.
 }
 \examples{
-if (morie_crypto_sodium_available()) {
-  morie_crypto_sodium_version()
-}
+morie_crypto_sodium_version()
 }

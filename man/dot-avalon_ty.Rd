@@ -19,5 +19,4 @@ One of two values, depending on the branch taken.
 \description{
 A step of the avalon_native implementation. Called by \code{morie_avalon_features}.
 See the file header for the source the module follows.
-source it follows.
 }

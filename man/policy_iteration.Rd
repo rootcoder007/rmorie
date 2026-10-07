@@ -24,7 +24,6 @@ A list with \code{policy}, \code{V}, \code{Q}, \code{sweeps}.
 \description{
 A step of the birl_native implementation. Called by \code{birl}, \code{policy_walk}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))

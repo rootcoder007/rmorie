@@ -21,7 +21,6 @@ A list with \code{sigmas}, \code{max_deviation}, \code{view_independent}, \code{
 \description{
 A step of the nrfrad_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 model <- function(p, d) list(sigma = sum(p^2), rgb = c(0.5, 0.5, 0.5))

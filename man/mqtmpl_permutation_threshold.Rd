@@ -42,5 +42,14 @@ A list with \code{estimate}, \code{threshold}, \code{alpha}, \code{n_perm},
 \description{
 A step of the mqtmpl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+\donttest{
+set.seed(2)
+n <- 40
+m1 <- rbinom(n, 1, 0.5); m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+thr <- mqtmpl_permutation_threshold(y, list(m1, m2), c(0, 0.1), n_perm = 20, method = "mr")
+thr$threshold
+}
 }

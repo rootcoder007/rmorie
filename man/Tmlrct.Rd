@@ -33,6 +33,14 @@ observational rows cost efficiency, not consistency.
 Rows are stacked trial-first: \code{D} and \code{X} must have
 \code{length(y_rct) + length(y_obs)} rows in that order.
 }
+\examples{
+set.seed(6)
+n1 <- 150; n2 <- 300
+X <- matrix(rnorm(n1 + n2), ncol = 1)
+D <- c(rbinom(n1, 1, 0.5), rbinom(n2, 1, plogis(X[(n1 + 1):(n1 + n2)])))
+y <- 1 + D + X[, 1] + rnorm(n1 + n2)
+Tmlrct(y_rct = y[1:n1], y_obs = y[-(1:n1)], D = D, X = X)$estimate
+}
 \references{
 Athey, S., Chetty, R., Imbens, G. W. & Kang, H. (2025).
 Review of Economic Studies 93(4):2284-2312; van der Laan, M. J. &

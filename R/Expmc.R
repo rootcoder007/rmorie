@@ -3,9 +3,8 @@
 #'
 #' Alias of \code{morie_dp_exponential_mechanism}: selects candidate r
 #' with probability proportional to
-#' \eqn{\exp(\epsilon u(D, r) / (2 \Delta u))}. The generated stub for
-#' module expmc described exactly the mechanism already shipped, so this
-#' is an alias.
+#' \eqn{\exp(\epsilon u(D, r) / (2 \Delta u))}. \code{expmc} is the same
+#' mechanism under a short name, not a second implementation.
 #'
 #' @param candidates See Usage.
 #' @param utility See Usage.
@@ -14,9 +13,7 @@
 #' @param seed See Usage.
 #' @references McSherry, F., and Talwar, K. (2007). Mechanism design via
 #'   differential privacy. FOCS 2007, 94-103.
-#' @references Dwork, C., and Roth, A. (2014). FnT-TCS 9(3-4), 211-487.
-#'   Definition 3.4.
-#'   Local source: fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
+#' @references Dwork, C., and Roth, A. (2014). FnT-TCS 9(3-4), 211-487. Definition 3.4.
 #'
 #' Delegating wrapper (not a bare assignment) so that source collation
 #' order does not matter at load time; the body is a single call to the

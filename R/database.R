@@ -30,17 +30,29 @@
     (requireNamespace("RSQLite", quietly = TRUE) || requireNamespace("duckdb", quietly = TRUE))
 }
 
+.morie_cache_note <- new.env(parent = emptyenv())
+
 .morie_sql_or_fallback <- function(db_path = NULL) {
   if (.morie_dbi_available()) {
     con <- if (is.null(db_path)) morie_db_connect() else morie_db_connect(db_path)
     return(list(type = "dbi", con = con, close = TRUE))
   }
-  message("cache: DBI with RSQLite or duckdb is not installed; using the file backend ",
-          "(morie_install_extras(c('DBI', 'RSQLite')) enables SQL caches)")
-  if (requireNamespace("nanoparquet", quietly = TRUE)) {
-    return(list(type = "parquet", dir = .morie_cache_fs_dir(), close = FALSE))
+  # the file backend is a working default cache: say so only when a SQL file was asked for by name,
+  # since that request is not honoured as asked
+  dir <- .morie_cache_fs_dir()
+  if (!is.null(db_path)) {
+    # the cache the caller named stays theirs: its files sit beside db_path, so two
+    # databases never share (or read) each other's tables
+    dir <- paste0(tools::file_path_sans_ext(db_path), "_files")
+    dir.create(dir, recursive = TRUE, showWarnings = FALSE)
+    .morie_cache_note$shown <- TRUE
+    message("cache: DBI with RSQLite or duckdb is not installed; using the file backend in ", dir,
+            " (morie_install_extras(c('DBI', 'RSQLite')) enables SQL caches)")
   }
-  list(type = "rds", dir = .morie_cache_fs_dir(), close = FALSE)
+  if (requireNamespace("nanoparquet", quietly = TRUE)) {
+    return(list(type = "parquet", dir = dir, close = FALSE))
+  }
+  list(type = "rds", dir = dir, close = FALSE)
 }
 
 # Internal: resolve a DBI connection. Accepts a pre-opened connection
@@ -100,7 +112,9 @@
 #' Internal helper: Morie Cache Fs Dir
 #' @noRd
 .morie_cache_fs_dir <- function() {
-  d <- file.path(tempdir(), "morie", "fscache")
+  # the per-user cache (MORIE_CACHE_DIR overrides): under tempdir() every session re-downloaded
+  # the 39 MB PUMF that `pull` had just said was cached
+  d <- morie_cache_dir("fscache")
   dir.create(d, recursive = TRUE, showWarnings = FALSE)
   d
 }
@@ -119,12 +133,40 @@
 #' @noRd
 .morie_atomic_write <- function(path, writer) {
   tmp <- paste0(path, ".tmp", Sys.getpid())
-  writer(tmp)
-  if (!file.rename(tmp, path)) {
-    file.copy(tmp, path, overwrite = TRUE)
-    unlink(tmp)
+  on.exit(if (file.exists(tmp)) unlink(tmp), add = TRUE)
+  res <- tryCatch(suppressWarnings(writer(tmp)), error = function(e) e)
+  # an unwritable directory: say which, instead of the writer's "cannot open the connection"
+  if (inherits(res, "error") || !file.exists(tmp)) {
+    if (file.access(dirname(path), 2L) != 0L) {
+      stop(sprintf("cannot write %s (the directory is not writable)", dirname(path)), call. = FALSE)
+    }
+    if (inherits(res, "error")) stop(res)
+    stop(sprintf("cannot write %s", path), call. = FALSE)
+  }
+  if (!suppressWarnings(file.rename(tmp, path)) && !file.copy(tmp, path, overwrite = TRUE)) {
+    stop(sprintf("cannot write %s", path), call. = FALSE)
   }
   invisible(path)
+}
+
+# The cache a loader fills on the way is optional: a read-only or full home directory (HPC,
+# containers) must not stop the data from reaching the caller or `pull --out`. Say so once and
+# return the data; morie_cache_store() itself still fails when called on purpose.
+#' Internal helper: best-effort cache store
+#' @noRd
+.morie_cache_store_soft <- function(data, table_name, db_path = NULL, con = NULL) {
+  tryCatch(
+    withCallingHandlers(
+      morie_cache_store(data, table_name, db_path = db_path, con = con),
+      warning = function(w) invokeRestart("muffleWarning")
+    ),
+    error = function(e) {
+      dir <- if (is.null(db_path) && is.null(con)) morie_cache_dir("fscache") else (db_path %||% "the database")
+      message(sprintf("cache skipped for %s (%s is not writable); the data are returned uncached",
+                      table_name, dir))
+      invisible(0L)
+    }
+  )
 }
 
 #' morie cache contract
@@ -206,14 +248,17 @@ morie_cache_dir <- function(subdir = NULL) {
 #' @return Invisibly, the number of files removed.
 #' @seealso \code{\link{morie_cache_dir}}
 #' @examples
-#' \dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("sql")) withAutoprint({
 #' # Non-interactive: skip the confirmation prompt.
 #' morie_cache_clear("siu", confirm = FALSE)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_clear <- function(subdir = NULL, confirm = interactive()) {
+  if (!is.null(subdir) && (!is.character(subdir) || length(subdir) != 1L || grepl("(^|[/\\\\])\\.\\.([/\\\\]|$)|^([A-Za-z]:)?[/\\\\]|^~", subdir))) {
+    stop("`subdir` must be a folder inside the cache (no \"..\", no absolute path)", call. = FALSE)
+  }
   path <- morie_cache_dir(subdir)
   if (!dir.exists(path)) {
     return(invisible(0L))
@@ -226,7 +271,7 @@ morie_cache_clear <- function(subdir = NULL, confirm = interactive()) {
     }
   }
   n_files <- length(list.files(path, recursive = TRUE, full.names = TRUE))
-  unlink(path, recursive = TRUE, force = TRUE)
+  .morie_unlink_owned(path)
   invisible(n_files)
 }
 
@@ -283,8 +328,8 @@ morie_builtin_db <- function() {
 #'   directory.
 #' @return A DBI connection object.
 #' @examples
-#' \dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("sql")) withAutoprint({
 #' # DuckDB (default when 'duckdb' is installed); pass a '.db' path for SQLite.
 #' if (requireNamespace("duckdb", quietly = TRUE) &&
 #'   requireNamespace("DBI", quietly = TRUE)) {
@@ -294,8 +339,8 @@ morie_builtin_db <- function() {
 #'   DBI::dbDisconnect(con)
 #'   file.remove(tmp)
 #' }
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_db_connect <- function(db_path = NULL) {
   morie_ensure_extras("DBI")
@@ -338,7 +383,8 @@ morie_db_connect <- function(db_path = NULL) {
         call. = FALSE
       )
     }
-    return(DBI::dbConnect(duckdb::duckdb(), dbdir = db_path))
+    # duckdb prints an 8-line note about its extension directory on first connect; a listing verb is not the place
+    return(suppressMessages(DBI::dbConnect(duckdb::duckdb(), dbdir = db_path)))
   }
   # SQLite fallback path.
   if (!requireNamespace("RSQLite", quietly = TRUE)) {
@@ -366,8 +412,8 @@ morie_db_connect <- function(db_path = NULL) {
 #' @return Number of rows written (invisible).
 #' @examples
 #' set.seed(1)
-#' \dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("sql")) withAutoprint({
 #' db <- tempfile(fileext = ".db")
 #' morie_cache_store(
 #'   data = data.frame(x = rnorm(50), y = rnorm(50)),
@@ -375,8 +421,8 @@ morie_db_connect <- function(db_path = NULL) {
 #'   db_path = db
 #' )
 #' file.remove(db)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
@@ -390,6 +436,7 @@ morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
   if (h$type == "rds") {
     p <- .morie_cache_fs_path(h$dir, table_name, "rds")
     .morie_atomic_write(p, function(f) saveRDS(as.data.frame(data), f))
+    .morie_cache_rows_note(p, nrow(data))
     return(invisible(nrow(data)))
   }
   if (h$close) on.exit(DBI::dbDisconnect(h$con), add = TRUE)
@@ -409,8 +456,8 @@ morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame, or \code{NULL} if the table does not exist.
 #' @examples
-#' \dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("sql")) withAutoprint({
 #' db <- tempfile(fileext = ".db")
 #' morie_cache_store(
 #'   data = data.frame(x = 1:5),
@@ -419,8 +466,8 @@ morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
 #' )
 #' morie_cache_load(table_name = "demo", db_path = db)
 #' file.remove(db)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_load <- function(table_name, db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
@@ -445,20 +492,37 @@ morie_cache_load <- function(table_name, db_path = NULL, con = NULL) {
   DBI::dbReadTable(h$con, table_name)
 }
 
+# Row count of a cached RDS table without reading it: a "<file>.n" note written when the
+# table is stored, trusted while it is not older than the table. Reading every table to
+# count it took minutes once the catalogue was cached.
+.morie_cache_rows_note <- function(f, n) {
+  try(writeLines(as.character(as.integer(n)), paste0(f, ".n")), silent = TRUE)
+  invisible(n)
+}
+
+.morie_cache_rows <- function(f) {
+  side <- paste0(f, ".n")
+  if (file.exists(side) && isTRUE(file.mtime(side) >= file.mtime(f))) {
+    n <- suppressWarnings(as.integer(readLines(side, n = 1L, warn = FALSE)))
+    if (length(n) == 1L && !is.na(n)) return(n)
+  }
+  .morie_cache_rows_note(f, as.integer(nrow(readRDS(f))))
+}
+
 #' List all tables in the MORIE cache
 #'
 #' @param db_path Optional path to a SQLite file (default backend).
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame with columns \code{table} and \code{rows}.
 #' @examples
-#' \dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("sql")) withAutoprint({
 #' db <- tempfile(fileext = ".db")
 #' morie_cache_store(data.frame(x = 1:3), "demo", db_path = db)
 #' morie_cache_list(db_path = db)
 #' file.remove(db)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_list <- function(db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
@@ -481,7 +545,7 @@ morie_cache_list <- function(db_path = NULL, con = NULL) {
         )
         if (is.na(n)) as.integer(nrow(nanoparquet::read_parquet(f))) else n
       } else {
-        as.integer(nrow(readRDS(f)))
+        .morie_cache_rows(f)
       }
     }, integer(1))
     return(data.frame(
@@ -615,20 +679,28 @@ morie_load_cpads <- function(db_path = NULL, use_ckan = TRUE, con = NULL) {
 #'   directly, so any catalogued dataset can be fetched without a built-in
 #'   database; \code{dataset_key} then only labels the cache table.
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
+#' @param portal Optional CKAN portal base URL (e.g. \code{"https://data.ontario.ca"}); the
+#'   default is open.canada.ca. The catalog gives it for resources on another portal.
 #' @return A data.frame.
 #' @examples
 #' \donttest{
-#' # Requires network access. Fetches the first 5000 rows of the
+#' # Requires network access. Fetches the first 200 rows of the
 #' # Canadian Postsecondary Alcohol and Drug Use Survey from the
 #' # Government of Canada CKAN datastore:
-#' cpads <- morie_fetch_ckan(dataset_key = "cpads", limit = 5000L)
+#' cpads <- morie_fetch_ckan(dataset_key = "cpads", limit = 200L)
 #' nrow(cpads)
 #' }
 #' @export
 morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
                              db_path = NULL, resource_id = NULL,
-                             con = NULL) {
-  ckan_base <- getOption("morie.ckan_base", "https://open.canada.ca/data/en/api/3/action/datastore_search")
+                             con = NULL, portal = NULL) {
+  # the catalog names the portal a resource lives on (the OTIS tables are on data.ontario.ca;
+  # asked on open.canada.ca they 404ed)
+  ckan_base <- if (!is.null(portal) && nzchar(portal)) {
+    paste0(sub("/+$", "", portal), "/api/3/action/datastore_search")
+  } else {
+    getOption("morie.ckan_base", "https://open.canada.ca/data/en/api/3/action/datastore_search")
+  }
 
   resource_ids <- list(
     cpads = "d2639429-c304-45a6-90b3-770562f4d46d",
@@ -698,15 +770,24 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
         "%s?resource_id=%s&limit=%d&offset=%d",
         ckan_base, rid, page, fetched
       )
-      raw <- tryCatch(suppressWarnings(readLines(url(api_url), warn = FALSE)), error = function(e) e)
-      if (inherits(raw, "error")) {
-        if (fetched > 0L) stop("CKAN datastore failed after ", fetched, " rows: ", conditionMessage(raw), call. = FALSE)
-        # the datastore API is down or slow: the resource file is the route,
-        # live or from its Wayback Machine snapshot (the Python arm does the same)
-        message("CKAN datastore unreachable (", conditionMessage(raw), "); reading the resource file instead")
+      # status-aware: a server that answered (a datastore query it refuses, HTTP 4xx/5xx) is not an
+      # unreachable one, and the message says which
+      resp <- tryCatch(.morie_http_get_with_status(api_url, timeout_s = 120L), error = function(e) e)
+      why <- if (inherits(resp, "error")) {
+        sprintf("CKAN datastore unreachable (%s)", conditionMessage(resp))
+      } else if (!identical(as.integer(resp$status_code), 200L)) {
+        sprintf("the CKAN datastore answered HTTP %d to the query (limit=%d, offset=%d)",
+                as.integer(resp$status_code), page, fetched)
+      }
+      if (!is.null(why)) {
+        if (fetched > 0L) stop(why, " after ", fetched, " rows", call. = FALSE)
+        # the resource file is the route then, live or from its Wayback Machine snapshot (the
+        # Python arm does the same)
+        message(why, "; reading the resource file instead")
         fallback <- TRUE
         break
       }
+      raw <- resp$body
       payload <- .morie_from_json(paste(raw, collapse = ""))
       recs <- payload$result$records
       if (is.null(recs) || NROW(recs) == 0L) break
@@ -766,9 +847,18 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @noRd
 .fuzzy_match_key <- function(key) {
   catalog <- morie_dataset_catalog()
+  # Exact match on the key as written (the NAPS keys carry hyphens), then with - read as _.
+  idx <- which(catalog$key == tolower(key))
+  if (length(idx) == 1L) {
+    return(catalog$key[idx])
+  }
   key_lower <- tolower(gsub("-", "_", key))
-  # Exact match on new short keys.
   idx <- which(catalog$key == key_lower)
+  if (length(idx) == 1L) {
+    return(catalog$key[idx])
+  }
+  key_hyphen <- tolower(gsub("_", "-", key))  # naps_co_on_2023 -> naps-co-on-2023
+  idx <- which(catalog$key == key_hyphen)
   if (length(idx) == 1L) {
     return(catalog$key[idx])
   }
@@ -812,8 +902,8 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @return A data.frame.
 #' @seealso \code{\link{morie_fetch}}, \code{\link{morie_ckan_search}}
 #' @examples
-#' \dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("sql")) withAutoprint({
 #' # CPADS 2021-2022: downloaded once from open.canada.ca (39 MB), then a local
 #' # read; try() so a missing optional backend does not fail the check
 #' df <- try(morie_load_dataset("ocp21"))
@@ -824,11 +914,30 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' # con <- DBI::dbConnect(RPostgres::Postgres(),
 #' #   host = "localhost", dbname = "morie", user = "...")
 #' # df <- morie_load_dataset("ocp21", con = con)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
                                con = NULL) {
+  # a workbook streamed to CSV reports progress under the dataset key, not a temp file name
+  op <- options(morie.xlsx.label = key)
+  on.exit(options(op), add = TRUE)
+  df <- .morie_load_dataset_raw(key, db_path = db_path, refresh = refresh, con = con)
+  # the published SIU corpus holds page text cut at the wrong place in this column: the few
+  # real categories (morie.data._post_load does the same), missing kept missing
+  if (identical(tolower(key), "siu") && is.data.frame(df) && "sex_gender_affected" %in% names(df)) {
+    v <- df$sex_gender_affected
+    miss <- is.na(v) | !nzchar(trimws(as.character(v)))
+    df$sex_gender_affected <- ifelse(miss, NA_character_, .siu_an_sex(v))
+  }
+  df
+}
+
+.morie_load_dataset_raw <- function(key, db_path = NULL, refresh = FALSE,
+                                    con = NULL) {
+  if (!is.character(key) || length(key) != 1L || is.na(key) || !nzchar(key)) {
+    stop("key must be a single dataset key (rmorie list-datasets / morie_list_datasets())", call. = FALSE)
+  }
   # the bootstrap-weight files are 600 MB: R's 60 s default timeout truncated
   # them mid-download (2026-10-01); every route below inherits this
   old_timeout <- options(timeout = max(getOption("timeout", 60), 3600))
@@ -856,7 +965,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       "  - rmoriedata::morie_data_catalog()  bundled data SLUGS (e.g. 'chicago_iucr_codes')\n",
       "  - morie_datasets_*()                dedicated fetchers ",
       "(e.g. morie_datasets_chicago_iucr_codes())\n",
-      "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (after rmorie login)",
+      "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (after rmorie login, GitHub or --email)",
       call. = FALSE
     )
   }
@@ -864,7 +973,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   entry <- catalog[catalog$key == matched, ]
   has <- function(col) col %in% names(entry) && nzchar(entry[[col]])
   has_remote <- has("ckan_resource_id") || has("download_url") ||
-    has("arcgis_url")
+    has("arcgis_url") || has("fetcher") || has("rmoriedata")
 
   if (!refresh) {
     # 1. Built-in database (ships with package).
@@ -897,21 +1006,54 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   # 3. Local file. Skipped on refresh when a remote source exists, so a
   #    refresh re-pulls from the authoritative remote rather than a stale
   #    on-disk copy; for local-only datasets the file remains the source.
-  if (file.exists(entry$local_path) && !(refresh && has_remote)) {
-    message("Ingesting ", matched, " from local: ", entry$local_path)
-    ext <- tolower(tools::file_ext(entry$local_path))
+  local_file <- .morie_own_file_path(entry$local_path)
+  if (!is.null(local_file) && !(refresh && has_remote)) {
+    message("Ingesting ", matched, " from local: ", local_file)
+    ext <- tolower(tools::file_ext(local_file))
     data <- if (ext == "csv") {
-      utils::read.csv(entry$local_path, stringsAsFactors = FALSE)
+      utils::read.csv(local_file, stringsAsFactors = FALSE)
     } else if (ext %in% c("xlsx", "xls")) {
-      if (!requireNamespace("readxl", quietly = TRUE)) stop("readxl required")
-      as.data.frame(readxl::read_excel(entry$local_path))
+      .morie_xlsx_data_sheet(local_file)
     } else if (ext == "rds") {
-      readRDS(entry$local_path)
+      readRDS(local_file)
     } else {
       stop("Unsupported format: ", ext, call. = FALSE)
     }
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
+  }
+
+  # 3b. Research files that are not tables (R environments) kept at
+  #     data.rmorie.com: fetched into the data directory and opened here.
+  if (has("hosted_file")) {
+    dest <- file.path(.morie_data_root(), entry$local_path)
+    if (!file.exists(dest)) {
+      dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
+      .morie_data_get(paste0("/files/", entry$hosted_file), dest)
+    }
+    ext <- tolower(tools::file_ext(dest))
+    if (ext == "rds") return(readRDS(dest))
+    e <- new.env(parent = emptyenv())
+    # objects saved from the producing session (a Quarto render hook, mlr3 learners) name packages
+    # this session may not have; R rebinds them to .GlobalEnv and says so once per object
+    withCallingHandlers(load(dest, envir = e), warning = function(w) {
+      if (grepl("is not available and has been replaced", conditionMessage(w), fixed = TRUE)) invokeRestart("muffleWarning")
+    })
+    attr(e, "morie_path") <- dest
+    message("Loaded ", matched, " as an environment with ", length(ls(e)), " objects (", dest, ")")
+    return(e)
+  }
+
+  # 3c. The data.rmorie.com copy of a table whose portal file is absent or
+  #     fails to download (Health Infobase tables, ...).
+  hosted_copy <- function(why) {
+    if (is.null(.morie_llm_hosted_key())) {
+      stop(matched, ": ", why, "; the data.rmorie.com copy (", entry$hosted_key,
+           ") opens with your MORIE key: run `rmorie login` (GitHub) or `rmorie login --email you@example.com` once.", call. = FALSE)
+    }
+    data <- morie_load_hosted_dataset(entry$hosted_key, db_path = db_path, refresh = refresh)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
+    data
   }
 
   # 4. CKAN datastore -- resolved directly from the catalog resource id,
@@ -922,40 +1064,104 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       dataset_key = matched,
       resource_id = entry$ckan_resource_id,
       db_path = db_path,
-      con = con
+      con = con,
+      portal = if (has("ckan_portal")) entry$ckan_portal else NULL
     )
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
+    return(data)
+  }
+
+  # 4a. A table shipped by rmoriedata on CRAN (the reviewed SIU corpus and its manifest).
+  if (has("rmoriedata")) {
+    if (!requireNamespace("rmoriedata", quietly = TRUE)) {
+      stop(matched, " ships in the rmoriedata package: install.packages(\"rmoriedata\")", call. = FALSE)
+    }
+    data <- as.data.frame(rmoriedata::morie_data_load(entry$rmoriedata))
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
+    return(data)
+  }
+
+  # 4b. A fetcher in this package (the NAPS hourly files), with its catalogued arguments.
+  if (has("fetcher")) {
+    message("Fetching ", matched, " via ", entry$fetcher, "() ...")
+    fetcher <- get(entry$fetcher, envir = asNamespace(utils::packageName()))
+    data <- do.call(fetcher, .morie_parse_fetcher_args(if (has("fetcher_args")) entry$fetcher_args else ""))
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
 
   # 5. Direct download URL -- open-data files not exposed through the CKAN
   #    datastore (direct CSV/XLSX, or a file included inside a .zip archive).
   if (has("download_url")) {
+    # .xlsx is read by the package's own reader; only the binary .xls format (BIFF) needs readxl,
+    # and that is said before the download, not after it
+    if (grepl("\\.xls($|\\?)", entry$download_url, ignore.case = TRUE) && !requireNamespace("readxl", quietly = TRUE)) {
+      stop(matched, " is a binary .xls workbook: install.packages(\"readxl\") to read it", call. = FALSE)
+    }
     message("Downloading ", matched, " from ", entry$download_url, " ...")
     zm <- if ("zip_member" %in% names(entry)) entry$zip_member else ""
     is_zip <- grepl("\\.zip$", entry$download_url, ignore.case = TRUE)
-    data <- morie_fetch(entry$download_url,
-      format = if (is_zip) "zip" else "auto",
-      zip_member = zm
+    data <- tryCatch(
+      morie_fetch(entry$download_url, format = if (is_zip) "zip" else "auto", zip_member = zm),
+      error = function(e) e
     )
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    if (inherits(data, "error")) {
+      if (has("hosted_key")) {
+        message("Portal download failed (", conditionMessage(data), "); using the data.rmorie.com copy")
+        return(hosted_copy(paste0("the portal download failed (", conditionMessage(data), ")")))
+      }
+      stop(data)
+    }
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
+  }
+  if (has("hosted_key")) {
+    return(hosted_copy("no portal file is catalogued"))
   }
 
   # 6. ArcGIS FeatureServer / MapServer layer (e.g. TPS crime open data).
   if (has("arcgis_url")) {
     message("Querying ", matched, " from the ArcGIS layer ...")
-    data <- morie_fetch_arcgis(entry$arcgis_url)
-    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    data <- morie_fetch_arcgis(entry$arcgis_url, label = matched)
+    .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
 
-  stop("Dataset '", matched, "' not found locally, in cache, via CKAN, ",
-    "via a direct download URL, or via an ArcGIS layer.\n",
-    "Health Infobase and the other own-file keys are not downloadable: place the file at ",
-    "$MORIE_DATA_DIR/", entry$local_path, " (rmorie list-datasets shows every path) for ", matched,
-    call. = FALSE
-  )
+  where <- .morie_own_file_target(entry$local_path)
+  if (identical(matched, "mapq")) {
+    # participant-level MAPQ data are not distributed: a synthetic toy panel stands in
+    message(matched, ": your file is not at ", where, "; returning the synthetic toy panel (n = 400, ",
+            "planted structure) so the analyses run. Its numbers demonstrate the pipeline, they are not findings.")
+    return(.morie_mapq_synth_panel())
+  }
+  stop(matched, " is one of your own research files, not found at ", where,
+       ": place it there (set MORIE_DATA_DIR to use another data directory)", call. = FALSE)
+}
+
+# Where an own-file dataset belongs, when the file is not there yet; NULL otherwise
+# (also NULL for every key that downloads).
+.morie_own_file_missing <- function(key) {
+  cat_df <- morie_dataset_catalog()
+  e <- cat_df[cat_df$key == key, , drop = FALSE]
+  if (!nrow(e) || !startsWith(.cli_dataset_route(e[1L, ]), "own file")) return(NULL)
+  lp <- e$local_path[1L]
+  if (!is.null(.morie_own_file_path(lp))) return(NULL)
+  .morie_own_file_target(lp)
+}
+
+.morie_own_file_target <- function(local_path) {
+  if (grepl("^(/|[A-Za-z]:[/\\\\]|~)", local_path)) path.expand(local_path) else
+    file.path(.morie_data_root(), sub("^data/", "", local_path))
+}
+
+# Your own research file: the path as catalogued (relative to the working directory),
+# then under the data directory (MORIE_DATA_DIR, or the per-user data directory).
+.morie_own_file_path <- function(local_path) {
+  if (!is.character(local_path) || !nzchar(local_path)) return(NULL)
+  for (p in c(local_path, file.path(.morie_data_root(), sub("^data/", "", local_path)))) {
+    if (file.exists(p)) return(p)
+  }
+  NULL
 }
 
 #' List all datasets with cache status
@@ -1046,40 +1252,36 @@ morie_userguide <- function(name = NULL) {
 #' Downloads large bootstrap weight CSVs that are too big to ship with the
 #' package. Data is cached in the user cache database for future use.
 #'
-#' @param survey One of \code{"csads_2021"}, \code{"csads_2023"},
-#'   \code{"csus_2019"}, \code{"csus_2023"}, or \code{"all"} (default).
+#' @param survey A bootstrap key of \code{\link{morie_dataset_catalog}}
+#'   (\code{"ocs22bt"}, \code{"ocs24bt"}, \code{"cu20bt"},
+#'   \code{"cu23bt"}), its survey-year name (\code{"csads_2021"},
+#'   \code{"csads_2023"}, \code{"csus_2019"}, \code{"csus_2023"}), or
+#'   \code{"all"} (default).
 #' @param limit Max records per CKAN request (default 32000).
 #' @param db_path Optional path to a SQLite/DuckDB file (default backend).
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
-#' @return Invisibly, the number of CSV files successfully downloaded.
+#' @param refresh Download again even when the table is already cached (default
+#'   \code{FALSE}: a cached table is reported and kept).
+#' @return Invisibly, the number of surveys available (downloaded or already cached).
 #' @examples
+#' # the bootstrap tables and their keys
+#' cat_ <- morie_dataset_catalog()
+#' cat_[cat_$type == "bootstrap", c("key", "name")]
 #' \donttest{
-#' # the CSADS 2021 bootstrap weights (376 MB), cached for later survey work
-#' morie_download_bootstrap(survey = "csads_2021")
+#' # the CSADS 2021 bootstrap weights are 376 MB: fetched once, then read from the cache
+#' if (interactive()) morie_download_bootstrap(survey = "csads_2021")
 #' }
 #' @export
 morie_download_bootstrap <- function(survey = "all", limit = 32000L,
-                                     db_path = NULL, con = NULL) {
-  # Current short catalog keys (see morie_dataset_catalog()); the older
-  # oc_<survey>_<year>_bootstrap long keys are no longer in the catalog.
-  bootstrap_keys <- list(
-    csads_2021 = "ocs22bt",
-    csads_2023 = "ocs24bt",
-    csus_2019  = "cu20bt",
-    csus_2023  = "cu23bt"
-  )
-  if (survey == "all") {
-    targets <- unlist(bootstrap_keys, use.names = FALSE)
-  } else {
-    targets <- bootstrap_keys[[survey]]
-    if (is.null(targets)) stop("Unknown survey: ", survey, call. = FALSE)
-  }
-
+                                     db_path = NULL, con = NULL, refresh = FALSE) {
+  targets <- .morie_bootstrap_targets(survey)
   catalog <- morie_dataset_catalog()
+  n_ok <- 0L
+  failed <- character()
   for (key in targets) {
     entry <- catalog[catalog$key == key, ]
     if (nrow(entry) == 0L) {
-      message("Unknown key: ", key)
+      failed <- c(failed, sprintf("%s: not in the dataset catalogue", key))
       next
     }
 
@@ -1088,30 +1290,67 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
       message("Ingesting ", key, " from local file: ", entry$local_path)
       morie_cache_file(entry$local_path, entry$table_name, db_path = db_path, con = con)
       message("  OK: cached ", entry$table_name)
+      n_ok <- n_ok + 1L
       next
     }
 
-    # Try CKAN.
-    if (nzchar(entry$ckan_resource_id)) {
-      message("Downloading ", key, " from CKAN (limit=", limit, ")...")
-      tryCatch(
-        {
-          data <- morie_fetch_ckan(entry$survey,
-            limit = limit,
-            db_path = db_path, con = con
-          )
-          morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
-          message("  OK: ", nrow(data), " rows cached as ", entry$table_name)
-        },
-        error = function(e) {
-          message("  ERROR: ", conditionMessage(e))
-        }
-      )
+    # already cached (as `pull` would find it): not fetched again unless refresh = TRUE
+    if (!isTRUE(refresh)) {
+      cached <- tryCatch(morie_cache_load(entry$table_name, db_path = db_path, con = con),
+                         error = function(e) NULL)
+      if (is.data.frame(cached) && nrow(cached)) {
+        message(sprintf("  %s: %s rows already cached as %s (refresh = TRUE to download again)",
+                        key, format(nrow(cached), big.mark = ","), entry$table_name))
+        n_ok <- n_ok + 1L
+        next
+      }
+    }
+
+    # The datastore when the catalogue names a CKAN resource (honours `limit`), else the
+    # catalogue's own download route, the one `rmorie pull` takes.
+    message("Downloading ", key, " (", entry$name, ") ...")
+    r <- tryCatch(
+      if (nzchar(entry$ckan_resource_id)) {
+        data <- morie_fetch_ckan(key, limit = limit, db_path = db_path, con = con,
+                                 resource_id = entry$ckan_resource_id)
+        .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
+        # morie_fetch_ckan keeps its own "<key>_raw" copy: one cached copy of a 230 MB table
+        if (!identical(paste0(key, "_raw"), entry$table_name)) .morie_cache_drop(paste0(key, "_raw"), db_path, con)
+        data
+      } else {
+        morie_load_dataset(key, db_path = db_path, con = con)
+      },
+      error = function(e) e
+    )
+    if (inherits(r, "error")) {
+      failed <- c(failed, sprintf("%s: %s", key, conditionMessage(r)))
+      message("  ERROR: ", conditionMessage(r))
     } else {
-      message("  ", key, ": no CKAN resource ID. Download CSV manually to ", entry$local_path)
+      n_ok <- n_ok + 1L
+      message("  OK: ", nrow(r), " rows cached as ", entry$table_name)
     }
   }
-  invisible(NULL)
+  if (n_ok == 0L && length(failed)) {
+    stop("no bootstrap file could be downloaded:\n  ", paste(failed, collapse = "\n  "), call. = FALSE)
+  }
+  invisible(n_ok)
+}
+
+#' Internal helper: the catalogue keys a download-bootstrap request names
+#'
+#' A bootstrap key itself, its survey-year name, or "all"; shared by
+#' morie_download_bootstrap() and `rmorie download-bootstrap`.
+#' @noRd
+.morie_bootstrap_targets <- function(survey) {
+  aliases <- c(csads_2021 = "ocs22bt", csads_2023 = "ocs24bt", csus_2019 = "cu20bt", csus_2023 = "cu23bt")
+  if (!is.character(survey) || length(survey) != 1L || is.na(survey)) {
+    stop("`survey` must be one string: a bootstrap key, its survey-year name, or \"all\"", call. = FALSE)
+  }
+  if (identical(survey, "all")) return(unname(aliases))
+  if (survey %in% aliases) return(survey)
+  if (survey %in% names(aliases)) return(unname(aliases[[survey]]))
+  stop(sprintf("Unknown survey '%s'. Keys: %s (or %s, or all)", survey,
+               paste(aliases, collapse = ", "), paste(names(aliases), collapse = ", ")), call. = FALSE)
 }
 
 #' Internal helper: the download URL of a CKAN resource (resource_show)
@@ -1124,13 +1363,18 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
 #' @noRd
 .morie_ckan_resource_meta <- function(rid, ckan_base) {
   base <- sub("/datastore_search$", "", ckan_base)
+  err <- NULL
   meta <- tryCatch(
     .morie_from_json(paste(suppressWarnings(readLines(url(paste0(base, "/resource_show?id=", rid)), warn = FALSE)), collapse = "")),
-    error = function(e) NULL)
+    error = function(e) {
+      err <<- conditionMessage(e)  # the portal did not answer: not the same as a resource with no file
+      NULL
+    })
   u <- meta$result$url
   size <- suppressWarnings(as.numeric(meta$result$size %||% NA))
   list(url = if (is.character(u) && length(u) == 1L && nzchar(u)) u else NULL,
-       size = if (length(size) == 1L && is.finite(size) && size > 0) size else NULL)
+       size = if (length(size) == 1L && is.finite(size) && size > 0) size else NULL,
+       error = err, host = sub("^https?://([^/]+).*$", "\\1", base))
 }
 
 #' Internal helper: a CKAN resource read as a file, live or from the Wayback Machine
@@ -1142,6 +1386,10 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
 .morie_ckan_resource_file <- function(rid, dataset_key, ckan_base) {
   meta <- .morie_ckan_resource_meta(rid, ckan_base)
   src <- meta$url
+  if (is.null(src) && !is.null(meta$error)) {
+    stop(sprintf("%s could not be reached (%s); nothing cached for %s", meta$host, meta$error, dataset_key),
+         call. = FALSE)
+  }
   if (is.null(src)) {
     stop("CKAN returned 0 records for ", dataset_key, " and resource ", rid, " has no file URL", call. = FALSE)
   }
@@ -1158,4 +1406,20 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
     path <- csvs[[1L]]
   }
   utils::read.csv(path, stringsAsFactors = FALSE)
+}
+
+#' Internal: the data directory ($MORIE_DATA_DIR, else the per-user data dir)
+#' @noRd
+.morie_data_root <- function() {
+  env <- Sys.getenv("MORIE_DATA_DIR", "")
+  if (nzchar(env)) return(path.expand(env))
+  tools::R_user_dir("morie", which = "data")
+}
+
+# Remove one table from the default file cache (a no-op for a database cache or a missing file).
+.morie_cache_drop <- function(table_name, db_path = NULL, con = NULL) {
+  h <- tryCatch(.morie_db_handle(con, db_path), error = function(e) NULL)
+  if (is.null(h) || !h$type %in% c("rds", "parquet")) return(invisible(FALSE))
+  p <- .morie_cache_fs_path(h$dir, table_name, h$type)
+  invisible(file.exists(p) && unlink(p) == 0L)
 }

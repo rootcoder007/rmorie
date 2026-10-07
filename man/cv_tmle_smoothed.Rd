@@ -26,7 +26,6 @@ A list with \code{estimate}, \code{psi}, \code{se}, \code{ci},
 \description{
 A step of the tlcvnp_native implementation. Called by \code{morie_tlcvnp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 cv_tmle_smoothed(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))

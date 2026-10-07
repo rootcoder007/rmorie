@@ -21,7 +21,6 @@ A numeric value.
 \description{
 A step of the fmFM_native implementation. Called by \code{fit_fm}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

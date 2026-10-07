@@ -55,7 +55,6 @@
 #' A step of the xdeep_native implementation. Called by \code{xdeep_hadamard},
 #' \code{xdeep_xdeepfm_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -72,7 +71,6 @@
 #'
 #' A step of the xdeep_native implementation. Called by \code{xdeep_cin}, \code{xdeep_cin_layer}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -94,7 +92,6 @@
 #'
 #' A step of the xdeep_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{.xdeep_to_vec}.
 #' @param b Passed to \code{.xdeep_to_vec}.
@@ -118,7 +115,6 @@ xdeep_hadamard <- function(a, b) {
 #'
 #' A step of the xdeep_native implementation. Called by \code{xdeep_cin}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X_prev Passed to \code{.xdeep_to_mat}.
 #' @param X0 Passed to \code{.xdeep_to_mat}.
@@ -158,7 +154,6 @@ xdeep_cin_layer <- function(X_prev, X0, W) {
 #'
 #' A step of the xdeep_native implementation. Called by \code{xdeep_xdeepfm_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X0 Passed to \code{.xdeep_to_mat}.
 #' @param Ws A vector; its length is taken.
@@ -196,7 +191,6 @@ xdeep_cin <- function(X0, Ws) {
 #'
 #' A step of the xdeep_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param layer_index Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{layer}, \code{degree}, \code{note}.
@@ -221,7 +215,6 @@ xdeep_interaction_degree <- function(layer_index) {
 #'
 #' A step of the xdeep_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x_linear Passed to \code{.xdeep_to_vec}.
 #' @param w_linear Passed to \code{.xdeep_to_vec}.
@@ -269,7 +262,6 @@ xdeep_xdeepfm_score <- function(x_linear, w_linear, X0, Ws, w_cin,
 #'
 #' A step of the xdeep_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -289,7 +281,7 @@ xdeep_cheatsheet <- function() {
         "interactions coexist.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 xdeep_xdeepfm <- xdeep_cin
 
 # entry point

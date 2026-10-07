@@ -193,13 +193,14 @@ morie_mtdrl_metarl <- morie_mtdrl
 #'
 #' A step of the mtdrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_arms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param n_tasks Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param seed Passed to \code{set.seed}. Defaults to \code{0}.
 #' @param structure One of \code{"independent"}, \code{"paired"}. Defaults to \code{"independent"}.
 #' @return The value of \code{tasks}, as built in the body.
+#' @examples
+#' str(mtdrl_bandit_tasks(n_arms = 2, n_tasks = 3, seed = 1))
 #' @export
 mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100, seed = 0,
                                structure = "independent") {
@@ -229,9 +230,10 @@ mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100, seed = 0,
 #'
 #' A step of the mtdrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
+#' @examples
+#' cat(mtdrl_cheatsheet())
 #' @export
 mtdrl_cheatsheet <- function() {
   paste(paste0(
@@ -251,11 +253,12 @@ mtdrl_cheatsheet <- function() {
 #'
 #' A step of the mtdrl_native implementation. Called by \code{mtdrl_run}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param history A vector; its length is taken and its elements indexed.
 #' @param n_arms Numeric; combined arithmetically in the body.
 #' @return The value of \code{feat}, as built in the body.
+#' @examples
+#' mtdrl_history_features(history = list(list(action = 1, reward = 1), list(action = 2, reward = 0)), n_arms = 2)
 #' @export
 mtdrl_history_features <- function(history, n_arms) {
   feat <- rep(0, n_arms + 2L)
@@ -273,7 +276,6 @@ mtdrl_history_features <- function(history, n_arms) {
 #'
 #' A step of the mtdrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tasks Iterated over elementwise, with \code{lapply}.
 #' @param agent A list; the body reads \code{$act}, \code{$observe}, \code{$reset} from it.
@@ -287,6 +289,11 @@ mtdrl_history_features <- function(history, n_arms) {
 #' \code{regret}, \code{reward_by_step}, \code{optimal_action_rate},
 #' \code{episode_reward}, \code{n_episodes}, \code{episode_length}, \code{n_arms},
 #' \code{method}.
+#' @examples
+#' tasks <- mtdrl_bandit_tasks(n_arms = 2, n_tasks = 5, seed = 1)
+#' ag <- mtdrl_TabularHistoryAgent(n_arms = 2)
+#' r <- mtdrl_run(tasks, ag, episode_length = 50, n_arms = 2, seed = 1)
+#' r$optimal_action_rate
 #' @export
 mtdrl_run <- function(tasks, agent, episode_length = 100, n_arms = NULL,
                       seed = 0, reset_between_episodes = TRUE) {
@@ -352,12 +359,14 @@ mtdrl_run <- function(tasks, agent, episode_length = 100, n_arms = NULL,
 #'
 #' A step of the mtdrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_arms Coerced to integer by the body, with \code{as.integer}.
 #' @param epsilon Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @param optimistic Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{agent}, as built in the body.
+#' @examples
+#' ag <- mtdrl_TabularHistoryAgent(n_arms = 3)
+#' names(ag)
 #' @export
 mtdrl_TabularHistoryAgent <- function(n_arms, epsilon = 0.1, optimistic = 1) {
   agent <- new.env(parent = emptyenv())

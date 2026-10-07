@@ -20,5 +20,4 @@ A numeric value.
 A step of the gwrcal_native implementation. Called by \code{.gwr_criterion},
 \code{morie_gwrcal}, \code{morie_gwrcal_global_aicc}.
 See the file header for the source the module follows.
-source it follows.
 }

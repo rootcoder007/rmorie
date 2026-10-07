@@ -1,10 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Residual analysis for the logistic regression model
 #'
-#' Source READ FROM THE CORPUS PDF, pages rendered with pdftoppm:
-#' Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
-#' section 8.4.5 "Residual Analysis", printed pages 837-838, equations
-#' (8.67), (8.68) and (8.69).
+#' Source: Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
+#' section 8.4.5 "Residual Analysis", printed pages 837-838, equations (8.67), (8.68)
+#' and (8.69).
 #'
 #' Pearson residuals (8.67):
 #' \code{r_i = (y_i - n_i p_i) / sqrt(n_i p_i (1 - p_i))}.

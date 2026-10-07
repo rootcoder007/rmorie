@@ -24,5 +24,4 @@ The value of \code{b}, as built in the body.
 A step of the tmlcen_native implementation. Called by \code{.tmlcen_logit_irls},
 \code{morie_tmle_censoring}.
 See the file header for the source the module follows.
-source it follows.
 }

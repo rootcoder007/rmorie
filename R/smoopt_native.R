@@ -29,7 +29,6 @@
 #'
 #' A step of the smoopt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{dim}.
 #' @return One of two values, depending on the branch taken.
@@ -45,7 +44,6 @@
 #'
 #' A step of the smoopt_native implementation. Called by \code{smo_platt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{uniform}.
@@ -62,7 +60,6 @@
 #'
 #' A step of the smoopt_native implementation. Called by \code{smo_platt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -93,7 +90,6 @@ error_cache <- function(alpha, y, K, b) {
 #'
 #' A step of the smoopt_native implementation. Called by \code{smo_platt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param i See Usage.
 #' @param alpha A vector; indexed elementwise.
@@ -118,7 +114,6 @@ violates_kkt <- function(i, alpha, y, E, C, tol = 1e-3) {
 #'
 #' A step of the smoopt_native implementation. Called by \code{smo_platt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param C Coerced to numeric by the body, with \code{as.numeric}.
@@ -145,7 +140,6 @@ outer_loop_schedule <- function(alpha, C, examine_all) {
 #'
 #' A step of the smoopt_native implementation. Called by \code{smo_platt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param i1 Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
@@ -157,9 +151,8 @@ outer_loop_schedule <- function(alpha, C, examine_all) {
 #' @return A list with \code{index}, \code{level}, \code{note}.
 #' @export
 #' @examples
-#' second_choice(i1 = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), alpha = 0.5,
-#'   y = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   rng = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' second_choice(i1 = 1L, alpha = c(0.5, 0.2, 0, 0.8), y = c(1, -1, 1, -1),
+#'   E = c(0.3, -0.6, 0.1, 0.9), C = 1, rng = list(uniform = function() 0.5))
 #' @keywords internal
 second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {
   a <- as.numeric(alpha)
@@ -194,7 +187,6 @@ second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {
 #'
 #' A step of the smoopt_native implementation. Called by \code{smo_platt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param i1 Coerced to integer by the body, with \code{as.integer}.
 #' @param i2 Coerced to integer by the body, with \code{as.integer}.
@@ -236,7 +228,6 @@ compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
 #'
 #' A step of the smoopt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K A matrix; indexed by row and column.
@@ -337,7 +328,6 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
 #'
 #' A step of the smoopt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

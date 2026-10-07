@@ -19,7 +19,6 @@ A step of the cgnonl_native implementation. Called by
 \code{.cgnonl_exact_quadratic_step}, \code{beta_fletcher_reeves},
 \code{beta_polak_ribiere} and 2 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)

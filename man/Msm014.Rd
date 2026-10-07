@@ -13,9 +13,15 @@ Msm014(...)
 The list returned by \code{Msm010()}.
 }
 \description{
-The stub generator stamped several extracted page fragments with the same
-function name, so the implementation lives once in \code{Msm010()} and this
-module re-exports it. Calling either path runs the same code.
+The same method as \code{Msm010()}, re-exported under this name; both run the same
+code.
+}
+\examples{
+set.seed(11)
+g <- rep(1:5, each = 4)
+X <- cbind(1, rnorm(20)); Z <- model.matrix(~ factor(g) - 1)
+y <- as.numeric(X \%*\% c(2, 1) + Z \%*\% rnorm(5, sd = 0.7) + rnorm(20))
+Msm014(X, Z, y, D = diag(0.5, 5))$beta
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

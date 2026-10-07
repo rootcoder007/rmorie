@@ -42,11 +42,9 @@ Prehay(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), M = c(1, 2, 3, 4, 5, 6, 7,
   y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
-Preacher, K. J. and Hayes, A. F. (2008), Asymptotic and
-resampling strategies for assessing and comparing indirect effects
-in multiple mediator models, Behavior Research Methods 40(3),
-879-891, doi:10.3758/BRM.40.3.879, pp. 880-884; local copy
-fetched-wave3/preacher-hayes-2008-asymptotic-resampling-multiple-mediators-BRM40.pdf.
-Rank rule: Preacher and Hayes (2004), Behavior Research Methods,
+Preacher, K. J. and Hayes, A. F. (2008), Asymptotic and resampling
+strategies for assessing and comparing indirect effects in multiple mediator
+models, Behavior Research Methods 40(3), 879-891, doi:10.3758/BRM.40.3.879, pp.
+880-884. Rank rule: Preacher and Hayes (2004), Behavior Research Methods,
 Instruments, and Computers 36(4), 717-731, p. 722.
 }

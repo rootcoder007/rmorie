@@ -35,7 +35,6 @@ A list with \code{estimate}, \code{identified_set}, \code{credible_hpd},
 \description{
 A step of the bndbye_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- morie_compare_sets(phi_hat = 0.5, half_width = 0.2, se_phi = 0.1)

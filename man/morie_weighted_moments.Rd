@@ -18,7 +18,6 @@ A list with \code{mean}, \code{sd}, \code{n}.
 A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic},
 \code{morie_gms_critical_value}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -21,7 +21,6 @@ A numeric value.
 \description{
 A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold_confidence}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 # Guo et al. (2017) temperature scaling on overconfident logits

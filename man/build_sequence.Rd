@@ -18,7 +18,6 @@ A list with \code{estimate}, \code{sequence}, \code{n_visual}, \code{n_text},
 \description{
 A step of the llavx_native implementation. Called by \code{morie_llavx}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

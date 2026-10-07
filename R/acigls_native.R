@@ -13,7 +13,6 @@
 #'
 #' A step of the acigls_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param A A matrix; indexed by row and column.

@@ -11,8 +11,8 @@ morie_survey_glm(
 )
 }
 \arguments{
-\item{design}{A \code{survey::svydesign} object (when interfacing with
-the \code{survey} package directly).}
+\item{design}{A design from \code{\link[=morie_survey_design]{morie_survey_design()}}. A \code{survey::svydesign}
+object is accepted too and read into the same native form (one-stage designs).}
 
 \item{formula}{A \code{formula} (e.g. \code{y ~ x1 + x2}) for survey-weighted
 regression / GLM.}
@@ -21,18 +21,32 @@ regression / GLM.}
 to the survey-weighted GLM.}
 }
 \value{
-A \code{svyglm} object (survey-weighted GLM fit).
+A list: \code{coefficients} (a matrix of estimates, design-based standard errors,
+t values and p-values on the design degrees of freedom: PSUs minus strata minus the
+coefficients beyond the intercept), \code{confint}, \code{vcov} (the sandwich
+\eqn{A^{-1} B A^{-1}} with \eqn{B} the Taylor-linearisation variance of the score totals)
+and \code{fit} (the weighted \code{glm} giving the estimates).
 }
 \description{
-Wraps \code{survey::svyglm()}. Family argument accepts the same strings as the
-Python module ("gaussian", "binomial", "poisson", "gamma", "negativebinomial")
-or any R \code{family} object.
+The design-weighted GLM with the linearisation (sandwich) variance of
+\code{survey::svyglm()} (Binder 1983; Lumley 2004), computed natively for weights, strata,
+clusters and a finite-population correction. Rows with a missing model variable leave the
+fit but stay in the design with a zero score, as in survey. Family accepts the same strings
+as the Python module ("gaussian", "binomial", "poisson", "gamma", "negativebinomial") or any
+R \code{family} object; binomial and Poisson fits use the quasi family (same estimates, no
+non-integer warning).
 }
 \examples{
-\dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
-df <- data.frame(y = rnorm(40), x = rnorm(40), w = runif(40, 0.5, 2))
-d <- morie_survey_design(df, "w")
-str(morie_survey_glm(d, y ~ x), max.level = 1)
-\dontshow{\}) # examplesIf}
+df <- data.frame(y = rnorm(40), x = rnorm(40), w = runif(40, 0.5, 2),
+                 s = rep(c("a", "b"), 20), psu = rep(1:10, each = 4))
+d <- morie_survey_design(df, "w", strata_col = "s", cluster_col = "psu", nest = TRUE)
+morie_survey_glm(d, y ~ x)$coefficients
+}
+\references{
+Binder, D. A. (1983). On the variances of asymptotically normal estimators from
+complex surveys. International Statistical Review 51, 279-292.
+
+Lumley, T. (2004). Analysis of complex survey samples. Journal of Statistical Software
+9(1), 1-19.
 }

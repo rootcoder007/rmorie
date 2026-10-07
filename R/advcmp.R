@@ -3,9 +3,8 @@
 #'
 #' Dwork, Rothblum and Vadhan (2010), "Boosting and differential privacy", 51st
 #' IEEE Symposium on Foundations of Computer Science (FOCS), 51-60,
-#' doi:10.1109/FOCS.2010.12.  The full text was not retrievable here, so the
-#' theorem is written in the standard published form the module specification
-#' states: the k-fold adaptive composition of mechanisms each
+#' doi:10.1109/FOCS.2010.12.  The theorem in its standard published form:
+#' the k-fold adaptive composition of mechanisms each
 #' (epsilon, delta)-differentially private is (epsilon', k delta + delta')-
 #' differentially private with
 #' epsilon' = sqrt(2 k ln(1/delta')) epsilon + k epsilon (e^epsilon - 1).
@@ -35,6 +34,7 @@
 #' Advcmp(0.1, 1e-6, 100, 1e-5)$epsilon_total
 #' @export
 Advcmp <- function(epsilon, delta = 0, k = 1, delta_prime = 1e-6) {
+  .morie_arg(epsilon, "n1")
   e <- as.numeric(epsilon)
   if (!(e > 0)) stop("advanced_composition: epsilon must be positive")
   d <- as.numeric(delta)

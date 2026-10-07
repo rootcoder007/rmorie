@@ -22,3 +22,6 @@ The smoothed relative rank
 load-bearing \eqn{\\sigma(r_j^2)} term that stops scores from
 running away.
 }
+\examples{
+morie_gru4r_top1(r_target = 2, r_negatives = c(0.5, 1, -1))
+}

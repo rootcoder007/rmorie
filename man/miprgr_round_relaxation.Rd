@@ -21,5 +21,8 @@ A list with \code{x}, \code{feasible}, \code{violations}, \code{note}.
 \description{
 A step of the miprgr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+A <- matrix(c(1, 1, 1, -1), 2, byrow = TRUE)
+miprgr_round_relaxation(c(1.4, 2.6), A, b = c(4, 1), integer_vars = c(1, 2))
 }

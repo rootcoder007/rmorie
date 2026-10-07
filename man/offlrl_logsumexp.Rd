@@ -15,5 +15,8 @@ A numeric value.
 \description{
 A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+offlrl_logsumexp(c(1000, 1000))
+log(2) + 1000
 }

@@ -27,13 +27,11 @@ below was read from rendered images of the journal PDF, article pages 58,
 59 and 60, because that PDF's text layer drops minus signs.
 }
 \details{
-The stub this replaces was labelled "Politis-Romano (2009)" with the form
-ell = round(C n^(1/5)).  The automatic, spectral-density-based selector the
-label points at is Politis and White (2004); the n^(1/5) rate belongs to
+The automatic, spectral-density-based block-length selector is Politis
+and White (2004).  It is sometimes quoted as "Politis-Romano (2009)" with
+the form ell = round(C n^(1/5)); the n^(1/5) rate belongs to
 distribution-function estimation, whereas the selector below is the
-MSE-optimal one for the variance, whose rate is n^(1/3).  The paper is
-cited, the rate is the paper's, and the discrepancy is recorded here rather
-than papered over.
+MSE-optimal one for the variance, whose rate is n^(1/3).
 
 Page 58, the flat-top lag-window of Politis and Romano (1995):
 lambda(t) = 1 for |t| in [0, 1/2]; 2(1 - |t|) for |t| in [1/2, 1]; 0

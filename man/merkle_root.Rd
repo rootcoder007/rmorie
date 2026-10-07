@@ -12,3 +12,6 @@ merkle_root(leaves)
 \description{
 RFC 6962 Merkle Tree Hash
 }
+\examples{
+merkle_root(lapply(c("a", "b", "c"), charToRaw))
+}

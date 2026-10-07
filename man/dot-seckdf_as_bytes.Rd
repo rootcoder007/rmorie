@@ -16,5 +16,4 @@ Nothing; this branch always raises.
 A step of the seckdf_native implementation. Called by \code{derive_context_keys},
 \code{expand}, \code{extract} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

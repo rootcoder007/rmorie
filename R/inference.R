@@ -161,6 +161,9 @@ morie_chi_square_test <- function(observed, expected = NULL, correct = TRUE) {
   }
   mn <- function(p) if (p == 0) lo else if (is.infinite(p)) hi else sum(s * dn(p))
   pn <- function(q, p, upper = FALSE) {
+    # fisher.test's pnhyper: the degenerate ncp = 0 / Inf distributions sit at lo / hi
+    if (p == 0) return(as.numeric(if (upper) q <= lo else q >= lo))
+    if (is.infinite(p)) return(as.numeric(if (upper) q <= hi else q >= hi))
     if (upper) sum(dn(p)[s >= q]) else sum(dn(p)[s <= q])
   }
   bis <- function(f, a, b) {
@@ -305,17 +308,21 @@ morie_mann_whitney_test <- function(x1, x2,
 #' @param x1 Numeric vector (before).
 #' @param x2 Numeric vector (after).
 #' @param alternative `"two.sided"`, `"greater"`, or `"less"`.
+#' @param exact Exact p-value? `NULL` (default): exact below 50 pairs without ties or
+#'   zero differences, as [stats::wilcox.test()].
 #' @return Named list: `V`, `p_value`.
 #' @examples
 #' # See the package vignettes for usage examples:
 #' #   vignette(package = "rmorie")
 #' @export
 morie_wilcoxon_signed_rank_test <- function(x1, x2,
-                                      alternative = c("two.sided", "greater", "less")) {
+                                      alternative = c("two.sided", "greater", "less"),
+                                      exact = NULL) {
   alternative <- match.arg(alternative)
+  # exact = NULL is wilcox.test's default: exact below 50 pairs without ties or zeros
   result <- stats::wilcox.test(x1, x2,
     paired = TRUE,
-    alternative = alternative, exact = FALSE
+    alternative = alternative, exact = exact
   )
   list(V = as.numeric(result$statistic), p_value = result$p.value)
 }
@@ -598,13 +605,17 @@ morie_spearman_rho <- function(x, y) {
 #'
 #' @param x Numeric vector.
 #' @param y Numeric vector.
+#' @param exact Exact p-value? `NULL` (default): exact below 50 pairs without ties, as
+#'   [stats::cor.test()].
 #' @return Named list: `tau`, `p_value`.
 #' @examples
 #' set.seed(1)
 #' morie_kendall_tau(x = rnorm(50), y = rnorm(50))
 #' @export
-morie_kendall_tau <- function(x, y) {
-  result <- stats::cor.test(x, y, method = "kendall", exact = FALSE)
+morie_kendall_tau <- function(x, y, exact = NULL) {
+  # exact = NULL is cor.test's own default: the exact null distribution below 50 pairs without
+  # ties, the normal approximation otherwise (morie's Python arm does the same)
+  result <- stats::cor.test(x, y, method = "kendall", exact = exact)
   list(tau = as.numeric(result$estimate), p_value = result$p.value)
 }
 

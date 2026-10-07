@@ -21,10 +21,9 @@ The value of \code{.dot}.
 \description{
 A step of the perfat_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
-kernel_estimate(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8),
-  omegas = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+omegas <- matrix(c(0.3, -0.2, 0.1, 0.4, 0.2, -0.1), nrow = 2)   # two random features in 3-d
+kernel_estimate(x = c(1, 0, 0.5), y = c(0.5, 1, 0), omegas = omegas)
 }
 \keyword{internal}

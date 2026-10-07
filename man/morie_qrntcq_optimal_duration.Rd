@@ -27,7 +27,6 @@ A list with \code{estimate}, \code{optimal.t.R}, \code{efficacy.at.optimum},
 \description{
 A step of the qrntcq_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_qrntcq_optimal_duration()

@@ -18,5 +18,4 @@ The value of \code{out}, as built in the body.
 A step of the helpers_s03 implementation. Called by \code{.s03crossprod},
 \code{Fevdc}, \code{Fnlm} and 11 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

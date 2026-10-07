@@ -26,5 +26,4 @@ A list with \code{params}, \code{se_params}, \code{fitted}, \code{resid},
 \description{
 A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}, \code{morie_gwrcal}.
 See the file header for the source the module follows.
-source it follows.
 }

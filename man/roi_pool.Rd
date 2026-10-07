@@ -23,7 +23,6 @@ A list with \code{pooled}, \code{quantised_box}, \code{quantisation_shift},
 A step of the masrcn_native implementation. Called by \code{alignment_error},
 \code{morie_masrcn}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 features <- matrix(as.numeric(1:36), 6, 6)

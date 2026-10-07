@@ -34,7 +34,6 @@ A list with \code{estimate}, \code{weights}, \code{atoms},
 \description{
 A step of the slowdp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 truncated_dp(alpha = 0.5, K = 5L)

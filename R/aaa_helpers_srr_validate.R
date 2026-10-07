@@ -309,3 +309,75 @@ morie_impute_column <- function(x, method = c(
   v <- tolower(Sys.getenv("MORIE_EXTENDED_TESTS", ""))
   v %in% c("1", "true", "yes", "on")
 }
+
+# Check a function's argument at entry and say, in plain words, what it
+# must be and what arrived -- instead of the R-internal message ("missing
+# value where TRUE/FALSE needed", "non-numeric argument to binary
+# operator") the body would otherwise stop with. Nothing is coerced: a
+# matrix stays a matrix, so the check costs nothing on valid input.
+#   n1 one number         i1 one whole number    n numeric vector, no NA
+#   n0 numeric, may be empty   nNA numeric, NA allowed   iv whole numbers
+#   m numeric matrix/array/vector or all-numeric data frame   mNA the same, NA allowed
+#   m0 numeric matrix, may be empty   l0 list, may be empty
+#   df data frame         l non-empty list       lnull list or NULL
+#   c character vector    c1 one string          c1null one string or NULL
+#   lg logical, no NA     lg1 TRUE or FALSE      r raw vector   f function
+#   data any non-empty value without NA that is not text   cls:NAME object of that class
+#' @noRd
+.morie_arg <- function(x, kind, arg = deparse(substitute(x))) {
+  got <- if (is.null(x)) {
+    "NULL"
+  } else if (is.data.frame(x)) {
+    sprintf("a data frame with %d column%s", ncol(x), if (ncol(x) == 1L) "" else "s")
+  } else if (is.atomic(x) && length(x) == 1L) {
+    if (is.character(x)) sprintf("\"%s\"", x) else format(x)
+  } else {
+    sprintf("a %s of length %d", class(x)[1L], length(x))
+  }
+  need <- function(what) {
+    stop(sprintf("`%s` must be %s (got %s).", arg, what, got), call. = FALSE)
+  }
+  is_num <- function(v) (is.numeric(v) || is.logical(v)) && !is.data.frame(v)
+  whole <- function(v) is_num(v) && !anyNA(v) && all(is.finite(v)) && all(v == round(v))
+  if (startsWith(kind, "cls:")) {
+    cls <- substring(kind, 5L)
+    if (!inherits(x, cls)) need(sprintf("a %s object", cls))
+    return(invisible(x))
+  }
+  switch(kind,
+    n1 = if (!is_num(x) || length(x) != 1L || is.na(x)) need("a single number"),
+    i1 = if (length(x) != 1L || !whole(x)) need("a single whole number"),
+    n = if (!is_num(x) || !length(x) || anyNA(x)) need("a numeric vector without missing values"),
+    n0 = if (!is.null(x) && (!is_num(x) || anyNA(x))) need("a numeric vector without missing values"),
+    nNA = if (!is_num(x) || !length(x)) need("a numeric vector"),
+    iv = if (!length(x) || !whole(x)) need("whole numbers without missing values"),
+    m = {
+      ok <- if (is.data.frame(x)) ncol(x) > 0L && nrow(x) > 0L && all(vapply(x, is.numeric, logical(1)))
+            else is_num(x) && length(x) > 0L
+      if (!ok || anyNA(as.matrix(x))) need("a numeric matrix without missing values")
+    },
+    mNA = {
+      ok <- if (is.data.frame(x)) ncol(x) > 0L && nrow(x) > 0L && all(vapply(x, function(v) is.numeric(v) || all(is.na(v)), logical(1)))
+            else is_num(x) && length(x) > 0L && !all(is.na(x))
+      if (!ok) need("a numeric matrix")
+    },
+    m0 = {
+      ok <- if (is.data.frame(x)) all(vapply(x, is.numeric, logical(1))) else is_num(x)
+      if (!ok || anyNA(as.matrix(x))) need("a numeric matrix without missing values")
+    },
+    l0 = if (!is.list(x)) need("a list"),
+    df = if (!is.data.frame(x)) need("a data frame"),
+    l = if (!is.list(x) || !length(x)) need("a non-empty list"),
+    lnull = if (!is.null(x) && !is.list(x)) need("a list"),
+    c = if (!is.character(x) || !length(x) || anyNA(x)) need("a character vector"),
+    c1 = if (!is.character(x) || length(x) != 1L || is.na(x)) need("a single string"),
+    c1null = if (!is.null(x) && (!is.character(x) || length(x) != 1L || is.na(x))) need("a single string"),
+    lg = if (!is.logical(x) || !length(x) || anyNA(x)) need("a logical vector without missing values"),
+    lg1 = if (!is.logical(x) || length(x) != 1L || is.na(x)) need("TRUE or FALSE"),
+    r = if (!is.raw(x) || !length(x)) need("a raw vector"),
+    f = if (!is.function(x)) need("a function"),
+    data = if (is.null(x) || !length(x) || is.character(x) ||
+                 (is.atomic(x) && anyNA(x))) need("a non-empty, non-text value without missing values"),
+    stop("internal: unknown argument kind ", kind, call. = FALSE))
+  invisible(x)
+}

@@ -17,5 +17,9 @@ A list with \code{lod}, \code{rss}, \code{rss0}.
 \description{
 A step of the mqtmpl_native implementation. Called by \code{mqtmpl_scanone}.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+set.seed(2)
+g <- rbinom(50, 1, 0.5)
+mqtmpl_single_marker(y = 1 + 0.8 * g + rnorm(50), g = g)$lod
 }

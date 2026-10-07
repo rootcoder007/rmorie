@@ -17,7 +17,6 @@ A numeric value.
 A step of the bats_native implementation. Called by \code{.fit_spec},
 \code{fit_seed_state}, \code{state_matrices}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 spec <- BatsSpec(periods = c(4), use_trend = TRUE)

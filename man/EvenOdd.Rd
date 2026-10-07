@@ -18,7 +18,7 @@ A vector, from \code{c}.
 error checks the index bookkeeping, not the arithmetic.
 }
 \examples{
-S <- c("a", "b", "c")
-EvenOdd(S)
+x <- c(2, -1, 4, 0, 1)   # odd length: n = 0 is the middle sample
+EvenOdd(x)
 }
 \keyword{internal}

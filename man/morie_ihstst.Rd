@@ -34,6 +34,12 @@ score.  Both routes the paper describes are available: the raw
 statistic, and the frequency-binned standardised score when
 \code{standardize} supplies the bin mean and standard deviation.
 }
+\examples{
+set.seed(2)
+hap <- matrix(rbinom(30 * 9, 1, 0.5), 30, 9)
+hap[hap[, 5] == 1, ] <- 1             # chromosomes carrying the derived allele share one long haplotype
+morie_ihstst(hap, core = 4)$estimate  # negative: long derived-allele haplotypes
+}
 \references{
 Voight, B. F., Kudaravalli, S., Wen, X. and Pritchard,
 J. K. (2006). A map of recent positive selection in the human

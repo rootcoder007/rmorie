@@ -37,6 +37,5 @@ A list with \code{estimate}, \code{weights}, \code{risk}, \code{member_risks},
 \description{
 A step of the tlonsl_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

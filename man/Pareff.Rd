@@ -27,6 +27,9 @@ formula is one line and is written here rather than duplicated twice.
 \details{
 Formula: \code{PAF = pe (RR - 1) / (pe (RR - 1) + 1)}.
 }
+\examples{
+Pareff(pe = 0.3, RR = 2, se_RR = 0.2)[c("estimate", "ci_lower", "ci_upper")]   # 0.3 / 1.3
+}
 \references{
 Levin, M. L. (1953). The occurrence of lung cancer in
 man. Acta Unio Internationalis Contra Cancrum, 9(3), 531-541.

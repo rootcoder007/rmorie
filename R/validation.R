@@ -107,7 +107,7 @@ column_rule <- function(name, dtype = NULL, required = TRUE,
 #' @return An object of class \code{"class_name"}.
 #' @examples
 #' df <- data.frame(age = c(20, 30, -1))
-#' rules <- list(age = list(type = "numeric", min = 0))
+#' rules <- list(column_rule("age", dtype = "numeric", min_val = 0))
 #' res <- try(validate_schema(df, rules))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
@@ -116,7 +116,22 @@ validate_schema <- function(data, rules, raise_on_error = FALSE) {
   warnings_ <- character(0)
   passed <- TRUE
 
-  for (rule in rules) {
+  if (!is.list(rules)) stop("`rules` must be a list of column_rule() objects", call. = FALSE)
+  for (i in seq_along(rules)) {
+    rule <- rules[[i]]
+    # list(age = list(dtype = ...)) names the column by the list name
+    if (is.list(rule) && is.null(rule$name) && !is.null(names(rules)) && nzchar(names(rules)[i])) {
+      rule$name <- names(rules)[i]
+    }
+    if (!is.list(rule) || !is.character(rule$name) || length(rule$name) != 1L) {
+      stop(sprintf("rule %d has no column name: build rules with column_rule(\"col\", ...)", i), call. = FALSE)
+    }
+    if (!inherits(rule, "morie_column_rule")) {
+      # a plain list gets column_rule()'s defaults (required, nullable, null_threshold, ...)
+      rule <- tryCatch(do.call(column_rule, unclass(rule)), error = function(e) {
+        stop(sprintf("rule %d (%s): %s; see ?column_rule", i, rule$name, conditionMessage(e)), call. = FALSE)
+      })
+    }
     if (!(rule$name %in% names(data))) {
       if (isTRUE(rule$required)) {
         msg <- sprintf("Missing required column: '%s'", rule$name)
@@ -438,7 +453,7 @@ cross_validate <- function(fit_fn, predict_fn, X, y,
 #' supported for backward compatibility:
 #'
 #' \itemize{
-#'   \item \strong{Legacy stub form:} \eqn{nested_cross_validate(tune_fn,
+#'   \item \strong{Legacy form:} \eqn{nested_cross_validate(tune_fn,
 #'         predict_fn, X, y, outer_folds, scoring, random_state)} where
 #'         \code{tune_fn(X, y)} returns a fitted model (no grid argument).
 #'         In this mode no inner search is run.
@@ -467,7 +482,7 @@ cross_validate <- function(fit_fn, predict_fn, X, y,
 #'   \code{score_fn} is \code{NULL}.
 #' @param random_state Integer seed for fold construction (default 42).
 #' @param tune_fn Deprecated legacy positional argument; see Description.
-#' @param outer_folds Deprecated alias for \code{outer_k} (legacy stub form).
+#' @param outer_folds Deprecated alias for \code{outer_k} (legacy form).
 #' @return Named list with \code{outer_scores} (numeric vector, length
 #'   \code{outer_k}), \code{best_hyperparams_per_fold} (list of named lists),
 #'   \code{mean_score}, \code{se_score}, and \code{n_configs}.
@@ -892,8 +907,8 @@ detect_overfitting <- function(fit_fn, predict_fn, X, y,
 #'                                               by = "day", length.out = 60))
 #' y <- X$x + rnorm(60)
 #' res <- try(temporal_validate(
-#'   fit_fn = function(Xt, yt) stats::lm(yt ~ x, data = cbind(Xt, yt = yt)),
-#'   predict_fn = function(m, Xt) stats::predict(m, Xt),
+#'   fit_fn = function(Xt, yt) stats::lm(yt ~ x, data = data.frame(Xt, yt = yt)),  # Xt is a matrix
+#'   predict_fn = function(m, Xt) stats::predict(m, data.frame(Xt)),
 #'   X = X, y = y, date_col = "date"))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export

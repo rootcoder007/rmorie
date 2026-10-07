@@ -18,3 +18,9 @@ verify_chain(entries, hashes, key = NULL, genesis = .GENESIS)
 \description{
 Verify a chain, returning the FIRST bad index (not just a boolean)
 }
+\examples{
+entries <- list("open", "write", "close")
+h <- build_chain(entries)$hashes
+verify_chain(entries, h)$intact
+verify_chain(list("open", "WRITE", "close"), h)$first_bad   # 0-based index of the edit
+}

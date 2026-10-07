@@ -20,5 +20,4 @@ Nothing; this branch always raises.
 A step of the lcfsdq_native implementation. Called by \code{morie_lcfsdq},
 \code{morie_lcfsdq_nn}.
 See the file header for the source the module follows.
-source it follows.
 }

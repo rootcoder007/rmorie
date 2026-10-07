@@ -23,7 +23,6 @@
 .non <- function(k) as.raw(c(rep(0, 11), k))
 
 test_that("the AEAD under the envelope reproduces RFC 8439 section 2.8.2", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE)), "no libsodium")
   key <- as.raw(0x80:0x9f)
   nonce <- .hx("070000004041424344454647")
   aad <- .hx("50515253c0c1c2c3c4c5c6c7")
@@ -48,7 +47,6 @@ test_that("the AEAD under the envelope reproduces RFC 8439 section 2.8.2", {
 })
 
 test_that("per-record DEKs are HKDF-SHA256 over 'dek:' || record id", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE)), "no libsodium")
   skip_if_not_installed("openssl")
   seed <- charToRaw("master-seed-for-tests-0123456789")
   rid <- charToRaw("rec-7")
@@ -62,7 +60,6 @@ test_that("per-record DEKs are HKDF-SHA256 over 'dek:' || record id", {
 })
 
 test_that("wrapping binds the KEK id and unwrapping authenticates it", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE)), "no libsodium")
   dek <- as.raw(100:131)
   w <- morie_secrtt_wrap_dek(dek, .kek1, .non(1), kek_id = "kek-A", aad = charToRaw("tenant"))
   e <- morie_secaead_aead_encrypt(.kek1, .non(1), dek, c(charToRaw("tenant"), charToRaw("kek-A")))
@@ -84,7 +81,6 @@ test_that("wrapping binds the KEK id and unwrapping authenticates it", {
 })
 
 test_that("KEK rotation re-wraps every DEK and rewrites no record", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE)), "no libsodium")
   deks <- list(as.raw(1:32), as.raw(40:71), as.raw(200:231))
   wr <- lapply(seq_along(deks), function(i) morie_secrtt_wrap_dek(deks[[i]], .kek1, .non(i)))
   r <- morie_secrtt_rotate_kek(wr, .kek1, .kek2, lapply(4:6, .non), audit_log = list())
@@ -113,7 +109,6 @@ test_that("KEK rotation re-wraps every DEK and rewrites no record", {
 })
 
 test_that("DEK rotation re-seals the record under the new key", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE)), "no libsodium")
   pt <- charToRaw("patient 42: blood pressure 120/80")
   d1 <- as.raw(1:32)
   d2 <- as.raw(32:1)
@@ -128,7 +123,6 @@ test_that("DEK rotation re-seals the record under the new key", {
 })
 
 test_that("rotation cost compares single-key and envelope rewrite volumes", {
-  skip_if_not(isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE)), "no libsodium")
   c1 <- morie_secrtt_rotation_cost(1000, 4096)
   expect_equal(c(c1$single_key_bytes, c1$envelope_kek_bytes, c1$ratio), c(4096000, 32000, 128))
   expect_identical(c1$records_touched_envelope, 0L)

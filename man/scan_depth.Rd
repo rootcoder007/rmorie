@@ -16,7 +16,6 @@ A list with \code{estimate}, \code{parallel_depth}, \code{sequential_depth},
 \description{
 A step of the ssmpar_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 scan_depth(length = 5L)

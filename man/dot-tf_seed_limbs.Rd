@@ -15,7 +15,6 @@ A vector, from \code{c}.
 \description{
 A step of the rangayyan_tf implementation. Called by \code{.tf_lcg_seed}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .tf_seed_limbs(seed = 1L)

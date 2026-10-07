@@ -11,10 +11,9 @@
 #' @param maxdist Longest topological distance kept.
 #'
 #' @return List with bits, count, nset, npairs, distance, a, nbits.
-#' @references Carhart, Smith and Venkataraghavan (1985), J. Chem. Inf.
-#'   Comput. Sci. 25(2), 64-73.  Standard published form; the article is
-#'   paywalled and was not read.  The folding hash is this
-#'   implementation's own choice, stated rather than attributed.
+#' @references Carhart, Smith and Venkataraghavan (1985), J. Chem. Inf. Comput. Sci.
+#'   25(2), 64-73. Standard published form; standard published form. The folding hash is
+#'   this implementation's own choice, stated rather than attributed.
 #' @export
 #' @examples
 #' Atompairfp(adjacency = 5L, atomtype = 5L)

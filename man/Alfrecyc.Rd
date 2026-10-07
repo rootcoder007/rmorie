@@ -41,6 +41,13 @@ disagree: "15 bins of equal width 1.25 A" implies an upper bin at
 implies a width of 18/14 = 1.2857.  The default follows the stated
 endpoints; pass \code{bins} explicitly for the other reading.
 }
+\examples{
+set.seed(18)
+m1 <- matrix(rnorm(6), 3, 2); z <- array(rnorm(18), c(3, 3, 2))
+x <- rbind(c(0, 0, 0), c(3.8, 0, 0), c(7.6, 0, 0))
+r <- Alfrecyc(m1, z, x, wd = matrix(rnorm(2 * 15), 2, 15))
+round(r$d, 2)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 30, 32
 }

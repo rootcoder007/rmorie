@@ -10,16 +10,21 @@ morie_otis_analyze_a01_ruhela_alt_gender(data = NULL, out_dir = NULL)
 morie_otis_analyze_a01_mrm_alt_gender(data = NULL, out_dir = NULL)
 }
 \arguments{
-\item{data}{Optional a01 data.frame.}
+\item{data}{The OTIS a01 table; \code{NULL} loads it.}
 
-\item{out_dir}{Optional output directory.}
+\item{out_dir}{Optional directory for the text and JSON rendering.}
 }
 \value{
 \code{morie_otis_analysis_result}.
 }
 \description{
-a01 alt-T Ruhela: Female -> vm count
+The a01 person-year cell frame with T = Female and Y = regional-volatility
+count, adjusting for age band and fiscal year; full DLRM ensemble.
 }
 \examples{
-\donttest{ morie_otis_analyze_a01_ruhela_alt_gender() }
+\donttest{
+a01 <- morie_synth_otis("a01", n = 300L, seed = 1L)
+r <- morie_otis_analyze_a01_ruhela_alt_gender(a01)
+r$tables[[1L]]$rows[[1L]]
+}
 }

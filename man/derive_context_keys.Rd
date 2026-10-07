@@ -18,3 +18,7 @@ derive_context_keys(ikm, contexts, salt = NULL, length = 32L)
 \description{
 Derive one key per context, all independent
 }
+\examples{
+k <- derive_context_keys(as.raw(1:32), contexts = c("records", "audit-log"))
+names(k$keys)
+}

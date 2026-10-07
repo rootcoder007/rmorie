@@ -56,7 +56,6 @@
 #'
 #' A step of the prnFil_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{morie_prphet_fit}.
 #' @param y Passed to \code{morie_prphet_fit}.
@@ -99,7 +98,6 @@
 #'
 #' A step of the prnFil_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{morie_prphet_fit}.
 #' @param y Passed to \code{morie_prphet_fit}.
@@ -146,7 +144,6 @@
 #'
 #' A step of the prnFil_native implementation. Called by \code{.prnFil_trend_intervals}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$changepoints}, \code{$deltas}, \code{$k},
 #' \code{$m}, \code{$t} from it.
@@ -199,7 +196,6 @@
 #'
 #' A step of the prnFil_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit Passed to \code{.prnFil_simulate_future_trend}.
 #' @param t_future A vector; its length is taken.
@@ -236,7 +232,6 @@
 #'
 #' A step of the prnFil_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -253,7 +248,7 @@
          "dominates every forecast.")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 .prnFil_selectchangepoints <- .prnFil_select_changepoints
 
 # public names resolved by fn/_lazy_map.json

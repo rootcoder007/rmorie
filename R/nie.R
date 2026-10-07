@@ -1,9 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Natural indirect effect (Pearl 2001)
 #'
-#' DUPLICATE: the contrast is already implemented as \code{Nieff} in
-#' \code{unclr.R}; per ledger/wave2/DUPMAP.tsv this is an alias, not a
-#' second copy.
+#' DUPLICATE: the contrast is already implemented as \code{Nieff} in \code{unclr.R};
+#' this is an alias, not a second copy.
 #'
 #' Formula: \code{NIE = E[Y(1, M(1))] - E[Y(1, M(0))]}, taken within
 #' unit so the standard error is the paired one.

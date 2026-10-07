@@ -19,7 +19,6 @@ The value of \code{.timeRS_deviation}.
 \description{
 A step of the timeRS_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_timeRS_deviation(t = 5L, t_user = 5L)

@@ -52,7 +52,10 @@ A list with \code{chunks}, \code{n_chunks}, \code{max_chunk_length}, \code{overl
 Recursive chunking, buffer memory, templates (Alammar Ch 6-12)
 }
 \examples{
-morie_alammar_recursive_chunking(text = 5L)
+txt <- paste(rep("Recursive chunking splits on paragraphs, then sentences.",
+                 6), collapse = " ")
+r <- morie_alammar_recursive_chunking(txt, target_size = 80)
+r$n_chunks
 morie_alammar_conversation_buffer_memory(
   conversation = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), N = 5L)
 morie_alammar_chat_template(list(c("user", "hi")), list(user = c("<u>",

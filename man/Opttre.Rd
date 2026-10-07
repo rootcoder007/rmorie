@@ -44,6 +44,15 @@ fixed order -- R scans a matrix column-major and Python row-major,
 and an unpinned scan would return a different-but-equally-optimal
 split per language.
 }
+\examples{
+set.seed(6)
+n <- 400
+W <- matrix(rnorm(n * 2), n, 2)
+A <- rbinom(n, 1, 0.5)
+y <- W[, 1] + A * ifelse(W[, 1] > 0, 1, -1) + rnorm(n)
+t <- Opttre(y, A, W, max_depth = 1L)
+c(t$split_var, round(t$split_point, 2))   # splits on W1 near 0
+}
 \references{
 Laber, E. B. & Zhao, Y.-Q. (2015). Tree-based methods
 for individualized treatment regimes. Biometrika, 102(3), 501-514.

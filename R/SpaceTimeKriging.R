@@ -38,6 +38,7 @@
 #' STCovariance(1, 1, m)
 #' @export
 STCovariance <- function(ds, dt, model) {
+  .morie_arg(ds, "n")
   ds <- abs(ds)
   dt <- abs(dt)
   k <- if (is.null(model$stAni)) 1 else model$stAni

@@ -18,5 +18,4 @@ A list with \code{weights}, \code{dropped}, \code{scale}, \code{method}.
 \description{
 A step of the replwt_native implementation. Called by \code{morie_replwt}.
 See the file header for the source the module follows.
-source it follows.
 }

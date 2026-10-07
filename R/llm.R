@@ -91,16 +91,9 @@ morie_llm_ollama_models <- function(base = .morie_llm_ollama_base(),
   empty <- data.frame(name = character(), size_gb = numeric(),
                       family = character(), parameter_size = character(),
                       quantization = character(), stringsAsFactors = FALSE)
-  if (!requireNamespace("httr2", quietly = TRUE)) return(empty)
-  models <- tryCatch({
-    req <- httr2::req_timeout(httr2::request(paste0(base, "/api/tags")), timeout)
-    key <- .morie_llm_env("OLLAMA_API_KEY")
-    if (nzchar(key)) req <- httr2::req_headers(req,
-                                               Authorization = paste("Bearer", key))
-    body <- .morie_from_json(httr2::resp_body_string(httr2::req_perform(req)),
-                             simplifyVector = FALSE)
-    body$models %||% list()
-  }, error = function(e) list())
+  res <- .morie_llm_http(paste0(base, "/api/tags"), headers = .morie_llm_bearer(.morie_llm_env("OLLAMA_API_KEY")),
+                         timeout = timeout)
+  models <- if (res$status == 200L) .morie_llm_http_json(res)$models %||% list() else list()
   if (!length(models)) return(empty)
   det <- function(m, k) as.character((m$details %||% list())[[k]] %||% NA)
   data.frame(
@@ -198,21 +191,18 @@ if (nzchar(v)) v else NULL }
 morie_llm_probe_ollama <- function(timeout = 2) {
   cache <- .morie_llm_cache$ollama_cached
   if (!is.null(cache)) return(cache)  # a cached answer needs no HTTP client
-  if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
   if (.morie_llm_no_net()) return(FALSE)
-  out <- tryCatch({
-    req <- httr2::request(paste0(.morie_llm_ollama_base(), "/api/tags"))
-    req <- httr2::req_timeout(req, timeout)
-    resp <- httr2::req_perform(req)
-    httr2::resp_status(resp) < 400
-  }, error = function(e) FALSE)
+  st <- .morie_llm_http(paste0(.morie_llm_ollama_base(), "/api/tags"), timeout = timeout)$status
+  out <- st > 0L && st < 400L
   .morie_llm_cache$ollama_cached <- out
   out
 }
 
 #' Detect the active LLM provider
-#' @return Character scalar provider key: ollama / hosted / gemini / api / openai / local.
-#' The hosted tier (llm.rmorie.com) answers only after \code{morie_llm_login()}.
+#' @return Character scalar provider key: ollama / gemini / api / openai / hosted / local,
+#' in that order of preference: a local model first, then your own cloud keys, then the
+#' hosted MORIE tier as a last resort (it answers only after \code{morie_llm_login()};
+#' keys are issued on request at \url{https://rmorie.com/access}).
 #' @examples
 #' old <- options(morie.llm.ollama_cached = FALSE)
 #' morie_llm_detect_provider()
@@ -220,11 +210,12 @@ morie_llm_probe_ollama <- function(timeout = 2) {
 #' @export
 morie_llm_detect_provider <- function() {
   if (morie_llm_probe_ollama())                                 return("ollama")
-  if (morie_llm_probe_hosted())                                 return("hosted")
   if (!is.null(.morie_llm_gemini_key()))                        return("gemini")
   if (!is.null(.morie_llm_api_base()) && !is.null(.morie_llm_api_key()))
                                                                 return("api")
   if (!is.null(.morie_llm_openai_key()))                        return("openai")
+  # the hosted tier is a last resort, behind every key of the user's own
+  if (morie_llm_probe_hosted())                                 return("hosted")
   "local"
 }
 
@@ -280,10 +271,6 @@ morie_llm_detect_provider <- function() {
 #' @export
 morie_llm_request_completion <- function(base_url, model, messages,
                                          api_key = NULL, timeout = 120) {
-  if (!requireNamespace("httr2", quietly = TRUE) ||
-      !requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("morie_llm_request_completion requires httr2 and jsonlite.")
-  }
   url <- paste0(base_url, "/v1/chat/completions")
   # reasoning models spend tokens thinking first: without room the answer is an empty content
   payload <- list(model = model, messages = messages, stream = FALSE, max_tokens = 4096L)
@@ -291,17 +278,60 @@ morie_llm_request_completion <- function(base_url, model, messages,
     payload$max_tokens <- 4096L
     timeout <- max(timeout, 300)
   }
-  req <- httr2::request(url)
-  req <- httr2::req_headers(req, `Content-Type` = "application/json")
-  if (!is.null(api_key)) {
-    req <- httr2::req_headers(req, Authorization = paste("Bearer", api_key))
+  res <- .morie_llm_http(url, body = .morie_to_json(payload, auto_unbox = TRUE),
+                         headers = .morie_llm_bearer(api_key), timeout = timeout)
+  if (res$status == 0L) {
+    stop(sprintf("%s did not answer (%s)", base_url, .morie_llm_redact(res$body, api_key)), call. = FALSE)
   }
-  req <- httr2::req_body_raw(req,
-    .morie_to_json(payload, auto_unbox = TRUE),
-    type = "application/json")
-  req <- httr2::req_timeout(req, timeout)
-  resp <- httr2::req_perform(req)
-  .morie_from_json(httr2::resp_body_string(resp), simplifyVector = FALSE)
+  if (res$status >= 400L) {
+    err <- .morie_llm_http_json(res)$error
+    msg <- if (is.list(err)) err$message %||% "" else as.character(err %||% "")
+    msg <- .morie_llm_redact(msg, api_key)
+    stop(sprintf("HTTP %d from %s%s", res$status, base_url, if (nzchar(msg)) paste0(": ", msg) else ""), call. = FALSE)
+  }
+  .morie_from_json(res$body, simplifyVector = FALSE)
+}
+
+# One HTTP request through the package's own libcurl backend (no httr2): list(status, body).
+# status 0 means no answer (no server, timeout, DNS).
+.morie_llm_http <- function(url, body = NULL, headers = character(), timeout = 30) {
+  t <- as.integer(ceiling(timeout))
+  r <- tryCatch(
+    if (is.null(body)) {
+      .morie_http_get_with_status(url, timeout_s = t, headers = as.character(headers))
+    } else {
+      .morie_http_post_with_status(url, as.character(body), "application/json", timeout_s = t,
+                                   headers = as.character(headers))
+    },
+    error = function(e) list(body = conditionMessage(e), status_code = 0L)
+  )
+  list(status = as.integer(r$status_code %||% 0L), body = paste(as.character(r$body %||% ""), collapse = ""))
+}
+
+.morie_llm_http_json <- function(res) {
+  tryCatch(.morie_from_json(res$body, simplifyVector = FALSE), error = function(e) list())
+}
+
+.morie_llm_bearer <- function(key) if (!is.null(key) && nzchar(key)) paste("Authorization: Bearer", trimws(key)) else character()
+
+# The sign-in service names the page to open: only an https address of a public host is
+# handed to the browser (bricklayer's fourth review: the auth host chose any URL, any scheme).
+.morie_llm_browsable <- function(uri) {
+  is.character(uri) && length(uri) == 1L &&
+    grepl("^https://[A-Za-z0-9.-]+(:[0-9]+)?(/|$)", uri) &&
+    !grepl("^https://(localhost|127\\.|10\\.|192\\.168\\.|172\\.(1[6-9]|2[0-9]|3[01])\\.|169\\.254\\.|0\\.|100\\.(6[4-9]|[7-9][0-9]|1[01][0-9]|12[0-7])\\.)",
+           uri, ignore.case = TRUE) &&
+    !grepl("^https://[^/]*\\.(local|internal|localhost|lan|home|corp)(:[0-9]+)?(/|$)", uri, ignore.case = TRUE) &&
+    !grepl("^https://[^/.]+(:[0-9]+)?(/|$)", uri)  # a single-label name is not a public host
+}
+
+# A server's error text can quote the key it was sent, in any phrasing: the key itself is
+# redacted by value, the usual bearer / sk- spellings by shape, the LiteLLM phrasings cut.
+.morie_llm_redact <- function(msg, secret = NULL) {
+  msg <- sub("(?i)[.,;]?\\s*(received api key|key hash).*$", "", msg, perl = TRUE)
+  for (sec in secret) if (is.character(sec) && nzchar(sec)) msg <- gsub(sec, "<key>", msg, fixed = TRUE)
+  msg <- gsub("(?i)bearer\\s+[A-Za-z0-9._~+/=-]{8,}", "Bearer <key>", msg, perl = TRUE)
+  gsub("\\bsk-[A-Za-z0-9._-]{6,}", "<key>", msg, perl = TRUE)
 }
 
 #' Internal helper: Morie Llm Extract Text
@@ -313,22 +343,36 @@ morie_llm_request_completion <- function(base_url, model, messages,
   if (is.null(msg)) "" else (msg$content %||% "")
 }
 
+#' Internal helper: kept for the hint sites; the hosted tier no longer needs httr2
+#' @noRd
+.morie_httr2_note <- function() ""
+
 #' Internal helper: Morie Llm Local Fallback
 #' @noRd
-.morie_llm_local_fallback <- function(prompt) {
-  paste0(
-    "MORIE is running in local-only mode (no LLM provider detected).\n\n",
+.morie_llm_local_fallback <- function(prompt, tried = FALSE) {
+  # the attribute lets a script tell this text from an answer: isTRUE(attr(x, "fallback"))
+  base <- tryCatch(.morie_llm_api_base(), error = function(e) NULL)
+  hosted <- !is.null(tryCatch(.morie_llm_hosted_key(), error = function(e) NULL))
+  head <- if (isTRUE(tried) || hosted) {
+    "No LLM provider answered this time (one is configured; the line below says why).\n\n"
+  } else if (!is.null(base) && nzchar(base)) {
+    sprintf("MORIE is running in local-only mode (your endpoint %s did not answer).\n\n", base)
+  } else {
+    "MORIE is running in local-only mode (no LLM provider detected).\n\n"
+  }
+  structure(paste0(
+    head,
     "The analyses do not need a model: morie_run_pipeline(), ",
     "morie_run_morie_module() and every morie_* estimator work as they are. ",
     "To get answers from a model, enable one of these (tried in this order):\n",
     "  1. a local Ollama: curl -fsSL https://ollama.com/install.sh | sh\n",
     "  2. the hosted MORIE tier at https://llm.rmorie.com: ",
-    "morie_llm_login() in R, or `rmorie login` from the shell after ",
-    "install_cli()\n",
+    "morie_llm_login() in R (GitHub; email = \"you@example.com\" for a code by email), ",
+    "or `rmorie login` / `rmorie login --email you@example.com` from the shell after install_cli()\n",
     "  3. your own key: GEMINI_API_KEY, LLM_API_BASE_URL + LLM_API_KEY, ",
     "or OPENAI_API_KEY\n",
     "morie_llm_detect_provider() reports what is reachable from here."
-  )
+  ), fallback = TRUE)
 }
 
 #' Send a prompt to the best available LLM provider
@@ -368,22 +412,22 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
   if (provider == "ollama") {
     add(.morie_llm_ollama_base(), model %||% .morie_llm_ollama_default_model(), NULL)
   }
-  if (provider %in% c("ollama", "hosted") && !is.null(.morie_llm_hosted_base()) &&
-      !is.null(.morie_llm_hosted_key())) {
-    add(.morie_llm_hosted_base(), model %||% .morie_llm_hosted_model_available(),
-        .morie_llm_hosted_key())
-  }
-  if (provider %in% c("ollama", "hosted", "gemini") && !is.null(.morie_llm_gemini_key())) {
+  if (provider %in% c("ollama", "gemini") && !is.null(.morie_llm_gemini_key())) {
     add(GEMINI_BASE_URL, model %||% .morie_llm_gemini_model(),
         .morie_llm_gemini_key())
   }
-  if (!is.null(.morie_llm_api_base()) && !is.null(.morie_llm_api_key())) {
+  if (provider != "hosted" && !is.null(.morie_llm_api_base()) && !is.null(.morie_llm_api_key())) {
     add(.morie_llm_api_base(), model %||% .morie_llm_api_model(),
         .morie_llm_api_key())
   }
-  if (!is.null(.morie_llm_openai_key())) {
+  if (provider != "hosted" && !is.null(.morie_llm_openai_key())) {
     add(OPENAI_BASE_URL, model %||% DEFAULT_OPENAI_MODEL,
         .morie_llm_openai_key())
+  }
+  # the hosted MORIE tier is the last resort, after every route of the user's own
+  if (!is.null(.morie_llm_hosted_base()) && !is.null(.morie_llm_hosted_key())) {
+    add(.morie_llm_hosted_base(), model %||% .morie_llm_hosted_model_available(),
+        .morie_llm_hosted_key())
   }
   if (length(attempts) == 0L) return(.morie_llm_local_fallback(prompt))
 
@@ -395,7 +439,15 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
       error = function(e) NULL)
     if (!is.null(out) && nzchar(out)) return(out)
   }
-  .morie_llm_local_fallback(prompt)
+  # a model the hosted tier does not list is the user's to fix, said in one line
+  if (!is.null(model) && identical(provider, "hosted") && !is.null(.morie_llm_hosted_key())) {
+    listed <- tryCatch(morie_llm_hosted_models(), error = function(e) character())
+    if (length(listed) && !model %in% listed) {
+      stop(sprintf("the hosted tier has no model '%s' (rmorie models lists the %d it has)", model, length(listed)),
+           call. = FALSE)
+    }
+  }
+  .morie_llm_local_fallback(prompt, tried = TRUE)
 }
 
 #' Return TRUE when at least one live LLM provider is available
@@ -445,7 +497,7 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
     detected <- morie_llm_detect_provider()
     providers <- unique(c(detected,
                           "ollama", "gemini",
-                          "api", "openai", "local"))
+                          "api", "openai", "hosted", "local"))
   }
 
   fallback_prompt <- function() {
@@ -462,6 +514,10 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
       ollama = list(base = .morie_llm_ollama_base(),
                     mdl = model %||% .morie_llm_ollama_default_model(),
                     key = NULL),
+      hosted = if (!is.null(.morie_llm_hosted_base()) && !is.null(.morie_llm_hosted_key()))
+                 list(base = .morie_llm_hosted_base(),
+                      mdl = model %||% .morie_llm_hosted_model_available(),
+                      key = .morie_llm_hosted_key()),
       gemini = if (!is.null(.morie_llm_gemini_key()))
                  list(base = GEMINI_BASE_URL,
                       mdl = model %||% .morie_llm_gemini_model(),
@@ -496,12 +552,37 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
 # stores it with mode 0600 in $XDG_CONFIG_HOME/morie/credentials.json -- the
 # same file the Python package reads, so one login serves both.
 
+# The defaults below are what an rmoriebricklayer too old to read the signed
+# services document falls back to. With a current bricklayer the document at
+# https://rmorie.com/.well-known/morie-services.json decides (ML-DSA-44, key
+# pinned in bricklayer), so the hosted addresses can change without a release.
 DEFAULT_HOSTED_BASE_URL <- "https://llm.rmorie.com"
 DEFAULT_HOSTED_AUTH_URL <- "https://llm.rmorie.com/auth"
 DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
+ACCESS_REQUEST_URL      <- "https://rmorie.com/access"
+
+#' Internal helper: the signed services document's llm block (through
+#' rmoriebricklayer's cached, verified copy), or NULL when that bricklayer
+#' predates it
+#' @noRd
+.morie_llm_services <- function() {
+  if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) return(NULL)
+  ns <- asNamespace("rmoriebricklayer")
+  if (!exists("bricklayer_services", envir = ns, inherits = FALSE)) return(NULL)
+  tryCatch(get("bricklayer_services", envir = ns)(offline = TRUE)$llm, error = function(e) NULL)
+}
+
+#' Internal helper: one line on how to get a hosted key
+#' @noRd
+.morie_llm_access_hint <- function() {
+  svc <- .morie_llm_services()
+  sprintf("keys are personal and issued on request at %s; store one with `rmorie login --token` (R: morie_llm_login(token = ))",
+          svc$request_access %||% ACCESS_REQUEST_URL)
+}
 
 #' Internal helper: the hosted endpoint, or NULL when disabled by an override
-#' of "" (POSIX) or "off" (any platform; Windows cannot hold an empty variable)
+#' of "" (POSIX) or "off" (any platform; Windows cannot hold an empty variable),
+#' or by the services document
 #' @noRd
 .morie_llm_hosted_base <- function() {
   if (nzchar(Sys.getenv("MORIE_HOSTED_BASE_URL", unset = "")) ||
@@ -509,18 +590,29 @@ DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
     v <- sub("/+$", "", trimws(Sys.getenv("MORIE_HOSTED_BASE_URL")))
     return(if (nzchar(v) && !tolower(v) %in% c("off", "none", "disabled")) v else NULL)
   }
-  DEFAULT_HOSTED_BASE_URL
+  svc <- .morie_llm_services()
+  if (is.null(svc)) return(DEFAULT_HOSTED_BASE_URL)
+  if (!identical(svc$mode, "key") || !nzchar(svc$base_url %||% "")) return(NULL)
+  svc$base_url
 }
 
 #' Internal helper: the sign-in service of the hosted tier
 #' @noRd
 .morie_llm_hosted_auth <- function() {
-  sub("/+$", "", .morie_llm_env("MORIE_HOSTED_AUTH_URL", DEFAULT_HOSTED_AUTH_URL))
+  v <- sub("/+$", "", .morie_llm_env("MORIE_HOSTED_AUTH_URL", ""))
+  if (nzchar(v)) return(v)
+  a <- .morie_llm_services()$auth_url %||% ""
+  if (nzchar(a)) a else DEFAULT_HOSTED_AUTH_URL
 }
 
 #' Internal helper: the hosted model name
 #' @noRd
-.morie_llm_hosted_model <- function() .morie_llm_env("MORIE_HOSTED_MODEL", DEFAULT_HOSTED_MODEL)
+.morie_llm_hosted_model <- function() {
+  v <- .morie_llm_env("MORIE_HOSTED_MODEL", "")
+  if (nzchar(v)) return(v)
+  m <- .morie_llm_services()$default_model %||% ""
+  if (nzchar(m)) m else DEFAULT_HOSTED_MODEL
+}
 
 #' Internal helper: the credentials file shared with the Python package
 #' @noRd
@@ -547,7 +639,8 @@ DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
   p <- .morie_llm_credentials_path()
   dir.create(dirname(p), recursive = TRUE, showWarnings = FALSE)
   tmp <- paste0(p, ".tmp")
-  writeLines(.morie_to_json(data, auto_unbox = TRUE, pretty = TRUE), tmp)
+  # an empty list serialises as [] (an array): the shared file is always a JSON object
+  writeLines(if (length(data)) .morie_to_json(data, auto_unbox = TRUE, pretty = TRUE) else "{}", tmp)
   Sys.chmod(tmp, mode = "0600")
   file.rename(tmp, p)
   invisible(p)
@@ -560,6 +653,16 @@ DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
   if (nzchar(v)) return(v)
   k <- .morie_llm_read_credentials()$hosted_key
   if (is.character(k) && length(k) == 1L && nzchar(trimws(k))) trimws(k) else NULL
+}
+
+#' Internal helper: does the user's own OpenAI-compatible endpoint answer?
+#' @noRd
+.morie_llm_probe_api <- function(timeout = 2) {
+  base <- .morie_llm_api_base()
+  if (is.null(base) || .morie_llm_no_net()) return(FALSE)
+  st <- .morie_llm_http(paste0(sub("/+$", "", base), "/models"), headers = .morie_llm_bearer(.morie_llm_api_key()),
+                        timeout = timeout)$status
+  st > 0L && st < 500L
 }
 
 #' Probe the hosted MORIE tier
@@ -576,25 +679,18 @@ morie_llm_probe_hosted <- function(timeout = 2) {
   if (!is.null(cache)) return(cache)
   base <- .morie_llm_hosted_base()
   key <- .morie_llm_hosted_key()
-  if (is.null(base) || is.null(key) || !requireNamespace("httr2", quietly = TRUE) ||
-      .morie_llm_no_net()) {
+  if (is.null(base) || is.null(key) || .morie_llm_no_net()) {
     .morie_llm_cache$hosted_cached <- FALSE
     return(FALSE)
   }
-  out <- tryCatch({
-    req <- httr2::request(paste0(base, "/v1/models"))
-    req <- httr2::req_headers(req, Authorization = paste("Bearer", key))
-    req <- httr2::req_timeout(req, timeout)
-    resp <- httr2::req_perform(req)
-    ok <- httr2::resp_status(resp) < 400
-    if (ok) {
-      ids <- tryCatch(vapply(httr2::resp_body_json(resp)$data, function(m) as.character(m$id %||% ""), ""),
-                      error = function(e) character())
-      ids <- ids[nzchar(ids)]
-      .morie_llm_cache$hosted_models <- if (length(ids)) ids else NULL
-    }
-    ok
-  }, error = function(e) FALSE)
+  res <- .morie_llm_http(paste0(base, "/v1/models"), headers = .morie_llm_bearer(key), timeout = timeout)
+  out <- res$status > 0L && res$status < 400L
+  if (out) {
+    ids <- tryCatch(vapply(.morie_llm_http_json(res)$data, function(m) as.character(m$id %||% ""), ""),
+                    error = function(e) character())
+    ids <- ids[nzchar(ids)]
+    .morie_llm_cache$hosted_models <- if (length(ids)) ids else NULL
+  }
   .morie_llm_cache$hosted_cached <- out
   out
 }
@@ -664,24 +760,32 @@ morie_llm_hosted_models <- function(refresh = FALSE) {
 morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600,
                             email = NULL, code = NULL, token = NULL, to_email = FALSE) {
   if (!is.null(token)) return(.morie_llm_store_token(token))
-  if (!requireNamespace("httr2", quietly = TRUE))
-    stop("morie_llm_login() needs the httr2 package")
+  if (!is.null(email)) email <- trimws(email)
+  if (!is.null(email) && !grepl("^[^@[:space:]]+@[^@[:space:]]+\\.[^@[:space:]]+$", email))
+    stop(sprintf("'%s' is not an email address", email), call. = FALSE)
   auth <- .morie_llm_hosted_auth()
   if (!is.null(email)) return(.morie_llm_login_email(auth, email, code, to_email))
-  start <- httr2::req_perform(httr2::req_method(httr2::request(paste0(auth, "/device/code")), "POST"))
-  info <- httr2::resp_body_json(start)
+  start <- .morie_llm_http(paste0(auth, "/device/code"), body = "{}")
+  if (start$status != 200L) stop(sprintf("the sign-in service answered %d", start$status), call. = FALSE)
+  info <- .morie_llm_http_json(start)
   message(sprintf("Sign in at %s and enter the code: %s", info$verification_uri, info$user_code))
-  if (isTRUE(open_browser)) try(utils::browseURL(info$verification_uri), silent = TRUE)
+  if (isTRUE(open_browser) && .morie_llm_browsable(info$verification_uri)) {
+    try(utils::browseURL(info$verification_uri), silent = TRUE)
+  }
   interval <- as.numeric(info$interval %||% 5)
   deadline <- Sys.time() + poll_max_seconds
+  waited <- 0
   while (Sys.time() < deadline) {
     Sys.sleep(interval)
-    req <- httr2::req_body_json(httr2::request(paste0(auth, "/device/token")),
-                                list(device_code = info$device_code))
-    resp <- httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))
-    st <- httr2::resp_status(resp)
+    waited <- waited + interval
+    if (waited %% 30 < interval) {
+      message(sprintf("still waiting for the sign-in to be approved (%ds elapsed; Ctrl-C stops)", as.integer(waited)))
+    }
+    resp <- .morie_llm_http(paste0(auth, "/device/token"),
+                            body = .morie_to_json(list(device_code = info$device_code), auto_unbox = TRUE))
+    st <- resp$status
     if (st == 200L) {
-      body <- httr2::resp_body_json(resp)
+      body <- .morie_llm_http_json(resp)
       if (!is.null(body$api_key)) {
         data <- .morie_llm_read_credentials()
         data$hosted_key <- body$api_key
@@ -694,7 +798,7 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
         return(invisible(body$api_key))
       }
     } else if (st == 428L) {
-      interval <- as.numeric(tryCatch(httr2::resp_body_json(resp)$interval, error = function(e) NULL) %||% interval)
+      interval <- as.numeric(.morie_llm_http_json(resp)$interval %||% interval)
     } else {
       stop(sprintf("the sign-in service answered %d", st))
     }
@@ -723,28 +827,27 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
 
 .morie_llm_login_email <- function(auth, email, code = NULL, to_email = FALSE) {
   email <- trimws(email)
-  if (!grepl("@", email, fixed = TRUE)) stop("an email address is required")
-  perform <- function(path, body) {
-    req <- httr2::req_body_json(httr2::request(paste0(auth, path)), body)
-    httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))
+  if (!grepl("@", email, fixed = TRUE)) stop(sprintf("'%s' is not an email address", email), call. = FALSE)
+  perform <- function(path, body) .morie_llm_http(paste0(auth, path), body = .morie_to_json(body, auto_unbox = TRUE))
+  fail <- function(resp) {
+    err <- .morie_llm_http_json(resp)$error
+    stop(if (is.null(err)) sprintf("the sign-in service answered %d", resp$status) else as.character(err), call. = FALSE)
   }
   if (is.null(code)) {
     resp <- perform("/email/code", list(email = email))
-    if (httr2::resp_status(resp) != 200L) {
-      err <- tryCatch(httr2::resp_body_json(resp)$error, error = function(e) NULL)
-      stop(err %||% sprintf("the sign-in service answered %d", httr2::resp_status(resp)))
-    }
+    if (resp$status != 200L) fail(resp)
     message(sprintf("A 6-digit code was sent to %s (valid for 10 minutes).", email))
-    code <- trimws(readline("Enter the code: "))
+    # the launcher runs Rscript, where readline() returns "" at once: .cli_readline reads stdin there
+    code <- .cli_readline("Enter the code: ")
+    if (is.na(code) || !nzchar(code)) {
+      stop(sprintf("no code entered; finish with `rmorie login --email %s --code CODE`", email), call. = FALSE)
+    }
   }
   payload <- list(email = email, code = trimws(code))
   if (isTRUE(to_email)) payload$deliver <- "email"
   resp <- perform("/email/verify", payload)
-  if (httr2::resp_status(resp) != 200L) {
-    err <- tryCatch(httr2::resp_body_json(resp)$error, error = function(e) NULL)
-    stop(err %||% sprintf("the sign-in service answered %d", httr2::resp_status(resp)))
-  }
-  body <- httr2::resp_body_json(resp)
+  if (resp$status != 200L) fail(resp)
+  body <- .morie_llm_http_json(resp)
   if (isTRUE(to_email)) {
     if (!isTRUE(body$sent)) stop("the sign-in service did not confirm the email")
     message(sprintf("Your key was emailed to %s. Store it with morie_llm_login(token = ) or: rmorie login --token", email))
@@ -838,7 +941,7 @@ morie_llm_provider_unset <- function() {
   d$api_base_url <- NULL
   d$api_key <- NULL
   d$api_model <- NULL
-  .morie_llm_write_credentials(d)
+  if (had) .morie_llm_write_credentials(d)  # nothing attached: nothing to write
   message(if (had) "Endpoint detached." else "No endpoint was attached.")
   invisible(had)
 }
@@ -848,16 +951,8 @@ morie_llm_provider_unset <- function() {
 .morie_llm_probe_token <- function(token) {
   base <- .morie_llm_hosted_base()
   if (is.null(base) || !nzchar(base)) return(FALSE)
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop("the hosted tier needs the httr2 package: install.packages(\"httr2\")", call. = FALSE)
-  }
-  res <- tryCatch({
-    req <- httr2::request(paste0(sub("/+$", "", base), "/v1/models"))
-    req <- httr2::req_headers(req, Authorization = paste("Bearer", trimws(token)))
-    req <- httr2::req_timeout(req, 20)
-    httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))
-  }, error = function(e) NULL)
-  !is.null(res) && httr2::resp_status(res) < 300
+  st <- .morie_llm_http(paste0(sub("/+$", "", base), "/v1/models"), headers = .morie_llm_bearer(token), timeout = 20)$status
+  st >= 200L && st < 300L
 }
 
 # The stored key reaches the gateway but the gateway refuses it (401/403), as opposed to no gateway.
@@ -865,11 +960,6 @@ morie_llm_provider_unset <- function() {
   key <- .morie_llm_hosted_key()
   base <- .morie_llm_hosted_base()
   if (is.null(key) || is.null(base) || !nzchar(base)) return(FALSE)
-  res <- tryCatch({
-    req <- httr2::request(paste0(sub("/+$", "", base), "/v1/models"))
-    req <- httr2::req_headers(req, Authorization = paste("Bearer", key))
-    req <- httr2::req_timeout(req, 20)
-    httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))
-  }, error = function(e) NULL)
-  !is.null(res) && httr2::resp_status(res) %in% c(401L, 403L)
+  .morie_llm_http(paste0(sub("/+$", "", base), "/v1/models"), headers = .morie_llm_bearer(key), timeout = 20)$status %in%
+    c(401L, 403L)
 }

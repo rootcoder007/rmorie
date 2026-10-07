@@ -1,14 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' eq. (15.4) p.652 (re-export)
 #'
-#' The stub generator stamped several extracted page fragments with the same
-#' function name, so the implementation lives once in \code{Msm329()} and this
-#' module re-exports it. Calling either path runs the same code.
+#' The same method as \code{Msm329()}, re-exported under this name; both run the same
+#' code.
 #'
 #' @param ... Passed unchanged to \code{Msm329()}.
 #' @return The list returned by \code{Msm329()}.
 #' @references Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer. DOI 10.1007/978-3-030-89010-0.
+#' @examples
+#' Msm331(theta_hat = 0.7, mu_hat = 4, threshold = 0.6)$estimate
 #' @export
 Msm331 <- function(...) Msm329(...)

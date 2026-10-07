@@ -26,6 +26,7 @@ that puts every breach in one cluster passes it. Pair it with
 morie_kupiec_var_test(c(rep(0, 90), rep(1, 10)), 0.05)$statistic
 }
 \references{
-Kupiec, P. H. (1995), \emph{Journal of Derivatives}
+Kupiec, P. H. (1995). Techniques for verifying the
+accuracy of risk measurement models. \emph{Journal of Derivatives}
 3(2), 73-84. Cross-checked against rugarch's \code{.LR.uc}.
 }

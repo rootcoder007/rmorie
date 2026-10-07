@@ -24,7 +24,6 @@
 #'
 #' A step of the metabd_native implementation. Called by \code{bin_contigs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
@@ -47,7 +46,6 @@
 #' A step of the metabd_native implementation. Called by \code{abundance_correlation},
 #' \code{bin_contigs}, \code{composite_distance}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
@@ -62,7 +60,6 @@
 #'
 #' A step of the metabd_native implementation. Called by \code{morie_metabd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq Coerced to character by the body, with \code{as.character}.
 #' @param kk Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
@@ -107,7 +104,6 @@ tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
 #' A step of the metabd_native implementation. Called by \code{composite_distance},
 #' \code{morie_metabd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cov_a Passed to \code{.metabd_vec}.
 #' @param cov_b Passed to \code{.metabd_vec}.
@@ -137,7 +133,6 @@ abundance_correlation <- function(cov_a, cov_b) {
 #' A step of the metabd_native implementation. Called by \code{composite_distance},
 #' \code{morie_metabd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param length Coerced to numeric by the body, with \code{as.numeric}.
 #' @param l_min Numeric; combined arithmetically in the body. Defaults to \code{2500}.
@@ -161,7 +156,6 @@ length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
 #'
 #' A step of the metabd_native implementation. Called by \code{bin_contigs}, \code{morie_metabd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tnf_a Passed to \code{.metabd_vec}.
 #' @param tnf_b Passed to \code{.metabd_vec}.
@@ -210,7 +204,6 @@ composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
 #'
 #' A step of the metabd_native implementation. Called by \code{morie_metabd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tnfs Passed to \code{.metabd_mat}.
 #' @param coverages Optional; may be \code{NULL}. A vector; indexed elementwise.
@@ -266,7 +259,6 @@ bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
 #'
 #' A step of the metabd_native implementation. Called by \code{morie_metabd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bins See Usage.
 #' @param truth Passed to \code{unlist}.
@@ -304,7 +296,6 @@ metagenome_binning <- bin_contigs
 #'
 #' A step of the metabd_native implementation. Called by \code{morie_metabd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -328,7 +319,6 @@ metagenome_binning <- bin_contigs
 #'
 #' A step of the metabd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op A vector; its length is taken.
 #' @param ... Passed through.

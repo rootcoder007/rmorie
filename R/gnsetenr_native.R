@@ -28,14 +28,11 @@
 #'   extreme deviation), \code{running}, \code{n}, \code{n_hits},
 #'   \code{nperm}, \code{pvalue} (when \code{nperm > 0}),
 #'   \code{method}.
-#' @references Subramanian, A., Tamayo, P., Mootha, V. K.,
-#'   Mukherjee, S., Ebert, B. L., Gillette, M. A., Paulovich, A.,
-#'   Pomeroy, S. L., Golub, T. R., Lander, E. S. and Mesirov, J. P.
-#'   (2005), Gene set enrichment analysis: A knowledge-based approach
-#'   for interpreting genome-wide expression profiles, PNAS 102(43),
-#'   15545-15550. Appendix, Enrichment Score ES(S), p. 15550;
-#'   sign-separated significance, p. 15546. Local source:
-#'   library/pdf/fetched-wave3/Subramanian-2005-GSEA-PNAS.pdf.
+#' @references Subramanian, A., Tamayo, P., Mootha, V. K., Mukherjee, S., Ebert, B. L.,
+#'   Gillette, M. A., Paulovich, A., Pomeroy, S. L., Golub, T. R., Lander, E. S. and
+#'   Mesirov, J. P. (2005), Gene set enrichment analysis: A knowledge-based approach for
+#'   interpreting genome-wide expression profiles, PNAS 102(43), 15545-15550. Appendix,
+#'   Enrichment Score ES(S), p. 15550; sign-separated significance, p. 15546.
 #' @export
 #' @examples
 #' set.seed(1)

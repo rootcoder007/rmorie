@@ -122,7 +122,6 @@
 #' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl_draw},
 #' \code{morie_bnppvl_log_prior}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param level Passed to \code{.bnppvl_conc}.
 #' @param c Passed to \code{.bnppvl_conc}.
@@ -183,7 +182,6 @@ morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
 #'
 #' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl_log_prior}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{log}.
 #' @param a Numeric; combined arithmetically in the body.
@@ -212,8 +210,7 @@ morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
 #' @return The log prior density.
 #' @export
 #' @examples
-#' set.seed(1)
-#' r <- morie_bnppvl_log_prior(q = matrix(rnorm(20), 5, 4), m = matrix(rnorm(20), 5, 4)); TRUE
+#' morie_bnppvl_log_prior(q = seq(0, 1, length.out = 9), m = 3L)
 #' @keywords internal
 morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
                                    centring = "uniform", nullq = NULL) {
@@ -353,7 +350,6 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #'
 #' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Passed to \code{.bnppvl_cell}.
 #' @param q A vector; indexed elementwise.
@@ -370,7 +366,6 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #'
 #' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Numeric; combined arithmetically in the body.
 #' @param q A vector; indexed elementwise.

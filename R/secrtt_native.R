@@ -315,6 +315,11 @@ morie_secrtt <- morie_secrtt_generate_dek
 #' Crypto-shred: destroy a KEK and report what that covers
 #' @param kek_id See Usage.
 #' @param wrapped_deks See Usage.
+#' @examples
+#' kek <- as.raw(32:1)
+#' w1 <- wrap_dek(as.raw(1:32), kek, as.raw(1:12), kek_id = "kek-1")
+#' w2 <- wrap_dek(as.raw(33:64), kek, as.raw(13:24), kek_id = "kek-1")
+#' crypto_shred("kek-1", list(w1, w2))
 #' @export
 crypto_shred <- function(kek_id, wrapped_deks) {
   covered <- which(vapply(wrapped_deks,
@@ -337,7 +342,6 @@ crypto_shred <- function(kek_id, wrapped_deks) {
 #' A step of the secrtt_native implementation. Called by \code{generate_dek},
 #' \code{open_record}, \code{rotate_dek} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
 #' @return Nothing; this branch always raises.
@@ -363,6 +367,10 @@ generate_dek <- function(master_seed, record_id, salt = NULL) {
 #' Open a sealed record
 #' @param sealed See Usage.
 #' @param dek See Usage.
+#' @examples
+#' dek <- as.raw(1:32); nonce <- as.raw(1:12)
+#' sealed <- seal_record(charToRaw("visit 2026-10-05"), dek, nonce)
+#' rawToChar(open_record(sealed, dek))
 #' @export
 open_record <- function(sealed, dek) {
   r <- .secrtt_aead_decrypt(dek, sealed$nonce, sealed$ciphertext,
@@ -379,6 +387,11 @@ open_record <- function(sealed, dek) {
 #' @param old_dek See Usage.
 #' @param new_dek See Usage.
 #' @param new_nonce See Usage.
+#' @examples
+#' old <- as.raw(1:32); new <- as.raw(33:64)
+#' sealed <- seal_record(charToRaw("payload"), old, as.raw(1:12))
+#' r <- rotate_dek(sealed, old, new, new_nonce = as.raw(13:24))
+#' rawToChar(open_record(r$sealed, new))
 #' @export
 rotate_dek <- function(sealed, old_dek, new_dek, new_nonce) {
   pt <- open_record(sealed, old_dek)
@@ -397,6 +410,11 @@ rotate_dek <- function(sealed, old_dek, new_dek, new_nonce) {
 #' @param new_nonces See Usage.
 #' @param new_kek_id See Usage.
 #' @param audit_log See Usage.
+#' @examples
+#' old <- as.raw(32:1); new <- as.raw(1:32)
+#' w <- list(wrap_dek(as.raw(1:32), old, as.raw(1:12)), wrap_dek(as.raw(33:64), old, as.raw(13:24)))
+#' r <- rotate_kek(w, old, new, new_nonces = list(as.raw(25:36), as.raw(37:48)))
+#' identical(unwrap_dek(r$wrapped[[2]], new)$dek, as.raw(33:64))
 #' @export
 rotate_kek <- function(wrapped_deks, old_kek, new_kek, new_nonces,
                        new_kek_id = "kek-2", audit_log = NULL) {
@@ -426,6 +444,8 @@ rotate_kek <- function(wrapped_deks, old_kek, new_kek, new_nonces,
 #' @param n_records See Usage.
 #' @param mean_record_bytes See Usage.
 #' @param dek_bytes See Usage.
+#' @examples
+#' rotation_cost(n_records = 1e6, mean_record_bytes = 2048)
 #' @export
 rotation_cost <- function(n_records, mean_record_bytes,
                           dek_bytes = 32L) {
@@ -450,6 +470,10 @@ rotation_cost <- function(n_records, mean_record_bytes,
 #' @param dek See Usage.
 #' @param nonce See Usage.
 #' @param aad See Usage.
+#' @examples
+#' dek <- as.raw(1:32)
+#' s <- seal_record(charToRaw("visit 2026-10-05"), dek, nonce = as.raw(1:12), aad = charToRaw("record-7"))
+#' rawToChar(open_record(s, dek))
 #' @export
 seal_record <- function(plaintext, dek, nonce, aad = raw(0)) {
   r <- .secrtt_aead_encrypt(dek, nonce, plaintext, aad)
@@ -462,6 +486,11 @@ seal_record <- function(plaintext, dek, nonce, aad = raw(0)) {
 #' @param wrapped See Usage.
 #' @param kek See Usage.
 #' @param audit_log See Usage.
+#' @examples
+#' dek <- as.raw(1:32); kek <- as.raw(32:1)
+#' w <- wrap_dek(dek, kek, as.raw(1:12))
+#' log_env <- new.env(); log_env$entries <- list()
+#' identical(unwrap_dek(w, kek)$dek, dek)
 #' @export
 unwrap_dek <- function(wrapped, kek, audit_log = NULL) {
   r <- .secrtt_aead_decrypt(kek, wrapped$nonce, wrapped$wrapped, wrapped$tag,
@@ -486,6 +515,10 @@ unwrap_dek <- function(wrapped, kek, audit_log = NULL) {
 #' @param nonce See Usage.
 #' @param kek_id See Usage.
 #' @param aad See Usage.
+#' @examples
+#' dek <- as.raw(1:32); kek <- as.raw(32:1); nonce <- as.raw(1:12)
+#' w <- wrap_dek(dek, kek, nonce, kek_id = "kek-2026")
+#' identical(unwrap_dek(w, kek)$dek, dek)
 #' @export
 wrap_dek <- function(dek, kek, nonce, kek_id = "kek-1",
                      aad = raw(0)) {

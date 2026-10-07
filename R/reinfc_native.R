@@ -13,7 +13,6 @@
 #'
 #' A step of the reinfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Numeric; passed to \code{exp}.
 #' @return A numeric value.
@@ -35,7 +34,6 @@
 #'
 #' A step of the reinfc_native implementation. Called by \code{morie_reinfc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
 #' @param name Passed to \code{sprintf}.
@@ -70,7 +68,6 @@
 #'
 #' A step of the reinfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rewards A vector; its length is taken and its elements indexed.
 #' @param baseline One of \code{"comparison"}, \code{"none"}.
@@ -109,7 +106,6 @@
 #' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli},
 #' \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param param Coerced to list by the body, with \code{as.list}.
 #' @param rewards A vector; its length is taken and its elements indexed.
@@ -141,7 +137,6 @@
 #' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli},
 #' \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param state A list; the body reads \code{$v1}, \code{$v2} from it.
 #' @param baseline One of \code{"comparison"}, \code{"none"}.
@@ -166,7 +161,6 @@
 #' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli},
 #' \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param state A list; the body reads \code{$v1}, \code{$v2} from it.
 #' @param baseline One of \code{"comparison"}, \code{"mean"}.
@@ -187,7 +181,6 @@
 #'
 #' A step of the reinfc_native implementation. Called by \code{morie_reinfc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reward_fn Accepted by the signature and not used anywhere in the body.
 #' @param pv A vector; its length is taken.
@@ -242,7 +235,6 @@
 #'
 #' A step of the reinfc_native implementation. Called by \code{morie_reinfc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reward_fn Accepted by the signature and not used anywhere in the body.
 #' @param xs A matrix; indexed by row and column.
@@ -317,7 +309,6 @@
 #'
 #' A step of the reinfc_native implementation. Called by \code{morie_reinfc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reward_fn Accepted by the signature and not used anywhere in the body.
 #' @param mu Numeric; combined arithmetically in the body.
@@ -393,7 +384,6 @@
 #'
 #' A step of the reinfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reward_fn Passed to \code{.reinfc_run_gaussian}.
 #' @param x Optional; may be \code{NULL}. Passed to \code{.reinfc_as_matrix}.
@@ -512,7 +502,6 @@ morie_reinforce <- morie_reinfc
 #'
 #' A step of the reinfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @param r0 Numeric; combined arithmetically in the body.
@@ -543,7 +532,6 @@ morie_reinfc_expected_update <- function(p, r0, r1, alpha = 1.0, b = 0.0) {
 #'
 #' A step of the reinfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

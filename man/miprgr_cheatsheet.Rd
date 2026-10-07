@@ -12,5 +12,7 @@ A character value.
 \description{
 A step of the miprgr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
+}
+\examples{
+cat(miprgr_cheatsheet())
 }

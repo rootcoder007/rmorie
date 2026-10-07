@@ -20,5 +20,4 @@ A list with \code{approx}, \code{details}, \code{lengths}.
 A step of the rangayyan_tf implementation. Called by \code{Dwt}, \code{Dwt2Tap},
 \code{Mra} and 6 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -19,7 +19,6 @@ A list with \code{forward_passes}, \code{cross_encoder}, \code{bi_encoder},
 \description{
 A step of the sbert_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 pair_cost(n = 5L)

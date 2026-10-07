@@ -20,7 +20,6 @@ A list with \code{values}, \code{rescaled}, \code{factor}, \code{log_offset},
 \description{
 A step of the phmmsr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

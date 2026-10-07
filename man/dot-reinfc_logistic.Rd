@@ -15,7 +15,6 @@ A numeric value.
 \description{
 A step of the reinfc_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 .reinfc_logistic(0)

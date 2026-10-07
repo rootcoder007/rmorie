@@ -26,7 +26,6 @@ A list with \code{spectrogram}, \code{stft}, \code{times}, \code{freqs},
 \description{
 A step of the rangayyan_tf implementation. Called by \code{HrvTv}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(5)

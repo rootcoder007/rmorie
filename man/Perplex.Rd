@@ -17,6 +17,9 @@ List with \code{perplexity}, \code{cross_entropy_nats}, \code{cross_entropy_bits
 \description{
 Formula: PPL = exp(-(1/N) sum_i log p(x_i)); cross-entropy H = -(1/N) sum_i log2 p(x_i)
 }
+\examples{
+Perplex(log(c(0.25, 0.25, 0.25, 0.25)))$perplexity   # uniform over 4 tokens: 4
+}
 \references{
 Brown, Della Pietra, Mercer, Della Pietra and Lai (1992), An estimate of
 an upper bound for the entropy of English, Computational Linguistics 18:31-40. Not

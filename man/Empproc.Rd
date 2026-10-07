@@ -33,8 +33,7 @@ G_n(t) = sqrt(n) [F_n(t) - F(t)];
 cov[G(s), G(t)] = F(s ^ t) - F(s) F(t)
 }
 \references{
-Kosorok (2008), Introduction to Empirical Processes and
-Semiparametric Inference, Section 2.1, equation (2.5). Fetched as the
-full text of the book.
+Kosorok (2008), Introduction to Empirical Processes and Semiparametric
+Inference, Section 2.1, equation (2.5).
 }
 \keyword{internal}

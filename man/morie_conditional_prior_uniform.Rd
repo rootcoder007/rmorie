@@ -17,7 +17,6 @@ A list with \code{grid}, \code{density}.
 \description{
 A step of the bndbye_native implementation. Called by \code{morie_posterior_hpd}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 r <- morie_conditional_prior_uniform(list(lower = 0.2, upper = 0.8),

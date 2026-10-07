@@ -36,6 +36,11 @@ drawn deterministically by inverting the Laplace CDF at van der
 Corput points in bases 2 and 3 so both language arms agree; a real
 deployment must use a cryptographic source.
 }
+\examples{
+set.seed(22)
+x <- rnorm(1000, 5, 2)
+Dpvar(x, a = 0, b = 10, epsilon = 1)[c("var_dp", "var_true")]
+}
 \references{
 Karwa, V. and Vadhan, S. (2018). Finite sample
 differentially private confidence intervals. ITCS 2018;

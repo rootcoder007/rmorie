@@ -17,7 +17,6 @@ A list with \code{prompt}, \code{kind}.
 \description{
 A step of the llavx_native implementation. Called by \code{morie_llavx}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

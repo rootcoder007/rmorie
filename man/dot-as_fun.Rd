@@ -16,5 +16,4 @@ Nothing; this branch always raises.
 A step of the barerp_native implementation. Called by \code{barrier_method},
 \code{central_point}.
 See the file header for the source the module follows.
-source it follows.
 }

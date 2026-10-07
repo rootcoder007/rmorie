@@ -23,5 +23,4 @@ A list with \code{estimate}, \code{elmo}, \code{layers}, \code{weights},
 \description{
 A step of the elmo_native implementation. Called by \code{morie_elmo}.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -41,10 +41,8 @@ cpts <- list(C = c(0.5, 0.5), R = list(c(0.8, 0.2), c(0.2, 0.8)))
 Baynet(graph, cpts, list(), "R")
 }
 \references{
-Zhang, N. L. and Poole, D. (1994). A simple approach to
-Bayesian network computations. Proc. 10th Canadian Conference on
-AI, 171-178. Archived:
-fetched-wave3/zhang-poole-1994-simple-approach-bn.pdf.
+Zhang, N. L. and Poole, D. (1994). A simple approach to Bayesian network
+computations. Proc. 10th Canadian Conference on AI, 171-178.
 
 Pearl, J. (1988). Probabilistic Reasoning in Intelligent Systems.
 Morgan Kaufmann.

@@ -18,7 +18,6 @@ The value of \code{out}, as built in the body.
 A step of the randIE_native implementation. Called by
 \code{morie_randIE_interventional_mean}, \code{morie_randIE_mediator_distribution}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

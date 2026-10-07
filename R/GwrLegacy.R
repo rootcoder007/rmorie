@@ -211,6 +211,7 @@ gwrfwl <- function(y, X1, X2, coords, bw = 0.5, kernel = "bisquare", adaptive = 
 #' @rdname gwrcoef
 #' @export
 gwrsur <- function(ys, X, coords, bw = 0.5, kernel = "bisquare", adaptive = FALSE) {
+  .morie_arg(ys, "l")
   s <- .gwl_setup(ys[[1]], X, coords, bw, kernel, adaptive)
   Y <- lapply(ys, as.numeric)
   m <- length(Y)

@@ -12,7 +12,7 @@
 #'
 #' @param cases Either (a, b) counts, or a 0/1 exposure indicator.
 #' @param controls Either (c, d) counts, or a 0/1 exposure indicator.
-#' @param exposed,unexposed Ignored; kept for the stub signature.
+#' @param exposed,unexposed Ignored; kept for backward compatibility.
 #' @param conf Confidence level.
 #' @return List with \code{estimate}, \code{a}, \code{b}, \code{c},
 #'   \code{d}, \code{log_or}, \code{se_log}, \code{ci_low},

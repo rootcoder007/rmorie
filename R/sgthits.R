@@ -15,6 +15,7 @@
 #' sgthits(matrix(c(0,1,1,0), 2, 2))$authority
 #' @export
 sgthits <- function(A, iters = 200L) {
+  .morie_arg(A, "m")
   m <- as.matrix(A)
   dimnames(m) <- NULL
   n <- nrow(m)

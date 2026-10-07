@@ -30,7 +30,6 @@ A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method},
 \description{
 A step of the egcn_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(1)

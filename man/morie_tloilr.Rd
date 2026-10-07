@@ -2,7 +2,7 @@
 % Please edit documentation in R/tloilr_native.R
 \name{morie_tloilr}
 \alias{morie_tloilr}
-\title{Main entry point -- compact alias per ledger/NAMING.md}
+\title{Main entry point -- compact alias}
 \usage{
 morie_tloilr(Q1, Q0, kappa)
 }
@@ -19,6 +19,5 @@ The value of \code{.tloilr_constrained_value}.
 \description{
 A step of the tloilr_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \keyword{internal}

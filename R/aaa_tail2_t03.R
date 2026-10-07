@@ -24,7 +24,6 @@
 #'
 #' A step of the tail2_t03 implementation. Called by \code{CoxPL}, \code{CramerRao}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
@@ -224,7 +223,6 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 #'
 #' A step of the tail2_t03 implementation. Called by \code{CoxPL}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time A vector; its length is taken and its elements indexed.
 #' @param event A vector; indexed elementwise.
@@ -387,7 +385,6 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #'
 #' A step of the tail2_t03 implementation. Called by \code{.morie_t2_qpen}, \code{PenaltyMin}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param constraints Iterated over elementwise, with \code{vapply}.
 #' @param x Passed to \code{g}.
@@ -401,7 +398,6 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #'
 #' A step of the tail2_t03 implementation. Called by \code{PenaltyMin}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param constraints Passed to \code{.morie_t2_viol}.
@@ -418,7 +414,6 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #'
 #' A step of the tail2_t03 implementation. Called by \code{PenaltyMin}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fun Accepted by the signature and not used anywhere in the body.
 #' @param x A vector; its length is taken.

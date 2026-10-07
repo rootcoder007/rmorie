@@ -23,7 +23,6 @@ closed forms.
 Areratio(var1 = 5L, var2 = 5L)
 }
 \references{
-Hodges and Lehmann (1956), Annals of Mathematical
-Statistics 27(2), 324-335.  Standard published form; the article is
-not in the local corpus and was not read.
+Hodges and Lehmann (1956), Annals of Mathematical Statistics 27(2),
+324-335; standard published form.
 }

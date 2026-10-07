@@ -297,6 +297,7 @@ DissimilarityCheck <- function(delta, tol = 1e-12) {
 #' ClassicalMds(rbind(c(0, 3, 4, 5), c(3, 0, 5, 4), c(4, 5, 0, 3), c(5, 4, 3, 0)))$eigenvalues
 #' @export
 ClassicalMds <- function(D, n_dims = 2) {
+  .morie_arg(D, "m")
   D <- as.matrix(D)
   D2 <- D^2
   B <- -0.5 * (D2 - outer(rowMeans(D2), colMeans(D2), `+`) + mean(D2))

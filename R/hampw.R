@@ -28,6 +28,7 @@
 #' Hampw(c(0, 1, 3, 5, 9))$weights
 #' @export
 Hampw <- function(y, a = 2, b = 4, c = 8) {
+  .morie_arg(y, "n0")
   r <- .s03vec(y)
   if (length(r) == 0L) stop("hampel_three_part: y is empty")
   ck <- .hampel_check(a, b, c, "hampel_three_part")

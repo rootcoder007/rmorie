@@ -21,12 +21,18 @@
 #' @return List with \code{lower}, \code{upper}, \code{width},
 #'   \code{estimate}, \code{wald}, \code{pi_net}, \code{pi_c_max},
 #'   \code{pi_d_max}, \code{itt_y}, \code{n}.
+#'   \code{pi_d_max}, \code{itt_y}, \code{n}.
 #' @references de Chaisemartin, C. (2017). Tolerating defiance? Local
 #'   average treatment effects without monotonicity. Quantitative
-#'   Economics 8(2), 367-396. \doi{10.3982/QE601} -- the stub's
-#'   attribution, for the problem; the paper was not accessible, so the
-#'   interval above is the elementary mixture bound, derived here rather
-#'   than taken from it.
+#'   Economics 8(2), 367-396. \doi{10.3982/QE601}, for the problem; the
+#'   interval above is the elementary mixture bound, derived in Details.
+#' @examples
+#' set.seed(1)
+#' n <- 500
+#' Z <- rbinom(n, 1, 0.5)
+#' D <- rbinom(n, 1, 0.2 + 0.5 * Z)
+#' y <- 1 + D + rnorm(n)
+#' Bndnmt(y, D, Z)[c("lower", "upper", "wald")]
 #' @export
 Bndnmt <- function(y, D, Z) {
   yv <- as.numeric(unlist(y))

@@ -17,5 +17,4 @@ A numeric value.
 \description{
 A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}.
 See the file header for the source the module follows.
-source it follows.
 }

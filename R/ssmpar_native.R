@@ -30,7 +30,6 @@
 #' A step of the ssmpar_native implementation. Called by \code{.ssmpar_upsweep},
 #' \code{check_associativity}, \code{parallel_scan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param left A vector; indexed elementwise.
 #' @param right A vector; indexed elementwise.
@@ -52,7 +51,6 @@
 #'
 #' A step of the ssmpar_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pairs A vector; its length is taken.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
@@ -89,7 +87,6 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 #'
 #' A step of the ssmpar_native implementation. Called by \code{parallel_scan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P See Usage.
 #' @return The value of \code{tree}, as built in the body.
@@ -184,7 +181,6 @@ parallel_scan <- function(pairs, x0 = 0.0) {
 #'
 #' A step of the ssmpar_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{.ssmpar_compose}.
 #' @param b Passed to \code{.ssmpar_compose}.
@@ -210,7 +206,6 @@ check_associativity <- function(a, b, c, tol = 1e-12) {
 #'
 #' A step of the ssmpar_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param length Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{parallel_depth}, \code{sequential_depth},
@@ -240,7 +235,6 @@ scan_depth <- function(length) {
 #'
 #' A step of the ssmpar_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -261,7 +255,7 @@ scan_depth <- function(length) {
 }
 
 
-# compact alias per ledger/NAMING.md
+# compact alias
 parallelscan <- parallel_scan
 
 # public names resolved by fn/_lazy_map.json

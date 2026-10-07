@@ -14,7 +14,6 @@
 #'
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param n.cp Coerced to integer by the body, with \code{as.integer}.
@@ -37,7 +36,6 @@
 #' A step of the prphet_native implementation. Called by
 #' \code{.prnFil_simulate_future_trend}, \code{morie_prphet_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param k.rate Numeric; combined arithmetically in the body.
@@ -47,9 +45,8 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' morie_prphet_piecewise_trend(t = c(1, 2, 3, 4, 5, 6, 7, 8), k.rate = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   m.off = c(1, 2, 3, 4, 5, 6, 7, 8), deltas = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   cps = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' # growth rate 1 with offset 0, bending by -0.5 at t = 3 and +0.25 at t = 6
+#' morie_prphet_piecewise_trend(t = 1:8, k.rate = 1, m.off = 0, deltas = c(-0.5, 0.25), cps = c(3, 6))
 #' @keywords internal
 morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
   out <- numeric(length(t))
@@ -67,7 +64,6 @@ morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
 #'
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_design}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken.
 #' @param cps A vector; its length is taken and its elements indexed.
@@ -94,7 +90,6 @@ morie_prphet_trend_matrix <- function(t, cps) {
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_design},
 #' \code{prophe_additive_components}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param period Numeric; combined arithmetically in the body.
@@ -124,7 +119,6 @@ morie_prphet_fourier_terms <- function(t, period, order) {
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_design},
 #' \code{prophe_additive_components}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param holidays A vector; indexed elementwise.
@@ -155,7 +149,6 @@ morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_fit},
 #' \code{morie_prphet_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{morie_prphet_trend_matrix}.
 #' @param cps A vector; its length is taken.
@@ -200,7 +193,6 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
 #' A step of the prphet_native implementation. Called by \code{.prnFil_changepoint_path},
 #' \code{.prnFil_select_changepoints}, \code{prophe_additive_components}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -288,7 +280,6 @@ morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8
 #'
 #' A step of the prphet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$beta}, \code{$changepoints}, \code{$columns} from it.
 #' @param t.new Coerced to numeric by the body, with \code{as.numeric}.
@@ -318,6 +309,9 @@ morie_prphet <- morie_prphet_piecewise_trend
 #' @param period Positive period.
 #' @param order Integer, number of harmonics.
 #' @return A list of rows, each \code{2 * order} long.
+#' @examples
+#' f <- fourier_terms(t = c(0, 7, 14), period = 7, order = 1)
+#' f   # identical rows: exactly periodic
 #' @export
 fourier_terms <- function(t, period, order) {
   if (period <= 0)
@@ -346,6 +340,9 @@ fourier_terms <- function(t, period, order) {
 #' @param upper Integer, days after the holiday to flag.
 #' @return A list with \code{matrix} (list of rows) and \code{names}
 #'   (sorted holiday names).
+#' @examples
+#' h <- holiday_matrix(t = 1:10, holidays = list(canada = 3, boxing = 8), lower = 1, upper = 1)
+#' h$names
 #' @export
 holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
   names_ <- sort(names(holidays))
@@ -379,6 +376,8 @@ holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
 #' @param deltas Numeric vector of rate adjustments, one per changepoint.
 #' @param cps Numeric vector of changepoints.
 #' @return Numeric vector of trend values.
+#' @examples
+#' piecewise_trend(t = 0:6, k_rate = 1, m_off = 0, deltas = -1, cps = 3)   # flat after t = 3
 #' @export
 piecewise_trend <- function(t, k_rate, m_off, deltas, cps) {
   out <- numeric(length(t))
@@ -401,6 +400,9 @@ piecewise_trend <- function(t, k_rate, m_off, deltas, cps) {
 #' @param holidays Optional named list of dates per holiday.
 #' @param holiday_window \code{c(lower, upper)} window around each date.
 #' @return A list with \code{X} (list of rows), \code{cols}, \code{hn}.
+#' @examples
+#' d <- prophet_design(t = 1:10, cps = 5, seasonalities = list(list("weekly", 7, 1)))
+#' d$cols
 #' @export
 prophet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
                            holiday_window = c(0, 0)) {
@@ -440,6 +442,13 @@ prophet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
 #' @param holidays Same as for the fit.
 #' @param holiday_window Same as for the fit.
 #' @return Numeric vector of forecasts.
+#' @examples
+#' set.seed(20)
+#' t <- 1:60
+#' y <- 0.1 * t + sin(2 * pi * t / 7) + rnorm(60, sd = 0.1)
+#' seas <- list(list(name = "weekly", period = 7, order = 2))
+#' fit <- morie_prphet_fit(t, y, seasonalities = seas)
+#' prophet_predict(fit, t_new = 61:63, seasonalities = seas)
 #' @export
 prophet_predict <- function(fit, t_new, seasonalities = NULL,
                             holidays = NULL, holiday_window = c(0, 0)) {
@@ -482,6 +491,8 @@ prphet_cheatsheet <- function() {
 #' @param t Numeric vector of times.
 #' @param cps Numeric vector of changepoints.
 #' @return A list of rows, each a numeric vector.
+#' @examples
+#' trend_matrix(t = c(0, 1, 2, 3), cps = 1.5)
 #' @export
 trend_matrix <- function(t, cps) {
   rows <- list()

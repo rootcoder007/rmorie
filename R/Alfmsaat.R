@@ -18,6 +18,12 @@
 #' @return A list with the MSA update \code{m}, the attention \code{attn},
 #'   \code{estimate}, \code{n}, \code{s}, \code{mode} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 7-8
+#' @examples
+#' set.seed(3)
+#' m <- array(rnorm(2 * 3 * 2), c(2, 3, 2)); z <- array(rnorm(3 * 3 * 2), c(3, 3, 2))
+#' w <- function() list(matrix(rnorm(4, sd = 0.5), 2, 2))
+#' r <- Alfmsaat(m, w(), w(), w(), w(), wo = matrix(rnorm(4), 2, 2), z = z, wb = matrix(rnorm(2), 1, 2))
+#' dim(r$m)
 #' @export
 Alfmsaat <- function(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL,
                      mode = "row") {

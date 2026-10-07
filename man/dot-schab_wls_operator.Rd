@@ -19,7 +19,7 @@ singular value. Written out rather than taken from MASS::ginv because
 MASS is only in Suggests.
 }
 \examples{
-x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
-res <- .schab_wls_operator(X = x, w = x)
+X <- cbind(1, c(1.2, 2.4, 3.1, 4.8))
+res <- .schab_wls_operator(X = X, w = c(1, 0.5, 2, 1))
 res
 }

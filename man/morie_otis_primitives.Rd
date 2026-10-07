@@ -76,7 +76,7 @@ joins on the ID are forbidden by design.
 \examples{
 \donttest{
 b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-res <- try(morie_otis_regional_placement(b01))
+res <- try(morie_otis_regional_placement(b01, year = max(b01$EndFiscalYear)))
 class(res)
 }
 \donttest{
@@ -106,7 +106,7 @@ class(res)
 }
 \donttest{
 b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-res <- try(morie_otis_regional_placement(b01))
+res <- try(morie_otis_regional_placement(b01, year = max(b01$EndFiscalYear)))
 class(res)
 }
 \donttest{

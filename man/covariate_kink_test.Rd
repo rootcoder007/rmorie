@@ -26,7 +26,6 @@ A list with \code{slope_change}, \code{slope_right}, \code{slope_left},
 \description{
 A step of the bnskt2_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 set.seed(2)

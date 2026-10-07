@@ -23,3 +23,7 @@ A list with \code{estimate}, \code{optimal_t_R},
 \description{
 Release time maximising utility
 }
+\examples{
+gt <- gamma_generation_time()
+optimal_duration(t_Q = 3, generation_time = gt)$optimal_t_R
+}

@@ -105,10 +105,10 @@ morie_snpest_t_logpdf <- function(x, df, loc, scale2) {
 #' @return The log predictive density.
 #' @export
 #' @examples
-#' set.seed(1)
-#' r <- morie_snpest_predictive(x = rnorm(10), n = 8L, s = rnorm(10), ss = rnorm(10),
-#'   m0 = rnorm(10), kappa0 = rnorm(10), a0 = rnorm(10), b0 = rnorm(10))
-#' TRUE
+#' # a cluster of 8 members with sum 16 and sum of squares 36
+#' morie_snpest_predictive(x = 2.5, n = 8L, s = 16, ss = 36, m0 = 0, kappa0 = 1, a0 = 2, b0 = 1)
+#' # n = 0 gives the prior predictive
+#' morie_snpest_predictive(x = 2.5, n = 0L, s = 0, ss = 0, m0 = 0, kappa0 = 1, a0 = 2, b0 = 1)
 #' @keywords internal
 morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
   if (n > 0) {
@@ -134,7 +134,6 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 #'
 #' A step of the snpest_native implementation. Called by \code{morie_snpest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
 #' @param weights A vector; its length is taken and its elements indexed.
@@ -173,7 +172,6 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 #'
 #' A step of the snpest_native implementation. Called by \code{morie_snpest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A numeric value.

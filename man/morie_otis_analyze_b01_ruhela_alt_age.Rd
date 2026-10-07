@@ -10,16 +10,20 @@ morie_otis_analyze_b01_ruhela_alt_age(data = NULL, out_dir = NULL)
 morie_otis_analyze_b01_mrm_alt_age(data = NULL, out_dir = NULL)
 }
 \arguments{
-\item{data}{Optional b01 data.frame.}
+\item{data}{The OTIS b01 table; \code{NULL} loads it.}
 
-\item{out_dir}{Optional output directory.}
+\item{out_dir}{Optional directory for the text and JSON rendering.}
 }
 \value{
 \code{morie_otis_analysis_result}.
 }
 \description{
-b01 alt-T Ruhela: Age 50+ -> vm count
+As \code{\link{morie_otis_analyze_a01_ruhela_alt_age}}, on the b01 cell frame.
 }
 \examples{
-\donttest{ morie_otis_analyze_b01_ruhela_alt_age() }
+\donttest{
+b01 <- morie_synth_otis("b01", n = 300L, seed = 1L)
+r <- morie_otis_analyze_b01_ruhela_alt_age(b01)
+r$tables[[1L]]$rows[[1L]]
+}
 }

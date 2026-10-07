@@ -1,12 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' AlphaZero MCTS node initialisation
 #'
-#' Schrittwieser et al. (2020), arXiv:1911.08265 (FETCHED), appendix B,
-#' and Silver et al. (2017), Nature 550, 354-359: a fresh node stores, per
-#' edge, N = 0, W = 0, Q = 0 and P = p_a.  Everything beyond the priors is
-#' zero, which is the point -- AlphaZero carries no rollout statistics and
-#' no heuristic, so a node is fully described by the policy prior until
-#' the first backup reaches it.
+#' Schrittwieser et al. (2020), arXiv:1911.08265, appendix B, and Silver et al. (2017),
+#' Nature 550, 354-359: a fresh node stores, per edge, N = 0, W = 0, Q = 0 and P = p_a.
+#' Everything beyond the priors is zero, which is the point -- AlphaZero carries no
+#' rollout statistics and no heuristic, so a node is fully described by the policy prior
+#' until the first backup reaches it.
 #'
 #' @param p prior probabilities from the policy head.
 #' @param action_space optional action-space size; p is zero-padded or

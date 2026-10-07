@@ -10,7 +10,6 @@
 #' A step of the berte_native implementation. Called by \code{encoder_block},
 #' \code{morie_kamath_houlsby_adapter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -28,7 +27,6 @@ gelu <- function(x) {
 #'
 #' A step of the berte_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @param gain Optional; may be \code{NULL}. A vector; its length is taken.
@@ -65,7 +63,6 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 #'
 #' A step of the berte_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param row Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W A matrix; passed to \code{as.matrix}.
@@ -85,7 +82,6 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 #'
 #' A step of the berte_native implementation. Called by \code{multi_head_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A matrix; indexed by row and column.
 #' @param K A matrix; indexed by row and column.
@@ -138,7 +134,6 @@ attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
 #'
 #' A step of the berte_native implementation. Called by \code{encoder_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A matrix; passed to \code{nrow}.
 #' @param K Passed to \code{attention_weights}.
@@ -178,7 +173,6 @@ multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
 #'
 #' A step of the berte_native implementation. Called by \code{bert_encoder}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Wq Passed to \code{apply}.
@@ -244,7 +238,6 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
 #'
 #' A step of the berte_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param blocks A vector; its length is taken.

@@ -17,7 +17,6 @@ The value of \code{$}.
 \description{
 A step of the snpqc1_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 if (morie_crypto_sodium_available()) {

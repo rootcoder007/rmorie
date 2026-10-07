@@ -98,6 +98,7 @@ NULL
 #' }
 #' @export
 morie_tps_temporal_summary <- function(df, ds_name = "?") {
+  .morie_arg(df, "df")
   stopifnot(is.data.frame(df))
   yc <- .tps_safe_year_col(df)
   summary_lines <- list(
@@ -484,6 +485,7 @@ morie_tps_crime_compare <- function(dfs) {
 #' }
 #' @export
 morie_tps_analyze_one <- function(df, name = "?") {
+  .morie_arg(df, "df")
   stopifnot(is.data.frame(df))
   temp <- morie_tps_temporal_summary(df, ds_name = name)
   spat <- morie_tps_spatial_summary(df, ds_name = name)

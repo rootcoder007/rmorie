@@ -912,8 +912,8 @@ morie_tps_render_district_proportional <- function(polys, count_col,
 #'
 #' Renders Kulldorff-style circular candidate windows on the TPS canvas.
 #' Currently a thin layer over centroids + radius circles; the full
-#' likelihood-ratio overlay and significance ranking depend on the Python
-#' ``morie.tps_satscan`` module and are stubbed.
+#' likelihood-ratio overlay and significance ranking are not yet
+#' available in R (they live in the Python \code{morie.tps_satscan} module).
 #'
 #' @param clusters data.frame with columns ``lat`` / ``lon`` / ``radius_km``
 #'   and optionally ``llr`` (log-likelihood ratio) for shading.

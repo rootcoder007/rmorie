@@ -16,7 +16,6 @@ The value of \code{out}, as built in the body.
 A step of the tail1_core implementation. Called by \code{Admixq}, \code{Admmlasso},
 \code{Advielbo} and 735 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 res <- .t1_result()

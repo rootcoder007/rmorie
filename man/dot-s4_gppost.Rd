@@ -23,5 +23,4 @@ A list with \code{mean}, \code{var}.
 \description{
 A step of the s04core implementation. Called by \code{Gpmoe}.
 See the file header for the source the module follows.
-source it follows.
 }

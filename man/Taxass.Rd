@@ -27,14 +27,16 @@ resolved to the LCA of the tied leaves. No hits leaves the query
 unclassified (taxon 0). Kraken 2 applies the same classification
 step to minimizer-based LCA hits.
 }
+\examples{
+# taxonomy 1 (root) -> 2 -> 3 and 2 -> 4; most k-mers hit 3
+parent <- c(`1` = 1, `2` = 1, `3` = 2, `4` = 2)
+Taxass(kmer_taxa = c(3, 3, 3, 4, 0, 2), parent = parent)$taxon
+}
 \references{
 Wood, D. E. and Salzberg, S. L. (2014), Kraken:
 ultrafast metagenomic sequence classification using exact
 alignments, Genome Biology 15(3), R46. Sequence classification
 algorithm (RTL scoring, tie to LCA), p. 8 and Figure 1. Wood,
 D. E., Lu, J. and Langmead, B. (2019), Improved metagenomic
-analysis with Kraken 2, Genome Biology 20, 257, Methods. Local
-sources:
-library/pdf/fetched-wave3/Wood-Salzberg-2014-Kraken1-GenomeBiology.pdf
-and Wood-Lu-Langmead-2019-Kraken2-GenomeBiology.pdf.
+analysis with Kraken 2, Genome Biology 20, 257, Methods.
 }

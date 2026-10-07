@@ -21,5 +21,4 @@ A list with \code{scaled}, \code{lower}, \code{upper}, \code{range}.
 \description{
 A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 See the file header for the source the module follows.
-source it follows.
 }

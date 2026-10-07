@@ -62,7 +62,6 @@
 #' \code{.gan_an_discrimination_loss_impl}, \code{.gan_an_residual_loss_impl},
 #' \code{morie_gan_an} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -80,7 +79,6 @@
 #' A step of the gan_an_native implementation. Called by
 #' \code{.gan_an_anomaly_score_impl}, \code{residual_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.gan_an_as_num}.
 #' @param g_z Passed to \code{.gan_an_as_num}.
@@ -101,7 +99,6 @@
 #' A step of the gan_an_native implementation. Called by
 #' \code{.gan_an_anomaly_score_impl}, \code{discrimination_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f_x Passed to \code{.gan_an_as_num}.
 #' @param f_gz Passed to \code{.gan_an_as_num}.
@@ -124,7 +121,6 @@
 #'
 #' A step of the gan_an_native implementation. Called by \code{anomaly_score}, \code{morie_gan_an}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.gan_an_residual_loss_impl}.
 #' @param g_z Passed to \code{.gan_an_residual_loss_impl}.
@@ -152,7 +148,6 @@
 #'
 #' A step of the gan_an_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.gan_an_anomaly_score_impl}.
 #' @param generator Accepted by the signature and not used anywhere in the body.
@@ -236,7 +231,6 @@ morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
 #'
 #' A step of the gan_an_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.gan_an_residual_loss_impl}.
 #' @param g_z Passed to \code{.gan_an_residual_loss_impl}.
@@ -254,7 +248,6 @@ residual_loss <- function(x, g_z) {
 #'
 #' A step of the gan_an_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f_x Passed to \code{.gan_an_discrimination_loss_impl}.
 #' @param f_gz Passed to \code{.gan_an_discrimination_loss_impl}.
@@ -272,7 +265,6 @@ discrimination_loss <- function(f_x, f_gz) {
 #'
 #' A step of the gan_an_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.gan_an_anomaly_score_impl}.
 #' @param g_z Passed to \code{.gan_an_anomaly_score_impl}.
@@ -293,7 +285,6 @@ anomaly_score <- function(x, g_z, f_x, f_gz, lam = 0.1) {
 #'
 #' A step of the gan_an_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.gan_an_as_num}.
 #' @param g_z Passed to \code{.gan_an_as_num}.
@@ -331,7 +322,6 @@ residual_map <- function(x, g_z, shape = NULL) {
 #'
 #' A step of the gan_an_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param normal_scores Passed to \code{.gan_an_as_num}.
 #' @param anomalous_scores Passed to \code{.gan_an_as_num}.
@@ -370,7 +360,6 @@ score_separation <- function(normal_scores, anomalous_scores) {
 #'
 #' A step of the gan_an_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -391,7 +380,7 @@ score_separation <- function(normal_scores, anomalous_scores) {
   )
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 anogan <- morie_gan_an
 
 # public names resolved by fn/_lazy_map.json

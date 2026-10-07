@@ -21,5 +21,4 @@ A step of the fauzi_native implementation. Called by
 \code{morie_fauzi_b1_coefficient}, \code{morie_fauzi_b2_coefficient},
 \code{morie_fauzi_b3_coefficient}.
 See the file header for the source the module follows.
-source it follows.
 }

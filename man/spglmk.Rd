@@ -44,6 +44,14 @@ exactly (6.91). \code{prediction} and \code{mspe} are the matched pair;
 \code{inverse_link_prediction} is returned separately and without an error
 measure attached.
 }
+\examples{
+set.seed(15)
+coords <- matrix(runif(10), 5, 2)
+Sig <- exp(-as.matrix(dist(coords)) / 0.5)
+s0 <- exp(-sqrt(colSums((t(coords) - c(0.5, 0.5))^2)) / 0.5)
+X <- cbind(1, coords[, 1])
+spglmk(nu = log(c(3, 5, 2, 4, 6)), Sigma_nu = Sig, sigma_0 = s0, X = X, x0 = c(1, 0.5), mu0 = 4)$prediction
+}
 \references{
 Schabenberger Ch 6, Sec 6.3.6, eqs (6.87)-(6.91)
 }

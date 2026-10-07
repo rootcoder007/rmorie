@@ -10,7 +10,6 @@
 #'
 #' A step of the bndbye_native implementation. Called by \code{morie_compare_sets}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param phi_hat Coerced to numeric by the body, with \code{as.numeric}.
 #' @param half_width Coerced to numeric by the body, with \code{as.numeric}.
@@ -30,7 +29,6 @@ morie_identified_set_interval <- function(phi_hat, half_width) {
 #'
 #' A step of the bndbye_native implementation. Called by \code{morie_posterior_hpd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta_set A list; the body reads \code{$lower}, \code{$upper} from it.
 #' @param n_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{401L}.
@@ -42,6 +40,7 @@ morie_identified_set_interval <- function(phi_hat, half_width) {
 #' str(r, max.level = 1)
 #' @keywords internal
 morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
+  .morie_arg(theta_set, "l")
   lo <- as.numeric(theta_set$lower)
   hi <- as.numeric(theta_set$upper)
   if (hi < lo) stop("bndbye: the identified set is empty")
@@ -56,7 +55,6 @@ morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
 #'
 #' A step of the bndbye_native implementation. Called by \code{morie_compare_sets}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta_set Passed to \code{morie_conditional_prior_uniform}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
@@ -105,7 +103,6 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
 #'
 #' A step of the bndbye_native implementation. Called by \code{morie_compare_sets}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta_set A list; the body reads \code{$lower}, \code{$upper}, \code{$width} from it.
 #' @param se_phi Coerced to numeric by the body, with \code{as.numeric}.
@@ -137,7 +134,6 @@ morie_frequentist_confidence_set <- function(theta_set, se_phi, level = 0.95,
 #'
 #' A step of the bndbye_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param phi_hat Passed to \code{morie_identified_set_interval}.
 #' @param half_width Passed to \code{morie_identified_set_interval}.

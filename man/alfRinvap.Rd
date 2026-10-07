@@ -17,7 +17,6 @@ A vector, from \code{as.numeric}.
 \description{
 A step of the alf_core implementation. Called by \code{Alffape}, \code{Alfipa}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 th <- pi / 6

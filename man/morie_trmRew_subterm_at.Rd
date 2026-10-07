@@ -18,7 +18,6 @@ The value of \code{cur}, as built in the body.
 A step of the trmRew_native implementation. Called by \code{.trmRew_overlap},
 \code{morie_trmRew_rewrite_step}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 x <- morie_unifAlg_var("x")

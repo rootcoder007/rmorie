@@ -15,7 +15,6 @@
 #' A step of the randIE_native implementation. Called by
 #' \code{morie_randIE_interventional_mean}, \code{morie_randIE_mediator_distribution}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Coerced to character by the body, with \code{as.character}.
 #' @param name Passed to \code{paste0}.
@@ -36,7 +35,6 @@
 #'
 #' A step of the randIE_native implementation. Called by \code{morie_randIE_interventional_mean}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.labels}.
 #' @param M Passed to \code{.labels}.
@@ -92,7 +90,6 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
 #' A step of the randIE_native implementation. Called by
 #' \code{morie_randIE_randomized_interventional_effect}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Passed to \code{.labels}.
@@ -219,7 +216,6 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
 #'
 #' A step of the randIE_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Passed to \code{morie_randIE_interventional_mean}.
 #' @param A Passed to \code{morie_randIE_interventional_mean}.
@@ -274,7 +270,6 @@ morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
 #'
 #' A step of the randIE_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param result A list; the body reads \code{$direct}, \code{$indirect}, \code{$total} from it.
 #' @return A list with \code{total}, \code{direct}, \code{indirect}, \code{residual},

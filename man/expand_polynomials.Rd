@@ -31,7 +31,6 @@ A list with \code{ar}, \code{ma}.
 A step of the sarima_native implementation. Called by \code{.sarima_fit},
 \code{.sarima_package}, \code{.sarimax_fit}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 expand_polynomials()

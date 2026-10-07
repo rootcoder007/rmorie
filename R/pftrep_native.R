@@ -6,7 +6,6 @@
 #'
 #' A step of the pftrep_native implementation. Called by \code{replicated_pfilter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -27,7 +26,6 @@ logmeanexp <- function(values) {
 #'
 #' A step of the pftrep_native implementation. Called by \code{replicated_pfilter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y See Usage.
 #' @param n_particles A count; the body uses it as \code{rep(...)}.
@@ -76,7 +74,6 @@ particle_filter_simple <- function(y, n_particles, init, step, loglik,
 #'
 #' A step of the pftrep_native implementation. Called by \code{loglik_profile}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{particle_filter_simple}.
 #' @param n_particles Coerced to integer by the body, with \code{as.integer}.
@@ -125,7 +122,6 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
 #'
 #' A step of the pftrep_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{replicated_pfilter}.
 #' @param grid Coerced to numeric by the body, with \code{as.numeric}.

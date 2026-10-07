@@ -136,13 +136,12 @@
 #' .rsludet is a
 #'
 #' general determinant and may return a small negative number for a
-#' positive-semidefinite matrix that is singular to working precision.
-#' Every objective in this shelf is minimised over such determinants, so
-#' an unclamped negative rounding artefact wins the minimisation
-#' outright and the search returns whichever subset happened to round
-#' furthest below zero.  Clamping at zero makes the comparison pick the
-#' FIRST exactly-degenerate subset instead, which is both correct and
-#' identical in the two language arms.
+#' positive-semidefinite matrix that is singular to working precision. Every objective
+#' in this package is minimised over such determinants, so an unclamped negative
+#' rounding artefact wins the minimisation outright and the search returns whichever
+#' subset happened to round furthest below zero. Clamping at zero makes the comparison
+#' pick the FIRST exactly-degenerate subset instead, which is both correct and identical
+#' in the two language arms.
 #'
 #' @param S Passed to \code{.rsludet}.
 #' @return One of two values, depending on the branch taken.
@@ -156,7 +155,6 @@
 #'
 #' A step of the helpers_rouss implementation. Called by \code{.rscovdet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{d}, as built in the body.
@@ -185,7 +183,6 @@
 #' A step of the helpers_rouss implementation. Called by \code{.rsltsfit}, \code{Lmsreg},
 #' \code{Ltsreg} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param b A vector; indexed elementwise.
@@ -225,7 +222,6 @@
 #' A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fastm},
 #' \code{Mcdcv} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param idx A vector; its length is taken.
@@ -256,7 +252,6 @@
 #' A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fastm},
 #' \code{Mvedet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param mu A vector; its length is taken.
@@ -299,7 +294,6 @@
 #' A step of the helpers_rouss implementation. Called by \code{.rscombosstride},
 #' \code{Lmsreg}, \code{Ltsreg} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param k Numeric; passed to \code{min}.
@@ -324,7 +318,6 @@
 #' A step of the helpers_rouss implementation. Called by \code{.rscombosstride},
 #' \code{Lmsreg}, \code{Ltsreg} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
@@ -397,7 +390,6 @@
 #'
 #' A step of the helpers_rouss implementation. Called by \code{Ltsreg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param p Numeric; combined arithmetically in the body.
@@ -414,7 +406,6 @@
 #' A step of the helpers_rouss implementation. Called by \code{Fastm}, \code{Mcdcv},
 #' \code{Mcdv} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param p Numeric; combined arithmetically in the body.
@@ -493,7 +484,6 @@
 #'
 #' A step of the helpers_rouss implementation. Called by \code{Lmsreg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -509,7 +499,6 @@
 #'
 #' A step of the helpers_rouss implementation. Called by \code{Lmsreg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Xm A matrix; indexed by row and column.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
@@ -537,7 +526,6 @@
 #'
 #' A step of the helpers_rouss implementation. Called by \code{Ltsreg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Xm A matrix; indexed by row and column.
 #' @param yy A vector; indexed elementwise.
@@ -562,7 +550,6 @@
 #'
 #' A step of the helpers_rouss implementation. Called by \code{Ltsreg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Xm A matrix; indexed by row and column.
 #' @param yy A vector; indexed elementwise.

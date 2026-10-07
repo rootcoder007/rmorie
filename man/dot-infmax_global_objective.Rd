@@ -27,5 +27,4 @@ A list with \code{objective}, \code{estimator}, \code{n_positive},
 \description{
 A step of the infmax_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }

@@ -634,6 +634,7 @@ morie_kamath_mlm_loss <- function(x, M_x) {
 #' morie_kamath_rtd_loss(c(0.9, 0.9), c(1, 0))
 #' @keywords internal
 morie_kamath_rtd_loss <- function(xhat, d) {
+  .morie_arg(xhat, "n")
   p <- .morie_km_probs(xhat, "xhat")
   d <- as.integer(d)
   if (length(d) != length(p)) stop("need one label per token.",

@@ -63,7 +63,6 @@
 #'
 #' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-1}.
@@ -78,7 +77,6 @@
 #'
 #' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @param s2 Coerced to integer by the body, with \code{as.integer}.
@@ -99,7 +97,6 @@
 #'
 #' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A vector; its length is taken and its elements indexed.
 #' @param P A vector; indexed elementwise.
@@ -133,7 +130,6 @@
 #'
 #' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param capacity Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{capacity}, \code{data}.
@@ -148,7 +144,6 @@
 #'
 #' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param buf A list; the body reads \code{$capacity}, \code{$data} from it.
 #' @param s Carried through into a list the body builds.
@@ -172,7 +167,6 @@
 #'
 #' A step of the dqnv_native implementation. Called by \code{morie_dqnv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param buf A list; the body reads \code{$data} from it.
 #' @param n Coerced to integer by the body, with \code{as.integer}.
@@ -201,7 +195,6 @@
 #'
 #' A step of the dqnv_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param buf A list; the body reads \code{$data} from it.
 #' @return The value of \code{length}.
@@ -214,7 +207,6 @@
 #'
 #' A step of the dqnv_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P A vector; indexed elementwise.
 #' @param R A vector; indexed elementwise.
@@ -333,7 +325,6 @@ morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
 #'
 #' A step of the dqnv_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -354,7 +345,7 @@ morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
         sep = " ")
 }
 
-# compact alias per ledger/NAMING.md
+# compact alias
 morie_dqnv_deepqnetwork <- morie_dqnv
 
 # public names resolved by fn/_lazy_map.json

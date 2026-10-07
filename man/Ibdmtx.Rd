@@ -19,10 +19,9 @@ List with \code{estimate} (pi-hat matrix), \code{Z0},
 Observed IBS-state counts per pair matched to expectations from the
 Table 1 P(IBS | IBD) with finite-sample corrections; P(Z=0..2)
 solved sequentially, bounded per p. 566, pi-hat = P(Z=1)/2 + P(Z=2)
-with the biological constraint transform when pi^2 <= P(Z=2). The
-stub's Browning-Browning (2010) citation was a misattribution
-(fastIBD is an HMM segment method) -- recorded; this is Purcell
-et al. (2007).
+with the biological constraint transform when pi^2 <= P(Z=2). This is
+Purcell et al. (2007); it is sometimes misattributed to Browning and
+Browning (2010), whose fastIBD is an HMM segment method.
 }
 \examples{
 set.seed(1)
@@ -33,6 +32,5 @@ c(nrow(K), ncol(K))
 \references{
 Purcell, S., Neale, B., Todd-Brown, K. et al. (2007),
 American Journal of Human Genetics 81(3), 559-575, Table 1 and
-pp. 565-566. Local: fetched-wave3
-Purcell-2007-PLINK-AJHG81-559.pdf.
+pp. 565-566.
 }

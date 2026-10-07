@@ -19,7 +19,6 @@ A step of the surxgb_native implementation. Called by
 \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss},
 \code{morie_surxgb_ddpdf} and 1 others in the module.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 morie_surxgb_cdf(z = 5L)

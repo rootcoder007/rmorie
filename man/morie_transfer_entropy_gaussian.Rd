@@ -22,8 +22,9 @@ transfer entropy exactly for Gaussian processes. Mirrors
 \code{morie.fn.granci} and the Gaussian arm of \code{morie.fn.trnfen}.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_transfer_entropy_gaussian(V, V)
+x <- sin(1:60)
+y <- c(0, 0.8 * x[-60]) + 0.3 * cos(3 * (1:60))
+morie_transfer_entropy_gaussian(x, y)
 }
 \references{
 Barnett L, Barrett AB, Seth AK (2009). \emph{Physical Review

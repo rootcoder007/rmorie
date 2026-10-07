@@ -36,7 +36,6 @@ MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
 #' A step of the tail1_core implementation. Called by \code{.schab_disjunctive_kriging},
 #' \code{t3ols}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M Passed to \code{svd}.
 #' @param rcond Numeric; combined arithmetically in the body. Defaults to \code{1e-15}.
@@ -72,7 +71,6 @@ NULL
 #' A step of the tail1_core implementation. Called by \code{.ecfp_percol},
 #' \code{Admmlasso}, \code{Advielbo} and 154 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
@@ -88,7 +86,6 @@ NULL
 #' A step of the tail1_core implementation. Called by \code{.ecfp_bonds},
 #' \code{Admmlasso}, \code{Advielbo} and 45 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
@@ -112,7 +109,6 @@ NULL
 #' A step of the tail1_core implementation. Called by \code{Clrpca}, \code{Eigcent},
 #' \code{Lapeig} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{t}.
 #' @return A list with \code{values}, \code{vectors}.
@@ -182,7 +178,6 @@ NULL
 #' A step of the tail1_core implementation. Called by \code{Dfbetas}, \code{Dffitsols},
 #' \code{Olsnormeq}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{\%*\%}.
 #' @param xtxinv A matrix; passed to \code{\%*\%}.
@@ -198,7 +193,6 @@ NULL
 #' A step of the tail1_core implementation. Called by \code{Bayeslogit}, \code{Dfbetas},
 #' \code{Dffitsols} and 9 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{cbind}.
@@ -213,7 +207,6 @@ NULL
 #'
 #' A step of the tail1_core implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{stats::sd}.
@@ -230,7 +223,6 @@ NULL
 #' A step of the tail1_core implementation. Called by \code{.btdir_rows},
 #' \code{.btmbb_reps}, \code{.kvmse_rotation} and 32 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
@@ -257,7 +249,6 @@ NULL
 #' A step of the tail1_core implementation. Called by \code{Admixq}, \code{Admmlasso},
 #' \code{Advielbo} and 735 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ... Passed through.
 #' @return The value of \code{out}, as built in the body.

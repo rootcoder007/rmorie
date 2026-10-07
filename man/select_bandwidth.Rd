@@ -32,7 +32,6 @@ A list with \code{h}, \code{fit}, \code{criterion}, \code{all}, \code{note}.
 \description{
 A step of the tlcvnp_native implementation. Called by \code{cv_tmle_smoothed}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 select_bandwidth(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))

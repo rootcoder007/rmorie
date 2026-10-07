@@ -21,5 +21,4 @@ A vector, from \code{as.numeric}.
 \description{
 A step of the tmldyn_native implementation. Called by \code{sequential_blips}.
 See the file header for the source the module follows.
-source it follows.
 }

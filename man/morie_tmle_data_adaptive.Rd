@@ -44,6 +44,13 @@ per-split levels and estimates, and the separation diagnostics.
 \description{
 Contrast between data-discovered exposure levels, done honestly
 }
+\examples{
+set.seed(10)
+n <- 300; X <- matrix(rnorm(n), n)
+D <- sample(0:2, n, TRUE)
+y <- 0.5 * D + X[, 1] + rnorm(n)
+morie_tmle_data_adaptive(y, D, X, n_folds = 5)$estimate
+}
 \references{
 Hubbard, A. E. et al. (2018).
 }

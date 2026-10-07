@@ -150,7 +150,6 @@
 #'
 #' A step of the orfgrf_native implementation. Called by \code{orthogonal_random_forest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.grow_one_tree}.
 #' @param y A vector; its length is taken.
@@ -207,7 +206,6 @@
 #'
 #' A step of the orfgrf_native implementation. Called by \code{.orfgrf_forest_weights}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree A list; the body reads \code{$cut}, \code{$j}, \code{$leaf}, \code{$left},
 #' \code{$right}, \code{$value} from it.
@@ -398,7 +396,6 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 #'
 #' A step of the orfgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param T Coerced to numeric by the body, with \code{as.numeric}.
@@ -471,7 +468,6 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
 #'
 #' A step of the orfgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

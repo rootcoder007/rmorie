@@ -52,7 +52,6 @@ LOG10E <- log10(exp(1))
 #'
 #' A step of the rqtmpl_native implementation. Called by \code{morie_threshold}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -95,6 +94,7 @@ morie_haldane <- function(distance) {
 #' morie_inverse_haldane(morie_haldane(0.2))
 #' @keywords internal
 morie_inverse_haldane <- function(r) {
+  .morie_arg(r, "n")
   r <- as.numeric(r)
   if (r < 0 || r >= 0.5)
     stop(sprintf("rqtmpl: a recombination fraction must lie in [0, 0.5), got %s", r))

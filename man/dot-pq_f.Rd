@@ -20,5 +20,4 @@ One of two values, depending on the branch taken.
 A step of the parquet implementation. Called by \code{.pq_column_values},
 \code{morie_read_parquet}.
 See the file header for the source the module follows.
-source it follows.
 }

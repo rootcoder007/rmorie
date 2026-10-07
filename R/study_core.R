@@ -61,6 +61,16 @@
   list(p = p, se = se, ci = ci)
 }
 
+
+# A binomial glm with survey design weights: R warns "non-integer #successes" on every fit, which is
+# expected for design weights (the point estimates are the weighted pseudo-likelihood ones). Only that
+# warning is muffled; any other warning from the fit (separation, fitted probabilities 0 or 1) still shows.
+.glm_design_weighted <- function(fit) {
+  withCallingHandlers(fit, warning = function(w) {
+    if (grepl("non-integer #successes", conditionMessage(w), fixed = TRUE)) invokeRestart("muffleWarning")
+  })
+}
+
 #' Internal helper: Weighted Binary Estimate
 #' @noRd
 .weighted_binary_estimate <- function(x, w) {
@@ -391,6 +401,9 @@
         cohens_h = h,
         abs_h = abs(h),
         magnitude = ifelse(abs(h) < 0.2, "small", ifelse(abs(h) < 0.5, "medium", "large")),
+        # the same two weighted proportions on the other two standard scales for a binary outcome
+        risk_difference = p1 - p2,
+        odds_ratio = if (all(c(p1, p2) > 0 & c(p1, p2) < 1)) (p1 / (1 - p1)) / (p2 / (1 - p2)) else NA_real_,
         stringsAsFactors = FALSE
       )
     }
@@ -450,10 +463,19 @@
       stringsAsFactors = FALSE
     )
   }
+  tests <- do.call(rbind, test_rows)
+  if (!is.null(tests) && nrow(tests)) {
+    # the corrections run over the whole family of tests in this table, not one row at a time
+    tests$p_bonferroni <- stats::p.adjust(tests$p_value, method = "bonferroni")
+    tests$p_fdr_bh <- stats::p.adjust(tests$p_value, method = "BH")
+    tests$sig_nominal <- tests$p_value < 0.05
+    tests$sig_bonf <- tests$p_bonferroni < 0.05
+    tests$sig_fdr <- tests$p_fdr_bh < 0.05
+  }
   list(
     frequentist_heavy_drinking_prevalence_ci = do.call(rbind, prevalence_rows),
     frequentist_effect_sizes = do.call(rbind, effect_rows),
-    frequentist_hypothesis_tests = do.call(rbind, test_rows)
+    frequentist_hypothesis_tests = tests
   )
 }
 
@@ -520,6 +542,48 @@
   )
 }
 
+#' Internal helper: SMOTE sensitivity refit (native SMOTE; no optional package)
+#'
+#' Rebalances the outcome with morie_ml_apply_smote() and refits an unweighted logit, as morie's
+#' modules do. On an outcome that is already balanced (minority/majority >= 0.8) the resample adds
+#' nothing, so it is skipped and the status says so.
+#' @noRd
+.smote_sensitivity <- function(frame, outcome, predictors, random_state = 42L) {
+  y <- as.integer(frame[[outcome]])
+  counts <- table(y)
+  ratio <- if (length(counts) == 2L && max(counts) > 0) min(counts) / max(counts) else 0
+  empty_or <- data.frame(term = character(), log_odds = numeric(), SE = numeric(), OR = numeric(),
+                         OR_lower95 = numeric(), OR_upper95 = numeric(), p_value = numeric())
+  status <- function(method, done, after, note) {
+    data.frame(smote_package = "rmorie (native SMOTE)", package_available = TRUE, run_completed = done,
+               method = method, warning_count = 0L, note = note,
+               class_ratio_before = round(ratio, 4), class_ratio_after = round(after, 4),
+               total_before = length(y), stringsAsFactors = FALSE)
+  }
+  if (ratio >= 0.8 || length(counts) != 2L) {
+    why <- if (length(counts) != 2L) "outcome has one class" else "classes already balanced (minority/majority >= 0.8)"
+    message("SMOTE sensitivity skipped: ", why)
+    return(list(status = status(paste("skipped:", why), FALSE, ratio, "no resample was needed"), or = empty_or))
+  }
+  X <- stats::model.matrix(stats::reformulate(predictors), frame)[, -1L, drop = FALSE]
+  res <- morie_ml_apply_smote(as.data.frame(X), y, random_state = random_state)
+  rs <- res$X
+  rs$.y <- as.integer(as.character(res$y))
+  fit <- tryCatch(suppressWarnings(stats::glm(.y ~ ., data = rs, family = stats::binomial())), error = function(e) NULL)
+  after <- table(rs$.y)
+  after <- min(after) / max(after)
+  if (is.null(fit)) {
+    return(list(status = status(res$status$method, FALSE, after, "the refit on the resampled data failed"), or = empty_or))
+  }
+  cf <- summary(fit)$coefficients
+  z <- stats::qnorm(0.975)
+  or <- data.frame(term = gsub("`", "", rownames(cf)), log_odds = cf[, 1], SE = cf[, 2], OR = .clip_exp(cf[, 1]),
+                   OR_lower95 = .clip_exp(cf[, 1] - z * cf[, 2]), OR_upper95 = .clip_exp(cf[, 1] + z * cf[, 2]),
+                   p_value = cf[, 4], row.names = NULL, stringsAsFactors = FALSE)
+  list(status = status(res$status$method, TRUE, after,
+                       sprintf("resampled %d -> %d rows and refitted", length(y), nrow(rs))), or = or)
+}
+
 #' Internal helper: Run Logistic Models Module Internal
 #' @noRd
 .run_logistic_models_module_internal <- function(data) {
@@ -533,28 +597,9 @@
   fit <- stats::glm(base_formula, data = frame, family = stats::quasibinomial(), weights = weight)
   interaction_anova <- stats::anova(fit, fit_int, test = "Chisq")
 
-  treated_n <- sum(frame$cannabis_any_use == 1)
-  control_n <- sum(frame$cannabis_any_use == 0)
-  imbalance_ratio <- .safe_divide(max(treated_n, control_n), min(treated_n, control_n))
-  smote_available <- requireNamespace("smotefamily", quietly = TRUE)
-  smote_status <- data.frame(
-    method = "smotefamily",
-    package_available = smote_available,
-    imbalance_ratio = imbalance_ratio,
-    run_completed = FALSE,
-    warning_count = ifelse(smote_available, 0, 1),
-    note = ifelse(smote_available, "Package available; oversampling not run in default parity mode.", "smotefamily not installed; status recorded only."),
-    stringsAsFactors = FALSE
-  )
-  smote_or <- data.frame(
-    model = character(),
-    term = character(),
-    OR_smote = numeric(),
-    OR_lower95 = numeric(),
-    OR_upper95 = numeric(),
-    p_value = numeric(),
-    stringsAsFactors = FALSE
-  )
+  smote <- .smote_sensitivity(frame, "heavy_drinking_30d",
+                              c("cannabis_any_use", "age_group_label", "gender_label", "province_region_label",
+                                "mental_health_label", "physical_health_label"))
   list(
     logistic_odds_ratios = .or_table(fit, model = NULL, lower_se_name = FALSE),
     logistic_interaction_odds_ratios = .or_table(fit_int, model = "heavy_drinking_interaction", lower_se_name = TRUE),
@@ -568,8 +613,8 @@
       model = "heavy_drinking_interaction",
       stringsAsFactors = FALSE
     ),
-    logistic_smote_status = smote_status,
-    logistic_smote_odds_ratios = smote_or
+    logistic_smote_status = smote$status,
+    logistic_smote_odds_ratios = smote$or
   )
 }
 
@@ -606,7 +651,7 @@
     )
   }))
   full_coefs <- .or_table(fits[[4]], model = NULL, lower_se_name = FALSE)
-  interaction_cmp <- stats::anova(fits[[4]], fits[[5]], test = "Chisq")
+  interaction_cmp <- suppressWarnings(stats::anova(fits[[4]], fits[[5]], test = "Chisq"))
   interaction_tbl <- data.frame(
     model_base = "Model 3",
     model_interaction = "Model 4",
@@ -618,7 +663,7 @@
     interaction_p_value = interaction_cmp$`Pr(>Chi)`[2],
     stringsAsFactors = FALSE
   )
-  drop_tbl <- stats::drop1(fits[[4]], test = "Chisq")
+  drop_tbl <- suppressWarnings(stats::drop1(fits[[4]], test = "Chisq"))  # refits each reduced model: same expected warning
   drop_tbl <- drop_tbl[setdiff(rownames(drop_tbl), "<none>"), , drop = FALSE]
   wald_tbl <- data.frame(
     predictor = rownames(drop_tbl),
@@ -958,20 +1003,20 @@
   demog <- c("age_group_label", "gender_label", "province_region_label",
              "mental_health_label", "physical_health_label")
   eligible$.ebac_missing <- is.na(eligible$ebac_tot)
-  miss_fit <- stats::glm(
+  miss_fit <- .glm_design_weighted(stats::glm(
     .robust_formula(".ebac_missing", c("cannabis_any_use", demog), eligible),
     data = eligible,
     family = stats::binomial(),
     weights = weight
-  )
-  miss_fit_eligible <- stats::glm(
+  ))
+  miss_fit_eligible <- .glm_design_weighted(stats::glm(
     .robust_formula(".ebac_missing",
                     c("cannabis_any_use", "age_group_label", "gender_label"),
                     eligible),
     data = eligible,
     family = stats::binomial(),
     weights = weight
-  )
+  ))
   logit_primary <- stats::glm(
     .robust_formula("ebac_legal", c("cannabis_any_use", demog), observed),
     data = observed,
@@ -1046,32 +1091,17 @@
   grid$se <- pred$se.fit * grid$pred_prob * (1 - grid$pred_prob)
   grid$ci_lower95 <- pmax(0, grid$pred_prob - 1.96 * grid$se)
   grid$ci_upper95 <- pmin(1, grid$pred_prob + 1.96 * grid$se)
-  smote_available <- requireNamespace("smotefamily", quietly = TRUE)
-  status_tbl <- data.frame(
-    smote_package = "smotefamily",
-    package_available = smote_available,
-    run_completed = FALSE,
-    method = ifelse(smote_available, "deferred_in_default_workflow", "not_available"),
-    warning_count = ifelse(smote_available, 0, 1),
-    class_ratio_before = .safe_divide(sum(observed$ebac_legal == 1), sum(observed$ebac_legal == 0)),
-    class_ratio_after = NA_real_,
-    note = ifelse(smote_available, "Package available; the default workflow does not resample by default.", "smotefamily not installed."),
-    stringsAsFactors = FALSE
-  )
-  empty_smote <- data.frame(
-    model = "not computed",
-    term = NA_character_,
-    log_odds = NA_real_,
-    se = NA_real_,
-    or = NA_real_,
-    or_lower95 = NA_real_,
-    or_upper95 = NA_real_,
-    p_value = NA_real_,
-    significant = "SMOTE resampling is not part of the R workflow; see the status file",
-    stringsAsFactors = FALSE
-  )
+  smote <- .smote_sensitivity(observed, "ebac_legal",
+                              c("cannabis_any_use", "gender_label", "age_group_label", "province_region_label",
+                                "mental_health_label", "physical_health_label"))
+  gender_or <- .or_table(int_fit, model = "ebac_legal_gender_interaction", lower_se_name = TRUE)
+  # original (survey-weighted) against SMOTE-refitted odds ratios, term by term
+  m <- match(gender_or$term, smote$or$term)
+  smote_compare <- data.frame(term = gender_or$term, OR_original = gender_or$or,
+                              OR_smote = smote$or$OR[m], p_original = gender_or$p_value, p_smote = smote$or$p_value[m],
+                              stringsAsFactors = FALSE)
   list(
-    ebac_gender_interaction_svy_or = .or_table(int_fit, model = "ebac_legal_gender_interaction", lower_se_name = TRUE),
+    ebac_gender_interaction_svy_or = gender_or,
     ebac_gender_interaction_tests = data.frame(
       test = "cannabis_any_use:gender joint test",
       F_stat = cmp$Deviance[2],
@@ -1084,9 +1114,9 @@
       grid[, c("gender_label", "cannabis_any_use", "pred_prob", "se", "ci_lower95", "ci_upper95")],
       c("gender", "cannabis_any_use", "pred_prob", "se", "ci_lower95", "ci_upper95")
     ),
-    ebac_smote_status = status_tbl[, c("smote_package", "package_available", "run_completed", "method", "warning_count", "note", "class_ratio_before", "class_ratio_after")],
-    ebac_smote_or = empty_smote,
-    ebac_smote_compare = empty_smote
+    ebac_smote_status = smote$status,
+    ebac_smote_or = smote$or,
+    ebac_smote_compare = smote_compare
   )
 }
 

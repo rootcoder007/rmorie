@@ -17,7 +17,6 @@ A list with \code{K}, \code{expected_tail}, \code{tolerance}, \code{note}.
 \description{
 A step of the slowdp_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sticks_for_tolerance(alpha = 0.5)

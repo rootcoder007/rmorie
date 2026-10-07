@@ -30,14 +30,19 @@
 #' @return List with \code{estimate} (GEBV vector), \code{u} (marker
 #'   effects), \code{mu}, \code{lam}, \code{sum2pq}, \code{freq},
 #'   \code{n}, \code{m}, \code{method}.
-#' @references Meuwissen, T. H. E., Hayes, B. J. and Goddard, M. E.
-#'   (2001). Prediction of total genetic value using genome-wide dense
-#'   marker maps. Genetics 157(4), 1819-1829, sec. BLUP estimation
-#'   p. 1822 (fetched-wave3 PDF). Henderson, C. R. (1975). Biometrics
-#'   31(2), 423-447. VanRaden, P. M. (2008). Journal of Dairy Science
-#'   91(11), 4414-4423, via Montesinos-Lopez et al. (2022) Multivariate
-#'   Statistical Machine Learning Methods for Genomic Prediction,
-#'   Springer, sec. 2.4 and ch. 5.2 (local split PDFs).
+#' @references Meuwissen, T. H. E., Hayes, B. J. and Goddard, M. E. (2001). Prediction
+#'   of total genetic value using genome-wide dense marker maps. Genetics 157(4),
+#'   1819-1829, sec. BLUP estimation p. 1822. Henderson, C. R. (1975). Biometrics 31(2),
+#'   423-447. VanRaden, P. M. (2008). Journal of Dairy Science 91(11), 4414-4423, via
+#'   Montesinos-Lopez et al. (2022) Multivariate Statistical Machine Learning Methods
+#'   for Genomic Prediction, Springer, sec. 2.4 and ch. 5.2 (local split PDFs).
+#' @examples
+#' set.seed(14)
+#' M <- matrix(rbinom(50 * 20, 2, 0.4), 50, 20)
+#' u <- rnorm(20, sd = 0.3)
+#' y <- as.numeric(10 + scale(M, scale = FALSE) %*% u + rnorm(50))
+#' s <- Snpblr(y, M, h2 = 0.5)
+#' cor(s$estimate, scale(M, scale = FALSE) %*% u)
 #' @export
 Snpblr <- function(y, M, lam = NULL, h2 = NULL, freq = NULL) {
   y <- as.numeric(y)

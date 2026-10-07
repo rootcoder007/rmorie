@@ -1,15 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Self-consistency of a policy network across repeated runs
 #'
-#' The AlphaZero literature states no self-consistency statistic: Silver
-#' et al. (2018), arXiv:1712.01815 (FETCHED), reports run-to-run variation
-#' only as Elo curves.  Rather than invent an attribution, this computes
-#' the two quantities that are well defined for a set of policies over one
-#' action space and cites them where they ARE defined: Shannon entropy
-#' H(p) = -sum p log p (Shannon 1948, Bell System Technical Journal 27,
-#' 379-423, eq. 11) and the Jensen-Shannon divergence JSD = H(pbar) -
-#' mean_i H(p_i) (Lin 1991, IEEE Trans. Inf. Theory 37(1), 145-151, eq.
-#' 3.1).  JSD is zero exactly when every run gave the same policy.
+#' The AlphaZero literature states no self-consistency statistic: Silver et al. (2018),
+#' arXiv:1712.01815, reports run-to-run variation only as Elo curves. Rather than invent
+#' an attribution, this computes the two quantities that are well defined for a set of
+#' policies over one action space and cites them where they ARE defined: Shannon entropy
+#' H(p) = -sum p log p (Shannon 1948, Bell System Technical Journal 27, 379-423, eq. 11)
+#' and the Jensen-Shannon divergence JSD = H(pbar) - mean_i H(p_i) (Lin 1991, IEEE
+#' Trans. Inf. Theory 37(1), 145-151, eq. 3.1). JSD is zero exactly when every run gave
+#' the same policy.
 #'
 #' @param policy_net the policies, one row per run, or a function
 #'   seed -> p applied to every entry of `seeds`.

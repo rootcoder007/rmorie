@@ -33,6 +33,12 @@ equation (7) adds it to a total that is minimised.  The reference
 implementation uses the negative log likelihood, so that is what is
 computed here; the sign in the supplement is a typo.
 }
+\examples{
+set.seed(14)
+s <- matrix(rnorm(6), 3, 2)
+r <- Alfplddt(s, w1 = matrix(rnorm(4), 2, 2), w2 = matrix(rnorm(4), 2, 2), w3 = matrix(rnorm(100), 50, 2))
+round(r$plddt, 1)
+}
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 29
 }

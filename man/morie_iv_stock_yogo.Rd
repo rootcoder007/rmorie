@@ -2,24 +2,35 @@
 % Please edit documentation in R/iv.R
 \name{morie_iv_stock_yogo}
 \alias{morie_iv_stock_yogo}
-\title{Stock-Yogo critical values}
+\title{Stock-Yogo critical values (TSLS maximal size, one endogenous regressor)}
 \usage{
 morie_iv_stock_yogo(n_endogenous = 1, n_instruments = 1)
 }
 \arguments{
-\item{n_endogenous}{Integer; number of endogenous regressors used
-to look up the Stock-Yogo critical-value table.}
+\item{n_endogenous}{Number of endogenous regressors.}
 
-\item{n_instruments}{Integer; number of instruments used to look
-up the Stock-Yogo critical-value table.}
+\item{n_instruments}{Number of excluded instruments.}
 }
 \value{
-A named \code{list} of Stock-Yogo weak-instrument critical values.
+A named \code{list} of critical values (\code{10pct} ...
+\code{25pct}).
 }
 \description{
-Stock-Yogo critical values
+The first-stage F thresholds of Stock and Yogo (2005, Table 5.2) for a
+nominal 5 percent TSLS Wald test whose actual size is at most 10, 15, 20 or
+25 percent, for one endogenous regressor and one to three instruments: the
+rows widely reprinted in textbooks. They assume iid errors. Outside those
+rows, or with heteroskedastic, clustered or serially correlated errors, use
+\code{\link{morie_iv_montiel_olea_pflueger}} (effective F with critical
+values computed from the data) or \code{\link{morie_iv_kleibergen_paap}}
+(rk Wald F, rule of thumb 10).
 }
 \examples{
 out <- morie_iv_stock_yogo(n_endogenous = 1, n_instruments = 1)
 out
+}
+\references{
+Stock, J. H. and Yogo, M. (2005). Testing for weak instruments
+in linear IV regression. In Andrews and Stock (eds), \emph{Identification
+and Inference for Econometric Models}, Cambridge University Press, 80-108.
 }

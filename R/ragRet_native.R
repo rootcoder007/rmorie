@@ -14,7 +14,6 @@
 #'
 #' A step of the ragRet_native implementation. Called by \code{morie_ragRet_top_k}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -34,7 +33,6 @@ morie_ragRet_normalise <- function(v) {
 #'
 #' A step of the ragRet_native implementation. Called by \code{morie_ragRet_ivf_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Coerced to numeric by the body, with \code{as.numeric}.
 #' @param corpus Iterated over elementwise, with \code{lapply}.
@@ -74,7 +72,6 @@ morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
 #'
 #' A step of the ragRet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param corpus Iterated over elementwise, with \code{lapply}.
 #' @param n.cells Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
@@ -139,7 +136,6 @@ morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
 #'
 #' A step of the ragRet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Coerced to numeric by the body, with \code{as.numeric}.
 #' @param corpus A vector; indexed elementwise.
@@ -179,7 +175,6 @@ morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
 #'
 #' A step of the ragRet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param approximate Coerced to integer by the body, with \code{as.integer}.
 #' @param exact Coerced to integer by the body, with \code{as.integer}.
@@ -202,7 +197,6 @@ morie_ragRet_recall_at_k <- function(approximate, exact) {
 #'
 #' A step of the ragRet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param doc.scores Coerced to numeric by the body, with \code{as.numeric}.
 #' @param token.probs Iterated over elementwise, with \code{lapply}.

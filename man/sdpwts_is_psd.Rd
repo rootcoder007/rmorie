@@ -18,7 +18,6 @@ A list with \code{eigenvalues}, \code{min_eigenvalue}, \code{psd},
 \description{
 A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 sdpwts_is_psd(M = matrix(c(2, 1, 1, 2), 2))$psd

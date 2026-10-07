@@ -22,6 +22,11 @@ DMT, PCB, and difference regressor cubes.
 }
 \examples{
 \donttest{
-try(morie_entheo_load_eeg_region("Frontal"))
+root <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", file.path(morie_cache_dir(), "DMT_Imaging"))
+if (dir.exists(root)) {
+  morie_entheo_load_eeg_region("Frontal")
+} else {
+  message("needs the DMT_Imaging data: git clone https://github.com/timmer500/DMT_Imaging.git ", root)
+}
 }
 }

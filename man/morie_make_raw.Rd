@@ -15,3 +15,7 @@ a raw vector.
 \description{
 Coerce to raw the way digest::makeRaw does
 }
+\examples{
+morie_make_raw("abc")
+morie_make_raw(c(1, 255))
+}

@@ -26,7 +26,6 @@
 #'
 #' A step of the ffmFM_native implementation. Called by \code{fit_ffm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_features Coerced to integer by the body, with \code{as.integer}.
 #' @param n_fields Coerced to integer by the body, with \code{as.integer}.
@@ -53,7 +52,6 @@ n_parameters <- function(n_features, n_fields, k_dim,
 #' A step of the ffmFM_native implementation. Called by \code{explor}, \code{fit_ffm},
 #' \code{gated_update} and 15 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x See Usage.
 #' @param fields A vector; indexed elementwise.
@@ -96,7 +94,6 @@ phi <- function(x, fields, W) {
 #'
 #' A step of the ffmFM_native implementation. Called by \code{fit_ffm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param phi_val Coerced to numeric by the body, with \code{as.numeric}.
@@ -118,7 +115,6 @@ logistic_loss <- function(y, phi_val) {
 #' A step of the ffmFM_native implementation. Called by \code{field_aware_fm},
 #' \code{fieldawarefm}, \code{morie_ffmFM}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows A vector; its length is taken and its elements indexed.
 #' @param labels A vector; its length is taken and its elements indexed.
@@ -226,7 +222,6 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
 #'
 #' A step of the ffmFM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -250,7 +245,6 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
 #'
 #' A step of the ffmFM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows Passed to \code{fit_ffm}.
 #' @param labels Passed to \code{fit_ffm}.
@@ -284,7 +278,6 @@ morie_ffmFM <- function(rows, labels, fields, n_features, n_fields,
 #'
 #' A step of the ffmFM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows Passed to \code{fit_ffm}.
 #' @param labels Passed to \code{fit_ffm}.
@@ -318,7 +311,6 @@ fieldawarefm <- function(rows, labels, fields, n_features, n_fields,
 #'
 #' A step of the ffmFM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows Passed to \code{fit_ffm}.
 #' @param labels Passed to \code{fit_ffm}.
@@ -353,7 +345,6 @@ field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
 #'
 #' A step of the ffmFM_native implementation. Called by \code{.fit_ffm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x See Usage.
 #' @param fields A vector; indexed elementwise.
@@ -395,7 +386,6 @@ field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
 #'
 #' A step of the ffmFM_native implementation. Called by \code{morie_ffmFM}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows A vector; its length is taken and its elements indexed.
 #' @param labels A vector; its length is taken and its elements indexed.
@@ -491,7 +481,6 @@ field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
 #'
 #' A step of the ffmFM_native implementation. Called by \code{.fit_ffm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param phi_val Coerced to numeric by the body, with \code{as.numeric}.
@@ -511,7 +500,6 @@ field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
 #'
 #' A step of the ffmFM_native implementation. Called by \code{.fit_ffm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_features Coerced to integer by the body, with \code{as.integer}.
 #' @param n_fields Coerced to integer by the body, with \code{as.integer}.

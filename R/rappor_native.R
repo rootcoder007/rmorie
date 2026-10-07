@@ -14,6 +14,8 @@
 #'
 #' @param f,p,q RAPPOR parameters.
 #' @return List with \code{q_star} and \code{p_star}.
+#' @examples
+#' morie_rappor_star(f = 0.5, p = 0.5, q = 0.75)
 #' @export
 morie_rappor_star <- function(f, p, q) {
   if (f < 0 || f > 1) stop("morie_rappor: f must lie in [0, 1]")
@@ -61,7 +63,6 @@ morie_rappor_epsilon <- function(h, f, p = NULL, q = NULL) {
 #'
 #' A step of the rappor_native implementation. Called by \code{morie_rappor}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param value Coerced to character by the body, with \code{as.character}.
 #' @param k Numeric; combined arithmetically in the body.

@@ -34,14 +34,10 @@
 #' @return List with \code{estimate} (the learned (S, A) Q table),
 #'   \code{policy} (0-based greedy actions), \code{v}, \code{n_steps},
 #'   \code{n_episodes}, \code{method}.
-#' @references Sutton, R. S. and Barto, A. G. (2018). Reinforcement
-#'   Learning: An Introduction, 2nd ed., MIT Press, Section 6.4, boxed
-#'   algorithm p. 130.  Local source:
-#'   fetched-wave3/sutton-barto-2018-reinforcement-learning-2nd-ed.pdf.
-#'   Rummery, G. A. and Niranjan, M. (1994). On-line Q-learning using
-#'   connectionist systems. Technical Report CUED/F-INFENG/TR 166,
-#'   Cambridge University Engineering Department.  Local source:
-#'   fetched-wave3/rummery-niranjan-1994-sarsa-tr166.pdf.
+#' @references Sutton, R. S. and Barto, A. G. (2018). Reinforcement Learning: An
+#'   Introduction, 2nd ed., MIT Press, Section 6.4, boxed algorithm p. 130. Rummery, G.
+#'   A. and Niranjan, M. (1994). On-line Q-learning using connectionist systems.
+#'   Technical Report CUED/F-INFENG/TR 166, Cambridge University Engineering Department.
 #' @examples
 #' P <- list(matrix(c(0, 1, 0, 1), 2, byrow = TRUE))
 #' R <- matrix(c(1, 0), 2)

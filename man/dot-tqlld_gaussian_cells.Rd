@@ -21,5 +21,4 @@ A list with \code{mass}, \code{mom}.
 \description{
 A step of the tqlld_native implementation. Called by \code{morie_tqlld_lloyd_max_codebook}.
 See the file header for the source the module follows.
-source it follows.
 }

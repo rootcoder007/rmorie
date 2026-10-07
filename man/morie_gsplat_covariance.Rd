@@ -20,6 +20,10 @@ Every reachable parameter value is positive semi-definite by
 construction; gradient descent on the six raw entries would not
 stay there.
 }
+\examples{
+c <- morie_gsplat_covariance(scale = c(1, 2, 3), quaternion = c(1, 0, 0, 0))
+c$covariance   # identity rotation: diag(scale^2)
+}
 \references{
 Kerbl, B. et al. (2023).
 }

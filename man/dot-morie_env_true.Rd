@@ -15,7 +15,6 @@ The value of \code{\%in\%}.
 \description{
 A step of the exec_guard implementation. Called by \code{.morie_exec_disabled}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 txt <- c('alpha', 'beta', 'gamma', 'delta')

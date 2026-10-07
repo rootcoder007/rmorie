@@ -25,6 +25,11 @@ Alias of \code{\link{morie_bndest}} exposing both the
 partially-observed-mean and the average-treatment-effect routes.
 Mirrors Python \code{morie.fn.manskif}.
 }
+\examples{
+set.seed(12)
+y <- runif(60); D <- rbinom(60, 1, 0.5)
+morie_manskif(y, observed = NULL, support = c(0, 1), treatment = D)
+}
 \references{
 Manski, C. F. (2007). Identification for Prediction and
 Decision. Harvard University Press.

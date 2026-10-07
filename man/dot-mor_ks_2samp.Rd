@@ -18,7 +18,6 @@ A list with \code{stat}, \code{p}, \code{n1}, \code{n2}, \code{d_plus},
 \description{
 A step of the over_native implementation. Called by \code{morie_over}.
 See the file header for the source the module follows.
-source it follows.
 }
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)

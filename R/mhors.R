@@ -25,6 +25,9 @@
 #'   Cancer Institute 22(4):719-748. \doi{10.1093/jnci/22.4.719}. Robins,
 #'   J., Breslow, N. and Greenland, S. (1986). Biometrics 42(2):311-323.
 #'   \doi{10.2307/2531052}.
+#' @examples
+#' tables <- rbind(c(a = 10, b = 20, c = 5, d = 25), c(a = 8, b = 12, c = 6, d = 24))
+#' Mhors(tables)[c("estimate", "ci_lower", "ci_upper")]
 #' @export
 Mhors <- function(tables, confidence = 0.95) {
   M <- as.matrix(tables)

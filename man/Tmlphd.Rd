@@ -30,6 +30,13 @@ for \code{g} -- with the intercept unpenalised, followed by
 \code{H = D/g - (1 - D)/(1 - g)},
 \code{eps = sum H (y - Q)/sum H^2}.
 }
+\examples{
+set.seed(2)
+n <- 200; X <- matrix(rnorm(n * 5), n)
+D <- rbinom(n, 1, plogis(X[, 1]))
+y <- 1 + 0.5 * D + X[, 1] + rnorm(n)
+Tmlphd(y, D, X, lam = 0.01)$estimate
+}
 \references{
 Belloni, A., Chernozhukov, V. & Hansen, C. (2014). Review
 of Economic Studies 81(2):608-650; van der Laan, M. J. & Rubin, D.

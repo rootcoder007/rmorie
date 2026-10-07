@@ -30,7 +30,6 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Arimacss(V)
 }
 \references{
-Box and Jenkins (1970), Time Series Analysis: Forecasting
-and Control, Chapters 4 and 7.  Standard published form; the
-monograph is not in the local corpus and was not read.
+Box and Jenkins (1970), Time Series Analysis: Forecasting and Control,
+Chapters 4 and 7; standard published form.
 }

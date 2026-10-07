@@ -22,9 +22,10 @@ List with \code{ct} (raw vector, length = \code{length(plaintext)})
 and \code{tag} (raw vector, 16 bytes).
 }
 \description{
-Phase 3JJJ1. Wraps libsodium's
-\code{crypto_aead_chacha20poly1305_ietf_encrypt} (RFC 8439 IETF
-variant: 32-byte key, 12-byte nonce, 16-byte authentication tag).
+RFC 8439 (IETF variant: 32-byte key, 12-byte nonce, 16-byte
+authentication tag): libsodium's
+\code{crypto_aead_chacha20poly1305_ietf_encrypt} when rmorie is linked
+against it, rmorie's native constant-time code otherwise.
 }
 \details{
 Byte-compatible with the Python morie
@@ -34,11 +35,9 @@ this R wrapper splits it into \code{list(ct = ..., tag = ...)} to
 match the Python tuple return shape.
 }
 \examples{
-if (morie_crypto_sodium_available()) {
-  k <- morie_crypto_random_bytes(32)
-  n <- morie_crypto_random_bytes(12)
-  r <- morie_crypto_chacha20_poly1305_encrypt(k, n, charToRaw("hello"))
-  p <- morie_crypto_chacha20_poly1305_decrypt(k, n, c(r$ct, r$tag))
-  rawToChar(p)
-}
+k <- morie_crypto_random_bytes(32)
+n <- morie_crypto_random_bytes(12)
+r <- morie_crypto_chacha20_poly1305_encrypt(k, n, charToRaw("hello"))
+p <- morie_crypto_chacha20_poly1305_decrypt(k, n, c(r$ct, r$tag))
+rawToChar(p)
 }

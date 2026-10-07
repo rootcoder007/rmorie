@@ -15,10 +15,9 @@
 #' @return List with \code{idx}, \code{reconstruction}, \code{codebook},
 #'   \code{mse}, \code{relative_mse}, \code{bound}, \code{within_bound},
 #'   \code{d}, \code{b}.
-#' @references Zandieh et al., arXiv:2504.19874, Algorithm 1 lines 2-11
-#'   and Theorem 1. Fetched from arXiv. The paper specifies the codebook
-#'   only as the MSE-minimising centroids; the Lloyd-Max construction is
-#'   documented in the batch helper .kvmse_codebook.
+#' @references Zandieh et al., arXiv:2504.19874, Algorithm 1 lines 2-11 and Theorem 1.
+#'   The paper specifies the codebook only as the MSE-minimising centroids; the
+#'   Lloyd-Max construction is documented in the batch helper .kvmse_codebook.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
