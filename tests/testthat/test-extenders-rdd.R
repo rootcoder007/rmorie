@@ -48,6 +48,7 @@ test_that("morie_rdd_local_randinf wraps rdlocrand::rdrandinf", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_rdd_power_calc wraps rdpower::rdpower", {
+  skip_if_not_installed("rdrobust")   # rdpower loads it; the macOS runner lacked it
   skip_if_not_installed("rdpower")
   set.seed(3L)
   R <- stats::runif(500L, -1, 1)
