@@ -111,9 +111,11 @@ test_that("offline location: the time zone, then the locale, through the full IS
   expect_equal(to3("ZZ"), "")
   expect_equal(to3(NA), "")
   withr::with_envvar(c(MORIE_COUNTRY_ISO = "", MORIE_EMISSIONS_OFFLINE = "1"), {
+    # no network: the answer is the zone's or the locale's country, or none (a UTC
+    # container with a C locale), never an error
     loc <- rmorie:::.emissions_detect_location()
     expect_true(is.list(loc))
-    expect_true(nzchar(loc$iso) || identical(Sys.timezone(), NA_character_))
+    expect_true(identical(loc$iso, "") || nchar(loc$iso) == 2L)
   })
 })
 

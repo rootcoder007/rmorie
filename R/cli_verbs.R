@@ -1086,7 +1086,11 @@
 
 .cli_emissions <- function(flag, has, out) {
   country <- toupper(flag("--country") %||% "")
-  if (nchar(country) == 2L) country <- .emissions_iso2_to_iso3(country) %||% country  # FR -> FRA
+  if (nchar(country) == 2L) {
+    # FR -> FRA; an unknown two-letter code stays as typed so the check below names it
+    m <- .emissions_iso2_to_iso3(country)
+    if (nzchar(m)) country <- m
+  }
   if (nzchar(country) && is.null(.emissions_energy_mix()[[country]])) {
     out(sprintf(paste0("--country %s: not a country code in the energy-mix table (ISO-3 such as CAN, FRA, USA; ",
                        "ISO-2 FR also works); ignoring it and detecting the location instead (the world average ",
