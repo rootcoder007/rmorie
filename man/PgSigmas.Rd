@@ -132,7 +132,15 @@ rural \code{sigma_y = a_y x (1 + 0.0001 x)^(-1/2)} (urban 0.0004) and
 with ground reflection and, under a mixing lid, image terms.
 \code{GaussianPuff}: instantaneous puff with \code{sigma_x = sigma_y} at the
 travel distance \code{u t}. \code{AdvectionDiffusion2d}: explicit upwind
-advection, central diffusion, forward Euler, zero boundaries.
+advection, central diffusion, forward Euler, zero boundaries; the scheme
+is stable when \code{|u dt/dx| + |v dt/dy| + 2 (kx dt/dx^2 + ky dt/dy^2) <= 1},
+returned as \code{stability_number} and \code{stable}, and a call outside
+the bound is taken in enough sub-steps of a smaller \code{dt} to satisfy
+it (\code{substeps}, \code{dt}), with a warning. Every physical input is
+checked: rates, masses, heights and distances non-negative, wind speed,
+travel time and grid steps positive, \code{n_images} a whole number, the
+stack hotter than the air, \code{x0} and \code{y0} single numbers; a
+release above \code{mixing_height} warns.
 \code{LagrangianParticles}: random walk
 \code{x + u dt + sqrt(2 K dt) xi} with Philox normals (step \code{k} uses
 streams \code{2k} and \code{2k + 1}) and an optional counting grid.

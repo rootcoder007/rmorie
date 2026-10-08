@@ -89,3 +89,31 @@ test_that("the capsule seals the CSV and manifest and verifies, and detects tamp
   expect_false(morie_emissions_verify(d)$ok)
   expect_error(morie_emissions_verify(withr::local_tempdir()), "no capsule_bundle")
 })
+
+test_that("offline location: the time zone, then the locale, through the full ISO 3166 list", {
+  off <- rmorie:::.emissions_offline_location
+  expect_equal(off(tz = "Europe/Stockholm", locale = "en_US.UTF-8")$iso, "SE")
+  expect_equal(off(tz = "US/Eastern", locale = "C")$iso, "US")
+  expect_equal(off(tz = "Asia/Calcutta", locale = "C")$iso, "IN")
+  expect_equal(off(tz = "posix/America/Toronto", locale = "C")$iso, "CA")
+  expect_match(off(tz = "Europe/Oslo", locale = "C")$method, "time zone")
+  expect_equal(off(tz = "Etc/UTC", locale = "en_IN.UTF-8")$iso, "IN")
+  expect_null(off(tz = "", locale = "C"))
+  expect_null(off(tz = NA_character_, locale = "POSIX"))
+  tz <- rmorie:::.emissions_table("timezone_countries.csv")
+  olson <- OlsonNames()
+  geo <- olson[grepl("/", olson, fixed = TRUE) & !grepl("^(Etc|posix|right|SystemV)/", olson)]
+  expect_identical(setdiff(geo, tz$tz), character(0))
+  to3 <- rmorie:::.emissions_iso2_to_iso3
+  expect_equal(to3("se"), "SWE")
+  expect_equal(to3("KZ"), "KAZ")
+  expect_equal(to3("CAN"), "CAN")
+  expect_equal(to3("ZZ"), "")
+  expect_equal(to3(NA), "")
+  withr::with_envvar(c(MORIE_COUNTRY_ISO = "", MORIE_EMISSIONS_OFFLINE = "1"), {
+    loc <- rmorie:::.emissions_detect_location()
+    expect_true(is.list(loc))
+    expect_true(nzchar(loc$iso) || identical(Sys.timezone(), NA_character_))
+  })
+})
+

@@ -1,3 +1,28 @@
+# rmorie 1.4.2 - 2026-10-08
+
+* Atmospheric dispersion, after rmoriebricklayer 0.5.10's stress test (the formulas are
+  shared): `AdvectionDiffusion2d()` documented a stability criterion that was false (cfl
+  below 1 and diffusion number below 1); the explicit upwind-plus-FTCS scheme needs
+  `|u dt/dx| + |v dt/dy| + 2 (kx dt/dx^2 + ky dt/dy^2) <= 1`, and a run outside it reached
+  10^10 from a unit pulse while reporting itself stable. The bound is returned as
+  `stability_number` and `stable`; a call outside it is taken in enough sub-steps of a
+  smaller `dt` to satisfy it (reported as `substeps` and `dt`, with a warning), so the field
+  is a solution over the same physical time rather than an explosion.
+* Physical guards throughout the dispersion functions: emission rates, masses, heights and
+  distances non-negative, wind speed, travel time and grid steps positive, `n_images` a
+  whole number (2.5 was truncated silently), the stack hotter than the air for Briggs' rise
+  (a cooler stack returned NaN), `x0` and `y0` single numbers (a vector doubled `mean_x`),
+  a warning when the release is above the mixing height. `GaussianPlume(q = -100)` returned a
+  negative concentration, `u = 0` returned Inf, `GaussianPuff(t = -100)` a negative one and
+  `PgSigmas(-500)` a negative sigma.
+* Emissions tracking places a run offline: after `MORIE_COUNTRY_ISO` and the geolocation
+  lookup, and whenever the lookup is skipped (`MORIE_EMISSIONS_OFFLINE`) or fails, the
+  system time zone is mapped to its country through the IANA zone tables (every zone of
+  `zone.tab` plus every alias in `backward`, 549 names) and then the locale's territory,
+  before falling back to the world average. Two-letter codes are mapped to the energy
+  table's three-letter codes through the full ISO 3166 list instead of a hand-picked map of
+  thirty countries.
+
 # rmorie 1.4.1 - 2026-10-07
 
 * Tests: the Wayback fallback test pinned the reachability probe as well as the

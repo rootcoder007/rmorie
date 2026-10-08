@@ -154,11 +154,40 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
   c(idle = v[4L] + if (length(v) > 4L) v[5L] else 0, total = sum(v))
 }
 
+# Where the run is, without any network: the system time zone through the IANA
+# zone tables (zone.tab, one country per zone, plus every alias in `backward`),
+# then the territory of the locale. Returns NULL when neither names a country.
+.emissions_offline_location <- function(tz = Sys.timezone(), locale = Sys.getlocale("LC_TIME")) {
+  if (length(tz) == 1L && !is.na(tz) && nzchar(tz)) {
+    tab <- .emissions_table("timezone_countries.csv")
+    key <- sub("^(posix|right)/", "", tz)
+    iso <- tab$location[match(key, tab$tz)]
+    if (length(iso) == 1L && !is.na(iso) && nzchar(iso)) {
+      return(list(iso = iso, region = "", name = "", lat = 0, lon = 0,
+                  method = sprintf("system time zone %s", tz)))
+    }
+  }
+  if (length(locale) == 1L && !is.na(locale)) {
+    m <- regmatches(locale, regexpr("^[A-Za-z]{2,3}_[A-Z]{2}", locale))
+    if (length(m) == 1L) {
+      return(list(iso = sub("^.*_", "", m), region = "", name = "", lat = 0, lon = 0,
+                  method = sprintf("locale %s", locale)))
+    }
+  }
+  NULL
+}
+
+.emissions_table <- function(name) {
+  f <- system.file("extdata", "emissions", name, package = utils::packageName(), mustWork = FALSE)
+  if (!nzchar(f)) f <- file.path("inst", "extdata", "emissions", name)
+  utils::read.csv(f, stringsAsFactors = FALSE, na.strings = character(0), colClasses = "character")
+}
+
 .emissions_detect_location <- function() {
   env <- Sys.getenv("MORIE_COUNTRY_ISO", "")
   if (nzchar(env)) return(list(iso = toupper(env), region = Sys.getenv("MORIE_REGION", ""), name = "", lat = 0, lon = 0))
   none <- list(iso = "", region = "", name = "", lat = 0, lon = 0)
-  if (nzchar(Sys.getenv("MORIE_EMISSIONS_OFFLINE", ""))) return(none)
+  if (nzchar(Sys.getenv("MORIE_EMISSIONS_OFFLINE", ""))) return(.emissions_offline_location() %||% none)
   # base R's url() (libcurl) reads the flat ipapi record: no optional package is needed to place the run
   tryCatch({
     old <- options(timeout = 5)
@@ -172,19 +201,22 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
     }
     # the energy-mix table is keyed by ISO-3 ("CAN"); country_code is ISO-2 ("CA")
     iso3 <- get("country_code_iso3")
-    list(iso = toupper(if (nzchar(iso3)) iso3 else get("country_code")), region = get("region"), name = get("country_name"),
+    iso <- toupper(if (nzchar(iso3)) iso3 else get("country_code"))
+    if (!nzchar(iso)) stop("no country in the geolocation record")
+    list(iso = iso, region = get("region"), name = get("country_name"),
          lat = suppressWarnings(as.numeric(get("latitude"))) %||% 0, lon = suppressWarnings(as.numeric(get("longitude"))) %||% 0)
-  }, error = function(e) none)
+  }, error = function(e) .emissions_offline_location() %||% none)
 }
 
 .emissions_iso2_to_iso3 <- function(iso) {
-  # ipapi returns two-letter codes; the energy mix is keyed by three letters.
+  # ipapi, the time zone and the locale give two-letter codes; the energy mix is
+  # keyed by three letters. The whole ISO 3166 list, not a hand-picked subset.
+  iso <- toupper(as.character(iso)[1L])
+  if (is.na(iso)) return("")
   if (nchar(iso) != 2L) return(iso)
-  map <- c(CA = "CAN", US = "USA", GB = "GBR", FR = "FRA", DE = "DEU", IN = "IND", CN = "CHN",
-           AU = "AUS", JP = "JPN", BR = "BRA", MX = "MEX", IT = "ITA", ES = "ESP", NL = "NLD",
-           SE = "SWE", NO = "NOR", FI = "FIN", DK = "DNK", CH = "CHE", IE = "IRL", NZ = "NZL",
-           KR = "KOR", SG = "SGP", ZA = "ZAF", PL = "POL", BE = "BEL", AT = "AUT", PT = "PRT")
-  unname(map[iso]) %||% ""
+  tab <- .emissions_table("iso3166.csv")
+  out <- tab$alpha3[match(iso, tab$alpha2)]
+  if (is.na(out)) "" else out
 }
 
 .emissions_csv_header <- c(
@@ -217,8 +249,15 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 #' wall time is used instead (\code{"process"} mode). Emissions are energy times the grid's carbon
 #' intensity (\code{\link{morie_emissions_carbon_intensity}}) times PUE. The
 #' country comes from \code{country_iso_code}, else the
-#' \code{MORIE_COUNTRY_ISO} environment variable, else a geolocation lookup
-#' (skipped when \code{MORIE_EMISSIONS_OFFLINE} is set).
+#' \code{MORIE_COUNTRY_ISO} environment variable, else a geolocation lookup,
+#' else, offline (\code{MORIE_EMISSIONS_OFFLINE} set, or the lookup failed),
+#' the system time zone mapped to its country through the IANA zone tables
+#' (every zone and alias of \code{zone.tab} and \code{backward}:
+#' \code{Europe/Stockholm} is Sweden, \code{US/Eastern} the United States)
+#' and then the territory of the locale (\code{en_CA.UTF-8} is Canada); the
+#' world average only when none of these names a country. Two-letter codes
+#' are mapped to the energy table's three-letter codes through the full ISO
+#' 3166 list.
 #'
 #' The capsule's signing key is generated for the run unless \code{key} is
 #' given, so a verifier learns that the files have not changed since they

@@ -80,8 +80,15 @@ tracking mode). Where no counters exist the R process's CPU time over
 wall time is used instead (\code{"process"} mode). Emissions are energy times the grid's carbon
 intensity (\code{\link{morie_emissions_carbon_intensity}}) times PUE. The
 country comes from \code{country_iso_code}, else the
-\code{MORIE_COUNTRY_ISO} environment variable, else a geolocation lookup
-(skipped when \code{MORIE_EMISSIONS_OFFLINE} is set).
+\code{MORIE_COUNTRY_ISO} environment variable, else a geolocation lookup,
+else, offline (\code{MORIE_EMISSIONS_OFFLINE} set, or the lookup failed),
+the system time zone mapped to its country through the IANA zone tables
+(every zone and alias of \code{zone.tab} and \code{backward}:
+\code{Europe/Stockholm} is Sweden, \code{US/Eastern} the United States)
+and then the territory of the locale (\code{en_CA.UTF-8} is Canada); the
+world average only when none of these names a country. Two-letter codes
+are mapped to the energy table's three-letter codes through the full ISO
+3166 list.
 
 The capsule's signing key is generated for the run unless \code{key} is
 given, so a verifier learns that the files have not changed since they
