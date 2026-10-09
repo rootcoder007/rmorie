@@ -214,48 +214,61 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
 From r-universe (prebuilt binaries for macOS and Windows, a source build on
 Linux). Its companions, rmoriebricklayer >= 0.5.10 and rmoriedata >= 0.3.5,
 come from r-universe too: CRAN carries older versions. Naming them replaces an
-older copy already installed, and keep `repos`: without it `Rscript` stops with
-"trying to use CRAN without setting a mirror".
+older copy already installed.
+
+With [pak](https://pak.r-lib.org) (progress bars, parallel downloads, compiler
+output hidden unless a build fails, and the named packages always upgraded to
+the current release):
 
 ```r
-install.packages(
-  c("rmoriebricklayer", "rmoriedata", "rmorie"),
-  repos = c(rootcoder007 = "https://rootcoder007.r-universe.dev",
-            CRAN         = "https://cloud.r-project.org")
-)
+if (!requireNamespace("pak", quietly = TRUE)) {
+  install.packages("pak", repos = "https://cloud.r-project.org")
+}
+pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev")
+pak::pkg_install(c("rmoriebricklayer", "rmoriedata", "rmorie"))
 
 # want every optional package too, in one shot? add dependencies = TRUE
-# (large: compiles many specialist packages — see "Optional packages" below)
-install.packages(
-  "rmorie", dependencies = TRUE,
-  repos = c(rootcoder007 = "https://rootcoder007.r-universe.dev",
-            CRAN         = "https://cloud.r-project.org")
-)
+# (large: compiles many specialist packages; see "Optional packages" below)
+pak::pkg_install("rmorie", dependencies = TRUE)
 ```
 
-The same from a terminal (single quotes outside, double quotes inside, so the
-shell passes the R code through untouched):
+From a terminal (single quotes outside, double quotes inside, so the shell
+passes the R code through untouched):
+
+```sh
+Rscript -e 'if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak", repos = "https://cloud.r-project.org"); pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev"); pak::pkg_install(c("rmoriebricklayer", "rmoriedata", "rmorie"))'
+```
+
+Without pak, plain `install.packages()` does the same with R's own output. Keep
+`repos`: under `Rscript` there is no mirror chooser, and a bare call stops with
+"trying to use CRAN without setting a mirror".
 
 ```sh
 Rscript -e 'install.packages(c("rmoriebricklayer", "rmoriedata", "rmorie"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))'
 ```
 
-From GitHub, or from a clone of this repository:
+From GitHub (a source build; needs a C/C++ toolchain):
+
+```sh
+Rscript -e 'if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak", repos = "https://cloud.r-project.org"); pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev"); pak::pkg_install("rootcoder007/rmorie")'
+# without pak
+Rscript -e 'repos <- c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"); install.packages("remotes", repos = repos); remotes::install_github("rootcoder007/rmorie", repos = repos, upgrade = "always")'
+```
+
+From a clone, at the repository root:
 
 ```r
-repos <- c(rootcoder007 = "https://rootcoder007.r-universe.dev",
-           CRAN         = "https://cloud.r-project.org")
-install.packages("remotes", repos = repos)
-remotes::install_github("rootcoder007/rmorie", repos = repos, upgrade = "always")
-
-# or, from a clone, at the repository root
-install.packages(c("rmoriebricklayer", "rmoriedata"), repos = repos)
+pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev")
+pak::local_install()
+# without pak
+install.packages(c("rmoriebricklayer", "rmoriedata"),
+                 repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
 install.packages(".", repos = NULL, type = "source")
 ```
 
-```sh
-Rscript -e 'repos <- c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"); install.packages("remotes", repos = repos); remotes::install_github("rootcoder007/rmorie", repos = repos, upgrade = "always")'
-```
+On macOS, CRAN's R (from <https://cloud.r-project.org/bin/macosx/>) installs
+r-universe's prebuilt binaries in seconds. Homebrew's R cannot use them, so
+there every package is compiled from source.
 
 The assistant (`morie_llm_ask()`) tries a local Ollama, then any Gemini or
 OpenAI-compatible key in the environment, then the hosted MORIE tier at
