@@ -233,6 +233,13 @@ install.packages(
 )
 ```
 
+The same from a terminal (single quotes outside, double quotes inside, so the
+shell passes the R code through untouched):
+
+```sh
+Rscript -e 'install.packages(c("rmoriebricklayer", "rmoriedata", "rmorie"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))'
+```
+
 From GitHub, or from a clone of this repository:
 
 ```r
@@ -244,6 +251,10 @@ remotes::install_github("rootcoder007/rmorie", repos = repos, upgrade = "always"
 # or, from a clone, at the repository root
 install.packages(c("rmoriebricklayer", "rmoriedata"), repos = repos)
 install.packages(".", repos = NULL, type = "source")
+```
+
+```sh
+Rscript -e 'repos <- c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"); install.packages("remotes", repos = repos); remotes::install_github("rootcoder007/rmorie", repos = repos, upgrade = "always")'
 ```
 
 The assistant (`morie_llm_ask()`) tries a local Ollama, then any Gemini or
