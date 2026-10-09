@@ -88,7 +88,7 @@ test_that("settings are saved privately, read back, overridden by the environmen
   expect_equal(.morie_llm_api_key(), "sk-own-123456")
   tab <- morie_llm_config()
   expect_equal(tab$source[tab$key == "route"], "saved")
-  expect_equal(tab$value[tab$key == "own.key"], "sk-o...3456")  # keys are shown shortened
+  expect_equal(tab$value[tab$key == "own.key"], "set")  # no character of a key is ever shown
   # an environment variable that is set wins, and saving under it says so
   withr::local_envvar(OLLAMA_MODEL = "llama3.2", MORIE_LLM_ROUTE = "ollama")
   expect_equal(.morie_llm_ollama_default_model(), "llama3.2")
@@ -245,7 +245,7 @@ test_that("rmorie config shows, explains, gets, sets and unsets the settings", {
   expect_match(.cap("config", "set", "route", "cloud")$text, "route must be one of")
   # a secret typed at the prompt stays out of the shell history
   testthat::local_mocked_bindings(.package = .pkg, .cli_readline = function(prompt) "sk-typed-key-123")
-  expect_equal(.cap("config", "set", "own.key")$text, "own.key = sk-t...-123\n")
+  expect_equal(.cap("config", "set", "own.key")$text, "own.key = set\n")
   expect_match(.cap("config", "--help")$text, "usage: rmorie config")
 })
 

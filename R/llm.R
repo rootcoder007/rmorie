@@ -1029,7 +1029,7 @@ morie_llm_provider_show <- function() {
   } else {
     k <- as.character(d$api_key %||% "")
     message("Endpoint: ", d$api_base_url, "\nModel:    ", d$api_model %||% "server default",
-            "\nKey:      ", substr(k, 1, 4), "...", substr(k, nchar(k) - 2, nchar(k)), " (", nchar(k), " chars)")
+            "\nKey:      ", if (nzchar(k)) "set" else "(not set)")
   }
   invisible(d[c("api_base_url", "api_key", "api_model")])
 }

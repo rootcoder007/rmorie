@@ -16,7 +16,7 @@ a saved setting. With no arguments nothing is written.}
 }
 \value{
 A data frame with one row per setting: \code{key}, \code{value}
-(keys shown shortened), \code{source} (\code{"environment"},
+(a key only as \code{"set"}), \code{source} (\code{"environment"},
 \code{"saved"} or \code{"default"}), \code{env} (the variable that
 overrides it) and \code{help}; visibly when called with no settings.
 }
