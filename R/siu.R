@@ -1407,7 +1407,7 @@ morie_siu_compare <- function(case_number, external,
         # Optional bearer token, for hosted Ollama-compatible APIs
         # (e.g. hosted inference gateways) that require auth. Local
         # Ollama at localhost:11434 doesn't need it.
-        api_key <- Sys.getenv("OLLAMA_API_KEY", unset = "")
+        api_key <- .morie_llm_ollama_key() %||% ""  # OLLAMA_API_KEY, else `rmorie config set ollama.key`
         if (nzchar(api_key)) {
           headers[["authorization"]] <- paste("Bearer", api_key)
         }
@@ -1487,7 +1487,8 @@ morie_siu_compare <- function(case_number, external,
           headers = list("authorization" = paste("Bearer", env[["MORIE_HOSTED_KEY_OR_LOGIN"]]),
                          "content-type" = "application/json"),
           body = list(
-            model = Sys.getenv("MORIE_HOSTED_MODEL", unset = attr(morie_llm_hosted_models(), "default") %||% "default"),
+            # MORIE_HOSTED_MODEL, else `rmorie config set hosted.model`, else the tier's default
+            model = .morie_llm_setting("hosted.model") %||% attr(morie_llm_hosted_models(), "default") %||% "default",
             temperature = 0,
             messages = list(list(role = "user", content = prompt))
           )
@@ -1509,7 +1510,7 @@ morie_siu_compare <- function(case_number, external,
       build = function(env, prompt) {
         base <- sub("/+$", "", env[["MORIE_LLM_BASE_URL"]])
         headers <- list("content-type" = "application/json")
-        key <- Sys.getenv("MORIE_LLM_API_KEY", unset = "")
+        key <- .morie_llm_setting("own.key") %||% ""  # MORIE_LLM_API_KEY, else `rmorie config set own.key`
         if (nzchar(key)) {
           headers[["authorization"]] <- paste("Bearer", key)
         }
@@ -1517,11 +1518,7 @@ morie_siu_compare <- function(case_number, external,
           url = paste0(base, "/chat/completions"),
           headers = headers,
           body = list(
-            model = if (nzchar(Sys.getenv("MORIE_LLM_MODEL", ""))) {
-              Sys.getenv("MORIE_LLM_MODEL")
-            } else {
-              "default"
-            },
+            model = .morie_llm_setting("own.model") %||% "default",
             temperature = 0,
             messages = list(list(role = "user", content = prompt))
           )
@@ -1562,8 +1559,13 @@ morie_siu_compare <- function(case_number, external,
   # that's the zero-config "install ollama, pull a model, done"
   # path. All other providers still hard-require their API key env.
   if (p$env_required == "OLLAMA_HOST_OR_DEFAULT") {
-    env_val <- Sys.getenv("OLLAMA_HOST", unset = "")
-    if (!nzchar(env_val)) env_val <- "http://localhost:11434"
+    env_val <- .morie_llm_ollama_base()  # OLLAMA_HOST, else `rmorie config set ollama.url`, else localhost
+  } else if (p$env_required == "MORIE_LLM_BASE_URL") {
+    env_val <- .morie_llm_setting("own.url") %||% ""  # the env var, else `rmorie config set own.url`
+    if (!nzchar(env_val)) {
+      stop("no OpenAI-compatible endpoint is set: MORIE_LLM_BASE_URL, or `rmorie config set own.url URL` ",
+           "(R: morie_llm_config(own.url = ...))", call. = FALSE)
+    }
   } else if (p$env_required == "MORIE_HOSTED_KEY_OR_LOGIN") {
     env_val <- .morie_llm_hosted_key() %||% ""
     if (!nzchar(env_val)) {
