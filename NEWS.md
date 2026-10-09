@@ -1,3 +1,16 @@
+# rmorie 1.4.3 - 2026-10-09
+
+* Install routes: `Remotes:` no longer pins rmoriebricklayer@v0.5.5 and rmoriedata@v0.3.4,
+  so `remotes::install_github("rootcoder007/rmorie")` builds the current companions
+  instead of those old tags, and the floors are raised to rmoriebricklayer (>= 0.5.10) and
+  rmoriedata (>= 0.3.5). The README install snippets name the companions and pass `repos`
+  to every `install.packages()` call (under `Rscript` there is no mirror chooser, and a bare
+  call stops with "trying to use CRAN without setting a mirror"), and the GitHub route
+  upgrades `"always"` so an older companion already installed is replaced.
+* CI: the daily r-cache-warmer pre-installs rmoriebricklayer and rmoriedata from
+  r-universe, like the other jobs. pak runs vanilla R and only sees the CRAN mirror, where
+  the companions are older than the floor, so the warmer had failed since 1.4.1.
+
 # rmorie 1.4.2 - 2026-10-08
 
 * Atmospheric dispersion, after rmoriebricklayer 0.5.10's stress test (the formulas are

@@ -211,22 +211,15 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
 
 ## Install
 
-From a clone of this repository (its companions, rmoriebricklayer >= 0.5.5 and
-rmoriedata >= 0.3.4, come from r-universe: CRAN carries older versions):
-
-```r
-install.packages(c("rmoriebricklayer", "rmoriedata"),
-                 repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
-install.packages(".", repos = NULL, type = "source")   # from the repository root
-# or, without cloning (Remotes pins rmoriebricklayer@v0.5.5 and rmoriedata@v0.3.4):
-# remotes::install_github("rootcoder007/rmorie")
-```
-
-From r-universe (development snapshot):
+From r-universe (prebuilt binaries for macOS and Windows, a source build on
+Linux). Its companions, rmoriebricklayer >= 0.5.10 and rmoriedata >= 0.3.5,
+come from r-universe too: CRAN carries older versions. Naming them replaces an
+older copy already installed, and keep `repos`: without it `Rscript` stops with
+"trying to use CRAN without setting a mirror".
 
 ```r
 install.packages(
-  "rmorie",
+  c("rmoriebricklayer", "rmoriedata", "rmorie"),
   repos = c(rootcoder007 = "https://rootcoder007.r-universe.dev",
             CRAN         = "https://cloud.r-project.org")
 )
@@ -238,6 +231,19 @@ install.packages(
   repos = c(rootcoder007 = "https://rootcoder007.r-universe.dev",
             CRAN         = "https://cloud.r-project.org")
 )
+```
+
+From GitHub, or from a clone of this repository:
+
+```r
+repos <- c(rootcoder007 = "https://rootcoder007.r-universe.dev",
+           CRAN         = "https://cloud.r-project.org")
+install.packages("remotes", repos = repos)
+remotes::install_github("rootcoder007/rmorie", repos = repos, upgrade = "always")
+
+# or, from a clone, at the repository root
+install.packages(c("rmoriebricklayer", "rmoriedata"), repos = repos)
+install.packages(".", repos = NULL, type = "source")
 ```
 
 The assistant (`morie_llm_ask()`) tries a local Ollama, then any Gemini or
