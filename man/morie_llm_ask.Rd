@@ -10,7 +10,8 @@ morie_llm_ask(
   model = NULL,
   provider = NULL,
   system_prompt = NULL,
-  timeout = 120
+  timeout = 120,
+  route = NULL
 )
 }
 \arguments{
@@ -20,21 +21,27 @@ morie_llm_ask(
 
 \item{model}{Optional model override.}
 
-\item{provider}{Optional provider override (ollama/gemini/api/openai/local).
-NULL = auto-detect.}
+\item{provider}{Optional provider override (ollama/gemini/api/openai/hosted/local;
+\code{"own"} is the same as \code{"api"}). NULL = auto-detect.}
 
 \item{system_prompt}{Optional full system-prompt override.}
 
 \item{timeout}{HTTP timeout in seconds. Default 120.}
+
+\item{route}{\code{NULL} (the saved setting), \code{"auto"}, \code{"own"},
+\code{"ollama"} or \code{"hosted"}: a route other than auto is the only
+one asked.}
 }
 \value{
 Character scalar response text, or local-fallback text when all
 providers fail.
 }
 \description{
-R port of \code{morie.llm.ask}. Tries each provider in priority order; on
-HTTP/timeout failure falls through to the next, and finally to a
-static local help string.
+R port of \code{morie.llm.ask}. With the automatic route it tries each provider
+in priority order; on HTTP/timeout failure falls through to the next, and
+finally to a static local help string. A route saved with
+\code{\link{morie_llm_config}} (or \code{MORIE_LLM_ROUTE}, or the
+\code{route} argument) other than \code{"auto"} asks that route only.
 }
 \examples{
 \donttest{

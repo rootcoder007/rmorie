@@ -23,11 +23,16 @@ in to the hosted LLM tier with GitHub (device flow) or an emailed code;
 \item{\code{login --token [KEY]}}{store a key you already have (prompts
 for it when KEY is omitted)}
 \item{\code{logout}}{forget the hosted key}
-\item{\code{doctor}}{report the LLM providers reachable from this machine}
+\item{\code{doctor}}{report the LLM providers reachable from this machine, and
+the route \code{ask} will take}
+\item{\code{config [show | help | get KEY | set KEY VALUE | unset KEY | setup | path]}}{show
+or change the language-model settings (\code{\link{morie_llm_config}}): the
+route \code{ask} uses and the address, key and model of each route;
+\code{setup} walks through them}
 \item{\code{models}}{list the models you can ask: the hosted tier's for your
 key (default marked), then the local Ollama server's}
-\item{\code{ask [--model NAME] PROMPT...}}{send a prompt to the active provider
-(or the named model) and print the reply}
+\item{\code{ask [--model NAME] [--route ROUTE] PROMPT...}}{send a prompt to the
+active provider (or the named model, on the named route) and print the reply}
 \item{\code{analyze SUBJECT [JSON]}}{run an analysis subject through \code{cli_main()}}
 \item{\code{explain FILENAME}, \code{inspect PATH}, \code{verify PATH}}{read,
 browse and validate module output tables}
@@ -45,7 +50,8 @@ provider chain}
 \code{exec}, \code{edit}, \code{percysuits}}{file encryption, open-data
 feeds, bootstrap weights, evaluate R code, edit a file, pull models}
 \item{\code{version}}{print the package version}
-\item{\code{help}}{this list}
+\item{\code{help [start | llm | config | r]}}{this list, or a guide: getting
+started, the language-model routes, every setting, the same from R}
 }
 }
 \examples{

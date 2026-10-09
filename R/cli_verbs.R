@@ -450,7 +450,8 @@
   }
   if (gemini_key) return(paste0(lead, gemini_line))
   if (nzchar(lead)) return(paste0(lead, "rmorie models lists the names\n"))
-  paste0("no LLM backend answered; this is the local fallback text (rmorie login with GitHub or --email", .morie_httr2_note(), ", or start Ollama)\n")
+  paste0("no LLM backend answered; this is the local fallback text (rmorie login with GitHub or --email", .morie_httr2_note(),
+         ", or start Ollama and pull a model; `rmorie config setup` sets a route, `rmorie help llm` explains them)\n")
 }
 
 .cli_chat <- function(rest, flag, out) {

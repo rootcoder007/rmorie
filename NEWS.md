@@ -11,6 +11,22 @@
   unless a build fails, named packages upgraded to the current release), with
   `install.packages()` and remotes as the fallback; a new install-routes workflow runs every
   README one-liner on Linux, macOS and Windows.
+* Language models: a running Ollama server with no model pulled no longer counts as a
+  usable route. `morie_llm_detect_provider()` picked it (the probe only asked whether
+  `/api/tags` answered), so `rmorie doctor` reported "active provider: ollama" for a user
+  logged in to the hosted tier and `ask` first sent a request with no model name; the
+  automatic route now skips such a server (unless `OLLAMA_MODEL` names a model) and reaches
+  the hosted tier. New `morie_llm_config()` and `rmorie config` (`show`, `help`, `get`, `set`,
+  `unset`, `setup`, `path`) save the route (`auto`, `own`, `ollama`, `hosted`) and the address,
+  key and model of each route in `~/.config/morie/llm.json` (private, written only on request;
+  the same file and keys as rmoriebricklayer's `rmbl config`); an environment variable that is
+  set still wins. A route other than `auto` is the only one asked, and says what is missing
+  when it is not set up. `rmorie ask --route ROUTE` picks one for a single call, `rmorie
+  doctor` ends with the route and model `ask` will use, and `rmorie help start | llm | config
+  | r` are step-by-step guides. The Ollama route now sends `OLLAMA_API_KEY` (the probe and
+  the chat request did not), and an endpoint given as `.../v1` (as `rmorie provider set`
+  documents) is no longer asked at `.../v1/v1/chat/completions`; Gemini's endpoint had the
+  same doubled path.
 * CI: the daily r-cache-warmer pre-installs rmoriebricklayer and rmoriedata from
   r-universe, like the other jobs. pak runs vanilla R and only sees the CRAN mirror, where
   the companions are older than the floor, so the warmer had failed since 1.4.1.
