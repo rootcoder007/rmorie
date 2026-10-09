@@ -42,7 +42,14 @@
 
 #' Internal helper: the language-model settings file, next to credentials.json
 #' @noRd
-.morie_llm_config_path <- function() file.path(dirname(.morie_llm_credentials_path()), "llm.json")
+.morie_llm_config_path <- function() {
+  # Same directory as the credentials file, built the same way: dirname() would
+  # rewrite the separators on Windows and make the path differ from the one
+  # the environment names.
+  base <- trimws(Sys.getenv("XDG_CONFIG_HOME", unset = ""))
+  if (!nzchar(base)) base <- file.path(path.expand("~"), ".config")
+  file.path(base, "morie", "llm.json")
+}
 
 #' Internal helper: the saved settings (a named list, empty when absent or unreadable)
 #' @noRd
