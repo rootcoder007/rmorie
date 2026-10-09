@@ -7,6 +7,10 @@
   to every `install.packages()` call (under `Rscript` there is no mirror chooser, and a bare
   call stops with "trying to use CRAN without setting a mirror"), and the GitHub route
   upgrades `"always"` so an older companion already installed is replaced.
+* The README's R install routes lead with pak (download progress, compiler output hidden
+  unless a build fails, named packages upgraded to the current release), with
+  `install.packages()` and remotes as the fallback; a new install-routes workflow runs every
+  README one-liner on Linux, macOS and Windows.
 * CI: the daily r-cache-warmer pre-installs rmoriebricklayer and rmoriedata from
   r-universe, like the other jobs. pak runs vanilla R and only sees the CRAN mirror, where
   the companions are older than the floor, so the warmer had failed since 1.4.1.
