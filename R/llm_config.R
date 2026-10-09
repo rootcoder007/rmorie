@@ -377,7 +377,10 @@ morie_llm_config <- function(...) {
       out(sprintf("or paste one issued at %s here.\n", .morie_llm_services()$request_access %||% ACCESS_REQUEST_URL))
       k <- ask("MORIE key (Enter to skip)")
       if (nzchar(k)) {
-        r <- tryCatch({ set(hosted.key = k); NULL }, error = function(e) conditionMessage(e))
+        r <- tryCatch({
+          set(hosted.key = k)
+          NULL
+        }, error = function(e) conditionMessage(e))
         if (!is.null(r)) out(paste0(r, "\n"))
       }
     }
