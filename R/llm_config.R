@@ -114,10 +114,9 @@
   "default"
 }
 
+# How a key is displayed: only whether one is set. No character of it is ever printed.
 .morie_llm_mask <- function(v) {
-  if (is.null(v) || !nzchar(v)) return("(not set)")
-  if (nchar(v) <= 8L) return("****")
-  paste0(substr(v, 1L, 4L), "...", substr(v, nchar(v) - 3L, nchar(v)))
+  if (is.null(v) || !nzchar(v)) "(not set)" else "set"
 }
 
 #' Internal helper: the value a setting has right now (the default spelled out), for display
@@ -195,7 +194,7 @@
 #'   \code{hosted.model}, \code{hosted.key}. \code{NULL} or \code{""} removes
 #'   a saved setting. With no arguments nothing is written.
 #' @return A data frame with one row per setting: \code{key}, \code{value}
-#'   (keys shown shortened), \code{source} (\code{"environment"},
+#'   (a key only as \code{"set"}), \code{source} (\code{"environment"},
 #'   \code{"saved"} or \code{"default"}), \code{env} (the variable that
 #'   overrides it) and \code{help}; visibly when called with no settings.
 #' @examples
