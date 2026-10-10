@@ -30,14 +30,6 @@
 # Rho (check) loss.
 .rqn_rho <- function(u, tau) sum(u * (tau - (u < 0)))
 
-# Smallest ratio -v/dv over the entries with dv < 0 (v > 0), i.e. the
-# distance to the boundary along dv; 1e20 when no entry decreases.
-# Computed as 1 / max(-dv / v), which avoids subsetting; 0 / 0 (a dual
-# variable at exactly zero that does not move) is dropped.
-.rqn_ratio <- function(v, dv) {
-  m <- max(-dv / v, na.rm = TRUE)
-  if (m > 0) 1 / m else 1e20
-}
 
 #' Frisch-Newton interior point solver for one regression quantile
 #'
@@ -54,69 +46,18 @@
 #'   \code{nit} (iterations, corrector steps, n).
 #' @keywords internal
 .rqn_fnb <- function(X, y, tau, beta = 0.99995, eps = 1e-6, maxit = 500L) {
-  n <- nrow(X)
-  p <- ncol(X)
   if (tau < eps || tau > 1 - eps)
     stop("the Frisch-Newton method needs tau in (0, 1).", call. = FALSE)
-  cc <- -y
-  b <- (1 - tau) * colSums(X)
-  x <- rep(1 - tau, n)
-  R <- tryCatch(chol(crossprod(X)), error = function(e) NULL)
-  if (is.null(R)) stop("singular design matrix.", call. = FALSE)
-  yv <- backsolve(R, backsolve(R, crossprod(X, cc), transpose = TRUE))
-  s <- cc - drop(X %*% yv)
-  z <- pmax(s, 0)
-  w <- pmax(-s, 0)
-  sm <- abs(s) < eps
-  z[sm] <- z[sm] + eps
-  w[sm] <- w[sm] + eps
-  s <- 1 - x
-  gap <- sum(z * x) + sum(w * s)
-  it <- 0L
-  ncor <- 0L
-  twon <- 2 * n
-  while (gap > eps && it < maxit) {
-    it <- it + 1L
-    d <- 1 / (z / x + w / s)
-    ds <- z - w
-    dz <- d * ds
-    rhs <- b + drop(crossprod(X, dz - x))
-    R <- tryCatch(chol(crossprod(X * sqrt(d))), error = function(e) NULL)
-    if (is.null(R)) stop("singular design matrix in the Newton step.", call. = FALSE)
-    dy <- backsolve(R, backsolve(R, rhs, transpose = TRUE))
-    ds <- drop(X %*% dy) - ds
-    dx <- d * ds
-    ds <- -dx
-    dz <- -z * (dx / x + 1)
-    dw <- -w * (ds / s + 1)
-    deltap <- min(beta * min(.rqn_ratio(x, dx), .rqn_ratio(s, ds)), 1)
-    deltad <- min(beta * min(.rqn_ratio(z, dz), .rqn_ratio(w, dw)), 1)
-    if (min(deltap, deltad) < 1) {
-      ncor <- ncor + 1L
-      mu <- sum(x * z) + sum(s * w)
-      g <- mu + deltap * sum(dx * z) + deltad * sum(dz * x) +
-        deltap * deltad * sum(dz * dx) + deltap * sum(ds * w) +
-        deltad * sum(dw * s) + deltap * deltad * sum(ds * dw)
-      mu <- mu * ((g / mu)^3) / twon
-      dr <- d * (mu * (1 / s - 1 / x) + dx * dz / x - ds * dw / s)
-      dy <- backsolve(R, backsolve(R, rhs + drop(crossprod(X, dr)), transpose = TRUE))
-      uu <- drop(X %*% dy)
-      dxdz <- dx * dz
-      dsdw <- ds * dw
-      dx <- d * (uu - z + w) - dr
-      ds <- -dx
-      dz <- -z + (mu - z * dx - dxdz) / x
-      dw <- -w + (mu - w * ds - dsdw) / s
-      deltap <- min(beta * min(.rqn_ratio(x, dx), .rqn_ratio(s, ds)), 1)
-      deltad <- min(beta * min(.rqn_ratio(z, dz), .rqn_ratio(w, dw)), 1)
-    }
-    x <- x + deltap * dx
-    s <- s + deltap * ds
-    yv <- yv + deltad * dy
-    z <- z + deltad * dz
-    w <- w + deltad * dw
-    gap <- sum(z * x) + sum(w * s)
-  }
+  storage.mode(X) <- "double"
+  # the iterations run in C++ (src/morie_rq_fnb.cpp): the same steps, without R's per-step
+  # allocation of a dozen length-n vectors
+  r <- tryCatch(.rqn_fnb_impl(X, as.double(y), tau, beta, eps, as.integer(maxit)),
+                error = function(e) stop(conditionMessage(e), call. = FALSE))
+  yv <- r$yv
+  gap <- r$gap
+  it <- r$it
+  ncor <- r$ncor
+  n <- nrow(X)
   if (gap > eps)
     warning(sprintf("Frisch-Newton stopped at the iteration limit with duality gap %.3g.", gap),
             call. = FALSE)
