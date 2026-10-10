@@ -447,7 +447,7 @@ morie_geron_stacked_autoencoder_modules <- function(X, hidden_sizes = c(2), epoc
 #' @keywords internal
 .morie_w4d_fit_predict <- function(A, t) {
   D <- cbind(1.0, A)
-  theta <- MASS::ginv(t(D) %*% D) %*% (t(D) %*% t)
+  theta <- .morie_ginv(t(D) %*% D) %*% (t(D) %*% t)
   list(theta = theta, fitted = as.numeric(D %*% theta))
 }
 
@@ -550,10 +550,8 @@ morie_geron_self_supervised <- function(X, pretext = "mask", noise = 0.1, seed =
 #'   objective, laplacian, affinity, alpha, estimate, n, method.
 #' @export
 #' @examples
-#' if (requireNamespace("MASS", quietly = TRUE)) {
-#'   morie_geron_semisupervised(X_l = c(1, 2, 3, 4, 5, 6, 7, 8), y_l = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'     X_u = c(1, 2, 3, 4, 5, 6, 7, 8))
-#' }
+#' morie_geron_semisupervised(X_l = c(1, 2, 3, 4, 5, 6, 7, 8), y_l = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   X_u = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_semisupervised <- function(X_l, y_l, X_u, alpha = 1.0, gamma = 1.0,
                                        fit_intercept = TRUE) {
   L1 <- as.matrix(X_l)
@@ -576,7 +574,7 @@ morie_geron_semisupervised <- function(X_l, y_l, X_u, alpha = 1.0, gamma = 1.0,
   Lap <- diag(rowSums(W)) - W
 
   M <- t(Dl) %*% Dl + a * (t(Du) %*% Lap %*% Du)
-  theta <- as.numeric(MASS::ginv(M) %*% (t(Dl) %*% t))
+  theta <- as.numeric(.morie_ginv(M) %*% (t(Dl) %*% t))
   fitted <- as.numeric(Dl %*% theta)
   f_u <- as.numeric(Du %*% theta)
   sup <- mean((fitted - t)^2)
@@ -1336,10 +1334,8 @@ morie_geron_stride <- function(in_dim, k, p = 0, s = 1) {
 #'   optimism, leverage, r2, estimate, n, method.
 #' @export
 #' @examples
-#' if (requireNamespace("MASS", quietly = TRUE)) {
-#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#'   morie_geron_supervised_learning(V, V)
-#' }
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_supervised_learning(V, V)
 morie_geron_supervised_learning <- function(X, y, ridge = 0.0, fit_intercept = TRUE) {
   A <- as.matrix(X)
   t <- as.numeric(y)
@@ -1352,7 +1348,7 @@ morie_geron_supervised_learning <- function(X, y, ridge = 0.0, fit_intercept = T
 
   D <- if (isTRUE(fit_intercept)) cbind(1.0, A) else A
   P <- t(D) %*% D + lam * diag(ncol(D))
-  H <- D %*% MASS::ginv(P) %*% t(D)
+  H <- D %*% .morie_ginv(P) %*% t(D)
   h <- pmin(pmax(diag(H), 0.0), 1.0)
   loo <- mean((resid / (1.0 - h))^2)
 
@@ -2964,7 +2960,7 @@ morie_geron_unsupervised_learning <- function(X, n_clusters = 2, bottleneck = 1,
 #' @export
 #' @keywords internal
 .morie_w4d_loo_mse <- function(D, t) {
-  P <- MASS::ginv(t(D) %*% D)
+  P <- .morie_ginv(t(D) %*% D)
   theta <- as.numeric(P %*% (t(D) %*% t))
   resid <- as.numeric(D %*% theta) - t
   h <- pmin(pmax(rowSums((D %*% P) * D), 0.0), 1.0)
@@ -4754,7 +4750,7 @@ morie_geron_time_series_forecast <- function(y, horizon = 1, window = 3, ridge =
     P <- diag(lam, w + 1)
     P[w + 1, w + 1] <- 0.0
     M <- t(Amat) %*% Amat + P
-    beta <- as.numeric(MASS::ginv(M) %*% (t(Amat) %*% t))
+    beta <- as.numeric(.morie_ginv(M) %*% (t(Amat) %*% t))
     list(beta = beta, A = Amat, t = t)
   }
 

@@ -182,12 +182,57 @@ morie_ts_acf <- function(x, lag_max = 20L, type = c("correlation",
 # TS2: stationarity
 # ============================================================
 
+# Native KPSS test (Kwiatkowski, Phillips, Schmidt and Shin 1992),
+# reproducing urca::ur.kpss(): residuals from the level ("mu") or trend
+# ("tau") regression, partial-sum numerator sum(S_t^2) / n^2, and a
+# Newey-West long-run variance with Bartlett weights 1 - j / (l + 1) and
+# truncation lag l = trunc(4 (n/100)^0.25) ("short"), trunc(12
+# (n/100)^0.25) ("long") or 0 ("nil").  Critical values are KPSS
+# Table 1 as tabulated by urca.
+.morie_kpss <- function(y, type = c("mu", "tau"),
+                        lags = c("short", "long", "nil"), use_lag = NULL) {
+  type <- match.arg(type)
+  lags <- match.arg(lags)
+  y <- as.numeric(y)
+  y <- y[!is.na(y)]
+  n <- length(y)
+  lmax <- if (!is.null(use_lag)) as.integer(use_lag) else switch(lags,
+    short = trunc(4 * (n / 100)^0.25),
+    long = trunc(12 * (n / 100)^0.25),
+    nil = 0L)
+  if (type == "mu") {
+    cval <- c(`10pct` = 0.347, `5pct` = 0.463, `2.5pct` = 0.574, `1pct` = 0.739)
+    res <- y - mean(y)
+  } else {
+    cval <- c(`10pct` = 0.119, `5pct` = 0.146, `2.5pct` = 0.176, `1pct` = 0.216)
+    tt <- seq_len(n)
+    res <- stats::lm.fit(cbind(1, tt), y)$residuals
+  }
+  S <- cumsum(res)
+  num <- sum(S^2) / n^2
+  s2 <- sum(res^2) / n
+  den <- s2
+  if (lmax > 0) {
+    j <- seq_len(lmax)
+    acov <- vapply(j, function(h) sum(res[-seq_len(h)] * res[seq_len(n - h)]),
+                   numeric(1))
+    den <- s2 + 2 / n * sum((1 - j / (lmax + 1)) * acov)
+  }
+  list(statistic = num / den, lag = as.integer(lmax), cval = cval)
+}
+
 #' Test a series for stationarity
 #'
-#' Runs an Augmented Dickey-Fuller test (H0: unit root / non-stationary)
-#' and a KPSS test (H0: stationary) via the urca package where available,
-#' plus a Ljung-Box autocorrelation test, and suggests a differencing
-#' order to achieve stationarity of the mean.
+#' Runs an Augmented Dickey-Fuller test (H0: unit root / non-stationary;
+#' regression with drift, augmentation lag chosen by AIC from
+#' \code{lags = 1}, i.e. one lagged difference), a KPSS test (H0: level
+#' stationary; Bartlett kernel with the "short" truncation lag
+#' \eqn{\lfloor 4 (n/100)^{1/4} \rfloor}), plus a Ljung-Box
+#' autocorrelation test, and suggests a differencing order to achieve
+#' stationarity of the mean.  Both unit-root tests are computed natively
+#' and reproduce \code{urca::ur.df(type = "drift", selectlags = "AIC")}
+#' and \code{urca::ur.kpss(type = "mu")} (statistics and 5 percent
+#' critical values) exactly; no external package is used.
 #'
 #' @param x A numeric series or `morie_ts`.
 #' @param max_d Maximum differencing to search for the suggestion.
@@ -199,29 +244,17 @@ morie_ts_acf <- function(x, lag_max = 20L, type = c("correlation",
 #' @export
 morie_ts_stationarity <- function(x, max_d = 2L) {
   x <- as.numeric(x)
-  have_urca <- requireNamespace("urca", quietly = TRUE)
   test_one <- function(v) {
     lb <- stats::Box.test(v, lag = min(10L, length(v) %/% 2L),
                           type = "Ljung-Box")$p.value
-    if (have_urca) {
-      adf <- suppressWarnings(urca::ur.df(v, type = "drift",
-                                          selectlags = "AIC"))
-      adf_stat <- adf@teststat[1]
-      adf_crit <- adf@cval[1, "5pct"]
-      adf_stationary <- adf_stat < adf_crit          # reject unit root
-      kp <- suppressWarnings(urca::ur.kpss(v, type = "mu"))
-      kpss_stat <- kp@teststat[1]
-      kpss_crit <- kp@cval[1, "5pct"]
-      kpss_stationary <- kpss_stat < kpss_crit        # fail to reject H0
-    } else {
-      # base fallback: split-half mean/variance stability
-      h <- floor(length(v) / 2)
-      adf_stationary <- abs(mean(v[1:h]) - mean(v[(h + 1):length(v)])) <
-        stats::sd(v)
-      adf_stat <- adf_crit <- NA_real_
-      kpss_stationary <- adf_stationary
-      kpss_stat <- kpss_crit <- NA_real_
-    }
+    adf <- .morie_urdf(v, type = "drift", lags = 1L, selectlags = "AIC")
+    adf_stat <- adf$statistic
+    adf_crit <- unname(adf$cval["5pct"])
+    adf_stationary <- adf_stat < adf_crit          # reject unit root
+    kp <- .morie_kpss(v, type = "mu", lags = "short")
+    kpss_stat <- kp$statistic
+    kpss_crit <- unname(kp$cval["5pct"])
+    kpss_stationary <- kpss_stat < kpss_crit        # fail to reject H0
     list(adf = list(statistic = adf_stat, crit_5pct = adf_crit,
                     stationary = adf_stationary),
          kpss = list(statistic = kpss_stat, crit_5pct = kpss_crit,

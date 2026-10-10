@@ -157,13 +157,6 @@ test_that(".morie_did_result NA-fills CI when SE is non-finite", {
 
 # ================================================================== matching.R
 
-test_that(".morie_matching_require errors when pkg is missing", {
-  expect_error(
-    rmorie:::.morie_matching_require("nonexistent_pkg_xyz",
-                                      "fake_fn"),
-    regexp = "morie requires")
-})
-
 test_that(".morie_matching_te_empty returns NA fields + class morie_te_result", {
   out <- rmorie:::.morie_matching_te_empty("ATT")
   expect_s3_class(out, "morie_te_result")

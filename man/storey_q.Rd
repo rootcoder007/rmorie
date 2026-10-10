@@ -11,36 +11,44 @@ storey_q(p_values, alpha = 0.05, lambda_param = 0.5, labels = NULL)
 
 \item{alpha}{Significance level.}
 
-\item{lambda_param}{Tuning parameter in (0, 1) for the pi0
-estimator.}
+\item{lambda_param}{Tuning value(s) in \verb{[0, 1)} for the pi0
+estimator, as qvalue's \code{lambda}: a single value gives the
+cutoff estimator \eqn{N(\lambda)/(m(1-\lambda))} (\eqn{N(\lambda)} = number of p-values \eqn{\ge \lambda}); a grid of at
+least four values (the default) gives the smoother estimator.}
 
 \item{labels}{Optional character vector of test labels.}
 }
 \value{
-An object of class \code{"morie_multiple_testing_result"}.
+An object of class \code{"morie_multiple_testing_result"}
+with the q-values in \code{adjusted}, plus \code{pi0} and
+\code{lambda_param}.
 }
 \description{
 Estimates the proportion of true null hypotheses (pi0) and
-tightens the BH thresholds by that factor. Delegates to
-\code{qvalue::qvalue} (Bioconductor) when installed; otherwise
-falls back to an inline Storey-style cutoff so the wrapper keeps
-working on CRAN-only installs.
+tightens the BH thresholds by that factor. Native implementation of
+Storey and Tibshirani (2003) that reproduces \code{qvalue::qvalue}
+with its defaults: pi0 from a cubic smoothing spline (3 df, via
+\code{stats::smooth.spline}) through \eqn{\hat\pi_0(\lambda)} over the
+grid \code{seq(0.05, 0.95, 0.05)}, read at the largest lambda, and
+q-values \eqn{q_{(i)} = \hat\pi_0 \min_{j \ge i} \min(1, m p_{(j)} / j)}.
 }
 \examples{
-if (requireNamespace("qvalue", quietly = TRUE)) {
-  set.seed(1)
-  p <- c(runif(80), runif(20, 0, 0.005))
+set.seed(1)
+p <- c(runif(80), runif(20, 0, 0.005))
 
-  res <- storey_q(p)
-  res$pi0                     # estimated proportion of true nulls
-  head(res$adjusted)          # q-values
-  res$n_rejected
+res <- storey_q(p)
+res$pi0                     # estimated proportion of true nulls
+head(res$adjusted)          # q-values
+res$n_rejected
 
-  # `lambda_param` tunes the pi0 estimator; different lambda, different pi0.
-  storey_q(p, lambda_param = 0.5)$pi0
-  storey_q(p, lambda_param = 0.8)$pi0
+# A single `lambda_param` gives the cutoff estimator at that lambda.
+storey_q(p, lambda_param = 0.5)$pi0
+storey_q(p, lambda_param = 0.8)$pi0
 
-  # Adaptive FDR rejects at least as many as BH (pi0 <= 1 tightens BH):
-  c(storey = storey_q(p)$n_rejected, BH = benjamini_hochberg(p)$n_rejected)
+# Adaptive FDR rejects at least as many as BH (pi0 <= 1 tightens BH):
+c(storey = storey_q(p)$n_rejected, BH = benjamini_hochberg(p)$n_rejected)
 }
+\references{
+Storey, J. D. and Tibshirani, R. (2003). Statistical
+significance for genomewide studies. \emph{PNAS} 100, 9440-9445.
 }

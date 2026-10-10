@@ -19,9 +19,9 @@ variances (\code{morie_causal_robust_se()}). The reference packages
 (WeightIt, AIPW, grf, stdReg, DoubleML, EValue, rbounds, sandwich) are
 used only by the cross-validation tests.
 
-Two functions reach an optional package by design, and say so:
-\code{morie_causal_impact()} is a named pass-through to
-\pkg{CausalImpact} (Bayesian structural time series), and
+\code{morie_causal_impact()} fits its Bayesian structural time series
+natively (Gibbs sampler, R/causal_impact_native.R). One function reaches
+an optional package by design, and says so:
 \code{morie_causal_weighting()} uses \pkg{WeightIt} only for a weighting
 method this package has no engine for (glm, cbps and ATT entropy
 balancing are native).

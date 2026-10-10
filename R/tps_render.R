@@ -422,8 +422,9 @@ morie_tps_render_choropleth <- function(polys,
 #'
 #' Projects (LAT_WGS84, LONG_WGS84) to the rotated Toronto canvas and
 #' draws one dot per incident.  When \code{eps_km} and \code{min_samples}
-#' are supplied AND the \pkg{dbscan} package is installed, points are
-#' coloured by DBSCAN cluster label.
+#' are supplied, points are coloured by DBSCAN cluster label (native
+#' DBSCAN with the clustering rules of \code{dbscan::dbscan}; labels
+#' are 0-based with -1 for noise).
 #'
 #' @param df A TPS data.frame with columns \code{LAT_WGS84} and
 #'   \code{LONG_WGS84}.
@@ -473,11 +474,10 @@ morie_tps_render_points <- function(df,
 
   labels <- rep(-1L, length(xk))
   n_clusters <- 0L
-  if (!is.null(eps_km) && requireNamespace("dbscan", quietly = TRUE)) {
-    fit <- dbscan::dbscan(cbind(xk, yk),
-                          eps = eps_km, minPts = min_samples)
-    labels <- as.integer(fit$cluster) - 1L  # match sklearn -1==noise
-    labels[labels == -1L] <- -1L
+  if (!is.null(eps_km)) {
+    fit <- .morie_dbscan_native(cbind(xk, yk), eps = eps_km,
+                                min_samples = as.integer(min_samples))
+    labels <- as.integer(fit$labels)  # sklearn convention: -1 == noise
     n_clusters <- length(unique(labels[labels >= 0L]))
   }
   noise_n <- sum(labels == -1L)
@@ -777,8 +777,9 @@ morie_tps_render_quad <- function(data, outfile = NULL, ...) {
 #' DBSCAN cluster figure on TPS-projected points
 #'
 #' Runs DBSCAN on rotated-km coordinates and colours points by cluster
-#' label, with noise rendered grey.  Requires the suggested \pkg{dbscan}
-#' package; without it a base-graphics single-colour fallback is drawn.
+#' label (native DBSCAN; cluster ids 1-based in discovery order, 0 for
+#' noise, as \code{dbscan::dbscan}), with noise rendered grey.  Without
+#' \pkg{ggplot2} a base-graphics plot is drawn.
 #'
 #' @param points_df data.frame with columns ``lat`` / ``lon`` (or ``LAT_WGS84``
 #'   / ``LONG_WGS84``).
@@ -805,12 +806,9 @@ morie_tps_render_dbscan <- function(points_df, eps_km = 0.5,
     stop("points_df must have lat/lon (or LAT_WGS84/LONG_WGS84) columns")
   pp <- morie_tps_project_xy(lat, lon)
 
-  labels <- rep(0L, length(lat))
-  if (requireNamespace("dbscan", quietly = TRUE)) {
-    cl <- dbscan::dbscan(cbind(pp$x, pp$y), eps = eps_km,
-                         minPts = as.integer(min_samples))
-    labels <- as.integer(cl$cluster)  # 0 = noise
-  }
+  cl <- .morie_dbscan_native(cbind(pp$x, pp$y), eps = eps_km,
+                             min_samples = as.integer(min_samples))
+  labels <- as.integer(cl$labels) + 1L  # 0 = noise
   dfp <- data.frame(x = pp$x, y = pp$y,
                     cluster = factor(labels))
   if (.tps_has_ggplot2()) {

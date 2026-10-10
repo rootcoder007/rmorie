@@ -20,8 +20,11 @@ by stratum (post-stratification target).}
 A numeric vector of post-stratification weights.
 }
 \description{
-Delegates to \code{survey::postStratify()} when given a design; otherwise
-computes raw post-stratification factors in base R.
+Computes the post-stratification factors natively in base R: each
+unit in stratum \eqn{h} gets \eqn{(N_h / N) / (n_h / n)}, the ratio of
+the population share to the sample share (the adjustment
+\code{survey::postStratify()} applies to equal starting weights). No package
+is called.
 }
 \examples{
 set.seed(1)

@@ -6,10 +6,11 @@
 #' coordinate distribution and samples synthetic points;
 #' \code{morie_fairness_ctgan_debiaser} rebalances a tabular dataset
 #' so every group's favourable-outcome rate matches a privileged
-#' group's. Both gate on optional dependencies: \pkg{torch} (preferred,
-#' native) or \pkg{reticulate} + JAX (fallback). When neither is
-#' available the callables return a degenerate \code{morie_rich_result}
-#' explaining how to install a backend; they never error at import.
+#' group's. Both run on a native base-R backend on every install: the
+#' spatial generator is a small leaky-ReLU MLP fitted by a seeded
+#' random-search (keep-if-better) loop, and the debiaser resamples
+#' observed rows conditional on (group, outcome). Neither \pkg{torch} nor
+#' \pkg{reticulate}/JAX is used.
 #'
 #' @name morie_fairness_gan
 NULL
@@ -22,7 +23,7 @@ NULL
 #' .fairness_result
 #'
 #' A step of the fairness_gan implementation. Called by
-#' \code{.fairness_no_backend_result}, \code{morie_fairness_ctgan_debiaser},
+#' \code{morie_fairness_ctgan_debiaser},
 #' \code{morie_fairness_spatial_gan}.
 #' See the file header for the source the module follows.
 #'
@@ -48,67 +49,22 @@ NULL
   out
 }
 
-#' Prefer native R torch; fall back to reticulate + JAX
+#' Backend descriptor for the fairness GAN callables
 #'
 #' A step of the fairness_gan implementation. Called by
 #' \code{morie_fairness_ctgan_debiaser}, \code{morie_fairness_spatial_gan}.
-#' See the file header for the source the module follows.
+#' The computation is base R, so the backend is always \code{"native"};
+#' no deep-learning runtime is probed or required.
 #'
-#' @return A list with \code{kind}, \code{note}.
+#' @return A list with \code{kind} (\code{"native"}) and \code{note}.
 #' @export
 #' @examples
 #' res <- .fairness_backend()
 #' res
 #' @keywords internal
 .fairness_backend <- function() {
-  # Prefer native R torch; fall back to reticulate + JAX.
-  if (requireNamespace("torch", quietly = TRUE)) {
-    return(list(kind = "torch", note = "Using R torch backend."))
-  }
-  if (requireNamespace("reticulate", quietly = TRUE)) {
-    have_jax <- tryCatch(
-      reticulate::py_module_available("jax"),
-      error = function(e) FALSE
-    )
-    if (isTRUE(have_jax)) {
-      return(list(kind = "reticulate-jax",
-                  note = "Using reticulate + JAX backend."))
-    }
-  }
-  list(kind = "none",
-       note = paste0("No GAN backend found. Install 'torch' (",
-                     "install.packages('torch'); torch::install_torch())",
-                     " or set up reticulate with JAX (",
-                     "reticulate::py_install('jax')) to enable this ",
-                     "callable."))
-}
-
-#' .fairness_no_backend_result
-#'
-#' A step of the fairness_gan implementation. Called by
-#' \code{morie_fairness_ctgan_debiaser}, \code{morie_fairness_spatial_gan}.
-#' See the file header for the source the module follows.
-#'
-#' @param title Passed to \code{.fairness_result}.
-#' @param call Passed to \code{.fairness_result}.
-#' @param note Passed to \code{.fairness_result}.
-#' @return The value of \code{.fairness_result}.
-#' @export
-#' @keywords internal
-.fairness_no_backend_result <- function(title, call, note) {
-  .fairness_result(
-    title, call,
-    summary_lines = list(Backend = "none"),
-    warnings = note,
-    interpretation = paste(
-      "No generative backend is available, so no GAN was fit. ",
-      "morie_fairness_gan callables are intentionally gated on an ",
-      "optional deep-learning runtime to keep the base R install lean. ",
-      "Install one of the listed backends and re-run.",
-      sep = ""
-    ),
-    backend = "none", fitted = FALSE
-  )
+  list(kind = "native",
+       note = "Using the native base-R backend (no torch / JAX needed).")
 }
 
 #' .fairness_he_init
@@ -158,12 +114,17 @@ NULL
 
 #' Learn a 2-D crime/patrol location distribution
 #'
-#' Trains a small MLP-based GAN on an (n, 2) matrix of coordinates and
-#' returns a fitted object that can \code{sample()} synthetic points.
-#' Mirrors the JAX \code{SpatialGAN} class.
+#' Fits a small leaky-ReLU MLP generator to an (n, 2) matrix of
+#' standardised coordinates and returns a fitted object that can
+#' \code{sample()} synthetic points. Mirrors the API of the JAX
+#' \code{SpatialGAN} class, but the fit is native base R: at most 50
+#' seeded random-search steps of size \code{lr} on the generator weights,
+#' each kept only when it lowers the minibatch squared error (no
+#' adversarial discriminator training, no torch / JAX).
 #'
 #' @param points Numeric matrix or data.frame with two columns (x, y).
-#' @param steps Integer training iterations.
+#' @param steps Integer training iterations requested (the native
+#'   random-search fit runs at most 50).
 #' @param batch_size Integer minibatch size.
 #' @param latent_dim Generator noise dimension.
 #' @param hidden Hidden-layer width.
@@ -171,7 +132,7 @@ NULL
 #' @param seed Reproducibility seed.
 #' @return A \code{morie_fairness_result} with the fitted parameters in
 #'   \code{$gp}, standardisation in \code{$mean}/\code{$std}, and a
-#'   \code{$sample(n, seed)} closure when a backend was found.
+#'   \code{$sample(n, seed)} closure; \code{$backend} is \code{"native"}.
 #' @examples
 #' set.seed(1)
 #' pts <- matrix(rnorm(60), ncol = 2L)
@@ -198,10 +159,6 @@ morie_fairness_spatial_gan <- function(points, steps = 1500L,
   bk <- .fairness_backend()
   call_str <- sprintf("morie_fairness_spatial_gan(n=%d, steps=%d)",
                       nrow(pts), as.integer(steps))
-  if (bk$kind == "none") {
-    return(.fairness_no_backend_result("morie Spatial GAN",
-                                        call_str, bk$note))
-  }
 
   mu <- colMeans(pts)
   sigma <- apply(pts, 2L, stats::sd) + 1e-8
@@ -211,12 +168,10 @@ morie_fairness_spatial_gan <- function(points, steps = 1500L,
   gp <- .fairness_he_init(c(latent_dim, hidden, hidden, 2L))
   dp <- .fairness_he_init(c(2L, hidden, hidden, 1L))
 
-  # The R port runs a base-R proxy training loop only when no native
-  # backend is present beyond reticulate; with the listed backends
-  # available we keep a deterministic Adam-free skeleton here for
-  # parity-of-API. Real training is delegated to the backend if the
-  # caller passes backend="full" via attributes (deferred to a later
-  # release to match the JAX reference exactly).
+  # Native base-R fit: a seeded random-search loop (at most 50 steps)
+  # on the generator weights, keeping a perturbation only when it lowers
+  # the minibatch squared error. The discriminator weights are
+  # initialised for API parity with the JAX class but not trained.
   history <- numeric(0)
   for (t in seq_len(min(as.integer(steps), 50L))) {
     idx <- sample.int(nrow(std_pts),
@@ -295,7 +250,10 @@ morie_fairness_spatial_gan <- function(points, steps = 1500L,
 #'   carried for interface parity and has no effect.
 #' @param seed Sampling/training seed.
 #' @return \code{morie_fairness_result}; \code{$debiased} carries the
-#'   synthesised data.frame when a backend is available.
+#'   synthesised data.frame (native base-R resampling: each synthetic row
+#'   draws its group from the observed group shares, its outcome at the
+#'   privileged group's favourable rate, and its features from an observed
+#'   row with that group and outcome).
 #' @examples
 #' df <- data.frame(group = c("A", "B"), outcome = c(1, 0), stringsAsFactors = FALSE)
 #' r <- morie_fairness_ctgan_debiaser(df, outcome_col = "outcome",
@@ -373,20 +331,11 @@ morie_fairness_ctgan_debiaser <- function(df, outcome_col, feature_cols,
                         numeric(1))
   names(group_props) <- groups
 
-  if (bk$kind == "none") {
-    out <- .fairness_no_backend_result("morie CTGAN Debiaser",
-                                        call_str, bk$note)
-    out$group_fav_rate <- fav_rate
-    out$target_rate <- target_rate
-    return(out)
-  }
-
-  # Base-R debiasing surrogate: resample feature rows from the
-  # observed conditional distribution P(features | group, outcome=1
-  # at privileged rate). This preserves the AGPL-safe semantic
-  # contract (every group's favourable rate matches privileged) when
-  # a heavy deep generative backend is not justified; full GAN
-  # training is delegated to the torch/JAX backend identified above.
+  # Native base-R debiaser: resample feature rows from the observed
+  # conditional distribution P(features | group, outcome), with the
+  # outcome drawn at the privileged group's favourable rate, so every
+  # group's favourable rate matches the privileged one. No generator is
+  # trained and no deep-learning runtime is used.
   .rmorie_local_seed(as.integer(seed))
   n_out <- as.integer(n)
   gi <- sample.int(ng, n_out, replace = TRUE, prob = group_props)

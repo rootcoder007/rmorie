@@ -14,14 +14,25 @@ morie_eg_coint(y1, y2, max_lag = NULL)
 \item{max_lag}{Max ADF augmentation lags. Default \code{floor(12*(n/100)^0.25)}.}
 }
 \value{
-Named list with \code{adf_statistic, p_value, beta, n, method}.
+Named list with \code{adf_statistic, p_value, beta,
+  critical_values, n, method}.
 }
 \description{
-Engle-Granger two-step cointegration test
+Step 1 regresses \code{y1} on \code{y2} by OLS; step 2 runs an
+augmented Dickey-Fuller regression without deterministic terms on the
+step-1 residuals, choosing the number of augmentation lags in
+\code{1..max_lag} by AIC on a common sample.  The ADF step is computed
+natively and reproduces \code{urca::ur.df(type = "none", lags =
+max_lag, selectlags = "AIC")} exactly; no external package is used.
+The statistic is compared with the Engle-Granger (two-variable,
+constant) critical values \code{-3.90 / -3.34 / -3.04}, not the plain
+Dickey-Fuller ones, and \code{p_value} is a coarse bracket from them.
 }
 \examples{
 set.seed(1)
-if (requireNamespace("urca", quietly = TRUE)) {
-  morie_eg_coint(y1 = rnorm(100), y2 = rnorm(100))
+morie_eg_coint(y1 = rnorm(100), y2 = rnorm(100))
 }
+\references{
+Engle, R. F. and Granger, C. W. J. (1987). Co-integration
+and error correction. Econometrica 55, 251-276.
 }

@@ -324,7 +324,7 @@ test_that("morie_spatial_voting_cjr_irt runs or skips on missing Stan", {
 test_that("single-row and single-column matrices never reach basicspace", {
   # basicspace's Fortran writes out of bounds on these shapes and the
   # process dies later (valgrind: mckalnew_, blackb_, blackboxt_)
-  ok <- rmorie:::.sv_basicspace_shape_ok
+  ok <- .sv_basicspace_shape_ok
   expect_false(ok(matrix(c(1, NA, 3), 3, 1)))
   expect_false(ok(matrix(c(1, 2), 1, 2)))
   expect_false(ok(matrix(1:4, 2))) # integer storage is refused by basicspace too
@@ -349,13 +349,14 @@ test_that("single-row and single-column matrices never reach basicspace", {
   }
 })
 
-test_that("aldrich_mckelvey delegates to basicspace on a valid matrix", {
+test_that("aldrich_mckelvey matches basicspace on a valid matrix", {
   skip_if_not_installed("basicspace")
   set.seed(1)
-  Z <- matrix(rnorm(100), 20, 5)
+  # basicspace truncates placements to integers, so the comparison uses an integer scale
+  Z <- matrix(as.numeric(sample(1:7, 100, replace = TRUE)), 20, 5)
   Z[3, 2] <- NA
   fit <- morie_spatial_voting_aldrich_mckelvey(Z)
-  expect_identical(fit$engine, "basicspace")
+  expect_identical(fit$engine, "native")
   expect_length(fit$zhat, 5L)
   expect_true(all(is.finite(fit$alpha)))
   expect_true(all(is.finite(fit$beta)))
@@ -372,7 +373,7 @@ test_that("aldrich_mckelvey delegates to basicspace on a valid matrix", {
                       rnorm(5, 0, 0.4), 1), 7))
   }))
   fs <- morie_spatial_voting_aldrich_mckelvey(S)
-  expect_identical(fs$engine, "basicspace")
+  expect_identical(fs$engine, "native")
   expect_true(all(is.finite(fs$alpha)))
   expect_true(all(is.finite(fs$beta)))
   expect_gt(cor(fs$zhat, truth), 0.95)

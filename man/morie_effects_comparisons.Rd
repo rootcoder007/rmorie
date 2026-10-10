@@ -2,33 +2,45 @@
 % Please edit documentation in R/effects.R
 \name{morie_effects_comparisons}
 \alias{morie_effects_comparisons}
-\title{Contrasts / comparisons via \pkg{marginaleffects}}
+\title{Contrasts / comparisons (native)}
 \usage{
 morie_effects_comparisons(model, variables = NULL, ...)
 }
 \arguments{
-\item{model}{A fitted model object.}
+\item{model}{A fitted \code{lm} or \code{glm} object.}
 
-\item{variables}{Character vector or named list of variables to
-contrast (see \code{marginaleffects::comparisons()}). When
-\code{NULL}, marginaleffects' default (all model variables) is used.}
+\item{variables}{Character vector of focal predictors, or a named
+list giving a numeric step for numeric predictors. When \code{NULL},
+all predictors.}
 
-\item{...}{Further arguments forwarded to
-\code{marginaleffects::comparisons()}.}
+\item{...}{Optional native settings: \code{newdata},
+\code{type}, \code{by}, \code{conf_level}, \code{vcov}, \code{df}
+and \code{comparison} (only \code{"difference"}). Any other argument
+is an error.}
 }
 \value{
-A \code{marginaleffects} data frame.
+A data frame with \code{rowid} (unit-level) or the \code{by}
+columns, \code{term}, \code{contrast}, \code{estimate},
+\code{std.error}, \code{statistic}, \code{p.value}, \code{s.value},
+\code{conf.low}, \code{conf.high}; unit-level rows also carry the
+data columns and \code{predicted_lo} / \code{predicted_hi}.
 }
 \description{
-Thin extender over \code{marginaleffects::comparisons()} for unit-
-level treatment-effect contrasts (counterfactual differences,
-ratios, etc.).
+Native unit-level counterfactual differences for \code{lm} and
+\code{glm} fits with the defaults of
+\code{marginaleffects::comparisons()}: a numeric predictor is moved
+from its observed value \code{x} to \code{x + 1} (or \code{x + step}
+via \code{variables = list(x = step)}), a factor / character /
+logical / 0-1 predictor is moved from its reference level to each
+other level; the difference of predictions (response scale) gets a
+delta-method SE from the analytic Jacobian. Terms are ordered
+alphabetically. \code{by = TRUE} averages over units (the
+\code{avg_comparisons()} result). Cross-validated against
+\pkg{marginaleffects} in the tests.
 }
 \examples{
-if (requireNamespace("marginaleffects", quietly = TRUE)) {
-  set.seed(1)
-  df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-  fit <- stats::lm(y ~ x + g, data = df)
-  head(morie_effects_comparisons(fit, variables = "g"))
-}
+set.seed(1)
+df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+fit <- stats::lm(y ~ x + g, data = df)
+head(morie_effects_comparisons(fit, variables = "g"))
 }

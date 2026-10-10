@@ -26,27 +26,20 @@
 #'     native VanderWeele-Ding continuous-scale E-value (module 26).
 #' }
 #'
-#' \strong{Marginal-effects extenders} (Phase 1.j additions; thin
-#' wrappers over Vincent Arel-Bundock's universal API and the
-#' \pkg{emmeans} / \pkg{broom} ecosystems):
+#' \strong{Marginal effects} (native; conventions of \pkg{emmeans} and
+#' Vincent Arel-Bundock's \pkg{marginaleffects}, which are used only by
+#' the cross-validation tests):
 #' \itemize{
-#'   \item \code{morie_effects_emmeans()} -> \code{emmeans::emmeans()}.
-#'   \item \code{morie_effects_predictions()} ->
-#'     \code{marginaleffects::predictions()}.
-#'   \item \code{morie_effects_comparisons()} ->
-#'     \code{marginaleffects::comparisons()}.
-#'   \item \code{morie_effects_slopes()} ->
-#'     \code{marginaleffects::slopes()}.
-#'   \item \code{morie_effects_tidy()} -> \code{broom::tidy()} (falls
-#'     back to a \code{summary()}-based tidy frame when \pkg{broom}
-#'     is unavailable).
+#'   \item \code{morie_effects_emmeans()} -- estimated marginal means.
+#'   \item \code{morie_effects_predictions()} -- adjusted predictions.
+#'   \item \code{morie_effects_comparisons()} -- counterfactual contrasts.
+#'   \item \code{morie_effects_slopes()} -- partial derivatives.
+#'   \item \code{morie_effects_tidy()} -- native coefficient table with
+#'     \code{broom::tidy()}'s columns.
 #' }
 #'
-#' Each extender requires the underlying CRAN package and signals a
-#' clean \code{stop()} when it is missing, leaving the upstream model
-#' object untouched. They return the underlying package's native
-#' object verbatim so downstream code (e.g. \pkg{ggplot2} plumbing,
-#' rmorie's MRM step) keeps working with the canonical API.
+#' They run natively for \code{lm} / \code{glm} fits (analytic
+#' delta-method standard errors) and return plain data frames.
 #'
 #' @references
 #' Chernozhukov et al. (2018); Robins (1986); VanderWeele & Ding
@@ -519,185 +512,243 @@ e_value <- function(ate, se, null = 0, sd_y = 1) {
 
 
 # ---------------------------------------------------------------------
-# Marginal-effects extenders (Phase 1.j additions)
+# Marginal effects (native engine in R/effects_native.R)
 # ---------------------------------------------------------------------
 
-#' Internal helper: Morie Effects Require
-#' @noRd
-.morie_effects_require <- function(pkg, fn) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    stop(
-      sprintf("`%s` requires the `%s` package. ", fn, pkg),
-      sprintf("Install it with install.packages(\"%s\").", pkg),
-      call. = FALSE
-    )
-  }
-  invisible(TRUE)
-}
-
-#' Estimated marginal means via \pkg{emmeans}
+#' Estimated marginal means (native)
 #'
-#' Thin extender over \code{emmeans::emmeans()}. The fitted model is
-#' passed through unchanged; \code{specs} follows the usual emmeans
-#' formula / list interface. Use \code{emmeans::pairs()} or
-#' \code{emmeans::contrast()} on the returned object for pairwise or
-#' custom contrasts.
+#' Native estimated marginal means (least-squares means) for \code{lm}
+#' and \code{glm} fits, following the conventions of
+#' \code{emmeans::emmeans()} (Lenth): a reference grid crossing every
+#' level of each categorical predictor with each numeric covariate held
+#' at its mean (or at the values in \code{at}); the marginal mean for a
+#' cell of \code{specs} is the equal-weight average of the grid
+#' predictions over the predictors not named in \code{specs}, a linear
+#' combination \eqn{L b} with standard error \eqn{\sqrt{L V L'}},
+#' \eqn{V = } \code{vcov(model)}. Degrees of freedom are the residual df
+#' for \code{lm} and gaussian / Gamma \code{glm} fits and \code{Inf}
+#' (asymptotic z) otherwise. Results are on the link scale unless
+#' \code{type = "response"}, which back-transforms the estimate and the
+#' interval and scales the SE by the inverse-link derivative (delta
+#' method), naming the estimate \code{prob} (binomial), \code{rate}
+#' (poisson) or \code{response}. Cross-validated against \pkg{emmeans}
+#' in the tests; \pkg{emmeans} is not needed at run time.
 #'
-#' @param model A fitted model object (`lm`, `glm`, `lmerMod`, ...).
-#' @param specs Specification for the marginal means -- a formula
-#'   (e.g. `~ treatment`), character vector of factor names, or a
-#'   list, exactly as accepted by \code{emmeans::emmeans()}.
-#' @param ... Further arguments forwarded to \code{emmeans::emmeans()}.
-#' @return An \code{emmGrid} object.
+#' @param model A fitted \code{lm} or \code{glm} object.
+#' @param specs Variables whose marginal means are wanted: a one-sided
+#'   formula (\code{~ g}, \code{~ g * h}, \code{~ g | h}) or a character
+#'   vector of predictor names.
+#' @param ... Optional native settings: \code{type} (\code{"link"},
+#'   default, or \code{"response"}), \code{level} (confidence level,
+#'   default 0.95), \code{at} (named list of covariate values for the
+#'   grid) and \code{by} (conditioning variables). Any other argument is
+#'   an error.
+#' @return A data frame shaped like \code{summary(emmeans::emmeans(...))}:
+#'   the spec (and by) variables, the estimate (\code{emmean} /
+#'   \code{prob} / \code{rate} / \code{response}), \code{SE}, \code{df}
+#'   and \code{lower.CL}/\code{upper.CL} (\code{asymp.LCL}/
+#'   \code{asymp.UCL} when \code{df = Inf}). Attributes carry the
+#'   estimate name, scale and the linear-function matrix
+#'   (\code{"linfct"}), so a contrast matrix C gives contrasts as the matrix product of C and
+#'   \code{attr(x, "linfct")} times the coefficients.
+#'   The \code{emmGrid} S4 object is no longer returned.
 #' @examples
-#' if (requireNamespace("emmeans", quietly = TRUE)) {
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-#'   fit <- stats::lm(y ~ x + g, data = df)
-#'   morie_effects_emmeans(fit, specs = "g")
-#' }
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#' fit <- stats::lm(y ~ x + g, data = df)
+#' morie_effects_emmeans(fit, specs = "g")
 #' @export
 morie_effects_emmeans <- function(model, specs, ...) {
-  .morie_effects_require("emmeans", "morie_effects_emmeans")
-  emmeans::emmeans(object = model, specs = specs, ...)
+  .emm_native(model, specs, list(...))
 }
 
-#' Adjusted predictions via \pkg{marginaleffects}
+#' Adjusted predictions (native)
 #'
-#' Thin extender over \code{marginaleffects::predictions()} for unit-
-#' level or grid-level adjusted predictions.
+#' Native unit-level (or averaged) adjusted predictions for \code{lm}
+#' and \code{glm} fits with the conventions of
+#' \code{marginaleffects::predictions()} (Arel-Bundock): one row per row
+#' of \code{newdata} (the model data by default), delta-method standard
+#' errors from the analytic Jacobian and \code{vcov(model)}, z-based
+#' tests and intervals. For a \code{glm} with no \code{type} and no
+#' \code{by}, inference is done on the link scale and the estimate and
+#' interval are back-transformed (marginaleffects' \code{"invlink(link)"});
+#' \code{std.error} and \code{statistic} are then \code{NA}. With
+#' \code{by}, unit predictions are averaged within groups on the response
+#' scale. Cross-validated against \pkg{marginaleffects} in the tests.
 #'
-#' @param model   A fitted model object supported by \pkg{insight} /
-#'   \pkg{marginaleffects}.
+#' @param model   A fitted \code{lm} or \code{glm} object.
 #' @param newdata Optional data frame for which to predict. Defaults
-#'   to the model frame when `NULL` (the marginaleffects default).
-#' @param ...     Further arguments forwarded to
-#'   \code{marginaleffects::predictions()}.
-#' @return A `marginaleffects` data frame.
+#'   to the model data when `NULL`.
+#' @param ...     Optional native settings: \code{type}
+#'   (\code{"response"} or \code{"link"}), \code{by} (\code{TRUE} or
+#'   grouping column names), \code{conf_level}, \code{vcov} (\code{TRUE},
+#'   \code{FALSE} or a matrix) and \code{df} (default \code{Inf}). Any
+#'   other argument is an error.
+#' @return A data frame with \code{rowid} (or the \code{by} columns),
+#'   \code{estimate}, \code{std.error}, \code{statistic}, \code{p.value},
+#'   \code{s.value}, \code{conf.low}, \code{conf.high} and, unit-level,
+#'   the \code{newdata} columns.
 #' @examples
-#' if (requireNamespace("marginaleffects", quietly = TRUE)) {
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-#'   fit <- stats::lm(y ~ x + g, data = df)
-#'   head(morie_effects_predictions(fit))
-#' }
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#' fit <- stats::lm(y ~ x + g, data = df)
+#' head(morie_effects_predictions(fit))
 #' @export
 morie_effects_predictions <- function(model, newdata = NULL, ...) {
-  .morie_effects_require(
-    "marginaleffects",
-    "morie_effects_predictions"
-  )
-  if (is.null(newdata)) {
-    marginaleffects::predictions(model, ...)
-  } else {
-    marginaleffects::predictions(model, newdata = newdata, ...)
-  }
+  .mfx_predictions(model, newdata, list(...))
 }
 
-#' Contrasts / comparisons via \pkg{marginaleffects}
+#' Contrasts / comparisons (native)
 #'
-#' Thin extender over \code{marginaleffects::comparisons()} for unit-
-#' level treatment-effect contrasts (counterfactual differences,
-#' ratios, etc.).
+#' Native unit-level counterfactual differences for \code{lm} and
+#' \code{glm} fits with the defaults of
+#' \code{marginaleffects::comparisons()}: a numeric predictor is moved
+#' from its observed value \code{x} to \code{x + 1} (or \code{x + step}
+#' via \code{variables = list(x = step)}), a factor / character /
+#' logical / 0-1 predictor is moved from its reference level to each
+#' other level; the difference of predictions (response scale) gets a
+#' delta-method SE from the analytic Jacobian. Terms are ordered
+#' alphabetically. \code{by = TRUE} averages over units (the
+#' \code{avg_comparisons()} result). Cross-validated against
+#' \pkg{marginaleffects} in the tests.
 #'
-#' @param model     A fitted model object.
-#' @param variables Character vector or named list of variables to
-#'   contrast (see \code{marginaleffects::comparisons()}). When
-#'   `NULL`, marginaleffects' default (all model variables) is used.
-#' @param ...       Further arguments forwarded to
-#'   \code{marginaleffects::comparisons()}.
-#' @return A `marginaleffects` data frame.
+#' @param model     A fitted \code{lm} or \code{glm} object.
+#' @param variables Character vector of focal predictors, or a named
+#'   list giving a numeric step for numeric predictors. When `NULL`,
+#'   all predictors.
+#' @param ...       Optional native settings: \code{newdata},
+#'   \code{type}, \code{by}, \code{conf_level}, \code{vcov}, \code{df}
+#'   and \code{comparison} (only \code{"difference"}). Any other argument
+#'   is an error.
+#' @return A data frame with \code{rowid} (unit-level) or the \code{by}
+#'   columns, \code{term}, \code{contrast}, \code{estimate},
+#'   \code{std.error}, \code{statistic}, \code{p.value}, \code{s.value},
+#'   \code{conf.low}, \code{conf.high}; unit-level rows also carry the
+#'   data columns and \code{predicted_lo} / \code{predicted_hi}.
 #' @examples
-#' if (requireNamespace("marginaleffects", quietly = TRUE)) {
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-#'   fit <- stats::lm(y ~ x + g, data = df)
-#'   head(morie_effects_comparisons(fit, variables = "g"))
-#' }
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#' fit <- stats::lm(y ~ x + g, data = df)
+#' head(morie_effects_comparisons(fit, variables = "g"))
 #' @export
 morie_effects_comparisons <- function(model, variables = NULL, ...) {
-  .morie_effects_require(
-    "marginaleffects",
-    "morie_effects_comparisons"
-  )
-  if (is.null(variables)) {
-    marginaleffects::comparisons(model, ...)
-  } else {
-    marginaleffects::comparisons(model, variables = variables, ...)
-  }
+  dots <- list(...)
+  .mfx_compare(model, variables, dots$newdata, dots, slope = FALSE)
 }
 
-#' Marginal slopes (partial derivatives) via \pkg{marginaleffects}
+#' Marginal slopes (partial derivatives, native)
 #'
-#' Thin extender over \code{marginaleffects::slopes()} for continuous
-#' marginal effects (Stata-style \code{margins, dydx()}).
+#' Native unit-level partial derivatives \eqn{dY/dX} for \code{lm} and
+#' \code{glm} fits with the defaults of
+#' \code{marginaleffects::slopes()}: a centred finite difference
+#' \eqn{(f(x + e/2) - f(x - e/2)) / e} with
+#' \eqn{e = 10^{-4} \times} the range of \code{x} in the model data, on
+#' the response scale, and a delta-method SE from the analytic Jacobian
+#' of that difference. Categorical predictors give differences from the
+#' reference level, as in marginaleffects. \code{by = TRUE} averages
+#' (\code{avg_slopes()}). Cross-validated against \pkg{marginaleffects}
+#' in the tests.
 #'
-#' @param model     A fitted model object.
+#' @param model     A fitted \code{lm} or \code{glm} object.
 #' @param variables Character vector of focal variables. When `NULL`,
-#'   the marginaleffects default (all continuous predictors) is used.
-#' @param ...       Further arguments forwarded to
-#'   \code{marginaleffects::slopes()}.
-#' @return A `marginaleffects` data frame.
+#'   all predictors.
+#' @param ...       Optional native settings: \code{newdata},
+#'   \code{type}, \code{by}, \code{conf_level}, \code{vcov}, \code{df},
+#'   \code{eps} and \code{slope} (only \code{"dydx"}). Any other argument
+#'   is an error.
+#' @return A data frame shaped like \code{morie_effects_comparisons()}
+#'   with \code{contrast = "dY/dX"} for numeric predictors.
 #' @examples
-#' if (requireNamespace("marginaleffects", quietly = TRUE)) {
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-#'   fit <- stats::lm(y ~ x + g, data = df)
-#'   head(morie_effects_slopes(fit, variables = "x"))
-#' }
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#' fit <- stats::lm(y ~ x + g, data = df)
+#' head(morie_effects_slopes(fit, variables = "x"))
 #' @export
 morie_effects_slopes <- function(model, variables = NULL, ...) {
-  .morie_effects_require(
-    "marginaleffects",
-    "morie_effects_slopes"
-  )
-  if (is.null(variables)) {
-    marginaleffects::slopes(model, ...)
-  } else {
-    marginaleffects::slopes(model, variables = variables, ...)
-  }
+  dots <- list(...)
+  .mfx_compare(model, variables, dots$newdata, dots, slope = TRUE)
 }
 
-#' Tidy a model with \pkg{broom} (fallback: `summary()` coefficients)
+#' Tidy coefficient table for a fitted model
 #'
-#' Thin extender over \code{broom::tidy()}. When \pkg{broom} is not
-#' installed, falls back to building a tidy-style data frame from
-#' \code{summary(model)$coefficients}, which is sufficient for the
-#' core `term / estimate / std.error / statistic / p.value` columns
-#' on the model classes (\code{lm} / \code{glm}) that rmorie ships.
+#' Native coefficient table with the columns and row conventions of
+#' \code{broom::tidy()} for \code{lm} / \code{glm} fits: one row per
+#' coefficient in \code{coef(model)} order (aliased coefficients kept
+#' with \code{NA} statistics), columns \code{term}, \code{estimate},
+#' \code{std.error}, \code{statistic}, \code{p.value} taken from
+#' \code{summary(model)$coefficients}, optional \code{conf.low} /
+#' \code{conf.high} from \code{stats::confint()}, and optional
+#' exponentiation of the estimate and interval. Any other model class
+#' whose \code{summary()} carries a \code{coefficients} matrix is
+#' tidied the same way.
 #'
 #' @param model A fitted model object.
-#' @param ...   Further arguments forwarded to \code{broom::tidy()}.
+#' @param conf.int Logical; add \code{conf.low} / \code{conf.high}.
+#' @param conf.level Confidence level for the interval.
+#' @param exponentiate Logical; exponentiate \code{estimate} and the
+#'   interval bounds (e.g. odds ratios for a logit \code{glm}).
+#' @param ...   Further arguments passed to \code{stats::confint()}.
 #' @return A data frame with one row per model term.
 #' @examples
-#' if (requireNamespace("broom", quietly = TRUE)) {
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-#'   fit <- stats::lm(y ~ x + g, data = df)
-#'   morie_effects_tidy(fit)
-#' }
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+#' fit <- stats::lm(y ~ x + g, data = df)
+#' morie_effects_tidy(fit)
 #' @export
-morie_effects_tidy <- function(model, ...) {
-  if (requireNamespace("broom", quietly = TRUE)) {
-    return(broom::tidy(model, ...))
-  }
+morie_effects_tidy <- function(model, conf.int = FALSE, conf.level = 0.95,
+                               exponentiate = FALSE, ...) {
   cf <- tryCatch(summary(model)$coefficients,
     error = function(e) NULL
   )
-  if (is.null(cf)) {
-    stop("morie_effects_tidy(): install `broom` to tidy this model ",
-      "class, or pass a model with summary()$coefficients.",
+  if (is.null(cf) || is.null(dim(cf))) {
+    stop("morie_effects_tidy(): cannot tidy a model of class '",
+      class(model)[1L], "'; it needs summary()$coefficients.",
       call. = FALSE
     )
   }
-  cf <- as.data.frame(cf)
-  data.frame(
+  getcol <- function(k) {
+    if (ncol(cf) >= k) as.numeric(cf[, k]) else rep(NA_real_, nrow(cf))
+  }
+  out <- data.frame(
     term = rownames(cf),
-    estimate = cf[[1]],
-    std.error = if (ncol(cf) >= 2L) cf[[2]] else NA_real_,
-    statistic = if (ncol(cf) >= 3L) cf[[3]] else NA_real_,
-    p.value = if (ncol(cf) >= 4L) cf[[4]] else NA_real_,
+    estimate = getcol(1L),
+    std.error = getcol(2L),
+    statistic = getcol(3L),
+    p.value = getcol(4L),
     row.names = NULL,
     stringsAsFactors = FALSE
   )
+  # Aliased (NA) coefficients are dropped by summary(); keep them as
+  # NA rows in coef() order, as broom does.
+  co <- tryCatch(stats::coef(model), error = function(e) NULL)
+  if (is.numeric(co) && !is.null(names(co)) && length(co) != nrow(out)) {
+    m <- match(names(co), out$term)
+    out <- data.frame(
+      term = names(co),
+      estimate = unname(co),
+      std.error = out$std.error[m],
+      statistic = out$statistic[m],
+      p.value = out$p.value[m],
+      row.names = NULL,
+      stringsAsFactors = FALSE
+    )
+  }
+  if (isTRUE(conf.int)) {
+    ci <- suppressMessages(stats::confint(model, level = conf.level, ...))
+    if (is.null(dim(ci))) {
+      ci <- matrix(ci, nrow = 1L,
+                   dimnames = list(names(stats::coef(model))[1L], NULL))
+    }
+    m <- match(out$term, rownames(ci))
+    out$conf.low <- as.numeric(ci[m, 1L])
+    out$conf.high <- as.numeric(ci[m, 2L])
+  }
+  if (isTRUE(exponentiate)) {
+    out$estimate <- exp(out$estimate)
+    if (!is.null(out$conf.low)) {
+      out$conf.low <- exp(out$conf.low)
+      out$conf.high <- exp(out$conf.high)
+    }
+  }
+  out
 }

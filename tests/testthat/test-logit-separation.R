@@ -1,8 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Research P5: separation detection must agree with research/lean/P5Separation.lean.
 
-skip_if_not_installed("lpSolve")
-
 loglik_of <- function(y, x, b) {
   s <- 2 * y - 1
   sum(-log1p(exp(-as.numeric((s * cbind(1, x)) %*% b))))

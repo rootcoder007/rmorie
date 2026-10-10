@@ -20,9 +20,7 @@ A named list with elements \code{n_extreme}, \code{threshold_lower},
 Detect extreme weights at +/- k * IQR or by absolute percentile
 }
 \examples{
-if (requireNamespace("survey", quietly = TRUE)) {
-  set.seed(1)
-  w <- c(runif(28, 0.5, 2), 25, 30)
-  str(morie_weights_detect_extreme(w), max.level = 1)
-}
+set.seed(1)
+w <- c(runif(28, 0.5, 2), 25, 30)
+str(morie_weights_detect_extreme(w), max.level = 1)
 }

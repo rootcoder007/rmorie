@@ -211,17 +211,6 @@ test_that(".otis_classify_bin maps known bins to Solitary / Torture / Unknown", 
 
 # ====================================================================== causal.R
 
-test_that(".dml_xfit_ridge_predict returns length-n_te numeric vector", {
-  set.seed(4L)
-  X_tr <- matrix(stats::rnorm(80L), 40L, 2L)
-  y_tr <- X_tr[, 1L] - 0.5 * X_tr[, 2L] + stats::rnorm(40L, sd = 0.3)
-  X_te <- matrix(stats::rnorm(20L), 10L, 2L)
-  pred <- rmorie:::.dml_xfit_ridge_predict(X_tr, y_tr, X_te,
-                                            lambda = 1.0)
-  expect_length(pred, 10L)
-  expect_true(all(is.finite(pred)))
-})
-
 # ================================================================== tps_render.R
 
 test_that(".tps_draw_compass invisibly returns NULL on base graphics", {

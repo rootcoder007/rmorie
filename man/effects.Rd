@@ -22,27 +22,20 @@ normal-approximation Wilcoxon signed-rank bounds.
 native VanderWeele-Ding continuous-scale E-value (module 26).
 }
 
-\strong{Marginal-effects extenders} (Phase 1.j additions; thin
-wrappers over Vincent Arel-Bundock's universal API and the
-\pkg{emmeans} / \pkg{broom} ecosystems):
+\strong{Marginal effects} (native; conventions of \pkg{emmeans} and
+Vincent Arel-Bundock's \pkg{marginaleffects}, which are used only by
+the cross-validation tests):
 \itemize{
-\item \code{morie_effects_emmeans()} -> \code{emmeans::emmeans()}.
-\item \code{morie_effects_predictions()} ->
-\code{marginaleffects::predictions()}.
-\item \code{morie_effects_comparisons()} ->
-\code{marginaleffects::comparisons()}.
-\item \code{morie_effects_slopes()} ->
-\code{marginaleffects::slopes()}.
-\item \code{morie_effects_tidy()} -> \code{broom::tidy()} (falls
-back to a \code{summary()}-based tidy frame when \pkg{broom}
-is unavailable).
+\item \code{morie_effects_emmeans()} -- estimated marginal means.
+\item \code{morie_effects_predictions()} -- adjusted predictions.
+\item \code{morie_effects_comparisons()} -- counterfactual contrasts.
+\item \code{morie_effects_slopes()} -- partial derivatives.
+\item \code{morie_effects_tidy()} -- native coefficient table with
+\code{broom::tidy()}'s columns.
 }
 
-Each extender requires the underlying CRAN package and signals a
-clean \code{stop()} when it is missing, leaving the upstream model
-object untouched. They return the underlying package's native
-object verbatim so downstream code (e.g. \pkg{ggplot2} plumbing,
-rmorie's MRM step) keeps working with the canonical API.
+They run natively for \code{lm} / \code{glm} fits (analytic
+delta-method standard errors) and return plain data frames.
 }
 \references{
 Chernozhukov et al. (2018); Robins (1986); VanderWeele & Ding

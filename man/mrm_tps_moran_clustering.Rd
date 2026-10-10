@@ -44,10 +44,8 @@ computations on full-sized TPS files use the \code{morie} Python
 interactive auditing.
 }
 \examples{
-if (requireNamespace("dbscan", quietly = TRUE)) {
-  if (FALSE) {
-    tps <- read.csv("Assault_Open_Data.csv")
-    mrm_tps_moran_clustering(tps)
-  }
+if (FALSE) {
+  tps <- read.csv("Assault_Open_Data.csv")
+  mrm_tps_moran_clustering(tps)
 }
 }

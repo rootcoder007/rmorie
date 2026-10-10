@@ -21,13 +21,12 @@ A numeric \code{matrix}.
 }
 \description{
 Each stratum is split into two halves; signs from a random Hadamard-like
-matrix double one half and zero the other. For exact Hadamard ordering use
+matrix double one half and zero the other. Native base R; the signs are
+random, not the exact Hadamard ordering of
 \code{survey::as.svrepdesign(..., type = "BRR")}.
 }
 \examples{
-if (requireNamespace("survey", quietly = TRUE)) {
-  set.seed(1)
-  res <- morie_weights_brr(runif(16, 0.5, 2), rep(1:8, each = 2))
-  str(res, max.level = 1)
-}
+set.seed(1)
+res <- morie_weights_brr(runif(16, 0.5, 2), rep(1:8, each = 2))
+str(res, max.level = 1)
 }

@@ -14,9 +14,9 @@
 #' (WeightIt, AIPW, grf, stdReg, DoubleML, EValue, rbounds, sandwich) are
 #' used only by the cross-validation tests.
 #'
-#' Two functions reach an optional package by design, and say so:
-#' \code{morie_causal_impact()} is a named pass-through to
-#' \pkg{CausalImpact} (Bayesian structural time series), and
+#' \code{morie_causal_impact()} fits its Bayesian structural time series
+#' natively (Gibbs sampler, R/causal_impact_native.R). One function reaches
+#' an optional package by design, and says so:
 #' \code{morie_causal_weighting()} uses \pkg{WeightIt} only for a weighting
 #' method this package has no engine for (glm, cbps and ATT entropy
 #' balancing are native).
@@ -29,12 +29,6 @@ NULL
 # ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
-
-#' Internal helper: Causal Have Causalimpact
-#' @noRd
-.causal_have_causalimpact <- function() {
-  requireNamespace("CausalImpact", quietly = TRUE)
-}
 
 # Internal helper: Fit Propensity
 # @noRd
@@ -203,15 +197,6 @@ NULL
   } else {
     .mor_ps_irls(X, y, lam = 0)
   }
-}
-
-#' Internal helper: Fit Propensity Weightit
-#' @noRd
-.fit_propensity_weightit <- function(data, treatment, covariates) {
-  # WeightIt's method = "glm" IS a logistic propensity fit -- the
-  # native .fit_propensity computes the identical scores, so the
-  # delegation was pure overhead (module 15).
-  .fit_propensity(data, treatment, covariates)
 }
 
 #' Internal helper: Clip Ps
@@ -1359,38 +1344,6 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
 # Double Machine Learning -- PLR + IRM
 # ---------------------------------------------------------------------------
 
-# Internal: hand-rolled cross-fit ridge fallback when DoubleML R package is
-# unavailable. Implements a partially linear regression (PLR) cross-fit on
-# residualised outcome and treatment using ridge regression with a fixed
-# lambda (lightweight; not for high-precision inference).
-#' Internal helper: Dml Xfit Ridge
-#' @noRd
-.dml_xfit_ridge <- function(X, y, n_folds = 5L, lambda = 1.0,
-                            random_state = 42L) {
-  n <- nrow(X)
-  p <- ncol(X)
-  .rmorie_local_seed(random_state)
-  folds <- sample(rep(seq_len(n_folds), length.out = n))
-  pred <- numeric(n)
-  Xs <- scale(X)
-  center <- attr(Xs, "scaled:center")
-  scl <- attr(Xs, "scaled:scale")
-  scl[scl == 0] <- 1
-  Xs[, ] <- sweep(sweep(X, 2, center, "-"), 2, scl, "/")
-  for (k in seq_len(n_folds)) {
-    te <- which(folds == k)
-    tr <- setdiff(seq_len(n), te)
-    Xt <- Xs[tr, , drop = FALSE]
-    yt <- y[tr]
-    yc <- mean(yt)
-    A <- crossprod(Xt) + lambda * diag(p)
-    b <- crossprod(Xt, yt - yc)
-    beta <- tryCatch(solve(A, b), error = function(e) .morie_ginv(A) %*% b)
-    pred[te] <- as.numeric(Xs[te, , drop = FALSE] %*% beta) + yc
-  }
-  pred
-}
-
 #' Internal helper: Dml Prepare Xy
 #' @noRd
 .dml_prepare_xy <- function(data, treatment, outcome, covariates) {
@@ -1467,98 +1420,102 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 # morie_estimate_irm lives in R/irm.R (single definition).
 
 
-# Helper: closed-form ridge fit on (X_tr, y_tr) and predict at X_te.
-#' Internal helper: Dml Xfit Ridge Predict
-#' @noRd
-.dml_xfit_ridge_predict <- function(X_tr, y_tr, X_te, lambda = 1.0) {
-  p <- ncol(X_tr)
-  ctr <- colMeans(X_tr)
-  scl <- apply(X_tr, 2, stats::sd)
-  scl[scl == 0 | !is.finite(scl)] <- 1
-  Xs_tr <- sweep(sweep(X_tr, 2, ctr, "-"), 2, scl, "/")
-  Xs_te <- sweep(sweep(X_te, 2, ctr, "-"), 2, scl, "/")
-  yc <- mean(y_tr)
-  A <- crossprod(Xs_tr) + lambda * diag(p)
-  b <- crossprod(Xs_tr, y_tr - yc)
-  beta <- tryCatch(solve(A, b),
-                   error = function(e) .morie_ginv(A) %*% b)
-  as.numeric(Xs_te %*% beta) + yc
-}
-
-
 # ---------------------------------------------------------------------------
 # Phase 1.h new extenders: previously-unmapped CRAN dependencies
 # ---------------------------------------------------------------------------
 
 #' Bayesian structural time-series intervention analysis
 #'
-#' Thin wrapper around \code{CausalImpact::CausalImpact()} (Brodersen
-#' et al. 2015). Fits a Bayesian structural time-series counterfactual
-#' to a single-series treatment using the pre-intervention window and
-#' reports the post-intervention causal effect with credible
-#' intervals.
+#' Native Bayesian structural time-series counterfactual in the manner of
+#' CausalImpact (Brodersen et al. 2015). The response is modelled over the
+#' pre-period as a local level plus a static regression on the
+#' concurrent covariates,
+#' \deqn{y_t = \mu_t + x_t'\beta + \varepsilon_t,\quad
+#'   \mu_{t+1} = \mu_t + \eta_t,}
+#' with \eqn{\varepsilon_t \sim N(0, \sigma^2)} and
+#' \eqn{\eta_t \sim N(0, \sigma_\mu^2)}, after standardising every column
+#' on the pre-period (CausalImpact's \code{standardize.data = TRUE}). A
+#' Gibbs sampler alternates (i) forward-filter backward-sampling of the
+#' level path, with the post-period response treated as missing,
+#' (ii) the conjugate normal draw of \eqn{\beta}, and (iii) inverse-gamma
+#' draws of \eqn{\sigma^2} and \eqn{\sigma_\mu^2}. Priors follow the bsts
+#' defaults CausalImpact uses: level sd prior with guess
+#' \code{prior.level.sd} (0.01) times the sd of y, 32 prior observations
+#' and upper limit sd(y); observation sd prior with guess
+#' \eqn{\sqrt{1 - 0.8}} sd(y) and 50 prior observations (expected
+#' \eqn{R^2 = 0.8}) when there are covariates, upper limit 1.2 sd(y);
+#' initial level \eqn{N(y_1, sd(y)^2)}. \strong{Simplification:} bsts'
+#' spike-and-slab coefficient prior is replaced by its slab alone,
+#' \eqn{\beta \mid \sigma^2 \sim N(0, \sigma^2 \Omega^{-1})} with
+#' \eqn{\Omega = 0.01\,(0.5 X'X/n + 0.5\,\mathrm{diag}(X'X/n))}, so every
+#' covariate is kept (no variable selection). The first 10 percent of the
+#' draws are discarded as burn-in. The posterior predictive of the
+#' counterfactual (level path + regression + observation noise, back on the
+#' original scale) gives the summary table: \code{Actual}, \code{Pred},
+#' \code{Pred.lower}/\code{upper}/\code{sd}, \code{AbsEffect} and
+#' \code{RelEffect} with interval and sd, \code{alpha}, and \code{p}, the
+#' posterior tail-area probability of the observed post-period sum
+#' (smaller tail, CausalImpact's \code{(+1)}-corrected rule). Results are
+#' reproducible under \code{set.seed()} or \code{model_args$seed}.
+#' CausalImpact itself (with its Boom dependency) is not used and was not
+#' available to cross-validate against; the tests check coverage of a
+#' known effect, the no-effect case and agreement with a Kalman filter.
 #'
-#' Hard-errors if \pkg{CausalImpact} is not installed -- the upstream
-#' Kalman-filter + slab-and-spike machinery has no compact inline
-#' equivalent. The wrapper is documented as an extender so that
-#' downstream rmorie callers have a stable \code{morie_*} entry point
-#' to the package.
-#'
-#' @param data A data frame, matrix, or \code{zoo} object whose first
-#'   column is the outcome and remaining columns are concurrent
+#' @param data A data frame or matrix (or a \code{zoo} series) whose
+#'   first column is the outcome and remaining columns are concurrent
 #'   covariate predictors.
-#' @param pre_period Integer length-2 vector giving the start and end
-#'   row indices (or time indices for \code{zoo}) of the
-#'   pre-intervention window.
-#' @param post_period Integer length-2 vector giving the start and end
-#'   row indices of the post-intervention window.
-#' @param model_args Optional named list passed to
-#'   \code{CausalImpact::CausalImpact()}'s \code{model.args} argument
-#'   (e.g. \code{list(niter = 1000L)}).
+#' @param pre_period Length-2 vector giving the first and last row (or,
+#'   for a \code{zoo} series, time index) of the pre-intervention window.
+#' @param post_period Length-2 vector giving the first and last row (or
+#'   time index) of the post-intervention window.
+#' @param model_args Optional named list of sampler settings, as in
+#'   CausalImpact's \code{model.args}: \code{niter} (default 1000),
+#'   \code{prior.level.sd} (0.01), \code{standardize.data} (\code{TRUE}),
+#'   \code{seed} (\code{NULL}: use the session RNG). \code{nseasons > 1}
+#'   and \code{dynamic.regression = TRUE} are not supported and error.
 #' @param alpha Posterior credible-interval coverage (default 0.05,
 #'   meaning 95 percent intervals).
 #' @return Named list with elements \code{average_effect},
-#'   \code{cumulative_effect}, \code{ci_lower}, \code{ci_upper},
-#'   \code{posterior_prob_causal}, and \code{summary} (the upstream
-#'   \code{CausalImpact} summary matrix), plus the original
-#'   \code{impact} object.
+#'   \code{cumulative_effect}, \code{ci_lower}, \code{ci_upper} (interval
+#'   of the average effect), \code{posterior_prob_causal} (the tail-area
+#'   probability \code{p}, as before), \code{summary} (the
+#'   \code{Average} / \code{Cumulative} summary data frame), and
+#'   \code{impact}: a native \code{"morie_causal_impact"} list with
+#'   \code{summary}, \code{series} (pointwise predictions and effects with
+#'   intervals over the analysed window), \code{y_samples} (posterior
+#'   predictive draws for the post-period), \code{model} (posterior draws
+#'   of the coefficients and standard deviations, burn-in, settings),
+#'   \code{pre_period}, \code{post_period} and \code{alpha}. It replaces
+#'   the former \code{CausalImpact} object.
 #' @export
 #' @references
 #'   Brodersen KH, Gallusser F, Koehler J, Remy N, Scott SL (2015).
 #'   Inferring causal impact using Bayesian structural time-series
 #'   models. *Annals of Applied Statistics*, 9(1):247-274.
+#'
+#'   Scott SL, Varian HR (2014). Predicting the present with Bayesian
+#'   structural time series. *International Journal of Mathematical
+#'   Modelling and Numerical Optimisation*, 5(1-2):4-23.
 #' @examples
 #' set.seed(1)
-#' if (requireNamespace("CausalImpact", quietly = TRUE)) {
-#'   morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)),
-#'       pre_period = c(1, 5), post_period = c(6, 10))
-#' }
+#' x <- cumsum(rnorm(60))
+#' y <- 2 + 0.8 * x + rnorm(60, sd = 0.3)
+#' y[41:60] <- y[41:60] + 2
+#' res <- morie_causal_impact(data.frame(y = y, x = x),
+#'   pre_period = c(1, 40), post_period = c(41, 60),
+#'   model_args = list(niter = 300)
+#' )
+#' res$summary
 morie_causal_impact <- function(data, pre_period, post_period,
                                 model_args = NULL, alpha = 0.05) {
-  if (!.causal_have_causalimpact()) {
-    stop(
-      "morie_causal_impact requires the 'CausalImpact' package. ",
-      "Install with install.packages('CausalImpact').",
-      call. = FALSE
-    )
-  }
-  ci_args <- list(
-    data = data,
-    pre.period = pre_period,
-    post.period = post_period,
-    alpha = alpha
-  )
-  if (!is.null(model_args)) {
-    ci_args$model.args <- model_args
-  }
-  impact <- do.call(CausalImpact::CausalImpact, ci_args)
+  impact <- .ci_native(data, pre_period, post_period, model_args, alpha)
   smry <- impact$summary
   list(
     average_effect = as.numeric(smry["Average", "AbsEffect"]),
     cumulative_effect = as.numeric(smry["Cumulative", "AbsEffect"]),
     ci_lower = as.numeric(smry["Average", "AbsEffect.lower"]),
     ci_upper = as.numeric(smry["Average", "AbsEffect.upper"]),
-    posterior_prob_causal = as.numeric(impact$summary$p[1L]),
+    posterior_prob_causal = as.numeric(smry$p[1L]),
     summary = smry,
     impact = impact
   )
