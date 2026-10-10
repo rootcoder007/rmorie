@@ -781,7 +781,7 @@ File,Line,Status,Version,Context
 ./R/fzwm.R,34,STALE_OR_DEP,5.3.1,"#' @references Fauzi and Maesono (2023); Sec. 5.3.1; Maesono; Moriyama and Lu (2018);"
 ./R/fzwm.R,47,STALE_OR_DEP,5.3.1,"method = smoothed Wilcoxon signed rank mean and variance (Sec. 5.3.1))"
 ./R/gam_native.R,6,STALE_OR_DEP,5.3.1,"# with R; 2nd ed.; CRC: sections 4.2 (penalized regression splines); 5.3.1"
-./R/gam_native.R,462,STALE_OR_DEP,5.3.1,"# Cubic regression spline basis (mgcv crspl; Wood 2017 section 5.3.1)"
+./R/gam_native.R,459,STALE_OR_DEP,5.3.1,"# Cubic regression spline basis (mgcv crspl; Wood 2017 section 5.3.1)"
 ./R/gauvar.R,20,STALE_OR_DEP,2.3.1,"# Cressie (1993); Statistics for Spatial Data; rev. edn.; sec. 2.3.1."
 ./R/gh_ap_d2.R,19,STALE_OR_DEP,6.8.2,"#'   under Appendix D; in the book it is Lemma 6.46 in Section 6.8.2."
 ./R/gh_ap_k1.R,15,STALE_OR_DEP,2.10.1,"#'   Theorem 2.10.1. The worklist filed this under Ghosal Appendix K;"

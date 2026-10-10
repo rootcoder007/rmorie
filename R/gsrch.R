@@ -216,7 +216,7 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
       lam <- .gs_glmnet_lambda_seq(x, y, fam, alpha = 0.5, nlambda = len + 2)
       lam <- unique(lam)
       lam <- lam[-c(1, length(lam))]
-      lam <- lam[1:min(length(lam), len)]
+      lam <- lam[seq_len(min(length(lam), len))]
       expand.grid(alpha = seq(0.1, 1, length = len), lambda = lam)
     } else {
       data.frame(alpha = stats::runif(len, min = 0, 1),
