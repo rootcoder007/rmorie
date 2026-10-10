@@ -1,5 +1,34 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* Every estimator now runs on the package's own code; the reference packages are used only by
+  tests that check the numbers (the opt-in `backend =` of `morie_taphonomy_bhm()` and
+  `morie_causal_weighting()`'s methods beyond glm/ps/cbps/ebal are the two exceptions you ask
+  for by name). Newly native, each with tests against the package it replaces:
+  `morie_roc_auc_score()` (pROC's thresholds and AUC), `morie_decision_tree_split()` (rpart's
+  CART, surrogates included), `anova_table()` Type II/III (car::Anova), `morie_grid_search_cv()`
+  and `morie_random_search_cv()` (caret's folds, draws and scores, with native lm, glm, ridge
+  and glmnet learners), `morie_effects_emmeans()`, `_predictions()`, `_comparisons()`,
+  `_slopes()` and `_tidy()` (emmeans, marginaleffects and broom for lm and glm),
+  `morie_causal_impact()` (a Bayesian structural time series by Gibbs sampling, with
+  CausalImpact's priors and summary), `morie_eg_coint()`, `morie_johansen_cointegration()` and
+  `morie_ts_stationarity()` (urca's ADF, Johansen and a new KPSS), `morie_regime_switching()`
+  (MSwM's EM), `storey_q()`, `estimate_pi0()` and the p-value combiners (qvalue, poolr),
+  `jackknife()` and `morie_rsample_bootstraps()`, the superlearners' random forest, the
+  Aldrich-McKelvey and blackbox scalings (basicspace), `morie_logit_separation()`'s LP
+  (lpSolve), `morie_matching_estimate_propensity(model = "gbm")` (gbm with bag.fraction = 1),
+  DBSCAN in the TPS clustering and rendering functions (dbscan, including points exactly eps
+  apart), `gam_smoother()` (mgcv), and the pseudoinverse in the geron learners (MASS).
+  Before, several of these gave different results depending on which packages were installed,
+  and some stopped when one was missing. The fairness GAN functions no longer require torch,
+  which they never used.
+* Changed results and shapes: `morie_rsample_bootstraps()` returns a `morie_bootstraps` data
+  frame; `morie_effects_emmeans()` a data frame shaped like emmeans' summary;
+  `morie_regime_switching()` returns the log-likelihood (not its negative) and n smoothed
+  probabilities; `storey_q()` estimates pi0 over a lambda grid by default, as qvalue does;
+  `n_effective_tests()` rounds down as poolr does; the CV searches report the chosen
+  candidate's score (the regression score was the worst one before).
+* DBSCAN's neighbour search uses a grid of eps-sized cells in one to three dimensions:
+  30,000 points cluster in about a second instead of half a minute.
 * New native estimators, written in R with no outside package: `morie_lmm()` (linear mixed
   models as `lme4::lmer`, with `nlme::lme`'s `random =` form and containment degrees of
   freedom), `morie_glmm()` (binomial and Poisson GLMMs by the Laplace approximation, as

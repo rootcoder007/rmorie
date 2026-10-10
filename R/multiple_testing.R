@@ -2,9 +2,9 @@
 #
 # Multiple-testing-correction routines for rmorie.
 #
-# Phase 1.f refactor (2026-05-25): hand-written textbook implementations
-# have been replaced with thin wrappers that delegate to canonical
-# packages where one exists. Wrappers preserve the rmorie API and the
+# Every routine runs on base R / rmorie code; outside packages (poolr,
+# qvalue, mutoss, harmonicmeanp, gMCP) appear only as cross-validation
+# references in tests/. The functions preserve the rmorie API and the
 # existing `morie_multiple_testing_result` / `morie_rich_result` S3
 # shape so that downstream rmorie code (the `stat_commands` dispatcher,
 # the `print.morie_multiple_testing_result` method, the MRM analyses)
@@ -12,19 +12,17 @@
 #
 #   * stats::p.adjust   -- Bonferroni / Holm / Hochberg / Hommel /
 #                          BH / BY (drop-in).
-#   * poolr             -- fisher / stouffer / tippett / simes
-#                          combined-p tests (delegated when installed).
-#   * qvalue            -- Storey pi0 + q-values (Bioconductor;
-#                          delegated when installed, inline fallback
-#                          otherwise so the wrapper keeps working off
-#                          CRAN-only installs).
-#   * harmonicmeanp     -- Wilson harmonic-mean p (delegated when
-#                          installed).
-#   * gMCP              -- graphical FWER procedures (delegated when
-#                          installed for fixed-sequence / fallback).
-#   * mutoss            -- broader catalogue of MCP procedures; the
-#                          Sidak / Holm-Sidak wrappers prefer
-#                          `mutoss::SidakSD` when installed.
+#   * fisher / stouffer / tippett combined-p tests and the effective
+#     number of tests (Nyholt / Li-Ji / Galwey) are native closed forms
+#     that reproduce poolr::fisher / stouffer / tippett / meff
+#     (cross-validated in tests/testthat/test-multiple-testing-native-parity.R).
+#   * Storey pi0 + q-values are native and reproduce
+#     qvalue::pi0est / qvalue::qvalue defaults (the pi0 smoother is
+#     stats::smooth.spline, exactly as qvalue uses it).
+#   * harmonic-mean p, fixed-sequence / fallback and Sidak /
+#     Holm-Sidak are native closed forms (no package is called at run
+#     time; harmonicmeanp / gMCP / mutoss are cross-validation
+#     references only).
 #
 # Functions left as in-house implementations and marked
 # "novel/no-clean-CRAN-equivalent" (kept for human review):
@@ -55,10 +53,10 @@
 #'
 #' FWER and FDR methods delegate to \code{stats::p.adjust} for the
 #' textbook procedures (Bonferroni, Holm, Hochberg, Hommel,
-#' Benjamini-Hochberg, Benjamini-Yekutieli). Combined-p tests delegate
-#' to \pkg{poolr} when installed and fall back to inline math
-#' otherwise. \code{storey_q} / \code{estimate_pi0} delegate to
-#' \pkg{qvalue} when installed.
+#' Benjamini-Hochberg, Benjamini-Yekutieli). Combined-p tests, the
+#' effective number of tests, Storey q-values and the pi0 estimators
+#' are native closed forms (cross-validated against \pkg{poolr} and
+#' \pkg{qvalue} in the test suite; neither package is used at run time).
 #'
 #' @name morie_multiple_testing
 NULL
@@ -68,12 +66,47 @@ NULL
 # Internal helpers (NOT exported)
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Mt Have Poolr
+#' Native Storey pi0 estimator (reproduces qvalue::pi0est)
+#'
+#' A single lambda gives the cutoff estimator
+#' \eqn{N(\lambda) / (m(1-\lambda))}, \eqn{N(\lambda)} the number of p-values \eqn{\ge \lambda}; a grid of at least four
+#' lambdas gives either the Storey-Tibshirani (2003) cubic smoothing
+#' spline with \code{smooth.df} df read at the largest lambda
+#' (\code{"smoother"}, qvalue's default) or the Storey-Taylor-Siegmund
+#' (2004) MSE-minimising lambda (\code{"bootstrap"}).
 #' @noRd
-.mt_have_poolr        <- function() requireNamespace("poolr",        quietly = TRUE)
-#' Internal helper: Mt Have Qvalue
-#' @noRd
-.mt_have_qvalue       <- function() requireNamespace("qvalue",       quietly = TRUE)
+.mt_pi0est <- function(p, lambda = seq(0.05, 0.95, 0.05),
+                       pi0_method = c("smoother", "bootstrap"),
+                       smooth_df = 3) {
+  pi0_method <- match.arg(pi0_method)
+  m <- length(p)
+  lambda <- sort(as.numeric(lambda))
+  ll <- length(lambda)
+  if (ll > 1L && ll < 4L) {
+    stop(sprintf("length(lambda_param) = %d; a lambda grid needs at least 4 values.", ll),
+         call. = FALSE)
+  }
+  if (min(lambda) < 0 || max(lambda) >= 1) {
+    stop("lambda_param must lie in [0, 1).", call. = FALSE)
+  }
+  pi0_lam <- vapply(lambda, function(l) sum(p >= l), numeric(1)) /
+    (m * (1 - lambda))
+  if (ll == 1L) {
+    pi0 <- min(pi0_lam, 1)
+  } else if (pi0_method == "smoother") {
+    spi0 <- stats::smooth.spline(lambda, pi0_lam, df = smooth_df)
+    pi0 <- min(stats::predict(spi0, x = lambda)$y[ll], 1)
+  } else {
+    min_pi0 <- stats::quantile(pi0_lam, prob = 0.1, names = FALSE)
+    W <- vapply(lambda, function(l) sum(p >= l), numeric(1))
+    mse <- (W / (m^2 * (1 - lambda)^2)) * (1 - W / m) + (pi0_lam - min_pi0)^2
+    pi0 <- min(pi0_lam[mse == min(mse)], 1)
+  }
+  if (pi0 <= 0) {
+    stop("estimated pi0 <= 0 (the smoother extrapolated below zero); use method = \"bootstrap\" or a different lambda", call. = FALSE)
+  }
+  pi0
+}
 
 #' Internal helper: Mt Result
 #' @noRd
@@ -167,31 +200,29 @@ NULL
 #' @return A \code{morie_rich_result} list (see
 #'   \code{morie_multiple_testing}).
 #' @examples
-#' if (requireNamespace("mutoss", quietly = TRUE)) {
-#'   set.seed(1)
-#'   # 60 tests: 50 null (uniform p) + 10 strong signals near zero.
-#'   p <- c(runif(50), runif(10, 0, 0.005))
+#' set.seed(1)
+#' # 60 tests: 50 null (uniform p) + 10 strong signals near zero.
+#' p <- c(runif(50), runif(10, 0, 0.005))
 #'
-#'   res <- bonferroni(p, alpha = 0.05)
-#'   res                       # rich print: method, alpha, tests, rejected
+#' res <- bonferroni(p, alpha = 0.05)
+#' res                       # rich print: method, alpha, tests, rejected
 #'
-#'   # The result carries the full adjusted-p and rejection vectors.
-#'   head(res$adjusted)        # each raw p multiplied by n (capped at 1)
-#'   res$n_rejected            # how many survive alpha after correction
-#'   which(res$rejected)       # indices declared significant
+#' # The result carries the full adjusted-p and rejection vectors.
+#' head(res$adjusted)        # each raw p multiplied by n (capped at 1)
+#' res$n_rejected            # how many survive alpha after correction
+#' which(res$rejected)       # indices declared significant
 #'
-#'   # `alpha` sets the rejection threshold; stricter alpha rejects fewer.
-#'   bonferroni(p, alpha = 0.01)$n_rejected
+#' # `alpha` sets the rejection threshold; stricter alpha rejects fewer.
+#' bonferroni(p, alpha = 0.01)$n_rejected
 #'
-#'   # `labels` names each test so the output is self-documenting.
-#'   bonferroni(c(0.001, 0.02, 0.3),
-#'              labels = c("geneA", "geneB", "geneC"))$labels
+#' # `labels` names each test so the output is self-documenting.
+#' bonferroni(c(0.001, 0.02, 0.3),
+#'            labels = c("geneA", "geneB", "geneC"))$labels
 #'
-#'   # Bonferroni is the most conservative FWER method -- compare to Holm/BH.
-#'   c(bonferroni = bonferroni(p)$n_rejected,
-#'     holm       = holm(p)$n_rejected,
-#'     BH         = benjamini_hochberg(p)$n_rejected)
-#' }
+#' # Bonferroni is the most conservative FWER method -- compare to Holm/BH.
+#' c(bonferroni = bonferroni(p)$n_rejected,
+#'   holm       = holm(p)$n_rejected,
+#'   BH         = benjamini_hochberg(p)$n_rejected)
 #' @export
 bonferroni <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -209,20 +240,18 @@ bonferroni <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' if (requireNamespace("mutoss", quietly = TRUE)) {
-#'   p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+#' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 #'
-#'   res <- sidak(p)
-#'   res$adjusted              # 1 - (1 - p)^m, slightly below Bonferroni
-#'   res$n_rejected
+#' res <- sidak(p)
+#' res$adjusted              # 1 - (1 - p)^m, slightly below Bonferroni
+#' res$n_rejected
 #'
-#'   # Less conservative than Bonferroni under independence:
-#'   rbind(sidak      = sidak(p)$adjusted,
-#'         bonferroni = bonferroni(p)$adjusted)
+#' # Less conservative than Bonferroni under independence:
+#' rbind(sidak      = sidak(p)$adjusted,
+#'       bonferroni = bonferroni(p)$adjusted)
 #'
-#'   # alpha + labels behave as in bonferroni().
-#'   sidak(p, alpha = 0.01, labels = paste0("H", seq_along(p)))$rejected
-#' }
+#' # alpha + labels behave as in bonferroni().
+#' sidak(p, alpha = 0.01, labels = paste0("H", seq_along(p)))$rejected
 #' @export
 sidak <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -239,22 +268,20 @@ sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' if (requireNamespace("mutoss", quietly = TRUE)) {
-#'   set.seed(1)
-#'   p <- c(runif(30), runif(5, 0, 0.005))
+#' set.seed(1)
+#' p <- c(runif(30), runif(5, 0, 0.005))
 #'
-#'   res <- holm(p)
-#'   res$n_rejected
-#'   head(res$adjusted)
+#' res <- holm(p)
+#' res$n_rejected
+#' head(res$adjusted)
 #'
-#'   # Holm is uniformly more powerful than Bonferroni (rejects at least as
-#'   # many), while still controlling the family-wise error rate:
-#'   c(holm = holm(p)$n_rejected, bonferroni = bonferroni(p)$n_rejected)
+#' # Holm is uniformly more powerful than Bonferroni (rejects at least as
+#' # many), while still controlling the family-wise error rate:
+#' c(holm = holm(p)$n_rejected, bonferroni = bonferroni(p)$n_rejected)
 #'
-#'   # alpha + labels as usual.
-#'   holm(c(0.001, 0.01, 0.04), alpha = 0.05,
-#'        labels = c("A", "B", "C"))$rejected
-#' }
+#' # alpha + labels as usual.
+#' holm(c(0.001, 0.01, 0.04), alpha = 0.05,
+#'      labels = c("A", "B", "C"))$rejected
 #' @export
 holm <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -295,20 +322,18 @@ hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' if (requireNamespace("mutoss", quietly = TRUE)) {
-#'   set.seed(1)
-#'   p <- c(runif(30), runif(5, 0, 0.005))
+#' set.seed(1)
+#' p <- c(runif(30), runif(5, 0, 0.005))
 #'
-#'   res <- hommel(p)
-#'   res$n_rejected
-#'   head(res$adjusted)
+#' res <- hommel(p)
+#' res$n_rejected
+#' head(res$adjusted)
 #'
-#'   # Hommel is the most powerful of the stats::p.adjust FWER methods
-#'   # (>= Hochberg), at higher computational cost.
-#'   c(hommel = hommel(p)$n_rejected, hochberg = hochberg(p)$n_rejected)
+#' # Hommel is the most powerful of the stats::p.adjust FWER methods
+#' # (>= Hochberg), at higher computational cost.
+#' c(hommel = hommel(p)$n_rejected, hochberg = hochberg(p)$n_rejected)
 #'
-#'   hommel(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
-#' }
+#' hommel(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
 #' @export
 hommel <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -319,8 +344,7 @@ hommel <- function(p_values, alpha = 0.05, labels = NULL) {
 #' Holm-Sidak step-down procedure
 #'
 #' Step-down Holm with Sidak's closed-form adjustment per step;
-#' equivalent to \code{mutoss::SidakSD} when that package is
-#' installed.
+#' native closed form, equivalent to \code{mutoss::SidakSD}.
 #'
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
@@ -365,26 +389,24 @@ holm_sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' if (requireNamespace("mutoss", quietly = TRUE)) {
-#'   set.seed(1)
-#'   # 100 tests, 20 true effects: FDR control keeps more power than FWER.
-#'   p <- c(runif(80), runif(20, 0, 0.005))
+#' set.seed(1)
+#' # 100 tests, 20 true effects: FDR control keeps more power than FWER.
+#' p <- c(runif(80), runif(20, 0, 0.005))
 #'
-#'   res <- benjamini_hochberg(p)
-#'   res$n_rejected
-#'   head(res$adjusted)          # BH-adjusted q-values
-#'   sum(res$rejected)           # discoveries at the default alpha = 0.05
+#' res <- benjamini_hochberg(p)
+#' res$n_rejected
+#' head(res$adjusted)          # BH-adjusted q-values
+#' sum(res$rejected)           # discoveries at the default alpha = 0.05
 #'
-#'   # BH controls the false discovery rate, so it rejects far more than the
-#'   # FWER methods on the same data:
-#'   c(BH = benjamini_hochberg(p)$n_rejected,
-#'     holm = holm(p)$n_rejected,
-#'     bonferroni = bonferroni(p)$n_rejected)
+#' # BH controls the false discovery rate, so it rejects far more than the
+#' # FWER methods on the same data:
+#' c(BH = benjamini_hochberg(p)$n_rejected,
+#'   holm = holm(p)$n_rejected,
+#'   bonferroni = bonferroni(p)$n_rejected)
 #'
-#'   # `bh()` is a shorthand alias; `alpha` sets the FDR level.
-#'   identical(bh(p)$adjusted, benjamini_hochberg(p)$adjusted)
-#'   benjamini_hochberg(p, alpha = 0.10)$n_rejected
-#' }
+#' # `bh()` is a shorthand alias; `alpha` sets the FDR level.
+#' identical(bh(p)$adjusted, benjamini_hochberg(p)$adjusted)
+#' benjamini_hochberg(p, alpha = 0.10)$n_rejected
 #' @export
 benjamini_hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -403,22 +425,20 @@ bh <- benjamini_hochberg
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' if (requireNamespace("qvalue", quietly = TRUE)) {
-#'   set.seed(1)
-#'   p <- c(runif(80), runif(20, 0, 0.005))
+#' set.seed(1)
+#' p <- c(runif(80), runif(20, 0, 0.005))
 #'
-#'   res <- benjamini_yekutieli(p)
-#'   res$n_rejected
-#'   head(res$adjusted)
+#' res <- benjamini_yekutieli(p)
+#' res$n_rejected
+#' head(res$adjusted)
 #'
-#'   # BY controls FDR under ARBITRARY dependence, so it is more conservative
-#'   # than BH (which assumes independence / positive dependence):
-#'   c(BY = benjamini_yekutieli(p)$n_rejected,
-#'     BH = benjamini_hochberg(p)$n_rejected)
+#' # BY controls FDR under ARBITRARY dependence, so it is more conservative
+#' # than BH (which assumes independence / positive dependence):
+#' c(BY = benjamini_yekutieli(p)$n_rejected,
+#'   BH = benjamini_hochberg(p)$n_rejected)
 #'
-#'   benjamini_yekutieli(p, alpha = 0.10,
-#'                       labels = paste0("t", seq_along(p)))$n_rejected
-#' }
+#' benjamini_yekutieli(p, alpha = 0.10,
+#'                     labels = paste0("t", seq_along(p)))$n_rejected
 #' @export
 benjamini_yekutieli <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -433,72 +453,58 @@ by_fdr <- benjamini_yekutieli
 #' Storey q-value procedure (adaptive FDR)
 #'
 #' Estimates the proportion of true null hypotheses (pi0) and
-#' tightens the BH thresholds by that factor. Delegates to
-#' \code{qvalue::qvalue} (Bioconductor) when installed; otherwise
-#' falls back to an inline Storey-style cutoff so the wrapper keeps
-#' working on CRAN-only installs.
+#' tightens the BH thresholds by that factor. Native implementation of
+#' Storey and Tibshirani (2003) that reproduces \code{qvalue::qvalue}
+#' with its defaults: pi0 from a cubic smoothing spline (3 df, via
+#' \code{stats::smooth.spline}) through \eqn{\hat\pi_0(\lambda)} over the
+#' grid \code{seq(0.05, 0.95, 0.05)}, read at the largest lambda, and
+#' q-values \eqn{q_{(i)} = \hat\pi_0 \min_{j \ge i} \min(1, m p_{(j)} / j)}.
 #'
 #' @inheritParams bonferroni
-#' @param lambda_param Tuning parameter in (0, 1) for the pi0
-#'   estimator.
-#' @return An object of class \code{"morie_multiple_testing_result"}.
+#' @param lambda_param Tuning value(s) in `[0, 1)` for the pi0
+#'   estimator, as qvalue's \code{lambda}: a single value gives the
+#'   cutoff estimator \eqn{N(\lambda)/(m(1-\lambda))} (\eqn{N(\lambda)} = number of p-values \eqn{\ge \lambda}); a grid of at
+#'   least four values (the default) gives the smoother estimator.
+#' @return An object of class \code{"morie_multiple_testing_result"}
+#'   with the q-values in \code{adjusted}, plus \code{pi0} and
+#'   \code{lambda_param}.
+#' @references Storey, J. D. and Tibshirani, R. (2003). Statistical
+#'   significance for genomewide studies. \emph{PNAS} 100, 9440-9445.
 #' @examples
-#' if (requireNamespace("qvalue", quietly = TRUE)) {
-#'   set.seed(1)
-#'   p <- c(runif(80), runif(20, 0, 0.005))
+#' set.seed(1)
+#' p <- c(runif(80), runif(20, 0, 0.005))
 #'
-#'   res <- storey_q(p)
-#'   res$pi0                     # estimated proportion of true nulls
-#'   head(res$adjusted)          # q-values
-#'   res$n_rejected
+#' res <- storey_q(p)
+#' res$pi0                     # estimated proportion of true nulls
+#' head(res$adjusted)          # q-values
+#' res$n_rejected
 #'
-#'   # `lambda_param` tunes the pi0 estimator; different lambda, different pi0.
-#'   storey_q(p, lambda_param = 0.5)$pi0
-#'   storey_q(p, lambda_param = 0.8)$pi0
+#' # A single `lambda_param` gives the cutoff estimator at that lambda.
+#' storey_q(p, lambda_param = 0.5)$pi0
+#' storey_q(p, lambda_param = 0.8)$pi0
 #'
-#'   # Adaptive FDR rejects at least as many as BH (pi0 <= 1 tightens BH):
-#'   c(storey = storey_q(p)$n_rejected, BH = benjamini_hochberg(p)$n_rejected)
-#' }
+#' # Adaptive FDR rejects at least as many as BH (pi0 <= 1 tightens BH):
+#' c(storey = storey_q(p)$n_rejected, BH = benjamini_hochberg(p)$n_rejected)
 #' @export
-storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
+storey_q <- function(p_values, alpha = 0.05,
+                     lambda_param = seq(0.05, 0.95, 0.05),
                      labels = NULL) {
   p <- .mt_check_p(p_values)
   m <- length(p)
-  if (.mt_have_qvalue()) {
-    qres <- tryCatch(
-      qvalue::qvalue(p, lambda = lambda_param),
-      error = function(e) NULL
-    )
-    if (!is.null(qres)) {
-      pi0 <- min(as.numeric(qres$pi0), 1.0)
-      adj <- as.numeric(qres$qvalues)
-      note <- sprintf(
-        "Storey pi0 (qvalue) is %.3f (lambda=%.2f).",
-        pi0, lambda_param
-      )
-      out <- .mt_adjusted(sprintf("storey_q(pi0=%.3f)", pi0),
-                          p, alpha, adj, labels, note = note)
-      out$pi0 <- pi0
-      out$lambda_param <- lambda_param
-      return(out)
-    }
-  }
+  pi0 <- .mt_pi0est(p, lambda = lambda_param)
+  # qvalue::qvalue (pfdr = FALSE): step-up from the largest p-value
+  i <- m:1L
+  o <- order(p, decreasing = TRUE)
+  ro <- order(o)
+  adj <- pi0 * pmin(1, cummin(p[o] * m / i))[ro]
 
-  # Inline fallback (Storey-style cutoff at lambda).
-  pi0 <- sum(p > lambda_param) / (m * (1.0 - lambda_param))
-  pi0 <- min(pi0, 1.0)
-  ord <- order(p)
-  sp <- p[ord]
-  q_sorted <- sp * pi0 * m / seq_len(m)
-  for (i in seq(m - 1L, 1L, by = -1L)) {
-    q_sorted[i] <- min(q_sorted[i], q_sorted[i + 1L])
+  lam_txt <- if (length(lambda_param) == 1L) {
+    sprintf("lambda=%.2f", lambda_param)
+  } else {
+    sprintf("smoother over %d lambdas in [%.2f, %.2f]",
+            length(lambda_param), min(lambda_param), max(lambda_param))
   }
-  q_sorted <- pmin(q_sorted, 1.0)
-  adj <- numeric(m)
-  adj[ord] <- q_sorted
-
-  note <- sprintf("Storey pi0 estimate is %.3f (lambda=%.2f).",
-                  pi0, lambda_param)
+  note <- sprintf("Storey pi0 estimate is %.3f (%s).", pi0, lam_txt)
   out <- .mt_adjusted(sprintf("storey_q(pi0=%.3f)", pi0),
                       p, alpha, adj, labels, note = note)
   out$pi0 <- pi0
@@ -538,43 +544,27 @@ storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
 
 #' Fisher's method for combining independent p-values
 #'
-#' Delegates to \code{poolr::fisher} when installed; otherwise
-#' computes the chi-square statistic inline.
+#' Native closed form: \eqn{X^2 = -2\sum \log p_i} on \eqn{2k} df
+#' (reproduces \code{poolr::fisher} with \code{adjust = "none"}).
 #'
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' if (requireNamespace("poolr", quietly = TRUE)) {
-#'   # Combine several independent tests into one global p-value.
-#'   res <- fisher_combined(c(0.001, 0.6, 0.5))
-#'   res                          # rich print: statistic, df, combined p
-#'   res$p_value                  # the combined p-value
-#'   res$statistic                # chi-square = -2 * sum(log p)
+#' # Combine several independent tests into one global p-value.
+#' res <- fisher_combined(c(0.001, 0.6, 0.5))
+#' res                          # rich print: statistic, df, combined p
+#' res$p_value                  # the combined p-value
+#' res$statistic                # chi-square = -2 * sum(log p)
 #'
-#'   # One small p can drive the combination significant.
-#'   fisher_combined(c(0.0001, 0.9, 0.8, 0.7))$p_value
+#' # One small p can drive the combination significant.
+#' fisher_combined(c(0.0001, 0.9, 0.8, 0.7))$p_value
 #'
-#'   # All-null inputs stay non-significant.
-#'   fisher_combined(c(0.4, 0.5, 0.6))$p_value
-#' }
+#' # All-null inputs stay non-significant.
+#' fisher_combined(c(0.4, 0.5, 0.6))$p_value
 #' @export
 fisher_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
   p <- pmax(p, 1e-300)
-  if (.mt_have_poolr()) {
-    pres <- tryCatch(poolr::fisher(p), error = function(e) NULL)
-    if (!is.null(pres)) {
-      chi2 <- as.numeric(pres$statistic)
-      p_comb <- as.numeric(pres$p)
-      df <- 2L * length(p)
-      interp <- sprintf(
-        "Fisher's combination of %d p-values yields chi-square=%.4f on %d df with combined p=%.4g.",
-        length(p), chi2, df, p_comb
-      )
-      return(.mt_combine_result("fisher", chi2, p_comb, interp,
-                                list(`df` = df)))
-    }
-  }
   chi2 <- -2.0 * sum(log(p))
   p_comb <- stats::pchisq(chi2, df = 2L * length(p), lower.tail = FALSE)
   interp <- sprintf(
@@ -587,45 +577,32 @@ fisher_combined <- function(p_values) {
 
 #' Stouffer's z-score method
 #'
-#' Delegates to \code{poolr::stouffer} when installed and no weights
-#' are supplied; otherwise computes the weighted z-sum inline.
+#' Native closed form: \eqn{Z = \sum w_i \Phi^{-1}(1 - p_i) /
+#' \sqrt{\sum w_i^2}} (unit weights by default, which reproduces
+#' \code{poolr::stouffer} with \code{adjust = "none"}).
 #'
 #' @inheritParams bonferroni
 #' @param weights Optional non-negative weights (any scale).
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' if (requireNamespace("poolr", quietly = TRUE)) {
-#'   p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+#' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 #'
-#'   res <- stouffer_combined(p)
-#'   res$statistic                # combined Z
-#'   res$p_value
+#' res <- stouffer_combined(p)
+#' res$statistic                # combined Z
+#' res$p_value
 #'
-#'   # `weights` up-weights more trustworthy / larger studies.
-#'   w <- c(10, 8, 5, 5, 2, 1)
-#'   stouffer_combined(p, weights = w)$p_value
+#' # `weights` up-weights more trustworthy / larger studies.
+#' w <- c(10, 8, 5, 5, 2, 1)
+#' stouffer_combined(p, weights = w)$p_value
 #'
-#'   # Compare Fisher (log-based) vs Stouffer (z-based) on the same inputs.
-#'   c(stouffer = stouffer_combined(p)$p_value,
-#'     fisher   = fisher_combined(p)$p_value)
-#' }
+#' # Compare Fisher (log-based) vs Stouffer (z-based) on the same inputs.
+#' c(stouffer = stouffer_combined(p)$p_value,
+#'   fisher   = fisher_combined(p)$p_value)
 #' @export
 stouffer_combined <- function(p_values, weights = NULL) {
   p <- .mt_check_p(p_values)
   p <- pmin(pmax(p, 1e-300), 1 - 1e-15)
-  if (is.null(weights) && .mt_have_poolr()) {
-    pres <- tryCatch(poolr::stouffer(p), error = function(e) NULL)
-    if (!is.null(pres)) {
-      z_comb <- as.numeric(pres$statistic)
-      p_comb <- as.numeric(pres$p)
-      interp <- sprintf(
-        "Stouffer's combination of %d p-values gives Z=%.4f and combined p=%.4g.",
-        length(p), z_comb, p_comb
-      )
-      return(.mt_combine_result("stouffer", z_comb, p_comb, interp))
-    }
-  }
-  z <- stats::qnorm(1 - p)
+  z <- stats::qnorm(p, lower.tail = FALSE)
   if (is.null(weights)) {
     z_comb <- sum(z) / sqrt(length(z))
   } else {
@@ -642,40 +619,27 @@ stouffer_combined <- function(p_values, weights = NULL) {
 
 #' Tippett's minimum-p method
 #'
-#' Delegates to \code{poolr::tippett} when installed; otherwise
-#' computes the closed form inline.
+#' Native closed form: statistic \eqn{\min p}, combined
+#' \eqn{p = 1 - (1 - \min p)^k} (reproduces \code{poolr::tippett} with
+#' \code{adjust = "none"}).
 #'
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' if (requireNamespace("poolr", quietly = TRUE)) {
-#'   p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+#' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 #'
-#'   res <- tippett_combined(p)
-#'   res$statistic                # the minimum p-value
-#'   res$p_value                  # 1 - (1 - min p)^m
+#' res <- tippett_combined(p)
+#' res$statistic                # the minimum p-value
+#' res$p_value                  # 1 - (1 - min p)^m
 #'
-#'   # Tippett is powerful when a single strong signal is enough (min-p);
-#'   # contrast with Fisher, which aggregates evidence across all tests.
-#'   c(tippett = tippett_combined(p)$p_value,
-#'     fisher  = fisher_combined(p)$p_value)
-#' }
+#' # Tippett is powerful when a single strong signal is enough (min-p);
+#' # contrast with Fisher, which aggregates evidence across all tests.
+#' c(tippett = tippett_combined(p)$p_value,
+#'   fisher  = fisher_combined(p)$p_value)
 #' @export
 tippett_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
   m <- length(p)
-  if (.mt_have_poolr()) {
-    pres <- tryCatch(poolr::tippett(p), error = function(e) NULL)
-    if (!is.null(pres)) {
-      mn <- as.numeric(pres$statistic)
-      p_comb <- as.numeric(pres$p)
-      interp <- sprintf(
-        "Tippett's minimum-p across %d tests is %.4g, giving combined p=%.4g.",
-        m, mn, p_comb
-      )
-      return(.mt_combine_result("tippett", mn, p_comb, interp))
-    }
-  }
   mn <- min(p)
   p_comb <- 1.0 - (1.0 - mn) ^ m
   interp <- sprintf(
@@ -690,19 +654,17 @@ tippett_combined <- function(p_values) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' if (requireNamespace("mutoss", quietly = TRUE)) {
-#'   p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+#' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 #'
-#'   res <- simes_combined(p)
-#'   res$p_value                  # Simes global-null p (min of sorted p * m/i)
+#' res <- simes_combined(p)
+#' res$p_value                  # Simes global-null p (min of sorted p * m/i)
 #'
-#'   # Simes is a less conservative global-null test than Bonferroni's min:
-#'   c(simes = simes_combined(p)$p_value,
-#'     bonferroni_min = min(bonferroni(p)$adjusted))
+#' # Simes is a less conservative global-null test than Bonferroni's min:
+#' c(simes = simes_combined(p)$p_value,
+#'   bonferroni_min = min(bonferroni(p)$adjusted))
 #'
-#'   # A single very small p makes the global null significant.
-#'   simes_combined(c(0.0005, 0.4, 0.6, 0.8))$p_value
-#' }
+#' # A single very small p makes the global null significant.
+#' simes_combined(c(0.0005, 0.4, 0.6, 0.8))$p_value
 #' @export
 simes_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -892,10 +854,8 @@ fallback_procedure <- function(p_values, weights, alpha = 0.05,
 #' @return A \code{morie_rich_result} list with one stage entry per
 #'   family and an \code{overall_rejected} logical vector.
 #' @examples
-#' if (requireNamespace("qvalue", quietly = TRUE)) {
-#'   res <- hierarchical_bonferroni(list(c(0.4, 0.5), c(0.001, 0.002)))
-#'   str(res)
-#' }
+#' res <- hierarchical_bonferroni(list(c(0.4, 0.5), c(0.001, 0.002)))
+#' str(res)
 #' @export
 hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
                                     propagate_alpha = TRUE) {
@@ -984,78 +944,37 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
 # Utilities
 # ---------------------------------------------------------------------------
 
-#' Natural cubic smoothing spline with fixed effective df
-#'
-#' Green and Silverman (1994, sec. 2.3): g = (I + a K)^-1 y with
-#' K = Q R^-1 Q', a solved so that the trace equals df.
-#' @noRd
-.mt_smoothing_spline_df <- function(x, y, df) {
-  n <- length(x)
-  h <- diff(x)
-  Q <- matrix(0, n, n - 2)
-  R <- matrix(0, n - 2, n - 2)
-  for (j in 2:(n - 1)) {
-    k <- j - 1
-    Q[j - 1, k] <- 1 / h[j - 1]
-    Q[j, k] <- -1 / h[j - 1] - 1 / h[j]
-    Q[j + 1, k] <- 1 / h[j]
-    R[k, k] <- (h[j - 1] + h[j]) / 3
-    if (k < n - 2) R[k, k + 1] <- R[k + 1, k] <- h[j] / 6
-  }
-  K <- Q %*% solve(R, t(Q))
-  sm <- function(a) solve(diag(n) + a * K)
-  lo <- -30
-  hi <- 30
-  for (it in 1:200) {
-    mid <- (lo + hi) / 2
-    if (sum(diag(sm(exp(mid)))) > df) lo <- mid else hi <- mid
-  }
-  as.numeric(sm(exp((lo + hi) / 2)) %*% y)
-}
-
-
 #' Estimate the proportion of true null hypotheses (pi0)
 #'
-#' Delegates to \code{qvalue::pi0est} (Bioconductor) when installed
-#' and \code{method = "storey"}. Otherwise computes the cutoff-based
-#' or bootstrap-based estimator inline.
+#' Native estimators. \code{"storey"} is Storey and Tibshirani (2003):
+#' a cubic smoothing spline with 3 df (\code{stats::smooth.spline})
+#' through \eqn{\hat\pi_0(\lambda)} over \code{seq(0.05, 0.95, 0.05)},
+#' read at the largest lambda; \code{"bootstrap"} is the
+#' Storey-Taylor-Siegmund (2004) MSE-minimising lambda. Both reproduce
+#' \code{qvalue::pi0est} (\code{pi0.method = "smoother"} /
+#' \code{"bootstrap"}). \code{"two_step"} is the Benjamini-Krieger-Yekutieli
+#' (2006) stage-one estimator.
 #'
 #' @inheritParams bonferroni
 #' @param method One of \code{"storey"}, \code{"bootstrap"}, or
 #'   \code{"two_step"}.
 #' @return A scalar pi0 estimate in `[0, 1]`.
 #' @examples
-#' if (requireNamespace("qvalue", quietly = TRUE)) {
-#'   set.seed(1)
-#'   p <- c(runif(80), runif(20, 0, 0.005))
-#'   estimate_pi0(p, method = "storey")
-#' }
+#' set.seed(1)
+#' p <- c(runif(80), runif(20, 0, 0.005))
+#' estimate_pi0(p, method = "storey")
 #' @export
 estimate_pi0 <- function(p_values,
                          method = c("storey", "bootstrap", "two_step")) {
   method <- match.arg(method)
   p <- .mt_check_p(p_values)
   m <- length(p)
-  lambdas <- seq(0.05, 0.95, by = 0.05)  # qvalue's default grid
-  pi0_lam <- vapply(lambdas, function(lam) sum(p >= lam) / (m * (1 - lam)), numeric(1))
 
   if (method == "storey") {
-    # Storey and Tibshirani (2003): a cubic smoothing spline with 3 df
-    # through pi0(lambda), read at the largest lambda (qvalue's
-    # pi0.method = "smoother")
-    fit <- .mt_smoothing_spline_df(lambdas, pi0_lam, 3)
-    if (fit[length(fit)] <= 0)
-      stop("estimated pi0 <= 0 (the smoother extrapolated below zero); use method = \"bootstrap\"", call. = FALSE)
-    return(min(fit[length(fit)], 1.0))
+    return(.mt_pi0est(p, pi0_method = "smoother"))
   }
-
   if (method == "bootstrap") {
-    # Storey, Taylor and Siegmund (2004): the lambda minimising the
-    # closed-form MSE against the 10% quantile of pi0(lambda)
-    min_pi0 <- stats::quantile(pi0_lam, 0.10, names = FALSE)
-    W <- vapply(lambdas, function(lam) sum(p >= lam), numeric(1))
-    mse <- (W / (m^2 * (1 - lambdas)^2)) * (1 - W / m) + (pi0_lam - min_pi0)^2
-    return(min(pi0_lam[mse == min(mse)], 1.0))
+    return(.mt_pi0est(p, pi0_method = "bootstrap"))
   }
 
   # two_step: Benjamini, Krieger and Yekutieli (2006), stage-one BH at
@@ -1083,12 +1002,10 @@ estimate_pi0 <- function(p_values,
 #' @return A named \code{list} of adjusted p-values with method metadata (as built by the
 #' selected adjustment method).
 #' @examples
-#' if (requireNamespace("poolr", quietly = TRUE)) {
-#'   set.seed(1)
-#'   p <- c(runif(20), runif(5, 0, 0.005))
-#'   res <- adjust_p_values(p, method = "bh")
-#'   res$n_rejected
-#' }
+#' set.seed(1)
+#' p <- c(runif(20), runif(5, 0, 0.005))
+#' res <- adjust_p_values(p, method = "bh")
+#' res$n_rejected
 #' @export
 adjust_p_values <- function(p_values, method = "bh", alpha = 0.05,
                             labels = NULL) {
@@ -1118,20 +1035,21 @@ adjust_p_values <- function(p_values, method = "bh", alpha = 0.05,
 
 #' Effective number of independent tests from a correlation matrix
 #'
-#' Delegates to \code{poolr::meff} when installed (\code{poolr}
-#' implements Galwey, Li-Ji, and Nyholt). Otherwise computes the
-#' chosen estimator inline.
+#' Native eigenvalue closed forms that reproduce \code{poolr::meff}
+#' (methods \code{"galwey"}, \code{"liji"}, \code{"nyholt"}), including
+#' its conventions: Galwey sets negative eigenvalues to zero, Li-Ji
+#' works on \eqn{|\lambda_i| + \sqrt{\epsilon}}, Nyholt uses all
+#' eigenvalues, and the estimate is rounded down to an integer.
 #'
 #' @param correlation_matrix Square symmetric correlation matrix.
 #' @param method One of \code{"galwey"} (Galwey 2009),
 #'   \code{"li_ji"} (Li and Ji 2005), or \code{"nyholt"} (Nyholt 2004).
-#' @return Effective number of tests (>= 1).
+#' @return Effective number of tests: \code{floor()} of the estimator,
+#'   bounded below by 1.
 #' @examples
-#' if (requireNamespace("poolr", quietly = TRUE)) {
-#'   set.seed(1)
-#'   X <- matrix(rnorm(200), ncol = 5)
-#'   n_effective_tests(stats::cor(X))
-#' }
+#' set.seed(1)
+#' X <- matrix(rnorm(200), ncol = 5)
+#' n_effective_tests(stats::cor(X))
 #' @export
 n_effective_tests <- function(correlation_matrix,
                               method = c("galwey", "li_ji", "nyholt")) {
@@ -1144,39 +1062,24 @@ n_effective_tests <- function(correlation_matrix,
     stop("correlation_matrix must be square")
   }
 
-  if (.mt_have_poolr()) {
-    poolr_method <- switch(method,
-      galwey = "galwey",
-      li_ji  = "liji",
-      nyholt = "nyholt"
-    )
-    out <- tryCatch(
-      as.numeric(poolr::meff(R = R, method = poolr_method)),
-      error = function(e) NULL
-    )
-    if (!is.null(out) && is.finite(out)) {
-      return(max(1.0, out))
-    }
-  }
-
   evs <- eigen(R, symmetric = TRUE, only.values = TRUE)$values
-  evs <- evs[evs > 0]
-  m <- length(evs)
-  if (m == 0L) {
+  if (!length(evs) || all(evs == 0)) {
     return(1.0)
   }
-
+  k <- length(evs)
   if (method == "galwey") {
-    m_eff <- (sum(sqrt(evs))) ^ 2 / sum(evs)
+    # Galwey (2009); negative eigenvalues set to zero as in poolr::meff
+    evs[evs < 0] <- 0
+    m_eff <- sum(sqrt(evs))^2 / sum(evs)
   } else if (method == "li_ji") {
-    # Li & Ji (2005): f(x) = I(x>=1) + (x - floor(x)); summed over
-    # all eigenvalues, INCLUDING the fractional part of evs >= 1.
-    m_eff <- sum(evs >= 1) + sum(evs - floor(evs))
+    # Li and Ji (2005): f(x) = I(x >= 1) + (x - floor(x)), on |ev| + sqrt(eps)
+    a <- abs(evs) + sqrt(.Machine$double.eps)
+    m_eff <- sum((a >= 1) + (a - floor(a)))
   } else {
-    var_e <- stats::var(evs)
-    m_eff <- 1 + (m - 1) * (1 - var_e / m)
+    # Nyholt (2004)
+    m_eff <- 1 + (k - 1) * (1 - stats::var(evs) / k)
   }
-  max(1.0, m_eff)
+  max(1.0, floor(m_eff))
 }
 
 

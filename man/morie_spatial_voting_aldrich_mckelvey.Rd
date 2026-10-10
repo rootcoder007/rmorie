@@ -15,7 +15,7 @@ placements.  \code{NA} entries are treated as missing.}
 \value{
 A list with components \code{zhat} (stimulus positions), \code{alpha},
 \code{beta}, \code{weights}, \code{iterations} (\code{NA}, the solution is closed form),
-\code{converged}, and \code{engine} ("basicspace" or "native").
+\code{converged}, and \code{engine} (always "native").
 }
 \description{
 Recovers latent stimulus positions from perceptual placement data by
@@ -34,11 +34,14 @@ projection onto the columns of \eqn{X_i}, so \eqn{\hat z} is the
 eigenvector of \eqn{\sum_i (I - P_i)} with the smallest eigenvalue
 orthogonal to the constant.  Respondents with a missing placement, or
 who place every stimulus at the same point, are left out, as
-\code{basicspace::aldmck} does; with \code{basicspace} installed it computes the
-stimuli, otherwise the same closed form is evaluated here (the two agree
-to rounding).  Positions are standardised to mean 0 and sd 1 and the
+\code{basicspace::aldmck} does.  The closed form is evaluated natively; on
+integer placement scales it equals \code{basicspace::aldmck}'s stimuli
+(standardised) to rounding (\eqn{< 10^{-15}}).  \code{basicspace} truncates
+every placement to an integer (\code{as.integer}) before scaling, so on
+non-integer data the two differ and this function uses the values as
+given.  Positions are standardised to mean 0 and sd 1 and the
 first stimulus is put on the left.  The respondent intercepts and slopes
-are, on either path, the per-respondent least squares regression of the
+are the per-respondent least squares regression of the
 reported placements on those positions, so they are defined for every
 respondent with at least two placements (\code{basicspace} itself reports
 them only for respondents it scales against a self-placement, which

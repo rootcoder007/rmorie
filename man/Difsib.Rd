@@ -41,7 +41,8 @@ pstar, correction, n, method.
 Source: \code{SIBTEST} in the CRAN package \pkg{mirt} (mirt 1.46.1,
 \code{R/SIBTEST.R}), implementing Shealy, R. and Stout, W. (1993), Psychometrika 58,
 159-194. (\code{difR::sibTest} is a thin wrapper that delegates to it.) The 1993
-paper is paywalled here; the package source states the estimator explicitly. Grouping
+paper is paywalled here; the package source states the estimator explicitly. The
+estimator is computed natively here; \pkg{mirt} is not called. Grouping
 examinees on the matching score k: \code{pstar_k = n_k / sum n_k}, \code{beta = sum_k
 pstar_k (Ystar_R,k - Ystar_F,k)}, \code{sigma = sqrt(sum_k pstar_k^2 (s2_F,k/n_F,k +
 s2_R,k/n_R,k))}, \code{X2 = (beta/sigma)^2} on one degree of freedom.
@@ -61,12 +62,8 @@ end levels where k-1 or k+1 does not exist.  The default is FALSE,
 which is the estimator this row specifies.
 }
 \examples{
-\donttest{
-if (requireNamespace("mirt", quietly = TRUE)) {
-  set.seed(1)
-  m <- rep(0:2, each = 20)
-  g <- rep(c("r", "f"), 30)
-  Difsib(rbinom(60, 1, 0.5), g, matching = m)$beta
-}
-}
+set.seed(1)
+m <- rep(0:2, each = 20)
+g <- rep(c("r", "f"), 30)
+Difsib(rbinom(60, 1, 0.5), g, matching = m)$beta
 }

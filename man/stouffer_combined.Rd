@@ -15,23 +15,22 @@ stouffer_combined(p_values, weights = NULL)
 An object of class \code{"morie_multiple_testing_result"}.
 }
 \description{
-Delegates to \code{poolr::stouffer} when installed and no weights
-are supplied; otherwise computes the weighted z-sum inline.
+Native closed form: \eqn{Z = \sum w_i \Phi^{-1}(1 - p_i) /
+\sqrt{\sum w_i^2}} (unit weights by default, which reproduces
+\code{poolr::stouffer} with \code{adjust = "none"}).
 }
 \examples{
-if (requireNamespace("poolr", quietly = TRUE)) {
-  p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 
-  res <- stouffer_combined(p)
-  res$statistic                # combined Z
-  res$p_value
+res <- stouffer_combined(p)
+res$statistic                # combined Z
+res$p_value
 
-  # `weights` up-weights more trustworthy / larger studies.
-  w <- c(10, 8, 5, 5, 2, 1)
-  stouffer_combined(p, weights = w)$p_value
+# `weights` up-weights more trustworthy / larger studies.
+w <- c(10, 8, 5, 5, 2, 1)
+stouffer_combined(p, weights = w)$p_value
 
-  # Compare Fisher (log-based) vs Stouffer (z-based) on the same inputs.
-  c(stouffer = stouffer_combined(p)$p_value,
-    fisher   = fisher_combined(p)$p_value)
-}
+# Compare Fisher (log-based) vs Stouffer (z-based) on the same inputs.
+c(stouffer = stouffer_combined(p)$p_value,
+  fisher   = fisher_combined(p)$p_value)
 }

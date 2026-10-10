@@ -3,9 +3,10 @@
 # morie weights -- survey-weight construction, calibration, replication,
 # trimming, and diagnostics.
 #
-# R port of src/morie/weights.py. Hand-rolls raking IPF and replicate-weight
-# constructors in base R; wraps `survey::calibrate` and
-# `survey::as.svrepdesign` when those packages are available.
+# R port of src/morie/weights.py. Raking IPF, GREG / linear calibration
+# and the replicate-weight constructors are all native base R; the survey
+# package (survey::calibrate, survey::as.svrepdesign) is a cross-validation
+# reference only and is never called at run time.
 #
 # References:
 #   Deville & Sarndal (1992). JASA, 87(418), 376-382.
@@ -148,13 +149,11 @@ morie_weights_poststratify <- function(weights, strata, population_totals) {
 #' @return list with `weights`, `converged`, `iterations`, `max_adjustment`,
 #'   `diagnostics` (from `morie_weights_diagnostics`).
 #' @examples
-#' if (requireNamespace("survey", quietly = TRUE)) {
-#'   set.seed(1)
-#'   df <- data.frame(g = rep(c("m", "f"), 15), r = rep(c("x", "y", "z"), 10))
-#'   res <- morie_weights_rake(rep(1, 30), df,
-#'                             list(g = c(m = 50, f = 50), r = c(x = 30, y = 40, z = 30)))
-#'   res$converged
-#' }
+#' set.seed(1)
+#' df <- data.frame(g = rep(c("m", "f"), 15), r = rep(c("x", "y", "z"), 10))
+#' res <- morie_weights_rake(rep(1, 30), df,
+#'                           list(g = c(m = 50, f = 50), r = c(x = 30, y = 40, z = 30)))
+#' res$converged
 #' @export
 morie_weights_rake <- function(weights, df, margins,
                                max_iter = 100, tol = 1e-6, bounds = NULL) {
@@ -198,9 +197,12 @@ morie_weights_rake <- function(weights, df, margins,
 
 #' Generalised regression (GREG) calibration
 #'
-#' Closed-form linear calibration to match population totals on auxiliary X.
-#' When `survey` is installed, defers to `survey::calibrate()` for a fully
-#' design-aware result; otherwise computes the linear adjustment in base R.
+#' Linear (chi-square distance) calibration to match population totals on
+#' auxiliary X, computed natively in base R: \eqn{w^* = w(1 + x^\top
+#' \lambda)} with \eqn{\lambda = (X^\top W X)^{-1}(T_x - \hat T_x)}, the
+#' step repeated on the calibrated weights until the totals match within
+#' `tol` (the linear calibration of `survey::calibrate()`; no package is
+#' called).
 #' @inheritParams morie_weights_params
 #' @return A named list with elements \code{weights}, \code{converged},
 #' \code{iterations}, \code{max_adjustment}, \code{diagnostics}.
@@ -556,11 +558,9 @@ morie_weights_deff <- function(weights) {
 #' \code{threshold_upper}, \code{extreme_indices}, \code{extreme_values},
 #' \code{pct_extreme}.
 #' @examples
-#' if (requireNamespace("survey", quietly = TRUE)) {
-#'   set.seed(1)
-#'   w <- c(runif(28, 0.5, 2), 25, 30)
-#'   str(morie_weights_detect_extreme(w), max.level = 1)
-#' }
+#' set.seed(1)
+#' w <- c(runif(28, 0.5, 2), 25, 30)
+#' str(morie_weights_detect_extreme(w), max.level = 1)
 #' @export
 morie_weights_detect_extreme <- function(weights, k = 3) {
   w <- as.numeric(weights)
@@ -583,16 +583,17 @@ morie_weights_detect_extreme <- function(weights, k = 3) {
 
 #' Jackknife replicate weights (JK1 delete-1 or JKn stratified delete-n)
 #'
-#' When the `survey` package is installed and `strata` is supplied, defers
-#' to `survey::as.svrepdesign(..., type = "JKn")` for variance compatibility.
+#' Built natively in base R. JK1: replicate \eqn{i} drops unit \eqn{i}
+#' and scales the others by \eqn{n/(n-1)}. JKn (needs `strata`): one
+#' replicate per unit, dropping it and scaling the rest of its stratum
+#' by \eqn{n_h/(n_h-1)} (Wolter 2007, ch. 4) -- the replicate weights of
+#' `survey::as.svrepdesign(..., type = "JK1"/"JKn")`; no package is called.
 #' @inheritParams morie_weights_params
 #' @return A numeric \code{matrix}.
 #' @examples
-#' if (requireNamespace("survey", quietly = TRUE)) {
-#'   set.seed(1)
-#'   res <- morie_weights_jackknife(runif(10, 0.5, 2))
-#'   str(res, max.level = 1)
-#' }
+#' set.seed(1)
+#' res <- morie_weights_jackknife(runif(10, 0.5, 2))
+#' str(res, max.level = 1)
 #' @export
 morie_weights_jackknife <- function(weights, strata = NULL,
                                     jk_type = c("JK1", "JKn")) {
@@ -632,16 +633,15 @@ morie_weights_jackknife <- function(weights, strata = NULL,
 #' Balanced Repeated Replication (BRR) weights
 #'
 #' Each stratum is split into two halves; signs from a random Hadamard-like
-#' matrix double one half and zero the other. For exact Hadamard ordering use
+#' matrix double one half and zero the other. Native base R; the signs are
+#' random, not the exact Hadamard ordering of
 #' `survey::as.svrepdesign(..., type = "BRR")`.
 #' @inheritParams morie_weights_params
 #' @return A numeric \code{matrix}.
 #' @examples
-#' if (requireNamespace("survey", quietly = TRUE)) {
-#'   set.seed(1)
-#'   res <- morie_weights_brr(runif(16, 0.5, 2), rep(1:8, each = 2))
-#'   str(res, max.level = 1)
-#' }
+#' set.seed(1)
+#' res <- morie_weights_brr(runif(16, 0.5, 2), rep(1:8, each = 2))
+#' str(res, max.level = 1)
 #' @export
 morie_weights_brr <- function(weights, strata, n_replicates = NULL,
                               seed = 42) {

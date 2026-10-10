@@ -21,7 +21,9 @@
 #'         \code{family = binomial()}.
 #'   \item \code{hazard_ratio_table} accepts a \code{coxph} fit, or
 #'         per-parameter \code{beta}, \code{se} and \code{p} vectors.
-#'   \item \code{anova_table} wraps \code{stats::anova} / \code{car::Anova}.
+#'   \item \code{anova_table} uses \code{stats::anova} for Type-I tests and
+#'         rmorie's native Type-II/III sums of squares (lm) or
+#'         likelihood-ratio tests (glm).
 #' }
 #'
 #' @name tables_pub
@@ -729,8 +731,25 @@ model_comparison_table <- function(models, nested = FALSE, digits = 3L,
 
 #' ANOVA table from a fitted model
 #'
-#' Uses \code{stats::anova} for sequential (Type-I) tests, or
-#' \code{car::Anova} for Type-II/III if \pkg{car} is installed.
+#' Uses \code{stats::anova} for sequential (Type-I) tests and rmorie's
+#' native Type-II / Type-III tests otherwise, which reproduce
+#' \code{car::Anova}'s defaults:
+#' \itemize{
+#'   \item \code{lm} / \code{aov}: F tests. Type II tests each term after
+#'     all terms that do not contain it (principle of marginality), i.e.
+#'     the sum of squares is RSS(model without the term and its
+#'     higher-order relatives) minus RSS(model without the relatives).
+#'     Type III tests each term (and the intercept) after all others in
+#'     the model as fitted, by dropping its columns from the model
+#'     matrix; it therefore depends on the contrasts used to fit the
+#'     model (use sum-to-zero contrasts for the textbook Type III).
+#'   \item \code{glm}: likelihood-ratio chi-square tests, by refitting
+#'     the reduced model matrices with the model's family, weights,
+#'     offset and control (deviance differences divided by the
+#'     dispersion, as car does).
+#' }
+#' Models with aliased coefficients are handled by model comparison for
+#' Type II and rejected for Type III, as in car.
 #'
 #' @param model An \code{lm}/\code{aov}/\code{glm} fit.
 #' @param typ ANOVA type (1, 2, 3).
@@ -738,14 +757,15 @@ model_comparison_table <- function(models, nested = FALSE, digits = 3L,
 #' @param output_format Output target.
 #' @param title Title.
 #' @return A character string.
+#' @references Fox, J. and Weisberg, S. (2019). An R Companion to Applied
+#'   Regression, 3rd ed., Sage (sections 5.3.4 and 6.3).
 #' @examples
-#' \dontshow{if (requireNamespace("car", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' set.seed(1)
-#' df <- data.frame(x = rnorm(30))
-#' df$y <- df$x + rnorm(30)
-#' m <- lm(y ~ x, data = df)
+#' df <- data.frame(x = rnorm(30), g = gl(3, 10))
+#' df$y <- df$x + as.numeric(df$g) + rnorm(30)
+#' m <- lm(y ~ x * g, data = df)
 #' anova_table(m, typ = 1L)
-#' \dontshow{\}) # examplesIf}
+#' anova_table(m, typ = 2L)
 #' @export
 anova_table <- function(model, typ = 2L, digits = 3L,
                           output_format = "dataframe",
@@ -753,9 +773,7 @@ anova_table <- function(model, typ = 2L, digits = 3L,
   if (typ == 1L) {
     tab <- as.data.frame(stats::anova(model))
   } else {
-    if (!requireNamespace("car", quietly = TRUE))
-      stop("Type-II/III ANOVA requires the 'car' package.")
-    tab <- as.data.frame(car::Anova(model, type = typ))
+    tab <- .tbl_anova_typed(model, typ)
   }
   formatted <- tab
   for (col in c("Sum Sq", "Mean Sq", "F value", "F", "LR Chisq")) {
@@ -782,6 +800,166 @@ anova_table <- function(model, typ = 2L, digits = 3L,
                     c("dataframe", "latex", "html", "markdown", "text", "csv"))
   .tbl_to_format(formatted, fmt, title = title,
                   footnotes = .tbl_footnotes_render(reg, fmt))
+}
+
+
+# Native Type-II / Type-III ANOVA (car::Anova defaults: F tests for lm,
+# likelihood-ratio tests for glm).
+#' @noRd
+.tbl_anova_typed <- function(model, typ) {
+  typ <- as.character(typ)
+  typ <- switch(typ, "2" = , "II" = 2L, "3" = , "III" = 3L,
+                stop("typ must be 1, 2 or 3.", call. = FALSE))
+  if (!inherits(model, "lm") || inherits(model, "mlm")) {
+    stop("Type-II/III tests are implemented for lm, aov and glm fits.",
+         call. = FALSE)
+  }
+  cf <- stats::coef(model)
+  intercept <- any(names(cf) == "(Intercept)")
+  if (intercept && length(cf) == 1L && typ == 2L) {
+    warning("the model contains only an intercept: Type III test substituted",
+            call. = FALSE)
+    typ <- 3L
+  }
+  aliased <- any(is.na(cf))
+  if (typ == 3L && aliased) {
+    stop("there are aliased coefficients in the model", call. = FALSE)
+  }
+  tt <- stats::terms(model)
+  fac <- attr(tt, "factors")
+  names_t <- labels(tt)
+  X <- stats::model.matrix(model)
+  asgn <- attr(X, "assign")
+  if (inherits(model, "glm")) {
+    return(.tbl_anova_glm_lr(model, typ, X, asgn, names_t, fac))
+  }
+  .tbl_anova_lm_f(model, typ, X, asgn, names_t, fac, intercept)
+}
+
+# car:::relatives(): terms whose factors contain all of term's factors.
+#' @noRd
+.tbl_anova_relatives <- function(term, names_t, fac) {
+  if (length(names_t) == 1L) return(integer(0))
+  others <- setdiff(seq_along(names_t), which(names_t == term))
+  others[vapply(names_t[others], function(t2) {
+    all(!(fac[, term] & !fac[, t2]))
+  }, logical(1))]
+}
+
+#' @noRd
+.tbl_anova_lm_f <- function(model, typ, X, asgn, names_t, fac, intercept) {
+  mf <- stats::model.frame(model)
+  y <- stats::model.response(mf, "numeric")
+  off <- stats::model.offset(mf)
+  if (!is.null(off)) y <- y - off
+  w <- stats::model.weights(mf)
+  if (is.null(w)) w <- rep(1, length(y))
+  ok <- w != 0
+  sw <- sqrt(w[ok])
+  Xw <- X[ok, , drop = FALSE] * sw
+  yw <- y[ok] * sw
+  fit_cols <- function(cols) {
+    if (length(cols) == 0L) return(c(rss = sum(yw^2), rank = 0))
+    q <- qr(Xw[, cols, drop = FALSE])
+    c(rss = sum(qr.resid(q, yw)^2), rank = q$rank)
+  }
+  all_cols <- seq_len(ncol(X))
+  full <- fit_cols(all_cols)
+  df_res <- sum(ok) - full[["rank"]]
+  rss <- full[["rss"]]
+  if (df_res == 0) stop("residual df = 0", call. = FALSE)
+  if (rss < sqrt(.Machine$double.eps)) {
+    stop("residual sum of squares is 0 (within rounding error)", call. = FALSE)
+  }
+  if (typ == 2L) {
+    src <- names_t
+    ss <- df <- numeric(length(src))
+    for (i in seq_along(src)) {
+      rels <- .tbl_anova_relatives(src[i], names_t, fac)
+      ex_rel <- which(asgn %in% rels)
+      ex_term <- which(asgn == i)
+      m1 <- fit_cols(setdiff(all_cols, c(ex_rel, ex_term)))
+      m2 <- if (length(rels) == 0L) full else fit_cols(setdiff(all_cols, ex_rel))
+      df[i] <- m2[["rank"]] - m1[["rank"]]
+      ss[i] <- if (df[i] == 0) NA_real_ else abs(m1[["rss"]] - m2[["rss"]])
+    }
+  } else {
+    src <- if (intercept) c("(Intercept)", names_t) else names_t
+    ss <- df <- numeric(length(src))
+    for (i in seq_along(src)) {
+      a <- if (intercept) i - 1L else i
+      ex <- which(asgn == a)
+      if (length(ex) == 0L) {
+        ss[i] <- NA_real_
+        df[i] <- 0
+        next
+      }
+      m1 <- fit_cols(setdiff(all_cols, ex))
+      df[i] <- full[["rank"]] - m1[["rank"]]
+      ss[i] <- m1[["rss"]] - rss
+    }
+  }
+  f <- (ss / df) / (rss / df_res)
+  f[df == 0] <- NA_real_
+  p <- stats::pf(f, df, df_res, lower.tail = FALSE)
+  out <- data.frame(c(ss, rss), c(df, df_res), c(f, NA), c(p, NA))
+  names(out) <- c("Sum Sq", "Df", "F value", "Pr(>F)")
+  row.names(out) <- c(src, "Residuals")
+  out
+}
+
+#' @noRd
+.tbl_anova_glm_lr <- function(model, typ, X, asgn, names_t, fac) {
+  y <- model$y
+  if (is.null(y)) y <- stats::model.response(stats::model.frame(model), "numeric")
+  wt <- model$prior.weights
+  if (is.null(wt)) wt <- rep(1, length(y))
+  refit <- function(drop_cols) {
+    keep <- setdiff(seq_len(ncol(X)), drop_cols)
+    stats::glm.fit(X[, keep, drop = FALSE], y, wt,
+                   offset = model$offset, family = model$family,
+                   control = model$control)
+  }
+  # summary.glm()'s dispersion: 1 for binomial / poisson, else the
+  # Pearson estimate.
+  fam <- model$family$family
+  dispersion <- if (fam %in% c("poisson", "binomial")) {
+    1
+  } else if (model$df.residual > 0) {
+    ww <- model$weights
+    sum((ww * model$residuals^2)[ww > 0]) / model$df.residual
+  } else {
+    NaN
+  }
+  n_t <- length(names_t)
+  LR <- df <- p <- numeric(n_t)
+  if (typ == 2L) {
+    for (i in seq_len(n_t)) {
+      rels <- .tbl_anova_relatives(names_t[i], names_t, fac)
+      ex1 <- which(asgn %in% c(i, rels))
+      m1 <- refit(ex1)
+      m2 <- if (length(rels) == 0L) model else refit(which(asgn %in% rels))
+      df[i] <- m1$df.residual - m2$df.residual
+      if (df[i] == 0) {
+        LR[i] <- p[i] <- NA_real_
+      } else {
+        LR[i] <- (m1$deviance - m2$deviance) / dispersion
+        p[i] <- stats::pchisq(LR[i], df[i], lower.tail = FALSE)
+      }
+    }
+  } else {
+    dev_full <- model$deviance / dispersion
+    for (i in seq_len(n_t)) {
+      m1 <- refit(which(asgn == i))
+      df[i] <- model$rank - m1$rank
+      LR[i] <- if (df[i] == 0) NA_real_ else m1$deviance / dispersion - dev_full
+      p[i] <- stats::pchisq(LR[i], df[i], lower.tail = FALSE)
+    }
+  }
+  out <- data.frame(LR, df, p)
+  names(out) <- c("LR Chisq", "Df", "Pr(>Chisq)")
+  row.names(out) <- names_t
+  out
 }
 
 

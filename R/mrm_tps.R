@@ -139,11 +139,9 @@ mrm_tps_levy_scaling <- function(
 #'   `dbscan_n_noise`, `dbscan_largest`.
 #' @export
 #' @examples
-#' if (requireNamespace("dbscan", quietly = TRUE)) {
-#'   if (FALSE) {
-#'     tps <- read.csv("Assault_Open_Data.csv")
-#'     mrm_tps_moran_clustering(tps)
-#'   }
+#' if (FALSE) {
+#'   tps <- read.csv("Assault_Open_Data.csv")
+#'   mrm_tps_moran_clustering(tps)
 #' }
 mrm_tps_moran_clustering <- function(
   data,
@@ -213,19 +211,14 @@ mrm_tps_moran_clustering <- function(
     ((N - 1) * (N - 2) * (N - 3) * S0^2) - EI^2
   morans_z <- (morans_I - EI) / sqrt(varI)
 
-  # --- DBSCAN ---
-  if (requireNamespace("dbscan", quietly = TRUE)) {
-    pts <- cbind(lat * 111, lon * 111 * cos(mean(lat) * pi / 180))
-    db <- dbscan::dbscan(pts, eps = dbscan_eps, minPts = dbscan_minpts)
-    cl <- db$cluster
-    n_clusters <- length(unique(cl[cl != 0L]))
-    n_noise <- sum(cl == 0L)
-    largest <- if (n_clusters > 0L) max(table(cl[cl != 0L])) else 0L
-  } else {
-    n_clusters <- NA_integer_
-    n_noise <- NA_integer_
-    largest <- NA_integer_
-  }
+  # --- DBSCAN (native; labels shifted to 1-based clusters, 0 = noise) ---
+  pts <- cbind(lat * 111, lon * 111 * cos(mean(lat) * pi / 180))
+  db <- .morie_dbscan_native(pts, eps = dbscan_eps,
+                             min_samples = as.integer(dbscan_minpts))
+  cl <- db$labels + 1L
+  n_clusters <- length(unique(cl[cl != 0L]))
+  n_noise <- sum(cl == 0L)
+  largest <- if (n_clusters > 0L) max(table(cl[cl != 0L])) else 0L
 
   list(
     morans_I = round(morans_I, 6),

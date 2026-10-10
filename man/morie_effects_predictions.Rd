@@ -2,32 +2,44 @@
 % Please edit documentation in R/effects.R
 \name{morie_effects_predictions}
 \alias{morie_effects_predictions}
-\title{Adjusted predictions via \pkg{marginaleffects}}
+\title{Adjusted predictions (native)}
 \usage{
 morie_effects_predictions(model, newdata = NULL, ...)
 }
 \arguments{
-\item{model}{A fitted model object supported by \pkg{insight} /
-\pkg{marginaleffects}.}
+\item{model}{A fitted \code{lm} or \code{glm} object.}
 
 \item{newdata}{Optional data frame for which to predict. Defaults
-to the model frame when \code{NULL} (the marginaleffects default).}
+to the model data when \code{NULL}.}
 
-\item{...}{Further arguments forwarded to
-\code{marginaleffects::predictions()}.}
+\item{...}{Optional native settings: \code{type}
+(\code{"response"} or \code{"link"}), \code{by} (\code{TRUE} or
+grouping column names), \code{conf_level}, \code{vcov} (\code{TRUE},
+\code{FALSE} or a matrix) and \code{df} (default \code{Inf}). Any
+other argument is an error.}
 }
 \value{
-A \code{marginaleffects} data frame.
+A data frame with \code{rowid} (or the \code{by} columns),
+\code{estimate}, \code{std.error}, \code{statistic}, \code{p.value},
+\code{s.value}, \code{conf.low}, \code{conf.high} and, unit-level,
+the \code{newdata} columns.
 }
 \description{
-Thin extender over \code{marginaleffects::predictions()} for unit-
-level or grid-level adjusted predictions.
+Native unit-level (or averaged) adjusted predictions for \code{lm}
+and \code{glm} fits with the conventions of
+\code{marginaleffects::predictions()} (Arel-Bundock): one row per row
+of \code{newdata} (the model data by default), delta-method standard
+errors from the analytic Jacobian and \code{vcov(model)}, z-based
+tests and intervals. For a \code{glm} with no \code{type} and no
+\code{by}, inference is done on the link scale and the estimate and
+interval are back-transformed (marginaleffects' \code{"invlink(link)"});
+\code{std.error} and \code{statistic} are then \code{NA}. With
+\code{by}, unit predictions are averaged within groups on the response
+scale. Cross-validated against \pkg{marginaleffects} in the tests.
 }
 \examples{
-if (requireNamespace("marginaleffects", quietly = TRUE)) {
-  set.seed(1)
-  df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-  fit <- stats::lm(y ~ x + g, data = df)
-  head(morie_effects_predictions(fit))
-}
+set.seed(1)
+df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+fit <- stats::lm(y ~ x + g, data = df)
+head(morie_effects_predictions(fit))
 }

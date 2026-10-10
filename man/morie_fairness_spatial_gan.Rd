@@ -17,7 +17,8 @@ morie_fairness_spatial_gan(
 \arguments{
 \item{points}{Numeric matrix or data.frame with two columns (x, y).}
 
-\item{steps}{Integer training iterations.}
+\item{steps}{Integer training iterations requested (the native
+random-search fit runs at most 50).}
 
 \item{batch_size}{Integer minibatch size.}
 
@@ -32,12 +33,16 @@ morie_fairness_spatial_gan(
 \value{
 A \code{morie_fairness_result} with the fitted parameters in
 \code{$gp}, standardisation in \code{$mean}/\code{$std}, and a
-\code{$sample(n, seed)} closure when a backend was found.
+\code{$sample(n, seed)} closure; \code{$backend} is \code{"native"}.
 }
 \description{
-Trains a small MLP-based GAN on an (n, 2) matrix of coordinates and
-returns a fitted object that can \code{sample()} synthetic points.
-Mirrors the JAX \code{SpatialGAN} class.
+Fits a small leaky-ReLU MLP generator to an (n, 2) matrix of
+standardised coordinates and returns a fitted object that can
+\code{sample()} synthetic points. Mirrors the API of the JAX
+\code{SpatialGAN} class, but the fit is native base R: at most 50
+seeded random-search steps of size \code{lr} on the generator weights,
+each kept only when it lowers the minibatch squared error (no
+adversarial discriminator training, no torch / JAX).
 }
 \examples{
 set.seed(1)

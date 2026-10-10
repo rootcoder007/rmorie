@@ -14,7 +14,7 @@ point-pattern clustering at multiple radii.
 \item \code{\link{morie_tps_getis_ord_g_star}}: local
 Getis-Ord Gi* hot/cold-spot z-scores.
 \item \code{\link{morie_tps_dbscan_clusters}}: density-based
-clusters on lat/long (via \pkg{dbscan}, optional).
+clusters on lat/long (native DBSCAN).
 \item \code{\link{morie_tps_polygon_morans_i}}: polygon-aware
 Moran's I from an \pkg{sf} object's actual polygon centroids
 (instead of the centroid-only k-NN approximation in
@@ -28,6 +28,6 @@ year) sweep of polygon Moran's I.
 Polygon functions accept either an \pkg{sf} object (gated with
 \code{requireNamespace("sf")}) or a plain data.frame carrying
 precomputed centroid columns. KNN graphs prefer \pkg{FNN}; DBSCAN
-requires the optional \pkg{dbscan} package; spatial autocorrelation
+runs on the package's native implementation; spatial autocorrelation
 tests can optionally be delegated to \pkg{spdep}.
 }

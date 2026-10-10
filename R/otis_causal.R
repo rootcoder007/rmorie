@@ -1139,7 +1139,10 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
 #' \code{morie_weight_super}): propensity from
 #' \{ridge-logistic, quadratic logistic, base rate\} and per-arm
 #' outcome regressions from \{OLS, cross-validated ridge, mean\},
-#' with ranger random forests joining both stacks when installed.
+#' plus rmorie's native random forest in both stacks (200 CART trees,
+#' \code{mtry} = \eqn{\lfloor\sqrt p\rfloor}; minimum node size 10 for the
+#' probability forest, 5 for regression), so the learner library is the
+#' same on every install.
 #' Stacking weights come from inner 3-fold cross-validated
 #' predictions inside every outer training fold, so no fold ever
 #' sees its own outcome.
@@ -1176,7 +1179,6 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
   n <- length(y)
   n_treated <- sum(d)
   p_treat <- mean(d)
-  have_ranger <- requireNamespace("ranger", quietly = TRUE)
 
   ps_learners <- list(
     ridge_logit = function(tr, te)
@@ -1206,21 +1208,19 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
                               X[te, , drop = FALSE], n_folds = 3L),
     mean = function(yy, tr, te) rep(mean(yy[tr]), length(te))
   )
-  if (have_ranger) {
-    ps_learners$forest <- function(tr, te) {
-      fit <- ranger::ranger(t ~ .,
-        data = data.frame(t = factor(d[tr]), X[tr, , drop = FALSE]),
-        probability = TRUE, num.trees = 200L)
-      stats::predict(fit,
-        data = data.frame(X[te, , drop = FALSE]))$predictions[, "1"]
-    }
-    reg_learners$forest <- function(yy, tr, te) {
-      fit <- ranger::ranger(y ~ .,
-        data = data.frame(y = yy[tr], X[tr, , drop = FALSE]),
-        num.trees = 200L)
-      stats::predict(fit,
-        data = data.frame(X[te, , drop = FALSE]))$predictions
-    }
+  # Native random forest (trees_native.R, ESL Algorithm 15.1): a
+  # probability forest (regression trees on 0/1) for the propensity and a
+  # regression forest for each outcome arm.
+  rf_mtry <- max(1L, floor(sqrt(ncol(X))))
+  ps_learners$forest <- function(tr, te) {
+    fit <- .morie_rf_fit(X[tr, , drop = FALSE], d[tr], task = "regression",
+                         n_estimators = 200L, mtry = rf_mtry, min_node = 10L)
+    .morie_rf_predict(fit, X[te, , drop = FALSE])
+  }
+  reg_learners$forest <- function(yy, tr, te) {
+    fit <- .morie_rf_fit(X[tr, , drop = FALSE], yy[tr], task = "regression",
+                         n_estimators = 200L, mtry = rf_mtry, min_node = 5L)
+    .morie_rf_predict(fit, X[te, , drop = FALSE])
   }
 
   # Inner-CV NNLS stacking within a training index set, then predict

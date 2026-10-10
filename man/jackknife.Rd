@@ -18,19 +18,18 @@ A \code{morie_jackknife_result}.
 }
 \description{
 Computes the leave-one-out estimates, pseudovalues, influence
-values, and bias-corrected jackknife estimate. The
-\pkg{bootstrap} package's \code{bootstrap::jackknife} is the
-canonical CRAN reference; it is invoked when installed and the
-rmorie-shape result is reconstructed around it. Falls back to an
-inline loop otherwise.
+values, and bias-corrected jackknife estimate with a native
+leave-one-out loop: \eqn{\hat b = (n-1)(\bar\theta_{(\cdot)} - \hat\theta)}
+and \eqn{\widehat{se} = \sqrt{(n-1)/n \sum (\theta_{(i)} -
+\bar\theta_{(\cdot)})^2}}, the same quantities as
+\code{bootstrap::jackknife} (cross-validated in the test suite).
+Matrices / data frames are deleted one row at a time.
 }
 \examples{
-if (requireNamespace("bootstrap", quietly = TRUE) && requireNamespace("resample", quietly = TRUE)) {
-  set.seed(1)
-  x <- rnorm(40)
-  res <- jackknife(x, mean)
-  res$se
-}
+set.seed(1)
+x <- rnorm(40)
+res <- jackknife(x, mean)
+res$se
 }
 \seealso{
 \code{bootstrap::jackknife}, \code{resample::jackknife}.

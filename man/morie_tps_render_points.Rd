@@ -40,8 +40,9 @@ A \code{ggplot} (when ggplot2 is available) or
 \description{
 Projects (LAT_WGS84, LONG_WGS84) to the rotated Toronto canvas and
 draws one dot per incident.  When \code{eps_km} and \code{min_samples}
-are supplied AND the \pkg{dbscan} package is installed, points are
-coloured by DBSCAN cluster label.
+are supplied, points are coloured by DBSCAN cluster label (native
+DBSCAN with the clustering rules of \code{dbscan::dbscan}; labels
+are 0-based with -1 for noise).
 }
 \examples{
 \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}

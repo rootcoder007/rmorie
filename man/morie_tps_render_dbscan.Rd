@@ -29,8 +29,9 @@ ggplot object or invisible NULL.
 }
 \description{
 Runs DBSCAN on rotated-km coordinates and colours points by cluster
-label, with noise rendered grey.  Requires the suggested \pkg{dbscan}
-package; without it a base-graphics single-colour fallback is drawn.
+label (native DBSCAN; cluster ids 1-based in discovery order, 0 for
+noise, as \code{dbscan::dbscan}), with noise rendered grey.  Without
+\pkg{ggplot2} a base-graphics plot is drawn.
 }
 \examples{
 \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}

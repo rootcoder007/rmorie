@@ -49,18 +49,21 @@ test_that("AM refuses a single stimulus or no usable respondent", {
                "at least one respondent")
 })
 
-test_that("native blackbox with complete data is the scaled SVD", {
-  testthat::local_mocked_bindings(
-    requireNamespace = function(...) FALSE, .package = "base")
+test_that("native blackbox with complete data matches basicspace::blackbox", {
+  skip_if_not_installed("basicspace")
+  # blackbox stops after at most five joint sweeps (|dSSE| < 0.01), as basicspace's BLACKB does,
+  # so on weakly structured data it is not the converged truncated SVD
   set.seed(4)
-  X <- matrix(stats::rnorm(40 * 6), 40, 6)
+  X <- round(matrix(stats::rnorm(40 * 2), 40, 2) %*% t(matrix(stats::rnorm(6 * 2), 6, 2)) +
+               matrix(stats::rnorm(40 * 6, 0, 0.5), 40, 6) + 4)
+  dimnames(X) <- list(paste0("r", 1:40), paste0("q", 1:6))
+  ref <- basicspace::blackbox(X, dims = 2, minscale = 5, verbose = FALSE)
+  rfit <- as.matrix(ref$individuals[[2]][, c("c1", "c2")]) %*%
+    t(as.matrix(ref$stimuli[[2]][, c("w1", "w2")]))
   f <- morie_spatial_voting_blackbox(X, n_dims = 2L)
   expect_identical(f$engine, "native")
-  s <- svd(sweep(X, 2L, colMeans(X)))
-  expect_equal(f$ideal_points %*% t(f$stimuli_weights),
-               s$u[, 1:2] %*% diag(s$d[1:2]) %*% t(s$v[, 1:2]),
-               tolerance = 1e-10)
-  expect_equal(f$singular_values, s$d[1:2], tolerance = 1e-12)
+  # basicspace prints three decimals
+  expect_lt(max(abs(rfit - f$ideal_points %*% t(f$stimuli_weights))), 0.01)
 })
 
 test_that("native blackbox matches basicspace::blackbox with missing cells", {

@@ -14,8 +14,8 @@ added unless \code{intercept = FALSE}.}
 
 \item{intercept}{Add a column of ones.}
 
-\item{method}{\code{"auto"} (linear programme when \pkg{lpSolve} is
-installed, otherwise the fit heuristic), \code{"lp"} or \code{"glm"}.}
+\item{method}{\code{"auto"} or \code{"lp"} (the exact linear programme,
+native) or \code{"glm"} (the fit heuristic).}
 }
 \value{
 A list with \code{separation} (\code{"none"}, \code{"quasi-complete"}
@@ -37,14 +37,22 @@ the likelihood climbs towards its supremum 0 without reaching it
 stops with huge coefficients and a warning is reporting this geometry, not
 a misspecified model. The exact check is a linear programme (Konis 2007):
 maximise \eqn{\sum_i s_i x_i \cdot d} subject to \eqn{0 \le s_i x_i \cdot d \le 1};
-a positive optimum is a separating direction. It runs through
-\pkg{lpSolve} when installed; otherwise a fit with many iterations is
-inspected for fitted probabilities at 0 or 1, which is reported as the
-heuristic it is.
+a positive optimum is a separating direction. The programme is solved by
+rmorie's own dense tableau simplex (Dantzig pricing with Bland's rule
+after a run of degenerate pivots, so it cannot cycle); it is the same
+programme the earlier \pkg{lpSolve} path solved and reaches the same
+optimum (cross-validated in the test suite). \code{method = "glm"}
+instead inspects a fit with many iterations for fitted probabilities at
+0 or 1, which is reported as the heuristic it is.
 }
 \examples{
 # one perfectly predictive dummy: every y = 1 has z = 1
 x <- cbind(z = c(1, 1, 1, 0, 0, 0, 0), w = c(0.2, -1, 0.5, 0.1, -0.4, 1.2, 0.3))
 y <- c(1, 1, 1, 0, 0, 0, 0)
 morie_logit_separation(y, x)[c("separation", "loglik_along")]
+}
+\references{
+Konis, K. (2007). \emph{Linear programming algorithms for
+detecting separated data in binary logistic regression models}. DPhil
+thesis, University of Oxford.
 }

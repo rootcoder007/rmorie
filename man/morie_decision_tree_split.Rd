@@ -11,26 +11,35 @@ morie_decision_tree_split(x, y, criterion = "gini", max_depth = 30L, seed = 0L)
 
 \item{y}{Response (factor for classification).}
 
-\item{criterion}{"gini" or "entropy" -- only "gini" is supported by
-rpart for classification; "entropy" maps to information.}
+\item{criterion}{"gini" or "entropy"; "entropy" uses rpart's
+"information" splitting index.}
 
-\item{max_depth}{Max tree depth.}
+\item{max_depth}{Max tree depth (1 to 30, as in rpart).}
 
-\item{seed}{RNG seed.}
+\item{seed}{RNG seed (kept for API compatibility; the tree is
+deterministic).}
 }
 \value{
 Named list: estimate, train_accuracy, root_feature, root_threshold,
 root_impurity, n_leaves, feature_importances, criterion, n, method.
 }
 \description{
-CART tree via \code{rpart::rpart}, returning the root split structure
-and feature importances.
+Native CART classification tree, grown exactly as \code{rpart::rpart}
+grows a \code{method = "class"} tree with \code{cp = 0},
+\code{minsplit = 2}, \code{minbucket = 1}, \code{xval = 0} and the
+default priors (class frequencies), loss (0-1), \code{maxcompete = 4},
+\code{maxsurrogate = 5}, \code{usesurrogate = 2} and
+\code{surrogatestyle = 0}: Gini (or information) improvement split
+search over the midpoints between distinct values, rpart's
+cost-complexity bookkeeping (a split whose subtree does not lower the
+misclassification risk is collapsed), surrogate splits for missing
+values, and rpart's variable importance (primary improvement plus
+improvement times adjusted agreement for every surrogate). Returns the
+root split structure and normalised feature importances.
 }
 \examples{
-if (requireNamespace("rpart", quietly = TRUE)) {
-  set.seed(1)
-  x <- matrix(rnorm(120), 60, 2)
-  y <- factor(ifelse(x[, 1] > 0, "pos", "neg"))
-  morie_decision_tree_split(x, y)
-}
+set.seed(1)
+x <- matrix(rnorm(120), 60, 2)
+y <- factor(ifelse(x[, 1] > 0, "pos", "neg"))
+morie_decision_tree_split(x, y)
 }

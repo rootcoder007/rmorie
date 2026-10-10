@@ -25,6 +25,8 @@ object responding to \code{coef}, \code{vcov} and
 \code{family = binomial()}.
 \item \code{hazard_ratio_table} accepts a \code{coxph} fit, or
 per-parameter \code{beta}, \code{se} and \code{p} vectors.
-\item \code{anova_table} wraps \code{stats::anova} / \code{car::Anova}.
+\item \code{anova_table} uses \code{stats::anova} for Type-I tests and
+rmorie's native Type-II/III sums of squares (lm) or
+likelihood-ratio tests (glm).
 }
 }

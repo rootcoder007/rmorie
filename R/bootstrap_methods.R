@@ -33,10 +33,13 @@
 #                                    percentile / basic / normal / stud.
 #   * boot::tsboot                -- block bootstrap (fixed / geom).
 #   * boot::censboot              -- (cross-referenced) censored boot.
-#   * bootstrap::jackknife        -- delete-one jackknife reference.
+#   * bootstrap::jackknife        -- delete-one jackknife (native
+#                                    loop; bootstrap is a test reference).
 #   * resample                    -- delete-d jackknife + permutation.
 #   * rsample::bootstraps,
-#     rsample::vfold_cv           -- tidymodels-style resampling.
+#     rsample::vfold_cv           -- tidymodels-style resampling
+#                                    (native index resampling; rsample
+#                                    is not called).
 #   * simpleboot::two.boot,
 #     simpleboot::one.boot,
 #     simpleboot::lm.boot         -- fast-path common cases.
@@ -52,7 +55,8 @@
 #
 #   * morie_boot_run()            -- direct boot::boot bridge.
 #   * morie_boot_basic_ci()       -- direct boot::boot.ci bridge.
-#   * morie_rsample_bootstraps()  -- rsample::bootstraps bridge.
+#   * morie_rsample_bootstraps()  -- native bootstrap resample set
+#                                    (rsample::bootstraps analogue).
 #   * morie_simpleboot_two()      -- simpleboot::two.boot bridge.
 #
 # Functions kept as in-house implementations and flagged
@@ -72,13 +76,6 @@
 # ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
-
-#' Internal helper: Boot Have Bootstrap
-#' @noRd
-.boot_have_bootstrap <- function() requireNamespace("bootstrap", quietly = TRUE)
-#' Internal helper: Boot Have Rsample
-#' @noRd
-.boot_have_rsample <- function() requireNamespace("rsample", quietly = TRUE)
 
 # Result container constructors (unchanged shapes).
 
@@ -180,26 +177,6 @@
 #' @noRd
 .boot_statistic_adapter <- function(statistic) {
   function(d, i) as.numeric(statistic(.idx(d, i)))
-}
-
-# Extract `(ci_lo, ci_hi)` from a `boot.ci` object by ci_method label.
-#' Internal helper: Boot Ci Extract
-#' @noRd
-.boot_ci_extract <- function(bci, ci_method) {
-  type_key <- switch(ci_method,
-    "percentile"  = "percent",
-    "basic"       = "basic",
-    "normal"      = "normal",
-    "bca"         = "bca",
-    "studentized" = "student",
-    "percent"
-  )
-  comp <- bci[[type_key]]
-  if (is.null(comp)) {
-    return(c(NA_real_, NA_real_))
-  }
-  ncols <- ncol(comp)
-  c(as.numeric(comp[1L, ncols - 1L]), as.numeric(comp[1L, ncols]))
 }
 
 # ---------------------------------------------------------------------------
@@ -695,17 +672,18 @@ block_bootstrap <- function(data, statistic, block_size,
 }
 
 # ---------------------------------------------------------------------------
-# Jackknife (bootstrap::jackknife reference; inline math retained)
+# Jackknife (native; bootstrap::jackknife is a test reference only)
 # ---------------------------------------------------------------------------
 
 #' Delete-one (leave-one-out) jackknife
 #'
 #' Computes the leave-one-out estimates, pseudovalues, influence
-#' values, and bias-corrected jackknife estimate. The
-#' \pkg{bootstrap} package's \code{bootstrap::jackknife} is the
-#' canonical CRAN reference; it is invoked when installed and the
-#' rmorie-shape result is reconstructed around it. Falls back to an
-#' inline loop otherwise.
+#' values, and bias-corrected jackknife estimate with a native
+#' leave-one-out loop: \eqn{\hat b = (n-1)(\bar\theta_{(\cdot)} - \hat\theta)}
+#' and \eqn{\widehat{se} = \sqrt{(n-1)/n \sum (\theta_{(i)} -
+#' \bar\theta_{(\cdot)})^2}}, the same quantities as
+#' \code{bootstrap::jackknife} (cross-validated in the test suite).
+#' Matrices / data frames are deleted one row at a time.
 #'
 #' @param data Numeric vector or matrix.
 #' @param statistic Function returning a scalar.
@@ -713,36 +691,23 @@ block_bootstrap <- function(data, statistic, block_size,
 #' @return A \code{morie_jackknife_result}.
 #' @seealso \code{bootstrap::jackknife}, \code{resample::jackknife}.
 #' @examples
-#' if (requireNamespace("bootstrap", quietly = TRUE) && requireNamespace("resample", quietly = TRUE)) {
-#'   set.seed(1)
-#'   x <- rnorm(40)
-#'   res <- jackknife(x, mean)
-#'   res$se
-#' }
+#' set.seed(1)
+#' x <- rnorm(40)
+#' res <- jackknife(x, mean)
+#' res$se
 #' @export
 jackknife <- function(data, statistic, ci_level = 0.95) {
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
 
-  if (.boot_have_bootstrap() && is.null(dim(data))) {
-    jk <- bootstrap::jackknife(
-      as.numeric(data),
-      function(x) as.numeric(statistic(x))
-    )
-    jack <- as.numeric(jk$jack.values)
-    bias <- as.numeric(jk$jack.bias)
-    se <- as.numeric(jk$jack.se)
-  } else {
-    jack <- numeric(n)
-    for (i in seq_len(n)) {
-      jack[i] <- as.numeric(statistic(.idx(data, -i)))
-    }
-    jm <- mean(jack)
-    bias <- (n - 1) * (jm - original)
-    se <- sqrt((n - 1) / n * sum((jack - jm)^2))
+  jack <- numeric(n)
+  for (i in seq_len(n)) {
+    jack[i] <- as.numeric(statistic(.idx(data, -i)))
   }
-
   jm <- mean(jack)
+  bias <- (n - 1) * (jm - original)
+  se <- sqrt((n - 1) / n * sum((jack - jm)^2))
+
   pseudovalues <- n * original - (n - 1) * jack
   influence <- original - jack
 
@@ -1155,11 +1120,9 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 #'
 #' Lower-level CV used by [repeated_cv()] / [leave_one_out_cv()].
 #' Public CV with `(fit_fn, predict_fn, X, y, ...)` signature lives
-#' in [cross_validate()] (validation.R). When \pkg{rsample} is
-#' installed and no stratification or grouping is requested the
-#' folds are drawn via \code{rsample::vfold_cv}; otherwise the
-#' inline `cut(sample(n), n_folds)` partitioning is used so the
-#' helper keeps working on minimal installs.
+#' in [cross_validate()] (validation.R). Folds are drawn natively:
+#' `cut(sample(n), n_folds)` partitioning (the \code{rsample::vfold_cv}
+#' design), stratified or grouped when requested.
 #'
 #' @param X Numeric design matrix.
 #' @param y Response vector.
@@ -1206,8 +1169,7 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
   )
 }
 
-# Build CV fold index list. Uses rsample::vfold_cv when available and
-# no stratification / grouping is requested.
+# Build CV fold index list (native; grouped, stratified or plain V-fold).
 #' Internal helper: Build Folds
 #' @noRd
 .build_folds <- function(n, n_folds, stratify, groups) {
@@ -1229,15 +1191,9 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
     }
     return(fold_indices)
   }
-  # rsample::vfold_cv rejects v == n (leave-one-out); the native split
-  # below handles that case exactly.
-  if (.boot_have_rsample() && n_folds < n) {
-    df <- data.frame(.row = seq_len(n))
-    splits <- rsample::vfold_cv(df, v = n_folds)
-    return(lapply(splits$splits, function(s) {
-      df$.row[rsample::complement(s)]
-    }))
-  }
+  # Plain V-fold: shuffle the rows and cut them into n_folds blocks of
+  # (near-)equal size (the rsample::vfold_cv partition; v == n gives
+  # leave-one-out).
   idx <- sample.int(n)
   split(idx, cut(seq_along(idx), n_folds, labels = FALSE))
 }
@@ -1407,33 +1363,105 @@ morie_boot_basic_ci <- function(boot_obj,
   morie_boot_ci(boot_obj, conf = conf, type = type)
 }
 
-#' Direct bridge to \code{rsample::bootstraps}
+#' Native set of bootstrap resamples (rsample-style)
 #'
-#' Thin pass-through that builds a tidymodels-style
-#' \code{rset} of bootstrap resamples via
-#' \code{rsample::bootstraps} and returns it untouched.
+#' Draws \code{times} nonparametric bootstrap resamples of the rows of
+#' \code{data} with base R's \code{sample.int} (no \pkg{rsample}
+#' dependency). Each resample's analysis set is \eqn{n} rows drawn
+#' with replacement; its assessment set is the out-of-bag rows (those
+#' never drawn, about \eqn{e^{-1} \approx 36.8\%} of them). This is the
+#' same design as \code{rsample::bootstraps}; the resampled indices are
+#' not the same as rsample's under a given seed.
 #'
-#' @param data A data.frame.
+#' @param data A data.frame (or matrix / vector; rows are resampled).
 #' @param times Number of bootstrap resamples (default 25).
-#' @param ... Forwarded to \code{rsample::bootstraps}
-#'   (e.g. \code{strata}, \code{apparent}).
-#' @return An \code{rset} \pkg{rsample} object.
-#' @seealso \code{rsample::bootstraps}, \code{rsample::vfold_cv}.
+#' @param ... Optional \code{strata} (a column name of \code{data}, or a
+#'   vector of length \code{nrow(data)}; rows are resampled within
+#'   strata, a numeric stratifier being cut at its quartiles as in
+#'   rsample), \code{breaks} (number of quantile bins for a numeric
+#'   stratifier, default 4) and \code{apparent} (logical; if
+#'   \code{TRUE} an extra "Apparent" resample uses every row for both
+#'   analysis and assessment).
+#' @return A \code{data.frame} of class
+#'   \code{c("morie_bootstraps", "data.frame")} with one row per resample
+#'   and columns \code{id} (\code{"Bootstrap01"}, ...) and \code{splits}
+#'   (a list column). Each split is a list with integer row indices
+#'   \code{analysis} (length \eqn{n}, with replacement) and
+#'   \code{assessment} (the out-of-bag rows). The original data are kept
+#'   in \code{attr(x, "data")}; the analysis set of split \eqn{b} is
+#'   \code{data[x$splits[[b]]$analysis, , drop = FALSE]}. Attributes
+#'   \code{times}, \code{strata} and \code{apparent} record the call.
+#' @seealso [bootstrap()], [k_fold_cv()].
 #' @examples
-#' if (requireNamespace("rsample", quietly = TRUE)) {
-#'   set.seed(1)
-#'   rs <- morie_rsample_bootstraps(data.frame(x = rnorm(30)), times = 5L)
-#'   class(rs)
-#' }
+#' set.seed(1)
+#' rs <- morie_rsample_bootstraps(data.frame(x = rnorm(30)), times = 5L)
+#' rs$id
+#' sp <- rs$splits[[1]]
+#' length(sp$analysis)                 # n rows, drawn with replacement
+#' setdiff(seq_len(30), sp$analysis)   # equals sp$assessment (out-of-bag)
 #' @export
 morie_rsample_bootstraps <- function(data, times = 25L, ...) {
-  if (!.boot_have_rsample()) {
-    stop(
-      "morie_rsample_bootstraps() requires the 'rsample' package; ",
-      "install it."
-    )
+  dots <- list(...)
+  unknown <- setdiff(names(dots), c("strata", "breaks", "apparent"))
+  if (length(unknown) || (length(dots) && is.null(names(dots)))) {
+    stop("morie_rsample_bootstraps(): unsupported argument(s): ",
+         paste(unknown, collapse = ", "), call. = FALSE)
   }
-  rsample::bootstraps(data = data, times = as.integer(times), ...)
+  times <- as.integer(times)
+  if (length(times) != 1L || is.na(times) || times < 1L) {
+    stop("`times` must be a positive integer.", call. = FALSE)
+  }
+  n <- .nrow_like(data)
+  if (n < 1L) stop("`data` has no rows.", call. = FALSE)
+  strata <- dots$strata
+  strata_name <- NULL
+  if (is.character(strata) && length(strata) == 1L && is.data.frame(data) &&
+      strata %in% names(data)) {
+    strata_name <- strata
+    strata <- data[[strata]]
+  }
+  if (!is.null(strata)) {
+    if (length(strata) != n) {
+      stop("`strata` must be a column name of `data` or a vector of length nrow(data).",
+           call. = FALSE)
+    }
+    if (is.numeric(strata)) {
+      breaks <- if (is.null(dots$breaks)) 4L else as.integer(dots$breaks)
+      qs <- unique(stats::quantile(strata, probs = seq(0, 1, length.out = breaks + 1L),
+                                   na.rm = TRUE, names = FALSE))
+      strata <- if (length(qs) > 1L) {
+        cut(strata, qs, include.lowest = TRUE)
+      } else {
+        factor(rep("all", n))
+      }
+    }
+    strata_groups <- split(seq_len(n), as.factor(strata), drop = TRUE)
+  } else {
+    strata_groups <- list(seq_len(n))
+  }
+  draw <- function() {
+    unlist(lapply(strata_groups, function(g) {
+      g[sample.int(length(g), length(g), replace = TRUE)]
+    }), use.names = FALSE)
+  }
+  splits <- lapply(seq_len(times), function(b) {
+    a <- as.integer(draw())
+    list(analysis = a, assessment = setdiff(seq_len(n), a))
+  })
+  ids <- sprintf(paste0("Bootstrap%0", nchar(times), "d"), seq_len(times))
+  apparent <- isTRUE(dots$apparent)
+  if (apparent) {
+    splits <- c(splits, list(list(analysis = seq_len(n), assessment = seq_len(n))))
+    ids <- c(ids, "Apparent")
+  }
+  out <- data.frame(id = ids, stringsAsFactors = FALSE)
+  out$splits <- splits
+  attr(out, "data") <- data
+  attr(out, "times") <- times
+  attr(out, "strata") <- if (!is.null(strata_name)) strata_name else !is.null(strata)
+  attr(out, "apparent") <- apparent
+  class(out) <- c("morie_bootstraps", "data.frame")
+  out
 }
 
 #' Direct bridge to \code{simpleboot::two.boot}

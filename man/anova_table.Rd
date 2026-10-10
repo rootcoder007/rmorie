@@ -27,15 +27,35 @@ anova_table(
 A character string.
 }
 \description{
-Uses \code{stats::anova} for sequential (Type-I) tests, or
-\code{car::Anova} for Type-II/III if \pkg{car} is installed.
+Uses \code{stats::anova} for sequential (Type-I) tests and rmorie's
+native Type-II / Type-III tests otherwise, which reproduce
+\code{car::Anova}'s defaults:
+\itemize{
+\item \code{lm} / \code{aov}: F tests. Type II tests each term after
+all terms that do not contain it (principle of marginality), i.e.
+the sum of squares is RSS(model without the term and its
+higher-order relatives) minus RSS(model without the relatives).
+Type III tests each term (and the intercept) after all others in
+the model as fitted, by dropping its columns from the model
+matrix; it therefore depends on the contrasts used to fit the
+model (use sum-to-zero contrasts for the textbook Type III).
+\item \code{glm}: likelihood-ratio chi-square tests, by refitting
+the reduced model matrices with the model's family, weights,
+offset and control (deviance differences divided by the
+dispersion, as car does).
+}
+Models with aliased coefficients are handled by model comparison for
+Type II and rejected for Type III, as in car.
 }
 \examples{
-\dontshow{if (requireNamespace("car", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
-df <- data.frame(x = rnorm(30))
-df$y <- df$x + rnorm(30)
-m <- lm(y ~ x, data = df)
+df <- data.frame(x = rnorm(30), g = gl(3, 10))
+df$y <- df$x + as.numeric(df$g) + rnorm(30)
+m <- lm(y ~ x * g, data = df)
 anova_table(m, typ = 1L)
-\dontshow{\}) # examplesIf}
+anova_table(m, typ = 2L)
+}
+\references{
+Fox, J. and Weisberg, S. (2019). An R Companion to Applied
+Regression, 3rd ed., Sage (sections 5.3.4 and 6.3).
 }

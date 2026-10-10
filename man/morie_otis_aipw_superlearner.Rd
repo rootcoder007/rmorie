@@ -35,7 +35,10 @@ native learners (the same Lawson-Hanson convex stacking as
 \code{morie_weight_super}): propensity from
 \{ridge-logistic, quadratic logistic, base rate\} and per-arm
 outcome regressions from \{OLS, cross-validated ridge, mean\},
-with ranger random forests joining both stacks when installed.
+plus rmorie's native random forest in both stacks (200 CART trees,
+\code{mtry} = \eqn{\lfloor\sqrt p\rfloor}; minimum node size 10 for the
+probability forest, 5 for regression), so the learner library is the
+same on every install.
 Stacking weights come from inner 3-fold cross-validated
 predictions inside every outer training fold, so no fold ever
 sees its own outcome.

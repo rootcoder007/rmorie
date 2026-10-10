@@ -16,11 +16,18 @@ Named list: estimate, auc, fpr, tpr, thresholds, n,
 n_positive, n_negative, method.
 }
 \description{
-Wraps \code{pROC::roc}.
+Native empirical ROC curve, computed exactly as \code{pROC::roc} does
+with \code{levels = c(0, 1)}, \code{direction = "<"}: candidate
+thresholds are \code{-Inf}, the midpoints between consecutive distinct
+scores and \code{+Inf} (with pROC's near-tie correction), a case is
+called positive when its score is \code{>=} the threshold, and the AUC
+is the trapezoid area under (specificity, sensitivity), which equals
+the Mann-Whitney U probability with ties credited 0.5. Observations
+with a missing label or score are dropped from the curve (pROC's
+\code{na.rm = TRUE}).
 }
 \examples{
-\dontshow{if (requireNamespace("pROC", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-# See the package vignettes for usage examples:
-#   vignette(package = "rmorie")
-\dontshow{\}) # examplesIf}
+set.seed(1)
+y <- rbinom(50, 1, 0.5)
+morie_roc_auc_score(y, y + rnorm(50))$auc
 }

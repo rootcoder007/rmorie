@@ -168,22 +168,14 @@ mk_model <- function(n = 80L) {
   )
 }
 
-test_that("morie_effects_emmeans wraps emmeans::emmeans", {
-  skip_if_not_installed("emmeans")
+test_that("morie_effects_emmeans returns the native estimated marginal means", {
   obj <- mk_model()
   em  <- morie_effects_emmeans(obj$fit, specs = ~ d)
-  expect_s4_class(em, "emmGrid")
+  expect_s3_class(em, "data.frame")
+  expect_true(all(c("emmean", "SE", "df", "lower.CL", "upper.CL") %in% names(em)))
 })
 
-test_that("morie_effects_emmeans errors when emmeans absent", {
-  skip_if(requireNamespace("emmeans", quietly = TRUE))
-  obj <- mk_model()
-  expect_error(morie_effects_emmeans(obj$fit, specs = ~ d),
-               "emmeans")
-})
-
-test_that("morie_effects_predictions wraps marginaleffects::predictions", {
-  skip_if_not_installed("marginaleffects")
+test_that("morie_effects_predictions returns native predictions", {
   obj <- mk_model()
   out <- morie_effects_predictions(obj$fit)
   expect_true(is.data.frame(out) ||
@@ -192,15 +184,13 @@ test_that("morie_effects_predictions wraps marginaleffects::predictions", {
 })
 
 test_that("morie_effects_predictions respects newdata", {
-  skip_if_not_installed("marginaleffects")
   obj <- mk_model()
   nd  <- obj$df[seq_len(5L), ]
   out <- morie_effects_predictions(obj$fit, newdata = nd)
   expect_equal(nrow(out), 5L)
 })
 
-test_that("morie_effects_comparisons wraps marginaleffects::comparisons", {
-  skip_if_not_installed("marginaleffects")
+test_that("morie_effects_comparisons returns native comparisons", {
   obj <- mk_model()
   out <- morie_effects_comparisons(obj$fit, variables = "d")
   expect_true(is.data.frame(out) ||
@@ -208,8 +198,7 @@ test_that("morie_effects_comparisons wraps marginaleffects::comparisons", {
   expect_true(nrow(out) > 0L)
 })
 
-test_that("morie_effects_slopes wraps marginaleffects::slopes", {
-  skip_if_not_installed("marginaleffects")
+test_that("morie_effects_slopes returns native slopes", {
   obj <- mk_model()
   out <- morie_effects_slopes(obj$fit, variables = "x1")
   expect_true(is.data.frame(out) ||
@@ -217,8 +206,7 @@ test_that("morie_effects_slopes wraps marginaleffects::slopes", {
   expect_true(nrow(out) > 0L)
 })
 
-test_that("morie_effects_tidy uses broom when installed", {
-  skip_if_not_installed("broom")
+test_that("morie_effects_tidy returns broom's columns", {
   obj <- mk_model()
   td  <- morie_effects_tidy(obj$fit)
   expect_s3_class(td, "data.frame")
@@ -226,10 +214,8 @@ test_that("morie_effects_tidy uses broom when installed", {
                     names(td)))
 })
 
-test_that("morie_effects_tidy has summary-based fallback", {
+test_that("morie_effects_tidy works on the model summary", {
   obj <- mk_model()
-  # Always works on lm/glm via the fallback path; broom path returns
-  # the same canonical columns, so the assertion holds either way.
   td <- morie_effects_tidy(obj$fit)
   expect_s3_class(td, "data.frame")
   expect_true("term" %in% names(td))

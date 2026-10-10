@@ -5,9 +5,9 @@
 \title{Model-agnostic explainability (XAI) for bias discovery}
 \description{
 R ports of the explainer suite in \code{morie.fairness.xai}.
-Prefers \pkg{iml} for permutation importance / PDP / SHAP-ish
-attributions when available; otherwise computes the same quantities
-in base R from first principles. Every callable takes a
+Permutation importance, partial dependence, ALE, ceteris-paribus
+profiles and SHAP-style attributions are computed natively in base R
+from first principles (\pkg{iml} is not used). Every callable takes a
 \code{predict_fn} closure (matrix -> numeric vector) so it works on
 any classifier or risk model.
 }

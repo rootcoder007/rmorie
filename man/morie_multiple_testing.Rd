@@ -19,8 +19,8 @@ interpretation.
 
 FWER and FDR methods delegate to \code{stats::p.adjust} for the
 textbook procedures (Bonferroni, Holm, Hochberg, Hommel,
-Benjamini-Hochberg, Benjamini-Yekutieli). Combined-p tests delegate
-to \pkg{poolr} when installed and fall back to inline math
-otherwise. \code{storey_q} / \code{estimate_pi0} delegate to
-\pkg{qvalue} when installed.
+Benjamini-Hochberg, Benjamini-Yekutieli). Combined-p tests, the
+effective number of tests, Storey q-values and the pi0 estimators
+are native closed forms (cross-validated against \pkg{poolr} and
+\pkg{qvalue} in the test suite; neither package is used at run time).
 }

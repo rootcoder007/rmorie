@@ -9,8 +9,9 @@ Two callables: \code{morie_fairness_spatial_gan} learns a 2-D
 coordinate distribution and samples synthetic points;
 \code{morie_fairness_ctgan_debiaser} rebalances a tabular dataset
 so every group's favourable-outcome rate matches a privileged
-group's. Both gate on optional dependencies: \pkg{torch} (preferred,
-native) or \pkg{reticulate} + JAX (fallback). When neither is
-available the callables return a degenerate \code{morie_rich_result}
-explaining how to install a backend; they never error at import.
+group's. Both run on a native base-R backend on every install: the
+spatial generator is a small leaky-ReLU MLP fitted by a seeded
+random-search (keep-if-better) loop, and the debiaser resamples
+observed rows conditional on (group, outcome). Neither \pkg{torch} nor
+\pkg{reticulate}/JAX is used.
 }

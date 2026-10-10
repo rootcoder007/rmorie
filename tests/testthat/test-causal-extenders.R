@@ -1,7 +1,7 @@
 library(testthat)
 
 # Tests for the Phase 1.h causal-extender wrappers added in R/causal.R:
-#   * morie_causal_impact()    -> CausalImpact
+#   * morie_causal_impact()    -> native (local level + regression BSTS, as CausalImpact)
 #   * morie_causal_weighting() -> WeightIt
 #   * morie_causal_robust_se() -> sandwich
 #
@@ -13,19 +13,6 @@ library(testthat)
 # ---------------------------------------------------------------------------
 # Hard-error contracts (no Suggests dependency)
 # ---------------------------------------------------------------------------
-
-test_that("morie_causal_impact hard-errors when CausalImpact is missing", {
-  with_mocked_bindings(
-    .causal_have_causalimpact = function() FALSE,
-    .package = "rmorie",
-    code = expect_error(
-      morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)),
-                          pre_period = c(1, 5),
-                          post_period = c(6, 10)),
-      regexp = "CausalImpact"
-    )
-  )
-})
 
 test_that("morie_causal_weighting is native for glm / cbps / ebal and names WeightIt only for the rest", {
   set.seed(2)
@@ -57,11 +44,10 @@ test_that("morie_causal_robust_se computes natively (no sandwich needed)", {
 })
 
 # ---------------------------------------------------------------------------
-# morie_causal_impact -- live CausalImpact integration
+# morie_causal_impact -- native Bayesian structural time series
 # ---------------------------------------------------------------------------
 
 test_that("morie_causal_impact returns expected result fields", {
-  skip_if_not_installed("CausalImpact")
 
   set.seed(42)
   n <- 80L
@@ -72,15 +58,12 @@ test_that("morie_causal_impact returns expected result fields", {
   y[(pre_n + 1L):n] <- y[(pre_n + 1L):n] + 1.5
   d <- data.frame(y = y, x = as.numeric(x))
 
-  # niter = 200 keeps the test fast; CausalImpact flags the short chain
-  expect_warning(
-    res <- morie_causal_impact(
-      data = d,
-      pre_period = c(1L, pre_n),
-      post_period = c(pre_n + 1L, n),
-      model_args = list(niter = 200L)
-    ),
-    "MCMC"
+  # niter = 200 keeps the test fast
+  res <- morie_causal_impact(
+    data = d,
+    pre_period = c(1L, pre_n),
+    post_period = c(pre_n + 1L, n),
+    model_args = list(niter = 200L, seed = 1L)
   )
   expect_true(all(c("average_effect", "cumulative_effect",
                     "ci_lower", "ci_upper", "summary",

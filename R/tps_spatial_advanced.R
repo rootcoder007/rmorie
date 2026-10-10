@@ -11,7 +11,7 @@
 #'   \item \code{\link{morie_tps_getis_ord_g_star}}: local
 #'     Getis-Ord Gi* hot/cold-spot z-scores.
 #'   \item \code{\link{morie_tps_dbscan_clusters}}: density-based
-#'     clusters on lat/long (via \pkg{dbscan}, optional).
+#'     clusters on lat/long (native DBSCAN).
 #'   \item \code{\link{morie_tps_polygon_morans_i}}: polygon-aware
 #'     Moran's I from an \pkg{sf} object's actual polygon centroids
 #'     (instead of the centroid-only k-NN approximation in
@@ -25,7 +25,7 @@
 #' Polygon functions accept either an \pkg{sf} object (gated with
 #' \code{requireNamespace("sf")}) or a plain data.frame carrying
 #' precomputed centroid columns. KNN graphs prefer \pkg{FNN}; DBSCAN
-#' requires the optional \pkg{dbscan} package; spatial autocorrelation
+#' runs on the package's native implementation; spatial autocorrelation
 #' tests can optionally be delegated to \pkg{spdep}.
 #'
 #' @name tps_spatial_advanced
@@ -385,9 +385,14 @@ morie_tps_getis_ord_g_star <- function(df,
 
 #' DBSCAN density clusters on lat/long
 #'
-#' Requires the optional \pkg{dbscan} package. Coordinates are
-#' projected to km via the small-angle latitude factor so \code{eps_km}
-#' is interpretable as a kilometre-scale radius.
+#' Runs the package's native DBSCAN (Ester et al. 1996; same core-point
+#' rule, \code{<= eps} neighbourhoods counting the point itself, and
+#' border points joining the first cluster that reaches them, as
+#' \code{dbscan::dbscan}). Coordinates are projected to km via the
+#' small-angle latitude factor so \code{eps_km} is interpretable as a
+#' kilometre-scale radius. Cluster ids are 1-based in discovery order;
+#' noise is 0.  The neighbour search is quadratic in the number of
+#' points, so large inputs are capped by \code{max_n}.
 #'
 #' @param df Incident-level data.frame.
 #' @param ds_name Tag for the result title.
@@ -398,14 +403,12 @@ morie_tps_getis_ord_g_star <- function(df,
 #' @return A named list with the per-cluster table, the count of
 #'   noise points, and the largest-cluster size.
 #' @examples
-#' if (requireNamespace("dbscan", quietly = TRUE)) {
-#'   set.seed(2026)
-#'   df <- data.frame(
-#'     LAT_WGS84 = c(rnorm(60, 43.65, 0.005), rnorm(60, 43.70, 0.005)),
-#'     LONG_WGS84 = c(rnorm(60, -79.40, 0.005), rnorm(60, -79.38, 0.005))
-#'   )
-#'   morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
-#' }
+#' set.seed(2026)
+#' df <- data.frame(
+#'   LAT_WGS84 = c(rnorm(60, 43.65, 0.005), rnorm(60, 43.70, 0.005)),
+#'   LONG_WGS84 = c(rnorm(60, -79.40, 0.005), rnorm(60, -79.38, 0.005))
+#' )
+#' morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
 #' @export
 morie_tps_dbscan_clusters <- function(df,
                                        ds_name = "?",
@@ -420,18 +423,6 @@ morie_tps_dbscan_clusters <- function(df,
     nrow(df), eps_km, as.integer(min_samples)
   )
   title <- sprintf("DBSCAN density clusters -- %s", ds_name)
-
-  if (!requireNamespace("dbscan", quietly = TRUE)) {
-    return(.tps_adv_result(
-      title, call,
-      warnings = "optional package 'dbscan' not installed",
-      interpretation = paste(
-        "No analysis: the optional 'dbscan' package is required for",
-        "this callable. Install with install.packages('dbscan')."
-      ),
-      n = 0L
-    ))
-  }
 
   coords <- .tps_coords(df, lat_col, lon_col)
   n0 <- nrow(coords)
@@ -455,8 +446,11 @@ morie_tps_dbscan_clusters <- function(df,
   coords_km <- cbind(coords[, 1L] * km_per_deg_lat,
                      coords[, 2L] * km_per_deg_lon)
 
-  db <- dbscan::dbscan(coords_km, eps = eps_km, minPts = as.integer(min_samples))
-  labels <- db$cluster
+  # Native DBSCAN labels are 0-based with -1 for noise; shift to the
+  # 1-based / 0-noise convention used below.
+  db <- .morie_dbscan_native(coords_km, eps = eps_km,
+                             min_samples = as.integer(min_samples))
+  labels <- db$labels + 1L
   n_clusters <- length(setdiff(unique(labels), 0L))
   n_noise <- sum(labels == 0L)
 
@@ -996,15 +990,13 @@ morie_tps_moran_sweep_heatmap <- function(polygons,
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
-#' if (requireNamespace("dbscan", quietly = TRUE)) {
-#'   set.seed(2026)
-#'   df <- data.frame(
-#'     LAT_WGS84 = c(rnorm(60, 43.65, 0.005), rnorm(60, 43.70, 0.005)),
-#'     LONG_WGS84 = c(rnorm(60, -79.40, 0.005), rnorm(60, -79.38, 0.005))
-#'   )
-#'   obj <- morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
-#'   print(obj)
-#' }
+#' set.seed(2026)
+#' df <- data.frame(
+#'   LAT_WGS84 = c(rnorm(60, 43.65, 0.005), rnorm(60, 43.70, 0.005)),
+#'   LONG_WGS84 = c(rnorm(60, -79.40, 0.005), rnorm(60, -79.38, 0.005))
+#' )
+#' obj <- morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
+#' print(obj)
 #' }
 #' @export
 print.morie_tps_spatial_advanced_result <- function(x, ...) {

@@ -264,8 +264,11 @@ morie_weight_trimming <- function(w, q = 0.99) {
 #' SuperLearner-style ensemble propensity weights
 #'
 #' Native stacking: fits a small library of propensity learners
-#' (logistic, logistic-with-interactions, and optionally GBM/ranger
-#' when installed), combines their cross-validated predictions by
+#' (logistic, logistic with squared terms, and rmorie's native random
+#' forest -- a probability forest of 200 CART trees, \code{mtry} =
+#' \eqn{\lfloor\sqrt p\rfloor}, minimum node size 10, the ranger
+#' probability-forest defaults -- so the library is identical on every
+#' install), combines their cross-validated predictions by
 #' non-negative least squares on the CV log-loss surface (native NNLS
 #' via Lawson-Hanson active set), and converts the ensemble scores to
 #' estimand weights.
@@ -302,14 +305,13 @@ morie_weight_super <- function(data, treatment, covariates,
                                  f$coefficients)))
     }
   )
-  if (requireNamespace("ranger", quietly = TRUE)) {
-    learners$ranger <- function(tr, te) {
-      df_tr <- data.frame(t = factor(t01[tr]), X[tr, , drop = FALSE])
-      fit <- ranger::ranger(t ~ ., data = df_tr, probability = TRUE,
-                            num.trees = 200L)
-      stats::predict(fit,
-                     data = data.frame(X[te, , drop = FALSE]))$predictions[, "1"]
-    }
+  # Native probability forest (regression trees on the 0/1 treatment,
+  # Malley et al. 2012), trees_native.R's ESL Algorithm 15.1 forest.
+  learners$forest <- function(tr, te) {
+    fit <- .morie_rf_fit(X[tr, , drop = FALSE], t01[tr], task = "regression",
+                         n_estimators = 200L,
+                         mtry = max(1L, floor(sqrt(ncol(X)))), min_node = 10L)
+    .morie_rf_predict(fit, X[te, , drop = FALSE])
   }
 
   .rmorie_local_seed(1L)

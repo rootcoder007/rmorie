@@ -28,33 +28,43 @@
   min_samples <- as.integer(min_samples)
   if (n == 0L) return(list(labels = integer(0), core = logical(0)))
 
+  # within eps as dbscan::dbscan decides it (its ANN kd-tree search): squared Euclidean distance
+  # summed one dimension at a time in double precision and compared with eps * eps; the
+  # Manhattan and Chebyshev distances are accumulated the same way
   dist_to <- function(i) {
-    dif <- x - matrix(x[i, ], nrow = n, ncol = ncol(x), byrow = TRUE)
-    switch(metric,
-           manhattan = rowSums(abs(dif)),
-           chebyshev = apply(abs(dif), 1L, max),
-           sqrt(rowSums(dif * dif)))
+    .morie_dbscan_within(lapply(seq_len(ncol(x)), function(j) x[i, j] - x[, j]), eps, metric)
   }
 
-  nbrs <- vector("list", n)
-  for (i in seq_len(n)) nbrs[[i]] <- which(dist_to(i) <= eps)
+  nbrs <- if (n > 300L && ncol(x) <= 3L && is.finite(eps) && eps > 0 && all(is.finite(x))) {
+    .morie_dbscan_grid_nbrs(x, eps, metric)
+  } else {
+    lapply(seq_len(n), function(i) which(dist_to(i)))
+  }
   core <- vapply(nbrs, function(v) length(v) >= min_samples, logical(1))
 
+  # Each cluster grows from its first core point in index order. A point is labelled when it is
+  # first reached and queued once, so the work is linear in the neighbour lists; every unlabelled
+  # point reachable from the cluster's core points gets its id whatever the visiting order, as in
+  # dbscan::dbscan (a border point keeps the first cluster that reaches it).
   labels <- rep(NA_integer_, n)
+  queue <- integer(n)
   cid <- 0L
   for (i in seq_len(n)) {
     if (!is.na(labels[i]) || !core[i]) next
     labels[i] <- cid
-    seeds <- setdiff(nbrs[[i]], i)
-    while (length(seeds)) {
-      j <- seeds[length(seeds)]
-      seeds <- seeds[-length(seeds)]
-      if (!is.na(labels[j]) && labels[j] != -1L) next
-      labels[j] <- cid
-      if (core[j]) {
-        add <- nbrs[[j]]
-        add <- add[is.na(labels[add]) | labels[add] == -1L]
-        seeds <- c(seeds, add)
+    head <- 1L
+    tail <- 1L
+    queue[1L] <- i
+    while (head <= tail) {
+      j <- queue[head]
+      head <- head + 1L
+      if (!core[j]) next
+      nb <- nbrs[[j]]
+      nb <- nb[is.na(labels[nb])]
+      if (length(nb)) {
+        labels[nb] <- cid
+        queue[tail + seq_along(nb)] <- nb
+        tail <- tail + length(nb)
       }
     }
     cid <- cid + 1L
@@ -112,4 +122,42 @@ morie_dbscan_clustering <- function(x, eps = 0.5, min_samples = 5L,
     n                   = nrow(x),
     method              = "DBSCAN (Ester et al. 1996)"
   )
+}
+
+# Neighbours within eps by a grid of cells of side eps (1 to 3 dimensions): for every metric
+# here |x_k - y_k| <= dist(x, y), so a neighbour lies in the same or an adjacent cell. Each
+# list element is sorted, as which() over all points would give, so the clustering is unchanged.
+.morie_dbscan_grid_nbrs <- function(x, eps, metric) {
+  n <- nrow(x)
+  d <- ncol(x)
+  side <- eps * (1 + 1e-9)
+  cell <- floor(sweep(x, 2L, apply(x, 2L, min)) / side)
+  span <- apply(cell, 2L, max) + 3
+  mult <- cumprod(c(1, span[-d]))
+  key <- as.vector((cell + 1) %*% mult)
+  members <- split(seq_len(n), key)
+  offs <- as.matrix(expand.grid(rep(list(-1:1), d)))
+  off_key <- as.vector(offs %*% mult)
+  ukey <- as.numeric(names(members))
+  adj <- matrix(match(outer(ukey, off_key, "+"), ukey), nrow = length(ukey))
+  nbrs <- vector("list", n)
+  for (c in seq_along(members)) {
+    own <- members[[c]]
+    cand <- sort(unlist(members[adj[c, !is.na(adj[c, ])]], use.names = FALSE))
+    hit <- matrix(.morie_dbscan_within(
+      lapply(seq_len(d), function(j) as.vector(outer(x[own, j], x[cand, j], "-"))), eps, metric),
+      nrow = length(own))
+    for (r in seq_along(own)) nbrs[[own[r]]] <- cand[hit[r, ]]
+  }
+  nbrs
+}
+
+# TRUE where a point is within eps, given its coordinate differences per dimension (a list of
+# equal-length vectors, in dimension order). Euclidean: dbscan's sum of squares, left to right in
+# double precision, <= eps * eps.
+.morie_dbscan_within <- function(diffs, eps, metric) {
+  switch(metric,
+         manhattan = Reduce(`+`, lapply(diffs, abs)) <= eps,
+         chebyshev = Reduce(pmax, lapply(diffs, abs)) <= eps,
+         Reduce(`+`, lapply(diffs, function(v) v * v)) <= eps * eps)
 }

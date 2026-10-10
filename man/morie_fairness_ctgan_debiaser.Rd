@@ -40,7 +40,10 @@ carried for interface parity and has no effect.}
 }
 \value{
 \code{morie_fairness_result}; \code{$debiased} carries the
-synthesised data.frame when a backend is available.
+synthesised data.frame (native base-R resampling: each synthetic row
+draws its group from the observed group shares, its outcome at the
+privileged group's favourable rate, and its features from an observed
+row with that group and outcome).
 }
 \description{
 A port of the CTGAN-style debiaser from

@@ -6,10 +6,6 @@
 #' @name ghosal_bnp_helpers
 NULL
 
-#' Internal helper: Gh Have
-#' @noRd
-.gh_have <- function(pkg) requireNamespace(pkg, quietly = TRUE)
-
 #' Internal helper: Gh Pairwise Sq
 #' @noRd
 .gh_pairwise_sq <- function(a, b = a) {

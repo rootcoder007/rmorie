@@ -73,54 +73,6 @@ test_that(".morie_did_ols_robust_se with cluster_ids returns clustered SE", {
   expect_true(is.numeric(out) || is.list(out))
 })
 
-test_that(".morie_did_outcome_regression_att returns ATT on synthetic data", {
-  set.seed(3L)
-  n <- 80L
-  X <- cbind(1, stats::rnorm(n))
-  treat <- stats::rbinom(n, 1L, 0.5)
-  y <- 0.5 * treat + X[, 2] + stats::rnorm(n, sd = 0.3)
-  out <- tryCatch(
-    rmorie:::.morie_did_outcome_regression_att(y, X, treat),
-    error = function(e) e)
-  if (inherits(out, "error")) {
-    skip(sprintf("outcome_regression_att error: %s",
-                 conditionMessage(out)))
-  }
-  expect_true(is.numeric(out) || is.list(out))
-})
-
-test_that(".morie_did_ipw_att returns ATT given y/treat/ps", {
-  set.seed(4L)
-  n <- 100L
-  treat <- stats::rbinom(n, 1L, 0.5)
-  ps <- pmin(pmax(stats::runif(n, 0.1, 0.9), 0.05), 0.95)
-  y <- 0.5 * treat + stats::rnorm(n, sd = 0.3)
-  out <- tryCatch(
-    rmorie:::.morie_did_ipw_att(y, treat, ps),
-    error = function(e) e)
-  if (inherits(out, "error")) {
-    skip(sprintf("ipw_att error: %s", conditionMessage(out)))
-  }
-  expect_true(is.numeric(out) || is.list(out))
-})
-
-test_that(".morie_did_within_transform demean each unit's series", {
-  set.seed(5L)
-  n_units <- 20L
-  n_periods <- 5L
-  df <- expand.grid(unit = 1:n_units, time = 1:n_periods)
-  df$y <- df$unit * 10 + df$time + stats::rnorm(nrow(df))
-  out <- tryCatch(
-    rmorie:::.morie_did_within_transform(df, "y", "unit", "time"),
-    error = function(e) e)
-  if (inherits(out, "error")) {
-    skip(sprintf("within_transform error: %s",
-                 conditionMessage(out)))
-  }
-  expect_true(is.numeric(out) || is.list(out) ||
-                is.data.frame(out))
-})
-
 # =========================================================== matching internals
 
 test_that(".morie_matching_logit returns ln(p/(1-p)) with eps clipping", {
@@ -130,11 +82,6 @@ test_that(".morie_matching_logit returns ln(p/(1-p)) with eps clipping", {
   # Edge: p=0 and p=1 should clip via eps, not return Inf
   expect_true(is.finite(rmorie:::.morie_matching_logit(0.0, eps = 1e-6)))
   expect_true(is.finite(rmorie:::.morie_matching_logit(1.0, eps = 1e-6)))
-})
-
-test_that(".morie_matching_have returns logical for installed/not-installed pkg", {
-  expect_type(rmorie:::.morie_matching_have("MatchIt"), "logical")
-  expect_false(rmorie:::.morie_matching_have("__not_a_real_pkg__"))
 })
 
 test_that(".morie_matching_drop_na drops rows with NAs in named cols", {

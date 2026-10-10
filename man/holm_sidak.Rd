@@ -18,8 +18,7 @@ An object of class \code{"morie_multiple_testing_result"}.
 }
 \description{
 Step-down Holm with Sidak's closed-form adjustment per step;
-equivalent to \code{mutoss::SidakSD} when that package is
-installed.
+native closed form, equivalent to \code{mutoss::SidakSD}.
 }
 \examples{
 set.seed(1)
