@@ -146,12 +146,9 @@ publishes the docs site at <https://rootcoder007.github.io/rmorie/>.
 
 - Subject in imperative ("fix", "feat", "ci", "docs", "test", "chore")
 - Body: WHY > WHAT (diff shows the what)
-- Dual co-author trailer required:
-
-  ```
-  Co-Authored-By: Claude <noreply@anthropic.com>
-  Co-Authored-By: Vansh Singh Ruhela (rootcoder007) <vsruhela@proton.me>
-  ```
+- Don't put AI session links in commit messages, PR or issue text, or
+  code: no `Claude-Session:` lines and no `claude.ai/code/session_...`
+  URLs.
 
 ## Contact
 
