@@ -30,6 +30,20 @@ gam_parity_data <- function(n = 400, seed = 2) {
 
 gam_rel <- function(a, b) max(abs(a - b)) / max(abs(b))
 
+# The sign of each thin plate basis column is the sign LAPACK gives an
+# eigenvector inside mgcv's Lanczos step, so it depends on the BLAS/LAPACK
+# R is linked to: with reference LAPACK mgcv's signs equal morie's, with
+# OpenBLAS some columns come out negated.  Either way the fit (fitted values,
+# EDF, criterion, p-values) is the same.  Coefficients, Vp and the basis are
+# compared after giving each of mgcv's columns morie's sign.
+gam_signs <- function(m, b, data) {
+  Xm <- stats::predict(m, data, type = "lpmatrix")
+  Xb <- stats::predict(b, data, type = "lpmatrix")
+  s <- sign(colSums(Xm * Xb))
+  s[s == 0] <- 1
+  s
+}
+
 gam_parity_cases <- list(
   list(f = y ~ s(x), fam = "gaussian", method = "GCV.Cp"),
   list(f = y ~ s(x) + s(z) + w, fam = "gaussian", method = "GCV.Cp"),
@@ -51,9 +65,11 @@ test_that("fixed smoothing parameters reproduce mgcv::gam to rounding", {
     m <- rmorie::morie_gam(cs$f, d, family = cs$fam, method = cs$method, sp = b$sp)
     lab <- paste(format(cs$f), cs$fam, cs$method)
     reml_gauss <- cs$method == "REML" && cs$fam == "gaussian"
-    expect_lt(gam_rel(m$coefficients, stats::coef(b)), 1e-8, label = paste("coef", lab))
+    s <- gam_signs(m, b, d)
+    expect_lt(gam_rel(m$coefficients, s * stats::coef(b)), 1e-8, label = paste("coef", lab))
     expect_equal(names(m$coefficients), names(stats::coef(b)), label = paste("names", lab))
-    expect_lt(gam_rel(m$Vp, b$Vp), if (reml_gauss) 1e-6 else 1e-8, label = paste("Vp", lab))
+    expect_lt(gam_rel(m$Vp, b$Vp * outer(s, s)), if (reml_gauss) 1e-6 else 1e-8,
+              label = paste("Vp", lab))
     expect_lt(gam_rel(m$edf, b$edf), 1e-8, label = paste("edf", lab))
     expect_lt(gam_rel(m$fitted.values, b$fitted.values), 1e-8, label = paste("fitted", lab))
     expect_lt(abs(m$score - b$gcv.ubre) / abs(b$gcv.ubre), 1e-8, label = paste("score", lab))
@@ -94,7 +110,7 @@ test_that("estimated smoothing parameters agree with mgcv::gam within its tolera
   }
 })
 
-test_that("thin plate basis matches mgcv's, eigenvector signs included", {
+test_that("thin plate basis matches mgcv's, column by column", {
   testthat::skip_if_not_installed("mgcv")
   d <- gam_parity_data()
   for (f in list(y ~ s(x), y ~ s(x, k = 20), y ~ s(x, z))) {
@@ -102,7 +118,8 @@ test_that("thin plate basis matches mgcv's, eigenvector signs included", {
     m <- rmorie::morie_gam(f, d, sp = b$sp)
     Xb <- stats::predict(b, d, type = "lpmatrix")
     Xm <- stats::predict(m, d, type = "lpmatrix")
-    expect_lt(max(abs(Xm - Xb)), 1e-8)
+    s <- gam_signs(m, b, d)
+    expect_lt(max(abs(Xm - sweep(Xb, 2, s, `*`))), 1e-8)
   }
 })
 
@@ -114,7 +131,7 @@ test_that("large data: knot subsampling matches mgcv (n > 2000)", {
   d$y <- sin(2 * pi * d$x) + d$z^2 + stats::rnorm(n, 0, 0.3)
   b <- mgcv::gam(y ~ s(x) + s(z), data = d)
   m <- rmorie::morie_gam(y ~ s(x) + s(z), d, sp = b$sp)
-  expect_lt(gam_rel(m$coefficients, stats::coef(b)), 1e-8)
+  expect_lt(gam_rel(m$coefficients, gam_signs(m, b, d) * stats::coef(b)), 1e-8)
   expect_lt(gam_rel(m$fitted.values, b$fitted.values), 1e-8)
 })
 
