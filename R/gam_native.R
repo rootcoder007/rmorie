@@ -36,12 +36,9 @@
 # variables, both translated from mgcv 1.9-1 (GPL >= 2; Davies, R. B.
 # (1980) The distribution of a linear combination of chi-squared random
 # variables, Applied Statistics 29, 323-333).
-
-
 # ---------------------------------------------------------------------------
 # Formula handling
 # ---------------------------------------------------------------------------
-
 # Read one s() call: its covariate expressions and the k / bs settings.
 .gamn_read_s <- function(cl) {
   args <- as.list(cl)[-1L]
@@ -84,7 +81,6 @@
   list(exprs = covs, term = terms, k = k, bs = bs, fixed = fx, label = label,
        dim = length(covs))
 }
-
 # Split a formula into its parametric part (a terms object) and its s() terms.
 .gamn_formula_parts <- function(formula) {
   if (!inherits(formula, "formula") || length(formula) != 3L)
@@ -131,20 +127,17 @@
   list(pterms = ptt, smooths = smooths, response = vars[[attr(tt, "response")]],
        intercept = attr(tt, "intercept"))
 }
-
-
 # ---------------------------------------------------------------------------
 # Thin plate regression spline basis (mgcv tprs.c, Wood 2003)
 # ---------------------------------------------------------------------------
-
 # Null-space dimension and the default penalty order m (smallest m with
 # 2m > d + 1 when the supplied order is not valid).
 .gamn_tp_m <- function(d, m = 0L) {
-  if (2L * m <= d) { m <- 1L; while (2L * m < d + 2L) m <- m + 1L }
+  if (2L * m <= d) { m <- 1L
+  while (2L * m < d + 2L) m <- m + 1L }
   m
 }
 .gamn_tp_M <- function(d, m) choose(m + d - 1L, d)
-
 # Thin plate radial basis constant (mgcv eta_const).
 .gamn_eta_const <- function(m, d) {
   if (d %% 2L == 0L) {
@@ -162,7 +155,6 @@
   }
   f
 }
-
 # eta(r) from squared distances r2 (mgcv fast_eta), vectorised.
 .gamn_eta <- function(r2, m, d, f) {
   out <- numeric(length(r2))
@@ -175,7 +167,6 @@
   }
   out
 }
-
 # Polynomial powers spanning the penalty null space (mgcv
 # gen_tps_poly_powers): an M x d integer matrix.
 .gamn_poly_powers <- function(M, m, d) {
@@ -190,24 +181,24 @@
       if (d > 1L) for (j in 2:d) {
         idx[j] <- idx[j] + 1L
         s <- s + 1L
-        if (s == m) { s <- s - idx[j]; idx[j] <- 0L } else break
+        if (s == m) { s <- s - idx[j]
+        idx[j] <- 0L } else break
       }
     }
   }
   P
 }
-
 .gamn_tps_T <- function(X, P) {
   T <- matrix(1, nrow(X), nrow(P))
   for (j in seq_len(nrow(P))) for (k in seq_len(ncol(P)))
     if (P[j, k] > 0L) T[, j] <- T[, j] * X[, k]^P[j, k]
   T
 }
-
 # Radial basis matrix between the rows of A (n x d) and B (nk x d).
 .gamn_tps_E <- function(A, B, m, d, f) {
   r2 <- 0
-  for (j in seq_len(d)) { dx <- outer(A[, j], B[, j], "-"); r2 <- r2 + dx * dx }
+  for (j in seq_len(d)) { dx <- outer(A[, j], B[, j], "-")
+  r2 <- r2 + dx * dx }
   if (d == 1L && m == 2L) {
     E <- f * r2 * sqrt(r2)              # (f r^2) sqrt(r^2), as mgcv's fast_eta
   } else if (d == 2L && m == 2L) {
@@ -219,11 +210,11 @@
   dim(E) <- c(nrow(A), nrow(B))
   E
 }
-
 # Householder factorisation A Q = [0, T] (mgcv QT with fullQ = 0): returns
 # the rows u_i defining Q = H_1 H_2 ... with H_i = I - u_i u_i'.
 .gamn_QT <- function(A) {
-  Ar <- nrow(A); Ac <- ncol(A)
+  Ar <- nrow(A)
+  Ac <- ncol(A)
   U <- matrix(0, Ar, Ac)
   for (i in seq_len(Ar)) {
     len <- Ac - i + 1L
@@ -242,7 +233,6 @@
   }
   U
 }
-
 # C Q (postmultiplication by the Householder product, mgcv HQmult(C,U,0,0)).
 .gamn_HQ_right <- function(C, U) {
   for (k in seq_len(nrow(U))) {
@@ -251,7 +241,6 @@
   }
   C
 }
-
 # Lanczos iteration for the k largest-magnitude eigenpairs of symmetric A,
 # reproducing mgcv's Rlanczos operation by operation: the same start
 # vector, the same order of floating point operations (sequential dot
@@ -266,14 +255,16 @@
   f_check <- max(k %/% 2L, 10L)
   kk <- max(n %/% 10L, 1L)
   if (kk < f_check) f_check <- kk
-  jran <- 1; q0 <- numeric(n)
+  jran <- 1
+  q0 <- numeric(n)
   for (i in seq_len(n)) {
     jran <- (jran * 106 + 1283) %% 6075
     q0[i] <- jran / 6075 - 0.5
   }
   Q <- matrix(0, n, min(n, 256L))
   Q[, 1L] <- q0 / sqrt(dot(q0, q0))
-  a <- numeric(n); b <- numeric(n)
+  a <- numeric(n)
+  b <- numeric(n)
   res <- NULL
   for (j in 0:(n - 1L)) {
     if (j + 2L > ncol(Q)) Q <- cbind(Q, matrix(0, n, ncol(Q)))
@@ -291,25 +282,32 @@
     if (j < n - 1L) Q[, j + 2L] <- z / b[j + 1L]
     if ((j >= k && j %% f_check == 0L) || j == n - 1L) {
       ev <- .gamn_tridiag_eigen(a[seq_len(j + 1L)], b[seq_len(j)])
-      d <- ev$values; v <- ev$vectors
+      d <- ev$values
+      v <- ev$vectors
       normTj <- max(abs(d[1L]), abs(d[j + 1L]))
       err <- abs(b[j + 1L] * v[j + 1L, ])
       if (j >= k) {
         max_err <- normTj * tol
-        pi_ <- 0L; ni <- 0L; conv <- TRUE
+        pi_ <- 0L
+        ni <- 0L
+        conv <- TRUE
         while (pi_ + ni < k) {
           if (abs(d[pi_ + 1L]) >= abs(d[j + 1L - ni])) {
-            if (err[pi_ + 1L] > max_err) { conv <- FALSE; break } else pi_ <- pi_ + 1L
+            if (err[pi_ + 1L] > max_err) { conv <- FALSE
+            break } else pi_ <- pi_ + 1L
           } else {
-            if (err[ni + 1L] > max_err) { conv <- FALSE; break } else ni <- ni + 1L
+            if (err[ni + 1L] > max_err) { conv <- FALSE
+            break } else ni <- ni + 1L
           }
         }
         if (conv || j == n - 1L) {
-          if (!conv) { pi_ <- k; ni <- 0L }
+          if (!conv) { pi_ <- k
+          ni <- 0L }
           jj <- j + 1L
           # final decomposition with LAPACK's DSTEDC conventions, descending
           ev <- .gamn_dstedc(a[seq_len(jj)], b[seq_len(j)])
-          d <- rev(ev$values); v <- ev$vectors[, jj:1L, drop = FALSE]
+          d <- rev(ev$values)
+          v <- ev$vectors[, jj:1L, drop = FALSE]
           idx <- c(seq_len(pi_), if (ni > 0L) (jj - ni + 1L):jj)
           U <- Q[, seq_len(jj), drop = FALSE] %*% v[, idx, drop = FALSE]
           res <- list(values = d[idx], vectors = U, iter = jj)
@@ -320,7 +318,6 @@
   }
   res
 }
-
 # Eigen-decomposition of a symmetric tridiagonal matrix (diagonal a,
 # off-diagonal b), eigenvalues in descending order.
 .gamn_tridiag_eigen <- function(a, b) {
@@ -331,11 +328,11 @@
   Tm[cbind(1:(n - 1L), 2:n)] <- b
   eigen(Tm, symmetric = TRUE)
 }
-
 # The thin plate regression spline basis of one smooth.
 .gamn_tp_construct <- function(Xd, k, max_knots = 2000L, seed = 1L) {
   Xd <- as.matrix(Xd)
-  n <- nrow(Xd); d <- ncol(Xd)
+  n <- nrow(Xd)
+  d <- ncol(Xd)
   shift <- colMeans(Xd)
   Xd <- sweep(Xd, 2L, shift)
   m <- .gamn_tp_m(d, 0L)
@@ -376,7 +373,8 @@
   P <- .gamn_poly_powers(M, m, d)
   T <- .gamn_tps_T(Xu, P)
   lz <- .gamn_lanczos(E, k)
-  U <- lz$vectors; v <- lz$values
+  U <- lz$vectors
+  v <- lz$values
   TU <- crossprod(T, U)
   Hh <- .gamn_QT(TU)
   UQ <- .gamn_HQ_right(U, Hh)
@@ -384,7 +382,8 @@
               cbind(matrix(0, M, k - M), diag(M)))
   S <- .gamn_HQ_right(diag(v, k), Hh)
   S <- t(.gamn_HQ_right(t(S), Hh))
-  S[, (k - M + 1L):k] <- 0; S[(k - M + 1L):k, ] <- 0
+  S[, (k - M + 1L):k] <- 0
+  S[(k - M + 1L):k, ] <- 0
   if (is.null(knots)) {
     X1 <- .gamn_HQ_right(sweep(U, 2L, v, "*"), Hh)
     X1[, (k - M + 1L):k] <- T
@@ -398,13 +397,13 @@
   X <- sweep(X, 2L, w, "/")
   UZ <- sweep(UZ, 2L, w, "/")
   # mgcv divides row i and then column i by w[i], i = 1, ..., k
-  ri <- row(S); ci <- col(S)
+  ri <- row(S)
+  ci <- col(S)
   S <- S / w[pmin(ri, ci)] / w[pmax(ri, ci)]
   S <- (S + t(S)) / 2
   list(X = X, S = S, UZ = UZ, Xu = Xu, shift = shift, m = m, M = M, k = k,
        null.space.dim = M, rank = k - M, eta_f = f, lanczos_iter = lz$iter)
 }
-
 # b'UZ for each row of X (already shifted): the knot-based evaluation used
 # for prediction and for large data sets.
 .gamn_tp_predict_raw <- function(Xd, Xu, UZ, m, d, M, f) {
@@ -418,7 +417,8 @@
     # eta(r) = f |r|^3: on each knot interval sum_j c_j |x - k_j|^3 is the
     # cubic sum_q choose(3, q) x^(3-q) (-1)^q sum_j s_j c_j k_j^q with
     # s_j = sign(x - k_j), evaluated from cumulative sums over the knots.
-    kn <- Xu[, 1L]; x <- Xd[, 1L]
+    kn <- Xu[, 1L]
+    x <- Xd[, 1L]
     pidx <- findInterval(x, kn) + 1L
     cf <- c(1, -3, 3, -1)
     for (q in 0:3) {
@@ -438,7 +438,6 @@
   }
   out
 }
-
 # Run expr with the RNG set to a fixed seed (as mgcv's temp.seed), leaving
 # the caller's random number stream untouched.
 .gamn_with_seed <- function(seed, expr) {
@@ -456,12 +455,9 @@
   set.seed(seed)
   force(expr)
 }
-
-
 # ---------------------------------------------------------------------------
 # Cubic regression spline basis (mgcv crspl, Wood 2017 section 5.3.1)
 # ---------------------------------------------------------------------------
-
 .gamn_cr_FS <- function(xk) {
   n <- length(xk)
   h <- diff(xk)
@@ -480,18 +476,25 @@
   BiD <- solve(B, D)
   list(S = crossprod(D, BiD), F = rbind(0, BiD, 0))  # F: second derivs at knots
 }
-
 .gamn_cr_X <- function(x, xk, Fm) {
-  nk <- length(xk); n <- length(x)
+  nk <- length(xk)
+  n <- length(x)
   X <- matrix(0, n, nk)
-  kmin <- xk[1L]; kmax <- xk[nk]
-  lo <- x < kmin; hi <- x > kmax; mid <- !(lo | hi)
+  kmin <- xk[1L]
+  kmax <- xk[nk]
+  lo <- x < kmin
+  hi <- x > kmax
+  mid <- !(lo | hi)
   if (any(mid)) {
     xi <- x[mid]
     j <- findInterval(xi, xk, rightmost.closed = TRUE, left.open = TRUE)
-    j[j < 1L] <- 1L; j[j > nk - 1L] <- nk - 1L
-    xj <- xk[j]; xj1 <- xk[j + 1L]; h <- xj1 - xj
-    ajm <- xj1 - xi; ajp <- xi - xj
+    j[j < 1L] <- 1L
+    j[j > nk - 1L] <- nk - 1L
+    xj <- xk[j]
+    xj1 <- xk[j + 1L]
+    h <- xj1 - xj
+    ajm <- xj1 - xi
+    ajp <- xi - xj
     cjm <- ajm * (ajm * ajm / h - h) / 6
     cjp <- ajp * (ajp * ajp / h - h) / 6
     Xm <- cjm * Fm[j, , drop = FALSE] + cjp * Fm[j + 1L, , drop = FALSE]
@@ -501,14 +504,16 @@
     X[mid, ] <- Xm
   }
   if (any(lo)) {
-    h <- xk[2L] - kmin; xik <- x[lo] - kmin
+    h <- xk[2L] - kmin
+    xik <- x[lo] - kmin
     Xl <- outer(-xik * h / 3, Fm[1L, ]) + outer(-xik * h / 6, Fm[2L, ])
     Xl[, 1L] <- Xl[, 1L] + 1 - xik / h
     Xl[, 2L] <- Xl[, 2L] + xik / h
     X[lo, ] <- Xl
   }
   if (any(hi)) {
-    h <- kmax - xk[nk - 1L]; xik <- x[hi] - kmax
+    h <- kmax - xk[nk - 1L]
+    xik <- x[hi] - kmax
     Xh <- outer(xik * h / 6, Fm[nk - 1L, ]) + outer(xik * h / 3, Fm[nk, ])
     Xh[, nk - 1L] <- Xh[, nk - 1L] - xik / h
     Xh[, nk] <- Xh[, nk] + 1 + xik / h
@@ -516,10 +521,10 @@
   }
   X
 }
-
 .gamn_cr_construct <- function(x, k) {
   if (k < 0L) k <- 10L
-  if (k < 3L) { k <- 3L; warning("basis dimension, k, increased to minimum possible") }
+  if (k < 3L) { k <- 3L
+  warning("basis dimension, k, increased to minimum possible") }
   xu <- unique(x)
   if (length(xu) < k) stop("the covariate has fewer unique values than k: reduce k")
   xk <- as.numeric(stats::quantile(xu, seq(0, 1, length.out = k)))
@@ -528,19 +533,17 @@
   list(X = .gamn_cr_X(x, xk, fs$F), S = S, xk = xk, F = fs$F, k = k,
        null.space.dim = 2L, rank = k - 2L)
 }
-
-
 # ---------------------------------------------------------------------------
 # smoothCon: penalty scaling and the sum-to-zero constraint (Wood 2017, 5.8)
 # ---------------------------------------------------------------------------
-
 .gamn_smooth_con <- function(spec, cov) {
   if (spec$bs == "tp") {
     b <- .gamn_tp_construct(cov, spec$k)
   } else {
     b <- .gamn_cr_construct(cov[, 1L], spec$k)
   }
-  X <- b$X; S <- b$S
+  X <- b$X
+  S <- b$S
   k <- ncol(X)
   S.scale <- 1
   if (!spec$fixed) {
@@ -570,26 +573,30 @@
     con <- list(type = "full", qrc = qrc)
   }
   S <- (S + t(S)) / 2
-  brank <- b$rank; bnull <- b$null.space.dim
-  b$X <- NULL; b$S <- NULL; b$rank <- NULL; b$null.space.dim <- NULL
+  brank <- b$rank
+  bnull <- b$null.space.dim
+  b$X <- NULL
+  b$S <- NULL
+  b$rank <- NULL
+  b$null.space.dim <- NULL
   c(list(label = spec$label, term = spec$term, exprs = spec$exprs, bs = spec$bs,
          dim = spec$dim, fixed = spec$fixed, X = X, S = S, S.scale = S.scale,
          con = con, rank = min(brank, k - 1L),
          null.space.dim = max(0L, bnull - 1L), bs.dim = k), b)
 }
-
 # Apply the stored constraint to a raw (unconstrained) basis matrix.
 .gamn_apply_con <- function(X, con) {
   k <- ncol(X)
   if (con$type == "full") {
     t(qr.qty(con$qrc, t(X))[2:k, , drop = FALSE])
   } else {
-    indi <- con$indi; nx <- length(indi); nz <- nx - 1L
+    indi <- con$indi
+    nx <- length(indi)
+    nz <- nx - 1L
     if (nz > 0L) X[, indi[seq_len(nz)]] <- t(qr.qty(con$qrc, t(X[, indi, drop = FALSE]))[2:nx, ])
     X[, -indi[nx], drop = FALSE]
   }
 }
-
 # Unconstrained basis of a fitted smooth at new covariate values.
 .gamn_smooth_predict_raw <- function(sm, cov) {
   cov <- as.matrix(cov)
@@ -600,12 +607,9 @@
     .gamn_cr_X(cov[, 1L], sm$xk, sm$F)
   }
 }
-
-
 # ---------------------------------------------------------------------------
 # Families (canonical links only: identity, logit, log)
 # ---------------------------------------------------------------------------
-
 .gamn_family <- function(name) {
   switch(name,
     gaussian = list(
@@ -626,7 +630,8 @@
       d2w = function(mu) mu * (1 - mu) * ((1 - 2 * mu)^2 - 2 * mu * (1 - mu)),
       dev.resids = function(y, mu, wt) {
         r <- numeric(length(y))
-        a <- y > 0; b <- y < 1
+        a <- y > 0
+        b <- y < 1
         r[a] <- r[a] + y[a] * log(y[a] / mu[a])
         r[b] <- r[b] + (1 - y[b]) * log((1 - y[b]) / (1 - mu[b]))
         2 * wt * r
@@ -649,7 +654,6 @@
       valid = function(y) all(is.finite(y)) && all(y >= 0)),
     stop("family must be gaussian, binomial or poisson"))
 }
-
 # Log saturated likelihood (mgcv fix.family.ls), used by REML.
 .gamn_ls <- function(fam, y, wt, scale) {
   if (fam$family == "gaussian") {
@@ -663,12 +667,9 @@
                  stats::dbinom(round(m * y), round(m), y, log = TRUE))) / 2
   }
 }
-
-
 # ---------------------------------------------------------------------------
 # Penalized fit and criterion derivatives at given log smoothing parameters
 # ---------------------------------------------------------------------------
-
 # Total penalty sum_k lambda_k S_k (p x p).
 .gamn_Slambda <- function(G, lambda) {
   St <- matrix(0, G$p, G$p)
@@ -678,7 +679,6 @@
   }
   St
 }
-
 # Full-size S_k (p x p).
 .gamn_Sfull <- function(G, k, lambda = 1) {
   St <- matrix(0, G$p, G$p)
@@ -686,7 +686,6 @@
   St[ii, ii] <- lambda * G$S[[k]]
   St
 }
-
 # Inverse and log determinant of a symmetric positive (semi)definite H.
 .gamn_inv <- function(H) {
   R <- tryCatch(chol(H), error = function(e) NULL)
@@ -700,10 +699,12 @@
   list(A = ev$vectors %*% (inv * t(ev$vectors)),
        ldet = sum(log(vals[vals > tol])), ok = FALSE)
 }
-
 # P-IRLS for the penalized likelihood at fixed lambda (canonical links).
 .gamn_pirls <- function(G, St, beta, tol = 1e-13, maxit = 200L) {
-  fam <- G$fam; X <- G$X; y <- G$y; wt <- G$wt
+  fam <- G$fam
+  X <- G$X
+  y <- G$y
+  wt <- G$wt
   eta <- if (is.null(beta)) fam$linkfun(fam$mustart(y, wt)) else drop(X %*% beta) + G$offset
   if (is.null(beta)) eta <- eta
   mu <- fam$linkinv(eta)
@@ -732,17 +733,21 @@
     }
     dchange <- abs(pdev - pdev_old)
     bchange <- if (is.null(beta)) Inf else max(abs(bnew - beta)) / (max(abs(bnew)) + 1e-300)
-    beta <- bnew; eta <- etan; mu <- mun
-    if (dchange <= tol * (abs(pdev) + 0.1) || bchange < 1e-12) { conv <- TRUE; break }
+    beta <- bnew
+    eta <- etan
+    mu <- mun
+    if (dchange <= tol * (abs(pdev) + 0.1) || bchange < 1e-12) { conv <- TRUE
+    break }
     pdev_old <- pdev
   }
   list(beta = beta, eta = eta, mu = mu, converged = conv, iter = it)
 }
-
 # Fit at log smoothing parameters rho (and log scale for Gaussian REML) and
 # return the criterion with its gradient and Hessian w.r.t. the parameters.
 .gamn_fit_score <- function(par, G, deriv = 2L, beta = NULL) {
-  fam <- G$fam; X <- G$X; nS <- length(G$S)
+  fam <- G$fam
+  X <- G$X
+  nS <- length(G$S)
   rho <- par[seq_len(nS)]
   lambda <- exp(rho)
   St <- .gamn_Slambda(G, lambda)
@@ -758,7 +763,9 @@
     fit_conv <- TRUE
   } else {
     pf <- .gamn_pirls(G, St, beta)
-    beta <- pf$beta; eta <- pf$eta; mu <- pf$mu
+    beta <- pf$beta
+    eta <- pf$eta
+    mu <- pf$mu
     w <- G$wt * fam$variance(mu)
     XWX <- crossprod(X * sqrt(w))
     inv <- .gamn_inv(XWX + St)
@@ -793,7 +800,6 @@
   }
   out$score <- score
   if (deriv == 0L || nS == 0L) return(out)
-
   # ---- first derivatives of beta and of the working weights
   Sk <- lapply(seq_len(nS), function(k) .gamn_Sfull(G, k, lambda[k]))
   Skb <- lapply(Sk, function(S) drop(S %*% beta))
@@ -882,12 +888,9 @@
   out$db <- bk
   out
 }
-
-
 # ---------------------------------------------------------------------------
 # Smoothing parameter selection: Newton's method on log(lambda)
 # ---------------------------------------------------------------------------
-
 # mgcv initial.sp: balance the diagonals of X'WX and the penalties.
 .gamn_initial_sp <- function(X, G) {
   nS <- length(G$S)
@@ -898,7 +901,9 @@
   for (i in seq_len(nS)) {
     S <- G$S[[i]]
     maS <- max(abs(S))
-    rsS <- rowMeans(abs(S)); csS <- colMeans(abs(S)); dS <- diag(abs(S))
+    rsS <- rowMeans(abs(S))
+    csS <- colMeans(abs(S))
+    dS <- diag(abs(S))
     thresh <- .Machine$double.eps^0.8 * maS
     ind <- rsS > thresh & csS > thresh & dS > thresh
     ii <- G$Sind[[i]]
@@ -908,12 +913,14 @@
     ldss[ii] <- ldss[ii] + sp[i] * diag(S)
   }
   ind <- ldss > 0 & pen & ldxx > 0
-  ldxx <- ldxx[ind]; ldss <- ldss[ind]
-  while (mean(ldxx / (ldxx + ldss)) > 0.4) { sp <- sp * 10; ldss <- ldss * 10 }
-  while (mean(ldxx / (ldxx + ldss)) < 0.4) { sp <- sp / 10; ldss <- ldss / 10 }
+  ldxx <- ldxx[ind]
+  ldss <- ldss[ind]
+  while (mean(ldxx / (ldxx + ldss)) > 0.4) { sp <- sp * 10
+  ldss <- ldss * 10 }
+  while (mean(ldxx / (ldxx + ldss)) < 0.4) { sp <- sp / 10
+  ldss <- ldss / 10 }
   sp
 }
-
 .gamn_newton <- function(par, G, tol = 1e-10, maxit = 200L, max_step = 5) {
   b <- .gamn_fit_score(par, G, 2L)
   hist <- b$score
@@ -922,8 +929,9 @@
   for (it in seq_len(maxit)) {
     iter <- it
     g <- b$grad
-    scale_ref <- abs(b$score) + (if (G$criterion == "REML") 1 else abs(b$dev / G$nobs)) 
-    if (max(abs(g)) <= tol * scale_ref) { conv <- "full convergence"; break }
+    scale_ref <- abs(b$score) + (if (G$criterion == "REML") 1 else abs(b$dev / G$nobs))
+    if (max(abs(g)) <= tol * scale_ref) { conv <- "full convergence"
+    break }
     eh <- eigen(b$hess, symmetric = TRUE)
     ev <- abs(eh$values)
     ev[ev < max(ev) * 1e-7] <- max(ev) * 1e-7
@@ -934,7 +942,8 @@
     for (h in 0:40) {
       trial <- par + step
       bt <- tryCatch(.gamn_fit_score(trial, G, 2L, b$beta), error = function(e) NULL)
-      if (!is.null(bt) && is.finite(bt$score) && bt$score <= b$score) { ok <- TRUE; break }
+      if (!is.null(bt) && is.finite(bt$score) && bt$score <= b$score) { ok <- TRUE
+      break }
       step <- step / 2
     }
     if (!ok) {
@@ -943,26 +952,27 @@
       for (h in 0:40) {
         trial <- par + step
         bt <- tryCatch(.gamn_fit_score(trial, G, 2L, b$beta), error = function(e) NULL)
-        if (!is.null(bt) && is.finite(bt$score) && bt$score <= b$score) { ok <- TRUE; break }
+        if (!is.null(bt) && is.finite(bt$score) && bt$score <= b$score) { ok <- TRUE
+        break }
         step <- step / 2
       }
     }
-    if (!ok) { conv <- "step failed"; break }
+    if (!ok) { conv <- "step failed"
+    break }
     dscore <- b$score - bt$score
-    par <- trial; b <- bt
+    par <- trial
+    b <- bt
     hist <- c(hist, b$score)
     if (max(abs(step)) < 1e-12 && dscore <= 1e-15 * abs(b$score)) {
-      conv <- "step length small"; break
+      conv <- "step length small"
+      break
     }
   }
   list(par = par, fit = b, conv = conv, iter = iter, score.hist = hist)
 }
-
-
 # ---------------------------------------------------------------------------
 # Model set-up
 # ---------------------------------------------------------------------------
-
 # Evaluate a covariate expression from an s() term in the data, through a
 # one-sided formula and model.frame (no evaluation of text).
 .gamn_cov <- function(expr, data) {
@@ -974,7 +984,6 @@
                                    paste(format(expr), collapse = "")))
   as.numeric(v)
 }
-
 .gamn_setup <- function(formula, data, family, weights) {
   pr <- .gamn_formula_parts(formula)
   data <- as.data.frame(data)
@@ -1016,7 +1025,11 @@
   sms <- lapply(seq_along(pr$smooths), function(i) .gamn_smooth_con(pr$smooths[[i]], covs[[i]]))
   X <- Xp
   nms <- colnames(Xp)
-  S <- list(); Sind <- list(); Srank <- numeric(0); ldS0 <- 0; Sowner <- integer(0)
+  S <- list()
+  Sind <- list()
+  Srank <- numeric(0)
+  ldS0 <- 0
+  Sowner <- integer(0)
   for (i in seq_along(sms)) {
     sm <- sms[[i]]
     first <- ncol(X) + 1L
@@ -1044,12 +1057,9 @@
        contrasts = contr, xlevels = xlev, intercept = attr(ptt, "intercept") > 0,
        rows = which(ok), n.data = nrow(data), formula = formula, gamma = 1)
 }
-
-
 # ---------------------------------------------------------------------------
 # Main fitting function
 # ---------------------------------------------------------------------------
-
 #' Generalized additive model fitted natively (mgcv-compatible)
 #'
 #' Fits a generalized additive model with penalized regression spline
@@ -1160,11 +1170,14 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   }
   .gamn_finish(G, b, par, opt, method)
 }
-
 .gamn_finish <- function(G, b, par, opt, method) {
-  fam <- G$fam; nS <- length(G$S); n <- G$nobs
-  y <- G$y; wt <- G$wt
-  beta <- b$beta; names(beta) <- colnames(G$X)
+  fam <- G$fam
+  nS <- length(G$S)
+  n <- G$nobs
+  y <- G$y
+  wt <- G$wt
+  beta <- b$beta
+  names(beta) <- colnames(G$X)
   mu <- b$mu
   trA <- b$trA
   if (G$scale_known) {
@@ -1178,12 +1191,15 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   F <- b$F
   Ve <- F %*% Vp
   dimnames(Vp) <- dimnames(Ve) <- list(names(beta), names(beta))
-  edf <- b$edf; names(edf) <- names(beta)
-  edf1 <- 2 * edf - rowSums(t(F) * F); names(edf1) <- names(beta)
+  edf <- b$edf
+  names(edf) <- names(beta)
+  edf1 <- 2 * edf - rowSums(t(F) * F)
+  names(edf1) <- names(beta)
   sm_lab <- vapply(G$smooths, `[[`, "", "label")
   edf_s <- vapply(G$smooths, function(s) sum(edf[s$first.para:s$last.para]), 0)
   names(edf_s) <- sm_lab
-  sp <- b$lambda; names(sp) <- sm_lab[G$Sowner]
+  sp <- b$lambda
+  names(sp) <- sm_lab[G$Sowner]
   wtdmu <- if (G$intercept) sum(wt * y) / sum(wt) else fam$linkinv(G$offset)
   nulldev <- sum(fam$dev.resids(y, rep_len(wtdmu, length(y)), wt))
   if (G$intercept && any(G$offset != 0)) nulldev <- .gamn_null_dev_offset(fam, y, wt, G$offset)
@@ -1222,7 +1238,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   class(out) <- "morie_gam"
   out
 }
-
 # Deviance of the intercept-plus-offset model (mgcv refits glm(y ~
 # offset(offset)) for the null deviance when an offset is present).
 .gamn_null_dev_offset <- function(fam, y, wt, offset) {
@@ -1240,7 +1255,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   }
   sum(fam$dev.resids(y, fam$linkinv(a + offset), wt))
 }
-
 # R factor of a QR decomposition with the columns in their original order.
 .gamn_Rfactor <- function(WX) {
   q <- qr(WX)
@@ -1248,8 +1262,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   R[, q$pivot] <- R
   R
 }
-
-
 # ---------------------------------------------------------------------------
 # Symmetric tridiagonal eigensolver following LAPACK 3.12 DSTEDC (with
 # DSTEQR for blocks of size <= 25 and the DLAED0/1/2/3 divide and conquer
@@ -1258,7 +1270,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
 # DSTEDC, and the sign of each Ritz vector fixes the sign of the matching
 # thin plate basis column, hence of its coefficient.
 # ---------------------------------------------------------------------------
-
 .gamn_lartg <- function(f, g) {
   if (g == 0) return(c(1, 0, f))
   if (f == 0) return(c(0, sign(g), abs(g)))
@@ -1267,33 +1278,53 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   r <- if (f >= 0) d else -d
   c(c1, g / r, r)
 }
-
 .gamn_laev2 <- function(a, b, c) {
-  sm <- a + c; df <- a - c; adf <- abs(df); tb <- b + b; ab <- abs(tb)
-  if (abs(a) > abs(c)) { acmx <- a; acmn <- c } else { acmx <- c; acmn <- a }
+  sm <- a + c
+  df <- a - c
+  adf <- abs(df)
+  tb <- b + b
+  ab <- abs(tb)
+  if (abs(a) > abs(c)) { acmx <- a
+  acmn <- c } else { acmx <- c
+  acmn <- a }
   rt <- if (adf > ab) adf * sqrt(1 + (ab / adf)^2) else
     if (adf < ab) ab * sqrt(1 + (adf / ab)^2) else ab * sqrt(2)
   if (sm < 0) {
-    rt1 <- 0.5 * (sm - rt); sgn1 <- -1; rt2 <- (acmx / rt1) * acmn - (b / rt1) * b
+    rt1 <- 0.5 * (sm - rt)
+    sgn1 <- -1
+    rt2 <- (acmx / rt1) * acmn - (b / rt1) * b
   } else if (sm > 0) {
-    rt1 <- 0.5 * (sm + rt); sgn1 <- 1; rt2 <- (acmx / rt1) * acmn - (b / rt1) * b
-  } else { rt1 <- 0.5 * rt; rt2 <- -0.5 * rt; sgn1 <- 1 }
-  if (df >= 0) { cs <- df + rt; sgn2 <- 1 } else { cs <- df - rt; sgn2 <- -1 }
+    rt1 <- 0.5 * (sm + rt)
+    sgn1 <- 1
+    rt2 <- (acmx / rt1) * acmn - (b / rt1) * b
+  } else { rt1 <- 0.5 * rt
+  rt2 <- -0.5 * rt
+  sgn1 <- 1 }
+  if (df >= 0) { cs <- df + rt
+  sgn2 <- 1 } else { cs <- df - rt
+  sgn2 <- -1 }
   if (abs(cs) > ab) {
-    ct <- -tb / cs; sn1 <- 1 / sqrt(1 + ct * ct); cs1 <- ct * sn1
-  } else if (ab == 0) { cs1 <- 1; sn1 <- 0 } else {
-    tn <- -cs / tb; cs1 <- 1 / sqrt(1 + tn * tn); sn1 <- tn * cs1
+    ct <- -tb / cs
+    sn1 <- 1 / sqrt(1 + ct * ct)
+    cs1 <- ct * sn1
+  } else if (ab == 0) { cs1 <- 1
+  sn1 <- 0 } else {
+    tn <- -cs / tb
+    cs1 <- 1 / sqrt(1 + tn * tn)
+    sn1 <- tn * cs1
   }
-  if (sgn1 == sgn2) { tn <- cs1; cs1 <- -sn1; sn1 <- tn }
+  if (sgn1 == sgn2) { tn <- cs1
+  cs1 <- -sn1
+  sn1 <- tn }
   c(rt1, rt2, cs1, sn1)
 }
-
 # Apply plane rotations from the right to columns l..l+mm-1 of Z
 # (DLASR with SIDE = 'R', PIVOT = 'V').
 .gamn_lasr_rv <- function(Z, cs, sn, l, mm, forward) {
   js <- if (forward) seq_len(mm - 1L) else rev(seq_len(mm - 1L))
   for (j in js) {
-    ct <- cs[j]; st <- sn[j]
+    ct <- cs[j]
+    st <- sn[j]
     if (ct != 1 || st != 0) {
       a <- l + j - 1L
       tmp <- Z[, a + 1L]
@@ -1303,7 +1334,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   }
   Z
 }
-
 # DSTEQR with COMPZ = 'I': implicit QL/QR on a tridiagonal matrix.
 .gamn_dsteqr <- function(d, e) {
   n <- length(d)
@@ -1315,53 +1345,69 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   safmin <- .Machine$double.xmin
   ssfmax <- sqrt(1 / safmin) / 3
   ssfmin <- sqrt(safmin) / eps2
-  nmaxit <- n * 30L; jtot <- 0L
+  nmaxit <- n * 30L
+  jtot <- 0L
   l1 <- 1L
-  wc <- numeric(n); ws <- numeric(n)
+  wc <- numeric(n)
+  ws <- numeric(n)
   repeat {
     if (l1 > n) break
     if (l1 > 1L) e[l1 - 1L] <- 0
     m <- n
     if (l1 <= n - 1L) for (mm_ in l1:(n - 1L)) {
       tst <- abs(e[mm_])
-      if (tst == 0) { m <- mm_; break }
+      if (tst == 0) { m <- mm_
+      break }
       if (tst <= sqrt(abs(d[mm_])) * sqrt(abs(d[mm_ + 1L])) * eps) {
-        e[mm_] <- 0; m <- mm_; break
+        e[mm_] <- 0
+        m <- mm_
+        break
       }
     }
-    l <- l1; lsv <- l; lend <- m; lendsv <- lend; l1 <- m + 1L
+    l <- l1
+    lsv <- l
+    lend <- m
+    lendsv <- lend
+    l1 <- m + 1L
     if (lend == l) next
     idx <- l:lend
     anorm <- max(abs(d[idx]), if (lend > l) abs(e[l:(lend - 1L)]) else 0)
     iscale <- 0L
     if (anorm == 0) next
     if (anorm > ssfmax) {
-      iscale <- 1L; d[idx] <- d[idx] * (ssfmax / anorm)
+      iscale <- 1L
+      d[idx] <- d[idx] * (ssfmax / anorm)
       if (lend > l) e[l:(lend - 1L)] <- e[l:(lend - 1L)] * (ssfmax / anorm)
     } else if (anorm < ssfmin) {
-      iscale <- 2L; d[idx] <- d[idx] * (ssfmin / anorm)
+      iscale <- 2L
+      d[idx] <- d[idx] * (ssfmin / anorm)
       if (lend > l) e[l:(lend - 1L)] <- e[l:(lend - 1L)] * (ssfmin / anorm)
     }
-    if (abs(d[lend]) < abs(d[l])) { lend <- lsv; l <- lendsv }
+    if (abs(d[lend]) < abs(d[l])) { lend <- lsv
+    l <- lendsv }
     if (lend > l) {
       # QL iteration
       repeat {
         m <- lend
         if (l != lend) for (mm_ in l:(lend - 1L)) {
           tst <- abs(e[mm_])^2
-          if (tst <= (eps2 * abs(d[mm_])) * abs(d[mm_ + 1L]) + safmin) { m <- mm_; break }
+          if (tst <= (eps2 * abs(d[mm_])) * abs(d[mm_ + 1L]) + safmin) { m <- mm_
+          break }
         }
         if (m < lend) e[m] <- 0
         p <- d[l]
         if (m == l) {
-          d[l] <- p; l <- l + 1L
+          d[l] <- p
+          l <- l + 1L
           if (l <= lend) next
           break
         }
         if (m == l + 1L) {
           r2 <- .gamn_laev2(d[l], e[l], d[l + 1L])
           Z <- .gamn_lasr_rv(Z, r2[3L], r2[4L], l, 2L, FALSE)
-          d[l] <- r2[1L]; d[l + 1L] <- r2[2L]; e[l] <- 0
+          d[l] <- r2[1L]
+          d[l + 1L] <- r2[2L]
+          e[l] <- 0
           l <- l + 2L
           if (l <= lend) next
           break
@@ -1371,17 +1417,24 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
         g <- (d[l + 1L] - p) / (2 * e[l])
         r <- sqrt(g * g + 1)
         g <- d[m] - p + (e[l] / (g + (if (g >= 0) abs(r) else -abs(r))))
-        s <- 1; cc <- 1; p <- 0
+        s <- 1
+        cc <- 1
+        p <- 0
         for (i in (m - 1L):l) {
-          f <- s * e[i]; b <- cc * e[i]
-          rot <- .gamn_lartg(g, f); cc <- rot[1L]; s <- rot[2L]; r <- rot[3L]
+          f <- s * e[i]
+          b <- cc * e[i]
+          rot <- .gamn_lartg(g, f)
+          cc <- rot[1L]
+          s <- rot[2L]
+          r <- rot[3L]
           if (i != m - 1L) e[i + 1L] <- r
           g <- d[i + 1L] - p
           r <- (d[i] - g) * s + 2 * cc * b
           p <- s * r
           d[i + 1L] <- g + p
           g <- cc * r - b
-          wc[i] <- cc; ws[i] <- -s
+          wc[i] <- cc
+          ws[i] <- -s
         }
         mm <- m - l + 1L
         Z <- .gamn_lasr_rv(Z, wc[l:(m - 1L)], ws[l:(m - 1L)], l, mm, FALSE)
@@ -1394,19 +1447,23 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
         m <- lend
         if (l != lend) for (mm_ in l:(lend + 1L)) {
           tst <- abs(e[mm_ - 1L])^2
-          if (tst <= (eps2 * abs(d[mm_])) * abs(d[mm_ - 1L]) + safmin) { m <- mm_; break }
+          if (tst <= (eps2 * abs(d[mm_])) * abs(d[mm_ - 1L]) + safmin) { m <- mm_
+          break }
         }
         if (m > lend) e[m - 1L] <- 0
         p <- d[l]
         if (m == l) {
-          d[l] <- p; l <- l - 1L
+          d[l] <- p
+          l <- l - 1L
           if (l >= lend) next
           break
         }
         if (m == l - 1L) {
           r2 <- .gamn_laev2(d[l - 1L], e[l - 1L], d[l])
           Z <- .gamn_lasr_rv(Z, r2[3L], r2[4L], m, 2L, TRUE)
-          d[l - 1L] <- r2[1L]; d[l] <- r2[2L]; e[l - 1L] <- 0
+          d[l - 1L] <- r2[1L]
+          d[l] <- r2[2L]
+          e[l - 1L] <- 0
           l <- l - 2L
           if (l >= lend) next
           break
@@ -1416,17 +1473,24 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
         g <- (d[l - 1L] - p) / (2 * e[l - 1L])
         r <- sqrt(g * g + 1)
         g <- d[m] - p + (e[l - 1L] / (g + (if (g >= 0) abs(r) else -abs(r))))
-        s <- 1; cc <- 1; p <- 0
+        s <- 1
+        cc <- 1
+        p <- 0
         for (i in m:(l - 1L)) {
-          f <- s * e[i]; b <- cc * e[i]
-          rot <- .gamn_lartg(g, f); cc <- rot[1L]; s <- rot[2L]; r <- rot[3L]
+          f <- s * e[i]
+          b <- cc * e[i]
+          rot <- .gamn_lartg(g, f)
+          cc <- rot[1L]
+          s <- rot[2L]
+          r <- rot[3L]
           if (i != m) e[i - 1L] <- r
           g <- d[i] - p
           r <- (d[i + 1L] - g) * s + 2 * cc * b
           p <- s * r
           d[i] <- g + p
           g <- cc * r - b
-          wc[i] <- cc; ws[i] <- s
+          wc[i] <- cc
+          ws[i] <- s
         }
         mm <- l - m + 1L
         Z <- .gamn_lasr_rv(Z, wc[m:(l - 1L)], ws[m:(l - 1L)], m, mm, TRUE)
@@ -1445,30 +1509,42 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   }
   # selection sort into ascending order
   for (ii in 2:n) {
-    i <- ii - 1L; k <- i; p <- d[i]
-    for (j in ii:n) if (d[j] < p) { k <- j; p <- d[j] }
+    i <- ii - 1L
+    k <- i
+    p <- d[i]
+    for (j in ii:n) if (d[j] < p) { k <- j
+    p <- d[j] }
     if (k != i) {
-      d[k] <- d[i]; d[i] <- p
-      tmp <- Z[, i]; Z[, i] <- Z[, k]; Z[, k] <- tmp
+      d[k] <- d[i]
+      d[i] <- p
+      tmp <- Z[, i]
+      Z[, i] <- Z[, k]
+      Z[, k] <- tmp
     }
   }
   list(values = d, vectors = Z)
 }
-
 # Secular equation roots for D + rho w w' (rho > 0, d ascending), returning
 # the eigenvalues and DELTA[i, j] = d_i - lambda_j computed relative to the
 # nearer pole (as DLAED4 does).
 .gamn_secular <- function(d, w, rho) {
   K <- length(d)
-  lam <- numeric(K); DEL <- matrix(0, K, K)
+  lam <- numeric(K)
+  DEL <- matrix(0, K, K)
   w2 <- w * w
   for (j in seq_len(K)) {
     if (j < K) {
       mid <- (d[j + 1L] - d[j]) / 2
       fmid <- 1 + rho * sum(w2 / ((d - d[j]) - mid))
-      if (fmid > 0) { o <- j; lo <- 0; hi <- mid } else { o <- j + 1L; lo <- -mid; hi <- 0 }
+      if (fmid > 0) { o <- j
+      lo <- 0
+      hi <- mid } else { o <- j + 1L
+      lo <- -mid
+      hi <- 0 }
     } else {
-      o <- K; lo <- 0; hi <- rho * sum(w2)
+      o <- K
+      lo <- 0
+      hi <- rho * sum(w2)
     }
     dd <- d - d[o]
     for (it in 1:200) {
@@ -1482,11 +1558,12 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   }
   list(values = lam, delta = DEL)
 }
-
 # DLAED1 (with DLAED2 deflation and DLAED3 eigenvectors): merge the
 # eigensystems of the two halves of a torn tridiagonal matrix.
 .gamn_dlaed1 <- function(D, Q, indxq, rho, cutpnt) {
-  n <- length(D); n1 <- cutpnt; n2 <- n - n1
+  n <- length(D)
+  n1 <- cutpnt
+  n2 <- n - n1
   z <- c(Q[cutpnt, seq_len(n1)], Q[cutpnt + 1L, n1 + seq_len(n2)])
   # ---- DLAED2
   if (rho < 0) z[n1 + seq_len(n2)] <- -z[n1 + seq_len(n2)]
@@ -1504,15 +1581,22 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
     return(list(D = D, Q = Q, indxq = seq_len(n)))
   }
   coltyp <- c(rep(1L, n1), rep(3L, n2))
-  K <- 0L; k2 <- n + 1L
-  indxp <- integer(n); W <- numeric(n); dlambda <- numeric(n)
-  j <- 1L; pj <- NA_integer_
+  K <- 0L
+  k2 <- n + 1L
+  indxp <- integer(n)
+  W <- numeric(n)
+  dlambda <- numeric(n)
+  j <- 1L
+  pj <- NA_integer_
   while (j <= n) {
     nj <- indx[j]
     if (rho * abs(z[nj]) <= tol) {
-      k2 <- k2 - 1L; coltyp[nj] <- 4L; indxp[k2] <- nj
+      k2 <- k2 - 1L
+      coltyp[nj] <- 4L
+      indxp[k2] <- nj
       j <- j + 1L
-    } else { pj <- nj; break }
+    } else { pj <- nj
+    break }
   }
   if (!is.na(pj)) {
     repeat {
@@ -1520,17 +1604,23 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
       if (j > n) break
       nj <- indx[j]
       if (rho * abs(z[nj]) <= tol) {
-        k2 <- k2 - 1L; coltyp[nj] <- 4L; indxp[k2] <- nj
+        k2 <- k2 - 1L
+        coltyp[nj] <- 4L
+        indxp[k2] <- nj
       } else {
-        s <- z[pj]; cc <- z[nj]
+        s <- z[pj]
+        cc <- z[nj]
         tau <- sqrt(cc * cc + s * s)
         tt <- D[nj] - D[pj]
-        cc <- cc / tau; s <- -s / tau
+        cc <- cc / tau
+        s <- -s / tau
         if (abs(tt * cc * s) <= tol) {
-          z[nj] <- tau; z[pj] <- 0
+          z[nj] <- tau
+          z[pj] <- 0
           if (coltyp[nj] != coltyp[pj]) coltyp[nj] <- 2L
           coltyp[pj] <- 4L
-          qp <- Q[, pj]; qn <- Q[, nj]
+          qp <- Q[, pj]
+          qn <- Q[, nj]
           Q[, pj] <- cc * qp + s * qn
           Q[, nj] <- cc * qn - s * qp
           tt <- D[pj] * cc^2 + D[nj] * s^2
@@ -1544,27 +1634,36 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
                 indxp[k2 + i - 1L] <- indxp[k2 + i]
                 indxp[k2 + i] <- pj
                 i <- i + 1L
-              } else { indxp[k2 + i - 1L] <- pj; break }
-            } else { indxp[k2 + i - 1L] <- pj; break }
+              } else { indxp[k2 + i - 1L] <- pj
+              break }
+            } else { indxp[k2 + i - 1L] <- pj
+            break }
           }
           pj <- nj
         } else {
           K <- K + 1L
-          dlambda[K] <- D[pj]; W[K] <- z[pj]; indxp[K] <- pj
+          dlambda[K] <- D[pj]
+          W[K] <- z[pj]
+          indxp[K] <- pj
           pj <- nj
         }
       }
     }
     K <- K + 1L
-    dlambda[K] <- D[pj]; W[K] <- z[pj]; indxp[K] <- pj
+    dlambda[K] <- D[pj]
+    W[K] <- z[pj]
+    indxp[K] <- pj
   }
   ctot <- tabulate(coltyp, 4L)
   psm <- c(1L, 1L + ctot[1L], 1L + ctot[1L] + ctot[2L], 1L + ctot[1L] + ctot[2L] + ctot[3L])
   K <- n - ctot[4L]
-  indx2 <- integer(n); indxc2 <- integer(n)
+  indx2 <- integer(n)
+  indxc2 <- integer(n)
   for (jj in seq_len(n)) {
-    js <- indxp[jj]; ct <- coltyp[js]
-    indx2[psm[ct]] <- js; indxc2[psm[ct]] <- jj
+    js <- indxp[jj]
+    ct <- coltyp[js]
+    indx2[psm[ct]] <- js
+    indxc2[psm[ct]] <- jj
     psm[ct] <- psm[ct] + 1L
   }
   # Q2 blocks and the deflated part
@@ -1576,10 +1675,13 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   Q2bot <- Q[n1 + seq_len(n2), c(c2, c3), drop = FALSE]   # n2 x (ct2 + ct3)
   Qdef <- Q[, c4, drop = FALSE]
   Ddef <- D[c4]
-  Dnew <- numeric(n); Qnew <- matrix(0, n, n)
-  if (K < n) { Qnew[, (K + 1L):n] <- Qdef; Dnew[(K + 1L):n] <- Ddef }
+  Dnew <- numeric(n)
+  Qnew <- matrix(0, n, n)
+  if (K < n) { Qnew[, (K + 1L):n] <- Qdef
+  Dnew[(K + 1L):n] <- Ddef }
   # ---- DLAED3
-  dl <- dlambda[seq_len(K)]; w <- W[seq_len(K)]
+  dl <- dlambda[seq_len(K)]
+  w <- W[seq_len(K)]
   ix <- indxc2[seq_len(K)]
   if (K == 1L) {
     Dnew[1L] <- dl[1L] + rho * w[1L]^2
@@ -1608,7 +1710,8 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
       Sv[, jj] <- s[ix]
     }
   }
-  n12 <- ctot[1L] + ctot[2L]; n23 <- ctot[2L] + ctot[3L]
+  n12 <- ctot[1L] + ctot[2L]
+  n23 <- ctot[2L] + ctot[3L]
   top <- if (n12 > 0L) Q2top %*% Sv[seq_len(n12), , drop = FALSE] else matrix(0, n1, K)
   bot <- if (n23 > 0L) Q2bot %*% Sv[ctot[1L] + seq_len(n23), , drop = FALSE] else matrix(0, n2, K)
   Qnew[seq_len(n1), seq_len(K)] <- top
@@ -1616,48 +1719,60 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   indxq <- .gamn_dlamrg(Dnew, K, n - K, 1L, -1L)
   list(D = Dnew, Q = Qnew, indxq = indxq)
 }
-
 .gamn_dlaed5 <- function(i, d, z, rho) {
   del <- d[2L] - d[1L]
   if (i == 1L) {
     w <- 1 + 2 * rho * (z[2L]^2 - z[1L]^2) / del
     if (w > 0) {
-      b <- del + rho * (z[1L]^2 + z[2L]^2); cc <- rho * z[1L]^2 * del
+      b <- del + rho * (z[1L]^2 + z[2L]^2)
+      cc <- rho * z[1L]^2 * del
       tau <- 2 * cc / (b + sqrt(abs(b * b - 4 * cc)))
       dlam <- d[1L] + tau
       delta <- c(-z[1L] / tau, z[2L] / (del - tau))
     } else {
-      b <- -del + rho * (z[1L]^2 + z[2L]^2); cc <- rho * z[2L]^2 * del
+      b <- -del + rho * (z[1L]^2 + z[2L]^2)
+      cc <- rho * z[2L]^2 * del
       tau <- if (b > 0) -2 * cc / (b + sqrt(b * b + 4 * cc)) else (b - sqrt(b * b + 4 * cc)) / 2
       dlam <- d[2L] + tau
       delta <- c(-z[1L] / (del + tau), -z[2L] / tau)
     }
   } else {
-    b <- -del + rho * (z[1L]^2 + z[2L]^2); cc <- rho * z[2L]^2 * del
+    b <- -del + rho * (z[1L]^2 + z[2L]^2)
+    cc <- rho * z[2L]^2 * del
     tau <- if (b > 0) (b + sqrt(b * b + 4 * cc)) / 2 else 2 * cc / (-b + sqrt(b * b + 4 * cc))
     dlam <- d[2L] + tau
     delta <- c(-z[1L] / (del + tau), -z[2L] / tau)
   }
   list(dlam = dlam, delta = delta / sqrt(sum(delta^2)))
 }
-
 .gamn_dlamrg <- function(a, n1, n2, s1, s2) {
   ind1 <- if (s1 > 0) 1L else n1
   ind2 <- if (s2 > 0) 1L + n1 else n1 + n2
-  out <- integer(n1 + n2); i <- 1L
+  out <- integer(n1 + n2)
+  i <- 1L
   while (n1 > 0L && n2 > 0L) {
-    if (a[ind1] <= a[ind2]) { out[i] <- ind1; ind1 <- ind1 + s1; n1 <- n1 - 1L } else {
-      out[i] <- ind2; ind2 <- ind2 + s2; n2 <- n2 - 1L }
+    if (a[ind1] <= a[ind2]) { out[i] <- ind1
+    ind1 <- ind1 + s1
+    n1 <- n1 - 1L } else {
+      out[i] <- ind2
+      ind2 <- ind2 + s2
+      n2 <- n2 - 1L }
     i <- i + 1L
   }
-  while (n2 > 0L) { out[i] <- ind2; ind2 <- ind2 + s2; n2 <- n2 - 1L; i <- i + 1L }
-  while (n1 > 0L) { out[i] <- ind1; ind1 <- ind1 + s1; n1 <- n1 - 1L; i <- i + 1L }
+  while (n2 > 0L) { out[i] <- ind2
+  ind2 <- ind2 + s2
+  n2 <- n2 - 1L
+  i <- i + 1L }
+  while (n1 > 0L) { out[i] <- ind1
+  ind1 <- ind1 + s1
+  n1 <- n1 - 1L
+  i <- i + 1L }
   out
 }
-
 # DLAED0 with ICOMPQ = 2 on an unreduced tridiagonal block.
 .gamn_dlaed0 <- function(d, e) {
-  n <- length(d); smlsiz <- 25L
+  n <- length(d)
+  smlsiz <- 25L
   sizes <- n
   while (sizes[length(sizes)] > smlsiz) {
     sizes <- as.vector(rbind(sizes %/% 2L, (sizes + 1L) %/% 2L))
@@ -1684,13 +1799,19 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
     nb <- integer(0)
     for (i in seq(0L, subpbs - 2L, by = 2L)) {
       if (i == 0L) {
-        submat <- 1L; matsiz <- bounds[2L]; msd2 <- bounds[1L]
+        submat <- 1L
+        matsiz <- bounds[2L]
+        msd2 <- bounds[1L]
       } else {
-        submat <- bounds[i] + 1L; matsiz <- bounds[i + 2L] - bounds[i]; msd2 <- matsiz %/% 2L
+        submat <- bounds[i] + 1L
+        matsiz <- bounds[i + 2L] - bounds[i]
+        msd2 <- matsiz %/% 2L
       }
       ii <- submat:(submat + matsiz - 1L)
       r <- .gamn_dlaed1(d[ii], Q[ii, ii, drop = FALSE], indxq[ii], e[submat + msd2 - 1L], msd2)
-      d[ii] <- r$D; Q[ii, ii] <- r$Q; indxq[ii] <- r$indxq
+      d[ii] <- r$D
+      Q[ii, ii] <- r$Q
+      indxq[ii] <- r$indxq
       nb <- c(nb, bounds[i + 2L])
     }
     bounds <- nb
@@ -1698,7 +1819,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   }
   list(values = d[indxq], vectors = Q[, indxq, drop = FALSE])
 }
-
 # DSTEDC with COMPZ = 'I'; eigenvalues ascending.
 .gamn_dstedc <- function(d, e) {
   n <- length(d)
@@ -1731,27 +1851,31 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
     start <- finish + 1L
   }
   for (ii in 2:n) {
-    i <- ii - 1L; k <- i; p <- d[i]
-    for (j in ii:n) if (d[j] < p) { k <- j; p <- d[j] }
+    i <- ii - 1L
+    k <- i
+    p <- d[i]
+    for (j in ii:n) if (d[j] < p) { k <- j
+    p <- d[j] }
     if (k != i) {
-      d[k] <- d[i]; d[i] <- p
-      tmp <- Z[, i]; Z[, i] <- Z[, k]; Z[, k] <- tmp
+      d[k] <- d[i]
+      d[i] <- p
+      tmp <- Z[, i]
+      Z[, i] <- Z[, k]
+      Z[, k] <- tmp
     }
   }
   list(values = d, vectors = Z)
 }
-
-
 # ---------------------------------------------------------------------------
 # Davies (1980) algorithm for the distribution of a linear combination of
 # chi-squared variables (as used by mgcv's psum.chisq), Algol 60 / mgcv C
 # code translated to R.
 # ---------------------------------------------------------------------------
-
 .gamn_log1pmx <- function(x) {
   if (abs(x) < 1e-2) {
     # series log(1 + x) - x = -x^2/2 + x^3/3 - ...
-    s <- 0; term <- x
+    s <- 0
+    term <- x
     for (k in 2:40) {
       term <- -term * x
       s <- s + term / k
@@ -1760,7 +1884,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
     s
   } else log1p(x) - x
 }
-
 .gamn_davies <- function(lb, nc, n, sigma, cc, lim = 100000L, acc = 2e-5) {
   r <- length(lb)
   ln1 <- function(x, first) if (first) log1p(x) else .gamn_log1pmx(x)
@@ -1769,37 +1892,54 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
     sum1 <- u * cx
     u <- u * 2
     for (j in r:1) {
-      nj <- n[j]; lj <- lb[j]; ncj <- nc[j]; x <- u * lj
-      y <- 1 - x; cx <- cx + lj * (ncj / y + nj) / y
+      nj <- n[j]
+      lj <- lb[j]
+      ncj <- nc[j]
+      x <- u * lj
+      y <- 1 - x
+      cx <- cx + lj * (ncj / y + nj) / y
       xy <- x / y
       sum1 <- sum1 + ncj * xy * xy + nj * (x * xy + ln1(-x, FALSE))
     }
     list(p = exp(-0.5 * sum1), cx = cx)
   }
   ctff <- function(accx, upn, mean, lmin, lmax, sigsq) {
-    u2 <- upn; u1 <- 0; c1 <- mean
+    u2 <- upn
+    u1 <- 0
+    c1 <- mean
     rb <- if (u2 > 0) 2 * lmax else 2 * lmin
     repeat {
       eb <- errbd(u2 / (1 + u2 * rb), sigsq)
       c2 <- eb$cx
       if (eb$p <= accx) break
-      u1 <- u2; c1 <- c2; u2 <- u2 * 2
+      u1 <- u2
+      c1 <- c2
+      u2 <- u2 * 2
     }
     repeat {
       if ((c1 - mean) / (c2 - mean) >= 0.9) break
       u <- (u1 + u2) * 0.5
       eb <- errbd(u / (1 + u * rb), sigsq)
-      if (eb$p > accx) { u1 <- u; c1 <- eb$cx } else { u2 <- u; c2 <- eb$cx }
+      if (eb$p > accx) { u1 <- u
+      c1 <- eb$cx } else { u2 <- u
+      c2 <- eb$cx }
     }
     list(c = c2, up = u2)
   }
   truncation <- function(u, tausq, sigsq) {
-    sum1 <- 0; prod2 <- 0; prod3 <- 0; s <- 0
+    sum1 <- 0
+    prod2 <- 0
+    prod3 <- 0
+    s <- 0
     sum2 <- (sigsq + tausq) * u * u
-    prod1 <- 2 * sum2; u <- 2 * u
+    prod1 <- 2 * sum2
+    u <- 2 * u
     for (j in seq_len(r)) {
-      lj <- lb[j]; ncj <- nc[j]; nj <- n[j]
-      x <- u * lj; x <- x * x
+      lj <- lb[j]
+      ncj <- nc[j]
+      nj <- n[j]
+      x <- u * lj
+      x <- x * x
       sum1 <- sum1 + ncj * x / (1 + x)
       if (x > 1) {
         prod2 <- prod2 + nj * log(x)
@@ -1807,7 +1947,9 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
         s <- s + nj
       } else prod1 <- prod1 + nj * ln1(x, TRUE)
     }
-    sum1 <- sum1 * 0.5; prod2 <- prod2 + prod1; prod3 <- prod3 + prod1
+    sum1 <- sum1 * 0.5
+    prod2 <- prod2 + prod1
+    prod3 <- prod3 + prod1
     x <- exp(-sum1 - 0.25 * prod2) / pi
     y <- exp(-sum1 - 0.25 * prod3) / pi
     err1 <- if (s == 0) 1 else 2 * x / s
@@ -1818,12 +1960,15 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
     if (err1 < err2) err1 else err2
   }
   findu <- function(utx, accx, sigsq) {
-    ut <- utx; u <- ut * 0.25
+    ut <- utx
+    u <- ut * 0.25
     if (truncation(u, 0, sigsq) > accx) {
       while (truncation(ut, 0, sigsq) > accx) ut <- ut * 4
     } else {
-      ut <- u; u <- u / 4
-      while (truncation(u, 0, sigsq) <= accx) { ut <- u; u <- u / 4 }
+      ut <- u
+      u <- u / 4
+      while (truncation(u, 0, sigsq) <= accx) { ut <- u
+      u <- u / 4 }
     }
     for (a in c(2, 1.4, 1.2, 1.1)) {
       u <- ut / a
@@ -1834,13 +1979,19 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   integ <- function(nterm, interv, tausq, main, sigsq, st) {
     inpi <- interv / pi
     for (k in nterm:0) {
-      u <- (k + 0.5) * interv; sum1 <- -2 * u * cc
-      sum2 <- abs(sum1); sum3 <- -0.5 * sigsq * u * u
+      u <- (k + 0.5) * interv
+      sum1 <- -2 * u * cc
+      sum2 <- abs(sum1)
+      sum3 <- -0.5 * sigsq * u * u
       for (j in r:1) {
-        nj <- n[j]; x <- 2 * lb[j] * u; y <- x * x
+        nj <- n[j]
+        x <- 2 * lb[j] * u
+        y <- x * x
         sum3 <- sum3 - 0.25 * nj * ln1(y, TRUE)
-        y <- nc[j] * x / (1 + y); z <- nj * atan(x) + y
-        sum1 <- sum1 + z; sum2 <- sum2 + abs(z)
+        y <- nc[j] * x / (1 + y)
+        z <- nj * atan(x) + y
+        sum1 <- sum1 + z
+        sum2 <- sum2 + abs(z)
         sum3 <- sum3 - 0.5 * x * y
       }
       x <- inpi * exp(sum3) / u
@@ -1853,12 +2004,14 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   th <- order(abs(lb), decreasing = TRUE)
   ln28 <- log(2) / 8
   cfe <- function(x) {
-    axl <- abs(x); sxl <- if (x < 0) -1 else 1
+    axl <- abs(x)
+    sxl <- if (x < 0) -1 else 1
     sum1 <- 0
     for (j in r:1) {
       t <- th[j]
       if (lb[t] * sxl > 0) {
-        lj <- abs(lb[t]); axl1 <- axl - lj * (n[t] + nc[t])
+        lj <- abs(lb[t])
+        axl1 <- axl - lj * (n[t] + nc[t])
         axl2 <- lj / ln28
         if (axl1 > axl2) axl <- axl1 else {
           if (axl > axl2) axl <- axl2
@@ -1875,9 +2028,13 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   acc1 <- acc
   sigsq <- sigma * sigma
   sd <- sigsq
-  lmax <- 0; lmin <- 0; mean <- 0
+  lmax <- 0
+  lmin <- 0
+  mean <- 0
   for (j in seq_len(r)) {
-    nj <- n[j]; lj <- lb[j]; ncj <- nc[j]
+    nj <- n[j]
+    lj <- lb[j]
+    ncj <- nc[j]
     sd <- sd + lj * lj * (2 * nj + 4 * ncj)
     mean <- mean + lj * (nj + ncj)
     if (lmax < lj) lmax <- lj else if (lmin > lj) lmin <- lj
@@ -1885,7 +2042,9 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   if (sd == 0) return(list(p = if (cc > 0) 1 else 0, ifault = 0L))
   sd <- sqrt(sd)
   almx <- if (lmax < -lmin) -lmin else lmax
-  utx <- 16 / sd; up <- 4.5 / sd; un <- -up
+  utx <- 16 / sd
+  up <- 4.5 / sd
+  un <- -up
   utx <- findu(utx, 0.5 * acc1, sigsq)
   if (cc != 0 && almx > 0.07 * sd) {
     cf <- cfe(cc)
@@ -1899,25 +2058,34 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   }
   acc1 <- 0.5 * acc1
   repeat {
-    ct <- ctff(acc1, up, mean, lmin, lmax, sigsq); up <- ct$up
+    ct <- ctff(acc1, up, mean, lmin, lmax, sigsq)
+    up <- ct$up
     d1 <- ct$c - cc
     if (d1 < 0) return(list(p = 1, ifault = 0L))
-    ct <- ctff(acc1, un, mean, lmin, lmax, sigsq); un <- ct$up
+    ct <- ctff(acc1, un, mean, lmin, lmax, sigsq)
+    un <- ct$up
     d2 <- cc - ct$c
     if (d2 < 0) return(list(p = 0, ifault = 0L))
     intv <- if (d1 > d2) 2 * pi / d1 else 2 * pi / d2
-    x <- utx / intv; nt <- floor(x); if (x - nt > 0.5) nt <- nt + 1
-    x <- 3 / sqrt(acc1); ntm <- floor(x); if (x - ntm > 0.5) ntm <- ntm + 1
+    x <- utx / intv
+    nt <- floor(x)
+    if (x - nt > 0.5) nt <- nt + 1
+    x <- 3 / sqrt(acc1)
+    ntm <- floor(x)
+    if (x - ntm > 0.5) ntm <- ntm + 1
     if (nt > ntm * 1.5) {
-      intv1 <- utx / ntm; x <- 2 * pi / intv1
+      intv1 <- utx / ntm
+      x <- 2 * pi / intv1
       if (x <= abs(cc)) break
-      c1 <- cfe(cc - x); c2 <- cfe(cc + x)
+      c1 <- cfe(cc - x)
+      c2 <- cfe(cc + x)
       tausq <- 0.33 * acc1 / (1.1 * (c1$v + c2$v))
       if (c2$fail) break
       acc1 <- acc1 * 0.67
       if (ntm > lim) return(list(p = -1, ifault = 1L))
       st <- integ(ntm, intv1, tausq, FALSE, sigsq, st)
-      lim <- lim - ntm; sigsq <- sigsq + tausq
+      lim <- lim - ntm
+      sigsq <- sigsq + tausq
       utx <- findu(utx, 0.25 * acc1, sigsq)
       acc1 <- 0.75 * acc1
     } else break
@@ -1928,10 +2096,10 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   x <- st$ersm + acc / 10
   ifault <- 0L
   jj <- 1
-  for (i in 1:4) { if (jj * x == jj * st$ersm) ifault <- 2L; jj <- jj * 2 }
+  for (i in 1:4) { if (jj * x == jj * st$ersm) ifault <- 2L
+  jj <- jj * 2 }
   list(p = p, ifault = ifault)
 }
-
 # Pr(sum_j lb_j X_j > q), X_j ~ chi^2_df_j (mgcv psum.chisq, upper tail).
 .gamn_psum_chisq <- function(q, lb, df = rep(1, length(lb))) {
   df <- round(df)
@@ -1942,27 +2110,30 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   }
   1 - r$p
 }
-
 .gamn_liu2 <- function(x, lambda, h = rep(1, length(lambda))) {
   lh <- lambda * h
   muQ <- sum(lh)
-  lh <- lh * lambda; c2 <- sum(lh)
-  lh <- lh * lambda; c3 <- sum(lh)
+  lh <- lh * lambda
+  c2 <- sum(lh)
+  lh <- lh * lambda
+  c3 <- sum(lh)
   if (x <= 0 || c2 <= 0) return(1)
   s1 <- c3 / c2^1.5
   s2 <- sum(lh * lambda) / c2^2
   sigQ <- sqrt(2 * c2)
   t <- (x - muQ) / sigQ
   if (s1^2 > s2) {
-    a <- 1 / (s1 - sqrt(s1^2 - s2)); delta <- s1 * a^3 - a^2; l <- a^2 - 2 * delta
+    a <- 1 / (s1 - sqrt(s1^2 - s2))
+    delta <- s1 * a^3 - a^2
+    l <- a^2 - 2 * delta
   } else {
-    a <- 1 / s1; delta <- 0
+    a <- 1 / s1
+    delta <- 0
     if (c3 == 0) return(1)
     l <- c2^3 / c3^2
   }
   stats::pchisq(t * sqrt(2) * a + l + delta, df = l, ncp = delta, lower.tail = FALSE)
 }
-
 # Wood (2013) test statistic and p-value for one smooth (mgcv testStat).
 .gamn_test_stat <- function(p, X, V, rank, res.df = -1) {
   qrx <- qr(X, tol = 0)
@@ -1970,13 +2141,16 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   V <- R %*% V[qrx$pivot, qrx$pivot, drop = FALSE] %*% t(R)
   V <- (V + t(V)) / 2
   ed <- eigen(V, symmetric = TRUE)
-  siv <- sign(ed$vectors[1L, ]); siv[siv == 0] <- 1
+  siv <- sign(ed$vectors[1L, ])
+  siv[siv == 0] <- 1
   ed$vectors <- sweep(ed$vectors, 2L, siv, "*")
   k <- max(0, floor(rank))
   nu <- abs(rank - k)
   k1 <- if (nu > 0) k + 1 else k
   r.est <- sum(ed$values > max(ed$values) * .Machine$double.eps^0.9)
-  if (r.est < k1) { k1 <- k <- r.est; nu <- 0; rank <- r.est }
+  if (r.est < k1) { k1 <- k <- r.est
+  nu <- 0
+  rank <- r.est }
   vec <- ed$vectors
   if (k1 < ncol(vec)) vec <- vec[, seq_len(k1), drop = FALSE]
   if (nu > 0 && k > 0) {
@@ -2026,12 +2200,9 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   }
   list(stat = d, pval = min(1, pval), rank = rank)
 }
-
-
 # ---------------------------------------------------------------------------
 # Methods
 # ---------------------------------------------------------------------------
-
 # Model matrix of a fitted morie_gam at new data.
 .gamn_predict_matrix <- function(object, newdata) {
   newdata <- as.data.frame(newdata)
@@ -2055,7 +2226,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   attr(X, "offset") <- if (is.null(off)) rep(0, nrow(X)) else as.numeric(off)
   X
 }
-
 #' Predictions from a native generalized additive model
 #'
 #' @param object A \code{"morie_gam"} fit.
@@ -2109,7 +2279,6 @@ predict.morie_gam <- function(object, newdata, type = c("link", "response", "ter
   }
   list(fit = fit, se.fit = se)
 }
-
 #' Print a native generalized additive model
 #'
 #' @param x A \code{"morie_gam"} fit.
@@ -2119,7 +2288,8 @@ predict.morie_gam <- function(object, newdata, type = c("link", "response", "ter
 #' @export
 print.morie_gam <- function(x, ...) {
   cat("\nFamily:", x$family, "\nLink function:", x$link, "\n\n")
-  cat("Formula:\n"); print(x$formula)
+  cat("Formula:\n")
+  print(x$formula)
   if (length(x$edf_smooth)) {
     cat("\nEstimated degrees of freedom:\n")
     print(round(x$edf_smooth, 4))
@@ -2131,7 +2301,6 @@ print.morie_gam <- function(x, ...) {
   cat(sprintf("\nn = %d\n", x$nobs))
   invisible(x)
 }
-
 #' Summary of a native generalized additive model
 #'
 #' Parametric coefficient table and approximate significance of smooth
@@ -2169,8 +2338,10 @@ summary.morie_gam <- function(object, ...) {
   if (length(labs)) {
     tab <- t(vapply(seq_along(labs), function(i) {
       ii <- which(object$assign == i)
-      b <- object$coefficients[ii]; V <- Vp[ii, ii, drop = FALSE]
-      if (length(b) == 1L) { nb <- 1; chi <- b * b / V[1L, 1L] } else {
+      b <- object$coefficients[ii]
+      V <- Vp[ii, ii, drop = FALSE]
+      if (length(b) == 1L) { nb <- 1
+      chi <- b * b / V[1L, 1L] } else {
         D <- eigen(V, symmetric = TRUE)
         keep <- D$values > .Machine$double.eps^0.5 * D$values[1L]
         nb <- sum(keep)
@@ -2189,7 +2360,8 @@ summary.morie_gam <- function(object, ...) {
     s.table <- t(vapply(object$smooths, function(sm) {
       ii <- sm$first.para:sm$last.para
       V <- Vp[ii, ii, drop = FALSE]
-      edfi <- sum(object$edf[ii]); edf1i <- sum(object$edf1[ii])
+      edfi <- sum(object$edf[ii])
+      edf1i <- sum(object$edf1[ii])
       Xt <- object$R[, ii, drop = FALSE]
       res <- .gamn_test_stat(object$coefficients[ii], Xt, V, min(ncol(Xt), edf1i),
                              res.df = if (est.disp) residual.df else -1)
@@ -2206,7 +2378,6 @@ summary.morie_gam <- function(object, ...) {
   class(out) <- "summary.morie_gam"
   out
 }
-
 #' Print the summary of a native generalized additive model
 #'
 #' @param x A \code{"summary.morie_gam"} object.
@@ -2232,7 +2403,6 @@ print.summary.morie_gam <- function(x, ...) {
               unname(x$score), x$scale, x$n))
   invisible(x)
 }
-
 #' Coefficients of a native generalized additive model
 #'
 #' @param object A \code{"morie_gam"} fit.
@@ -2241,7 +2411,6 @@ print.summary.morie_gam <- function(x, ...) {
 #' @keywords internal
 #' @export
 coef.morie_gam <- function(object, ...) object$coefficients
-
 #' Bayesian posterior covariance of a native generalized additive model
 #'
 #' @param object A \code{"morie_gam"} fit.
@@ -2250,7 +2419,6 @@ coef.morie_gam <- function(object, ...) object$coefficients
 #' @keywords internal
 #' @export
 vcov.morie_gam <- function(object, ...) object$Vp
-
 #' Fitted values of a native generalized additive model
 #'
 #' @param object A \code{"morie_gam"} fit.
@@ -2259,7 +2427,6 @@ vcov.morie_gam <- function(object, ...) object$Vp
 #' @keywords internal
 #' @export
 fitted.morie_gam <- function(object, ...) object$fitted.values
-
 #' Residuals of a native generalized additive model
 #'
 #' @param object A \code{"morie_gam"} fit.
@@ -2272,14 +2439,15 @@ fitted.morie_gam <- function(object, ...) object$fitted.values
 residuals.morie_gam <- function(object, type = c("deviance", "pearson", "working", "response"), ...) {
   type <- match.arg(type)
   fam <- .gamn_family(object$family)
-  y <- object$y; mu <- object$fitted.values; wt <- object$prior.weights
+  y <- object$y
+  mu <- object$fitted.values
+  wt <- object$prior.weights
   switch(type,
     deviance = sign(y - mu) * sqrt(pmax(fam$dev.resids(y, mu, wt), 0)),
     pearson = (y - mu) * sqrt(wt) / sqrt(fam$variance(mu)),
     working = (y - mu) / switch(object$family, gaussian = 1, binomial = mu * (1 - mu), poisson = mu),
     response = y - mu)
 }
-
 #' Log-likelihood of a native generalized additive model
 #'
 #' As \code{logLik.gam}: the value is \code{edf + (scale estimated) -
