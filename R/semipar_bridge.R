@@ -458,10 +458,10 @@ kernel_cond_moments <- function(x, y, x_eval, bandwidth,
 
 
 # ---------------------------------------------------------------------------
-# mgcv::gam smoother helper
+# thin plate spline smoother helper (morie_gam)
 # ---------------------------------------------------------------------------
 
-#' Thin-plate spline smoother via mgcv::gam
+#' Thin-plate spline smoother
 #'
 #' A penalised-spline alternative to the kernel methods above. Fits
 #' \code{y ~ s(x, k = k)} and returns fitted values at \code{x_eval}.
@@ -470,25 +470,20 @@ kernel_cond_moments <- function(x, y, x_eval, bandwidth,
 #' @param y Numeric outcome vector.
 #' @param x_eval Evaluation grid (defaults to \code{x}).
 #' @param k Basis dimension for the smoother (default 10).
-#' @param family GLM family for \code{mgcv::gam} (default
-#'   \code{gaussian()}).
-#' @return A list with \code{fit} (the fitted gam object),
+#' @param family \code{"gaussian"}, \code{"binomial"} or \code{"poisson"},
+#'   or the matching family object (default \code{gaussian()}).
+#' @return A list with \code{fit} (the \code{\link{morie_gam}} fit),
 #'   \code{x_eval}, \code{y_hat} (predictions), and \code{edf}
 #'   (effective degrees of freedom).
 #' @examples
-#' if (requireNamespace("mgcv", quietly = TRUE)) {
-#'   set.seed(1)
-#'   x <- sort(runif(40, -2, 2))
-#'   y <- sin(x) + 0.2 * rnorm(40)
-#'   xe <- seq(-1.5, 1.5, length.out = 20)
-#'   r <- gam_smoother(x, y, x_eval = xe, k = 5)
-#'   head(r$y_hat)
-#' }
+#' set.seed(1)
+#' x <- sort(runif(40, -2, 2))
+#' y <- sin(x) + 0.2 * rnorm(40)
+#' xe <- seq(-1.5, 1.5, length.out = 20)
+#' r <- gam_smoother(x, y, x_eval = xe, k = 5)
+#' head(r$y_hat)
 #' @export
 gam_smoother <- function(x, y, x_eval = NULL, k = 10, family = stats::gaussian()) {
-  if (!requireNamespace("mgcv", quietly = TRUE)) {
-    stop("gam_smoother requires the mgcv package")
-  }
   x <- as.numeric(x)
   y <- as.numeric(y)
   if (length(x) != length(y)) stop("x and y must have equal length")
@@ -496,10 +491,13 @@ gam_smoother <- function(x, y, x_eval = NULL, k = 10, family = stats::gaussian()
   x_eval <- as.numeric(x_eval)
 
   df <- data.frame(x = x, y = y)
-  fit <- mgcv::gam(y ~ s(x, k = k), data = df, family = family)
+  if (is.list(family)) family <- family$family
+  # morie_gam reads k from the formula, so the value goes in, not the name
+  f <- stats::as.formula(bquote(y ~ s(x, k = .(as.integer(k)))))
+  fit <- morie_gam(f, df, family = family)
   newdat <- data.frame(x = x_eval)
   y_hat <- as.numeric(stats::predict(fit, newdata = newdat))
-  edf <- sum(fit$edf)
+  edf <- fit$edf_total
   list(fit = fit, x_eval = x_eval, y_hat = y_hat, edf = edf, k = k)
 }
 

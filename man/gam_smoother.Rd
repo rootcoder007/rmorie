@@ -2,7 +2,7 @@
 % Please edit documentation in R/semipar_bridge.R
 \name{gam_smoother}
 \alias{gam_smoother}
-\title{Thin-plate spline smoother via mgcv::gam}
+\title{Thin-plate spline smoother}
 \usage{
 gam_smoother(x, y, x_eval = NULL, k = 10, family = stats::gaussian())
 }
@@ -15,11 +15,11 @@ gam_smoother(x, y, x_eval = NULL, k = 10, family = stats::gaussian())
 
 \item{k}{Basis dimension for the smoother (default 10).}
 
-\item{family}{GLM family for \code{mgcv::gam} (default
-\code{gaussian()}).}
+\item{family}{\code{"gaussian"}, \code{"binomial"} or \code{"poisson"},
+or the matching family object (default \code{gaussian()}).}
 }
 \value{
-A list with \code{fit} (the fitted gam object),
+A list with \code{fit} (the \code{\link{morie_gam}} fit),
 \code{x_eval}, \code{y_hat} (predictions), and \code{edf}
 (effective degrees of freedom).
 }
@@ -28,12 +28,10 @@ A penalised-spline alternative to the kernel methods above. Fits
 \code{y ~ s(x, k = k)} and returns fitted values at \code{x_eval}.
 }
 \examples{
-if (requireNamespace("mgcv", quietly = TRUE)) {
-  set.seed(1)
-  x <- sort(runif(40, -2, 2))
-  y <- sin(x) + 0.2 * rnorm(40)
-  xe <- seq(-1.5, 1.5, length.out = 20)
-  r <- gam_smoother(x, y, x_eval = xe, k = 5)
-  head(r$y_hat)
-}
+set.seed(1)
+x <- sort(runif(40, -2, 2))
+y <- sin(x) + 0.2 * rnorm(40)
+xe <- seq(-1.5, 1.5, length.out = 20)
+r <- gam_smoother(x, y, x_eval = xe, k = 5)
+head(r$y_hat)
 }
