@@ -4,7 +4,13 @@
 \alias{morie_effects_tidy}
 \title{Tidy coefficient table for a fitted model}
 \usage{
-morie_effects_tidy(model, ...)
+morie_effects_tidy(
+  model,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+)
 }
 \arguments{
 \item{model}{A fitted model object.}
