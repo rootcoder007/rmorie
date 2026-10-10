@@ -15,11 +15,16 @@
 #'   \item{\code{login --token [KEY]}}{store a key you already have (prompts
 #'     for it when KEY is omitted)}
 #'   \item{\code{logout}}{forget the hosted key}
-#'   \item{\code{doctor}}{report the LLM providers reachable from this machine}
+#'   \item{\code{doctor}}{report the LLM providers reachable from this machine, and
+#'     the route \code{ask} will take}
+#'   \item{\code{config [show | help | get KEY | set KEY VALUE | unset KEY | setup | path]}}{show
+#'     or change the language-model settings (\code{\link{morie_llm_config}}): the
+#'     route \code{ask} uses and the address, key and model of each route;
+#'     \code{setup} walks through them}
 #'   \item{\code{models}}{list the models you can ask: the hosted tier's for your
 #'     key (default marked), then the local Ollama server's}
-#'   \item{\code{ask [--model NAME] PROMPT...}}{send a prompt to the active provider
-#'     (or the named model) and print the reply}
+#'   \item{\code{ask [--model NAME] [--route ROUTE] PROMPT...}}{send a prompt to the
+#'     active provider (or the named model, on the named route) and print the reply}
 #'   \item{\code{analyze SUBJECT [JSON]}}{run an analysis subject through \code{cli_main()}}
 #'   \item{\code{explain FILENAME}, \code{inspect PATH}, \code{verify PATH}}{read,
 #'     browse and validate module output tables}
@@ -37,7 +42,8 @@
 #'     \code{exec}, \code{edit}, \code{percysuits}}{file encryption, open-data
 #'     feeds, bootstrap weights, evaluate R code, edit a file, pull models}
 #'   \item{\code{version}}{print the package version}
-#'   \item{\code{help}}{this list}
+#'   \item{\code{help [start | llm | config | r]}}{this list, or a guide: getting
+#'     started, the language-model routes, every setting, the same from R}
 #' }
 #' @param args Character vector of arguments; defaults to the command line.
 #' @param out Connection or function for output (default: the console).
@@ -111,25 +117,8 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         }
       },
       logout = { morie_llm_logout() },
-      doctor = {
-        rows <- list(
-          c("Ollama (local)", if (morie_llm_probe_ollama()) "reachable" else "not reachable",
-            .morie_llm_ollama_base()),
-          c("Hosted LLM", if (is.null(.morie_llm_hosted_key())) paste0("not logged in -- rmorie login (GitHub) or rmorie login --email you@example.com", .morie_httr2_note())
-                          else if (morie_llm_probe_hosted()) "logged in, gateway answering"
-                          else if (.morie_llm_hosted_rejected()) "key rejected by the gateway -- rmorie login again"
-                          else "logged in, gateway not reachable",
-            if (!is.null(.morie_llm_hosted_key()) && morie_llm_probe_hosted()) {
-              hm <- morie_llm_hosted_models()
-              sprintf("%s  models: %s (default %s)", .morie_llm_hosted_base(),
-                      paste(hm, collapse = ", "), attr(hm, "default") %||% "")
-            } else .morie_llm_hosted_base() %||% "disabled"),
-          c("Gemini key", if (is.null(.morie_llm_gemini_key())) "absent" else "set", ""),
-          c("OpenAI-compatible API", if (is.null(.morie_llm_api_base())) "absent" else "set", .morie_llm_api_base() %||% ""),
-          c("OpenAI key", if (is.null(.morie_llm_openai_key())) "absent" else "set", ""))
-        for (r in rows) out(sprintf("  %-24s %-32s %s\n", r[[1L]], r[[2L]], r[[3L]]))
-        out(sprintf("  active provider: %s\n", morie_llm_detect_provider()))
-      },
+      doctor = status <- .cli_doctor(out),
+      config = status <- .cli_config(rest, out),
       models = {
         if (is.null(.morie_llm_hosted_key())) {
           out(paste0("Hosted LLM: not logged in -- rmorie login (GitHub) or rmorie login --email you@example.com", .morie_httr2_note(), "\n"))
@@ -157,22 +146,39 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         } else {
           out(sprintf("Local Ollama: not reachable at %s\n", .morie_llm_ollama_base()))
         }
-        out("Pick one per call with `rmorie ask --model NAME ...`, or set MORIE_HOSTED_MODEL / MORIE_OLLAMA_MODEL; attach your own endpoint with `rmorie provider set`.\n")
+        out(paste0("Pick one per call with `rmorie ask --model NAME ...`; make one the default with ",
+                   "`rmorie config set hosted.model NAME` (or ollama.model, own.model); ",
+                   "point ask at your own server with `rmorie config set own.url URL` (rmorie help llm).\n"))
       },
       ask = {
         mdl <- flag("--model")
         if (!is.null(mdl)) rest <- rest[-(match("--model", rest) + 0:1)]
+        rte <- flag("--route")
+        if (!is.null(rte)) {
+          rest <- rest[-(match("--route", rest) + 0:1)]
+          rte <- tolower(rte)
+          if (!rte %in% .morie_llm_routes) {
+            stop(structure(class = c("cli_usage", "error", "condition"),
+                           list(message = "--route takes auto, own, ollama or hosted", call = NULL)))
+          }
+        }
         if (!length(rest) || identical(rest[[1L]], "--help")) {
-          out("usage: rmorie ask [--model NAME] PROMPT...\n")
+          out("usage: rmorie ask [--model NAME] [--route auto|own|ollama|hosted] PROMPT...\n")
           status <- 2L
+        } else if (!identical(.morie_llm_route(rte), "auto") &&
+                   identical(if (is.null(rte)) morie_llm_detect_provider() else morie_llm_detect_provider(route = rte),
+                             "local")) {
+          # a chosen route that is not set up: say what is missing, not the generic fallback text
+          out(paste0("rmorie ask: ", .morie_llm_route_missing(.morie_llm_route(rte)), "\n"))
+          status <- 1L
         } else {
-          provider <- morie_llm_detect_provider()
+          provider <- if (is.null(rte)) morie_llm_detect_provider() else morie_llm_detect_provider(route = rte)
           if (identical(provider, "local")) {
             out(paste0(.morie_llm_local_fallback(paste(rest, collapse = " ")), "\n"))
             out(.cli_llm_fallback_cause(mdl))
             status <- 1L
           } else {
-            ans <- morie_llm_ask(paste(rest, collapse = " "), model = mdl, provider = provider)
+            ans <- morie_llm_ask(paste(rest, collapse = " "), model = mdl, provider = provider, route = rte)
             out(paste0(trimws(ans), "\n"))  # some models open with blank lines
             if (isTRUE(attr(ans, "fallback"))) {
               out(.cli_llm_fallback_cause(mdl))
@@ -407,15 +413,43 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       version = out(sprintf("%s %s\n", pkg, as.character(utils::packageVersion(pkg)))),
       help = ,
       `--help` = ,
-      `-h` = out(paste0(
+      `-h` = status <- .cli_help(rest, out),
+      stop(structure(class = c("cli_usage", "error", "condition"),
+                     list(message = sprintf("unknown verb '%s' (try: rmorie help)", verb), call = NULL))))
+  }, warning = function(w) {
+    # R reports a refused file as a warning naming the path, then a bare "cannot open the connection"
+    # error; keep the path and the reason, and do not let the raw warning leak after the message
+    if (!grepl("cannot open file '", conditionMessage(w), fixed = TRUE)) return(invisible())
+    opened <<- sub("^.*cannot open file '(.*)': (.*)$", "\\1: \\2", conditionMessage(w))
+    invokeRestart("muffleWarning")
+  }), error = function(e) {
+    msg <- conditionMessage(e)
+    if (!is.null(opened) && grepl("cannot open (the connection|file)", msg)) {
+      msg <- paste0("cannot open ", opened)
+    } else if (grepl("cannot open (the connection|file)|[Pp]ermission denied", msg) &&
+               !grepl("could not be reached|cannot open the connection to '", msg)) {  # a URL: the network, not a path
+      msg <- paste0(msg, " (permission denied, or the path does not exist)")
+    }
+    out(paste0("rmorie ", verb, ": ", msg, "\n"))
+    status <<- if (inherits(e, "cli_usage")) 2L else 1L
+  })
+  invisible(status)
+}
+
+# `rmorie help [TOPIC]`: the verbs, a getting-started guide, and one page per topic.
+.cli_help <- function(rest, out) {
+  topic <- if (length(rest) && !startsWith(rest[[1L]], "-")) tolower(rest[[1L]]) else ""
+  verbs <- paste0(
         "usage: rmorie <verb> [options]\n\n",
         "  login [--email ADDRESS] [--code CODE] [--no-browser]   sign in to the hosted LLM tier\n",
         "        [--to-email]                                     ... and have the key emailed instead\n",
         "  login --token [KEY]                                    store a key you already have\n",
         "  logout                                                 forget the hosted key\n",
-        "  doctor                                                 LLM providers reachable from here\n",
+        "  doctor                                                 LLM routes reachable from here, and the one ask uses\n",
         "  models                                                 models you can ask (hosted + local)\n",
-        "  ask [--model NAME] PROMPT...                           ask the active provider\n",
+        "  ask [--model NAME] [--route auto|own|ollama|hosted] PROMPT...   ask a model (this route only, with --route)\n",
+        "  config [show | help | get KEY | set KEY VALUE | unset KEY | setup | path]   language-model settings\n",
+        "        (route, addresses, keys, models; saved in ~/.config/morie/llm.json; setup asks for each)\n",
         "  analyze SUBJECT [JSON]                                 run an analysis subject\n",
         "  list-modules [--outputs]                               the analysis modules (--outputs: the files each writes)\n",
         "  run-module NAME [--output-dir DIR] [--cpads FILE | --dataset KEY]   run one module (--dataset ocp21 = the real PUMF)\n",
@@ -447,31 +481,96 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  percysuits [--dry-run] [--host URL]                    pull the Perseus model set into Ollama\n",
         "  verify-earth-engine                                    (Python side only)\n",
         "  version                                                package version\n",
-        "  help | -h | --help                                     this list; VERB --help for one verb\n\n",
+        "  help [start | llm | config | r]                        this list, or a guide; VERB --help for one verb\n\n",
+        "Guides:  rmorie help start   getting started, step by step\n",
+        "         rmorie help llm     every way to point ask at a model (hosted, Ollama, your own server)\n",
+        "         rmorie help config  every language-model setting, its environment variable, examples\n",
+        "         rmorie help r       the same from R and Rscript\n\n",
         "Install or update:  install.packages(\"rmorie\", repos = c(\"https://rootcoder007.r-universe.dev\", ",
         "\"https://cloud.r-project.org\"))\n",
         "Launcher on PATH:   Rscript -e 'rmorie::install_cli()'\n",
-        "Python side:        pip install morie   (then: morie r-install)\n")),
-      stop(structure(class = c("cli_usage", "error", "condition"),
-                     list(message = sprintf("unknown verb '%s' (try: rmorie help)", verb), call = NULL))))
-  }, warning = function(w) {
-    # R reports a refused file as a warning naming the path, then a bare "cannot open the connection"
-    # error; keep the path and the reason, and do not let the raw warning leak after the message
-    if (!grepl("cannot open file '", conditionMessage(w), fixed = TRUE)) return(invisible())
-    opened <<- sub("^.*cannot open file '(.*)': (.*)$", "\\1: \\2", conditionMessage(w))
-    invokeRestart("muffleWarning")
-  }), error = function(e) {
-    msg <- conditionMessage(e)
-    if (!is.null(opened) && grepl("cannot open (the connection|file)", msg)) {
-      msg <- paste0("cannot open ", opened)
-    } else if (grepl("cannot open (the connection|file)|[Pp]ermission denied", msg) &&
-               !grepl("could not be reached|cannot open the connection to '", msg)) {  # a URL: the network, not a path
-      msg <- paste0(msg, " (permission denied, or the path does not exist)")
-    }
-    out(paste0("rmorie ", verb, ": ", msg, "\n"))
-    status <<- if (inherits(e, "cli_usage")) 2L else 1L
-  })
-  invisible(status)
+        "Python side:        pip install morie   (then: morie r-install)\n"
+  )
+  start <- paste0(
+    "Getting started with rmorie\n\n",
+    "1. Check what is set up (and which route `ask` will take):\n",
+    "     rmorie doctor\n",
+    "2. Pick a model source (any one is enough):\n",
+    "     hosted MORIE tier   rmorie login                  (GitHub, or --email ADDRESS for a code)\n",
+    "                         rmorie login --token KEY      (a key issued at https://rmorie.com/access)\n",
+    "     local Ollama        ollama pull qwen3:8b          (https://ollama.com)\n",
+    "     your own server     rmorie config set own.url http://localhost:1234/v1\n",
+    "   or answer a few questions instead:  rmorie config setup\n",
+    "3. Ask:\n",
+    "     rmorie ask \"which module fits a treatment-control design?\"\n",
+    "     rmorie ask --model gpt-oss-120b:cf \"...\"      (one model, this time)\n",
+    "     rmorie ask --route hosted \"...\"               (one route, this time)\n",
+    "4. Make a choice stick:\n",
+    "     rmorie config set route hosted\n",
+    "     rmorie config set hosted.model gpt-oss-120b:cf\n",
+    "5. Run an analysis (no model needed):\n",
+    "     rmorie list-modules\n",
+    "     rmorie run-module power-design --output-dir out/\n",
+    "     rmorie tutorial                                 (a guided walk through one analysis)\n",
+    "     rmorie cheatsheet                               (one-page reference)\n"
+  )
+  llm <- paste0(
+    "Where ask sends a prompt\n\n",
+    "With route = auto (the default) ask tries, in order: a local Ollama server (only if it has a\n",
+    "model), your GEMINI_API_KEY, your own server (own.url), your OPENAI_API_KEY, then the hosted\n",
+    "MORIE tier (if you are logged in). A route other than auto is the only one asked.\n",
+    "`rmorie doctor` shows each one and the route ask will take.\n\n",
+    "Hosted MORIE tier (the :cloud and :cf models)\n",
+    "  rmorie login                                 sign in (GitHub, or --email ADDRESS for a code)\n",
+    "  rmorie login --token KEY                     paste a key; it is checked before it is saved\n",
+    "  rmorie models                                the models your key can use\n",
+    "  rmorie config set route hosted               always use it, even with Ollama running\n",
+    "  rmorie config set hosted.model NAME          its default model\n\n",
+    "Ollama, on this machine or another\n",
+    "  ollama pull qwen3:8b                         a model to use\n",
+    "  rmorie config set ollama.url http://192.168.1.20:11434\n",
+    "  rmorie config set ollama.model qwen3:8b\n",
+    "  rmorie config set ollama.url off             never try Ollama\n\n",
+    "Your own OpenAI-compatible server (LM Studio, vLLM, llama.cpp, a provider's API)\n",
+    "  rmorie config set own.url http://localhost:1234/v1\n",
+    "  rmorie config set own.model NAME\n",
+    "  rmorie config set own.key                    (asks for the key, so it stays out of history)\n\n",
+    "One call only\n",
+    "  rmorie ask --route ollama --model qwen3:8b \"...\"\n",
+    "  MORIE_LLM_ROUTE=hosted rmorie ask \"...\"      (environment variables win over saved settings)\n"
+  )
+  r_help <- paste0(
+    "From R (or Rscript -e '...': single quotes outside, double quotes inside)\n\n",
+    "  library(rmorie)\n",
+    "  morie_llm_config()                                        # every setting, where it comes from\n",
+    "  morie_llm_config(route = \"hosted\", hosted.model = \"gpt-oss-120b:cf\")\n",
+    "  morie_llm_config(ollama.url = \"http://192.168.1.20:11434\", ollama.model = \"qwen3:8b\")\n",
+    "  morie_llm_config(own.url = \"http://localhost:1234/v1\", own.model = \"m\")\n",
+    "  morie_llm_config(route = NULL)                            # back to auto\n",
+    "  morie_llm_login()                                         # or email = \"you@example.org\", token = \"KEY\"\n",
+    "  morie_llm_detect_provider()                               # the provider ask will use\n",
+    "  morie_llm_hosted_models()\n",
+    "  morie_llm_ask(\"Which module fits a treatment-control design?\", route = \"hosted\")\n",
+    "  morie_cli(c(\"config\", \"set\", \"route\", \"hosted\"))         # any shell verb, from R\n\n",
+    "From the shell:\n",
+    "  Rscript -e 'rmorie::morie_llm_config(route = \"hosted\")'\n",
+    "  Rscript -e 'cat(rmorie::morie_llm_ask(\"What is a difference-in-differences design?\"), \"\\n\")'\n",
+    "  Rscript -e 'rmorie::install_cli()'                       # puts the rmorie command on PATH\n"
+  )
+  if (!nzchar(topic)) {
+    out(verbs)
+  } else if (topic %in% c("start", "getting-started", "quickstart")) {
+    out(start)
+  } else if (topic %in% c("llm", "routes", "hosted", "ollama", "models")) {
+    out(llm)
+  } else if (identical(topic, "config")) {
+    return(.cli_config("help", out))
+  } else if (topic %in% c("r", "rscript")) {
+    out(r_help)
+  } else {
+    return(.cli_verb_help(topic, out))
+  }
+  0L
 }
 
 #' Install the rmorie command-line launcher

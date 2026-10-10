@@ -966,6 +966,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rqn_fnb_impl
+List rqn_fnb_impl(const arma::mat& X, const arma::vec& y, double tau, double beta, double eps, int maxit);
+RcppExport SEXP _rmorie_rqn_fnb_impl(SEXP XSEXP, SEXP ySEXP, SEXP tauSEXP, SEXP betaSEXP, SEXP epsSEXP, SEXP maxitSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< double >::type tau(tauSEXP);
+    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< int >::type maxit(maxitSEXP);
+    rcpp_result_gen = Rcpp::wrap(rqn_fnb_impl(X, y, tau, beta, eps, maxit));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_sobol_cpp
 NumericMatrix morie_sobol_cpp(const int n, const int d);
 RcppExport SEXP _rmorie_morie_sobol_cpp(SEXP nSEXP, SEXP dSEXP) {
@@ -1507,6 +1523,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_lsap_cpp", (DL_FUNC) &_rmorie_morie_lsap_cpp, 1},
     {"_rmorie_morie_rlearner_forest_cpp", (DL_FUNC) &_rmorie_morie_rlearner_forest_cpp, 9},
     {"_rmorie_morie_rlm_cpp", (DL_FUNC) &_rmorie_morie_rlm_cpp, 5},
+    {"_rmorie_rqn_fnb_impl", (DL_FUNC) &_rmorie_rqn_fnb_impl, 6},
     {"_rmorie_morie_sobol_cpp", (DL_FUNC) &_rmorie_morie_sobol_cpp, 2},
     {"_rmorie_morie_knn_index_cpp", (DL_FUNC) &_rmorie_morie_knn_index_cpp, 2},
     {"_rmorie_morie_coord_descent_cpp", (DL_FUNC) &_rmorie_morie_coord_descent_cpp, 7},

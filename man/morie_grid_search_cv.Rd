@@ -19,31 +19,82 @@ morie_grid_search_cv(
 
 \item{y}{Response.}
 
-\item{method}{caret method id (default chosen by task).}
+\item{method}{Learner id, one of \code{"lm"}, \code{"glm"},
+\code{"glmnet"}, \code{"ridge"} (default \code{"glmnet"} for
+classification, \code{"ridge"} for regression).}
 
-\item{tune_grid}{data.frame of hyperparameter combos to evaluate.}
+\item{tune_grid}{data.frame of hyperparameter combos to evaluate
+(column names are the method's tuning parameters). When
+\code{NULL} and \code{method} is supplied, a three-level default
+grid is built as caret does.}
 
 \item{cv}{CV folds.}
 
 \item{task}{"auto", "classification", or "regression".}
 
-\item{seed}{RNG seed.}
+\item{seed}{RNG seed (drives the fold assignment; the caller's RNG
+stream is restored on exit).}
 }
 \value{
-Named list: estimate (best CV score), best_params, best_score,
-cv_results_params, cv_results_mean_score, task, n, method.
+Named list: estimate (CV score of the best candidate), best_params,
+best_score (same as estimate), cv_results_params (the candidate
+parameters, sorted, together with the fold standard deviations of
+the metrics), cv_results_mean_score (mean CV RMSE for regression,
+accuracy for classification, aligned with cv_results_params), task,
+n, method.
 }
 \description{
-Wraps \code{caret::train} with method = "glm" (classification) or
-"lm" (regression) by default; users can pass any caret \code{method}.
+Native k-fold cross-validated grid search. Every candidate in
+\code{tune_grid} is fitted on each training fold with one of rmorie's
+own learners and scored on the held-out fold; the best candidate is
+the one with the lowest mean RMSE (regression) or highest mean
+accuracy (classification). The resampling protocol reproduces
+\code{caret::train(..., trControl = trainControl(method = "cv"))}:
+after \code{set.seed(seed)} one integer is drawn to seed the fold
+assignment, which is made with caret's stratified \code{createFolds}
+algorithm (outcome classes, or up to five quantile bins of a numeric
+outcome, are spread evenly over the folds) in an isolated RNG
+stream; per-fold RMSE / R-squared / MAE or accuracy / Cohen's kappa
+are averaged over the folds (\code{NA} folds dropped), and ties are
+broken as caret does. With the same seed the folds, and therefore
+the scores, agree with caret's.
+}
+\details{
+Supported \code{method} values and their native learners:
+\describe{
+\item{\code{"lm"}}{least squares (pivoted QR), tuning parameter
+\code{intercept} (logical); regression only.}
+\item{\code{"glm"}}{logistic (classification, two classes) or
+Gaussian (regression) GLM by IRLS (\code{stats::glm.fit});
+tuning parameter \code{parameter = "none"}.}
+\item{\code{"glmnet"}}{elastic net by pathwise coordinate descent on
+standardised predictors (Friedman, Hastie and Tibshirani 2010):
+Gaussian, binomial or multinomial by task. As in glmnet, each
+training fold is fitted along glmnet's default 100-point lambda
+path (same lambda_max, lambda.min.ratio and early-stopping rules)
+and predictions at a grid lambda are linearly interpolated
+between path points. Tuning parameters \code{alpha},
+\code{lambda}.}
+\item{\code{"ridge"}}{ridge regression in the Zou-Hastie elastic net
+parametrisation of \code{elasticnet::enet} at fraction 1
+(unit-norm predictors, coefficients rescaled by
+\code{1 + lambda}); tuning parameter \code{lambda}; regression
+only.}
+}
+Any other \code{method} is an error naming the supported set.
 }
 \examples{
 set.seed(1)
-\dontshow{if (requireNamespace("caret", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_grid_search_cv(
   x = matrix(rnorm(150), 50, 3), y = rnorm(50),
   method = "lm", tune_grid = data.frame(intercept = c(TRUE, FALSE)),
   cv = 3L, task = "regression", seed = 1L
 )
-\dontshow{\}) # examplesIf}
+}
+\references{
+Friedman, J., Hastie, T. and Tibshirani, R. (2010).
+Regularization paths for generalized linear models via coordinate
+descent. Journal of Statistical Software 33(1).
+Kuhn, M. (2008). Building predictive models in R using the caret
+package. Journal of Statistical Software 28(5).
 }

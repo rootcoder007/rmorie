@@ -13,21 +13,19 @@ fisher_combined(p_values)
 An object of class \code{"morie_multiple_testing_result"}.
 }
 \description{
-Delegates to \code{poolr::fisher} when installed; otherwise
-computes the chi-square statistic inline.
+Native closed form: \eqn{X^2 = -2\sum \log p_i} on \eqn{2k} df
+(reproduces \code{poolr::fisher} with \code{adjust = "none"}).
 }
 \examples{
-if (requireNamespace("poolr", quietly = TRUE)) {
-  # Combine several independent tests into one global p-value.
-  res <- fisher_combined(c(0.001, 0.6, 0.5))
-  res                          # rich print: statistic, df, combined p
-  res$p_value                  # the combined p-value
-  res$statistic                # chi-square = -2 * sum(log p)
+# Combine several independent tests into one global p-value.
+res <- fisher_combined(c(0.001, 0.6, 0.5))
+res                          # rich print: statistic, df, combined p
+res$p_value                  # the combined p-value
+res$statistic                # chi-square = -2 * sum(log p)
 
-  # One small p can drive the combination significant.
-  fisher_combined(c(0.0001, 0.9, 0.8, 0.7))$p_value
+# One small p can drive the combination significant.
+fisher_combined(c(0.0001, 0.9, 0.8, 0.7))$p_value
 
-  # All-null inputs stay non-significant.
-  fisher_combined(c(0.4, 0.5, 0.6))$p_value
-}
+# All-null inputs stay non-significant.
+fisher_combined(c(0.4, 0.5, 0.6))$p_value
 }

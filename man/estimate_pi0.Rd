@@ -16,14 +16,17 @@ estimate_pi0(p_values, method = c("storey", "bootstrap", "two_step"))
 A scalar pi0 estimate in \verb{[0, 1]}.
 }
 \description{
-Delegates to \code{qvalue::pi0est} (Bioconductor) when installed
-and \code{method = "storey"}. Otherwise computes the cutoff-based
-or bootstrap-based estimator inline.
+Native estimators. \code{"storey"} is Storey and Tibshirani (2003):
+a cubic smoothing spline with 3 df (\code{stats::smooth.spline})
+through \eqn{\hat\pi_0(\lambda)} over \code{seq(0.05, 0.95, 0.05)},
+read at the largest lambda; \code{"bootstrap"} is the
+Storey-Taylor-Siegmund (2004) MSE-minimising lambda. Both reproduce
+\code{qvalue::pi0est} (\code{pi0.method = "smoother"} /
+\code{"bootstrap"}). \code{"two_step"} is the Benjamini-Krieger-Yekutieli
+(2006) stage-one estimator.
 }
 \examples{
-if (requireNamespace("qvalue", quietly = TRUE)) {
-  set.seed(1)
-  p <- c(runif(80), runif(20, 0, 0.005))
-  estimate_pi0(p, method = "storey")
-}
+set.seed(1)
+p <- c(runif(80), runif(20, 0, 0.005))
+estimate_pi0(p, method = "storey")
 }

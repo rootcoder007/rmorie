@@ -81,9 +81,9 @@ NULL
 #   - Slapin & Proksch (2008) "A Scaling Model for Estimating Time-Series
 #     Party Positions from Texts", AJPS 52(3)  (Wordfish).
 #
-# Aldrich-McKelvey and blackbox scaling use `basicspace` when it is
-# installed and otherwise compute the same estimators natively (closed-form
-# AM; EM low-rank blackbox).  The Bayesian estimators (Bayesian AM,
+# Aldrich-McKelvey and blackbox scaling are native: closed-form AM and a
+# port of basicspace's BLACKB alternating least squares (both cross-validated
+# against basicspace in tests/).  The Bayesian estimators (Bayesian AM,
 # Bayesian MDS and unfolding, CJR, ordinal and dynamic IRT,
 # alpha-NOMINATE) run on the native samplers in
 # spatial_voting_bayes_native.R, each checked against its reference
@@ -98,14 +98,6 @@ NULL
   m <- as.matrix(x)
   storage.mode(m) <- "double"
   m
-}
-
-# basicspace's Fortran (aldmck, blackbox, blackbox_transpose) writes past
-# its arrays on a matrix with a single row or a single column and only
-# errors afterwards; the damage surfaces later as a segfault in whatever
-# allocates next. Such shapes never reach it (valgrind, 2026-09-22).
-.sv_basicspace_shape_ok <- function(M, min_rows = 2L, min_cols = 2L) {
-  is.matrix(M) && is.double(M) && nrow(M) >= min_rows && ncol(M) >= min_cols
 }
 
 #' Internal helper: Sv Nanmean Col
@@ -253,11 +245,14 @@ NULL
 #' eigenvector of \eqn{\sum_i (I - P_i)} with the smallest eigenvalue
 #' orthogonal to the constant.  Respondents with a missing placement, or
 #' who place every stimulus at the same point, are left out, as
-#' `basicspace::aldmck` does; with `basicspace` installed it computes the
-#' stimuli, otherwise the same closed form is evaluated here (the two agree
-#' to rounding).  Positions are standardised to mean 0 and sd 1 and the
+#' `basicspace::aldmck` does.  The closed form is evaluated natively; on
+#' integer placement scales it equals `basicspace::aldmck`'s stimuli
+#' (standardised) to rounding (\eqn{< 10^{-15}}).  `basicspace` truncates
+#' every placement to an integer (\code{as.integer}) before scaling, so on
+#' non-integer data the two differ and this function uses the values as
+#' given.  Positions are standardised to mean 0 and sd 1 and the
 #' first stimulus is put on the left.  The respondent intercepts and slopes
-#' are, on either path, the per-respondent least squares regression of the
+#' are the per-respondent least squares regression of the
 #' reported placements on those positions, so they are defined for every
 #' respondent with at least two placements (`basicspace` itself reports
 #' them only for respondents it scales against a self-placement, which
@@ -268,7 +263,7 @@ NULL
 #' @param n_dims Number of latent dimensions (must be 1).
 #' @return A list with components `zhat` (stimulus positions), `alpha`,
 #'   `beta`, `weights`, `iterations` (`NA`, the solution is closed form),
-#'   `converged`, and `engine` ("basicspace" or "native").
+#'   `converged`, and `engine` (always "native").
 #' @references
 #'   Aldrich, J. H. and McKelvey, R. D. (1977). "A Method of Scaling with
 #'   Applications to the 1968 and 1972 Presidential Elections."
@@ -298,30 +293,6 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z, n_dims = 1L) {
   n_resp <- nrow(Z)
   n_stim <- ncol(Z)
 
-  if (requireNamespace("basicspace", quietly = TRUE) &&
-        .sv_basicspace_shape_ok(Z)) {
-    # aldmck's default treats NA cells as missing; passing `missing = NA`
-    # is rejected ("must only contain integers"), which sent every call
-    # down the native path while the docs promised basicspace
-    out <- try(basicspace::aldmck(Z, respondent = 0, polarity = 1),
-               silent = TRUE)
-    if (!inherits(out, "try-error") && all(is.finite(out$stimuli))) {
-      zhat <- as.numeric(out$stimuli)
-      zhat <- zhat - mean(zhat)
-      if (stats::sd(zhat) > 0) zhat <- zhat / stats::sd(zhat)
-      rp <- .sv_am_respondents(Z, !is.na(Z), zhat)
-      return(list(
-        zhat       = zhat,
-        alpha      = rp$alpha,
-        beta       = rp$beta,
-        weights    = abs(rp$beta) / sum(abs(rp$beta)) * n_resp,
-        iterations = NA_integer_,
-        converged  = TRUE,
-        engine     = "basicspace"
-      ))
-    }
-  }
-
   zhat <- .sv_am_stimuli(Z)
   rp <- .sv_am_respondents(Z, !is.na(Z), zhat)
   list(zhat = zhat, alpha = rp$alpha, beta = rp$beta,
@@ -333,30 +304,185 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z, n_dims = 1L) {
 # 2. Blackbox (Basic Space) scaling
 # ===========================================================================
 
+# Port of basicspace's BLACKB Fortran routine (Poole 1998).  Missing cells
+# are NA here (the Fortran codes them -999).
+
+# Pseudo-inverse of a small symmetric matrix through its eigen-decomposition,
+# dropping eigenvalues with |lambda| <= 1e-4 (the DSYEV step in REG / REGA).
+.sv_bb_pinv_sym <- function(A) {
+  e <- eigen(A, symmetric = TRUE)
+  keep <- abs(e$values) > 1e-4
+  if (!any(keep)) return(matrix(0, nrow(A), ncol(A)))
+  V <- e$vectors[, keep, drop = FALSE]
+  V %*% (t(V) / e$values[keep])
+}
+
+# CORR2: column polarities (+1 / -1) from the pairwise correlation matrix.
+# A respondent enters the (j, jj) correlation (jj <= j) only when cell j and
+# cells 1..jj are all observed -- the Fortran leaves its inner loop at the
+# first missing cell, and that rule is kept.  The anchor is the column with
+# the largest sum |r|; a column is then flipped whenever more than half of
+# its signed correlations are negative, sweeping NY times.
+.sv_bb_polarity <- function(X, obs) {
+  ny <- ncol(X)
+  firstmiss <- apply(obs, 1L, function(o) {
+    w <- which(!o)
+    if (length(w)) w[1L] else ny + 1L
+  })
+  R <- matrix(0, ny, ny)
+  for (j in seq_len(ny)) {
+    for (jj in seq_len(j)) {
+      use <- obs[, j] & (jj < firstmiss)
+      n <- sum(use)
+      a <- X[use, j]
+      b <- X[use, jj]
+      AA <- n * sum(a * b) - sum(a) * sum(b)
+      BB <- n * sum(a * a) - sum(a)^2
+      CC <- n * sum(b * b) - sum(b)^2
+      R[j, jj] <- R[jj, j] <- if (BB * CC <= 0) 0 else AA / sqrt(BB * CC)
+    }
+  }
+  ll <- ifelse(R[which.max(rowSums(abs(R))), ] <= 0, -1, 1)
+  nyd2 <- (ny - 1L) %/% 2L
+  for (jk in seq_len(ny)) {
+    for (j in seq_len(ny)) {
+      if (sum(R[j, ] * ll * ll[j] < 0) > nyd2) ll[j] <- -ll[j]
+    }
+  }
+  ll
+}
+
+# REG: regress each issue's observed cells on PSI (last column the
+# constant).  Returns the coefficients W (slopes, then intercept), the
+# signed residuals fitted - observed, and the SSE.
+.sv_bb_reg <- function(XS, obs, PSI) {
+  ny <- ncol(XS)
+  W <- matrix(0, ny, ncol(PSI))
+  Xr <- matrix(NA_real_, nrow(XS), ny)
+  sse <- 0
+  for (j in seq_len(ny)) {
+    o <- obs[, j]
+    P <- PSI[o, , drop = FALSE]
+    w <- as.numeric(.sv_bb_pinv_sym(crossprod(P)) %*% crossprod(P, XS[o, j]))
+    W[j, ] <- w
+    r <- as.numeric(P %*% w) - XS[o, j]
+    Xr[o, j] <- r
+    sse <- sse + sum(r^2)
+  }
+  list(W = W, X = Xr, sse = sse)
+}
+
+# REG2 / REGA: regress each respondent's observed cells (minus the issue
+# intercepts) on the issue weights; updates the first nf columns of PSI.
+.sv_bb_reg2 <- function(XS, obs, W, PSI, nf) {
+  Xr <- matrix(NA_real_, nrow(XS), ncol(XS))
+  sse <- 0
+  idx <- seq_len(nf)
+  for (i in seq_len(nrow(XS))) {
+    o <- obs[i, ]
+    A <- W[o, idx, drop = FALSE]
+    v <- as.numeric(.sv_bb_pinv_sym(crossprod(A)) %*%
+                      crossprod(A, XS[i, o] - W[o, nf + 1L]))
+    PSI[i, idx] <- v
+    r <- as.numeric(A %*% v) + W[o, nf + 1L] - XS[i, o]
+    Xr[i, o] <- r
+    sse <- sse + sum(r^2)
+  }
+  list(PSI = PSI, X = Xr, sse = sse)
+}
+
+# BLACKB: one dimension at a time from sign-corrected (and, for the first,
+# column-centred) respondent means, four alternating least squares sweeps
+# per dimension on the residuals of the previous ones; then up to five joint
+# sweeps (stopping once the two half-step SSEs differ by < 0.01); finally
+# the SVD of the fitted Psi W' gives Psi = U D^(1/2), W = V D^(1/2).
+.sv_bb_fit <- function(X0, nf) {
+  obs <- !is.na(X0)
+  np <- nrow(X0)
+  dc <- colSums(ifelse(obs, X0, 0)) / colSums(obs)
+  X <- X0
+  XS <- X0
+  ll <- .sv_bb_polarity(X, obs)
+  PSIX <- matrix(0, np, nf + 1L)
+  for (jjj in seq_len(nf)) {
+    shift <- if (jjj == 1L) -dc else rep(0, ncol(X))
+    Z <- sweep(sweep(X, 2L, shift, "+"), 2L, ll, "*")
+    wxb <- rowSums(ifelse(obs, Z, 0)) / rowSums(obs)
+    xxk <- sum(wxb^2) - np * mean(wxb)^2
+    XT <- cbind(wxb - mean(wxb), 1)
+    for (mm in 1:4) {
+      r1 <- .sv_bb_reg(XS, obs, XT)
+      r2 <- .sv_bb_reg2(XS, obs, r1$W, XT, 1L)
+      X[obs] <- r2$X[obs]
+      psi <- r2$PSI[, 1L]
+      pxb <- mean(psi)
+      pxs <- sum(psi^2) - np * pxb^2
+      xcor <- if (pxs > 0) sqrt(xxk / pxs) else 1
+      XT[, 1L] <- (psi - pxb) * xcor
+      PSIX[, jjj] <- XT[, 1L]
+    }
+    if (jjj == nf) {
+      PSIX[, nf + 1L] <- 1
+      X <- X0
+    }
+    XS <- X
+    if (jjj < nf) ll <- .sv_bb_polarity(X, obs)
+  }
+  idx <- seq_len(nf)
+  for (nn in 1:5) {
+    r1 <- .sv_bb_reg(XS, obs, PSIX)
+    W <- r1$W
+    r2 <- .sv_bb_reg2(XS, obs, W, PSIX, nf)
+    PSIX <- r2$PSI
+    PSIX[, idx] <- sweep(PSIX[, idx, drop = FALSE], 2L,
+                         colMeans(PSIX[, idx, drop = FALSE]))
+    if (abs(r1$sse - r2$sse) < 0.01) break
+  }
+  s <- svd(PSIX[, idx, drop = FALSE] %*% t(W[, idx, drop = FALSE]),
+           nu = nf, nv = nf)
+  d <- s$d[idx]
+  psi <- s$u %*% diag(sqrt(d), nrow = nf)
+  w <- s$v %*% diag(sqrt(d), nrow = nf)
+  cvec <- W[, nf + 1L]
+  fit <- psi %*% t(w) + rep(cvec, each = np)
+  sse <- sum((fit - X0)[obs]^2)
+  svsum <- sum(X0[obs]^2) - sum(X0[obs])^2 / sum(obs)
+  list(psi = psi, w = w, c = cvec, d = d, sse = sse, svsum = svsum)
+}
+
 #' Blackbox / Basic Space scaling
 #'
 #' Recovers respondent ideal points from an issue-scale response matrix
 #' by Poole's (1998) decomposition
-#' \eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0}, fitted
-#' by least squares over the observed cells only.  Respondents with fewer
-#' than `minscale` responses are not scaled (their rows are `NA`).
-#' `basicspace::blackbox` computes it when installed and the matrix has at
-#' least eight issues; otherwise it is computed here, by the EM low-rank
-#' fit: missing cells are filled with the current fit, the column means
-#' and the leading singular vectors of the centred matrix recomputed, and
-#' the two steps repeated until the filled cells stop moving.  With no
-#' missing cells this is one SVD; either way \eqn{\Psi = U D^{1/2}} and
-#' \eqn{W = V D^{1/2}}, the scaling `basicspace` reports, and the two
-#' paths give the same fitted values.
+#' \eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0} over the
+#' observed cells.  Respondents with fewer than `minscale` responses are
+#' not scaled (their rows are `NA`).  The fit is a native port of the
+#' BLACKB routine of `basicspace::blackbox`: each dimension is started
+#' from sign-corrected respondent means (column polarities from the
+#' pairwise correlation matrix) and refined by four alternating least
+#' squares sweeps on the residuals of the earlier dimensions; up to five
+#' joint sweeps follow, stopping once the two half-step error sums of
+#' squares differ by less than 0.01; and the fitted \eqn{\Psi W'} is
+#' re-expressed by its singular value decomposition,
+#' \eqn{\Psi = U D^{1/2}}, \eqn{W = V D^{1/2}}.  The results equal
+#' `basicspace::blackbox`'s (which rounds them to three decimals), with
+#' or without missing cells; like it, the alternating fit is stopped
+#' early, so on weakly structured data it need not be the fully converged
+#' least-squares (truncated SVD) solution.
 #'
 #' @param X A respondent-by-issue numeric matrix of responses
 #'   (`NA` for missing).
 #' @param n_dims Number of dimensions to extract.
 #' @param minscale Minimum number of responses for a respondent to be
 #'   scaled (capped at the number of issues).
-#' @return A list with `ideal_points`, `stimuli_weights`, `eigenvalues`,
-#'   `singular_values`, `explained_variance`, `col_means`, `n_dims`, and
-#'   `engine`.
+#' @return A list with `ideal_points` (\eqn{\Psi}, `NA` rows for unscaled
+#'   respondents), `stimuli_weights` (\eqn{W}), `eigenvalues` (squared
+#'   singular values), `singular_values` (of the fitted \eqn{\Psi W'},
+#'   basicspace's `fits$singular`), `explained_variance` (\eqn{1 -
+#'   SSE/SS}, SS taken about the grand mean of the observed cells: the sum
+#'   of basicspace's `fits$percent` over the dimensions, divided by 100),
+#'   `col_means` (the issue intercepts \eqn{c}, basicspace's `c` column),
+#'   `n_dims`, and `engine` ("native").
 #' @references Poole, K. T. (1998); Armstrong et al. (2021).
 #' @examples
 #' set.seed(1)
@@ -371,69 +497,28 @@ morie_spatial_voting_blackbox <- function(X, n_dims = 2L, minscale = 8L) {
   X <- .sv_as_matrix(X)
   n <- nrow(X)
   p <- ncol(X)
-
-  # minscale = 8 below drops every respondent with fewer than eight
-  # responses, so fewer than eight stimuli would only error anyway
-  if (requireNamespace("basicspace", quietly = TRUE) &&
-        .sv_basicspace_shape_ok(X, min_cols = max(8L, n_dims + 1L))) {
-    # blackbox's default treats NA cells as missing; `missing = NA` is
-    # rejected ("must only contain integers") and silently sent every
-    # call to the native path
-    Xb <- X
-    if (is.null(colnames(Xb))) colnames(Xb) <- paste0("issue", seq_len(p))
-    if (is.null(rownames(Xb))) rownames(Xb) <- paste0("resp", seq_len(n))
-    out <- try(basicspace::blackbox(Xb, dims = n_dims, minscale = minscale,
-                                    verbose = FALSE),
-               silent = TRUE)
-    if (!inherits(out, "try-error")) {
-      ip <- as.matrix(out$individuals[[n_dims]][, paste0("c", seq_len(n_dims))])
-      sw <- as.matrix(out$stimuli[[n_dims]][, paste0("w", seq_len(n_dims))])
-      return(list(
-        ideal_points      = ip,
-        stimuli_weights   = sw,
-        eigenvalues       = NA_real_,
-        singular_values   = NA_real_,
-        explained_variance = NA_real_,
-        col_means         = .sv_nanmean_col(X),
-        n_dims            = n_dims,
-        engine            = "basicspace"
-      ))
-    }
-  }
-
   if (p < 2L) {
     stop("Blackbox scaling needs at least two issues (columns).",
          call. = FALSE)
   }
-  keep <- rowSums(!is.na(X)) >= min(as.integer(minscale), p)
+  keep <- rowSums(!is.na(X)) >= max(1L, min(as.integer(minscale), p))
   if (sum(keep) <= n_dims) {
     stop("Too few respondents answer at least `minscale` issues.",
          call. = FALSE)
   }
   Xk <- X[keep, , drop = FALSE]
-  obs <- !is.na(Xk)
-  M <- Xk
-  M[!obs] <- .sv_nanmean_col(Xk)[col(Xk)][!obs]
-  q <- min(as.integer(n_dims), p - 1L, nrow(Xk) - 1L)
-  for (it in seq_len(5000L)) {
-    col_means <- colMeans(M)
-    sv <- svd(sweep(M, 2L, col_means), nu = q, nv = q)
-    fit <- sv$u %*% (sv$d[seq_len(q)] * t(sv$v)) +
-      rep(col_means, each = nrow(M))
-    if (all(obs)) break
-    change <- max(abs(M[!obs] - fit[!obs]))
-    M[!obs] <- fit[!obs]
-    if (change < 1e-10) break
+  if (any(colSums(!is.na(Xk)) == 0L)) {
+    stop("Every issue needs at least one response among the scaled respondents.",
+         call. = FALSE)
   }
-  d <- sv$d[seq_len(q)]
+  q <- min(as.integer(n_dims), p - 1L, nrow(Xk) - 1L)
+  f <- .sv_bb_fit(Xk, q)
   Psi <- matrix(NA_real_, n, q)
-  Psi[keep, ] <- sv$u %*% diag(sqrt(d), nrow = q)
-  W <- sv$v %*% diag(sqrt(d), nrow = q)
-  total_var <- sum(svd(sweep(M, 2L, col_means))$d^2)
-  list(ideal_points = Psi, stimuli_weights = W,
-       eigenvalues = d^2, singular_values = d,
-       explained_variance = if (total_var > 0) sum(d^2) / total_var else 0,
-       col_means = col_means, n_dims = q, engine = "native")
+  Psi[keep, ] <- f$psi
+  list(ideal_points = Psi, stimuli_weights = f$w,
+       eigenvalues = f$d^2, singular_values = f$d,
+       explained_variance = if (f$svsum > 0) 1 - f$sse / f$svsum else 0,
+       col_means = f$c, n_dims = q, engine = "native")
 }
 
 # ===========================================================================

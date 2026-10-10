@@ -33,7 +33,7 @@ The value of \code{out}, as built in the body.
 }
 \description{
 A step of the fairness_gan implementation. Called by
-\code{.fairness_no_backend_result}, \code{morie_fairness_ctgan_debiaser},
+\code{morie_fairness_ctgan_debiaser},
 \code{morie_fairness_spatial_gan}.
 See the file header for the source the module follows.
 }

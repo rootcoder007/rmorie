@@ -53,11 +53,6 @@ test_that(".hrz_qreg_irls returns a coef vector of length p", {
 
 # ====================================================== aaa_helpers_ghosal_bnp.R
 
-test_that(".gh_have returns logical", {
-  expect_true(rmorie:::.gh_have("stats"))
-  expect_false(rmorie:::.gh_have("nonexistent_pkg_xyz"))
-})
-
 test_that(".gh_pairwise_sq returns ||a_i - a_j||^2 symmetric matrix", {
   set.seed(4L)
   a <- matrix(stats::rnorm(20L), 5L, 4L)

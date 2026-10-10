@@ -2,33 +2,51 @@
 % Please edit documentation in R/bootstrap_methods.R
 \name{morie_rsample_bootstraps}
 \alias{morie_rsample_bootstraps}
-\title{Direct bridge to \code{rsample::bootstraps}}
+\title{Native set of bootstrap resamples (rsample-style)}
 \usage{
 morie_rsample_bootstraps(data, times = 25L, ...)
 }
 \arguments{
-\item{data}{A data.frame.}
+\item{data}{A data.frame (or matrix / vector; rows are resampled).}
 
 \item{times}{Number of bootstrap resamples (default 25).}
 
-\item{...}{Forwarded to \code{rsample::bootstraps}
-(e.g. \code{strata}, \code{apparent}).}
+\item{...}{Optional \code{strata} (a column name of \code{data}, or a
+vector of length \code{nrow(data)}; rows are resampled within
+strata, a numeric stratifier being cut at its quartiles as in
+rsample), \code{breaks} (number of quantile bins for a numeric
+stratifier, default 4) and \code{apparent} (logical; if
+\code{TRUE} an extra "Apparent" resample uses every row for both
+analysis and assessment).}
 }
 \value{
-An \code{rset} \pkg{rsample} object.
+A \code{data.frame} of class
+\code{c("morie_bootstraps", "data.frame")} with one row per resample
+and columns \code{id} (\code{"Bootstrap01"}, ...) and \code{splits}
+(a list column). Each split is a list with integer row indices
+\code{analysis} (length \eqn{n}, with replacement) and
+\code{assessment} (the out-of-bag rows). The original data are kept
+in \code{attr(x, "data")}; the analysis set of split \eqn{b} is
+\code{data[x$splits[[b]]$analysis, , drop = FALSE]}. Attributes
+\code{times}, \code{strata} and \code{apparent} record the call.
 }
 \description{
-Thin pass-through that builds a tidymodels-style
-\code{rset} of bootstrap resamples via
-\code{rsample::bootstraps} and returns it untouched.
+Draws \code{times} nonparametric bootstrap resamples of the rows of
+\code{data} with base R's \code{sample.int} (no \pkg{rsample}
+dependency). Each resample's analysis set is \eqn{n} rows drawn
+with replacement; its assessment set is the out-of-bag rows (those
+never drawn, about \eqn{e^{-1} \approx 36.8\%} of them). This is the
+same design as \code{rsample::bootstraps}; the resampled indices are
+not the same as rsample's under a given seed.
 }
 \examples{
-if (requireNamespace("rsample", quietly = TRUE)) {
-  set.seed(1)
-  rs <- morie_rsample_bootstraps(data.frame(x = rnorm(30)), times = 5L)
-  class(rs)
-}
+set.seed(1)
+rs <- morie_rsample_bootstraps(data.frame(x = rnorm(30)), times = 5L)
+rs$id
+sp <- rs$splits[[1]]
+length(sp$analysis)                 # n rows, drawn with replacement
+setdiff(seq_len(30), sp$analysis)   # equals sp$assessment (out-of-bag)
 }
 \seealso{
-\code{rsample::bootstraps}, \code{rsample::vfold_cv}.
+\code{\link[=bootstrap]{bootstrap()}}, \code{\link[=morie_geron_kfold_cv]{morie_geron_kfold_cv()}}.
 }

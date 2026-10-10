@@ -12,13 +12,38 @@ morie_johansen_cointegration(x, k_ar_diff = 1)
 \item{k_ar_diff}{Number of lagged differences. Default 1.}
 }
 \value{
-Named list with \eqn{eigenvalues, trace_stat, crit_values,
-  rank, n, k, method}.
+Named list with \code{eigenvalues, trace_stat, crit_values,
+  rank, n, k, method}.  \code{trace_stat} and the rows of
+\code{crit_values} (columns \code{10pct, 5pct, 1pct}) are ordered as
+in urca: H0 \eqn{r \le k-1} first, \eqn{r = 0} last; \code{rank} is
+the number of trace statistics exceeding their 5 percent critical
+value.  The list carries an attribute \code{"johansen"} holding the
+maximal-eigenvalue statistics (\code{max_eigen_stat},
+\code{max_eigen_crit}), the eigenvectors normalised on the first
+variable (\code{eigenvectors}, urca's \code{V}) and unnormalised
+(\code{eigenvectors_raw}, urca's \code{Vorg}), the loading matrix
+\code{W}, \code{PI}, and the lag order \code{K}.
 }
 \description{
-Johansen trace test for cointegration
+Native Johansen (1988, 1991) reduced-rank regression on a VECM with
+\code{K = max(k_ar_diff + 1, 2)} lags in levels, an unrestricted
+constant (\code{ecdet = "none"}) and the long-run parameterisation.
+Computed with rmorie's own code, which reproduces
+\code{urca::ca.jo(x, type = "trace", ecdet = "none", K = max(k_ar_diff
++ 1, 2))} (statistics, eigenvalues and normalised eigenvectors) to
+rounding error; no external package is used.  Critical values are the
+Osterwald-Lenum (1992) table used by urca (available for up to 11
+series).
 }
 \examples{
-# See the package vignettes for usage examples:
-#   vignette(package = "rmorie")
+set.seed(1)
+w <- cumsum(rnorm(100))
+Y <- cbind(w + rnorm(100), 0.5 * w + rnorm(100))
+morie_johansen_cointegration(Y)$trace_stat
+}
+\references{
+Johansen, S. (1988). Statistical analysis of cointegration
+vectors. Journal of Economic Dynamics and Control 12, 231-254.
+Osterwald-Lenum, M. (1992). Oxford Bulletin of Economics and
+Statistics 54, 461-472.
 }

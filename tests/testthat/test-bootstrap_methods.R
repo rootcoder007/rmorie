@@ -251,11 +251,10 @@ test_that("morie_boot_run respects strata argument", {
   expect_equal(nrow(bo$t), 60L)
 })
 
-test_that("morie_rsample_bootstraps returns an rset", {
-  skip_if_not_installed("rsample")
+test_that("morie_rsample_bootstraps returns native bootstrap splits", {
   df <- data.frame(x = x_vec)
   rs <- morie_rsample_bootstraps(df, times = 5L)
-  expect_s3_class(rs, "bootstraps")
+  expect_s3_class(rs, "morie_bootstraps")
   expect_equal(nrow(rs), 5L)
 })
 

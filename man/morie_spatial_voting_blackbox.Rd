@@ -16,24 +16,33 @@ morie_spatial_voting_blackbox(X, n_dims = 2L, minscale = 8L)
 scaled (capped at the number of issues).}
 }
 \value{
-A list with \code{ideal_points}, \code{stimuli_weights}, \code{eigenvalues},
-\code{singular_values}, \code{explained_variance}, \code{col_means}, \code{n_dims}, and
-\code{engine}.
+A list with \code{ideal_points} (\eqn{\Psi}, \code{NA} rows for unscaled
+respondents), \code{stimuli_weights} (\eqn{W}), \code{eigenvalues} (squared
+singular values), \code{singular_values} (of the fitted \eqn{\Psi W'},
+basicspace's \code{fits$singular}), \code{explained_variance} (\eqn{1 -
+  SSE/SS}, SS taken about the grand mean of the observed cells: the sum
+of basicspace's \code{fits$percent} over the dimensions, divided by 100),
+\code{col_means} (the issue intercepts \eqn{c}, basicspace's \code{c} column),
+\code{n_dims}, and \code{engine} ("native").
 }
 \description{
 Recovers respondent ideal points from an issue-scale response matrix
 by Poole's (1998) decomposition
-\eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0}, fitted
-by least squares over the observed cells only.  Respondents with fewer
-than \code{minscale} responses are not scaled (their rows are \code{NA}).
-\code{basicspace::blackbox} computes it when installed and the matrix has at
-least eight issues; otherwise it is computed here, by the EM low-rank
-fit: missing cells are filled with the current fit, the column means
-and the leading singular vectors of the centred matrix recomputed, and
-the two steps repeated until the filled cells stop moving.  With no
-missing cells this is one SVD; either way \eqn{\Psi = U D^{1/2}} and
-\eqn{W = V D^{1/2}}, the scaling \code{basicspace} reports, and the two
-paths give the same fitted values.
+\eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0} over the
+observed cells.  Respondents with fewer than \code{minscale} responses are
+not scaled (their rows are \code{NA}).  The fit is a native port of the
+BLACKB routine of \code{basicspace::blackbox}: each dimension is started
+from sign-corrected respondent means (column polarities from the
+pairwise correlation matrix) and refined by four alternating least
+squares sweeps on the residuals of the earlier dimensions; up to five
+joint sweeps follow, stopping once the two half-step error sums of
+squares differ by less than 0.01; and the fitted \eqn{\Psi W'} is
+re-expressed by its singular value decomposition,
+\eqn{\Psi = U D^{1/2}}, \eqn{W = V D^{1/2}}.  The results equal
+\code{basicspace::blackbox}'s (which rounds them to three decimals), with
+or without missing cells; like it, the alternating fit is stopped
+early, so on weakly structured data it need not be the fully converged
+least-squares (truncated SVD) solution.
 }
 \examples{
 set.seed(1)

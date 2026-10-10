@@ -19,13 +19,14 @@ morie_weights_jackknife(weights, strata = NULL, jk_type = c("JK1", "JKn"))
 A numeric \code{matrix}.
 }
 \description{
-When the \code{survey} package is installed and \code{strata} is supplied, defers
-to \code{survey::as.svrepdesign(..., type = "JKn")} for variance compatibility.
+Built natively in base R. JK1: replicate \eqn{i} drops unit \eqn{i}
+and scales the others by \eqn{n/(n-1)}. JKn (needs \code{strata}): one
+replicate per unit, dropping it and scaling the rest of its stratum
+by \eqn{n_h/(n_h-1)} (Wolter 2007, ch. 4) -- the replicate weights of
+\code{survey::as.svrepdesign(..., type = "JK1"/"JKn")}; no package is called.
 }
 \examples{
-if (requireNamespace("survey", quietly = TRUE)) {
-  set.seed(1)
-  res <- morie_weights_jackknife(runif(10, 0.5, 2))
-  str(res, max.level = 1)
-}
+set.seed(1)
+res <- morie_weights_jackknife(runif(10, 0.5, 2))
+str(res, max.level = 1)
 }

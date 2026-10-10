@@ -2,30 +2,46 @@
 % Please edit documentation in R/effects.R
 \name{morie_effects_tidy}
 \alias{morie_effects_tidy}
-\title{Tidy a model with \pkg{broom} (fallback: \code{summary()} coefficients)}
+\title{Tidy coefficient table for a fitted model}
 \usage{
-morie_effects_tidy(model, ...)
+morie_effects_tidy(
+  model,
+  conf.int = FALSE,
+  conf.level = 0.95,
+  exponentiate = FALSE,
+  ...
+)
 }
 \arguments{
 \item{model}{A fitted model object.}
 
-\item{...}{Further arguments forwarded to \code{broom::tidy()}.}
+\item{...}{Further arguments passed to \code{stats::confint()}.}
+
+\item{conf.int}{Logical; add \code{conf.low} / \code{conf.high}.}
+
+\item{conf.level}{Confidence level for the interval.}
+
+\item{exponentiate}{Logical; exponentiate \code{estimate} and the
+interval bounds (e.g. odds ratios for a logit \code{glm}).}
 }
 \value{
 A data frame with one row per model term.
 }
 \description{
-Thin extender over \code{broom::tidy()}. When \pkg{broom} is not
-installed, falls back to building a tidy-style data frame from
-\code{summary(model)$coefficients}, which is sufficient for the
-core \code{term / estimate / std.error / statistic / p.value} columns
-on the model classes (\code{lm} / \code{glm}) that rmorie ships.
+Native coefficient table with the columns and row conventions of
+\code{broom::tidy()} for \code{lm} / \code{glm} fits: one row per
+coefficient in \code{coef(model)} order (aliased coefficients kept
+with \code{NA} statistics), columns \code{term}, \code{estimate},
+\code{std.error}, \code{statistic}, \code{p.value} taken from
+\code{summary(model)$coefficients}, optional \code{conf.low} /
+\code{conf.high} from \code{stats::confint()}, and optional
+exponentiation of the estimate and interval. Any other model class
+whose \code{summary()} carries a \code{coefficients} matrix is
+tidied the same way.
 }
 \examples{
-if (requireNamespace("broom", quietly = TRUE)) {
-  set.seed(1)
-  df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-  fit <- stats::lm(y ~ x + g, data = df)
-  morie_effects_tidy(fit)
-}
+set.seed(1)
+df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+fit <- stats::lm(y ~ x + g, data = df)
+morie_effects_tidy(fit)
 }

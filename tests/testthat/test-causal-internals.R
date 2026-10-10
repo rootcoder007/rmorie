@@ -48,20 +48,6 @@ test_that(".dml_prepare_xy splits data into X, y, treatment matrix", {
   expect_type(out, "list")
 })
 
-test_that(".dml_xfit_ridge runs ridge cross-fitting on synthetic data", {
-  set.seed(4L)
-  n <- 80L
-  X <- cbind(1, matrix(stats::rnorm(n * 3), n, 3))
-  y <- X %*% c(0.1, 0.5, 0.3, -0.2) + stats::rnorm(n, sd = 0.3)
-  out <- tryCatch(
-    rmorie:::.dml_xfit_ridge(X, y, n_folds = 2L, lambda = 1.0),
-    error = function(e) e)
-  if (inherits(out, "error")) {
-    skip(sprintf("dml_xfit_ridge error: %s", conditionMessage(out)))
-  }
-  expect_true(is.numeric(out) || is.list(out))
-})
-
 # ============================================================ effect_sizes.R
 
 test_that(".arr computes absolute relative ratio", {

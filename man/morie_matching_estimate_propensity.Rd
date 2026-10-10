@@ -19,8 +19,8 @@ morie_matching_estimate_propensity(
 
 \item{covariates}{Character vector of covariate names.}
 
-\item{model}{One of \code{"logistic"} (default) or \code{"gbm"}.
-\code{"gbm"} requires the \pkg{gbm} package.}
+\item{model}{One of \code{"logistic"} (default) or \code{"gbm"}
+(native gradient boosting, see Details).}
 
 \item{max_iter}{Maximum iterations for logistic regression.}
 }
@@ -32,20 +32,34 @@ of the retained rows.
 }
 \description{
 Estimates the probability of treatment via logistic regression or
-gradient boosting on a set of covariates.
+gradient boosting on a set of covariates. Both run natively.
+}
+\details{
+\code{model = "gbm"} is native Bernoulli-deviance gradient boosting
+with the settings this function always used for \pkg{gbm}: 100 trees,
+\code{interaction.depth = 3} (three best-first splits per tree),
+shrinkage 0.1 and at least 10 observations per node, leaves set by a
+Newton step on the binomial deviance. It differs from a default
+\code{gbm::gbm()} call in one respect: no row subsampling (gbm's
+\code{bag.fraction = 1}), so the scores are deterministic and need no
+seed. Factor covariates enter through their treatment-contrast dummy
+columns. Cross-validated against \pkg{gbm} (with
+\code{bag.fraction = 1}) in the tests; \pkg{gbm} is not needed at run
+time.
 }
 \examples{
-if (requireNamespace("gbm", quietly = TRUE)) {
-  \donttest{
-  set.seed(1)
-  df <- data.frame(d = rbinom(200, 1, 0.4),
-                   x1 = rnorm(200), x2 = rnorm(200))
-  ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))
-  }
-}
+set.seed(1)
+df <- data.frame(d = rbinom(200, 1, 0.4),
+                 x1 = rnorm(200), x2 = rnorm(200))
+ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))
+ps_gbm <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"),
+                                             model = "gbm")
 }
 \references{
 Rosenbaum, P. R., & Rubin, D. B. (1983). The central role of
 the propensity score in observational studies for causal effects.
 \emph{Biometrika}, 70(1), 41--55.
+
+Friedman, J. H. (2001). Greedy function approximation: a gradient
+boosting machine. \emph{Annals of Statistics}, 29(5), 1189--1232.
 }

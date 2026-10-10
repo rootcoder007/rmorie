@@ -2,9 +2,9 @@
 #' Model-agnostic explainability (XAI) for bias discovery
 #'
 #' R ports of the explainer suite in \code{morie.fairness.xai}.
-#' Prefers \pkg{iml} for permutation importance / PDP / SHAP-ish
-#' attributions when available; otherwise computes the same quantities
-#' in base R from first principles. Every callable takes a
+#' Permutation importance, partial dependence, ALE, ceteris-paribus
+#' profiles and SHAP-style attributions are computed natively in base R
+#' from first principles (\pkg{iml} is not used). Every callable takes a
 #' \code{predict_fn} closure (matrix -> numeric vector) so it works on
 #' any classifier or risk model.
 #'
@@ -84,13 +84,6 @@ NULL
   }
   out
 }
-
-#' Internal helper: Xai Have Iml
-#' @noRd
-.xai_have_iml <- function() {
-  requireNamespace("iml", quietly = TRUE)
-}
-
 
 # ---------------------------------------------------------------------------
 # 1. Permutation importance
@@ -182,7 +175,7 @@ morie_fairness_xai_permutation_importance <- function(predict_fn, X,
     summary_lines = list(
       `Top feature` = ranking[1L],
       `Top importance` = top,
-      Backend = if (.xai_have_iml()) "iml available" else "base R"
+      Backend = "base R"
     ),
     warnings = warnings,
     interpretation = interp,

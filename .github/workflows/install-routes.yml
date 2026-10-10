@@ -1,0 +1,96 @@
+# Runs the README's install one-liners exactly as a user would type them, in a
+# fresh R with no mirror configured, so a snippet that only works in an
+# interactive session (mirror chooser) or keeps an old companion fails here.
+name: install-routes
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - README.md
+      - DESCRIPTION
+      - .github/workflows/install-routes.yml
+  schedule:
+    - cron: "41 10 * * 1" # weekly: catches r-universe or CRAN drift
+
+permissions:
+  contents: read
+
+jobs:
+  route:
+    name: ${{ matrix.route }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        route: [pak, install-packages, pak-github, remotes-github]
+    steps:
+      # setup-r without use-public-rspm or a repos option: the one-liners must
+      # bring their own repos, as they do on a user's machine
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          r-version: release
+          use-public-rspm: false
+
+      - name: Forget any configured mirror
+        shell: bash
+        run: |
+          echo 'options(repos = c(CRAN = "@CRAN@"))' > "$RUNNER_TEMP/Rprofile"
+          echo "R_PROFILE_USER=$RUNNER_TEMP/Rprofile" >> "$GITHUB_ENV"
+
+      - name: Linux headers for the compiled cores (source builds)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libcurl4-openssl-dev libssl-dev libxml2-dev
+
+      - name: pak one-liners (README)
+        if: matrix.route == 'pak'
+        shell: bash
+        run: |
+          Rscript -e 'if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak", repos = "https://cloud.r-project.org"); pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev"); pak::pkg_install("rmoriebricklayer")'
+          Rscript -e 'if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak", repos = "https://cloud.r-project.org"); pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev"); pak::pkg_install(c("rmoriebricklayer", "rmoriedata"))'
+          Rscript -e 'if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak", repos = "https://cloud.r-project.org"); pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev"); pak::pkg_install(c("rmoriebricklayer", "rmoriedata", "rmorie"))'
+
+      - name: install.packages fallback one-liners (README)
+        if: matrix.route == 'install-packages'
+        shell: bash
+        run: |
+          Rscript -e 'install.packages("rmoriebricklayer", repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))'
+          Rscript -e 'install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))'
+          Rscript -e 'install.packages(c("rmoriebricklayer", "rmoriedata", "rmorie"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))'
+
+      - name: pak GitHub one-liners (README)
+        if: matrix.route == 'pak-github'
+        shell: bash
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          # rmorie itself at the commit under test (main for the schedule)
+          REF: ${{ github.head_ref || github.ref_name }}
+        run: |
+          Rscript -e 'if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak", repos = "https://cloud.r-project.org"); pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev"); pak::pkg_install("rootcoder007/rmorie-bricklayer")'
+          Rscript -e 'if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak", repos = "https://cloud.r-project.org"); pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev"); pak::pkg_install("rootcoder007/rmoriedata")'
+          Rscript -e 'if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak", repos = "https://cloud.r-project.org"); pak::repo_add(rootcoder007 = "https://rootcoder007.r-universe.dev"); pak::pkg_install(paste0("rootcoder007/rmorie@", Sys.getenv("REF")))'
+
+      - name: remotes GitHub fallback one-liners (README)
+        if: matrix.route == 'remotes-github'
+        shell: bash
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          REF: ${{ github.head_ref || github.ref_name }}
+        run: |
+          Rscript -e 'repos <- c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"); install.packages("remotes", repos = repos); remotes::install_github("rootcoder007/rmorie-bricklayer", repos = repos, upgrade = "always")'
+          Rscript -e 'repos <- c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"); install.packages("remotes", repos = repos); remotes::install_github("rootcoder007/rmoriedata", repos = repos, upgrade = "always")'
+          Rscript -e 'repos <- c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"); install.packages("remotes", repos = repos); remotes::install_github(paste0("rootcoder007/rmorie@", Sys.getenv("REF")), repos = repos, upgrade = "always")'
+
+      - name: Installed versions meet DESCRIPTION's floors
+        shell: Rscript {0}
+        run: |
+          v <- vapply(c("rmoriebricklayer", "rmoriedata", "rmorie"),
+                      function(p) as.character(utils::packageVersion(p)), "")
+          print(v)
+          stopifnot(utils::packageVersion("rmoriebricklayer") >= "0.5.10",
+                    utils::packageVersion("rmoriedata") >= "0.3.5")
+          library(rmorie)

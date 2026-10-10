@@ -391,7 +391,7 @@ clear_stat_commands <- function() {
     list(
       name = "gam_smoother", category = "Semiparametric",
       usage = "gam_smoother(x, y, k)",
-      description = "mgcv::gam thin-plate smoother",
+      description = "Thin plate spline smoother (morie_gam)",
       handler = function(...) gam_smoother(...),
       aliases = c("gam")
     )

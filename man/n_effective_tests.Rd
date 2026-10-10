@@ -13,17 +13,18 @@ n_effective_tests(correlation_matrix, method = c("galwey", "li_ji", "nyholt"))
 \code{"li_ji"} (Li and Ji 2005), or \code{"nyholt"} (Nyholt 2004).}
 }
 \value{
-Effective number of tests (>= 1).
+Effective number of tests: \code{floor()} of the estimator,
+bounded below by 1.
 }
 \description{
-Delegates to \code{poolr::meff} when installed (\code{poolr}
-implements Galwey, Li-Ji, and Nyholt). Otherwise computes the
-chosen estimator inline.
+Native eigenvalue closed forms that reproduce \code{poolr::meff}
+(methods \code{"galwey"}, \code{"liji"}, \code{"nyholt"}), including
+its conventions: Galwey sets negative eigenvalues to zero, Li-Ji
+works on \eqn{|\lambda_i| + \sqrt{\epsilon}}, Nyholt uses all
+eigenvalues, and the estimate is rounded down to an integer.
 }
 \examples{
-if (requireNamespace("poolr", quietly = TRUE)) {
-  set.seed(1)
-  X <- matrix(rnorm(200), ncol = 5)
-  n_effective_tests(stats::cor(X))
-}
+set.seed(1)
+X <- matrix(rnorm(200), ncol = 5)
+n_effective_tests(stats::cor(X))
 }

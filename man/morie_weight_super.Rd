@@ -23,8 +23,11 @@ the ensemble coefficients.
 }
 \description{
 Native stacking: fits a small library of propensity learners
-(logistic, logistic-with-interactions, and optionally GBM/ranger
-when installed), combines their cross-validated predictions by
+(logistic, logistic with squared terms, and rmorie's native random
+forest -- a probability forest of 200 CART trees, \code{mtry} =
+\eqn{\lfloor\sqrt p\rfloor}, minimum node size 10, the ranger
+probability-forest defaults -- so the library is identical on every
+install), combines their cross-validated predictions by
 non-negative least squares on the CV log-loss surface (native NNLS
 via Lawson-Hanson active set), and converts the ensemble scores to
 estimand weights.

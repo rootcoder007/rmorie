@@ -24,9 +24,12 @@ A named list with elements \code{weights}, \code{converged},
 \code{iterations}, \code{max_adjustment}, \code{diagnostics}.
 }
 \description{
-Closed-form linear calibration to match population totals on auxiliary X.
-When \code{survey} is installed, defers to \code{survey::calibrate()} for a fully
-design-aware result; otherwise computes the linear adjustment in base R.
+Linear (chi-square distance) calibration to match population totals on
+auxiliary X, computed natively in base R: \eqn{w^* = w(1 + x^\top
+\lambda)} with \eqn{\lambda = (X^\top W X)^{-1}(T_x - \hat T_x)}, the
+step repeated on the calibrated weights until the totals match within
+\code{tol} (the linear calibration of \code{survey::calibrate()}; no package is
+called).
 }
 \examples{
 set.seed(1)

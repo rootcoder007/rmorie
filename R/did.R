@@ -137,23 +137,6 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
-#' @param pkg See Usage.
-#' @param fn See Usage.
-#' @keywords internal
-#' @noRd
-.morie_did_need <- function(pkg, fn) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    stop(
-      sprintf(
-        "`%s()` requires the '%s' package. Install it with %s",
-        fn, pkg, sprintf("install.packages(\"%s\")", pkg)
-      ),
-      call. = FALSE
-    )
-  }
-  invisible(TRUE)
-}
-
 #' @param estimate See Usage.
 #' @param se See Usage.
 #' @param alpha See Usage.
@@ -260,54 +243,6 @@ NULL
     method    = method,
     details   = details
   )
-}
-
-#' @param df See Usage.
-#' @param varname See Usage.
-#' @param unit See Usage.
-#' @param time See Usage.
-#' @keywords internal
-#' @noRd
-.morie_did_within_transform <- function(df, varname, unit, time) {
-  # Two-way demeaning: x - unit_mean - time_mean + grand_mean.
-  v <- as.numeric(df[[varname]])
-  um <- stats::ave(v, df[[unit]], FUN = function(z) mean(z, na.rm = TRUE))
-  tm <- stats::ave(v, df[[time]], FUN = function(z) mean(z, na.rm = TRUE))
-  gm <- mean(v, na.rm = TRUE)
-  v - um - tm + gm
-}
-
-#' @param y See Usage.
-#' @param X See Usage.
-#' @param treat See Usage.
-#' @keywords internal
-#' @noRd
-.morie_did_outcome_regression_att <- function(y, X, treat) {
-  X <- as.matrix(X)
-  fit <- stats::lm.fit(
-    cbind(1, X[treat == 0, , drop = FALSE]),
-    y[treat == 0]
-  )
-  beta <- fit$coefficients
-  beta[is.na(beta)] <- 0
-  X1 <- cbind(1, X[treat == 1, , drop = FALSE])
-  y0_hat <- as.numeric(X1 %*% beta)
-  mean(y[treat == 1] - y0_hat)
-}
-
-#' @param y See Usage.
-#' @param treat See Usage.
-#' @param ps See Usage.
-#' @keywords internal
-#' @noRd
-.morie_did_ipw_att <- function(y, treat, ps) {
-  ps <- pmin(pmax(ps, 0.01), 0.99)
-  w <- ps / (1 - ps)
-  if (sum(treat == 1) == 0) {
-    return(0)
-  }
-  mean(y[treat == 1]) -
-    sum(w[treat == 0] * y[treat == 0]) / sum(w[treat == 0])
 }
 
 `%||%` <- function(a, b) if (is.null(a)) b else a

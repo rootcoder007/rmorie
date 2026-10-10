@@ -20,7 +20,9 @@ morie_random_search_cv(
 
 \item{y}{Response.}
 
-\item{method}{caret method id (default by task).}
+\item{method}{Learner id, one of \code{"lm"}, \code{"glm"},
+\code{"glmnet"}, \code{"ridge"} (default \code{"glmnet"} for
+classification, \code{"ridge"} for regression).}
 
 \item{n_iter}{Number of random draws.}
 
@@ -36,15 +38,28 @@ agree on the canonical fixture.  When \code{NULL} (default), behaviour
 is unchanged: \code{seed} drives \code{set.seed()} directly.}
 }
 \value{
-Named list: estimate, best_params, best_score, sampled_params,
-sampled_scores, n_iter, task, n, method.
+Named list: estimate (CV score of the best draw), best_params,
+best_score (same as estimate), sampled_params (the drawn parameters,
+sorted, with the fold standard deviations of the metrics),
+sampled_scores (mean CV RMSE for regression, accuracy for
+classification, aligned with sampled_params), n_iter, task, n, method.
 }
 \description{
-Uses \code{caret::train} with \code{search = "random"}.
+Native k-fold cross-validated random search: \code{n_iter} candidate
+hyperparameter settings are drawn at random (caret's random-search
+distributions: \code{alpha ~ U(0, 1)}, \code{lambda = 2^U(-10, 3)} for
+\code{"glmnet"}; \code{lambda = 10^U(-5, 1)} for \code{"ridge"}), each is
+scored by cross-validation with rmorie's own learners, and the best is
+returned. Folds, metrics, tie-breaking and the supported learners
+(\code{"lm"}, \code{"glm"}, \code{"glmnet"}, \code{"ridge"}) are those of
+\code{\link[=morie_grid_search_cv]{morie_grid_search_cv()}}, which documents them; the RNG protocol is
+caret's \code{train(search = "random")}: one draw seeds the
+(isolated) fold assignment, then the candidates are drawn from the
+main stream, so a given seed reproduces caret's candidates and folds.
 }
 \examples{
-\dontshow{if (requireNamespace("caret", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-# See the package vignettes for usage examples:
-#   vignette(package = "rmorie")
-\dontshow{\}) # examplesIf}
+set.seed(1)
+x <- matrix(rnorm(120), 40, 3)
+y <- drop(x \%*\% c(1, -0.5, 0)) + rnorm(40)
+morie_random_search_cv(x, y, n_iter = 4L, cv = 3L, task = "regression")
 }

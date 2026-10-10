@@ -26,19 +26,6 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Morie Matching Have
-#' @noRd
-.morie_matching_have <- function(pkg) {
-  requireNamespace(pkg, quietly = TRUE)
-}
-
-#' Internal helper: Morie Matching Require
-#' @noRd
-.morie_matching_require <- function(pkg, fn) {
-  morie_ensure_extras(pkg)
-  invisible(TRUE)
-}
-
 #' @param data See Usage.
 #' @param cols See Usage.
 #' @keywords internal
@@ -116,16 +103,100 @@ NULL
 # Propensity score estimation
 # ---------------------------------------------------------------------------
 
+# Native Bernoulli-deviance gradient boosting with gbm's tree rules
+# (gbm 2.x CCARTTree / bernoulli): start at the log-odds of the mean,
+# fit each tree to the working response z = y - p, grow it best-first
+# (always splitting the terminal node with the largest improvement
+# nL nR / (nL + nR) (mean_L - mean_R)^2, `depth` splits per tree, i.e.
+# gbm's interaction.depth), midpoint thresholds, every child at least
+# `min_obs` observations (n.minobsinnode); each leaf takes the Newton
+# step sum(z) / sum(p (1 - p)), shrunk by `shrinkage`. No subsampling
+# (gbm with bag.fraction = 1), so the fit is deterministic.
+#' @noRd
+.morie_matching_gbm_bernoulli <- function(X, y, n_trees = 100L, depth = 3L,
+                                          shrinkage = 0.1, min_obs = 10L) {
+  X <- as.matrix(X)
+  n <- nrow(X)
+  p0 <- mean(y)
+  f <- rep(log(p0 / (1 - p0)), n)
+  ords <- lapply(seq_len(ncol(X)), function(j) order(X[, j], method = "radix"))
+  search <- function(idx, z) {
+    best <- list(imp = 0)
+    m <- length(idx)
+    if (m < 2L * min_obs) {
+      return(best)
+    }
+    inn <- logical(n)
+    inn[idx] <- TRUE
+    tot <- sum(z[idx])
+    for (j in seq_len(ncol(X))) {
+      o <- ords[[j]][inn[ords[[j]]]]
+      xs <- X[o, j]
+      cs <- cumsum(z[o])
+      k <- seq_len(m - 1L)
+      ok <- k >= min_obs & (m - k) >= min_obs & xs[k] != xs[k + 1L]
+      if (!any(ok)) next
+      k <- k[ok]
+      sl <- cs[k]
+      sr <- tot - sl
+      imp <- k * (m - k) / m * (sl / k - sr / (m - k))^2
+      i <- which.max(imp)
+      if (imp[i] > best$imp) {
+        best <- list(
+          imp = imp[i], j = j, thr = 0.5 * (xs[k[i]] + xs[k[i] + 1L])
+        )
+      }
+    }
+    best
+  }
+  for (t in seq_len(n_trees)) {
+    pr <- 1 / (1 + exp(-f))
+    z <- y - pr
+    leaves <- list(seq_len(n))
+    cand <- list(search(leaves[[1L]], z))
+    for (s in seq_len(depth)) {
+      imps <- vapply(cand, function(cnd) cnd$imp, numeric(1))
+      b <- which.max(imps)
+      if (imps[b] <= 0) break
+      idx <- leaves[[b]]
+      cb <- cand[[b]]
+      left <- idx[X[idx, cb$j] < cb$thr]
+      right <- idx[X[idx, cb$j] >= cb$thr]
+      leaves[[b]] <- left
+      cand[[b]] <- search(left, z)
+      leaves[[length(leaves) + 1L]] <- right
+      cand[[length(cand) + 1L]] <- search(right, z)
+    }
+    for (idx in leaves) {
+      den <- sum(pr[idx] * (1 - pr[idx]))
+      if (den > 0) f[idx] <- f[idx] + shrinkage * sum(z[idx]) / den
+    }
+  }
+  1 / (1 + exp(-f))
+}
+
 #' Estimate propensity scores
 #'
 #' Estimates the probability of treatment via logistic regression or
-#' gradient boosting on a set of covariates.
+#' gradient boosting on a set of covariates. Both run natively.
+#'
+#' \code{model = "gbm"} is native Bernoulli-deviance gradient boosting
+#' with the settings this function always used for \pkg{gbm}: 100 trees,
+#' \code{interaction.depth = 3} (three best-first splits per tree),
+#' shrinkage 0.1 and at least 10 observations per node, leaves set by a
+#' Newton step on the binomial deviance. It differs from a default
+#' \code{gbm::gbm()} call in one respect: no row subsampling (gbm's
+#' \code{bag.fraction = 1}), so the scores are deterministic and need no
+#' seed. Factor covariates enter through their treatment-contrast dummy
+#' columns. Cross-validated against \pkg{gbm} (with
+#' \code{bag.fraction = 1}) in the tests; \pkg{gbm} is not needed at run
+#' time.
 #'
 #' @param data Data frame.
 #' @param treatment Name of the binary treatment column (0/1).
 #' @param covariates Character vector of covariate names.
-#' @param model One of \code{"logistic"} (default) or \code{"gbm"}.
-#'   \code{"gbm"} requires the \pkg{gbm} package.
+#' @param model One of \code{"logistic"} (default) or \code{"gbm"}
+#'   (native gradient boosting, see Details).
 #' @param max_iter Maximum iterations for logistic regression.
 #' @return A numeric vector of propensity scores aligned to the rows of
 #'   \code{data} (after dropping NAs in \code{treatment} or
@@ -134,15 +205,16 @@ NULL
 #' @references Rosenbaum, P. R., & Rubin, D. B. (1983). The central role of
 #'   the propensity score in observational studies for causal effects.
 #'   \emph{Biometrika}, 70(1), 41--55.
+#'
+#'   Friedman, J. H. (2001). Greedy function approximation: a gradient
+#'   boosting machine. \emph{Annals of Statistics}, 29(5), 1189--1232.
 #' @examples
-#' if (requireNamespace("gbm", quietly = TRUE)) {
-#'   \donttest{
-#'   set.seed(1)
-#'   df <- data.frame(d = rbinom(200, 1, 0.4),
-#'                    x1 = rnorm(200), x2 = rnorm(200))
-#'   ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))
-#'   }
-#' }
+#' set.seed(1)
+#' df <- data.frame(d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))
+#' ps_gbm <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"),
+#'                                              model = "gbm")
 #' @export
 morie_matching_estimate_propensity <- function(data, treatment, covariates,
                                                model = "logistic",
@@ -151,16 +223,14 @@ morie_matching_estimate_propensity <- function(data, treatment, covariates,
   f <- stats::as.formula(paste(treatment, "~",
                                paste(covariates, collapse = " + ")))
   if (model == "gbm") {
-    if (!.morie_matching_have("gbm")) {
-      stop("Package 'gbm' is required for model = \"gbm\".  ",
-           "Install it with install.packages(\"gbm\").",
+    X <- stats::model.matrix(f, data = df)[, -1L, drop = FALSE]
+    y <- as.numeric(df[[treatment]])
+    if (!all(y %in% c(0, 1)) || length(unique(y)) < 2L) {
+      stop("model = \"gbm\" needs a 0/1 treatment with both values present.",
            call. = FALSE)
     }
-    fit <- gbm::gbm(f, data = df, distribution = "bernoulli",
-                    n.trees = 100, interaction.depth = 3,
-                    shrinkage = 0.1, verbose = FALSE)
-    ps <- gbm::predict.gbm(fit, newdata = df, n.trees = 100,
-                           type = "response")
+    ps <- .morie_matching_gbm_bernoulli(X, y, n_trees = 100L, depth = 3L,
+                                        shrinkage = 0.1, min_obs = 10L)
   } else {
     fit <- stats::glm(f, data = df, family = stats::binomial(),
                       control = list(maxit = max_iter))
@@ -203,16 +273,12 @@ morie_matching_trim_propensity <- function(ps, lower = 0.01, upper = 0.99) {
 #'   \code{"trim"} (drop the extreme 5 percent of each tail).
 #' @return A subset of \code{data} on common support.
 #' @examples
-#' if (requireNamespace("gbm", quietly = TRUE)) {
-#'   \donttest{
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
-#'                    x1 = rnorm(200), x2 = rnorm(200))
-#'   df$propensity_score <- morie_matching_estimate_propensity(df, "d",
-#'                                                             c("x1", "x2"))
-#'   morie_matching_common_support(df, "d")
-#'   }
-#' }
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' df$propensity_score <- morie_matching_estimate_propensity(df, "d",
+#'                                                           c("x1", "x2"))
+#' morie_matching_common_support(df, "d")
 #' @export
 morie_matching_common_support <- function(data, treatment,
                                           ps_col = "propensity_score",

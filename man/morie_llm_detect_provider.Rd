@@ -4,13 +4,21 @@
 \alias{morie_llm_detect_provider}
 \title{Detect the active LLM provider}
 \usage{
-morie_llm_detect_provider()
+morie_llm_detect_provider(route = NULL)
+}
+\arguments{
+\item{route}{\code{NULL} (the saved setting: \code{MORIE_LLM_ROUTE}, else
+\code{\link{morie_llm_config}}'s \code{route}, else \code{"auto"}),
+\code{"auto"}, \code{"own"}, \code{"ollama"} or \code{"hosted"}.}
 }
 \value{
-Character scalar provider key: ollama / gemini / api / openai / hosted / local,
-in that order of preference: a local model first, then your own cloud keys, then the
-hosted MORIE tier as a last resort (it answers only after \code{morie_llm_login()};
-keys are issued on request at \url{https://rmorie.com/access}).
+Character scalar provider key: ollama / gemini / api / openai / hosted / local.
+With the automatic route, in that order of preference: a local Ollama that
+has a model (a server with nothing pulled is skipped), then your own keys
+and endpoint, then the hosted MORIE tier as a last resort (it answers only
+after \code{morie_llm_login()}; keys are issued on request at
+\url{https://rmorie.com/access}). A forced route returns its provider
+(\code{"api"} for \code{"own"}) when it is set up, else \code{"local"}.
 }
 \description{
 Detect the active LLM provider

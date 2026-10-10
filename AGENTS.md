@@ -93,14 +93,6 @@ When touching an extender wrapper:
 
 ## What NOT to do
 
-- **No Zenodo DOIs.** Taken down. Never write `10.5281/zenodo.*`.
-- **No CRAN or win-builder submissions during pre-alpha.** Uwe
-  Ligges archived morie 0.9.4 and asked us to wait. Same applies
-  here. r-universe / GHCR / Homebrew tap are fine.
-- **No false paper citations.** Methodology + empirical-applications
-  papers are in preparation. The citation block in README +
-  `inst/CITATION` should cite ONLY the software (one entry). Do not
-  re-add the 4 vapor paper entries.
 - **No writes to `~/`** from package code. Default to `tempdir()`;
   touch `R_user_dir()` only on explicit user opt-in. morie 0.9.4
   was CRAN-archived over this.
@@ -146,12 +138,9 @@ publishes the docs site at <https://rootcoder007.github.io/rmorie/>.
 
 - Subject in imperative ("fix", "feat", "ci", "docs", "test", "chore")
 - Body: WHY > WHAT (diff shows the what)
-- Dual co-author trailer required:
-
-  ```
-  Co-Authored-By: Claude <noreply@anthropic.com>
-  Co-Authored-By: Vansh Singh Ruhela (rootcoder007) <vsruhela@proton.me>
-  ```
+- Don't put AI session links in commit messages, PR or issue text, or
+  code: no `Claude-Session:` lines and no `claude.ai/code/session_...`
+  URLs.
 
 ## Contact
 

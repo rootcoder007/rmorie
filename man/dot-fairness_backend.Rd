@@ -2,17 +2,18 @@
 % Please edit documentation in R/fairness_gan.R
 \name{.fairness_backend}
 \alias{.fairness_backend}
-\title{Prefer native R torch; fall back to reticulate + JAX}
+\title{Backend descriptor for the fairness GAN callables}
 \usage{
 .fairness_backend()
 }
 \value{
-A list with \code{kind}, \code{note}.
+A list with \code{kind} (\code{"native"}) and \code{note}.
 }
 \description{
 A step of the fairness_gan implementation. Called by
 \code{morie_fairness_ctgan_debiaser}, \code{morie_fairness_spatial_gan}.
-See the file header for the source the module follows.
+The computation is base R, so the backend is always \code{"native"};
+no deep-learning runtime is probed or required.
 }
 \examples{
 res <- .fairness_backend()

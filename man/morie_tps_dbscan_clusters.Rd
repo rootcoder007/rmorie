@@ -32,17 +32,20 @@ A named list with the per-cluster table, the count of
 noise points, and the largest-cluster size.
 }
 \description{
-Requires the optional \pkg{dbscan} package. Coordinates are
-projected to km via the small-angle latitude factor so \code{eps_km}
-is interpretable as a kilometre-scale radius.
+Runs the package's native DBSCAN (Ester et al. 1996; same core-point
+rule, \code{<= eps} neighbourhoods counting the point itself, and
+border points joining the first cluster that reaches them, as
+\code{dbscan::dbscan}). Coordinates are projected to km via the
+small-angle latitude factor so \code{eps_km} is interpretable as a
+kilometre-scale radius. Cluster ids are 1-based in discovery order;
+noise is 0.  The neighbour search is quadratic in the number of
+points, so large inputs are capped by \code{max_n}.
 }
 \examples{
-if (requireNamespace("dbscan", quietly = TRUE)) {
-  set.seed(2026)
-  df <- data.frame(
-    LAT_WGS84 = c(rnorm(60, 43.65, 0.005), rnorm(60, 43.70, 0.005)),
-    LONG_WGS84 = c(rnorm(60, -79.40, 0.005), rnorm(60, -79.38, 0.005))
-  )
-  morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
-}
+set.seed(2026)
+df <- data.frame(
+  LAT_WGS84 = c(rnorm(60, 43.65, 0.005), rnorm(60, 43.70, 0.005)),
+  LONG_WGS84 = c(rnorm(60, -79.40, 0.005), rnorm(60, -79.38, 0.005))
+)
+morie_tps_dbscan_clusters(df, eps_km = 0.5, min_samples = 5L)
 }

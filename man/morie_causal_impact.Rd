@@ -13,54 +13,92 @@ morie_causal_impact(
 )
 }
 \arguments{
-\item{data}{A data frame, matrix, or \code{zoo} object whose first
-column is the outcome and remaining columns are concurrent
+\item{data}{A data frame or matrix (or a \code{zoo} series) whose
+first column is the outcome and remaining columns are concurrent
 covariate predictors.}
 
-\item{pre_period}{Integer length-2 vector giving the start and end
-row indices (or time indices for \code{zoo}) of the
-pre-intervention window.}
+\item{pre_period}{Length-2 vector giving the first and last row (or,
+for a \code{zoo} series, time index) of the pre-intervention window.}
 
-\item{post_period}{Integer length-2 vector giving the start and end
-row indices of the post-intervention window.}
+\item{post_period}{Length-2 vector giving the first and last row (or
+time index) of the post-intervention window.}
 
-\item{model_args}{Optional named list passed to
-\code{CausalImpact::CausalImpact()}'s \code{model.args} argument
-(e.g. \code{list(niter = 1000L)}).}
+\item{model_args}{Optional named list of sampler settings, as in
+CausalImpact's \code{model.args}: \code{niter} (default 1000),
+\code{prior.level.sd} (0.01), \code{standardize.data} (\code{TRUE}),
+\code{seed} (\code{NULL}: use the session RNG). \code{nseasons > 1}
+and \code{dynamic.regression = TRUE} are not supported and error.}
 
 \item{alpha}{Posterior credible-interval coverage (default 0.05,
 meaning 95 percent intervals).}
 }
 \value{
 Named list with elements \code{average_effect},
-\code{cumulative_effect}, \code{ci_lower}, \code{ci_upper},
-\code{posterior_prob_causal}, and \code{summary} (the upstream
-\code{CausalImpact} summary matrix), plus the original
-\code{impact} object.
+\code{cumulative_effect}, \code{ci_lower}, \code{ci_upper} (interval
+of the average effect), \code{posterior_prob_causal} (the tail-area
+probability \code{p}, as before), \code{summary} (the
+\code{Average} / \code{Cumulative} summary data frame), and
+\code{impact}: a native \code{"morie_causal_impact"} list with
+\code{summary}, \code{series} (pointwise predictions and effects with
+intervals over the analysed window), \code{y_samples} (posterior
+predictive draws for the post-period), \code{model} (posterior draws
+of the coefficients and standard deviations, burn-in, settings),
+\code{pre_period}, \code{post_period} and \code{alpha}. It replaces
+the former \code{CausalImpact} object.
 }
 \description{
-Thin wrapper around \code{CausalImpact::CausalImpact()} (Brodersen
-et al. 2015). Fits a Bayesian structural time-series counterfactual
-to a single-series treatment using the pre-intervention window and
-reports the post-intervention causal effect with credible
-intervals.
-}
-\details{
-Hard-errors if \pkg{CausalImpact} is not installed -- the upstream
-Kalman-filter + slab-and-spike machinery has no compact inline
-equivalent. The wrapper is documented as an extender so that
-downstream rmorie callers have a stable \code{morie_*} entry point
-to the package.
+Native Bayesian structural time-series counterfactual in the manner of
+CausalImpact (Brodersen et al. 2015). The response is modelled over the
+pre-period as a local level plus a static regression on the
+concurrent covariates,
+\deqn{y_t = \mu_t + x_t'\beta + \varepsilon_t,\quad
+  \mu_{t+1} = \mu_t + \eta_t,}
+with \eqn{\varepsilon_t \sim N(0, \sigma^2)} and
+\eqn{\eta_t \sim N(0, \sigma_\mu^2)}, after standardising every column
+on the pre-period (CausalImpact's \code{standardize.data = TRUE}). A
+Gibbs sampler alternates (i) forward-filter backward-sampling of the
+level path, with the post-period response treated as missing,
+(ii) the conjugate normal draw of \eqn{\beta}, and (iii) inverse-gamma
+draws of \eqn{\sigma^2} and \eqn{\sigma_\mu^2}. Priors follow the bsts
+defaults CausalImpact uses: level sd prior with guess
+\code{prior.level.sd} (0.01) times the sd of y, 32 prior observations
+and upper limit sd(y); observation sd prior with guess
+\eqn{\sqrt{1 - 0.8}} sd(y) and 50 prior observations (expected
+\eqn{R^2 = 0.8}) when there are covariates, upper limit 1.2 sd(y);
+initial level \eqn{N(y_1, sd(y)^2)}. \strong{Simplification:} bsts'
+spike-and-slab coefficient prior is replaced by its slab alone,
+\eqn{\beta \mid \sigma^2 \sim N(0, \sigma^2 \Omega^{-1})} with
+\eqn{\Omega = 0.01\,(0.5 X'X/n + 0.5\,\mathrm{diag}(X'X/n))}, so every
+covariate is kept (no variable selection). The first 10 percent of the
+draws are discarded as burn-in. The posterior predictive of the
+counterfactual (level path + regression + observation noise, back on the
+original scale) gives the summary table: \code{Actual}, \code{Pred},
+\code{Pred.lower}/\code{upper}/\code{sd}, \code{AbsEffect} and
+\code{RelEffect} with interval and sd, \code{alpha}, and \code{p}, the
+posterior tail-area probability of the observed post-period sum
+(smaller tail, CausalImpact's \code{(+1)}-corrected rule). Results are
+reproducible under \code{set.seed()} or \code{model_args$seed}.
+CausalImpact itself (with its Boom dependency) is not used and was not
+available to cross-validate against; the tests check coverage of a
+known effect, the no-effect case and agreement with a Kalman filter.
 }
 \examples{
 set.seed(1)
-if (requireNamespace("CausalImpact", quietly = TRUE)) {
-  morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)),
-      pre_period = c(1, 5), post_period = c(6, 10))
-}
+x <- cumsum(rnorm(60))
+y <- 2 + 0.8 * x + rnorm(60, sd = 0.3)
+y[41:60] <- y[41:60] + 2
+res <- morie_causal_impact(data.frame(y = y, x = x),
+  pre_period = c(1, 40), post_period = c(41, 60),
+  model_args = list(niter = 300)
+)
+res$summary
 }
 \references{
 Brodersen KH, Gallusser F, Koehler J, Remy N, Scott SL (2015).
 Inferring causal impact using Bayesian structural time-series
 models. \emph{Annals of Applied Statistics}, 9(1):247-274.
+
+Scott SL, Varian HR (2014). Predicting the present with Bayesian
+structural time series. \emph{International Journal of Mathematical
+Modelling and Numerical Optimisation}, 5(1-2):4-23.
 }

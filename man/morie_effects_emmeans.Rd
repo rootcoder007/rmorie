@@ -2,34 +2,55 @@
 % Please edit documentation in R/effects.R
 \name{morie_effects_emmeans}
 \alias{morie_effects_emmeans}
-\title{Estimated marginal means via \pkg{emmeans}}
+\title{Estimated marginal means (native)}
 \usage{
 morie_effects_emmeans(model, specs, ...)
 }
 \arguments{
-\item{model}{A fitted model object (\code{lm}, \code{glm}, \code{lmerMod}, ...).}
+\item{model}{A fitted \code{lm} or \code{glm} object.}
 
-\item{specs}{Specification for the marginal means -- a formula
-(e.g. \code{~ treatment}), character vector of factor names, or a
-list, exactly as accepted by \code{emmeans::emmeans()}.}
+\item{specs}{Variables whose marginal means are wanted: a one-sided
+formula (\code{~ g}, \code{~ g * h}, \code{~ g | h}) or a character
+vector of predictor names.}
 
-\item{...}{Further arguments forwarded to \code{emmeans::emmeans()}.}
+\item{...}{Optional native settings: \code{type} (\code{"link"},
+default, or \code{"response"}), \code{level} (confidence level,
+default 0.95), \code{at} (named list of covariate values for the
+grid) and \code{by} (conditioning variables). Any other argument is
+an error.}
 }
 \value{
-An \code{emmGrid} object.
+A data frame shaped like \code{summary(emmeans::emmeans(...))}:
+the spec (and by) variables, the estimate (\code{emmean} /
+\code{prob} / \code{rate} / \code{response}), \code{SE}, \code{df}
+and \code{lower.CL}/\code{upper.CL} (\code{asymp.LCL}/
+\code{asymp.UCL} when \code{df = Inf}). Attributes carry the
+estimate name, scale and the linear-function matrix
+(\code{"linfct"}), so a contrast matrix C gives contrasts as the matrix product of C and
+\code{attr(x, "linfct")} times the coefficients.
+The \code{emmGrid} S4 object is no longer returned.
 }
 \description{
-Thin extender over \code{emmeans::emmeans()}. The fitted model is
-passed through unchanged; \code{specs} follows the usual emmeans
-formula / list interface. Use \code{emmeans::pairs()} or
-\code{emmeans::contrast()} on the returned object for pairwise or
-custom contrasts.
+Native estimated marginal means (least-squares means) for \code{lm}
+and \code{glm} fits, following the conventions of
+\code{emmeans::emmeans()} (Lenth): a reference grid crossing every
+level of each categorical predictor with each numeric covariate held
+at its mean (or at the values in \code{at}); the marginal mean for a
+cell of \code{specs} is the equal-weight average of the grid
+predictions over the predictors not named in \code{specs}, a linear
+combination \eqn{L b} with standard error \eqn{\sqrt{L V L'}},
+\eqn{V = } \code{vcov(model)}. Degrees of freedom are the residual df
+for \code{lm} and gaussian / Gamma \code{glm} fits and \code{Inf}
+(asymptotic z) otherwise. Results are on the link scale unless
+\code{type = "response"}, which back-transforms the estimate and the
+interval and scales the SE by the inverse-link derivative (delta
+method), naming the estimate \code{prob} (binomial), \code{rate}
+(poisson) or \code{response}. Cross-validated against \pkg{emmeans}
+in the tests; \pkg{emmeans} is not needed at run time.
 }
 \examples{
-if (requireNamespace("emmeans", quietly = TRUE)) {
-  set.seed(1)
-  df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-  fit <- stats::lm(y ~ x + g, data = df)
-  morie_effects_emmeans(fit, specs = "g")
-}
+set.seed(1)
+df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+fit <- stats::lm(y ~ x + g, data = df)
+morie_effects_emmeans(fit, specs = "g")
 }

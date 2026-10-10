@@ -16,10 +16,16 @@ A \code{morie_ts_stationarity} list: \code{adf}, \code{kpss} (statistic +
 whether stationary at 5\%), \code{ljung_box} p-value, and \code{suggested_d}.
 }
 \description{
-Runs an Augmented Dickey-Fuller test (H0: unit root / non-stationary)
-and a KPSS test (H0: stationary) via the urca package where available,
-plus a Ljung-Box autocorrelation test, and suggests a differencing
-order to achieve stationarity of the mean.
+Runs an Augmented Dickey-Fuller test (H0: unit root / non-stationary;
+regression with drift, augmentation lag chosen by AIC from
+\code{lags = 1}, i.e. one lagged difference), a KPSS test (H0: level
+stationary; Bartlett kernel with the "short" truncation lag
+\eqn{\lfloor 4 (n/100)^{1/4} \rfloor}), plus a Ljung-Box
+autocorrelation test, and suggests a differencing order to achieve
+stationarity of the mean.  Both unit-root tests are computed natively
+and reproduce \code{urca::ur.df(type = "drift", selectlags = "AIC")}
+and \code{urca::ur.kpss(type = "mu")} (statistics and 5 percent
+critical values) exactly; no external package is used.
 }
 \examples{
 set.seed(1)

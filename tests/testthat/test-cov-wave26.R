@@ -25,16 +25,18 @@ test_that("optional-package guards stop() when the package is absent", {
   x <- matrix(rnorm(40), 20, 2)
   y <- rbinom(20, 1, 0.5)
   expect_no_error(morie_dbscan_clustering(x))  # native since the ML wave
-  expect_error(morie_decision_tree_split(x, y))
-  expect_error(morie_grid_search_cv(x, y))
+  # native CART split and CV search: they RUN without rpart/caret
+  expect_true(is.list(morie_decision_tree_split(x, y)))
+  expect_true(is.list(morie_grid_search_cv(x, y)))
   # Tree ensembles are native now (ESL Alg. 15.1 / 10.3 + compiled
   # kernel): they RUN without randomForest/gbm/xgboost instead of stopping.
   expect_true(is.list(morie_random_forest_ensemble(x, y, n_estimators = 5L)))
   # Wave B/C natives: regularization path + t-SNE now RUN without
   # glmnet/Rtsne instead of stopping.
   expect_true(is.list(morie_regularization_path(x, y)))
-  expect_error(morie_random_search_cv(x, y))
-  expect_error(morie_roc_auc_score(y, runif(20)))
+  # native random search and ROC/AUC: they RUN without caret/pROC
+  expect_true(is.list(morie_random_search_cv(x, y)))
+  expect_true(is.list(morie_roc_auc_score(y, runif(20))))
   # SVM is native now (LIBSVM's SMO decomposition, compiled kernel):
   # these RUN without e1071 instead of stopping.
   expect_true(is.list(morie_svm_hinge_primal(x, y)))

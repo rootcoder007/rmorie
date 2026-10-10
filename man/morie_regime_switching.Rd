@@ -13,15 +13,35 @@ morie_regime_switching(x, k_regimes = 2)
 }
 \value{
 Named list with \eqn{mu, sigma, transition,
-  smoothed_probabilities, loglik, n, k_regimes, method}.
+  smoothed_probabilities, loglik, n, k_regimes, method}.  Regimes are
+ordered by increasing \code{mu}.  \code{transition} uses MSwM's
+column convention: \code{transition[j, i]} is
+\eqn{Pr(s_t = j \mid s_{t-1} = i)} (columns sum to 1).
+\code{smoothed_probabilities} is n x K (observations 1..n).
+\code{loglik} is the maximised log-likelihood (MSwM's
+\code{logLikel} slot stores its negative).
 }
 \description{
-Fit a constant-mean, switching-variance K-regime Markov-switching
-model by EM (Hamilton filter).
+Fit a K-regime Markov-switching model with a switching mean and a
+switching variance, \eqn{y_t \mid s_t = j \sim N(\mu_j,
+\sigma_j^2)}, by EM with the Hamilton filter and Kim smoother.  This
+is the model \code{MSwM::msmFit(lm(y ~ 1), k, sw = c(TRUE, TRUE))}
+fits, computed natively: the E- and M-steps reproduce MSwM's EM
+(including its transition-matrix update, which normalises the summed
+smoothed joint probabilities by the occupancy of the destination
+regime, so its fixed point can differ from the exact maximum
+likelihood estimate in the fourth decimal of the log-likelihood).
+Instead of MSwM's random starts the EM runs from two deterministic
+starts (regimes split by the quantiles of \eqn{y} and of
+\eqn{|y - median(y)|}) and keeps the higher log-likelihood.  No
+external package is used.
 }
 \examples{
 set.seed(1)
-if (requireNamespace("MSwM", quietly = TRUE)) {
-  morie_regime_switching(x = rnorm(50))
+morie_regime_switching(x = c(rnorm(40, 0, 0.5), rnorm(40, 2, 1.5)))$mu
 }
+\references{
+Hamilton, J. D. (1989). A new approach to the economic
+analysis of nonstationary time series and the business cycle.
+Econometrica 57, 357-384.
 }

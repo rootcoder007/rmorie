@@ -2,31 +2,40 @@
 % Please edit documentation in R/effects.R
 \name{morie_effects_slopes}
 \alias{morie_effects_slopes}
-\title{Marginal slopes (partial derivatives) via \pkg{marginaleffects}}
+\title{Marginal slopes (partial derivatives, native)}
 \usage{
 morie_effects_slopes(model, variables = NULL, ...)
 }
 \arguments{
-\item{model}{A fitted model object.}
+\item{model}{A fitted \code{lm} or \code{glm} object.}
 
 \item{variables}{Character vector of focal variables. When \code{NULL},
-the marginaleffects default (all continuous predictors) is used.}
+all predictors.}
 
-\item{...}{Further arguments forwarded to
-\code{marginaleffects::slopes()}.}
+\item{...}{Optional native settings: \code{newdata},
+\code{type}, \code{by}, \code{conf_level}, \code{vcov}, \code{df},
+\code{eps} and \code{slope} (only \code{"dydx"}). Any other argument
+is an error.}
 }
 \value{
-A \code{marginaleffects} data frame.
+A data frame shaped like \code{morie_effects_comparisons()}
+with \code{contrast = "dY/dX"} for numeric predictors.
 }
 \description{
-Thin extender over \code{marginaleffects::slopes()} for continuous
-marginal effects (Stata-style \code{margins, dydx()}).
+Native unit-level partial derivatives \eqn{dY/dX} for \code{lm} and
+\code{glm} fits with the defaults of
+\code{marginaleffects::slopes()}: a centred finite difference
+\eqn{(f(x + e/2) - f(x - e/2)) / e} with
+\eqn{e = 10^{-4} \times} the range of \code{x} in the model data, on
+the response scale, and a delta-method SE from the analytic Jacobian
+of that difference. Categorical predictors give differences from the
+reference level, as in marginaleffects. \code{by = TRUE} averages
+(\code{avg_slopes()}). Cross-validated against \pkg{marginaleffects}
+in the tests.
 }
 \examples{
-if (requireNamespace("marginaleffects", quietly = TRUE)) {
-  set.seed(1)
-  df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
-  fit <- stats::lm(y ~ x + g, data = df)
-  head(morie_effects_slopes(fit, variables = "x"))
-}
+set.seed(1)
+df <- data.frame(y = rnorm(60), x = rnorm(60), g = factor(rep(c("a", "b"), 30)))
+fit <- stats::lm(y ~ x + g, data = df)
+head(morie_effects_slopes(fit, variables = "x"))
 }
