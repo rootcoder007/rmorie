@@ -4,7 +4,12 @@
 \alias{storey_q}
 \title{Storey q-value procedure (adaptive FDR)}
 \usage{
-storey_q(p_values, alpha = 0.05, lambda_param = 0.5, labels = NULL)
+storey_q(
+  p_values,
+  alpha = 0.05,
+  lambda_param = seq(0.05, 0.95, 0.05),
+  labels = NULL
+)
 }
 \arguments{
 \item{p_values}{Numeric vector of raw p-values.}
