@@ -1,5 +1,18 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* New native estimators, written in R with no outside package: `morie_lmm()` (linear mixed
+  models as `lme4::lmer`, with `nlme::lme`'s `random =` form and containment degrees of
+  freedom), `morie_glmm()` (binomial and Poisson GLMMs by the Laplace approximation, as
+  `lme4::glmer`), `morie_gam()` (thin plate and cubic regression splines with GCV, UBRE or
+  REML smoothness selection, as `mgcv::gam`), `morie_rq()` (quantile regression by
+  Frisch-Newton interior point or Barrodale-Roberts, with nid, iid, kernel and bootstrap
+  standard errors, as `quantreg::rq`) and `morie_nls()` (Gauss-Newton and Levenberg-Marquardt,
+  as `stats::nls`). Each has `print`, `summary`, `coef`, `vcov`, `fitted`, `residuals` and
+  `logLik` methods, and tests that check it against the reference package when that is
+  installed. Mixed models factor one small block per group level (a Schur complement
+  handles a second grouping factor) instead of a dense n x n matrix, so a model that took
+  14 s with the previous dense code takes about 1 s; a two-smooth GAM on 10,000 rows takes
+  under a second.
 * Install routes: `Remotes:` no longer pins rmoriebricklayer@v0.5.5 and rmoriedata@v0.3.4,
   so `remotes::install_github("rootcoder007/rmorie")` builds the current companions
   instead of those old tags, and the floors are raised to rmoriebricklayer (>= 0.5.10) and
