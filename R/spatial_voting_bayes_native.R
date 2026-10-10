@@ -537,7 +537,7 @@
   # start: first principal component of the vote matrix, scaled
   Yc <- Y
   Yc[!obs] <- 0.5
-  pc <- prcomp(Yc, center = TRUE)$x[, 1]
+  pc <- stats::prcomp(Yc, center = TRUE)$x[, 1]
   pc <- if (stats::sd(pc) > 0) as.numeric(scale(pc)) else rep(0, N)
   if (is.null(anchor)) anchor <- which.max(pc)
   theta <- matrix(pc, N, Tn)
