@@ -48,5 +48,5 @@ length(sp$analysis)                 # n rows, drawn with replacement
 setdiff(seq_len(30), sp$analysis)   # equals sp$assessment (out-of-bag)
 }
 \seealso{
-\code{\link[=bootstrap]{bootstrap()}}, \code{\link[=k_fold_cv]{k_fold_cv()}}.
+\code{\link[=bootstrap]{bootstrap()}}, \code{\link[=morie_geron_kfold_cv]{morie_geron_kfold_cv()}}.
 }

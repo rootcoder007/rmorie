@@ -102,7 +102,11 @@ test_that("the grid neighbour search (n > 300) gives the all-pairs neighbours", 
 test_that("labels equal dbscan::dbscan's, also with points exactly eps apart", {
   skip_if_not_installed("dbscan")
   set.seed(12)
-  for (d in 1:3) for (n in c(200L, 1200L)) for (eps in c(0.1, 0.3)) {
+  # dbscan's distance sum is fused (a * a + s in one rounding) where its C++ is built for arm64,
+  # so a pair exactly eps apart can fall on either side of eps there; the exact-tie cases are
+  # compared on machines whose build rounds each step, as R does
+  exact_ties <- !grepl("^(aarch64|arm64)", R.version$arch)
+  if (exact_ties) for (d in 1:3) for (n in c(200L, 1200L)) for (eps in c(0.1, 0.3)) {
     # one-decimal coordinates: many pairs are exactly eps apart
     x <- matrix(round(stats::rnorm(n * d), 1), ncol = d)
     a <- rmorie:::.morie_dbscan_native(x, eps = eps, min_samples = 4L)

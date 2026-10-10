@@ -1391,7 +1391,7 @@ morie_boot_basic_ci <- function(boot_obj,
 #'   in \code{attr(x, "data")}; the analysis set of split \eqn{b} is
 #'   \code{data[x$splits[[b]]$analysis, , drop = FALSE]}. Attributes
 #'   \code{times}, \code{strata} and \code{apparent} record the call.
-#' @seealso [bootstrap()], [k_fold_cv()].
+#' @seealso [bootstrap()], [morie_geron_kfold_cv()].
 #' @examples
 #' set.seed(1)
 #' rs <- morie_rsample_bootstraps(data.frame(x = rnorm(30)), times = 5L)
