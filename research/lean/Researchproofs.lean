@@ -67,3 +67,5 @@ import Researchproofs.P5Overlap
 import Researchproofs.P3Ring
 import Researchproofs.P7Persistence
 import Researchproofs.P4Hotspot
+import Researchproofs.P1Comparable
+import Researchproofs.P4Martingale

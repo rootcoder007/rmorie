@@ -363,3 +363,26 @@ test_that("the hot-spot threshold reproduces the Short-Brantingham algebra of Re
   expect_error(morie_hotspot_threshold(0, 1, 1, 1, 1, 0.1), "A0")
   expect_error(morie_hotspot_threshold(1, 1, -1, 1, 1, 0.1), "eps")
 })
+
+test_that("the comparable-subset dark figure matches Research.P1.Comparable", {
+  r <- morie_dark_figure_comparable(VA = 1000, RA = 400, RB = 300, lambda = 0.5)
+  expect_equal(r$rate_A, 0.4)                                           # rate_on_A
+  expect_equal(r$rate_upper, 700 / 1300)                                # total_rate_le
+  expect_equal(unname(r$total), c(1300, 1000 + 300 / 0.2))             # total_interval
+  expect_equal(unname(r$dark_figure), c(600, 600 + 300 * (1 / 0.2 - 1)))  # dark_interval
+  expect_equal(r$width, 300 * (1 - 0.2) / 0.2)                          # dark_figure_width
+  # the bound is sharp: a VB inside the interval gives a rate between the ends
+  for (VB in c(300, 800, 1500)) {
+    rate <- 700 / (1000 + VB)
+    expect_lte(rate, r$rate_upper)
+    expect_gte(1000 + VB, r$total[["lower"]])
+    expect_lte(1000 + VB, r$total[["upper"]])
+  }
+  # lambda r_A = 1 pins the dark figure to VA - RA (width zero)
+  z <- morie_dark_figure_comparable(VA = 1000, RA = 1000, RB = 300, lambda = 1)
+  expect_equal(z$width, 0)
+  expect_equal(unname(z$dark_figure), c(0, 0))
+  expect_error(morie_dark_figure_comparable(1000, 1200, 300), "exceeds")
+  expect_error(morie_dark_figure_comparable(1000, 400, 300, lambda = 0), "lambda")
+  expect_error(morie_dark_figure_comparable(0, 0, 300), "positive")
+})

@@ -718,3 +718,55 @@ morie_hotspot_threshold <- function(A0, omega, eps, D, gamma, eta, z = 1, k = NU
                     "Research.P4.Hotspot.no_hotspots_below_threshold",
                     "Research.P4.Hotspot.hotspots_above_threshold"))
 }
+
+#' The dark figure from a survey that covers only some offences
+#'
+#' A victimisation survey covers an offence set A; the police record covers A and the rest, B.
+#' With \eqn{V = V_A + V_B} true offences and \eqn{R = R_A + R_B} recorded ones, the survey
+#' identifies \eqn{V_A} and so the recording rate on A, \eqn{r_A = R_A / V_A}
+#' (\code{Research.P1.Comparable.rate_on_A}); \eqn{V_B} is never observed. The overall rate is
+#' at most \eqn{R / (V_A + R_B)} (\code{total_rate_le}) and has no positive lower bound without
+#' an assumption on B (\code{total_rate_unbounded_below}). Under \eqn{r_B \ge \lambda r_A}
+#' (the non-comparable offences are recorded at least a fraction \eqn{\lambda} as well as the
+#' comparable ones) the total count lies in \eqn{[V_A + R_B, V_A + R_B / (\lambda r_A)]}
+#' (\code{total_interval}) and the dark figure in
+#' \eqn{[V_A - R_A, V_A - R_A + R_B (1 / (\lambda r_A) - 1)]} (\code{dark_interval}), an
+#' interval of width \eqn{R_B (1 - \lambda r_A) / (\lambda r_A)} (\code{dark_figure_width}).
+#'
+#' @param VA Survey estimate of the true offences in the comparable set.
+#' @param RA Recorded offences in the comparable set.
+#' @param RB Recorded offences outside it.
+#' @param lambda The assumed floor on the non-comparable recording rate relative to the
+#'   comparable one, in (0, 1]; 1 says B is recorded at least as well as A.
+#' @return A list with \code{rate_A}, \code{rate_upper} (the total rate's upper bound),
+#'   \code{total} and \code{dark_figure} (each a two-element interval), \code{width} and
+#'   \code{theorems}.
+#' @examples
+#' morie_dark_figure_comparable(VA = 1000, RA = 400, RB = 300, lambda = 0.5)
+#' @export
+morie_dark_figure_comparable <- function(VA, RA, RB, lambda = 1) {
+  num1 <- function(x, nm, lower = 0) {
+    if (!is.numeric(x) || length(x) != 1L || !is.finite(x) || x < lower) {
+      stop(sprintf("`%s` must be a single finite number at least %s", nm, lower), call. = FALSE)
+    }
+    as.numeric(x)
+  }
+  VA <- num1(VA, "VA")
+  RA <- num1(RA, "RA")
+  RB <- num1(RB, "RB")
+  lambda <- num1(lambda, "lambda")
+  if (VA <= 0) stop("`VA` must be positive: the survey must see some comparable offences", call. = FALSE)
+  if (RA > VA) stop("`RA` exceeds `VA`: a record is an offence, so the recorded count cannot exceed the true one",
+                    call. = FALSE)
+  if (lambda <= 0 || lambda > 1) stop("`lambda` must be in (0, 1]", call. = FALSE)
+  rate_A <- RA / VA
+  if (rate_A <= 0) stop("`RA` must be positive for the bound: with nothing recorded on A, lambda r_A = 0", call. = FALSE)
+  k <- lambda * rate_A
+  total <- c(lower = VA + RB, upper = VA + RB / k)
+  dark <- c(lower = VA - RA, upper = VA - RA + RB * (1 / k - 1))
+  list(rate_A = rate_A, rate_upper = (RA + RB) / (VA + RB), total = total, dark_figure = dark,
+       width = RB * (1 - k) / k,
+       theorems = c("Research.P1.Comparable.rate_on_A", "Research.P1.Comparable.total_rate_le",
+                    "Research.P1.Comparable.total_interval", "Research.P1.Comparable.dark_interval",
+                    "Research.P1.Comparable.dark_figure_width"))
+}

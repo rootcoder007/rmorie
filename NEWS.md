@@ -1,7 +1,21 @@
 # rmorie 1.4.3 - 2026-10-09
 
-* Research ledger, thirteen more items closed with machine-checked proofs (`research/lean`, now 69
-  files, 361 audited theorems, 0 sorry): the hot-spot threshold of the Short-Brantingham
+* Victimisation data and the applications that waited for it: the NCVS 1992-2022 concatenated
+  file (ICPSR 38604; incident, person and household files, the person and household files in two
+  year ranges each) is served at data.rmorie.com as `ncvs_38604/*` with the ICPSR codebooks, user
+  guide, citation and terms of use beside it (`rmorie pull ncvs_38604/incident`).
+  `research/applications/ncvs_victimisation.R` runs the ledger on it: the P1 survey/record pair
+  (victimisations against the ones the police learned of, by year and class, with the
+  partial-identification interval and the breakdown value of the 1993 to 2022 decline), the P7
+  concentration of victimisations on persons and households against the Poisson null, the P10
+  moments contagion and heterogeneity fit alike, and the A14 comparable-subset rate.
+* Research ledger, fifteen more items closed with machine-checked proofs (`research/lean`, now 71
+  files, 377 audited theorems, 0 sorry): the recording rate is identified only on the
+  survey-comparable offence set, with the dark-figure interval for the rest
+  (`morie_dark_figure_comparable()`, library scan A14); the stochastic urn's share converges
+  almost surely and in mean, each step being the conditional expectation of the limit, so the
+  long-run allocation is a random variable with the starting share as its mean (Lean
+  `Research.P4.Martingale`, on Mathlib's martingale convergence theorem); the hot-spot threshold of the Short-Brantingham
   reaction-diffusion model, the unique steady state and the dispersion relation with an explicit
   stability inequality (`morie_hotspot_threshold()`); the ring mis-specification bound for the spillover
   estimand (`morie_spillover_ring_bound()`); the hypergeometric rank-persistence null

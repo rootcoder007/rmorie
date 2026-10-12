@@ -167,7 +167,7 @@ is stated in the ledger entry of its problem.
 
 | # | Items | Problem | Lean files | R / Python |
 |---|---|---|---|---|
-| 1 | C1 + C2 + C3 | P4 stochastic urn: martingale share, Friedman contrast, Azuma drift envelope | `P4Urn`, `P4Envelope`, `P4Feedback` | `morie_feedback_loop_urn_law()`, `morie_feedback_loop_envelope()` |
+| 1 | C1 + C2 + C3 | P4 stochastic urn: martingale share, Friedman contrast, Azuma drift envelope, almost-sure and L¹ convergence of the share | `P4Urn`, `P4Envelope`, `P4Feedback`, `P4Martingale` | `morie_feedback_loop_urn_law()`, `morie_feedback_loop_envelope()` |
 | 2 | B23 + C12 | P7 Poisson null as a Jensen inequality; Cox overdispersion | `P7Mixture`, `P7Bound`, `P7Persistence` | `morie_concentration_decompose()`, `morie_rank_persistence_null()` |
 | 3 | B5 + B6 | P1 Petersen/Chapman floor identities; k-list non-identification | `P1DarkFigure`, `P1ThreeList`, `P1LeCam` | `morie_dark_figure_*()` |
 | 4 | A23 + A22 + A21 | P2 exposure-offset identity, multiplicative benchmark, arrest-probability premise | `P2Benchmark`, `P2RelativeRisk`, `P2Selection` | `morie_benchmark_*()` |
@@ -177,6 +177,7 @@ is stated in the ledger entry of its problem.
 | 8 | B1 + B2 + B4 + B25 | P11 sentencing effects as intervals, with inference | `P11Bounds`, `P11Monotone`, `P11Selection`, `P11Contaminated`, `P11Coverage` | `morie_bounds_*()` |
 | 9 | A1 + A2 + A5 | logit separation, LDA, KHB rescaling (filed under P5, "what a coefficient means") | `P5Separation`, `P5Rescale`, `P5Compare` | `morie_logit_separation()`, `morie_khb_rescale()` |
 | 10 | C8 + A16, B20 | hot-spot threshold of the reaction-diffusion model; Bartlett non-identification | `P4Hotspot` (steady state, dispersion relation, threshold), `P10Moments` (Bartlett) | `morie_hotspot_threshold()`, `morie_contagion_moments()` |
+| 11 | A14 | the recording rate is identified only on the survey-comparable subset; the dark figure's interval for the rest | `P1Comparable` | `morie_dark_figure_comparable()` |
 
 Item 10's reaction-diffusion part (C8) was the last to land (2026-10-12): the unique homogeneous
 steady state B̄ = εDγ/ω, ρ̄ = γ/Ā; the mode-k determinant P k² − Q k + R with P = ηD²/z,
@@ -184,3 +185,6 @@ Q = D(3εDρ̄ − ω − ηĀ/z), R = ωĀ > 0 and a negative trace, so a mode 
 negative; hence no hot spots at any wavelength when 3εDρ̄ ≤ ω + ηĀ/z (in particular with ε = 0,
 which refutes "hot spots for all parameters"), and a growing critical mode k* = Q/(2P) when Q > 0
 and Q² > 4PR. The amplitude (sub/supercritical) half of A16 is not formalised.
+
+Item 11 (A14) and the convergence half of item 1 landed on 2026-10-12 with the NCVS data (ICPSR
+38604): `research/applications/ncvs_victimisation.R` applies P1, A14, P7 and P10 to it.

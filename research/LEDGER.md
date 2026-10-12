@@ -85,9 +85,31 @@ assumptions the dark figure is an interval, not a point.
   (`interaction_not_identified`). R: `morie_dark_figure_no_interaction()` (the test matches the
   Poisson log-linear fit with every two-way term); Python `dark_figure_no_interaction()`.
   Open: the small-area application on a real survey/record pair.
-- Noted 2026-10-12: no victimisation survey microdata is held (the substance-use surveys CSUS,
-  CPADS and CCS carry no victimisation items), so the survey/record pair stays open; see
-  research/applications/README.md.
+- Progress 2026-10-12 (the survey/record pair, with the NCVS): the NCVS 1992-2022 concatenated
+  file (ICPSR 38604, https://doi.org/10.3886/ICPSR38604.v1) is held and served
+  (`ncvs_38604/*` at data.rmorie.com). `research/applications/ncvs_victimisation.R` takes the
+  victimisations the survey counts (WGTVICCY with the BJS series rule) against the ones the
+  victim says the police learned of (V4399), by year and class, and applies
+  `morie_dark_figure_bounds()` with stated misreport bounds (alpha_max 0.05, beta_max 0.25):
+  violent victimisations per person 0.081 in 1993 and 0.024 in 2022, of which the police learned
+  of 0.034 and 0.010 (reported shares 0.42 and 0.41), identified sets [0.034, 0.107] and
+  [0.010, 0.031]; property per household 0.354 and 0.102, sets [0.320, 0.472] and [0.055, 0.136].
+  The breakdown value of the decline (`Research.P1Breakdown`): under-reporting in 2022 would have
+  to reach beta* = 0.31 (violent) or 0.68 (property) to lift the 2022 upper bound to the 1993
+  lower bound, above the stated 0.25, so the decline survives; for personal theft beta* = 0.19 and
+  it does not. Results: research/applications/results/ncvs_victimisation.md.
+- Progress 2026-10-12 (the comparable subset, library scan A14): `Research.P1.Comparable`
+  (P1Comparable.lean). With the survey covering offence set A and the record covering A and B,
+  the rate on A is identified from the survey's V_A (`rate_on_A`); the total rate is at most
+  R/(V_A + R_B) (`total_rate_le`) and has no positive lower bound without an assumption on B
+  (`total_rate_unbounded_below`); under r_B >= lambda r_A the total count lies in
+  [V_A + R_B, V_A + R_B/(lambda r_A)] (`total_interval`) and the dark figure in
+  [V_A - R_A, V_A - R_A + R_B(1/(lambda r_A) - 1)] (`dark_interval`), an interval of width
+  R_B (1 - lambda r_A)/(lambda r_A) (`dark_figure_width`). R: `morie_dark_figure_comparable()`;
+  Python `dark_figure_comparable()`. On the NCVS the identified r_A for 2022 is 0.415 (violent),
+  0.318 (property), 0.230 (personal theft); every recorded offence outside the survey's reach
+  widens the dark-figure interval by 3.8, 5.3 and 7.7 at lambda = 1/2. The FBI count R_B is not
+  held, so the factor is reported, not the interval.
 
 ## P2. Selection in police-recorded data: the record is the treatment
 
@@ -314,8 +336,15 @@ or of the initial condition?
   0.1 about its start with probability above 1/80, ever. So the "runaway" of the naive loop is,
   for the stochastic urn, a drift of bounded size fixed by the starting mass, not a flight to
   the boundary. R: `morie_feedback_loop_envelope()` (the bound beside the exact law by the urn
-  recursion). Still open: the unequal-rate urn limit (a Rubin-type reinforcement theorem) and
-  the a.s. convergence statement.
+  recursion). Still open: the unequal-rate urn limit (a Rubin-type reinforcement theorem).
+- Progress 2026-10-12 (almost-sure convergence): `Research.P4.Martingale` (P4Martingale.lean). On
+  any probability space with a filtration, a [0, 1]-valued martingale (what P4Envelope's
+  `step_mean` makes the urn share) is uniformly integrable (`uniformIntegrable_of_unit`),
+  converges almost surely (`share_converges`, Doob's theorem through Mathlib's
+  `Submartingale.ae_tendsto_limitProcess`) and in L¹ (`share_converges_L1`), and is at every time
+  the conditional expectation of its limit (`share_eq_condExp_limit`), so the limit is a random
+  variable with the starting share as its mean (`limit_mean`): the long-run allocation is random,
+  not the mean-field fixed point.
 - Progress 2026-10-12 (hot-spot threshold, scan item C8): `Research.P4.Hotspot`
   (P4Hotspot.lean). The Short-Brantingham uniform system has exactly one homogeneous steady
   state, B̄ = εDγ/ω and ρ̄ = γ/Ā with Ā = A₀ + B̄ (`steady_iff`). Its mode-k linearisation
@@ -532,6 +561,14 @@ counts are sparse relative to units.
   probabilities below 1e-6 in every pair of years, so the persistence of hot neighbourhoods is
   the part of concentration that chance does not produce. Still open: the exact expected Gini of
   the finite Poisson sample (the ratio's bias) and the population-proportional null.
+- Progress 2026-10-12 (victims, with the NCVS): victimisations per person-year (violent and
+  personal theft) and per household-year (property), zeros from the person and household files,
+  through `morie_concentration_decompose()` (research/applications/ncvs_victimisation.R). 2022:
+  185,616 persons, mean 0.016, zero share 0.991 against a Poisson 0.984, Gini among the
+  victimised 0.36, dispersion index 4.4; 152,794 households, mean 0.051, zero share 0.962 against
+  0.950, Gini among the victimised 0.23, dispersion 2.2; 1994 the same shape at twice the mean.
+  The excess zeros and the dispersion are what the Poisson null cannot produce; the Gini among
+  the victimised is the part of concentration that is not the zeros.
 
 ## P8. Deterrence: certainty, severity and celerity cannot be varied alone
 
@@ -662,6 +699,12 @@ aggregate clearance rate is not a performance measure.
 
 
 ## P10. Near-repeat contagion: what a branching ratio commits you to
+
+- Progress 2026-10-12 (the moments, with the NCVS): the person-year and household-year counts of
+  research/applications/ncvs_victimisation.R have dispersion indices 3.7 to 4.7 (persons) and
+  2.2 to 2.5 (households) with zero shares above the Poisson's: the two moments `Research.P10.Moments`
+  shows contagion (a branching process) and heterogeneity (a mixed Poisson) fit alike, so the
+  repeat victimisation in the NCVS is not, from these moments, evidence of contagion.
 
 Self-exciting (Hawkes) models of near-repeat victimisation (Mohler et al.;
 D'Orsogna & Perc review) report a branching ratio n. The offspring of one

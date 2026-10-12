@@ -36,7 +36,7 @@ nobody reads the folder as complete.
 
 | problem | application named | why it is not here |
 |---|---|---|
-| P1 dark figure | a survey/record pair (GSS victimisation + UCR) | no victimisation survey microdata is held; the substance-use surveys (CSUS, CPADS, CCS) carry no victimisation items |
+| P1 dark figure | a survey/record pair | done with the NCVS 1992-2022 (ICPSR 38604, `ncvs_38604/*` at data.rmorie.com): `ncvs_victimisation.R`, results/ncvs_victimisation.md (P1 interval and breakdown by year and class; A14 comparable-subset rate; P7 concentration on persons and households; P10 moments) |
 | P2 selection | Toronto stops with a mobility proxy | the public Regulated Interactions table is counts by year and category only, with no time of day or group |
 | P3 interference | TPS street segments | the public files carry neighbourhoods, not the street-segment network; the neighbourhood version is here and labelled |
 | P6 age-crime | a cohort | no cohort file; OTIS gives age categories of people in segregation, not offending by age |
