@@ -41,3 +41,31 @@ test_that("downgrade-and-caution raises the detection rate by q n (1 - d) / N (d
   expect_gt(s$rise, 0)
   expect_error(morie_detection_rate_shift(10, 100, 50, 1, 0.5), "d must lie")
 })
+
+test_that("one series, two regimes; a second source separates them (regimes_not_identified, second_source_separates)", {
+  set.seed(3)
+  for (k in 1:50) {
+    m <- sample(2:6, 1)
+    r <- runif(m, 0, 500)
+    eps <- runif(1, 0.05, 0.9)
+    two <- morie_recording_regimes(r, cuffed_share = eps)
+    # both constructions reproduce the series exactly
+    expect_equal(unname(as.numeric(two$reclassification$M %*% two$reclassification$counts)), r, tolerance = 1e-12)
+    expect_equal(unname(as.numeric(two$cuffing$M %*% two$cuffing$counts)), r, tolerance = 1e-12)
+    expect_equal(colSums(two$reclassification$M), rep(1, m))
+    expect_true(all(colSums(two$cuffing$M) < 1))
+    expect_equal(two$reclassification$true_total, sum(r))
+    expect_equal(two$cuffing$true_total, sum(r) / (1 - eps), tolerance = 1e-12)
+    expect_gt(two$cuffing$true_total, two$reclassification$true_total)
+    expect_false(two$identified_from_series)
+    # the second source: re-classification keeps the total, cuffing records strictly less
+    expect_equal(morie_recording_regimes(r, eps, true_total = sum(r))$second_source$regime, "reclassification")
+    sec <- morie_recording_regimes(r, eps, true_total = two$cuffing$true_total)$second_source
+    expect_equal(sec$regime, "cuffing")
+    expect_equal(sec$dropped_mass, two$cuffing$true_total - sum(r), tolerance = 1e-10)
+    expect_equal(morie_recording_regimes(r, eps, true_total = sum(r) / 2)$second_source$regime, "inconsistent")
+  }
+  expect_error(morie_recording_regimes(c(1, -1)), "non-negative")
+  expect_error(morie_recording_regimes(c(1, 2), cuffed_share = 1), "cuffed_share")
+  expect_error(morie_recording_regimes(c(1, 2), true_total = -1), "true_total")
+})

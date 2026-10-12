@@ -34,7 +34,10 @@ the two-sided normal quantiles (\code{im_cutoff_between}), and the
 two-sided quantile over-covers whenever the region has positive width
 (\code{two_sided_overcovers}). An interval built to cover the whole
 region is at least as conservative for the parameter
-(\code{region_coverage_le}); the function reports both.
+(\code{region_coverage_le}); the function reports both. The cutoff the
+root finder returns exists and is unique: the coverage is continuous and
+strictly increasing in \eqn{c} with limits \eqn{-1} and \eqn{1}
+(\code{im_cutoff_exists}, \code{im_cutoff_unique}).
 }
 \examples{
 morie_bounds_confidence(lower = 0.10, upper = 0.35, se_lower = 0.03, se_upper = 0.04)

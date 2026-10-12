@@ -125,4 +125,64 @@ theorem unobserved_ends_attained (M R : Finset Ω) :
 theorem naive_can_mislead : (1 : ℝ) / 4 < 1 / 2 ∧ (1 : ℝ) / 2 < 3 / 4 ∧ (3 : ℝ) / 4 - 1 / 4 = 1 / 2 := by
   norm_num
 
+
+/-! ### Many judges, ordered by leniency -/
+
+/-- A more lenient judge leaves less of a rule's set unobserved. -/
+theorem unobserved_mass_antitone (M R R' : Finset Ω) (hRR : R ⊆ R') :
+    mass P (M \ R') ≤ mass P (M \ R) := by
+  unfold mass
+  apply sum_le_sum_of_subset_of_nonneg
+  · exact sdiff_subset_sdiff (subset_refl M) hRR
+  · intro i _ _; exact P.w_nonneg i
+
+/-- The identified interval of a rule is narrower under a more lenient judge. -/
+theorem interval_width_antitone (M R R' : Finset Ω) (hRR : R ⊆ R') (hM : 0 < mass P M) :
+    mass P (M \ R') / mass P M ≤ mass P (M \ R) / mass P M :=
+  div_le_div_of_nonneg_right (unobserved_mass_antitone P M R R' hRR) hM.le
+
+/-- A chain of judges' release sets ordered by leniency: `release k ⊆ release (k+1)`. -/
+def Nested (release : ℕ → Finset Ω) : Prop := ∀ k, release k ⊆ release (k + 1)
+
+theorem nested_mono {release : ℕ → Finset Ω} (h : Nested release) {j k : ℕ} (hjk : j ≤ k) :
+    release j ⊆ release k := by
+  induction hjk with
+  | refl => exact subset_refl _
+  | step _ ih => exact ih.trans (h _)
+
+/-- Contraction across a chain of judges: a rule's set covered by the judges up to `K` is inside
+the most lenient one's release set, hence scored exactly from that judge's outcomes. -/
+theorem chain_contraction {release : ℕ → Finset Ω} (h : Nested release) (K : ℕ) (M : Finset Ω)
+    (hM : M ⊆ (Finset.range (K + 1)).biUnion release) :
+    M ⊆ release K ∧ fails P M = ∑ i ∈ release K, if i ∈ M then P.w i * P.y i else 0 := by
+  have hsub : M ⊆ release K := by
+    intro i hi
+    obtain ⟨k, hk, hik⟩ := Finset.mem_biUnion.1 (hM hi)
+    exact nested_mono h (Nat.lt_succ_iff.1 (Finset.mem_range.1 hk)) hik
+  exact ⟨hsub, nested_rate_identified P (release K) M hsub⟩
+
+/-- Along the chain the unobserved share of a rule is non-increasing in leniency: the most lenient
+judge gives the sharpest identified interval, and it collapses to a point exactly when the rule's
+set is inside that judge's release set. -/
+theorem chain_width_antitone {release : ℕ → Finset Ω} (h : Nested release) (M : Finset Ω)
+    (hM : 0 < mass P M) : Antitone (fun k => mass P (M \ release k) / mass P M) := by
+  intro j k hjk
+  exact interval_width_antitone P M (release j) (release k) (nested_mono h hjk) hM
+
+theorem chain_width_zero_iff {release : ℕ → Finset Ω} (k : ℕ) (M : Finset Ω)
+    (hpos : ∀ i, 0 < P.w i) (hM : 0 < mass P M) :
+    mass P (M \ release k) / mass P M = 0 ↔ M ⊆ release k := by
+  rw [div_eq_zero_iff, or_iff_left hM.ne']
+  unfold mass
+  constructor
+  · intro h0
+    have : M \ release k = ∅ := by
+      by_contra hne
+      obtain ⟨i, hi⟩ := Finset.nonempty_iff_ne_empty.2 hne
+      have : 0 < ∑ i ∈ M \ release k, P.w i :=
+        Finset.sum_pos (fun i _ => hpos i) ⟨i, hi⟩
+      linarith
+    exact Finset.sdiff_eq_empty_iff_subset.1 this
+  · intro hsub; rw [Finset.sdiff_eq_empty_iff_subset.2 hsub, Finset.sum_empty]
+
 end Research.P18

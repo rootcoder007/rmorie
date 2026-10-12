@@ -63,6 +63,8 @@ open Research.P4
 #print axioms Research.P9.total_le_of_colSubstochastic
 #print axioms Research.P9.reclassification_moves_ratio
 #print axioms Research.P9.detection_rate_rises
+#print axioms Research.P9.regimes_not_identified
+#print axioms Research.P9.second_source_separates
 #print axioms Research.P10.generation_mean
 #print axioms Research.P10.cluster_size_of_lt_one
 #print axioms Research.P10.stationary_rate
@@ -154,6 +156,8 @@ open Research.P4
 #print axioms Research.P11.coverage_strictMono_c
 #print axioms Research.P11.im_cutoff_antitone
 #print axioms Research.P11.im_cutoff_between
+#print axioms Research.P11.im_cutoff_unique
+#print axioms Research.P11.im_cutoff_exists
 #print axioms Research.P11.two_sided_overcovers
 #print axioms Research.P12.pq_ge
 #print axioms Research.P12.dd_bounds
@@ -207,6 +211,11 @@ open Research.P4
 #print axioms Research.P18.nested_rate_identified
 #print axioms Research.P18.fails_split
 #print axioms Research.P18.unobserved_bounds
+#print axioms Research.P18.unobserved_mass_antitone
+#print axioms Research.P18.interval_width_antitone
+#print axioms Research.P18.chain_contraction
+#print axioms Research.P18.chain_width_antitone
+#print axioms Research.P18.chain_width_zero_iff
 #print axioms Research.P18.unobserved_width
 #print axioms Research.P18.unobserved_ends_attained
 #print axioms Research.P19.reindex

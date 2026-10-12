@@ -23,7 +23,10 @@
 #' two-sided quantile over-covers whenever the region has positive width
 #' (\code{two_sided_overcovers}). An interval built to cover the whole
 #' region is at least as conservative for the parameter
-#' (\code{region_coverage_le}); the function reports both.
+#' (\code{region_coverage_le}); the function reports both. The cutoff the
+#' root finder returns exists and is unique: the coverage is continuous and
+#' strictly increasing in \eqn{c} with limits \eqn{-1} and \eqn{1}
+#' (\code{im_cutoff_exists}, \code{im_cutoff_unique}).
 #' @param lower,upper Estimated bounds (e.g. from
 #'   \code{\link{morie_sentence_effect_bounds}} with bootstrap standard errors).
 #' @param se_lower,se_upper Their standard errors, positive.
@@ -58,6 +61,7 @@ morie_bounds_confidence <- function(lower, upper, se_lower, se_upper, level = 0.
     coverage_two_sided = stats::pnorm(z2 + delta) - stats::pnorm(-z2),
     theorems = c("Research.P11.region_coverage_le", "Research.P11.coverage_strictMono_c",
                  "Research.P11.im_cutoff_antitone", "Research.P11.im_cutoff_between",
-                 "Research.P11.two_sided_overcovers")
+                 "Research.P11.two_sided_overcovers", "Research.P11.im_cutoff_exists",
+                 "Research.P11.im_cutoff_unique")
   )
 }

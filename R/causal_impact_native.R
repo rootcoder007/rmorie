@@ -62,6 +62,8 @@
   n <- length(y)
   obs <- !is.na(y)
   sdy <- stats::sd(y[obs])
+  # a constant pre-period has no scale: unit priors instead of zero-rate gamma draws
+  if (!is.finite(sdy) || sdy <= 0) sdy <- 1
   p <- if (is.null(X)) 0L else ncol(X)
   # Priors (CausalImpact -> bsts defaults):
   #   level sd     ~ SdPrior(prior.level.sd * sdy, sample.size = 32,
@@ -162,7 +164,6 @@
   }
   idx <- attr(data, "index")
   M <- if (is.data.frame(data)) data.matrix(data) else as.matrix(unclass(data))
-  if (is.null(dim(M))) M <- matrix(M, ncol = 1L)
   storage.mode(M) <- "double"
   n_all <- nrow(M)
   to_row <- function(v) {
@@ -285,8 +286,10 @@
   eff_draws <- matrix(y_obs, nd, n, byrow = TRUE) - ysamp
   eff_draws[, !in_post] <- 0
   cum_draws <- t(apply(eff_draws, 1L, cumsum))
-  if (n == 1L) cum_draws <- t(cum_draws)
-  colq <- function(m, pr) apply(m, 2L, stats::quantile, probs = pr, names = FALSE)
+  # a missing response leaves that row's pointwise effect undefined
+  colq <- function(m, pr) {
+    apply(m, 2L, function(v) if (anyNA(v)) NA_real_ else stats::quantile(v, probs = pr, names = FALSE))
+  }
   series <- data.frame(
     time = rows,
     response = y_obs,

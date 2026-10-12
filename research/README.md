@@ -50,6 +50,7 @@ signed off.
 | P8 deterrence | `Research.P8.certainty_monotone`, `severity_monotone`, `aggregate_monotone` | `morie_deterrence_response()` |
 | P8 deterrence | `Research.P8.necessity_bounds`, `necessity_of_monotone`, `necessity_of_disjoint` | `morie_probability_of_necessity()` |
 | P9 recording map | `Research.P9.total_invariant_of_colStochastic`, `total_le_of_colSubstochastic`, `reclassification_moves_ratio`, `detection_rate_rises` | `morie_recording_map()`, `morie_detection_rate_shift()` |
+| P9 recording map | `Research.P9.regimes_not_identified`, `second_source_separates` | `morie_recording_regimes()` |
 | P10 contagion | `Research.P10.generation_mean`, `cluster_size_of_lt_one`, `stationary_rate`, `cluster_size_diverges_of_ge_one`, `endogeneity_share` | `morie_contagion_branching()` |
 | P11 sentencing bounds | `Research.P11.Pop.outcome_bounds`, `lower_attained`, `upper_attained`, `ate_width_one`, `ate_contains_zero` | `morie_sentence_effect_bounds()` |
 | P12 ecological | `Research.P12.within_orth`, `cov_decomp`, `var_decomp`, `var_nonneg`, `ecological_ge` | `morie_ecological_decompose()` |
@@ -58,6 +59,7 @@ signed off.
 | P3 interference | `Research.P3.testVec_orth`, `testVec_dnorm`, `testVec_dirichlet`, `rayleigh_testVec`, `rayleigh_le_two_conductance`, `lambda2_le_rayleigh_testVec`, `cheeger_easy` | `morie_cheeger_bound()` |
 | P5 fairness | `Research.P5.ll1_strictMono`, `ll1_neg`, `loglik_lt_shift`, `loglik_lt_shift_quasi`, `no_mle`, `no_mle_quasi`, `loglik_neg`, `loglik_tendsto_zero` | `morie_logit_separation()` |
 | P11 sentencing bounds | `Research.P11.region_coverage_le`, `coverage_strictMono_c`, `im_cutoff_antitone`, `im_cutoff_between`, `two_sided_overcovers` | `morie_bounds_confidence()` |
+| P11 sentencing bounds | `Research.P11.im_cutoff_exists`, `im_cutoff_unique` | `morie_bounds_confidence()` (the root the solver finds) |
 | P13 pooling | `Research.P13.truncation_bias`, `pos_part_ge`, `pos_part_pos`, `dl_biased_under_homogeneity`, `tauDL_nonneg`, `tauDL_eq_zero_iff`, `re_var_ge`, `re_var_eq_iff` | `morie_meta_random_effects()`, `morie_meta_dl_bias()` |
 | P13 pooling | `Research.P13HKSJ.hksj_wider_iff`, `Q_eq_zero_iff`, `hksj_equal_weights` | `morie_meta_hksj()` |
 | P12 ecological | `Research.P12.pq_ge`, `dd_bounds`, `Cells.ends_attained`, `dd_complement`, `dd_aggregate_bounds` | `morie_ecological_bounds()` |
@@ -72,6 +74,7 @@ signed off.
 | P17 incapacitation | `Research.P17.steady_state_rate`, `cycle_rate`, `prevented_share_lt_one`, `rate_antitone_in_S`, `rate_antitone_in_q`, `marginal_prevention_eq`, `high_rate_more_prevented` | `morie_incapacitation()` |
 | P17 incapacitation | `Research.P17Replacement.replaced_antitone`, `prevented_le_const`, `prevented_ge_const`, `later_sentence_prevents_less`, `prevented_net_le` | `morie_incapacitation_career()` |
 | P18 selective labels | `Research.P18.observed_rate_is_conditional`, `nested_rate_identified`, `unobserved_bounds`, `unobserved_width`, `unobserved_ends_attained` | `morie_selective_labels()` |
+| P18 selective labels | `Research.P18.unobserved_mass_antitone`, `interval_width_antitone`, `chain_contraction`, `chain_width_antitone`, `chain_width_zero_iff` | `morie_selective_labels_judges()` |
 | P19 regression to the mean | `Research.P19.exchange_mass`, `exchange_cross`, `indicator_bound`, `selected_change_nonpos`, `low_selected_change_nonneg` | `morie_regression_to_mean()` |
 | P19 regression to the mean | `Research.P19Shrinkage.loss_eq`, `loss_min`, `loss_bstar_eq`, `loss_bstar_le_raw`, `bstar_mem`, `predicted_fall` | `morie_hotspot_shrinkage()`, `morie_shrinkage_loss()` |
 

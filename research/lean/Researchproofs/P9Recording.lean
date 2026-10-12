@@ -99,4 +99,70 @@ theorem detection_rate_rises (D N n q d : ℝ) (hN : 0 < N) (hn : 0 < n) (hq : 0
   · have : 0 < 1 - d := by linarith
     positivity
 
+
+/-! ### The two regimes from one recorded series -/
+
+variable [DecidableEq ι]
+
+/-- The identity recording map: every offence recorded in its own category. -/
+def idMap : ι → ι → ℝ := fun i j => if i = j then 1 else 0
+
+theorem idMap_nonneg (i j : ι) : 0 ≤ idMap (ι := ι) i j := by
+  unfold idMap; split_ifs <;> norm_num
+
+theorem idMap_colsum (j : ι) : ∑ i, idMap (ι := ι) i j = 1 := by
+  unfold idMap
+  rw [Finset.sum_eq_single j]
+  · simp
+  · intro i _ hij; simp [hij]
+  · intro h; exact absurd (Finset.mem_univ j) h
+
+theorem recorded_idMap (c : ι → ℝ) (i : ι) : recorded (idMap (ι := ι)) c i = c i := by
+  unfold recorded idMap
+  rw [Finset.sum_eq_single i]
+  · simp
+  · intro j _ hji; simp [Ne.symm hji]
+  · intro h; exact absurd (Finset.mem_univ i) h
+
+theorem recorded_smul (M : ι → ι → ℝ) (c : ι → ℝ) (t : ℝ) (i : ι) :
+    recorded (fun i j => t * M i j) c i = t * recorded M c i := by
+  unfold recorded; rw [Finset.mul_sum]; apply Finset.sum_congr rfl; intro j _; ring
+
+/-- Two regimes, one series: a non-negative recorded vector `r` is produced both by pure
+re-classification of true counts `c = r` (identity map, column-stochastic) and by cuffing a share
+`ε` of larger true counts `c' = r / (1 - ε)` (the map `(1 - ε) I`, strictly column-substochastic).
+With a positive total the two true totals differ, so the recorded series alone cannot say which
+regime produced it. -/
+theorem regimes_not_identified (r : ι → ℝ) (hr : ∀ i, 0 ≤ r i) (ε : ℝ) (hε0 : 0 < ε) (hε1 : ε < 1) :
+    ∃ (M M' : ι → ι → ℝ) (c c' : ι → ℝ),
+      ColStochastic M ∧ ColSubstochastic M' ∧ (∀ j, ∑ i, M' i j < 1) ∧
+      (∀ i, recorded M c i = r i) ∧ (∀ i, recorded M' c' i = r i) ∧
+      (∀ j, 0 ≤ c j) ∧ (∀ j, 0 ≤ c' j) ∧
+      (0 < ∑ j, r j → ∑ j, c j < ∑ j, c' j) := by
+  have h1ε : 0 < 1 - ε := by linarith
+  refine ⟨idMap, fun i j => (1 - ε) * idMap i j, r, fun j => r j / (1 - ε), ?_, ?_, ?_, ?_, ?_, hr, ?_, ?_⟩
+  · exact ⟨idMap_nonneg, idMap_colsum⟩
+  · refine ⟨fun i j => mul_nonneg h1ε.le (idMap_nonneg i j), fun j => ?_⟩
+    rw [← Finset.mul_sum, idMap_colsum, mul_one]; linarith
+  · intro j; rw [← Finset.mul_sum, idMap_colsum, mul_one]; linarith
+  · intro i; exact recorded_idMap r i
+  · intro i; rw [recorded_smul, recorded_idMap]; field_simp
+  · intro j; exact div_nonneg (hr j) h1ε.le
+  · intro hpos
+    rw [← Finset.sum_div, lt_div_iff₀ h1ε]
+    nlinarith [mul_pos hε0 hpos]
+
+/-- With a second source that fixes the true total, the regimes separate: re-classification
+reproduces the total exactly, while cuffing a positive share of a category with positive count
+records strictly less. -/
+theorem second_source_separates (M : ι → ι → ℝ) (c : ι → ℝ) (hc : ∀ j, 0 ≤ c j) :
+    (ColStochastic M → ∑ i, recorded M c i = ∑ j, c j) ∧
+    (ColSubstochastic M → (∃ j, ∑ i, M i j < 1 ∧ 0 < c j) → ∑ i, recorded M c i < ∑ j, c j) := by
+  refine ⟨fun h => total_invariant_of_colStochastic M c h, fun hM ⟨j₀, hj₀, hcj⟩ => ?_⟩
+  rw [total_recorded]
+  apply Finset.sum_lt_sum
+  · intro j _
+    have := hM.2 j; have := hc j; nlinarith
+  · exact ⟨j₀, Finset.mem_univ _, by nlinarith⟩
+
 end Research.P9

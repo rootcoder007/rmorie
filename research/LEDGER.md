@@ -510,11 +510,16 @@ aggregate clearance rate is not a performance measure.
   (moving a share q of a class with detection rate d into a disposal
   detected with probability one raises the aggregate rate by q n (1-d)/N).
   R: `morie_recording_map()`, `morie_detection_rate_shift()`.
-- Open: the two regimes (re-classification vs cuffing) are not
-  distinguishable from a single recorded series (a formal
-  non-identification statement with a second source as the fix);
-  application to TPS MCI 2014-2024 robbery/theft and assault ratios with
-  CSUS victimisation as the second source (library scan A12, A13, A15).
+- Progress 2026-10-11 (two regimes): `Research.P9.regimes_not_identified`,
+  `second_source_separates` (P9Recording.lean): any non-negative recorded series is
+  produced both by the identity map on true counts equal to the series (pure
+  re-classification) and by the map (1-eps) I on true counts r/(1-eps) (cuffing a share
+  eps), whose true total is larger, so one series cannot say which regime produced it;
+  with a second source fixing the true total, re-classification reproduces it exactly and
+  cuffing a positive share of a category with positive count records strictly less. R:
+  `morie_recording_regimes()`; Python `recording_regimes()`.
+- Open: application to TPS MCI 2014-2024 robbery/theft and assault ratios with CSUS
+  victimisation as the second source (library scan A12, A13, A15).
 
 
 ## P10. Near-repeat contagion: what a branching ratio commits you to
@@ -574,7 +579,11 @@ Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
   cutoff solving it is non-increasing in Delta (`im_cutoff_antitone`), lies
   below the two-sided quantile with F(-c) <= alpha (`im_cutoff_between`), and the
   two-sided quantile over-covers any region of positive width
-  (`two_sided_overcovers`). Existence of the cutoff is left to root finding. R:
+  (`two_sided_overcovers`). Existence and uniqueness of the cutoff: for a continuous strictly
+  increasing F with the limits of a distribution function the coverage is continuous in c with
+  limits -1 and 1, so the intermediate value theorem gives a root for every alpha in (0, 1)
+  (`im_cutoff_exists`, added 2026-10-11) and strict monotonicity makes it the only one
+  (`im_cutoff_unique`); the root finder computes what the theorems guarantee. R:
   `morie_bounds_confidence()`; the test checks the equation, the ordering of the
   three cutoffs, monotonicity in Delta and the over-coverage on random bounds.
 - Progress 2026-10-02 (MTS, Manski & Pepper 2000): `Research.P11.Pop` in P11Selection.lean:
@@ -761,8 +770,15 @@ some judge released (Lakkaraju et al. 2017; Kleinberg et al. 2018).
   (`unobserved_bounds`), an interval whose width is the unobserved share
   (`unobserved_width`) with both ends attained (`unobserved_ends_attained`).
   R: `morie_selective_labels()`; Python `selective_labels()`.
-- Open: the many-judge contraction with leniency quantiles; an application to
-  Ontario bail outcomes once a released-cohort file is public.
+- Progress 2026-10-11 (many judges): `Research.P18.unobserved_mass_antitone`,
+  `interval_width_antitone`, `chain_contraction`, `chain_width_antitone`, `chain_width_zero_iff`
+  (P18Selective.lean): with judges' release sets nested by leniency a rule's unobserved mass,
+  hence its identified interval's width, is non-increasing along the chain; a rule whose set
+  the chain covers lies inside the most lenient judge's set and is scored exactly from that
+  judge's outcomes; the width is zero exactly on containment (positive weights). R:
+  `morie_selective_labels_judges()` (one row per judge, nestedness check, sharpest interval);
+  Python `selective_labels_judges()`.
+- Open: an application to Ontario bail outcomes once a released-cohort file is public.
 
 ## P19. Regression to the mean at selected hot spots
 

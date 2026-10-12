@@ -121,6 +121,52 @@ theorem two_sided_overcovers (α z Δ : ℝ) (hΔ : 0 < Δ) (hz : F z - F (-z) =
   have : F z < F (z + Δ) := hF (by linarith)
   linarith
 
+
+include hF in
+/-- The cutoff is unique: two cutoffs with the same coverage at the same width coincide. -/
+theorem im_cutoff_unique (α c₁ c₂ Δ : ℝ) (h₁ : coverage F c₁ Δ = 1 - α) (h₂ : coverage F c₂ Δ = 1 - α) :
+    c₁ = c₂ :=
+  (coverage_strictMono_c F hF Δ).injective (h₁.trans h₂.symm)
+
+include hF in
+/-- Existence of the Imbens–Manski cutoff: for a continuous strictly increasing `F` with the
+limits of a distribution function, and any `α ∈ (0, 1)`, some `c` solves
+`F (c + Δ) - F (-c) = 1 - α`. The coverage is continuous in `c`, tends to `-1` as `c → -∞` and to
+`1` as `c → ∞`, so the intermediate value theorem supplies the root that the R and Python arms
+find numerically. -/
+theorem im_cutoff_exists (hFc : Continuous F)
+    (hlo : Filter.Tendsto F Filter.atBot (nhds 0)) (hhi : Filter.Tendsto F Filter.atTop (nhds 1))
+    (α Δ : ℝ) (hα0 : 0 < α) (hα1 : α < 1) :
+    ∃ c, coverage F c Δ = 1 - α := by
+  have hcont : Continuous (fun c => coverage F c Δ) := by
+    unfold coverage
+    exact (hFc.comp (continuous_id.add continuous_const)).sub (hFc.comp continuous_neg)
+  -- limits of the coverage
+  have htop : Filter.Tendsto (fun c => coverage F c Δ) Filter.atTop (nhds (1 - 0)) := by
+    unfold coverage
+    exact (hhi.comp (Filter.tendsto_atTop_add_const_right _ Δ Filter.tendsto_id)).sub
+      (hlo.comp Filter.tendsto_neg_atTop_atBot)
+  have hbot : Filter.Tendsto (fun c => coverage F c Δ) Filter.atBot (nhds (0 - 1)) := by
+    unfold coverage
+    exact (hlo.comp (Filter.tendsto_atBot_add_const_right _ Δ Filter.tendsto_id)).sub
+      (hhi.comp Filter.tendsto_neg_atBot_atTop)
+  -- a point above and a point below the target
+  obtain ⟨b, hb⟩ : ∃ b, 1 - α < coverage F b Δ := by
+    have : ∀ᶠ c in Filter.atTop, 1 - α < coverage F c Δ :=
+      htop.eventually (lt_mem_nhds (by linarith))
+    exact this.exists
+  obtain ⟨a, ha⟩ : ∃ a, coverage F a Δ < 1 - α := by
+    have : ∀ᶠ c in Filter.atBot, coverage F c Δ < 1 - α :=
+      hbot.eventually (gt_mem_nhds (by linarith))
+    exact this.exists
+  have hab : a ≤ b := by
+    by_contra h
+    push Not at h
+    have := coverage_strictMono_c F hF Δ h
+    linarith
+  obtain ⟨c, _, hc⟩ := intermediate_value_Icc hab hcont.continuousOn ⟨ha.le, hb.le⟩
+  exact ⟨c, hc⟩
+
 end Cutoff
 
 end Research.P11

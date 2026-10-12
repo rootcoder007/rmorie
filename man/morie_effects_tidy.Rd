@@ -15,14 +15,14 @@ morie_effects_tidy(
 \arguments{
 \item{model}{A fitted model object.}
 
-\item{...}{Further arguments passed to \code{stats::confint()}.}
-
 \item{conf.int}{Logical; add \code{conf.low} / \code{conf.high}.}
 
 \item{conf.level}{Confidence level for the interval.}
 
 \item{exponentiate}{Logical; exponentiate \code{estimate} and the
 interval bounds (e.g. odds ratios for a logit \code{glm}).}
+
+\item{...}{Further arguments passed to \code{stats::confint()}.}
 }
 \value{
 A data frame with one row per model term.

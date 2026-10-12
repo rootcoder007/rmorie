@@ -7,6 +7,7 @@
 #   Research.P9.reclassification_moves_ratio       share q of j moved into i: total fixed, r_i/r_j = c_i/c_j + q/(1-q) (1 + c_i/c_j)
 #   Research.P9.detection_rate_rises               moving share q of a class (rate d) into a disposal detected w.p. 1
 #                                                  raises the aggregate detection rate by q n (1-d) / N, N fixed
+#   Research.P9.regimes_not_identified          one recorded series, two regimes (identity vs (1-eps) I); second_source_separates: a true total tells them apart
 
 #' Recorded counts from true counts through a recording matrix
 #'
@@ -77,4 +78,68 @@ morie_detection_rate_shift <- function(detected, total, n, d, q) {
   rise <- q * n * (1 - d) / total
   list(rate_before = detected / total, rate_after = (detected + q * n * (1 - d)) / total, rise = rise,
        theorem = "Research.P9.detection_rate_rises")
+}
+
+#' Two recording regimes from one recorded series
+#'
+#' A recorded vector alone cannot say whether it came from pure
+#' re-classification or from cuffing: the same series is produced by the
+#' identity map on true counts equal to the series and by the map
+#' \eqn{(1-\epsilon) I} on true counts \eqn{r/(1-\epsilon)}, whose true
+#' total is larger (\code{Research.P9.regimes_not_identified}). A second
+#' source that fixes the true total separates the two: re-classification
+#' reproduces the total exactly, cuffing a positive share records strictly
+#' less (\code{Research.P9.second_source_separates}).
+#'
+#' @param recorded Non-negative recorded counts per category.
+#' @param cuffed_share The share \eqn{\epsilon} in (0, 1) used for the cuffing
+#'   construction.
+#' @param true_total Optional true total from a second source (a
+#'   victimisation survey, an audit). When given, the regime the pair of
+#'   numbers allows is reported.
+#' @return A list with \code{recorded_total}, two constructions
+#'   (\code{reclassification} and \code{cuffing}, each with \code{M},
+#'   \code{counts} and \code{true_total}), \code{identified_from_series}
+#'   (always \code{FALSE}), \code{second_source} (\code{NULL}, or the
+#'   regime, the dropped mass and whether the pair is consistent) and
+#'   \code{theorems}.
+#' @examples
+#' r <- c(robbery = 70, theft = 430)
+#' two <- morie_recording_regimes(r, cuffed_share = 0.2)
+#' two$reclassification$true_total; two$cuffing$true_total
+#' morie_recording_regimes(r, true_total = 550)$second_source
+#' @export
+morie_recording_regimes <- function(recorded, cuffed_share = 0.1, true_total = NULL) {
+  r <- as.numeric(recorded)
+  if (!length(r) || anyNA(r) || any(r < 0)) stop("recorded must be non-negative counts", call. = FALSE)
+  if (!is.numeric(cuffed_share) || length(cuffed_share) != 1L || cuffed_share <= 0 || cuffed_share >= 1) {
+    stop("cuffed_share must lie in (0, 1)", call. = FALSE)
+  }
+  k <- length(r)
+  nm <- names(recorded)
+  id <- diag(k)
+  dimnames(id) <- list(nm, nm)
+  cuff <- (1 - cuffed_share) * id
+  counts_cuff <- r / (1 - cuffed_share)
+  names(counts_cuff) <- nm
+  recorded_total <- sum(r)
+  second <- NULL
+  if (!is.null(true_total)) {
+    if (!is.numeric(true_total) || length(true_total) != 1L || is.na(true_total) || true_total < 0) {
+      stop("true_total must be a single non-negative number", call. = FALSE)
+    }
+    tol <- 1e-9 * max(1, true_total)
+    second <- list(
+      true_total = true_total, dropped_mass = max(0, true_total - recorded_total),
+      regime = if (abs(recorded_total - true_total) <= tol) "reclassification" else if (recorded_total < true_total) "cuffing" else "inconsistent",
+      consistent = recorded_total <= true_total + tol
+    )
+  }
+  list(
+    recorded = stats::setNames(r, nm), recorded_total = recorded_total,
+    reclassification = list(M = id, counts = stats::setNames(r, nm), true_total = recorded_total),
+    cuffing = list(M = cuff, counts = counts_cuff, true_total = sum(counts_cuff), share = cuffed_share),
+    identified_from_series = FALSE, second_source = second,
+    theorems = c("Research.P9.regimes_not_identified", "Research.P9.second_source_separates")
+  )
 }

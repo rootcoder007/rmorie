@@ -1,5 +1,12 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* Research ledger, three open items closed with machine-checked proofs (`research/lean`, 273
+  theorems and lemmas, 0 sorry): one recorded crime series cannot separate re-classification
+  from cuffing and a second source's true total can (`morie_recording_regimes()`); the
+  Imbens-Manski cutoff exists and is unique (`morie_bounds_confidence()` cites
+  `im_cutoff_exists`, `im_cutoff_unique`); across judges nested by leniency a release rule's
+  identified interval narrows and collapses exactly on containment
+  (`morie_selective_labels_judges()`). The Lean library directory now holds all 56 proof files.
 * Every estimator now runs on the package's own code; the reference packages are used only by
   tests that check the numbers (the opt-in `backend =` of `morie_taphonomy_bhm()` and
   `morie_causal_weighting()`'s methods beyond glm/ps/cbps/ebal are the two exceptions you ask

@@ -31,3 +31,19 @@ test_that("a wider region needs a smaller cutoff; zero width gives the two-sided
   expect_error(morie_bounds_confidence(1, 0, 0.1, 0.1), "at least")
   expect_error(morie_bounds_confidence(0, 1, 0, 0.1), "positive")
 })
+
+test_that("the cutoff exists inside the search bracket and is the only root (im_cutoff_exists, im_cutoff_unique)", {
+  set.seed(7)
+  for (k in 1:40) {
+    delta <- runif(1, 0, 6); alpha <- runif(1, 0.01, 0.3)
+    f <- function(c_) pnorm(c_ + delta) - pnorm(-c_) - (1 - alpha)
+    z1 <- qnorm(1 - alpha); z2 <- qnorm(1 - alpha / 2)
+    # a sign change on the bracket the function searches: existence
+    expect_lte(f(z1 - 1e-9), 1e-12); expect_gte(f(z2 + 1e-9), -1e-12)
+    r <- morie_bounds_confidence(0, delta * 0.1, 0.1, 0.1, 1 - alpha)
+    expect_equal(f(r$cutoff), 0, tolerance = 1e-9)
+    # strict monotonicity: every other c misses, on both sides
+    for (d in c(-1, -0.1, 0.1, 1)) expect_gt(abs(f(r$cutoff + d)), 1e-6)
+    expect_true(all(c("Research.P11.im_cutoff_exists", "Research.P11.im_cutoff_unique") %in% r$theorems))
+  }
+})
