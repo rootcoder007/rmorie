@@ -54,3 +54,11 @@ import Researchproofs.P15Reweight
 import Researchproofs.P16Censoring
 import Researchproofs.P17Replacement
 import Researchproofs.P19Shrinkage
+import Researchproofs.P1Interaction
+import Researchproofs.P2Veil
+import Researchproofs.P6Panel
+import Researchproofs.P7Bound
+import Researchproofs.P8Instrument
+import Researchproofs.P10Moments
+import Researchproofs.P15RIF
+import Researchproofs.P19Error

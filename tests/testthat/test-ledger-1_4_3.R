@@ -1,0 +1,227 @@
+# The 2026-10-12 ledger closures: every number recomputed from the theorem it cites.
+
+test_that("the veil-of-darkness odds ratio is the relative visible-race factor and the share sign follows it", {
+  # a synthetic road: exposures and dark propensities cancel, delta = (0.5, 0.1)
+  E <- c(white = 1000, black = 400)
+  r <- c(white = 0.03, black = 0.05)
+  delta <- c(white = 0.1, black = 0.5)
+  night <- E * r
+  day <- E * r * (1 + delta)
+  v <- morie_veil_of_darkness(day, night)
+  expect_equal(v$bias_ratio, c(1, (1 + 0.5) / (1 + 0.1)))
+  expect_equal(v$sign, c("lower", "higher"))
+  expect_equal(v$share_day, as.numeric(day / sum(day)))
+  expect_equal(v$share_night, as.numeric(night / sum(night)))
+  expect_equal(attr(v, "theorem"), "Research.P2.Veil.odds_ratio_identifies_bias")
+  eq <- morie_veil_of_darkness(E * r * 1.3, night)
+  expect_equal(eq$sign, c("equal", "equal"))
+  expect_equal(eq$bias_ratio, c(1, 1))
+  # an exposure shift by light condition is observationally a bias, and dividing it out recovers delta
+  kappa <- c(white = 1.2, black = 0.8)
+  day2 <- kappa * E * r * (1 + delta)
+  v2 <- morie_veil_of_darkness(day2, night, exposure_shift = kappa)
+  expect_equal(v2$bias_ratio[2], (kappa[["black"]] / kappa[["white"]]) * (1.5 / 1.1))
+  expect_equal(v2$bias_ratio_adjusted, c(1, 1.5 / 1.1))
+  # a common scale of both visible-race factors is invisible (bias_not_absolute)
+  v3 <- morie_veil_of_darkness(day * 2, night)
+  expect_equal(v3$bias_ratio, v$bias_ratio)
+  expect_equal(v3$share_day, v$share_day)
+  expect_equal(morie_veil_of_darkness(day, night, reference = "black")$bias_ratio, c(1.1 / 1.5, 1))
+  expect_error(morie_veil_of_darkness(unname(day), night), "named counts")
+  expect_error(morie_veil_of_darkness(day, night, reference = "x"), "not a group")
+  expect_error(morie_veil_of_darkness(day, c(white = 0, black = 1)), "darkness counts positive")
+  expect_error(morie_veil_of_darkness(day, night, exposure_shift = c(white = 1)), "named over the groups")
+})
+
+test_that("the no-interaction three-list cell matches the log-linear fit and moves by exp(-t)", {
+  cells <- c(n100 = 120, n010 = 80, n001 = 60, n110 = 30, n101 = 24, n011 = 16, n111 = 8)
+  r <- morie_dark_figure_no_interaction(cells, interaction = c(-0.5, 0, 0.5))
+  expect_equal(r$missing, 120 * 80 * 60 * 8 / (30 * 24 * 16))
+  expect_equal(r$total, sum(cells) + r$missing)
+  expect_equal(r$sensitivity$missing, r$missing * exp(-c(-0.5, 0, 0.5)))
+  expect_equal(r$sensitivity$total[2], r$total)
+  # the Poisson log-linear model with every two-way term and no three-way term predicts the same cell
+  d <- expand.grid(a = 0:1, b = 0:1, c = 0:1)
+  d$n <- c(NA, cells[["n100"]], cells[["n010"]], cells[["n110"]], cells[["n001"]], cells[["n101"]],
+           cells[["n011"]], cells[["n111"]])
+  fit <- stats::glm(n ~ a * b + a * c + b * c, data = d[-1, ], family = stats::poisson())
+  pred <- stats::predict(fit, newdata = d[1, ], type = "response")
+  expect_equal(unname(pred), r$missing, tolerance = 1e-8)
+  # the saturated model reproduces the seven cells; the missing one is then whatever t says
+  expect_error(morie_dark_figure_no_interaction(cells[-1]), "must be named")
+  expect_error(morie_dark_figure_no_interaction(replace(cells, "n110", 0)), "pairwise cells must be positive")
+})
+
+test_that("the plug-in shrinkage factor's error is the stated algebra and the bound holds", {
+  set.seed(1)
+  theta <- stats::rnorm(40, 10, 2)
+  e <- stats::rnorm(40, 0, 1.5)
+  e <- stats::residuals(stats::lm(e ~ theta))  # the finite noise law: mean zero, uncorrelated with the truth
+  y <- theta + e
+  Se <- mean(e^2)
+  St <- mean((theta - mean(theta))^2)
+  Sy <- Se + St
+  expect_equal(mean((y - mean(y))^2), Sy, tolerance = 1e-10)  # Sy_eq
+  r <- morie_shrinkage_factor_error(y, noise_variance = Se, total_variance = Sy)
+  expect_equal(r$S_y_hat, Sy, tolerance = 1e-10)
+  expect_equal(r$B_star, Se / Sy)
+  expect_equal(r$B_hat, Se / r$S_y_hat)
+  expect_equal(r$error, Se * (Sy - r$S_y_hat) / (Sy * r$S_y_hat), tolerance = 1e-10)
+  expect_true(r$bound_holds)
+  # a wrong total: the exact error and the bound (bhat_error, bhat_error_bound)
+  r2 <- morie_shrinkage_factor_error(y * 1.1, noise_variance = Se, total_variance = Sy)
+  S2 <- mean((y * 1.1 - mean(y * 1.1))^2)
+  expect_equal(r2$error, Se / S2 - Se / Sy)
+  expect_lte(abs(r2$error), (Se / Sy) * abs(S2 - Sy) / S2 + 1e-12)
+  expect_true(r2$B_interval[["lower"]] <= r2$B_hat && r2$B_hat <= r2$B_interval[["upper"]])
+  # jackknife spread shrinks with n
+  big <- morie_shrinkage_factor_error(rep(y, 10), noise_variance = Se)
+  expect_lt(big$S_y_se, r$S_y_se)
+  w <- rep(c(1, 2), 20)
+  rw <- morie_shrinkage_factor_error(y, noise_variance = Se, weights = w)
+  m <- sum(w * y) / sum(w)
+  expect_equal(rw$S_y_hat, sum(w * (y - m)^2) / sum(w))
+  expect_error(morie_shrinkage_factor_error(y[1:2], 1), "at least three")
+  expect_error(morie_shrinkage_factor_error(y, -1), "single non-negative")
+  expect_error(morie_shrinkage_factor_error(y, 1, weights = rep(-1, 40)), "non-negative with a positive sum")
+  expect_error(morie_shrinkage_factor_error(rep(3, 5), 1), "no spread")
+})
+
+test_that("the Gini never exceeds the coefficient-of-variation bound, and the Poisson null sits under it", {
+  set.seed(2)
+  for (i in 1:50) {
+    x <- stats::rpois(sample(5:40, 1), stats::runif(1, 0.2, 20))
+    if (sum(x) == 0) next
+    g <- morie_concentration_gini(x)
+    m <- mean(x)
+    v <- mean((x - m)^2)
+    # the Gini in its pairwise form, and the Cauchy-Schwarz bound
+    expect_equal(g, sum(abs(outer(x, x, "-"))) / (2 * length(x)^2 * m), tolerance = 1e-12)
+    expect_lte(g, sqrt(v / 2) / m + 1e-12)
+    expect_equal(sum(outer(x, x, "-")^2), 2 * length(x) * sum((x - m)^2))  # pair_sq_identity
+  }
+  x <- c(0, 0, 1, 2, 9, 0, 3)
+  r <- morie_concentration_null_bound(x, n_sim = 500, seed = 7)
+  expect_equal(r$gini, morie_concentration_gini(x))
+  expect_equal(r$cv_bound, sqrt(r$variance / 2) / r$mean)
+  expect_equal(r$null_bound, 1 / sqrt(2 * mean(x)))
+  expect_lte(r$gini, r$cv_bound)
+  set.seed(7)
+  sims <- vapply(1:500, function(i) {
+    s <- stats::rpois(7, mean(x))
+    if (sum(s) == 0) 0 else morie_concentration_gini(s)
+  }, numeric(1))
+  expect_equal(r$null_mean, mean(sims))
+  expect_equal(r$p_value, mean(sims >= r$gini))
+  expect_equal(r$excess, r$gini - mean(sims))
+  expect_error(morie_concentration_null_bound(c(0, 0)), "positive total")
+})
+
+test_that("the log expected-cost design identifies the discount, and the Wald ratio recovers the slope", {
+  set.seed(3)
+  n <- 200
+  p <- stats::runif(n, 0.1, 0.9)
+  s <- stats::runif(n, 1, 10)
+  c <- stats::runif(n, 0, 12)
+  rho <- 0.1
+  beta <- -0.8
+  y <- 2 + beta * (log(p) + log(s) - rho * c)
+  r <- morie_deterrence_logcost(p, s, c, y, rho = rho)
+  expect_true(r$identified)
+  expect_equal(r$rank, 4L)
+  expect_equal(unname(r$coefficients), c(2, beta, beta, -beta * rho), tolerance = 1e-10)
+  expect_equal(r$implied_discount, rho, tolerance = 1e-10)  # ratio_is_discount
+  expect_equal(r$log_expected_cost, log(r$expected_cost))   # logcost_linear
+  expect_equal(r$expected_cost, p * s * exp(-rho * c))
+  fixed <- morie_deterrence_logcost(p, rep(5, n), c)
+  expect_false(fixed$identified)
+  expect_error(morie_deterrence_logcost(p, rep(5, n), c, y), "rank deficient")
+  expect_error(morie_deterrence_logcost(-p, s, c), "must be positive")
+  # Wald: cov(z, u) = 0 by construction on the finite population
+  z <- stats::rbinom(n, 1, 0.5)
+  u <- stats::rnorm(n)
+  u <- u - mean(u)
+  u <- u - (mean(z * u) - mean(z) * mean(u)) / (mean(z * z) - mean(z)^2) * (z - mean(z))
+  pp <- 0.3 + 0.4 * z + stats::rnorm(n, sd = 0.1)
+  yy <- 1 - 2 * pp + u
+  w <- morie_wald_iv(yy, pp, z)
+  expect_true(w$relevant)
+  expect_equal(w$beta, -2, tolerance = 1e-10)
+  expect_equal(w$cov_zy, mean(z * yy) - mean(z) * mean(yy))
+  expect_equal(w$alpha, mean(yy) - w$beta * mean(pp))
+  # the same number as two-stage least squares with one instrument
+  stage1 <- stats::fitted(stats::lm(pp ~ z))
+  expect_equal(w$beta, unname(stats::coef(stats::lm(yy ~ stage1))[2]), tolerance = 1e-10)
+  dead <- morie_wald_iv(yy, pp, rep(1, n))
+  expect_false(dead$relevant)
+  expect_true(is.na(dead$beta))
+  expect_error(morie_wald_iv(yy, pp, z[-1]), "same length")
+})
+
+test_that("the quantile RIF averages to the quantile at the sample quantile and carries the gap", {
+  set.seed(4)
+  y <- stats::rexp(301)
+  r <- morie_rif_quantile(y, 0.5)
+  expect_equal(r$rif, r$q + (0.5 - as.numeric(y <= r$q)) / r$f)
+  expect_equal(r$mean_rif, r$q + (0.5 - r$F_q) / r$f)        # rif_quantile_avg
+  expect_equal(r$F_q, mean(y <= r$q))
+  expect_equal(r$recentering, (0.5 - r$F_q) / r$f)
+  # at an off-quantile point the recentering is exactly the deviation of F from tau
+  r2 <- morie_rif_quantile(y, 0.5, q = 2, f = 0.3)
+  expect_equal(r2$mean_rif, 2 + (0.5 - mean(y <= 2)) / 0.3)
+  expect_equal(r2$mean_rif == 2, mean(y <= 2) == 0.5)          # rif_quantile_avg_eq_iff
+  w <- rep(c(1, 3), length.out = 301)
+  rw <- morie_rif_quantile(y, 0.25, weights = w, f = 1)
+  expect_equal(rw$F_q, sum(w * (y <= rw$q)) / sum(w))
+  expect_gte(rw$F_q, 0.25)
+  g <- morie_rif_gap(y, y * 2, 0.5)
+  expect_equal(g$gap, g$quantile_gap + g$recentering_gap)       # rif_gap
+  expect_equal(g$quantile_gap, g$A$q - g$B$q)
+  expect_error(morie_rif_quantile(y, 1.5), "lie in \\(0, 1\\)")
+  expect_error(morie_rif_quantile(y, 0.5, f = 0), "must be positive")
+  expect_error(morie_rif_quantile(y[1], 0.5), "at least two")
+})
+
+test_that("the two witness count laws share mean and variance but not their zero mass", {
+  w <- morie_contagion_moment_witness(function(m, v) v / m)
+  expect_equal(sum(w$p), 1)
+  expect_equal(sum(w$q), 1)
+  expect_equal(unname(w$mean), c(1, 1))
+  expect_equal(unname(w$variance), c(1, 1))
+  expect_equal(unname(w$dispersion), c(1, 1))
+  expect_equal(unname(w$statistic), c(1, 1))
+  expect_equal(unname(w$zero_probability), c(1 / 2, 1 / 3))
+  expect_false(identical(w$p, w$q))
+  expect_equal(sum(w$q * (0:3)^2), 2)
+})
+
+test_that("cross-age covariance of a mixture recomputes and the panel test sees the P6 witness", {
+  tc <- morie_age_crime_type_cov(c(0.5, 0.5), c(1, 3), c(3, 1))
+  expect_equal(unname(tc$aggregate), c(2, 2))
+  expect_equal(tc$cross_cov, 0.5 * 0.5 * (1 - 3) * (3 - 1))       # two_type_cov = -1
+  expect_false(tc$one_type)
+  one <- morie_age_crime_type_cov(c(0.5, 0.5), c(2, 2), c(2, 2))
+  expect_equal(one$cross_cov, 0)
+  expect_true(one$one_type)
+  w <- c(0.2, 0.3, 0.5)
+  ra <- c(1, 2, 4)
+  rb <- c(3, 1, 2)
+  tc3 <- morie_age_crime_type_cov(w, ra, rb)
+  expect_equal(tc3$cross_cov, sum(w * ra * rb) - sum(w * ra) * sum(w * rb))  # cross_moment_eq
+  expect_error(morie_age_crime_type_cov(c(0.5, 0.6), c(1, 2), c(1, 2)), "summing to one")
+  set.seed(6)
+  type <- stats::rbinom(400, 1, 0.5)
+  ya <- stats::rpois(400, ifelse(type == 1, 1, 3))
+  yb <- stats::rpois(400, ifelse(type == 1, 3, 1))
+  pc <- morie_age_crime_panel_cov(ya, yb, n_perm = 300, seed = 2)
+  expect_equal(pc$cross_cov, mean(ya * yb) - mean(ya) * mean(yb))
+  expect_lt(pc$p_value, 0.05)
+  one_type <- morie_age_crime_panel_cov(stats::rpois(400, 2), stats::rpois(400, 2), n_perm = 300, seed = 3)
+  expect_gt(one_type$p_value, 0.05)
+  set.seed(3)
+  perm <- vapply(1:300, function(i) {
+    s <- sample.int(400)
+    mean(one_type$cross_cov * 0 + ya[seq_len(0)]) + 0
+  }, numeric(1))
+  expect_error(morie_age_crime_panel_cov(ya, yb[-1]), "same individuals")
+})

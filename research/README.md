@@ -77,6 +77,14 @@ signed off.
 | P18 selective labels | `Research.P18.unobserved_mass_antitone`, `interval_width_antitone`, `chain_contraction`, `chain_width_antitone`, `chain_width_zero_iff` | `morie_selective_labels_judges()` |
 | P19 regression to the mean | `Research.P19.exchange_mass`, `exchange_cross`, `indicator_bound`, `selected_change_nonpos`, `low_selected_change_nonneg` | `morie_regression_to_mean()` |
 | P19 regression to the mean | `Research.P19Shrinkage.loss_eq`, `loss_min`, `loss_bstar_eq`, `loss_bstar_le_raw`, `bstar_mem`, `predicted_fall` | `morie_hotspot_shrinkage()`, `morie_shrinkage_loss()` |
+| P1 dark figure | `Research.P1.Interaction.missing_cell_identified`, `missing_cell_with_interaction`, `total_identified`, `interaction_not_identified` | `morie_dark_figure_no_interaction()` |
+| P2 selection | `Research.P2.Veil.odds_ratio_identifies_bias`, `share_sign`, `exposure_shift_confounds`, `bias_not_absolute` | `morie_veil_of_darkness()` |
+| P6 age-crime | `Research.P6.Panel.cross_moment_eq`, `one_type_cov_zero`, `two_type_cov`, `panel_separates_witness`, `aggregate_blind` | `morie_age_crime_type_cov()`, `morie_age_crime_panel_cov()` |
+| P7 concentration | `Research.P7.Bound.pair_sq_identity`, `abs_sum_le_sqrt`, `gini_le_cv` | `morie_concentration_null_bound()` |
+| P8 deterrence | `Research.P8.Instrument.logcost_linear`, `ratio_is_discount`, `wald_identifies`, `wald_undefined` | `morie_deterrence_logcost()`, `morie_wald_iv()` |
+| P10 contagion | `Research.P10.Moments.witness_same_mean`, `witness_same_second_moment`, `witness_distinct`, `second_moments_do_not_identify`, `witness_dispersion_one` | `morie_contagion_moment_witness()` |
+| P15 disparity decomposition | `Research.P15.RIF.rif_mean_avg`, `rif_quantile_avg`, `rif_quantile_avg_eq_iff`, `rif_gap` | `morie_rif_quantile()`, `morie_rif_gap()` |
+| P19 regression to the mean | `Research.P19Error.Sy_eq`, `bstar_from_total`, `bhat_error`, `bhat_error_bound`, `fall_error`, `bhat_antitone` | `morie_shrinkage_factor_error()` |
 
 C++ kernels: `src/morie_feedback_loop.cpp` (two-region urn),
 `src/morie_spillover.cpp` (treated-neighbour counts on a place network).

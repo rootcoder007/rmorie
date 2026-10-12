@@ -27,7 +27,7 @@ cite the theorem they rest on (see `../README.md` for the table).
 | `P18Selective` | selective labels: evaluating a release rule from the released alone |
 | `P19Regression`, `P19Shrinkage` | regression to the mean at selected hot spots |
 
-371 theorems and lemmas in all. What is proved is the mathematics: given
+410 theorems and lemmas in all. What is proved is the mathematics: given
 the stated assumptions, the estimand is identified, bounded or diverges as
 claimed. Whether the assumptions hold of any data set is a substantive
 claim that Lean cannot check.

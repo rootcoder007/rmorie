@@ -74,6 +74,17 @@ assumptions the dark figure is an interval, not a point.
   two recording mechanisms close in total variation but with true rates delta apart leave
   every estimator a worst-case error of delta (1 - TV)/2. R: `morie_two_point_bound()`;
   Python `two_point_bound()`.
+- Progress 2026-10-12 (breakdown, three sources): the breakdown value β̄* = 1 − v_obs/t of the
+  under-reporting box was proved on 2026-10-02 (P1Breakdown.lean: `conclusion_holds_below_breakdown`,
+  `conclusion_fails_above_breakdown`; `morie_fairness_compare_groups` reports it) and is recorded
+  here. The three-source case under one interaction constraint: `Research.P1.Interaction`
+  (P1Interaction.lean) writes the 2×2×2 expected cells from the log-linear parameters and proves
+  that under u₁₂₃ = 0 the never-listed cell is m₁₀₀m₀₁₀m₀₀₁m₁₁₁/(m₁₁₀m₁₀₁m₀₁₁)
+  (`missing_cell_identified`, `total_identified`), that with interaction t the same ratio equals
+  m₀₀₀eᵗ (`missing_cell_with_interaction`) so the data never choose t
+  (`interaction_not_identified`). R: `morie_dark_figure_no_interaction()` (the test matches the
+  Poisson log-linear fit with every two-way term); Python `dark_figure_no_interaction()`.
+  Open: the small-area application on a real survey/record pair.
 
 ## P2. Selection in police-recorded data: the record is the treatment
 
@@ -138,6 +149,15 @@ field has no agreed estimand, let alone estimator.
   ratio exactly pi (the background arrest prevalence) among arrestees:
   a manufactured negative association (Hernan & Robins Fine Point 8.2;
   library scan B16). R: `morie_collider_arrest()`.
+- Progress 2026-10-12 (veil of darkness): `Research.P2.Veil` (P2Veil.lean). In the
+  inter-twilight window the same people drive in light and dark, so with latent exposures E_g,
+  dark propensities r_g and visible-race factors (1 + δ_g) the ratio of daylight to darkness odds
+  against the reference is exactly (1 + δ_g)/(1 + δ_ref) (`odds_ratio_identifies_bias`): the
+  relative bias is point-identified, its sign is the sign of the daylight-minus-darkness share
+  difference (`share_sign`), a differential shift of who drives by light condition is
+  observationally a bias (`exposure_shift_confounds`), and a common scale of both factors is
+  invisible (`bias_not_absolute`). R: `morie_veil_of_darkness()`; Python `veil_of_darkness()`.
+  Open: the Toronto stops application with a stated mobility proxy.
 
 ## P3. Causal effects of policing under interference and displacement
 
@@ -198,6 +218,11 @@ spillover.
   lambda_2 >= h^2/2 is not proved. R: `morie_cheeger_bound()` (conductance, test
   Rayleigh quotient, lambda_2 of the normalised Laplacian, exhaustive h_G on
   small graphs); the test rebuilds every identity on random weighted graphs.
+- Recorded 2026-10-12: the Horvitz–Thompson variance and its unbiased estimator were proved on
+  2026-10-02 (P3Variance.lean: `ht_variance`, `ht_variance_estimator_unbiased`, positivity of the
+  joint exposure probabilities as the design condition; `morie_spillover_ht_variance()`). Still
+  open: the Cheeger hard direction λ₂ ≥ h²/2, the ring mis-specification bound, the TPS
+  street-segment application.
 
 ## P4. Predictive policing feedback: when does the loop run away?
 
@@ -252,6 +277,10 @@ or of the initial condition?
   source for it, see LIBRARY-SCAN-2026-09-21.md C1–C3), the Azuma drift
   envelope, and the a.s. convergence statement itself (needs Mathlib's
   martingale convergence on a genuine filtered space).
+- Recorded 2026-10-12: the rate bound x_N − x₀ ≤ ((λA − λB)/4) Σ_{k<N} 1/(c₀ + kλmin) was proved
+  on 2026-10-02 (P4Rate.lean: `naiveShare_rate_bound`, `naiveTotal_ge`,
+  `not_summable_shifted_harmonic`). Still open: the unequal-rate urn limit, the drift envelope,
+  the a.s. convergence statement.
 
 ## P5. Recidivism prediction under label bias: what can be certified?
 
@@ -353,6 +382,16 @@ would.
   one-type curve. Next: panel identifiability under a separation
   condition (finite mixture of Poisson trajectories) and the invariance
   test with a proved null.
+- Progress 2026-10-12 (panel): `Research.P6.Panel` (P6Panel.lean). With two ages observed on
+  the same individuals and counts conditionally independent given type, the cross-age
+  covariance is the covariance of the type rates, Σ_k w_k (λ_k(a) − m_a)(λ_k(b) − m_b)
+  (`cross_moment_eq`), zero for one type (`one_type_cov_zero`: the null of the invariance test,
+  exactly), w₁w₂(λ₁(a) − λ₂(a))(λ₁(b) − λ₂(b)) for two (`two_type_cov`); the P6AgeCrime witness
+  has the one-type aggregate and covariance −1 (`panel_separates_witness`), which the aggregate
+  cannot see (`aggregate_blind`). The separation condition is that the types differ at both ages.
+  R: `morie_age_crime_type_cov()` and `morie_age_crime_panel_cov()` (sample covariance with an
+  exact one-type permutation null); Python `age_crime_type_cov()`, `age_crime_panel_cov()`.
+  Open: the full identifiability of K types from T periods (Teicher-type), a cohort application.
 
 ## P7. The law of crime concentration: how much is chance?
 
@@ -402,6 +441,14 @@ counts are sparse relative to units.
   logarithmic growth, so polynomial growth of distinct addresses rejects a
   concentration-only mechanism (library scan C13). R:
   `morie_concentration_distinct_growth()` with a log-log slope diagnostic.
+- Progress 2026-10-12 (null bound): `Research.P7.Bound` (P7Bound.lean). For any count vector
+  the Gini index is at most √(v/2)/x̄, the coefficient of variation over √2 (`gini_le_cv`, by
+  Cauchy–Schwarz over the n² pairs and `pair_sq_identity` ΣΣ(x_i − x_j)² = 2nΣ(x_i − x̄)²), so
+  under a Poisson null (variance = mean) the Gini is at most about 1/√(2x̄): the amount of
+  concentration chance can show is a closed-form function of the mean count. R:
+  `morie_concentration_null_bound()` (the bound plus the simulated Poisson-null distribution and a
+  p-value); Python `concentration_null_bound()`. Open: the exact expected null Gini, the
+  rank-persistence null, the Toronto application.
 
 ## P8. Deterrence: certainty, severity and celerity cannot be varied alone
 
@@ -431,6 +478,15 @@ model. Identification is the unsolved part.
   `morie_deterrence_design_check` (rank of (1,p,s,c) and per-dimension
   identification). Next: the nonlinear expected-cost response with
   discounting, and the instrument condition for one dimension.
+- Progress 2026-10-12 (expected cost, instrument): `Research.P8.Instrument` (P8Instrument.lean).
+  log(p s e^{−ρc}) = log p + log s − ρc (`logcost_linear`), so the expected-cost response with a
+  common elasticity is linear in the log design and the celerity-to-certainty coefficient ratio
+  is −ρ (`ratio_is_discount`); identification is P8Deterrence's rank condition on the transformed
+  design. With y = α + βp + u and an instrument z, cov(z, u) = 0 and cov(z, p) ≠ 0 give
+  β = cov(z, y)/cov(z, p) on the finite population (`wald_identifies`), and without relevance
+  every slope yields the same instrument covariance (`wald_undefined`). R:
+  `morie_deterrence_logcost()`, `morie_wald_iv()` (the test matches two-stage least squares);
+  Python `deterrence_logcost()`, `wald_iv()`.
 
 ## Order of attack
 
@@ -549,6 +605,15 @@ cluster size, the stationary rate and the share of "contagious" events.
   and continuity of f' give a fixed point below one when m > 1
   (`one_sub_pgf_ge`, `supercritical_extinction_lt_one`). R: `morie_contagion_extinction()`;
   Python `contagion_extinction()`.
+- Progress 2026-10-12 (Bartlett, second moments): `Research.P10.Moments` (P10Moments.lean).
+  Two count laws on {0,1,2,3}, p = (1/2, 0, 1/2, 0) and q = (1/3, 1/2, 0, 1/6), have the same
+  mean and variance (`witness_same_mean`, `witness_same_second_moment`), dispersion index one in
+  both (`witness_dispersion_one`), and differ at zero (`witness_distinct`); hence no function of
+  the first two moments — a dispersion index, a K-function's cell summary — separates them
+  (`second_moments_do_not_identify`). This is the finite core of Bartlett's result that contagion
+  and heterogeneity share second moments. R: `morie_contagion_moment_witness()`; Python
+  `contagion_moment_witness()`. Open: the K-function statement on a spatial process, the TPS
+  break-and-enter application.
 
 
 ## P11. Sentencing effects as intervals: what observational data can say before assumptions
@@ -703,6 +768,13 @@ legal factors" and an "unexplained" remainder read as disparity or discriminatio
   (`decomposition`). R: `morie_dfl_reweight()`; Python `dfl_reweight()`.
 - Open: the distributional (recentered-influence-function) versions; an application to
   OTIS sentence lengths by offence score.
+- Progress 2026-10-12 (RIF): `Research.P15.RIF` (P15RIF.lean). On a finite weighted population
+  the RIF of the mean averages to the mean (`rif_mean_avg`); the RIF of the τ-quantile at a point q
+  with density f averages to q + (τ − F(q))/f (`rif_quantile_avg`), equal to q exactly when
+  F(q) = τ (`rif_quantile_avg_eq_iff`); the gap of two groups' RIF means is the quantile gap plus
+  the two recentering terms (`rif_gap`), so the P15 split applied to RIF means is a split of the
+  quantile gap. R: `morie_rif_quantile()`, `morie_rif_gap()`; Python `rif_quantile()`, `rif_gap()`.
+  Open: the OTIS sentence-length application.
 
 ## P16. Court backlog: what a disposition-time statistic already says
 
@@ -804,3 +876,10 @@ the selected set for exactly this reason (Sherman & Weisburd 1995).
   (`predicted_fall`), the size the sign theorem left open. R: `morie_hotspot_shrinkage()`,
   `morie_shrinkage_loss()`; Python `hotspot_shrinkage()`, `shrinkage_loss()`.
 - Open: the sampling error of B* itself (S_theta is estimated from the same counts).
+- Progress 2026-10-12 (error of B*): `Research.P19Error` (P19Error.lean). Under the noise law the
+  total mass of the counts is S_e + S_θ (`Sy_eq`), so B* = S_e/S_y (`bstar_from_total`); the
+  plug-in B̂ = S_e/Ŝ_y is off by S_e(S_y − Ŝ_y)/(S_yŜ_y) (`bhat_error`), at most
+  B*|Ŝ_y − S_y|/Ŝ_y (`bhat_error_bound`), the predicted fall inherits the error times the place's
+  excess (`fall_error`), and B̂ falls as Ŝ_y rises (`bhat_antitone`). R:
+  `morie_shrinkage_factor_error()` (jackknife spread of Ŝ_y, the implied interval for B̂, the exact
+  error when the total is known); Python `shrinkage_factor_error()`.

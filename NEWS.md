@@ -1,5 +1,20 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* Research ledger, eight more items closed with machine-checked proofs (`research/lean`, now 64
+  files, 312 audited theorems, 0 sorry): the veil-of-darkness odds ratio is the relative
+  visible-race factor and a sign test (`morie_veil_of_darkness()`); the three-list never-listed
+  cell under no three-way interaction and its exp(-t) sensitivity
+  (`morie_dark_figure_no_interaction()`); the error of the plug-in shrinkage factor
+  (`morie_shrinkage_factor_error()`); the Gini is at most the coefficient of variation over
+  sqrt(2), so a Poisson null caps it at about 1/sqrt(2 mean) (`morie_concentration_null_bound()`);
+  the expected-cost deterrence response is linear in the log design with the discount as a
+  coefficient ratio, and the Wald ratio identifies one dimension under exclusion and relevance
+  (`morie_deterrence_logcost()`, `morie_wald_iv()`); the quantile RIF averages to the quantile
+  exactly at the sample quantile and carries the gap (`morie_rif_quantile()`, `morie_rif_gap()`);
+  two count laws with equal mean and variance but different zero mass, the second-moment core of
+  Bartlett's non-identification (`morie_contagion_moment_witness()`); the cross-age covariance of
+  a type mixture that the aggregate age-crime curve cannot see (`morie_age_crime_type_cov()`,
+  `morie_age_crime_panel_cov()`).
 * `morie_weightit()`: balancing weights under WeightIt's method names with no call into it,
   for binary, multi-category and continuous treatments: `"glm"` (any binomial link; maximum
   likelihood, Firth, ridge, lasso, elastic net; multinomial or cumulative-link; the
