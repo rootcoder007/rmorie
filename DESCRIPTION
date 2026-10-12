@@ -132,6 +132,7 @@ Suggests:
     httr2,
     igraph,
     iml,
+    insight,
     ipred,
     irr,
     ivreg,
