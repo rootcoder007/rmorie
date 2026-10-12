@@ -34,27 +34,17 @@ morie_survey_variances(
 
 \item{xbar_d, beta_hat, v_d}{Small-area pieces.}
 
-\item{times}{See Usage.}
+\item{times}{Trend.}
 
 \item{x, c_mat, zhat}{GLS pieces.}
 
 \item{beta0, beta1, x_val}{Model 16.1.}
 
-\item{beta1}{See Usage.}
-
-\item{x_val}{See Usage.}
-
 \item{x_design, z_obs}{OLS pieces.}
 
 \item{sigma2_eps, x0}{Prediction var.}
 
-\item{x0}{See Usage.}
-
 \item{c_hat, c_true, u}{Classification pieces.}
-
-\item{beta0}{See Usage.}
-
-\item{sigma2_eps}{See Usage.}
 }
 \value{
 List of the requested quantities.

@@ -17,17 +17,17 @@ morie_logistic_wald(
 \arguments{
 \item{b1}{Coefficient.}
 
-\item{var_b1}{See Usage.}
+\item{var_b1}{Its variance.}
 
-\item{c}{See Usage.}
+\item{c}{Unit change.}
 
 \item{z}{Critical value.}
 
-\item{xs}{See Usage.}
+\item{xs}{Covariate vector (leading 1).}
 
 \item{cov}{Coefficient covariance.}
 
-\item{xb}{See Usage.}
+\item{xb}{Linear predictor value.}
 }
 \value{
 List with or, or_lower, or_upper, var_xb, pi, pi_lower, pi_upper.

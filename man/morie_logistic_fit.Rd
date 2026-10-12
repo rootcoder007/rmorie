@@ -9,7 +9,7 @@ morie_logistic_fit(x, y, b = NULL)
 \arguments{
 \item{x}{Design matrix (with intercept column).}
 
-\item{y}{See Usage.}
+\item{y}{0/1 response.}
 
 \item{b}{Coefficients (fit by Newton-Raphson when NULL).}
 }

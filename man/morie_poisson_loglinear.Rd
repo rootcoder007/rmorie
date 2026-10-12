@@ -27,15 +27,9 @@ morie_poisson_loglinear(
 
 \item{b0, bs, xs}{Log link.}
 
-\item{bs}{See Usage.}
-
-\item{xs}{See Usage.}
-
 \item{exposure}{Rate-model exposure t.}
 
 \item{beta_x_i, beta_z_j, }{beta_xz_ij Loglinear cell parameters.}
-
-\item{beta_z_j}{See Usage.}
 
 \item{beta_xz_ij}{See Usage.}
 
@@ -43,10 +37,6 @@ morie_poisson_loglinear(
 odds ratio of eq 4.7.}
 
 \item{beta_z_jp, beta_xz_i, s_j, s_jp}{Ordinal-score ratio pieces.}
-
-\item{b0}{See Usage.}
-
-\item{beta_x_i}{See Usage.}
 }
 \value{
 List with score_ci, mu, mu_rate, mu_cell, or_loglinear,

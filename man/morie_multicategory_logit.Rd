@@ -22,19 +22,15 @@ morie_multicategory_logit(
 
 \item{bjs, xs}{Slope and covariate vectors.}
 
-\item{xs}{See Usage.}
-
 \item{logits_2_to_j}{Baseline logits for categories 2..J.}
 
 \item{cum_probs}{Cumulative probabilities excluding P(Y <= J) = 1.}
 
 \item{j}{Category index.}
 
-\item{polr}{See Usage.}
+\item{polr}{If TRUE negate the slopes.}
 
 \item{pi_hat, var_pi, z}{Wald pieces.}
-
-\item{bjs}{See Usage.}
 }
 \value{
 List with logit, probs, pi_j, wald (as supplied).

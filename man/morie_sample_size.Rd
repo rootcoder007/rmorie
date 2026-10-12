@@ -33,19 +33,11 @@ pieces.}
 
 \item{design_effect, n_si}{Design-effect pieces.}
 
-\item{n_si}{See Usage.}
-
 \item{p, z, n, c, d}{Beta posterior pieces.}
 
 \item{v, l}{Interval pieces.}
 
-\item{l}{See Usage.}
-
 \item{lengths, probs, coverages, alpha}{ALC/ACC pieces.}
-
-\item{design_effect}{See Usage.}
-
-\item{v}{See Usage.}
 }
 \value{
 List with the requested sample sizes and criteria.

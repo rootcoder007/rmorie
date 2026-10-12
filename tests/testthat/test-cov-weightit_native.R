@@ -198,13 +198,24 @@ test_that("continuous-treatment weights are the ratio of two residual densities"
   fit <- stats::lm(a ~ x1 + x2, data = d, weights = sw)
   m <- unname(stats::fitted(fit))
   expect_equal(r$fitted, m, tolerance = 1e-8)
-  zn <- (d$a - mean(sw * d$a)) / sqrt(mean(sw * (d$a - mean(sw * d$a))^2))
-  zd <- (d$a - m) / sqrt(mean(sw * (d$a - m)^2))
-  expect_equal(r$w, stats::dnorm(zn) / stats::dnorm(zd), tolerance = 1e-8)
-  expect_equal(wc(X, d$a, d$sw, density = "laplace")$w, exp(-abs(zn) + abs(zd)), tolerance = 1e-8)
-  expect_equal(wc(X, d$a, d$sw, density = "t_5")$w, stats::dt(zn, 5) / stats::dt(zd, 5), tolerance = 1e-8)
-  expect_equal(wc(X, d$a, d$sw, density = function(x) stats::dnorm(x, sd = 2))$w,
-               stats::dnorm(zn, sd = 2) / stats::dnorm(zd, sd = 2), tolerance = 1e-8)
+  # WeightIt 2.x: the denominator is the density of the standardised residual; the numerator is
+  # the marginal density of a, the sampling-weighted mixture of the conditional densities on a
+  # 50-point grid of a, splined at the observed values
+  s <- sqrt(mean(sw * (d$a - m)^2))
+  zd <- (d$a - m) / s
+  grid <- seq(min(d$a), max(d$a), length.out = 50L)
+  marginal <- function(f) {
+    num <- vapply(grid, function(g) sum(sw * f((g - m) / s)) / sum(sw), numeric(1))
+    stats::spline(grid, num, xout = d$a)$y
+  }
+  expect_equal(r$w, marginal(stats::dnorm) / stats::dnorm(zd), tolerance = 1e-8)
+  lap <- function(z) exp(-abs(z)) / 2
+  expect_equal(wc(X, d$a, d$sw, density = "laplace")$w, marginal(lap) / lap(zd), tolerance = 1e-8)
+  t5 <- function(z) stats::dt(z, 5)
+  expect_equal(wc(X, d$a, d$sw, density = "t_5")$w, marginal(t5) / t5(zd), tolerance = 1e-8)
+  n2 <- function(z) stats::dnorm(z, sd = 2)
+  expect_equal(wc(X, d$a, d$sw, density = function(x) stats::dnorm(x, sd = 2))$w, marginal(n2) / n2(zd),
+               tolerance = 1e-8)
   expect_silent(k <- wc(X, d$a, d$sw, density = "kernel")$w)
   expect_true(all(is.finite(k) & k > 0))
   k2 <- wc(X, d$a, d$sw, density = "kernel", bw = 0.5, adjust = 2)$w

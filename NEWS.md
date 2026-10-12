@@ -11,6 +11,10 @@
   concentration against the Poisson null, break-and-enter over-dispersion and per-neighbourhood
   Hawkes fits, the OTIS gender gap in placement lengths split by DFL and RIF, the neighbourhood
   contiguity graph as the interference design), the rest listed as open with the reason;
+  `morie_weightit()` for a continuous treatment follows WeightIt 2.x: the marginal density in the
+  numerator is the sampling-weighted mixture of the conditional densities on a grid of the
+  treatment, splined at the observed values (the 1.x normal marginal gave weights 7 to 10 percent
+  larger); ten help pages carried "See Usage" placeholders beside the documented argument;
   `morie_logit_separation()` now settles complete versus quasi-complete separation by a second
   programme that maximises the smallest margin, so a vertex of the first programme sitting on a
   zero margin no longer reports completely separated data as quasi-complete; about 25 help pages

@@ -18,7 +18,7 @@ morie_spline_logit(
 \arguments{
 \item{x}{Evaluation point.}
 
-\item{knot}{See Usage.}
+\item{knot}{Single-knot piecewise pieces.}
 
 \item{coef_left, coef_right}{Cubic coefficients per side.}
 

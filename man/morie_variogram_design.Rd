@@ -28,34 +28,14 @@ morie_variogram_design(
 \item{a, da_list}{REML
 pieces.}
 
-\item{da_list}{See Usage.}
-
 \item{cov_theta, dv_dtheta}{VKV pieces.}
-
-\item{dv_dtheta}{See Usage.}
 
 \item{v_ok, e_tau2}{AKV
 pieces.}
 
-\item{e_tau2}{See Usage.}
-
 \item{dlam_dtheta, a_mat}{Tau2 pieces.}
 
-\item{a_mat}{See Usage.}
-
 \item{akv, vkv}{EAC.}
-
-\item{vkv}{See Usage.}
-
-\item{a}{See Usage.}
-
-\item{cov_theta}{See Usage.}
-
-\item{v_ok}{See Usage.}
-
-\item{dlam_dtheta}{See Usage.}
-
-\item{akv}{See Usage.}
 }
 \value{
 List with nested, fisher_info, vkv, akv, e_tau2, eac.

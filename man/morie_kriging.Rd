@@ -25,23 +25,11 @@ morie_kriging(
 
 \item{sigma2, lam, nu}{Variance pieces.}
 
-\item{lam}{See Usage.}
-
-\item{nu}{See Usage.}
-
-\item{gamma_s0}{See Usage.}
+\item{gamma_s0}{Semivariance form pieces.}
 
 \item{h, c0, c1, phi}{Semivariogram pieces.}
 
 \item{z, mu, cov}{Likelihood.}
-
-\item{mu}{See Usage.}
-
-\item{cov}{See Usage.}
-
-\item{sigma2}{See Usage.}
-
-\item{z}{See Usage.}
 }
 \value{
 List with lam, nu, v_ok_cov, v_ok_gamma, gamma_h, loglik.

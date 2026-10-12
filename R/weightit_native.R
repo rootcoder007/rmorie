@@ -369,29 +369,39 @@
 }
 
 # the stabilised generalised-propensity weight f(A) / f(A | X), both
-# densities of standardised residuals (WeightIt's method_glm, continuous)
-.wn_w_continuous <- function(X, a, sw, link = "identity", density = "normal", bw = "nrd0", adjust = 1) {
+# WeightIt's method_glm for a continuous treatment (2.x): the denominator is the density of the
+# standardised residual (a - mu) / s with s the weighted root mean square residual; the numerator
+# is the marginal density of the treatment estimated as the sampling-weighted mixture of the
+# conditional densities, evaluated on a grid of the treatment and splined at the observed values
+# (.get_w_from_gps_internal_cont). The 1.x form, a normal marginal from the treatment's own
+# mean and variance, gave weights 7-10 percent larger and no longer matches the package.
+.wn_w_continuous <- function(X, a, sw, link = "identity", density = "normal", bw = "nrd0", adjust = 1,
+                             n_grid = 50L) {
   sw <- sw / mean(sw)
   fam <- stats::gaussian(link = link)
   fit <- stats::glm.fit(cbind(1, X), a, weights = sw, family = fam)
   m <- fit$fitted.values
-  un_p <- mean(sw * a)
-  un_s2 <- mean(sw * (a - un_p)^2)
-  s2 <- mean(sw * (a - m)^2)
-  zn <- (a - un_p) / sqrt(un_s2)
-  zd <- (a - m) / sqrt(s2)
-  if (identical(density, "kernel")) {
-    kd <- function(z) {
-      # the bandwidth rule is applied to the sample itself (density() would
-      # warn that it ignores the weights for the rule)
-      b <- if (is.character(bw)) get(paste0("bw.", bw), envir = asNamespace("stats"))(z) else bw
-      d <- stats::density(z, n = 10L * length(z), weights = sw / sum(sw), bw = b, adjust = adjust)
-      log(stats::approxfun(d$x, d$y)(z))
-    }
-    return(list(w = exp(kd(zn) - kd(zd)), fitted = m))
+  r <- a - m
+  s <- sqrt(mean(sw * r^2))
+  zd <- r / s
+  grid <- seq(min(a), max(a), length.out = n_grid)
+  zg <- outer(grid, m, "-") / s   # grid points x units, standardised
+  dens <- if (identical(density, "kernel")) {
+    # the bandwidth rule is applied to the sample itself (density() would warn that it ignores
+    # the weights for the rule); the estimate covers the grid's range, as WeightIt's does
+    b <- if (is.character(bw)) get(paste0("bw.", bw), envir = asNamespace("stats"))(zd) else bw
+    d <- stats::density(zd, weights = sw / sum(sw), n = 512L, bw = b, adjust = adjust,
+                        from = min(zg), to = max(zg))
+    stats::approxfun(d$x, d$y)
+  } else {
+    f <- .wn_density(density)
+    function(z) exp(f(z))
   }
-  f <- .wn_density(density)
-  list(w = exp(f(zn) - f(zd)), fitted = m)
+  dd <- dens(zd)
+  dg <- matrix(dens(as.vector(zg)), nrow = length(grid))
+  num_grid <- as.numeric(dg %*% sw) / sum(sw)
+  dn <- stats::spline(grid, num_grid, xout = a)$y
+  list(w = dn / dd, fitted = m)
 }
 
 # ---- balance terms ------------------------------------------------------------------

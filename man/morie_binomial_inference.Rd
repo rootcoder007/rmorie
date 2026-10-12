@@ -9,9 +9,9 @@ morie_binomial_inference(w, n, p = NA, z = 1.96, interval_fn = NULL)
 \arguments{
 \item{w}{Successes.}
 
-\item{n}{See Usage.}
+\item{n}{Trials.}
 
-\item{p}{See Usage.}
+\item{p}{Probability.}
 
 \item{z}{Normal critical value.}
 
