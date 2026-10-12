@@ -59,7 +59,10 @@ test_that("GroupLens correlates over co-rated items only and predicts from devia
   expect_equal(fb$n_neighbours, 0L)
   expect_error(pr(numeric(), others, "i5"), "rated nothing")
   expect_match(.ts(".ucfR_cheatsheet")(), "^ucfR: people who agreed before")
-  expect_identical(morie_ucfR$user_based_cf, .ts(".ucfR_predict_rating"))
+  # the registry entry is that function: compared by what it returns (coverage rewrites the
+  # namespace copy's body and leaves the list's copy as it was loaded)
+  expect_identical(formals(morie_ucfR$user_based_cf), formals(.ts(".ucfR_predict_rating")))
+  expect_equal(morie_ucfR$user_based_cf(ra, others, "i5"), r2)
 })
 
 test_that("the sample-effect TMLE keeps the point estimate and narrows the interval by the conditional-effect variance", {
