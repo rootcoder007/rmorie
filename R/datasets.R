@@ -413,7 +413,13 @@
     body <- r$body
     if (isTRUE(r$status_code >= 400L)) {
       err <- tryCatch(.morie_from_json(body, simplifyVector = FALSE), error = function(e) NULL)
-      msg <- if (is.list(err)) as.character(err$message %||% err$error$message %||% err$error %||% "")[1L] else ""
+      # the message sits at $message, at $error$message, or $error is the message itself
+      msg <- if (is.list(err)) {
+        inner <- err$error
+        as.character(err$message %||% (if (is.list(inner)) inner$message else inner) %||% "")[1L]
+      } else {
+        ""
+      }
       stop(sprintf("HTTP %d from %s%s", as.integer(r$status_code),
                    sub("^[a-z]+://([^/:?#]+).*$", "\\1", full_url),
                    if (length(msg) && !is.na(msg) && nzchar(msg)) paste0(": ", msg) else ""),
