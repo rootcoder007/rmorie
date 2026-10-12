@@ -178,6 +178,14 @@ is stated in the ledger entry of its problem.
 | 9 | A1 + A2 + A5 | logit separation, LDA, KHB rescaling (filed under P5, "what a coefficient means") | `P5Separation`, `P5Rescale`, `P5Compare` | `morie_logit_separation()`, `morie_khb_rescale()` |
 | 10 | C8 + A16, B20 | hot-spot threshold of the reaction-diffusion model; Bartlett non-identification | `P4Hotspot` (steady state, dispersion relation, threshold), `P10Moments` (Bartlett) | `morie_hotspot_threshold()`, `morie_contagion_moments()` |
 | 11 | A14 | the recording rate is identified only on the survey-comparable subset; the dark figure's interval for the rest | `P1Comparable` | `morie_dark_figure_comparable()` |
+| 12 | A4 | attenuation is a one-regressor fact; two regressors give the error-free coefficient a bias of either sign | `P5Attenuation` | `morie_attenuation_two_regressor()` |
+| 13 | C2 + C4 + C7 | P4 Friedman urn (deterministic limit 1/2), de Moivre ruin probability, attractiveness contraction and feedback gain | `P4Friedman`, `P4Ruin`, `P4Contraction` | `morie_friedman_urn()`, `morie_ruin_probability()`, `morie_attractiveness_contraction()` |
+| 14 | C12 + B24 | P7 Cox overdispersion (Var N = E N + Var Λ); Vuong's test at the ZIP boundary | `P7Cox` | `morie_cox_overdispersion()`, `morie_zip_vuong_boundary()` |
+| 15 | B10 | P1 nonresponse region of width exactly 1 − r | `P1Nonresponse` | `morie_nonresponse_region()` |
+| 16 | B12 + A18 + C24 | P8 instrumental inequality; the inspection game has a conserved quantity, so it cycles | `P8IVInequality`, `P8Inspection` | `morie_instrumental_inequality()`, `morie_inspection_game()` |
+| 17 | B14 | P2 binary misclassification attenuates by (se + sp − 1)π(1 − π)/(d₁d₀); ordinal reversal witness | `P2Misclassification` | `morie_misclassified_rd()`, `morie_misclassified_contrast()` |
+| 18 | B18 | P11 amplification: one Γ is the curve Δ = (ΛΓ − 1)/(Λ − Γ) | `P11Amplification` | `morie_sensitivity_amplification()` |
+| 19 | A10 + B9 + B8 | P3 design effect is direction-specific, ICC ≥ −1/(M − 1); Basu's elephant | `P13Design`, `P3Basu` | `morie_design_effect_direction()`, `morie_ht_elephant()` |
 
 Item 10's reaction-diffusion part (C8) was the last to land (2026-10-12): the unique homogeneous
 steady state B̄ = εDγ/ω, ρ̄ = γ/Ā; the mode-k determinant P k² − Q k + R with P = ηD²/z,
@@ -188,3 +196,9 @@ and Q² > 4PR. The amplitude (sub/supercritical) half of A16 is not formalised.
 
 Item 11 (A14) and the convergence half of item 1 landed on 2026-10-12 with the NCVS data (ICPSR
 38604): `research/applications/ncvs_victimisation.R` applies P1, A14, P7 and P10 to it.
+
+Items 12-19 landed on 2026-10-12 (second batch of the scan): twelve Lean files, 57 audited
+theorems (434 in all over 83 files, 0 sorry), the R functions in `R/ledger_scan.R` with
+`tests/testthat/test-ledger-scan.R`, and the Python ports in `morie.research.library_scan` with
+parity tests. Still unformalised: A6, A7, A8, A9, A19, A24, A25, B11, B17, B19, B21, C9, C11, C15,
+C17, C18, C20, C21, C22, C23.

@@ -69,3 +69,15 @@ import Researchproofs.P7Persistence
 import Researchproofs.P4Hotspot
 import Researchproofs.P1Comparable
 import Researchproofs.P4Martingale
+import Researchproofs.P5Attenuation
+import Researchproofs.P4Friedman
+import Researchproofs.P4Ruin
+import Researchproofs.P7Cox
+import Researchproofs.P1Nonresponse
+import Researchproofs.P8IVInequality
+import Researchproofs.P2Misclassification
+import Researchproofs.P11Amplification
+import Researchproofs.P13Design
+import Researchproofs.P3Basu
+import Researchproofs.P4Contraction
+import Researchproofs.P8Inspection

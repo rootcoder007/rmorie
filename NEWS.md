@@ -1,5 +1,15 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* Research ledger, the second library-scan batch (12 Lean files, 57 audited theorems; 434
+  theorems over 83 files, 0 sorry) with R functions and tests in `R/ledger_scan.R`:
+  `morie_attenuation_two_regressor()` (A4), `morie_friedman_urn()` (C2),
+  `morie_ruin_probability()` (C4), `morie_cox_overdispersion()` and `morie_zip_vuong_boundary()`
+  (C12, B24), `morie_nonresponse_region()` (B10), `morie_instrumental_inequality()` (B12),
+  `morie_misclassified_rd()` and `morie_misclassified_contrast()` (B14),
+  `morie_sensitivity_amplification()` (B18), `morie_design_effect_direction()` (A10, B9),
+  `morie_ht_elephant()` (B8), `morie_attractiveness_contraction()` (C7) and
+  `morie_inspection_game()` (A18, C24). Each function carries the theorem it computes from as
+  its `theorem` attribute.
 * Victimisation data and the applications that waited for it: the NCVS 1992-2022 concatenated
   file (ICPSR 38604; incident, person and household files, the person and household files in two
   year ranges each) is served at data.rmorie.com as `ncvs_38604/*` with the ICPSR codebooks, user

@@ -110,6 +110,11 @@ assumptions the dark figure is an interval, not a point.
   0.318 (property), 0.230 (personal theft); every recorded offence outside the survey's reach
   widens the dark-figure interval by 3.8, 5.3 and 7.7 at lambda = 1/2. The FBI count R_B is not
   held, so the factor is reported, not the interval.
+- Progress 2026-10-12 (nonresponse, library scan B10): `Research.P1.Nonresponse`
+  (P1Nonresponse.lean). With reporting rate r and observed share p_obs among reporters, the
+  proportion lies in [r p_obs, r p_obs + 1 − r], both ends attained (`region_sharp`), of width
+  exactly 1 − r (`region_width`); at Mexico's 10.6 percent reporting rate the region is 0.894
+  wide. R: `morie_nonresponse_region()`; Python `nonresponse_region()`.
 
 ## P2. Selection in police-recorded data: the record is the treatment
 
@@ -185,6 +190,14 @@ field has no agreed estimand, let alone estimator.
   Open: the Toronto stops application with a stated mobility proxy.
 - Noted 2026-10-12: the public TPS Regulated Interactions table is counts by year and category
   only (no time of day, no group), so the veil-of-darkness application cannot be run from it.
+- Progress 2026-10-12 (misclassification, scan B14): `Research.P2.Misclassification`
+  (P2Misclassification.lean). Nondifferential misclassification of a binary exposure gives
+  RD* = (se + sp − 1) RD π(1 − π)/(d₁d₀) with d₁, d₀ the measured group shares
+  (`binary_attenuation`), so the sign is kept whenever se + sp ≥ 1 (`binary_sign`); a
+  three-level exposure with a non-monotone map has measured contrast 0 (`ordinal_witness`) or
+  the opposite sign (`ordinal_reversal`), so the attenuation theorem is a binary theorem. R:
+  `morie_misclassified_rd()`, `morie_misclassified_contrast()`; Python `misclassified_rd()`,
+  `misclassified_contrast()`.
 
 ## P3. Causal effects of policing under interference and displacement
 
@@ -269,6 +282,17 @@ spillover.
   π_i (the exposure probabilities with the larger ring), so the bias of a d-ring analysis is a
   number before any outcome is seen. R: `morie_spillover_ring_bound()`; Python
   `spillover_ring_bound()`. Still open: the Cheeger hard direction and the street-segment data.
+- Progress 2026-10-12 (Basu's elephant, scan B8; design effect, scans A10 and B9):
+  `Research.P3.Basu` (P3Basu.lean): the Horvitz–Thompson total under independent inclusion has
+  mean Σt (`ht_mean`) and variance Σ t²(1 − π)/π (`ht_variance`); one unit with inclusion
+  probability t_e²/(2(B + t_e²)) alone exceeds any bound B (`elephant_unbounded`), while the
+  other units' contribution is bounded without reference to π_e (`ratio_bounded`).
+  `Research.P13.Design` (P13Design.lean): the exchangeable-covariance quadratic form is
+  (1 − ρ)Σx² + ρΣ_c(Σ_j x_cj)² (`quad_form`); a cluster-level regressor inflates the naive
+  variance by 1 + (M − 1)ρ (`cluster_level`), a within-cluster-balanced one deflates it by 1 − ρ
+  (`within_balanced`), and non-negativity at a one-cluster indicator (`quad_indicator`) forces
+  ρ ≥ −1/(M − 1) (`icc_lower_bound`). R: `morie_ht_elephant()`,
+  `morie_design_effect_direction()`; Python `ht_elephant()`, `design_effect_direction()`.
 
 ## P4. Predictive policing feedback: when does the loop run away?
 
@@ -310,7 +334,7 @@ or of the initial condition?
   true-rate proportion). Reports mitigate but do not remove the loop, and
   the size of the residual is now an explicit number. R:
   `morie_feedback_loop_limit(rho = ...)$cap`; test checks the cap on the
-  full trajectory. Still open: the stochastic urn (martingale) version.
+  full trajectory. The stochastic urn (martingale) version follows below.
 - Progress 2026-09-21 (stochastic): `Research.P4.Urn` (P4Urn.lean), on the
   finite path space: `urn_step_martingale` (the share is a martingale for
   any reinforcement), `polya_uniform` (equal rates, one count each: the
@@ -318,11 +342,10 @@ or of the initial condition?
   `polya_no_concentration` (P(1/4 ≤ share ≤ 3/4) ≥ 1/4 for all n ≥ 2). So
   "equal rates, no runaway" holds for the mean field and fails for the
   process: the share converges to a random limit (uniform on (0, 1)) fixed
-  by early luck. R: `morie_feedback_loop_urn_law()`. Still open: the
+  by early luck. R: `morie_feedback_loop_urn_law()`. The Azuma drift envelope
+  and the a.s. convergence statement landed on 2026-10-12 (below). Still open: the
   unequal-rate urn (a Rubin-type reinforcement theorem; the library has no
-  source for it, see LIBRARY-SCAN-2026-09-21.md C1–C3), the Azuma drift
-  envelope, and the a.s. convergence statement itself (needs Mathlib's
-  martingale convergence on a genuine filtered space).
+  source for it, see LIBRARY-SCAN-2026-09-21.md C1–C3).
 - Recorded 2026-10-12: the rate bound x_N − x₀ ≤ ((λA − λB)/4) Σ_{k<N} 1/(c₀ + kλmin) was proved
   on 2026-10-02 (P4Rate.lean: `naiveShare_rate_bound`, `naiveTotal_ge`,
   `not_summable_shifted_harmonic`).
@@ -358,6 +381,28 @@ or of the initial condition?
   P, Q, R, the two sides of the threshold, the critical wavenumber and its growth rate, a
   dispersion table). Still open: the amplitude equation that decides whether the bifurcation
   is subcritical (A16's second half), and the stochastic items above.
+- Progress 2026-10-12 (Friedman urn, scan C2): `Research.P4.Friedman` (P4Friedman.lean).
+  Under cross-colour reinforcement (B − R)(B + R − 1) is a martingale (`friedman_step`) and
+  E[D_{n+1}] = E[D_n](1 − 1/T_n) (`difference_step`, `meanDiff_succ`), so
+  E[D_n] = D₀(T₀ − 1)/(T₀ + n − 1) → 0 (`difference_mean_tendsto`) and the mean share tends to
+  1/2 (`mean_share_tendsto_half`): same-colour reinforcement (P4Urn, P4Martingale) has a random
+  limit, cross-colour reinforcement a deterministic one. R: `morie_friedman_urn()`; Python
+  `friedman_urn()`.
+- Progress 2026-10-12 (absorption, scan C4): `Research.P4.Ruin` (P4Ruin.lean). With ρ = q/p,
+  pρ^{k+2} + qρ^k = ρ^{k+1} (`deMoivre_step`, the de Moivre martingale), and
+  p_k = (ρ^k − ρ^N)/(1 − ρ^N) solves the harmonic equation with p₀ = 1, p_N = 0
+  (`ruin_harmonic`, `ruin_boundary`) together with the optional-stopping identity
+  ρ^k = p_k + (1 − p_k)ρ^N (`optional_stopping_identity`); at p = 1/2 the formula is 0/0 and
+  1 − k/N solves the same problem (`ruin_symmetric`), which is why optional stopping needs its
+  boundedness condition and not only the martingale property. R: `morie_ruin_probability()`;
+  Python `ruin_probability()`.
+- Progress 2026-10-12 (attractiveness contraction, scan C7): `Research.P4.Contraction`
+  (P4Contraction.lean). With no events the lattice update B' = (1 − ω)[(1 − η)B + ηSB]
+  contracts the sup norm by 1 − ω (`sup_contraction`, `decay`), doubly stochastic spreading
+  conserves the total so ΣB' = (1 − ω)ΣB (`spreading_conserves`, `update_total`), and the
+  uniform feedback mode grows iff ερ > ω/(1 − ω) (`feedback_gain`), the site form of
+  P4Hotspot's threshold. R: `morie_attractiveness_contraction()`; Python
+  `attractiveness_contraction()`.
 
 ## P5. Recidivism prediction under label bias: what can be certified?
 
@@ -441,6 +486,14 @@ biased is open.
   separated. The failure of overlap splits into separation proper and a rank-deficient design
   (a direction with every margin zero), which the R check reports separately.
   R: `morie_logit_separation()$mle_exists`.
+- Progress 2026-10-12 (attenuation, scan A4): `Research.P5.Attenuation` (P5Attenuation.lean).
+  Classical error on one regressor attenuates its slope by s₁₁/(s₁₁ + s_u²)
+  (`single_attenuation`); with a second, error-free regressor the population coefficients are
+  b₁ = β₁(s₁₁s₂₂ − s₁₂²)/D*, b₂ = β₂ + β₁s_u²s₁₂/D* (`normal_equations`,
+  `two_regressor_coeffs`), so the error-free coefficient is biased unless β₁, s_u² or s₁₂ is
+  zero (`error_free_biased_iff`) and the bias has the sign of β₁s₁₂ (`bias_sign`): "any
+  measurement error attenuates" is a one-regressor fact. R: `morie_attenuation_two_regressor()`;
+  Python `attenuation_two_regressor()`.
 
 ## P6. The age-crime curve: invariant law or mixture artefact?
 
@@ -569,6 +622,15 @@ counts are sparse relative to units.
   0.950, Gini among the victimised 0.23, dispersion 2.2; 1994 the same shape at twice the mean.
   The excess zeros and the dispersion are what the Poisson null cannot produce; the Gini among
   the victimised is the part of concentration that is not the zeros.
+- Progress 2026-10-12 (Cox overdispersion, scan C12; Vuong boundary, scan B24): `Research.P7.Cox`
+  (P7Cox.lean). For a finite mixture of Poissons Var N = E N + Var Λ (`total_variance`), so
+  Var N ≥ E N (`variance_ge_mean`) with equality iff the intensity is constant on the support
+  (`equality_iff_constant`): a Gini above the Poisson null is implied by any random intensity,
+  which is why `morie_concentration_decompose()` separates mixing from contagion. At π = 0 the
+  zero-inflated pmf is the Poisson pmf (`zip_zero_eq_poisson`), every pointwise log-likelihood
+  ratio is 0 (`llr_zero`) and Vuong's statistic is 0/0, not N(0, 1). R:
+  `morie_cox_overdispersion()`, `morie_zip_vuong_boundary()`; Python `cox_overdispersion()`,
+  `zip_vuong_boundary()`.
 
 ## P8. Deterrence: certainty, severity and celerity cannot be varied alone
 
@@ -607,6 +669,16 @@ model. Identification is the unsolved part.
   every slope yields the same instrument covariance (`wald_undefined`). R:
   `morie_deterrence_logcost()`, `morie_wald_iv()` (the test matches two-stage least squares);
   Python `deterrence_logcost()`, `wald_iv()`.
+- Progress 2026-10-12 (instrumental inequality, scan B12; inspection game, scans A18 and C24):
+  `Research.P8.IVInequality` (P8IVInequality.lean): for finite Z, X, Y with a latent confounder
+  independent of Z, Σ_y max_z P(y, x | z) ≤ 1 for every x (`instrumental_inequality`), so a
+  table that violates it refutes the instrument. `Research.P8.Inspection` (P8Inspection.lean):
+  the rock–paper–scissors replicator field has xᵀAx = 0 (`payoff_zero_sum`), keeps the simplex
+  (`simplex_invariant`), has the centroid as its only interior rest point
+  (`interior_fixed_point`, `only_interior_rest`) and conserves V = x₁x₂x₃ (`conserved`): the
+  interior rest point is a centre, orbits cycle, and more inspection does not monotonically
+  reduce crime. R: `morie_instrumental_inequality()`, `morie_inspection_game()`; Python
+  `instrumental_inequality()`, `inspection_game()`.
 
 ## Order of attack
 
@@ -668,6 +740,12 @@ Three readers went through the criminology, statistics and mathematics shelves o
   [max(0, a-b), min(a, 1-b)] with both ends attained and equals a-b under
   monotonicity, giving Pearl's PN bounds and the excess-risk-ratio
   identity (library scan B13). R: `morie_probability_of_necessity()`.
+
+Scan items closed by problem (2026-10-12; status table in LIBRARY-SCAN-2026-09-21.md): P1: B5, B6,
+B10, A14; P2: A21, A22, A23, B14; P3: B7, C16, B8, A10, B9; P4: C1, C2, C3, C4, C7, C8; P5: A1, A2,
+A4, A5; P7: B23, C12, B24; P8: B12, A18, C24; P9: A12, A15; P10: C5, C6, A17, B20; P11: B1, B2, B4,
+B18, B25. Not yet formalised: A6, A7, A8, A9, A19, A24, A25, B11, B17, B19, B21, C9, C11, C15, C17,
+C18, C20, C21, C22, C23.
 
 ## P9. Crime recording as a linear map: what counting rules can hide
 
@@ -794,6 +872,12 @@ Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
   overstates the effect (`mts_ate_le_naive`); with MTR as well the contrast lies in
   [0, naive difference] (`mtr_mts_bounds`). R: `morie_sentence_effect_mts()`; Python
   `sentence_effect_mts()`.
+- Progress 2026-10-12 (amplification, scan B18): `Research.P11.Amplification`
+  (P11Amplification.lean). Γ = (ΛΔ + 1)/(Λ + Δ) is symmetric, at least 1, at most min(Λ, Δ)
+  and non-decreasing in each argument (`symmetric`, `ge_one`, `le_min`, `mono_left`), and every
+  Γ ≥ 1 is the curve Δ = (ΛΓ − 1)/(Λ − Γ), Λ > Γ (`level_curve`): a sensitivity statement at Γ
+  is the same statement at every (Λ, Δ) on that curve. R: `morie_sensitivity_amplification()`;
+  Python `sensitivity_amplification()`.
 
 ## P12. Ecological inference: when group-level correlations say anything about people
 
