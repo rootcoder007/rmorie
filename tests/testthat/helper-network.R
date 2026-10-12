@@ -33,7 +33,7 @@ skip_if_no_network <- function(host = "8.8.8.8", port = NULL, timeout = 2) {
     expr,
     error = function(e) {
       msg <- conditionMessage(e)
-      if (grepl("non-JSON|HTTP fetch|empty body|upstream|503|502|504",
+      if (grepl("non-JSON|HTTP fetch|empty body|upstream|could not reach|timed? ?out|503|502|504",
                 msg, ignore.case = TRUE)) {
         testthat::skip(paste("Upstream service unhealthy:", msg))
       }
