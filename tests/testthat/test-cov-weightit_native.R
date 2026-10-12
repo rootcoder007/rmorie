@@ -427,7 +427,7 @@ test_that("morie_causal_weighting runs ebal for the ATE and ipt natively", {
 })
 
 test_that("the native engines agree with WeightIt where it is installed", {
-  skip_if_not_installed("WeightIt", "1.0.0")
+  skip_if_not_installed("WeightIt", "2.0.0")  # the 2.x continuous formula is the one implemented
   d <- .wn_data()
   cmp <- function(ours, theirs, tol = 1e-5) expect_equal(unname(ours), unname(as.numeric(theirs)), tolerance = tol)
   w <- WeightIt::weightit(t ~ x1 + x2, data = d, method = "glm", estimand = "ATE")
