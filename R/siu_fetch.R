@@ -688,15 +688,18 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
     if (is.null(fields)) next
     # A dead drid returns a page with no report body; require a date or a
     # service before treating it as a real report.
-    if (!nzchar(fields[["police_service"]]) &&
-        !nzchar(fields[["date_of_incident_iso"]])) next
+    # the parser's output is a named character vector: a name it does not carry (the
+    # pre-0.5.5 "number_of_subject_officers", a field a newer schema dropped) must read as
+    # absent, not as a subscript error that abandons the refresh
+    field <- function(k) if (k %in% names(fields)) fields[[k]] else ""
+    if (!nzchar(field("police_service")) && !nzchar(field("date_of_incident_iso"))) next
     row <- corpus[NA_integer_, , drop = FALSE][1, ]
     row$drid <- as.character(id)
     row$source_url_report <- sprintf(
       "https://www.siu.on.ca/en/directors_report_details.php?drid=%d", id)
     for (k in names(fmap)) {
-      v <- fields[[k]]
-      if (!is.null(v) && nzchar(v)) row[[fmap[[k]]]] <- v
+      v <- field(k)
+      if (!is.na(v) && nzchar(v)) row[[fmap[[k]]]] <- v
     }
     row$panel_reviewed <- FALSE
     new_rows[[length(new_rows) + 1L]] <- row

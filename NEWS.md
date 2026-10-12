@@ -17,6 +17,9 @@
   under 100 cells with the same message as the female formulations.
 * Dataset fetches: an HTTP error whose JSON body carries the message as the `error` string
   itself is reported with that message.
+* `morie_siu_reports(update = TRUE)`: a field name the parser does not emit (the pre-0.5.5
+  `number_of_subject_officers`) read as absent instead of a subscript error that abandoned
+  every newer report, so the refresh now appends them.
 * Tests cover the TPS hub wrappers without mocking, the advanced Hawkes drivers and their
   base-R fallbacks against the C++ paths, the statistical-physics routines on exact synthetic
   frames, `morie_fetch_siu()` and the SIU review side with the transport replaced by recorders,
