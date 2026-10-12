@@ -1,5 +1,16 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* Research ledger, the third and last library-scan batch (20 Lean files, 84 audited theorems; 517
+  theorems over 103 files, 0 sorry) with R functions and tests in `R/ledger_scan2.R`:
+  `morie_nb_matches_zip()`, `morie_gamma_bound()`, `morie_blocking_crossover()`,
+  `morie_adjustment_variances()`, `morie_budget_optimum()`, `morie_outcome_test()`,
+  `morie_spatial_omission()`, `morie_iv_natural_bounds()`, `morie_design_sensitivity()`,
+  `morie_moran_trend()`, `morie_exposure_positivity()`, `morie_permutation_valid()`,
+  `morie_thinning_identification()`, `morie_poisson_chernoff()`, `morie_random_walk_exposure()`,
+  `morie_extremal_index_clusters()`, `morie_tail_ratio()`, `morie_calibration_flip()`,
+  `morie_bayes_risk_dpi()`, `morie_bellman_value()`, `morie_myopic_example()`,
+  `morie_budget_rule()` and `morie_run_length_bound()`. Every item of the 2026-09-21 library scan
+  now has a machine-checked core.
 * Research ledger, the second library-scan batch (12 Lean files, 57 audited theorems; 434
   theorems over 83 files, 0 sorry) with R functions and tests in `R/ledger_scan.R`:
   `morie_attenuation_two_regressor()` (A4), `morie_friedman_urn()` (C2),

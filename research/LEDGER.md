@@ -115,6 +115,12 @@ assumptions the dark figure is an interval, not a point.
   proportion lies in [r p_obs, r p_obs + 1 − r], both ends attained (`region_sharp`), of width
   exactly 1 − r (`region_width`); at Mexico's 10.6 percent reporting rate the region is 0.894
   wide. R: `morie_nonresponse_region()`; Python `nonresponse_region()`.
+- Progress 2026-10-12 (thinning, scan C9): `Research.P1.Thinning` (P1Thinning.lean). Recording
+  each event independently with probability γ turns a Poisson(λ) generating function into the
+  Poisson(λγ) one (`thinned_pgf`), the recorded and unrecorded parts factorise (`joint_pgf_factorises`),
+  and (λ, γ) is known only through λγ (`not_identified`); a Poisson recorded count does not make the
+  true count Poisson (`shifted_not_equidispersed`). R: `morie_thinning_identification()`; Python
+  `thinning_identification()`.
 
 ## P2. Selection in police-recorded data: the record is the treatment
 
@@ -198,6 +204,13 @@ field has no agreed estimand, let alone estimator.
   the opposite sign (`ordinal_reversal`), so the attenuation theorem is a binary theorem. R:
   `morie_misclassified_rd()`, `morie_misclassified_contrast()`; Python `misclassified_rd()`,
   `misclassified_contrast()`.
+- Progress 2026-10-12 (outcome test, scan A24): `Research.P2.OutcomeTest` (P2OutcomeTest.lean).
+  In a threshold model two groups with different signal laws and thresholds 0.5 and 0.2 have the
+  same hit rate and different stop rates (`infra_marginality`); the same threshold with different
+  laws gives different hit rates (`equal_thresholds_unequal_hits`); only under one signal law with
+  a strictly increasing conditional mean, E[q | q > t] = (1 + t)/2 for the uniform case
+  (`uniform_hit_rate`), do equal hit rates certify equal thresholds
+  (`uniform_equal_hits_equal_thresholds`). R: `morie_outcome_test()`; Python `outcome_test()`.
 
 ## P3. Causal effects of policing under interference and displacement
 
@@ -293,6 +306,31 @@ spillover.
   (`within_balanced`), and non-negativity at a one-cluster indicator (`quad_indicator`) forces
   ρ ≥ −1/(M − 1) (`icc_lower_bound`). R: `morie_ht_elephant()`,
   `morie_design_effect_direction()`; Python `ht_elephant()`, `design_effect_direction()`.
+- Progress 2026-10-12 (blocking, scan A8; adjustment, scan A9): `Research.P3.Blocking`
+  (P3Blocking.lean): with k = δ√(n/2)/σ and critical values c_p > c_u, the paired design has more
+  approximate power iff ρ > ρ* = 1 − (1 + (c_p − c_u)/k)^{−2} (`paired_better_iff`), and ρ* > 0
+  (`crossover_pos`). `Research.P3.Adjustment` (P3Adjustment.lean): under any balanced finite design
+  the unadjusted difference in means is unbiased (`unadjusted_unbiased`); in the superpopulation
+  asymptotics Lin's interaction estimator is never worse than either (`lin_le_unadjusted`,
+  `lin_le_adjusted`), the pooled-slope adjustment never hurts at p = 1/2
+  (`adjusted_le_unadjusted_balanced`), and with b₀ = 0 it hurts iff p > 2/3 (`adjusted_worse`).
+  R: `morie_blocking_crossover()`, `morie_adjustment_variances()`; Python `blocking_crossover()`,
+  `adjustment_variances()`.
+- Progress 2026-10-12 (spatial omission, scan A25; exposure and permutation, scan B21; random walk,
+  scan C15): `Research.P3.Spatial` (P3Spatial.lean): in the two-unit lag model the lag regressor has
+  covariance ρ/(1 − ρ²) ≠ 0 with the error (`lag_regressor_correlated`), least squares stays
+  unbiased under correlated errors (`ols_unbiased_correlated_errors`) but GLS is more precise
+  (`gls_more_precise`), and m uncorrected local tests reject somewhere with probability
+  1 − (1 − α)^m → 1 (`fwer_tendsto_one`). `Research.P3.Exposure` (P3Exposure.lean): the
+  all-neighbours-treated probability p^d → 0 and the Horvitz–Thompson weight → ∞
+  (`exposure_prob_tendsto_zero`, `ht_weight_unbounded`); the permutation p-value over any finite
+  design is exact, #{p ≤ α} ≤ α|A| (`permutation_valid`), which under interference needs an
+  imputable statistic. `Research.P3.RandomWalk` (P3RandomWalk.lean): the simple random walk on an
+  undirected graph has stationary law d_v/(2|E|) (`stationary`, `stationary_sum_one`), and the
+  out-degree law fails on a directed network (`directed_fails`). R: `morie_spatial_omission()`,
+  `morie_exposure_positivity()`, `morie_permutation_valid()`, `morie_random_walk_exposure()`;
+  Python `spatial_omission()`, `exposure_positivity()`, `permutation_valid()`,
+  `random_walk_exposure()`.
 
 ## P4. Predictive policing feedback: when does the loop run away?
 
@@ -403,6 +441,12 @@ or of the initial condition?
   uniform feedback mode grows iff ερ > ω/(1 − ω) (`feedback_gain`), the site form of
   P4Hotspot's threshold. R: `morie_attractiveness_contraction()`; Python
   `attractiveness_contraction()`.
+- Progress 2026-10-12 (Bellman contraction, scan C21): `Research.P4.Bellman` (P4Bellman.lean).
+  The Bellman optimality operator on a finite MDP satisfies ‖Tv − Tw‖_∞ ≤ γ‖v − w‖_∞
+  (`bellman_lipschitz`), is a contraction (`bellman_contracting`) with a unique fixed point
+  (`optimal_value_exists_unique`); in the three-state example the greedy action (1 now, 1/2 after)
+  loses to the patient one (0 now, 1 after) iff γ > 2/3 (`myopic_suboptimal`). R:
+  `morie_bellman_value()`, `morie_myopic_example()`; Python `bellman_value()`, `myopic_example()`.
 
 ## P5. Recidivism prediction under label bias: what can be certified?
 
@@ -494,6 +538,26 @@ biased is open.
   zero (`error_free_biased_iff`) and the bias has the sign of β₁s₁₂ (`bias_sign`): "any
   measurement error attenuates" is a one-regressor fact. R: `morie_attenuation_two_regressor()`;
   Python `attenuation_two_regressor()`.
+- Progress 2026-10-12 (Γ bounds, scan A7; design sensitivity, scan B17): `Research.P5.Gamma`
+  (P5GammaBound.lean): the worst-case mean nΓ/(1 + Γ) is non-decreasing in Γ (`worst_mean_mono`),
+  Γ* = T/(n − T) is where it reaches T (`worst_mean_at_gamma_star`, `gamma_star_kills`,
+  `below_gamma_star`) and depends on the table alone (`gamma_star_table_only`).
+  `Research.P5.DesignSensitivity` (P5DesignSensitivity.lean): along T_n/n → μ, c_n/n → μ_Γ the test
+  rejects for all large n iff μ > μ_Γ (`eventually_reject`, `eventually_accept`), and the design
+  sensitivity is the unique root of μ_Γ = μ (`design_sensitivity_exists_unique`). R:
+  `morie_gamma_bound()`, `morie_design_sensitivity()`; Python `gamma_bound()`,
+  `design_sensitivity()`.
+- Progress 2026-10-12 (data processing and calibration, scan C20; budget rule, scan C22):
+  `Research.P5.DataProcessing` (P5DataProcessing.lean): every predictor from a post-processed score
+  is a predictor from the record, so the best squared-error risk from the record is at most that
+  from the score (`bayes_risk_data_processing`); with symmetric flip rates, calibration to the
+  record in both groups forces true rates (r − f_g)/(1 − 2f_g) that differ
+  (`calibration_incompatible`), and calibration to the truth forces recorded rates that differ
+  (`calibration_to_W_incompatible`). `Research.P5.BudgetRule` (P5BudgetRule.lean): a rule that
+  treats above a level, not below, and spends the budget maximises the total effect over all
+  fractional rules (`threshold_optimal`); at a tied cell no deterministic rule attains it
+  (`stochastic_needed`). R: `morie_calibration_flip()`, `morie_bayes_risk_dpi()`,
+  `morie_budget_rule()`; Python `calibration_flip()`, `bayes_risk_dpi()`, `budget_rule()`.
 
 ## P6. The age-crime curve: invariant law or mixture artefact?
 
@@ -631,6 +695,22 @@ counts are sparse relative to units.
   ratio is 0 (`llr_zero`) and Vuong's statistic is 0/0, not N(0, 1). R:
   `morie_cox_overdispersion()`, `morie_zip_vuong_boundary()`; Python `cox_overdispersion()`,
   `zip_vuong_boundary()`.
+- Progress 2026-10-12 (zero inflation, scan A6; Moran trend, scan B19; Chernoff, scan C11; tail
+  shape, scan C18): `Research.P7.ZeroInflation` (P7ZeroInflation.lean): the ZIP zero share lies
+  strictly in (e^{−μ}, 1) (`zip_zero_gt_poisson`, `zip_zero_lt_one`), the NB zero share runs
+  continuously from 1 to e^{−μ} (`nb_zero_tendsto_zero`, `nb_zero_tendsto_atTop`), so an NB with the
+  same mean and zero share exists (`nb_matches_zip`). `Research.P7.MoranTrend` (P7MoranTrend.lean):
+  a noiseless linear trend on the four-node path gives I = 1/3, not −1/3 (`trend_witness`), and for
+  residuals of a symmetric idempotent M the summed numerator and denominator are c·tr(WM) and
+  c·tr(M) (`residual_moran_ratio`). `Research.P7.Chernoff` (P7Chernoff.lean):
+  P(S ≥ (1 + ε)λ) ≤ exp(−λ[(1 + ε)log(1 + ε) − ε]) from Markov on the generating function
+  (`poisson_chernoff`), rate positive (`rate_pos`). `Research.P7.TailShape` (P7TailShape.lean): the
+  tail ratio S(2k)/S(k) is q^k → 0 for a geometric tail, 2^{−α} for a power tail, and the NB pmf
+  ratio is at most (2k + r)^{r−1}q^k → 0 (`nb_pmf_ratio_le`, `nb_pmf_ratio_tendsto_zero`): the
+  Gamma-mixed Poisson is light-tailed however heterogeneous the places. R:
+  `morie_nb_matches_zip()`, `morie_moran_trend()`, `morie_poisson_chernoff()`,
+  `morie_tail_ratio()`; Python `nb_matches_zip()`, `moran_trend()`, `poisson_chernoff()`,
+  `tail_ratio()`.
 
 ## P8. Deterrence: certainty, severity and celerity cannot be varied alone
 
@@ -679,6 +759,16 @@ model. Identification is the unsolved part.
   interior rest point is a centre, orbits cycle, and more inspection does not monotonically
   reduce crime. R: `morie_instrumental_inequality()`, `morie_inspection_game()`; Python
   `instrumental_inequality()`, `inspection_game()`.
+- Progress 2026-10-12 (budget optimum, scan A19; natural bounds, scan B11): `Research.P8.Budget`
+  (P8Budget.lean): g(θ) + d(C − θ) is concave for concave g, d (`concave_sum`), attains a maximum
+  (`exists_max`), interior whenever some interior θ beats both corners (`interior_optimum`), and
+  a bounded deterrence response loses to a rehabilitation gain above its range
+  (`rehab_beats_bound`). `Research.P8.NaturalBounds` (P8NaturalBounds.lean): the IV natural
+  bounds contain the effect (`ate_mem`), are attained (`bounds_attained`), have width
+  P(A = 0 | Z = 1) + P(A = 1 | Z = 0) (`width`), zero under perfect compliance and one at fifty
+  percent noncompliance (`perfect_compliance_point`, `half_noncompliance_width`); the Balke–Pearl
+  linear-programming bounds are not formalised. R: `morie_budget_optimum()`,
+  `morie_iv_natural_bounds()`; Python `budget_optimum()`, `iv_natural_bounds()`.
 
 ## Order of attack
 
@@ -742,10 +832,12 @@ Three readers went through the criminology, statistics and mathematics shelves o
   identity (library scan B13). R: `morie_probability_of_necessity()`.
 
 Scan items closed by problem (2026-10-12; status table in LIBRARY-SCAN-2026-09-21.md): P1: B5, B6,
-B10, A14; P2: A21, A22, A23, B14; P3: B7, C16, B8, A10, B9; P4: C1, C2, C3, C4, C7, C8; P5: A1, A2,
-A4, A5; P7: B23, C12, B24; P8: B12, A18, C24; P9: A12, A15; P10: C5, C6, A17, B20; P11: B1, B2, B4,
-B18, B25. Not yet formalised: A6, A7, A8, A9, A19, A24, A25, B11, B17, B19, B21, C9, C11, C15, C17,
-C18, C20, C21, C22, C23.
+B10, A14, C9; P2: A21, A22, A23, B14, A24; P3: B7, C16, B8, A10, B9, A8, A9, A25, B21, C15; P4: C1,
+C2, C3, C4, C7, C8, C21; P5: A1, A2, A4, A5, A7, B17, C20, C22; P7: B23, C12, B24, A6, B19, C11, C18;
+P8: B12, A18, C24, A19, B11; P9: A12, A15; P10: C5, C6, A17, B20, C17, C23; P11: B1, B2, B4, B18, B25.
+Every scan item now has a formalised core; the parts left open inside an item are named in its
+bullet (Balke–Pearl sharp bounds in B11, Lorden's constant in C23, the Gaussian AR(1) extremal
+index in C17, Wager's variance-bias formula in B21).
 
 ## P9. Crime recording as a linear map: what counting rules can hide
 
@@ -827,6 +919,16 @@ cluster size, the stationary rate and the share of "contagious" events.
   order, not the moments, is what identifies them, and a background that moves with the
   seasons would be read as self-excitation. Open: the constant-versus-KDE background comparison
   (A17) and the K-function statement.
+- Progress 2026-10-12 (extremal index, scan C17; run length, scan C23):
+  `Research.P10.ExtremalIndex` (P10ExtremalIndex.lean): in the block-cluster process with n blocks
+  of m days the no-exceedance probability tends to e^{−τ/m} while the independent comparison tends
+  to e^{−τ} (`cluster_tendsto`, `iid_tendsto`), and e^{−τ/m} = (e^{−τ})^{1/m} (`extremal_index`):
+  θ = 1/m, the reciprocal cluster size. `Research.P10.Cusum` (P10Cusum.lean): for restarted copies
+  with P(τ < ∞) ≤ α, {N ≤ n} ⊆ ⋃_{k ≤ n}{τ_k < ∞} (`stop_subset_union`), P(N ≤ n) ≤ (n + 1)α
+  (`stop_prob_le`) and E N ≥ Σ_{n<J}(1 − nα) ≥ J/2 for Jα ≤ 1 (`partial_sum_ge_half`,
+  `mean_run_length_ge`); Lorden's 1/α constant and CUSUM optimality are not formalised. R:
+  `morie_extremal_index_clusters()`, `morie_run_length_bound()`; Python
+  `extremal_index_clusters()`, `run_length_bound()`.
 
 
 ## P11. Sentencing effects as intervals: what observational data can say before assumptions

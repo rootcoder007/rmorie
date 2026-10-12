@@ -186,6 +186,14 @@ is stated in the ledger entry of its problem.
 | 17 | B14 | P2 binary misclassification attenuates by (se + sp − 1)π(1 − π)/(d₁d₀); ordinal reversal witness | `P2Misclassification` | `morie_misclassified_rd()`, `morie_misclassified_contrast()` |
 | 18 | B18 | P11 amplification: one Γ is the curve Δ = (ΛΓ − 1)/(Λ − Γ) | `P11Amplification` | `morie_sensitivity_amplification()` |
 | 19 | A10 + B9 + B8 | P3 design effect is direction-specific, ICC ≥ −1/(M − 1); Basu's elephant | `P13Design`, `P3Basu` | `morie_design_effect_direction()`, `morie_ht_elephant()` |
+| 20 | A6 + B19 + C11 + C18 | P7 an NB matches any ZIP's zero share and mean; Moran's I under a trend and on residuals; Poisson Chernoff tail; tail ratios (NB light, Zipf heavy) | `P7ZeroInflation`, `P7MoranTrend`, `P7Chernoff`, `P7TailShape` | `morie_nb_matches_zip()`, `morie_moran_trend()`, `morie_poisson_chernoff()`, `morie_tail_ratio()` |
+| 21 | A7 + B17 | P5 Γ* is a function of the table; design sensitivity as the root of μ = μ_Γ with 0/1 limiting power | `P5GammaBound`, `P5DesignSensitivity` | `morie_gamma_bound()`, `morie_design_sensitivity()` |
+| 22 | A8 + A9 | P3 blocking crossover ρ* > 0; Freedman/Lin adjustment variances, pooled adjustment hurts iff p > 2/3 | `P3Blocking`, `P3Adjustment` | `morie_blocking_crossover()`, `morie_adjustment_variances()` |
+| 23 | A25 + B21 + C15 | P3 lag endogeneity, GLS over OLS, FWER → 1; exposure positivity and exact permutation p-values; random-walk exposure ∝ degree | `P3Spatial`, `P3Exposure`, `P3RandomWalk` | `morie_spatial_omission()`, `morie_exposure_positivity()`, `morie_permutation_valid()`, `morie_random_walk_exposure()` |
+| 24 | A19 + B11 | P8 interior stick/carrot optimum; IV natural bounds of width P(A=0|Z=1) + P(A=1|Z=0) | `P8Budget`, `P8NaturalBounds` | `morie_budget_optimum()`, `morie_iv_natural_bounds()` |
+| 25 | A24 + C9 | P2 outcome-test infra-marginality; P1 Poisson thinning and the unidentified recording rate | `P2OutcomeTest`, `P1Thinning` | `morie_outcome_test()`, `morie_thinning_identification()` |
+| 26 | C20 + C22 | P5 Bayes-risk data processing and the calibration incompatibility; the budget-constrained threshold rule | `P5DataProcessing`, `P5BudgetRule` | `morie_calibration_flip()`, `morie_bayes_risk_dpi()`, `morie_budget_rule()` |
+| 27 | C21 + C17 + C23 | P4 Bellman contraction and the myopic counterexample; P10 extremal index 1/m and the restarted-detector run-length bound | `P4Bellman`, `P10ExtremalIndex`, `P10Cusum` | `morie_bellman_value()`, `morie_myopic_example()`, `morie_extremal_index_clusters()`, `morie_run_length_bound()` |
 
 Item 10's reaction-diffusion part (C8) was the last to land (2026-10-12): the unique homogeneous
 steady state B̄ = εDγ/ω, ρ̄ = γ/Ā; the mode-k determinant P k² − Q k + R with P = ηD²/z,
@@ -200,5 +208,11 @@ Item 11 (A14) and the convergence half of item 1 landed on 2026-10-12 with the N
 Items 12-19 landed on 2026-10-12 (second batch of the scan): twelve Lean files, 57 audited
 theorems (434 in all over 83 files, 0 sorry), the R functions in `R/ledger_scan.R` with
 `tests/testthat/test-ledger-scan.R`, and the Python ports in `morie.research.library_scan` with
-parity tests. Still unformalised: A6, A7, A8, A9, A19, A24, A25, B11, B17, B19, B21, C9, C11, C15,
-C17, C18, C20, C21, C22, C23.
+parity tests.
+
+Items 20-27 landed later on 2026-10-12 (third batch, the last of the scan): twenty Lean files, 84
+audited theorems (517 in all over 103 files, 0 sorry), R functions in `R/ledger_scan2.R` with
+`tests/testthat/test-ledger-scan2.R`, Python ports in `morie.research.library_scan2`. Every scan
+item now has a formalised core; what a file leaves open is named in its header and in the ledger
+bullet (Balke–Pearl sharp bounds, Lorden's 1/α constant, the Gaussian AR(1) extremal index, Wager's
+variance-bias formula).
