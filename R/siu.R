@@ -1269,6 +1269,10 @@ morie_siu_compare <- function(case_number, external,
   if (!is.finite(t) || t < 1L) 600L else t
 }
 
+# the first element of a reply list, or NULL when the provider sent none (an empty
+# candidates / content / choices array is "empty text", not a subscript error)
+.siu_first <- function(x) if (length(x)) x[[1L]] else NULL
+
 #' Internal helper: Siu Llm Providers
 #' @noRd
 .siu_llm_providers <- function() {
@@ -1293,7 +1297,7 @@ morie_siu_compare <- function(case_number, external,
         )
       },
       extract = function(resp) {
-        x <- resp$candidates[[1L]]$content$parts[[1L]]$text
+        x <- .siu_first(.siu_first(resp$candidates)$content$parts)$text
         if (is.null(x)) stop("Gemini returned empty text", call. = FALSE)
         x
       }
@@ -1316,7 +1320,7 @@ morie_siu_compare <- function(case_number, external,
         )
       },
       extract = function(resp) {
-        x <- resp$content[[1L]]$text
+        x <- .siu_first(resp$content)$text
         if (is.null(x)) stop("Claude returned empty text", call. = FALSE)
         x
       }
@@ -1382,7 +1386,7 @@ morie_siu_compare <- function(case_number, external,
         )
       },
       extract = function(resp) {
-        x <- resp$candidates[[1L]]$content$parts[[1L]]$text
+        x <- .siu_first(.siu_first(resp$candidates)$content$parts)$text
         if (is.null(x)) stop("Vertex returned empty text", call. = FALSE)
         x
       }
@@ -1472,7 +1476,7 @@ morie_siu_compare <- function(case_number, external,
         )
       },
       extract = function(resp) {
-        x <- resp$choices[[1L]]$message$content
+        x <- .siu_first(resp$choices)$message$content
         if (is.null(x)) stop("OpenAI returned empty text", call. = FALSE)
         x
       }
@@ -1495,7 +1499,7 @@ morie_siu_compare <- function(case_number, external,
         )
       },
       extract = function(resp) {
-        x <- resp$choices[[1L]]$message$content
+        x <- .siu_first(resp$choices)$message$content
         if (is.null(x)) stop("the hosted tier returned empty text", call. = FALSE)
         x
       }
@@ -1525,7 +1529,7 @@ morie_siu_compare <- function(case_number, external,
         )
       },
       extract = function(resp) {
-        x <- resp$choices[[1L]]$message$content
+        x <- .siu_first(resp$choices)$message$content
         if (is.null(x)) {
           stop("OpenAI-compatible endpoint returned empty text",
                call. = FALSE)
@@ -1872,14 +1876,18 @@ morie_siu_llm_extract <- function(case_number,
         drid)), error = function(e) "")
     }
     if (is.null(audit)) {
-      # Minimal row from the lightweight scraper cache when present.
+      # Minimal row from the lightweight scraper cache when present; the
+      # bookkeeping fields below need a drid and an nrid, so the resolved
+      # drid (NA when unresolved) and the cache row's nrid are carried too
       csv <- file.path(cache_dir, "SIU.csv")
       row <- if (file.exists(csv)) {
         d <- utils::read.csv(csv, stringsAsFactors = FALSE)
         d[d$case_number == case_number, , drop = FALSE]
       } else data.frame(case_number = case_number,
                         stringsAsFactors = FALSE)
-      audit <- list(row = row, report_html = html)
+      if (!nrow(row)) row <- data.frame(case_number = case_number, stringsAsFactors = FALSE)
+      nrid <- if ("nrid" %in% names(row)) suppressWarnings(as.integer(row$nrid[1L])) else NA_integer_
+      audit <- list(row = row, drid = as.integer(drid), nrid = nrid, report_html = html)
     }
   }
   if (!nzchar(html)) {
@@ -2006,14 +2014,18 @@ morie_siu_anomaly_check <- function(case_number,
         drid)), error = function(e) "")
     }
     if (is.null(audit)) {
-      # Minimal row from the lightweight scraper cache when present.
+      # Minimal row from the lightweight scraper cache when present; the
+      # bookkeeping fields below need a drid and an nrid, so the resolved
+      # drid (NA when unresolved) and the cache row's nrid are carried too
       csv <- file.path(cache_dir, "SIU.csv")
       row <- if (file.exists(csv)) {
         d <- utils::read.csv(csv, stringsAsFactors = FALSE)
         d[d$case_number == case_number, , drop = FALSE]
       } else data.frame(case_number = case_number,
                         stringsAsFactors = FALSE)
-      audit <- list(row = row, report_html = html)
+      if (!nrow(row)) row <- data.frame(case_number = case_number, stringsAsFactors = FALSE)
+      nrid <- if ("nrid" %in% names(row)) suppressWarnings(as.integer(row$nrid[1L])) else NA_integer_
+      audit <- list(row = row, drid = as.integer(drid), nrid = nrid, report_html = html)
     }
   }
   if (!nzchar(html)) {
