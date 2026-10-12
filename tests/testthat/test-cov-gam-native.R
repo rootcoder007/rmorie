@@ -1,0 +1,240 @@
+# R/gam_native.R: the formula reader's refusals, every family and criterion, the fixed and
+# cubic bases, the prediction and summary methods, and the numerical kernels (tridiagonal
+# eigensolver, Lanczos, Davies / Liu tails) against base R.
+
+.gn <- function(name) get(name, envir = environment(morie_gam))
+
+.gn_data <- function(n = 200, seed = 7) {
+  set.seed(seed)
+  x <- stats::runif(n)
+  w <- stats::rnorm(n)
+  g <- factor(sample(c("a", "b", "c"), n, TRUE))
+  f <- sin(2 * pi * x) + 0.5 * w
+  data.frame(x = x, w = w, g = g, z = stats::runif(n), f = f,
+             y = f + stats::rnorm(n, sd = 0.3),
+             yb = stats::rbinom(n, 1, stats::plogis(f)),
+             yp = stats::rpois(n, exp(0.5 + 0.5 * f)))
+}
+
+test_that("the smooth-term reader accepts k, bs and fx and refuses everything else", {
+  rs <- .gn(".gamn_read_s")
+  s <- rs(quote(s(x, k = 7, bs = "cr", fx = TRUE)))
+  expect_equal(s[c("k", "bs", "fixed", "label", "dim")], list(k = 7L, bs = "cr", fixed = TRUE, label = "s(x)", dim = 1L))
+  expect_equal(rs(quote(s(x, k = -1)))$k, -1L)
+  expect_equal(rs(quote(s(x, w)))$label, "s(x,w)")
+  expect_error(rs(quote(s())), "needs at least one covariate")
+  expect_error(rs(quote(s(x, w, z))), "one or two covariates")
+  expect_error(rs(quote(s(x, m = 2))), "not supported: m")
+  expect_error(rs(quote(s(x, k = "7"))), "k in s\\(\\) must be a number")
+  expect_error(rs(quote(s(x, bs = cr))), "bs in s\\(\\) must be a quoted string")
+  expect_error(rs(quote(s(x, bs = "ps"))), "not supported \\(use")
+  expect_error(rs(quote(s(x, fx = 1))), "fx in s\\(\\) must be TRUE or FALSE")
+  expect_error(rs(quote(s(x, w, bs = "cr"))), "handles one covariate only")
+  fp <- .gn(".gamn_formula_parts")
+  expect_error(fp(~ s(x)), "two-sided formula")
+  expect_error(fp(s(x) ~ y), "cannot be the response")
+  expect_error(fp(y ~ s(x) + s(x, k = 5)), "appears twice")
+  p <- fp(y ~ s(x) + w + offset(z))
+  expect_equal(attr(p$pterms, "term.labels"), "w")
+  expect_true(!is.null(attr(p$pterms, "offset")))
+  expect_equal(p$smooths[[1]]$label, "s(x)")
+  p0 <- fp(y ~ s(x) - 1)
+  expect_equal(p0$intercept, 0L)
+  expect_equal(attr(p0$pterms, "intercept"), 0L)
+  pn <- fp(y ~ w)
+  expect_length(pn$smooths, 0)
+  expect_equal(pn$response, quote(y))
+})
+
+test_that("the three families, both criteria, fixed and cubic smooths fit and predict consistently", {
+  d <- .gn_data()
+  for (fam in c("gaussian", "binomial", "poisson")) {
+    resp <- switch(fam, gaussian = "y", binomial = "yb", poisson = "yp")
+    fo <- stats::as.formula(paste(resp, "~ s(x) + w + g"))
+    for (method in c("GCV.Cp", "REML")) {
+      m <- morie_gam(fo, d, family = fam, method = method)
+      expect_s3_class(m, "morie_gam")
+      expect_equal(m$family, fam)
+      expect_equal(names(m$score), if (method == "REML") "REML" else "GCV.Cp")
+      expect_equal(m$criterion, if (method == "REML") "REML" else if (fam == "gaussian") "GCV" else "UBRE")
+      expect_equal(unname(stats::predict(m, d, type = "response")), unname(m$fitted.values), tolerance = 1e-8)
+      expect_equal(m$scale.estimated, fam == "gaussian")
+      expect_equal(length(stats::coef(m)), 1 + 1 + 2 + 9)
+      s <- summary(m)
+      expect_equal(colnames(s$p.table)[3], if (fam == "gaussian") "t value" else "z value")
+      expect_equal(rownames(s$pTerms.table), c("w", "g"))
+      expect_equal(s$pTerms.table["g", "df"], 2)
+      expect_output(print(s), if (fam == "gaussian") "Scale est" else "UBRE|REML")
+      expect_output(print(m), if (method == "REML") "REML score" else if (fam == "gaussian") "GCV score" else "UBRE score")
+      ll <- stats::logLik(m)
+      expect_equal(as.numeric(ll), m$edf_total + m$scale.estimated - m$aic / 2)
+      expect_equal(attr(ll, "nobs"), 200L)
+      expect_equal(stats::residuals(m, "response"), d[[resp]] - m$fitted.values)
+      pr <- stats::residuals(m, "pearson")
+      v <- switch(fam, gaussian = 1, binomial = m$fitted.values * (1 - m$fitted.values), poisson = m$fitted.values)
+      expect_equal(pr, (d[[resp]] - m$fitted.values) / sqrt(v))
+      expect_equal(stats::residuals(m, "working"), (d[[resp]] - m$fitted.values) / v)
+      expect_equal(unname(stats::residuals(m)), unname(m$residuals))
+    }
+  }
+  # a fixed smoothing parameter reproduces itself; a fixed-df smooth has no penalty to estimate
+  m <- morie_gam(y ~ s(x), d, sp = 2.5)
+  expect_equal(unname(m$sp), 2.5)
+  expect_null(m$outer)
+  mr <- morie_gam(y ~ s(x), d, sp = 2.5, method = "REML")
+  expect_equal(unname(mr$sp), 2.5)
+  mf <- morie_gam(y ~ s(x, fx = TRUE, k = 8), d)
+  expect_length(mf$sp, 0)
+  expect_equal(mf$edf_total, 8)
+  mcr <- morie_gam(y ~ s(x, bs = "cr", k = 8), d)
+  expect_equal(mcr$smooths[[1]]$bs, "cr")
+  expect_equal(unname(stats::predict(mcr, d)), unname(mcr$linear.predictors), tolerance = 1e-8)
+  m2 <- morie_gam(y ~ s(x, w), d)
+  expect_equal(m2$smooths[[1]]$dim, 2L)
+  expect_equal(unname(stats::predict(m2, d[1:5, ])), unname(m2$linear.predictors[1:5]), tolerance = 1e-8)
+  # no smooth at all: a penalised fit degenerates to the GLM
+  mg <- morie_gam(yp ~ w + g, d, family = "poisson")
+  ref <- stats::glm(yp ~ w + g, data = d, family = stats::poisson())
+  expect_equal(unname(stats::coef(mg)), unname(stats::coef(ref)), tolerance = 1e-6)
+  mgr <- morie_gam(y ~ w, d, method = "REML")
+  refl <- stats::lm(y ~ w, data = d)
+  expect_equal(unname(stats::coef(mgr)), unname(stats::coef(refl)), tolerance = 1e-8)
+  # weights and an offset
+  mw <- morie_gam(y ~ s(x) + offset(z), d, weights = rep(c(1, 2), 100))
+  expect_equal(mw$prior.weights, rep(c(1, 2), 100))
+  expect_true(mw$null.deviance > mw$deviance)
+  mo <- morie_gam(yp ~ s(x) + offset(z), d, family = "poisson")
+  expect_true(is.finite(mo$null.deviance))
+  # binomial responses as factor and logical
+  mb <- morie_gam(fb ~ s(x), transform(d, fb = factor(yb)), family = "binomial")
+  expect_equal(mb$y, d$yb)
+  ml <- morie_gam(lb ~ s(x), transform(d, lb = yb == 1), family = "binomial")
+  expect_equal(ml$y, d$yb)
+})
+
+test_that("the fit refuses what it cannot take", {
+  d <- .gn_data(60)
+  expect_error(morie_gam(y ~ s(x), d, sp = c(1, 2)), "sp must hold 1")
+  expect_error(morie_gam(y ~ s(x), d, sp = -1), "sp must hold")
+  expect_error(morie_gam(cbind(yb, 1 - yb) ~ s(x), d, family = "binomial"), "two-column responses")
+  expect_error(morie_gam(g ~ s(x), d), "must be a numeric vector")
+  expect_error(morie_gam(y ~ s(x), d, family = "binomial"), "not valid for the binomial family")
+  expect_error(morie_gam(y ~ s(x), d, weights = rep(-1, 60)), "non-negative")
+  expect_error(morie_gam(y ~ s(x), d, weights = 1:3), "one value per row")
+  expect_error(morie_gam(y ~ s(x), d[1:1, ]), "too few complete observations")
+  expect_error(morie_gam(y ~ s(g), d), "must be numeric")
+  expect_error(.gn(".gamn_cov")(quote(x), as.environment(d)), "data frame or list")
+  expect_equal(morie_gam(y ~ s(x), as.list(d))$nobs, 60L)
+  expect_error(morie_gam(y ~ s(x, k = 70), d), "fewer unique covariate combinations")
+  expect_error(morie_gam(y ~ s(x, bs = "cr", k = 70), d), "fewer unique values")
+  expect_error(.gn(".gamn_family")("gamma"), "family must be")
+  expect_warning(cr <- .gn(".gamn_cr_construct")(d$x, 2L), "increased to minimum")
+  expect_equal(cr$k, 3L)
+  expect_equal(.gn(".gamn_cr_construct")(d$x, -1L)$k, 10L)
+  dn <- d
+  dn$x[3] <- NA
+  m <- morie_gam(y ~ s(x) + w, dn)
+  expect_equal(m$nobs, 59L)
+})
+
+test_that("predictions come in every type, with standard errors, and need new data for the matrix types", {
+  d <- .gn_data()
+  m <- morie_gam(yb ~ s(x) + w, d, family = "binomial")
+  nd <- d[1:10, ]
+  expect_equal(stats::predict(m), m$linear.predictors)
+  expect_equal(stats::predict(m, type = "response"), m$fitted.values)
+  expect_error(stats::predict(m, type = "lpmatrix"), "supply newdata")
+  expect_error(stats::predict(m, se.fit = TRUE), "supply newdata")
+  X <- stats::predict(m, nd, type = "lpmatrix")
+  expect_equal(dim(X), c(10L, length(stats::coef(m))))
+  expect_equal(unname(drop(X %*% stats::coef(m)) + attr(X, "offset")), unname(m$linear.predictors[1:10]),
+               tolerance = 1e-8)
+  tm <- stats::predict(m, nd, type = "terms")
+  expect_equal(colnames(tm), c("w", "s(x)"))
+  expect_equal(unname(rowSums(tm)) + stats::coef(m)[1], unname(m$linear.predictors[1:10]), tolerance = 1e-8)
+  tse <- stats::predict(m, nd, type = "terms", se.fit = TRUE)
+  expect_equal(dim(tse$se.fit), c(10L, 2L))
+  ii <- which(m$assign == 1)
+  expect_equal(unname(tse$se.fit[, "w"]), unname(sqrt(X[, ii]^2 * m$Vp[ii, ii])))
+  lse <- stats::predict(m, nd, se.fit = TRUE)
+  expect_equal(lse$se.fit, sqrt(rowSums((X %*% m$Vp) * X)))
+  rse <- stats::predict(m, nd, type = "response", se.fit = TRUE)
+  expect_equal(rse$fit, stats::plogis(lse$fit))
+  expect_equal(rse$se.fit, lse$se.fit * rse$fit * (1 - rse$fit))
+  mp <- morie_gam(yp ~ s(x), d, family = "poisson")
+  rp <- stats::predict(mp, nd, type = "response", se.fit = TRUE)
+  lp <- stats::predict(mp, nd, se.fit = TRUE)
+  expect_equal(rp$se.fit, lp$se.fit * rp$fit)
+  mg <- morie_gam(y ~ s(x), d)
+  rg <- stats::predict(mg, nd, type = "response", se.fit = TRUE)
+  expect_equal(rg$se.fit, stats::predict(mg, nd, se.fit = TRUE)$se.fit)
+  expect_equal(stats::vcov(m), m$Vp)
+  expect_equal(stats::fitted(m), m$fitted.values)
+})
+
+test_that("the tridiagonal eigensolvers and Lanczos agree with eigen(), signs included", {
+  set.seed(3)
+  for (n in c(1L, 5L, 25L, 40L, 70L)) {
+    a <- stats::rnorm(n)
+    b <- stats::rnorm(max(n - 1L, 0L))
+    ref <- .gn(".gamn_tridiag_eigen")(a, b)
+    got <- .gn(".gamn_dstedc")(a, b)
+    expect_equal(sort(got$values, decreasing = TRUE), ref$values, tolerance = 1e-10, info = n)
+    Tm <- diag(a, n)
+    if (n > 1L) {
+      Tm[cbind(2:n, 1:(n - 1L))] <- b
+      Tm[cbind(1:(n - 1L), 2:n)] <- b
+    }
+    expect_equal(Tm %*% got$vectors, got$vectors %*% diag(got$values, n), tolerance = 1e-9, info = n)
+    expect_equal(crossprod(got$vectors), diag(n), tolerance = 1e-9, info = n)
+  }
+  A <- crossprod(matrix(stats::rnorm(1600), 40))
+  lz <- .gn(".gamn_lanczos")(A, 6L)
+  ev <- eigen(A, symmetric = TRUE)
+  expect_equal(lz$values, ev$values[1:6], tolerance = 1e-7)
+  expect_equal(abs(crossprod(lz$vectors, ev$vectors[, 1:6])), diag(6), tolerance = 1e-6)
+  inv <- .gn(".gamn_inv")(A)
+  expect_true(inv$ok)
+  expect_equal(inv$A %*% A, diag(40), tolerance = 1e-8)
+  expect_equal(inv$ldet, as.numeric(determinant(A)$modulus))
+  S <- crossprod(matrix(stats::rnorm(40), 2))
+  inv2 <- .gn(".gamn_inv")(S)
+  expect_false(inv2$ok)
+  expect_equal(S %*% inv2$A %*% S, S, tolerance = 1e-8)
+  # the seeded block leaves the caller's stream where it was
+  set.seed(5)
+  r1 <- stats::runif(3)
+  set.seed(5)
+  stats::runif(1)
+  .gn(".gamn_with_seed")(99, stats::runif(10))
+  expect_equal(stats::runif(2), r1[2:3])
+})
+
+test_that("the Davies and Liu tails agree with the chi-square they reduce to", {
+  l1 <- .gn(".gamn_log1pmx")
+  for (x in c(1e-4, -3e-3, 5e-3, 0.5, -0.2)) expect_equal(l1(x), log1p(x) - x, tolerance = 1e-12)
+  ps <- .gn(".gamn_psum_chisq")
+  for (q in c(0.5, 2, 5.5)) {
+    expect_equal(ps(q, 1), stats::pchisq(q, 1, lower.tail = FALSE), tolerance = 1e-4)
+    expect_equal(ps(q, c(1, 1)), stats::pchisq(q, 2, lower.tail = FALSE), tolerance = 1e-4)
+    expect_equal(ps(q, 2, df = 3), stats::pchisq(q / 2, 3, lower.tail = FALSE), tolerance = 1e-4)
+  }
+  liu <- .gn(".gamn_liu2")
+  expect_equal(liu(3, 2), stats::pchisq(1.5, 1, lower.tail = FALSE))
+  expect_equal(liu(0, 2), 1)
+  expect_equal(liu(3, c(1, 1)), stats::pchisq(3, 2, lower.tail = FALSE), tolerance = 1e-10)
+  ts <- .gn(".gamn_test_stat")
+  set.seed(8)
+  X <- matrix(stats::rnorm(60), 20)
+  V <- crossprod(matrix(stats::rnorm(9), 3)) / 10
+  p <- c(0.5, -0.2, 0.1)
+  for (rank in c(3, 2.4, 1, 1.5)) {
+    r <- ts(p, X, V, rank)
+    expect_true(r$stat >= 0 && r$pval >= 0 && r$pval <= 1, info = rank)
+    rf <- ts(p, X, V, rank, res.df = 15)
+    expect_true(rf$pval >= 0 && rf$pval <= 1, info = rank)
+  }
+  r3 <- ts(p, X, V, 3)
+  expect_equal(r3$rank, 3)
+  expect_equal(r3$pval, stats::pchisq(r3$stat, 3, lower.tail = FALSE))
+})
