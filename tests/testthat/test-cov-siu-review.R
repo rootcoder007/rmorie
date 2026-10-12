@@ -12,7 +12,7 @@
     police_service = c("Toronto Police Service", "Ontario Provincial Police", ""),
     location_of_call = c("Queen Street", "", "Rue Principale"),
     narrative_summary = c("An officer attended.", "", "Un agent est intervenu."),
-    news_release_summary = c("", "", "Communiqué"),
+    news_release_summary = c("", "", "Communiqu\u00e9"),
     news_release_title = c("", "", ""),
     relevant_legislation = c("", "", ""),
     `_language` = c("en", "en", "fr"),
@@ -168,7 +168,7 @@ test_that("translation picks its rows by language, asks for every non-empty fiel
   out2 <- morie_siu_translate_fr_to_en(cache_dir = dir2, progress = FALSE, model = c("ollama", "hosted"))
   expect_equal(unique(out2$case_number), "24-TST-003")
   expect_match(seen[[1]]$prompt, "fields into clear professional English\\.")
-  expect_match(seen[[1]]$prompt, "\\[news_release_summary\\]\nCommuniqué\n")
+  expect_match(seen[[1]]$prompt, "\\[news_release_summary\\]\nCommuniqu[^\n]+\n\\[/news_release_summary\\]")
   out3 <- morie_siu_translate(case_numbers = c("24-TST-001", "nope"), cache_dir = dir2, progress = FALSE)
   expect_match(seen[[length(seen)]]$prompt, "fields into clear professional Hindi\\.")
   expect_equal(nrow(out3), 1L)
