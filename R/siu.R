@@ -2113,7 +2113,8 @@ morie_siu_anomaly_check <- function(case_number,
   if (is.null(rows)) {
     return(deterministic())
   }
-  if (is.null(rows) || (is.data.frame(rows) && !nrow(rows))) {
+  # an empty JSON array parses to an empty list, not a zero-row frame
+  if (is.null(rows) || !length(rows) || (is.data.frame(rows) && !nrow(rows))) {
     return(data.frame(
       field = character(0), parser_value = character(0),
       verdict = character(0), reason = character(0),
