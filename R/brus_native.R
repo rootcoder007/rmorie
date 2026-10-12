@@ -183,7 +183,9 @@ morie_twostage_design <- function(s_w, s_b, c1, c2, v_max = NA,
 #'
 #' Equation 8.2 of Brus (2022): sum((z_k/p_k - t_hat)^2)/(n(n-1)).
 #'
-#' @param z Sample values. @param p Draw probabilities. @param t_hat
+#' @param z Sample values.
+#' @param p Draw probabilities.
+#' @param t_hat
 #'   Estimated total.
 #' @param p See Usage.
 #' @param t_hat See Usage.
@@ -274,7 +276,8 @@ morie_model_assisted <- function(m_all = NULL, z_sample = NULL,
 #'
 #' Equations 10.13, 10.14, 10.17, 10.18, 10.25, 10.42 of Brus (2022).
 #'
-#' @param e Residuals. @param n,n_population Sizes.
+#' @param e Residuals.
+#' @param n,n_population Sizes.
 #' @param x_k,xbar_true,xbar_sample,s2_x Simple g-weight pieces.
 #' @param g g-weights for the weighted variance.
 #' @param pi Inclusion probabilities (calibration-residual route).
@@ -432,8 +435,10 @@ morie_balanced_twophase <- function(t_pi_z = NA, t_x_true = NA,
 #' 12.25, 12.27 of Brus (2022).
 #'
 #' @param p_star,se_max,u_crit,s_star,l_max,cv_star,r_max Frequentist
-#'   pieces. @param design_effect,n_si Design-effect pieces.
-#' @param p,z,n,c,d Beta posterior pieces. @param v,l Interval pieces.
+#'   pieces.
+#' @param design_effect,n_si Design-effect pieces.
+#' @param p,z,n,c,d Beta posterior pieces.
+#' @param v,l Interval pieces.
 #' @param lengths,probs,coverages,alpha ALC/ACC pieces.
 #' @param design_effect See Usage.
 #' @param n_si See Usage.
@@ -494,8 +499,10 @@ morie_sample_size <- function(p_star = NA, se_max = NA, u_crit = NA,
 #' 13.16 (untagged on the web) and the Ospats objective as 13.17 (web
 #' 13.16).
 #'
-#' @param gamma_bar_h Mean semivariances. @param weights,n_h Strata.
-#' @param n Total sample size. @param s_h,c_h Allocation pieces.
+#' @param gamma_bar_h Mean semivariances.
+#' @param weights,n_h Strata.
+#' @param n Total sample size.
+#' @param s_h,c_h Allocation pieces.
 #' @param zhat_i,zhat_j,r2,s2_i,s2_j,s2_ij Pairwise pieces.
 #' @param d2_upper_sum,n_h_units Stratum-variance pieces.
 #' @param per_stratum_sums,n_population Objective pieces.
@@ -553,9 +560,12 @@ morie_ospats <- function(gamma_bar_h = NULL, weights = NULL, n_h = NULL,
 #' distance parameters) pins this form; the printed exp term is a display
 #' typo.
 #'
-#' @param cov_ss,cov_s0 Kriging system pieces. @param sigma2,lam,nu
-#'   Variance pieces. @param gamma_s0 Semivariance form pieces.
-#' @param h,c0,c1,phi Semivariogram pieces. @param z,mu,cov Likelihood.
+#' @param cov_ss,cov_s0 Kriging system pieces.
+#' @param sigma2,lam,nu
+#'   Variance pieces.
+#' @param gamma_s0 Semivariance form pieces.
+#' @param h,c0,c1,phi Semivariogram pieces.
+#' @param z,mu,cov Likelihood.
 #' @param sigma2 See Usage.
 #' @param lam See Usage.
 #' @param nu See Usage.
@@ -632,9 +642,14 @@ morie_kriging <- function(cov_ss = NULL, cov_s0 = NULL, sigma2 = NA,
 #' kriging variance, expected squared prediction shift, and the
 #' estimation-adjusted criterion.
 #'
-#' @param mu,a_i,b_ij,c_ijk,eps Nested pieces. @param a,da_list REML
-#'   pieces. @param cov_theta,dv_dtheta VKV pieces. @param v_ok,e_tau2 AKV
-#'   pieces. @param dlam_dtheta,a_mat Tau2 pieces. @param akv,vkv EAC.
+#' @param mu,a_i,b_ij,c_ijk,eps Nested pieces.
+#' @param a,da_list REML
+#'   pieces.
+#' @param cov_theta,dv_dtheta VKV pieces.
+#' @param v_ok,e_tau2 AKV
+#'   pieces.
+#' @param dlam_dtheta,a_mat Tau2 pieces.
+#' @param akv,vkv EAC.
 #' @param a See Usage.
 #' @param da_list See Usage.
 #' @param cov_theta See Usage.
@@ -704,9 +719,12 @@ morie_variogram_design <- function(mu = NA, a_i = NA, b_ij = NA,
 #' 20.3), classification indicator (25.8).
 #'
 #' @param sigma2,n,rho_bar,s2,n_population Chapter 26 pieces.
-#' @param xbar_d,beta_hat,v_d Small-area pieces. @param times Trend.
-#' @param x,c_mat,zhat GLS pieces. @param beta0,beta1,x_val Model 16.1.
-#' @param x_design,z_obs OLS pieces. @param sigma2_eps,x0 Prediction var.
+#' @param xbar_d,beta_hat,v_d Small-area pieces.
+#' @param times Trend.
+#' @param x,c_mat,zhat GLS pieces.
+#' @param beta0,beta1,x_val Model 16.1.
+#' @param x_design,z_obs OLS pieces.
+#' @param sigma2_eps,x0 Prediction var.
 #' @param c_hat,c_true,u Classification pieces.
 #' @param times See Usage.
 #' @param beta0 See Usage.

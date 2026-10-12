@@ -7,9 +7,11 @@
 morie_geron_pairwise_distances(X)
 }
 \arguments{
-\item{X}{Data matrix. @return Distance matrix.}
+\item{X}{Data matrix.}
 }
 \value{
+Distance matrix.
+
 The value of \code{.morie_gr_w4b_pairwise_distances}.
 }
 \description{

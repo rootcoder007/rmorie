@@ -225,3 +225,59 @@ test_that("cross-age covariance of a mixture recomputes and the panel test sees 
   }, numeric(1))
   expect_error(morie_age_crime_panel_cov(ya, yb[-1]), "same individuals")
 })
+
+
+test_that("the urn share is a martingale whose variance stays under a/(4(r0+b0)), with Chebyshev's band", {
+  for (par in list(c(1, 1, 1), c(1, 99, 1), c(5, 3, 2), c(0.5, 2, 0.7))) {
+    for (n in c(0L, 1L, 10L, 60L)) {
+      e <- morie_feedback_loop_envelope(par[1], par[2], par[3], n = n, t = 0.2)
+      expect_equal(sum(e$law), 1, tolerance = 1e-12)
+      expect_equal(e$mean_n, e$share0, tolerance = 1e-12)      # mean_const
+      expect_lte(e$variance_n, e$variance_bound + 1e-12)          # var_le
+      expect_lte(e$exit_n, e$chebyshev_bound + 1e-12)             # chebyshev
+      expect_equal(e$chebyshev_bound, e$variance_bound / 0.04)
+    }
+  }
+  # the Polya start: the law is uniform (polya_uniform) and its variance tends to 1/12 under the 1/8 envelope
+  e <- morie_feedback_loop_envelope(1, 1, 1, n = 40)
+  expect_equal(e$law, rep(1 / 41, 41), tolerance = 1e-12)
+  expect_equal(e$variance_n, mean(((1 + 0:40) / 42 - 0.5)^2), tolerance = 1e-12)
+  expect_lt(e$variance_n, 1 / 8)
+  expect_equal(e$variance_bound, 1 / 8)
+  # the second-moment recursion step by step: one step adds s(1-s)(a/(T+a))^2 exactly
+  e1 <- morie_feedback_loop_envelope(2, 3, 1, n = 1)
+  s0 <- 2 / 5
+  expect_equal(e1$variance_n, s0 * (1 - s0) * (1 / 6)^2, tolerance = 1e-12)   # step_var
+  expect_error(morie_feedback_loop_envelope(0, 1, 1), "must be positive")
+  expect_error(morie_feedback_loop_envelope(1, 1, 1, t = 0), "positive half-width")
+})
+
+test_that("Albert-Anderson converse: overlap gives a finite maximiser, separation or rank deficiency does not", {
+  set.seed(5)
+  x <- cbind(rnorm(60), rnorm(60))
+  y <- as.integer(x[, 1] + rnorm(60, sd = 2) > 0)
+  r <- morie_logit_separation(y, x)
+  expect_identical(r$separation, "none")
+  expect_true(r$mle_exists)
+  expect_true("Research.P5.mle_exists" %in% r$theorems)
+  # the maximiser is finite: glm converges and nothing climbs past it along any of the axes
+  fit <- suppressWarnings(stats::glm(y ~ x, family = stats::binomial()))
+  expect_true(fit$converged)
+  expect_true(all(is.finite(stats::coef(fit))))
+  ll <- function(b) sum(-log1p(exp(-(2 * y - 1) * as.numeric(cbind(1, x) %*% b))))
+  b <- stats::coef(fit)
+  for (j in 1:3) for (step in c(-10, -1, 1, 10)) {
+    e <- numeric(3); e[j] <- step
+    expect_lt(ll(b + e), ll(b))
+  }
+  # complete separation: no maximiser
+  y2 <- as.integer(x[, 1] > 0)
+  r2 <- morie_logit_separation(y2, x)
+  expect_identical(r2$separation, "complete")
+  expect_false(r2$mle_exists)
+  # overlap in the labels but a rank-deficient design: a zero-margin direction exists
+  r3 <- morie_logit_separation(y, cbind(x, x[, 1] + x[, 2]))
+  expect_identical(r3$separation, "none")
+  expect_false(r3$mle_exists)
+  expect_true(is.na(morie_logit_separation(y, x, method = "glm")$mle_exists))
+})

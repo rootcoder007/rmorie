@@ -4,6 +4,13 @@
 \alias{morie_rdd_params}
 \title{Shared parameters for morie_rdd_* estimators and diagnostics}
 \arguments{
+\item{entries}{shared across the
+RDD family (sharp / fuzzy / bias-corrected, McCrary / Cattaneo
+density, bandwidth selectors, covariate balance, placebo cutoffs,
+kink, donut, geographic, local randomisation, power, etc.).
+Functions reference these via \verb{@inheritParams morie_rdd_params} so
+each \verb{@param} is documented once and the Rd files stay consistent.}
+
 \item{x}{Numeric vector of running-variable values (used by
 bandwidth selectors + density tests that don't take a
 \code{data.frame}).}
@@ -92,11 +99,6 @@ cutoff.}
 \item{power}{Numeric in \verb{(0, 1)}; target statistical power.}
 }
 \description{
-Roxygen-only block holding the @param entries shared across the
-RDD family (sharp / fuzzy / bias-corrected, McCrary / Cattaneo
-density, bandwidth selectors, covariate balance, placebo cutoffs,
-kink, donut, geographic, local randomisation, power, etc.).
-Functions reference these via \verb{@inheritParams morie_rdd_params} so
-each \verb{@param} is documented once and the Rd files stay consistent.
+Roxygen-only block holding the
 }
 \keyword{internal}

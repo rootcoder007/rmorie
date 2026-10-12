@@ -7,10 +7,12 @@
 morie_geron_mish(z)
 }
 \arguments{
-\item{z}{Pre-activations. @return List with activation, derivative, softplus, minimum,
-estimate, n, method.}
+\item{z}{Pre-activations.}
 }
 \value{
+List with activation, derivative, softplus, minimum,
+estimate, n, method.
+
 A list with \code{activation}, \code{derivative}, \code{softplus}, \code{minimum}, \code{estimate}, \code{n}, \code{method}.
 }
 \description{

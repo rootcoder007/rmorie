@@ -16,7 +16,7 @@ morie_spline_logit(
 )
 }
 \arguments{
-\item{x}{Evaluation point. @param knot Single-knot piecewise pieces.}
+\item{x}{Evaluation point.}
 
 \item{knot}{See Usage.}
 

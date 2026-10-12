@@ -1,7 +1,14 @@
 # rmorie 1.4.3 - 2026-10-09
 
-* Research ledger, eight more items closed with machine-checked proofs (`research/lean`, now 64
-  files, 312 audited theorems, 0 sorry): the veil-of-darkness odds ratio is the relative
+* Research ledger, ten more items closed with machine-checked proofs (`research/lean`, now 66
+  files, 334 audited theorems, 0 sorry): the stochastic urn's share has variance at most
+  a/(4(r0+b0)) at every horizon, so the loop drifts within a Chebyshev band fixed by the starting
+  mass (`morie_feedback_loop_envelope()`); Albert-Anderson's converse, overlap gives a finite
+  logistic maximum-likelihood estimate (`morie_logit_separation()$mle_exists`);
+  `morie_logit_separation()` now settles complete versus quasi-complete separation by a second
+  programme that maximises the smallest margin, so a vertex of the first programme sitting on a
+  zero margin no longer reports completely separated data as quasi-complete; about 25 help pages
+  had two `@param` tags on one line, folding the second parameter into the first description; the veil-of-darkness odds ratio is the relative
   visible-race factor and a sign test (`morie_veil_of_darkness()`); the three-list never-listed
   cell under no three-way interaction and its exp(-t) sensitivity
   (`morie_dark_figure_no_interaction()`); the error of the plug-in shrinkage factor

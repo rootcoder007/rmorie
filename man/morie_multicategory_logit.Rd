@@ -18,9 +18,9 @@ morie_multicategory_logit(
 )
 }
 \arguments{
-\item{bj0}{Intercept. @param bjs,xs Slope and covariate vectors.}
+\item{bj0}{Intercept.}
 
-\item{bjs}{See Usage.}
+\item{bjs, xs}{Slope and covariate vectors.}
 
 \item{xs}{See Usage.}
 
@@ -28,11 +28,13 @@ morie_multicategory_logit(
 
 \item{cum_probs}{Cumulative probabilities excluding P(Y <= J) = 1.}
 
-\item{j}{Category index. @param polr If TRUE negate the slopes.}
+\item{j}{Category index.}
 
 \item{polr}{See Usage.}
 
 \item{pi_hat, var_pi, z}{Wald pieces.}
+
+\item{bjs}{See Usage.}
 }
 \value{
 List with logit, probs, pi_j, wald (as supplied).

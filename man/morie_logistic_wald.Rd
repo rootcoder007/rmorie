@@ -15,17 +15,17 @@ morie_logistic_wald(
 )
 }
 \arguments{
-\item{b1}{Coefficient. @param var_b1 Its variance. @param c Unit change.}
+\item{b1}{Coefficient.}
 
 \item{var_b1}{See Usage.}
 
 \item{c}{See Usage.}
 
-\item{z}{Critical value. @param xs Covariate vector (leading 1).}
+\item{z}{Critical value.}
 
 \item{xs}{See Usage.}
 
-\item{cov}{Coefficient covariance. @param xb Linear predictor value.}
+\item{cov}{Coefficient covariance.}
 
 \item{xb}{See Usage.}
 }

@@ -58,6 +58,8 @@ signed off.
 | P11 sentencing bounds | `Research.P11.Pop.mtr_lower`, `mtr_upper`, `mtr_upper_attained` | `morie_sentence_effect_mtr()` |
 | P3 interference | `Research.P3.testVec_orth`, `testVec_dnorm`, `testVec_dirichlet`, `rayleigh_testVec`, `rayleigh_le_two_conductance`, `lambda2_le_rayleigh_testVec`, `cheeger_easy` | `morie_cheeger_bound()` |
 | P5 fairness | `Research.P5.ll1_strictMono`, `ll1_neg`, `loglik_lt_shift`, `loglik_lt_shift_quasi`, `no_mle`, `no_mle_quasi`, `loglik_neg`, `loglik_tendsto_zero` | `morie_logit_separation()` |
+| P5 fairness | `Research.P5.minMargin_continuous`, `loglik_le_ll1_min`, `sphere_margin_neg`, `loglik_le_of_norm`, `loglik_small_far`, `loglik_continuous`, `mle_exists` | `morie_logit_separation()$mle_exists` |
+| P4 feedback loops | `Research.P4.Envelope.mean_const`, `step_var`, `second_moment_step`, `step_sum_le`, `var_le`, `chebyshev`, `polya_envelope` | `morie_feedback_loop_envelope()` |
 | P11 sentencing bounds | `Research.P11.region_coverage_le`, `coverage_strictMono_c`, `im_cutoff_antitone`, `im_cutoff_between`, `two_sided_overcovers` | `morie_bounds_confidence()` |
 | P11 sentencing bounds | `Research.P11.im_cutoff_exists`, `im_cutoff_unique` | `morie_bounds_confidence()` (the root the solver finds) |
 | P13 pooling | `Research.P13.truncation_bias`, `pos_part_ge`, `pos_part_pos`, `dl_biased_under_homogeneity`, `tauDL_nonneg`, `tauDL_eq_zero_iff`, `re_var_ge`, `re_var_eq_iff` | `morie_meta_random_effects()`, `morie_meta_dl_bias()` |

@@ -7,8 +7,7 @@
 morie_pps_variance(z, p, t_hat)
 }
 \arguments{
-\item{z}{Sample values. @param p Draw probabilities. @param t_hat
-Estimated total.}
+\item{z}{Sample values.}
 
 \item{p}{See Usage.}
 

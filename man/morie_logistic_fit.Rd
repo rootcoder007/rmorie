@@ -7,7 +7,7 @@
 morie_logistic_fit(x, y, b = NULL)
 }
 \arguments{
-\item{x}{Design matrix (with intercept column). @param y 0/1 response.}
+\item{x}{Design matrix (with intercept column).}
 
 \item{y}{See Usage.}
 

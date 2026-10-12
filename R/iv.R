@@ -21,7 +21,8 @@ NULL
 
 #' Shared parameters for morie_iv_* estimators and diagnostics
 #'
-#' Roxygen-only block holding the @param entries shared across the IV
+#' Roxygen-only block holding the
+#' @param entries shared across the IV
 #' family (Anderson-Rubin, conditional-LR, Hansen J, Sargan, etc.).
 #' Functions reference these via `@inheritParams morie_iv_params` so
 #' each `@param` is documented once and the Rd files stay consistent.

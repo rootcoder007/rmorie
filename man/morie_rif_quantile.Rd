@@ -10,7 +10,9 @@ morie_rif_quantile(y, tau, weights = NULL, q = NULL, f = NULL)
 morie_rif_gap(yA, yB, tau, wA = NULL, wB = NULL)
 }
 \arguments{
-\item{y}{Outcomes. @param tau Quantile level in (0, 1).}
+\item{y}{Outcomes.}
+
+\item{tau}{Quantile level in (0, 1).}
 
 \item{weights}{Optional non-negative weights.}
 
@@ -18,7 +20,9 @@ morie_rif_gap(yA, yB, tau, wA = NULL, wB = NULL)
 
 \item{f}{Density value at \code{q}; a kernel estimate by default.}
 
-\item{yA, yB}{Outcomes of the two groups. @param wA,wB Their optional weights.}
+\item{yA, yB}{Outcomes of the two groups.}
+
+\item{wA, wB}{Their optional weights.}
 }
 \value{
 A list with \code{rif} (one value per outcome), \code{q}, \code{f},

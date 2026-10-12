@@ -4099,8 +4099,7 @@ morie_geron_xception <- function(n_classes = 1000, in_channels = 3, input_size =
 #'
 #' @param X Design matrix (n, d).
 #' @param y Targets `({0,1}` for logistic).
-#' @param
-#' n_estimators,learning_rate,max_depth,reg_lambda,gamma,min_child_weight,objective As in
+#' @param n_estimators,learning_rate,max_depth,reg_lambda,gamma,min_child_weight,objective As in
 #' Python original.
 #' @return list with predicted, raw_score, trees, base_score, loss_curve,
 #'   feature_importance, objective, estimate, n, method.

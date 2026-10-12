@@ -279,7 +279,18 @@ or of the initial condition?
   martingale convergence on a genuine filtered space).
 - Recorded 2026-10-12: the rate bound x_N − x₀ ≤ ((λA − λB)/4) Σ_{k<N} 1/(c₀ + kλmin) was proved
   on 2026-10-02 (P4Rate.lean: `naiveShare_rate_bound`, `naiveTotal_ge`,
-  `not_summable_shifted_harmonic`). Still open: the unequal-rate urn limit, the drift envelope,
+  `not_summable_shifted_harmonic`).
+- Progress 2026-10-12 (drift envelope): `Research.P4.Envelope` (P4Envelope.lean). For the
+  two-region urn at any starting counts (r₀, b₀) and reinforcement a, on the exact finite path
+  space: the share S_n is a martingale (`step_mean`, `mean_const`: E S_n = r₀/(r₀+b₀) for all n),
+  one step adds exactly s(1−s)(a/(T+a))² ≤ (a/(T+a))²/4 to the second moment (`step_var`,
+  `second_moment_step`), the increments telescope (`step_sum_le`), so Var S_n ≤ a/(4(r₀+b₀))
+  for every n (`var_le`) and P(|S_n − S_0| ≥ t) ≤ a/(4(r₀+b₀)t²) (`chebyshev`, `polya_envelope`).
+  The envelope is uniform in n: with r₀ + b₀ = 200 the share cannot leave a band of half-width
+  0.1 about its start with probability above 1/80, ever. So the "runaway" of the naive loop is,
+  for the stochastic urn, a drift of bounded size fixed by the starting mass, not a flight to
+  the boundary. R: `morie_feedback_loop_envelope()` (the bound beside the exact law by the urn
+  recursion). Still open: the unequal-rate urn limit (a Rubin-type reinforcement theorem) and
   the a.s. convergence statement.
 
 ## P5. Recidivism prediction under label bias: what can be certified?
@@ -352,6 +363,18 @@ biased is open.
   is not proved. R: `morie_logit_separation()` (exact linear programme through
   lpSolve, glm heuristic otherwise; reports the direction, the margins and the
   log-likelihood climbing along the direction).
+- Progress 2026-10-12 (Albert–Anderson converse): `Research.P5` in P5Overlap.lean. Overlap
+  (every direction d ≠ 0 gives some observation a strictly negative margin) implies a finite
+  maximum-likelihood estimate (`mle_exists`). The smallest margin is continuous
+  (`minMargin_continuous`), negative on the unit sphere, hence at most −δ there for some δ > 0
+  by compactness (`sphere_margin_neg`); the log-likelihood is at most ll1 of the smallest margin
+  (`loglik_le_ll1_min`), so at most ll1(−δ‖b‖) ≤ −δ‖b‖ (`loglik_le_of_norm`, `ll1_le_neg`) and
+  falls below any level far from the origin (`loglik_small_far`); on the remaining closed ball
+  the continuous log-likelihood (`loglik_continuous`) attains its maximum. With P5Separation
+  the characterisation is complete: a maximiser exists iff the data are not (quasi-)completely
+  separated. The failure of overlap splits into separation proper and a rank-deficient design
+  (a direction with every margin zero), which the R check reports separately.
+  R: `morie_logit_separation()$mle_exists`.
 
 ## P6. The age-crime curve: invariant law or mixture artefact?
 

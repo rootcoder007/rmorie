@@ -31,15 +31,20 @@
 #' change of who drives by light condition, \eqn{\kappa_g}, is observationally a
 #' bias (\code{exposure_shift_confounds}); passing it divides the ratio out.
 #'
+#'
 #' @param day,night Named counts of stops by group in daylight and in darkness.
+#'
 #' @param reference Name of the reference group.
+#'
 #' @param exposure_shift Optional named factors \eqn{\kappa_g} by which daylight
 #'   exposure differs from darkness exposure; the bias ratio is divided by
 #'   \eqn{\kappa_g/\kappa_{ref}}.
+#'
 #' @return A data frame with one row per group: the two counts, the daylight and
 #'   darkness shares, \code{bias_ratio} (relative visible-race factor against the
 #'   reference), \code{sign} (\code{"higher"}, \code{"lower"} or \code{"equal"}) and,
 #'   with \code{exposure_shift}, \code{bias_ratio_adjusted}.
+#'
 #' @references Grogger J, Ridgeway G (2006). Testing for racial profiling in traffic
 #'   stops from behind a veil of darkness. JASA 101(475).
 #' @examples
@@ -83,13 +88,17 @@ morie_veil_of_darkness <- function(day, night, reference = names(day)[1], exposu
 #' (\code{missing_cell_with_interaction}), so the dark figure moves by exactly
 #' \eqn{e^{-t}} per unit of the interaction the analyst assumes away.
 #'
+#'
 #' @param cells Named counts \code{n100, n010, n001, n110, n101, n011, n111} (list
 #'   memberships as the three digits).
+#'
 #' @param interaction Optional vector of three-way interaction values \eqn{t} at which
 #'   the implied never-listed cell is also reported.
+#'
 #' @return A list with \code{missing} (the never-listed cell under \eqn{u_{123} = 0}),
 #'   \code{observed}, \code{total}, and, with \code{interaction}, a data frame
 #'   \code{sensitivity} of \code{interaction}, \code{missing} and \code{total}.
+#'
 #' @references Fienberg SE (1972). The multiple recapture census for closed populations
 #'   and incomplete 2^k contingency tables. Biometrika 59(3).
 #' @examples
@@ -128,10 +137,15 @@ morie_dark_figure_no_interaction <- function(cells, interaction = NULL) {
 #' total mass is estimated by their weighted variance and its uncertainty by the
 #' leave-one-out jackknife.
 #'
+#'
 #' @param y Counts, one per place.
+#'
 #' @param noise_variance The stated noise mass \eqn{S_e} (for Poisson counts, the mean).
+#'
 #' @param weights Optional non-negative weights.
+#'
 #' @param total_variance Optional true total mass, when known, to evaluate the exact error.
+#'
 #' @return A list with \code{B_hat}, \code{S_y_hat}, \code{S_y_se} (jackknife),
 #'   \code{B_interval} (the factor at \eqn{\hat S_y \pm 2} se, by \code{bhat_antitone}),
 #'   \code{error_bound} (the bound at the 2-se relative error), and, with
@@ -181,9 +195,13 @@ morie_shrinkage_factor_error <- function(y, noise_variance, weights = NULL, tota
 #' Under a Poisson null the variance is the mean, so the null Gini is at most about
 #' \eqn{1/\sqrt{2\bar x}}; the exact null distribution is simulated as well.
 #'
+#'
 #' @param x Non-negative counts over places.
+#'
 #' @param n_sim Number of Poisson-null simulations.
+#'
 #' @param seed Seed for the simulation.
+#'
 #' @return A list with \code{gini}, \code{mean}, \code{variance}, \code{cv_bound}
 #'   (\eqn{\sqrt{v/2}/\bar x}, which the Gini never exceeds), \code{null_bound}
 #'   (\eqn{1/\sqrt{2\bar x}}), \code{null_mean}, \code{null_q95}, \code{excess}
@@ -225,10 +243,14 @@ morie_concentration_null_bound <- function(x, n_sim = 2000L, seed = 1L) {
 #' (\code{ratio_is_discount}). Identification of the three coefficients is the rank
 #' condition of \code{\link{morie_deterrence_design_check}} on the transformed design.
 #'
+#'
 #' @param p,s,c Certainty (in (0, 1]), severity (positive) and delay of the sanction, one
 #'   observation each.
+#'
 #' @param y Optional response; when given the log-design least-squares fit is returned.
+#'
 #' @param rho Optional discount rate at which the expected cost is evaluated.
+#'
 #' @return A list with the log design check (\code{identified}, \code{rank}), and, with
 #'   \code{y}, \code{coefficients} and \code{implied_discount}; with \code{rho},
 #'   \code{expected_cost} and \code{log_expected_cost}.
@@ -272,8 +294,12 @@ morie_deterrence_logcost <- function(p, s, c, y = NULL, rho = NULL) {
 #' (\code{Research.P8.Instrument.wald_identifies}); without relevance every slope
 #' yields the same instrument covariance (\code{wald_undefined}).
 #'
-#' @param y Outcome. @param p The sanction dimension to be instrumented.
+#'
+#' @param y Outcome.
+#' @param p The sanction dimension to be instrumented.
+#'
 #' @param z The instrument.
+#'
 #' @return A list with \code{beta}, \code{cov_zy}, \code{cov_zp}, \code{relevant}
 #'   and \code{alpha} (the intercept from the means).
 #' @examples
@@ -309,10 +335,16 @@ morie_wald_iv <- function(y, p, z) {
 #' \eqn{F(q) = \tau} (\code{rif_quantile_avg_eq_iff}). The gap between two groups'
 #' RIF means is the quantile gap plus the two recentering terms (\code{rif_gap}).
 #'
-#' @param y Outcomes. @param tau Quantile level in (0, 1).
+#'
+#' @param y Outcomes.
+#' @param tau Quantile level in (0, 1).
+#'
 #' @param weights Optional non-negative weights.
+#'
 #' @param q Evaluation point; the weighted \eqn{\tau}-quantile by default.
+#'
 #' @param f Density value at \code{q}; a kernel estimate by default.
+#'
 #' @return A list with \code{rif} (one value per outcome), \code{q}, \code{f},
 #'   \code{F_q} (weighted share at or below \code{q}), \code{mean_rif} and
 #'   \code{recentering} (\eqn{(\tau - F(q))/f}, zero at the sample quantile).
@@ -346,7 +378,10 @@ morie_rif_quantile <- function(y, tau, weights = NULL, q = NULL, f = NULL) {
 }
 
 #' @rdname morie_rif_quantile
-#' @param yA,yB Outcomes of the two groups. @param wA,wB Their optional weights.
+#'
+#' @param yA,yB Outcomes of the two groups.
+#' @param wA,wB Their optional weights.
+#'
 #' @return For \code{morie_rif_gap}: a list with the two groups' RIF results, \code{gap}
 #'   (difference of RIF means), \code{quantile_gap} and \code{recentering_gap}, with
 #'   \code{gap = quantile_gap + recentering_gap}.
@@ -369,7 +404,9 @@ morie_rif_gap <- function(yA, yB, tau, wA = NULL, wB = NULL) {
 #' \eqn{q = (1/3, 1/2, 0, 1/6)}: mean 1 and variance 1 in both, dispersion index one,
 #' yet \eqn{P(0)} of 1/2 against 1/3 (\code{Research.P10.Moments.second_moments_do_not_identify}).
 #'
+#'
 #' @param statistic Optional function of (mean, variance) to evaluate on both laws.
+#'
 #' @return A list with the two laws, their moments, \code{dispersion} (both 1),
 #'   \code{zero_probability} (1/2 and 1/3), and, with \code{statistic}, its two values.
 #' @examples
@@ -403,7 +440,10 @@ morie_contagion_moment_witness <- function(statistic = NULL) {
 #' for two (\code{two_type_cov}). The aggregate curve is blind to it
 #' (\code{aggregate_blind}); the panel is not (\code{panel_separates_witness}).
 #'
-#' @param w Type weights summing to one. @param rate_a,rate_b Type rates at the two ages.
+#'
+#' @param w Type weights summing to one.
+#' @param rate_a,rate_b Type rates at the two ages.
+#'
 #' @return For \code{morie_age_crime_type_cov}: a list with \code{aggregate} (the two
 #'   aggregate rates), \code{cross_cov} and \code{one_type} (whether the covariance is zero).
 #' @examples
@@ -423,10 +463,14 @@ morie_age_crime_type_cov <- function(w, rate_a, rate_b) {
 }
 
 #' @rdname morie_age_crime_type_cov
+#'
 #' @param y_a,y_b Counts of the same individuals at the two ages.
+#'
 #' @param n_perm Number of permutations for the exact null (one type: the pairing carries no
 #'   information, so permuting one age across individuals preserves the null law).
+#'
 #' @param seed Seed for the permutations.
+#'
 #' @return For \code{morie_age_crime_panel_cov}: a list with \code{cross_cov} (the sample
 #'   cross-age covariance), \code{p_value} (permutation, two-sided) and \code{n}.
 #' @examples
@@ -446,4 +490,60 @@ morie_age_crime_panel_cov <- function(y_a, y_b, n_perm = 2000L, seed = 1L) {
   perm <- vapply(seq_len(n_perm), function(i) cv(y_a, y_b[sample.int(n)]), numeric(1))
   list(cross_cov = obs, p_value = (1 + sum(abs(perm) >= abs(obs) - 1e-12)) / (n_perm + 1), n = n,
        theorem = "Research.P6.Panel.one_type_cov_zero")
+}
+
+#' Drift envelope of the discovery urn at any rates
+#'
+#' The stochastic discovery urn starts at counts \eqn{(r_0, b_0)}, adds \eqn{a} to
+#' the region drawn, and draws region A with probability equal to its share. The
+#' share is a martingale (\code{Research.P4.Envelope.mean_const}), one step adds
+#' \eqn{s(1-s)(a/(T+a))^2 \le (a/(T+a))^2/4} to its second moment
+#' (\code{step_var}), and the sum telescopes, so the variance of the share after
+#' any number of steps is at most \eqn{a/(4(r_0+b_0))} (\code{var_le}) and the
+#' share leaves a band of half-width \eqn{t} about its start with probability at
+#' most \eqn{a/(4(r_0+b_0)t^2)} (\code{chebyshev}). The exact law after \code{n}
+#' steps is computed by the urn's recursion for comparison.
+#'
+#'
+#' @param r0,b0 Initial counts of the two regions (positive).
+#'
+#' @param a Reinforcement per discovery (positive).
+#'
+#' @param n Horizon at which the exact law is evaluated.
+#'
+#' @param t Half-width of the band about the initial share.
+#'
+#' @return A list with \code{share0}, \code{variance_bound} (\eqn{a/(4(r_0+b_0))}),
+#'   \code{chebyshev_bound} (the band-exit probability bound at \code{t}),
+#'   \code{variance_n} (the exact variance of the share after \code{n} steps),
+#'   \code{mean_n} (its exact mean, equal to \code{share0}), \code{exit_n} (the
+#'   exact band-exit probability) and \code{law} (the exact law of the number of
+#'   A-draws).
+#' @examples
+#' morie_feedback_loop_envelope(1, 1, 1, n = 50, t = 0.25)[c("variance_bound", "variance_n")]
+#' @export
+morie_feedback_loop_envelope <- function(r0, b0, a = 1, n = 100L, t = 0.25) {
+  if (!all(c(r0, b0, a) > 0) || length(c(r0, b0, a)) != 3L) stop("`r0`, `b0` and `a` must be positive numbers", call. = FALSE)
+  if (!is.numeric(t) || length(t) != 1L || t <= 0) stop("`t` must be a positive half-width", call. = FALSE)
+  n <- as.integer(n)
+  if (n < 0L) stop("`n` must be a non-negative horizon", call. = FALSE)
+  share <- function(k, j) (r0 + j * a) / (r0 + b0 + k * a)
+  q <- 1
+  for (k in seq_len(n)) {
+    j <- 0:(k - 1L)
+    s <- share(k - 1L, j)
+    nq <- numeric(k + 1L)
+    nq[1:k] <- nq[1:k] + q * (1 - s)
+    nq[2:(k + 1L)] <- nq[2:(k + 1L)] + q * s
+    q <- nq
+  }
+  j <- 0:n
+  s_n <- share(n, j)
+  share0 <- r0 / (r0 + b0)
+  mean_n <- sum(q * s_n)
+  var_n <- sum(q * (s_n - share0)^2)
+  list(share0 = share0, variance_bound = a / (4 * (r0 + b0)),
+       chebyshev_bound = a / (4 * (r0 + b0) * t^2), variance_n = var_n, mean_n = mean_n,
+       exit_n = sum(q[abs(s_n - share0) >= t]), law = q, n = n,
+       theorem = "Research.P4.Envelope.chebyshev")
 }

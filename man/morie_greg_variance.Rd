@@ -18,9 +18,9 @@ morie_greg_variance(
 )
 }
 \arguments{
-\item{e}{Residuals. @param n,n_population Sizes.}
+\item{e}{Residuals.}
 
-\item{n}{See Usage.}
+\item{n, n_population}{Sizes.}
 
 \item{n_population}{See Usage.}
 
@@ -31,6 +31,8 @@ morie_greg_variance(
 \item{pi}{Inclusion probabilities (calibration-residual route).}
 
 \item{ratio}{If TRUE return the N^2 S2(e)/n ratio-total variance.}
+
+\item{n}{See Usage.}
 }
 \value{
 List with s2_e, variance, g_weight, g_variance, ratio_variance,

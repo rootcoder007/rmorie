@@ -4,6 +4,11 @@
 \alias{morie_survey_params}
 \title{Shared parameters for morie_survey_* design-based estimators}
 \arguments{
+\item{entries}{shared across the
+survey family (HT, Hajek, ratio, calibration, post-stratification,
+subpopulation, complex-design GLM, mean). Functions reference these
+via \verb{@inheritParams morie_survey_params}.}
+
 \item{df}{A \code{data.frame} holding the (unit-level) sample data plus
 any weight/strata/cluster/domain columns referenced by name.}
 
@@ -66,9 +71,6 @@ to the survey-weighted GLM.}
 \item{tol}{Convergence tolerance for calibration.}
 }
 \description{
-Roxygen-only block holding the @param entries shared across the
-survey family (HT, Hajek, ratio, calibration, post-stratification,
-subpopulation, complex-design GLM, mean). Functions reference these
-via \verb{@inheritParams morie_survey_params}.
+Roxygen-only block holding the
 }
 \keyword{internal}

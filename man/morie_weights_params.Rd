@@ -4,6 +4,11 @@
 \alias{morie_weights_params}
 \title{Shared parameters for morie_weights_* helpers}
 \arguments{
+\item{entries}{shared across the
+weights family (design / calibration / replication / trimming /
+diagnostics). Functions reference these via
+\verb{@inheritParams morie_weights_params}.}
+
 \item{weights}{Numeric vector of unit-level design weights.}
 
 \item{weights_a}{Numeric vector of weights from frame A
@@ -86,9 +91,6 @@ estimates.}
 \item{...}{Additional method-specific arguments.}
 }
 \description{
-Roxygen-only block holding the @param entries shared across the
-weights family (design / calibration / replication / trimming /
-diagnostics). Functions reference these via
-\verb{@inheritParams morie_weights_params}.
+Roxygen-only block holding the
 }
 \keyword{internal}

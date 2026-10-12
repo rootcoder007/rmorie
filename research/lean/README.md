@@ -10,8 +10,8 @@ cite the theorem they rest on (see `../README.md` for the table).
 | `P1DarkFigure`, `P1Breakdown`, `P1Hierarchy`, `P1ThreeList`, `P1LeCam` | the dark figure of crime as a partial-identification problem |
 | `P2Selection`, `P2Collider`, `P2Benchmark`, `P2RelativeRisk`, `P2Interracial` | selection and collider bias in policing data |
 | `P3HorvitzThompson`, `P3Variance`, `P3Interference`, `P3SYG`, `P3Cheeger` | survey estimation under interference |
-| `P4Urn`, `P4Rate`, `P4Feedback`, `P4Limit`, `P4Mitigation` | feedback loops in predictive policing |
-| `P5Fairness`, `P5Compare`, `P5Hazard`, `P5Ranking`, `P5Rescale`, `P5Separation` | fairness measures and their impossibilities |
+| `P4Urn`, `P4Rate`, `P4Feedback`, `P4Limit`, `P4Mitigation`, `P4Envelope` | feedback loops in predictive policing |
+| `P5Fairness`, `P5Compare`, `P5Hazard`, `P5Ranking`, `P5Rescale`, `P5Separation`, `P5Overlap` | fairness measures and their impossibilities |
 | `P6AgeCrime` | the age-crime curve |
 | `P7Concentration`, `P7Distinct`, `P7Mixture` | concentration of crime in places and people |
 | `P8Deterrence`, `P8Necessity`, `P8Comparative` | deterrence |
@@ -27,7 +27,7 @@ cite the theorem they rest on (see `../README.md` for the table).
 | `P18Selective` | selective labels: evaluating a release rule from the released alone |
 | `P19Regression`, `P19Shrinkage` | regression to the mean at selected hot spots |
 
-410 theorems and lemmas in all. What is proved is the mathematics: given
+439 theorems and lemmas in all. What is proved is the mathematics: given
 the stated assumptions, the estimand is identified, bounded or diverges as
 claimed. Whether the assumptions hold of any data set is a substantive
 claim that Lean cannot check.

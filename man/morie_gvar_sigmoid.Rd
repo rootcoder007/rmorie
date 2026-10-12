@@ -7,9 +7,11 @@
 morie_gvar_sigmoid(x)
 }
 \arguments{
-\item{x}{A tape node. @return A tape node.}
+\item{x}{A tape node.}
 }
 \value{
+A tape node.
+
 The value of \code{.morie_gvar}.
 }
 \description{

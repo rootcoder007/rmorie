@@ -7,9 +7,11 @@
 morie_geron_double_center(D)
 }
 \arguments{
-\item{D}{Distance matrix. @return Gram matrix B.}
+\item{D}{Distance matrix.}
 }
 \value{
+Gram matrix B.
+
 The value of \code{.morie_gr_w4b_double_center}.
 }
 \description{

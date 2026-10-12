@@ -7,7 +7,9 @@
 morie_wald_iv(y, p, z)
 }
 \arguments{
-\item{y}{Outcome. @param p The sanction dimension to be instrumented.}
+\item{y}{Outcome.}
+
+\item{p}{The sanction dimension to be instrumented.}
 
 \item{z}{The instrument.}
 }

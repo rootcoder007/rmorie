@@ -4,6 +4,11 @@
 \alias{morie_iv_params}
 \title{Shared parameters for morie_iv_* estimators and diagnostics}
 \arguments{
+\item{entries}{shared across the IV
+family (Anderson-Rubin, conditional-LR, Hansen J, Sargan, etc.).
+Functions reference these via \verb{@inheritParams morie_iv_params} so
+each \verb{@param} is documented once and the Rd files stay consistent.}
+
 \item{data}{A \code{data.frame} (or tibble) holding the outcome,
 endogenous regressors, instruments, and any exogenous controls.}
 
@@ -40,9 +45,6 @@ to look up the Stock-Yogo critical-value table.}
 up the Stock-Yogo critical-value table.}
 }
 \description{
-Roxygen-only block holding the @param entries shared across the IV
-family (Anderson-Rubin, conditional-LR, Hansen J, Sargan, etc.).
-Functions reference these via \verb{@inheritParams morie_iv_params} so
-each \verb{@param} is documented once and the Rd files stay consistent.
+Roxygen-only block holding the
 }
 \keyword{internal}

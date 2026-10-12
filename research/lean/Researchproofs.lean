@@ -62,3 +62,5 @@ import Researchproofs.P8Instrument
 import Researchproofs.P10Moments
 import Researchproofs.P15RIF
 import Researchproofs.P19Error
+import Researchproofs.P4Envelope
+import Researchproofs.P5Overlap

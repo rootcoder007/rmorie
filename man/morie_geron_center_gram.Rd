@@ -7,9 +7,11 @@
 morie_geron_center_gram(K)
 }
 \arguments{
-\item{K}{Gram matrix. @return Centred Gram matrix.}
+\item{K}{Gram matrix.}
 }
 \value{
+Centred Gram matrix.
+
 A numeric value.
 }
 \description{

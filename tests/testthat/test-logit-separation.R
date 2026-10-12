@@ -57,3 +57,15 @@ test_that("overlapping data has no separating direction and the fit converges", 
   y2 <- c(1, 1, 1, 0, 0, 0, 0)
   expect_true(morie_logit_separation(y2, x2, method = "glm")$separation %in% c("complete", "quasi-complete"))
 })
+
+test_that("complete separation is reported as complete even when the first programme's vertex has zero margins", {
+  set.seed(5)
+  x <- cbind(rnorm(60), rnorm(60))
+  y <- as.integer(x[, 1] > 0)
+  r <- morie_logit_separation(y, x)
+  expect_identical(r$separation, "complete")
+  expect_true(all(r$margins > 0))
+  expect_identical(r$n_zero_margin, 0L)
+  # the witness direction is (0, 1, 0): margins s_i x_i1 > 0 for every row
+  expect_true(all((2 * y - 1) * x[, 1] > 0))
+})

@@ -23,7 +23,12 @@ or \code{"complete"}), \code{direction} (a separating \eqn{d}, or
 \code{NULL}), \code{margins} (\eqn{s_i x_i \cdot d}), \code{n_zero_margin},
 \code{loglik_along} (the log-likelihood at \eqn{t d} for
 \eqn{t = 0, 1, 10, 100}: increasing towards 0 when separated),
-\code{method} and \code{theorems}.
+\code{mle_exists} (\code{TRUE} when the linear programme finds no
+separating direction and the design has full column rank: by
+Albert-Anderson's converse, \code{Research.P5.mle_exists}, the
+log-likelihood then attains its maximum at a finite coefficient vector;
+\code{FALSE} under separation or a rank-deficient design; \code{NA}
+for the \code{"glm"} heuristic), \code{method} and \code{theorems}.
 }
 \description{
 With labels coded as signs \eqn{s_i = 2y_i - 1}, a direction \eqn{d} with
@@ -50,6 +55,7 @@ instead inspects a fit with many iterations for fitted probabilities at
 x <- cbind(z = c(1, 1, 1, 0, 0, 0, 0), w = c(0.2, -1, 0.5, 0.1, -0.4, 1.2, 0.3))
 y <- c(1, 1, 1, 0, 0, 0, 0)
 morie_logit_separation(y, x)[c("separation", "loglik_along")]
+
 }
 \references{
 Konis, K. (2007). \emph{Linear programming algorithms for

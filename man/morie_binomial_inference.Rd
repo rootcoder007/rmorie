@@ -7,7 +7,7 @@
 morie_binomial_inference(w, n, p = NA, z = 1.96, interval_fn = NULL)
 }
 \arguments{
-\item{w}{Successes. @param n Trials. @param p Probability.}
+\item{w}{Successes.}
 
 \item{n}{See Usage.}
 

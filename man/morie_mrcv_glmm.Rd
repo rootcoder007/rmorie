@@ -15,15 +15,17 @@ morie_mrcv_glmm(
 )
 }
 \arguments{
-\item{b0}{Intercept. @param beta_w_a,beta_y_b,beta_z_c MRCV effects.}
+\item{b0}{Intercept.}
 
-\item{beta_w_a}{See Usage.}
+\item{beta_w_a, beta_y_b, beta_z_c}{MRCV effects.}
 
 \item{beta_y_b}{See Usage.}
 
 \item{beta_z_c}{See Usage.}
 
 \item{b1, x, random_intercept}{GLMM pieces.}
+
+\item{beta_w_a}{See Usage.}
 }
 \value{
 List with mu_spmi, mu_three, eta_glmm (as supplied).

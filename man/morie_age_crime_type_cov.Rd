@@ -10,7 +10,9 @@ morie_age_crime_type_cov(w, rate_a, rate_b)
 morie_age_crime_panel_cov(y_a, y_b, n_perm = 2000L, seed = 1L)
 }
 \arguments{
-\item{w}{Type weights summing to one. @param rate_a,rate_b Type rates at the two ages.}
+\item{w}{Type weights summing to one.}
+
+\item{rate_a, rate_b}{Type rates at the two ages.}
 
 \item{y_a, y_b}{Counts of the same individuals at the two ages.}
 
