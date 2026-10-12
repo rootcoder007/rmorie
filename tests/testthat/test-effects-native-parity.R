@@ -33,12 +33,14 @@ me_call <- function(fn, m, d, ...) {
   do.call(fn, args)
 }
 
+# the models carry their data in the call (do.call embeds the frame), so marginaleffects 1.0
+# and insight recover it from a model built inside this helper on every platform
 mk_eff_models <- function() {
   d <- mk_eff_data()
   list(
-    lm = stats::lm(y ~ x * g + z + h + k, data = d),
-    logit = stats::glm(yb ~ x * g + z + h + l, family = stats::binomial(), data = d),
-    pois = stats::glm(cnt ~ g * h + x + I(z^2), family = stats::poisson(), data = d)
+    lm = do.call(stats::lm, list(y ~ x * g + z + h + k, data = d)),
+    logit = do.call(stats::glm, list(yb ~ x * g + z + h + l, family = stats::binomial(), data = d)),
+    pois = do.call(stats::glm, list(cnt ~ g * h + x + I(z^2), family = stats::poisson(), data = d))
   )
 }
 
