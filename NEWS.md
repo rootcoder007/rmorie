@@ -8,6 +8,20 @@
   moments and interactions. `morie_causal_weighting()` now runs `"ebal"` for every estimand
   and `"ipt"` natively. The engines had been in the package without an entry point; each is
   tested against the equation it solves and, where WeightIt is installed, against WeightIt.
+* SIU: `morie_siu_llm_extract()` and `morie_siu_anomaly_check()` on a case with no harvester
+  cache (the self-serve route) now carry the resolved drid and the cache row's nrid instead of
+  failing on the bookkeeping columns; a provider that answers with an empty candidates, content
+  or choices array is reported as "returned empty text" rather than a subscript error; an empty
+  verdict array from the auditing model is an empty audit table.
+* OTIS: `morie_otis_analyze_a01_ruhela_subgroup_male()` and the b01 sibling refuse a subgroup
+  under 100 cells with the same message as the female formulations.
+* Dataset fetches: an HTTP error whose JSON body carries the message as the `error` string
+  itself is reported with that message.
+* Tests cover the TPS hub wrappers without mocking, the advanced Hawkes drivers and their
+  base-R fallbacks against the C++ paths, the statistical-physics routines on exact synthetic
+  frames, `morie_fetch_siu()` and the SIU review side with the transport replaced by recorders,
+  the dataset HTTP helpers on both backends, and the OTIS Mandela, chi-square, grid and master
+  analyses with every reported number recomputed.
 * Research ledger, three open items closed with machine-checked proofs (`research/lean`, 273
   theorems and lemmas, 0 sorry): one recorded crime series cannot separate re-classification
   from cuffing and a second source's true total can (`morie_recording_regimes()`); the
