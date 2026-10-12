@@ -3005,6 +3005,10 @@ morie_otis_analyze_a01_ruhela_subgroup_female <- function(data = NULL, out_dir =
 morie_otis_analyze_a01_ruhela_subgroup_male <- function(data = NULL, out_dir = NULL) {
   pair <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "a01"))
   work <- pair$data[.otis_female(pair$data$Gender) == 0L, , drop = FALSE]
+  if (nrow(work) < 100L) {
+    return(.otis_wrap(title = "a01 subgroup Male Ruhela", summary_lines = list(),
+                      warnings = sprintf("only %d male cells; too few", nrow(work))))
+  }
   res <- .otis_ruhela_formulations_on(
     work,
     ds_id = "a01-subM",
@@ -3083,6 +3087,10 @@ morie_otis_analyze_b01_ruhela_subgroup_female <- function(data = NULL, out_dir =
 morie_otis_analyze_b01_ruhela_subgroup_male <- function(data = NULL, out_dir = NULL) {
   pair <- morie_otis_make_pair_alert_to_volatility_ruhela(.otis_ruhela_input(data, "b01"))
   work <- pair$data[.otis_female(pair$data$Gender) == 0L, , drop = FALSE]
+  if (nrow(work) < 100L) {
+    return(.otis_wrap(title = "b01 subgroup Male Ruhela", summary_lines = list(),
+                      warnings = sprintf("only %d male cells; too few", nrow(work))))
+  }
   res <- .otis_ruhela_formulations_on(
     work,
     ds_id = "b01-subM",
