@@ -25,6 +25,14 @@ mk_eff_data <- function(n = 200L) {
   d
 }
 
+# marginaleffects 1.0 no longer recovers the data of a model built inside a helper, and 0.32
+# treats an explicit newdata differently from its default: give each version what it expects
+me_call <- function(fn, m, d, ...) {
+  args <- c(list(m), list(...))
+  if (utils::packageVersion("marginaleffects") >= "1.0.0" && is.null(args$newdata)) args$newdata <- d
+  do.call(fn, args)
+}
+
 mk_eff_models <- function() {
   d <- mk_eff_data()
   list(
@@ -63,12 +71,13 @@ test_that("native emmeans matches emmeans::emmeans (lm, logit, poisson)", {
 test_that("native predictions match marginaleffects::predictions", {
   skip_if_not_installed("marginaleffects")
   ms <- mk_eff_models()
+  d <- mk_eff_data()
   for (nm in names(ms)) {
     m <- ms[[nm]]
     types <- if (nm == "lm") list(NULL, "response") else list(NULL, "response", "link")
     for (ty in types) {
       a <- do.call(morie_effects_predictions, c(list(m), list(type = ty)))
-      b <- do.call(marginaleffects::predictions, c(list(m), list(type = ty)))
+      b <- do.call(me_call, c(list(marginaleffects::predictions, m, d), list(type = ty)))
       expect_equal(a$estimate, b$estimate, tolerance = tol)
       expect_equal(a$conf.low, b$conf.low, tolerance = tol)
       expect_equal(a$conf.high, b$conf.high, tolerance = tol)
@@ -76,7 +85,7 @@ test_that("native predictions match marginaleffects::predictions", {
       if (!is.null(b$std.error)) expect_equal(a$std.error, b$std.error, tolerance = tol)
     }
     a <- morie_effects_predictions(m, by = "g")
-    b <- marginaleffects::predictions(m, by = "g")
+    b <- me_call(marginaleffects::predictions, m, d, by = "g")
     expect_equal(a$estimate, b$estimate, tolerance = tol)
     expect_equal(a$std.error, b$std.error, tolerance = tol)
     expect_equal(nrow(morie_effects_predictions(m, newdata = mk_eff_data()[1:5, ])), 5L)
@@ -96,16 +105,16 @@ test_that("native comparisons / slopes match marginaleffects", {
   }
   for (nm in names(ms)) {
     m <- ms[[nm]]
-    chk(morie_effects_comparisons(m), marginaleffects::comparisons(m))
-    chk(morie_effects_comparisons(m, by = TRUE), marginaleffects::avg_comparisons(m))
+    chk(morie_effects_comparisons(m), me_call(marginaleffects::comparisons, m, d))
+    chk(morie_effects_comparisons(m, by = TRUE), me_call(marginaleffects::avg_comparisons, m, d))
     a <- morie_effects_comparisons(m, by = "h")
-    b <- marginaleffects::avg_comparisons(m, by = "h")
+    b <- me_call(marginaleffects::avg_comparisons, m, d, by = "h")
     chk(a, b)
     expect_identical(as.character(a$h), as.character(b$h))
     chk(morie_effects_comparisons(m, variables = list(x = 2)),
-        marginaleffects::comparisons(m, variables = list(x = 2)))
-    chk(morie_effects_slopes(m), marginaleffects::slopes(m))
-    chk(morie_effects_slopes(m, by = TRUE), marginaleffects::avg_slopes(m))
+        me_call(marginaleffects::comparisons, m, d, variables = list(x = 2)))
+    chk(morie_effects_slopes(m), me_call(marginaleffects::slopes, m, d))
+    chk(morie_effects_slopes(m, by = TRUE), me_call(marginaleffects::avg_slopes, m, d))
     chk(morie_effects_slopes(m, variables = "x", newdata = d[1:5, ]),
         marginaleffects::slopes(m, variables = "x", newdata = d[1:5, ]))
   }
@@ -158,7 +167,7 @@ test_that("a numeric variable the formula wraps in factor() is categorical, as i
   expect_lt(rel(a$prob, b$prob), 1e-10)
   for (m in list(m1, m2, m3)) {
     a <- morie_effects_comparisons(m, variables = "cyl")
-    b <- suppressWarnings(as.data.frame(marginaleffects::comparisons(m, variables = "cyl")))
+    b <- suppressWarnings(as.data.frame(me_call(marginaleffects::comparisons, m, mtcars, variables = "cyl")))
     expect_equal(nrow(a), nrow(b))
     expect_lt(rel(a$estimate, b$estimate), 1e-10)
     expect_lt(rel(a$std.error, b$std.error), 1e-10)

@@ -68,9 +68,12 @@ test_that("glm propensity scores equal glm's for every link and the weights foll
     expect_equal(as.numeric(sc) / nrow(d), rep(0, 3), tolerance = 1e-7, info = lk)
   }
   for (lk in c("log", "loglog", "clog", "identity")) {
-    # on these data the clog and identity fits stop at the iteration cap and say so
+    # on these data the clog and identity fits reach the iteration cap on most BLAS builds and
+    # say so; a build that converges inside the cap is silent, and either way the only warning
+    # allowed is that one, and the scores stay inside (0, 1)
     w <- testthat::capture_warnings(f <- ps_binary(X, d$t, d$sw, link = lk))
-    expect_equal(w, rep("the propensity model did not converge", lk %in% c("clog", "identity")), info = lk)
+    expect_true(all(w == "the propensity model did not converge"), info = lk)
+    if (lk %in% c("log", "loglog")) expect_length(w, 0L)
     expect_true(all(f$ps > 0 & f$ps < 1), info = lk)
     expect_equal(f$link$name, lk)
   }
