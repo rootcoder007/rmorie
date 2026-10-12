@@ -323,3 +323,43 @@ test_that("the rank-persistence null is the hypergeometric law: it matches brute
   expect_error(morie_rank_persistence_null(5, 6), "between 0")
   expect_error(morie_rank_persistence_null(5, 2, observed = 3), "between 0")
 })
+
+test_that("the hot-spot threshold reproduces the Short-Brantingham algebra of Research.P4.Hotspot", {
+  p <- list(A0 = 1, omega = 1, eps = 2, D = 1, gamma = 1, eta = 0.01, z = 1)
+  r <- do.call(morie_hotspot_threshold, p)
+  B <- r$steady[["B"]]; A <- r$steady[["A"]]; rho <- r$steady[["rho"]]
+  # steady_iff: the two uniform right-hand sides vanish, and the state is the closed form
+  expect_equal(-p$omega * B + p$eps * p$D * rho * (p$A0 + B), 0, tolerance = 1e-12)
+  expect_equal(-rho * (p$A0 + B) + p$gamma, 0, tolerance = 1e-12)
+  expect_equal(c(B, A, rho), c(2, 3, 1 / 3), tolerance = 1e-12)
+  # det_eq / P_eq / Q_eq / R_eq against the 2x2 matrix built by hand
+  ks <- c(0, 0.5, 2, 10)
+  a <- -p$omega + p$eps * p$D * rho; b <- p$eps * p$D * A; c0 <- -rho; c1 <- 2 * p$D * rho / A
+  d <- -A; d1 <- p$eta * p$D / p$z; d2 <- p$D
+  dets <- vapply(ks, function(k) det(matrix(c(a - d1 * k, c0 + c1 * k, b, d - d2 * k), 2L)), numeric(1))
+  tab <- morie_hotspot_threshold(p$A0, p$omega, p$eps, p$D, p$gamma, p$eta, p$z, k = ks)$dispersion
+  expect_equal(tab$det, dets, tolerance = 1e-12)
+  expect_equal(tab$det, r$P * ks^2 - r$Q * ks + r$R, tolerance = 1e-12)
+  expect_equal(r$P, p$eta * p$D^2 / p$z)
+  expect_equal(r$Q, p$D * (3 * p$eps * p$D * rho - p$omega - p$eta * A / p$z), tolerance = 1e-12)
+  expect_equal(r$R, p$omega * A)
+  expect_true(all(tab$trace < 0))                                                  # tr_neg
+  # hotspots_above_threshold: Q > 0, Q^2 > 4 P R, the critical mode grows and its growth rate is
+  # a root of the characteristic polynomial (unstable_iff)
+  expect_true(r$Q > 0 && r$Q^2 > 4 * r$P * r$R && r$unstable)
+  expect_equal(r$k_crit, r$Q / (2 * r$P))
+  expect_lt(r$det_crit, 0)
+  expect_gt(r$growth_crit, 0)
+  tr_c <- (a - d1 * r$k_crit) + (d - d2 * r$k_crit)
+  expect_equal(r$growth_crit^2 - tr_c * r$growth_crit + r$det_crit, 0, tolerance = 1e-10)
+  # no_hotspots_without_reinforcement and no_hotspots_below_threshold
+  r0 <- morie_hotspot_threshold(p$A0, p$omega, 0, p$D, p$gamma, p$eta, p$z, k = ks)
+  expect_false(r0$unstable)
+  expect_true(all(r0$dispersion$det > 0))
+  rb <- morie_hotspot_threshold(p$A0, p$omega, 0.2, p$D, p$gamma, 0.5, p$z, k = ks)
+  expect_lte(rb$threshold[["reinforcement"]], rb$threshold[["decay_plus_diffusion"]])
+  expect_false(rb$unstable)
+  expect_true(all(rb$dispersion$det > 0))
+  expect_error(morie_hotspot_threshold(0, 1, 1, 1, 1, 0.1), "A0")
+  expect_error(morie_hotspot_threshold(1, 1, -1, 1, 1, 0.1), "eps")
+})

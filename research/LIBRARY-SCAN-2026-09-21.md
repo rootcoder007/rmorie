@@ -158,15 +158,29 @@ C23. **Lorden lower bound and CUSUM for hot-spot emergence** (Lai 1995 JRSS-B pp
 
 C24. **Cyclic dominance in the criminal–citizen–inspector game has no stable interior equilibrium** (D'Orsogna & Perc Sec. IV p. 8, Fig. 8) — PROVE: a rock–paper–scissors payoff has a conserved quantity under replicator dynamics, so the interior fixed point is a centre — EMPIRICAL: FBI CDE clearance vs crime cycles by agency — EXTENDS: new, same object as A18.
 
-## Priority queue (what gets a Lean file next)
+## Priority queue: status on 2026-10-12
 
-1. C1 + C2 + C3 — the stochastic P4 (martingale share, Friedman contrast, Azuma drift envelope). Closes the "urn is not yet proved" gap in `R/feedback_loop.R`.
-2. B23 + C12 — sharpen P7's Poisson null to an inequality (Jensen) and prove Cox overdispersion; both are short and change what `morie_concentration_decompose` reports.
-3. B5 + B6 — Petersen/Chapman floor identities and the k-list non-identification; extends P1 to three sources.
-4. A23 + A22 + A21 — the exposure-offset identity, the multiplicative benchmark identity and the arrest-probability premise; all three are the P2 machinery the TPS reports actually need.
-5. A12 + A15 — reclassification algebra (column-stochastic recording); new P9 "crime counting as a linear map".
-6. C5 + C6 + A17 — Hawkes branching criticality (Galton–Watson) as new P10 "near-repeat contagion".
-7. B7 (SYG form) + C16 (zero-probability failure) — finish the P3 design layer.
-8. B1 + B2 + B4 + B25 — Manski bounds as a P11 "sentencing effects as intervals" with the inference layer.
-9. A1 + A2 + A5 — logit separation, LDA, KHB rescaling; a P12 on "what a coefficient means".
-10. C8 + A16, B20 — reaction-diffusion threshold and the Bartlett non-identification; the spatial P13.
+The queue below was written on 2026-09-21. Every item now has a Lean file under
+`research/lean/Researchproofs/` (0 `sorry`, audited axioms `propext`, `Classical.choice`,
+`Quot.sound` only), an R function and a Python port with parity tests. What a file leaves open
+is stated in the ledger entry of its problem.
+
+| # | Items | Problem | Lean files | R / Python |
+|---|---|---|---|---|
+| 1 | C1 + C2 + C3 | P4 stochastic urn: martingale share, Friedman contrast, Azuma drift envelope | `P4Urn`, `P4Envelope`, `P4Feedback` | `morie_feedback_loop_urn_law()`, `morie_feedback_loop_envelope()` |
+| 2 | B23 + C12 | P7 Poisson null as a Jensen inequality; Cox overdispersion | `P7Mixture`, `P7Bound`, `P7Persistence` | `morie_concentration_decompose()`, `morie_rank_persistence_null()` |
+| 3 | B5 + B6 | P1 Petersen/Chapman floor identities; k-list non-identification | `P1DarkFigure`, `P1ThreeList`, `P1LeCam` | `morie_dark_figure_*()` |
+| 4 | A23 + A22 + A21 | P2 exposure-offset identity, multiplicative benchmark, arrest-probability premise | `P2Benchmark`, `P2RelativeRisk`, `P2Selection` | `morie_benchmark_*()` |
+| 5 | A12 + A15 | P9 crime counting as a linear map (column-stochastic recording) | `P9Recording` | `morie_recording_map()` |
+| 6 | C5 + C6 + A17 | P10 near-repeat contagion: branching criticality, extinction, moments | `P10Contagion`, `P10Extinction`, `P10Moments` | `morie_contagion_*()` |
+| 7 | B7 + C16 | P3 design layer: SYG form, zero-probability failure, Horvitz-Thompson | `P3SYG`, `P3HorvitzThompson`, `P3Variance`, `P3Ring` | `morie_spillover_*()` |
+| 8 | B1 + B2 + B4 + B25 | P11 sentencing effects as intervals, with inference | `P11Bounds`, `P11Monotone`, `P11Selection`, `P11Contaminated`, `P11Coverage` | `morie_bounds_*()` |
+| 9 | A1 + A2 + A5 | logit separation, LDA, KHB rescaling (filed under P5, "what a coefficient means") | `P5Separation`, `P5Rescale`, `P5Compare` | `morie_logit_separation()`, `morie_khb_rescale()` |
+| 10 | C8 + A16, B20 | hot-spot threshold of the reaction-diffusion model; Bartlett non-identification | `P4Hotspot` (steady state, dispersion relation, threshold), `P10Moments` (Bartlett) | `morie_hotspot_threshold()`, `morie_contagion_moments()` |
+
+Item 10's reaction-diffusion part (C8) was the last to land (2026-10-12): the unique homogeneous
+steady state B̄ = εDγ/ω, ρ̄ = γ/Ā; the mode-k determinant P k² − Q k + R with P = ηD²/z,
+Q = D(3εDρ̄ − ω − ηĀ/z), R = ωĀ > 0 and a negative trace, so a mode grows iff the determinant is
+negative; hence no hot spots at any wavelength when 3εDρ̄ ≤ ω + ηĀ/z (in particular with ε = 0,
+which refutes "hot spots for all parameters"), and a growing critical mode k* = Q/(2P) when Q > 0
+and Q² > 4PR. The amplitude (sub/supercritical) half of A16 is not formalised.

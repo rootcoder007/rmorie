@@ -1,7 +1,9 @@
 # rmorie 1.4.3 - 2026-10-09
 
-* Research ledger, twelve more items closed with machine-checked proofs (`research/lean`, now 68
-  files, 341 audited theorems, 0 sorry): the ring mis-specification bound for the spillover
+* Research ledger, thirteen more items closed with machine-checked proofs (`research/lean`, now 69
+  files, 361 audited theorems, 0 sorry): the hot-spot threshold of the Short-Brantingham
+  reaction-diffusion model, the unique steady state and the dispersion relation with an explicit
+  stability inequality (`morie_hotspot_threshold()`); the ring mis-specification bound for the spillover
   estimand (`morie_spillover_ring_bound()`); the hypergeometric rank-persistence null
   (`morie_rank_persistence_null()`); the stochastic urn's share has variance at most
   a/(4(r0+b0)) at every horizon, so the loop drifts within a Chebyshev band fixed by the starting

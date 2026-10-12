@@ -66,3 +66,4 @@ import Researchproofs.P4Envelope
 import Researchproofs.P5Overlap
 import Researchproofs.P3Ring
 import Researchproofs.P7Persistence
+import Researchproofs.P4Hotspot

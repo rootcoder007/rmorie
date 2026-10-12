@@ -2,8 +2,8 @@
 
 Rootcoder007, started 2026-09-21. Fresh start: nothing here is
 taken from earlier MRP/VSR work; those results are a later reproducibility
-target inside rmorie, not the seed. Workspace: l14 `~/work/rmorie-research`
-(branch `research`), Lean project to be created as `~/work/researchproofs`.
+target inside rmorie, not the seed. The Lean sources live in `research/lean/`
+of this repository; the R functions in `R/`, the Python port in morie.
 
 Selection rule: a problem is on this list if the field itself calls it
 unsolved AND a correct, machine-checked method would change what the field
@@ -316,6 +316,19 @@ or of the initial condition?
   the boundary. R: `morie_feedback_loop_envelope()` (the bound beside the exact law by the urn
   recursion). Still open: the unequal-rate urn limit (a Rubin-type reinforcement theorem) and
   the a.s. convergence statement.
+- Progress 2026-10-12 (hot-spot threshold, scan item C8): `Research.P4.Hotspot`
+  (P4Hotspot.lean). The Short-Brantingham uniform system has exactly one homogeneous steady
+  state, B̄ = εDγ/ω and ρ̄ = γ/Ā with Ā = A₀ + B̄ (`steady_iff`). Its mode-k linearisation
+  has determinant P k² − Q k + R with P = ηD²/z, Q = D(3εDρ̄ − ω − ηĀ/z) and R = ωĀ > 0
+  (`det_eq`, `P_eq`, `Q_eq`, `R_eq`) and a negative trace at every k ≥ 0 (`tr_neg`, from
+  εDρ̄ ≤ ω), so a mode grows iff the determinant is negative (`unstable_iff`). Threshold:
+  3εDρ̄ ≤ ω + ηĀ/z gives a stable uniform state at every wavelength
+  (`no_hotspots_below_threshold`; with ε = 0, `no_hotspots_without_reinforcement`, which
+  refutes "hot spots for all parameters"); Q > 0 with Q² > 4PR gives a growing critical mode
+  k* = Q/(2P) (`hotspots_above_threshold`). R: `morie_hotspot_threshold()` (steady state,
+  P, Q, R, the two sides of the threshold, the critical wavenumber and its growth rate, a
+  dispersion table). Still open: the amplitude equation that decides whether the bifurcation
+  is subcritical (A16's second half), and the stochastic items above.
 
 ## P5. Recidivism prediction under label bias: what can be certified?
 

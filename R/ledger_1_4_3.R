@@ -624,3 +624,97 @@ morie_rank_persistence_null <- function(n, k, observed = NULL) {
        theorems = c("Research.P7.Persistence.card_overlapSets", "Research.P7.Persistence.overlap_prob",
                     "Research.P7.Persistence.overlap_prob_sum"))
 }
+
+#' Hot-spot threshold of the Short-Brantingham reaction-diffusion model
+#'
+#' The spatially uniform Short-Brantingham system
+#' \eqn{B' = -\omega B + \epsilon D \rho (A_0 + B)}, \eqn{\rho' = -\rho (A_0 + B) + \gamma}
+#' has exactly one homogeneous steady state, \eqn{\bar B = \epsilon D \gamma / \omega},
+#' \eqn{\bar\rho = \gamma / \bar A} with \eqn{\bar A = A_0 + \bar B}
+#' (\code{Research.P4.Hotspot.steady_iff}). Linearising at wavenumber-squared \eqn{k} gives a
+#' \eqn{2 \times 2} matrix whose determinant is \eqn{P k^2 - Q k + R} with
+#' \eqn{P = \eta D^2 / z}, \eqn{Q = D (3 \epsilon D \bar\rho - \omega - \eta \bar A / z)} and
+#' \eqn{R = \omega \bar A > 0} (\code{det_eq}, \code{P_eq}, \code{Q_eq}, \code{R_eq}); its trace is
+#' negative at every \eqn{k \ge 0} (\code{tr_neg}), so a mode grows iff the determinant is
+#' negative (\code{unstable_iff}). Hence the threshold: with
+#' \eqn{3 \epsilon D \bar\rho \le \omega + \eta \bar A / z} the uniform state is stable at every
+#' wavelength (\code{no_hotspots_below_threshold}; in particular without repeat reinforcement,
+#' \code{no_hotspots_without_reinforcement}), and with \eqn{Q > 0} and \eqn{Q^2 > 4 P R} the
+#' critical mode \eqn{k^* = Q / (2P)} grows (\code{hotspots_above_threshold}).
+#'
+#' @param A0 Baseline attractiveness (positive).
+#' @param omega Decay rate of the dynamic attractiveness (positive).
+#' @param eps Repeat-victimisation reinforcement (non-negative).
+#' @param D Diffusion rate of the criminal density (positive).
+#' @param gamma Generation rate of criminals (positive).
+#' @param eta Relative diffusion of attractiveness (non-negative).
+#' @param z Lattice coordination number (positive; 4 on a square lattice, 1 in the continuum form).
+#' @param k Optional wavenumbers-squared at which the trace, determinant and growth rate are tabulated.
+#' @return A list with \code{steady} (\eqn{\bar B}, \eqn{\bar A}, \eqn{\bar\rho}), the coefficients
+#'   \code{P}, \code{Q}, \code{R}, \code{threshold} (the two sides of
+#'   \eqn{3 \epsilon D \bar\rho \lessgtr \omega + \eta \bar A / z}), \code{unstable}, the critical
+#'   wavenumber-squared \code{k_crit} with \code{det_crit} and \code{growth_crit}, an optional
+#'   \code{dispersion} table and \code{theorems}.
+#' @examples
+#' morie_hotspot_threshold(A0 = 1, omega = 1, eps = 2, D = 1, gamma = 1, eta = 0.01)$unstable
+#' morie_hotspot_threshold(A0 = 1, omega = 1, eps = 0, D = 1, gamma = 1, eta = 0.01)$unstable
+#' @export
+morie_hotspot_threshold <- function(A0, omega, eps, D, gamma, eta, z = 1, k = NULL) {
+  one <- function(x, nm, lower, strict = TRUE) {
+    if (!is.numeric(x) || length(x) != 1L || !is.finite(x) || (if (strict) x <= lower else x < lower)) {
+      stop(sprintf("`%s` must be a single finite number %s %s", nm, if (strict) "above" else "at least", lower),
+           call. = FALSE)
+    }
+    as.numeric(x)
+  }
+  A0 <- one(A0, "A0", 0)
+  omega <- one(omega, "omega", 0)
+  eps <- one(eps, "eps", 0, strict = FALSE)
+  D <- one(D, "D", 0)
+  gamma <- one(gamma, "gamma", 0)
+  eta <- one(eta, "eta", 0, strict = FALSE)
+  z <- one(z, "z", 0)
+  Bbar <- eps * D * gamma / omega
+  Abar <- A0 + Bbar
+  rhobar <- gamma / Abar
+  a <- -omega + eps * D * rhobar
+  b <- eps * D * Abar
+  c0 <- -rhobar
+  c1 <- 2 * D * rhobar / Abar
+  d <- -Abar
+  d1 <- eta * D / z
+  d2 <- D
+  P <- d1 * d2
+  Q <- a * d2 + d * d1 + b * c1
+  R <- a * d - b * c0
+  tr_k <- function(k) (a - d1 * k) + (d - d2 * k)
+  det_k <- function(k) (a - d1 * k) * (d - d2 * k) - b * (c0 + c1 * k)
+  growth_k <- function(k) {
+    t <- tr_k(k)
+    dd <- det_k(k)
+    (t + sqrt(pmax(t^2 - 4 * dd, 0))) / 2   # the larger real part of the two eigenvalues
+  }
+  lhs <- 3 * eps * D * rhobar
+  rhs <- omega + eta * Abar / z
+  if (P > 0) {
+    unstable <- Q > 0 && Q^2 > 4 * P * R
+    k_crit <- if (Q > 0) Q / (2 * P) else NA_real_
+  } else {
+    # no attractiveness diffusion: the determinant is linear in k, negative past R / Q when Q > 0
+    unstable <- Q > 0
+    k_crit <- if (Q > 0) 2 * R / Q else NA_real_
+  }
+  det_crit <- if (is.na(k_crit)) NA_real_ else det_k(k_crit)
+  growth_crit <- if (is.na(k_crit)) NA_real_ else growth_k(k_crit)
+  dispersion <- NULL
+  if (!is.null(k)) {
+    if (!is.numeric(k) || anyNA(k) || any(k < 0)) stop("`k` must be non-negative wavenumbers-squared", call. = FALSE)
+    dispersion <- data.frame(k = k, trace = tr_k(k), det = det_k(k), growth = growth_k(k))
+  }
+  list(steady = c(B = Bbar, A = Abar, rho = rhobar), P = P, Q = Q, R = R,
+       threshold = c(reinforcement = lhs, decay_plus_diffusion = rhs), unstable = unstable,
+       k_crit = k_crit, det_crit = det_crit, growth_crit = growth_crit, dispersion = dispersion,
+       theorems = c("Research.P4.Hotspot.steady_iff", "Research.P4.Hotspot.unstable_iff",
+                    "Research.P4.Hotspot.no_hotspots_below_threshold",
+                    "Research.P4.Hotspot.hotspots_above_threshold"))
+}

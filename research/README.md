@@ -8,8 +8,8 @@ signed off.
 - `LEDGER.md`: the eight problems, each with estimand, identifying
   assumptions, what must be proved, what "cracked" means, sources, and a
   progress log.
-- `lean/`: the Lean 4 sources (Mathlib, project `~/work/researchproofs`
-  on l14). `Audit.lean` prints the axioms of every theorem; all depend on
+- `lean/`: the Lean 4 sources (a Lake project on Mathlib; `lakefile.toml`
+  is included). `Audit.lean` prints the axioms of every theorem; all depend on
   `propext`, `Classical.choice`, `Quot.sound` only, and no file contains
   `sorry`.
 
@@ -104,8 +104,8 @@ assumption holds in Toronto, Ontario, or anywhere else.
 ## Reproducing the checks
 
 ```
-cd ~/work/researchproofs && lake build && lake env lean Audit.lean
-cd ~/work/rmorie-research && Rscript -e 'testthat::test_dir("tests/testthat", filter = "feedback-loop|fairness-bounds|dark-figure|spillover|concentration|research-p268|meta-pooling|logit-separation|bounds-confidence|cheeger|ecological-bounds|sentence-mts|contagion-extinction|judge-iv|disparity-decomposition|court-backlog|incapacitation|selective-labels|regression-to-mean")'
+cd research/lean && lake build && lake env lean Audit.lean    # from the repository root
+Rscript -e 'testthat::test_dir("tests/testthat", filter = "feedback-loop|fairness-bounds|dark-figure|spillover|concentration|research-p268|meta-pooling|logit-separation|bounds-confidence|cheeger|ecological-bounds|sentence-mts|contagion-extinction|judge-iv|disparity-decomposition|court-backlog|incapacitation|selective-labels|regression-to-mean")'
 ```
 
 ## Data applications
