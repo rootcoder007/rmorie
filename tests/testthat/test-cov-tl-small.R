@@ -188,5 +188,9 @@ test_that("the stochastic-shift TMLE uses a density ratio as its clever covariat
   fit0 <- .ts(".tlstoch_shift_tmle")(yv, av, Wm, qfn, function(a, w) if (a < 0) 1e-9 else 1, 100, iters = 5)
   expect_equal(fit0$epsilon, 0)
   expect_match(.ts(".tlstoch_cheatsheet")(), "^tlstoch: static and dynamic regimes")
-  expect_identical(morie_tlstoch$stochasticregime, .ts(".tlstoch_shift_tmle"))
+  # the registry entry is that function: compared by what it returns, since coverage rewrites the
+  # namespace copy's body and leaves the list's copy as it was loaded
+  expect_identical(formals(morie_tlstoch$stochasticregime), formals(.ts(".tlstoch_shift_tmle")))
+  reg <- morie_tlstoch$stochasticregime(yv, av, Wm, qfn, function(a, w) if (a < 0) 1e-9 else 1, 100, iters = 5)
+  expect_equal(reg, fit0)
 })
