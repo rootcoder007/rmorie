@@ -334,3 +334,10 @@ open Research.P4
 #print axioms Research.P5.loglik_small_far
 #print axioms Research.P5.loglik_continuous
 #print axioms Research.P5.mle_exists
+#print axioms Research.P3.Ring.gap_eq
+#print axioms Research.P3.Ring.gap_zero
+#print axioms Research.P3.Ring.expected_gap_eq
+#print axioms Research.P3.Ring.expected_gap_le
+#print axioms Research.P7.Persistence.card_overlapSets
+#print axioms Research.P7.Persistence.overlap_prob
+#print axioms Research.P7.Persistence.overlap_prob_sum

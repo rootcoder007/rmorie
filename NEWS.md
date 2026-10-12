@@ -1,7 +1,9 @@
 # rmorie 1.4.3 - 2026-10-09
 
-* Research ledger, ten more items closed with machine-checked proofs (`research/lean`, now 66
-  files, 334 audited theorems, 0 sorry): the stochastic urn's share has variance at most
+* Research ledger, twelve more items closed with machine-checked proofs (`research/lean`, now 68
+  files, 341 audited theorems, 0 sorry): the ring mis-specification bound for the spillover
+  estimand (`morie_spillover_ring_bound()`); the hypergeometric rank-persistence null
+  (`morie_rank_persistence_null()`); the stochastic urn's share has variance at most
   a/(4(r0+b0)) at every horizon, so the loop drifts within a Chebyshev band fixed by the starting
   mass (`morie_feedback_loop_envelope()`); Albert-Anderson's converse, overlap gives a finite
   logistic maximum-likelihood estimate (`morie_logit_separation()$mle_exists`);

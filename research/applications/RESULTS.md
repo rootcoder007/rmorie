@@ -95,6 +95,24 @@ about 1 / sqrt(2 mean) (`Research.P7.Bound.gini_le_cv`, `morie_concentration_nul
 | 2024 | 6,824 | 43.2 | 0.343 | 0.108 | 0.0851 | 0.093 | 0.258 | 0 |
 | 2025 | 6,092 | 38.6 | 0.34 | 0.114 | 0.09 | 0.0984 | 0.25 | 0 |
 
+## Rank persistence: the top-16 break-and-enter neighbourhoods, year to year
+
+| years | overlap | null_mean | p_value |
+|---|---|---|---|
+| 2014-2015 | 12 | 1.62 | 9.07e-12 |
+| 2015-2016 | 11 | 1.62 | 6.05e-10 |
+| 2016-2017 | 12 | 1.62 | 9.07e-12 |
+| 2017-2018 | 13 | 1.62 | 8.00e-14 |
+| 2018-2019 | 11 | 1.62 | 6.05e-10 |
+| 2019-2020 | 14 | 1.62 | 3.66e-16 |
+| 2020-2021 | 12 | 1.62 | 9.07e-12 |
+| 2021-2022 | 13 | 1.62 | 8.00e-14 |
+| 2022-2023 | 11 | 1.62 | 6.05e-10 |
+| 2023-2024 | 13 | 1.62 | 8.00e-14 |
+| 2024-2025 | 12 | 1.62 | 9.07e-12 |
+
+Under the null that this year's top-16 set is a random 16-subset with no memory of last year's, the overlap is hypergeometric with mean 1.6 (`Research.P7.Persistence.overlap_prob`, `morie_rank_persistence_null()`). The observed overlaps are 11 to 14 of 16, with null upper-tail probabilities below 1e-6 in every pair of years: the hot neighbourhoods persist, and the persistence is not what a memoryless draw produces, which is the part of the law of concentration that chance cannot explain.
+
 ## Reading
 
 For every offence with more than a handful of events the observed Gini sits far above the Poisson null's mean and its 95th percentile (p = 0 in 2,000 draws): the concentration is not the arithmetic of rare counts. Homicide and shootings (means of 1.2 and 2.5 per neighbourhood) are the cases the null bound warns about: their null Ginis are already 0.48 and 0.34, so most of their observed concentration is what a Poisson count at that mean produces by itself.
@@ -158,7 +176,7 @@ Group 1 = women, group 0 = men; covariates = age category x region of the most r
 | counterfactual (men reweighted to women's cells) | 2.45 |
 | structure (women minus counterfactual) | 1.564 |
 | composition (counterfactual minus men) | -0.1428 |
-| largest covariate-share mismatch after reweighting | 0.000000000000000111 |
+| largest covariate-share mismatch after reweighting | 1.11e-16 |
 
 ## By fiscal year
 

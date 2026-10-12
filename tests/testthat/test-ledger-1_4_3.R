@@ -281,3 +281,45 @@ test_that("Albert-Anderson converse: overlap gives a finite maximiser, separatio
   expect_false(r3$mle_exists)
   expect_true(is.na(morie_logit_separation(y, x, method = "glm")$mle_exists))
 })
+
+
+test_that("the ring mis-specification bound is the gamma-weighted mean outer-ring share, and bounds the exact gap", {
+  # a path of 5 units, one treated unit chosen uniformly; the outer ring of unit i is exposed when
+  # a unit at distance exactly 2 is treated; every assignment is enumerated
+  n <- 5L
+  outer <- function(z, i) any(abs(which(z) - i) == 2L)
+  share <- vapply(seq_len(n), function(i) mean(vapply(seq_len(n), function(t) outer(seq_len(n) == t, i), logical(1))), numeric(1))
+  gamma <- c(0.5, -1, 2, 0, 1.5)
+  exact_gap <- mean(vapply(seq_len(n), function(t) {
+    z <- seq_len(n) == t
+    mean(gamma * vapply(seq_len(n), function(i) as.numeric(outer(z, i)), numeric(1)))
+  }, numeric(1)))
+  r <- morie_spillover_ring_bound(share, gamma_max = 2, gamma = gamma)
+  expect_equal(r$expected_gap, exact_gap, tolerance = 1e-12)   # expected_gap_eq
+  expect_equal(r$expected_gap, mean(gamma * share), tolerance = 1e-12)
+  expect_lte(abs(r$expected_gap), r$bound)                    # expected_gap_le
+  expect_equal(r$bound, 2 * mean(share))
+  expect_equal(morie_spillover_ring_bound(share, gamma_max = 2, gamma = rep(0, n))$expected_gap, 0)  # gap_zero
+  expect_error(morie_spillover_ring_bound(share, gamma_max = 1, gamma = gamma), "exceeds")
+  expect_error(morie_spillover_ring_bound(c(0.5, 1.2), gamma_max = 1), "probabilities")
+})
+
+test_that("the rank-persistence null is the hypergeometric law: it matches brute-force counting, sums to one, mean k^2/n", {
+  n <- 7L
+  k <- 3L
+  A <- 1:k
+  sets <- utils::combn(n, k)
+  overlaps <- apply(sets, 2L, function(B) length(intersect(A, B)))
+  brute <- vapply(0:k, function(j) sum(overlaps == j), numeric(1))
+  r <- morie_rank_persistence_null(n, k, observed = 2)
+  expect_equal(r$law$probability, brute / ncol(sets), tolerance = 1e-12)                       # card_overlapSets
+  expect_equal(r$law$probability, choose(k, 0:k) * choose(n - k, k - 0:k) / choose(n, k))       # overlap_prob
+  expect_equal(sum(r$law$probability), 1, tolerance = 1e-12)                                    # overlap_prob_sum
+  expect_equal(sum(r$law$overlap * r$law$probability), k^2 / n, tolerance = 1e-12)
+  expect_equal(r$p_value, mean(overlaps >= 2), tolerance = 1e-12)
+  big <- morie_rank_persistence_null(158, 16, observed = 9)
+  expect_equal(big$mean, 16^2 / 158)
+  expect_lt(big$p_value, 1e-4)
+  expect_error(morie_rank_persistence_null(5, 6), "between 0")
+  expect_error(morie_rank_persistence_null(5, 2, observed = 3), "between 0")
+})

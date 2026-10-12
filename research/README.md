@@ -58,6 +58,8 @@ signed off.
 | P11 sentencing bounds | `Research.P11.Pop.mtr_lower`, `mtr_upper`, `mtr_upper_attained` | `morie_sentence_effect_mtr()` |
 | P3 interference | `Research.P3.testVec_orth`, `testVec_dnorm`, `testVec_dirichlet`, `rayleigh_testVec`, `rayleigh_le_two_conductance`, `lambda2_le_rayleigh_testVec`, `cheeger_easy` | `morie_cheeger_bound()` |
 | P5 fairness | `Research.P5.ll1_strictMono`, `ll1_neg`, `loglik_lt_shift`, `loglik_lt_shift_quasi`, `no_mle`, `no_mle_quasi`, `loglik_neg`, `loglik_tendsto_zero` | `morie_logit_separation()` |
+| P3 interference | `Research.P3.Ring.gap_eq`, `gap_zero`, `expected_gap_eq`, `expected_gap_le` | `morie_spillover_ring_bound()` |
+| P7 concentration | `Research.P7.Persistence.card_overlapSets`, `overlap_prob`, `overlap_prob_sum` | `morie_rank_persistence_null()` |
 | P5 fairness | `Research.P5.minMargin_continuous`, `loglik_le_ll1_min`, `sphere_margin_neg`, `loglik_le_of_norm`, `loglik_small_far`, `loglik_continuous`, `mle_exists` | `morie_logit_separation()$mle_exists` |
 | P4 feedback loops | `Research.P4.Envelope.mean_const`, `step_var`, `second_moment_step`, `step_sum_le`, `var_le`, `chebyshev`, `polya_envelope` | `morie_feedback_loop_envelope()` |
 | P11 sentencing bounds | `Research.P11.region_coverage_le`, `coverage_strictMono_c`, `im_cutoff_antitone`, `im_cutoff_between`, `two_sided_overcovers` | `morie_bounds_confidence()` |

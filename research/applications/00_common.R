@@ -16,7 +16,9 @@ fmt <- function(x, digits = 3) {
   whole <- is.finite(x) & x == round(x)
   out <- character(length(x))
   out[whole] <- format(x[whole], big.mark = ",", scientific = FALSE, trim = TRUE)
-  out[!whole] <- trimws(formatC(x[!whole], digits = digits, format = "fg"))
+  tiny <- !whole & is.finite(x) & abs(x) < 1e-4
+  out[!whole & !tiny] <- trimws(formatC(x[!whole & !tiny], digits = digits, format = "fg"))
+  out[tiny] <- trimws(formatC(x[tiny], digits = 2, format = "e"))
   out
 }
 

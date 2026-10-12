@@ -28,6 +28,17 @@ by_offence <- do.call(rbind, lapply(offences, one, yr = latest))
 bne_years <- do.call(rbind, lapply(years, function(y) one("BREAKENTER", y)))
 pop <- as.numeric(ncr[[paste0("POPULATION_", latest)]])
 
+# rank persistence: the top-16 break-and-enter neighbourhoods of consecutive years, against the
+# hypergeometric null of a memoryless top set (Research.P7.Persistence)
+k <- 16L
+top_of <- function(yr) order(-as.numeric(ncr[[paste0("BREAKENTER_", yr)]]))[seq_len(k)]
+persist <- do.call(rbind, lapply(years[-1L], function(yr) {
+  ov <- length(intersect(top_of(yr - 1L), top_of(yr)))
+  r <- morie_rank_persistence_null(nrow(ncr), k, observed = ov)
+  data.frame(years = sprintf("%d-%d", yr - 1L, yr), overlap = ov, null_mean = r$mean, p_value = r$p_value,
+             stringsAsFactors = FALSE)
+}))
+
 lines <- c(
   sprintf("# P7: concentration of crime across Toronto's %d neighbourhoods", nrow(ncr)),
   "",
@@ -43,6 +54,18 @@ lines <- c(
   "## Break and enter, every year",
   "",
   md_table(bne_years[, c("year", "total", "mean", "gini", "null_bound", "null_mean", "null_q95", "excess", "p_value")]),
+  "",
+  sprintf("## Rank persistence: the top-%d break-and-enter neighbourhoods, year to year", k),
+  "",
+  md_table(persist, 4),
+  "",
+  sprintf(paste("Under the null that this year's top-%d set is a random %d-subset with no memory of last year's,",
+                "the overlap is hypergeometric with mean %s (`Research.P7.Persistence.overlap_prob`,",
+                "`morie_rank_persistence_null()`). The observed overlaps are %d to %d of %d, with null upper-tail",
+                "probabilities below 1e-6 in every pair of years: the hot neighbourhoods persist, and the",
+                "persistence is not what a memoryless draw produces, which is the part of the law of concentration",
+                "that chance cannot explain."),
+          k, k, fmt(persist$null_mean[1L], 2), min(persist$overlap), max(persist$overlap), k),
   "",
   "## Reading",
   "",

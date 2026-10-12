@@ -13,7 +13,7 @@ Group 1 = women, group 0 = men; covariates = age category x region of the most r
 | counterfactual (men reweighted to women's cells) | 2.45 |
 | structure (women minus counterfactual) | 1.564 |
 | composition (counterfactual minus men) | -0.1428 |
-| largest covariate-share mismatch after reweighting | 0.000000000000000111 |
+| largest covariate-share mismatch after reweighting | 1.11e-16 |
 
 ## By fiscal year
 

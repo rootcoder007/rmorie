@@ -547,3 +547,80 @@ morie_feedback_loop_envelope <- function(r0, b0, a = 1, n = 100L, t = 0.25) {
        exit_n = sum(q[abs(s_n - share0) >= t]), law = q, n = n,
        theorem = "Research.P4.Envelope.chebyshev")
 }
+
+#' Ring mis-specification bound for the spillover estimand
+#'
+#' The Horvitz-Thompson spillover estimator is design-unbiased for the estimand written with the
+#' d-ring exposure map. If the outcome also moves by \eqn{\gamma_i} when unit \eqn{i}'s
+#' \eqn{(d+1)}-ring is treated, the d-ring estimand misses \eqn{(1/N)\sum_i \gamma_i \pi_i} in
+#' expectation, with \eqn{\pi_i} the outer-ring exposure share of unit \eqn{i} under the design
+#' (\code{Research.P3.Ring.expected_gap_eq}), and the miss is at most
+#' \eqn{G \cdot \bar\pi} when every \eqn{|\gamma_i| \le G}
+#' (\code{Research.P3.Ring.expected_gap_le}).
+#'
+#' @param outer_share Per-unit probability that the \eqn{(d+1)}-ring is exposed under the
+#'   design, for instance the exposed-class column of
+#'   \code{\link{morie_spillover_exposure_probs}} run with the larger ring.
+#' @param gamma_max Bound \eqn{G} on the outer-ring effects.
+#' @param gamma Optional per-unit outer-ring effects; with them the expected gap itself is
+#'   returned beside the bound.
+#' @return A list with \code{mean_share}, \code{bound} (\eqn{G \bar\pi}), \code{expected_gap}
+#'   (\code{NA} without \code{gamma}) and \code{theorems}.
+#' @examples
+#' morie_spillover_ring_bound(c(0.1, 0.3, 0.2), gamma_max = 2)
+#' @export
+morie_spillover_ring_bound <- function(outer_share, gamma_max, gamma = NULL) {
+  s <- as.numeric(outer_share)
+  if (!length(s) || anyNA(s) || any(s < 0 | s > 1)) stop("`outer_share` must be probabilities in [0, 1]", call. = FALSE)
+  if (!is.numeric(gamma_max) || length(gamma_max) != 1L || is.na(gamma_max) || gamma_max < 0) {
+    stop("`gamma_max` must be a single non-negative bound", call. = FALSE)
+  }
+  gap <- NA_real_
+  if (!is.null(gamma)) {
+    g <- as.numeric(gamma)
+    if (length(g) != length(s) || anyNA(g)) stop("`gamma` must have one finite value per unit", call. = FALSE)
+    if (any(abs(g) > gamma_max + 1e-12)) stop("`gamma` exceeds `gamma_max` somewhere", call. = FALSE)
+    gap <- mean(g * s)
+  }
+  list(mean_share = mean(s), bound = gamma_max * mean(s), expected_gap = gap,
+       theorems = c("Research.P3.Ring.expected_gap_eq", "Research.P3.Ring.expected_gap_le"))
+}
+
+#' Rank-persistence null: the overlap of two top-k sets by chance
+#'
+#' Under the null that this year's top-\eqn{k} places are a uniformly random \eqn{k}-subset of
+#' the \eqn{n} places, independent of last year's, the number of places in both sets is
+#' hypergeometric: \eqn{P(j) = C(k, j) C(n-k, k-j) / C(n, k)}
+#' (\code{Research.P7.Persistence.card_overlapSets}, \code{overlap_prob}), the law sums to one
+#' (\code{overlap_prob_sum}) and its mean is \eqn{k^2/n}.
+#'
+#' @param n Number of places.
+#' @param k Size of the top set.
+#' @param observed Optional observed overlap; its upper tail probability under the null is
+#'   returned.
+#' @return A list with \code{law} (a data frame of \code{overlap} and \code{probability}),
+#'   \code{mean} (\eqn{k^2/n}), \code{p_value} (\eqn{P(\mathrm{overlap} \ge \mathrm{observed})},
+#'   \code{NA} without \code{observed}) and \code{theorems}.
+#' @examples
+#' morie_rank_persistence_null(158, 16, observed = 9)$p_value
+#' @export
+morie_rank_persistence_null <- function(n, k, observed = NULL) {
+  n <- as.integer(n)
+  k <- as.integer(k)
+  if (length(n) != 1L || length(k) != 1L || is.na(n) || is.na(k) || k < 0L || k > n) {
+    stop("`k` must be between 0 and `n`", call. = FALSE)
+  }
+  j <- 0:k
+  prob <- choose(k, j) * choose(n - k, k - j) / choose(n, k)
+  p <- NA_real_
+  if (!is.null(observed)) {
+    observed <- as.integer(observed)
+    if (length(observed) != 1L || is.na(observed) || observed < 0L || observed > k) {
+      stop("`observed` must be an overlap between 0 and `k`", call. = FALSE)
+    }
+    p <- sum(prob[j >= observed])
+  }
+  list(law = data.frame(overlap = j, probability = prob), mean = k^2 / n, p_value = p,
+       theorems = c("Research.P7.Persistence.card_overlapSets", "Research.P7.Persistence.overlap_prob",
+                    "Research.P7.Persistence.overlap_prob_sum"))
+}

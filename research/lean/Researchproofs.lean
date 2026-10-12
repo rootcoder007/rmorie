@@ -64,3 +64,5 @@ import Researchproofs.P15RIF
 import Researchproofs.P19Error
 import Researchproofs.P4Envelope
 import Researchproofs.P5Overlap
+import Researchproofs.P3Ring
+import Researchproofs.P7Persistence

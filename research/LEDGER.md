@@ -239,6 +239,14 @@ spillover.
   neighbourhood 098, which is what sets the Horvitz-Thompson variance; outcomes are not used
   because the NIAs were not randomised. Still open: the street-segment version (needs the
   centreline network) and the Cheeger hard direction.
+- Progress 2026-10-12 (ring mis-specification): `Research.P3.Ring` (P3Ring.lean). If the
+  outcome also moves by γ_i when unit i's (d+1)-ring is treated, the d-ring estimand misses
+  (1/N) Σ_i γ_i 1[outer ring of i exposed] at every assignment (`gap_eq`), zero when every γ_i = 0
+  (`gap_zero`), in expectation (1/N) Σ_i γ_i π_i with π_i the outer-ring exposure share
+  (`expected_gap_eq`), and at most G · π̄ when |γ_i| ≤ G (`expected_gap_le`). The design computes
+  π_i (the exposure probabilities with the larger ring), so the bias of a d-ring analysis is a
+  number before any outcome is seen. R: `morie_spillover_ring_bound()`; Python
+  `spillover_ring_bound()`. Still open: the Cheeger hard direction and the street-segment data.
 
 ## P4. Predictive policing feedback: when does the loop run away?
 
@@ -500,6 +508,17 @@ counts are sparse relative to units.
   rare counts, as P7's bound says. Break-and-enter concentration rose from 0.31 (2014) to 0.40
   (2021) and fell back to 0.34. The null is equal-rate; populations run from 10,000 to 44,636, so
   a population-proportional null (and a bound for it) is the next step.
+- Progress 2026-10-12 (rank persistence): `Research.P7.Persistence` (P7Persistence.lean). Under
+  the null that this year's top-k set is a uniformly random k-subset of the N places with no
+  memory of last year's, the k-sets meeting the old top-k in exactly j places number
+  C(k, j) C(N−k, k−j) (`card_overlapSets`, by the bijection B ↦ (B ∩ A, B \ A)), so
+  P(overlap = j) = C(k, j) C(N−k, k−j) / C(N, k) (`overlap_prob`) and the law sums to one
+  (`overlap_prob_sum`); its mean is k²/N. R: `morie_rank_persistence_null()`; Python
+  `rank_persistence_null()`. Applied to Toronto break and enter (top 16 of 158, consecutive years
+  2014-2025): the observed overlaps are far above the null mean of 1.6, with upper-tail
+  probabilities below 1e-6 in every pair of years, so the persistence of hot neighbourhoods is
+  the part of concentration that chance does not produce. Still open: the exact expected Gini of
+  the finite Poisson sample (the ratio's bias) and the population-proportional null.
 
 ## P8. Deterrence: certainty, severity and celerity cannot be varied alone
 
