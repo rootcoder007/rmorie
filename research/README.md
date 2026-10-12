@@ -105,3 +105,11 @@ assumption holds in Toronto, Ontario, or anywhere else.
 cd ~/work/researchproofs && lake build && lake env lean Audit.lean
 cd ~/work/rmorie-research && Rscript -e 'testthat::test_dir("tests/testthat", filter = "feedback-loop|fairness-bounds|dark-figure|spillover|concentration|research-p268|meta-pooling|logit-separation|bounds-confidence|cheeger|ecological-bounds|sentence-mts|contagion-extinction|judge-iv|disparity-decomposition|court-backlog|incapacitation|selective-labels|regression-to-mean")'
 ```
+
+## Data applications
+
+`research/applications/` runs the ledger's research functions on the public files the problems
+are about (TPS neighbourhood counts and break-and-enter occurrences, the City of Toronto
+neighbourhood polygons, the OTIS segregation dataset) and writes `RESULTS.md`; its README lists
+the files, the four applications done (P3, P7, P10, P15) and the ones that stay open with the
+reason (no public file). Run with `MORIE_DATA_ROOT=... Rscript research/applications/run_all.R`.

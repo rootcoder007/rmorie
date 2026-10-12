@@ -85,6 +85,9 @@ assumptions the dark figure is an interval, not a point.
   (`interaction_not_identified`). R: `morie_dark_figure_no_interaction()` (the test matches the
   Poisson log-linear fit with every two-way term); Python `dark_figure_no_interaction()`.
   Open: the small-area application on a real survey/record pair.
+- Noted 2026-10-12: no victimisation survey microdata is held (the substance-use surveys CSUS,
+  CPADS and CCS carry no victimisation items), so the survey/record pair stays open; see
+  research/applications/README.md.
 
 ## P2. Selection in police-recorded data: the record is the treatment
 
@@ -158,6 +161,8 @@ field has no agreed estimand, let alone estimator.
   observationally a bias (`exposure_shift_confounds`), and a common scale of both factors is
   invisible (`bias_not_absolute`). R: `morie_veil_of_darkness()`; Python `veil_of_darkness()`.
   Open: the Toronto stops application with a stated mobility proxy.
+- Noted 2026-10-12: the public TPS Regulated Interactions table is counts by year and category
+  only (no time of day, no group), so the veil-of-darkness application cannot be run from it.
 
 ## P3. Causal effects of policing under interference and displacement
 
@@ -223,6 +228,17 @@ spillover.
   joint exposure probabilities as the design condition; `morie_spillover_ht_variance()`). Still
   open: the Cheeger hard direction λ₂ ≥ h²/2, the ring mis-specification bound, the TPS
   street-segment application.
+- Application 2026-10-12 (research/applications/p03_toronto_neighbourhood_network.R): the public
+  files carry Toronto's 158 neighbourhoods, not street segments, so the design computation is run
+  on the queen-contiguity graph (475 edges) and labelled as such. The cut around the 33
+  Neighbourhood Improvement Areas has conductance 0.516 (98 of the NIAs' 190 edge-ends leave the
+  set): a scatter, not a cluster, so a treatment confined to the NIAs puts most of its contiguity
+  spillover on untreated neighbours. λ₂ = 0.0157 and the proved chain λ₂ ≤ E(f)/D(f) = 0.645 ≤ 2h(S)
+  = 1.03 holds. Under a completely randomised allocation of 33 treated neighbourhoods the rarest
+  exposure class (untreated with no treated neighbour) has probability 0.056 at the degree-11
+  neighbourhood 098, which is what sets the Horvitz-Thompson variance; outcomes are not used
+  because the NIAs were not randomised. Still open: the street-segment version (needs the
+  centreline network) and the Cheeger hard direction.
 
 ## P4. Predictive policing feedback: when does the loop run away?
 
@@ -415,6 +431,8 @@ would.
   R: `morie_age_crime_type_cov()` and `morie_age_crime_panel_cov()` (sample covariance with an
   exact one-type permutation null); Python `age_crime_type_cov()`, `age_crime_panel_cov()`.
   Open: the full identifiability of K types from T periods (Teicher-type), a cohort application.
+- Noted 2026-10-12: no cohort file is held; OTIS gives age categories of people in segregation,
+  not offending by age, so the cohort application stays open.
 
 ## P7. The law of crime concentration: how much is chance?
 
@@ -472,6 +490,16 @@ counts are sparse relative to units.
   `morie_concentration_null_bound()` (the bound plus the simulated Poisson-null distribution and a
   p-value); Python `concentration_null_bound()`. Open: the exact expected null Gini, the
   rank-persistence null, the Toronto application.
+- Application 2026-10-12 (research/applications/p07_concentration_toronto.R): TPS neighbourhood
+  counts, 158 neighbourhoods, 2014-2025. In 2025 every offence with more than a handful of
+  events has a Gini far above the equal-rate Poisson null (assault 0.39 against a null mean of
+  0.045; break and enter 0.34 against 0.09; bike theft 0.63 against 0.15; p = 0 in 2,000 draws).
+  Homicide (45 events, mean 1.2 per neighbourhood) has Gini 0.14 below its null mean of 0.48,
+  and shootings (262 events) Gini 0.38 against 0.34 with p = 0.056: at those means the null
+  bound 1/√(2x̄) is 0.64 and 0.45, so the "concentration" of rare offences is the arithmetic of
+  rare counts, as P7's bound says. Break-and-enter concentration rose from 0.31 (2014) to 0.40
+  (2021) and fell back to 0.34. The null is equal-rate; populations run from 10,000 to 44,636, so
+  a population-proportional null (and a bound for it) is the next step.
 
 ## P8. Deterrence: certainty, severity and celerity cannot be varied alone
 
@@ -637,6 +665,15 @@ cluster size, the stationary rate and the share of "contagious" events.
   and heterogeneity share second moments. R: `morie_contagion_moment_witness()`; Python
   `contagion_moment_witness()`. Open: the K-function statement on a spatial process, the TPS
   break-and-enter application.
+- Application 2026-10-12 (research/applications/p10_near_repeat_bne.R): TPS break and enter,
+  76,466 occurrences in 158 neighbourhoods over 574 weeks (2014-2024). Every neighbourhood's
+  weekly series is over-dispersed (median var/mean 1.33, a gamma mixture of size 2.3 matches the
+  same two moments), which by `second_moments_do_not_identify` a self-exciting process and a
+  heterogeneous Poisson reproduce alike. Hawkes fits of the five busiest neighbourhoods' full
+  series give branching ratios 0.24-0.79 with decay half-lives of 1.3 to 18 days: the temporal
+  order, not the moments, is what identifies them, and a background that moves with the
+  seasons would be read as self-excitation. Open: the constant-versus-KDE background comparison
+  (A17) and the K-function statement.
 
 
 ## P11. Sentencing effects as intervals: what observational data can say before assumptions
@@ -660,6 +697,8 @@ Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
   B4). R: `morie_sentence_effect_mtr()`.
 - Open: application to OTIS/CPADS
   custody-vs-community sentences and reconviction.
+- Noted 2026-10-12: OTIS is segregation placements, not sentences, and CPADS is a postsecondary
+  substance-use survey; the application needs a sentencing file with reconviction and stays open.
 - Progress 2026-10-02 (Imbens-Manski, library scan B25): `Research.P11` in P11Coverage.lean:
   on a finite probability space P[H subset of C] <= P[theta in C] whenever theta
   in H (`region_coverage_le`); for a strictly increasing CDF the coverage
@@ -697,6 +736,8 @@ group-level correlation can differ in size and sign from the individual one.
   (individual +0.6, ecological -1).
 - Open: an application with
   PSDP/CPADS individual records against TPS neighbourhood aggregates.
+- Noted 2026-10-12: the only neighbourhood trait held is the NIA flag (0/1 per neighbourhood), for
+  which the Duncan-Davis interval is a point; census trait shares by neighbourhood are needed.
 - Progress 2026-10-02 (Duncan-Davis, library scan B22): `Research.P12` in P12Bounds.lean:
   on a finite weighted population the joint mass satisfies p + q - 1 <= pq <= min(p, q)
   (`pq_ge`, `pq_le_p`, `pq_le_q`), so P(y | x) lies in [max(0,(p+q-1)/p), min(1, q/p)]
@@ -764,6 +805,7 @@ check.
   pair is not nested (`violation_refutes_monotonicity`), the Frandsen-Lefgren-Leslie test.
   R: `morie_judge_slope_test()`; Python `judge_slope_test()`.
 - Open: an application to OTIS custody decisions by presiding judge.
+- Noted 2026-10-12: OTIS carries no judge or court identifiers; stays open.
 
 ## P15. Sentencing disparity: what the "unexplained" part of a decomposition is
 
@@ -798,6 +840,16 @@ legal factors" and an "unexplained" remainder read as disparity or discriminatio
   the two recentering terms (`rif_gap`), so the P15 split applied to RIF means is a split of the
   quantile gap. R: `morie_rif_quantile()`, `morie_rif_gap()`; Python `rif_quantile()`, `rif_gap()`.
   Open: the OTIS sentence-length application.
+- Application 2026-10-12 (research/applications/p15_otis_placement_lengths.R): OTIS segregation
+  placements, 82,001 rows (fiscal 2023-2025), consecutive days per placement, women against men,
+  age category × region (15 cells) as the covariates. Women's placements are 1.42 days longer on
+  average; reweighting men to women's cells moves men's mean by −0.14 days, so the composition
+  term is negative and the structure term is 1.56 days (the DFL identity holds to 1e-16). The RIF
+  split says where: the medians coincide (2 days), the 75th-percentile gap is 1 day and the
+  90th-percentile gap 3 days, with recentering terms of −0.47 and −0.63. The gap is a tail, not
+  a shift. "Structure" is what two covariates leave; placement reason, alerts and institution
+  are in the file and are the next covariates. OTIS carries no sentence lengths, so the
+  sentence-length version named here is not possible from the public file.
 
 ## P16. Court backlog: what a disposition-time statistic already says
 
@@ -821,6 +873,7 @@ about as if it were a third number.
   (`disposed_understates`); no upper bound exists without a cap (`no_upper_bound`). R:
   `morie_backlog_censoring()`; Python `backlog_censoring()`.
 - Open: an application to Ontario Court of Justice disposition statistics.
+- Noted 2026-10-12: the OCJ tables are not held locally; stays open.
 
 ## P17. Incapacitation: what a sentence year buys
 
@@ -849,6 +902,8 @@ Shinnar 1973; Blumstein, Cohen & Nagin 1978) is a steady-state identity.
   an upper bound under both corrections (`prevented_net_le`). R:
   `morie_incapacitation_career()`; Python `incapacitation_career()`.
 - Open: an application to OTIS custody lengths with Ontario reconviction rates.
+- Noted 2026-10-12: OTIS carries no custody lengths and no reconviction rate by length is
+  published for Ontario; stays open.
 
 ## P18. Selective labels: evaluating a release rule from the released alone
 

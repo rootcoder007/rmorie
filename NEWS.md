@@ -5,6 +5,10 @@
   a/(4(r0+b0)) at every horizon, so the loop drifts within a Chebyshev band fixed by the starting
   mass (`morie_feedback_loop_envelope()`); Albert-Anderson's converse, overlap gives a finite
   logistic maximum-likelihood estimate (`morie_logit_separation()$mle_exists`);
+  four ledger problems applied to public data (`research/applications/`: Toronto neighbourhood
+  concentration against the Poisson null, break-and-enter over-dispersion and per-neighbourhood
+  Hawkes fits, the OTIS gender gap in placement lengths split by DFL and RIF, the neighbourhood
+  contiguity graph as the interference design), the rest listed as open with the reason;
   `morie_logit_separation()` now settles complete versus quasi-complete separation by a second
   programme that maximises the smallest margin, so a vertex of the first programme sitting on a
   zero margin no longer reports completely separated data as quasi-complete; about 25 help pages
