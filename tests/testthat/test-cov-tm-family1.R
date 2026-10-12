@@ -74,7 +74,6 @@ test_that("Tnie is the total natural indirect effect of the VanderWeele model", 
 })
 
 test_that("morie_tps_figures draws one PNG per requested panel", {
-  testthat::skip_on_covr()
   skip_if_not(isTRUE(capabilities("png")), "no png device")
   pkg <- if (isNamespaceLoaded("rmorie")) "rmorie" else "morie"
   dir <- file.path(tempdir(), "tpsfig_cov")

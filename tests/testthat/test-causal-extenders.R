@@ -30,7 +30,8 @@ test_that("morie_causal_weighting is native for glm / cbps / ebal and names Weig
   expect_equal(morie_causal_weighting(d, "t", "x", method = "ebal", estimand = "ATT")$weights,
                morie_weight_entropy(d, "t", "x")$weights)
   expect_error(morie_causal_weighting(d, "t", "x", method = "bart"), "WeightIt")
-  expect_error(morie_causal_weighting(d, "t", "x", method = "ebal", estimand = "ATE"), "WeightIt")
+  expect_equal(morie_causal_weighting(d, "t", "x", method = "ebal", estimand = "ATE")$weights,
+               morie_weightit(d, "t", "x", method = "ebal", estimand = "ATE")$weights)
 })
 
 test_that("morie_causal_robust_se computes natively (no sandwich needed)", {

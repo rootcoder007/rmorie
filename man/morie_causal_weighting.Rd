@@ -22,7 +22,7 @@ or continuous depending on \code{method}).}
 \item{covariates}{Character vector of covariate names.}
 
 \item{method}{One of \code{"glm"}, \code{"cbps"}, \code{"ebal"},
-\code{"ps"}, \code{"energy"}, \code{"optweight"}, or any other
+\code{"ipt"}, \code{"ps"}, \code{"energy"}, \code{"optweight"}, or any other
 method accepted by \code{WeightIt::weightit()}.}
 
 \item{estimand}{One of \code{"ATE"}, \code{"ATT"}, \code{"ATC"};
@@ -43,8 +43,9 @@ Balancing weights under a \code{WeightIt}-style method name. The methods
 this package has engines for run natively and give the same weights
 whatever is installed: \code{"glm"} / \code{"ps"} (logistic propensity
 weights, \code{\link{morie_weight_ps}}), \code{"cbps"}
-(\code{\link{morie_weight_cbps}}) and, for the ATT, \code{"ebal"} /
-\code{"entropy"} (\code{\link{morie_weight_entropy}}). Any other method
+(\code{\link{morie_weight_cbps}}), \code{"ebal"} / \code{"entropy"}
+(\code{\link{morie_weight_entropy}} for the ATT, \code{\link{morie_weightit}}
+otherwise) and \code{"ipt"} (\code{\link{morie_weightit}}). Any other method
 (\code{"energy"}, \code{"optweight"}, \code{"bart"}, ...) is passed to
 \code{WeightIt::weightit()}, which must then be installed; the error says
 so and names the native methods.

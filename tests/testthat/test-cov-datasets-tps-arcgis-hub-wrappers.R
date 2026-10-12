@@ -102,6 +102,17 @@ test_that("each hub_id is the catalog entry whose title slugifies to the name", 
   }
 })
 
+test_that("every wrapper reaches the dispatcher, which refuses an unknown format first", {
+  # no mocking, so this runs under covr too: the wrapper body executes, then
+  # match.arg() in the dispatcher stops before any resolution or request
+  for (s in tps_wrapper_suffixes) {
+    fn <- get(paste0("morie_datasets_tps_", s))
+    expect_error(fn(format = "nope"), "should be one of", info = s)
+    expect_error(fn(format = "nope", where = "1=1", max_features = 3L, layer_idx = 1L, offline = FALSE,
+                    dest = tempfile()), "should be one of", info = s)
+  }
+})
+
 test_that("an unknown format is rejected before any network access", {
   expect_error(morie_datasets_tps_budget_2020(format = "xlsx"), "arg")
   expect_error(morie_datasets_tps_reported_crimes(format = "pdf"), "arg")

@@ -1528,8 +1528,9 @@ morie_causal_impact <- function(data, pre_period, post_period,
 #' this package has engines for run natively and give the same weights
 #' whatever is installed: \code{"glm"} / \code{"ps"} (logistic propensity
 #' weights, \code{\link{morie_weight_ps}}), \code{"cbps"}
-#' (\code{\link{morie_weight_cbps}}) and, for the ATT, \code{"ebal"} /
-#' \code{"entropy"} (\code{\link{morie_weight_entropy}}). Any other method
+#' (\code{\link{morie_weight_cbps}}), \code{"ebal"} / \code{"entropy"}
+#' (\code{\link{morie_weight_entropy}} for the ATT, \code{\link{morie_weightit}}
+#' otherwise) and \code{"ipt"} (\code{\link{morie_weightit}}). Any other method
 #' (\code{"energy"}, \code{"optweight"}, \code{"bart"}, ...) is passed to
 #' \code{WeightIt::weightit()}, which must then be installed; the error says
 #' so and names the native methods.
@@ -1539,7 +1540,7 @@ morie_causal_impact <- function(data, pre_period, post_period,
 #'   or continuous depending on \code{method}).
 #' @param covariates Character vector of covariate names.
 #' @param method One of \code{"glm"}, \code{"cbps"}, \code{"ebal"},
-#'   \code{"ps"}, \code{"energy"}, \code{"optweight"}, or any other
+#'   \code{"ipt"}, \code{"ps"}, \code{"energy"}, \code{"optweight"}, or any other
 #'   method accepted by \code{WeightIt::weightit()}.
 #' @param estimand One of \code{"ATE"}, \code{"ATT"}, \code{"ATC"};
 #'   defaults to \code{"ATE"}.
@@ -1567,18 +1568,21 @@ morie_causal_weighting <- function(data, treatment, covariates,
   native <- switch(method,
     glm = , ps = morie_weight_ps(data, treatment, covariates, estimand = estimand),
     cbps = morie_weight_cbps(data, treatment, covariates, estimand = estimand),
-    ebal = , entropy = if (estimand == "ATT") morie_weight_entropy(data, treatment, covariates) else NULL,
+    ebal = , entropy = if (estimand == "ATT") morie_weight_entropy(data, treatment, covariates) else
+      morie_weightit(data, treatment, covariates, method = "ebal", estimand = estimand),
+    ipt = morie_weightit(data, treatment, covariates, method = "ipt", estimand = estimand),
     NULL
   )
   if (!is.null(native)) {
     wt <- native$weights
-    return(list(weights = wt, propensity_scores = native$propensity, method = method,
+    ps <- if (is.null(native$propensity)) native$ps else native$propensity
+    return(list(weights = wt, propensity_scores = ps, method = method,
                 estimand = estimand, ess = sum(wt)^2 / sum(wt^2), weightit = NULL))
   }
   # a method this package has no engine for: WeightIt's, explicitly
   if (!requireNamespace("WeightIt", quietly = TRUE)) {
     stop(sprintf("method = \"%s\" (estimand %s) is WeightIt's; install.packages(\"WeightIt\"), ", method, estimand),
-         "or use a native method: \"glm\", \"cbps\", or \"ebal\" for the ATT", call. = FALSE)
+         "or use a native method: \"glm\", \"cbps\", \"ebal\" or \"ipt\"", call. = FALSE)
   }
   formula <- stats::as.formula(paste(treatment, "~", paste(covariates, collapse = " + ")))
   w <- WeightIt::weightit(formula, data = data, method = method, estimand = estimand, ...)

@@ -1,5 +1,13 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* `morie_weightit()`: balancing weights under WeightIt's method names with no call into it,
+  for binary, multi-category and continuous treatments: `"glm"` (any binomial link; maximum
+  likelihood, Firth, ridge, lasso, elastic net; multinomial or cumulative-link; the
+  density-ratio weight for a continuous treatment), `"ebal"`, `"ipt"` and `"cbps"` (just- or
+  over-identified), every `get_w_from_ps` estimand, sampling weights, stabilisation, balance
+  moments and interactions. `morie_causal_weighting()` now runs `"ebal"` for every estimand
+  and `"ipt"` natively. The engines had been in the package without an entry point; each is
+  tested against the equation it solves and, where WeightIt is installed, against WeightIt.
 * Research ledger, three open items closed with machine-checked proofs (`research/lean`, 273
   theorems and lemmas, 0 sorry): one recorded crime series cannot separate re-classification
   from cuffing and a second source's true total can (`morie_recording_regimes()`); the

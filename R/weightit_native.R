@@ -59,7 +59,7 @@
 # collinear with the intercept and the columns before it (WeightIt's
 # make_full_rank; glm would alias it)
 .wn_design <- function(data, covariates) {
-  X <- .mor_ps_design(data, covariates)
+  X <- .mor_ps_design(data, covariates)[, -1L, drop = FALSE]
   if (!ncol(X)) return(X)
   q <- qr(cbind(1, X), tol = 1e-7)
   keep <- sort(q$pivot[seq_len(q$rank)])
@@ -97,7 +97,8 @@
       } else {
         mustart <- 0.25 + 0.5 * t
       }
-      fit <- suppressWarnings(stats::glm.fit(Xi, t, weights = sw, start = start, mustart = mustart, family = fam))
+      fit <- suppressWarnings(stats::glm.fit(Xi, t, weights = sw, start = start, mustart = mustart, family = fam,
+                                             control = stats::glm.control(epsilon = 1e-12, maxit = 100L)))
       if (!fit$converged) warning("the propensity model did not converge", call. = FALSE)
       list(ps = as.numeric(fit$fitted.values), coef = fit$coefficients, X = Xi, link = lk)
     },
@@ -381,7 +382,10 @@
   zd <- (a - m) / sqrt(s2)
   if (identical(density, "kernel")) {
     kd <- function(z) {
-      d <- stats::density(z, n = 10L * length(z), weights = sw / sum(sw), bw = bw, adjust = adjust)
+      # the bandwidth rule is applied to the sample itself (density() would
+      # warn that it ignores the weights for the rule)
+      b <- if (is.character(bw)) get(paste0("bw.", bw), envir = asNamespace("stats"))(z) else bw
+      d <- stats::density(z, n = 10L * length(z), weights = sw / sum(sw), bw = b, adjust = adjust)
       log(stats::approxfun(d$x, d$y)(z))
     }
     return(list(w = exp(kd(zn) - kd(zd)), fitted = m))
@@ -645,4 +649,212 @@
   }
   ps <- lk$linkinv(as.numeric(C %*% B))
   list(ps = ps, w = .wn_w_binary(ps, t, estimand))
+}
+
+# ---- the entry point ------------------------------------------------------------------
+
+.wn_treatment_type <- function(a, ordinal = FALSE) {
+  if (is.factor(a) || is.character(a) || is.logical(a)) {
+    f <- factor(a)
+    if (nlevels(f) < 2L) stop("treatment has one level", call. = FALSE)
+    return(list(type = if (nlevels(f) == 2L) "binary" else "multi", treat = f))
+  }
+  if (!is.numeric(a)) stop("treatment must be numeric, logical, character or a factor", call. = FALSE)
+  if (anyNA(a)) stop("treatment has missing values", call. = FALSE)
+  u <- sort(unique(a))
+  if (length(u) == 2L) return(list(type = "binary", treat = factor(a, levels = u)))
+  if (length(u) < 2L) stop("treatment has one level", call. = FALSE)
+  if (isTRUE(ordinal) || (all(u == round(u)) && length(u) <= 10L)) {
+    return(list(type = "multi", treat = factor(a, levels = u)))
+  }
+  list(type = "continuous", treat = as.numeric(a))
+}
+
+#' Balancing weights by WeightIt's rules, natively
+#'
+#' Balancing weights for a binary, multi-category or continuous treatment
+#' under the method names and rules of \code{WeightIt} (Greifer 2024), with
+#' no call into it: \code{"glm"} (a propensity model: any binomial link,
+#' maximum likelihood, Firth's bias reduction, ridge, lasso or an elastic
+#' net; multinomial or cumulative-link for more than two levels; the
+#' density-ratio generalised propensity weight for a continuous treatment),
+#' \code{"ebal"} (entropy balancing, exact moment balance), \code{"ipt"}
+#' (inverse probability tilting) and \code{"cbps"} (the covariate balancing
+#' propensity score, just- or over-identified). The weights each estimand
+#' takes from a propensity score follow WeightIt's \code{get_w_from_ps}:
+#' \code{"ATE"}, \code{"ATT"}, \code{"ATC"}, \code{"ATO"}, \code{"ATM"} and
+#' \code{"ATOS"} for a binary treatment, \code{"ATE"}, \code{"ATT"},
+#' \code{"ATC"}, \code{"ATO"} and \code{"ATM"} for a multi-category one.
+#'
+#' @param data A data frame.
+#' @param treatment Name of the treatment column. Two distinct values make
+#'   a binary treatment; a factor, character, or an integer-valued column
+#'   with at most ten levels a multi-category one; any other numeric column
+#'   a continuous one.
+#' @param covariates Character vector of covariate names; non-numeric
+#'   columns enter as dummies.
+#' @param method One of \code{"glm"}, \code{"ebal"}, \code{"ipt"},
+#'   \code{"cbps"}.
+#' @param estimand The target: see Details for what each method and
+#'   treatment type accept. Ignored for a continuous treatment.
+#' @param focal For a multi-category treatment with \code{estimand}
+#'   \code{"ATT"} or \code{"ATC"}, the level the others are weighted to.
+#' @param link The propensity model's link (\code{"logit"}, \code{"probit"},
+#'   \code{"cloglog"}, \code{"loglog"}, \code{"cauchit"}, \code{"log"},
+#'   \code{"clog"}, \code{"identity"}); for a continuous treatment the
+#'   Gaussian link.
+#' @param ps_model For a binary \code{"glm"}: \code{"mle"}, \code{"firth"},
+#'   \code{"ridge"}, \code{"lasso"} or \code{"elasticnet"}.
+#' @param lambda,alpha The penalty and the elastic-net mixing weight of a
+#'   penalised propensity model.
+#' @param sampling_weights Optional sampling weights (a numeric vector or a
+#'   column name); the balancing weights multiply them.
+#' @param stabilize For a binary or multi-category treatment, multiply the
+#'   weights by the marginal probability of the unit's level. A continuous
+#'   treatment's weights are stabilised already.
+#' @param moments,int For \code{"ebal"}, balance powers up to \code{moments}
+#'   of the non-binary covariates and, with \code{int}, all pairwise
+#'   products.
+#' @param over For \code{"cbps"}, the over-identified (GMM) estimator.
+#' @param density,bw,adjust For a continuous \code{"glm"}, the density of the
+#'   standardised residuals (\code{"normal"}, \code{"laplace"},
+#'   \code{"t_<df>"}, \code{"kernel"} or a function) and the kernel
+#'   bandwidth arguments.
+#' @param ordinal Treat a multi-category treatment as ordered and fit a
+#'   cumulative-link model.
+#' @param d_moments For a continuous \code{"ebal"}, balance powers up to this
+#'   order of the treatment.
+#' @return A list of class \code{morie_weightit}: \code{weights}; \code{ps}
+#'   (the propensity scores, a matrix of them for a multi-category
+#'   treatment, the fitted treatment for a continuous one, \code{NULL} for
+#'   \code{"ebal"}); \code{treatment_type}; \code{method}; \code{estimand};
+#'   \code{focal}; \code{ess} (the effective sample size); and, for an
+#'   over-identified \code{"cbps"}, \code{objective}, the GMM criterion as a
+#'   function of a propensity score vector.
+#' @details Each method's estimands: \code{"glm"} every one above;
+#'   \code{"ebal"} \code{"ATE"}, \code{"ATT"}, \code{"ATC"}; \code{"ipt"}
+#'   \code{"ATE"}, \code{"ATT"}, \code{"ATC"}; \code{"cbps"} (binary only)
+#'   \code{"ATE"}, \code{"ATT"}, \code{"ATC"}, \code{"ATO"}. A continuous
+#'   treatment takes \code{"glm"} or \code{"ebal"}.
+#' @references Greifer N (2024). WeightIt: Weighting for Covariate Balance
+#'   in Observational Studies. Hainmueller J (2012). Entropy balancing for
+#'   causal effects. Political Analysis 20(1). Graham BS, Pinto CC, Egel D
+#'   (2012). Inverse probability tilting. Review of Economic Studies 79(3).
+#'   Imai K, Ratkovic M (2014). Covariate balancing propensity score. JRSS-B
+#'   76(1). Kosmidis I, Firth D (2009). Bias reduction in exponential family
+#'   nonlinear models. Biometrika 96(4).
+#' @examples
+#' set.seed(1)
+#' d <- data.frame(t = rbinom(80, 1, 0.4), x = rnorm(80), g = sample(c("a", "b"), 80, TRUE))
+#' w <- morie_weightit(d, "t", c("x", "g"), method = "ebal", estimand = "ATT")
+#' round(w$ess, 2)
+#' d$a <- rnorm(80, d$x)
+#' morie_weightit(d, "a", "x", method = "glm")$ess
+#' @export
+morie_weightit <- function(data, treatment, covariates, method = c("glm", "ebal", "ipt", "cbps"),
+                           estimand = "ATE", focal = NULL, link = "logit", ps_model = "mle",
+                           lambda = 1, alpha = 1, sampling_weights = NULL, stabilize = FALSE,
+                           moments = 1L, int = FALSE, over = FALSE, density = "normal",
+                           bw = "nrd0", adjust = 1, ordinal = FALSE, d_moments = 1L) {
+  stopifnot(is.data.frame(data))
+  method <- match.arg(method)
+  miss <- setdiff(c(treatment, covariates), names(data))
+  if (length(miss)) stop("Columns missing from data: ", paste(miss, collapse = ", "), call. = FALSE)
+  tt <- .wn_treatment_type(data[[treatment]], ordinal)
+  n <- nrow(data)
+  sw <- if (is.null(sampling_weights)) {
+    rep(1, n)
+  } else if (is.character(sampling_weights)) {
+    as.numeric(data[[sampling_weights]])
+  } else {
+    as.numeric(sampling_weights)
+  }
+  if (length(sw) != n || anyNA(sw) || any(sw < 0)) {
+    stop("sampling_weights must be one non-negative number per row", call. = FALSE)
+  }
+  X <- .wn_design(data, covariates)
+  if (tt$type == "continuous" && !method %in% c("glm", "ebal")) {
+    stop(sprintf("method = \"%s\" takes a binary or multi-category treatment", method), call. = FALSE)
+  }
+  if (tt$type == "multi" && estimand %in% c("ATT", "ATC")) {
+    if (is.null(focal) || !as.character(focal) %in% levels(tt$treat)) {
+      stop("estimand \"", estimand, "\" for a multi-category treatment needs focal = one of its levels",
+           call. = FALSE)
+    }
+    focal <- as.character(focal)
+  }
+  if (tt$type == "binary" && estimand %in% c("ATT", "ATC")) focal <- levels(tt$treat)[2L]
+  ps <- NULL
+  objective <- NULL
+  three <- c("ATE", "ATT", "ATC")
+  w <- switch(tt$type,
+    binary = {
+      t <- as.numeric(tt$treat == levels(tt$treat)[2L])
+      if (!estimand %in% c(three, "ATO", "ATM", "ATOS")) {
+        stop("estimand must be one of \"ATE\", \"ATT\", \"ATC\", \"ATO\", \"ATM\", \"ATOS\"", call. = FALSE)
+      }
+      switch(method,
+        glm = {
+          fit <- .wn_ps_binary(X, t, sw, link, ps_model, lambda, alpha)
+          ps <- fit$ps
+          .wn_w_binary(ps, t, estimand)
+        },
+        ebal = {
+          if (!estimand %in% three) stop("ebal takes estimand = \"ATE\", \"ATT\" or \"ATC\"", call. = FALSE)
+          foc <- switch(estimand, ATT = levels(tt$treat)[2L], ATC = levels(tt$treat)[1L], NULL)
+          .wn_ebal(.wn_terms(X, sw, moments, int), tt$treat, sw, if (estimand == "ATE") "ATE" else "ATT", foc)
+        },
+        ipt = {
+          r <- .wn_ipt(X, t, sw, estimand, link)
+          ps <- r$ps
+          r$w
+        },
+        cbps = {
+          r <- .wn_cbps(X, t, sw, estimand, link, over)
+          ps <- r$ps
+          objective <- r$objective
+          r$w
+        })
+    },
+    multi = {
+      switch(method,
+        glm = {
+          ps <- if (isTRUE(ordinal)) .wn_ordinal(X, tt$treat, sw, link) else .wn_multinom(X, tt$treat, sw)
+          .wn_w_multi(ps, tt$treat, estimand, focal)
+        },
+        ebal = {
+          if (!estimand %in% three) stop("ebal takes estimand = \"ATE\", \"ATT\" or \"ATC\"", call. = FALSE)
+          .wn_ebal(.wn_terms(X, sw, moments, int), tt$treat, sw, if (estimand == "ATE") "ATE" else "ATT", focal)
+        },
+        ipt = {
+          if (!estimand %in% three) stop("ipt takes estimand = \"ATE\", \"ATT\" or \"ATC\"", call. = FALSE)
+          .wn_ipt_multi(X, tt$treat, sw, if (estimand == "ATE") "ATE" else "ATT", focal, link)
+        },
+        cbps = stop("cbps takes a binary treatment", call. = FALSE))
+    },
+    continuous = {
+      estimand <- "ATE"
+      if (method == "glm") {
+        r <- .wn_w_continuous(X, tt$treat, sw, if (link == "logit") "identity" else link, density, bw, adjust)
+        ps <- r$fitted
+        r$w
+      } else {
+        .wn_ebal_continuous(.wn_terms(X, sw, moments, int), tt$treat, sw, d_moments)
+      }
+    })
+  if (isTRUE(stabilize) && tt$type != "continuous") w <- .wn_stabilize(w, tt$treat)
+  w <- as.numeric(w * sw)
+  structure(list(weights = w, ps = ps, treatment_type = tt$type, method = method, estimand = estimand,
+                 focal = focal, ess = sum(w)^2 / sum(w^2), objective = objective, n = n),
+            class = "morie_weightit")
+}
+
+#' @rdname morie_weightit
+#' @param x A \code{morie_weightit} object.
+#' @param ... Ignored.
+#' @export
+print.morie_weightit <- function(x, ...) {
+  cat(sprintf("morie_weightit: %s, %s treatment, estimand %s\n", x$method, x$treatment_type, x$estimand))
+  cat(sprintf("  n = %d  ESS = %.1f  weight range [%.3f, %.3f]\n", x$n, x$ess, min(x$weights), max(x$weights)))
+  invisible(x)
 }
