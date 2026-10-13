@@ -1014,8 +1014,15 @@ group-level correlation can differ in size and sign from the individual one.
   (individual +0.6, ecological -1).
 - Open: an application with
   PSDP/CPADS individual records against TPS neighbourhood aggregates.
-- Noted 2026-10-12: the only neighbourhood trait held is the NIA flag (0/1 per neighbourhood), for
-  which the Duncan-Davis interval is a point; census trait shares by neighbourhood are needed.
+- Applied 2026-10-13: City of Toronto Neighbourhood Profiles, 2021 Census, 158 neighbourhoods
+  (research/applications/p12_toronto_ecological.md; hosted as toronto_neighbourhood_profiles/census_2021).
+  Checked where the census publishes the answer: Duncan-Davis bounds on the LIM-AT low-income rate of
+  children, seniors and working-age adults from the age share and overall share alone contain the
+  published rate in 474 of 474 neighbourhood-group checks (allowing the census's rounding to
+  multiples of five), and the city-wide truths (0.145, 0.169, 0.119) lie inside the aggregate
+  intervals. Applied where it publishes none: visible-minority residents (56% of the population)
+  have a city-wide low-income rate in [0.007, 0.237] from neighbourhood shares alone, against an
+  ecological correlation of 0.52.
 - Progress 2026-10-02 (Duncan-Davis, library scan B22): `Research.P12` in P12Bounds.lean:
   on a finite weighted population the joint mass satisfies p + q - 1 <= pq <= min(p, q)
   (`pq_ge`, `pq_le_p`, `pq_le_q`), so P(y | x) lies in [max(0,(p+q-1)/p), min(1, q/p)]

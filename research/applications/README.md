@@ -16,6 +16,7 @@ under the folder names the scripts expect.
 | folder | file | source |
 |---|---|---|
 | `OT/` | `neighbourhood-crime-rates - 4326.csv` | City of Toronto open data, Neighbourhood Crime Rates (Toronto Police Service), 158 neighbourhoods, 2014-2025 |
+| `OT/` | `nbhd_2021_census_profile_full_158model.csv` | City of Toronto, Neighbourhood Profiles 2021 Census, 158-neighbourhood model (the workbook as CSV; also at data.rmorie.com as `toronto_neighbourhood_profiles/census_2021`) |
 | `OT/` | `centreline-4326.csv` | City of Toronto open data, Toronto Centreline (road segments with their end intersections) |
 | `TPS/` | `tps_break_enter_d14_2024.csv` | TPS break and enter, Division 14, 2024 (shipped with rmoriebricklayer) |
 | `OT/` | `Neighbourhoods - 4326.geojson` | City of Toronto open data, Neighbourhoods (with the Neighbourhood Improvement Area classification) |
@@ -39,6 +40,7 @@ under the folder names the scripts expect.
 | `p15_otis_placement_lengths.R` | P15 disparity | `morie_dfl_reweight()`, `morie_rif_gap()` | `Research.P15.Reweight`, `Research.P15.RIF` |
 | `p03_street_segments.R` | P3 interference, street segments | `morie_cheeger_bound()`, `morie_spillover_exposure_probs()` | `Research.P3.cheeger_easy`, the HT design condition |
 | `p11_custody_reconviction.R` | P11 sentencing bounds | `morie_sentence_effect_bounds()`, `morie_sentence_effect_mts()` | `Research.P11.ate_width_one`, `Research.P11.Pop.mtr_mts_bounds` |
+| `p12_toronto_ecological.R` | P12 ecological inference | `morie_ecological_bounds()` | `Research.P12.dd_bounds`, `dd_aggregate_bounds` |
 | `p14_cook_judges.R` | P14 judge leniency | `morie_judge_monotonicity()` | `Research.P14Slope.subgroup_propensity_mono`, `crossing_refutes_both` |
 | `p16_ocj_backlog.R` | P16 court backlog | `morie_backlog_published()` | `Research.P16.little_target`, `Research.P16Censoring.band_floor_le_mean` |
 | `p18_ny_pretrial.R` | P18 selective labels | `morie_selective_labels()` | `Research.P18.unobserved_bounds`, `unobserved_width` |
@@ -53,6 +55,5 @@ nobody reads the folder as complete.
 |---|---|---|
 | P1 dark figure | a survey/record pair | done with the NCVS 1992-2022 (ICPSR 38604, `ncvs_38604/*` at data.rmorie.com): `ncvs_victimisation.R`, results/ncvs_victimisation.md (P1 interval and breakdown by year and class; A14 comparable-subset rate; P7 concentration on persons and households; P10 moments) |
 | P6 age-crime | a cohort | no cohort file; OTIS gives age categories of people in segregation, not offending by age |
-| P12 ecological | PSDP/CPADS individuals against TPS neighbourhood aggregates | the only neighbourhood trait held is the NIA flag, which is 0/1 per neighbourhood, so the Duncan-Davis interval is a point; census shares are needed |
 | P14 judge leniency | the Wald ratio (complier effect) | monotonicity is tested on Cook County sentencing (`p14_cook_judges.R`), but no public file pairs judge assignment with a post-sentence outcome |
 | P17 incapacitation | offending (not conviction) rates by custody length | applied in convictions to published reconviction hazards (`p17_reconviction_incapacitation.R`); no public file gives custody lengths by person with offending |
