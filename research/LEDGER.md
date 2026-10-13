@@ -960,8 +960,12 @@ Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
   B4). R: `morie_sentence_effect_mtr()`.
 - Open: application to OTIS/CPADS
   custody-vs-community sentences and reconviction.
-- Noted 2026-10-12: OTIS is segregation placements, not sentences, and CPADS is a postsecondary
-  substance-use survey; the application needs a sentencing file with reconviction and stays open.
+- Applied 2026-10-13: Statistics Canada Juristat 85-002-X 2024001 table 2, adults sentenced to
+  custody or community supervision in five provinces 2015/16-2018/19 with one-, two- and three-year
+  reconviction by type (research/applications/p11_custody_reconviction.md). Two-year any new
+  conviction: 61.6% after custody, 36.0% after community, naive 25.5 points; worst case
+  [-36.9, 63.1], MTS [-36.9, 25.5], MTR + MTS [0, 25.5]; the same pattern holds for every follow-up
+  and conviction type. The cohorts differ before sentencing (59% vs 20% with ten or more priors).
 - Progress 2026-10-02 (Imbens-Manski, library scan B25): `Research.P11` in P11Coverage.lean:
   on a finite probability space P[H subset of C] <= P[theta in C] whenever theta
   in H (`region_coverage_le`); for a strictly increasing CDF the coverage
