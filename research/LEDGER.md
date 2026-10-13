@@ -1183,9 +1183,16 @@ Shinnar 1973; Blumstein, Cohen & Nagin 1978) is a steady-state identity.
   later (`later_sentence_prevents_less`), and the entry-rate constant-lambda estimate is
   an upper bound under both corrections (`prevented_net_le`). R:
   `morie_incapacitation_career()`; Python `incapacitation_career()`.
-- Open: an application to OTIS custody lengths with Ontario reconviction rates.
-- Noted 2026-10-12: OTIS carries no custody lengths and no reconviction rate by length is
-  published for Ontario; stays open.
+- Applied 2026-10-13: published reconviction, in convictions (the conviction rate lambda q is what a
+  reconviction hazard measures, and the prevented share depends on lambda and q only through it)
+  (research/applications/p17_reconviction_incapacitation.md). Juristat 85-002-X 2024001: the
+  quarterly hazard of a first new conviction falls from 0.30 to 0.01 after custody and 0.14 to 0.01
+  after community supervision over four years; a year of custody imposed at release prevents
+  0.754 first reconvictions per person released from custody (constant entry-rate bound 1.43),
+  0.132 if served two years later. Ontario 2014/15 releases by risk level: a six-month term
+  removes 0.7% of a very-low-risk releasee's convictions and 20.6% of a very-high-risk one's.
+  The published hazard is the cohort's, so desistance and selection are not separated, and
+  offending per conviction (q) stays unidentified; custody lengths by person remain unpublished.
 
 ## P18. Selective labels: evaluating a release rule from the released alone
 
