@@ -22,6 +22,7 @@ under the folder names the scripts expect.
 | `TPS/BreakandEnter/CSV/` | `Break_and_Enter_Open_Data_*.csv` | Toronto Police Service Public Safety Data Portal, Break and Enter occurrences |
 | `OTIS/` | `b01_segregation_detailed_dataset.csv` | Ontario Ministry of the Solicitor General, OTIS segregation detailed dataset (open data) |
 | `OCJ/` | `ocj_clearance_rate_criminal.csv`, `ocj_disposition_rate_criminal.csv`, `ocj_offence_based_criminal.csv` | Ontario Court of Justice criminal court statistics, every workbook 2012-2026 as tidy CSV (also at data.rmorie.com) |
+| `NYPRETRIAL/` | `PretrialRelease_2019_2024_Part_1.csv`, `..._Part_2.csv` | New York State DCJS, Supplemental Pretrial Release Data File (also at data.rmorie.com as `ny_pretrial_supplemental/part_1`, `part_2`) |
 | `COOK/` | `cook_sentencing.csv` | Cook County State's Attorney, Sentencing (Cook County open data) |
 | `JURISTAT/` | `reconviction_2024_tbl02_grid.csv`, `reconviction_2024_tbl04_grid.csv` | Statistics Canada, Juristat 85-002-X 2024001 article 00002, table 4 |
 | `ONTARIO/` | `ontario_adult_releases_by_risk_2014_15.csv` | Government of Ontario, Rates of recidivism in Ontario |
@@ -38,6 +39,7 @@ under the folder names the scripts expect.
 | `p11_custody_reconviction.R` | P11 sentencing bounds | `morie_sentence_effect_bounds()`, `morie_sentence_effect_mts()` | `Research.P11.ate_width_one`, `Research.P11.Pop.mtr_mts_bounds` |
 | `p14_cook_judges.R` | P14 judge leniency | `morie_judge_monotonicity()` | `Research.P14Slope.subgroup_propensity_mono`, `crossing_refutes_both` |
 | `p16_ocj_backlog.R` | P16 court backlog | `morie_backlog_published()` | `Research.P16.little_target`, `Research.P16Censoring.band_floor_le_mean` |
+| `p18_ny_pretrial.R` | P18 selective labels | `morie_selective_labels()` | `Research.P18.unobserved_bounds`, `unobserved_width` |
 | `p17_reconviction_incapacitation.R` | P17 incapacitation | `morie_incapacitation()`, `morie_incapacitation_career()` | `Research.P17.high_rate_more_prevented`, `Research.P17Replacement.later_sentence_prevents_less` |
 
 ## What stays open, and why
@@ -53,4 +55,3 @@ nobody reads the folder as complete.
 | P12 ecological | PSDP/CPADS individuals against TPS neighbourhood aggregates | the only neighbourhood trait held is the NIA flag, which is 0/1 per neighbourhood, so the Duncan-Davis interval is a point; census shares are needed |
 | P14 judge leniency | the Wald ratio (complier effect) | monotonicity is tested on Cook County sentencing (`p14_cook_judges.R`), but no public file pairs judge assignment with a post-sentence outcome |
 | P17 incapacitation | offending (not conviction) rates by custody length | applied in convictions to published reconviction hazards (`p17_reconviction_incapacitation.R`); no public file gives custody lengths by person with offending |
-| P18 selective labels | Ontario bail outcomes | no released-cohort file is public |

@@ -1229,7 +1229,14 @@ some judge released (Lakkaraju et al. 2017; Kleinberg et al. 2018).
   judge's outcomes; the width is zero exactly on containment (positive weights). R:
   `morie_selective_labels_judges()` (one row per judge, nestedness check, sharpest interval);
   Python `selective_labels_judges()`.
-- Open: an application to Ontario bail outcomes once a released-cohort file is public.
+- Applied 2026-10-13: New York State DCJS Supplemental Pretrial Release Data File, cases arraigned
+  2019-2024 (research/applications/p18_ny_pretrial.md; hosted as ny_pretrial_supplemental/*).
+  1,145,222 defendants at liberty (943,330) or held (201,892); 21.6% of those at liberty were
+  rearrested within 180 days. Releasing everyone: rearrest rate in [17.8%, 35.4%]; releasing only
+  non-violent charges with no violent prior: [17.9%, 29.6%] (11.7% of the set held); misdemeanour
+  charges with no pending case: [11.8%, 16.1%]. Across 33 courts with 3,000+ cases the interval's
+  width falls with the court's release share (Spearman -0.95), the contraction argument across
+  caseloads. Ontario publishes no released-cohort bail file; New York's is the application.
 
 ## P19. Regression to the mean at selected hot spots
 
