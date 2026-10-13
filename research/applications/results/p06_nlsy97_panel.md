@@ -1,6 +1,6 @@
 ## P6 the age-crime curve: a cohort panel (NLSY97)
 
-Data: Bureau of Justice Statistics, Recidivism in the National Longitudinal Survey of Youth 1997, Standalone Data (Rounds 1 to 13), ICPSR 34562-v1 (2014), DS0001: 8,984 respondents. Offending at an age is any of six self-reported acts (destroying property, theft under or over $50, other property crime, selling drugs, assault) in the calendar year the respondent turned that age. The file is used under ICPSR's terms of use and is not redistributed here.
+Data: Bureau of Justice Statistics, Recidivism in the National Longitudinal Survey of Youth 1997, Standalone Data (Rounds 1 to 13), ICPSR 34562-v1 (2014), DS0001: 8,984 respondents. Offending at an age is any of six self-reported acts (destroying property, theft under or over $50, other property crime, selling drugs, assault) in the calendar year the respondent turned that age. The file is used under ICPSR's terms of use; it is not in this repository (a key-gated copy loads with morie_load_dataset("icpsr_34562/ds0001"), ICPSR's terms still apply).
 
 ### The aggregate curve
 
