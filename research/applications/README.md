@@ -23,6 +23,7 @@ under the folder names the scripts expect.
 | `OTIS/` | `b01_segregation_detailed_dataset.csv` | Ontario Ministry of the Solicitor General, OTIS segregation detailed dataset (open data) |
 | `OCJ/` | `ocj_clearance_rate_criminal.csv`, `ocj_disposition_rate_criminal.csv`, `ocj_offence_based_criminal.csv` | Ontario Court of Justice criminal court statistics, every workbook 2012-2026 as tidy CSV (also at data.rmorie.com) |
 | `NYPRETRIAL/` | `PretrialRelease_2019_2024_Part_1.csv`, `..._Part_2.csv` | New York State DCJS, Supplemental Pretrial Release Data File (also at data.rmorie.com as `ny_pretrial_supplemental/part_1`, `part_2`) |
+| `OPP/` | `tn_nashville_2020_04_01.csv` | Stanford Open Policing Project, Nashville TN stops (ODC-By; also at data.rmorie.com as `opp_nashville/stops`) |
 | `COOK/` | `cook_sentencing.csv` | Cook County State's Attorney, Sentencing (Cook County open data) |
 | `JURISTAT/` | `reconviction_2024_tbl02_grid.csv`, `reconviction_2024_tbl04_grid.csv` | Statistics Canada, Juristat 85-002-X 2024001 article 00002, table 4 |
 | `ONTARIO/` | `ontario_adult_releases_by_risk_2014_15.csv` | Government of Ontario, Rates of recidivism in Ontario |
@@ -31,6 +32,7 @@ under the folder names the scripts expect.
 
 | script | problem | functions | theorems |
 |---|---|---|---|
+| `p02_veil_nashville.R` | P2 selection | `morie_veil_of_darkness()` | `Research.P2.Veil.odds_ratio_identifies_bias` |
 | `p03_toronto_neighbourhood_network.R` | P3 interference | `PolygonContiguity()`, `morie_cheeger_bound()`, `morie_spillover_exposure_probs()` | `Research.P3.cheeger_easy`, the HT design condition |
 | `p07_concentration_toronto.R` | P7 concentration | `morie_concentration_null_bound()` | `Research.P7.Bound.gini_le_cv`, `Research.P7.Mixture` |
 | `p10_near_repeat_bne.R` | P10 near repeats | `morie_contagion_moment_witness()`, `morie_tps_hawkes_temporal_fit()` | `Research.P10.Moments` |
@@ -50,7 +52,6 @@ nobody reads the folder as complete.
 | problem | application named | why it is not here |
 |---|---|---|
 | P1 dark figure | a survey/record pair | done with the NCVS 1992-2022 (ICPSR 38604, `ncvs_38604/*` at data.rmorie.com): `ncvs_victimisation.R`, results/ncvs_victimisation.md (P1 interval and breakdown by year and class; A14 comparable-subset rate; P7 concentration on persons and households; P10 moments) |
-| P2 selection | Toronto stops with a mobility proxy | the public Regulated Interactions table is counts by year and category only, with no time of day or group |
 | P6 age-crime | a cohort | no cohort file; OTIS gives age categories of people in segregation, not offending by age |
 | P12 ecological | PSDP/CPADS individuals against TPS neighbourhood aggregates | the only neighbourhood trait held is the NIA flag, which is 0/1 per neighbourhood, so the Duncan-Davis interval is a point; census shares are needed |
 | P14 judge leniency | the Wald ratio (complier effect) | monotonicity is tested on Cook County sentencing (`p14_cook_judges.R`), but no public file pairs judge assignment with a post-sentence outcome |

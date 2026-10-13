@@ -193,9 +193,14 @@ field has no agreed estimand, let alone estimator.
   difference (`share_sign`), a differential shift of who drives by light condition is
   observationally a bias (`exposure_shift_confounds`), and a common scale of both factors is
   invisible (`bias_not_absolute`). R: `morie_veil_of_darkness()`; Python `veil_of_darkness()`.
-  Open: the Toronto stops application with a stated mobility proxy.
-- Noted 2026-10-12: the public TPS Regulated Interactions table is counts by year and category
-  only (no time of day, no group), so the veil-of-darkness application cannot be run from it.
+- Applied 2026-10-13: Nashville TN traffic stops, Stanford Open Policing Project release 2020-04-01
+  (research/applications/p02_veil_nashville.md; hosted as opp_nashville/stops). Vehicular stops of
+  Black and white drivers in the inter-twilight window 16:32-20:39 (sunset and civil dusk computed
+  per date, local time), twilight dropped: 268,323 daylight and 227,760 darkness stops. Pooled
+  bias ratio 0.962; with clock time held fixed (Mantel-Haenszel over half-hour bins) 0.998, and
+  every bin within 0.97-1.03: no visibility-driven disparity in Nashville's stops, under the
+  antecedent that who drives at a clock time does not shift with light by race. The TPS
+  Regulated Interactions table (counts by year and category) still cannot support the design.
 - Progress 2026-10-12 (misclassification, scan B14): `Research.P2.Misclassification`
   (P2Misclassification.lean). Nondifferential misclassification of a binary exposure gives
   RD* = (se + sp − 1) RD π(1 − π)/(d₁d₀) with d₁, d₀ the measured group shares
