@@ -16,6 +16,8 @@ under the folder names the scripts expect.
 | folder | file | source |
 |---|---|---|
 | `OT/` | `neighbourhood-crime-rates - 4326.csv` | City of Toronto open data, Neighbourhood Crime Rates (Toronto Police Service), 158 neighbourhoods, 2014-2025 |
+| `OT/` | `centreline-4326.csv` | City of Toronto open data, Toronto Centreline (road segments with their end intersections) |
+| `TPS/` | `tps_break_enter_d14_2024.csv` | TPS break and enter, Division 14, 2024 (shipped with rmoriebricklayer) |
 | `OT/` | `Neighbourhoods - 4326.geojson` | City of Toronto open data, Neighbourhoods (with the Neighbourhood Improvement Area classification) |
 | `TPS/BreakandEnter/CSV/` | `Break_and_Enter_Open_Data_*.csv` | Toronto Police Service Public Safety Data Portal, Break and Enter occurrences |
 | `OTIS/` | `b01_segregation_detailed_dataset.csv` | Ontario Ministry of the Solicitor General, OTIS segregation detailed dataset (open data) |
@@ -32,6 +34,7 @@ under the folder names the scripts expect.
 | `p07_concentration_toronto.R` | P7 concentration | `morie_concentration_null_bound()` | `Research.P7.Bound.gini_le_cv`, `Research.P7.Mixture` |
 | `p10_near_repeat_bne.R` | P10 near repeats | `morie_contagion_moment_witness()`, `morie_tps_hawkes_temporal_fit()` | `Research.P10.Moments` |
 | `p15_otis_placement_lengths.R` | P15 disparity | `morie_dfl_reweight()`, `morie_rif_gap()` | `Research.P15.Reweight`, `Research.P15.RIF` |
+| `p03_street_segments.R` | P3 interference, street segments | `morie_cheeger_bound()`, `morie_spillover_exposure_probs()` | `Research.P3.cheeger_easy`, the HT design condition |
 | `p14_cook_judges.R` | P14 judge leniency | `morie_judge_monotonicity()` | `Research.P14Slope.subgroup_propensity_mono`, `crossing_refutes_both` |
 | `p16_ocj_backlog.R` | P16 court backlog | `morie_backlog_published()` | `Research.P16.little_target`, `Research.P16Censoring.band_floor_le_mean` |
 | `p17_reconviction_incapacitation.R` | P17 incapacitation | `morie_incapacitation()`, `morie_incapacitation_career()` | `Research.P17.high_rate_more_prevented`, `Research.P17Replacement.later_sentence_prevents_less` |
@@ -45,7 +48,6 @@ nobody reads the folder as complete.
 |---|---|---|
 | P1 dark figure | a survey/record pair | done with the NCVS 1992-2022 (ICPSR 38604, `ncvs_38604/*` at data.rmorie.com): `ncvs_victimisation.R`, results/ncvs_victimisation.md (P1 interval and breakdown by year and class; A14 comparable-subset rate; P7 concentration on persons and households; P10 moments) |
 | P2 selection | Toronto stops with a mobility proxy | the public Regulated Interactions table is counts by year and category only, with no time of day or group |
-| P3 interference | TPS street segments | the public files carry neighbourhoods, not the street-segment network; the neighbourhood version is here and labelled |
 | P6 age-crime | a cohort | no cohort file; OTIS gives age categories of people in segregation, not offending by age |
 | P11 sentencing bounds | OTIS/CPADS custody vs community and reconviction | OTIS is segregation placements, not sentences; CPADS is a student substance-use survey |
 | P12 ecological | PSDP/CPADS individuals against TPS neighbourhood aggregates | the only neighbourhood trait held is the NIA flag, which is 0/1 per neighbourhood, so the Duncan-Davis interval is a point; census shares are needed |

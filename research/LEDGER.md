@@ -285,8 +285,16 @@ spillover.
   = 1.03 holds. Under a completely randomised allocation of 33 treated neighbourhoods the rarest
   exposure class (untreated with no treated neighbour) has probability 0.056 at the degree-11
   neighbourhood 098, which is what sets the Horvitz-Thompson variance; outcomes are not used
-  because the NIAs were not randomised. Still open: the street-segment version (needs the
-  centreline network) and the Cheeger hard direction.
+  because the NIAs were not randomised. Still open: the Cheeger hard direction.
+- Applied 2026-10-13, street segments (research/applications/p03_street_segments.R): the City of
+  Toronto Centreline (local, collector and arterial roads, joined at shared intersections) inside
+  TPS Division 14's 2024 break-and-enter extent, largest connected piece 3,264 segments and 5,650
+  adjacencies; 506 of 513 incidents within 150 m of a segment. The 120 repeat segments (two or
+  more incidents, 3.7%) hold 64% of the incidents and have conductance 0.972: 97% of a hot
+  segment's neighbours are not hot, so displacement or diffusion from a hot-spot treatment lands
+  on untreated streets. λ₂ = 0.00042 (long chains of local streets) and λ₂ ≤ E(f)/D(f) = 1.011 ≤
+  2h(S) holds. Under a random allocation of 120 treated segments every segment reaches every
+  exposure class (smallest: untreated with a treated neighbour, 0.0245).
 - Progress 2026-10-12 (ring mis-specification): `Research.P3.Ring` (P3Ring.lean). If the
   outcome also moves by γ_i when unit i's (d+1)-ring is treated, the d-ring estimand misses
   (1/N) Σ_i γ_i 1[outer ring of i exposed] at every assignment (`gap_eq`), zero when every γ_i = 0
