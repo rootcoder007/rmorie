@@ -22,6 +22,7 @@ under the folder names the scripts expect.
 | `OT/` | `Neighbourhoods - 4326.geojson` | City of Toronto open data, Neighbourhoods (with the Neighbourhood Improvement Area classification) |
 | `TPS/BreakandEnter/CSV/` | `Break_and_Enter_Open_Data_*.csv` | Toronto Police Service Public Safety Data Portal, Break and Enter occurrences |
 | `OTIS/` | `b01_segregation_detailed_dataset.csv` | Ontario Ministry of the Solicitor General, OTIS segregation detailed dataset (open data) |
+| `NLSY97REC/` | `ICPSR_34562/DS0001/34562-0001-Data.rda` | BJS, Recidivism in the NLSY97 Standalone Data, ICPSR 34562-v1 (free ICPSR login; ICPSR terms of use, not redistributed) |
 | `OCJ/` | `ocj_clearance_rate_criminal.csv`, `ocj_disposition_rate_criminal.csv`, `ocj_offence_based_criminal.csv` | Ontario Court of Justice criminal court statistics, every workbook 2012-2026 as tidy CSV (also at data.rmorie.com) |
 | `NYPRETRIAL/` | `PretrialRelease_2019_2024_Part_1.csv`, `..._Part_2.csv` | New York State DCJS, Supplemental Pretrial Release Data File (also at data.rmorie.com as `ny_pretrial_supplemental/part_1`, `part_2`) |
 | `OPP/` | `tn_nashville_2020_04_01.csv` | Stanford Open Policing Project, Nashville TN stops (ODC-By; also at data.rmorie.com as `opp_nashville/stops`) |
@@ -35,6 +36,7 @@ under the folder names the scripts expect.
 |---|---|---|---|
 | `p02_veil_nashville.R` | P2 selection | `morie_veil_of_darkness()` | `Research.P2.Veil.odds_ratio_identifies_bias` |
 | `p03_toronto_neighbourhood_network.R` | P3 interference | `PolygonContiguity()`, `morie_cheeger_bound()`, `morie_spillover_exposure_probs()` | `Research.P3.cheeger_easy`, the HT design condition |
+| `p06_nlsy97_panel.R` | P6 age-crime | `morie_age_crime_panel_cov()`, `morie_age_crime_type_cov()` | `Research.P6.Panel.one_type_cov_zero`, `cross_moment_eq` |
 | `p07_concentration_toronto.R` | P7 concentration | `morie_concentration_null_bound()` | `Research.P7.Bound.gini_le_cv`, `Research.P7.Mixture` |
 | `p10_near_repeat_bne.R` | P10 near repeats | `morie_contagion_moment_witness()`, `morie_tps_hawkes_temporal_fit()` | `Research.P10.Moments` |
 | `p15_otis_placement_lengths.R` | P15 disparity | `morie_dfl_reweight()`, `morie_rif_gap()` | `Research.P15.Reweight`, `Research.P15.RIF` |
@@ -54,6 +56,5 @@ nobody reads the folder as complete.
 | problem | application named | why it is not here |
 |---|---|---|
 | P1 dark figure | a survey/record pair | done with the NCVS 1992-2022 (ICPSR 38604, `ncvs_38604/*` at data.rmorie.com): `ncvs_victimisation.R`, results/ncvs_victimisation.md (P1 interval and breakdown by year and class; A14 comparable-subset rate; P7 concentration on persons and households; P10 moments) |
-| P6 age-crime | a cohort panel | the public panel is BJS's NLSY97 recidivism file (ICPSR 34562, public use) behind a free ICPSR login; not yet downloaded |
 | P14 judge leniency | the Wald ratio (complier effect) | monotonicity is tested on Cook County sentencing (`p14_cook_judges.R`), but no public file pairs judge assignment with a post-sentence outcome |
 | P17 incapacitation | offending (not conviction) rates by custody length | applied in convictions to published reconviction hazards (`p17_reconviction_incapacitation.R`); no public file gives custody lengths by person with offending |

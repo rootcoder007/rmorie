@@ -611,8 +611,13 @@ would.
   R: `morie_age_crime_type_cov()` and `morie_age_crime_panel_cov()` (sample covariance with an
   exact one-type permutation null); Python `age_crime_type_cov()`, `age_crime_panel_cov()`.
   Open: the full identifiability of K types from T periods (Teicher-type), a cohort application.
-- Noted 2026-10-12: no cohort file is held; OTIS gives age categories of people in segregation,
-  not offending by age, so the cohort application stays open.
+- Applied 2026-10-13: BJS, Recidivism in the NLSY97, Standalone Data (Rounds 1 to 13), ICPSR 34562-v1,
+  DS0001, 8,984 respondents, any of six self-reported offences in the year each turned 14 to 23
+  (research/applications/p06_nlsy97_panel.md; used under ICPSR's terms of use, not redistributed).
+  The aggregate curve falls from 0.30 at 14-15 to 0.10 at 23. Every age pair tested (14/15 to 20/23)
+  has positive cross-age covariance 0.028-0.074 (correlations 0.18-0.38), each beyond all 2,000
+  permutations of the one-type null (one_type_cov_zero): a single shared age curve is refuted on a
+  cohort. The number of types (Teicher-type identification from T periods) stays open.
 
 ## P7. The law of crime concentration: how much is chance?
 
