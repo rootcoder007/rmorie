@@ -182,3 +182,106 @@ morie_judge_slope_test <- function(judge, d, y, weights = NULL, lo = min(y), hi 
        theorems = c("Research.P14Slope.propensity_mono", "Research.P14Slope.outcome_diff",
                     "Research.P14Slope.slope_bound", "Research.P14Slope.violation_refutes_monotonicity"))
 }
+
+#   Research.P14Slope.subgroup_propensity_mono   nested judges are ordered inside every subgroup
+#   Research.P14Slope.subgroup_reversal_refutes  a subgroup reversal refutes the nesting
+#   Research.P14Slope.crossing_refutes_both      stricter overall, more lenient in a subgroup: unordered
+
+#' Monotonicity of judges without outcomes: do the leniency rankings hold in every subgroup?
+#'
+#' Judge designs need judges ordered by leniency: whoever a lenient judge detains, a stricter
+#' one detains too (nesting, the many-judge monotonicity). Nesting holds person by person, so it
+#' orders the judges' detention rates inside every subgroup of defendants
+#' (\code{Research.P14Slope.subgroup_propensity_mono}). For every pair of judges, the one with the
+#' higher detention rate overall should not have a lower one in any subgroup; a pair that does is
+#' nested in neither direction (\code{crossing_refutes_both}). With sampling noise a reversal is
+#' evidence only when it is significant, so each is tested (one-sided, difference of proportions)
+#' and the p-values are adjusted across every comparison made.
+#' @param judge Judge of each case.
+#' @param d 0/1 decision (1 = detained or incarcerated).
+#' @param group Subgroup of each case (an offence category, a year).
+#' @param min_n Smallest number of a judge's cases in a subgroup for that cell to be compared.
+#' @param adjust Multiple-comparison adjustment passed to \code{p.adjust}.
+#' @param alpha Level at which an adjusted reversal counts as significant.
+#' @return A list: \code{judges} (overall rate and cases per judge), \code{comparisons} (one row
+#'   per pair and subgroup compared, stricter-overall judge first, with the subgroup rates, the
+#'   z statistic for the reversal, raw and adjusted p-values), \code{summary} (comparisons,
+#'   reversals, significant reversals, the pairs and judges involved), \code{by_group} (per
+#'   subgroup: judges compared and the slope of the subgroup rate on the overall rate, the
+#'   average-monotonicity check) and \code{theorems}.
+#' @examples
+#' set.seed(1)
+#' judge <- sample(sprintf("J%02d", 1:8), 4000, replace = TRUE)
+#' strict <- setNames(seq(0.2, 0.6, length.out = 8), sprintf("J%02d", 1:8))
+#' group <- sample(c("drugs", "theft", "weapons"), 4000, replace = TRUE)
+#' d <- rbinom(4000, 1, strict[judge])
+#' r <- morie_judge_monotonicity(judge, d, group)
+#' r$summary
+#' @export
+morie_judge_monotonicity <- function(judge, d, group, min_n = 30, adjust = "holm", alpha = 0.05) {
+  n <- length(judge)
+  if (length(d) != n || length(group) != n) stop("judge, d and group must have equal length", call. = FALSE)
+  if (anyNA(judge) || anyNA(d) || anyNA(group)) stop("no missing values allowed", call. = FALSE)
+  if (!all(d %in% c(0, 1))) stop("d must be 0/1", call. = FALSE)
+  if (!is.numeric(min_n) || length(min_n) != 1L || min_n < 1) stop("min_n must be a positive number", call. = FALSE)
+  if (!is.numeric(alpha) || length(alpha) != 1L || !(alpha > 0 && alpha < 1)) stop("alpha must be in (0, 1)", call. = FALSE)
+  judge <- as.character(judge)
+  group <- as.character(group)
+  jt <- tapply(d, judge, mean)
+  jn <- tapply(d, judge, length)
+  judges <- data.frame(judge = names(jt), rate = as.numeric(jt), n = as.integer(jn), stringsAsFactors = FALSE)
+  judges <- judges[order(-judges$rate), ]
+  rows <- list()
+  slopes <- list()
+  for (g in sort(unique(group))) {
+    s <- group == g
+    cr <- tapply(d[s], judge[s], mean)
+    cn <- tapply(d[s], judge[s], length)
+    keep <- names(cn)[cn >= min_n]
+    if (length(keep) >= 2L) {
+      o <- jt[keep]
+      fit <- stats::lm.wfit(cbind(1, as.numeric(o)), as.numeric(cr[keep]), as.numeric(cn[keep]))
+      slopes[[g]] <- data.frame(group = g, judges = length(keep), cases = sum(cn[keep]), slope = unname(fit$coefficients[2]),
+                                stringsAsFactors = FALSE)
+    }
+    if (length(keep) < 2L) next
+    pr <- utils::combn(keep, 2L)
+    a <- pr[1L, ]
+    b <- pr[2L, ]
+    # the stricter judge overall first
+    swap <- jt[a] < jt[b]
+    hi <- ifelse(swap, b, a)
+    lo <- ifelse(swap, a, b)
+    tie <- jt[hi] == jt[lo]
+    hi <- hi[!tie]
+    lo <- lo[!tie]
+    if (!length(hi)) next
+    ph <- cr[hi]
+    pl <- cr[lo]
+    nh <- cn[hi]
+    nl <- cn[lo]
+    pp <- (ph * nh + pl * nl) / (nh + nl)
+    se <- sqrt(pp * (1 - pp) * (1 / nh + 1 / nl))
+    z <- ifelse(se > 0, (pl - ph) / se, 0)
+    rows[[g]] <- data.frame(group = g, stricter = hi, lenient = lo, rate_stricter = as.numeric(jt[hi]),
+                            rate_lenient = as.numeric(jt[lo]), group_rate_stricter = as.numeric(ph),
+                            group_rate_lenient = as.numeric(pl), n_stricter = as.integer(nh), n_lenient = as.integer(nl),
+                            z = as.numeric(z), p_value = stats::pnorm(-as.numeric(z)), stringsAsFactors = FALSE)
+  }
+  comp <- if (length(rows)) do.call(rbind, rows) else
+    data.frame(group = character(), stricter = character(), lenient = character(), z = numeric(), p_value = numeric())
+  rownames(comp) <- NULL
+  comp$p_adjusted <- stats::p.adjust(comp$p_value, adjust)
+  comp$reversed <- if (nrow(comp)) comp$group_rate_stricter < comp$group_rate_lenient else logical()
+  comp$significant <- comp$p_adjusted < alpha
+  sig <- comp[comp$significant, , drop = FALSE]
+  summary <- data.frame(comparisons = nrow(comp), reversed = sum(comp$reversed),
+                        share_reversed = if (nrow(comp)) mean(comp$reversed) else NA_real_,
+                        significant = nrow(sig), pairs_refuted = nrow(unique(sig[c("stricter", "lenient")])),
+                        judges_involved = length(unique(c(sig$stricter, sig$lenient))))
+  by_group <- if (length(slopes)) do.call(rbind, slopes) else data.frame()
+  rownames(by_group) <- NULL
+  list(judges = judges, comparisons = comp, summary = summary, by_group = by_group,
+       theorems = c("Research.P14Slope.propensity_mono", "Research.P14Slope.subgroup_propensity_mono",
+                    "Research.P14Slope.subgroup_reversal_refutes", "Research.P14Slope.crossing_refutes_both"))
+}

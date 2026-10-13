@@ -518,3 +518,8 @@ open Research.P4
 #print axioms Research.P10.Cusum.stop_prob_le
 #print axioms Research.P10.Cusum.partial_sum_ge_half
 #print axioms Research.P10.Cusum.mean_run_length_ge
+#print axioms Research.P16Censoring.band_floor_le_mean
+#print axioms Research.P16Censoring.band_floor_shares
+#print axioms Research.P14Slope.subgroup_propensity_mono
+#print axioms Research.P14Slope.subgroup_reversal_refutes
+#print axioms Research.P14Slope.crossing_refutes_both

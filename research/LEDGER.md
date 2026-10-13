@@ -1065,8 +1065,20 @@ check.
   (`outcome_diff`), and |Y_k - Y_j| <= (hi - lo)(P_k - P_j) (`slope_bound`); a steeper
   pair is not nested (`violation_refutes_monotonicity`), the Frandsen-Lefgren-Leslie test.
   R: `morie_judge_slope_test()`; Python `judge_slope_test()`.
-- Open: an application to OTIS custody decisions by presiding judge.
-- Noted 2026-10-12: OTIS carries no judge or court identifiers; stays open.
+- Progress 2026-10-13 (subgroups): `Research.P14Slope.subgroup_propensity_mono`,
+  `subgroup_reversal_refutes`, `crossing_refutes_both` (P14Slope.lean): nesting orders the
+  judges' detention rates inside every subgroup, so a pair whose overall order flips inside one
+  is nested in neither direction. R: `morie_judge_monotonicity()` (every pair in every subgroup,
+  one-sided pooled two-proportion test, Holm-adjusted, and the per-group slope of the subgroup rate
+  on the overall rate); Python `judge_monotonicity()` (parity to 5e-15).
+- Applied 2026-10-13: Cook County (Illinois) felony sentencing, 26th Street courthouse 2011-2023,
+  53 judges, 14 offence categories, 86,568 original sentences (research/applications/
+  p14_cook_judges.md). 1,745 of 6,564 within-category comparisons reverse the overall order and
+  36 are significant after Holm adjustment, involving 28 of the 53 judges; the Armed Robbery slope
+  is negative. Under calendar (not random) assignment each significant reversal is either a
+  failure of monotonicity or a difference in case mix inside the category; both break a
+  single-scale judge design. The file has no post-sentence outcome, so the Wald ratio itself
+  stays open; OTIS carries no judge identifiers.
 
 ## P15. Sentencing disparity: what the "unexplained" part of a decomposition is
 
@@ -1133,8 +1145,17 @@ about as if it were a third number.
   mean understates the truth whenever the pending cases are older on average
   (`disposed_understates`); no upper bound exists without a cap (`no_upper_bound`). R:
   `morie_backlog_censoring()`; Python `backlog_censoring()`.
-- Open: an application to Ontario Court of Justice disposition statistics.
-- Noted 2026-10-12: the OCJ tables are not held locally; stays open.
+- Progress 2026-10-13 (published statistics): `Research.P16Censoring.band_floor_le_mean`,
+  `band_floor_shares` (P16Censoring.lean): the share-weighted band floors bound the disposed mean
+  from below, in the form courts publish. R: `morie_backlog_published()` (Little's law read
+  backwards from published filings and pending counts, against the published mean, with the band
+  bound); Python `backlog_published()`.
+- Applied 2026-10-13: Ontario Court of Justice criminal statistics, October 2018 to March 2026,
+  61 courts (research/applications/p16_ocj_backlog.md). In all 7 full years the pending docket
+  implies cases stay 1.21 to 1.97 times as long as the published mean (2021: 278 days against
+  141), highest in the pandemic years; the published mean always exceeds its band floor bound.
+  Over the last 12 months the ratio runs from 0.98 (Ottawa, Cobourg, Cornwall) to 3.3 (Welland),
+  and every offence group is above 1 (1.13 to 1.29).
 
 ## P17. Incapacitation: what a sentence year buys
 

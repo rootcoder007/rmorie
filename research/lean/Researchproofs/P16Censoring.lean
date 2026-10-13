@@ -91,4 +91,33 @@ theorem no_upper_bound (hm : 0 < m) (B : ℝ) :
       rw [hK₀]; field_simp
     nlinarith [mul_le_mul_of_nonneg_left hK₀K hm'.le]
 
+
+/-! ### Duration bands
+
+Courts publish the shares of disposed cases in duration bands (under 10 months, 10 to 15, ...)
+rather than the durations. Each case in band `k` lasted at least the band's lower edge `f k`, so
+the floors bound the disposed mean from below, and the bound is a sum over the published shares;
+an open top band has no upper edge, which is `no_upper_bound` again. -/
+
+variable {K : ℕ}
+
+/-- The floors of the cases' bands, averaged, are at most the disposed-cases mean. -/
+theorem band_floor_le_mean (b : Fin n → Fin K) (f : Fin K → ℝ) (hf : ∀ i, f (b i) ≤ t i) :
+    (∑ i, f (b i)) / n ≤ disposedMean t := by
+  unfold disposedMean
+  apply div_le_div_of_nonneg_right _ (by positivity)
+  exact sum_le_sum (fun i _ => hf i)
+
+/-- The floor average is the share-weighted sum of the floors: the bound in the form courts
+publish (the share of band `k` is the count of cases in it over `n`). -/
+theorem band_floor_shares (b : Fin n → Fin K) (f : Fin K → ℝ) :
+    (∑ i, f (b i)) / n = ∑ k, (((univ.filter (fun i => b i = k)).card : ℝ) / n) * f k := by
+  rw [← Finset.sum_fiberwise univ b (fun i => f (b i)), Finset.sum_div]
+  refine Finset.sum_congr rfl (fun k _ => ?_)
+  have h : ∑ i ∈ univ.filter (fun i => b i = k), f (b i) =
+      ∑ _i ∈ univ.filter (fun i => b i = k), f k :=
+    Finset.sum_congr rfl (fun i hi => by rw [(Finset.mem_filter.mp hi).2])
+  rw [h, Finset.sum_const, nsmul_eq_mul]
+  ring
+
 end Research.P16Censoring

@@ -474,6 +474,8 @@
 'Research.P5.DesignSensitivity.eventually_reject' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P5.DesignSensitivity.eventually_accept' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P5.DesignSensitivity.design_sensitivity_exists_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'Research.P7.MoranTrend.trend_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P7.MoranTrend.quad_eq_trace' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P7.MoranTrend.quad_sum_eq_trace' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -516,3 +518,8 @@
 'Research.P10.Cusum.stop_prob_le' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P10.Cusum.partial_sum_ge_half' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P10.Cusum.mean_run_length_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P16Censoring.band_floor_le_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P16Censoring.band_floor_shares' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P14Slope.subgroup_propensity_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P14Slope.subgroup_reversal_refutes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P14Slope.crossing_refutes_both' depends on axioms: [propext, Classical.choice, Quot.sound]

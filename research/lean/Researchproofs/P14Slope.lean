@@ -105,4 +105,31 @@ theorem violation_refutes_monotonicity {j k : Fin J}
     (hv : (G.hi - G.lo) * (P G k - P G j) < |Y G k - Y G j|) : ¬ Nested G j k :=
   fun h => absurd (slope_bound G h) (not_le.mpr hv)
 
+
+/-! ### Subgroups
+
+With no outcome observed, monotonicity still has a testable implication: nesting is a statement
+about every person, so it orders the judges' detention rates inside every subgroup of
+defendants (an offence category, a court, a year). A pair whose overall order flips inside a
+subgroup is not nested either way, and the judges cannot be ordered by leniency. -/
+
+/-- Detention mass of judge `j` within a subgroup `S`. -/
+def PS (S : Finset Ω) (j : Fin J) : ℝ := ∑ i ∈ S, G.w i * ind (G.d i j)
+
+theorem subgroup_propensity_mono (S : Finset Ω) {j k : Fin J} (h : Nested G j k) :
+    PS G S j ≤ PS G S k := by
+  unfold PS
+  apply sum_le_sum; intro i _
+  have := ind_diff_nonneg G h i
+  nlinarith [G.w_nonneg i]
+
+/-- A subgroup where `k` detains less than `j` refutes that `k` is nested over `j`. -/
+theorem subgroup_reversal_refutes (S : Finset Ω) {j k : Fin J} (hrev : PS G S k < PS G S j) :
+    ¬ Nested G j k := fun h => absurd (subgroup_propensity_mono G S h) (not_le.mpr hrev)
+
+/-- Harsher overall but more lenient in a subgroup: neither judge is nested in the other. -/
+theorem crossing_refutes_both (S : Finset Ω) {j k : Fin J} (hall : P G j < P G k)
+    (hrev : PS G S k < PS G S j) : ¬ Nested G j k ∧ ¬ Nested G k j :=
+  ⟨subgroup_reversal_refutes G S hrev, fun h => absurd (propensity_mono G h) (not_le.mpr hall)⟩
+
 end Research.P14Slope

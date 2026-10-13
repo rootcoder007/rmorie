@@ -115,3 +115,76 @@ morie_backlog_censoring <- function(disposed, pending_ages) {
                  "Research.P16Censoring.no_upper_bound")
   )
 }
+
+#   Research.P16.little_target                 a backlog fixes the mean time: W = L / lambda
+#   Research.P16Censoring.band_floor_le_mean   the band floors' share-weighted sum bounds the mean below
+
+#' Published court statistics read through Little's law
+#'
+#' Courts publish cases received, cases pending and a mean time to disposition over disposed
+#' cases. Over a window of \code{days} days with \code{received} filings, the time-average
+#' number pending \eqn{L} and the filing rate \eqn{\lambda} fix the mean time a case spends in
+#' court, \eqn{W = L/\lambda} (\code{Research.P16.little}, read backwards as
+#' \code{little_target}). The published mean counts only the cases disposed, so it is a
+#' truncated mean that understates the truth when the pending cases are older
+#' (\code{Research.P16Censoring.disposed_understates}); \code{ratio} is how far. With the
+#' published shares of disposed cases by duration band and the bands' lower edges, the
+#' disposed mean is at least the share-weighted sum of the floors
+#' (\code{Research.P16Censoring.band_floor_le_mean}); an open top band leaves no upper bound
+#' (\code{no_upper_bound}).
+#' @param received Cases received in each window.
+#' @param days Length of each window in days.
+#' @param pending Time-average number of cases pending over each window (the mean of the
+#'   published month-end counts, for a monthly series).
+#' @param mean_days Published mean days to disposition of the cases disposed in each window.
+#' @param band_shares Optional matrix (one row per window, one column per band) of the shares of
+#'   disposed cases in each duration band.
+#' @param band_floors Lower edge of each band in days (the first is usually 0).
+#' @return A data frame with \code{filing_rate} (per day), \code{implied_mean_days}
+#'   (\eqn{L/\lambda}), \code{published_mean_days}, \code{ratio} (implied over published),
+#'   \code{little_backlog} (\eqn{\lambda} times the published mean, the backlog the published
+#'   mean would imply), \code{pending}, \code{band_floor_bound} (when bands are given) and the
+#'   \code{theorems} attribute.
+#' @examples
+#' # Ontario Court of Justice, criminal, April 2024: 21,265 received in 30 days, 148,904
+#' # pending, 175 published mean days; disposed shares under 10, 10-15, 15-18, over 18 months
+#' morie_backlog_published(21265, 30, 148904, 175,
+#'                         band_shares = rbind(c(0.808, 0.105, 0.034, 0.053)),
+#'                         band_floors = c(0, 304, 456, 548))
+#' @export
+morie_backlog_published <- function(received, days, pending, mean_days, band_shares = NULL, band_floors = NULL) {
+  n <- max(length(received), length(days), length(pending), length(mean_days))
+  chk <- function(x, nm, pos = TRUE) {
+    if (!is.numeric(x) || anyNA(x) || any(!is.finite(x))) stop(sprintf("%s must be finite numbers", nm), call. = FALSE)
+    if (pos && any(x <= 0)) stop(sprintf("%s must be positive", nm), call. = FALSE)
+    if (!pos && any(x < 0)) stop(sprintf("%s must be non-negative", nm), call. = FALSE)
+    if (!length(x) %in% c(1L, n)) stop(sprintf("%s must have length 1 or %d", nm, n), call. = FALSE)
+    rep_len(as.numeric(x), n)
+  }
+  received <- chk(received, "received")
+  days <- chk(days, "days")
+  pending <- chk(pending, "pending", pos = FALSE)
+  mean_days <- chk(mean_days, "mean_days")
+  rate <- received / days
+  out <- data.frame(filing_rate = rate, implied_mean_days = pending / rate, published_mean_days = mean_days,
+                    ratio = (pending / rate) / mean_days, little_backlog = rate * mean_days, pending = pending)
+  thm <- c("Research.P16.little", "Research.P16.little_backlog", "Research.P16.little_target",
+           "Research.P16Censoring.disposed_understates", "Research.P16Censoring.no_upper_bound")
+  if (!is.null(band_shares)) {
+    s <- as.matrix(band_shares)
+    if (nrow(s) == 1L && n > 1L) s <- s[rep(1L, n), , drop = FALSE]
+    if (nrow(s) != n) stop(sprintf("band_shares must have one row per window (%d)", n), call. = FALSE)
+    if (is.null(band_floors) || length(band_floors) != ncol(s)) {
+      stop("band_floors must give one lower edge per band", call. = FALSE)
+    }
+    if (anyNA(s) || any(s < 0)) stop("band_shares must be non-negative", call. = FALSE)
+    if (any(abs(rowSums(s) - 1) > 0.01)) stop("each row of band_shares must sum to 1 (within rounding)", call. = FALSE)
+    if (!is.numeric(band_floors) || anyNA(band_floors) || any(band_floors < 0) || is.unsorted(band_floors)) {
+      stop("band_floors must be non-negative and increasing", call. = FALSE)
+    }
+    out$band_floor_bound <- as.numeric(s %*% band_floors) / rowSums(s)
+    thm <- c(thm, "Research.P16Censoring.band_floor_le_mean")
+  }
+  attr(out, "theorems") <- thm
+  out
+}
