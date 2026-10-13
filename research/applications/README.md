@@ -54,6 +54,6 @@ nobody reads the folder as complete.
 | problem | application named | why it is not here |
 |---|---|---|
 | P1 dark figure | a survey/record pair | done with the NCVS 1992-2022 (ICPSR 38604, `ncvs_38604/*` at data.rmorie.com): `ncvs_victimisation.R`, results/ncvs_victimisation.md (P1 interval and breakdown by year and class; A14 comparable-subset rate; P7 concentration on persons and households; P10 moments) |
-| P6 age-crime | a cohort | no cohort file; OTIS gives age categories of people in segregation, not offending by age |
+| P6 age-crime | a cohort panel | the public panel is BJS's NLSY97 recidivism file (ICPSR 34562, public use) behind a free ICPSR login; not yet downloaded |
 | P14 judge leniency | the Wald ratio (complier effect) | monotonicity is tested on Cook County sentencing (`p14_cook_judges.R`), but no public file pairs judge assignment with a post-sentence outcome |
 | P17 incapacitation | offending (not conviction) rates by custody length | applied in convictions to published reconviction hazards (`p17_reconviction_incapacitation.R`); no public file gives custody lengths by person with offending |
