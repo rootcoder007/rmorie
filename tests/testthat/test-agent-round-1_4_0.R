@@ -281,18 +281,6 @@ test_that("round 4: both spellings of a NAPS key resolve and analyze reports a s
   expect_false(.cli_analyze_all_failed(list(subject = "tps", status = "not_available")))
 })
 
-test_that("round 4: the fallback cause names the requested model", {
-  withr::local_envvar(GEMINI_API_KEY = "", GOOGLE_API_KEY = "")
-  local_mocked_bindings(.morie_llm_api_base = function() NULL, .morie_llm_hosted_key = function() NULL)
-  expect_match(.cli_llm_fallback_cause("nosuchmodel"), "no provider answered for model 'nosuchmodel'")
-  # a stale hosted key is still named, after the model
-  local_mocked_bindings(.morie_llm_hosted_key = function() "k", .morie_llm_hosted_rejected = function() TRUE)
-  expect_match(.cli_llm_fallback_cause("nosuchmodel"), "model 'nosuchmodel': your hosted key was rejected")
-  # asking Gemini with a Gemini key set points at that key, whatever else is configured
-  withr::local_envvar(GEMINI_API_KEY = "AIzaFAKE")
-  expect_match(.cli_llm_fallback_cause("gemini"), "model 'gemini': your GEMINI_API_KEY")
-})
-
 test_that("round 4: omega hierarchical is below one on a two-factor scale", {
   set.seed(4)
   n <- 400L
@@ -418,13 +406,4 @@ test_that("round 4: only the expected design-weight warning is muffled in weight
   sep <- data.frame(y = c(0, 0, 0, 1, 1, 1), x = 1:6, w = 1.5)
   expect_warning(.glm_design_weighted(stats::glm(y ~ x, data = sep, family = stats::binomial(), weights = w)),
                  "fitted probabilities")
-})
-
-test_that("round 4: the cause names the model first, then the real cause, and a Gemini model points at the Gemini key", {
-  withr::local_envvar(GEMINI_API_KEY = "", GOOGLE_API_KEY = "")
-  local_mocked_bindings(.morie_llm_api_base = function() NULL, .morie_llm_hosted_key = function() "k",
-                        .morie_llm_hosted_rejected = function() TRUE)
-  expect_match(.cli_llm_fallback_cause("nosuchmodel"), "model 'nosuchmodel': your hosted key was rejected")
-  withr::local_envvar(GEMINI_API_KEY = "AIzaFAKE")
-  expect_match(.cli_llm_fallback_cause("gemini"), "model 'gemini': your GEMINI_API_KEY")
 })

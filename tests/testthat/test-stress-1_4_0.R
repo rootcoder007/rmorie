@@ -108,12 +108,6 @@ test_that("agent --help and perseus --help describe the percy verb", {
   }
 })
 
-test_that("login --to-email needs --email", {
-  r <- .cap("login", "--to-email")
-  expect_equal(r$status, 2L)
-  expect_match(r$text, "--to-email needs --email")
-})
-
 test_that("download-bootstrap without --survey lists the keys instead of downloading", {
   r <- .cap("download-bootstrap")
   expect_equal(r$status, 2L)
@@ -126,30 +120,28 @@ test_that("the tutorial stops with a message when stdin is closed; chat ends at 
   r <- .cap("tutorial")
   expect_equal(r$status, 2L)
   expect_match(r$text, "interactive terminal")
-  testthat::local_mocked_bindings(.package = .pkg, morie_llm_detect_provider = function() "hosted")
+  testthat::local_mocked_bindings(.package = .pkg, morie_llm_detect_provider = function(...) "groq")
   expect_equal(.cap("chat")$status, 0L)
 })
 
 test_that("the local fallback text is marked, and ask/percy name the cause and exit 1", {
+  withr::local_envvar(OLLAMA_HOST = "off")  # no Ollama, even when one runs on this machine
   fb <- .morie_llm_local_fallback("q")
   expect_true(isTRUE(attr(fb, "fallback")))
-  expect_match(as.character(fb), "local-only mode")
+  expect_match(as.character(fb), "without a language model")
   testthat::local_mocked_bindings(.package = .pkg,
     morie_llm_ask = function(prompt, context = NULL, model = NULL, ...) .morie_llm_local_fallback(prompt),
-    morie_llm_detect_provider = function() "hosted",
-    .morie_llm_api_base = function() NULL,
-    .morie_llm_hosted_key = function() "k",
-    .morie_llm_hosted_rejected = function() TRUE,
-    .morie_llm_hosted_base = function() "https://llm.example")
+    morie_llm_detect_provider = function(...) "groq")
   r <- .cap("percy", "what", "is", "a", "PAF")
   expect_equal(r$status, 1L)
-  expect_match(r$text, "hosted key was rejected by https://llm.example")
+  expect_match(r$text, "the model did not answer; `rmorie doctor` shows the route")
   a <- .cap("ask", "hello")
   expect_equal(a$status, 1L)
-  expect_match(a$text, "hosted key was rejected")
-  testthat::local_mocked_bindings(.package = .pkg,
-    .morie_llm_api_base = function() "http://127.0.0.1:9", .morie_llm_probe_api = function() FALSE)
-  expect_match(.cap("ask", "hello")$text, "could not connect to your endpoint http://127.0.0.1:9")
+  expect_match(a$text, "No language-model route is set up on this machine")
+  withr::local_envvar(MORIE_LLM_BASE_URL = "http://127.0.0.1:9/v1", MORIE_LLM_MODEL = "m")
+  a <- .cap("ask", "hello")
+  expect_equal(a$status, 1L)
+  expect_match(a$text, "could not reach the own endpoint", fixed = TRUE)
 })
 
 test_that("morie_load_dataset() and morie_spillover_ht() validate their inputs in words", {
@@ -228,13 +220,22 @@ test_that("morie_siu_sanity_check() accepts the corpus's yes/no, true/false and 
   expect_match(b$issues, "sex_gender_affected:bad-value")
 })
 
-test_that("the SIU LLM chain reads GEMINI_API_KEY and knows the hosted tier", {
+test_that("the SIU LLM chain reads GEMINI_API_KEY and asks the model you set up as \"route\"", {
   withr::local_envvar(GEMINI_API_KEY = "", GOOGLE_API_KEY = "")
   expect_error(.siu_llm_call_one("gemini", "p"), "GEMINI_API_KEY")
-  expect_true("hosted" %in% names(.siu_llm_providers()))
-  testthat::local_mocked_bindings(.package = .pkg, .morie_llm_hosted_key = function() NULL)
-  expect_error(.siu_llm_call_one("hosted", "p"), "not logged in")
-  expect_equal(formals(morie_siu_llm_extract)$model, quote(c("ollama", "hosted", "gemini")))
+  expect_false("hosted" %in% names(.siu_llm_providers()))
+  seen <- NULL
+  testthat::local_mocked_bindings(bricklayer_llm_chat = function(messages, model = NULL, route = NULL, timeout = 120) {
+    seen <<- list(messages = messages, route = route)
+    "{}"
+  }, .package = "rmoriebricklayer")
+  expect_identical(.siu_llm_call_one("route", "p"), "{}")
+  expect_null(seen$route)
+  expect_identical(seen$messages[[1L]]$content, "p")
+  .siu_llm_call_one("groq", "p")  # a provider rmoriebricklayer knows, not in the table
+  expect_identical(seen$route, "groq")
+  expect_error(.siu_llm_call_one("hosted", "p"), "Unknown LLM model: 'hosted'")
+  expect_equal(formals(morie_siu_llm_extract)$model, quote(c("ollama", "route", "gemini")))
 })
 
 test_that("selftest names the reason for a skip", {

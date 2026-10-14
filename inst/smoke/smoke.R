@@ -34,12 +34,9 @@ run <- function(...) {
   LAST$text <- paste(buf, collapse = "")
   list(status = st, text = LAST$text)
 }
-# the hosted tier answers 429 when every runner of every package asks at once on the shared key: wait and ask once more
-run_llm <- function(...) {
-  r <- run(...)
-  if (r$status != 0 && grepl("429", r$text, fixed = TRUE)) { Sys.sleep(45); r <- run(...) }
-  r
-}
+# a runner has no language model of its own: with none set up, the model verbs must say how to bring one
+no_route <- function(r) r$status == 1L && grepl("bring your own key|no language model is set up|without a language model", r$text)
+answered <- function(r) (r$status == 0L && nzchar(trimws(r$text))) || no_route(r)
 results <- list()
 check <- function(cond, what) if (!isTRUE(cond)) stop(what, call. = FALSE)
 case <- function(verb, fn) results[[length(results) + 1L]] <<- list(verb = verb, fn = fn)
@@ -54,26 +51,27 @@ case("cheatsheet", function() { r <- run("cheatsheet"); check(r$status == 0 && g
 case("explain", function() { r <- run("explain", "power_two_proportion_gender.csv"); check(r$status == 0 && grepl("effect size", r$text, fixed = TRUE) && grepl("Cohen's h", r$text, fixed = TRUE), r$text) })
 case("doctor", function() { r <- run("doctor"); check(r$status == 0 && nzchar(r$text), r$text) })
 case("models", function() {
-  r <- run("models"); check(r$status == 0, r$text)
-  if (!nzchar(key)) check(grepl("login", r$text, ignore.case = TRUE), "no key: models must point at login")
-  # the gateway serves additional AI models (ids ending in :cf) beside the ollama.com ones
-  if (nzchar(key)) check(grepl(":cf", r$text, fixed = TRUE), paste("no additional AI model (:cf) listed:", r$text))
+  r <- run("models"); check(r$status == 0L || no_route(r), r$text)
+})
+case("config", function() {
+  r <- run("config"); check(r$status == 0 && grepl("route", r$text, fixed = TRUE), r$text)
+  r <- run("config", "set", "ollama.model", "smoke-model:1"); check(r$status == 0, r$text)
+  r <- run("config", "get", "ollama.model"); check(r$status == 0 && grepl("smoke-model:1", r$text, fixed = TRUE), r$text)
+  r <- run("config", "unset", "ollama.model"); check(r$status == 0, r$text)
+  check(run("config", "set", "route", "nowhere")$status != 0L, "config set accepted a bad route")
 })
 case("provider", function() {
   check(run("provider", "set", "--base-url", "https://api.example.org/v1/", "--key", "sk-smoke-1234567", "--model", "demo")$status == 0, "provider set")
   r <- run("provider", "show"); check(grepl("api.example.org/v1", r$text) && !grepl("sk-smoke-1234567", r$text), r$text)
-  check(grepl("Your endpoint", run("models")$text), "models does not list the endpoint")
+  r <- run("models"); check(grepl("own endpoint", r$text, fixed = TRUE) && grepl("demo", r$text, fixed = TRUE), paste("models does not name the endpoint:", r$text))
   check(run("provider", "unset")$status == 0, "provider unset")
 })
 case("ask", function() {
-  r <- run_llm("ask", "What does the power-design module compute?"); check(r$status == 0 && nzchar(trimws(r$text)), r$text)
-  # one of the additional models, named per call
-  r <- run_llm("ask", "--model", "gpt-oss-120b:cf", "Reply with the single word pong.")
-  if (nzchar(key)) check(r$status == 0 && nzchar(trimws(r$text)), r$text) else check(r$status != 0, "no key: ask must not claim an answer")
+  r <- run("ask", "What does the power-design module compute?"); check(answered(r), r$text)
 })
-case("percy", function() { r <- run_llm("percy", "Which module compares two groups?"); check(r$status == 0 && nzchar(trimws(r$text)), r$text) })
-case("perseus", function() { r <- run_llm("perseus", "hello"); check(r$status == 0, r$text) })
-case("agent", function() { r <- run_llm("agent", "hello"); check(r$status == 0, r$text) })
+case("percy", function() { r <- run("percy", "Which module compares two groups?"); check(answered(r), r$text) })
+case("perseus", function() { r <- run("perseus", "hello"); check(answered(r), r$text) })
+case("agent", function() { r <- run("agent", "hello"); check(answered(r), r$text) })
 case("chat", function() {
   con <- textConnection("/quit"); on.exit(close(con))
   testthat::local_mocked_bindings(.cli_readline = function(prompt) "/quit", .package = pkg)
@@ -206,7 +204,7 @@ case("verb-help", function() {
 case("exec", function() { r <- run("exec", "6 * 7"); check(r$status == 0 && grepl("42", r$text), r$text) })
 case("ask-fallback-honest", function() {
   if (nzchar(key)) return(invisible())
-  r <- run("ask", "hello"); check(grepl("local|fallback|login", r$text, ignore.case = TRUE), "without a key ask must say it fell back")
+  r <- run("ask", "hello"); check(no_route(r), paste("with no model set up, ask must say how to bring one:", r$text))
 })
 case("selftest", function() { r <- run("selftest"); check(r$status == 0 && grepl("All tests passed", r$text), r$text) })
 case("update", function() { r <- run("update"); check(r$status %in% c(0L, 1L), r$text) })

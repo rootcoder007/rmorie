@@ -3,26 +3,6 @@
 # local polynomial regression, Huber Proposal 2, LOWESS, odds ratios,
 # PSIS weights and PPS sampling; recomputed with base R, MASS and stats.
 
-test_that("morie_llm_detect_provider walks ollama, gemini, api, openai, local in order", {
-  testthat::skip_on_covr()
-  pkg <- if (isNamespaceLoaded("rmorie")) "rmorie" else "morie"
-  ollama_up <- FALSE
-  local_mocked_bindings(morie_llm_probe_ollama = function(...) ollama_up, .package = pkg)
-  vars <- c(gem = "GEMINI_API_KEY", base = "LLM_API_BASE_URL", key = "LLM_API_KEY", oai = "OPENAI_API_KEY")
-  grid <- expand.grid(ollama = c(FALSE, TRUE), gem = c(FALSE, TRUE), base = c(FALSE, TRUE),
-                      key = c(FALSE, TRUE), oai = c(FALSE, TRUE))
-  for (i in seq_len(nrow(grid))) {
-    g <- grid[i, ]
-    ollama_up <- g$ollama
-    set <- vapply(names(vars), function(v) if (g[[v]]) "x" else "", "")
-    withr::local_envvar(stats::setNames(set, vars))
-    expected <- if (g$ollama) "ollama" else if (g$gem) "gemini" else if (g$base && g$key) "api" else
-      if (g$oai) "openai" else "local"
-    expect_identical(morie_llm_detect_provider(), expected)
-    expect_identical(morie_llm_agent_available(), expected != "local")
-  }
-})
-
 test_that("LmcCovariance sums B_s rho_s(h)", {
   B1 <- matrix(c(1, 0.6, 0.6, 1.5), 2)
   B2 <- matrix(c(0.3, 0.1, 0.1, 0.2), 2)

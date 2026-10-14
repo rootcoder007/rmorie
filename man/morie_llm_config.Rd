@@ -7,56 +7,34 @@
 morie_llm_config(...)
 }
 \arguments{
-\item{...}{Settings to save, as \code{key = value}: \code{route}
-(\code{"auto"}, \code{"own"}, \code{"ollama"} or \code{"hosted"}),
-\code{own.url}, \code{own.key}, \code{own.model}, \code{ollama.url},
-\code{ollama.model}, \code{ollama.key}, \code{hosted.url},
-\code{hosted.model}, \code{hosted.key}. \code{NULL} or \code{""} removes
-a saved setting. With no arguments nothing is written.}
+\item{...}{Settings as \code{key = value}; \code{NULL} or \code{""} removes
+one. With no arguments nothing is written.}
 }
 \value{
-A data frame with one row per setting: \code{key}, \code{value}
-(a key only as \code{"set"}), \code{source} (\code{"environment"},
-\code{"saved"} or \code{"default"}), \code{env} (the variable that
-overrides it) and \code{help}; visibly when called with no settings.
+A data frame with one row per setting (\code{key}, \code{value},
+\code{source}, \code{env}, \code{help}).
 }
 \description{
 Every setting that decides how \code{\link{morie_llm_ask}} (and
-\code{rmorie ask}) reaches a model, in one place: which route to use, and
-the address, key and model of your own OpenAI-compatible server, of a
-local or LAN Ollama server, and of the hosted MORIE tier. Settings are
-saved in \code{$XDG_CONFIG_HOME/morie/llm.json} (default
-\code{~/.config/morie/}), a private file this function writes only when you
-pass a setting; the hosted key goes to the shared credentials file through
-\code{\link{morie_llm_login}}, after the gateway has accepted it. An
-environment variable that is set (the \code{env} column) wins over a saved
-value. The same file and keys are read by rmoriebricklayer and the Python
-package.
-}
-\details{
-With \code{route = "auto"} (the default) \code{morie_llm_ask()} tries a
-local Ollama server that has a model (a server with nothing pulled is
-skipped), then your Gemini key, your own server, your OpenAI key, and the
-hosted tier last. \code{"own"}, \code{"ollama"} or \code{"hosted"} use that
-route and no other.
-
-The same is available from the shell: \code{rmorie config} lists the
-settings, \code{rmorie config set KEY VALUE} and
-\code{rmorie config unset KEY} change one, \code{rmorie config setup} walks
-through all of them, and \code{rmorie doctor} says which route \code{ask}
-will take.
+\code{rmorie ask}) reaches a model: the route, your own OpenAI-compatible
+server (\code{own.url}, \code{own.model}, \code{own.key}), Ollama
+(\code{ollama.url}, \code{ollama.model}, \code{ollama.key}; \code{ollama.url}
+may be \code{https://ollama.com} with your Ollama key), and a key and model
+per provider (\code{anthropic.key}, \code{openai.model}, ...: the providers
+are \code{rmoriebricklayer::bricklayer_llm_providers()}). The settings are
+rmoriebricklayer's, in the file it shares with rmorie, so
+\code{morie_llm_config()} is \code{rmoriebricklayer::bricklayer_llm_config()}.
+An environment variable that is set wins over the saved value; a key is never
+shown, only "set".
 }
 \examples{
-# reading the settings writes nothing
-morie_llm_config()[, c("key", "value", "source")]
+old <- Sys.getenv("XDG_CONFIG_HOME", unset = NA)
+Sys.setenv(XDG_CONFIG_HOME = tempfile())
+head(morie_llm_config())   # reading writes nothing
+if (is.na(old)) Sys.unsetenv("XDG_CONFIG_HOME") else Sys.setenv(XDG_CONFIG_HOME = old)
 \dontrun{
-# always use the hosted tier, with one model
-morie_llm_config(route = "hosted", hosted.model = "gpt-oss-120b:cf")
-# an Ollama server on another machine
+morie_llm_config(anthropic.key = "sk-ant-...", route = "anthropic")
 morie_llm_config(ollama.url = "http://192.168.1.20:11434", ollama.model = "qwen3:8b")
-# your own OpenAI-compatible server
-morie_llm_config(own.url = "http://localhost:1234/v1", own.model = "my-model")
-# back to the automatic order
-morie_llm_config(route = NULL)
+morie_llm_config(route = NULL)   # back to the automatic order
 }
 }

@@ -17,11 +17,12 @@ morie_siu_anomaly_check(
 
 \item{model}{One of \code{"ollama"} (default; free, runs locally,
 zero-config when an Ollama daemon is on \code{localhost:11434}),
-\code{"gemini"} (paid), or \code{"claude"} (paid). A character
-vector enables fail-over: the first model whose call succeeds
-wins. The default \code{c("ollama", "gemini")} tries the local
-free model first and only escalates to paid Gemini if Ollama
-isn't installed or fails -- so morie costs $0 to use as long
+\code{"route"} (the model you set up), \code{"gemini"} (paid), or
+\code{"claude"} (paid). A character vector enables fail-over: the
+first model whose call succeeds wins. The default
+\code{c("ollama", "route", "gemini")} tries the local free model
+first, then the model you set up, and only then paid Gemini -- so
+morie costs $0 to use as long
 as you have a free Gemma / Qwen / Llama running locally
 (e.g. \code{ollama pull <model>}).}
 

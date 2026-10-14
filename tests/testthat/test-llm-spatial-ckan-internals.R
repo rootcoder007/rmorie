@@ -46,7 +46,7 @@ test_that(".morie_llm_extract_text returns '' when message is missing", {
 test_that(".morie_llm_local_fallback returns the canonical fallback text", {
   out <- rmorie:::.morie_llm_local_fallback("ignored prompt")
   expect_type(out, "character")
-  expect_match(out, "local-only mode")
+  expect_match(out, "without a language model")
   expect_match(out, "morie")
 })
 

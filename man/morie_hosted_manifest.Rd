@@ -28,8 +28,10 @@ a data frame with \code{key}, \code{name}, \code{rows}, \code{source};
 The MORIE project keeps 160 databases materialised from Google BigQuery public datasets, plus the Health Infobase tables and the OTIS research files,
 public datasets (Chicago crime, EPA air quality, US census, FEC, FDA,
 NOAA, NHTSA, Hacker News, Ethereum, World Bank, ...) and serves their
-tables from the edge. They open with the key \code{\link{morie_llm_login}}
-stores. \code{morie_hosted_manifest()} returns the gateway's manifest
+tables from the edge. They open with the data key \code{\link{morie_llm_login}}
+stores; a downloaded table is used only when it matches the SHA-256 the
+manifest lists for it. The ICPSR, NCVS 38604 and a2aj tables also need their
+terms accepted at \url{https://data.rmorie.com/terms}. \code{morie_hosted_manifest()} returns the gateway's manifest
 (every table with rows, columns, size, SHA-256 and its BigQuery source),
 cached for a day; \code{morie_hosted_datasets()} the same as a data frame;
 \code{morie_load_hosted_dataset("db/table")} one table, cached in the

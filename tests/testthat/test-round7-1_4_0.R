@@ -207,28 +207,6 @@ test_that("a request that gets no response names the host and curl's reason", {
   expect_error(.morie_dataset_http_text("http://127.0.0.1:9/x"), "could not reach 127\\.0\\.0\\.1 \\(.+\\)")
 })
 
-test_that("models tells a rejected key from an unreachable gateway", {
-  pkg <- utils::packageName(environment(morie_cli))
-  withr::local_envvar(MORIE_HOSTED_KEY = "sk-test")
-  local_mocked_bindings(morie_llm_hosted_models = function(...) structure(character(), default = NULL),
-                        .morie_llm_hosted_rejected = function() TRUE, .package = pkg)
-  r <- .cap7("models")
-  expect_match(r$text, "rejected your key")
-  expect_equal(r$status, 1L)
-  local_mocked_bindings(.morie_llm_hosted_rejected = function() FALSE, .package = pkg)
-  r <- .cap7("models")
-  expect_match(r$text, "not reachable")
-  expect_false(grepl("login again", r$text))
-})
-
-test_that("with a stored hosted key the fallback does not claim no provider is configured", {
-  pkg <- utils::packageName(environment(morie_cli))
-  local_mocked_bindings(.morie_llm_hosted_key = function() "sk-test", .package = pkg)
-  txt <- .morie_llm_local_fallback("hi")
-  expect_false(grepl("no LLM provider detected", txt, fixed = TRUE))
-  expect_match(txt, "one is configured")
-})
-
 
 test_that("records with NULL and nested fields become one row each", {
   df <- .morie_dataset_records_to_df(list(

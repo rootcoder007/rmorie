@@ -2,7 +2,7 @@
 % Please edit documentation in R/llm.R
 \name{morie_llm_ask}
 \alias{morie_llm_ask}
-\title{Send a prompt to the best available LLM provider}
+\title{Send a prompt to a language model}
 \usage{
 morie_llm_ask(
   prompt,
@@ -11,43 +11,50 @@ morie_llm_ask(
   provider = NULL,
   system_prompt = NULL,
   timeout = 120,
-  route = NULL
+  route = NULL,
+  docs = TRUE
 )
 }
 \arguments{
 \item{prompt}{User question or instruction.}
 
-\item{context}{Optional named list injected as text into the system prompt.}
+\item{context}{Optional named list (or text) given with the question.}
 
-\item{model}{Optional model override.}
+\item{model}{Optional model name; the route's model when NULL.}
 
-\item{provider}{Optional provider override (ollama/gemini/api/openai/hosted/local;
-\code{"own"} is the same as \code{"api"}). NULL = auto-detect.}
+\item{provider}{Older name for \code{route} (\code{"api"} is \code{"own"}).}
 
-\item{system_prompt}{Optional full system-prompt override.}
+\item{system_prompt}{Optional instructions added for the model.}
 
-\item{timeout}{HTTP timeout in seconds. Default 120.}
+\item{timeout}{Seconds to wait for each reply. Default 120.}
 
-\item{route}{\code{NULL} (the saved setting), \code{"auto"}, \code{"own"},
-\code{"ollama"} or \code{"hosted"}: a route other than auto is the only
-one asked.}
+\item{route}{\code{NULL} (the saved setting, else the automatic order),
+\code{"auto"}, \code{"own"}, \code{"ollama"} or a provider id such as
+\code{"anthropic"}: a route other than auto is the only one asked.}
+
+\item{docs}{\code{TRUE} (default) to give the model the packages' help.}
 }
 \value{
-Character scalar response text, or local-fallback text when all
-providers fail.
+Character scalar: the answer, or the fallback text.
 }
 \description{
-R port of \code{morie.llm.ask}. With the automatic route it tries each provider
-in priority order; on HTTP/timeout failure falls through to the next, and
-finally to a static local help string. A route saved with
-\code{\link{morie_llm_config}} (or \code{MORIE_LLM_ROUTE}, or the
-\code{route} argument) other than \code{"auto"} asks that route only.
+Asks the model you set up (see \code{\link{morie_llm_detect_provider}}) through
+rmoriebricklayer. With \code{docs = TRUE} the model is given the help of
+rmorie, rmoriebricklayer and rmoriedata (rmorie's own thousands of pages are
+searched, the functions nearest the question listed) and tools to read it,
+so it can name the right function and its arguments. When no model is set
+up, or the automatic route fails, the answer is a short text saying how to
+set one up (with \code{attr(, "fallback")} TRUE); a route you named is an
+error instead.
 }
 \examples{
-\donttest{
-old <- options(morie.llm.ollama_cached = FALSE)
-out <- try(morie_llm_ask("In one word, what is 2 + 2?"))
-print(out)
-options(old)
+old <- Sys.getenv(c("OLLAMA_HOST", "XDG_CONFIG_HOME"), unset = NA)
+Sys.setenv(OLLAMA_HOST = "off", XDG_CONFIG_HOME = tempfile())
+out <- morie_llm_ask("In one word, what is 2 + 2?")
+isTRUE(attr(out, "fallback"))
+for (v in names(old)) if (is.na(old[[v]])) Sys.unsetenv(v) else do.call(Sys.setenv, as.list(old[v]))
+\dontrun{
+Sys.setenv(ANTHROPIC_API_KEY = "...")
+morie_llm_ask("Which rmorie function fits a staggered difference-in-differences design?")
 }
 }

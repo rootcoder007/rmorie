@@ -72,15 +72,19 @@ test_that("the launcher's old --args separator is dropped before the verb", {
   expect_match(r$text, "ask")
 })
 
-test_that("ask with only the local fallback prints why no model answered and exits 1", {
-  testthat::local_mocked_bindings(
-    morie_llm_detect_provider = function(...) "local",
-    .morie_llm_local_fallback = function(prompt) "local fallback text",
-    .cli_llm_fallback_cause = function(model = NULL) "no backend: the cause line\n"
-  )
+test_that("ask with no model set up says what to set up and exits 1", {
+  ps <- rmoriebricklayer::bricklayer_llm_providers()
+  withr::local_envvar(c(stats::setNames(rep(NA_character_, nrow(ps)), ps$key_env), OLLAMA_HOST = "off",
+                        MORIE_LLM_BASE_URL = NA, XDG_CONFIG_HOME = withr::local_tempdir()))
   r <- .pc_cap("ask", "hello")
   expect_equal(r$status, 1L)
-  expect_match(r$text, "the cause line")
+  expect_match(r$text, "No language-model route is set up")
+  expect_match(r$text, "`rmorie config setup`", fixed = TRUE)
+  # percy and agent keep rmorie's own fallback line, which names the cause
+  testthat::local_mocked_bindings(morie_llm_ask = function(...) .morie_llm_local_fallback("q"))
+  r <- .pc_cap("percy", "hello")
+  expect_equal(r$status, 1L)
+  expect_match(r$text, "no language model is set up here")
 })
 
 test_that("run-module says when a module wrote nothing and exits 1", {
@@ -155,15 +159,6 @@ test_that("inspect and sample print usage, and inspect names an unknown module",
   o3 <- .pc_out()
   expect_equal(.cli_sample(character(), no_flag, function(name) FALSE, o3$out), 2L)
   expect_match(o3$text(), "usage: rmorie sample")
-})
-
-test_that("the no-answer cause line names the Gemini key, the model, or the default", {
-  withr::local_envvar(GEMINI_API_KEY = NA, GOOGLE_API_KEY = NA)
-  testthat::local_mocked_bindings(.morie_llm_api_base = function() NULL, .morie_llm_hosted_key = function() NULL)
-  expect_match(.cli_llm_fallback_cause(), "no LLM backend answered")
-  expect_match(.cli_llm_fallback_cause("llama3"), "no provider answered for model 'llama3'.*models lists")
-  withr::local_envvar(GEMINI_API_KEY = "test-key")
-  expect_match(.cli_llm_fallback_cause("llama3"), "GEMINI_API_KEY")
 })
 
 test_that("a failed read with no Wayback snapshot names the URL and the cause", {
@@ -273,29 +268,6 @@ test_that("a CKAN resource of unknown type is read as CSV", {
   expect_equal(d$b, c("x", "y"))
 })
 
-test_that("an endpoint that refuses the connection probes as unreachable", {
-  skip_if_not_installed("httr2")
-  testthat::local_mocked_bindings(
-    .morie_llm_api_base = function() "http://127.0.0.1:9/v1",
-    .morie_llm_api_key = function() "sk-test",
-    .morie_llm_no_net = function() FALSE
-  )
-  expect_false(.morie_llm_probe_api(timeout = 2))
-})
-
-test_that("the device sign-in polls and reports a service error", {
-  testthat::local_mocked_bindings(.morie_llm_hosted_auth = function() "https://auth.example.invalid")
-  testthat::local_mocked_bindings(  # the device code is issued, then the token endpoint answers 503
-    .morie_llm_http = function(url, body = NULL, headers = character(), timeout = 30) {
-      if (grepl("/device/code$", url)) {
-        return(list(status = 200L, body = '{"verification_uri":"https://auth.example.invalid/device","user_code":"ABCD","device_code":"dc","interval":0.01}'))
-      }
-      list(status = 503L, body = "{}")
-    }
-  )
-  expect_error(suppressMessages(morie_llm_login(open_browser = FALSE, poll_max_seconds = 5)), "answered 503")
-})
-
 test_that("glm-based separation check reports none when large fitted values come without separation", {
   x <- cbind(z = c(-1000, -2, -1, 0, 1, 2, 1000))
   y <- c(0, 1, 0, 1, 0, 1, 1)
@@ -316,19 +288,4 @@ test_that("the OTIS and MAPQ modules announce their synthetic data", {
 
 test_that("a zero or invalid numeric entity decodes to nothing", {
   expect_identical(.siu_decode_numeric_entities("a&#0;b&#x41;"), "abA")
-})
-
-test_that("the hosted SIU provider builds a chat request and rejects empty text", {
-  withr::local_envvar(MORIE_HOSTED_MODEL = NA)
-  testthat::local_mocked_bindings(
-    .morie_llm_hosted_base = function() "https://llm.example.invalid/",
-    morie_llm_hosted_models = function(...) structure(c("m1", "m2"), default = "m1")
-  )
-  p <- .siu_llm_providers()$hosted
-  req <- p$build(list(MORIE_HOSTED_KEY_OR_LOGIN = "sk-test"), "summarise")
-  expect_equal(req$url, "https://llm.example.invalid/v1/chat/completions")
-  expect_equal(req$headers$authorization, "Bearer sk-test")
-  expect_equal(req$body$model, "m1")
-  expect_equal(p$extract(list(choices = list(list(message = list(content = "ok"))))), "ok")
-  expect_error(p$extract(list(choices = list(list(message = list())))), "empty text")
 })

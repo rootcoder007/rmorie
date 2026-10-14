@@ -435,23 +435,13 @@
 
 # One line naming why no model answered, for `ask`, `percy` and friends.
 .cli_llm_fallback_cause <- function(model = NULL) {
-  gemini_key <- nzchar(Sys.getenv("GEMINI_API_KEY")) || nzchar(Sys.getenv("GOOGLE_API_KEY"))
-  gemini_line <- paste0("your GEMINI_API_KEY (or GOOGLE_API_KEY) did not get an answer from Gemini ",
-                        "(rejected key, quota or network); check it, or unset it to use the other providers\n")
-  # a model the caller named leads the line; a Gemini model with a Gemini key set points at that key
-  lead <- if (!is.null(model) && nzchar(model)) sprintf("no provider answered for model '%s': ", model) else ""
-  if (nzchar(lead) && gemini_key && grepl("gemini", model, ignore.case = TRUE)) return(paste0(lead, gemini_line))
-  base <- .morie_llm_api_base()
-  if (!is.null(base) && !isTRUE(tryCatch(.morie_llm_probe_api(), error = function(e) FALSE))) {
-    return(paste0(lead, sprintf("could not connect to your endpoint %s (rmorie provider show / unset)\n", base)))
+  lead <- if (!is.null(model) && nzchar(model)) sprintf("no answer for model '%s': ", model) else ""
+  if (identical(morie_llm_detect_provider(), "local")) {
+    return(paste0(lead, "no language model is set up here; bring one: a provider's key (ANTHROPIC_API_KEY, ",
+                  "OPENAI_API_KEY, ...), Ollama, or your own server -- `rmorie config setup` asks for each\n"))
   }
-  if (!is.null(.morie_llm_hosted_key()) && isTRUE(tryCatch(.morie_llm_hosted_rejected(), error = function(e) FALSE))) {
-    return(paste0(lead, sprintf("your hosted key was rejected by %s -- run `rmorie login` again\n", .morie_llm_hosted_base())))
-  }
-  if (gemini_key) return(paste0(lead, gemini_line))
-  if (nzchar(lead)) return(paste0(lead, "rmorie models lists the names\n"))
-  paste0("no LLM backend answered; this is the local fallback text (rmorie login with GitHub or --email", .morie_httr2_note(),
-         ", or start Ollama and pull a model; `rmorie config setup` sets a route, `rmorie help llm` explains them)\n")
+  paste0(lead, "the model did not answer; `rmorie doctor` shows the route and why it may fail, ",
+         "`rmorie models` the names it offers\n")
 }
 
 .cli_chat <- function(rest, flag, out) {
@@ -487,7 +477,10 @@
   check("module registry (23 modules)", function() length(morie_module_names()) >= 20L)
   check("dataset catalog", function() nrow(morie_list_datasets()) > 0L)
   check("explain registry", function() nzchar(explain_file("power_two_proportion_gender.csv")))
-  check("llm provider detection", function() morie_llm_detect_provider() %in% c("ollama", "hosted", "gemini", "api", "openai", "local"))
+  check("llm route detection", function() {
+    r <- morie_llm_detect_provider()
+    is.character(r) && length(r) == 1L && nzchar(r)
+  })
   check("statistics: two-sample t", function() {
     r <- morie_two_sample_t_test(c(1, 2, 3, 4, 5), c(2, 3, 4, 5, 6))
     is.list(r) && is.numeric(unlist(r)[1L])

@@ -6,37 +6,34 @@
 \alias{morie_llm_provider_unset}
 \title{Attach your own model endpoint}
 \usage{
-morie_llm_provider_set(base_url, key, model = NULL)
+morie_llm_provider_set(base_url, key = NULL, model = NULL)
 
 morie_llm_provider_show()
 
 morie_llm_provider_unset()
 }
 \arguments{
-\item{base_url}{The endpoint, e.g. \code{"https://api.openai.com/v1"}.}
+\item{base_url}{The endpoint, e.g. \code{"http://localhost:1234/v1"}.}
 
-\item{key}{The API key for it.}
+\item{key}{The API key for it (\code{NULL} for a server that needs none).}
 
 \item{model}{Optional model name to ask by default.}
 }
 \value{
-\code{morie_llm_provider_set()} and \code{morie_llm_provider_show()}
-return the stored fields invisibly; \code{morie_llm_provider_unset()}
-returns \code{TRUE} when something was detached.
+\code{morie_llm_provider_set()} and \code{morie_llm_provider_unset()}:
+the settings table, invisibly; \code{morie_llm_provider_show()}: the
+\code{own.*} rows of it.
 }
 \description{
-Stores an OpenAI-compatible endpoint (chat completions at
-\code{BASE_URL/chat/completions}) in the credentials file, where both this
-package and the Python package read it: OpenAI, Anthropic's compatibility
-endpoint (\code{https://api.anthropic.com/v1}), OpenRouter, Mistral, Groq, a
-local LM Studio / vLLM / llama.cpp server, and so on. The environment
-variables \code{LLM_API_BASE_URL}, \code{LLM_API_KEY} and
-\code{MORIE_API_MODEL} take precedence when set.
+Saves an OpenAI-compatible endpoint (chat completions at
+\code{base_url/chat/completions}) as the \code{own} route: the same as
+\code{morie_llm_config(own.url = , own.key = , own.model = )}.
 }
 \examples{
-\dontrun{
-morie_llm_provider_set("https://api.openai.com/v1", "sk-...", model = "gpt-4o-mini")
+old <- Sys.getenv("XDG_CONFIG_HOME", unset = NA)
+Sys.setenv(XDG_CONFIG_HOME = tempfile())
+morie_llm_provider_set("http://localhost:1234/v1", key = NULL, model = "my-model")
 morie_llm_provider_show()
 morie_llm_provider_unset()
-}
+if (is.na(old)) Sys.unsetenv("XDG_CONFIG_HOME") else Sys.setenv(XDG_CONFIG_HOME = old)
 }

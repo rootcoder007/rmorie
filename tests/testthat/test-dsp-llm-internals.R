@@ -272,54 +272,6 @@ test_that(".morie_llm_ollama_base strips trailing slashes", {
                "http://localhost:11434")
 })
 
-test_that(".morie_llm_gemini_key returns NULL when env is unset", {
-  old <- Sys.getenv("GEMINI_API_KEY", unset = NA)
-  Sys.unsetenv("GEMINI_API_KEY")
-  on.exit(if (!is.na(old)) Sys.setenv(GEMINI_API_KEY = old), add = TRUE)
-  expect_null(rmorie:::.morie_llm_gemini_key())
-})
-
-test_that(".morie_llm_openai_key returns NULL when env is unset", {
-  old <- Sys.getenv("OPENAI_API_KEY", unset = NA)
-  Sys.unsetenv("OPENAI_API_KEY")
-  on.exit(if (!is.na(old)) Sys.setenv(OPENAI_API_KEY = old), add = TRUE)
-  expect_null(rmorie:::.morie_llm_openai_key())
-})
-
-test_that(".morie_llm_api_base returns NULL when env is unset", {
-  old <- Sys.getenv("LLM_API_BASE_URL", unset = NA)
-  Sys.unsetenv("LLM_API_BASE_URL")
-  on.exit(if (!is.na(old)) Sys.setenv(LLM_API_BASE_URL = old),
-          add = TRUE)
-  expect_null(rmorie:::.morie_llm_api_base())
-})
-
-test_that(".morie_llm_api_base strips trailing slashes when set", {
-  old <- Sys.getenv("LLM_API_BASE_URL", unset = NA)
-  Sys.setenv(LLM_API_BASE_URL = "https://api.example.com/v1//")
-  on.exit({
-    if (!is.na(old)) Sys.setenv(LLM_API_BASE_URL = old)
-    else Sys.unsetenv("LLM_API_BASE_URL")
-  }, add = TRUE)
-  expect_equal(rmorie:::.morie_llm_api_base(),
-               "https://api.example.com/v1")
-})
-
-test_that(".morie_llm_api_key returns NULL when env is unset", {
-  old <- Sys.getenv("LLM_API_KEY", unset = NA)
-  Sys.unsetenv("LLM_API_KEY")
-  on.exit(if (!is.na(old)) Sys.setenv(LLM_API_KEY = old), add = TRUE)
-  expect_null(rmorie:::.morie_llm_api_key())
-})
-
-test_that(".morie_llm_gemini_model returns DEFAULT_GEMINI_MODEL when unset", {
-  old <- Sys.getenv("GEMINI_MODEL", unset = NA)
-  Sys.unsetenv("GEMINI_MODEL")
-  on.exit(if (!is.na(old)) Sys.setenv(GEMINI_MODEL = old), add = TRUE)
-  out <- rmorie:::.morie_llm_gemini_model()
-  expect_true(is.character(out) && nzchar(out))
-})
-
 test_that(".morie_llm_system_prompt returns the MORIE system preamble", {
   out <- rmorie:::.morie_llm_system_prompt()
   expect_type(out, "character")

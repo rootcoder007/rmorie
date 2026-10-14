@@ -2,7 +2,7 @@
 #
 # The project materialises public BigQuery datasets and serves their tables
 # as CSV from the edge (R2 behind a Worker), reachable whenever the internet
-# is, with the key morie_llm_login() stores. /manifest.json lists every table
+# is, with the data key morie_llm_login() stores. /manifest.json lists every table
 # with rows, columns, size, SHA-256 and the BigQuery source; /<db>/<table>.csv.gz
 # is the table. Downloads are cached in the dataset store. Mirrors
 # morie.datahub (Python).
@@ -22,9 +22,49 @@
   if (is.null(svc)) return("https://data.rmorie.com")
   if (!identical(svc$mode, "key") || !nzchar(svc$base_url %||% "")) {
     stop("the curated-data service is not available right now (see ",
-         svc$request_access %||% ACCESS_REQUEST_URL, ")", call. = FALSE)
+         svc$request_access %||% "https://rmorie.com/access", ")", call. = FALSE)
   }
   svc$base_url
+}
+
+# The tables whose source licence asks more than attribution (ICPSR studies, the NCVS 38604
+# extract, the a2aj case law): data.rmorie.com opens them once the terms are accepted.
+.morie_data_restricted <- function(key) grepl("^(icpsr_|ncvs_38604|a2aj_)", sub("^(db|files)/", "", key))
+
+# A downloaded table is used only when it matches the manifest's SHA-256: the manifest is fetched
+# again once before a mismatch is final (a table rebuilt upstream has a new digest), and a table
+# the manifest lists without a digest is used as it is. A failing file is deleted.
+.morie_data_check_sha <- function(key, path) {
+  digest <- function(refresh) {
+    m <- morie_hosted_manifest(refresh = refresh)
+    for (d in m$datasets %||% list()) {
+      if (identical(d$key, key)) {
+        s <- d$sha256
+        return(if (is.character(s) && length(s) == 1L && nzchar(s)) tolower(s) else NA_character_)
+      }
+    }
+    NULL
+  }
+  unlisted <- function() {
+    unlink(path)
+    stop(key, " is not listed in the manifest of data.rmorie.com", call. = FALSE)
+  }
+  want <- digest(FALSE)
+  if (is.null(want)) unlisted()
+  if (is.na(want)) return(invisible(TRUE))
+  have <- tolower(rmoriebricklayer::sha256_file(path))
+  if (!identical(have, want)) {
+    want <- digest(TRUE)
+    if (is.null(want)) unlisted()
+    if (is.na(want)) return(invisible(TRUE))
+  }
+  if (!identical(have, want)) {
+    unlink(path)
+    stop(sprintf(paste("%s does not match the manifest's SHA-256 (%s... vs %s...): the download was",
+                       "deleted; run again, and if it still fails it was altered in transit"),
+                 key, substr(have, 1L, 12L), substr(want, 1L, 12L)), call. = FALSE)
+  }
+  invisible(TRUE)
 }
 
 .morie_data_manifest_path <- function() {
@@ -36,8 +76,7 @@
 .morie_data_get <- function(path, dest, timeout = 600, size = NULL) {
   key <- .morie_llm_hosted_key()
   if (is.null(key)) {
-    stop(paste0("the curated tables need your MORIE key: ", .morie_llm_access_hint(),
-                "; `rmorie login` (GitHub) or `rmorie login --email you@example.com` also sign in", .morie_httr2_note(), "."), call. = FALSE)
+    stop(paste0("the curated tables need your MORIE data key: ", .morie_llm_access_hint(), "."), call. = FALSE)
   }
   label <- sub("^/", "", path)
   if (is.null(size) && grepl("\\.csv\\.gz$", path)) {
@@ -58,6 +97,10 @@
     error = function(e) e, warning = function(w) w)
   if (inherits(rc, "condition")) {
     msg <- conditionMessage(rc)
+    if (grepl("403|Forbidden", msg) && .morie_data_restricted(label)) {
+      stop(label, " is a restricted table (its source asks more than a citation): read and accept the terms at ",
+           "https://data.rmorie.com/terms, signed in with your key, then ask again.", call. = FALSE)
+    }
     if (grepl("401|403|Unauthorized|Forbidden", msg)) {
       stop("data.rmorie.com rejected the stored key; run `rmorie login` again.", call. = FALSE)
     }
@@ -71,8 +114,10 @@
 #' The MORIE project keeps 160 databases materialised from Google BigQuery public datasets, plus the Health Infobase tables and the OTIS research files,
 #' public datasets (Chicago crime, EPA air quality, US census, FEC, FDA,
 #' NOAA, NHTSA, Hacker News, Ethereum, World Bank, ...) and serves their
-#' tables from the edge. They open with the key \code{\link{morie_llm_login}}
-#' stores. \code{morie_hosted_manifest()} returns the gateway's manifest
+#' tables from the edge. They open with the data key \code{\link{morie_llm_login}}
+#' stores; a downloaded table is used only when it matches the SHA-256 the
+#' manifest lists for it. The ICPSR, NCVS 38604 and a2aj tables also need their
+#' terms accepted at \url{https://data.rmorie.com/terms}. \code{morie_hosted_manifest()} returns the gateway's manifest
 #' (every table with rows, columns, size, SHA-256 and its BigQuery source),
 #' cached for a day; \code{morie_hosted_datasets()} the same as a data frame;
 #' \code{morie_load_hosted_dataset("db/table")} one table, cached in the
@@ -158,6 +203,7 @@ morie_load_hosted_dataset <- function(key, db_path = NULL, refresh = FALSE) {
   tmp <- tempfile(fileext = ".csv.gz")
   on.exit(unlink(tmp), add = TRUE)
   .morie_data_get(sprintf("/%s/%s.csv.gz", parts[[1L]], paste(parts[-1L], collapse = "/")), tmp)
+  .morie_data_check_sha(key, tmp)
   df <- utils::read.csv(gzfile(tmp), stringsAsFactors = FALSE, skipNul = TRUE)  # some sources carry NUL bytes
   .morie_cache_store_soft(df, table, db_path = db_path)
   df

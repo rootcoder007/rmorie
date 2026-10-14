@@ -1,5 +1,20 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* Language models are not hosted any more: bring your own. `morie_llm_ask()`,
+  `morie_llm_ask_multi()`, `rmorie ask`, `rmorie models`, `rmorie config` and `rmorie doctor`
+  use the route rmoriebricklayer (>= 0.5.12) sets up: your own OpenAI-compatible endpoint, each
+  provider whose key is set (OpenAI, Anthropic, Google Gemini, OpenRouter, Groq, Mistral and
+  more), or a local Ollama. The model is given the help of rmorie, rmoriedata and
+  rmoriebricklayer, with tools to search and read it. `morie_llm_hosted_models()` and
+  `morie_llm_probe_hosted()` are gone, and `route = "hosted"` is an error that says so. With no
+  model set up, the answer is the keyword fallback, marked as such.
+* `morie_siu_llm_extract()` and the other SIU model calls take `"route"` (or a provider id such
+  as `"anthropic"`) for the model you set up; the default chain is `c("ollama", "route",
+  "gemini")`.
+* `rmorie login` is for the curated tables at data.rmorie.com only (GitHub or an emailed code
+  issues the key). A downloaded table is checked against the SHA-256 the manifest lists, and a
+  restricted table (ICPSR, NCVS 38604, a2aj) answers with where to accept its terms.
+
 * Research ledger, the third and last library-scan batch (20 Lean files, 84 audited theorems; 517
   theorems over 103 files, 0 sorry) with R functions and tests in `R/ledger_scan2.R`:
   `morie_nb_matches_zip()`, `morie_gamma_bound()`, `morie_blocking_crossover()`,
@@ -689,7 +704,7 @@
 ## Hosted LLM tier
 
 * `morie_llm_ask()` falls back to the MORIE hosted tier at
-  `https://llm.rmorie.com` when no local Ollama answers. Sign in once with
+  llm.rmorie.com (since retired) when no local Ollama answers. Sign in once with
   `morie_llm_login()` (GitHub device flow), `morie_llm_login(email = )`
   (a 6-digit code sent to the address), `morie_llm_login(email = ,
   to_email = TRUE)` (the key itself mailed to the verified inbox) or

@@ -1236,7 +1236,8 @@ morie_siu_compare <- function(case_number, external,
 # Providers are configured via env vars so secrets never appear in
 # the package or in chat:
 #   GEMINI_API_KEY (or GOOGLE_API_KEY) -> Gemini
-#   the stored hosted key (morie_llm_login) -> llm.rmorie.com ("hosted")
+#   "route" -> the model you set up for rmoriebricklayer (a provider key, Ollama, your server);
+#   a provider id ("anthropic", "groq", ...) -> that provider, through rmoriebricklayer
 #   ANTHROPIC_API_KEY  -> Claude
 # Both functions hard-fail with a clear message if the relevant env
 # var is missing.
@@ -1481,29 +1482,6 @@ morie_siu_compare <- function(case_number, external,
         x
       }
     ),
-    hosted = list(
-      # the hosted MORIE tier (llm.rmorie.com), with the key morie_llm_login() stored
-      env_required = "MORIE_HOSTED_KEY_OR_LOGIN",
-      build = function(env, prompt) {
-        base <- sub("/+$", "", .morie_llm_hosted_base())
-        list(
-          url = paste0(base, "/v1/chat/completions"),
-          headers = list("authorization" = paste("Bearer", env[["MORIE_HOSTED_KEY_OR_LOGIN"]]),
-                         "content-type" = "application/json"),
-          body = list(
-            # MORIE_HOSTED_MODEL, else `rmorie config set hosted.model`, else the tier's default
-            model = .morie_llm_setting("hosted.model") %||% attr(morie_llm_hosted_models(), "default") %||% "default",
-            temperature = 0,
-            messages = list(list(role = "user", content = prompt))
-          )
-        )
-      },
-      extract = function(resp) {
-        x <- .siu_first(resp$choices)$message$content
-        if (is.null(x)) stop("the hosted tier returned empty text", call. = FALSE)
-        x
-      }
-    ),
     openai_compatible = list(
       # ANY OpenAI-compatible endpoint: Groq, Together, Mistral,
       # DeepSeek, xAI, LM Studio, vLLM, llama.cpp server, ...
@@ -1552,6 +1530,13 @@ morie_siu_compare <- function(case_number, external,
 .siu_llm_call_one <- function(model, prompt,
                               timeout_s = .siu_llm_default_timeout()) {
   providers <- .siu_llm_providers()
+  # "route" (or a provider rmoriebricklayer knows that is not in the table) asks the model you set up
+  if (identical(model, "route") ||
+      (!model %in% names(providers) && model %in% rmoriebricklayer::bricklayer_llm_providers()$id)) {
+    return(rmoriebricklayer::bricklayer_llm_chat(list(list(role = "user", content = prompt)),
+                                                 route = if (identical(model, "route")) NULL else model,
+                                                 timeout = timeout_s))
+  }
   if (!model %in% names(providers)) {
     stop("Unknown LLM model: '", model, "'. Available: ",
       paste(names(providers), collapse = ", "),
@@ -1569,12 +1554,6 @@ morie_siu_compare <- function(case_number, external,
     if (!nzchar(env_val)) {
       stop("no OpenAI-compatible endpoint is set: MORIE_LLM_BASE_URL, or `rmorie config set own.url URL` ",
            "(R: morie_llm_config(own.url = ...))", call. = FALSE)
-    }
-  } else if (p$env_required == "MORIE_HOSTED_KEY_OR_LOGIN") {
-    env_val <- .morie_llm_hosted_key() %||% ""
-    if (!nzchar(env_val)) {
-      stop("not logged in to the hosted MORIE tier; run morie_llm_login() or morie_llm_login(email = \"you@example.com\") (shell: `rmorie login [--email ...]`) first, ",
-           "or use model = \"ollama\" with a local Ollama daemon.", call. = FALSE)
     }
   } else {
     env_val <- Sys.getenv(p$env_required, unset = "")
@@ -1812,7 +1791,9 @@ morie_siu_compare <- function(case_number, external,
 #' hard-coded, never passed as function arguments -- so secrets do
 #' not leak into call traces, logs, or scripts. Set
 #' \code{GEMINI_API_KEY} (or \code{GOOGLE_API_KEY}) for Gemini, the key stored by
-#' \code{\link{morie_llm_login}} for \code{"hosted"}, \code{ANTHROPIC_API_KEY} for
+#' \code{"route"} for the model you set up with \code{\link{morie_llm_config}} (a
+#' provider's key, Ollama or your own server; a provider id such as
+#' \code{"groq"} names one), \code{ANTHROPIC_API_KEY} for
 #' Claude, or \code{OLLAMA_HOST} (e.g.
 #' \code{"http://localhost:11434"} or an OpenAI-compatible base URL) plus
 #' optionally \code{OLLAMA_MODEL} (else the first model the server serves) for
@@ -1821,11 +1802,12 @@ morie_siu_compare <- function(case_number, external,
 #' @param case_number An SIU case number (e.g. \code{"17-OVI-201"}).
 #' @param model One of \code{"ollama"} (default; free, runs locally,
 #'   zero-config when an Ollama daemon is on \code{localhost:11434}),
-#'   \code{"gemini"} (paid), or \code{"claude"} (paid). A character
-#'   vector enables fail-over: the first model whose call succeeds
-#'   wins. The default \code{c("ollama", "gemini")} tries the local
-#'   free model first and only escalates to paid Gemini if Ollama
-#'   isn't installed or fails -- so morie costs $0 to use as long
+#'   \code{"route"} (the model you set up), \code{"gemini"} (paid), or
+#'   \code{"claude"} (paid). A character vector enables fail-over: the
+#'   first model whose call succeeds wins. The default
+#'   \code{c("ollama", "route", "gemini")} tries the local free model
+#'   first, then the model you set up, and only then paid Gemini -- so
+#'   morie costs $0 to use as long
 #'   as you have a free Gemma / Qwen / Llama running locally
 #'   (e.g. \code{ollama pull <model>}).
 #' @param cache_dir Directory holding the harvester's SIU.csv and
@@ -1853,7 +1835,7 @@ morie_siu_compare <- function(case_number, external,
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_llm_extract <- function(case_number,
-                                  model = c("ollama", "hosted", "gemini"),
+                                  model = c("ollama", "route", "gemini"),
                                   cache_dir = file.path(tempdir(), "morie", "siu"),
                                   max_html_chars = 80000L,
                                   mock_response_text = NULL) {
@@ -2629,7 +2611,7 @@ morie_siu_translate_fr_to_en <- function(
 #' attr(audit, "examples")[[audit$field[1L]]]
 #' \dontshow{\}) # examplesIf}
 #' @export
-morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "hosted", "gemini"),
+morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "route", "gemini"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),
                                     max_html_chars = 80000L,
                                     max_examples_per_field = 5L,

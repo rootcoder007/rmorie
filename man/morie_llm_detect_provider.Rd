@@ -2,29 +2,30 @@
 % Please edit documentation in R/llm.R
 \name{morie_llm_detect_provider}
 \alias{morie_llm_detect_provider}
-\title{Detect the active LLM provider}
+\title{The language-model route that would answer}
 \usage{
 morie_llm_detect_provider(route = NULL)
 }
 \arguments{
-\item{route}{\code{NULL} (the saved setting: \code{MORIE_LLM_ROUTE}, else
-\code{\link{morie_llm_config}}'s \code{route}, else \code{"auto"}),
-\code{"auto"}, \code{"own"}, \code{"ollama"} or \code{"hosted"}.}
+\item{route}{\code{NULL} (the saved setting, else the automatic order),
+\code{"auto"}, \code{"own"}, \code{"ollama"} or a provider id such as
+\code{"anthropic"}.}
 }
 \value{
-Character scalar provider key: ollama / gemini / api / openai / hosted / local.
-With the automatic route, in that order of preference: a local Ollama that
-has a model (a server with nothing pulled is skipped), then your own keys
-and endpoint, then the hosted MORIE tier as a last resort (it answers only
-after \code{morie_llm_login()}; keys are issued on request at
-\url{https://rmorie.com/access}). A forced route returns its provider
-(\code{"api"} for \code{"own"}) when it is set up, else \code{"local"}.
+The route id (\code{"own"}, \code{"ollama"}, a provider id), or
+\code{"local"} when no route is set up.
 }
 \description{
-Detect the active LLM provider
+Which route \code{\link{morie_llm_ask}} would take now, without sending
+anything. The routes are rmoriebricklayer's: an endpoint of your own, then
+each provider whose key is set (OpenAI, Anthropic, Google Gemini, OpenRouter,
+Groq, Mistral and more: \code{rmoriebricklayer::bricklayer_llm_providers()}),
+then Ollama (on this machine, another one, or ollama.com with your Ollama
+key). \code{\link{morie_llm_config}} or \code{rmorie config setup} sets them up.
 }
 \examples{
-old <- options(morie.llm.ollama_cached = FALSE)
+old <- Sys.getenv(c("OLLAMA_HOST", "XDG_CONFIG_HOME"), unset = NA)
+Sys.setenv(OLLAMA_HOST = "off", XDG_CONFIG_HOME = tempfile())
 morie_llm_detect_provider()
-options(old)
+for (v in names(old)) if (is.na(old[[v]])) Sys.unsetenv(v) else do.call(Sys.setenv, as.list(old[v]))
 }

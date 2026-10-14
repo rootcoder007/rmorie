@@ -2,40 +2,34 @@
 % Please edit documentation in R/llm.R
 \name{morie_llm_ask_multi}
 \alias{morie_llm_ask_multi}
-\title{Ask the best available LLM provider, accepting a multi-turn messages list}
+\title{Ask a language model with a whole conversation}
 \usage{
 morie_llm_ask_multi(messages, providers = NULL, model = NULL, timeout = 120)
 }
 \arguments{
-\item{messages}{list of role/content lists.}
+\item{messages}{List of role/content lists.}
 
-\item{providers}{Optional character vector forcing a specific provider
-ordering.  When NULL the auto-detected provider is tried first, then
-the remaining providers in priority order.}
+\item{providers}{Optional route (a character vector: the first that is not
+\code{"local"} is used; \code{"api"} is \code{"own"}).}
 
-\item{model}{Optional model identifier.}
+\item{model}{Optional model name.}
 
-\item{timeout}{HTTP timeout in seconds.}
+\item{timeout}{Seconds to wait for the reply.}
 }
 \value{
 Character scalar response text.
 }
 \description{
-R port of \code{morie.llm.ask_multi}.  Unlike :func:\code{morie_llm_ask}, this
-accepts a pre-built \code{messages} list (each element: \code{role}/\code{content})
-enabling multi-turn conversation.  Streaming is not supported in the R
-port -- this always returns a single character scalar.
-}
-\details{
-Provider fall-through order mirrors :func:\code{morie_llm_detect_provider}:
-ollama -> gemini -> api -> openai -> local.
+Sends \code{messages} (each \code{list(role = , content = )}, role
+\code{"system"}, \code{"user"} or \code{"assistant"}) as it is, through
+\code{rmoriebricklayer::bricklayer_llm_chat()}, for chat loops. When no model
+answers on the automatic route the result is the fallback text of
+\code{\link{morie_llm_ask}}.
 }
 \examples{
-\donttest{
-old <- options(morie.llm.ollama_cached = FALSE)
-msgs <- list(list(role = "user", content = "hello"))
-out <- try(morie_llm_ask_multi(msgs))
-print(out)
-options(old)
-}
+old <- Sys.getenv(c("OLLAMA_HOST", "XDG_CONFIG_HOME"), unset = NA)
+Sys.setenv(OLLAMA_HOST = "off", XDG_CONFIG_HOME = tempfile())
+out <- morie_llm_ask_multi(list(list(role = "user", content = "hello")))
+isTRUE(attr(out, "fallback"))
+for (v in names(old)) if (is.na(old[[v]])) Sys.unsetenv(v) else do.call(Sys.setenv, as.list(old[v]))
 }

@@ -6,7 +6,7 @@
 \usage{
 morie_siu_llm_extract(
   case_number,
-  model = c("ollama", "hosted", "gemini"),
+  model = c("ollama", "route", "gemini"),
   cache_dir = file.path(tempdir(), "morie", "siu"),
   max_html_chars = 80000L,
   mock_response_text = NULL
@@ -17,11 +17,12 @@ morie_siu_llm_extract(
 
 \item{model}{One of \code{"ollama"} (default; free, runs locally,
 zero-config when an Ollama daemon is on \code{localhost:11434}),
-\code{"gemini"} (paid), or \code{"claude"} (paid). A character
-vector enables fail-over: the first model whose call succeeds
-wins. The default \code{c("ollama", "gemini")} tries the local
-free model first and only escalates to paid Gemini if Ollama
-isn't installed or fails -- so morie costs $0 to use as long
+\code{"route"} (the model you set up), \code{"gemini"} (paid), or
+\code{"claude"} (paid). A character vector enables fail-over: the
+first model whose call succeeds wins. The default
+\code{c("ollama", "route", "gemini")} tries the local free model
+first, then the model you set up, and only then paid Gemini -- so
+morie costs $0 to use as long
 as you have a free Gemma / Qwen / Llama running locally
 (e.g. \code{ollama pull <model>}).}
 
@@ -59,7 +60,9 @@ Credentials are read from environment variables only -- never
 hard-coded, never passed as function arguments -- so secrets do
 not leak into call traces, logs, or scripts. Set
 \code{GEMINI_API_KEY} (or \code{GOOGLE_API_KEY}) for Gemini, the key stored by
-\code{\link{morie_llm_login}} for \code{"hosted"}, \code{ANTHROPIC_API_KEY} for
+\code{"route"} for the model you set up with \code{\link{morie_llm_config}} (a
+provider's key, Ollama or your own server; a provider id such as
+\code{"groq"} names one), \code{ANTHROPIC_API_KEY} for
 Claude, or \code{OLLAMA_HOST} (e.g.
 \code{"http://localhost:11434"} or an OpenAI-compatible base URL) plus
 optionally \code{OLLAMA_MODEL} (else the first model the server serves) for

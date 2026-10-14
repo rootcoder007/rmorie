@@ -2,7 +2,7 @@
 % Please edit documentation in R/llm.R
 \name{morie_llm_agent_available}
 \alias{morie_llm_agent_available}
-\title{Return TRUE when at least one live LLM provider is available}
+\title{Return TRUE when a language model is set up}
 \usage{
 morie_llm_agent_available()
 }
@@ -10,10 +10,11 @@ morie_llm_agent_available()
 Logical scalar.
 }
 \description{
-Return TRUE when at least one live LLM provider is available
+Return TRUE when a language model is set up
 }
 \examples{
-old <- options(morie.llm.ollama_cached = FALSE)
+old <- Sys.getenv(c("OLLAMA_HOST", "XDG_CONFIG_HOME"), unset = NA)
+Sys.setenv(OLLAMA_HOST = "off", XDG_CONFIG_HOME = tempfile())
 morie_llm_agent_available()
-options(old)
+for (v in names(old)) if (is.na(old[[v]])) Sys.unsetenv(v) else do.call(Sys.setenv, as.list(old[v]))
 }

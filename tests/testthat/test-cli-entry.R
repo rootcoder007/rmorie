@@ -20,90 +20,48 @@ test_that("version, help and unknown verbs behave", {
   expect_equal(u$status, 2L)  # a usage error, like an unknown option
   expect_match(u$text, "unknown verb 'frobnicate'")
 })
-
-test_that("login forwards the flags to morie_llm_login and logout forgets the key", {
+test_that("login, logout, doctor, config, models and ask are rmoriebricklayer's verbs, named rmorie", {
   withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir())
   seen <- NULL
   testthat::local_mocked_bindings(
-    .package = .pkg,
-    morie_llm_login = function(open_browser = TRUE, poll_max_seconds = 600, email = NULL, code = NULL,
-                               token = NULL, to_email = FALSE) {
-      seen <<- list(email = email, code = code, open_browser = open_browser, token = token, to_email = to_email)
-      invisible(if (isTRUE(to_email)) "" else "sk-x")
-    })
-  r <- .capture("login", "--email", "vee@example.com", "--code", "123456", "--no-browser")
-  expect_equal(r$status, 0L)
-  expect_equal(seen$email, "vee@example.com")
-  expect_equal(seen$code, "123456")
-  expect_false(seen$open_browser)
-  expect_match(r$text, "Logged in to https://llm.rmorie.com")
-  expect_equal(.capture("login", "--email")$status, 2L)  # a flag without its value is a usage error
-  r2 <- .capture("login", "--email", "vee@example.com", "--code", "1", "--to-email")
-  expect_equal(r2$status, 0L)
-  expect_true(seen$to_email)
-  expect_false(grepl("Logged in", r2$text, fixed = TRUE))
-  testthat::local_mocked_bindings(.package = .pkg, .morie_llm_probe_token = function(token) identical(token, "sk-pasted"))
-  testthat::local_mocked_bindings(.package = .pkg, .morie_llm_probe_token = function(token) identical(token, "sk-pasted"))
-  expect_equal(.capture("login", "--token", "sk-pasted")$status, 0L)
-  expect_equal(seen$token, "sk-pasted")
-  expect_equal(.capture("login", "--token", "sk-rejected")$status, 1L)
-  expect_equal(seen$token, "sk-pasted")  # a rejected key is never stored
-  expect_equal(.capture("login", "--token", "sk-rejected")$status, 1L)
-  expect_equal(seen$token, "sk-pasted")  # a rejected key is never stored
-  .morie_llm_write_credentials(list(hosted_key = "sk-x"))
-  expect_equal(suppressMessages(.capture("logout"))$status, 0L)
-  expect_null(.morie_llm_hosted_key())
+    bricklayer_cli = function(args, out = cat) {
+      seen <<- list(args = args, prog = Sys.getenv("RMBL_PROG"))
+      out("from bricklayer\n")
+      0L
+    },
+    .package = "rmoriebricklayer")
+  for (v in list(c("login", "--email", "vee@example.com", "--no-browser"), c("logout"), c("models", "--route", "groq"),
+                 c("ask", "--route", "anthropic", "what", "is", "MORIE"))) {
+    r <- .capture(v)
+    expect_equal(r$status, 0L, info = v[[1L]])
+    expect_identical(seen$args, v, info = v[[1L]])
+    expect_identical(seen$prog, "rmorie", info = v[[1L]])  # messages name the command the user typed
+    expect_match(r$text, "from bricklayer")
+  }
+  .capture("doctor")
+  expect_identical(seen$args, "doctor")
+  .capture("config", "set", "route", "groq")
+  expect_identical(seen$args, c("config", "set", "route", "groq"))
+  expect_false(nzchar(Sys.getenv("RMBL_PROG")))  # put back afterwards
 })
 
-test_that("doctor lists the providers and ask relays the reply", {
-  withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir(), GEMINI_API_KEY = NA,
-                      LLM_API_BASE_URL = NA, LLM_API_KEY = NA, OPENAI_API_KEY = NA)
-  .morie_llm_cache$ollama_cached <- FALSE
-  .morie_llm_cache$hosted_cached <- NULL
-  withr::defer({ .morie_llm_cache$ollama_cached <- NULL; .morie_llm_cache$hosted_cached <- NULL })
+test_that("doctor names the route ask would take and the data key; ask relays the reply", {
+  ps <- rmoriebricklayer::bricklayer_llm_providers()
+  withr::local_envvar(c(stats::setNames(rep(NA_character_, nrow(ps)), ps$key_env), XDG_CONFIG_HOME = withr::local_tempdir(),
+                        OLLAMA_HOST = "off", MORIE_LLM_BASE_URL = NA, MORIE_HOSTED_KEY = NA))
   d <- .capture("doctor")
   expect_equal(d$status, 0L)
-  expect_match(d$text, "Ollama \\(local\\) +not reachable")
-  expect_match(d$text, "not logged in")
-  expect_match(d$text, "active provider: local")
-  testthat::local_mocked_bindings(.package = .pkg, morie_llm_ask = function(prompt, ...) paste("echo:", prompt),
-                                  morie_llm_detect_provider = function(...) "hosted")
+  expect_match(d$text, "local Ollama +disabled")
+  expect_match(d$text, "ask has no route yet")
+  expect_match(d$text, "data key: none \\(`rmorie login`")
+  withr::local_envvar(GROQ_API_KEY = "gsk-x", MORIE_GROQ_MODEL = "llama-x")
+  testthat::local_mocked_bindings(.bl_post_json = function(url, payload, ...) {
+    list(status = 200L, json = list(choices = list(list(finish_reason = "stop", message = list(content = "echo")))), error = "")
+  }, .package = "rmoriebricklayer")
   a <- .capture("ask", "what", "is", "MORIE")
-  expect_equal(a$text, "echo: what is MORIE\n")
+  expect_equal(a$text, "echo\n")
   expect_match(.capture("ask", "--help")$text, "usage: rmorie ask")
 })
-
-test_that("models lists the hosted and local models and ask --model names one", {
-  withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir())
-  .morie_llm_cache$ollama_cached <- FALSE
-  .morie_llm_cache$hosted_cached <- NULL
-  withr::defer({ .morie_llm_cache$ollama_cached <- NULL; .morie_llm_cache$hosted_cached <- NULL
-                 .morie_llm_cache$hosted_models <- NULL })
-  expect_match(.capture("models")$text, "Hosted LLM: not logged in")
-  testthat::local_mocked_bindings(.package = .pkg,
-    .morie_llm_hosted_key = function() "sk-test",
-    morie_llm_probe_hosted = function(...) { .morie_llm_cache$hosted_models <- c("a:cloud", "b:cloud"); TRUE },
-    .morie_llm_hosted_model = function() "b:cloud")
-  m <- .capture("models")
-  expect_equal(m$status, 0L)
-  expect_match(m$text, "Hosted LLM \\(https://llm.rmorie.com\\); default marked \\*:")
-  expect_match(m$text, "\n    a:cloud\n  \\* b:cloud\n")
-  expect_match(m$text, "Local Ollama: not reachable")
-  hm <- morie_llm_hosted_models()
-  expect_equal(as.character(hm), c("a:cloud", "b:cloud"))
-  expect_equal(attr(hm, "default"), "b:cloud")
-  expect_match(.capture("doctor")$text, "models: a:cloud, b:cloud \\(default b:cloud\\)")
-  seen <- NULL
-  testthat::local_mocked_bindings(.package = .pkg,
-    morie_llm_ask = function(prompt, model = NULL, ...) { seen <<- model; paste("echo:", prompt) },
-    morie_llm_detect_provider = function(...) "hosted")
-  expect_equal(.capture("ask", "--model", "a:cloud", "hi", "there")$text, "echo: hi there\n")
-  expect_equal(seen, "a:cloud")
-  expect_equal(.capture("ask", "hi")$text, "echo: hi\n")
-  expect_null(seen)
-  expect_match(.capture("ask", "--help")$text, "usage: rmorie ask \\[--model NAME\\]")
-})
-
 test_that("the launcher ships and install_cli links it", {
   src <- system.file("bin", "rmorie", package = .pkg)
   expect_true(nzchar(src))
@@ -143,24 +101,23 @@ test_that("list-modules, cheatsheet, pull and run-module verbs work", {
   expect_equal(r$status, 0L)
   expect_match(r$text, "Generated tables: a, b")
 })
-
-test_that("provider set/show/unset store an endpoint the chain reads", {
-  withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir(),
-                      LLM_API_BASE_URL = NA, LLM_API_KEY = NA, MORIE_API_MODEL = NA)
-  expect_null(.morie_llm_api_base())
+test_that("provider set/show/unset store your own endpoint as the own route", {
+  withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir(), MORIE_LLM_BASE_URL = NA, MORIE_LLM_API_KEY = NA,
+                      MORIE_LLM_MODEL = NA)
   r <- .capture("provider", "set", "--base-url", "https://api.example.org/v1/", "--key", "sk-test-1234567", "--model", "demo-model")
   expect_equal(r$status, 0L)
-  expect_equal(.morie_llm_api_base(), "https://api.example.org/v1")
-  expect_equal(.morie_llm_api_key(), "sk-test-1234567")
-  expect_equal(.morie_llm_api_model(), "demo-model")
-  expect_true(file.exists(.morie_llm_credentials_path()))
-  expect_equal(.capture("provider", "show")$status, 0L)
+  expect_equal(.morie_llm_setting("own.url"), "https://api.example.org/v1/")
+  expect_equal(.morie_llm_setting("own.model"), "demo-model")
+  s <- .capture("provider", "show")
+  expect_equal(s$status, 0L)
+  expect_match(s$text, "own.url +https://api.example.org/v1/")
+  expect_match(s$text, "own.key +set")
+  expect_false(grepl("sk-test-1234567", s$text, fixed = TRUE))  # never the key itself
   expect_equal(.capture("provider", "unset")$status, 0L)
-  expect_null(.morie_llm_api_base())
+  expect_null(.morie_llm_setting("own.url"))
   expect_match(.capture("provider", "bogus")$text, "usage: rmorie provider")
   expect_equal(.capture("provider", "set", "--key", "x")$status, 2L)  # --base-url missing: usage
 })
-
 
 test_that("output verbs: explain, inspect and verify", {
   expect_match(.capture("explain", "power_two_proportion_gender.csv")$text, "group1, group2")
@@ -244,7 +201,7 @@ test_that("run-modules and pipeline run through the module runner", {
 test_that("percy, agent and chat go through morie_llm_ask", {
   testthat::local_mocked_bindings(.package = .pkg,
     morie_llm_ask = function(prompt, context = NULL, model = NULL, ...) paste0("[", model %||% "default", "] ", prompt),
-    morie_llm_detect_provider = function() "hosted")
+    morie_llm_detect_provider = function(...) "groq")
   expect_match(.capture("percy", "what", "is", "a", "PAF")$text, "\\[default\\] what is a PAF")
   expect_match(.capture("agent", "--model", "m1", "hi")$text, "\\[m1\\] hi")
   expect_match(.capture("percy", "--context", "ctx", "q")$text, "Context:\nctx")
@@ -374,16 +331,21 @@ test_that("data.rmorie.com tables: key handling, manifest cache, download cached
   expect_error(morie_hosted_manifest(), "rmorie login")
   withr::local_envvar(MORIE_HOSTED_KEY = "sk-good")
   calls <- character()
-  manifest <- '{"generated_utc":"2026-10-01T00:00:00Z","datasets":[{"db":"chicago_crime","table":"incidents","key":"chicago_crime/incidents","rows":3,"columns":["id","type"],"bytes_gz":10,"sha256":"x","source":"bigquery-public-data.chicago_crime.crime","meta":{"description":"Chicago Police incidents"}}]}'
+  # the table as served, and its digest in the manifest (a download is used only when it matches)
+  served <- withr::local_tempfile(fileext = ".csv.gz")
+  con <- gzfile(served, "w")
+  writeLines(c("id,type", "1,THEFT", "2,BATTERY", "3,THEFT"), con)
+  close(con)
+  manifest <- paste0('{"generated_utc":"2026-10-01T00:00:00Z","datasets":[{"db":"chicago_crime","table":"incidents",',
+                     '"key":"chicago_crime/incidents","rows":3,"columns":["id","type"],"bytes_gz":10,"sha256":"',
+                     rmoriebricklayer::sha256_file(served), '","source":"bigquery-public-data.chicago_crime.crime",',
+                     '"meta":{"description":"Chicago Police incidents"}}]}')
   testthat::local_mocked_bindings(.package = .pkg,
     .morie_data_get = function(path, dest, timeout = 600) {
       calls <<- c(calls, path)
       if (path == "/manifest.json") writeLines(manifest, dest)
-      else if (path == "/chicago_crime/incidents.csv.gz") {
-        con <- gzfile(dest, "w")
-        writeLines(c("id,type", "1,THEFT", "2,BATTERY", "3,THEFT"), con)
-        close(con)
-      } else stop("404")
+      else if (path == "/chicago_crime/incidents.csv.gz") file.copy(served, dest, overwrite = TRUE)
+      else stop("404")
       invisible(dest)
     })
   m <- morie_hosted_manifest()

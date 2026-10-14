@@ -2,7 +2,7 @@
 % Please edit documentation in R/llm.R
 \name{morie_llm_logout}
 \alias{morie_llm_logout}
-\title{Forget the hosted MORIE LLM key}
+\title{Forget the stored data key}
 \usage{
 morie_llm_logout()
 }
@@ -10,10 +10,11 @@ morie_llm_logout()
 TRUE (invisibly) when a key was removed.
 }
 \description{
-Forget the hosted MORIE LLM key
+Forget the stored data key
 }
 \examples{
-\dontrun{
+old <- Sys.getenv("XDG_CONFIG_HOME", unset = NA)
+Sys.setenv(XDG_CONFIG_HOME = tempfile())
 morie_llm_logout()
-}
+if (is.na(old)) Sys.unsetenv("XDG_CONFIG_HOME") else Sys.setenv(XDG_CONFIG_HOME = old)
 }

@@ -17,22 +17,21 @@ The exit status, invisibly (0 on success).
 \description{
 Dispatches the verbs of the \code{rmorie} launcher. Verbs:
 \describe{
-\item{\code{login [--email ADDRESS] [--code CODE] [--to-email] [--no-browser]}}{sign
-in to the hosted LLM tier with GitHub (device flow) or an emailed code;
-\code{--to-email} has the key emailed instead of stored}
-\item{\code{login --token [KEY]}}{store a key you already have (prompts
+\item{\code{login [--email ADDRESS] [--code CODE] [--no-browser]}}{sign in for
+the curated tables at data.rmorie.com with GitHub (device flow) or an
+emailed code: the data key, never a language model}
+\item{\code{login --token [KEY]}}{store a data key you already have (prompts
 for it when KEY is omitted)}
-\item{\code{logout}}{forget the hosted key}
-\item{\code{doctor}}{report the LLM providers reachable from this machine, and
-the route \code{ask} will take}
+\item{\code{logout}}{forget the data key}
+\item{\code{doctor}}{the language-model routes set up on this machine, the one
+\code{ask} will take, and the data key}
 \item{\code{config [show | help | get KEY | set KEY VALUE | unset KEY | setup | path]}}{show
-or change the language-model settings (\code{\link{morie_llm_config}}): the
-route \code{ask} uses and the address, key and model of each route;
+or change the language-model settings (\code{\link{morie_llm_config}}): a
+provider's key and model, Ollama, your own server, the route;
 \code{setup} walks through them}
-\item{\code{models}}{list the models you can ask: the hosted tier's for your
-key (default marked), then the local Ollama server's}
-\item{\code{ask [--model NAME] [--route ROUTE] PROMPT...}}{send a prompt to the
-active provider (or the named model, on the named route) and print the reply}
+\item{\code{models [--route ROUTE]}}{the models a route offers, the one in use marked}
+\item{\code{ask [--model NAME] [--route ROUTE] PROMPT...}}{ask the model you set
+up, with the help of rmorie, rmoriebricklayer and rmoriedata at hand}
 \item{\code{analyze SUBJECT [JSON]}}{run an analysis subject through \code{cli_main()}}
 \item{\code{explain FILENAME}, \code{inspect PATH}, \code{verify PATH}}{read,
 browse and validate module output tables}

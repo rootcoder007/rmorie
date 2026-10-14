@@ -7,7 +7,7 @@
 
 test_that("every provider builds its request from the prompt and the credential and reads the reply", {
   P <- .sl(".siu_llm_providers")()
-  expect_setequal(names(P), c("gemini", "claude", "vertex", "ollama", "openai", "hosted", "openai_compatible"))
+  expect_setequal(names(P), c("gemini", "claude", "vertex", "ollama", "openai", "openai_compatible"))
   g <- P$gemini$build(list(GOOGLE_API_KEY = "k1"), "hello")
   expect_match(g$url, "models/gemini-2.5-flash:generateContent\\?key=k1$")
   expect_equal(g$body$contents[[1]]$parts[[1]]$text, "hello")
@@ -67,20 +67,6 @@ test_that("every provider builds its request from the prompt and the credential 
   expect_equal(P$openai$build(list(OPENAI_API_KEY = "k3"), "p")$body$model, "g-9")
   expect_equal(P$openai$extract(list(choices = list(list(message = list(content = "O"))))), "O")
   expect_error(P$openai$extract(list(choices = list())), "OpenAI returned empty text")
-  # the hosted tier: the configured model, else the tier's default
-  testthat::local_mocked_bindings(
-    .morie_llm_hosted_base = function() "https://llm.example/",
-    .morie_llm_setting = function(key, ...) if (key == "hosted.model") "hm" else NULL,
-    morie_llm_hosted_models = function(...) structure(c("a", "b"), default = "dm"),
-    .package = .sl_pkg)
-  h <- P$hosted$build(list(MORIE_HOSTED_KEY_OR_LOGIN = "hk"), "p")
-  expect_equal(h$url, "https://llm.example/v1/chat/completions")
-  expect_equal(h$headers[["authorization"]], "Bearer hk")
-  expect_equal(h$body$model, "hm")
-  testthat::local_mocked_bindings(.morie_llm_setting = function(key, ...) NULL, .package = .sl_pkg)
-  expect_equal(P$hosted$build(list(MORIE_HOSTED_KEY_OR_LOGIN = "hk"), "p")$body$model, "dm")
-  expect_equal(P$hosted$extract(list(choices = list(list(message = list(content = "H"))))), "H")
-  expect_error(P$hosted$extract(list(choices = list())), "the hosted tier returned empty text")
   # any OpenAI-compatible endpoint: a key only when configured
   testthat::local_mocked_bindings(
     .morie_llm_setting = function(key, ...) switch(key, own.key = "kk", own.model = "mm", NULL), .package = .sl_pkg)
@@ -111,7 +97,7 @@ test_that("one LLM call resolves the provider's credential and turns each HTTP o
       },
       .package = .sl_pkg, .env = parent.frame())
   }
-  expect_error(call_one("nope", "p"), "Unknown LLM model: 'nope'. Available: gemini, claude, vertex, ollama, openai, hosted, openai_compatible")
+  expect_error(call_one("nope", "p"), "Unknown LLM model: 'nope'. Available: gemini, claude, vertex, ollama, openai, openai_compatible")
   withr::local_envvar(GOOGLE_API_KEY = NA, GEMINI_API_KEY = NA, ANTHROPIC_API_KEY = NA)
   expect_error(call_one("gemini", "p"), "Env var 'GEMINI_API_KEY' \\(or 'GOOGLE_API_KEY'\\) is not set; cannot call gemini")
   expect_error(call_one("claude", "p"), "Env var 'ANTHROPIC_API_KEY' is not set; cannot call claude")
@@ -142,14 +128,12 @@ test_that("one LLM call resolves the provider's credential and turns each HTTP o
   reply(200L, '{"choices":[{"message":{"content":"X"}}]}')
   expect_equal(call_one("openai_compatible", "p"), "X")
   expect_equal(rec$url, "http://x/chat/completions")
-  testthat::local_mocked_bindings(.morie_llm_hosted_key = function() NULL, .package = .sl_pkg)
-  expect_error(call_one("hosted", "p"), "not logged in to the hosted MORIE tier")
-  testthat::local_mocked_bindings(
-    .morie_llm_hosted_key = function() "hk", .morie_llm_hosted_base = function() "https://llm.example",
-    morie_llm_hosted_models = function(...) structure("a", default = "dm"), .package = .sl_pkg)
-  expect_equal(call_one("hosted", "p"), "X")
-  expect_equal(rec$url, "https://llm.example/v1/chat/completions")
-  expect_equal(rec$headers[1], "authorization: Bearer hk")
+  # "route" is the model you set up, through rmoriebricklayer
+  testthat::local_mocked_bindings(bricklayer_llm_chat = function(messages, model = NULL, route = NULL, timeout = 120) {
+    paste("route", route %||% "auto", messages[[1L]]$content)
+  }, .package = "rmoriebricklayer")
+  expect_equal(call_one("route", "p"), "route auto p")
+  expect_error(call_one("hosted", "p"), "Unknown LLM model: 'hosted'")
   testthat::local_mocked_bindings(
     .morie_llm_ollama_base = function() "http://o:1", .morie_llm_ollama_key = function() "",
     .morie_llm_ollama_default_model = function(base) "m", .package = .sl_pkg)
@@ -280,7 +264,7 @@ test_that("the extraction driver turns the model's JSON into the 64-column row w
   expect_equal(out$drid, "7")
   expect_equal(out$nrid, "9")
   expect_equal(out$source_url_report, "https://www.siu.on.ca/en/directors_report_details.php?drid=7")
-  expect_equal(out$parser_version, "llm-ollama+hosted+gemini")
+  expect_equal(out$parser_version, "llm-ollama+route+gemini")
   expect_match(out$scraped_at_utc, "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$")
   expect_true(seen$expect_json)
   expect_equal(seen$mock, "unused by the mock")

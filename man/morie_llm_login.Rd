@@ -2,47 +2,43 @@
 % Please edit documentation in R/llm.R
 \name{morie_llm_login}
 \alias{morie_llm_login}
-\title{Sign in to the hosted MORIE LLM tier}
+\title{Sign in for the curated tables at data.rmorie.com}
 \usage{
 morie_llm_login(
   open_browser = interactive(),
   poll_max_seconds = 600,
   email = NULL,
   code = NULL,
-  token = NULL,
-  to_email = FALSE
+  token = NULL
 )
 }
 \arguments{
-\item{open_browser}{Open the verification URL in the browser.}
+\item{open_browser}{Open the GitHub page in a browser.}
 
-\item{poll_max_seconds}{Give up after this many seconds.}
+\item{poll_max_seconds}{How long to wait for the GitHub approval.}
 
-\item{email}{Sign in with a one-time code emailed to this address instead
-of GitHub; the code is read from the console (or from \code{code}).}
+\item{email}{An email address to send a sign-in code to.}
 
-\item{code}{The emailed code, when not read interactively.}
+\item{code}{The code that was emailed (asked for when not given).}
 
-\item{token}{A key obtained elsewhere (the website, or one the gateway
-emailed); stored directly, no sign-in round trip.}
-
-\item{to_email}{With \code{email}: have the gateway email the key instead of
-returning it. Nothing is stored; paste it later with \code{token}.}
+\item{token}{A key you already hold.}
 }
 \value{
 The key, invisibly.
 }
 \description{
-Runs the GitHub device flow against the sign-in service of
-llm.rmorie.com: a short code and a URL are printed (and the browser
-opened when possible); once the sign-in is approved the service mints a
-per-user, rate-limited key, which is stored with mode 0600 in
-\code{$XDG_CONFIG_HOME/morie/credentials.json} and used by both the R
-and the Python package. Nothing is sent to the tier before that.
+Stores your MORIE data key, the key that opens the curated tables at
+data.rmorie.com (\code{\link{morie_load_hosted_dataset}}). It is never a language
+model: those you bring yourself (\code{\link{morie_llm_config}}). With
+\code{token} the key you already hold is checked with the data service and
+stored; with \code{email} a one-time code is sent there; otherwise the GitHub
+device flow runs. The key is stored once, privately, for rmorie,
+rmoriebricklayer, rmoriedata and morie. This is
+\code{rmoriebricklayer::bricklayer_llm_login()}.
 }
 \examples{
 \dontrun{
-morie_llm_login()
-morie_llm_login(email = "you@example.com")
+morie_llm_login()                              # GitHub
+morie_llm_login(email = "you@example.org")     # an emailed code
 }
 }
