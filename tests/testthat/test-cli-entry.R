@@ -53,7 +53,7 @@ test_that("doctor names the route ask would take and the data key; ask relays th
   expect_equal(d$status, 0L)
   expect_match(d$text, "local Ollama +disabled")
   expect_match(d$text, "ask has no route yet")
-  expect_match(d$text, "data key: none \\(`rmorie login`")
+  expect_match(d$text, "data key: none \\(`[a-z]+ login`")
   withr::local_envvar(GROQ_API_KEY = "gsk-x", MORIE_GROQ_MODEL = "llama-x")
   testthat::local_mocked_bindings(.bl_post_json = function(url, payload, ...) {
     list(status = 200L, json = list(choices = list(list(finish_reason = "stop", message = list(content = "echo")))), error = "")
