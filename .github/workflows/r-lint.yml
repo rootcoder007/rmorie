@@ -53,12 +53,20 @@ jobs:
       - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
         run: |
           install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
-          # rmoriebricklayer 0.5.1 carries the corrected mean kernel; until CRAN
-          # and r-universe serve it, build it from GitHub main when the repos
-          # handed us an older build.
-          if (utils::packageVersion("rmoriebricklayer") < "0.5.1") {
+          # r-universe serves the released build; a branch that raises the floor in DESCRIPTION is
+          # ahead of it, so the floor and the branch are read from DESCRIPTION and built from GitHub
+          # when the installed build is older (pak honours Remotes, install.packages() does not)
+          desc <- read.dcf("DESCRIPTION")
+          imports <- gsub("[[:space:]]+", " ", c(desc[1, intersect(c("Imports", "Depends"), colnames(desc))], ""))
+          floor <- sub(".*rmoriebricklayer \\(>= ([0-9.]+)\\).*", "\\1", paste(imports, collapse = " "))
+          if (!grepl("^[0-9.]+$", floor)) floor <- "0.0.0"
+          remotes <- if ("Remotes" %in% colnames(desc)) desc[1, "Remotes"] else ""
+          ref <- sub(".*rmorie-bricklayer@([A-Za-z0-9._/-]+).*", "\\1", remotes)
+          if (identical(ref, remotes) || !grepl("^[A-Za-z0-9._/-]+$", ref)) ref <- "main"
+          if (!requireNamespace("rmoriebricklayer", quietly = TRUE) ||
+              utils::packageVersion("rmoriebricklayer") < floor) {
             tf <- tempfile(fileext = ".tar.gz")
-            download.file("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+            download.file(sprintf("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/%s.tar.gz", ref),
                           tf, mode = "wb", quiet = TRUE)
             install.packages(tf, repos = NULL, type = "source")
           }
