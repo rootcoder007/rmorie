@@ -106,7 +106,7 @@ test_that("exec, ask, provider and login: wording and exit codes", {
   local_mocked_bindings(.cli_readline = function(prompt) "", .package = utils::packageName(environment(morie_cli)))
   r <- .cap("login", "--token")
   expect_equal(r$status, 2L)
-  expect_match(r$text, "--token needs a value")
+  expect_match(r$text, "--token needs a (value|key)")   # the login verb is rmoriebricklayer's
   local_mocked_bindings(.cli_readline = function(prompt) NA_character_, .package = utils::packageName(environment(morie_cli)))
   expect_equal(.cap("login", "--token")$status, 2L)  # stdin closed
   expect_error(morie_llm_login(email = "notanemail"), "'notanemail' is not an email address")
@@ -246,14 +246,9 @@ test_that("install_extras(ask = TRUE) off a terminal does not pretend the user d
   expect_length(r$installed, 0L)
 })
 
-test_that("ask with a model the hosted tier does not list says so in one line", {
-  pkg <- utils::packageName(environment(morie_cli))
-  local_mocked_bindings(.morie_llm_hosted_key = function() "k", .morie_llm_hosted_base = function() "https://h.invalid",
-                        morie_llm_hosted_models = function(...) c("a", "b"),
-                        morie_llm_request_completion = function(...) stop("404"),
-                        .morie_llm_gemini_key = function() NULL, .morie_llm_api_base = function() NULL,
-                        .morie_llm_openai_key = function() NULL, .package = pkg)
-  expect_error(morie_llm_ask("hi", model = "nosuch", provider = "hosted"), "no model 'nosuch'")
+test_that("ask on the retired hosted tier says so in one line", {
+  # the hosted tier is retired: its helpers are gone, so the only answer is the retirement notice
+  expect_error(morie_llm_ask("hi", model = "nosuch", provider = "hosted"), "retired")
 })
 
 test_that("a large workbook is streamed to its first sheet; a small one picks the data sheet over a cover sheet", {
