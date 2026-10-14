@@ -268,5 +268,5 @@ Additional_repositories:
   https://stan-dev.r-universe.dev,
   https://rootcoder007.r-universe.dev
 Remotes:
-  rootcoder007/rmorie-bricklayer@update,
+  rmoriebricklayer=rootcoder007/rmorie-bricklayer@update,
   rootcoder007/rmoriedata
