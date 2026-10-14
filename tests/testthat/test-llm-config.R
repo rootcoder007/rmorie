@@ -33,10 +33,10 @@ test_that("help has a guide per topic and every verb, config included", {
   .cfg_sandbox()
   v <- .cap("help")
   expect_match(v$text, "config \\[show \\| help")
-  expect_match(v$text, "rmorie help llm")
+  expect_match(v$text, paste(.pkg, "help llm"), fixed = TRUE)
   expect_match(.cap("help", "start")$text, "Getting started")
   # the language-model pages are rmoriebricklayer's, under the rmorie name
-  expect_match(.cap("help", "llm")$text, "rmorie config set route anthropic")
+  expect_match(.cap("help", "llm")$text, paste(.pkg, "config set route anthropic"), fixed = TRUE)
   expect_match(.cap("help", "r")$text, "bricklayer_llm_config\\(route = \"anthropic\"")
   expect_match(.cap("help", "ask")$text, "usage: rmorie ask \\[--model NAME\\] \\[--route")
   expect_match(.cap("ask", "--help")$text, "--route")

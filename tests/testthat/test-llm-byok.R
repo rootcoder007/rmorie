@@ -1,6 +1,8 @@
 # Language models in rmorie: the one the user brings, through rmoriebricklayer. The model calls
 # are replaced by canned replies; nothing leaves the machine.
 
+.prog <- if (isNamespaceLoaded("rmorie")) "rmorie" else "morie"  # the command is named for the package: morie in the morie mirror
+
 .byok_sandbox <- function(env = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = env)
   ps <- rmoriebricklayer::bricklayer_llm_providers()
@@ -96,7 +98,7 @@ test_that("with no model set up, or a failure on the automatic route, ask return
   expect_true(isTRUE(attr(out, "fallback")))
   expect_match(out, "without a language model")
   expect_match(out, "ANTHROPIC_API_KEY")
-  expect_match(out, "rmorie config setup")
+  expect_match(out, paste(.prog, "config setup"), fixed = TRUE)
   testthat::local_mocked_bindings(bricklayer_llm_ask = function(...) stop("Groq rejected your key (HTTP 401)"),
                                   .package = "rmoriebricklayer")
   out <- morie_llm_ask("hello")
@@ -146,8 +148,9 @@ test_that("login, the settings and your own endpoint are rmoriebricklayer's", {
   expect_identical(morie_llm_login(email = "you@example.org", code = "123456"), "sk-k")
   expect_identical(seen[c("email", "code")], list(email = "you@example.org", code = "123456"))
   # settings: saved through rmoriebricklayer, read back by rmorie's own helpers
+  # the sandbox switches Ollama off in the environment, which wins (and saving under it warns so)
+  withr::local_envvar(OLLAMA_HOST = NA)
   morie_llm_config(ollama.url = "http://192.168.1.20:11434", ollama.model = "qwen3:8b")
-  withr::local_envvar(OLLAMA_HOST = NA)  # the sandbox switches Ollama off in the environment, which wins
   expect_identical(.morie_llm_setting("ollama.model"), "qwen3:8b")
   expect_identical(.morie_llm_setting("ollama.url"), "http://192.168.1.20:11434")
   withr::local_envvar(OLLAMA_MODEL = "env-model")
@@ -169,7 +172,7 @@ test_that("the shell verbs for models, the data key and the settings are rmorieb
   st <- morie_cli("doctor", out = function(s) buf <<- c(buf, s))
   expect_identical(as.integer(st), 0L)
   expect_true(any(grepl("ask has no route yet", buf)))
-  expect_true(any(grepl("`rmorie config setup`", buf, fixed = TRUE)))
+  expect_true(any(grepl(sprintf("`%s config setup`", .prog), buf, fixed = TRUE)))
   buf <- character()
   morie_cli(c("config", "set", "route", "anthropic"), out = function(s) buf <<- c(buf, s))
   expect_identical(morie_llm_config()$value[morie_llm_config()$key == "route"], "anthropic")

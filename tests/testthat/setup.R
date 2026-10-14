@@ -61,9 +61,8 @@ skip_heavy <- function() {
   invisible(TRUE)
 }
 
-# The hosted LLM tier reads $XDG_CONFIG_HOME/morie/credentials.json. Point it
-# at an empty temp dir for the whole run so a developer who ran
-# morie_llm_login() never turns provider-detection tests into hosted ones
-# (and no test can reach the real gateway).
+# The data key and the language-model settings live under $XDG_CONFIG_HOME/morie.
+# Point it at an empty temp dir for the whole run, so a developer's own sign-in or
+# provider keys never change what a test sees (and no test reaches a real service).
 Sys.setenv(XDG_CONFIG_HOME = tempfile("morie-test-xdg-"))
 Sys.unsetenv("MORIE_HOSTED_KEY")

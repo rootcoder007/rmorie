@@ -1,5 +1,7 @@
 # The 1.4.0 branches codecov/patch reported without a test: error messages, usage lines and fallbacks.
 
+.prog <- if (isNamespaceLoaded("rmorie")) "rmorie" else "morie"  # the command is named for the package: morie in the morie mirror
+
 .pc_cap <- function(...) {
   buf <- character()
   status <- withCallingHandlers(
@@ -79,7 +81,7 @@ test_that("ask with no model set up says what to set up and exits 1", {
   r <- .pc_cap("ask", "hello")
   expect_equal(r$status, 1L)
   expect_match(r$text, "No language-model route is set up")
-  expect_match(r$text, "`rmorie config setup`", fixed = TRUE)
+  expect_match(r$text, sprintf("`%s config setup`", .prog), fixed = TRUE)
   # percy and agent keep rmorie's own fallback line, which names the cause
   testthat::local_mocked_bindings(morie_llm_ask = function(...) .morie_llm_local_fallback("q"))
   r <- .pc_cap("percy", "hello")
