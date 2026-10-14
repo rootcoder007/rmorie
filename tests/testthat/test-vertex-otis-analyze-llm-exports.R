@@ -133,6 +133,8 @@ test_that("morie_llm_detect_provider returns 'local' when nothing is configured"
     LLM_API_BASE_URL = Sys.getenv("LLM_API_BASE_URL", unset = NA),
     LLM_API_KEY      = Sys.getenv("LLM_API_KEY",      unset = NA))
   for (k in names(saved)) Sys.unsetenv(k)
+  # and no Ollama: unset, the default address is probed, and a machine running one answers there
+  withr::local_envvar(OLLAMA_HOST = "off")
   # Reset cached ollama probe flag so we re-probe.
   old_opt  <- getOption("morie.llm.ollama_cached",  default = NULL)
   options(morie.llm.ollama_cached = FALSE)

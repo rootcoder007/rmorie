@@ -99,10 +99,14 @@ morie_llm_config <- function(...) {
 
 .cli_doctor <- function(out) .cli_bricklayer("doctor", out)
 
-# Run one of rmoriebricklayer's shell verbs with its messages naming `rmorie`.
+# Run one of rmoriebricklayer's shell verbs with its messages naming `rmorie`, and with rmorie's
+# help and messages in what ask and explain-error read (rmoriebricklayer reads only its own unless
+# told: RMBL_PACKAGES).
 .cli_bricklayer <- function(args, out) {
-  old <- Sys.getenv("RMBL_PROG", unset = NA)
-  Sys.setenv(RMBL_PROG = "rmorie")
-  on.exit(if (is.na(old)) Sys.unsetenv("RMBL_PROG") else Sys.setenv(RMBL_PROG = old), add = TRUE)
+  old <- Sys.getenv(c("RMBL_PROG", "RMBL_PACKAGES"), unset = NA)
+  Sys.setenv(RMBL_PROG = "rmorie", RMBL_PACKAGES = paste(.morie_llm_doc_packages(), collapse = ","))
+  on.exit(for (k in names(old)) {
+    if (is.na(old[[k]])) Sys.unsetenv(k) else do.call(Sys.setenv, stats::setNames(list(old[[k]]), k))
+  }, add = TRUE)
   rmoriebricklayer::bricklayer_cli(args, out = out)
 }

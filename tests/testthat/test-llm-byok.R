@@ -187,3 +187,21 @@ test_that("the shell verbs for models, the data key and the settings are rmorieb
   morie_cli(c("provider", "show"), out = function(s) buf <<- c(buf, s))
   expect_true(any(grepl("own.url", buf, fixed = TRUE)))
 })
+
+test_that("the verbs rmorie hands to rmoriebricklayer read rmorie's help too, and leave the environment as it was", {
+  .byok_sandbox()
+  seen <- NULL
+  testthat::local_mocked_bindings(
+    bricklayer_cli = function(args, out = cat) {
+      seen <<- Sys.getenv(c("RMBL_PROG", "RMBL_PACKAGES"))
+      0L
+    },
+    .package = "rmoriebricklayer")
+  withr::local_envvar(RMBL_PROG = NA, RMBL_PACKAGES = "before")
+  .cli_bricklayer(c("ask", "x"), function(...) NULL)
+  expect_identical(unname(seen[["RMBL_PROG"]]), .prog)
+  expect_true(.prog %in% strsplit(seen[["RMBL_PACKAGES"]], ",")[[1L]])
+  expect_true("rmoriebricklayer" %in% strsplit(seen[["RMBL_PACKAGES"]], ",")[[1L]])
+  expect_identical(Sys.getenv("RMBL_PACKAGES"), "before")
+  expect_identical(Sys.getenv("RMBL_PROG", unset = "unset"), "unset")
+})
