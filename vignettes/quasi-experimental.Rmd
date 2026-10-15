@@ -12,13 +12,15 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 set.seed(1)
 ```
 
-rmorie's quasi-experimental stack is fully native: no `did`,
-`fixest`, `did2s`, `didimputation`, `rdrobust`, `AER`, `WeightIt`, or
-`CBPS` at runtime. Each estimator is cross-validated against its
-reference package in `tests/` and the canonical replication suite
-(`tests/testthat/test-quasiex-replication.R`) reproduces the
-published estimates on the bundled real datasets (LaLonde, Basque
-Country, Lee 2008 incumbency, CigarettesSW).
+rmorie's quasi-experimental estimators run on native code: the
+examples below need no `did`, `fixest`, `did2s`, `didimputation`,
+`rdrobust`, `AER`, `WeightIt`, or `CBPS`. In the source repository,
+`tests/cross/` compares several of them with reference packages (for
+example `test-morie_vs_did.R`, `test-morie_vs_rdrobust.R`,
+`test-morie_vs_ivreg.R`), and
+`tests/testthat/test-quasiex-replication.R` checks them against
+published results on datasets bundled in `inst/extdata/quasiex/`
+(LaLonde, Basque Country, Lee 2008 incumbency, CigarettesSW).
 
 ```{r setup}
 library(rmorie)
@@ -67,6 +69,15 @@ y <- 2 * d + u + rnorm(n)
 morie_iv_2sls(data.frame(y, d, z), "y", "d", "z")
 ```
 
+With a weak instrument the gate refuses the point estimate, warns, and
+reports only the Anderson-Rubin set:
+
+```{r iv-weak}
+d_weak <- 0.05 * z + 0.5 * u + rnorm(n)
+y_weak <- 2 * d_weak + u + rnorm(n)
+morie_iv_2sls(data.frame(y = y_weak, d = d_weak, z), "y", "d", "z")
+```
+
 ## Regression discontinuity with bundled diagnostics
 
 `morie_rdd()` returns the bias-corrected estimate together with the
@@ -76,8 +87,13 @@ robustness steps applied papers routinely forget.
 ```{r rdd}
 x <- runif(600, -1, 1)
 y <- 1 + 2 * (x >= 0) + x + rnorm(600, sd = 0.5)
-morie_rdd(data.frame(y, x), "y", "x")
+rd <- morie_rdd(data.frame(y, x), "y", "x")
+rd
+rd$placebo
 ```
+
+`rd$placebo` holds the estimates at placebo cutoffs on either side of
+the true one; neither should be significant.
 
 ## Propensity-score weighting
 

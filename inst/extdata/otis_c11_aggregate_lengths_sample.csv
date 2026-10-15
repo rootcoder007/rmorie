@@ -1,6 +1,12 @@
 EndFiscalYear,Aggregate_Duration,NumberIndividuals_RestrictiveConfinement,NumberIndividuals_Segregation
-2022,1 to 15 days,180,120
-2022,16 to 30 days,80,55
-2023,31 to 60 days,50,30
-2023,61 to 90 days,25,14
-2024,Over 90 days,18,8
+2022,1 day,30,25
+2022,2 days,20,18
+2022,3 days,15,14
+2022,4 days,14,12
+2022,5 days,12,10
+2022,6 to 10 days,45,25
+2022,11 to 15 days,30,9
+2022,16 to 20 days,15,4
+2022,21 to 25 days,10,3
+2022,26 to 30 days,6,2
+2022,Greater than 30 days,35,7

@@ -57,16 +57,39 @@ NULL
 }
 
 
+#' Internal helper: Toronto WGS84 bounding box for TPS events
+#' @noRd
+.tps_toronto_bbox <- c(lat_min = 43.55, lat_max = 43.90,
+                       lon_min = -79.65, lon_max = -79.10)
+
+#' Internal helper: which TPS coordinates are usable
+#'
+#' TPS writes (0, 0) for an unknown location. That placeholder, missing
+#' values and any point outside the Toronto bounding box are not usable.
+#' @noRd
+.tps_coord_ok <- function(lat, lon) {
+  lat <- suppressWarnings(as.numeric(lat))
+  lon <- suppressWarnings(as.numeric(lon))
+  b <- .tps_toronto_bbox
+  !is.na(lat) & !is.na(lon) &
+    lat >= b[["lat_min"]] & lat <= b[["lat_max"]] &
+    lon >= b[["lon_min"]] & lon <= b[["lon_max"]]
+}
+
 #' Internal helper: Tps Coords
+#'
+#' Usable (lat, lon) matrix; attribute `n_dropped` counts rows dropped by
+#' `.tps_coord_ok()`.
 #' @noRd
 .tps_coords <- function(df, lat_col, lon_col) {
   if (!all(c(lat_col, lon_col) %in% names(df))) {
-    return(matrix(numeric(0), 0L, 2L))
+    return(structure(matrix(numeric(0), 0L, 2L), n_dropped = 0L))
   }
   a <- df[, c(lat_col, lon_col), drop = FALSE]
-  a <- a[stats::complete.cases(a), , drop = FALSE]
-  a <- a[a[[lat_col]] != 0 & a[[lon_col]] != 0, , drop = FALSE]
-  as.matrix(a)
+  ok <- .tps_coord_ok(a[[lat_col]], a[[lon_col]])
+  a <- a[ok, , drop = FALSE]
+  a[] <- lapply(a, as.numeric)
+  structure(as.matrix(a), n_dropped = sum(!ok))
 }
 
 
@@ -141,6 +164,7 @@ morie_tps_ripley_k <- function(df,
   title <- sprintf("Ripley's K -- %s", ds_name)
 
   coords <- .tps_coords(df, lat_col, lon_col)
+  n_drop <- attr(coords, "n_dropped")
   n0 <- nrow(coords)
   if (n0 < 50L) {
     return(.tps_adv_result(
@@ -212,6 +236,7 @@ morie_tps_ripley_k <- function(df,
     title, call,
     summary_lines = list(
       `Points used` = as.integer(n),
+      `Dropped (no / out-of-Toronto location)` = as.integer(n_drop),
       `Bounding-box area (km^2)` = round(area_km2, 2),
       `Intensity (pts/km^2)` = round(intensity, 3),
       `Radii (km)` = paste(radii_km, collapse = ", "),
@@ -220,6 +245,7 @@ morie_tps_ripley_k <- function(df,
     warnings = character(0),
     interpretation = interp,
     n = as.integer(n),
+    n_dropped_coords = as.integer(n_drop),
     intensity = intensity,
     area_km2 = area_km2,
     table = tbl,
@@ -288,7 +314,7 @@ morie_tps_getis_ord_g_star <- function(df,
   counts <- counts[toupper(as.character(counts)) != "NSA"]
   counts <- sort(table(counts), decreasing = TRUE)
 
-  keep <- stats::complete.cases(df[, c(hood_col, lat_col, lon_col)])
+  keep <- !is.na(df[[hood_col]]) & .tps_coord_ok(df[[lat_col]], df[[lon_col]])
   d <- df[keep, , drop = FALSE]
   cent <- aggregate(d[, c(lat_col, lon_col)], by = list(d[[hood_col]]), mean)
   rownames(cent) <- as.character(cent[[1L]])
@@ -425,6 +451,7 @@ morie_tps_dbscan_clusters <- function(df,
   title <- sprintf("DBSCAN density clusters -- %s", ds_name)
 
   coords <- .tps_coords(df, lat_col, lon_col)
+  n_drop <- attr(coords, "n_dropped")
   n0 <- nrow(coords)
   if (n0 < 50L) {
     return(.tps_adv_result(
@@ -488,6 +515,7 @@ morie_tps_dbscan_clusters <- function(df,
     title, call,
     summary_lines = list(
       `Points clustered` = as.integer(n),
+      `Dropped (no / out-of-Toronto location)` = as.integer(n_drop),
       `eps (km)` = eps_km,
       `min_samples` = as.integer(min_samples),
       `Clusters discovered` = as.integer(n_clusters),
@@ -497,6 +525,7 @@ morie_tps_dbscan_clusters <- function(df,
     warnings = character(0),
     interpretation = interp,
     n = as.integer(n),
+    n_dropped_coords = as.integer(n_drop),
     n_clusters = as.integer(n_clusters),
     n_noise = as.integer(n_noise),
     largest_cluster = as.integer(largest),

@@ -19,17 +19,12 @@ knitr::opts_chunk$set(
 
 # Overview
 
-Beyond its causal-inference and survey-statistics surfaces, MORIE
-exposes a small collection of signal-processing primitives. These
-are useful for forensic-audio work, biomedical signals, and any
-analysis that needs spectral or time-frequency methods adjacent to
-the causal pipeline (e.g.\ inter-incident time series in
-criminological data).
-
-The R surface is intentionally thin --- the heavy lifting lives in
-the Python `morie.signal_processing` and
-`morie.homomorphic_deconvolution` modules. The R wrappers cover
-the most commonly needed primitives.
+Beyond its causal-inference and survey-statistics surfaces, rmorie
+includes signal-processing functions: periodogram, multitaper and
+Welch spectral estimates, the short-time Fourier transform, the
+Hilbert envelope, cepstra and cepstral pitch estimation. They apply to
+audio and biomedical signals and to any regularly sampled series, such
+as daily incident counts.
 
 # A synthetic two-tone signal
 
@@ -55,15 +50,68 @@ peak_freqs <- freq[order(mag, decreasing = TRUE)[1:5]]
 peak_freqs
 ```
 
-The two largest peaks should sit near 50 Hz and 120 Hz, recovering
-the synthetic signal's components.
+The largest peaks sit next to 50 Hz and 120 Hz, the two components of
+the synthetic signal.
+
+# Spectral density estimates
+
+`morie_dsp_psd_periodogram()` returns the raw periodogram,
+`morie_psdmt()` a multitaper estimate (`nw = 4` by default), and
+`welch()` Welch's averaged-segment estimate. Each returns the
+frequencies and the power spectral density:
+
+```{r psd}
+per <- morie_dsp_psd_periodogram(sig, fs = fs)
+mt  <- morie_psdmt(sig, fs = fs)
+wl  <- welch(sig, fs = fs, nperseg = 256L)
+
+# frequency of the largest PSD value in each band (Hz)
+peaks <- function(f, p) c(
+  low  = f[f > 25 & f < 85][which.max(p[f > 25 & f < 85])],
+  high = f[f > 95 & f < 145][which.max(p[f > 95 & f < 145])]
+)
+rbind(periodogram = peaks(per$freqs, per$psd),
+      multitaper  = peaks(mt$frequencies, mt$psd),
+      welch       = peaks(wl$extra$freqs, wl$filtered))
+mt$n_tapers
+```
+
+All three put a peak next to 50 Hz and next to 120 Hz. Welch's
+estimate trades frequency resolution (here `fs / nperseg`, about
+3.9 Hz) for lower variance, so its peaks fall on the nearest bins of
+that coarser grid. The Welch PSD values are in the `filtered` element
+and its frequencies in `extra$freqs`.
+
+# Short-time Fourier transform
+
+`morie_rangayyan_stft()` returns the spectrogram matrix `Sxx`
+(frequencies by time segments):
+
+```{r stft}
+st <- morie_rangayyan_stft(sig, fs = fs, nperseg = 128L)
+dim(st$Sxx)
+range(st$times)
+```
+
+# Envelope and cepstral pitch
+
+`morie_dsp_hilbert_envelope()` returns the amplitude envelope of a
+signal. `morie_cepstrum_pitch()` estimates a fundamental frequency
+from the real cepstrum; on a harmonic signal at 150 Hz:
+
+```{r cepstrum}
+env <- morie_dsp_hilbert_envelope(sig)
+length(env)
+
+fs2 <- 8000
+tt  <- seq(0, 0.5, by = 1 / fs2)
+voiced <- rowSums(sapply(1:10, function(k) sin(2 * pi * k * 150 * tt) / k))
+morie_cepstrum_pitch(voiced, fs = fs2)$f0
+```
 
 # Where to go next
 
-- Spectral analysis with windowing, multitaper estimation, and
-  short-time Fourier transforms is implemented in the Python
-  `morie.signal_processing` module --- with the same RichResult
-  return convention --- and is documented in the package paper.
-- Homomorphic deconvolution and cepstral methods (used in forensic
-  audio and biomedical-signal applications) live in
-  `morie.homomorphic_deconvolution`.
+- `morie_dsp_complex_cepstrum()` and `morie_dsp_homomorphic()` cover
+  cepstral and homomorphic processing.
+- `Spectrogram()`, `IStft()` and `reassigned_spectrogram()` are
+  further time-frequency tools; see their help pages.

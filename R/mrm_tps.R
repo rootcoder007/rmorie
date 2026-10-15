@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' MRM-framework analyses on Toronto Police Service (TPS) open data
 #'
-#' Four callables for TPS public-release crime-incident CSVs, used in
-#' the MRM empirical companion paper.
+#' Four callables for TPS public-release crime-incident CSVs, for the
+#' MRM (Multilevel Reconciliation Methodology) workflow.
 #'
 #' Functions:
 #' * `mrm_tps_levy_scaling()`: Hill-MLE Pareto exponent of inter-incident
@@ -54,6 +54,9 @@ NULL
 #' and computes the inter-event step length (km) via haversine on
 #' WGS84 latitude/longitude. Returns the Hill-MLE exponent restricted
 #' to steps above `min_step_km`.
+#' Events at the TPS unknown-location placeholder (0, 0), with missing
+#' coordinates, or outside the Toronto bounding box (latitude 43.55 to
+#' 43.90, longitude -79.65 to -79.10) are dropped first.
 #'
 #' @param data A data.frame with at least the columns named in
 #'   `date_col`, `lat_col`, `lon_col`.
@@ -65,8 +68,9 @@ NULL
 #'   (default `"LONG_WGS84"`).
 #' @param min_step_km Lower-tail cutoff in km (default `0.5`).
 #' @param x_min Hill-MLE cutoff (default = `min_step_km`).
-#' @return A list with `n_events`, `n_steps_tail`, `min_step_km`,
-#'   `hill_alpha`.
+#' @return A list with `n_events` (events used), `n_dropped_coords`
+#'   (events dropped for an unusable location), `n_steps_tail`,
+#'   `min_step_km`, `hill_alpha`.
 #' @export
 #' @examples
 #' if (FALSE) {
@@ -88,14 +92,15 @@ mrm_tps_levy_scaling <- function(
   ord <- order(as.character(data[[date_col]]))
   lat <- data[[lat_col]][ord]
   lon <- data[[lon_col]][ord]
-  keep <- is.finite(lat) & is.finite(lon)
-  lat <- lat[keep]
-  lon <- lon[keep]
+  keep <- .tps_coord_ok(lat, lon)
+  n_dropped <- sum(!keep)
+  lat <- as.numeric(lat[keep])
+  lon <- as.numeric(lon[keep])
 
   n <- length(lat)
   if (n < 2L) {
     return(list(
-      n_events = n, n_steps_tail = 0L,
+      n_events = n, n_dropped_coords = n_dropped, n_steps_tail = 0L,
       min_step_km = min_step_km, hill_alpha = NA_real_
     ))
   }
@@ -105,6 +110,7 @@ mrm_tps_levy_scaling <- function(
   alpha <- if (length(tail) >= 2L) 1 + length(tail) / sum(log(tail / x_min)) else NA_real_
   list(
     n_events = n,
+    n_dropped_coords = n_dropped,
     n_steps_tail = length(tail),
     min_step_km = min_step_km,
     hill_alpha = round(alpha, 4)
@@ -123,6 +129,9 @@ mrm_tps_levy_scaling <- function(
 #' global Moran's I via a rook contiguity matrix. Also runs DBSCAN on
 #' the raw lat/long points (rescaled to km) and reports cluster
 #' counts.
+#' Events at the TPS unknown-location placeholder (0, 0), with missing
+#' coordinates, or outside the Toronto bounding box (latitude 43.55 to
+#' 43.90, longitude -79.65 to -79.10) are dropped first.
 #'
 #' This function is a thin computational wrapper. For high-precision
 #' computations on full-sized TPS files use the `morie` Python
@@ -136,7 +145,8 @@ mrm_tps_levy_scaling <- function(
 #' @param dbscan_eps DBSCAN radius in km (default `0.3`).
 #' @param dbscan_minpts DBSCAN minimum points per core (default `5L`).
 #' @return A list with `morans_I`, `morans_z`, `dbscan_n_clusters`,
-#'   `dbscan_n_noise`, `dbscan_largest`.
+#'   `dbscan_n_noise`, `dbscan_largest`, `n_events` (events used) and
+#'   `n_dropped_coords` (events dropped for an unusable location).
 #' @export
 #' @examples
 #' if (FALSE) {
@@ -155,15 +165,16 @@ mrm_tps_moran_clustering <- function(
   stopifnot(all(c(lat_col, lon_col) %in% names(data)))
   lat <- data[[lat_col]]
   lon <- data[[lon_col]]
-  keep <- is.finite(lat) & is.finite(lon)
-  lat <- lat[keep]
-  lon <- lon[keep]
+  keep <- .tps_coord_ok(lat, lon)
+  n_dropped <- sum(!keep)
+  lat <- as.numeric(lat[keep])
+  lon <- as.numeric(lon[keep])
   n <- length(lat)
   if (n < 10L) {
     return(list(
       morans_I = NA_real_, morans_z = NA_real_,
       dbscan_n_clusters = 0L, dbscan_n_noise = 0L,
-      dbscan_largest = 0L
+      dbscan_largest = 0L, n_events = n, n_dropped_coords = n_dropped
     ))
   }
 
@@ -225,7 +236,9 @@ mrm_tps_moran_clustering <- function(
     morans_z = round(morans_z, 2),
     dbscan_n_clusters = n_clusters,
     dbscan_n_noise = as.integer(n_noise),
-    dbscan_largest = as.integer(largest)
+    dbscan_largest = as.integer(largest),
+    n_events = n,
+    n_dropped_coords = n_dropped
   )
 }
 

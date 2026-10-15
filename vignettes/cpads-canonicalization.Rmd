@@ -20,64 +20,85 @@ knitr::opts_chunk$set(
 # Overview
 
 The Canadian Postsecondary Education Alcohol and Drug Use Survey
-(CPADS) is one of the Statistics Canada PUMFs that MORIE supports
-out of the box. Variable names, value codes, and survey weights
-differ across cycles, so MORIE provides a *canonical* column
-contract and a `morie_canonicalize_cpads_data()` helper to harmonise
-cycles into a single analysis-ready tibble.
+(CPADS) is a Health Canada survey whose public-use microdata file
+(PUMF) is open data. rmorie provides a *canonical* column contract and
+`morie_canonicalize_cpads_data()`, which maps the raw PUMF columns to
+analysis-ready names.
+
+The examples use the synthetic CPADS frame that ships with rmorie: it
+has the PUMF's columns but random values, so the numbers below are not
+findings about students. The real PUMF loads the same way (see
+"Loading the real PUMF").
 
 # The CPADS column contract
 
-```{r contract, eval = FALSE}
+```{r contract}
 library(rmorie)
 contract <- morie_cpads_contract()
-str(contract, max.level = 2)
+contract$required_variables
+unlist(contract$raw_column_map)
 ```
 
-`morie_cpads_contract()` returns the canonical names, value-code maps,
-and survey-weight columns. Using the contract is opt-in --- the
-estimators in MORIE do not require it --- but it lets you write
-analysis code once and run it across cycles unchanged.
+`morie_cpads_contract()` returns the canonical variable names, the raw
+PUMF column each comes from, and notes on the source. Using the
+contract is opt-in: the estimators in rmorie do not require it.
 
-# Loading + canonicalising
+# Loading and canonicalising
 
-```{r load, eval = FALSE}
-raw_2122 <- morie_load_dataset("cpads-2122")
-df       <- morie_canonicalize_cpads_data(raw_2122)
+```{r load}
+raw <- morie_datasets_cpads(offline = TRUE)
+dim(raw)
+df <- morie_canonicalize_cpads_data(raw)
 
-# Validates that all canonical columns are present + correctly
-# typed. Returns silently if OK, or stops with a clear message
-# pointing at the offending column.
+# Returns the names of required canonical columns that are missing
+# (character(0) when all are present); with strict = TRUE, the
+# default, it stops instead.
 morie_validate_cpads_data(df)
 ```
 
-# A simple analysis with weights
+# Survey-weighted proportions
 
-```{r analysis, eval = FALSE}
-# CPADS ships PUMF weights in a column the contract surfaces.
-weighted_freq <- mean(df$heavy_drinking_30d * df$pumf_weight,
-                      na.rm = TRUE)
-weighted_freq
+The PUMF weight is mapped to the canonical column `weight`. A weighted
+proportion of heavy drinking in the past 30 days among respondents
+with a non-missing answer:
+
+```{r analysis}
+ok <- !is.na(df$heavy_drinking_30d)
+stats::weighted.mean(df$heavy_drinking_30d[ok], df$weight[ok])
+mean(df$heavy_drinking_30d[ok])          # unweighted, for comparison
 ```
 
-# Survey-weighted causal estimate
+# Propensity-score IPW workflow
 
-```{r causal, eval = FALSE}
-# Estimate ATE of (canonical-treatment) on
-# (canonical-outcome), passing CPADS PUMF weights:
-ate <- morie_estimate_ate(df,
-                    outcome    = "heavy_drinking_30d",
-                    treatment  = "treat_canonical",
-                    covariates = c("age", "sex", "region"),
-                    weights    = "pumf_weight")
-ate$estimate
+`morie_run_propensity_ipw_analysis()` estimates the effect of a binary
+treatment on a binary outcome (by default `cannabis_any_use` on
+`heavy_drinking_30d`) with a logistic propensity model and trimmed
+inverse-probability weights. It requires the `weight` column but does
+not apply the survey weights in the estimate:
+
+```{r causal}
+ipw <- morie_run_propensity_ipw_analysis(df)
+ipw$ipw_results
+ipw$diagnostics
 ```
+
+# Loading the real PUMF
+
+```{r real, eval = FALSE}
+raw_real <- morie_load_dataset("ocp21")
+df_real  <- morie_canonicalize_cpads_data(raw_real)
+dim(df_real)
+# 40931   403
+```
+
+This chunk is not run when the vignette is built, because the first
+call downloads the PUMF from open.canada.ca.
 
 # Where to go next
 
-- The `survey-weighted` vignette covers complex-sample sampling
-  (stratified, cluster, PPS), bootstrap CIs, and design effects.
-- The `causal-inference` vignette covers the full ATE / ATT / ATC /
-  AIPW / CATE / GATE estimator family.
-- For Statistics Canada citation requirements, see the README's
-  data-acknowledgment block.
+- The `survey-weighted` vignette covers stratified and cluster
+  sampling, design weights, design effects and bootstrap variance.
+- The `causal-inference` vignette covers the ATE / ATT / ATC / AIPW /
+  CATE / GATE estimators.
+- For Statistics Canada and Health Canada acknowledgment requirements,
+  see the `dataset-catalog` vignette.

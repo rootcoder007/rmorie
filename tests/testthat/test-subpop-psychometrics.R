@@ -44,7 +44,7 @@ test_that("ETS delta scale and classification are exact", {
   expect_equal(d$delta_mh, -2.35 * log(c(1, 1.35, 1.9, 0.5)))
   # OR 0.5 gives delta = -2.35*log(0.5) = 1.629, which is C, not B.
   expect_equal(d$magnitude, c("A", "A", "C", "C"))
-  expect_equal(d$favours, c("neither", "focal", "focal", "reference"))
+  expect_equal(d$favours, c("neither", "reference", "reference", "focal"))
   # Boundary: |delta| = 1 exactly is B, not A.
   or_b <- exp(-1 / 2.35)
   expect_equal(morie_dif_delta_mh(or_b)$magnitude, "B")

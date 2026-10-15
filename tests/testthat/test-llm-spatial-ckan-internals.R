@@ -181,10 +181,11 @@ test_that(".morie_ckan_call dispatches with mocked HTTP backend", {
 
 # ====================================================================== ipw.R
 
-test_that(".weighted_prop computes weighted proportion", {
-  expect_equal(rmorie:::.weighted_prop(c(1, 0, 1, 0), c(1, 1, 1, 1)),
-               0.5)
-  expect_equal(rmorie:::.weighted_prop(c(1, 0, 1, 0), c(3, 1, 1, 1)),
+test_that(".hajek_mean of a 0/1 outcome is the weighted proportion", {
+  # .weighted_prop was folded into .hajek_mean when the IPW analysis started applying the
+  # survey weights (review of the 1.4.3 vignettes, bug 12)
+  expect_equal(rmorie:::.hajek_mean(c(1, 0, 1, 0), c(1, 1, 1, 1))[["mean"]], 0.5)
+  expect_equal(rmorie:::.hajek_mean(c(1, 0, 1, 0), c(3, 1, 1, 1))[["mean"]],
                4 / 6, tolerance = 1e-10)
 })
 

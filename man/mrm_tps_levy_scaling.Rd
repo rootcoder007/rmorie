@@ -31,14 +31,18 @@ mrm_tps_levy_scaling(
 \item{x_min}{Hill-MLE cutoff (default = \code{min_step_km}).}
 }
 \value{
-A list with \code{n_events}, \code{n_steps_tail}, \code{min_step_km},
-\code{hill_alpha}.
+A list with \code{n_events} (events used), \code{n_dropped_coords}
+(events dropped for an unusable location), \code{n_steps_tail},
+\code{min_step_km}, \code{hill_alpha}.
 }
 \description{
 Treats consecutive events in chronological order as a single stream
 and computes the inter-event step length (km) via haversine on
 WGS84 latitude/longitude. Returns the Hill-MLE exponent restricted
 to steps above \code{min_step_km}.
+Events at the TPS unknown-location placeholder (0, 0), with missing
+coordinates, or outside the Toronto bounding box (latitude 43.55 to
+43.90, longitude -79.65 to -79.10) are dropped first.
 }
 \examples{
 if (FALSE) {

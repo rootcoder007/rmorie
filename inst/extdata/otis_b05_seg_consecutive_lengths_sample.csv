@@ -1,6 +1,23 @@
 EndFiscalYear,Consecutive_Duration,Number_SegregationPlacements
-2022,1 to 7 days,120
-2022,8 to 15 days,45
-2023,16 to 30 days,18
-2023,31 to 60 days,7
-2024,Over 60 days,3
+2022,1 day,120
+2022,2 days,60
+2022,3 days,50
+2022,4 days,40
+2022,5 days,10
+2022,6 to 10 days,15
+2022,11 to 15 days,5
+2022,16 to 20 days,2
+2022,21 to 25 days,1
+2022,26 to 30 days,1
+2022,Greater than 30 days,1
+2023,1 day,100
+2023,2 days,55
+2023,3 days,45
+2023,4 days,35
+2023,5 days,10
+2023,6 to 10 days,12
+2023,11 to 15 days,4
+2023,16 to 20 days,2
+2023,21 to 25 days,1
+2023,26 to 30 days,1
+2023,Greater than 30 days,3

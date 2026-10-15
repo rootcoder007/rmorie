@@ -19,10 +19,9 @@ knitr::opts_chunk$set(
 
 # Overview
 
-For aggregate contingency tables --- the kind that sit behind the
-MRM chi-square family --- MORIE exposes `morie_chi_square_test()`
-and the companion effect-size helpers (Cramer's V, omega-squared)
-as first-class functions.
+For aggregate contingency tables, rmorie exposes
+`morie_chi_square_test()` and the companion effect-size helpers
+(Cramer's V, omega-squared).
 
 # A 2x3 contingency table
 
@@ -34,13 +33,15 @@ tab <- matrix(c(20, 10, 30,
                               outcome = c("A", "B", "C")))
 
 result <- morie_chi_square_test(tab)
-result$statistic
+result$chi_sq
 result$p_value
 result$df
+result$cramers_v
 ```
 
-`morie_chi_square_test()` returns the Pearson $\chi^{2}$, the asymptotic
-p-value, and the degrees of freedom in a tidy list.
+`morie_chi_square_test()` returns a list with the Pearson $\chi^{2}$
+(`chi_sq`), the degrees of freedom, the asymptotic p-value, and
+Cramer's V. The values agree with `stats::chisq.test(tab)`.
 
 # Effect size: Cramer's V
 
@@ -70,22 +71,31 @@ fstat   <- fsum$`F value`[1]
 df_b    <- fsum$Df[1]
 df_w    <- fsum$Df[2]
 
+fstat
 morie_omega_squared(f_stat = fstat, df_between = df_b, df_within = df_w, n = n)
 ```
 
-# MRM chi-square family
+With this seed the F statistic is below 1, so omega-squared comes out
+slightly negative. The estimator allows that; read a negative value as
+an effect indistinguishable from zero.
 
-The MRM framework's chi-square family is a coordinated set of
-chi-square tests on the published Sprott / Doob / Iftene
-contingency tables (federal SIU operation, COVID-period operation,
-torture-classification rates, IEDM analyses). MORIE reproduces
-all five published statistics to within $0.01$ of the printed
-values; details are in the MRM paper
-(`citation("morie")`).
+# Published chi-square statistics (Sprott, Doob and Iftene)
+
+`morie_siu_verify_published_chi_squares()` recomputes five Pearson
+chi-square statistics from contingency tables transcribed from the
+2021 Sprott--Doob and Sprott--Doob--Iftene reports on federal
+Structured Intervention Units, and compares each with the published
+value:
+
+```{r published-chi}
+v <- morie_siu_verify_published_chi_squares()
+v$tables[[1]]$data
+```
 
 # Where to go next
 
 - The `effect-sizes` vignette covers Cohen's d, Cramer's V,
-  omega-squared, proportion-CI, and the E-value in one place.
-- The `mrm-otis-walkthrough` vignette shows the chi-square family
-  applied to OTIS provincial data.
+  omega-squared, proportion confidence intervals, and the E-value.
+- `mrm_otis_mortification_cooccurrence()` applies the chi-square test
+  and Cramer's V to pairs of OTIS alert flags; see the
+  `mrm-empirical-callables` vignette.

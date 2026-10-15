@@ -46,7 +46,10 @@ A data.frame with one row per cluster (expected count
 expectation), with
 columns \code{center_lat}, \code{center_lon}, \code{radius_km},
 \code{t_start}, \code{t_end}, \code{n_observed}, \code{n_expected},
-\code{relative_risk}, \code{log_lrt}, \code{p_value}.
+\code{relative_risk}, \code{log_lrt}, \code{p_value}. Events at
+the TPS unknown-location placeholder (0, 0) or outside the Toronto
+bounding box are dropped first; attribute \code{n_dropped_coords}
+holds how many.
 }
 \description{
 Run a 3-d (lat, lon, time) Kulldorff scan with MC inference

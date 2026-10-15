@@ -926,56 +926,43 @@ morie_otis_regC_demog_contingency <- function(df) {
 
 #' Poisson + Negative-Binomial IRR for volatility ~ alert complexity
 #'
-#' Builds the (id x fiscal year) cell with outcome
-#' \code{vm} (number of distinct regions visited) and treatment
-#' \code{T_high_ac} = 1 if the person-year alert-complexity \eqn{ac >=
-#' 2}, then fits Poisson and (optionally) negative-binomial GLMs
-#' adjusting for Year, Gender, and Age. The NB fit uses
-#' \pkg{MASS::glm.nb} when available; if not, only Poisson is
-#' reported.
+#' Builds the (id x fiscal year) cell frame with the shared Ruhela
+#' builder, \code{\link{morie_otis_make_pair_alert_to_volatility_ruhela}},
+#' so treatment and outcome are the canonical ones: treatment
+#' \code{T_high_ac} = 1 when the person-year's alert complexity
+#' \code{ac} (the number of distinct MentalHealth x SuicideRisk x
+#' SuicideWatch alert combinations across its rows, the no-alert
+#' combination included) is at least 2; outcome \code{Y_vm_count} = the
+#' number of region changes in the person-year (rows whose
+#' \code{Region_AtTimeOfPlacement} differs from
+#' \code{Region_MostRecentPlacement}, plus changes of
+#' \code{Region_AtTimeOfPlacement} from one row to the next). It then
+#' fits Poisson and negative-binomial GLMs of \code{Y_vm_count} on
+#' \code{T_high_ac} adjusting for Year, Gender, and Age, the NB fit
+#' through the native \code{\link{morie_glm_nb}}.
 #'
 #' No random effect / cluster-robust SE -- for paper-grade inference,
 #' use the dedicated OTIS DML pipeline.
 #'
-#' @param df b01 data.frame.
+#' @param df b01 (or a01) data.frame.
 #' @return \code{morie_otis_result}.
 #' @examples
-#' b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
-#' res <- morie_otis_irr_glmm_vm(b02)
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- morie_otis_irr_glmm_vm(b01)
 #' res$title
 #' @export
 morie_otis_irr_glmm_vm <- function(df) {
-  needed <- c("UniqueIndividual_ID", "EndFiscalYear",
-              "Region_AtTimeOfPlacement", "MentalHealth_Alert",
-              "SuicideRisk_Alert", "SuicideWatch_Alert",
-              "Gender", "Age_Category")
-  if (!all(needed %in% names(df))) {
+  pair <- tryCatch(morie_otis_make_pair_alert_to_volatility_ruhela(df),
+                   error = function(e) e)
+  if (inherits(pair, "error")) {
     return(.churn_result(title = "IRR Poisson/NB GLM (vm)",
-                          warnings = "b01 missing required cols"))
+                          warnings = paste("b01:", conditionMessage(pair))))
   }
-  base <- df[stats::complete.cases(df[, needed, drop = FALSE]), needed,
-              drop = FALSE]
-  a_mh <- .churn_yn(base$MentalHealth_Alert)
-  a_sr <- .churn_yn(base$SuicideRisk_Alert)
-  a_sw <- .churn_yn(base$SuicideWatch_Alert)
-  base$combo <- a_mh * 4L + a_sr * 2L + a_sw
-  key <- paste(base$UniqueIndividual_ID, base$EndFiscalYear,
-                sep = "\u001f")
-  py <- do.call(rbind, lapply(split(base, key), function(g) {
-    ac <- length(unique(g$combo[g$combo > 0]))
-    vm <- length(unique(g$Region_AtTimeOfPlacement))
-    data.frame(
-      vm = vm,
-      T_high_ac = as.integer(ac >= 2L),
-      yr = as.character(g$EndFiscalYear[1]),
-      sg = as.character(g$Gender[1]),
-      ag = as.character(g$Age_Category[1]),
-      stringsAsFactors = FALSE
-    )
-  }))
-  py$yr <- factor(py$yr)
-  py$sg <- factor(py$sg)
-  py$ag <- factor(py$ag)
+  py <- pair$data
+  py$vm <- py[[pair$Y]]
+  py$yr <- factor(as.character(py$EndFiscalYear))
+  py$sg <- factor(as.character(py$Gender))
+  py$ag <- factor(as.character(py$Age_Category))
   if (nrow(py) == 0L || sum(py$vm) == 0L) {
     return(.churn_result(title = "IRR Poisson/NB GLM (vm)",
                           warnings = "empty cell-table or zero outcome"))
@@ -1034,7 +1021,12 @@ morie_otis_irr_glmm_vm <- function(df) {
       `Cells (id x year)` = nrow(py),
       `Mean vm / cell` = round(mean(py$vm), 3),
       `T_high_ac prevalence` = sprintf("%.1f%%",
-                                         100 * mean(py$T_high_ac))
+                                         100 * mean(py$T_high_ac)),
+      `Treatment T` = paste("T_high_ac = 1 if ac >= 2, ac = distinct",
+                            "alert combinations in the person-year",
+                            "(no-alert included)"),
+      `Outcome Y` = paste("vm = Y_vm_count, region changes in the",
+                          "person-year (within-row + row-to-row)")
     ),
     tables = list(list(
       title = "IRR for T_high_ac on vm (covariate-adjusted):",

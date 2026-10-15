@@ -10,7 +10,7 @@ test_that("mrm_tps_levy_scaling handles short / empty input", {
   )
   r0 <- mrm_tps_levy_scaling(empty)
   expect_type(r0, "list")
-  expect_named(r0, c("n_events", "n_steps_tail", "min_step_km", "hill_alpha"))
+  expect_named(r0, c("n_events", "n_dropped_coords", "n_steps_tail", "min_step_km", "hill_alpha"))
   expect_equal(r0$n_events, 0L)
   expect_equal(r0$n_steps_tail, 0L)
   expect_true(is.na(r0$hill_alpha))
@@ -53,7 +53,7 @@ test_that("mrm_tps_moran_clustering returns NA structure for tiny input", {
   expect_type(r, "list")
   expect_named(r, c(
     "morans_I", "morans_z", "dbscan_n_clusters",
-    "dbscan_n_noise", "dbscan_largest"
+    "dbscan_n_noise", "dbscan_largest", "n_events", "n_dropped_coords"
   ))
   expect_true(is.na(r$morans_I))
   expect_equal(r$dbscan_n_clusters, 0L)

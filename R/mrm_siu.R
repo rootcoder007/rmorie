@@ -235,10 +235,17 @@ mrm_siu_per_service_rate <- function(
 #' Tabulate SIU Director's-decision outcomes
 #'
 #' Cross-tabulates a categorical outcome column (default
-#' `director_decision_category`) by service and year, reporting both
-#' raw counts and within-service shares. If the supplied
-#' `outcome_col` is not present, looks for a few common alternatives
-#' (`director_decision`, `outcome`).
+#' `director_decision_category`) by service, reporting both raw
+#' counts and within-service shares. If the supplied `outcome_col`
+#' is not present, looks for a few common alternatives
+#' (`director_decision`, `outcome`, `decision`,
+#' `director_decision_outcome`, `director_decision_text`). The SIU
+#' corpus that rmorie ships (`morie_fetch_siu()`) carries the
+#' Director's decision in `charges_recommended`; when none of the
+#' category columns exists, the outcome is derived from it as
+#' `"charges"` / `"no charges"` (booleans and the Director's own
+#' wording, e.g. "No Charges to Issue", both count; unreadable
+#' values are dropped).
 #'
 #' @param data A data.frame in the SIU case schema.
 #' @param outcome_col Outcome category column
@@ -249,29 +256,38 @@ mrm_siu_per_service_rate <- function(
 #'   `share_within_service`.
 #' @export
 #' @examples
-#' if (FALSE) {
-#'   siu <- read.csv("SIU.csv")
-#'   mrm_siu_outcome_classifier(siu)
-#' }
+#' siu <- data.frame(
+#'   police_service = c("Toronto Police Service", "Toronto Police Service",
+#'                      "Ontario Provincial Police"),
+#'   charges_recommended = c(TRUE, FALSE, FALSE))
+#' mrm_siu_outcome_classifier(siu)
 mrm_siu_outcome_classifier <- function(
   data,
   outcome_col = "director_decision_category",
   service_col = "police_service"
 ) {
   stopifnot(is.data.frame(data))
+  alts <- c(
+    "director_decision", "outcome", "decision",
+    "director_decision_outcome", "director_decision_text"
+  )
+  if (!service_col %in% names(data)) {
+    stop("service column '", service_col, "' is not in `data`", call. = FALSE)
+  }
   if (!outcome_col %in% names(data)) {
-    for (alt in c(
-      "director_decision", "outcome", "decision",
-      "director_decision_outcome", "director_decision_text"
-    )) {
-      if (alt %in% names(data)) {
-        outcome_col <- alt
-        break
-      }
+    hit <- intersect(alts, names(data))
+    if (length(hit)) {
+      outcome_col <- hit[[1L]]
+    } else if ("charges_recommended" %in% names(data)) {
+      flag <- .siu_an_charge_flag(data[["charges_recommended"]])
+      data[[".outcome"]] <- ifelse(flag, "charges", "no charges")
+      outcome_col <- ".outcome"
+    } else {
+      stop("no outcome column: none of '", outcome_col, "', ",
+           paste0("'", c(alts, "charges_recommended"), "'", collapse = ", "),
+           " is in `data`", call. = FALSE)
     }
   }
-  stopifnot(outcome_col %in% names(data))
-  stopifnot(service_col %in% names(data))
   out <- as.character(data[[outcome_col]])
   svc <- as.character(data[[service_col]])
   ok <- !is.na(out) & nchar(out) > 0 & !is.na(svc) & nchar(svc) > 0

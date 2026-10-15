@@ -200,14 +200,9 @@ test_that("morie_run_propensity_ipw_analysis runs", {
 })
 
 test_that("ipw micro-helpers run", {
-  wp <- tryCatch(
-    suppressWarnings(rmorie:::.weighted_prop(
-      c(1, 0, 1),
-      c(1, 1, 2)
-    )),
-    error = function(e) NA
-  )
-  expect_true(is.na(wp) || is.finite(wp))
+  # .weighted_prop was folded into .hajek_mean (bug 12 of the 1.4.3 vignette review)
+  wp <- rmorie:::.hajek_mean(c(1, 0, 1), c(1, 1, 2))[["mean"]]
+  expect_equal(wp, 3 / 4)
   es <- tryCatch(suppressWarnings(rmorie:::.ess(c(1, 2, 3, 4))),
     error = function(e) NA
   )

@@ -1,6 +1,6 @@
-#' Magnitude-squared morie_coherence -- Rangayyan Ch 4
+#' Magnitude-squared coherence -- Rangayyan Ch 4
 #'
-#' Welch-averaged magnitude-squared morie_coherence::
+#' Welch-averaged magnitude-squared coherence:
 #'
 #' \deqn{C_{xy}(f) = |S_{xy}(f)|^2 / (S_{xx}(f) S_{yy}(f))}
 #'
@@ -9,7 +9,7 @@
 #' @param x,y Numeric vectors of equal length.
 #' @param fs Sampling rate (Hz).
 #' @param nperseg Welch segment length (default `min(N, 256)`).
-#' @return Named list `freqs`, `morie_coherence`, `mean_coherence`,
+#' @return Named list `freqs`, `coherence`, `mean_coherence`,
 #'   `peak_freq`, `peak_coherence`.
 #' @references Rangayyan Ch 4.
 #' @export
@@ -48,7 +48,7 @@ rgcoh <- function(x, y, fs = 1.0, nperseg = NULL) {
   Cxy <- Mod(Sxy)^2 / (Sxx * Syy)
   peak <- which.max(Cxy)
   list(
-    freqs = freqs, morie_coherence = Cxy,
+    freqs = freqs, coherence = Cxy,
     mean_coherence = mean(Cxy),
     peak_freq = freqs[peak],
     peak_coherence = Cxy[peak]

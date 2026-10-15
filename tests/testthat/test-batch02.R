@@ -505,16 +505,16 @@ test_that("morie_estimate_late with covariates runs (ivreg or fallback)", {
 test_that("morie_e_value computes E-value and CI bound", {
   skip_heavy()
   res <- morie_e_value(rr = 3.9, rr_lower = 2.4)
-  expect_named(res, c("morie_e_value", "e_value_ci"))
-  expect_true(res$morie_e_value > 1)
+  expect_named(res, c("e_value", "e_value_ci"))
+  expect_true(res$e_value > 1)
   expect_true(res$e_value_ci > 1)
-  expect_true(is.finite(res$morie_e_value))
+  expect_true(is.finite(res$e_value))
 })
 
 test_that("morie_e_value without CI bound returns NA for e_value_ci", {
   skip_heavy()
   res <- morie_e_value(rr = 2.0)
-  expect_true(res$morie_e_value > 1)
+  expect_true(res$e_value > 1)
   expect_true(is.na(res$e_value_ci))
 })
 

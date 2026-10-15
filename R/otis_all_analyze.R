@@ -961,11 +961,35 @@ print.morie_otis_analysis_result <- function(x, ...) {
     cat("\
 ")
   }
-  for (w in x$warnings) cat("Warning:", w, "\
-")
-  if (nzchar(x$interpretation)) cat(x$interpretation, "\
-")
+  # the estimates live in the tables: without them the printout (and the .txt that
+  # .otis_emit() writes from it) showed the header and the interpretation only
+  for (tab in x$tables) cat(.otis_format_table(tab), sep = "\n")
+  for (w in x$warnings) cat("Warning:", w, "\n")
+  if (nzchar(x$interpretation)) cat(x$interpretation, "\n")
   invisible(x)
+}
+
+#' Internal helper: one result table (title, headers, rows) as aligned text lines
+#' @noRd
+.otis_format_table <- function(tab) {
+  rows <- lapply(tab$rows, function(r) {
+    v <- vapply(r, function(e) if (length(e) == 0L) "" else paste(format(e), collapse = " "), "")
+    length(v) <- max(length(v), length(tab$headers))
+    v[is.na(v)] <- ""
+    v
+  })
+  cells <- c(list(as.character(tab$headers)), rows)
+  k <- max(lengths(cells))
+  cells <- lapply(cells, function(r) {
+    length(r) <- k
+    r[is.na(r)] <- ""
+    r
+  })
+  width <- vapply(seq_len(k), function(j) max(nchar(vapply(cells, `[`, "", j))), 0L)
+  line <- function(r) sub(" +$", "", paste0("  ", paste(sprintf("%-*s", width, r), collapse = "  ")))
+  c(if (length(tab$title) && nzchar(tab$title)) tab$title,
+    line(cells[[1L]]), paste0("  ", strrep("-", sum(width) + 2L * (k - 1L))),
+    vapply(cells[-1L], line, ""), "")
 }
 
 
@@ -1043,9 +1067,8 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
                       "-> regional volatility (vm count)"),
       summary_lines = summary,
       interpretation = paste(
-        "MatchIt-then-IRM-DML reproduction of the published",
-        "res_pool finding on the canonical Restrictive",
-        "Confinement Detailed Dataset."
+        "MatchIt-then-IRM-DML on the canonical Restrictive",
+        "Confinement Detailed Dataset (a01)."
       ),
       payload = fit
     ),
@@ -1069,11 +1092,27 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
 #' @noRd
 .otis_ruhela_input <- function(data, id) {
   if (!is.null(data)) return(data)
-  tryCatch(
+  df <- tryCatch(
     if (id == "a01") morie_otis_load() else morie_load_dataset(paste0("otis", id)),
     error = function(e) stop(sprintf(
       "pass data = the OTIS %s table; it could not be loaded here (%s)",
       id, conditionMessage(e)), call. = FALSE))
+  # with no cached download, morie_otis_load() hands back the included 5-row synthetic sample
+  if (.otis_is_synthetic(df)) {
+    warning(sprintf(paste(
+      "no OTIS %s table is cached, so this runs on the included 5-row synthetic sample:",
+      "its numbers are not findings. Download the real table with",
+      "morie_datasets_otis_a01(offline = FALSE)"), id), call. = FALSE)
+  }
+  df
+}
+
+#' Internal helper: TRUE for synthetic OTIS rows -- the included sample's IDs carry
+#' "-SYNTH-" and morie_synth_otis() writes "syn-" IDs
+#' @noRd
+.otis_is_synthetic <- function(df) {
+  ids <- df[["UniqueIndividual_ID"]]
+  !is.null(ids) && any(grepl("SYNTH|^syn-", as.character(ids)))
 }
 
 #' Internal helper: stop naming the columns a table lacks
@@ -1219,8 +1258,24 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
                       error = function(e) e)
   balance_summary <- if (inherits(balance, "error")) {
     paste("err:", conditionMessage(balance))
+  } else if (!any(is.finite(balance$smd_raw))) {
+    "n/a (an SMD needs treated and control units)"
   } else {
     sprintf("max |SMD| = %.3f", max(abs(balance$smd_raw), na.rm = TRUE))
+  }
+
+  # a synthetic table or an empty treatment arm yields numbers that are not findings:
+  # the result says why and withholds the interpretation
+  arms <- table(factor(.otis_binarise(data[[treatment]]), levels = c(0, 1)))
+  warns <- c(
+    if (.otis_is_synthetic(df)) paste(
+      "synthetic input: these rows are not OTIS records and the estimates are not findings;",
+      "download the real table with morie_datasets_otis_a01(offline = FALSE) and pass it as data"),
+    if (any(arms == 0L)) sprintf(
+      "the treatment has %d treated and %d control rows: every estimator needs both arms",
+      arms[["1"]], arms[["0"]]))
+  if (length(warns)) {
+    interpretation <- paste("No interpretation:", paste(warns, collapse = "; "))
   }
 
   tables <- list(list(
@@ -1236,8 +1291,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
   }
   if (length(naive_rows)) {
     tables[[length(tables) + 1L]] <- list(
-      title = paste("Naive-arm sensitivity (any-flag, vm-binary): concordance",
-                    "with Ruhela in sign, smaller magnitude"),
+      title = "Naive-arm sensitivity (any-flag treatment, binary vm outcome):",
       headers = c("Estimator", "ATE", "SE", "95% CI", "p-value"),
       rows = naive_rows)
   }
@@ -1254,6 +1308,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
       "Propensity calibration" = "none"),
     tables = tables,
     interpretation = interpretation,
+    warnings = warns,
     payload = list(
       ensemble = ensemble,
       match_first = mf,
@@ -1274,7 +1329,9 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
 #' error comparison (pooled, by year, by person, two-way) and the Naive-arm
 #' sensitivity (any-flag treatment, binary outcome).
 #'
-#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param data The OTIS a01 table. \code{NULL} uses \code{morie_otis_load()}: the table
+#'   cached by \code{morie_datasets_otis_a01(offline = FALSE)}, or else the included 5-row
+#'   synthetic sample, with a warning that its numbers are not findings.
 #' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
@@ -1294,17 +1351,14 @@ morie_otis_analyze_a01_ruhela_formulations <- function(data = NULL, out_dir = NU
       "OTIS a01 -- Ruhela formulations (full DLRM) on the canonical ",
       "formulation (T = ac >= 2 -> Y = vm count)"),
     interpretation = paste0(
-      "Ruhela formulations on the canonical OTIS-RC dataset (a01). ",
-      "The Ruhela formulation (T = ac >= 2 alert-state complexity, ",
-      "Y = vm regional-volatility count) is the published ",
-      "Goffmanian contrast in notez1a.qmd section res_pool. ",
-      "Concordance across IPW (single-robust on propensity), ",
-      "g-computation (single-robust on outcome), AIPW ",
-      "(doubly-robust), PSM-NN (ATT, nonparametric), PSM-subclass ",
-      "(ATE, nonparametric), IRM-DML and the MatchIt-then-DoubleML ",
-      "pipeline is the strongest practical signal of ",
-      "identification. Naive-arm sensitivity (any-flag, vm-binary) ",
-      "shows the same Goffmanian sign at smaller magnitude."))
+      "Ruhela formulation on the canonical OTIS-RC dataset (a01): ",
+      "T = alert-state complexity ac >= 2, Y = regional-volatility count vm. ",
+      "Read the estimators together: IPW (single-robust on the propensity), ",
+      "g-computation (single-robust on the outcome), AIPW (doubly robust), ",
+      "PSM-NN (ATT) and PSM-subclass (ATE), IRM-DML and MatchIt-then-IRM-DML. ",
+      "Agreement across them supports identification; disagreement points to ",
+      "model dependence. The naive arm (any-flag treatment, binary outcome) is a ",
+      "sensitivity check: compare its sign with the main table."))
   .otis_emit(res, out_dir, "a01")
 }
 
@@ -1334,11 +1388,9 @@ morie_otis_analyze_b01_ruhela_formulations <- function(data = NULL, out_dir = NU
       "(segregation-detailed complement)"),
     interpretation = paste0(
       "Ruhela formulations on b01 segregation-placement records, ",
-      "complementing the a01 RC analysis. Same Ruhela formulation ",
-      "and DLRM ensemble; the larger ATE magnitude (~3x a01) ",
-      "reflects segregation being a stronger institutional contrast ",
-      "than restrictive confinement, and per-placement rather than ",
-      "per-day units of analysis."))
+      "complementing the a01 analysis: the same formulation and estimators, ",
+      "on per-placement rather than per-person-year units, so magnitudes are ",
+      "not directly comparable with a01."))
   .otis_emit(res, out_dir, "b01")
 }
 
@@ -1513,7 +1565,9 @@ morie_otis_analyze_ruhela_per_year <- function(data, ds_id,
 #' cell frame (T = alert complexity >= 2, Y = regional-volatility count),
 #' clustered on fiscal year.
 #'
-#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param data The OTIS a01 table. \code{NULL} uses \code{morie_otis_load()}: the table
+#'   cached by \code{morie_datasets_otis_a01(offline = FALSE)}, or else the included 5-row
+#'   synthetic sample, with a warning that its numbers are not findings.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
@@ -2644,7 +2698,9 @@ morie_otis_analyze_d05_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' The a01 person-year cell frame with T = Female and Y = regional-volatility
 #' count, adjusting for age band and fiscal year; full DLRM ensemble.
 #'
-#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param data The OTIS a01 table. \code{NULL} uses \code{morie_otis_load()}: the table
+#'   cached by \code{morie_datasets_otis_a01(offline = FALSE)}, or else the included 5-row
+#'   synthetic sample, with a warning that its numbers are not findings.
 #' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
@@ -2682,7 +2738,9 @@ morie_otis_analyze_a01_ruhela_alt_gender <- function(data = NULL, out_dir = NULL
 #' T = age band containing 50, Y = regional-volatility count, adjusting for
 #' gender and fiscal year; full DLRM ensemble.
 #'
-#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param data The OTIS a01 table. \code{NULL} uses \code{morie_otis_load()}: the table
+#'   cached by \code{morie_datasets_otis_a01(offline = FALSE)}, or else the included 5-row
+#'   synthetic sample, with a warning that its numbers are not findings.
 #' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
@@ -2719,7 +2777,9 @@ morie_otis_analyze_a01_ruhela_alt_age <- function(data = NULL, out_dir = NULL) {
 #' T = placement region Toronto, Y = regional-volatility count, adjusting for
 #' gender, age band and fiscal year; full DLRM ensemble.
 #'
-#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param data The OTIS a01 table. \code{NULL} uses \code{morie_otis_load()}: the table
+#'   cached by \code{morie_datasets_otis_a01(offline = FALSE)}, or else the included 5-row
+#'   synthetic sample, with a warning that its numbers are not findings.
 #' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
@@ -2948,7 +3008,9 @@ morie_otis_analyze_b02_ruhela_alt_age <- function(data = NULL, out_dir = NULL) {
 #' female person-years only, without the gender covariate. Fewer than 100
 #' female person-years returns a result carrying that warning instead.
 #'
-#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param data The OTIS a01 table. \code{NULL} uses \code{morie_otis_load()}: the table
+#'   cached by \code{morie_datasets_otis_a01(offline = FALSE)}, or else the included 5-row
+#'   synthetic sample, with a warning that its numbers are not findings.
 #' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
@@ -2992,7 +3054,9 @@ morie_otis_analyze_a01_ruhela_subgroup_female <- function(data = NULL, out_dir =
 #' The canonical formulation on male (non-female) person-years only, without
 #' the gender covariate.
 #'
-#' @param data The OTIS a01 table; \code{NULL} loads it.
+#' @param data The OTIS a01 table. \code{NULL} uses \code{morie_otis_load()}: the table
+#'   cached by \code{morie_datasets_otis_a01(offline = FALSE)}, or else the included 5-row
+#'   synthetic sample, with a warning that its numbers are not findings.
 #' @param out_dir Optional directory for the text and JSON rendering.
 #' @return \code{morie_otis_analysis_result}.
 #' @export
@@ -3133,6 +3197,21 @@ morie_otis_analyze_b01_ruhela_subgroup_male <- function(data = NULL, out_dir = N
   out
 }
 
+#' Internal helper: name the duration labels no Mandela bin covers. A table whose
+#' labels are all unknown (another release's binning) gave 0 rows and "n/a" silently.
+#' @noRd
+.otis_bin_warnings <- function(x, class, col) {
+  bad <- sort(unique(as.character(x)[class == "Unknown" & !is.na(x)]))
+  if (!length(bad)) return(character(0))
+  lab <- paste(utils::head(bad, 6L), collapse = ", ")
+  if (length(bad) > 6L) lab <- paste0(lab, ", ...")
+  if (all(class == "Unknown")) {
+    sprintf("no %s value matches a known OTIS duration bin (%s): nothing could be classified", col, lab)
+  } else {
+    sprintf("%s values outside the known OTIS duration bins were left out: %s", col, lab)
+  }
+}
+
 #' Mandela-RF on b05 -- per-placement Mandela classification by year
 #'
 #' Applies the Sprott-Doob 15-day Mandela threshold to OTIS b05
@@ -3160,6 +3239,7 @@ morie_otis_analyze_b05_mandela_classification <- function(data,
   }
   d <- data
   d$mandela_class <- .otis_classify_bin(d$Consecutive_Duration)
+  warns <- .otis_bin_warnings(d$Consecutive_Duration, d$mandela_class, "Consecutive_Duration")
   d[["Number_SegregationPlacements"]] <- suppressWarnings(
     as.numeric(d[["Number_SegregationPlacements"]]))
 
@@ -3218,6 +3298,7 @@ morie_otis_analyze_b05_mandela_classification <- function(data,
                       "Torture N", "Torture %", "Total"),
         rows = rows
       )),
+      warnings = warns,
       interpretation = paste(
         "Applies the Sprott-Doob Mandela-Rules duration threshold",
         "(15 days, Rule 43) to OTIS provincial segregation placements.",
@@ -3262,6 +3343,7 @@ morie_otis_analyze_c11_mandela_classification <- function(data,
   }
   d <- data
   d$mandela_class <- .otis_classify_bin(d$Aggregate_Duration)
+  warns <- .otis_bin_warnings(d$Aggregate_Duration, d$mandela_class, "Aggregate_Duration")
   d[["NumberIndividuals_Segregation"]] <- suppressWarnings(
     as.numeric(d[["NumberIndividuals_Segregation"]]))
   d[["NumberIndividuals_RestrictiveConfinement"]] <- suppressWarnings(
@@ -3317,6 +3399,7 @@ morie_otis_analyze_c11_mandela_classification <- function(data,
                       "Torture N", "Torture %", "Total"),
         rows = rows
       )),
+      warnings = warns,
       interpretation = paste(
         "Per-individual Mandela classification on OTIS c11. The",
         "'Segregation' view is most directly comparable to the",

@@ -119,11 +119,10 @@ person-year regional-transition count)
 }
 }
 
-\section{Companion papers}{
+\section{Citation}{
 
-If you use rmorie in your work, please cite the relevant companion
-papers (see \code{citation("rmorie")} for the current list). DOIs
-are pending re-deposit.
+If you use rmorie in your work, please cite the software; see
+\code{citation("rmorie")}.
 }
 
 \section{Key external citations used by MRM modules}{

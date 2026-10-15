@@ -207,8 +207,10 @@ morie_dag_identify <- function(dag) {
 #' @param data Data frame containing the observed nodes.
 #' @param method `"backdoor.aipw"` (default), `"backdoor.linear"`, or
 #'   `"backdoor.dml"` -- all native estimators.
-#' @return The chosen estimator's result list, plus `adjustment_set`
-#'   and `estimand`.
+#' @return The chosen estimator's result list, plus `estimand`
+#'   (`"backdoor"`), `adjustment_set` and `method`. When the estimator
+#'   reports its own `estimand` or `method`, those are kept as
+#'   `estimator_estimand` / `estimator_method`, so every name is unique.
 #' @examples
 #' set.seed(1)
 #' z <- rnorm(400)
@@ -259,6 +261,11 @@ morie_dag_estimate <- function(dag, data,
       outcome = y, treatment = x,
       covariates = zs
     )
+  }
+  # the estimator's own estimand / method move aside: names stay unique
+  for (k in intersect(c("estimand", "method"), names(res))) {
+    res[[paste0("estimator_", k)]] <- res[[k]]
+    res[[k]] <- NULL
   }
   c(res, list(
     estimand = "backdoor", adjustment_set = zs,

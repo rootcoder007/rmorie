@@ -12,7 +12,7 @@ morie_prediction_accuracy(y_true, y_pred)
 \item{y_pred}{Numeric predicted.}
 }
 \value{
-list(estimate (Pearson r), pearson_r, morie_spearman_rho, mse, mspe,
+list(estimate (Pearson r), pearson_r, spearman_rho, mse, mspe,
 rmse, r2, slope, intercept, n, method).
 }
 \description{

@@ -77,7 +77,10 @@ NULL
 #'   expectation), with
 #'   columns \code{center_lat}, \code{center_lon}, \code{radius_km},
 #'   \code{t_start}, \code{t_end}, \code{n_observed}, \code{n_expected},
-#'   \code{relative_risk}, \code{log_lrt}, \code{p_value}.
+#'   \code{relative_risk}, \code{log_lrt}, \code{p_value}. Events at
+#'   the TPS unknown-location placeholder (0, 0) or outside the Toronto
+#'   bounding box are dropped first; attribute \code{n_dropped_coords}
+#'   holds how many.
 #' @export
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' if (FALSE) {
@@ -110,7 +113,12 @@ mrm_tps_kulldorff_scan <- function(
   ))
   if (all(is.na(d))) d <- suppressWarnings(as.POSIXct(df[[date_col]], tz = "UTC"))
   df[[date_col]] <- as.Date(d)
-  df <- df[stats::complete.cases(df), ]
+  df <- df[!is.na(df[[date_col]]), ]
+  coord_ok <- .tps_coord_ok(df[[lat_col]], df[[lon_col]])
+  n_dropped <- sum(!coord_ok)
+  df <- df[coord_ok, ]
+  df[[lat_col]] <- as.numeric(df[[lat_col]])
+  df[[lon_col]] <- as.numeric(df[[lon_col]])
   df <- df[order(df[[date_col]]), ]
   n <- nrow(df)
   if (n < 100L) {
@@ -175,7 +183,7 @@ mrm_tps_kulldorff_scan <- function(
     }, logical(1)))
     if (ok) chosen[[length(chosen) + 1L]] <- cd
   }
-  do.call(rbind, lapply(chosen, function(cl) {
+  res <- do.call(rbind, lapply(chosen, function(cl) {
     # space-time permutation expectation (Kulldorff et al. 2005), the
     # same mu the scan maximised: n_space * n_time / n
     n_exp <- cl$n_space * cl$n_time / n
@@ -193,4 +201,6 @@ mrm_tps_kulldorff_scan <- function(
       p_value = round((sum(null >= cl$lrt) + 1) / (n_permutations + 1), 4)
     )
   }))
+  attr(res, "n_dropped_coords") <- n_dropped
+  res
 }

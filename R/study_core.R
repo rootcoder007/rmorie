@@ -733,17 +733,9 @@
 #' Internal helper: Run Propensity Scores Module Internal
 #' @noRd
 .run_propensity_scores_module_internal <- function(data) {
+  # the survey-weighted Hajek estimate and its linearised SE come from
+  # morie_run_propensity_ipw_analysis() itself
   out <- morie_run_propensity_ipw_analysis(data)
-  frame <- out$analysis_frame
-  treated <- frame[frame$cannabis_any_use == 1, , drop = FALSE]
-  control <- frame[frame$cannabis_any_use == 0, , drop = FALSE]
-  var_est <- stats::var(treated$heavy_drinking_30d * treated$ipw_trimmed, na.rm = TRUE) / nrow(treated) +
-    stats::var(control$heavy_drinking_30d * control$ipw_trimmed, na.rm = TRUE) / nrow(control)
-  se <- sqrt(var_est)
-  ci <- .wald_ci(out$ipw_results$estimate[1], se)
-  out$ipw_results$se <- se
-  out$ipw_results$ci_lower <- ci[1]
-  out$ipw_results$ci_upper <- ci[2]
   out$ipw_results <- out$ipw_results[, c("estimand", "method", "estimate", "se", "ci_lower", "ci_upper", "n")]
   out$ipw_diagnostics <- out$diagnostics
   out$diagnostics <- NULL
@@ -791,11 +783,14 @@
   y <- y[ok]
   a <- a[ok]
   ps <- ps[ok]
+  sw <- af$weight[ok]
   mu1a <- unname(mu1[at[ok]])
   mu0a <- unname(mu0[at[ok]])
   infl <- mu1a - mu0a + a * (y - mu1a) / ps - (1 - a) * (y - mu0a) / (1 - ps)
-  aipw <- mean(infl)
-  se_aipw <- stats::sd(infl) / sqrt(length(infl))  # influence-function standard error
+  # survey-weighted mean of the influence values and its linearised SE
+  h_aipw <- .hajek_mean(infl, sw)
+  aipw <- unname(h_aipw[["mean"]])
+  se_aipw <- sqrt(h_aipw[["var"]])
   # outcome regression: the uncertainty is in the fitted model, not in the spread of mu1 - mu0;
   # a weighted bootstrap of the fit gives it (60 refits)
   set.seed(20261001L)
@@ -835,25 +830,27 @@
     family = stats::binomial()
   )
   frame$ps <- pmin(pmax(stats::predict(ps_model, type = "response"), 0.01), 0.99)
-  frame$w_ate <- ifelse(frame$cannabis_any_use == 1, 1 / frame$ps, 1 / (1 - frame$ps))
-  frame$w_att <- ifelse(frame$cannabis_any_use == 1, 1, frame$ps / (1 - frame$ps))
-  frame$w_atc <- ifelse(frame$cannabis_any_use == 1, (1 - frame$ps) / frame$ps, 1)
+  # every weight is the survey design weight times the estimand's IPW weight
+  frame$w_ate <- frame$weight * ifelse(frame$cannabis_any_use == 1, 1 / frame$ps, 1 / (1 - frame$ps))
+  frame$w_att <- frame$weight * ifelse(frame$cannabis_any_use == 1, 1, frame$ps / (1 - frame$ps))
+  frame$w_atc <- frame$weight * ifelse(frame$cannabis_any_use == 1, (1 - frame$ps) / frame$ps, 1)
   treated <- frame[frame$cannabis_any_use == 1, ]
   control <- frame[frame$cannabis_any_use == 0, ]
-  ate <- stats::weighted.mean(treated$heavy_drinking_30d, treated$w_ate) - stats::weighted.mean(control$heavy_drinking_30d, control$w_ate)
-  att <- mean(treated$heavy_drinking_30d) - stats::weighted.mean(control$heavy_drinking_30d, control$w_att)
-  atc <- stats::weighted.mean(treated$heavy_drinking_30d, treated$w_atc) - mean(control$heavy_drinking_30d)
+  contrast <- function(wcol) {
+    h1 <- .hajek_mean(treated$heavy_drinking_30d, treated[[wcol]])
+    h0 <- .hajek_mean(control$heavy_drinking_30d, control[[wcol]])
+    c(est = h1[["mean"]] - h0[["mean"]], se = sqrt(h1[["var"]] + h0[["var"]]))
+  }
+  ct <- rbind(contrast("w_ate"), contrast("w_att"), contrast("w_atc"))
   summary_tbl <- data.frame(
     estimand = c("ATE", "ATT", "ATC"),
     method = c("IPW", "IPW", "IPW"),
-    estimate = c(ate, att, atc),
-    se = c(stats::sd(treated$heavy_drinking_30d - mean(control$heavy_drinking_30d)) / sqrt(nrow(frame)), NA_real_, NA_real_),
-    ci_lower = c(NA_real_, NA_real_, NA_real_),
-    ci_upper = c(NA_real_, NA_real_, NA_real_),
+    estimate = ct[, "est"],
+    se = ct[, "se"],
+    ci_lower = ct[, "est"] - 1.96 * ct[, "se"],
+    ci_upper = ct[, "est"] + 1.96 * ct[, "se"],
     stringsAsFactors = FALSE
   )
-  summary_tbl$ci_lower[1] <- ate - 1.96 * summary_tbl$se[1]
-  summary_tbl$ci_upper[1] <- ate + 1.96 * summary_tbl$se[1]
   cate_rows <- list()
   for (var in c("gender_label", "age_group_label", "province_region_label", "mental_health_label")) {
     levs <- unique(frame[[var]])
@@ -863,8 +860,10 @@
       tsub <- sub[sub$cannabis_any_use == 1, ]
       csub <- sub[sub$cannabis_any_use == 0, ]
       if (nrow(tsub) < 2L || nrow(csub) < 2L) next
-      cate <- mean(tsub$heavy_drinking_30d) - mean(csub$heavy_drinking_30d)
-      se <- sqrt(stats::var(tsub$heavy_drinking_30d) / nrow(tsub) + stats::var(csub$heavy_drinking_30d) / nrow(csub))
+      h1 <- .hajek_mean(tsub$heavy_drinking_30d, tsub$weight)
+      h0 <- .hajek_mean(csub$heavy_drinking_30d, csub$weight)
+      cate <- h1[["mean"]] - h0[["mean"]]
+      se <- sqrt(h1[["var"]] + h0[["var"]])
       cate_rows[[length(cate_rows) + 1L]] <- data.frame(
         subgroup_var = var,
         subgroup_level = as.character(lvl),

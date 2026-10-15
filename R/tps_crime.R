@@ -367,7 +367,8 @@ morie_tps_bivariate_morans_i <- function(dfs, cat_a, cat_b,
     ))
   }
   sub <- df_a[, need_cols, drop = FALSE]
-  sub <- sub[stats::complete.cases(sub), , drop = FALSE]
+  sub <- sub[!is.na(sub$HOOD_158) &
+               .tps_coord_ok(sub$LAT_WGS84, sub$LONG_WGS84), , drop = FALSE]
   sub$HOOD_158 <- as.character(sub$HOOD_158)
   sub <- sub[sub$HOOD_158 %in% common, , drop = FALSE]
   if (nrow(sub) == 0L) {

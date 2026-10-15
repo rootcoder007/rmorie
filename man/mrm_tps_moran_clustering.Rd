@@ -28,7 +28,8 @@ mrm_tps_moran_clustering(
 }
 \value{
 A list with \code{morans_I}, \code{morans_z}, \code{dbscan_n_clusters},
-\code{dbscan_n_noise}, \code{dbscan_largest}.
+\code{dbscan_n_noise}, \code{dbscan_largest}, \code{n_events} (events used) and
+\code{n_dropped_coords} (events dropped for an unusable location).
 }
 \description{
 Grids the lat/long extent of \code{data} into a coarse raster of
@@ -36,6 +37,9 @@ Grids the lat/long extent of \code{data} into a coarse raster of
 global Moran's I via a rook contiguity matrix. Also runs DBSCAN on
 the raw lat/long points (rescaled to km) and reports cluster
 counts.
+Events at the TPS unknown-location placeholder (0, 0), with missing
+coordinates, or outside the Toronto bounding box (latitude 43.55 to
+43.90, longitude -79.65 to -79.10) are dropped first.
 }
 \details{
 This function is a thin computational wrapper. For high-precision

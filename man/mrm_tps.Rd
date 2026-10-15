@@ -10,8 +10,8 @@ and a plain-language \code{interpretation}; \code{mrm_tps_load_hawkes_refit()}
 returns the parsed Hawkes-refit manifest as a \code{list}.
 }
 \description{
-Four callables for TPS public-release crime-incident CSVs, used in
-the MRM empirical companion paper.
+Four callables for TPS public-release crime-incident CSVs, for the
+MRM (Multilevel Reconciliation Methodology) workflow.
 }
 \details{
 Functions:

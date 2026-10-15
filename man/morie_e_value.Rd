@@ -14,8 +14,8 @@ reciprocal.}
 E-value for CI).}
 }
 \value{
-Named list: \code{morie_e_value}, \code{e_value_ci} (for the CI
-bound).
+Named list: \code{e_value} (for the point estimate),
+\code{e_value_ci} (for the CI bound).
 }
 \description{
 The E-value quantifies the minimum strength of confounding
@@ -27,10 +27,8 @@ effect:
 For a risk ratio \eqn{RR < 1}, use \eqn{1/RR} before applying the
 formula.
 
-Thin wrapper over \code{EValue::evalue()} when \pkg{EValue} is
-installed; falls back to the inline closed-form computation
-otherwise. Both arms produce numerically identical answers
-(the formula above is the EValue closed-form for RR estimands).
+Computed in closed form; the formula above is the one
+\code{EValue::evalue()} uses for RR estimands, so the two agree.
 }
 \examples{
 morie_e_value(rr = 3.9, rr_lower = 2.4)

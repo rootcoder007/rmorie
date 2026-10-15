@@ -66,7 +66,7 @@ matching without replacement on the propensity score \eqn{e(X)}, with
 caliper \code{match_caliper_sd * SD(e)} and treated units taken in
 decreasing score -- MatchIt's matcher, which this package implements
 natively -- then fits IRM-DML on the matched subset (the MatchIt-then-DML
-pipeline of OTIS-RC/notez1a.qmd).
+pipeline).
 }
 \examples{
 set.seed(1)

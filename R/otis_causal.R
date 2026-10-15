@@ -405,7 +405,7 @@ morie_otis_aipw_ate <- function(df, treatment, outcome, covariates,
 #' caliper \code{match_caliper_sd * SD(e)} and treated units taken in
 #' decreasing score -- MatchIt's matcher, which this package implements
 #' natively -- then fits IRM-DML on the matched subset (the MatchIt-then-DML
-#' pipeline of OTIS-RC/notez1a.qmd).
+#' pipeline).
 #'
 #' @param df A data frame.
 #' @param treatment Binary treatment column name.
@@ -697,9 +697,7 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
 #' Ruhela's primary alert-complexity -> regional-volatility builder
 #'
 #' Implements Ruhela's "ac >= 2 -> vm" RF (Ruhela Formulation): the
-#' 8-state combo encoding documented in OTIS-RC/notez1a.qmd and used
-#' for the published \code{res_pool} / \code{res_by_year} / \code{res_all}
-#' estimates. Per \code{(UniqueIndividual_ID, EndFiscalYear)}, the
+#' 8-state encoding of the three alert flags. Per \code{(UniqueIndividual_ID, EndFiscalYear)}, the
 #' alert-state \emph{complexity} \code{ac} is the number of distinct
 #' alert combos with positive support across that person-year's rows
 #' (NOT the max of simultaneous flags -- see the Naive arm for that
@@ -844,8 +842,7 @@ morie_otis_make_pair_alert_to_volatility_all <- function(df) {
 #' Same as \code{morie_otis_make_pair_alert_to_volatility_ruhela()} but
 #' auto-loads a01 (Restrictive Confinement Detailed) via the registered
 #' \code{morie_otis_load()} loader when \code{df = NULL}. a01 is the
-#' canonical file the published OTIS-RC \code{res_pool} /
-#' \code{res_by_year} / \code{res_all} are computed on.
+#' canonical file for this formulation.
 #'
 #' @param df Optional OTIS a01 data.frame. If \code{NULL}, attempts to
 #'   resolve via \code{morie_otis_load()}.
@@ -1527,9 +1524,31 @@ morie_otis_gcomputation <- function(df, treatment, outcome, covariates,
     mean(X1 %*% b - X0 %*% b)
   }
   ate <- contrast(seq_len(n))
+  # The outcome model is additive in d, so mu1 - mu0 is b[d] for every row and the contrast
+  # is that coefficient. A replicate is then the weighted least-squares fit with the
+  # bootstrap counts as weights: a p x p solve, not a QR of a copied n x p matrix (on
+  # OTIS a01, 65k rows, 200 replicates took 99 s). Same draws, so the same replicates.
+  # Centring every non-intercept column (the intercept absorbs it) and scaling it to unit sd
+  # leaves b[d] unchanged up to its scale and keeps X'WX well conditioned: raw, a fiscal-year
+  # column near 2020 is all but collinear with the intercept and qr() calls it rank deficient.
+  icpt <- which(colnames(Xfull) == "(Intercept)")
+  Xs <- Xfull
+  sc <- rep(1, ncol(Xs))
+  for (j in setdiff(seq_len(ncol(Xs)), icpt)) {
+    v <- Xs[, j] - mean(Xs[, j])
+    sc[j] <- stats::sd(v)
+    if (sc[j] > 0) Xs[, j] <- v / sc[j] else sc[j] <- 1
+  }
+  boot_coef <- function(rows) {
+    w <- tabulate(rows, n)
+    XtW <- t(Xs * w)
+    q <- qr(XtW %*% Xs)
+    b <- qr.coef(q, XtW %*% y)
+    if (q$rank < ncol(Xs) || is.na(b[1L])) contrast(rows) else b[1L] / sc[1L]
+  }
   .rmorie_local_seed(seed)
   boot <- vapply(seq_len(n_bootstrap), function(i)
-    tryCatch(contrast(sample.int(n, n, replace = TRUE)),
+    tryCatch(boot_coef(sample.int(n, n, replace = TRUE)),
              error = function(e) NA_real_), numeric(1))
   boot <- boot[!is.na(boot)]
   se <- if (length(boot) > 1L) stats::sd(boot) else NA_real_

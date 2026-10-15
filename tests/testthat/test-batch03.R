@@ -115,7 +115,7 @@ test_that("cntrl_estimator internal helper works directly", {
   expect_equal(res$n, 100L)
 })
 
-test_that("morie_coherence returns frequencies and bounded morie_coherence", {
+test_that("morie_coherence returns frequencies and bounded coherence", {
   set.seed(1)
   n <- 200
   t <- seq_len(n)
@@ -124,14 +124,14 @@ test_that("morie_coherence returns frequencies and bounded morie_coherence", {
   res <- morie_coherence(x, y)
   expect_true(is.list(res))
   expect_true(all(c(
-    "frequencies", "morie_coherence", "n_segments", "nperseg",
+    "frequencies", "coherence", "n_segments", "nperseg",
     "fs", "n", "method"
   ) %in% names(res)))
   expect_equal(res$n, n)
-  expect_equal(length(res$frequencies), length(res$morie_coherence))
-  expect_true(all(is.finite(res$morie_coherence)))
-  expect_true(all(res$morie_coherence >= 0))
-  expect_true(all(res$morie_coherence <= 1 + 1e-8))
+  expect_equal(length(res$frequencies), length(res$coherence))
+  expect_true(all(is.finite(res$coherence)))
+  expect_true(all(res$coherence >= 0))
+  expect_true(all(res$coherence <= 1 + 1e-8))
   expect_gte(res$n_segments, 1)
 })
 
@@ -274,7 +274,7 @@ test_that("morie_copula_estimation works for the gaussian family", {
   res <- morie_copula_estimation(x, y, family = "gaussian")
   expect_true(is.list(res))
   expect_true(all(c(
-    "estimate", "morie_kendall_tau", "se_tau", "u", "v",
+    "estimate", "kendall_tau", "se_tau", "u", "v",
     "family", "n", "method"
   ) %in% names(res)))
   expect_equal(res$family, "gaussian")

@@ -19,10 +19,10 @@ knitr::opts_chunk$set(
 
 # Overview
 
-Many MORIE analyses use Statistics Canada Public Use Microdata
-Files (CCS, CSADS, CSUS, CADS, CPADS), which require complex-sample
-design weights for valid inference. This vignette covers the
-sampling and weighting helpers that wrap the same machinery.
+Many analyses use Statistics Canada and Health Canada Public Use
+Microdata Files (CCS, CSADS, CPADS and others), which require survey
+weights for valid inference. This vignette covers rmorie's sampling
+and weighting helpers.
 
 # Stratified, cluster, and PPS sampling
 
@@ -55,7 +55,7 @@ dim(clust)
 weights consistent with a known sampling scheme and known
 population marginals.
 
-```{r weights, eval = exists("morie_compute_design_weights")}
+```{r weights}
 # Design weights from a stratified scheme.
 # Treat `region` as the stratum; supply known population sizes per stratum.
 pop_sizes <- c(ON = 14000000, QC = 8500000, BC = 5200000, AB = 4400000)
@@ -66,6 +66,10 @@ design <- morie_compute_design_weights(
 )
 head(design)
 ```
+
+Each unit's design weight is its stratum's population size divided by
+the number of rows of that stratum in `df`, so the weights in a stratum
+sum to its population size.
 
 # Effective sample size and design effect
 
@@ -98,8 +102,12 @@ str(boot, max.level = 1)
 
 # Where to go next
 
-- For complex-survey causal inference (survey-weighted ATE/AIPW),
-  see the `causal-inference` vignette --- the same `estimate_*`
-  functions accept a `weights` argument.
+- `morie_calibration_weights()` and `morie_rake()` adjust weights to
+  known population totals; see the `subpopulation-design` vignette for
+  raking.
+- The causal estimators (`morie_estimate_ate()`,
+  `morie_estimate_aipw()`) take no survey-weight argument; the
+  `cpads-canonicalization` vignette shows survey-weighted descriptive
+  estimates on CPADS.
 - For Statistics Canada PUMF acknowledgments and citation
   requirements, see the package README.

@@ -20,38 +20,35 @@ knitr::opts_chunk$set(
 # Overview
 
 The Ontario Special Investigations Unit (SIU) publishes director's
-reports on every police-civilian interaction that meets the SIU's
-mandate (serious injury, death, sexual assault, or discharge of a
-firearm at a person). MORIE ships a full pipeline for that corpus:
+reports on police-civilian interactions within its mandate (death,
+serious injury, sexual assault, or the discharge of a firearm at a
+person). rmorie has a pipeline for that corpus:
 
-- a polite-by-default HTTP fetcher (`morie_fetch_siu()`),
-- a hand-rolled C++ parser that handles both English and French
-  templates from 2005 to the present,
-- a language-aware DRID manifest (4,743 drids, English + French) that
-  ships inside the package,
-- a canonical override system that lets the parser *learn* from
-  hand-verified corrections,
-- audit + AI tooling (`morie_siu_audit_case()`,
+- `morie_fetch_siu()`, which writes the panel-reviewed corpus bundled
+  in rmoriedata or, on request, fetches the reports live;
+- a C++ parser for the English and French report templates;
+- a language-aware DRID manifest that ships inside the package
+  (`morie_siu_index()`);
+- a correction system that applies hand-verified values over the
+  parser output (`morie_siu_record_correction()`);
+- audit and LLM tooling (`morie_siu_audit_case()`,
   `morie_siu_anomaly_check()`, `morie_siu_llm_extract()`,
-  `morie_siu_compare()`),
-- and FR -> EN translation via local Ollama (`morie_siu_translate()`).
+  `morie_siu_compare()`) and French-to-English translation
+  (`morie_siu_translate()`).
 
-Most code chunks below are flagged `eval = FALSE` because they make
-network calls or talk to a local LLM. They are tested in `tests/`
-under a guarded skipif.
+Chunks marked `eval = FALSE` below need the network or a running LLM
+server, and are not run when the vignette is built.
 
 # Inspecting the shipped manifest
 
 The DRID manifest ships inside the package, so reading it requires no
 network access.
 
-```{r manifest, eval = FALSE}
+```{r manifest}
 library(rmorie)
 
 manifest <- morie_siu_index()
-str(manifest)
-
-# Language counts: en=2531, fr=2212, unknown=0.
+dim(manifest)
 table(manifest$`_language`)
 
 # canonical_drid points each French drid at its English counterpart.
@@ -59,115 +56,125 @@ head(manifest[manifest$`_language` == "fr",
               c("drid", "case_number", "canonical_drid")])
 ```
 
-# Fetching the full corpus
+# The corpus
 
-`morie_fetch_siu()` walks the manifest, fetches every page (with a
-token-bucket throttle, default 4 req/s), and parses the result into a
-2,218 x 64 data frame.
+`morie_fetch_siu()` returns the path of an SIU.csv file. By default it
+writes the panel-reviewed corpus from rmoriedata:
 
-```{r fetch, eval = FALSE}
-df <- morie_fetch_siu(
-  lang       = "en",     # skip French drids: half the network traffic
-  cache_html = TRUE,     # persist pages locally; re-runs are ~1-2 min
-  rate_limit = 4         # requests per second
-)
-
-dim(df)
-# 2218 x 64
+```{r corpus}
+csv_path <- morie_fetch_siu(lang = "en")
+siu <- utils::read.csv(csv_path, colClasses = "character")
+dim(siu)
 ```
 
-The fetcher respects `Retry-After` on 429 responses, retries up to 3
-times with exponential backoff on 5xx, and interleaves report and
-news-release fetches in a single rolling-window pool so a cold run
-finishes in ~30 minutes rather than the ~58 it took before the
-interleaving change in v0.9.5.
+With `options(morie.siu.allow_fetch = TRUE)` the function fetches the
+reports live instead. It walks the manifest, requests each report and
+news release through a rate-limited pool (`rate_rps` requests per
+second, `concurrency` parallel transfers, up to 3 retries per request),
+interleaving the report and news-release requests, and parses the
+pages with the C++ parser:
+
+```{r fetch, eval = FALSE}
+options(morie.siu.allow_fetch = TRUE)
+csv_path <- morie_fetch_siu(
+  lang       = "en",   # skip French drids: half the network traffic
+  cache_html = TRUE,   # keep the pages locally for audits and re-runs
+  rate_rps   = 4,      # requests per second
+  overwrite  = TRUE
+)
+```
 
 # Auditing a single case
 
-`morie_siu_audit_case()` returns the parser row, the raw report HTML,
-the raw news HTML, and the cleaned text side-by-side, so you can spot
-exactly what the parser saw.
+`morie_siu_audit_case()` returns the parser row, the raw report and
+news HTML, and the cleaned text side by side, so you can see exactly
+what the parser saw. It fetches the pages if they are not cached:
 
 ```{r audit, eval = FALSE}
-audit <- morie_siu_audit_case("16-OFI-019")
-
+audit <- morie_siu_audit_case("17-OVI-201")
 names(audit)
-# "row", "report_html", "news_html", "report_text", "news_text"
+# "row" "drid" "nrid" "report_html" "news_html" "report_text" "news_text"
+```
 
-# Per-field "does the HTML actually support this value?" verdicts.
-morie_siu_anomaly_check("16-OFI-019")
+`morie_siu_anomaly_check()` asks an LLM, per field, whether the HTML
+supports the parsed value, and `morie_siu_audit_columns()` does the
+same across a sample of cases. Both need an LLM provider (see below):
 
-# How accurate is each column across a sample of cases?
-morie_siu_audit_columns(case_numbers = sample(df$case_number, 50))
+```{r anomaly, eval = FALSE}
+morie_siu_anomaly_check("17-OVI-201")
+morie_siu_audit_columns(case_numbers = sample(siu$case_number, 50))
 ```
 
 # Comparing parser output against an external table
 
 `morie_siu_compare()` produces a side-by-side diff between the parser
-row and any external table that names the same case.
+row and any external table that names the same case. `field_map` maps
+external column names to parser field names, and `external_case_col`
+names the external table's case-number column:
 
 ```{r compare, eval = FALSE}
 my_other_table <- data.frame(
-  case_number = "16-OFI-019",
-  n_officers  = 2L,
-  date        = as.Date("2016-01-15")
+  case_number = "17-OVI-201",
+  n_officers  = 1L
 )
 
 morie_siu_compare(
-  case_number = "16-OFI-019",
-  external    = my_other_table,
-  field_map   = c(officer_count = "n_officers",
-                  incident_date = "date")
+  case_number       = "17-OVI-201",
+  external          = my_other_table,
+  field_map         = c(n_officers = "number_of_subject_officials"),
+  external_case_col = "case_number"
 )
 ```
 
-# AI extraction (free local model by default)
+# LLM extraction
 
-`morie_siu_llm_extract()` runs an LLM over the cleaned report text and
-returns structured field extractions. The default provider is local
-Ollama with `gemma3:4b`, so no API key is required.
+`morie_siu_llm_extract()` runs an LLM over a cached report and returns
+the parser's 64 columns as extracted by the model. The default
+`model = c("ollama", "route", "gemini")` tries a local Ollama server
+first, then the model configured with `morie_llm_config()`, then
+Gemini (paid, `GEMINI_API_KEY` or `GOOGLE_API_KEY`). A local Ollama
+server needs no API key.
 
 ```{r llm, eval = FALSE}
-# Default: local Ollama with gemma3:4b. No API key needed.
-morie_siu_llm_extract("16-OFI-019")
-
-# Failover chain: try local first, fall back to Gemini only on error.
-morie_siu_llm_extract("16-OFI-019", model = c("ollama", "gemini"))
+morie_siu_llm_extract("17-OVI-201", model = "ollama")
 ```
 
-Supported providers: `ollama` (default, local, free), `gemini`,
-`claude`, `vertex`. Environment knobs:
-
-- `OLLAMA_HOST` (default `http://localhost:11434`)
-- `OLLAMA_MODEL` (default `gemma3:4b`)
-- `OLLAMA_KEEP_ALIVE` (default `30m`)
-- `OLLAMA_API_KEY` (optional, for hosted gateways)
+Ollama settings: `OLLAMA_HOST` (default `http://localhost:11434`),
+`OLLAMA_MODEL` (otherwise the first model the server lists), and
+`OLLAMA_API_KEY` for hosted gateways.
 
 # French -> English translation
 
+`morie_siu_translate()` translates the text fields
+(`narrative_summary`, `news_release_summary`, `news_release_title`,
+`relevant_legislation`) of cached French reports through the LLM
+provider:
+
 ```{r translate, eval = FALSE}
-morie_siu_translate(
-  text        = "L'enquete a ete close...",
-  target_lang = "en"
-)
+morie_siu_translate(target_lang = "en", case_numbers = "17-OVI-201")
 ```
 
-`translategemma:latest` is the recommended Ollama model for SIU
-French-language report translation; install with `ollama pull
-translategemma:latest`.
-
-# The canonical-override system: the parser learns
+# Corrections: the parser learns
 
 Ship-time corrections live in
-`inst/extdata/siu_canonical_overrides.csv.gz` (47 hand-verified
-corrections covering 10 spot-checked cases). Users can add their
-own, which take effect on the next `morie_fetch_siu()` call:
+`inst/extdata/siu_canonical_overrides.csv.gz`:
+
+```{r overrides}
+ov <- utils::read.csv(system.file("extdata", "siu_canonical_overrides.csv.gz",
+                                  package = "rmorie"))
+nrow(ov)                       # corrections
+length(unique(ov$case_number)) # cases they cover
+```
+
+Users can add their own corrections, which take effect on the next
+`morie_fetch_siu()` run:
 
 ```{r override, eval = FALSE}
 morie_siu_record_correction(
-  case_number = "20-OFD-082",
-  field       = "officer_count",
-  value       = 3L
+  case_number    = "17-OVI-201",
+  field          = "number_of_officers_involved",
+  verified_value = "1",
+  note           = "checked against the report"
 )
 ```
 
@@ -176,22 +183,26 @@ parser writes its initial output.
 
 # Format validity
 
-```{r sanity, eval = FALSE}
-sane <- morie_siu_sanity_check(df)
-sum(!sane$ok)
-# 0 on the shipped corpus (100.000% format-clean)
-```
-
 `morie_siu_sanity_check()` validates per-row format constraints:
-case-number regex, ISO dates, integer counts, Yes / No values, and
-no-page-chrome-leak in narrative columns.
+case-number pattern, ISO dates, integer counts, Yes / No values, and
+narrative columns that are empty or suspiciously short. It expects the
+columns as character, so read the CSV with `colClasses = "character"`
+(as above):
+
+```{r sanity}
+sane <- morie_siu_sanity_check(siu)
+sum(sane$issues_count > 0)   # rows with at least one flag
+head(sort(table(unlist(strsplit(sane$issues[sane$issues_count > 0], ";"))),
+          decreasing = TRUE))
+```
 
 # Where to go next
 
-- `morie_fetch_siu()` is wired through MORIE's universal multi-format
-  fetcher; see the `mrm-dataset-fetchers` vignette for the full set
-  of supported open-data sources.
-- The OTIS provincial corpus is covered in the
-  `mrm-otis-walkthrough` vignette; OTIS + SIU together form the
-  federal + provincial side of the MRM framework.
-- Citation: see `citation("morie")`.
+- `vignette("mrm-dataset-fetchers")` covers the OTIS, TPS and case-law
+  fetchers.
+- `vignette("mrm-empirical-callables")` runs `mrm_siu_case_to_decision_km()`
+  and `mrm_siu_per_service_rate()` on this corpus.
+- `morie_siu_classify_mandela()` applies the Mandela-Rules classifier
+  to federal Structured Intervention Unit stays; see the
+  `mrm-otis-walkthrough` vignette.
+- Citation: see `citation("rmorie")`.

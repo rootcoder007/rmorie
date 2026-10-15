@@ -552,7 +552,7 @@ test_that("e_value (in causal.R) closed-form: E = RR + sqrt(RR*(RR-1))", {
   res <- morie_e_value(rr = 3.9, rr_lower = 2.4)
   exp_ev <- 3.9 + sqrt(3.9 * 2.9)
   exp_ev_ci <- 2.4 + sqrt(2.4 * 1.4)
-  expect_equal(as.numeric(res$morie_e_value), exp_ev, tolerance = 1e-8)
+  expect_equal(as.numeric(res$e_value), exp_ev, tolerance = 1e-8)
   expect_equal(as.numeric(res$e_value_ci), exp_ev_ci, tolerance = 1e-8)
 })
 

@@ -19,8 +19,10 @@ morie_dag_estimate(
 \code{"backdoor.dml"} -- all native estimators.}
 }
 \value{
-The chosen estimator's result list, plus \code{adjustment_set}
-and \code{estimand}.
+The chosen estimator's result list, plus \code{estimand}
+(\code{"backdoor"}), \code{adjustment_set} and \code{method}. When the estimator
+reports its own \code{estimand} or \code{method}, those are kept as
+\code{estimator_estimand} / \code{estimator_method}, so every name is unique.
 }
 \description{
 Estimate the identified effect from data

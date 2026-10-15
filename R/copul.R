@@ -8,7 +8,7 @@
 #'
 #' @param x,y numeric marginal samples.
 #' @param family "gaussian", "clayton", or "gumbel".
-#' @return list: estimate, morie_kendall_tau, se_tau, u, v, family, n, method.
+#' @return list: estimate, kendall_tau, se_tau, u, v, family, n, method.
 #' @importFrom stats cor.test
 #' @keywords internal
 #' @examples
@@ -39,7 +39,7 @@ copul <- function(x, y, family = c("gaussian", "clayton", "gumbel")) {
   v <- (rank(y[seq_len(n)]) - 0.5) / n
   list(
     estimate = as.numeric(theta),
-    morie_kendall_tau = as.numeric(tau),
+    kendall_tau = as.numeric(tau),
     se_tau = sqrt((1 - tau^2) / n),
     u = u, v = v, family = family, n = as.integer(n),
     method = paste0("Copula ", family, " (rank-based; Nelsen 2006)")

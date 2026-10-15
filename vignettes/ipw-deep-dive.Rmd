@@ -20,10 +20,10 @@ knitr::opts_chunk$set(
 # Overview
 
 Inverse-probability weighting (IPW) is the simplest of the
-single-robust causal estimators. This vignette shows the building
-blocks that MORIE exposes: the Horvitz--Thompson and the
-Hajek-stabilised IPW estimators, propensity-score modelling,
-and weight-trimming diagnostics.
+single-robust causal estimators. This vignette shows propensity-score
+modelling, the Hajek-stabilised IPW estimator that
+`morie_estimate_ate()` computes, the unnormalised Horvitz--Thompson
+form for comparison, and weight diagnostics.
 
 # Setting up
 
@@ -41,9 +41,9 @@ df <- data.frame(y = y, treat = treat, X1 = X1, X2 = X2)
 
 # Estimating propensities
 
-The `morie_estimate_ate()` machinery fits a logistic propensity model
-internally and returns the IPW estimate by default. To inspect the
-propensities, set `propensity_col` after fitting them:
+`morie_estimate_ate()` fits a logistic propensity model internally and
+returns the IPW estimate. To inspect or supply the propensities
+yourself, fit them first and pass the column name as `propensity_col`:
 
 ```{r ps}
 ps_fit <- glm(treat ~ X1 + X2, family = binomial(), data = df)
@@ -53,17 +53,33 @@ summary(df$ps)
 
 # Hajek-stabilised IPW
 
-`morie_estimate_ate()` defaults to the Hajek estimator, which divides
+`morie_estimate_ate()` computes the Hajek estimator, which divides
 each weighted sum by the corresponding sum of weights. This
-stabilises the estimator under finite samples even when the
-propensity tails are heavy:
+stabilises the estimator in finite samples when the propensity tails
+are heavy. By default the propensities are trimmed to [0.01, 0.99]
+(argument `trim`):
 
 ```{r hajek}
 ate_hajek <- morie_estimate_ate(df, treatment = "treat", outcome = "y", covariates = c("X1", "X2"),
                           propensity_col = "ps")
-ate_hajek$estimate
+ate_hajek$ate
 ate_hajek$se
+c(ate_hajek$ci_lower, ate_hajek$ci_upper)
 ```
+
+The result is a list with `ate`, `se`, `ci_lower`, `ci_upper`, the
+number of rows used and discarded by propensity trimming (`n_used`,
+`n_discarded`), and the effective sample size of the weights (`ess`).
+
+The Horvitz--Thompson form does not normalise the weights. It has no
+separate function here; in base R it is:
+
+```{r ht}
+with(df, mean(treat * y / ps) - mean((1 - treat) * y / (1 - ps)))
+```
+
+On these simulated data the two forms are close. Hajek is the more
+stable of the two when a few weights are large.
 
 # Weight diagnostics
 
@@ -71,12 +87,14 @@ In practice, IPW is sensitive to extreme propensities. Two common
 diagnostics:
 
 ```{r diag}
-# Effective sample size after weighting
-ess <- morie_effective_sample_size(1 / df$ps)
-ess
+# ATE weights: 1 / ps for treated units, 1 / (1 - ps) for controls
+w <- ifelse(df$treat == 1, 1 / df$ps, 1 / (1 - df$ps))
 
-# Range of weights (extreme means trimming)
-range(1 / df$ps)
+# Effective sample size after weighting
+morie_effective_sample_size(w)
+
+# Range of weights (extreme values suggest trimming)
+range(w)
 ```
 
 If the effective sample size collapses dramatically, the analysis
@@ -90,7 +108,9 @@ should consider:
 
 ```{r aipw}
 aipw <- morie_estimate_aipw(df, treatment = "treat", outcome = "y", covariates = c("X1", "X2"))
-aipw$estimate
+aipw$ate
+aipw$se
+c(aipw$ci_lower, aipw$ci_upper)
 ```
 
 When propensities are well-behaved, IPW and AIPW should agree to

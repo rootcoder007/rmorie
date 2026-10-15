@@ -2,8 +2,8 @@
 #' MRM-framework analyses on Ontario OTIS data
 #'
 #' Five callables for the OTIS (Offender Tracking Information System)
-#' public-release datasets, used in the MRM (Multilevel Reconciliation
-#' Methodology) empirical companion paper. Every analysis is computed
+#' public-release datasets, for the MRM (Multilevel Reconciliation
+#' Methodology) workflow. Every analysis is computed
 #' directly from the OTIS CSV files; no precomputed artifacts are
 #' required.
 #'
@@ -263,8 +263,12 @@ mrm_otis_placement_concentration <- function(
 #'   prolonged placement. Reports the fraction of placements above the
 #'   cutoff and the median duration among those.
 #' @return A data.frame with one row per stratum (or one pooled row),
-#'   columns `stratum`, `n`, `mean_days`, `median_days`,
-#'   `q25_days`, `pct_above_mandela`, `median_among_above_mandela`.
+#'   columns `stratum`, `n`, `mean_days`, `median_days`, `q75_days`
+#'   (the 75th percentile of duration: the day by which survival falls
+#'   to 0.25, so a quarter of placements last longer),
+#'   `pct_above_mandela`, `median_among_above_mandela`, and one
+#'   `days_at_SXX` column per entry of `probs` (the day at which the
+#'   survival function falls to `XX` percent).
 #' @export
 #' @examples
 #' if (FALSE) {
@@ -301,7 +305,7 @@ mrm_otis_seg_duration_km <- function(
                                                       sprintf("days_at_S%02d", round(100 * probs)))))
       return(cbind(data.frame(
         stratum = s, n = 0, mean_days = NA_real_,
-        median_days = NA_real_, q25_days = NA_real_,
+        median_days = NA_real_, q75_days = NA_real_,
         pct_above_mandela = NA_real_,
         median_among_above_mandela = NA_real_
       ), empty_q))
@@ -315,7 +319,7 @@ mrm_otis_seg_duration_km <- function(
       n = n,
       mean_days = round(mean(d), 2),
       median_days = stats::median(d),
-      q25_days = stats::quantile(d, 0.75, names = FALSE),
+      q75_days = stats::quantile(d, 0.75, names = FALSE),
       pct_above_mandela = round(100 * mean(above), 2),
       median_among_above_mandela = if (any(above)) stats::median(d[above]) else NA_real_
     ), as.data.frame(as.list(surv_q)))

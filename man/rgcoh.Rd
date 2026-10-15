@@ -3,7 +3,7 @@
 \name{rgcoh}
 \alias{rgcoh}
 \alias{morie_rangayyan_coherence}
-\title{Magnitude-squared morie_coherence -- Rangayyan Ch 4}
+\title{Magnitude-squared coherence -- Rangayyan Ch 4}
 \usage{
 rgcoh(x, y, fs = 1, nperseg = NULL)
 
@@ -17,11 +17,11 @@ morie_rangayyan_coherence(x, y, fs = 1, nperseg = NULL)
 \item{nperseg}{Welch segment length (default \code{min(N, 256)}).}
 }
 \value{
-Named list \code{freqs}, \code{morie_coherence}, \code{mean_coherence},
+Named list \code{freqs}, \code{coherence}, \code{mean_coherence},
 \code{peak_freq}, \code{peak_coherence}.
 }
 \description{
-Welch-averaged magnitude-squared morie_coherence::
+Welch-averaged magnitude-squared coherence:
 }
 \details{
 \deqn{C_{xy}(f) = |S_{xy}(f)|^2 / (S_{xx}(f) S_{yy}(f))}

@@ -29,9 +29,22 @@ morie_run_propensity_ipw_analysis(
 }
 \value{
 Named list of output tables and the analysis data.
+\code{ipw_results} holds \code{estimate}, \code{se}, \code{ci_lower}, \code{ci_upper} (Wald,
+95 percent), \code{n}, \code{y1_ipw} and \code{y0_ipw}; \code{analysis_frame} gains \code{ps},
+\code{ipw}, \code{ipw_trimmed} and \code{w_survey_ipw} (survey weight times
+\code{ipw_trimmed}).
 }
 \description{
 Mirrors the core outputs of the old \verb{07_propensity.R} workflow.
+}
+\details{
+The \code{weight} column is the CPADS survey design weight (\code{wtpumf}). The
+estimate is the survey-weighted Hajek contrast: each respondent's weight
+is the survey weight times the trimmed inverse-probability weight, and
+the treated and control means are \code{sum(w * y) / sum(w)} within each arm.
+The standard error is the Taylor-linearised (with-replacement) variance
+of the two weighted means, holding the weights fixed, so it does not
+propagate uncertainty from the estimated propensity score.
 }
 \examples{
 # Run on a synthetic CPADS-shaped frame (the CKAN-fetched PUMF works

@@ -1133,17 +1133,15 @@ morie_estimate_late <- function(data, treatment, outcome, instrument,
 #' For a risk ratio \eqn{RR < 1}, use \eqn{1/RR} before applying the
 #' formula.
 #'
-#' Thin wrapper over \code{EValue::evalue()} when \pkg{EValue} is
-#' installed; falls back to the inline closed-form computation
-#' otherwise. Both arms produce numerically identical answers
-#' (the formula above is the EValue closed-form for RR estimands).
+#' Computed in closed form; the formula above is the one
+#' \code{EValue::evalue()} uses for RR estimands, so the two agree.
 #'
 #' @param rr Risk ratio estimate (> 0). Supply > 1; if < 1, pass its
 #'   reciprocal.
 #' @param rr_lower Lower bound of the 95\% CI (used to compute
 #'   E-value for CI).
-#' @return Named list: `morie_e_value`, `e_value_ci` (for the CI
-#'   bound).
+#' @return Named list: `e_value` (for the point estimate),
+#'   `e_value_ci` (for the CI bound).
 #' @export
 #' @references
 #'   VanderWeele TJ, Ding P (2017). Sensitivity analysis in
@@ -1155,13 +1153,8 @@ morie_e_value <- function(rr, rr_lower = NULL) {
   if (!is.numeric(rr) || length(rr) != 1L || is.na(rr) || rr <= 0) {
     stop("rr must be a single positive risk ratio", call. = FALSE)
   }
-  if (!is.null(rr_lower) && (!is.numeric(rr_lower) || is.na(rr_lower) || rr_lower <= 0)) {
-    stop("rr_lower must be a positive risk ratio", call. = FALSE)
-  }
-  if (!is.numeric(rr) || length(rr) != 1L || is.na(rr) || rr <= 0) {
-    stop("rr must be a single positive risk ratio", call. = FALSE)
-  }
-  if (!is.null(rr_lower) && (!is.numeric(rr_lower) || is.na(rr_lower) || rr_lower <= 0)) {
+  if (!is.null(rr_lower) && (!is.numeric(rr_lower) || length(rr_lower) != 1L ||
+                             is.na(rr_lower) || rr_lower <= 0)) {
     stop("rr_lower must be a positive risk ratio", call. = FALSE)
   }
   # Module 26: the Ding-VanderWeele closed form is exact; a CI bound
@@ -1172,7 +1165,7 @@ morie_e_value <- function(rr, rr_lower = NULL) {
   }
   ev <- compute_e(rr)
   ev_ci <- if (!is.null(rr_lower)) compute_e(rr_lower) else NA_real_
-  list(morie_e_value = ev, e_value_ci = ev_ci)
+  list(e_value = ev, e_value_ci = ev_ci)
 }
 
 

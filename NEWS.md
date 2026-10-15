@@ -1,5 +1,31 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* The vignettes were rewritten against the code: every chunk runs, none prints `NULL`, every
+  count is recomputed, and the references to an "MRM framework paper", a "companion paper" and a
+  "package paper", none of which exists, are replaced by the rmorie functions that do the work
+  (`citation("rmorie")` for the software). Wrong field names (`aipw$estimate` and others), the IPW
+  weights of `ipw-deep-dive`, and claims about functions (`morie_estimate_ate()` is one IPW
+  estimate, not an ensemble) are corrected.
+* `morie_otis_analyze_a01_mrm()` and the other Ruhela formulations say when they run on synthetic
+  rows (the 5-row sample `morie_otis_load()` falls back to, or `morie_synth_otis()`) or on a
+  treatment with an empty arm, and then give no interpretation; their printed results show every
+  estimate table, and no result text claims a finding the data did not produce.
+* The live OTIS loaders read CKAN's `datastore/dump` with its column names (they came back as
+  V1..V4 with the row id); the b05 and c11 samples use the real duration bins, and a table whose
+  bins are unknown is reported, not summarised as nothing.
+* Faster on the full OTIS a01 (65,467 person-years): g-computation's bootstrap 55 s to 2 s, the
+  SuperLearner's forests 1,218 s to 314 s (exact node sort; rows that share a covariate pattern
+  grow one weighted row), with the same estimates.
+* `morie_lmm()` no longer stops on the boundary when nlminb reports singular convergence (Orthodont
+  with a 1e-10 perturbation of y missed the REML maximum in 31 of 60 draws); native gbm
+  propensities break an exact tie in split gain the same way on every platform.
+* Fixed, each with a test: `mrm_siu_outcome_classifier()` on the shipped corpus;
+  `morie_siu_sanity_check()` on a default `read.csv()`; TPS spatial measures drop the (0,0)
+  placeholder and report how many; the Doob table summaries are computed; `morie_e_value()`
+  returns `e_value`; `morie_dag_estimate()` has unique names; `morie_dif_delta_mh()` labels
+  `favours` the right way round; `morie_run_propensity_ipw_analysis()` applies the survey weight;
+  `q75_days` is named for what it is; `morie_otis_irr_glmm_vm()` uses the a01 definitions;
+  `morie_siu_compare()` names unmatched fields.
 * Needs rmoriebricklayer 0.5.12 and rmoriedata 0.3.6, whose language-model layer this
   release is built on; CI installs rmoriebricklayer from its v0.5.12 tag, not a branch.
 * Language models are not hosted any more: bring your own. `morie_llm_ask()`,

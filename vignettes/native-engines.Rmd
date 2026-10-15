@@ -12,12 +12,13 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 set.seed(2026)
 ```
 
-rmorie implements every statistical algorithm it exposes natively —
-this vignette walks the whole pipeline on one simulated study using
-only `library(rmorie)`. No MatchIt, no survey, no DoubleML, no
-dagitty, no fixest: each step below runs on an engine that lives in
-this package and is cross-validated against the reference
-implementation in `tests/cross/`.
+This vignette walks a whole causal pipeline on one simulated study
+using only `library(rmorie)`. No MatchIt, no survey, no DoubleML, no
+dagitty, no fixest: each step below runs on an engine in this package.
+The source repository's `tests/cross/` directory holds the tests that
+compare these engines with the reference packages (for example
+`test-morie_vs_matchit.R`, `test-morie_vs_dagitty.R`,
+`test-morie_vs_doubleml.R`).
 
 ```{r}
 library(rmorie)
@@ -41,9 +42,11 @@ d <- data.frame(age, educ, re74, treat, re78)
 
 Before any model: audit the categorical columns. Silent
 category-mapping errors — numeric codes imported without their
-labels, positional recodes, alphabetical releveling — have corrupted
-published disparity analyses for years at a time. rmorie makes them
-structurally impossible:
+labels, positional recodes, alphabetical releveling — can corrupt a
+disparity analysis without any error message. rmorie's audit flags
+such columns, `morie_safe_recode()` recodes by label rather than by
+position, and `morie_crosstab_verify()` checks a recode against its
+mapping (it stops on a mismatch):
 
 ```{r}
 grp_codes <- sample(c("1", "2"), n, replace = TRUE)   # an import hazard
@@ -81,7 +84,8 @@ id$adjustment_set
 ## 3. Matching on the identified set (module 1)
 
 ```{r}
-m <- morie_matching_nearest_neighbor(d, "treat", id$adjustment_set)
+m <- morie_matching_nearest_neighbor(d, "treat", id$adjustment_set,
+                                     replace = TRUE)
 nrow(m$match_pairs)
 morie_matching_balance(m$matched_data, "treat",
                        id$adjustment_set)$max_smd
@@ -95,8 +99,7 @@ nuisances, Neyman-orthogonal score):
 
 ```{r}
 ate <- morie_dag_estimate(dag, d, method = "backdoor.dml")
-est <- if (!is.null(ate$estimate)) ate$estimate else ate$ate
-c(estimate = est)
+unlist(ate[c("ate", "se", "ci_lower", "ci_upper")])
 ```
 
 ## 5. Refutation (module 13)
@@ -127,10 +130,15 @@ eff <- morie_mrm_estimate_causal_effect(
 cat(morie_mrm_report(eff, format = "markdown"), sep = "\n")
 ```
 
+The consensus standard error is the inverse-variance-weighted mean of
+the estimators' standard errors, not `sqrt(1 / sum(w))`: the
+estimators share one data set, so their errors are correlated and the
+independent-studies formula would be too small.
+
 ## Where to look next
 
-* Every engine's cross-validation lives in `tests/cross/` (one file
-  per reference package) and its speed in `inst/benchmarks/`.
+* The cross-validation tests live in `tests/cross/` of the source
+  repository and the speed benchmarks in `inst/benchmarks/`.
 * The quasi-experimental family (DiD, event studies, synthetic
   control, RDD, ITS, IV) follows the same pattern — see
   `?morie_did_group_time_att`, `?morie_synth_control`,

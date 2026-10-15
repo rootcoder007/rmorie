@@ -10,8 +10,8 @@ association measures) and a plain-language \code{interpretation}.
 }
 \description{
 Five callables for the OTIS (Offender Tracking Information System)
-public-release datasets, used in the MRM (Multilevel Reconciliation
-Methodology) empirical companion paper. Every analysis is computed
+public-release datasets, for the MRM (Multilevel Reconciliation
+Methodology) workflow. Every analysis is computed
 directly from the OTIS CSV files; no precomputed artifacts are
 required.
 }

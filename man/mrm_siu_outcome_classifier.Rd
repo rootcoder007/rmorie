@@ -25,14 +25,22 @@ A data.frame with columns \code{service}, \code{outcome}, \code{n_cases},
 }
 \description{
 Cross-tabulates a categorical outcome column (default
-\code{director_decision_category}) by service and year, reporting both
-raw counts and within-service shares. If the supplied
-\code{outcome_col} is not present, looks for a few common alternatives
-(\code{director_decision}, \code{outcome}).
+\code{director_decision_category}) by service, reporting both raw
+counts and within-service shares. If the supplied \code{outcome_col}
+is not present, looks for a few common alternatives
+(\code{director_decision}, \code{outcome}, \code{decision},
+\code{director_decision_outcome}, \code{director_decision_text}). The SIU
+corpus that rmorie ships (\code{morie_fetch_siu()}) carries the
+Director's decision in \code{charges_recommended}; when none of the
+category columns exists, the outcome is derived from it as
+\code{"charges"} / \code{"no charges"} (booleans and the Director's own
+wording, e.g. "No Charges to Issue", both count; unreadable
+values are dropped).
 }
 \examples{
-if (FALSE) {
-  siu <- read.csv("SIU.csv")
-  mrm_siu_outcome_classifier(siu)
-}
+siu <- data.frame(
+  police_service = c("Toronto Police Service", "Toronto Police Service",
+                     "Ontario Provincial Police"),
+  charges_recommended = c(TRUE, FALSE, FALSE))
+mrm_siu_outcome_classifier(siu)
 }

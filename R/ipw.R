@@ -16,10 +16,14 @@ morie_validate_cpads_data <- function(data, strict = TRUE) {
   missing
 }
 
-#' Internal helper: Weighted Prop
+#' Internal helper: survey-weighted Hajek mean and its linearised variance
+#'
+#' `sum(w * y) / sum(w)` with the with-replacement (Taylor-linearised)
+#' variance `sum((w * (y - mean))^2) / sum(w)^2`, the weights held fixed.
 #' @noRd
-.weighted_prop <- function(x, w) {
-  sum(x * w, na.rm = TRUE) / sum(w, na.rm = TRUE)
+.hajek_mean <- function(y, w) {
+  mu <- sum(w * y) / sum(w)
+  c(mean = mu, var = sum((w * (y - mu))^2) / sum(w)^2)
 }
 
 #' Internal helper: Ess
@@ -32,6 +36,14 @@ morie_validate_cpads_data <- function(data, strict = TRUE) {
 #'
 #' Mirrors the core outputs of the old `07_propensity.R` workflow.
 #'
+#' The `weight` column is the CPADS survey design weight (`wtpumf`). The
+#' estimate is the survey-weighted Hajek contrast: each respondent's weight
+#' is the survey weight times the trimmed inverse-probability weight, and
+#' the treated and control means are `sum(w * y) / sum(w)` within each arm.
+#' The standard error is the Taylor-linearised (with-replacement) variance
+#' of the two weighted means, holding the weights fixed, so it does not
+#' propagate uncertainty from the estimated propensity score.
+#'
 #' @param data Analysis data frame.
 #' @param output_dir Optional directory for CSV outputs.
 #' @param trim Quantile pair used to trim extreme IPW values.
@@ -39,6 +51,10 @@ morie_validate_cpads_data <- function(data, strict = TRUE) {
 #' @param outcome Binary outcome column.
 #' @param covariates Covariate names for the propensity model.
 #' @return Named list of output tables and the analysis data.
+#'   `ipw_results` holds `estimate`, `se`, `ci_lower`, `ci_upper` (Wald,
+#'   95 percent), `n`, `y1_ipw` and `y0_ipw`; `analysis_frame` gains `ps`,
+#'   `ipw`, `ipw_trimmed` and `w_survey_ipw` (survey weight times
+#'   `ipw_trimmed`).
 #' @examples
 #' # Run on a synthetic CPADS-shaped frame (the CKAN-fetched PUMF works
 #' # identically -- see morie_load_cpads_data() for the real frame):
@@ -84,17 +100,24 @@ morie_run_propensity_ipw_analysis <- function(
   q01 <- as.numeric(stats::quantile(frame$ipw, trim[[1]], na.rm = TRUE))
   q99 <- as.numeric(stats::quantile(frame$ipw, trim[[2]], na.rm = TRUE))
   frame$ipw_trimmed <- pmin(pmax(frame$ipw, q01), q99)
+  frame$w_survey_ipw <- frame$weight * frame$ipw_trimmed
 
   treated <- frame[frame[[treatment]] == 1, , drop = FALSE]
   control <- frame[frame[[treatment]] == 0, , drop = FALSE]
-  y1_ipw <- .weighted_prop(treated[[outcome]], treated$ipw_trimmed)
-  y0_ipw <- .weighted_prop(control[[outcome]], control$ipw_trimmed)
+  h1 <- .hajek_mean(treated[[outcome]], treated$w_survey_ipw)
+  h0 <- .hajek_mean(control[[outcome]], control$w_survey_ipw)
+  y1_ipw <- unname(h1[["mean"]])
+  y0_ipw <- unname(h0[["mean"]])
   ate_ipw <- y1_ipw - y0_ipw
+  se_ipw <- sqrt(h1[["var"]] + h0[["var"]])
 
   ipw_results <- data.frame(
     estimand = "ATE",
-    method = "IPW (trimmed)",
+    method = "IPW (trimmed) x survey weight",
     estimate = ate_ipw,
+    se = se_ipw,
+    ci_lower = ate_ipw - 1.96 * se_ipw,
+    ci_upper = ate_ipw + 1.96 * se_ipw,
     n = nrow(frame),
     y1_ipw = y1_ipw,
     y0_ipw = y0_ipw,
@@ -102,14 +125,16 @@ morie_run_propensity_ipw_analysis <- function(
   )
 
   diagnostics <- data.frame(
-    metric = c("ps_mean", "ps_min", "ps_max", "ipw_mean", "ipw_trimmed_mean", "ess_ipw_trimmed"),
+    metric = c("ps_mean", "ps_min", "ps_max", "ipw_mean", "ipw_trimmed_mean", "ess_ipw_trimmed",
+               "ess_survey_x_ipw_trimmed"),
     value = c(
       mean(frame$ps),
       min(frame$ps),
       max(frame$ps),
       mean(frame$ipw),
       mean(frame$ipw_trimmed),
-      .ess(frame$ipw_trimmed)
+      .ess(frame$ipw_trimmed),
+      .ess(frame$w_survey_ipw)
     ),
     stringsAsFactors = FALSE
   )

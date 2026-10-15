@@ -18,8 +18,7 @@ Same shape as
 Same as \code{morie_otis_make_pair_alert_to_volatility_ruhela()} but
 auto-loads a01 (Restrictive Confinement Detailed) via the registered
 \code{morie_otis_load()} loader when \code{df = NULL}. a01 is the
-canonical file the published OTIS-RC \code{res_pool} /
-\code{res_by_year} / \code{res_all} are computed on.
+canonical file for this formulation.
 }
 \examples{
 \donttest{

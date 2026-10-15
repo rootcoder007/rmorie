@@ -13,7 +13,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 
 ## What this vignette covers
 
-morie 0.8.0 adds a **fairness & disparity-audit** subsystem. It does not
+rmorie includes a **fairness & disparity-audit** subsystem. It does not
 build or deploy a predictive-policing or risk-assessment system — it
 *measures* whether an existing one treats demographic groups
 differently, so the system can be held accountable.

@@ -107,7 +107,7 @@ test_that("morie_prediction_accuracy returns full metric list", {
   res <- morie_prediction_accuracy(y, yhat)
   expect_true(is.list(res))
   expect_named(res, c(
-    "estimate", "pearson_r", "morie_spearman_rho",
+    "estimate", "pearson_r", "spearman_rho",
     "mse", "mspe", "rmse", "r2", "slope",
     "intercept", "n", "method"
   ))

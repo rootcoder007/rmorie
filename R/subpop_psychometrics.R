@@ -107,14 +107,18 @@ morie_dif_sample_size <- function(p_reference, odds_ratio = NULL,
 #' \eqn{\Delta_{MH} = -2.35 \ln(\alpha_{MH})}, and applies the
 #' three-category classification used in operational test review: negligible
 #' (A) below 1, moderate (B) from 1 to below 1.5, large (C) at 1.5 and above.
-#' Negative delta indicates the item favours the focal group.
+#' The odds ratio is Holland and Thayer's \eqn{\alpha_{MH}}, the reference
+#' group's odds of success over the focal group's (as \code{\link{Difmh}}
+#' returns it), so negative delta (\eqn{\alpha_{MH} > 1}) indicates the item
+#' favours the reference group and positive delta favours the focal group.
 #'
 #' The classification is a reporting convention, not a significance test; an
 #' item may be classified C on a large sample and B on a small one for the
 #' same underlying difference, which is why \code{\link{morie_dif_sample_size}}
 #' belongs in the same planning step.
 #'
-#' @param or_mh Mantel-Haenszel odds ratio, or a vector of them.
+#' @param or_mh Mantel-Haenszel odds ratio \eqn{\alpha_{MH}} (reference
+#'   odds over focal odds), or a vector of them.
 #' @return A data frame with \code{or_mh}, \code{delta_mh}, \code{magnitude}
 #'   (A, B or C) and \code{favours} (reference, focal or neither).
 #' @references Holland, P. W. and Thayer, D. T. (1988) Differential item
@@ -136,7 +140,7 @@ morie_dif_delta_mh <- function(or_mh) {
                 ifelse(ad < 1, "A", ifelse(ad < 1.5, "B", "C")))
   fav <- ifelse(is.na(delta), NA_character_,
                 ifelse(abs(delta) < .Machine$double.eps^0.5, "neither",
-                       ifelse(delta < 0, "focal", "reference")))
+                       ifelse(delta < 0, "reference", "focal")))
   data.frame(or_mh = or_mh, delta_mh = delta, magnitude = mag,
              favours = fav, stringsAsFactors = FALSE)
 }

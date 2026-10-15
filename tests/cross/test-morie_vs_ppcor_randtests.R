@@ -75,7 +75,7 @@ test_that("native E-value matches EValue::evalue", {
   skip_if_not_installed("EValue")
   for (rr in c(1.5, 2.0, 3.9, 0.4)) {
     ref <- EValue::evalue(EValue::RR(rr))
-    mine <- morie_e_value(rr)$morie_e_value
+    mine <- morie_e_value(rr)$e_value
     expect_equal(mine, as.numeric(ref["E-values", "point"]),
                  tolerance = 1e-8)
   }

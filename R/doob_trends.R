@@ -129,6 +129,9 @@ analyze_doob_table1_releases <- function() {
   total_violent_revokes <- sum(tbl$revoke_violent)
   overall_violent_revoke_pct <-
     if (total_pop > 0) 100 * total_violent_revokes / total_pop else 0
+  # every release not revoked for a violent offence: successful, or
+  # revoked for a non-violent offence or a breach of conditions
+  not_violent_pct <- 100 - overall_violent_revoke_pct
 
   .doob_result(
     title = paste0(
@@ -145,10 +148,10 @@ analyze_doob_table1_releases <- function() {
       ),
       c(
         "Doob's headline point",
-        paste0(
-          ">= 99.4% of releases are successful or non-violent-",
-          "revoked -- the violent-revocation rate is < 1%"
-        )
+        sprintf(paste0(
+          "%.2f%% of releases are successful or non-violent-",
+          "revoked -- the violent-revocation rate is %.2f%%"
+        ), not_violent_pct, overall_violent_revoke_pct)
       )
     ),
     tables = list(list(
@@ -164,7 +167,8 @@ analyze_doob_table1_releases <- function() {
     )),
     interpretation = paste0(
       "Reproduces Doob's Federal Court Table 1. The headline finding: ",
-      "violent revocations are very rare -- < 1% of all releases ",
+      sprintf("violent revocations are rare -- %.2f%% of all releases ",
+              overall_violent_revoke_pct),
       "(across day parole, full parole, statutory) result in revocation ",
       "due to a violent offence. The majority of unsuccessful releases ",
       "are breach-of-condition (curfew, drug/alcohol restrictions, ",
@@ -173,7 +177,8 @@ analyze_doob_table1_releases <- function() {
     payload = list(
       table1 = tbl,
       total_pop_per_year = total_pop,
-      violent_revocation_rate_pct = overall_violent_revoke_pct
+      violent_revocation_rate_pct = overall_violent_revoke_pct,
+      not_violent_pct = not_violent_pct
     )
   )
 }
@@ -212,6 +217,9 @@ analyze_doob_table2_flow <- function() {
     round(avg_full_parole, 1), round(avg_stat_release, 1)
   )
   monthly_releases <- avg_stat_release / 12
+  # releasing every prisoner 6 months early: six months of statutory
+  # releases leave at once, as a share of the average count
+  early_release_pct <- 100 * 6 * monthly_releases / avg_count
 
   .doob_result(
     title = paste0(
@@ -226,11 +234,11 @@ analyze_doob_table2_flow <- function() {
       c("Average statutory releases / month", round(monthly_releases, 1)),
       c(
         "Doob's headline point",
-        paste0(
-          "About 427 statutory releases per month -- releasing ",
-          "prisoners 6 months early would empty ~17.5% of the ",
+        sprintf(paste0(
+          "About %.0f statutory releases per month -- releasing ",
+          "prisoners 6 months early would empty ~%.1f%% of the ",
           "penitentiary system in one tranche."
-        )
+        ), monthly_releases, early_release_pct)
       )
     ),
     tables = list(list(
@@ -243,17 +251,25 @@ analyze_doob_table2_flow <- function() {
     )),
     interpretation = paste0(
       "Reproduces Doob's Federal Court Table 2. The flow shows remarkable ",
-      "stability: counts within 14k-15k, admissions and statutory ",
-      "releases each ~5k/year. This stability is what enables Doob's ",
+      sprintf(paste0(
+        "stability: counts between %s and %s, admissions ~%.0f/year ",
+        "and statutory releases ~%.0f/year. "
+      ), format(min(tbl$avg_count), big.mark = ","),
+      format(max(tbl$avg_count), big.mark = ","),
+      avg_admissions, avg_stat_release),
+      "This stability is what enables Doob's ",
       "projection that releasing prisoners 6 months early would steady-",
-      "state at ~427 fewer prisoners per month, depopulating ~17.5% of ",
-      "the system."
+      sprintf(paste0(
+        "state at ~%.0f fewer prisoners per month, depopulating ~%.1f%% ",
+        "of the system."
+      ), monthly_releases, early_release_pct)
     ),
     payload = list(
       table2           = tbl,
       avg_count        = avg_count,
       avg_admissions   = avg_admissions,
-      monthly_releases = monthly_releases
+      monthly_releases = monthly_releases,
+      early_release_pct = early_release_pct
     )
   )
 }
@@ -296,6 +312,13 @@ analyze_doob_table3_age_overrepresentation <- function() {
       irr_admissions = irr_admissions
     )
   }
+  old <- tbl$age_group != "18-49"
+  pop50 <- sum(tbl$canada_adult_pop_pct[old])
+  cust50 <- sum(tbl$csc_in_custody_pct[old])
+  adm50 <- sum(tbl$csc_admissions_pct[old])
+  irr_txt <- function(i) {
+    sprintf("%.2f/%.2f", irrs[[i]]$irr_custody, irrs[[i]]$irr_admissions)
+  }
   .doob_result(
     title = paste0(
       "Doob Affidavit Table 3 -- Prisoner age distribution: ",
@@ -303,16 +326,16 @@ analyze_doob_table3_age_overrepresentation <- function() {
     ),
     summary_lines = list(
       c("Source", "CCRSO 2018 + StatsCan CANSIM, Doob Affidavit Exhibits A,C,D"),
-      c("Age 50+ as % of Canada adult population", "47.3%"),
-      c("Age 50+ as % of CSC in-custody", "25.2%"),
-      c("Age 50+ as % of CSC admissions (2017-18)", "16.9%"),
+      c("Age 50+ as % of Canada adult population", sprintf("%.1f%%", pop50)),
+      c("Age 50+ as % of CSC in-custody", sprintf("%.1f%%", cust50)),
+      c("Age 50+ as % of CSC admissions (2017-18)", sprintf("%.1f%%", adm50)),
       c(
         "Doob's headline point",
-        paste0(
+        sprintf(paste0(
           "Older adults are dramatically under-represented in CSC ",
-          "custody (25.2% vs 47.3%) and even more so in admissions ",
-          "(16.9%) -- the prison population skews young."
-        )
+          "custody (%.1f%% vs %.1f%%) and even more so in admissions ",
+          "(%.1f%%) -- the prison population skews young."
+        ), cust50, pop50, adm50)
       )
     ),
     tables = list(list(
@@ -329,10 +352,13 @@ analyze_doob_table3_age_overrepresentation <- function() {
     )),
     interpretation = paste0(
       "Reproduces Doob's Federal Court Table 3 plus over-/under-",
-      "representation IRRs. Age 18-49 has IRR_custody ~ 1.42 ",
-      "(over-represented) and IRR_admissions ~ 1.57; ages 50-59 ",
-      "near-balanced (IRR ~ 0.89/0.65); ages 60+ severely under-",
-      "represented (IRR ~ 0.32/0.18). This supports Doob's argument ",
+      sprintf(paste0(
+        "representation IRRs (custody/admissions). Age %s has IRR ~ %s ",
+        "(over-represented); ages %s IRR ~ %s; ages %s IRR ~ %s ",
+        "(severely under-represented). "
+      ), tbl$age_group[1], irr_txt(1), tbl$age_group[2], irr_txt(2),
+      tbl$age_group[3], irr_txt(3)),
+      "This supports Doob's argument ",
       "that older prisoners are a low-risk group appropriate for ",
       "conditional release."
     ),
@@ -557,8 +583,10 @@ analyze_doob_full_affidavit <- function() {
     tables = sections,
     interpretation = paste0(
       "Replicates the three CCRSO tables Doob used to argue (a) ",
-      "violent revocation is rare (< 1% of releases), (b) prisoner ",
-      "flow is steady-state (~427 statutory releases/month), and (c) ",
+      sprintf("violent revocation is rare (%.2f%% of releases), (b) prisoner ",
+              t1$payload$violent_revocation_rate_pct),
+      sprintf("flow is steady-state (~%.0f statutory releases/month), and (c) ",
+              t2$payload$monthly_releases),
       "older adults are under-represented in CSC custody. These ",
       "national-aggregate analyses sit alongside the MRM modules on ",
       "OTIS from federal aggregates down to provincial individual-",

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cohrc.R
 \name{morie_coherence}
 \alias{morie_coherence}
-\title{Magnitude-squared morie_coherence between two time series}
+\title{Magnitude-squared coherence between two time series}
 \usage{
 morie_coherence(x, y, nperseg = NULL, fs = 1)
 }
@@ -16,11 +16,11 @@ morie_coherence(x, y, nperseg = NULL, fs = 1)
 \item{fs}{Sampling frequency. Default 1.}
 }
 \value{
-Named list with \eqn{frequencies, morie_coherence, n_segments,
+Named list with \eqn{frequencies, coherence, n_segments,
   nperseg, fs, n, method}.
 }
 \description{
-Magnitude-squared morie_coherence between two time series
+Magnitude-squared coherence between two time series
 }
 \examples{
 set.seed(1)

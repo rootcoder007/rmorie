@@ -10,7 +10,7 @@ test_that("the alternative-treatment b02 formulations run on the Toronto and age
   dir <- withr::local_tempdir()
   r <- morie_otis_analyze_b02_ruhela_alt_region(b02, out_dir = dir)
   expect_s3_class(r, "morie_otis_analysis_result")
-  expect_length(r$warnings, 0)
+  expect_match(r$warnings, "^synthetic input")  # synthetic tables: that warning and no other
   expect_match(r$title, "Alt-T Ruhela formulation: T=Toronto region")
   expect_gt(length(r$tables[[1]]$rows), 0)
   expect_true(file.exists(file.path(dir, "otis_b02-altR.txt")))
@@ -38,11 +38,11 @@ test_that("the a01 subgroup formulations refuse a thin subgroup and run on a thi
   pair <- morie_otis_make_pair_alert_to_volatility_ruhela(big)
   expect_gte(sum(.ox(".otis_female")(pair$data$Gender) == 1L), 100)
   rf <- morie_otis_analyze_a01_ruhela_subgroup_female(big)
-  expect_length(rf$warnings, 0)
+  expect_match(rf$warnings, "^synthetic input")  # synthetic tables: that warning and no other
   expect_match(rf$title, "Female-only cell frame")
   expect_gt(length(rf$tables[[1]]$rows), 0)
   rm <- morie_otis_analyze_a01_ruhela_subgroup_male(big)
-  expect_length(rm$warnings, 0)
+  expect_match(rm$warnings, "^synthetic input")  # synthetic tables: that warning and no other
   expect_match(rm$title, "Male-only")
   # the b01 siblings carry the same guard
   b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)

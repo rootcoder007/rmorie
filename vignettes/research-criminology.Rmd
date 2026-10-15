@@ -15,8 +15,11 @@ library(rmorie)
 ```
 
 Every function on this page rests on a theorem checked in Lean 4 with
-Mathlib (the sources ship under `research/lean/`; `Audit.lean` prints the
-axioms, which are the three standard ones, and no file contains `sorry`).
+Mathlib. The Lean sources are in `research/lean/` of the source
+repository (they are not part of the installed package); `Audit.lean`
+prints the axioms each theorem uses, which are the three standard ones
+(`propext`, `Classical.choice`, `Quot.sound`), and no project file
+contains `sorry`.
 The rule throughout: Lean certifies the implication, never the
 antecedent. Each section says where the empirical assumption enters.
 
@@ -125,6 +128,21 @@ pr <- morie_spillover_exposure_probs(n = 8, edges, n_treated = 3)
 trt <- c(2, 5, 7)
 e <- morie_spillover_exposure(seq_len(8) %in% trt, edges)$exposure
 morie_spillover_ht(y = 10 + seq_len(8) - 3 * (e == 2) - (e == 1), e, pr)$total_effect
+```
+
+One draw of the design gives a noisy estimate of the true total effect
+(-3 in this outcome model). Unbiasedness is a statement about the
+average over the design, which here can be enumerated exactly: all
+`choose(8, 3)` = 56 ways of treating three of the eight places.
+
+```{r p3ht-enum}
+draws <- combn(8, 3)
+ht <- apply(draws, 2, function(trt) {
+  e <- morie_spillover_exposure(seq_len(8) %in% trt, edges)$exposure
+  morie_spillover_ht(y = 10 + seq_len(8) - 3 * (e == 2) - (e == 1), e, pr)$total_effect
+})
+mean(ht)
+range(ht)
 ```
 
 # P7. How much of the "law of crime concentration" is crime-free places?

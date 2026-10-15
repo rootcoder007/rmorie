@@ -19,63 +19,83 @@ knitr::opts_chunk$set(
 
 # Overview
 
-MORIE ships a portable SQLite layer with dozens of built-in
-datasets covering Canadian carceral, police, oversight, and public-
-health surveillance corpora. This vignette shows how to discover
-and load them from R.
+rmorie reaches datasets through three routes:
+
+- `morie_dataset_catalog()` lists the datasets that
+  `morie_load_dataset()` fetches by key (CKAN portals, direct
+  downloads, ArcGIS layers) and caches locally;
+- `rmoriedata::morie_data_catalog()` lists the tables bundled in the
+  rmoriedata package, which rmorie imports;
+- `morie_sample()` reads four small OTIS and Toronto Police reference
+  tables used by the MRM examples.
+
+This vignette shows how to discover and load them from R.
 
 # Browsing the catalogue
 
-```{r catalog, eval = FALSE}
+```{r catalog}
 library(rmorie)
 catalog <- morie_dataset_catalog()
-head(catalog)
+dim(catalog)
+head(catalog[, c("key", "name", "source", "survey", "year")])
 ```
 
-Each row of the returned data frame describes one dataset:
-identifier (e.g. `otis-2025`, `cpads-2122`), source, year, number
-of rows, and a short description.
+Each row describes one dataset: its key (for example `ocp21` for the
+CPADS 2021--2022 PUMF, or `otisb01` for OTIS table b01), its name,
+source, survey, year, and where it is fetched from
+(`ckan_resource_id`, `download_url`, `arcgis_url`).
 
 # Per-dataset detail
 
-```{r info, eval = FALSE}
-morie_dataset_info("cpads-2122")
+```{r info}
+str(morie_dataset_info("ocp21"))
 ```
 
-`morie_dataset_info()` returns a list with the variable names,
-labels, value codes, citation, and any data-acknowledgment
-disclaimer required by the original publisher.
+`morie_dataset_info()` returns the catalogue row for one key as a
+named list.
 
 # Loading data
 
 ```{r load, eval = FALSE}
-df <- morie_load_dataset("cpads-2122")
+df <- morie_load_dataset("ocp21")
 dim(df)
+# 40931   394
 ```
 
-`morie_load_dataset()` returns a tibble. Public-use datasets
-shipped inside the package require no further configuration.
+This chunk is not run when the vignette is built: on the first call
+`morie_load_dataset()` downloads the PUMF from open.canada.ca. The
+copy is then kept in a per-user cache under `morie_cache_dir()` (set
+`MORIE_CACHE_DIR` to move it), and `refresh = TRUE` re-downloads it.
 
-# Configuring local + remote backends
+# Bundled tables
 
-For datasets backed by external SQLite mirrors:
+The tables in rmoriedata need no network access:
 
-- Set `MORIE_LOCAL_DB_DIR` to a directory of `.sqlite` files for
-  fast offline access.
-- Set `MORIE_REMOTE_URL` to an HTTP SQL-over-REST endpoint for
-  network-only exploration.
+```{r bundled}
+bundled <- rmoriedata::morie_data_catalog()
+nrow(bundled)
+head(bundled[, c("slug", "kind", "n_rows", "n_cols")])
+```
+
+`morie_sample()` returns one of four MRM reference tables:
+
+```{r sample}
+dim(morie_sample("otis_c11"))
+```
 
 # Statistics Canada / Health Canada data acknowledgment
 
-Several datasets in the catalogue are derived from Statistics
-Canada and Health Canada PUMFs (CCS, CSADS, CSUS, CADS, CPADS).
-The standard disclaimer applies: although the analyses use
-Statistics Canada / Health Canada data, the analyses,
-interpretations, and conclusions are those of the analyst and do
-not represent the views of either agency.
+Several datasets in the catalogue are Statistics Canada and Health
+Canada PUMFs (CCS, CSADS, CPADS and others). The standard disclaimer
+applies: although the analyses use Statistics Canada / Health Canada
+data, the analyses, interpretations, and conclusions are those of the
+analyst and do not represent the views of either agency.
 
 # Where to go next
 
 - The `intro` vignette uses `morie_load_dataset()` end-to-end.
 - The `cpads-canonicalization` vignette covers the CPADS column
-  contract and `morie_canonicalize_cpads_data()` helpers.
+  contract (`morie_cpads_contract()`) and
+  `morie_canonicalize_cpads_data()`.
+- The `mrm-dataset-fetchers` vignette covers the OTIS, Toronto Police,
+  SIU and case-law fetchers.

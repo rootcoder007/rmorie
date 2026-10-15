@@ -333,7 +333,7 @@ morie_tps_morans_i_neighbourhood <- function(df,
   }
 
   counts <- .tps_hood_counts(df, hood_col)
-  keep <- stats::complete.cases(df[, c(hood_col, lat_col, lon_col)])
+  keep <- !is.na(df[[hood_col]]) & .tps_coord_ok(df[[lat_col]], df[[lon_col]])
   d <- df[keep, , drop = FALSE]
   cent <- aggregate(d[, c(lat_col, lon_col)], by = list(d[[hood_col]]), mean)
   rownames(cent) <- as.character(cent[[1L]])
@@ -497,7 +497,7 @@ morie_tps_local_morans_i <- function(df,
   }
 
   counts <- .tps_hood_counts(df, hood_col)
-  keep <- stats::complete.cases(df[, c(hood_col, lat_col, lon_col)])
+  keep <- !is.na(df[[hood_col]]) & .tps_coord_ok(df[[lat_col]], df[[lon_col]])
   d <- df[keep, , drop = FALSE]
   cent <- aggregate(d[, c(lat_col, lon_col)], by = list(d[[hood_col]]), mean)
   rownames(cent) <- as.character(cent[[1L]])
@@ -630,8 +630,10 @@ morie_tps_kde_density <- function(df,
   }
 
   coords <- df[, c(lat_col, lon_col), drop = FALSE]
-  coords <- coords[stats::complete.cases(coords), , drop = FALSE]
-  coords <- coords[coords[[lat_col]] != 0 & coords[[lon_col]] != 0, , drop = FALSE]
+  coord_ok <- .tps_coord_ok(coords[[lat_col]], coords[[lon_col]])
+  coords <- coords[coord_ok, , drop = FALSE]
+  coords[] <- lapply(coords, as.numeric)
+  n_drop <- sum(!coord_ok)
   n <- nrow(coords)
   if (n < 50L) {
     return(.tps_spatial_result(
@@ -674,6 +676,7 @@ morie_tps_kde_density <- function(df,
     title, call,
     summary_lines = list(
       `Geocoded incidents` = as.integer(n),
+      `Dropped (no / out-of-Toronto location)` = as.integer(n_drop),
       `Bandwidth` = bandwidth,
       `Max density (at obs)` = max(densities),
       `Mean density` = mean(densities),
@@ -685,6 +688,7 @@ morie_tps_kde_density <- function(df,
     warnings = character(0),
     interpretation = interp,
     n = as.integer(n),
+    n_dropped_coords = as.integer(n_drop),
     densities = densities,
     max_density = max(densities),
     mean_density = mean(densities),

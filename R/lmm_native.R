@@ -1164,11 +1164,9 @@ morie_lmm <- function(formula, data, REML = TRUE, random = NULL,
                                 control = list(maxit = ctrl$iter.max %||% 1000L, factr = 10)),
                    error = function(e) NULL)
     if (!is.null(o3) && is.finite(o3$value) && o3$value < o1$objective) {
+      # nlminb (PORT) accepts only steps that lower f, so started at o3$par it ends at or
+      # below o3$value (f is Inf, never NaN, on failure): no fallback to o3 is needed
       o1 <- stats::nlminb(o3$par, f, lower = lower, control = ctrl)
-      if (!(o1$objective <= o3$value)) {
-        o1$par <- o3$par
-        o1$objective <- o3$value
-      }
     }
   }
   out <- list(par = o1$par, objective = o1$objective,

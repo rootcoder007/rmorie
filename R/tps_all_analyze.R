@@ -180,10 +180,10 @@ morie_tps_spatial_summary <- function(df, ds_name = "?") {
     Incidents = nrow(df)
   )
   if (all(c("LAT_WGS84", "LONG_WGS84") %in% names(df))) {
-    lat <- suppressWarnings(as.numeric(df[["LAT_WGS84"]]))
-    lon <- suppressWarnings(as.numeric(df[["LONG_WGS84"]]))
-    lat <- lat[is.finite(lat)]
-    lon <- lon[is.finite(lon)]
+    ok <- .tps_coord_ok(df[["LAT_WGS84"]], df[["LONG_WGS84"]])
+    lat <- as.numeric(df[["LAT_WGS84"]][ok])
+    lon <- as.numeric(df[["LONG_WGS84"]][ok])
+    summary_lines[["Dropped (no / out-of-Toronto location)"]] <- sum(!ok)
     if (length(lat) > 0L && length(lon) > 0L) {
       summary_lines[["Latitude range"]] <- sprintf(
         "%.4f-%.4f", min(lat), max(lat)

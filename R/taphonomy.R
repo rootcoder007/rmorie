@@ -335,7 +335,7 @@ morie_taphonomy_preservation_delta <- function(data,
 
   # E-value on the standardized effect (continuous-outcome bridge).
   out_sd <- stats::sd(data[[outcome]], na.rm = TRUE)
-  ev <- list(morie_e_value = NA_real_, e_value_ci = NA_real_)
+  ev <- list(e_value = NA_real_, e_value_ci = NA_real_)
   if (is.finite(out_sd) && out_sd > 0 && is.finite(ate)) {
     d  <- ate / out_sd
     rr <- .taphonomy_smd_to_rr(d)
@@ -358,7 +358,7 @@ morie_taphonomy_preservation_delta <- function(data,
       "sufficient, but sufficiency is not proof of exclusivity."
     ),
     treatment, outcome, ate, ci_lower, ci_upper, n, method,
-    if (is.finite(ev$morie_e_value)) sprintf("%.2f", ev$morie_e_value) else "NA"
+    if (is.finite(ev$e_value)) sprintf("%.2f", ev$e_value) else "NA"
   )
 
   list(
@@ -368,7 +368,7 @@ morie_taphonomy_preservation_delta <- function(data,
     ci_lower       = ci_lower,
     ci_upper       = ci_upper,
     n              = n,
-    e_value        = ev$morie_e_value,
+    e_value        = ev$e_value,
     e_value_ci     = ev$e_value_ci,
     estimator      = method,
     cate_per_unit  = cate_per_unit,

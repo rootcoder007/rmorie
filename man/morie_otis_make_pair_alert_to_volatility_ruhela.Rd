@@ -16,9 +16,7 @@ data.frame), \code{T} = "T_high_ac", \code{Y} = "Y_vm_count", and
 }
 \description{
 Implements Ruhela's "ac >= 2 -> vm" RF (Ruhela Formulation): the
-8-state combo encoding documented in OTIS-RC/notez1a.qmd and used
-for the published \code{res_pool} / \code{res_by_year} / \code{res_all}
-estimates. Per \code{(UniqueIndividual_ID, EndFiscalYear)}, the
+8-state encoding of the three alert flags. Per \code{(UniqueIndividual_ID, EndFiscalYear)}, the
 alert-state \emph{complexity} \code{ac} is the number of distinct
 alert combos with positive support across that person-year's rows
 (NOT the max of simultaneous flags -- see the Naive arm for that

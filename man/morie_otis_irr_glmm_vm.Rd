@@ -7,26 +7,33 @@
 morie_otis_irr_glmm_vm(df)
 }
 \arguments{
-\item{df}{b01 data.frame.}
+\item{df}{b01 (or a01) data.frame.}
 }
 \value{
 \code{morie_otis_result}.
 }
 \description{
-Builds the (id x fiscal year) cell with outcome
-\code{vm} (number of distinct regions visited) and treatment
-\code{T_high_ac} = 1 if the person-year alert-complexity \eqn{ac >=
-2}, then fits Poisson and (optionally) negative-binomial GLMs
-adjusting for Year, Gender, and Age. The NB fit uses
-\pkg{MASS::glm.nb} when available; if not, only Poisson is
-reported.
+Builds the (id x fiscal year) cell frame with the shared Ruhela
+builder, \code{\link{morie_otis_make_pair_alert_to_volatility_ruhela}},
+so treatment and outcome are the canonical ones: treatment
+\code{T_high_ac} = 1 when the person-year's alert complexity
+\code{ac} (the number of distinct MentalHealth x SuicideRisk x
+SuicideWatch alert combinations across its rows, the no-alert
+combination included) is at least 2; outcome \code{Y_vm_count} = the
+number of region changes in the person-year (rows whose
+\code{Region_AtTimeOfPlacement} differs from
+\code{Region_MostRecentPlacement}, plus changes of
+\code{Region_AtTimeOfPlacement} from one row to the next). It then
+fits Poisson and negative-binomial GLMs of \code{Y_vm_count} on
+\code{T_high_ac} adjusting for Year, Gender, and Age, the NB fit
+through the native \code{\link{morie_glm_nb}}.
 }
 \details{
 No random effect / cluster-robust SE -- for paper-grade inference,
 use the dedicated OTIS DML pipeline.
 }
 \examples{
-b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
-res <- morie_otis_irr_glmm_vm(b02)
+b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+res <- morie_otis_irr_glmm_vm(b01)
 res$title
 }

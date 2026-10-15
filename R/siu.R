@@ -1106,7 +1106,10 @@ morie_siu_audit_case <- function(case_number,
 #'   \code{html_excerpt} (a 240-character window around the first
 #'   occurrence of either value in the cleaned report text). When
 #'   parser and external disagree, the \code{html_excerpt} is the
-#'   tie-breaker.
+#'   tie-breaker. Mapped fields whose external column or morie field
+#'   does not exist are skipped and listed in the
+#'   \code{"unmatched_fields"} attribute; when none match, the
+#'   function stops and names them.
 #' @examples
 #' \donttest{
 #' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
@@ -1199,6 +1202,17 @@ morie_siu_compare <- function(case_number, external,
     tolower(x)
   }
 
+  ext_ok <- names(field_map) %in% names(e_row)
+  fld_ok <- vapply(field_map, function(f) f %in% names(audit$row), logical(1))
+  unmatched <- c(
+    sprintf("external column '%s' not found", names(field_map)[!ext_ok]),
+    sprintf("morie field '%s' not found",
+            unlist(field_map, use.names = FALSE)[ext_ok & !fld_ok])
+  )
+  if (!any(ext_ok & fld_ok)) {
+    stop("no field_map entry matches: ", paste(unmatched, collapse = "; "),
+         call. = FALSE)
+  }
   rows <- lapply(names(field_map), function(k) {
     fld <- field_map[[k]]
     if (!(k %in% names(e_row)) || !(fld %in% names(audit$row))) {
@@ -1221,6 +1235,7 @@ morie_siu_compare <- function(case_number, external,
   })
   out <- do.call(rbind, rows)
   rownames(out) <- NULL
+  if (length(unmatched)) attr(out, "unmatched_fields") <- unmatched
   out
 }
 
@@ -2159,6 +2174,16 @@ morie_siu_sanity_check <- function(df) {
     )
   }
   stopifnot(is.data.frame(df), "case_number" %in% names(df))
+  out_case <- df$case_number
+  out_drid <- if (!is.null(df$drid)) df$drid else rep(NA_character_, nrow(df))
+  # A missing value (numeric NA, logical NA, character NA or "") is not a
+  # format error: normalise every column to character with "" for missing,
+  # so a default read.csv() and a colClasses = "character" read agree.
+  df[] <- lapply(df, function(v) {
+    v <- trimws(as.character(v))
+    v[is.na(v)] <- ""
+    v
+  })
 
   check_case <- function(v) {
     bad <- nzchar(v) & !grepl("^[0-9]{2}-[A-Z]{2,4}-[0-9]{3}$", v)
@@ -2263,8 +2288,8 @@ morie_siu_sanity_check <- function(df) {
     function(x) sum(nzchar(x)), integer(1)
   )
   out <- data.frame(
-    case_number = df$case_number,
-    drid = if (!is.null(df$drid)) df$drid else rep(NA_character_, nrow(df)),
+    case_number = out_case,
+    drid = out_drid,
     issues_count = issues_count,
     issues = collapsed,
     stringsAsFactors = FALSE

@@ -21,20 +21,20 @@ knitr::opts_chunk$set(
 
 The MRM empirical callables (`mrm_otis_*`, `mrm_tps_*`,
 `mrm_siu_*`) operate on three external data sources. This vignette
-documents how `morie` makes each of them accessible to end users:
+documents how rmorie makes each of them accessible:
 
 * **OTIS** (Offender Tracking Information System; published by the
-  Ontario Ministry of the Solicitor General) \u2014 public CKAN
+  Ontario Ministry of the Solicitor General) -- public CKAN
   release on `data.ontario.ca`, reached via the existing
   `morie_load_dataset()` infrastructure.
-* **TPS** (Toronto Police Service) \u2014 public ArcGIS Open Data, reached
+* **TPS** (Toronto Police Service) -- public ArcGIS Open Data, reached
   via `morie_fetch_tps()`.
-* **SIU** (Ontario Special Investigations Unit) \u2014 public Director's
-  Reports, scraped on demand by `morie_fetch_siu()` (the corpus is
-  not shipped because redistribution licensing is unsettled).
+* **SIU** (Ontario Special Investigations Unit) -- public Director's
+  Reports. `morie_fetch_siu()` writes the panel-reviewed corpus
+  bundled in rmoriedata, or fetches the reports live on request.
 
-Four small reference samples ship with the package
-(`inst/extdata/`) so every example runs offline.
+Four small reference tables, read by `morie_sample()`, let the
+examples run offline.
 
 ```{r intro}
 library(rmorie)
@@ -42,9 +42,9 @@ library(rmorie)
 
 # Included reference samples
 
-The samples live in `inst/extdata/` and total ~420 KB. Each is a
-1000-row random draw (seed 42) except `otis_b09` and `otis_c11`,
-which are shipped whole (already small).
+`otis_b09` and `otis_c11` ship in rmorie and are the whole published
+tables. `otis_b01` and `tps_assault` ship in rmoriedata and are
+1,000-row extracts.
 
 ```{r samples}
 # Included samples
@@ -57,32 +57,33 @@ tps <- morie_sample("tps_assault")
 str(b01, max.level = 1)
 nrow(b09)
 nrow(c11)
-ncol(tps)
+dim(tps)
 ```
 
 # OTIS via CKAN (`data.ontario.ca`)
 
 The OTIS public release is hosted at
-`data.ontario.ca/dataset/data-on-inmates-in-ontario` as 28 CSV
-resources. The MORIE catalog has four of them registered with their
-canonical CKAN resource IDs:
+`data.ontario.ca/dataset/data-on-inmates-in-ontario` (31 resources
+when this vignette was written, 29 of them CSV). The catalogue
+registers these tables with their CKAN resource IDs:
 
 ```{r otis-keys}
-cat <- morie_dataset_catalog()
-cat[cat$source == "otis", c("key", "name", "table_name", "ckan_resource_id")]
+catalog <- morie_dataset_catalog()
+catalog[catalog$source == "otis", c("key", "name", "ckan_resource_id")]
 ```
 
-To pull the full b01 (82,001 rows) from CKAN:
+To pull the full b01 from CKAN (network; not run when the vignette is
+built):
 
 ```{r otis-load, eval = FALSE}
 b01_full <- morie_load_dataset("otisb01")
 nrow(b01_full)
-# 82001
+# 82001 (October 2026)
 ```
 
-The loader downloads the CSV on first call, caches it into the
-package SQLite database, and returns a data.frame on subsequent
-calls.
+The loader downloads the CSV on the first call, keeps it in the
+per-user cache under `morie_cache_dir()`, and reads that copy on
+later calls (`refresh = TRUE` downloads it again).
 
 # TPS via ArcGIS Open Data
 
@@ -93,19 +94,21 @@ ArcGIS Online. MORIE knows the layer URLs for nine categories.
 morie_tps_layer_urls()
 ```
 
-To fetch a single category:
+To fetch a single category (network; not run when the vignette is
+built):
 
 ```{r tps-fetch, eval = FALSE}
 csv_path <- morie_fetch_tps("Assault")
 assault <- utils::read.csv(csv_path)
 nrow(assault)
-# 254378 (as of mid-2026)
+# 267796 (the layer count in October 2026)
 ```
 
-The fetcher pages through `/query` with a 2000-record-per-page cap
-(the ArcGIS-imposed maximum) and writes a tidy CSV to
-`~/.cache/morie/tps/tps_Assault.csv`. Subsequent calls return the
-cached path unless `overwrite = TRUE`.
+The fetcher pages through `/query` with up to 2,000 records per page
+(`max_per_page`) and writes `tps_Assault.csv` into `cache_dir`, which
+defaults to a directory under `tempdir()`. Later calls in the session
+return the cached path unless `overwrite = TRUE`; pass a persistent
+`cache_dir` to keep the file between sessions.
 
 Filtering at the server side:
 
@@ -115,56 +118,44 @@ recent <- morie_fetch_tps("Homicides",
                           overwrite = TRUE)
 ```
 
-# SIU via on-demand scraper
+# SIU Director's Reports
 
-The Ontario SIU publishes Director's Reports at
-`siu.on.ca/en/case_directors_reports.php`. MORIE includes an
-on-demand scraper that:
+The Ontario SIU publishes Director's Reports at `siu.on.ca`.
+`morie_fetch_siu()` returns the path of an SIU.csv file. By default it
+writes the panel-reviewed corpus bundled in rmoriedata, which needs no
+network access:
 
-* Iterates over the index page(s) (optionally filtered by year)
-* Extracts case links
-* Pulls each case detail page
-* Parses incident date, notifying police service, Director's
-  decision, and outcome text into a single CSV
-
-```{r siu, eval = FALSE}
-csv_path <- morie_fetch_siu()       # full unfiltered index
+```{r siu}
+csv_path <- morie_fetch_siu(lang = "en")
 siu <- utils::read.csv(csv_path)
-nrow(siu)
-
-# Or restricted to specific years:
-csv_path <- morie_fetch_siu(years = 2020:2025, overwrite = TRUE)
+dim(siu)
 ```
 
-## Why a scraper rather than a shipped dataset?
+With `options(morie.siu.allow_fetch = TRUE)` it fetches the reports
+live instead: it walks the DRID manifest shipped with rmorie
+(`morie_siu_index()`), requests each report and news release at
+`rate_rps` requests per second with `concurrency` parallel requests,
+and parses them with the package's C++ parser. That takes a long time
+and needs the network, so it is not run here:
 
-The legal status of redistributing a single tabular copy of public
-oversight reports is not clearly established. Running the scraper
-per-user is unambiguously fair use of public information; shipping
-the scraped corpus might be more questionable. The scraper itself
-respects a 2-second rate limit, sets a clear User-Agent, and follows
-the SIU site's published structure.
-
-## R-side wrapper, Python-side implementation
-
-`morie_fetch_siu()` in R is a thin `reticulate` wrapper around
-`morie.siu_fetch.fetch_siu_cases()` in Python. This keeps the regex
-parsing logic in one canonical place. If `reticulate` isn't
-installed, fall back to calling the Python directly:
-
-```{bash, eval = FALSE}
-python3 -c "from morie.siu_fetch import fetch_siu_cases; print(fetch_siu_cases())"
+```{r siu-live, eval = FALSE}
+options(morie.siu.allow_fetch = TRUE)
+csv_path <- morie_fetch_siu(lang = "en", cache_html = TRUE,
+                            rate_rps = 4, overwrite = TRUE)
 ```
+
+The `siu-pipeline` vignette covers the manifest, auditing and
+corrections.
 
 # Workflow: from included sample to verified result
 
-Putting it together \u2014 a complete worked example without any network
+Putting it together -- a complete worked example without any network
 call:
 
 ```{r workflow}
 b01 <- morie_sample("otis_b01")
 
-# Mandela classification with default "individual_any" denominator
+# Mandela classification, one row per placement
 mrm_classify_mandela(b01, denominator = "row")
 
 # Segregation duration KM
@@ -180,10 +171,11 @@ For a full-data version, swap `morie_sample("otis_b01")` for
 
 # Canadian case law and legislation via A2AJ and CanLII
 
-Access to Algorithmic Justice (A2AJ) publishes about 226,000 Canadian
-court and tribunal decisions and 27,000 statutes and regulations as
-open data, through a REST API and as one Parquet file per court on
-Hugging Face. The `morie_ingest_a2aj_*` functions wrap both channels.
+Access to Algorithmic Justice (A2AJ) publishes Canadian court and
+tribunal decisions and statutes and regulations as open data, through
+a REST API and as one Parquet file per court on Hugging Face. The
+`morie_ingest_a2aj_*` functions wrap both channels. The chunks in this
+section need the network and are not run when the vignette is built.
 
 ```{r a2aj-coverage, eval = FALSE}
 cov <- morie_ingest_a2aj_coverage("cases")
@@ -219,8 +211,8 @@ Human Rights Tribunal, the Ontario Superior Court, Alberta, Quebec or
 the remaining provinces (its issues #1, #3 and #4), and individual
 decisions can be missing (`2007 BCSC 1700`, issue #2). Those are
 reachable through CanLII's API, which needs a free key
-(`CANLII_API_KEY`) and returns metadata plus the citation network
-rather than full text:
+(`CANLII_API_KEY`; the chunk stops with a message without one) and
+returns metadata plus the citation network rather than full text:
 
 ```{r canlii, eval = FALSE}
 morie_ingest_a2aj_gaps()[, c("code", "canlii_database_id")]
@@ -235,17 +227,16 @@ any commercial use, and treat all texts as unofficial copies.
 
 # Caching layout
 
-| Cache path | Populated by | Size (full) |
+| Data | Fetched by | Cached in |
 |---|---|---|
-| `~/.cache/morie/morie.db` (SQLite) | `morie_load_dataset(*)` | a few MB to ~1 GB depending on selection |
-| `~/.cache/morie/tps/tps_*.csv` | `morie_fetch_tps()` | ~5--50 MB per category |
-| `~/.cache/morie/siu/SIU.csv` | `morie_fetch_siu()` | ~5 MB |
+| catalogue datasets (OTIS, PUMFs, ...) | `morie_load_dataset()` | per-user cache under `morie_cache_dir()` |
+| TPS layers | `morie_fetch_tps()` | `cache_dir` argument (default under `tempdir()`) |
+| SIU reports | `morie_fetch_siu()` | `cache_dir` argument (default under `tempdir()`) |
 
 # References
 
-* OTIS data dictionary \u2014
+* OTIS data dictionary --
   `data.ontario.ca/dataset/data-on-inmates-in-ontario`
-* Toronto Police Open Data \u2014 `data.torontopolice.on.ca/`
-* SIU Director's Reports \u2014 `siu.on.ca/en/case_directors_reports.php`
-* MRM theoretical paper (Ruhela 2026, *Multilevel Reconciliation
-  Methodology*; see `citation("morie")` for the full bibentry)
+* Toronto Police Open Data -- `data.torontopolice.on.ca/`
+* SIU Director's Reports -- `siu.on.ca/en/case_directors_reports.php`
+* Software: `citation("rmorie")`

@@ -423,8 +423,8 @@ morie_svm_decision_cpp <- function(SV, coef, rho, Xnew, kernel_type, gamma, coef
 
 #' Grow one regression / second-order tree (compiled)
 #' @noRd
-morie_tree_fit_cpp <- function(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen) {
-    .Call(`_rmorie_morie_tree_fit_cpp`, X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen)
+morie_tree_fit_cpp <- function(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen, cnt = numeric(0)) {
+    .Call(`_rmorie_morie_tree_fit_cpp`, X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen, cnt)
 }
 
 #' Predict from a flattened tree (compiled)

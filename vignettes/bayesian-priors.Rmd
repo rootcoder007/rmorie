@@ -8,12 +8,13 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
 ## General principle
 
-`morie_bayes_lm()` fits a Bayesian linear regression by MCMC. Each
+`morie_bayes_lm()` fits a Bayesian linear regression by random-walk
+Metropolis MCMC. Each
 regression coefficient is given an independent zero-mean Normal prior
 whose standard deviation is the `prior_sd` hyperparameter. The prior
 encodes how large the coefficients are expected to be *before* seeing
@@ -24,6 +25,7 @@ estimates toward zero.
 
 ```{r}
 library(rmorie)
+set.seed(1)
 d <- data.frame(x = rnorm(100))
 d$y <- 1 + 2 * d$x + rnorm(100)
 
@@ -32,8 +34,14 @@ fit <- morie_bayes_lm(y ~ x, d, prior_sd = 10, chains = 2, iter = 1000)
 print(fit)
 
 # a per-coefficient prior vector is also accepted
-fit2 <- morie_bayes_lm(y ~ x, d, prior_sd = c(5, 1))
+fit2 <- morie_bayes_lm(y ~ x, d, prior_sd = c(5, 1), chains = 2, iter = 1000)
+print(fit2)
 ```
+
+The data were simulated with intercept 1 and slope 2. The second fit
+gives the slope a prior standard deviation of 1, which pulls its
+estimate slightly toward zero relative to the first fit (with 100
+observations the likelihood dominates a prior this wide).
 
 Tighter priors (small `prior_sd`) regularise the fit; inspect
 convergence with `morie_bayes_diagnostics(fit)` and the posterior with

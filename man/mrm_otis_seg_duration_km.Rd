@@ -31,8 +31,12 @@ cutoff and the median duration among those.}
 }
 \value{
 A data.frame with one row per stratum (or one pooled row),
-columns \code{stratum}, \code{n}, \code{mean_days}, \code{median_days},
-\code{q25_days}, \code{pct_above_mandela}, \code{median_among_above_mandela}.
+columns \code{stratum}, \code{n}, \code{mean_days}, \code{median_days}, \code{q75_days}
+(the 75th percentile of duration: the day by which survival falls
+to 0.25, so a quarter of placements last longer),
+\code{pct_above_mandela}, \code{median_among_above_mandela}, and one
+\code{days_at_SXX} column per entry of \code{probs} (the day at which the
+survival function falls to \code{XX} percent).
 }
 \description{
 Treats each row of OTIS b01 as one observed placement with duration

@@ -35,7 +35,10 @@ A data frame with one row per mapped field: \code{field},
 \code{html_excerpt} (a 240-character window around the first
 occurrence of either value in the cleaned report text). When
 parser and external disagree, the \code{html_excerpt} is the
-tie-breaker.
+tie-breaker. Mapped fields whose external column or morie field
+does not exist are skipped and listed in the
+\code{"unmatched_fields"} attribute; when none match, the
+function stops and names them.
 }
 \description{
 For one case_number, line up the parser's value against the same

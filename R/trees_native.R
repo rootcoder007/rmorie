@@ -162,14 +162,16 @@
 #' @noRd
 .morie_tree_fit <- function(X, g, h, max_depth = 6L, min_node = 1L,
                             mtry = ncol(X), lambda = 0, alpha = 0,
-                            gamma_pen = 0) {
+                            gamma_pen = 0, cnt = NULL) {
   X <- as.matrix(X)
   if (exists("morie_tree_fit_cpp", mode = "function")) {
     return(morie_tree_fit_cpp(X, as.numeric(g), as.numeric(h),
                               as.integer(max_depth), as.integer(min_node),
                               as.integer(min(mtry, ncol(X))),
-                              lambda, alpha, gamma_pen))
+                              lambda, alpha, gamma_pen,
+                              if (is.null(cnt)) numeric(0) else as.numeric(cnt)))
   }
+  if (!is.null(cnt)) stop("row counts need the compiled tree builder", call. = FALSE)
   imp <- new.env(parent = emptyenv())
   imp$val <- numeric(ncol(X))
   tree <- .tree_grow(X, g, h, seq_len(nrow(X)), 0L, max_depth, min_node,
@@ -291,22 +293,48 @@
     fitted <- numeric(n)
     oob_sum <- numeric(n)
     oob_cnt <- integer(n)
+    # Rows sharing one covariate pattern are indistinguishable to a tree: it can only split
+    # between distinct values. With few patterns (OTIS a01: 18 among 65,467 person-years),
+    # each bootstrap tree grows on the patterns it drew, with summed gradients and the
+    # number of rows each stands for, so min_node still counts rows. Every split sees the
+    # same left/right sums, so these are the trees the rows would give, up to the order
+    # of a floating-point sum.
+    pat <- NULL
+    if (exists("morie_tree_fit_cpp", mode = "function") && n > 1L) {
+      key <- do.call(paste, c(lapply(seq_len(p), function(j) X[, j]), sep = "\r"))
+      ukey <- unique(key)
+      if (length(ukey) * 4L <= n) {
+        pid <- match(key, ukey)
+        pat <- list(pid = pid, Xu = X[match(ukey, key), , drop = FALSE], nu = length(ukey))
+      }
+    }
     for (b in seq_len(n_estimators)) {
       boot <- sample.int(n, n, replace = TRUE)
-      Xb <- X[boot, , drop = FALSE]
-      yb <- yv[boot]
-      # Squared-error loss: g = -y (so the leaf weight -G/H is the mean),
-      # h = 1. With lambda = 0 the second-order gain is exactly the
-      # variance reduction CART maximises.
-      f <- .morie_tree_fit(Xb, -yb, rep(1, length(yb)),
-                           max_depth = max_depth, min_node = min_node,
-                           mtry = mtry)
+      if (is.null(pat)) {
+        Xb <- X[boot, , drop = FALSE]
+        yb <- yv[boot]
+        # Squared-error loss: g = -y (so the leaf weight -G/H is the mean),
+        # h = 1. With lambda = 0 the second-order gain is exactly the
+        # variance reduction CART maximises.
+        f <- .morie_tree_fit(Xb, -yb, rep(1, length(yb)),
+                             max_depth = max_depth, min_node = min_node,
+                             mtry = mtry)
+        pred <- .tree_predict(f$tree, X)
+      } else {
+        cb <- tabulate(pat$pid[boot], pat$nu)
+        use <- which(cb > 0L)
+        gb <- -as.numeric(rowsum(yv[boot], pat$pid[boot], reorder = TRUE))
+        f <- .morie_tree_fit(pat$Xu[use, , drop = FALSE], gb, cb[use],
+                             max_depth = max_depth, min_node = min_node,
+                             mtry = mtry, cnt = cb[use])
+        pred <- .tree_predict(f$tree, pat$Xu)[pat$pid]
+      }
       forest[[b]] <- f$tree
       imp <- imp + f$importance
-      fitted <- fitted + .tree_predict(f$tree, X)
-      oob <- setdiff(seq_len(n), unique(boot))
+      fitted <- fitted + pred
+      oob <- which(tabulate(boot, n) == 0L)
       if (length(oob)) {
-        oob_sum[oob] <- oob_sum[oob] + .tree_predict(f$tree, X[oob, , drop = FALSE])
+        oob_sum[oob] <- oob_sum[oob] + pred[oob]
         oob_cnt[oob] <- oob_cnt[oob] + 1L
       }
     }

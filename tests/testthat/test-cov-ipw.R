@@ -25,8 +25,8 @@ test_that("morie_validate_cpads_data flags missing variables and respects strict
   )
 })
 
-test_that(".weighted_prop and .ess compute on simple inputs", {
-  expect_equal(rmorie:::.weighted_prop(c(1, 0, 1), c(2, 1, 1)), 0.75)
+test_that(".hajek_mean and .ess compute on simple inputs", {
+  expect_equal(rmorie:::.hajek_mean(c(1, 0, 1), c(2, 1, 1))[["mean"]], 0.75)
   expect_equal(rmorie:::.ess(rep(1, 10)), 10)
   expect_lt(rmorie:::.ess(c(rep(1, 9), 100)), 10)
 })
@@ -37,7 +37,7 @@ test_that("morie_run_propensity_ipw_analysis returns IPW tables, writes CSVs", {
   res <- suppressWarnings(morie_run_propensity_ipw_analysis(d, output_dir = od))
   expect_named(res, c("analysis_frame", "ipw_results", "diagnostics"))
   expect_equal(res$ipw_results$estimand, "ATE")
-  expect_equal(nrow(res$diagnostics), 6L)
+  expect_equal(nrow(res$diagnostics), 7L)
   expect_true(file.exists(file.path(od, "ipw_results.csv")))
   expect_true(file.exists(file.path(od, "ipw_diagnostics.csv")))
 })

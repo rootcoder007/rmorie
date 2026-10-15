@@ -34,7 +34,8 @@ test_that("mrm_tps_levy_scaling validates input and fits a Hill alpha", {
   expect_equal(one$n_events, 1L)
   expect_true(is.na(one$hill_alpha))
   res <- mrm_tps_levy_scaling(.fake_tps(220L))
-  expect_equal(res$n_events, 220L)
+  # points the fixture scatters south of 43.55 (into Lake Ontario) are dropped
+  expect_equal(res$n_events + res$n_dropped_coords, 220L)
   expect_true(is.numeric(res$hill_alpha))
 })
 

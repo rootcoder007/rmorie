@@ -38,7 +38,8 @@ d
 
 Cohen's d expresses the difference between two means in pooled
 standard-deviation units. Conventional benchmarks: 0.2 small,
-0.5 medium, 0.8 large.
+0.5 medium, 0.8 large. The sign follows the argument order (first
+group minus second), so the estimate above is negative.
 
 # Cramer's V (categorical association)
 
@@ -50,8 +51,7 @@ v
 ```
 
 Cramer's V scales the chi-square statistic to a 0--1 association
-measure for contingency tables. It is particularly useful for the
-provincial-vs-federal Mandela-rate cross-comparisons in MRM.
+measure for contingency tables.
 
 # Omega-squared (one-way ANOVA)
 
@@ -76,7 +76,7 @@ morie_proportion_ci(35, 100, method = "wald")      # Wald
 
 # E-value (sensitivity analysis)
 
-```{r e-value, eval = exists("morie_e_value")}
+```{r e-value}
 morie_e_value(rr = 2.0)
 ```
 
@@ -86,7 +86,7 @@ fully explain away an observed risk ratio.
 
 # Where to go next
 
-- For survey-weighted versions of `morie_cohens_d` and `morie_cramers_v`, see
-  the `survey-weighted` vignette.
+- The `chi-square-and-anova` vignette puts Cramer's V and
+  omega-squared next to the tests they summarise.
 - For full causal-inference workflows that include ATE / ATT / ATC
   effect sizes with CIs, see the `causal-inference` vignette.

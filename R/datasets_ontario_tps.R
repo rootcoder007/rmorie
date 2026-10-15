@@ -57,6 +57,21 @@
 # given resource_id; return a parsed data.frame. Mock this in tests.
 #' Internal helper: Morie Ontario Ckan Dump Csv
 #' @noRd
+#' Internal helper: a CKAN datastore records payload as a data frame
+#'
+#' \code{datastore/dump?format=json} sends each record as an array and the
+#' column names separately in \code{fields}; read as is, every live OTIS table
+#' came back as V1..V4 with the row id as a column. Names come from
+#' \code{fields}, and CKAN's own \code{_id} is dropped.
+#' @noRd
+.morie_ckan_records_frame <- function(rec, fields) {
+  df <- as.data.frame(rec, stringsAsFactors = FALSE)
+  ids <- if (is.data.frame(fields)) fields$id else vapply(fields %||% list(), function(f) f$id %||% "", "")
+  if (length(ids) == ncol(df) && all(nzchar(ids)) && all(grepl("^V[0-9]+$", names(df)))) names(df) <- ids
+  df[["_id"]] <- NULL
+  df
+}
+
 .morie_ontario_ckan_dump_csv <- function(resource_id, limit = 200000L) {
   url <- sprintf(
     "%s/datastore/dump/%s?format=json&limit=%d",
@@ -70,11 +85,9 @@
   if (is.data.frame(body)) {
     return(body)
   }
-  if (!is.null(body$records)) {
-    return(as.data.frame(body$records))
-  }
-  if (!is.null(body$result$records)) {
-    return(as.data.frame(body$result$records))
+  rec <- body$records %||% body$result$records
+  if (!is.null(rec)) {
+    return(.morie_ckan_records_frame(rec, body$fields %||% body$result$fields))
   }
   stop("unrecognised Ontario CKAN datastore_dump payload shape",
     call. = FALSE

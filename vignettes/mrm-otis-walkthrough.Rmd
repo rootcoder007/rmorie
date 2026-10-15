@@ -19,91 +19,267 @@ knitr::opts_chunk$set(
 
 # What this vignette covers
 
-The **MRM (Multilevel Reconciliation Methodology)** framework is a coordinated set
-of ten causal estimators paired with a multi-source data layer for
-Canadian carceral, police, and oversight data. This vignette uses the
-provincial Offender Tracking Information System (OTIS; published by
-the Ontario Ministry of the Solicitor General)
-restrictive-confinement microdata as an example, applies the
-ten-estimator ensemble to a binary-treatment design on dataset `a01`,
-and shows how to read the resulting summary.
+The Offender Tracking Information System (OTIS) tables, published by
+the Ontario Ministry of the Solicitor General on data.ontario.ca,
+describe restrictive confinement and segregation in Ontario's
+provincial institutions. This vignette shows the rmorie functions that
+work with them:
 
-The mathematical foundations are developed in the companion paper
-(Ruhela 2026, *The MRM Framework*; see `citation("morie")` for the
-full bibentry).
+- where the OTIS tables come from, online and offline;
+- `morie_otis_analyze_a01_mrm()`, which runs a ten-estimator causal
+  ensemble on the canonical a01 design;
+- `morie_mrm_estimate_causal_effect()`, the general multi-estimator
+  entry point, on the same design;
+- `morie_otis_irr_glmm_vm()`, the aggregate incidence-rate ratio;
+- the Mandela-Rules classifiers and the federal comparison tables.
 
-# Loading OTIS
-
-OTIS is shipped with the package; the `morie_load_dataset()` loader
-hides the SQLite-backed indirection.
-
-```{r load-otis, eval = FALSE}
+```{r setup}
 library(rmorie)
-otis <- morie_load_dataset("otis-2025-a01")
-str(otis)
+```
+
+The OTIS analysis functions return lists with a `tables` element.
+This helper turns one of those tables into a data frame for printing:
+
+```{r helper}
+as_table <- function(tab) {
+  rows <- lapply(tab$rows, function(r) unlist(lapply(r, as.character)))
+  out <- as.data.frame(do.call(rbind, rows), stringsAsFactors = FALSE)
+  names(out) <- tab$headers
+  out
+}
+```
+
+# Where the OTIS data come from
+
+The dataset catalogue lists the OTIS tables that
+`morie_load_dataset()` fetches from data.ontario.ca:
+
+```{r otis-catalog}
+cat_otis <- morie_dataset_catalog()
+cat_otis[cat_otis$source == "otis", c("key", "name")]
+```
+
+The full tables are downloaded on the first call and then read from
+the local cache. This chunk is not run when the vignette is built: it
+needs the network, and the ensemble below takes a long time on the
+full a01 table (76,934 rows in October 2026; a test run had not
+finished within 20 minutes):
+
+```{r otis-download, eval = FALSE}
+a01 <- morie_load_dataset("otisa01")
+r_full <- morie_otis_analyze_a01_mrm(a01)
+```
+
+Offline, three kinds of OTIS data are available:
+
+- `morie_sample("otis_b01")` is a 1,000-row extract of table b01;
+  `morie_sample("otis_b09")` and `morie_sample("otis_c11")` are the
+  whole b09 and c11 tables.
+- `morie_otis_load()` returns the cached a01 table if there is one,
+  and otherwise a 5-row synthetic sample in the a01 layout. Its
+  numbers are not findings.
+- `morie_synth_otis()` simulates OTIS tables with the published
+  column layout. The examples below use it for the a01 design.
+
+```{r otis-offline}
+b01 <- morie_sample("otis_b01")
+dim(b01)
+a01_syn <- morie_synth_otis("a01", n = 300L, seed = 1L)
+head(a01_syn[, c("EndFiscalYear", "UniqueIndividual_ID",
+                 "MentalHealth_Alert", "SuicideRisk_Alert",
+                 "SuicideWatch_Alert")], 3)
 ```
 
 # The canonical a01 design
 
-For dataset `a01` the canonical formulation is
-`T_high_ac` (a binary treatment derived from administrative-classification
-flags) on `Y_vm_count` (a count of a specific in-confinement
-observation) with the standard demographic covariate set. This is the
-design choice that the per-row MRM modules implement.
+OTIS reassigns `UniqueIndividual_ID` every fiscal year, so the unit of
+analysis is the person-year. For each person-year,
+`morie_otis_make_pair_alert_to_volatility_ruhela()` builds:
 
-```{r design, eval = FALSE}
-# Full ten-estimator ensemble on the canonical a01 design:
-result <- morie_estimate_ate(
-  data       = otis,
-  outcome    = "Y_vm_count",
-  treatment  = "T_high_ac",
-  covariates = c("age", "sex", "region", "fiscal_year")
-)
-print(result)
+- `ac`: the number of distinct combinations of the three alert flags
+  (mental health, suicide risk, suicide watch) across that
+  person-year's rows;
+- the treatment `T_high_ac = 1` when `ac >= 2`;
+- the outcome `Y_vm_count`: the number of region changes, counting a
+  change between the region at placement and the most recent region
+  within a row, and a change of region from one row to the next;
+- the covariates `Gender`, `Age_Category` and `EndFiscalYear`.
+
+```{r pair}
+pair <- morie_otis_make_pair_alert_to_volatility_ruhela(a01_syn)
+nrow(pair$data)
+table(pair$data$T_high_ac)
 ```
 
-The returned object summarises the IPW (Hajek), AIPW
-(Robins--Rotnitzky--Zhao), g-computation, propensity-score-matching
-(1:1 NN and five-strata subclass), IRM-DML
-(Chernozhukov *et al.* 2018), PLR-DML, and SuperLearner-stacked AIPW
-estimates. Multi-SE comparison (pooled, cluster on fiscal year, cluster
-on individual ID, two-way) is reported alongside the IRM-DML primary.
+# The ten-estimator ensemble
 
-# Augmented IPW
+`morie_otis_analyze_a01_mrm()` (an alias of
+`morie_otis_analyze_a01_ruhela_formulations()`) runs ten estimators on
+this design: IPW (Hajek), AIPW, g-computation, 1:1 propensity-score
+matching, propensity-score subclassification, IRM double machine
+learning (ATE, ATTE and ATC), matching followed by IRM-DML, an AIPW
+estimate of the ATC, the partially linear DML model, and a
+SuperLearner-stacked AIPW. Here it runs on the simulated a01 table, so
+the estimates describe the simulation, not Ontario:
 
-```{r aipw, eval = FALSE}
-result_aipw <- morie_estimate_aipw(
-  data       = otis,
-  outcome    = "Y_vm_count",
-  treatment  = "T_high_ac",
-  covariates = c("age", "sex", "region", "fiscal_year")
+```{r ensemble}
+res <- morie_otis_analyze_a01_mrm(a01_syn)
+class(res)
+str(res$summary_lines[c("n", "Treated prevalence")])
+ens <- as_table(res$tables[[1]])
+ens[, c("Estimator", "Estimand", "Estimate", "SE", "95% CI")]
+```
+
+The second table compares four standard errors for the IRM-DML
+estimate: pooled, clustered on fiscal year, clustered on person, and
+two-way:
+
+```{r multi-se}
+as_table(res$tables[[2]])[, c("SE flavour", "ATE", "SE", "95% CI")]
+```
+
+The third table is a sensitivity arm built by
+`morie_otis_make_pair_alert_to_volatility_naive()`: the treatment is
+"at least two alert flags at once in some row of the person-year", and
+the outcome is binary (any row whose two region columns differ):
+
+```{r naive}
+as_table(res$tables[[3]])[, c("Estimator", "ATE", "SE", "95% CI")]
+```
+
+The individual estimator outputs are kept in `res$payload$ensemble`.
+
+# The general multi-estimator entry point
+
+`morie_mrm_estimate_causal_effect()` takes any data frame with a
+binary treatment and runs up to four estimators (nearest-neighbour
+matching, IPW, AIPW and DML) on the same specification. It adjusts the
+p-values for multiple testing (Holm by default) and pools the
+estimates. `morie_mrm_report()` renders the result:
+
+```{r mrm-effect}
+eff <- morie_mrm_estimate_causal_effect(
+  pair$data, treatment = pair$T, outcome = pair$Y,
+  covariates = pair$covariates,
+  methods = c("matching", "ate", "aipw", "dml"),
+  correction = "holm"
 )
-print(result_aipw)
+cat(morie_mrm_report(eff, format = "markdown"), sep = "\n")
+```
+
+For a single estimator, `morie_estimate_ate()` returns one Hajek IPW
+estimate with its standard error and confidence interval, and
+`morie_estimate_aipw()` one augmented IPW estimate:
+
+```{r single}
+ipw <- morie_estimate_ate(pair$data, pair$T, pair$Y, pair$covariates)
+unlist(ipw[c("ate", "se", "ci_lower", "ci_upper", "n", "ess")])
 ```
 
 # Aggregate companion: incidence-rate ratios
 
-For aggregate (year-level) outcomes the analog is a Poisson or
-negative-binomial GLM with cluster-robust standard errors. The MRM
-framework reports both the per-row individual-level estimate (above)
-and the aggregate IRR family in parallel; see the companion paper for
-the formal aggregate-IRR notation.
+`morie_otis_irr_glmm_vm()` builds person-year cells from table b01 with
+the same builder as the a01 design
+(`morie_otis_make_pair_alert_to_volatility_ruhela()`) and fits Poisson and
+negative-binomial GLMs of the regional-volatility count `Y_vm_count` (region
+changes) on `T_high_ac` (alert-state complexity of at least 2), adjusting
+for year, gender and age band. It has no random effect and no cluster-robust standard error,
+and says so in its warnings. On the 1,000-row b01 extract, few
+person-years are treated, so the interval is wide:
+
+```{r irr}
+irr <- morie_otis_irr_glmm_vm(b01)
+irr
+```
 
 # Mandela classification
 
-A separate Mandela-Rules classifier (UN Mandela Rules 43 and 44) is
-applied at both the federal and provincial levels. The provincial
-implementation uses a duration-only proxy that is documented
-explicitly in the framework paper. Federal counterpart analyses (SIU
-IAP, Sprott--Doob--Iftene) live in the companion Python module
-`morie.tps_csi` and `morie.siu_iap`.
+Rule 44 of the UN Mandela Rules defines solitary confinement as
+confinement for 22 hours or more a day without meaningful human
+contact, and prolonged solitary confinement as solitary confinement
+for more than 15 consecutive days; Rule 43 prohibits prolonged
+solitary confinement.
+
+`morie_otis_analyze_c11_mandela_classification()` applies the 15-day
+threshold to OTIS table c11 (individuals by aggregate length of
+confinement). OTIS records no hours out of cell, so the provincial
+classification is a duration-only proxy:
+
+```{r c11}
+c11 <- morie_sample("otis_c11")
+m11 <- morie_otis_analyze_c11_mandela_classification(c11)
+as_table(m11$tables[[1]])
+```
+
+`morie_otis_analyze_otis_mandela_provincial_vs_federal()` sets those
+rates beside the federal Structured Intervention Unit figures of
+Sprott and Doob (2021, Table 19):
+
+```{r prov-fed}
+pf <- morie_otis_analyze_otis_mandela_provincial_vs_federal(c11)
+as_table(pf$tables[[1]])
+```
+
+The units differ (federal person-stays, provincial individuals), as
+the function's caveat line states.
+
+Three further classifiers work on single records:
+
+```{r classifiers}
+# Federal SIU stay: days, average hours out of cell, % of days missing 4 h
+morie_siu_classify_mandela(20, 1.5, 100)$category
+# OTIS alert flags (mental health, suicide risk, suicide watch) + duration
+morie_otis_classify_mandela_combo(1, 1, 0, days = 20)$mandela_category
+# Placement-level rates on b01
+mrm_classify_mandela(b01, denominator = "row")
+```
+
+`morie_otis_analyze_b05_mandela_classification()` applies the same
+threshold to table b05 (placements by consecutive length). b05 is not
+in the catalogue, so read it straight from data.ontario.ca (network;
+not run here):
+
+```{r b05, eval = FALSE}
+b05 <- utils::read.csv(paste0(
+  "https://data.ontario.ca/dataset/09f7fc65-d3bb-4ca8-8b84-1cdc3ef73c36/",
+  "resource/754e8cde-5c74-4c0a-9782-79767a2b26b0/download/",
+  "b05_segregation_placements_consecutive_lengths.csv"),
+  fileEncoding = "UTF-8-BOM")
+m05 <- morie_otis_analyze_b05_mandela_classification(b05)
+as_table(m05$tables[[1]])
+```
+
+# Federal counterparts
+
+The federal side has its own functions:
+
+- `morie_siuiap_panel_summary()` describes the Structured Intervention
+  Unit Implementation Advisory Panel, and `MORIE_SIUIAP_REPORTS` lists
+  its reports; `morie_siuiap_cite()` gives the citation of one report.
+- `analyze_doob_table1_releases()`,
+  `analyze_doob_table2_flow()`,
+  `analyze_doob_table3_age_overrepresentation()` and
+  `analyze_doob_full_affidavit()` reproduce the tables of Doob's
+  Federal Court affidavit from the published CCRSO figures.
+- `morie_siu_verify_published_chi_squares()` recomputes five
+  published chi-square statistics from the Sprott--Doob and
+  Sprott--Doob--Iftene reports.
+
+```{r federal}
+names(MORIE_SIUIAP_REPORTS)
+morie_siuiap_cite("final_2024")
+doob1 <- analyze_doob_table1_releases()
+as_table(doob1$tables[[1]])
+```
 
 # Where to go next
 
-- The full MRM framework paper, including all ten estimators,
-  multi-SE comparison, propensity calibration, and the
-  Sprott--Doob--Iftene replication tables, is in the companion
-  publication set (see `citation("morie")`).
-- The MORIE package paper covers the broader toolkit; see
-  `citation("morie")` for the bibentry.
-- Citation: see `citation("morie")`.
+- `vignette("mrm-empirical-callables")`: the `mrm_otis_*()`,
+  `mrm_tps_*()` and `mrm_siu_*()` callables on the reference samples.
+- `vignette("mrm-dataset-fetchers")`: downloading the full OTIS, TPS
+  and SIU data.
+- `vignette("native-engines")`: the DAG, matching, DML and refutation
+  functions behind `morie_mrm_estimate_causal_effect()`.
+- `morie_otis_analyze_b01_ruhela_formulations()` runs the same
+  ten-estimator ensemble on table b01.
+- `citation("rmorie")` gives the software citation.

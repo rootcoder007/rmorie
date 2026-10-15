@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Magnitude-squared morie_coherence between two time series
+#' Magnitude-squared coherence between two time series
 #'
 #' @param x Numeric vector.
 #' @param y Numeric vector (same length).
 #' @param nperseg Segment length. Default n/4.
 #' @param fs Sampling frequency. Default 1.
-#' @return Named list with \eqn{frequencies, morie_coherence, n_segments,
+#' @return Named list with \eqn{frequencies, coherence, n_segments,
 #'   nperseg, fs, n, method}.
 #' @examples
 #' set.seed(1)
@@ -45,9 +45,9 @@ morie_coherence <- function(x, y, nperseg = NULL, fs = 1) {
   coh <- Mod(Sxy)^2 / denom
   freqs <- seq(0, fs / 2, length.out = nfreq)
   list(
-    frequencies = freqs, morie_coherence = coh,
+    frequencies = freqs, coherence = coh,
     n_segments = nseg, nperseg = nperseg,
     fs = fs, n = n,
-    method = "Magnitude-squared morie_coherence (Welch, base R)"
+    method = "Magnitude-squared coherence (Welch, base R)"
   )
 }

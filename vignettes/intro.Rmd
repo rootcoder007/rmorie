@@ -19,19 +19,16 @@ knitr::opts_chunk$set(
 
 # Overview
 
-MORIE is a multi-domain scientific-computing toolkit with parallel
-Python and R packages. The R package mirrors a substantial subset of
-the Python package, focused on the surfaces that are most useful from
-within an R workflow: dataset loading, causal estimators, survey
-sampling and weighting, basic spectral analysis, and helpers for the
-MRM (Multilevel Reconciliation Methodology) framework that is MORIE's primary
-sociolegal-data application.
+rmorie is the R package of the MORIE toolkit. It covers dataset
+loading, causal estimators, survey sampling and weighting, signal
+processing, and the MRM (Multilevel Reconciliation Methodology)
+helpers for Canadian carceral, police and oversight data.
 
-This vignette walks through a minimal end-to-end session: load the
-package, look at the included dataset catalogue, load one dataset, and
-run an average-treatment-effect estimator on a small synthetic example.
-A second vignette (`mrm-otis-walkthrough`) covers the MRM ten-estimator
-ensemble on OTIS provincial data.
+This vignette walks through a minimal session: load the package, look
+at the dataset catalogue, load one dataset, and run an
+average-treatment-effect estimator on a small synthetic example. The
+`mrm-otis-walkthrough` vignette runs the ten-estimator OTIS ensemble
+of `morie_otis_analyze_a01_mrm()`.
 
 # Loading the package
 
@@ -41,34 +38,39 @@ library(rmorie)
 
 # The dataset catalogue
 
-`morie_dataset_catalog()` returns a data frame summarising every
-dataset shipped with the package or accessible via the package's
-loaders. This is the easiest way to discover what's available without
-leaving the R session.
+`morie_dataset_catalog()` returns a data frame with one row per
+dataset that `morie_load_dataset()` can load by key: Statistics
+Canada and Health Canada PUMFs, OTIS tables, Toronto Police layers and
+others. Reading the catalogue needs no network access.
 
-```{r catalog, eval = FALSE}
+```{r catalog}
 catalog <- morie_dataset_catalog()
-head(catalog)
+nrow(catalog)
+table(catalog$source)
+head(catalog[, c("key", "name", "source", "year")])
 ```
 
-For details on a single dataset (variables, source, citation), use
-`morie_dataset_info()`:
+`morie_dataset_info()` returns the catalogue entry for one key as a
+list, including where the data are fetched from:
 
-```{r dataset-info, eval = FALSE}
-morie_dataset_info("cpads-2122")
+```{r dataset-info}
+info <- morie_dataset_info("ocp21")
+info[c("key", "name", "survey", "year", "ckan_resource_id")]
 ```
 
 # Loading a dataset
 
-`morie_load_dataset()` returns a tibble (or data frame) for any
-dataset in the catalogue. Public-use datasets that ship inside the
-package require no further configuration; for datasets backed by
-remote SQLite mirrors, configure `MORIE_LOCAL_DB_DIR` (local
-directory of `.sqlite` files) or `MORIE_REMOTE_URL` (HTTP endpoint).
+`morie_load_dataset()` returns a data frame for any key in the
+catalogue. Remote datasets are downloaded on the first call and kept
+in a per-user cache under `morie_cache_dir()`, so later calls read the
+local copy. The chunk below is not run when the vignette is built,
+because the first call downloads the CPADS 2021--2022 PUMF (about
+40 MB) from open.canada.ca:
 
 ```{r load, eval = FALSE}
-df <- morie_load_dataset("cpads-2122")
+df <- morie_load_dataset("ocp21")
 dim(df)
+# 40931   394
 ```
 
 # A simple ATE estimate
@@ -98,19 +100,20 @@ result <- morie_estimate_ate(
 print(result)
 ```
 
-The returned object is a list with the point estimate, standard error,
-confidence interval, and the underlying nuisance fits, in the
-`RichResult`-compatible structure described in the Python package
-paper.
+The returned object is a list: the point estimate `ate`, its standard
+error `se`, the confidence limits `ci_lower` and `ci_upper`, the
+number of rows used and discarded by propensity trimming, and the
+effective sample size of the weights (`ess`).
 
 # Companion estimators
 
-`morie_estimate_att()`, `morie_estimate_atc()`, and `morie_estimate_aipw()` follow the
-same calling convention. The augmented IPW estimator
-(`morie_estimate_aipw()`) is doubly robust under correct specification of
-either the propensity model or the outcome model.
+`morie_estimate_att()`, `morie_estimate_atc()`, and
+`morie_estimate_aipw()` follow the same calling convention. The
+augmented IPW estimator (`morie_estimate_aipw()`) is consistent if
+either the propensity model or the outcome model is correctly
+specified.
 
-```{r aipw-synth, eval = FALSE}
+```{r aipw-synth}
 result_aipw <- morie_estimate_aipw(
   data       = df_synth,
   outcome    = "y",
@@ -122,11 +125,15 @@ print(result_aipw)
 
 # Where to go next
 
-- The `mrm-otis-walkthrough` vignette demonstrates the ten-estimator
-  MRM ensemble on Ontario OTIS provincial restrictive-confinement
-  microdata.
-- The MORIE package paper describes the wider scope of the toolkit
-  beyond R: signal processing, cryptography, spatial statistics,
-  statistical-physics-of-crime models, psychometrics, and the
-  full Python interface.
-- Citation: see `citation("morie")`.
+- `vignette("causal-inference")`: ATT, ATC, AIPW, CATE, GATE and the
+  E-value (`morie_estimate_cate()`, `morie_estimate_gate()`,
+  `morie_e_value()`).
+- `vignette("native-engines")`: a DAG, identification, matching,
+  DML and refutation pipeline ending in
+  `morie_mrm_estimate_causal_effect()` and `morie_mrm_report()`.
+- `vignette("mrm-otis-walkthrough")`: the OTIS estimator ensemble
+  (`morie_otis_analyze_a01_mrm()`), the aggregate IRR
+  (`morie_otis_irr_glmm_vm()`) and the Mandela classifiers.
+- `vignette("dataset-catalog")`: the catalogue and loaders in more
+  detail.
+- `citation("rmorie")` gives the software citation.
