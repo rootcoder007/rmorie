@@ -148,9 +148,7 @@ morie_llm_ollama_models <- function(base = .morie_llm_ollama_base(),
 #' # examples ARE run by pkgdown and by CRAN's --run-donttest.
 #' \dontrun{
 #' if (requireNamespace("httr2", quietly = TRUE)) {
-#'   old <- options(morie.llm.ollama_cached = FALSE)
-#'   morie_llm_probe_ollama()
-#'   options(old)
+#'   morie_llm_probe_ollama()  # the answer is cached for the session
 #' }
 #' }
 #' @export

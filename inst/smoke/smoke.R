@@ -2,7 +2,7 @@
 # Every verb of morie_cli() is run for real in an empty HOME with assertions,
 # no mocks. Usage (package installed, or a source tree via pkgload):
 #   Rscript inst/smoke/smoke.R            # exit status 0 = every case passed
-#   MORIE_SMOKE_KEY=sk-... Rscript ...    # unlocks hosted-tier and data.rmorie.com cases
+#   MORIE_SMOKE_KEY=sk-... Rscript ...    # unlocks the data.rmorie.com cases
 # Verb coverage is enforced against the verbs listed by `help`.
 
 pkg <- Sys.getenv("MORIE_SMOKE_PKG", "rmorie")

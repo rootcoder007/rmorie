@@ -135,15 +135,16 @@ test_that("morie_llm_detect_provider returns 'local' when nothing is configured"
   for (k in names(saved)) Sys.unsetenv(k)
   # and no Ollama: unset, the default address is probed, and a machine running one answers there
   withr::local_envvar(OLLAMA_HOST = "off")
-  # Reset cached ollama probe flag so we re-probe.
-  old_opt  <- getOption("morie.llm.ollama_cached",  default = NULL)
-  options(morie.llm.ollama_cached = FALSE)
+  # a probe answer cached by an earlier test would win over OLLAMA_HOST = "off": clear it
+  cache <- get(".morie_llm_cache", envir = asNamespace("rmorie"))
+  old_cache <- cache$ollama_cached
+  cache$ollama_cached <- NULL
   on.exit({
     for (k in names(saved)) {
       v <- saved[[k]]
       if (!is.na(v)) Sys.setenv(.list = stats::setNames(list(v), k))
     }
-    options(morie.llm.ollama_cached = old_opt)
+    cache$ollama_cached <- old_cache
   }, add = TRUE)
   expect_equal(morie_llm_detect_provider(), "local")
 })
@@ -152,12 +153,14 @@ test_that("morie_llm_detect_provider returns 'gemini' when GEMINI_API_KEY set + 
   saved <- list(
     GEMINI_API_KEY  = Sys.getenv("GEMINI_API_KEY", unset = NA))
   Sys.setenv(GEMINI_API_KEY = "fake-test-key")
-  old_opt  <- getOption("morie.llm.ollama_cached",  default = NULL)
-  options(morie.llm.ollama_cached = FALSE)
+  # ollama down: a cached FALSE probe answer, so a machine running one does not answer
+  cache <- get(".morie_llm_cache", envir = asNamespace("rmorie"))
+  old_cache <- cache$ollama_cached
+  cache$ollama_cached <- FALSE
   on.exit({
     if (is.na(saved$GEMINI_API_KEY)) Sys.unsetenv("GEMINI_API_KEY")
     else Sys.setenv(GEMINI_API_KEY = saved$GEMINI_API_KEY)
-    options(morie.llm.ollama_cached = old_opt)
+    cache$ollama_cached <- old_cache
   }, add = TRUE)
   expect_equal(morie_llm_detect_provider(), "gemini")
 })

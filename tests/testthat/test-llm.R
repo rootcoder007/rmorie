@@ -11,7 +11,6 @@ set.seed(1)
   # no Ollama for the test, even when one runs on this machine (the default address is
   # localhost:11434); a test that wants one sets OLLAMA_HOST itself
   withr::local_envvar(OLLAMA_HOST = "off", .local_envir = env)
-  options(morie.llm.ollama_cached = NULL)
   .morie_llm_cache$ollama_cached <- NULL
 }
 
@@ -35,26 +34,26 @@ test_that("ollama_base strips trailing slash", {
 test_that("probe_ollama caches via options", {
   set.seed(1)
   .clean_llm_env()
-  options(morie.llm.ollama_cached = FALSE)
-  on.exit(options(morie.llm.ollama_cached = NULL))
+  .morie_llm_cache$ollama_cached <- FALSE
+  on.exit(.morie_llm_cache$ollama_cached <- NULL)
   expect_false(morie_llm_probe_ollama())
 })
 
 test_that("detect_provider returns 'local' with no providers configured", {
   set.seed(1)
   .clean_llm_env()
-  options(morie.llm.ollama_cached = FALSE)
-  on.exit(options(morie.llm.ollama_cached = NULL))
+  .morie_llm_cache$ollama_cached <- FALSE
+  on.exit(.morie_llm_cache$ollama_cached <- NULL)
   expect_equal(morie_llm_detect_provider(), "local")
 })
 
 test_that("detect_provider picks gemini when key set", {
   set.seed(1)
   .clean_llm_env()
-  options(morie.llm.ollama_cached = FALSE)
+  .morie_llm_cache$ollama_cached <- FALSE
   Sys.setenv(GEMINI_API_KEY = "k")
   on.exit({
-    options(morie.llm.ollama_cached = NULL)
+    .morie_llm_cache$ollama_cached <- NULL
     Sys.unsetenv("GEMINI_API_KEY")
   })
   expect_equal(morie_llm_detect_provider(), "gemini")
@@ -88,8 +87,8 @@ test_that("extract_text handles empty + valid choices", {
 test_that("ask returns local-fallback when provider=local", {
   set.seed(1)
   .clean_llm_env()
-  options(morie.llm.ollama_cached = FALSE)
-  on.exit(options(morie.llm.ollama_cached = NULL))
+  .morie_llm_cache$ollama_cached <- FALSE
+  on.exit(.morie_llm_cache$ollama_cached <- NULL)
   out <- morie_llm_ask("question?")
   expect_type(out, "character")
   expect_true(isTRUE(attr(out, "fallback")))
@@ -99,8 +98,8 @@ test_that("ask returns local-fallback when provider=local", {
 test_that("agent_available reflects detect_provider", {
   set.seed(1)
   .clean_llm_env()
-  options(morie.llm.ollama_cached = FALSE)
-  on.exit(options(morie.llm.ollama_cached = NULL))
+  .morie_llm_cache$ollama_cached <- FALSE
+  on.exit(.morie_llm_cache$ollama_cached <- NULL)
   expect_false(morie_llm_agent_available())
 })
 
@@ -138,8 +137,8 @@ test_that("request_completion fails clean off-network", {
 test_that("ask_multi falls back to local with no providers", {
   set.seed(1)
   .clean_llm_env()
-  options(morie.llm.ollama_cached = FALSE)
-  on.exit(options(morie.llm.ollama_cached = NULL))
+  .morie_llm_cache$ollama_cached <- FALSE
+  on.exit(.morie_llm_cache$ollama_cached <- NULL)
   msgs <- list(list(role = "user", content = "hello"))
   out <- morie_llm_ask_multi(msgs)
   expect_type(out, "character")

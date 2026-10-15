@@ -38,9 +38,6 @@ if (!nzchar(Sys.getenv("_R_CHECK_PACKAGE_NAME_"))) {
   Sys.setenv(NOT_CRAN = "true")
 }
 
-# Deterministic ollama probing across the whole suite: force the cached
-# result FALSE so no provider-detection test ever hits the network.
-options(morie.llm.ollama_cached = FALSE)
 
 # Heavy-test gate.
 #
