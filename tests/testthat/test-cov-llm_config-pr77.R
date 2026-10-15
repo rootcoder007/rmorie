@@ -9,7 +9,11 @@ test_that("without XDG_CONFIG_HOME the settings file is ~/.config/morie/llm.json
   withr::local_envvar(XDG_CONFIG_HOME = NA, HOME = home, R_USER = home)
   p <- .lc(".morie_llm_config_path")()
   expect_identical(p, file.path(path.expand("~"), ".config", "morie", "llm.json"))
-  expect_identical(normalizePath(dirname(dirname(dirname(p))), winslash = "/"), normalizePath(home, winslash = "/"))
+  # R reads the home directory once at startup on Windows (R_USER / USERPROFILE), so "~" does not
+  # follow HOME set here; elsewhere it does, and the file lands under the temporary home
+  if (.Platform$OS.type != "windows") {
+    expect_identical(normalizePath(dirname(dirname(dirname(p))), winslash = "/"), normalizePath(home, winslash = "/"))
+  }
   withr::local_envvar(XDG_CONFIG_HOME = "  ")
   expect_identical(.lc(".morie_llm_config_path")(), p)   # blank is unset
 })

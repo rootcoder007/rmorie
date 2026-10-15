@@ -120,6 +120,13 @@ NULL
   p0 <- mean(y)
   f <- rep(log(p0 / (1 - p0)), n)
   ords <- lapply(seq_len(ncol(X)), function(j) order(X[, j], method = "radix"))
+  # gbm keeps the first candidate unless a later one is strictly better. Gains that tie
+  # exactly in arithmetic (two variables splitting a 20-row node at k = 10, both 0.05) differ
+  # in the last bit by platform -- sum() and cumsum() accumulate in long double on x86 and in
+  # double on arm64 -- so "better" must mean better beyond rounding, or macOS picks the
+  # other variable. Same rule for the position within a variable and for the leaf to split.
+  tol <- 1e-12
+  first_max <- function(v) which(v >= max(v) - tol * abs(max(v)))[1L]
   search <- function(idx, z) {
     best <- list(imp = 0)
     m <- length(idx)
@@ -140,8 +147,8 @@ NULL
       sl <- cs[k]
       sr <- tot - sl
       imp <- k * (m - k) / m * (sl / k - sr / (m - k))^2
-      i <- which.max(imp)
-      if (imp[i] > best$imp) {
+      i <- first_max(imp)
+      if (imp[i] > best$imp + tol * abs(best$imp)) {
         best <- list(
           imp = imp[i], j = j, thr = 0.5 * (xs[k[i]] + xs[k[i] + 1L])
         )
@@ -156,7 +163,7 @@ NULL
     cand <- list(search(leaves[[1L]], z))
     for (s in seq_len(depth)) {
       imps <- vapply(cand, function(cnd) cnd$imp, numeric(1))
-      b <- which.max(imps)
+      b <- first_max(imps)
       if (imps[b] <= 0) break
       idx <- leaves[[b]]
       cb <- cand[[b]]

@@ -1137,8 +1137,9 @@ morie_lmm <- function(formula, data, REML = TRUE, random = NULL,
 
 #' Bounded minimisation with a confirming restart
 #'
-#' Runs \code{stats::nlminb}, then (if \code{polish}) restarts it at
-#' the solution.  The fit counts as converged (code 0) when nlminb
+#' Runs \code{stats::nlminb}; when it reports a non-zero code, a bounded
+#' L-BFGS-B run from the same start decides whether a lower minimum exists.
+#' Then (if \code{polish}) restarts nlminb at the solution.  The fit counts as converged (code 0) when nlminb
 #' reports convergence or when the restart cannot lower the objective by
 #' more than \code{1e-8 * (|f| + 1)}, i.e. the stopping point is
 #' confirmed as a minimum.
@@ -1154,6 +1155,22 @@ morie_lmm <- function(formula, data, REML = TRUE, random = NULL,
 #' @noRd
 .lmm_optimize <- function(par, f, lower, ctrl, polish = TRUE) {
   o1 <- stats::nlminb(par, f, lower = lower, control = ctrl)
+  # nlminb's "singular convergence" can stop on the boundary short of the minimum (Orthodont
+  # with a 1e-10 perturbation of y: theta[1] = 0 at REML 445.1 against lme4's 442.6), and a
+  # restart from that same point only confirms it. A second, bounded quasi-Newton run from the
+  # original start decides; the better of the two goes on to the confirming restart.
+  if (o1$convergence != 0L) {
+    o3 <- tryCatch(stats::optim(par, f, method = "L-BFGS-B", lower = lower,
+                                control = list(maxit = ctrl$iter.max %||% 1000L, factr = 10)),
+                   error = function(e) NULL)
+    if (!is.null(o3) && is.finite(o3$value) && o3$value < o1$objective) {
+      o1 <- stats::nlminb(o3$par, f, lower = lower, control = ctrl)
+      if (!(o1$objective <= o3$value)) {
+        o1$par <- o3$par
+        o1$objective <- o3$value
+      }
+    }
+  }
   out <- list(par = o1$par, objective = o1$objective,
               convergence = o1$convergence, message = o1$message,
               iterations = o1$iterations,
