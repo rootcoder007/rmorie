@@ -1,7 +1,7 @@
 # R-MORIE <img src="man/figures/logo.png" align="right" height="139" alt="rmorie hex logo" />
 
 <!-- badges: start -->
-[![Status](https://img.shields.io/badge/status-active-success.svg)](https://www.repostatus.org/#active) [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) [![r-universe](https://rootcoder007.r-universe.dev/badges/rmorie)](https://rootcoder007.r-universe.dev/rmorie) [![CI](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml) [![AGPL-3.0](https://img.shields.io/badge/AGPL--3.0-blue.svg)](https://spdx.org/licenses/AGPL-3.0-or-later.html) [![Website](https://img.shields.io/badge/website-rmorie.com-1d1d1f.svg)](https://rmorie.com) [![Hosted LLM](https://img.shields.io/badge/hosted%20LLM-llm.rmorie.com-0066cc.svg)](https://llm.rmorie.com)
+[![Status](https://img.shields.io/badge/status-active-success.svg)](https://www.repostatus.org/#active) [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) [![r-universe](https://rootcoder007.r-universe.dev/badges/rmorie)](https://rootcoder007.r-universe.dev/rmorie) [![CI](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml/badge.svg)](https://github.com/rootcoder007/rmorie/actions/workflows/build.yml) [![AGPL-3.0](https://img.shields.io/badge/AGPL--3.0-blue.svg)](https://spdx.org/licenses/AGPL-3.0-or-later.html) [![Website](https://img.shields.io/badge/website-rmorie.com-1d1d1f.svg)](https://rmorie.com)
 <!-- badges: end -->
 
 R-MORIE (**Multi-domain Open Research and Inferential Estimation**) is an
@@ -212,7 +212,7 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
 ## Install
 
 From r-universe (prebuilt binaries for macOS and Windows, a source build on
-Linux). Its companions, rmoriebricklayer >= 0.5.10 and rmoriedata >= 0.3.5,
+Linux). Its companions, rmoriebricklayer >= 0.5.12 and rmoriedata >= 0.3.6,
 come from r-universe too: CRAN carries older versions. Naming them replaces an
 older copy already installed.
 

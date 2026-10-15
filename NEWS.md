@@ -162,8 +162,8 @@
   under a second.
 * Install routes: `Remotes:` no longer pins rmoriebricklayer@v0.5.5 and rmoriedata@v0.3.4,
   so `remotes::install_github("rootcoder007/rmorie")` builds the current companions
-  instead of those old tags, and the floors are raised to rmoriebricklayer (>= 0.5.10) and
-  rmoriedata (>= 0.3.5). The README install snippets name the companions and pass `repos`
+  instead of those old tags, and the floors are raised to rmoriebricklayer (>= 0.5.12) and
+  rmoriedata (>= 0.3.6). The README install snippets name the companions and pass `repos`
   to every `install.packages()` call (under `Rscript` there is no mirror chooser, and a bare
   call stops with "trying to use CRAN without setting a mirror"), and the GitHub route
   upgrades `"always"` so an older companion already installed is replaced.
@@ -173,11 +173,10 @@
   README one-liner on Linux, macOS and Windows.
 * Language models: a running Ollama server with no model pulled no longer counts as a
   usable route. `morie_llm_detect_provider()` picked it (the probe only asked whether
-  `/api/tags` answered), so `rmorie doctor` reported "active provider: ollama" for a user
-  logged in to the hosted tier and `ask` first sent a request with no model name; the
-  automatic route now skips such a server (unless `OLLAMA_MODEL` names a model) and reaches
-  the hosted tier. New `morie_llm_config()` and `rmorie config` (`show`, `help`, `get`, `set`,
-  `unset`, `setup`, `path`) save the route (`auto`, `own`, `ollama`, `hosted`) and the address,
+  `/api/tags` answered), so `rmorie doctor` reported "active provider: ollama" and `ask`
+  first sent a request with no model name; the automatic route now skips such a server
+  (unless `OLLAMA_MODEL` names a model) and goes on to the next route. New `morie_llm_config()` and `rmorie config` (`show`, `help`, `get`, `set`,
+  `unset`, `setup`, `path`) save the route (`auto`, `own`, `ollama` or a provider id) and the address,
   key and model of each route in `~/.config/morie/llm.json` (private, written only on request;
   the same file and keys as rmoriebricklayer's `rmbl config`); an environment variable that is
   set still wins. A route other than `auto` is the only one asked, and says what is missing
