@@ -44,14 +44,16 @@ test_that("bug 5: morie_siu_sanity_check does not flag missing values", {
 })
 
 test_that("bug 6: the bundled b05 and c11 samples use the real OTIS duration bins", {
-  b05 <- utils::read.csv(system.file("extdata", "otis_b05_seg_consecutive_lengths_sample.csv",
-                                     package = "rmorie"))
+  # the OTIS samples are left out of the build tarball (.Rbuildignore), so a check of it has none
+  f05 <- system.file("extdata", "otis_b05_seg_consecutive_lengths_sample.csv", package = "rmorie")
+  f11 <- system.file("extdata", "otis_c11_aggregate_lengths_sample.csv", package = "rmorie")
+  skip_if(!nzchar(f05) || !nzchar(f11), "the OTIS samples are not in this build")
+  b05 <- utils::read.csv(f05)
   expect_false(any(.otis_classify_bin(b05$Consecutive_Duration) == "Unknown"))
   res <- morie_otis_analyze_b05_mandela_classification(b05)
   expect_length(res$payload$rows, length(unique(b05$EndFiscalYear)))
   expect_false(identical(res$summary_lines[["Latest provincial torture rate"]], "n/a"))
-  c11 <- utils::read.csv(system.file("extdata", "otis_c11_aggregate_lengths_sample.csv",
-                                     package = "rmorie"))
+  c11 <- utils::read.csv(f11)
   expect_false(any(.otis_classify_bin(c11$Aggregate_Duration) == "Unknown"))
 })
 
