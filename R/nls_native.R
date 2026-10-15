@@ -26,8 +26,10 @@
 #' Environment holding the data for a model formula
 #'
 #' @param data A data frame or named list.
-#' @return An environment whose parent holds base R and a few
-#'   distribution functions from stats.
+#' @param enclos The formula's environment, which encloses the model
+#'   (as \code{nls()} evaluates it); \code{baseenv()} by default.
+#' @return An environment holding \code{data}, whose parent holds a few
+#'   distribution functions from stats, enclosed by \code{enclos}.
 #' @keywords internal
 .nlsn_env <- function(data, enclos = baseenv()) {
   # the formula's environment encloses the model, as nls() evaluates it: a function or constant the

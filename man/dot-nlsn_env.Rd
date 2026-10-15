@@ -4,14 +4,17 @@
 \alias{.nlsn_env}
 \title{Environment holding the data for a model formula}
 \usage{
-.nlsn_env(data)
+.nlsn_env(data, enclos = baseenv())
 }
 \arguments{
 \item{data}{A data frame or named list.}
+
+\item{enclos}{The formula's environment, which encloses the model
+(as \code{nls()} evaluates it); \code{baseenv()} by default.}
 }
 \value{
-An environment whose parent holds base R and a few
-distribution functions from stats.
+An environment holding \code{data}, whose parent holds a few
+distribution functions from stats, enclosed by \code{enclos}.
 }
 \description{
 Environment holding the data for a model formula
