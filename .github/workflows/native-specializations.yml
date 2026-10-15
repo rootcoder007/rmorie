@@ -84,7 +84,7 @@ jobs:
           if (!nzchar(system.file(package = "rmoriebricklayer")) ||
               utils::packageVersion("rmoriebricklayer") < floor) {
             tf <- tempfile(fileext = ".tar.gz")
-            download.file(sprintf("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/%s.tar.gz", ref),
+            download.file(sprintf("https://github.com/rootcoder007/rmorie-bricklayer/archive/%s.tar.gz", ref),
                           tf, mode = "wb", quiet = TRUE)
             install.packages(tf, repos = NULL, type = "source")
           }

@@ -1,5 +1,7 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* Needs rmoriebricklayer 0.5.12 and rmoriedata 0.3.6, whose language-model layer this
+  release is built on; CI installs rmoriebricklayer from its v0.5.12 tag, not a branch.
 * Language models are not hosted any more: bring your own. `morie_llm_ask()`,
   `morie_llm_ask_multi()`, `rmorie ask`, `rmorie models`, `rmorie config` and `rmorie doctor`
   use the route rmoriebricklayer (>= 0.5.12) sets up: your own OpenAI-compatible endpoint, each

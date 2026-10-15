@@ -63,7 +63,7 @@ Imports:
   utils,
   Rcpp,
   rmoriebricklayer (>= 0.5.12),
-  rmoriedata (>= 0.3.5)
+  rmoriedata (>= 0.3.6)
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb);
     optional liboqs (ML-KEM post-quantum crypto): liboqs-devel (rpm), liboqs-dev (deb) or brew install liboqs
@@ -268,5 +268,5 @@ Additional_repositories:
   https://stan-dev.r-universe.dev,
   https://rootcoder007.r-universe.dev
 Remotes:
-  rmoriebricklayer=rootcoder007/rmorie-bricklayer@update,
+  rmoriebricklayer=rootcoder007/rmorie-bricklayer@v0.5.12,
   rootcoder007/rmoriedata
