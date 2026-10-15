@@ -62,7 +62,7 @@ Imports:
   stats,
   utils,
   Rcpp,
-  rmoriebricklayer (>= 0.5.12),
+  rmoriebricklayer (>= 0.5.13),
   rmoriedata (>= 0.3.6)
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb);
@@ -270,5 +270,5 @@ Additional_repositories:
   https://stan-dev.r-universe.dev,
   https://rootcoder007.r-universe.dev
 Remotes:
-  rmoriebricklayer=rootcoder007/rmorie-bricklayer@v0.5.12,
+  rmoriebricklayer=rootcoder007/rmorie-bricklayer@v0.5.13,
   rootcoder007/rmoriedata
