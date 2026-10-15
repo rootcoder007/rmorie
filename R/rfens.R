@@ -41,6 +41,9 @@ morie_random_forest_ensemble <- function(x, y, n_estimators = 100L,
   } else {
     .rmorie_local_seed(seed)
   }
+  pg <- rmoriebricklayer::bricklayer_progress("random forest", 0)
+  on.exit(pg$done(), add = TRUE)
+  pg$update(info = sprintf("growing %d trees", as.integer(n_estimators)))
   fit <- .morie_rf_fit(
     x, y, task = task, n_estimators = as.integer(n_estimators),
     max_depth = if (is.null(max_depth)) 30L else as.integer(max_depth)

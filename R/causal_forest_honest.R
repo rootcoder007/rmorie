@@ -215,7 +215,10 @@ morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
   m <- max(4L * min_leaf, as.integer(subsample * n))
   trees <- vector("list", n_trees)
   in_bag <- matrix(FALSE, nrow = n_trees, ncol = n)
+  pg <- rmoriebricklayer::bricklayer_progress("causal forest", n_trees + 1L)
+  on.exit(pg$done(), add = TRUE)
   for (b in seq_len(n_trees)) {
+    pg$update(b - 1L, info = sprintf("tree %d/%d", b, n_trees))
     idx <- sample.int(n, min(m, n))
     half <- length(idx) %/% 2L
     trees[[b]] <- .morie_cf_grow(
@@ -226,6 +229,7 @@ morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
     )
     in_bag[b, idx] <- TRUE
   }
+  pg$update(n_trees, info = "effects for every row")
 
   cate <- vapply(seq_len(n), function(i) {
     mean(vapply(trees, .morie_cf_walk, numeric(1), xrow = X[i, ]))
@@ -313,7 +317,10 @@ morie_causal_forest_bootstrap <- function(y, d, x, B = 40L, n_trees = 60L,
     stop("alpha must lie in (0, 1).", call. = FALSE)
   }
   draws <- matrix(NA_real_, nrow = B, ncol = n)
+  pg <- rmoriebricklayer::bricklayer_progress("causal forest bootstrap", B)
+  on.exit(pg$done(), add = TRUE)
   for (b in seq_len(B)) {
+    pg$update(b - 1L, info = sprintf("replicate %d/%d", b, B))
     .rmorie_local_seed(seed + b)
     idx <- sample.int(n, n, replace = TRUE)
     fit <- morie_causal_forest(y[idx], d[idx], X[idx, , drop = FALSE],

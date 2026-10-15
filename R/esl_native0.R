@@ -651,7 +651,10 @@ morie_esl_random_forest <- function(X, y, B = 100, mtry = NULL,
   pred <- numeric(nrow(Q))
   oob_sum <- numeric(n)
   oob_cnt <- numeric(n)
+  pg <- rmoriebricklayer::bricklayer_progress("random forest", Bn)
+  on.exit(pg$done(), add = TRUE)
   for (b in seq_len(Bn)) {
+    pg$update(b - 1L, info = sprintf("tree %d/%d", b, Bn))
     rows <- sample.int(n, n, replace = TRUE)
     tree <- .esl_grow(
       A[rows, , drop = FALSE], yv[rows], m, 0L,

@@ -485,7 +485,10 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
   e_hat <- numeric(n)
   mu1_hat <- numeric(n)
   mu0_hat <- numeric(n)
+  pg <- rmoriebricklayer::bricklayer_progress("IRM-DML", n_folds)
+  on.exit(pg$done(), add = TRUE)
   for (k in seq_len(n_folds)) {
+    pg$update(k - 1L, info = sprintf("fold %d/%d", k, n_folds))
     test <- which(folds == k)
     train <- setdiff(seq_len(n), test)
     beta_p <- .otis_logit_fit(X[train, , drop = FALSE], d[train])
@@ -1273,11 +1276,16 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
   e_hat <- numeric(n)
   mu1_hat <- numeric(n)
   mu0_hat <- numeric(n)
+  pg <- rmoriebricklayer::bricklayer_progress("SuperLearner AIPW", 3L * n_folds)
+  on.exit(pg$done(), add = TRUE)
   for (k in seq_len(n_folds)) {
     test <- which(folds == k)
     train <- setdiff(seq_len(n), test)
+    pg$update(3L * (k - 1L), info = sprintf("fold %d/%d: propensity", k, n_folds))
     e_hat[test] <- stack_ps(train, test)
+    pg$update(3L * (k - 1L) + 1L, info = sprintf("fold %d/%d: treated outcome", k, n_folds))
     mu1_hat[test] <- stack_reg(y, train[d[train] == 1L], test)
+    pg$update(3L * (k - 1L) + 2L, info = sprintf("fold %d/%d: control outcome", k, n_folds))
     mu0_hat[test] <- stack_reg(y, train[d[train] == 0L], test)
   }
 

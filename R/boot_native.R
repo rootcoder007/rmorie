@@ -89,7 +89,12 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
   t0 <- as.numeric(statistic(data, seq_len(n), ...))
   k <- length(t0)
   t <- matrix(NA_real_, R, k)
-  for (r in seq_len(R)) t[r, ] <- as.numeric(statistic(data, idx[r, ], ...))
+  pg <- rmoriebricklayer::bricklayer_progress("bootstrap", R)
+  on.exit(pg$done(), add = TRUE)
+  for (r in seq_len(R)) {
+    t[r, ] <- as.numeric(statistic(data, idx[r, ], ...))
+    pg$tick(info = sprintf("replicate %d/%d", r, R))
+  }
   structure(
     list(
       t0 = t0, t = t, R = R, data = data,
@@ -394,7 +399,10 @@ morie_tsboot <- function(tseries, statistic, R, l, sim = "fixed",
   ia <- .morie_ts_array(n, n.sim, R, l, sim, endcorr)
   k <- length(t0)
   t <- matrix(NA_real_, R, k)
+  pg <- rmoriebricklayer::bricklayer_progress("block bootstrap", R)
+  on.exit(pg$done(), add = TRUE)
   for (r in seq_len(R)) {
+    pg$update(r - 1L, info = sprintf("replicate %d/%d", r, R))
     ends <- if (sim == "geom") {
       cbind(ia$starts[r, ], ia$lengths[r, ])
     } else {

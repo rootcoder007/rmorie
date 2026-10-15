@@ -90,7 +90,10 @@ morie_dml_clustered <- function(data, treatment, outcome, covariates,
   mu1 <- numeric(n)
   mu0 <- numeric(n)
 
+  pg <- rmoriebricklayer::bricklayer_progress("clustered DML", n_folds)
+  on.exit(pg$done(), add = TRUE)
   for (k in seq_len(n_folds)) {
+    pg$update(k - 1L, info = sprintf("fold %d/%d", k, n_folds))
     te <- which(folds == k)
     tr <- setdiff(seq_len(n), te)
     if (is.null(ps)) {

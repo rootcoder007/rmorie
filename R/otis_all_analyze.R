@@ -1160,7 +1160,10 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
                                 "--", "--", "--")
   rows <- list()
   ensemble <- list()
+  pg <- rmoriebricklayer::bricklayer_progress(sprintf("%s: ten estimators", ds_id), 10L)
+  on.exit(pg$done(), add = TRUE)
   add <- function(idx, name, estimand, f) {
+    pg$update(as.integer(sub("[.].*$", "", idx)) - 1L, info = name)
     est <- tryCatch(f(), error = function(e) e)
     if (inherits(est, "error")) {
       rows[[length(rows) + 1L]] <<- err_row(idx, est)
@@ -1183,6 +1186,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
   add("5. PSM subclass (5)", "PSM-subclass", "ATE",
       function() fit(morie_otis_psm_subclass, n_strata = 5L))
 
+  pg$update(5L, info = "IRM-DML")
   irm <- tryCatch(fit(morie_otis_irm_dml, cluster_cols = cl), error = function(e) e)
   if (inherits(irm, "error")) {
     rows[[length(rows) + 1L]] <- err_row("6. IRM-DML", irm)
@@ -1198,6 +1202,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
     ensemble[[length(ensemble) + 1L]] <- c(list(estimator = "IRM-DML"),
       irm[c("ate", "ate_se", "atte", "atte_se", "atc", "atc_se", "n")])
   }
+  pg$update(6L, info = "PSM->IRM-DML")
   mf <- tryCatch(fit(morie_otis_irm_dml, cluster_cols = cl, match_first = TRUE),
                  error = function(e) e)
   if (inherits(mf, "error")) {

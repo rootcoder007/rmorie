@@ -425,7 +425,11 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
   J <- length(lib)
   folds <- .flxipt_folds(n, n_folds)
   Z <- matrix(0, nrow = n, ncol = J)
-  for (val in folds) {
+  pg <- rmoriebricklayer::bricklayer_progress("super learner", length(folds) + 1L)
+  on.exit(pg$done(), add = TRUE)
+  for (fi in seq_along(folds)) {
+    pg$update(fi - 1L, info = sprintf("fold %d/%d", fi, length(folds)))
+    val <- folds[[fi]]
     train <- setdiff(seq_len(n), val)
     if (length(train) == 0L) stop("flxipt: an empty training fold")
     src <- if (honest_level_one) train else seq_len(n)
@@ -446,6 +450,7 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
   }
   # refit candidates on all the data; only the combination came from
   # the held-out predictions
+  pg$update(length(folds), info = "refit on all rows")
   full <- matrix(0, nrow = n, ncol = J)
   for (j in seq_along(lib)) {
     full[, j] <- .flxipt_fit(yv, Wm, lib[[j]], seq_len(n),

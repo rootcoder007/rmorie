@@ -715,7 +715,11 @@ morie_caus_dml_partial_lin <- function(y, D, X, n_folds = 5, learner = NULL,
 
   yres <- numeric(n)
   dres <- numeric(n)
-  for (te in fs) {
+  pg <- rmoriebricklayer::bricklayer_progress("partially linear DML", nf)
+  on.exit(pg$done(), add = TRUE)
+  for (fi in seq_along(fs)) {
+    pg$update(fi - 1L, info = sprintf("fold %d/%d", fi, nf))
+    te <- fs[[fi]]
     tr <- setdiff(seq_len(n), te)
     yres[te] <- yv[te] - fit(Xm[tr, , drop = FALSE], yv[tr])(
       Xm[te, , drop = FALSE])

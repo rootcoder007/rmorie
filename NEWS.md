@@ -1,5 +1,13 @@
 # rmorie 1.4.3 - 2026-10-09
 
+* Live progress in the long-running work, through rmoriebricklayer 0.5.13's
+  `bricklayer_progress()`: the bootstraps (`morie_boot()`, `morie_boot_run()`, `morie_tsboot()`,
+  `morie_bootstrap_sample()`), the honest causal forest and its bootstrap, the random forests,
+  the DML cross-fitting (`morie_otis_irm_dml()`, `morie_dml_clustered()`,
+  `morie_caus_dml_partial_lin()`), `super_learner()`, `morie_otis_aipw_superlearner()` and the
+  ten-estimator OTIS run. The bar shows only when someone is watching (an interactive session,
+  or `options(morie.progress = TRUE)`), after the work has run for a moment; nested work shows
+  one bar, and `options(morie.quiet = TRUE)` silences it.
 * The vignettes were rewritten against the code: every chunk runs, none prints `NULL`, every
   count is recomputed, and the references to an "MRM framework paper", a "companion paper" and a
   "package paper", none of which exists, are replaced by the rmorie functions that do the work
