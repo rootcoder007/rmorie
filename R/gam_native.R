@@ -251,6 +251,8 @@
 # signs included, which makes the thin plate coefficients comparable.
 .gamn_lanczos <- function(A, k, tol = .Machine$double.eps^0.7) {
   n <- nrow(A)
+  # every eigenpair is no Lanczos problem: k = n returned NULL (the basis code refuses it first)
+  if (k >= n) stop("the Lanczos iteration needs k below the matrix dimension (", n, ")", call. = FALSE)
   dot <- function(u, v) sum(crossprod(u, v))
   f_check <- max(k %/% 2L, 10L)
   kk <- max(n %/% 10L, 1L)
@@ -1335,7 +1337,7 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   Z
 }
 # DSTEQR with COMPZ = 'I': implicit QL/QR on a tridiagonal matrix.
-.gamn_dsteqr <- function(d, e) {
+.gamn_dsteqr <- function(d, e, nmaxit = 30L * length(d)) {
   n <- length(d)
   Z <- diag(n)
   if (n == 1L) return(list(values = d, vectors = Z))
@@ -1345,7 +1347,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   safmin <- .Machine$double.xmin
   ssfmax <- sqrt(1 / safmin) / 3
   ssfmin <- sqrt(safmin) / eps2
-  nmaxit <- n * 30L
   jtot <- 0L
   l1 <- 1L
   wc <- numeric(n)
@@ -1373,7 +1374,6 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
     idx <- l:lend
     anorm <- max(abs(d[idx]), if (lend > l) abs(e[l:(lend - 1L)]) else 0)
     iscale <- 0L
-    if (anorm == 0) next
     if (anorm > ssfmax) {
       iscale <- 1L
       d[idx] <- d[idx] * (ssfmax / anorm)
@@ -1506,6 +1506,11 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
       if (lendsv > lsv) e[lsv:(lendsv - 1L)] <- e[lsv:(lendsv - 1L)] * (anorm / ssfmin)
     }
     if (jtot >= nmaxit) break
+  }
+  # LAPACK's DSTEQR reports INFO > 0 when the cap is reached with an off-diagonal left; the values
+  # were returned unconverged before
+  if (jtot >= nmaxit && any(e[seq_len(n - 1L)] != 0)) {
+    stop(sprintf("the tridiagonal eigensolver did not converge in %d iterations", nmaxit), call. = FALSE)
   }
   # selection sort into ascending order
   for (ii in 2:n) {
@@ -2094,16 +2099,15 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   st <- integ(nt, intv, 0, TRUE, sigsq, st)
   p <- 0.5 - st$intl
   x <- st$ersm + acc / 10
-  ifault <- 0L
-  jj <- 1
-  for (i in 1:4) { if (jj * x == jj * st$ersm) ifault <- 2L
-  jj <- jj * 2 }
+  # round-off may be significant when acc / 10 is lost beside the error bound. Davies' C compares
+  # jj * x and jj * ersm for jj = 1, 2, 4, 8: scaling by a power of 2 is exact, so that is one test
+  ifault <- if (x == st$ersm) 2L else 0L
   list(p = p, ifault = ifault)
 }
 # Pr(sum_j lb_j X_j > q), X_j ~ chi^2_df_j (mgcv psum.chisq, upper tail).
-.gamn_psum_chisq <- function(q, lb, df = rep(1, length(lb))) {
+.gamn_psum_chisq <- function(q, lb, df = rep(1, length(lb)), lim = 100000L) {
   df <- round(df)
-  r <- .gamn_davies(lb, rep(0, length(lb)), df, 0, q)
+  r <- .gamn_davies(lb, rep(0, length(lb)), df, 0, q, lim = lim)   # lim: mgcv's nlim
   if (r$ifault != 0L && r$ifault != 2L) {
     # Liu et al. / Pearson approximation, as mgcv falls back on
     return(.gamn_liu2(q, lb, df))
@@ -2119,19 +2123,14 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   c3 <- sum(lh)
   if (x <= 0 || c2 <= 0) return(1)
   s1 <- c3 / c2^1.5
-  s2 <- sum(lh * lambda) / c2^2
   sigQ <- sqrt(2 * c2)
   t <- (x - muQ) / sigQ
-  if (s1^2 > s2) {
-    a <- 1 / (s1 - sqrt(s1^2 - s2))
-    delta <- s1 * a^3 - a^2
-    l <- a^2 - 2 * delta
-  } else {
-    a <- 1 / s1
-    delta <- 0
-    if (c3 == 0) return(1)
-    l <- c2^3 / c3^2
-  }
+  # s1^2 <= s2 always (Cauchy-Schwarz on the weights, (sum h l^3)^2 <= (sum h l^2)(sum h l^4)):
+  # the s1^2 > s2 case of Liu et al. needs a non-centrality, which this port does not take
+  a <- 1 / s1
+  delta <- 0
+  if (c3 == 0) return(1)
+  l <- c2^3 / c3^2
   stats::pchisq(t * sqrt(2) * a + l + delta, df = l, ncp = delta, lower.tail = FALSE)
 }
 # Wood (2013) test statistic and p-value for one smooth (mgcv testStat).
@@ -2155,9 +2154,7 @@ morie_gam <- function(formula, data, family = c("gaussian", "binomial", "poisson
   if (k1 < ncol(vec)) vec <- vec[, seq_len(k1), drop = FALSE]
   if (nu > 0 && k > 0) {
     if (k > 1) vec[, 1:(k - 1)] <- t(t(vec[, 1:(k - 1), drop = FALSE]) / sqrt(ed$values[1:(k - 1)]))
-    b12 <- 0.5 * nu * (1 - nu)
-    if (b12 < 0) b12 <- 0
-    b12 <- sqrt(b12)
+    b12 <- sqrt(0.5 * nu * (1 - nu))   # nu in [0, 1): never negative
     B <- matrix(c(1, b12, b12, nu), 2, 2)
     ev <- diag(ed$values[k:k1]^-0.5, nrow = k1 - k + 1)
     B <- ev %*% B %*% ev

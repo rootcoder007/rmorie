@@ -29,8 +29,10 @@
 #' @return An environment whose parent holds base R and a few
 #'   distribution functions from stats.
 #' @keywords internal
-.nlsn_env <- function(data) {
-  fe <- new.env(parent = baseenv())
+.nlsn_env <- function(data, enclos = baseenv()) {
+  # the formula's environment encloses the model, as nls() evaluates it: a function or constant the
+  # user defined there was "not found" with baseenv() as the parent
+  fe <- new.env(parent = enclos)
   for (f in .nlsn_funs) assign(f, getExportedValue("stats", f), envir = fe)
   list2env(as.list(data), parent = fe)
 }
@@ -73,10 +75,13 @@
   one <- length(formula) == 2L
   rhs <- formula[[if (one) 2L else 3L]]
   data <- as.list(data)
+  fenv <- environment(formula)
+  if (is.null(fenv)) fenv <- baseenv()
   miss <- setdiff(all.vars(rhs), c(snames, names(data)))
+  miss <- miss[!vapply(miss, exists, NA, envir = fenv)]
   if (length(miss))
     stop("variables not found in data or start: ", paste(miss, collapse = ", "), call. = FALSE)
-  env <- .nlsn_env(data)
+  env <- .nlsn_env(data, fenv)
   make_f <- function(e) {
     fn <- as.function(c(start, rhs))
     environment(fn) <- e
@@ -142,7 +147,7 @@
     J <- central
   }
   list(f = function(th) rep_len(f(th), n), J = J, y = y, theta0 = theta0,
-       pnames = pnames, jacobian = used, make_f = make_f, as_args = as_args,
+       pnames = pnames, jacobian = used, make_f = make_f, as_args = as_args, env = fenv,
        n = n, p = p)
 }
 
@@ -248,7 +253,7 @@ morie_nls <- function(formula, data, start,
     fac <- 1
     for (i in seq_len(ctrl$maxiter + 1L) - 1L) {
       it <- i
-      if (conv <= ctrl$tol) {
+      if (isTRUE(conv <= ctrl$tol)) {   # NaN (0/0 on an exact fit) is not converged, as in nls()
         isConv <- TRUE
         break
       }
@@ -275,8 +280,18 @@ morie_nls <- function(formula, data, start,
         it <- i + 1L
         break
       }
-      QR <- qr(m$J(th))
-      if (QR$rank < p) {
+      Jg <- m$J(th)
+      # a model that overflows or underflows to NaN stops in words, as nls() says it (qr.qty() failed
+      # on the NaN before)
+      if (any(!is.finite(Jg)) || any(!is.finite(r))) {
+        stopCode <- 1L
+        msg <- "missing value or an infinity produced when evaluating the model"
+        it <- i + 1L
+        break
+      }
+      QR <- qr(Jg)
+      # a Jacobian down in the subnormals decomposes to NaN with full rank: singular too
+      if (QR$rank < p || any(!is.finite(QR$qr))) {
         stopCode <- 1L
         msg <- "singular gradient"
         it <- i + 1L
@@ -289,7 +304,7 @@ morie_nls <- function(formula, data, start,
     Jm <- m$J(th)
     for (i in seq_len(ctrl$maxiter + 1L) - 1L) {
       it <- i
-      if (conv <= ctrl$tol) {
+      if (isTRUE(conv <= ctrl$tol)) {   # NaN (0/0 on an exact fit) is not converged, as in nls()
         isConv <- TRUE
         break
       }
@@ -320,8 +335,15 @@ morie_nls <- function(formula, data, start,
         break
       }
       Jm <- m$J(th)
+      if (any(!is.finite(Jm)) || any(!is.finite(r))) {
+        stopCode <- 1L
+        msg <- "missing value or an infinity produced when evaluating the model"
+        it <- i + 1L
+        break
+      }
       QR <- qr(Jm)
-      if (QR$rank < p) {
+      # a Jacobian down in the subnormals decomposes to NaN with full rank: singular too
+      if (QR$rank < p || any(!is.finite(QR$qr))) {
         stopCode <- 1L
         msg <- "singular gradient"
         it <- i + 1L
@@ -340,7 +362,10 @@ morie_nls <- function(formula, data, start,
   names(th) <- m$pnames
   rdf <- n - p
   resvar <- dev / rdf
-  XtXinv <- chol2inv(qr.R(QR))
+  # a fit kept with warnOnly = TRUE after a singular gradient has no covariance (chol2inv() stopped on
+  # the zero pivot); nls() computes it only in summary(), so its fit came back
+  XtXinv <- if (QR$rank < p) matrix(NA_real_, p, p) else
+    tryCatch(chol2inv(qr.R(QR)), error = function(e) matrix(NA_real_, p, p))
   po <- order(QR$pivot)
   XtXinv <- XtXinv[po, po, drop = FALSE]
   dimnames(XtXinv) <- list(m$pnames, m$pnames)
@@ -356,7 +381,7 @@ morie_nls <- function(formula, data, start,
                                  stopCode = stopCode, stopMessage = msg),
                  algorithm = algorithm, jacobian = m$jacobian, control = ctrl,
                  formula = formula, start = start, n = n, call = cl,
-                 .make_f = m$make_f),
+                 .make_f = m$make_f, .env = m$env),
             class = "morie_nls")
 }
 
@@ -439,7 +464,7 @@ logLik.morie_nls <- function(object, ...) {
 #' @export
 predict.morie_nls <- function(object, newdata = NULL, ...) {
   if (is.null(newdata)) return(object$fitted.values)
-  fn <- object$.make_f(.nlsn_env(newdata))
+  fn <- object$.make_f(.nlsn_env(newdata, object$.env %||% baseenv()))
   th <- object$coefficients
   lens <- lengths(object$start)
   idx <- split(seq_along(th), rep(seq_along(lens), lens))

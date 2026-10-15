@@ -268,6 +268,10 @@
   allv <- unique(c(all.vars(fixed),
                    unlist(lapply(rterms, function(t) all.vars(t$lhs))),
                    unlist(lapply(rterms, function(t) t$vars))))
+  # a missing grouping factor is named here: model.frame() below stopped first with "object 'h' not
+  # found", and the check after it never ran
+  for (t in rterms) for (v in t$vars) if (!v %in% names(data))
+    stop("grouping variable '", v, "' not found", call. = FALSE)
   n0 <- nrow(data)
   if (!is.null(weights) && length(weights) != n0)
     stop("weights must have one value per row of data", call. = FALSE)
@@ -314,8 +318,6 @@
   blocks <- list()
   for (t in rterms) {
     gl <- paste(t$vars, collapse = ":")
-    for (v in t$vars) if (!v %in% names(d))
-      stop("grouping variable '", v, "' not found", call. = FALSE)
     Zt <- stats::model.matrix(.lmm_formula(NULL, t$lhs, env), d)
     attr(Zt, "assign") <- NULL
     attr(Zt, "contrasts") <- NULL

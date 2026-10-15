@@ -75,8 +75,7 @@
 morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
                                  cv = 5L, task = "auto", seed = 0L) {
   x <- .morie_ensure_design_matrix(x)
-  if (is.null(dim(x))) x <- matrix(x, ncol = 1)
-  x <- as.matrix(x)
+  x <- as.matrix(x)   # a vector is a one-column matrix here, as before
   colnames(x) <- colnames(x) %||% paste0("x", seq_len(ncol(x)) - 1L)
   task <- .gs_resolve_task(task, y)
   .rmorie_local_seed(seed)
@@ -141,7 +140,9 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
     if (cuts < 2) cuts <- 2
     if (cuts > 5) cuts <- 5
     breaks <- unique(stats::quantile(y, probs = seq(0, 1, length = cuts)))
-    y <- cut(y, breaks, include.lowest = TRUE)
+    # a constant response has one quantile: one stratum (cut() stopped with "invalid number of
+    # intervals" before the learner could say the response is constant)
+    y <- if (length(breaks) < 2L) factor(rep("all", n)) else cut(y, breaks, include.lowest = TRUE)
   }
   if (k < n) {
     y <- factor(as.character(y))
@@ -169,11 +170,8 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
 # train.default protocol.
 .gs_seeded_folds <- function(y, k) {
   rs <- sample.int(.Machine$integer.max, 1L)
-  old <- if (exists(".Random.seed", envir = globalenv(), inherits = FALSE)) {
-    get(".Random.seed", envir = globalenv(), inherits = FALSE)
-  } else {
-    NULL
-  }
+  # the draw above made sure there is a seed to put back
+  old <- get(".Random.seed", envir = globalenv(), inherits = FALSE)
   on.exit(.rmorie_restore_seed(old), add = TRUE)
   set.seed(rs)
   .gs_create_folds(y, k)
@@ -246,10 +244,9 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
   cv <- as.integer(cv)
   folds <- .gs_seeded_folds(y_use, cv)
   if (is.null(tune_grid)) {
+    # every random grid here has tune_length rows and every fixed one a single row, so caret's
+    # trim of a longer random grid has nothing to cut
     tune_grid <- .gs_default_grid(method, x, y_use, tune_length, search)
-    if (search != "grid" && tune_length < nrow(tune_grid)) {
-      tune_grid <- tune_grid[seq_len(tune_length), , drop = FALSE]
-    }
   }
   tune_grid <- as.data.frame(tune_grid, stringsAsFactors = FALSE)
   names(tune_grid) <- sub("^\\.", "", names(tune_grid))
@@ -714,6 +711,9 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
 }
 
 .gs_glmnet_predict <- function(path, newx, s) {
+  # several lambdas: one column each, as predict.glmnet() gives them (the interpolation below holds
+  # one lambda; a vector recycled its fractions over the coefficients)
+  if (length(s) > 1L) return(sapply(s, function(si) .gs_glmnet_predict(path, newx, si)))
   li <- .gs_lambda_interp(path$lambda, s)
   fr <- li$frac
   if (path$family == "multinomial") {
