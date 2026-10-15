@@ -140,17 +140,11 @@
     a[h] <- 0
     cand <- which((r >= -tolz & a > 0) | (r < -tolz & a < 0))
     cand <- cand[!(cand %in% h)]
-    if (!length(cand)) {
-      why <- "unbounded direction"
-      break
-    }
     tt <- pmax(r[cand] / a[cand], 0)
     o <- order(tt)
+    # cand is never empty and k never NA: the dual identity sgn v_j = -sum psi_i a_i gives
+    # sum(abs(a[cand])) >= |v_j|, so slope + sum(abs(a[cand])) >= min(tau, 1 - tau) > 0
     k <- which(slope + cumsum(abs(a[cand][o])) >= 0)[1L]
-    if (is.na(k)) {
-      why <- "unbounded direction"
-      break
-    }
     h[j] <- cand[o][k]
   }
   list(basis = h, cert = NULL, pivots = piv, optimal = FALSE, why = why)

@@ -371,7 +371,9 @@ morie_decision_tree_split <- function(x, y, criterion = "gini", max_depth = 30L,
     tempcp <- (me$risk - L$sumrisk) / (L$nsplit + 1)
     tempcp2 <- me$risk - L$risk
     if (tempcp < tempcp2) tempcp <- tempcp2
-    if (tempcp > complexity) tempcp <- complexity
+    # rpart.c caps tempcp at complexity here; with unit weights and default priors (prior = 1
+    # exactly) risks are integer counts, risk(node) >= risk(left) + risk(right), so every node is
+    # entered with complexity >= its risk >= tempcp and the cap can never bind
     R <- partition(2 * nodenum + 1, n1 + ns[["nleft"]],
                    n1 + ns[["nleft"]] + ns[["nright"]] - 1L, tempcp)
     left_risk <- L$sumrisk

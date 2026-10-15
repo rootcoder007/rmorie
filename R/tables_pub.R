@@ -889,11 +889,6 @@ anova_table <- function(model, typ = 2L, digits = 3L,
     for (i in seq_along(src)) {
       a <- if (intercept) i - 1L else i
       ex <- which(asgn == a)
-      if (length(ex) == 0L) {
-        ss[i] <- NA_real_
-        df[i] <- 0
-        next
-      }
       m1 <- fit_cols(setdiff(all_cols, ex))
       df[i] <- full[["rank"]] - m1[["rank"]]
       ss[i] <- m1[["rss"]] - rss
