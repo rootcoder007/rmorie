@@ -21,10 +21,12 @@
 // the same machinery applied to the 0/1 indicator of each class, since for a
 // binary indicator the Gini impurity 2p(1-p) is twice its variance.
 //
-// Each column is sorted once up front; a node then recovers its own sorted
-// order by scanning that global order and keeping the rows it owns. That is
-// O(n) per node per feature instead of an O(n log n) sort, and is the single
-// change that closes most of the gap to randomForest.
+// Each column is sorted once up front. A large node recovers its own sorted
+// order by scanning that global order and keeping the rows it owns: O(n) per
+// node per feature instead of an O(m log m) sort. A small node sorts its m
+// rows by their global rank instead, because the scan costs O(n) however few
+// rows the node holds: a deep forest on 65k rows spent 20 minutes scanning.
+// Both give the same order (rank order is scan order), so the trees are the same.
 
 #include <Rcpp.h>
 #include <algorithm>
@@ -67,13 +69,17 @@ struct Builder {
   double alpha;
   double gamma_pen;
   const std::vector<std::vector<int> >* order;   // global sort order per column
+  const std::vector<std::vector<int> >* rank;    // position of each row in that order
+  const double* cnt;                             // rows each row stands for (NULL: one)
   std::vector<Node> nodes;
   std::vector<double> importance;
   std::vector<char> in_node;                     // membership mask, reused
 
   int build(std::vector<int>& idx, int depth) {
-    double G = 0.0, H = 0.0;
+    double G = 0.0, H = 0.0, C = 0.0;
     for (size_t i = 0; i < idx.size(); ++i) { G += g[idx[i]]; H += h[idx[i]]; }
+    if (cnt) { for (size_t i = 0; i < idx.size(); ++i) C += cnt[idx[i]]; }
+    else C = static_cast<double>(idx.size());
 
     Node nd;
     nd.leaf = true;
@@ -81,8 +87,7 @@ struct Builder {
     int self = static_cast<int>(nodes.size());
     nodes.push_back(nd);
 
-    if (depth >= max_depth ||
-        static_cast<int>(idx.size()) < 2 * min_node) return self;
+    if (depth >= max_depth || C < 2.0 * min_node) return self;
 
     // Candidate features for this node -- partial Fisher-Yates so the draw
     // is without replacement and costs O(mtry), not O(p log p).
@@ -107,19 +112,28 @@ struct Builder {
       const int j = feats[k];
       const std::vector<int>& ord = (*order)[j];
       sorted.clear();
-      for (size_t t = 0; t < ord.size(); ++t)
-        if (in_node[ord[t]]) sorted.push_back(ord[t]);
+      const size_t m_node = idx.size();
+      if (m_node * 16 < ord.size()) {
+        const std::vector<int>& rk = (*rank)[j];
+        sorted.assign(idx.begin(), idx.end());
+        std::sort(sorted.begin(), sorted.end(),
+                  [&rk](int a, int b) { return rk[a] < rk[b]; });
+      } else {
+        for (size_t t = 0; t < ord.size(); ++t)
+          if (in_node[ord[t]]) sorted.push_back(ord[t]);
+      }
 
       const int nn = static_cast<int>(sorted.size());
       if (nn < 2) continue;
-      double GL = 0.0, HL = 0.0;
+      double GL = 0.0, HL = 0.0, CL = 0.0;
       for (int t = 0; t < nn - 1; ++t) {
         GL += g[sorted[t]];
         HL += h[sorted[t]];
+        CL += cnt ? cnt[sorted[t]] : 1.0;
         const double v = X[sorted[t] + static_cast<size_t>(j) * n];
         const double vn = X[sorted[t + 1] + static_cast<size_t>(j) * n];
         if (!(v < vn)) continue;                 // tied values: not a split
-        if (t + 1 < min_node || nn - t - 1 < min_node) continue;
+        if (CL < min_node || C - CL < min_node) continue;   // rows, not distinct values
         const double GR = G - GL, HR = H - HL;
         const double gain = 0.5 * (GL * GL / (HL + lambda) +
                                    GR * GR / (HR + lambda) - parent) - gamma_pen;
@@ -197,15 +211,22 @@ std::vector<std::vector<int> > column_orders(const NumericMatrix& X) {
 // [[Rcpp::export]]
 List morie_tree_fit_cpp(NumericMatrix X, NumericVector g, NumericVector h,
                         int max_depth, int min_node, int mtry,
-                        double lambda, double alpha, double gamma_pen) {
+                        double lambda, double alpha, double gamma_pen,
+                        NumericVector cnt = NumericVector(0)) {
   const int n = X.nrow(), p = X.ncol();
   std::vector<std::vector<int> > ord = column_orders(X);
+  std::vector<std::vector<int> > rk(p, std::vector<int>(n));
+  for (int j = 0; j < p; ++j)
+    for (int t = 0; t < n; ++t) rk[j][ord[j][t]] = t;
   Builder b;
   b.X = &X[0]; b.g = &g[0]; b.h = &h[0];
   b.n = n; b.p = p;
   b.max_depth = max_depth; b.min_node = min_node; b.mtry = mtry;
   b.lambda = lambda; b.alpha = alpha; b.gamma_pen = gamma_pen;
   b.order = &ord;
+  b.rank = &rk;
+  if (cnt.size() != 0 && cnt.size() != n) Rcpp::stop("cnt must have one entry per row");
+  b.cnt = cnt.size() ? &cnt[0] : nullptr;
   b.importance.assign(p, 0.0);
   b.in_node.assign(n, 0);
   std::vector<int> idx(n);

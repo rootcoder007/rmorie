@@ -1179,8 +1179,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // morie_tree_fit_cpp
-List morie_tree_fit_cpp(NumericMatrix X, NumericVector g, NumericVector h, int max_depth, int min_node, int mtry, double lambda, double alpha, double gamma_pen);
-RcppExport SEXP _rmorie_morie_tree_fit_cpp(SEXP XSEXP, SEXP gSEXP, SEXP hSEXP, SEXP max_depthSEXP, SEXP min_nodeSEXP, SEXP mtrySEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP gamma_penSEXP) {
+List morie_tree_fit_cpp(NumericMatrix X, NumericVector g, NumericVector h, int max_depth, int min_node, int mtry, double lambda, double alpha, double gamma_pen, NumericVector cnt);
+RcppExport SEXP _rmorie_morie_tree_fit_cpp(SEXP XSEXP, SEXP gSEXP, SEXP hSEXP, SEXP max_depthSEXP, SEXP min_nodeSEXP, SEXP mtrySEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP gamma_penSEXP, SEXP cntSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -1193,7 +1193,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< double >::type gamma_pen(gamma_penSEXP);
-    rcpp_result_gen = Rcpp::wrap(morie_tree_fit_cpp(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen));
+    Rcpp::traits::input_parameter< NumericVector >::type cnt(cntSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_tree_fit_cpp(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen, cnt));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1537,7 +1538,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_svc_train_cpp", (DL_FUNC) &_rmorie_morie_svc_train_cpp, 9},
     {"_rmorie_morie_svr_train_cpp", (DL_FUNC) &_rmorie_morie_svr_train_cpp, 10},
     {"_rmorie_morie_svm_decision_cpp", (DL_FUNC) &_rmorie_morie_svm_decision_cpp, 8},
-    {"_rmorie_morie_tree_fit_cpp", (DL_FUNC) &_rmorie_morie_tree_fit_cpp, 9},
+    {"_rmorie_morie_tree_fit_cpp", (DL_FUNC) &_rmorie_morie_tree_fit_cpp, 10},
     {"_rmorie_morie_tree_predict_cpp", (DL_FUNC) &_rmorie_morie_tree_predict_cpp, 2},
     {"_rmorie_siu_core_html_to_text", (DL_FUNC) &_rmorie_siu_core_html_to_text, 1},
     {"_rmorie_siu_core_parse_html", (DL_FUNC) &_rmorie_siu_core_parse_html, 1},
