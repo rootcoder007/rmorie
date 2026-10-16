@@ -60,12 +60,11 @@ test_that("morie_siu_strip_boilerplate removes the witness-officer glossary note
 })
 
 test_that("morie_llm_models lists the configured server's models", {
-  # with no server configured the listing is empty, not an error
+  # the default backend (MORIE_LLM_BASE, else a local Ollama) answers with model names, or
+  # with an empty listing when nothing is listening -- never an error, on any machine
   m <- morie_llm_models()
   expect_type(m, "character")
-  if (!nzchar(Sys.getenv("MORIE_LLM_BASE"))) {
-    expect_length(m, 0L)
-  }
+  expect_true(all(nzchar(m)))
   # an unreachable base returns an empty listing rather than stopping
   expect_length(morie_llm_models(base = "http://127.0.0.1:1"), 0L)
 })

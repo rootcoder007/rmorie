@@ -9,21 +9,21 @@ if (nzchar(Sys.getenv("R_COVR"))) Sys.setenv(TESTTHAT_PARALLEL = "FALSE")
 if (.Platform$OS.type == "windows") Sys.setenv(TESTTHAT_PARALLEL = "FALSE")
 library(rmorie)
 
-# R-universe's R-oldrel macOS x86_64 runner spends 44 of its 60-minute check
-# step before the tests start (install, code and Rd checks, examples), so
-# the whole suite cannot fit; every other platform finishes well inside the
-# cap. There, the files run in order inside a wall-clock budget
-# (MORIE_TEST_BUDGET_SECONDS, default 10 minutes), stopping before a chunk
-# that would not fit; the check fails only on a real failure and the files
-# not reached are counted. NOT_CRAN=true (the package's own CI and
-# developer machines) always runs everything.
-slow_runner <- identical(Sys.info()[["sysname"]], "Darwin") &&
-  identical(R.version$arch, "x86_64") &&
-  !identical(Sys.getenv("NOT_CRAN"), "true")
+# R-universe gives the whole check step 60 minutes, and its slower runners (R-oldrel
+# macOS x86_64 above all) spend much of that before the tests start (install, code and
+# Rd checks, examples), so the full suite (about 45 CPU minutes) cannot fit there. Under a
+# reference check (no NOT_CRAN=true: R-universe, CRAN) the files run in order, in one
+# process, inside a wall-clock budget (MORIE_TEST_BUDGET_SECONDS: 25 minutes, 10 on
+# macOS x86_64), stopping before a chunk that would not fit; the check fails only on a
+# real failure and the files not reached are counted. One process also keeps clear of
+# parallel testthat workers stalling there. NOT_CRAN=true (the package's own CI and
+# developer machines) always runs every file.
+mac_x86 <- identical(Sys.info()[["sysname"]], "Darwin") && identical(R.version$arch, "x86_64")
+slow_runner <- !identical(Sys.getenv("NOT_CRAN"), "true")
 if (!slow_runner) {
   test_check("rmorie")
 } else {
-  budget <- as.numeric(Sys.getenv("MORIE_TEST_BUDGET_SECONDS", "600"))
+  budget <- as.numeric(Sys.getenv("MORIE_TEST_BUDGET_SECONDS", if (mac_x86) "600" else "1500"))
   files <- sort(list.files("testthat", "^test-.*\\.[rR]$"))
   names <- sub("^test-(.*)\\.[rR]$", "\\1", files)
   chunks <- split(seq_along(files), ceiling(seq_along(files) / 20))
