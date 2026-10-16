@@ -1,3 +1,11 @@
+# rmorie 1.4.5 - 2026-10-16
+
+* When open.canada.ca is down, the survey PUMFs (CPADS, the Canadian Cannabis Survey, CSADS,
+  CSUS) still load: the file URL of each resource is pinned, so the live file and then its
+  Wayback Machine snapshot are tried without the portal's metadata API, and after that the
+  data.rmorie.com mirror, used only when it matches the SHA-256 recorded for the original
+  (2026-10-16: the portal timed out and its datastore answered 504).
+
 # rmorie 1.4.4 - 2026-10-16
 
 * A new data key needs the data access terms accepted first: `rmorie login` and

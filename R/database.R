@@ -1383,9 +1383,82 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
 #' CSVs) is, so when the API is down this is the route. `morie_download()`
 #' tries the live URL first and the closest Internet Archive snapshot second.
 #' @noRd
+# The file each open.canada.ca survey resource serves, pinned so a portal whose metadata API is down
+# (2026-10-16: resource_show unreachable, the datastore answering 504) still leads to the file and
+# to its Wayback Machine snapshot.
+.MORIE_CKAN_FILES <- c(
+  "d2639429-c304-45a6-90b3-770562f4d46d" = "https://open.canada.ca/data/dataset/736fa9b2-62e4-4e31-aea4-51869605b363/resource/d2639429-c304-45a6-90b3-770562f4d46d/download/cpads-2021-2022-pumf2.csv",
+  "262e6163-ba41-4562-bd2b-8996e738b1d4" = "https://open.canada.ca/data/dataset/b65cb40c-10e8-4332-ae4e-0f1cc134f53f/resource/262e6163-ba41-4562-bd2b-8996e738b1d4/download/ccs_pumf_2018to2022_final.csv",
+  "100c5845-664e-4c66-be15-3625ce236d8b" = "https://open.canada.ca/data/dataset/6c240c79-c857-4fd4-bbd6-b1fd7f04fdbc/resource/100c5845-664e-4c66-be15-3625ce236d8b/download/pumf_ccs_2023_rev.csv",
+  "420925be-399a-473b-8be3-26875a1c132a" = "https://open.canada.ca/data/dataset/2abe0796-c3e6-443b-a5c5-74e770e9fbe0/resource/420925be-399a-473b-8be3-26875a1c132a/download/ccs_pumf_2024-002.csv",
+  "f6761337-47e9-455a-a3c4-ea8516aa634f" = "https://open.canada.ca/data/dataset/1f15ca45-8bfd-4f9c-9ec6-2c0c440e69c2/resource/f6761337-47e9-455a-a3c4-ea8516aa634f/download/2021-22-cstads-ectade-pumf-fmgd-data-donnees-.csv",
+  "ebdc36e1-910d-4685-81a3-6acfe44729bc" = "https://open.canada.ca/data/dataset/1f15ca45-8bfd-4f9c-9ec6-2c0c440e69c2/resource/ebdc36e1-910d-4685-81a3-6acfe44729bc/download/202122-cstads-ectade-pumf-fmgd-bootstrap-weights-poids-de-bootstrap.csv",
+  "81a3adf0-61d0-4691-afba-588fa5f563da" = "https://open.canada.ca/data/dataset/1f15ca45-8bfd-4f9c-9ec6-2c0c440e69c2/resource/81a3adf0-61d0-4691-afba-588fa5f563da/download/202324-csads-ecade-pumf-fmgd-data-donnees.csv",
+  "c2c1795b-4501-49ba-9dd1-5b8360cc3b2e" = "https://open.canada.ca/data/dataset/65e2d45e-efc6-4c29-9a9b-db59bc96aa0e/resource/c2c1795b-4501-49ba-9dd1-5b8360cc3b2e/download/csus2023_pumf_final.csv",
+  "7d19d47a-5f42-4447-b735-aa4d677ad5ed" = "https://open.canada.ca/data/dataset/65e2d45e-efc6-4c29-9a9b-db59bc96aa0e/resource/7d19d47a-5f42-4447-b735-aa4d677ad5ed/download/csus2023_pumf_bwt.csv"
+)
+
 .morie_ckan_resource_file <- function(rid, dataset_key, ckan_base) {
+  live <- tryCatch(.morie_ckan_resource_file_live(rid, dataset_key, ckan_base), error = function(e) e)
+  if (!inherits(live, "error")) return(live)
+  message(conditionMessage(live), "; trying the data.rmorie.com mirror")
+  mirror <- tryCatch(.morie_ckan_mirror(rid, dataset_key), error = function(e) e)
+  if (!inherits(mirror, "error")) return(mirror)
+  stop(conditionMessage(live), "; the data.rmorie.com mirror: ", conditionMessage(mirror), call. = FALSE)
+}
+
+#' Internal helper: a CKAN survey resource from the project mirror
+#'
+#' data.rmorie.com keeps the open.canada.ca and Statistics Canada survey PUMFs under
+#' files/open_canada/ (gzipped), with index.json recording each original's SHA-256. The copy is
+#' used only when it matches.
+#' @noRd
+.morie_ckan_mirror <- function(rid, dataset_key) {
+  idx_path <- tempfile(fileext = ".json")
+  on.exit(unlink(idx_path), add = TRUE)
+  .morie_data_get("/files/open_canada/index.json", idx_path, timeout = 60)
+  idx <- .morie_from_json(paste(readLines(idx_path, warn = FALSE), collapse = ""))
+  hit <- NULL
+  for (nm in names(idx$files)) {
+    e <- idx$files[[nm]]
+    if ((nzchar(rid %||% "") && identical(e$ckan_resource_id, rid)) || identical(nm, dataset_key)) {
+      hit <- e
+      break
+    }
+  }
+  if (is.null(hit)) stop("it holds no copy of ", dataset_key, call. = FALSE)
+  gz <- file.path(tempdir(), hit$file)
+  csv <- sub("\\.gz$", "", gz)
+  if (!file.exists(csv) || !identical(tolower(rmoriebricklayer::sha256_file(csv)), tolower(hit$sha256))) {
+    .morie_data_get(paste0("/files/open_canada/", hit$file), gz, size = hit$gz_bytes)
+    zin <- gzfile(gz, "rb")
+    out <- file(csv, "wb")
+    repeat {
+      b <- readBin(zin, raw(), 8L * 1024L * 1024L)
+      if (!length(b)) break
+      writeBin(b, out)
+    }
+    close(zin)
+    close(out)
+    unlink(gz)
+    if (!identical(tolower(rmoriebricklayer::sha256_file(csv)), tolower(hit$sha256))) {
+      unlink(csv)
+      stop("its copy of ", dataset_key, " does not match the SHA-256 it records", call. = FALSE)
+    }
+  }
+  message("Read ", dataset_key, " from the data.rmorie.com mirror (", hit$original_name, ", SHA-256 checked)")
+  utils::read.csv(csv, stringsAsFactors = FALSE)
+}
+
+.morie_ckan_resource_file_live <- function(rid, dataset_key, ckan_base) {
   meta <- .morie_ckan_resource_meta(rid, ckan_base)
   src <- meta$url
+  if (is.null(src) && !is.null(meta$error) && !is.na(.MORIE_CKAN_FILES[rid])) {
+    # the portal's metadata is down: the pinned file URL, live and then from the Wayback Machine
+    message(sprintf("%s could not be reached (%s); using the pinned file URL", meta$host, meta$error))
+    src <- unname(.MORIE_CKAN_FILES[rid])
+    meta$size <- NULL
+  }
   if (is.null(src) && !is.null(meta$error)) {
     stop(sprintf("%s could not be reached (%s); nothing cached for %s", meta$host, meta$error, dataset_key),
          call. = FALSE)
