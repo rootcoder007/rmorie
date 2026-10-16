@@ -2715,7 +2715,7 @@ File,Line,Status,Version,Context
 ./tests/testthat/test-cov-secaead-native.R,84,STALE_OR_DEP,2.8.2,"test_that(AEAD encrypt/decrypt match RFC 8439 Sec. 2.8.2 and reject tampering; {"
 ./tests/testthat/test-cov-secrtt-native.R,2,STALE_OR_DEP,2.8.2,"# AEAD is pinned to the RFC 8439 section 2.8.2 test vector; the DEK"
 ./tests/testthat/test-cov-secrtt-native.R,25,STALE_OR_DEP,2.8.2,"test_that(the AEAD under the envelope reproduces RFC 8439 section 2.8.2; {"
-./tests/testthat/test-cov-siu-core.R,70,STALE_OR_DEP,127.0.0.1,"expect_length(morie_llm_models(base = http://127.0.0.1:1); 0L)"
+./tests/testthat/test-cov-siu-core.R,69,STALE_OR_DEP,127.0.0.1,"expect_length(morie_llm_models(base = http://127.0.0.1:1); 0L)"
 ./tests/testthat/test-cov-siu-parser.R,19,STALE_OR_DEP,0.9.4,"# reports unclassified in v0.9.4); see v0.9.5 NEWS."
 ./tests/testthat/test-cov-siu-parser.R,19,STALE_OR_DEP,0.9.4,"# reports unclassified in v0.9.4); see v0.9.5 NEWS."
 ./tests/testthat/test-cov-untested-exports.R,4,STALE_OR_DEP,0.9.5.5,"# pre-v0.9.5.5-release audit as having no direct test reference:"
