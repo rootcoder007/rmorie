@@ -351,7 +351,8 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
   topic <- if (length(rest) && !startsWith(rest[[1L]], "-")) tolower(rest[[1L]]) else ""
   verbs <- paste0(
         "usage: rmorie <verb> [options]\n\n",
-        "  login [--email ADDRESS] [--code CODE] [--no-browser]   sign in for the curated tables (the data key)\n",
+        "  login [--email ADDRESS] [--code CODE] [--no-browser]   sign in for the curated tables (the data key);\n",
+        "        asks you to accept the terms, then your name and reason (or --accept-terms --name --reason)\n",
         "  login --token [KEY]                                    store a data key you already have\n",
         "  logout                                                 forget the data key\n",
         "  doctor                                                 language-model routes set up here, the one ask uses\n",

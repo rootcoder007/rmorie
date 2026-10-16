@@ -562,17 +562,21 @@ morie_llm_ask_multi <- function(messages, providers = NULL, model = NULL, timeou
 #' @param email An email address to send a sign-in code to.
 #' @param code The code that was emailed (asked for when not given).
 #' @param token A key you already hold.
+#' @param ... Passed to \code{rmoriebricklayer::bricklayer_llm_login()}: the data access terms
+#'   and who is asking, which a new key needs (\code{accept_terms}, \code{name},
+#'   \code{affiliation}, \code{purpose}, \code{restricted}, \code{supervisor_name},
+#'   \code{supervisor_role}, \code{supervisor_email}); what is not given is asked at the console.
 #' @return The key, invisibly.
 #' @examples
 #' \dontrun{
-#' morie_llm_login()                              # GitHub
+#' morie_llm_login()                              # GitHub; asks for the terms, name and reason
 #' morie_llm_login(email = "you@example.org")     # an emailed code
 #' }
 #' @export
 morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600,
-                            email = NULL, code = NULL, token = NULL) {
+                            email = NULL, code = NULL, token = NULL, ...) {
   rmoriebricklayer::bricklayer_llm_login(token = token, email = email, code = code,
-                                         open_browser = open_browser, poll_max_seconds = poll_max_seconds)
+                                         open_browser = open_browser, poll_max_seconds = poll_max_seconds, ...)
 }
 
 #' Forget the stored data key

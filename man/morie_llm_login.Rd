@@ -9,7 +9,8 @@ morie_llm_login(
   poll_max_seconds = 600,
   email = NULL,
   code = NULL,
-  token = NULL
+  token = NULL,
+  ...
 )
 }
 \arguments{
@@ -22,6 +23,11 @@ morie_llm_login(
 \item{code}{The code that was emailed (asked for when not given).}
 
 \item{token}{A key you already hold.}
+
+\item{...}{Passed to \code{rmoriebricklayer::bricklayer_llm_login()}: the data access terms
+and who is asking, which a new key needs (\code{accept_terms}, \code{name},
+\code{affiliation}, \code{purpose}, \code{restricted}, \code{supervisor_name},
+\code{supervisor_role}, \code{supervisor_email}); what is not given is asked at the console.}
 }
 \value{
 The key, invisibly.
@@ -38,7 +44,7 @@ rmoriebricklayer, rmoriedata and morie. This is
 }
 \examples{
 \dontrun{
-morie_llm_login()                              # GitHub
+morie_llm_login()                              # GitHub; asks for the terms, name and reason
 morie_llm_login(email = "you@example.org")     # an emailed code
 }
 }

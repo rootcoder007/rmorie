@@ -1,7 +1,7 @@
 Package: rmorie
 Type: Package
 Title: Multi-Domain Open Research and Inferential Estimation
-Version: 1.4.3
+Version: 1.4.4
 Authors@R: c(
   person(
     given = "Vansh Singh",
@@ -62,7 +62,7 @@ Imports:
   stats,
   utils,
   Rcpp,
-  rmoriebricklayer (>= 0.5.13),
+  rmoriebricklayer (>= 0.5.14),
   rmoriedata (>= 0.3.6)
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb);
@@ -271,5 +271,5 @@ Additional_repositories:
   https://stan-dev.r-universe.dev,
   https://rootcoder007.r-universe.dev
 Remotes:
-  rmoriebricklayer=rootcoder007/rmorie-bricklayer@v0.5.13,
+  rmoriebricklayer=rootcoder007/rmorie-bricklayer@v0.5.14,
   rootcoder007/rmoriedata

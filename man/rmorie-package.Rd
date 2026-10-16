@@ -169,6 +169,7 @@ Useful links:
 \itemize{
   \item \url{https://github.com/rootcoder007/rmorie}
   \item \url{https://rootcoder007.github.io/rmorie/}
+  \item \url{https://rmorie.com}
   \item Report bugs at \url{https://github.com/rootcoder007/rmorie/issues}
 }
 

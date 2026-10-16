@@ -10,7 +10,9 @@ morie_otis_analyze_a01_ruhela_per_year(data = NULL, out_dir = NULL)
 morie_otis_analyze_a01_mrm_per_year(data = NULL, out_dir = NULL)
 }
 \arguments{
-\item{data}{The OTIS a01 table; \code{NULL} loads it.}
+\item{data}{The OTIS a01 table. \code{NULL} uses \code{morie_otis_load()}: the table
+cached by \code{morie_datasets_otis_a01(offline = FALSE)}, or else the included 5-row
+synthetic sample, with a warning that its numbers are not findings.}
 
 \item{out_dir}{Optional output directory.}
 }
