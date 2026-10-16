@@ -4,10 +4,12 @@
 csv_text <- "SEQID,age\n1,20\n2,31\n"
 
 mirror_files <- function(dir, sha = NULL, rid = "rid-1", name = "ocp21") {
+  # the same LF bytes in both files, so the SHA-256 matches on Windows too
+  bytes <- charToRaw(csv_text)
   csv <- file.path(dir, "src.csv")
-  writeLines(c("SEQID,age", "1,20", "2,31"), csv)
+  writeBin(bytes, csv)
   gz <- file.path(dir, paste0(name, ".csv.gz"))
-  con <- gzfile(gz, "wb"); writeLines(c("SEQID,age", "1,20", "2,31"), con); close(con)
+  con <- gzfile(gz, "wb"); writeBin(bytes, con); close(con)
   idx <- list(files = stats::setNames(list(list(
     file = paste0(name, ".csv.gz"), original_name = "cpads.csv",
     sha256 = sha %||% rmoriebricklayer::sha256_file(csv), gz_bytes = file.size(gz), ckan_resource_id = rid)), name))
