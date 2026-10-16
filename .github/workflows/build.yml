@@ -221,8 +221,8 @@ jobs:
           fi
           git clone --depth=1 "$remote" "$tmp"
           cd "$tmp"
-          git config user.email "noreply@anthropic.com"
-          git config user.name "rmorie CI"
+          git config user.email "278967282+rootcoder007@users.noreply.github.com"
+          git config user.name "rootcoder007"
           git commit --allow-empty -m "sync: rmorie ${{ github.sha }}"
           git push
           rm -f "${keyfile:-}"
