@@ -23,6 +23,9 @@ slow_runner <- !identical(Sys.getenv("NOT_CRAN"), "true")
 if (!slow_runner) {
   test_check("rmorie")
 } else {
+  # test_dir() reads Config/testthat/parallel from the DESCRIPTION; the budgeted run is
+  # one process, so it starts no workers that could stall
+  Sys.setenv(TESTTHAT_PARALLEL = "FALSE")
   budget <- as.numeric(Sys.getenv("MORIE_TEST_BUDGET_SECONDS", if (mac_x86) "600" else "1500"))
   files <- sort(list.files("testthat", "^test-.*\\.[rR]$"))
   names <- sub("^test-(.*)\\.[rR]$", "\\1", files)
