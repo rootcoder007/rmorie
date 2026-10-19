@@ -88,6 +88,19 @@ jobs:
                           tf, mode = "wb", quiet = TRUE)
             install.packages(tf, repos = NULL, type = "source")
           }
+          # the same for rmoriedata: its floor and branch from DESCRIPTION, built from GitHub when the
+          # installed build is older (it needs the rmoriebricklayer just installed)
+          dfloor <- sub(".*rmoriedata \\(>= ([0-9.]+)\\).*", "\\1", paste(imports, collapse = " "))
+          if (!grepl("^[0-9.]+$", dfloor)) dfloor <- "0.0.0"
+          dref <- sub(".*rootcoder007/rmoriedata@([A-Za-z0-9._/-]+).*", "\\1", remotes)
+          if (identical(dref, remotes) || !grepl("^[A-Za-z0-9._/-]+$", dref)) dref <- "main"
+          if (!nzchar(system.file(package = "rmoriedata")) ||
+              utils::packageVersion("rmoriedata") < dfloor) {
+            tf <- tempfile(fileext = ".tar.gz")
+            download.file(sprintf("https://github.com/rootcoder007/rmoriedata/archive/%s.tar.gz", dref),
+                          tf, mode = "wb", quiet = TRUE)
+            install.packages(tf, repos = NULL, type = "source")
+          }
         shell: Rscript {0}
 
       - name: Make apt resilient (retries, timeouts, primary mirror first)
