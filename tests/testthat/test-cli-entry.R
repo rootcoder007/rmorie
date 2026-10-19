@@ -24,7 +24,7 @@ test_that("login, logout, doctor, config, models and ask are rmoriebricklayer's 
   withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir())
   seen <- NULL
   testthat::local_mocked_bindings(
-    bricklayer_cli = function(args, out = cat) {
+    blcli = function(args, out = cat) {
       seen <<- list(args = args, prog = Sys.getenv("RMBL_PROG"))
       out("from bricklayer\n")
       0L
@@ -46,7 +46,7 @@ test_that("login, logout, doctor, config, models and ask are rmoriebricklayer's 
 })
 
 test_that("doctor names the route ask would take and the data key; ask relays the reply", {
-  ps <- rmoriebricklayer::bricklayer_llm_providers()
+  ps <- rmoriebricklayer::llmprvd()
   withr::local_envvar(c(stats::setNames(rep(NA_character_, nrow(ps)), ps$key_env), XDG_CONFIG_HOME = withr::local_tempdir(),
                         OLLAMA_HOST = "off", MORIE_LLM_BASE_URL = NA, MORIE_HOSTED_KEY = NA))
   d <- .capture("doctor")
@@ -338,7 +338,7 @@ test_that("data.rmorie.com tables: key handling, manifest cache, download cached
   close(con)
   manifest <- paste0('{"generated_utc":"2026-10-01T00:00:00Z","datasets":[{"db":"chicago_crime","table":"incidents",',
                      '"key":"chicago_crime/incidents","rows":3,"columns":["id","type"],"bytes_gz":10,"sha256":"',
-                     rmoriebricklayer::sha256_file(served), '","source":"bigquery-public-data.chicago_crime.crime",',
+                     rmoriebricklayer::sha256file(served), '","source":"bigquery-public-data.chicago_crime.crime",',
                      '"meta":{"description":"Chicago Police incidents"}}]}')
   testthat::local_mocked_bindings(.package = .pkg,
     .morie_data_get = function(path, dest, timeout = 600) {

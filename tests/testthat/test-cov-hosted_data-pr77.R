@@ -27,19 +27,19 @@
 test_that("the data service comes from the signed services document, and an unavailable one is refused", {
   .hd_sandbox()
   url <- .hd(".morie_data_url")
-  testthat::local_mocked_bindings(bricklayer_services = function(offline = TRUE) stop("too old"),
+  testthat::local_mocked_bindings(svcs = function(offline = TRUE) stop("too old"),
                                   .package = "rmoriebricklayer")
   expect_identical(url(), "https://data.rmorie.com")   # an unreadable document leaves the default
   testthat::local_mocked_bindings(
-    bricklayer_services = function(offline = TRUE) list(data = list(mode = "key", base_url = "https://d.example.org")),
+    svcs = function(offline = TRUE) list(data = list(mode = "key", base_url = "https://d.example.org")),
     .package = "rmoriebricklayer")
   expect_identical(url(), "https://d.example.org")
   testthat::local_mocked_bindings(
-    bricklayer_services = function(offline = TRUE) list(data = list(mode = "off", request_access = "https://x.example/a")),
+    svcs = function(offline = TRUE) list(data = list(mode = "off", request_access = "https://x.example/a")),
     .package = "rmoriebricklayer")
   expect_error(url(), "the curated-data service is not available right now (see https://x.example/a)", fixed = TRUE)
   testthat::local_mocked_bindings(
-    bricklayer_services = function(offline = TRUE) list(data = list(mode = "key", base_url = "")),
+    svcs = function(offline = TRUE) list(data = list(mode = "key", base_url = "")),
     .package = "rmoriebricklayer")
   expect_error(url(), "not available right now (see https://rmorie.com/access)", fixed = TRUE)
   withr::local_envvar(MORIE_DATA_URL = " https://local.test/// ")
@@ -70,7 +70,7 @@ test_that("a table is checked against the manifest's SHA-256, with one refetch b
       writeLines(jsonlite::toJSON(served, auto_unbox = TRUE, null = "null"), dest)
       invisible(dest)
     }, .package = "rmorie")
-  testthat::local_mocked_bindings(bricklayer_services = function(offline = TRUE) NULL, .package = "rmoriebricklayer")
+  testthat::local_mocked_bindings(svcs = function(offline = TRUE) NULL, .package = "rmoriebricklayer")
   copy <- function() {
     g <- withr::local_tempfile(.local_envir = parent.frame())
     file.copy(f, g)
@@ -118,7 +118,7 @@ test_that("a table is checked against the manifest's SHA-256, with one refetch b
 test_that("a refused download names a restricted table's terms, a rejected key, or the service's own message", {
   .hd_sandbox()
   get_ <- .hd(".morie_data_get")
-  testthat::local_mocked_bindings(bricklayer_services = function(offline = TRUE) NULL, .package = "rmoriebricklayer")
+  testthat::local_mocked_bindings(svcs = function(offline = TRUE) NULL, .package = "rmoriebricklayer")
   .hd_write_cache(list(datasets = list(list(key = "icpsr_9/t", bytes_gz = 1234L))))
   seen <- list()
   fail <- "HTTP 403 Forbidden"

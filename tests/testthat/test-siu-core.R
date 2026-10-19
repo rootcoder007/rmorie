@@ -10,7 +10,7 @@ siu_fixture <- function() {
 # test-siu-subject-service.R guards the rule there.
 skip_unless_bricklayer_subject_rule <- function() {
   skip_if_not(requireNamespace("rmoriebricklayer", quietly = TRUE) &&
-                exists("bricklayer_parse_siu", envir = asNamespace("rmoriebricklayer")))
+                exists("siuprs", envir = asNamespace("rmoriebricklayer")))
   probe <- paste0("<p>The Lakeshore Police Service notified the SIU.</p>",
                   "<p>Analysis and Director's Decision</p>",
                   "<p>The SO of the Hillcrest Police Service was identified as the subject official.</p>")
@@ -20,7 +20,7 @@ skip_unless_bricklayer_subject_rule <- function() {
   # and the round-8 parser (French subject officials, sentence-level incident dates): the native
   # core carries it, a bricklayer from before it parses differently
   fr <- "Unit\u00e9 des enqu\u00eates sp\u00e9ciales (UES)\nAgents impliqu\u00e9s\nAI n o 1 A particip\u00e9\nAI n o 2 A particip\u00e9\n"
-  skip_if_not(identical(rmoriebricklayer::bricklayer_siu_resolve_so(fr)$count, 2L),
+  skip_if_not(identical(rmoriebricklayer::siuso(fr)$count, 2L),
               "installed rmoriebricklayer predates the round-8 SIU parser")
 }
 

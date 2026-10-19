@@ -37,7 +37,7 @@ test_that("help has a guide per topic and every verb, config included", {
   expect_match(.cap("help", "start")$text, "Getting started")
   # the language-model pages are rmoriebricklayer's, under the rmorie name
   expect_match(.cap("help", "llm")$text, paste(.pkg, "config set route anthropic"), fixed = TRUE)
-  expect_match(.cap("help", "r")$text, "bricklayer_llm_config\\(route = \"anthropic\"")
+  expect_match(.cap("help", "r")$text, "llmcfg\\(route = \"anthropic\"")
   expect_match(.cap("help", "ask")$text, "usage: rmorie ask \\[--model NAME\\] \\[--route")
   expect_match(.cap("ask", "--help")$text, "--route")
   expect_equal(.cap("help", "no-such-topic")$status, 2L)

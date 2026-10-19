@@ -388,7 +388,7 @@ morie_siu_fetch_cases <- function(
   # was requested, materialize it instead of sweeping 2000+ pages.
   if (!isTRUE(getOption("morie.siu.allow_fetch")) &&
       requireNamespace("rmoriedata", quietly = TRUE)) {
-    corpus <- tryCatch(rmoriedata::load_siu_reports(),
+    corpus <- tryCatch(rmoriedata::siuload(),
                        error = function(e) NULL)
     if (!is.null(corpus) && nrow(corpus)) {
       if (!is.null(years) && "case_number" %in% names(corpus)) {
@@ -564,7 +564,7 @@ morie_siu_fetch_dataframe <- function(...) {
 #' @export
 morie_siu_parse_report <- function(html, engine = "auto") {
   stopifnot(is.character(html), length(html) == 1L, !is.na(html))
-  if (.siu_use_bricklayer(engine, "bricklayer_parse_siu")) return(rmoriebricklayer::bricklayer_parse_siu(html))
+  if (.siu_use_bricklayer(engine, "siuprs")) return(rmoriebricklayer::siuprs(html))
   if (!grepl("<", html, fixed = TRUE) && file.exists(html)) {
     html <- paste(readLines(html, warn = FALSE, encoding = "UTF-8"), collapse = "\n")
   }
@@ -618,7 +618,7 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
          "the reviewed corpus). install.packages(\"rmoriedata\", ",
          "repos = \"https://rootcoder007.r-universe.dev\")")
   }
-  corpus <- rmoriedata::load_siu_reports()
+  corpus <- rmoriedata::siuload()
   if (!isTRUE(update)) return(corpus)
 
   max_drid <- suppressWarnings(max(as.integer(corpus$drid), na.rm = TRUE))
@@ -641,7 +641,7 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
       dest <- tempfile(fileext = ".html")
       on.exit(unlink(dest), add = TRUE)
       ok <- tryCatch(
-        rmoriebricklayer::bricklayer_fetch_siu(id, dest),
+        rmoriebricklayer::siufetch(id, dest),
         error = function(e) NULL)
       if (!is.null(ok) && file.exists(dest) && file.size(dest) > 0) {
         return(paste(readLines(dest, warn = FALSE, encoding = "UTF-8"),
@@ -743,7 +743,7 @@ morie_siu_resolve_so <- function(text = NULL, drid = NULL, engine = "auto") {
   case_no <- if (is.character(text) && length(text) == 1L && grepl("^\\d{2}-[A-Z]{2,5}-\\d{3,4}$", text)) text else NULL
   if (!is.null(case_no) && is.null(drid)) {
     corpus <- if (requireNamespace("rmoriedata", quietly = TRUE)) {
-      tryCatch(rmoriedata::load_siu_reports(), error = function(e) NULL)
+      tryCatch(rmoriedata::siuload(), error = function(e) NULL)
     }
     hits <- if (!is.null(corpus)) corpus[corpus$case_number == case_no, , drop = FALSE] else NULL
     n <- if (!is.null(hits)) suppressWarnings(as.integer(hits$number_of_subject_officials)) else integer()
@@ -757,7 +757,7 @@ morie_siu_resolve_so <- function(text = NULL, drid = NULL, engine = "auto") {
                    " with no verified count in the reviewed corpus"), call. = FALSE)
   }
   if (!is.null(drid) && requireNamespace("rmoriedata", quietly = TRUE)) {
-    corpus <- tryCatch(rmoriedata::load_siu_reports(),
+    corpus <- tryCatch(rmoriedata::siuload(),
                        error = function(e) NULL)
     if (!is.null(corpus)) {
       hit <- corpus[corpus$drid == as.character(drid), , drop = FALSE]
@@ -774,8 +774,8 @@ morie_siu_resolve_so <- function(text = NULL, drid = NULL, engine = "auto") {
     stop("report not in the reviewed corpus; supply `text` for the ",
          "rule-based resolution")
   }
-  if (.siu_use_bricklayer(engine, "bricklayer_siu_resolve_so")) {
-    return(rmoriebricklayer::bricklayer_siu_resolve_so(text))
+  if (.siu_use_bricklayer(engine, "siuso")) {
+    return(rmoriebricklayer::siuso(text))
   }
   .siu_core_resolve_so(text)
 }

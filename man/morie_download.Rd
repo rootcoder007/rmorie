@@ -25,10 +25,10 @@ Wayback snapshot when the live fetch fails (passed through to bricklayer;
 expected size in bytes when known (a percent bar instead of a spinner).}
 }
 \value{
-The downloaded path, per \code{rmoriebricklayer::friendly_download()}.
+The downloaded path, per \code{rmoriebricklayer::fdl()}.
 }
 \description{
-Thin bridge to \code{rmoriebricklayer::friendly_download()}: downloads
+Thin bridge to \code{rmoriebricklayer::fdl()}: downloads
 \code{url} to \code{target_path}, falling back to the archived Wayback
 snapshot if the live source is unreachable -- useful for pinned open-data
 sources (e.g. the OTIS "Data on Inmates in Ontario" releases) that may move

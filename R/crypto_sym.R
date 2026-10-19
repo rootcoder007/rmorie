@@ -157,7 +157,7 @@ morie_crypto_hkdf_sha256 <- function(ikm, length = 32L,
 #'
 #' libsodium's `randombytes_buf` when rmorie is linked against it,
 #' otherwise the operating system's source through
-#' [rmoriebricklayer::random_bytes()] (never R's own generator).
+#' [rmoriebricklayer::rndbytes()] (never R's own generator).
 #'
 #' @param n Number of bytes to generate.
 #' @return Raw vector of length `n`.
@@ -168,7 +168,7 @@ morie_crypto_hkdf_sha256 <- function(ikm, length = 32L,
 morie_crypto_random_bytes <- function(n) {
   if (!morie_crypto_sodium_available()) {
     if (length(n) != 1L || is.na(n) || n < 1) stop("n must be positive", call. = FALSE)
-    return(rmoriebricklayer::random_bytes(as.integer(n)))
+    return(rmoriebricklayer::rndbytes(as.integer(n)))
   }
   .Call(`_rmorie_morie_crypto_random_bytes`, as.integer(n))
 }

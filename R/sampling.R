@@ -246,7 +246,7 @@ morie_bootstrap_sample <- function(df, statistic, n_bootstrap = 1000L, seed = 42
   }
   .rmorie_local_seed(seed)
   n <- nrow(df)
-  pg <- rmoriebricklayer::bricklayer_progress("bootstrap", n_bootstrap)
+  pg <- rmoriebricklayer::blprog("bootstrap", n_bootstrap)
   on.exit(pg$done(), add = TRUE)
   boot_stats <- vapply(seq_len(n_bootstrap), function(i) {
     idx <- sample.int(n, n, replace = TRUE)

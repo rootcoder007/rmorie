@@ -65,7 +65,7 @@ test_that("the panel-reviewed corpus is materialised when rmoriedata is installe
   withr::local_options(morie.siu.allow_fetch = NULL)
   corpus <- data.frame(case_number = c("A", "B", "C"), police_service = c("TPS", "OPP", "TPS"),
                        `_language` = c("en", "fr", "unknown"), check.names = FALSE, stringsAsFactors = FALSE)
-  testthat::local_mocked_bindings(load_siu_reports = function(...) corpus, .package = "rmoriedata")
+  testthat::local_mocked_bindings(siuload = function(...) corpus, .package = "rmoriedata")
   testthat::local_mocked_bindings(.siu_http_get_many = function(...) stop("no network allowed"), .package = .sf_pkg)
   expect_message(out <- morie_fetch_siu(cache_dir = dir, lang = "fr"), "wrote the panel-reviewed corpus from rmoriedata \\(2 rows\\)")
   got <- utils::read.csv(out, stringsAsFactors = FALSE, check.names = FALSE)
@@ -73,7 +73,7 @@ test_that("the panel-reviewed corpus is materialised when rmoriedata is installe
   expect_silent(morie_fetch_siu(cache_dir = dir, overwrite = TRUE, progress = FALSE))
   expect_equal(nrow(utils::read.csv(out)), 3L)
   # an empty corpus falls through to the check guard
-  testthat::local_mocked_bindings(load_siu_reports = function(...) stop("no corpus"), .package = "rmoriedata")
+  testthat::local_mocked_bindings(siuload = function(...) stop("no corpus"), .package = "rmoriedata")
   withr::local_envvar("_R_CHECK_PACKAGE_NAME_" = "rmorie")
   out2 <- morie_fetch_siu(cache_dir = withr::local_tempdir(), progress = FALSE)
   expect_equal(readLines(out2), "case_number")

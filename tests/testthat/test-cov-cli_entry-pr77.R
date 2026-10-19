@@ -18,7 +18,7 @@
 test_that("a warning that is not about a refused file is left to the caller", {
   .ce_sandbox()
   testthat::local_mocked_bindings(
-    bricklayer_cli = function(args, out = cat) {
+    blcli = function(args, out = cat) {
       warning("the server is slow today")
       out("doctor ran\n")
       0L
@@ -32,7 +32,7 @@ test_that("a warning that is not about a refused file is left to the caller", {
 test_that("a refused path says why, and a refused URL does not", {
   .ce_sandbox()
   msg <- NULL
-  testthat::local_mocked_bindings(bricklayer_cli = function(args, out = cat) stop(msg), .package = "rmoriebricklayer")
+  testthat::local_mocked_bindings(blcli = function(args, out = cat) stop(msg), .package = "rmoriebricklayer")
   msg <- "Permission denied: /srv/data.csv"
   r <- .ce_capture("doctor")
   expect_identical(r$status, 1L)
@@ -47,7 +47,7 @@ test_that("`rmorie help config` is rmoriebricklayer's config help, named rmorie"
   .ce_sandbox()
   seen <- NULL
   testthat::local_mocked_bindings(
-    bricklayer_cli = function(args, out = cat) {
+    blcli = function(args, out = cat) {
       seen <<- list(args = args, prog = Sys.getenv("RMBL_PROG"))
       out("config help\n")
       0L

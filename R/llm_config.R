@@ -64,9 +64,9 @@
 #' (\code{ollama.url}, \code{ollama.model}, \code{ollama.key}; \code{ollama.url}
 #' may be \code{https://ollama.com} with your Ollama key), and a key and model
 #' per provider (\code{anthropic.key}, \code{openai.model}, ...: the providers
-#' are \code{rmoriebricklayer::bricklayer_llm_providers()}). The settings are
+#' are \code{rmoriebricklayer::llmprvd()}). The settings are
 #' rmoriebricklayer's, in the file it shares with rmorie, so
-#' \code{morie_llm_config()} is \code{rmoriebricklayer::bricklayer_llm_config()}.
+#' \code{morie_llm_config()} is \code{rmoriebricklayer::llmcfg()}.
 #' An environment variable that is set wins over the saved value; a key is never
 #' shown, only "set".
 #'
@@ -86,7 +86,7 @@
 #' }
 #' @export
 morie_llm_config <- function(...) {
-  out <- rmoriebricklayer::bricklayer_llm_config(...)
+  out <- rmoriebricklayer::llmcfg(...)
   if (...length()) .morie_llm_reset_probes()
   out
 }
@@ -108,5 +108,5 @@ morie_llm_config <- function(...) {
   on.exit(for (k in names(old)) {
     if (is.na(old[[k]])) Sys.unsetenv(k) else do.call(Sys.setenv, stats::setNames(list(old[[k]]), k))
   }, add = TRUE)
-  rmoriebricklayer::bricklayer_cli(args, out = out)
+  rmoriebricklayer::blcli(args, out = out)
 }

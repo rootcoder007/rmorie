@@ -98,12 +98,12 @@ test_that("the decomposition is exact, and opposite signs are possible", {
   expect_equal(round(sf$days, 0), c(115674, 126121))
   expect_equal(round(sf$adp[2], 1), round(126121 / 365, 1))
   # people down, stay up, days up
-  expect_lt(sf$people_change[2], 0)
-  expect_gt(sf$alos_change[2], 0)
-  expect_gt(sf$days_change[2], 0)
+  expect_lt(sf$peochg[2], 0)
+  expect_gt(sf$aloschg[2], 0)
+  expect_gt(sf$dayschg[2], 0)
   # and the two rates disagree on the sign, which is the finding
-  expect_lt(sf$flow_rate_change[2], 0)
-  expect_gt(sf$stock_rate_change[2], 0)
+  expect_lt(sf$flowratechg[2], 0)
+  expect_gt(sf$stkratechg[2], 0)
 })
 
 test_that("the period length is a parameter, not an assumption", {

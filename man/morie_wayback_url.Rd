@@ -16,7 +16,7 @@ closest to that time; \code{NULL} (default) returns the most recent.}
 The snapshot URL (https), or \code{NULL} if unavailable.
 }
 \description{
-Thin bridge to \code{rmoriebricklayer::wayback_snapshot_url()}: given a live
+Thin bridge to \code{rmoriebricklayer::wbsnpurl()}: given a live
 URL, returns the closest \code{archive.org} snapshot URL (or \code{NULL} if
 none exists). Lets the morie family reuse the shared bricklayer Wayback
 helpers -- e.g. to reach an archived copy of an Ontario Data Catalogue page

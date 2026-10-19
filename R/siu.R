@@ -135,7 +135,7 @@ morie_fetch_siu <- function(cache_dir = file.path(tempdir(), "morie", "siu"),
   # options(morie.siu.allow_fetch = TRUE) (and/or max_drid=).
   if (!isTRUE(getOption("morie.siu.allow_fetch")) &&
       requireNamespace("rmoriedata", quietly = TRUE)) {
-    corpus <- tryCatch(rmoriedata::load_siu_reports(),
+    corpus <- tryCatch(rmoriedata::siuload(),
                        error = function(e) NULL)
     if (!is.null(corpus) && nrow(corpus)) {
       if (lang != "all" && "_language" %in% names(corpus)) {
@@ -1547,10 +1547,10 @@ morie_siu_compare <- function(case_number, external,
   providers <- .siu_llm_providers()
   # "route" (or a provider rmoriebricklayer knows that is not in the table) asks the model you set up
   if (identical(model, "route") ||
-      (!model %in% names(providers) && model %in% rmoriebricklayer::bricklayer_llm_providers()$id)) {
-    return(rmoriebricklayer::bricklayer_llm_chat(list(list(role = "user", content = prompt)),
+      (!model %in% names(providers) && model %in% rmoriebricklayer::llmprvd()$id)) {
+    return(rmoriebricklayer::llmchat(list(list(role = "user", content = prompt)),
                                                  route = if (identical(model, "route")) NULL else model,
-                                                 timeout = timeout_s))
+                                                 tmout = timeout_s))
   }
   if (!model %in% names(providers)) {
     stop("Unknown LLM model: '", model, "'. Available: ",

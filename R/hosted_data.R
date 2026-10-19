@@ -15,8 +15,8 @@
   svc <- NULL
   if (requireNamespace("rmoriebricklayer", quietly = TRUE)) {
     ns <- asNamespace("rmoriebricklayer")
-    if (exists("bricklayer_services", envir = ns, inherits = FALSE)) {
-      svc <- tryCatch(get("bricklayer_services", envir = ns)(offline = TRUE)$data, error = function(e) NULL)
+    if (exists("svcs", envir = ns, inherits = FALSE)) {
+      svc <- tryCatch(get("svcs", envir = ns)(offline = TRUE)$data, error = function(e) NULL)
     }
   }
   if (is.null(svc)) return("https://data.rmorie.com")
@@ -52,7 +52,7 @@
   want <- digest(FALSE)
   if (is.null(want)) unlisted()
   if (is.na(want)) return(invisible(TRUE))
-  have <- tolower(rmoriebricklayer::sha256_file(path))
+  have <- tolower(rmoriebricklayer::sha256file(path))
   if (!identical(have, want)) {
     want <- digest(TRUE)
     if (is.null(want)) unlisted()

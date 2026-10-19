@@ -212,7 +212,7 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
 ## Install
 
 From r-universe (prebuilt binaries for macOS and Windows, a source build on
-Linux). Its companions, rmoriebricklayer >= 0.5.14 and rmoriedata >= 0.3.7,
+Linux). Its companions, rmoriebricklayer >= 1.0.0 and rmoriedata >= 0.4.0,
 come from r-universe too: CRAN carries older versions. Naming them replaces an
 older copy already installed.
 
@@ -316,7 +316,7 @@ The sign-in is for the curated tables only: a personal key for
 data.rmorie.com, which the Python package `morie` reads too.
 
 ```r
-morie_llm_config(route = "anthropic")              # with ANTHROPIC_API_KEY set; rmoriebricklayer::bricklayer_llm_providers() lists them
+morie_llm_config(route = "anthropic")              # with ANTHROPIC_API_KEY set; rmoriebricklayer::llmprvd() lists them
 morie_llm_provider_set("http://localhost:1234/v1", model = "local-model")   # your own server (LM Studio, vLLM, llama.cpp)
 morie_llm_ask("Which design fits a pre/post comparison with a control group?")
 morie_llm_login()                                  # the data key: GitHub sign-in
@@ -539,7 +539,7 @@ CodeQL.
 
 If you use rmorie in your research, please cite the software:
 
-> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* https://github.com/rootcoder007/rmorie
+> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* R package version 1.5.0. https://rootcoder007.r-universe.dev/rmorie
 
 BibTeX (or run `citation("rmorie")` after installation for the entry
 stamped with the exact installed version, sourced from `inst/CITATION`):
@@ -549,7 +549,7 @@ stamped with the exact installed version, sourced from `inst/CITATION`):
   title   = {rmorie: Multi-domain Open Research and Inferential Estimation in R},
   author  = {Ruhela, Vansh Singh},
   year    = {2026},
-  url     = {https://github.com/rootcoder007/rmorie}
+  url     = {https://rootcoder007.r-universe.dev/rmorie}
 }
 ```
 

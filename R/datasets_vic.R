@@ -362,7 +362,7 @@ morie_datasets_vic_table <- function(key, table = 1, cache_dir = NULL,
     return(NULL)
   }
   slug <- paste0("vic_", key)
-  out <- tryCatch(rmoriedata::morie_data_load(slug), error = function(e) NULL)
+  out <- tryCatch(rmoriedata::mdload(slug), error = function(e) NULL)
   if (is.data.frame(out) && nrow(out) > 0L) out else NULL
 }
 

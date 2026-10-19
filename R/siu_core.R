@@ -15,7 +15,7 @@
 # (live pages), read the real signature block ("Public Reports" navigation was
 # taken for the director on every live report) and drop incident headlines as
 # police-service names -- fixes not yet in bricklayer 0.5.x.
-.siu_bricklayer_min <- c(bricklayer_parse_siu = "0.6.0", bricklayer_siu_text = "0.6.0")
+.siu_bricklayer_min <- c(siuprs = "1.0.0", siutxt = "1.0.0")
 
 .siu_use_bricklayer <- function(engine, fn) {
   engine <- match.arg(engine, c("auto", "bricklayer", "native"))
@@ -66,8 +66,8 @@
 #' morie_siu_to_iso_date(c("January 5, 2023", "not a date"), engine = "native")
 #' @export
 morie_siu_schema <- function(engine = "auto") {
-  if (.siu_use_bricklayer(engine, "bricklayer_siu_schema")) {
-    return(as.data.frame(rmoriebricklayer::bricklayer_siu_schema(), stringsAsFactors = FALSE))
+  if (.siu_use_bricklayer(engine, "siusch")) {
+    return(as.data.frame(rmoriebricklayer::siusch(), stringsAsFactors = FALSE))
   }
   .siu_core_schema()
 }
@@ -76,7 +76,7 @@ morie_siu_schema <- function(engine = "auto") {
 #' @export
 morie_siu_html_to_text <- function(html, engine = "auto") {
   stopifnot(is.character(html), length(html) == 1L, !is.na(html))
-  if (.siu_use_bricklayer(engine, "bricklayer_siu_text")) return(rmoriebricklayer::bricklayer_siu_text(html))
+  if (.siu_use_bricklayer(engine, "siutxt")) return(rmoriebricklayer::siutxt(html))
   .siu_core_html_to_text(html)
 }
 
@@ -84,9 +84,9 @@ morie_siu_html_to_text <- function(html, engine = "auto") {
 #' @export
 morie_siu_to_iso_date <- function(x, engine = "auto") {
   stopifnot(is.character(x))
-  brick <- .siu_use_bricklayer(engine, "bricklayer_siu_iso_date")
+  brick <- .siu_use_bricklayer(engine, "siudate")
   vapply(x, function(v) {
-    if (is.na(v)) NA_character_ else if (brick) rmoriebricklayer::bricklayer_siu_iso_date(v) else .siu_core_to_iso_date(v)
+    if (is.na(v)) NA_character_ else if (brick) rmoriebricklayer::siudate(v) else .siu_core_to_iso_date(v)
   }, "", USE.NAMES = FALSE)
 }
 

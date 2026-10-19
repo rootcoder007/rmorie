@@ -3,7 +3,7 @@
 test_that("morie_llm_login passes the terms and profile arguments through", {
   seen <- NULL
   testthat::local_mocked_bindings(
-    bricklayer_llm_login = function(...) {
+    dlogin = function(...) {
       seen <<- list(...)
       invisible("sk-k")
     },

@@ -135,7 +135,7 @@ test_that("the cases driver returns the cache, materialises the corpus, holds un
   if (requireNamespace("rmoriedata", quietly = TRUE)) {
     testthat::local_mocked_bindings(requireNamespace = function(package, ...) TRUE, .package = "base")
     testthat::local_mocked_bindings(
-      load_siu_reports = function(...) data.frame(case_number = c("22-OCI-001", "23-TCI-002", "21-OVI-003"),
+      siuload = function(...) data.frame(case_number = c("22-OCI-001", "23-TCI-002", "21-OVI-003"),
                                                    stringsAsFactors = FALSE),
       .package = "rmoriedata")
     expect_message(morie_siu_fetch_cases(years = 2022:2023, cache_dir = dir, overwrite = TRUE),
@@ -199,7 +199,7 @@ test_that("the corpus refresh appends only genuine newer reports, through either
   corpus <- data.frame(case_number = "24-OCI-001", drid = "5000", source_url_report = "u", police_service = "TPS",
                        date_of_incident_iso = "2024-01-01", number_of_subject_officials = "2", X_language = "en",
                        panel_reviewed = TRUE, stringsAsFactors = FALSE)
-  testthat::local_mocked_bindings(load_siu_reports = function(...) corpus, .package = "rmoriedata")
+  testthat::local_mocked_bindings(siuload = function(...) corpus, .package = "rmoriedata")
   expect_equal(morie_siu_reports(), corpus)
   testthat::local_mocked_bindings(.siu_discover_max_drid = function(default = 6000L, ...) 5000L, .package = .sq_pkg)
   expect_message(morie_siu_reports(update = TRUE), "corpus is current \\(max drid 5000\\)")
@@ -215,7 +215,7 @@ test_that("the corpus refresh appends only genuine newer reports, through either
   # bricklayer's engine writes the page to a file
   skip_if_not_installed("rmoriebricklayer")
   testthat::local_mocked_bindings(
-    bricklayer_fetch_siu = function(id, dest, ...) {
+    siufetch = function(id, dest, ...) {
       if (id == 5004L) stop("dead")
       writeLines(paste0("page", id), dest)
       TRUE
@@ -249,7 +249,7 @@ test_that("the subject-official count comes from the corpus when it can, else fr
   skip_if_not_installed("rmoriedata")
   corpus <- data.frame(case_number = c("17-OVI-201", "18-OCI-009"), drid = c("5038", "5100"),
                        number_of_subject_officials = c("2", NA), stringsAsFactors = FALSE)
-  testthat::local_mocked_bindings(load_siu_reports = function(...) corpus, .package = "rmoriedata")
+  testthat::local_mocked_bindings(siuload = function(...) corpus, .package = "rmoriedata")
   expect_equal(morie_siu_resolve_so("17-OVI-201"), list(count = 2L, reason = "panel-reviewed corpus (verified), case 17-OVI-201, drid 5038"))
   expect_error(morie_siu_resolve_so("18-OCI-009"), "no verified count in the reviewed corpus")
   expect_equal(morie_siu_resolve_so(drid = 5038), list(count = 2L, reason = "panel-reviewed corpus (verified)"))
@@ -257,6 +257,6 @@ test_that("the subject-official count comes from the corpus when it can, else fr
   text <- "The SIU investigated the conduct of two subject officials, SO #1 and SO #2, in this matter."
   r <- morie_siu_resolve_so(text, drid = 5100, engine = "native")
   expect_true(is.list(r) && all(c("count", "reason") %in% names(r)))
-  testthat::local_mocked_bindings(load_siu_reports = function(...) stop("no corpus"), .package = "rmoriedata")
+  testthat::local_mocked_bindings(siuload = function(...) stop("no corpus"), .package = "rmoriedata")
   expect_error(morie_siu_resolve_so("17-OVI-201"), "with no verified count|not installed")
 })

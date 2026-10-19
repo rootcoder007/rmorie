@@ -26,7 +26,7 @@ morie_ingest_cihi_xlsx(
 \item{wayback_url}{Optional Internet Archive snapshot URL used as a
 fallback if the live \code{url} download fails (CIHI rotates files).
 \code{NULL} (default) auto-resolves one via
-\code{rmoriebricklayer::wayback_snapshot_url()} when that package is
+\code{rmoriebricklayer::wbsnpurl()} when that package is
 installed; \code{""} disables the fallback.}
 
 \item{...}{forwarded to readxl::read_excel.}

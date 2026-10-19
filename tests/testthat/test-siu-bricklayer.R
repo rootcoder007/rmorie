@@ -4,7 +4,7 @@
 
 test_that("morie_siu_parse_report delegates to the compiled parser", {
   skip_if_not_installed("rmoriebricklayer")
-  skip_if(!exists("bricklayer_parse_siu",
+  skip_if(!exists("siuprs",
                   envir = asNamespace("rmoriebricklayer")),
           "rmoriebricklayer too old (< 0.3.5, no compiled SIU parser)")
   fx <- system.file("extdata", "siu_synthetic_report.html",
@@ -25,7 +25,7 @@ test_that("morie_siu_reports loads the reviewed corpus offline", {
 
 test_that("scraper prefill uses the compiled parser when available", {
   skip_if_not_installed("rmoriebricklayer")
-  skip_if(!exists("bricklayer_parse_siu",
+  skip_if(!exists("siuprs",
                   envir = asNamespace("rmoriebricklayer")),
           "rmoriebricklayer too old (< 0.3.5)")
   fx <- system.file("extdata", "siu_synthetic_report.html",

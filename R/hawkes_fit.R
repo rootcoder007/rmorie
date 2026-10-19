@@ -208,7 +208,7 @@
 #'   parameter \code{estimate}, \code{loglik}, \code{aic},
 #'   \code{branching_ratio}, \code{baseline_rate}, \code{n_events},
 #'   \code{converged} and the \code{backend} used: from 50 events the fit is
-#'   \code{rmoriebricklayer::core_hawkes_fit()} (bounded, analytic gradient), which also
+#'   \code{rmoriebricklayer::chwkfit()} (bounded, analytic gradient), which also
 #'   reports \code{at_bound}, the parameters on their bound, and a \code{note} when the
 #'   kernel shape is not identified (a Lomax at its exponential limit).
 #' @examples
@@ -362,11 +362,11 @@ print.morie_hawkes_fit <- function(x, ...) {
   invisible(x)
 }
 
-# morie_hawkes_fit() through rmoriebricklayer::core_hawkes_fit(), in this function's parameter
+# morie_hawkes_fit() through rmoriebricklayer::chwkfit(), in this function's parameter
 # names and Lomax convention.
 .hawkes_fit_core <- function(times, end_time, kernel) {
   n <- length(times)
-  f <- suppressWarnings(rmoriebricklayer::core_hawkes_fit(times, end_time, kernel))
+  f <- suppressWarnings(rmoriebricklayer::chwkfit(times, end_time, kernel))
   est <- as.numeric(f$theta)
   if (kernel == "lomax") est[3] <- est[3] + 1
   names(est) <- .hawkes_param_names(kernel)
@@ -375,7 +375,7 @@ print.morie_hawkes_fit <- function(x, ...) {
   loglik_pois <- .hawkes_loglik_poisson(n, end_time)
   eta <- unname(est[["eta"]])
   degenerate <- eta < 1e-3
-  at_bound <- f$at_bound
+  at_bound <- f$atbound
   note <- if (degenerate) {
     paste("eta collapsed to ~0: data consistent with a homogeneous Poisson process;",
           "kernel-shape parameters are NOT identified")

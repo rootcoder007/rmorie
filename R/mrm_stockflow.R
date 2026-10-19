@@ -48,7 +48,7 @@
 #' @return A list with:
 #'   \itemize{
 #'     \item `stock_flow`: the measures per period, from
-#'       `rmoriebricklayer::stock_flow()`.
+#'       `rmoriebricklayer::stkflow()`.
 #'     \item `reconciliation`: one row per period comparing the strata --
 #'       people at the person and placement strata, the stated aggregate
 #'       total, whether they agree, and the ratio of summed consecutive
@@ -96,7 +96,7 @@ mrm_otis_stock_flow <- function(person_days,
   ## The measures come from rmoriebricklayer, and an installed copy older
   ## than 0.4.8 does not have them. Say so here rather than let a `::`
   ## call fail with a message about an object not being exported.
-  for (.fn in c("adp", "alos", "stock_flow")) {
+  for (.fn in c("adp", "alos", "stkflow")) {
     if (!exists(.fn, envir = asNamespace("rmoriebricklayer"),
                 inherits = FALSE)) {
       stop("this needs rmoriebricklayer (>= 0.4.8) for ", .fn,
@@ -119,9 +119,9 @@ mrm_otis_stock_flow <- function(person_days,
   if (any(people == 0))
     stop("every period must contain at least one person", call. = FALSE)
 
-  sf <- rmoriebricklayer::stock_flow(days = days, people = people,
-                                     period = yrs, t = t,
-                                     exposure = exposure, per = per)
+  sf <- rmoriebricklayer::stkflow(days = days, people = people,
+                                     prd = yrs, t = t,
+                                     expo = exposure, per = per)
 
   ## -- the reconciliation --
   rec <- data.frame(period = yrs, person_stratum_people = people,
@@ -165,9 +165,9 @@ mrm_otis_stock_flow <- function(person_days,
   exact <- TRUE
   if (nrow(sf) > 1L) {
     i <- nrow(sf)
-    p <- sf$people_change[i] / 100
-    l <- sf$alos_change[i] / 100
-    exact <- isTRUE(all.equal((1 + p) * (1 + l) - 1, sf$days_change[i] / 100,
+    p <- sf$peochg[i] / 100
+    l <- sf$aloschg[i] / 100
+    exact <- isTRUE(all.equal((1 + p) * (1 + l) - 1, sf$dayschg[i] / 100,
                               tolerance = 1e-8))
   }
   list(stock_flow = sf, reconciliation = rec,

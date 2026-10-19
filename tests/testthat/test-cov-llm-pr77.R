@@ -90,8 +90,8 @@ test_that("a character context is appended to the question one element per line"
   .ll_sandbox()
   seen <- NULL
   testthat::local_mocked_bindings(
-    bricklayer_llm_ask = function(prompt, model = NULL, timeout = 120, system_prompt = NULL, route = NULL,
-                                  docs = TRUE, packages = NULL) {
+    llmask = function(prompt, model = NULL, tmout = 120, syspro = NULL, route = NULL,
+                                  docs = TRUE, pkgs = NULL) {
       seen <<- prompt
       "ok"
     },

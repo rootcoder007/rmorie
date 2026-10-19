@@ -31,7 +31,7 @@
 #' @export
 morie_crypto_slhdsa_keygen <- function() {
   if (.morie_pqc_native()) {
-    k <- rmoriebricklayer::fips_keygen("SLH-DSA-SHA2-128s")
+    k <- rmoriebricklayer::fipskg("SLH-DSA-SHA2-128s")
     return(list(pk = .morie_pqc_h2r(k$public), sk = .morie_pqc_h2r(k$secret)))
   }
   .Call(`_rmorie_morie_crypto_slhdsa128s_keygen`)
@@ -57,8 +57,8 @@ morie_crypto_slhdsa_sign <- function(sk, message) {
   if (is.character(message)) message <- charToRaw(message)
   if (.morie_pqc_native()) {
     # FIPS 205 sk = SK.seed || SK.prf || PK.seed || PK.root: the public half is its last 32 bytes
-    key <- rmoriebricklayer::fips_key("SLH-DSA-SHA2-128s", public = utils::tail(sk, 32L), secret = sk)
-    return(.morie_pqc_h2r(rmoriebricklayer::capsule_sign(message, key)$signature))
+    key <- rmoriebricklayer::fipskey("SLH-DSA-SHA2-128s", public = utils::tail(sk, 32L), secret = sk)
+    return(.morie_pqc_h2r(rmoriebricklayer::cpssign(message, key)$signature))
   }
   .Call(`_rmorie_morie_crypto_slhdsa128s_sign`, sk, message)
 }
@@ -84,11 +84,11 @@ morie_crypto_slhdsa_verify <- function(pk, message, signature) {
   stopifnot(is.raw(pk), is.raw(signature))
   if (is.character(message)) message <- charToRaw(message)
   if (.morie_pqc_native()) {
-    key <- tryCatch(rmoriebricklayer::fips_key("SLH-DSA-SHA2-128s", public = pk), error = function(e) NULL)
+    key <- tryCatch(rmoriebricklayer::fipskey("SLH-DSA-SHA2-128s", public = pk), error = function(e) NULL)
     if (is.null(key)) return(FALSE)
     sig <- structure(list(scheme = "SLH-DSA-SHA2-128s", signature = .morie_pqc_r2h(signature), prehash = "none"),
                      class = c("bricklayer_signature", "list"))
-    return(isTRUE(rmoriebricklayer::capsule_verify(message, sig, key)))
+    return(isTRUE(rmoriebricklayer::cpsvrf(message, sig, key)))
   }
   .Call(`_rmorie_morie_crypto_slhdsa128s_verify`, pk, message, signature)
 }
@@ -111,7 +111,7 @@ morie_crypto_slhdsa_verify <- function(pk, message, signature) {
 #' @export
 morie_crypto_hqc_keygen <- function() {
   if (.morie_pqc_native()) {
-    k <- rmoriebricklayer::hqc_keygen(1L)
+    k <- rmoriebricklayer::hqckg(1L)
     return(list(pk = .morie_pqc_h2r(k$public), sk = .morie_pqc_h2r(k$secret)))
   }
   .Call(`_rmorie_morie_crypto_hqc128_keygen`)
@@ -130,7 +130,7 @@ morie_crypto_hqc_encaps <- function(pk) {
   stopifnot(is.raw(pk))
   if (.morie_pqc_native()) {
     key <- structure(list(public = .morie_pqc_r2h(pk), level = 1L), class = c("bricklayer_hqc_public_key", "list"))
-    e <- rmoriebricklayer::hqc_encapsulate(key)
+    e <- rmoriebricklayer::hqcencap(key)
     return(list(ct = .morie_pqc_h2r(e$ciphertext), shared_secret = .morie_pqc_h2r(e$shared)))
   }
   .Call(`_rmorie_morie_crypto_hqc128_encaps`, pk)
@@ -150,7 +150,7 @@ morie_crypto_hqc_decaps <- function(sk, ct) {
   stopifnot(is.raw(sk), is.raw(ct))
   if (.morie_pqc_native()) {
     key <- structure(list(public = "", secret = .morie_pqc_r2h(sk), level = 1L), class = c("bricklayer_hqc_key", "list"))
-    return(.morie_pqc_h2r(rmoriebricklayer::hqc_decapsulate(key, ct)))
+    return(.morie_pqc_h2r(rmoriebricklayer::hqcdecap(key, ct)))
   }
   .Call(`_rmorie_morie_crypto_hqc128_decaps`, sk, ct)
 }

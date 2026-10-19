@@ -21,9 +21,9 @@ server (\code{own.url}, \code{own.model}, \code{own.key}), Ollama
 (\code{ollama.url}, \code{ollama.model}, \code{ollama.key}; \code{ollama.url}
 may be \code{https://ollama.com} with your Ollama key), and a key and model
 per provider (\code{anthropic.key}, \code{openai.model}, ...: the providers
-are \code{rmoriebricklayer::bricklayer_llm_providers()}). The settings are
+are \code{rmoriebricklayer::llmprvd()}). The settings are
 rmoriebricklayer's, in the file it shares with rmorie, so
-\code{morie_llm_config()} is \code{rmoriebricklayer::bricklayer_llm_config()}.
+\code{morie_llm_config()} is \code{rmoriebricklayer::llmcfg()}.
 An environment variable that is set wins over the saved value; a key is never
 shown, only "set".
 }

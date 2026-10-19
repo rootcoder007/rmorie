@@ -75,7 +75,7 @@ test_that("the launcher's old --args separator is dropped before the verb", {
 })
 
 test_that("ask with no model set up says what to set up and exits 1", {
-  ps <- rmoriebricklayer::bricklayer_llm_providers()
+  ps <- rmoriebricklayer::llmprvd()
   withr::local_envvar(c(stats::setNames(rep(NA_character_, nrow(ps)), ps$key_env), OLLAMA_HOST = "off",
                         MORIE_LLM_BASE_URL = NA, XDG_CONFIG_HOME = withr::local_tempdir()))
   r <- .pc_cap("ask", "hello")
@@ -165,7 +165,7 @@ test_that("inspect and sample print usage, and inspect names an unknown module",
 
 test_that("a failed read with no Wayback snapshot names the URL and the cause", {
   if (requireNamespace("rmoriebricklayer", quietly = TRUE)) {
-    testthat::local_mocked_bindings(wayback_snapshot_url = function(...) NULL, .package = "rmoriebricklayer")
+    testthat::local_mocked_bindings(wbsnpurl = function(...) NULL, .package = "rmoriebricklayer")
   }
   url <- paste0("file://", file.path(withr::local_tempdir(), "missing.json"))
   # the message depends on whether archive.org answers: pin both cases, never the network
@@ -203,7 +203,7 @@ test_that("a hosted R environment file opens as an environment", {
 test_that("a catalogued rmoriedata table loads from that package", {
   .pc_mock_catalog(.pc_entry(rmoriedata = "siu_manifest"))
   if (requireNamespace("rmoriedata", quietly = TRUE)) {
-    testthat::local_mocked_bindings(morie_data_load = function(slug, ...) data.frame(slug = slug), .package = "rmoriedata")
+    testthat::local_mocked_bindings(mdload = function(slug, ...) data.frame(slug = slug), .package = "rmoriedata")
     expect_equal(morie_load_dataset("zzcov")$slug, "siu_manifest")
   } else {
     expect_error(morie_load_dataset("zzcov"), "ships in the rmoriedata package")

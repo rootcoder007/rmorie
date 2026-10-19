@@ -54,7 +54,7 @@ value or one per period.}
 A list with:
 \itemize{
 \item \code{stock_flow}: the measures per period, from
-\code{rmoriebricklayer::stock_flow()}.
+\code{rmoriebricklayer::stkflow()}.
 \item \code{reconciliation}: one row per period comparing the strata --
 people at the person and placement strata, the stated aggregate
 total, whether they agree, and the ratio of summed consecutive

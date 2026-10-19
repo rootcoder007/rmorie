@@ -8,9 +8,9 @@ authors:
     affiliation: "Centre for Criminology and Sociolegal Studies, University of Toronto"
     name-particle: "Singh"
     # IPA: /ʋənʃ sɪŋ ɾʊˈɦeːlɑː/
-version: "1.4.5"
+version: "1.5.0"
 date-released: "2026-10-16"
-url: "https://github.com/rootcoder007/rmorie"
+url: "https://rootcoder007.r-universe.dev/rmorie"
 repository-code: "https://github.com/rootcoder007/rmorie"
 license: "AGPL-3.0-or-later"
 keywords:
@@ -34,7 +34,7 @@ preferred-citation:
       orcid: "https://orcid.org/0009-0004-1750-3592"
       affiliation: "Centre for Criminology and Sociolegal Studies, University of Toronto"
   year: "2026"
-  url: "https://github.com/rootcoder007/rmorie"
+  url: "https://rootcoder007.r-universe.dev/rmorie"
 references:
   # Methodology + empirical-applications papers are in preparation and
   # will be added once publicly available with DOIs or preprint URLs.

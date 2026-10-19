@@ -1,10 +1,10 @@
 Package: rmorie
 Type: Package
 Title: Multi-Domain Open Research and Inferential Estimation
-Version: 1.4.5
+Version: 1.5.0
 Authors@R: c(
   person(
-    given = "Vansh Singh",
+    given = c("Vansh", "Singh"),
     family = "Ruhela",
     email = "vsruhela@proton.me",
     role = c("aut", "cre"),
@@ -62,8 +62,8 @@ Imports:
   stats,
   utils,
   Rcpp,
-  rmoriebricklayer (>= 0.5.14),
-  rmoriedata (>= 0.3.6)
+  rmoriebricklayer (>= 1.0.0),
+  rmoriedata (>= 0.4.0)
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb);
     optional liboqs (ML-KEM post-quantum crypto): liboqs-devel (rpm), liboqs-dev (deb) or brew install liboqs
@@ -271,5 +271,5 @@ Additional_repositories:
   https://stan-dev.r-universe.dev,
   https://rootcoder007.r-universe.dev
 Remotes:
-  rmoriebricklayer=rootcoder007/rmorie-bricklayer@v0.5.14,
+  rmoriebricklayer=rootcoder007/rmorie-bricklayer@v1.0.0,
   rootcoder007/rmoriedata

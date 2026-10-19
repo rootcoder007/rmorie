@@ -141,7 +141,7 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
 
 #' Resolve a Wayback Machine snapshot URL (via rmoriebricklayer)
 #'
-#' Thin bridge to \code{rmoriebricklayer::wayback_snapshot_url()}: given a live
+#' Thin bridge to \code{rmoriebricklayer::wbsnpurl()}: given a live
 #' URL, returns the closest \code{archive.org} snapshot URL (or \code{NULL} if
 #' none exists). Lets the morie family reuse the shared bricklayer Wayback
 #' helpers -- e.g. to reach an archived copy of an Ontario Data Catalogue page
@@ -166,12 +166,12 @@ morie_wayback_url <- function(url, timestamp = NULL) {
       call. = FALSE
     )
   }
-  rmoriebricklayer::wayback_snapshot_url(url, timestamp = timestamp)
+  rmoriebricklayer::wbsnpurl(url, ts = timestamp)
 }
 
 #' Download a file with an automatic Wayback fallback (via rmoriebricklayer)
 #'
-#' Thin bridge to \code{rmoriebricklayer::friendly_download()}: downloads
+#' Thin bridge to \code{rmoriebricklayer::fdl()}: downloads
 #' \code{url} to \code{target_path}, falling back to the archived Wayback
 #' snapshot if the live source is unreachable -- useful for pinned open-data
 #' sources (e.g. the OTIS "Data on Inmates in Ontario" releases) that may move
@@ -184,7 +184,7 @@ morie_wayback_url <- function(url, timestamp = NULL) {
 #'   \code{NULL} uses the bricklayer default).
 #' @param label,size Shown by the progress bar: a short name for the file and its
 #'   expected size in bytes when known (a percent bar instead of a spinner).
-#' @return The downloaded path, per \code{rmoriebricklayer::friendly_download()}.
+#' @return The downloaded path, per \code{rmoriebricklayer::fdl()}.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_wayback_url}}
 #' @examples
 #' # \donttest: needs an internet connection, so it is not run by
@@ -214,7 +214,7 @@ morie_download <- function(url, target_path, attempt_wayback = NULL,
     TRUE
   }, error = function(e) FALSE, warning = function(w) FALSE)
   if (ok) return(invisible(target_path))
-  rmoriebricklayer::friendly_download(url, target_path,
-    attempt_wayback = attempt_wayback
+  rmoriebricklayer::fdl(url, target_path,
+    attwb = attempt_wayback
   )
 }

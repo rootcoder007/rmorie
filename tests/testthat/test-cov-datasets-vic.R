@@ -134,11 +134,11 @@ test_that("the bundle lookup degrades to NULL without rmoriedata, a failing load
 test_that("the bundle lookup returns the rmoriedata sample when there is one", {
   skip_if_not_installed("rmoriedata")
   testthat::local_mocked_bindings(requireNamespace = function(package, ...) TRUE, .package = "base")
-  testthat::local_mocked_bindings(morie_data_load = function(slug) stop("no such slug"), .package = "rmoriedata")
+  testthat::local_mocked_bindings(mdload = function(slug) stop("no such slug"), .package = "rmoriedata")
   expect_null(.vic(".morie_vic_bundled")("x"))
-  testthat::local_mocked_bindings(morie_data_load = function(slug) data.frame(), .package = "rmoriedata")
+  testthat::local_mocked_bindings(mdload = function(slug) data.frame(), .package = "rmoriedata")
   expect_null(.vic(".morie_vic_bundled")("x"))
-  testthat::local_mocked_bindings(morie_data_load = function(slug) data.frame(slug = slug), .package = "rmoriedata")
+  testthat::local_mocked_bindings(mdload = function(slug) data.frame(slug = slug), .package = "rmoriedata")
   expect_equal(.vic(".morie_vic_bundled")("x"), data.frame(slug = "vic_x"))
 })
 

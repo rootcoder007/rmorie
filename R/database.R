@@ -952,17 +952,17 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     # shipped in rmoriedata), load it from there so newcomers have one reliable
     # entry point.
     if (requireNamespace("rmoriedata", quietly = TRUE)) {
-      slugs <- tryCatch(rmoriedata::morie_data_catalog()$slug,
+      slugs <- tryCatch(rmoriedata::mdcat()$slug,
         error = function(e) character()
       )
       if (key %in% slugs) {
-        return(as.data.frame(rmoriedata::morie_data_load(key)))
+        return(as.data.frame(rmoriedata::mdload(key)))
       }
     }
     stop(
       "Unknown dataset '", key, "'. Open-data access points:\n",
       "  - morie_dataset_catalog()           remote/CKAN dataset KEYS (e.g. 'ocp21')\n",
-      "  - rmoriedata::morie_data_catalog()  bundled data SLUGS (e.g. 'chicago_iucr_codes')\n",
+      "  - rmoriedata::mdcat()  bundled data SLUGS (e.g. 'chicago_iucr_codes')\n",
       "  - morie_datasets_*()                dedicated fetchers ",
       "(e.g. morie_datasets_chicago_iucr_codes())\n",
       "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (after rmorie login, GitHub or --email)",
@@ -1076,7 +1076,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     if (!requireNamespace("rmoriedata", quietly = TRUE)) {
       stop(matched, " ships in the rmoriedata package: install.packages(\"rmoriedata\")", call. = FALSE)
     }
-    data <- as.data.frame(rmoriedata::morie_data_load(entry$rmoriedata))
+    data <- as.data.frame(rmoriedata::mdload(entry$rmoriedata))
     .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
@@ -1429,7 +1429,7 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
   if (is.null(hit)) stop("it holds no copy of ", dataset_key, call. = FALSE)
   gz <- file.path(tempdir(), hit$file)
   csv <- sub("\\.gz$", "", gz)
-  if (!file.exists(csv) || !identical(tolower(rmoriebricklayer::sha256_file(csv)), tolower(hit$sha256))) {
+  if (!file.exists(csv) || !identical(tolower(rmoriebricklayer::sha256file(csv)), tolower(hit$sha256))) {
     .morie_data_get(paste0("/files/open_canada/", hit$file), gz, size = hit$gz_bytes)
     zin <- gzfile(gz, "rb")
     out <- file(csv, "wb")
@@ -1441,7 +1441,7 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
     close(zin)
     close(out)
     unlink(gz)
-    if (!identical(tolower(rmoriebricklayer::sha256_file(csv)), tolower(hit$sha256))) {
+    if (!identical(tolower(rmoriebricklayer::sha256file(csv)), tolower(hit$sha256))) {
       unlink(csv)
       stop("its copy of ", dataset_key, " does not match the SHA-256 it records", call. = FALSE)
     }

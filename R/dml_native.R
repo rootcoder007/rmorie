@@ -192,12 +192,12 @@
   as.numeric(Zs %*% beta) + yc
 }
 
-# Cross-fitting folds from the splitmix64 uniforms rmoriebricklayer::core_uniforms() and morie's
+# Cross-fitting folds from the splitmix64 uniforms rmoriebricklayer::cunif() and morie's
 # Python arm share: units in the order of their uniforms, dealt round-robin into the folds, so
 # the same seed gives the same split in both languages (R's sample() and numpy's permutation do
 # not agree).
 .morie_dml_folds <- function(n, n_folds, seed) {
-  perm <- order(rmoriebricklayer::core_uniforms(n, seed), method = "radix")
+  perm <- order(rmoriebricklayer::cunif(n, seed), method = "radix")
   folds <- integer(n)
   folds[perm] <- rep_len(seq_len(n_folds), n)
   folds

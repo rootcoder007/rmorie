@@ -12,7 +12,7 @@ mirror_files <- function(dir, sha = NULL, rid = "rid-1", name = "ocp21") {
   con <- gzfile(gz, "wb"); writeBin(bytes, con); close(con)
   idx <- list(files = stats::setNames(list(list(
     file = paste0(name, ".csv.gz"), original_name = "cpads.csv",
-    sha256 = sha %||% rmoriebricklayer::sha256_file(csv), gz_bytes = file.size(gz), ckan_resource_id = rid)), name))
+    sha256 = sha %||% rmoriebricklayer::sha256file(csv), gz_bytes = file.size(gz), ckan_resource_id = rid)), name))
   idx_path <- file.path(dir, "index.json")
   writeLines(jsonlite::toJSON(idx, auto_unbox = TRUE), idx_path)
   list(index = idx_path, gz = gz)

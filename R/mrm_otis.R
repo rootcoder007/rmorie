@@ -91,7 +91,7 @@ NULL
     return(NA_real_)
   }
   nll <- function(a) {
-    z <- rmoriebricklayer::hurwitz_zeta(a, x_min)
+    z <- rmoriebricklayer::hurwzeta(a, x_min)
     if (!is.finite(z) || z <= 0) return(Inf)
     n * log(z) + a * logsum
   }

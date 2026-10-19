@@ -1,7 +1,7 @@
 name = "researchproofs"
 version = "0.1.0"
 keywords = ["math"]
-defaultTargets = ["Researchproofs"]
+defaultTargets = ["Researchproofs", "IndigenousWellness"]
 
 [leanOptions]
 pp.unicode.fun = true # pretty-prints `fun a ↦ b`
@@ -16,3 +16,6 @@ rev = "v4.34.0"
 
 [[lean_lib]]
 name = "Researchproofs"
+
+[[lean_lib]]
+name = "IndigenousWellness"

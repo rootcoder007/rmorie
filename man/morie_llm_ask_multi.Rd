@@ -22,7 +22,7 @@ Character scalar response text.
 \description{
 Sends \code{messages} (each \code{list(role = , content = )}, role
 \code{"system"}, \code{"user"} or \code{"assistant"}) as it is, through
-\code{rmoriebricklayer::bricklayer_llm_chat()}, for chat loops. When no model
+\code{rmoriebricklayer::llmchat()}, for chat loops. When no model
 answers on the automatic route the result is the fallback text of
 \code{\link{morie_llm_ask}}.
 }

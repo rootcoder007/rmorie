@@ -5,7 +5,7 @@
 
 .byok_sandbox <- function(env = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = env)
-  ps <- rmoriebricklayer::bricklayer_llm_providers()
+  ps <- rmoriebricklayer::llmprvd()
   vars <- c(ps$key_env, "MORIE_LLM_BASE_URL", "MORIE_LLM_API_KEY", "MORIE_LLM_MODEL", "MORIE_LLM_ROUTE",
             "MORIE_HOSTED_KEY", "OLLAMA_MODEL", "OLLAMA_API_KEY")
   withr::local_envvar(c(stats::setNames(rep(NA_character_, length(vars)), vars),
@@ -69,10 +69,10 @@ test_that("ask hands the question, the context and rmorie's persona to rmoriebri
   .byok_sandbox()
   seen <- NULL
   testthat::local_mocked_bindings(
-    bricklayer_llm_ask = function(prompt, model = NULL, timeout = 120, system_prompt = NULL, route = NULL,
-                                  docs = TRUE, packages = NULL) {
-      seen <<- list(prompt = prompt, model = model, route = route, docs = docs, packages = packages,
-                    system_prompt = system_prompt)
+    llmask = function(prompt, model = NULL, tmout = 120, syspro = NULL, route = NULL,
+                                  docs = TRUE, pkgs = NULL) {
+      seen <<- list(prompt = prompt, model = model, route = route, docs = docs, packages = pkgs,
+                    system_prompt = syspro)
       "an answer"
     },
     .package = "rmoriebricklayer")
@@ -99,7 +99,7 @@ test_that("with no model set up, or a failure on the automatic route, ask return
   expect_match(out, "without a language model")
   expect_match(out, "ANTHROPIC_API_KEY")
   expect_match(out, paste(.prog, "config setup"), fixed = TRUE)
-  testthat::local_mocked_bindings(bricklayer_llm_ask = function(...) stop("Groq rejected your key (HTTP 401)"),
+  testthat::local_mocked_bindings(llmask = function(...) stop("Groq rejected your key (HTTP 401)"),
                                   .package = "rmoriebricklayer")
   out <- morie_llm_ask("hello")
   expect_true(isTRUE(attr(out, "fallback")))
@@ -112,7 +112,7 @@ test_that("ask_multi sends the conversation as it is; it falls back like ask", {
   .byok_sandbox()
   seen <- NULL
   testthat::local_mocked_bindings(
-    bricklayer_llm_chat = function(messages, model = NULL, route = NULL, timeout = 120) {
+    llmchat = function(messages, model = NULL, route = NULL, tmout = 120) {
       seen <<- list(messages = messages, route = route, model = model)
       "chat reply"
     },
@@ -124,11 +124,11 @@ test_that("ask_multi sends the conversation as it is; it falls back like ask", {
   expect_identical(seen$messages, msgs)
   morie_llm_ask_multi(msgs)
   expect_null(seen$route)
-  testthat::local_mocked_bindings(bricklayer_llm_chat = function(...) stop("No language-model route is set up"),
+  testthat::local_mocked_bindings(llmchat = function(...) stop("No language-model route is set up"),
                                   .package = "rmoriebricklayer")
   out <- morie_llm_ask_multi(msgs)
   expect_true(isTRUE(attr(out, "fallback")))
-  testthat::local_mocked_bindings(bricklayer_llm_chat = function(...) stop("Groq answered 500"),
+  testthat::local_mocked_bindings(llmchat = function(...) stop("Groq answered 500"),
                                   .package = "rmoriebricklayer")
   expect_match(morie_llm_ask_multi(msgs), "Groq answered 500", fixed = TRUE)
   expect_error(morie_llm_ask_multi(msgs, providers = "groq"), "Groq answered 500")
@@ -139,8 +139,8 @@ test_that("login, the settings and your own endpoint are rmoriebricklayer's", {
   .byok_sandbox()
   seen <- NULL
   testthat::local_mocked_bindings(
-    bricklayer_llm_login = function(token = NULL, email = NULL, code = NULL, open_browser = FALSE,
-                                    poll_max_seconds = 600) {
+    dlogin = function(token = NULL, email = NULL, code = NULL, openbro = FALSE,
+                                    pollmaxsec = 600) {
       seen <<- list(token = token, email = email, code = code)
       invisible("sk-k")
     },
@@ -192,7 +192,7 @@ test_that("the verbs rmorie hands to rmoriebricklayer read rmorie's help too, an
   .byok_sandbox()
   seen <- NULL
   testthat::local_mocked_bindings(
-    bricklayer_cli = function(args, out = cat) {
+    blcli = function(args, out = cat) {
       seen <<- Sys.getenv(c("RMBL_PROG", "RMBL_PACKAGES"))
       0L
     },

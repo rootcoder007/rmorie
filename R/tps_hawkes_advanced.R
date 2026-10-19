@@ -345,26 +345,26 @@ NULL
 #' Internal helper: Tps Hwka Fit One
 #' @noRd
 .tps_hwka_fit_one <- function(t, T_, kernel_kind, baseline_kind, method = "auto", eps = 1e-9) {
-  # the shared C++ fit (rmoriebricklayer::core_hawkes_fit: analytic gradient, projected BFGS, the
+  # the shared C++ fit (rmoriebricklayer::chwkfit: analytic gradient, projected BFGS, the
   # exact / sum-of-exponentials / truncated / EM / INAR routes) -- the routine morie's Python
   # fit_hawkes_general calls, so both arms return the same estimate from the same events
-  fit <- rmoriebricklayer::core_hawkes_fit(as.numeric(t), T_, kernel_kind, baseline_kind, method = method, eps = eps)
+  fit <- rmoriebricklayer::chwkfit(as.numeric(t), T_, kernel_kind, baseline_kind, meth = method, eps = eps)
   t <- as.numeric(t)
   t <- t[t >= 0 & t <= T_]
-  u <- rmoriebricklayer::core_hawkes_residuals(t, T_, kernel_kind, fit$theta, baseline = baseline_kind)
+  u <- rmoriebricklayer::chwkres(t, T_, kernel_kind, fit$theta, base = baseline_kind)
   list(
     theta              = as.numeric(fit$theta),
-    baseline_params    = as.numeric(fit$baseline_params),
-    branching_ratio    = as.numeric(fit$branching_ratio),
-    kernel_params      = as.numeric(fit$kernel_params),
+    baseline_params    = as.numeric(fit$basepar),
+    branching_ratio    = as.numeric(fit$braratio),
+    kernel_params      = as.numeric(fit$kerpar),
     nll                = fit$nll,
     aic                = fit$aic,
     bic                = fit$bic,
     n                  = fit$n,
     T_days             = as.numeric(T_),
-    k_params           = as.integer(fit$k_params),
-    ks_stat            = as.numeric(fit$ks_stat),
-    ks_pvalue          = as.numeric(fit$ks_pvalue),
+    k_params           = as.integer(fit$kpar),
+    ks_stat            = as.numeric(fit$ksstat),
+    ks_pvalue          = as.numeric(fit$kspva),
     rescaled_uniforms  = utils::head(u, 1000L),
     kernel_kind        = kernel_kind,
     baseline_kind      = baseline_kind,
@@ -387,7 +387,7 @@ NULL
   # OCC_DATE into UTC, moving late-evening events to the next day), else OCC_DATE / REPORT_DATE
   # (epoch milliseconds or text); years before min_year dropped; an optional subsample of the
   # max_n events with the smallest splitmix keys (seed 43); a stable sort; the splitmix64
-  # within-day jitter (seed 42) -- rmoriebricklayer::core_uniforms, the same numbers as Python's
+  # within-day jitter (seed 42) -- rmoriebricklayer::cunif, the same numbers as Python's
   dt <- NULL
   if (all(c("OCC_YEAR", "OCC_MONTH", "OCC_DAY") %in% colnames(df))) {
     mon <- as.character(df$OCC_MONTH)
@@ -409,11 +409,11 @@ NULL
   }
   if (!is.null(min_year)) dt <- dt[as.integer(format(dt, "%Y", tz = "UTC")) >= min_year]
   if (!is.null(max_n) && is.finite(max_n) && length(dt) > max_n) {
-    keys <- rmoriebricklayer::core_uniforms(length(dt), 43)
+    keys <- rmoriebricklayer::cunif(length(dt), 43)
     dt <- dt[sort(order(keys)[seq_len(max_n)])]
   }
   dt <- dt[order(as.numeric(dt), method = "radix")]
-  t <- as.numeric(difftime(dt, dt[[1]], units = "days")) + rmoriebricklayer::core_uniforms(length(dt), 42)
+  t <- as.numeric(difftime(dt, dt[[1]], units = "days")) + rmoriebricklayer::cunif(length(dt), 42)
   t <- sort(t)
   list(t = t, T_ = as.numeric(t[length(t)]))
 }

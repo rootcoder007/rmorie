@@ -24,7 +24,7 @@ rmorie reaches datasets through three routes:
 - `morie_dataset_catalog()` lists the datasets that
   `morie_load_dataset()` fetches by key (CKAN portals, direct
   downloads, ArcGIS layers) and caches locally;
-- `rmoriedata::morie_data_catalog()` lists the tables bundled in the
+- `rmoriedata::mdcat()` lists the tables bundled in the
   rmoriedata package, which rmorie imports;
 - `morie_sample()` reads four small OTIS and Toronto Police reference
   tables used by the MRM examples.
@@ -72,7 +72,7 @@ copy is then kept in a per-user cache under `morie_cache_dir()` (set
 The tables in rmoriedata need no network access:
 
 ```{r bundled}
-bundled <- rmoriedata::morie_data_catalog()
+bundled <- rmoriedata::mdcat()
 nrow(bundled)
 head(bundled[, c("slug", "kind", "n_rows", "n_cols")])
 ```

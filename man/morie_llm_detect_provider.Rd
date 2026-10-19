@@ -19,7 +19,7 @@ The route id (\code{"own"}, \code{"ollama"}, a provider id), or
 Which route \code{\link{morie_llm_ask}} would take now, without sending
 anything. The routes are rmoriebricklayer's: an endpoint of your own, then
 each provider whose key is set (OpenAI, Anthropic, Google Gemini, OpenRouter,
-Groq, Mistral and more: \code{rmoriebricklayer::bricklayer_llm_providers()}),
+Groq, Mistral and more: \code{rmoriebricklayer::llmprvd()}),
 then Ollama (on this machine, another one, or ollama.com with your Ollama
 key). \code{\link{morie_llm_config}} or \code{rmorie config setup} sets them up.
 }

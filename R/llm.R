@@ -389,7 +389,7 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' Which route \code{\link{morie_llm_ask}} would take now, without sending
 #' anything. The routes are rmoriebricklayer's: an endpoint of your own, then
 #' each provider whose key is set (OpenAI, Anthropic, Google Gemini, OpenRouter,
-#' Groq, Mistral and more: \code{rmoriebricklayer::bricklayer_llm_providers()}),
+#' Groq, Mistral and more: \code{rmoriebricklayer::llmprvd()}),
 #' then Ollama (on this machine, another one, or ollama.com with your Ollama
 #' key). \code{\link{morie_llm_config}} or \code{rmorie config setup} sets them up.
 #' @param route \code{NULL} (the saved setting, else the automatic order),
@@ -404,7 +404,7 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' for (v in names(old)) if (is.na(old[[v]])) Sys.unsetenv(v) else do.call(Sys.setenv, as.list(old[v]))
 #' @export
 morie_llm_detect_provider <- function(route = NULL) {
-  info <- tryCatch(rmoriebricklayer::bricklayer_llm_route_info(.morie_llm_bl_route(route)),
+  info <- tryCatch(rmoriebricklayer::llmrte(.morie_llm_bl_route(route)),
                    error = function(e) NULL)
   if (is.null(info)) "local" else info$route
 }
@@ -435,7 +435,7 @@ morie_llm_agent_available <- function() {
     "The analyses do not need a model: morie_run_pipeline(), morie_run_morie_module() and every ",
     "morie_* estimator work as they are. To get answers from a model, bring your own:\n",
     "  - a provider's key: ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, OPENROUTER_API_KEY, ",
-    "GROQ_API_KEY, ... (rmoriebricklayer::bricklayer_llm_providers() lists them)\n",
+    "GROQ_API_KEY, ... (rmoriebricklayer::llmprvd() lists them)\n",
     "  - Ollama: on this machine (https://ollama.com), another one (rmorie config set ollama.url ",
     "ADDRESS), or ollama.com itself (ollama.url https://ollama.com and your ollama.key)\n",
     "  - your own OpenAI-compatible server: rmorie config set own.url URL (LM Studio, vLLM, llama.cpp)\n",
@@ -496,9 +496,9 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
   }
   extra <- c(.morie_llm_system_prompt(""), system_prompt)
   ask <- function() {
-    rmoriebricklayer::bricklayer_llm_ask(prompt, model = model, timeout = timeout,
-                                         system_prompt = paste(extra, collapse = "\n"), route = rte,
-                                         docs = isTRUE(docs), packages = .morie_llm_doc_packages())
+    rmoriebricklayer::llmask(prompt, model = model, tmout = timeout,
+                                         syspro = paste(extra, collapse = "\n"), route = rte,
+                                         docs = isTRUE(docs), pkgs = .morie_llm_doc_packages())
   }
   if (forced) return(ask())
   tryCatch(ask(), error = function(e) {
@@ -512,7 +512,7 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
 #'
 #' Sends \code{messages} (each \code{list(role = , content = )}, role
 #' \code{"system"}, \code{"user"} or \code{"assistant"}) as it is, through
-#' \code{rmoriebricklayer::bricklayer_llm_chat()}, for chat loops. When no model
+#' \code{rmoriebricklayer::llmchat()}, for chat loops. When no model
 #' answers on the automatic route the result is the fallback text of
 #' \code{\link{morie_llm_ask}}.
 #'
@@ -535,7 +535,7 @@ morie_llm_ask_multi <- function(messages, providers = NULL, model = NULL, timeou
   rte <- if (length(pick)) .morie_llm_bl_route(pick[[1L]]) else NULL
   last <- Filter(function(m) identical(m$role %||% "", "user"), messages)
   q <- if (length(last)) last[[length(last)]]$content %||% "" else ""
-  tryCatch(rmoriebricklayer::bricklayer_llm_chat(messages, model = model, route = rte, timeout = timeout),
+  tryCatch(rmoriebricklayer::llmchat(messages, model = model, route = rte, tmout = timeout),
            error = function(e) {
              msg <- conditionMessage(e)
              if (!is.null(rte) && !startsWith(msg, "No language-model route")) stop(e)
@@ -555,14 +555,14 @@ morie_llm_ask_multi <- function(messages, providers = NULL, model = NULL, timeou
 #' stored; with \code{email} a one-time code is sent there; otherwise the GitHub
 #' device flow runs. The key is stored once, privately, for rmorie,
 #' rmoriebricklayer, rmoriedata and morie. This is
-#' \code{rmoriebricklayer::bricklayer_llm_login()}.
+#' \code{rmoriebricklayer::dlogin()}.
 #'
 #' @param open_browser Open the GitHub page in a browser.
 #' @param poll_max_seconds How long to wait for the GitHub approval.
 #' @param email An email address to send a sign-in code to.
 #' @param code The code that was emailed (asked for when not given).
 #' @param token A key you already hold.
-#' @param ... Passed to \code{rmoriebricklayer::bricklayer_llm_login()}: the data access terms
+#' @param ... Passed to \code{rmoriebricklayer::dlogin()}: the data access terms
 #'   and who is asking, which a new key needs (\code{accept_terms}, \code{name},
 #'   \code{affiliation}, \code{purpose}, \code{restricted}, \code{supervisor_name},
 #'   \code{supervisor_role}, \code{supervisor_email}); what is not given is asked at the console.
@@ -575,8 +575,8 @@ morie_llm_ask_multi <- function(messages, providers = NULL, model = NULL, timeou
 #' @export
 morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600,
                             email = NULL, code = NULL, token = NULL, ...) {
-  rmoriebricklayer::bricklayer_llm_login(token = token, email = email, code = code,
-                                         open_browser = open_browser, poll_max_seconds = poll_max_seconds, ...)
+  rmoriebricklayer::dlogin(token = token, email = email, code = code,
+                                         openbro = open_browser, pollmaxsec = poll_max_seconds, ...)
 }
 
 #' Forget the stored data key
@@ -587,7 +587,7 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
 #' morie_llm_logout()
 #' if (is.na(old)) Sys.unsetenv("XDG_CONFIG_HOME") else Sys.setenv(XDG_CONFIG_HOME = old)
 #' @export
-morie_llm_logout <- function() rmoriebricklayer::bricklayer_llm_logout()
+morie_llm_logout <- function() rmoriebricklayer::dlogout()
 
 #' Internal helper: one line on how to get a data key
 #' @noRd

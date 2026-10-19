@@ -36,9 +36,9 @@
 #' @noRd
 .morie_scrypt <- function(password, salt, N = .MORIE_SCRYPT_N, r = .MORIE_SCRYPT_R,
                           p = .MORIE_SCRYPT_P, size = .MORIE_SCRYPT_DK) {
-  B <- .morie_hex_to_raw(rmoriebricklayer::derive_key(password, salt, 1L, 128L * r * p))
+  B <- .morie_hex_to_raw(rmoriebricklayer::drvkey(password, salt, 1L, 128L * r * p))
   B <- .morie_scrypt_romix_impl(B, as.integer(N), as.integer(r), as.integer(p))
-  .morie_hex_to_raw(rmoriebricklayer::derive_key(password, B, 1L, as.integer(size)))
+  .morie_hex_to_raw(rmoriebricklayer::drvkey(password, B, 1L, as.integer(size)))
 }
 
 #' Internal helper: Morie Resolve Path
@@ -119,7 +119,7 @@ morie_crypto_keystore_create <- function(password,
   if (file.exists(p)) {
     stop(sprintf("Keystore already exists: %s", p), call. = FALSE)
   }
-  salt <- rmoriebricklayer::random_bytes(16L)
+  salt <- rmoriebricklayer::rndbytes(16L)
   invisible(.morie_derive_key(password, salt))
   store <- list(salt = .morie_raw_to_hex(salt), keys = list())
   .morie_write_store(store, path)
@@ -154,7 +154,7 @@ morie_crypto_keystore_store <- function(name, pk, sk, password,
   store <- .morie_read_store(path)
   salt <- .morie_hex_to_raw(store$salt)
   enc_key <- .morie_derive_key(password, salt)
-  nonce <- rmoriebricklayer::random_bytes(12L)
+  nonce <- rmoriebricklayer::rndbytes(12L)
   sealed <- .morie_aead_seal_impl(enc_key, nonce, sk, raw(0))
   n <- length(sk)
   if (is.null(store$keys)) store$keys <- list()

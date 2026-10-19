@@ -24,7 +24,7 @@ morie_llm_login(
 
 \item{token}{A key you already hold.}
 
-\item{...}{Passed to \code{rmoriebricklayer::bricklayer_llm_login()}: the data access terms
+\item{...}{Passed to \code{rmoriebricklayer::dlogin()}: the data access terms
 and who is asking, which a new key needs (\code{accept_terms}, \code{name},
 \code{affiliation}, \code{purpose}, \code{restricted}, \code{supervisor_name},
 \code{supervisor_role}, \code{supervisor_email}); what is not given is asked at the console.}
@@ -40,7 +40,7 @@ model: those you bring yourself (\code{\link{morie_llm_config}}). With
 stored; with \code{email} a one-time code is sent there; otherwise the GitHub
 device flow runs. The key is stored once, privately, for rmorie,
 rmoriebricklayer, rmoriedata and morie. This is
-\code{rmoriebricklayer::bricklayer_llm_login()}.
+\code{rmoriebricklayer::dlogin()}.
 }
 \examples{
 \dontrun{

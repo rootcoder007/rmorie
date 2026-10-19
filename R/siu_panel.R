@@ -87,7 +87,7 @@ morie_siu_panel <- function(html,
     if (requireNamespace("rmoriebricklayer", quietly = TRUE)) {
       dest <- tempfile(fileext = ".html")
       on.exit(unlink(dest), add = TRUE)
-      rmoriebricklayer::bricklayer_fetch_siu(drid, dest)
+      rmoriebricklayer::siufetch(drid, dest)
       html <- paste(readLines(dest, warn = FALSE, encoding = "UTF-8"),
                     collapse = "\n")
     } else {

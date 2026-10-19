@@ -215,7 +215,7 @@ morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
   m <- max(4L * min_leaf, as.integer(subsample * n))
   trees <- vector("list", n_trees)
   in_bag <- matrix(FALSE, nrow = n_trees, ncol = n)
-  pg <- rmoriebricklayer::bricklayer_progress("causal forest", n_trees + 1L)
+  pg <- rmoriebricklayer::blprog("causal forest", n_trees + 1L)
   on.exit(pg$done(), add = TRUE)
   for (b in seq_len(n_trees)) {
     pg$update(b - 1L, info = sprintf("tree %d/%d", b, n_trees))
@@ -317,7 +317,7 @@ morie_causal_forest_bootstrap <- function(y, d, x, B = 40L, n_trees = 60L,
     stop("alpha must lie in (0, 1).", call. = FALSE)
   }
   draws <- matrix(NA_real_, nrow = B, ncol = n)
-  pg <- rmoriebricklayer::bricklayer_progress("causal forest bootstrap", B)
+  pg <- rmoriebricklayer::blprog("causal forest bootstrap", B)
   on.exit(pg$done(), add = TRUE)
   for (b in seq_len(B)) {
     pg$update(b - 1L, info = sprintf("replicate %d/%d", b, B))

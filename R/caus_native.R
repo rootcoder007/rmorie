@@ -715,7 +715,7 @@ morie_caus_dml_partial_lin <- function(y, D, X, n_folds = 5, learner = NULL,
 
   yres <- numeric(n)
   dres <- numeric(n)
-  pg <- rmoriebricklayer::bricklayer_progress("partially linear DML", nf)
+  pg <- rmoriebricklayer::blprog("partially linear DML", nf)
   on.exit(pg$done(), add = TRUE)
   for (fi in seq_along(fs)) {
     pg$update(fi - 1L, info = sprintf("fold %d/%d", fi, nf))

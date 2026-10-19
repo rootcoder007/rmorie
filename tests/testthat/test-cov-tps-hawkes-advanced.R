@@ -93,7 +93,7 @@ test_that("time-rescaling residuals equal the C++ residuals of the fitted proces
     u <- tr(f$theta, td$t, td$T_, kb[1], kb[2])
     expect_length(u, length(td$t))
     expect_true(all(u > 0 & u < 1))
-    expect_equal(u, rmoriebricklayer::core_hawkes_residuals(td$t, td$T_, kb[1], f$theta, baseline = kb[2]),
+    expect_equal(u, rmoriebricklayer::chwkres(td$t, td$T_, kb[1], f$theta, base = kb[2]),
                  tolerance = 1e-9)
     expect_true(f$converged)
     expect_equal(f$T_days, td$T_)
@@ -109,7 +109,7 @@ test_that("events become days from dated columns, epoch milliseconds, or text, w
   expect_true(all(diff(td$t) >= 0))
   dt <- as.POSIXct(df$OCC_DATE, tz = "UTC", format = "%Y-%m-%dT%H:%M:%S")
   base <- as.numeric(difftime(dt, dt[1], units = "days"))
-  jitter <- rmoriebricklayer::core_uniforms(120, 42)
+  jitter <- rmoriebricklayer::cunif(120, 42)
   expect_equal(td$t, sort(base + jitter))
   # the same events as year / month / day columns, with month names and abbreviations
   ymd <- data.frame(OCC_YEAR = as.integer(format(dt, "%Y")), OCC_MONTH = format(dt, "%B"),
@@ -128,9 +128,9 @@ test_that("events become days from dated columns, epoch milliseconds, or text, w
   expect_length(e2d(old, min_year = NULL)$t, 120)
   sub <- e2d(df, max_n = 50)
   expect_length(sub$t, 50)
-  keys <- rmoriebricklayer::core_uniforms(120, 43)
+  keys <- rmoriebricklayer::cunif(120, 43)
   keep <- sort(order(keys)[1:50])
-  expect_equal(sub$t, sort(base[keep] - base[keep[1]] + rmoriebricklayer::core_uniforms(50, 42)))
+  expect_equal(sub$t, sort(base[keep] - base[keep[1]] + rmoriebricklayer::cunif(50, 42)))
   expect_error(e2d(data.frame(x = 1)), "no OCC_DATE or REPORT_DATE column")
 })
 

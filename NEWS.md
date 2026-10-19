@@ -1,3 +1,12 @@
+# rmorie 1.5.0 - 2026-10-19
+
+* Needs rmoriebricklayer 1.0.0 and rmoriedata 0.4.0, and calls them by their new short names
+  (`rmoriebricklayer::siuprs()`, `rmoriedata::mdload()` and so on).
+* The citation gives the author's given names in full ("Ruhela VS").
+* The citation points to the r-universe page.
+* `research/lean/IndigenousWellness`: 120 Lean 4 theorems (Mathlib, no unproved step) for the
+  properties the First Nations, Metis and Inuit wellness estimators in rmoriebricklayer rely on.
+
 # rmorie 1.4.5 - 2026-10-16
 
 * When open.canada.ca is down, the survey PUMFs (CPADS, the Canadian Cannabis Survey, CSADS,

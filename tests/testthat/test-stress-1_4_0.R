@@ -225,7 +225,7 @@ test_that("the SIU LLM chain reads GEMINI_API_KEY and asks the model you set up 
   expect_error(.siu_llm_call_one("gemini", "p"), "GEMINI_API_KEY")
   expect_false("hosted" %in% names(.siu_llm_providers()))
   seen <- NULL
-  testthat::local_mocked_bindings(bricklayer_llm_chat = function(messages, model = NULL, route = NULL, timeout = 120) {
+  testthat::local_mocked_bindings(llmchat = function(messages, model = NULL, route = NULL, tmout = 120) {
     seen <<- list(messages = messages, route = route)
     "{}"
   }, .package = "rmoriebricklayer")

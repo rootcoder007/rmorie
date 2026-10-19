@@ -10,9 +10,9 @@ bibentry(
   bibtype = "Manual",
   key     = "ruhela_rmorie_2026",
   title   = "rmorie: Multi-domain Open Research and Inferential Estimation in R",
-  author  = person("Vansh Singh", "Ruhela",
+  author  = person(c("Vansh", "Singh"), "Ruhela",
                    comment = c(ORCID = "0009-0004-1750-3592")),
   year    = "2026",
   note    = paste("R package version", meta$Version),
-  url     = "https://github.com/rootcoder007/rmorie"
+  url     = "https://rootcoder007.r-universe.dev/rmorie"
 )

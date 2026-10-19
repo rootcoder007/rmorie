@@ -411,7 +411,7 @@ morie_json_stringify <- function(x, auto_unbox = TRUE) {
   }
   # the port gives jsonlite's shapes (records -> data frames, nested objects -> nested frames), so a
   # caller sees the same object whether or not jsonlite is installed
-  rmoriebricklayer::bricklayer_json_from_json(txt, ...)
+  rmoriebricklayer::fromjs(txt, ...)
 }
 
 #' Internal shim: prefer .s03json_toJSON, fall back to native

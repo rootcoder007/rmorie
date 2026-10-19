@@ -425,7 +425,7 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
   J <- length(lib)
   folds <- .flxipt_folds(n, n_folds)
   Z <- matrix(0, nrow = n, ncol = J)
-  pg <- rmoriebricklayer::bricklayer_progress("super learner", length(folds) + 1L)
+  pg <- rmoriebricklayer::blprog("super learner", length(folds) + 1L)
   on.exit(pg$done(), add = TRUE)
   for (fi in seq_along(folds)) {
     pg$update(fi - 1L, info = sprintf("fold %d/%d", fi, length(folds)))

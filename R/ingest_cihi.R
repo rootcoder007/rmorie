@@ -16,7 +16,7 @@
 #' tables} page (\url{https://www.cihi.ca/en/access-data-and-reports/data-tables}),
 #' with its direct \code{url} and an Internet Archive \code{wayback_url}
 #' fallback. The full ~218-row catalogue is bundled in \pkg{rmoriedata}
-#' (\code{rmoriedata::load_cihi_data_tables()}); if that package is not
+#' (\code{rmoriedata::cihitbls()}); if that package is not
 #' installed this returns a small built-in subset so the function still
 #' works. Pass any \code{url} to \code{\link{morie_ingest_cihi_xlsx}}.
 #'
@@ -31,7 +31,7 @@
 #' @export
 morie_datasets_cihi_data_tables <- function() {
   if (requireNamespace("rmoriedata", quietly = TRUE)) {
-    return(rmoriedata::load_cihi_data_tables())
+    return(rmoriedata::cihitbls())
   }
   base <- "https://www.cihi.ca/sites/default/files/document/"
   data.frame(
@@ -63,7 +63,7 @@ morie_datasets_cihi_data_tables <- function() {
 #' @param wayback_url Optional Internet Archive snapshot URL used as a
 #'   fallback if the live \code{url} download fails (CIHI rotates files).
 #'   \code{NULL} (default) auto-resolves one via
-#'   \code{rmoriebricklayer::wayback_snapshot_url()} when that package is
+#'   \code{rmoriebricklayer::wbsnpurl()} when that package is
 #'   installed; \code{""} disables the fallback.
 #' @param ... forwarded to readxl::read_excel.
 #' @return base R data.frame.
@@ -95,7 +95,7 @@ morie_ingest_cihi_xlsx <- function(url, sheet = NULL, timeout = 120,
   if (!fetched) {
     wb <- wayback_url
     if (is.null(wb) && requireNamespace("rmoriebricklayer", quietly = TRUE)) {
-      wb <- tryCatch(rmoriebricklayer::wayback_snapshot_url(url),
+      wb <- tryCatch(rmoriebricklayer::wbsnpurl(url),
                      error = function(e) "")
     }
     if (!is.null(wb) && nzchar(wb)) {

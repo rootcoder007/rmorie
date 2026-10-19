@@ -262,7 +262,7 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 #' The capsule's signing key is generated for the run unless \code{key} is
 #' given, so a verifier learns that the files have not changed since they
 #' were sealed, not who sealed them; pass your own
-#' \code{rmoriebricklayer::fips_keygen()} key to bind the run to you.
+#' \code{rmoriebricklayer::fipskg()} key to bind the run to you.
 #' @param project_name Label written to the CSV and the manifest.
 #' @param output_dir Where \code{emissions.csv} and the capsule go. \code{NULL}
 #'   (the default) writes nothing: the measurement is returned in R only.
@@ -271,7 +271,7 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 #' @param country_iso_code,region Location overrides.
 #' @param save_to_file Write the CSV row.
 #' @param capsule Seal the run in a bricklayer capsule.
-#' @param key A signing key from \code{rmoriebricklayer::fips_keygen()} or
+#' @param key A signing key from \code{rmoriebricklayer::fipskg()} or
 #'   \code{pqc_keygen()}; generated per run when \code{NULL}.
 #' @param measure_power_secs Seconds between utilisation samples of the
 #'   background sampler (the Python arm's default is 15; 1 here, since R
@@ -401,7 +401,7 @@ morie_emissions_stop <- function(tracker) {
 
 .emissions_capsule <- function(t, data, csv_path) {
   dir <- t$output_dir
-  manifest <- rmoriebricklayer::make_manifest(list(
+  manifest <- rmoriebricklayer::mkmnf(list(
     project = t$project_name, run_id = t$run_id, tool = "morie_emissions (R)",
     method = paste("CodeCarbon methodology: energy = (TDP x (0.1 + 0.9 u^3) + RAM) x time;",
                    "emissions = energy x carbon intensity x PUE"),
@@ -409,14 +409,14 @@ morie_emissions_stop <- function(tracker) {
     measurements = data[c("duration", "emissions", "energy_consumed", "cpu_power", "ram_power",
                           "cpu_utilization_percent", "tracking_mode", "country_iso_code")],
     carbon_intensity_kg_per_kwh = t$carbon_intensity,
-    emissions_csv = basename(csv_path)), environment = TRUE)
+    emissions_csv = basename(csv_path)), env = TRUE)
   mpath <- file.path(dir, "emissions_manifest.json")
-  rmoriebricklayer::write_manifest_json(manifest, mpath)
+  rmoriebricklayer::wrmnfjs(manifest, mpath)
   bpath <- file.path(dir, "capsule_bundle.json")
   signed <- FALSE
-  if (exists("capsule_bundle", envir = asNamespace("rmoriebricklayer"), inherits = FALSE)) {
-    key <- t$key %||% rmoriebricklayer::fips_keygen("ML-DSA-44")
-    rmoriebricklayer::capsule_bundle(dir, manifest, key,
+  if (exists("cpsbndl", envir = asNamespace("rmoriebricklayer"), inherits = FALSE)) {
+    key <- t$key %||% rmoriebricklayer::fipskg("ML-DSA-44")
+    rmoriebricklayer::cpsbndl(dir, manifest, key,
                                      files = c(basename(csv_path), basename(mpath)),
                                      note = paste("morie emissions run", t$run_id), path = bpath)
     signed <- TRUE
@@ -449,7 +449,7 @@ morie_emissions_track <- function(expr, ...) {
 morie_emissions_verify <- function(dir) {
   bpath <- file.path(dir, "capsule_bundle.json")
   if (!file.exists(bpath)) stop("no capsule_bundle.json in ", dir, call. = FALSE)
-  rmoriebricklayer::capsule_bundle_verify(bpath, dir)
+  rmoriebricklayer::cpsbndlvrf(bpath, dir)
 }
 
 .emissions_text <- function(e) {

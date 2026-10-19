@@ -15,7 +15,7 @@ Raw vector of length \code{n}.
 \description{
 libsodium's \code{randombytes_buf} when rmorie is linked against it,
 otherwise the operating system's source through
-\code{\link[rmoriebricklayer:random_bytes]{rmoriebricklayer::random_bytes()}} (never R's own generator).
+\code{\link[rmoriebricklayer:rndbytes]{rmoriebricklayer::rndbytes()}} (never R's own generator).
 }
 \examples{
 r <- morie_crypto_random_bytes(32L)

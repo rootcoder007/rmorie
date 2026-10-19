@@ -16,7 +16,7 @@ Returns the CIHI data-table catalogue -- every public data-table
 tables} page (\url{https://www.cihi.ca/en/access-data-and-reports/data-tables}),
 with its direct \code{url} and an Internet Archive \code{wayback_url}
 fallback. The full ~218-row catalogue is bundled in \pkg{rmoriedata}
-(\code{rmoriedata::load_cihi_data_tables()}); if that package is not
+(\code{rmoriedata::cihitbls()}); if that package is not
 installed this returns a small built-in subset so the function still
 works. Pass any \code{url} to \code{\link{morie_ingest_cihi_xlsx}}.
 }

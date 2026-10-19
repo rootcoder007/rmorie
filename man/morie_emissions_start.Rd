@@ -40,7 +40,7 @@ morie_emissions_track(expr, ...)
 
 \item{capsule}{Seal the run in a bricklayer capsule.}
 
-\item{key}{A signing key from \code{rmoriebricklayer::fips_keygen()} or
+\item{key}{A signing key from \code{rmoriebricklayer::fipskg()} or
 \code{pqc_keygen()}; generated per run when \code{NULL}.}
 
 \item{measure_power_secs}{Seconds between utilisation samples of the
@@ -93,7 +93,7 @@ are mapped to the energy table's three-letter codes through the full ISO
 The capsule's signing key is generated for the run unless \code{key} is
 given, so a verifier learns that the files have not changed since they
 were sealed, not who sealed them; pass your own
-\code{rmoriebricklayer::fips_keygen()} key to bind the run to you.
+\code{rmoriebricklayer::fipskg()} key to bind the run to you.
 }
 \examples{
 dir <- tempfile()

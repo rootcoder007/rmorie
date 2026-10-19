@@ -36,7 +36,7 @@ test_that("the IPW standard error is the HC3 sandwich of the weighted regression
 
 test_that("DML folds come from the shared splitmix64 uniforms, one split for both nuisances", {
   f <- rmorie:::.morie_dml_folds(10, 3, 42)
-  u <- rmoriebricklayer::core_uniforms(10, 42)
+  u <- rmoriebricklayer::cunif(10, 42)
   expect_identical(f[order(u, method = "radix")], rep_len(1:3, 10))
   expect_identical(rmorie:::.morie_dml_folds(10, 3, 42), f)
 })
@@ -54,12 +54,12 @@ test_that("morie_hawkes_fit fits 50+ events with the bricklayer core, in this fu
   set.seed(10)
   ev <- sort(cumsum(stats::rexp(120, rate = 2)))
   fe <- morie_hawkes_fit(ev, kernel = "exponential")
-  core <- rmoriebricklayer::core_hawkes_fit(ev, ev[length(ev)], "exponential")
+  core <- rmoriebricklayer::chwkfit(ev, ev[length(ev)], "exponential")
   expect_identical(fe$backend, "rmoriebricklayer core")
   expect_equal(unname(fe$estimate), unname(core$theta), tolerance = 1e-12)
   expect_equal(fe$loglik, -core$nll, tolerance = 1e-12)
   fl <- morie_hawkes_fit(ev, kernel = "lomax")
-  cl <- suppressWarnings(rmoriebricklayer::core_hawkes_fit(ev, ev[length(ev)], "lomax"))
+  cl <- suppressWarnings(rmoriebricklayer::chwkfit(ev, ev[length(ev)], "lomax"))
   expect_equal(unname(fl$estimate[["alpha"]]), cl$theta[[3]] + 1, tolerance = 1e-12)
   if ("alpha" %in% cl$at_bound) expect_match(fl$note, "exponential")
 })

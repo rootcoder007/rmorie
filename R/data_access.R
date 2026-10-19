@@ -72,7 +72,7 @@
                         warning = function(w) invokeRestart("muffleWarning"))
   }
   tryCatch(read_one(url), error = function(e) {
-    wb <- tryCatch(rmoriebricklayer::wayback_snapshot_url(url),
+    wb <- tryCatch(rmoriebricklayer::wbsnpurl(url),
       error = function(e2) NULL
     )
     if (is.null(wb)) {
@@ -114,7 +114,7 @@
     error = function(e) conditionMessage(e)
   )
   if (!is.null(failed)) {
-    wb <- tryCatch(rmoriebricklayer::wayback_snapshot_url(url), error = function(e) NULL)
+    wb <- tryCatch(rmoriebricklayer::wbsnpurl(url), error = function(e) NULL)
     if (!is.character(wb) || !length(wb) || !nzchar(wb[[1L]])) {
       # say which of the two failed and how: an unreachable archive is not "no snapshot"
       stop("Download failed for ", url, " (", failed, "); the Wayback Machine ",

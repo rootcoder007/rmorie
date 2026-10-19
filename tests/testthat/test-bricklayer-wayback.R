@@ -3,7 +3,7 @@
 test_that("morie_wayback_url delegates to rmoriebricklayer", {
   skip_if_not_installed("rmoriebricklayer")
   testthat::local_mocked_bindings(
-    wayback_snapshot_url = function(url, timestamp = NULL) {
+    wbsnpurl = function(url, ts = NULL) {
       "https://web.archive.org/web/20260623060856/https://data.ontario.ca/dataset/data-on-inmates-in-ontario"
     },
     .package = "rmoriebricklayer"
@@ -18,7 +18,7 @@ test_that("morie_download delegates to rmoriebricklayer friendly_download", {
   skip_if_not_installed("rmoriebricklayer")
   tp <- tempfile(fileext = ".html")
   testthat::local_mocked_bindings(
-    friendly_download = function(url, target_path, attempt_wayback = NULL) target_path,
+    fdl = function(url, target_path, attwb = NULL) target_path,
     .package = "rmoriebricklayer"
   )
   expect_identical(morie_download("https://data.ontario.ca/x", tp), tp)

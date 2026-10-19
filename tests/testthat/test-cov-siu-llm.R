@@ -129,7 +129,7 @@ test_that("one LLM call resolves the provider's credential and turns each HTTP o
   expect_equal(call_one("openai_compatible", "p"), "X")
   expect_equal(rec$url, "http://x/chat/completions")
   # "route" is the model you set up, through rmoriebricklayer
-  testthat::local_mocked_bindings(bricklayer_llm_chat = function(messages, model = NULL, route = NULL, timeout = 120) {
+  testthat::local_mocked_bindings(llmchat = function(messages, model = NULL, route = NULL, tmout = 120) {
     paste("route", route %||% "auto", messages[[1L]]$content)
   }, .package = "rmoriebricklayer")
   expect_equal(call_one("route", "p"), "route auto p")

@@ -485,7 +485,7 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
   e_hat <- numeric(n)
   mu1_hat <- numeric(n)
   mu0_hat <- numeric(n)
-  pg <- rmoriebricklayer::bricklayer_progress("IRM-DML", n_folds)
+  pg <- rmoriebricklayer::blprog("IRM-DML", n_folds)
   on.exit(pg$done(), add = TRUE)
   for (k in seq_len(n_folds)) {
     pg$update(k - 1L, info = sprintf("fold %d/%d", k, n_folds))
@@ -1276,7 +1276,7 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
   e_hat <- numeric(n)
   mu1_hat <- numeric(n)
   mu0_hat <- numeric(n)
-  pg <- rmoriebricklayer::bricklayer_progress("SuperLearner AIPW", 3L * n_folds)
+  pg <- rmoriebricklayer::blprog("SuperLearner AIPW", 3L * n_folds)
   on.exit(pg$done(), add = TRUE)
   for (k in seq_len(n_folds)) {
     test <- which(folds == k)

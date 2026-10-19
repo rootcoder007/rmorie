@@ -1160,7 +1160,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
                                 "--", "--", "--")
   rows <- list()
   ensemble <- list()
-  pg <- rmoriebricklayer::bricklayer_progress(sprintf("%s: ten estimators", ds_id), 10L)
+  pg <- rmoriebricklayer::blprog(sprintf("%s: ten estimators", ds_id), 10L)
   on.exit(pg$done(), add = TRUE)
   add <- function(idx, name, estimand, f) {
     pg$update(as.integer(sub("[.].*$", "", idx)) - 1L, info = name)
