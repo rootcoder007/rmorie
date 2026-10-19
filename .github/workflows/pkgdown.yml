@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     # Cold-cache dep builds (every main push: PR caches are branch-scoped)
     # historically hung the runner past 2h; fail fast instead.
-    timeout-minutes: 120
+    timeout-minutes: 300
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
       MAKEFLAGS: "-j4"
