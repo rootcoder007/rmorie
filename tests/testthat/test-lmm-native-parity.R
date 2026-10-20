@@ -294,7 +294,7 @@ test_that("speed: n = 20000 lmm and n = 10000 glmm with random slopes", {
   d$y <- 2 + 0.5 * d$x - d$z + stats::rnorm(m)[d$g] +
     stats::rnorm(m, 0, 0.5)[d$g] * d$x + stats::rnorm(n)
   # wall-clock limits hold on a dedicated machine; shared CI runners vary several-fold (the
-  # v1.5.1 tag run took 32.6 s on a macOS runner that passed in under 15 s hours earlier),
+  # release tag run took 32.6 s on a macOS runner that passed in under 15 s hours earlier),
   # so on CI the fits still run at full size and only the timing is not asserted
   timed <- !nzchar(Sys.getenv("CI"))
   t1 <- system.time(f <- rmorie::morie_lmm(y ~ x + z + (x | g), d))[["elapsed"]]
