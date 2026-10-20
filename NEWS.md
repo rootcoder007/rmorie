@@ -1,5 +1,8 @@
 # rmorie 1.5.1 - 2026-10-20
 
+* The binomial and multinomial branches of the elastic-net path in `morie_grid_search_cv()` use separately
+  named deviance helpers, which clears the `R CMD check` NOTE "multiple local function definitions
+  for dev_fun" reported on every r-universe platform.
 * `stat_bridge_main("verify")` and `stat_bridge_verify(execute = TRUE)` run each command on
   sample inputs (p-values, `x` and `y`, a correlation matrix), as the Python self-test does,
   instead of calling it with no arguments, which reported every command that takes input as

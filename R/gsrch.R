@@ -572,11 +572,11 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
   if (family == "binomial") {
     q0 <- mean(yy)
     lmax <- max(abs(drop(crossprod(Xs, yy - q0))) / n) / max(alpha, 1e-3)
-    dev_fun <- function(q) {
+    dev_binom <- function(q) {
       q <- pmin(pmax(q, pmin), 1 - pmin)
       -2 * sum(yy * log(q) + (1 - yy) * log(1 - q)) / n
     }
-    dev0 <- dev_fun(rep(q0, n))
+    dev0 <- dev_binom(rep(q0, n))
     b0 <- stats::qlogis(q0)
     b <- numeric(pj)
     A0 <- numeric(nlambda)
@@ -606,7 +606,7 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
       A0[m] <- b0
       B[, m] <- b
       q <- stats::plogis(b0 + drop(Xs %*% b))
-      dev[m] <- 1 - dev_fun(q) / dev0
+      dev[m] <- 1 - dev_binom(q) / dev0
       if (m >= mnl) {
         if (dev[m] - dev[m - 1L] < fdev || dev[m] > devmax ||
             sum(q * (1 - q)) / n <= (1 + pmin) * pmin * (1 - pmin)) {
@@ -632,13 +632,13 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
     P / rowSums(P)
   }
   lin <- function(B, b0) Xs %*% B + rep(b0, each = n)
-  dev_fun <- function(P) {
+  dev_multi <- function(P) {
     -2 * sum(yy * log(pmax(P, pmin))) / n
   }
   b0 <- log(ybar)
   b0 <- b0 - mean(b0)
   Bc <- matrix(0, pj, K)
-  dev0 <- dev_fun(matrix(ybar, n, K, byrow = TRUE))
+  dev0 <- dev_multi(matrix(ybar, n, K, byrow = TRUE))
   A0 <- matrix(0, K, nlambda)
   BB <- array(0, c(pj, K, nlambda))
   lam <- numeric(nlambda)
@@ -669,7 +669,7 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
     A0[, m] <- b0
     BB[, , m] <- Bc
     P <- softmax(lin(Bc, b0))
-    dev[m] <- 1 - dev_fun(P) / dev0
+    dev[m] <- 1 - dev_multi(P) / dev0
     if (m >= mnl) {
       if (dev[m] - dev[m - 1L] < fdev || dev[m] > devmax) {
         L <- m
