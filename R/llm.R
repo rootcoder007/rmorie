@@ -575,8 +575,14 @@ morie_llm_ask_multi <- function(messages, providers = NULL, model = NULL, timeou
 #' @export
 morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600,
                             email = NULL, code = NULL, token = NULL, ...) {
-  rmoriebricklayer::dlogin(token = token, email = email, code = code,
-                                         openbro = open_browser, pollmaxsec = poll_max_seconds, ...)
+  # rmoriebricklayer 1.0.0 takes these under short names; the names documented here are kept
+  args <- list(...)
+  long <- c(accept_terms = "accter", affiliation = "affil", purpose = "purp", restricted = "restr",
+            supervisor_name = "supnm", supervisor_role = "suprole", supervisor_email = "supemail")
+  hit <- names(args) %in% names(long)
+  names(args)[hit] <- long[names(args)[hit]]
+  do.call(rmoriebricklayer::dlogin, c(list(token = token, email = email, code = code,
+                                           openbro = open_browser, pollmaxsec = poll_max_seconds), args))
 }
 
 #' Forget the stored data key

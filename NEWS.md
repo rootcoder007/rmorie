@@ -1,5 +1,21 @@
 # rmorie 1.5.0 - 2026-10-19
 
+* Data capsules: `morie_capsule_write()` pins a local CSV in `data_provenance.json` (file name,
+  SHA-256, size, data rows, source URL, retrieval date), `morie_capsule_verify()` checks it,
+  `morie_capsule_sign()` and `morie_capsule_bundle()` sign a digest, a manifest or the whole
+  directory (ML-DSA, SLH-DSA, XMSS or HMAC), `morie_capsule_drift()` compares a fresh copy with
+  the pinned one, and `morie_capsule_manifest()` and `morie_capsule_compare()` record results and
+  recompute them, through rmoriebricklayer; the same layer is in morie and in rmbl-action. New
+  vignette `capsules`.
+* `morie_llm_login()` passes `accept_terms`, `affiliation`, `purpose`, `restricted` and the
+  `supervisor_*` arguments to rmoriebricklayer 1.0.0 under its names (`accter`, `affil`, ...);
+  they were refused as unused arguments.
+* `morie_download()` returns the path, and errors when the live file and the Wayback Machine
+  both fail (it returned `TRUE` or `FALSE`, and `FALSE` silently). `attempt_wayback = TRUE` looks
+  a snapshot up; it switched the fallback off, so the CKAN file route never reached the archive.
+* `morie_emissions_verify()` documents that any other file in the directory fails the
+  `no_unlisted_files` check, and `morie_emissions_start()` points to `rmoriebricklayer::pqckg()`
+  (there is no `pqc_keygen()`).
 * Needs rmoriebricklayer 1.0.0 and rmoriedata 0.4.0, and calls them by their new short names
   (`rmoriebricklayer::siuprs()`, `rmoriedata::mdload()` and so on).
 * The citation gives the author's given names in full ("Ruhela VS").

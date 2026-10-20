@@ -119,3 +119,14 @@ test_that("offline location: the time zone, then the locale, through the full IS
   })
 })
 
+
+test_that("morie_emissions_verify fails a file the bundle does not list, as documented", {
+  dir <- withr::local_tempdir()
+  morie_emissions_track(sum(1:10), output_dir = dir, country_iso_code = "CAN")
+  expect_true(morie_emissions_verify(dir)$ok)
+  writeLines("x", file.path(dir, "notes.txt"))
+  res <- morie_emissions_verify(dir)
+  expect_false(res$ok)
+  expect_false(res$checks$ok[res$checks$check == "no_unlisted_files"])
+  expect_match(res$checks$detail[res$checks$check == "no_unlisted_files"], "notes.txt")
+})

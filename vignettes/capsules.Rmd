@@ -1,0 +1,89 @@
+---
+title: "Data capsules: pin, verify, sign and re-check a CSV"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Data capsules: pin, verify, sign and re-check a CSV}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = requireNamespace("rmorie", quietly = TRUE)
+)
+```
+
+A capsule is a directory holding a data file and `data_provenance.json`, the record of where
+the file came from and what it was: its SHA-256, size and row count. The record is what lets
+someone else (or you, a year later) confirm that an analysis still runs on the data it was
+written for. The `morie_capsule_*()` functions are thin wrappers over rmoriebricklayer; the same
+capsules are read by morie in Python and checked in CI by the `rmbl-action` GitHub Action.
+
+```{r}
+library(rmorie)
+dir <- file.path(tempdir(), "capsule-vignette")
+dir.create(dir, showWarnings = FALSE)
+set.seed(1)
+utils::write.csv(data.frame(region = sample(c("east", "west"), 200, TRUE),
+                            rate = stats::rnorm(200, 10, 2)),
+                 file.path(dir, "rates.csv"), row.names = FALSE)
+```
+
+## Write the record
+
+```{r}
+prov <- morie_capsule_write(dir, "rates.csv", url = "https://example.org/rates.csv",
+                            name = "rates", retrieved = "2026-10-20")
+str(prov$resource)
+```
+
+## Verify it
+
+Every check is a row; `ok` is `TRUE` only when all of them pass.
+
+```{r}
+morie_capsule_verify(dir)
+```
+
+## Record the results, sign and bundle
+
+The manifest records the numbers the analysis produced next to the numbers they should
+reproduce. Signing it, or bundling the whole directory, shows who vouched for the capsule and
+that nothing changed since.
+
+```{r}
+d <- utils::read.csv(file.path(dir, "rates.csv"))
+man <- suppressMessages(morie_capsule_manifest(
+  list(project = "rates"),
+  data.frame(name = c("n", "mean_rate"), observed = c(nrow(d), mean(d$rate)),
+             expected = c(200, mean(d$rate))),
+  path = file.path(dir, "manifest.json")
+))
+key <- rmoriebricklayer::fipskg("ML-DSA-44")
+sig <- morie_capsule_sign(man, key)
+rmoriebricklayer::cpsvrf(rmoriebricklayer::mnfdgst(man), sig, key)
+bundle <- morie_capsule_bundle(dir, man, key)
+rmoriebricklayer::cpsbndlvrf(attr(bundle, "path"), dir, man = man)$ok
+morie_capsule_compare(man, d, list(n = nrow, mean_rate = function(z) mean(z$rate)))$ok
+```
+
+## Check a fresh download for drift
+
+A re-released file has a new digest even when it holds the same data; `morie_capsule_drift()`
+asks whether the distributions moved.
+
+```{r}
+fresh <- d
+fresh$rate <- fresh$rate * 1.5
+drift <- morie_capsule_drift(dir, fresh)
+drift$anydrft
+drift$columns[, c("column", "type", "p_value", "drifted")]
+```
+
+```{r, include = FALSE}
+unlink(dir, recursive = TRUE)
+```

@@ -124,6 +124,10 @@ reference:
       - starts_with("morie_fauzi")
       - starts_with("morie_horowitz")
       - starts_with("morie_psymet")
+  - title: Data capsules
+    desc: Pin a CSV by its provenance, verify, sign, bundle and check a fresh copy for drift.
+    contents:
+      - starts_with("morie_capsule")
   - title: Cryptography
     desc: Post-quantum KEM/DEM, hashing, and symmetric primitives.
     contents:

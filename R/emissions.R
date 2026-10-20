@@ -272,7 +272,7 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 #' @param save_to_file Write the CSV row.
 #' @param capsule Seal the run in a bricklayer capsule.
 #' @param key A signing key from \code{rmoriebricklayer::fipskg()} or
-#'   \code{pqc_keygen()}; generated per run when \code{NULL}.
+#'   \code{rmoriebricklayer::pqckg()}; generated per run when \code{NULL}.
 #' @param measure_power_secs Seconds between utilisation samples of the
 #'   background sampler (the Python arm's default is 15; 1 here, since R
 #'   runs are usually shorter).
@@ -437,7 +437,9 @@ morie_emissions_track <- function(expr, ...) {
 #'
 #' Re-hashes \code{emissions.csv} and \code{emissions_manifest.json} in
 #' \code{dir} and checks them and the manifest digest against the signed
-#' \code{capsule_bundle.json}.
+#' \code{capsule_bundle.json}. Any other file in \code{dir} fails the
+#' \code{no_unlisted_files} check (the bundle does not cover it), so give the
+#' run a directory of its own.
 #' @param dir The directory \code{morie_emissions_stop()} wrote to.
 #' @return A list with \code{ok} and the bricklayer \code{checks} table.
 #' @examples

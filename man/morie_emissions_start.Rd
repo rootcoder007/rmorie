@@ -41,7 +41,7 @@ morie_emissions_track(expr, ...)
 \item{capsule}{Seal the run in a bricklayer capsule.}
 
 \item{key}{A signing key from \code{rmoriebricklayer::fipskg()} or
-\code{pqc_keygen()}; generated per run when \code{NULL}.}
+\code{rmoriebricklayer::pqckg()}; generated per run when \code{NULL}.}
 
 \item{measure_power_secs}{Seconds between utilisation samples of the
 background sampler (the Python arm's default is 15; 1 here, since R

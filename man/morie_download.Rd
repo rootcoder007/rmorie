@@ -17,15 +17,17 @@ morie_download(
 
 \item{target_path}{Destination file path.}
 
-\item{attempt_wayback}{Logical or \code{NULL}; whether to fall back to the
-Wayback snapshot when the live fetch fails (passed through to bricklayer;
-\code{NULL} uses the bricklayer default).}
+\item{attempt_wayback}{Whether to fall back to a Wayback Machine snapshot
+when the live fetch fails: \code{NULL} or \code{TRUE} (the default) looks
+one up, \code{FALSE} switches the fallback off, and a snapshot URL is
+tried as given.}
 
 \item{label, size}{Shown by the progress bar: a short name for the file and its
 expected size in bytes when known (a percent bar instead of a spinner).}
 }
 \value{
-The downloaded path, per \code{rmoriebricklayer::fdl()}.
+\code{target_path}, invisibly. A download that fails on both routes
+is an error.
 }
 \description{
 Thin bridge to \code{rmoriebricklayer::fdl()}: downloads

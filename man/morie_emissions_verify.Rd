@@ -15,7 +15,9 @@ A list with \code{ok} and the bricklayer \code{checks} table.
 \description{
 Re-hashes \code{emissions.csv} and \code{emissions_manifest.json} in
 \code{dir} and checks them and the manifest digest against the signed
-\code{capsule_bundle.json}.
+\code{capsule_bundle.json}. Any other file in \code{dir} fails the
+\code{no_unlisted_files} check (the bundle does not cover it), so give the
+run a directory of its own.
 }
 \examples{
 dir <- tempfile()

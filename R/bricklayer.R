@@ -179,12 +179,14 @@ morie_wayback_url <- function(url, timestamp = NULL) {
 #'
 #' @param url Live source URL.
 #' @param target_path Destination file path.
-#' @param attempt_wayback Logical or \code{NULL}; whether to fall back to the
-#'   Wayback snapshot when the live fetch fails (passed through to bricklayer;
-#'   \code{NULL} uses the bricklayer default).
+#' @param attempt_wayback Whether to fall back to a Wayback Machine snapshot
+#'   when the live fetch fails: \code{NULL} or \code{TRUE} (the default) looks
+#'   one up, \code{FALSE} switches the fallback off, and a snapshot URL is
+#'   tried as given.
 #' @param label,size Shown by the progress bar: a short name for the file and its
 #'   expected size in bytes when known (a percent bar instead of a spinner).
-#' @return The downloaded path, per \code{rmoriebricklayer::fdl()}.
+#' @return \code{target_path}, invisibly. A download that fails on both routes
+#'   is an error.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_wayback_url}}
 #' @examples
 #' # \donttest: needs an internet connection, so it is not run by
@@ -214,7 +216,10 @@ morie_download <- function(url, target_path, attempt_wayback = NULL,
     TRUE
   }, error = function(e) FALSE, warning = function(w) FALSE)
   if (ok) return(invisible(target_path))
-  rmoriebricklayer::fdl(url, target_path,
-    attwb = attempt_wayback
-  )
+  # fdl() takes NULL (look a snapshot up), a snapshot URL, or "" / FALSE (off): TRUE meant off
+  if (isTRUE(attempt_wayback)) attempt_wayback <- NULL
+  if (!isTRUE(rmoriebricklayer::fdl(url, target_path, attwb = attempt_wayback))) {
+    stop("could not download ", url, " (live or from the Wayback Machine)", call. = FALSE)
+  }
+  invisible(target_path)
 }
