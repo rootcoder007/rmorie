@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-24.04, macos-latest, windows-latest]
         route: [pak, install-packages, pak-github, remotes-github]
     steps:
       # setup-r without use-public-rspm or a repos option: the one-liners must

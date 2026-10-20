@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Cold-cache dep builds (every main push: PR caches are branch-scoped)
     # historically hung the runner past 2h; fail fast instead.
     timeout-minutes: 300
@@ -161,7 +161,7 @@ jobs:
     # build job's artifact.
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

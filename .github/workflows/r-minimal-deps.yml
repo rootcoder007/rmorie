@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   minimal:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
       NOT_CRAN: true
@@ -133,7 +133,7 @@ jobs:
   # UBUNTU-based (found 2026-07-15) — this job now runs true Debian
   # bookworm with R from CRAN's apt repo; P3M bookworm binaries match. Same bare-install contract as the ubuntu minimal job.
   debian:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: r-base:4.5.1
     timeout-minutes: 90
     env:
@@ -241,7 +241,7 @@ jobs:
   # the Debian-family jobs above). P3M ships rhel9 binaries that work on
   # Fedora; the same bare-install contract applies.
   fedora:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: fedora:42
     timeout-minutes: 90
     env:

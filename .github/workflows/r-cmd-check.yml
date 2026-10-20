@@ -4,7 +4,7 @@
 #
 # Refactor 3MMM.62 + 3MMM.64 (2026-05-25): folds the previously-standalone
 # r-lint, r-coverage, and r-goodpractice workflows into POST-CHECK steps
-# on the ubuntu-latest + release cell so they share the installed R
+# on the ubuntu-24.04 + release cell so they share the installed R
 # library and built package state. Saves ~3 redundant install+compile
 # passes per build.
 #
@@ -68,11 +68,11 @@ jobs:
         config:
           - { os: macos-latest,   r: 'release' }
           - { os: windows-latest, r: 'release' }
-          - { os: ubuntu-latest,  r: 'release' }
-          - { os: ubuntu-latest,  r: 'devel', allow_failure: true }
+          - { os: ubuntu-24.04,  r: 'release' }
+          - { os: ubuntu-24.04,  r: 'devel', allow_failure: true }
           # Pin oldrel to jammy (22.04): Posit Package Manager ships mature
           # binary packages for oldrel on 22.04, avoiding the ~40-min from-source
-          # dependency builds seen on ubuntu-latest (24.04), where P3M lacks
+          # dependency builds seen on ubuntu-24.04 (24.04), where P3M lacks
           # oldrel binaries for newer package versions.
           - { os: ubuntu-22.04,   r: 'oldrel-1' }
 
@@ -372,14 +372,14 @@ jobs:
       # ONE leaf only -- a full CmdStan toolchain build is ~10 min uncached,
       # so the other leaves cover the brms rstan-fallback path instead.
       - name: Cache CmdStan (ubuntu release leaf only)
-        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
+        if: matrix.config.os == 'ubuntu-24.04' && matrix.config.r == 'release'
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cmdstan
           key: cmdstan-${{ runner.os }}-2.39.0
 
       - name: Install CmdStan (ubuntu release leaf only)
-        if: matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release'
+        if: matrix.config.os == 'ubuntu-24.04' && matrix.config.r == 'release'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -429,7 +429,7 @@ jobs:
   # _R_CHECK_FORCE_SUGGESTS_=false; vignettes need Suggests, ignored).
   R-CMD-check-debian:
     name: debian-bookworm (r-base 4.5.1, Debian)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: r-base:4.5.1
     timeout-minutes: 60
     env:

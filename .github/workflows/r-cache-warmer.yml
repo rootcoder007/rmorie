@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   warm:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 120 # first run after an eviction legitimately rebuilds
     env:
       MAKEFLAGS: "-j1" # ECOSolveR SuiteSparse Makefile races under parallel make

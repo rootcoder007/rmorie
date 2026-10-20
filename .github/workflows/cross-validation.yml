@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   cross-and-property:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: rocker/r-ver:4.5.1
     timeout-minutes: 120
     env:

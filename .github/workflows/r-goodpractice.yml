@@ -20,7 +20,7 @@ permissions:
 jobs:
   goodpractice:
     name: goodpractice (covr + cyclocomp + lintr + rcmdcheck)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     env:
       _R_CHECK_FORCE_SUGGESTS_: false

@@ -22,7 +22,7 @@ permissions:
 jobs:
   coverage:
     name: covr + codecov (${{ matrix.type }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
