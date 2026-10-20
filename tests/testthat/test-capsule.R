@@ -34,11 +34,45 @@ test_that("morie_capsule_write leaves source$url out without a url, and overwrit
   prov <- morie_capsule_write(dir, "data.csv", provenance_file = "p.json")
   expect_named(prov$source, "retrieved")
   expect_identical(prov$source$retrieved, format(Sys.Date()))
-  expect_identical(prov$name, basename(dir))
+  expect_identical(prov$name, "data")
   expect_true(morie_capsule_verify(dir, provenance_file = "p.json")$ok)
   utils::write.csv(data.frame(id = 1:5), file.path(dir, "data.csv"), row.names = FALSE)
   morie_capsule_write(dir, "data.csv", provenance_file = "p.json")
   expect_equal(rmoriebricklayer::loadprov(file.path(dir, "p.json"))$resource$row_count_data_rows, 5)
+})
+
+test_that("morie_capsule_write writes the rmbl-action examples' key order, table and script", {
+  dir <- capsule_dir()
+  writeLines("1 + 1", file.path(dir, "analysis.R"))
+  prov <- morie_capsule_write(dir, "data.csv", url = "https://example.org/data.csv",
+                              table = list(columns = list("id", "value")), script_file = "analysis.R")
+  expect_named(prov, c("name", "source", "resource", "table", "script"))
+  expect_identical(prov$name, "data")
+  expect_identical(prov$script, list(filename = "analysis.R",
+                                     sha256 = rmoriebricklayer::sha256file(file.path(dir, "analysis.R"))))
+  expect_named(jsonlite::fromJSON(attr(prov, "path"), simplifyVector = FALSE),
+               c("name", "source", "resource", "table", "script"))
+  chk <- morie_capsule_verify(dir)
+  expect_true(chk$ok)
+  expect_true("script_sha256" %in% chk$checks$check)
+  writeLines("2 + 2", file.path(dir, "analysis.R"))
+  expect_false(morie_capsule_verify(dir)$ok)
+  expect_error(morie_capsule_write(dir, "data.csv", table = "x"), "`table` must be a list")
+  expect_error(morie_capsule_write(dir, "data.csv", table = data.frame(a = 1)), "`table` must be a list")
+  expect_error(morie_capsule_write(dir, "data.csv", script_file = "../a.R"), "`script_file` must be a path relative")
+  expect_error(morie_capsule_write(dir, "data.csv", script_file = "gone.R"), "`script_file` is not a file in `dir`")
+})
+
+test_that("morie_capsule_verify reports a provenance that does not parse as a failed row", {
+  dir <- capsule_dir()
+  writeLines("{bad", file.path(dir, "data_provenance.json"))
+  chk <- morie_capsule_verify(dir)
+  expect_s3_class(chk, "bricklayer_capsule_check")
+  expect_false(chk$ok)
+  expect_false(chk$checks$ok[chk$checks$check == "provenance_readable"])
+  expect_identical(chk$checks$detail[chk$checks$check == "provenance_readable"],
+                   file.path(dir, "data_provenance.json"))
+  expect_identical(list.files(dir), c("data.csv", "data_provenance.json"))
 })
 
 test_that("morie_capsule_write refuses bad arguments", {

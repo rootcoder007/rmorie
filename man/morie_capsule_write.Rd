@@ -8,9 +8,11 @@ morie_capsule_write(
   dir,
   data_file,
   url = NULL,
-  name = basename(dir),
+  name = NULL,
   retrieved = format(Sys.Date()),
-  provenance_file = "data_provenance.json"
+  provenance_file = "data_provenance.json",
+  table = NULL,
+  script_file = NULL
 )
 }
 \arguments{
@@ -21,11 +23,18 @@ morie_capsule_write(
 \item{url}{Where the data were downloaded from (\code{source$url}), or
 \code{NULL}.}
 
-\item{name}{The capsule's name. Default: the directory's name.}
+\item{name}{The capsule's name. \code{NULL} (the default): the data file's
+name without \code{.csv}.}
 
 \item{retrieved}{The retrieval date, \code{YYYY-MM-DD}. Default: today.}
 
 \item{provenance_file}{The record's file name, relative to \code{dir}.}
+
+\item{table}{\code{NULL}, or a list stored as the record's \code{table}
+(the column schema the verification's \code{schema_valid} row reads).}
+
+\item{script_file}{\code{NULL}, or an analysis script relative to
+\code{dir}, pinned as \code{script$filename} and \code{script$sha256}.}
 }
 \value{
 The provenance (a list), invisibly, with the file written as
@@ -40,16 +49,21 @@ checks the data against later.
 }
 \details{
 The record written is
-\preformatted{{"name": ..., "resource": {"filename", "sha256", "size_bytes",
- "row_count_data_rows"}, "source": {"url", "retrieved"}}}
-\code{source$url} is left out when \code{url} is \code{NULL}. The row count
+\preformatted{{"name": ..., "source": {"url", "retrieved"}, "resource": {"filename",
+ "sha256", "size_bytes", "row_count_data_rows"}, "table": ..., "script": {"filename",
+ "sha256"}}}
+in that order, the order of the rmbl-action examples and of
+\code{morie.capsule.write()} in Python, so the three writers agree byte for
+byte. \code{source$url} is left out when \code{url} is \code{NULL},
+\code{table} and \code{script} when not given. The row count
 is what \code{utils::read.csv()} reads, header excluded, which is how
 the verification counts them. An existing provenance file is overwritten.
 
 Errors: \code{dir} not an existing directory; \code{data_file} or
 \code{provenance_file} not a relative path inside \code{dir}; a
 \code{data_file} that is not a \code{.csv} file in \code{dir} or cannot be
-read; \code{url}, \code{name} or \code{retrieved} not one string.
+read; \code{url}, \code{name} or \code{retrieved} not one string;
+\code{table} not a list; \code{script_file} not a file inside \code{dir}.
 }
 \examples{
 dir <- file.path(tempdir(), "capsule-write")

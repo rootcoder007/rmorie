@@ -54,24 +54,34 @@
 #'
 #' @details
 #' The record written is
-#' \preformatted{{"name": ..., "resource": {"filename", "sha256", "size_bytes",
-#'  "row_count_data_rows"}, "source": {"url", "retrieved"}}}
-#' \code{source$url} is left out when \code{url} is \code{NULL}. The row count
+#' \preformatted{{"name": ..., "source": {"url", "retrieved"}, "resource": {"filename",
+#'  "sha256", "size_bytes", "row_count_data_rows"}, "table": ..., "script": {"filename",
+#'  "sha256"}}}
+#' in that order, the order of the rmbl-action examples and of
+#' \code{morie.capsule.write()} in Python, so the three writers agree byte for
+#' byte. \code{source$url} is left out when \code{url} is \code{NULL},
+#' \code{table} and \code{script} when not given. The row count
 #' is what \code{utils::read.csv()} reads, header excluded, which is how
 #' the verification counts them. An existing provenance file is overwritten.
 #'
 #' Errors: \code{dir} not an existing directory; \code{data_file} or
 #' \code{provenance_file} not a relative path inside \code{dir}; a
 #' \code{data_file} that is not a \code{.csv} file in \code{dir} or cannot be
-#' read; \code{url}, \code{name} or \code{retrieved} not one string.
+#' read; \code{url}, \code{name} or \code{retrieved} not one string;
+#' \code{table} not a list; \code{script_file} not a file inside \code{dir}.
 #'
 #' @param dir The capsule directory, a single string.
 #' @param data_file The CSV, relative to \code{dir}.
 #' @param url Where the data were downloaded from (\code{source$url}), or
 #'   \code{NULL}.
-#' @param name The capsule's name. Default: the directory's name.
+#' @param name The capsule's name. \code{NULL} (the default): the data file's
+#'   name without \code{.csv}.
 #' @param retrieved The retrieval date, \code{YYYY-MM-DD}. Default: today.
 #' @param provenance_file The record's file name, relative to \code{dir}.
+#' @param table \code{NULL}, or a list stored as the record's \code{table}
+#'   (the column schema the verification's \code{schema_valid} row reads).
+#' @param script_file \code{NULL}, or an analysis script relative to
+#'   \code{dir}, pinned as \code{script$filename} and \code{script$sha256}.
 #' @return The provenance (a list), invisibly, with the file written as
 #'   attribute \code{"path"}.
 #' @family capsule
@@ -90,14 +100,26 @@
 #' try(morie_capsule_write(dir, "../data.csv"))
 #' unlink(dir, recursive = TRUE)
 #' @export
-morie_capsule_write <- function(dir, data_file, url = NULL, name = basename(dir),
+morie_capsule_write <- function(dir, data_file, url = NULL, name = NULL,
                                 retrieved = format(Sys.Date()),
-                                provenance_file = "data_provenance.json") {
+                                provenance_file = "data_provenance.json", table = NULL,
+                                script_file = NULL) {
   dir <- .morie_capsule_dir(dir)
   data_file <- .morie_capsule_rel(data_file, "data_file")
   provenance_file <- .morie_capsule_rel(provenance_file, "provenance_file")
   if (!is.null(url)) url <- .morie_capsule_string(url, "url")
+  if (is.null(name)) name <- sub("\\.csv$", "", basename(data_file), ignore.case = TRUE)
   name <- .morie_capsule_string(name, "name")
+  if (!is.null(table) && (!is.list(table) || is.data.frame(table))) {
+    stop("`table` must be a list, or NULL", call. = FALSE)
+  }
+  if (!is.null(script_file)) {
+    script_file <- .morie_capsule_rel(script_file, "script_file")
+    spath <- file.path(dir, script_file)
+    if (!file.exists(spath) || dir.exists(spath)) {
+      stop("`script_file` is not a file in `dir`: ", script_file, call. = FALSE)
+    }
+  }
   retrieved <- .morie_capsule_string(retrieved, "retrieved")
   path <- file.path(dir, data_file)
   if (!grepl("\\.csv$", data_file, ignore.case = TRUE)) {
@@ -109,10 +131,14 @@ morie_capsule_write <- function(dir, data_file, url = NULL, name = basename(dir)
   rows <- nrow(.morie_capsule_csv(path, "data_file"))
   prov <- list(
     name = name,
+    source = c(if (!is.null(url)) list(url = url), list(retrieved = retrieved)),
     resource = list(filename = data_file, sha256 = rmoriebricklayer::sha256file(path),
-                    size_bytes = file.size(path), row_count_data_rows = rows),
-    source = c(if (!is.null(url)) list(url = url), list(retrieved = retrieved))
+                    size_bytes = file.size(path), row_count_data_rows = rows)
   )
+  prov$table <- table
+  if (!is.null(script_file)) {
+    prov$script <- list(filename = script_file, sha256 = rmoriebricklayer::sha256file(spath))
+  }
   out <- file.path(dir, provenance_file)
   writeLines(rmoriebricklayer::tojs(prov, auto_unbox = TRUE, pretty = TRUE, digits = NA), out,
              useBytes = TRUE)
@@ -129,7 +155,9 @@ morie_capsule_write <- function(dir, data_file, url = NULL, name = basename(dir)
 #' \code{rmoriebricklayer::vrfcps()}; see its help for every row.
 #'
 #' Entirely offline; nothing is written. A failed check is a row, not an
-#' error; the errors are \code{dir} not an existing directory and an
+#' error: a provenance record that does not parse as JSON is a failed
+#' \code{provenance_readable} row, as in morie (\code{vrfcps()} itself stops
+#' on one). The errors are \code{dir} not an existing directory and an
 #' argument that is not one string.
 #'
 #' @param dir The capsule directory, a single string.
@@ -165,8 +193,16 @@ morie_capsule_verify <- function(dir, provenance_file = "data_provenance.json", 
   if (!is.null(data_file)) data_file <- .morie_capsule_string(data_file, "data_file")
   if (!is.null(manifest_file)) manifest_file <- .morie_capsule_string(manifest_file, "manifest_file")
   if (!is.null(script_file)) script_file <- .morie_capsule_string(script_file, "script_file")
-  rmoriebricklayer::vrfcps(dir, provfile = provenance_file, dfile = data_file,
-                           mnffile = manifest_file, scrfile = script_file)
+  ppath <- file.path(dir, provenance_file)
+  # ponytail: rmoriebricklayer 1.0.0 vrfcps() stops on a record that does not parse; checked as a
+  # missing record instead (a failed provenance_readable row, as in morie) until vrfcps() does it
+  unreadable <- file.exists(ppath) &&
+    inherits(tryCatch(rmoriebricklayer::loadprov(ppath), error = function(e) e), "error")
+  provfile <- if (unreadable) basename(tempfile("absent-", tmpdir = dir)) else provenance_file
+  out <- rmoriebricklayer::vrfcps(dir, provfile = provfile, dfile = data_file,
+                                  mnffile = manifest_file, scrfile = script_file)
+  if (unreadable) out$checks$detail[out$checks$check == "provenance_readable"] <- ppath
+  out
 }
 
 #' Sign a capsule digest or manifest

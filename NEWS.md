@@ -7,6 +7,11 @@
   the pinned one, and `morie_capsule_manifest()` and `morie_capsule_compare()` record results and
   recompute them, through rmoriebricklayer; the same layer is in morie and in rmbl-action. New
   vignette `capsules`.
+* `morie_capsule_write()` writes `name`, `source`, `resource` in that order, as the rmbl-action
+  examples and morie do, names the capsule after the data file (`data.csv` -> `data`) by default,
+  and takes `table` and `script_file` as `morie.capsule.write()` does. `morie_capsule_verify()`
+  reports a provenance record that does not parse as a failed `provenance_readable` row, as morie
+  does; `rmoriebricklayer::vrfcps()` stopped with an error.
 * `morie_llm_login()` passes `accept_terms`, `affiliation`, `purpose`, `restricted` and the
   `supervisor_*` arguments to rmoriebricklayer 1.0.0 under its names (`accter`, `affil`, ...);
   they were refused as unused arguments.

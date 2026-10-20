@@ -42,7 +42,9 @@ still has its digest, and the data are not synthetic. This is
 }
 \details{
 Entirely offline; nothing is written. A failed check is a row, not an
-error; the errors are \code{dir} not an existing directory and an
+error: a provenance record that does not parse as JSON is a failed
+\code{provenance_readable} row, as in morie (\code{vrfcps()} itself stops
+on one). The errors are \code{dir} not an existing directory and an
 argument that is not one string.
 }
 \examples{

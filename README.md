@@ -190,6 +190,23 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
 - **Pollution and compute emissions**: the pollution-health module and a
   compute-emissions tracker with a C++ background sampler and signed
   bricklayer capsules are native R.
+- **Data capsules**: `morie_capsule_write()`, `morie_capsule_verify()`, `morie_capsule_sign()`,
+  `morie_capsule_bundle()`, `morie_capsule_drift()`, `morie_capsule_manifest()` and
+  `morie_capsule_compare()` pin, check, sign and re-check a CSV through rmoriebricklayer
+  (vignette `capsules`). Their twins in morie (Python) are `morie.capsule.write()` and so on:
+  the same words name the same things: `write`/`verify`/`sign`/`bundle`/`drift`/`manifest`/`compare`
+  take the same arguments and defaults, return the same fields, and verification gives the same
+  check rows (those of `rmoriebricklayer::vrfcps()`). The deliberate differences: morie signs with
+  `hmac` (a shared secret) only, so its `sign()` and `bundle()` have no `context`, `prehash` or
+  `deterministic` (rmorie also signs with ML-DSA, SLH-DSA and XMSS keys); rmorie's results checks
+  are a data frame, morie's a list of dicts; rmorie's drift takes the capsule directory (`dir`) and
+  a data frame or CSV as `current`, morie's takes `ref` (a capsule directory or a CSV) and a CSV;
+  rmorie pins only a CSV, morie any file (a row count for a CSV); morie also has `load`, `pin`,
+  `record`, `canon`, `digest` and the attestation helpers, which in R are rmoriebricklayer's own
+  (`loadprov()`, `recrd()`, `mnfcanon()`, `mnfdgst()`, `cpsatst()`); and the command line
+  `morie capsule init|pin|verify|sign|drift` exits 0 (verified, no drift), 1 (a check failed or
+  drift) or 2 (an error), where the R functions return a result with `$ok` (or `$anydrft`) and
+  stop on an error.
 - **SIU subsystem**: the Ontario Special Investigations Unit director's-report
   corpus (English + French, 2005-present). See *SIU pipeline* below.
 - **Also**: CPADS contract helpers, IPW / eBAC workflows, outputs-manifest
