@@ -1,4 +1,4 @@
-# rmorie 1.5.0 - 2026-10-19
+# rmorie 1.5.1 - 2026-10-20
 
 * Data capsules: `morie_capsule_write()` pins a local CSV in `data_provenance.json` (file name,
   SHA-256, size, data rows, source URL, retrieval date), `morie_capsule_verify()` checks it,
@@ -16,6 +16,9 @@
 * `morie_emissions_verify()` documents that any other file in the directory fails the
   `no_unlisted_files` check, and `morie_emissions_start()` points to `rmoriebricklayer::pqckg()`
   (there is no `pqc_keygen()`).
+
+# rmorie 1.5.0 - 2026-10-19
+
 * Needs rmoriebricklayer 1.0.0 and rmoriedata 0.4.0, and calls them by their new short names
   (`rmoriebricklayer::siuprs()`, `rmoriedata::mdload()` and so on).
 * The citation gives the author's given names in full ("Ruhela VS").

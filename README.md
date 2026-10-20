@@ -539,7 +539,7 @@ CodeQL.
 
 If you use rmorie in your research, please cite the software:
 
-> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* R package version 1.5.0. https://rootcoder007.r-universe.dev/rmorie
+> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* R package version 1.5.1. https://rootcoder007.r-universe.dev/rmorie
 
 BibTeX (or run `citation("rmorie")` after installation for the entry
 stamped with the exact installed version, sourced from `inst/CITATION`):
