@@ -149,6 +149,26 @@ register_stat_command <- function(cmd) {
 }
 
 
+#' Remove a command from the registry (tests register throwaway commands)
+#' @param name Canonical name.
+#' @noRd
+.unregister_stat_command <- function(name) {
+  reg <- .morie_stat_commands$registry
+  cmd <- reg[[name]]
+  if (is.null(cmd)) return(invisible(FALSE))
+  reg[[name]] <- NULL
+  .morie_stat_commands$registry <- reg
+  cats <- .morie_stat_commands$categories
+  cats[[cmd$category]] <- setdiff(cats[[cmd$category]], name)
+  if (!length(cats[[cmd$category]])) cats[[cmd$category]] <- NULL
+  .morie_stat_commands$categories <- cats
+  aliases <- .morie_stat_commands$aliases
+  for (a in cmd$aliases) if (identical(aliases[[a]], name)) aliases[[a]] <- NULL
+  .morie_stat_commands$aliases <- aliases
+  invisible(TRUE)
+}
+
+
 #' Resolve a command by canonical name or alias
 #'
 #' @param name Character scalar.

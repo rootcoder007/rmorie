@@ -1,5 +1,10 @@
 # rmorie 1.5.1 - 2026-10-20
 
+* `stat_bridge_main("verify")` and `stat_bridge_verify(execute = TRUE)` run each command on
+  sample inputs (p-values, `x` and `y`, a correlation matrix), as the Python self-test does,
+  instead of calling it with no arguments, which reported every command that takes input as
+  FAIL; a command with no sample input is shown as NEEDS INPUT. The bridge tests remove the
+  commands they register.
 * Data capsules: `morie_capsule_write()` pins a local CSV in `data_provenance.json` (file name,
   SHA-256, size, data rows, source URL, retrieval date), `morie_capsule_verify()` checks it,
   `morie_capsule_sign()` and `morie_capsule_bundle()` sign a digest, a manifest or the whole

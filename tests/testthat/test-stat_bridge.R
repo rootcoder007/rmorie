@@ -38,6 +38,7 @@ test_that("stat_bridge_exec captures handler error", {
   cmd <- stat_command("test_bridge_throw", "T", "u", "d",
                       handler_repl = function(...) stop("boom"))
   register_stat_command(cmd)
+  on.exit(.unregister_stat_command("test_bridge_throw"), add = TRUE)
   out <- stat_bridge_exec("test_bridge_throw")
   expect_true(grepl("Error", out) || nchar(out) >= 0)
 })
@@ -53,6 +54,7 @@ test_that("stat_bridge_fn_info handles command with no aliases", {
   cmd <- stat_command("test_bridge_no_alias", "T", "use", "desc",
                       handler_repl = function() 1)
   register_stat_command(cmd)
+  on.exit(.unregister_stat_command("test_bridge_no_alias"), add = TRUE)
   out <- stat_bridge_fn_info("test_bridge_no_alias")
   expect_true(grepl("none", out))
 })
@@ -102,4 +104,35 @@ test_that("stat_bridge_main dispatches all modes", {
   # unknown mode
   u <- stat_bridge_main(c("nonsense_mode_xyz"))
   expect_match(u, "Unknown mode")
+})
+
+test_that("verify runs every seeded command on sample inputs", {
+  df <- stat_bridge_verify(execute = TRUE)
+  seeded <- c("bonferroni", "holm", "benjamini_hochberg", "benjamini_yekutieli",
+              "storey_q", "fisher_combined", "stouffer_combined", "harmonic_mean_p",
+              "adjust_p_values", "estimate_pi0", "n_effective_tests", "nw_regression",
+              "local_linear", "kde", "silverman_bandwidth", "loocv_bandwidth",
+              "gam_smoother")
+  got <- df[df$name %in% seeded, ]
+  expect_setequal(got$name, seeded)
+  expect_true(all(got$ok %in% TRUE), info = paste(got$name[!got$ok %in% TRUE], got$message[!got$ok %in% TRUE], collapse = "; "))
+  # no test-only commands left behind by the tests above
+  expect_false(any(startsWith(df$name, "test_bridge_")))
+})
+
+test_that("verify reports a command it cannot feed as needing input, not failing", {
+  register_stat_command(stat_command("test_bridge_needs", "T", "test_bridge_needs(z)", "d",
+                                     handler_repl = function(z) z))
+  on.exit(.unregister_stat_command("test_bridge_needs"), add = TRUE)
+  register_stat_command(stat_command("test_bridge_boom", "T", "test_bridge_boom()", "d",
+                                     handler_repl = function() stop("boom")))
+  on.exit(.unregister_stat_command("test_bridge_boom"), add = TRUE)
+  df <- stat_bridge_verify(execute = TRUE)
+  expect_true(is.na(df$ok[df$name == "test_bridge_needs"]))
+  expect_match(df$message[df$name == "test_bridge_needs"], "needs input: z")
+  expect_false(df$ok[df$name == "test_bridge_boom"])
+  out <- utils::capture.output(stat_bridge_main(args = "verify"))
+  expect_true(any(grepl("NEEDS INPUT  test_bridge_needs", out, fixed = TRUE)))
+  expect_true(any(grepl("FAIL  test_bridge_boom -- boom", out, fixed = TRUE)))
+  expect_true(any(grepl("PASS  bonferroni", out, fixed = TRUE)))
 })

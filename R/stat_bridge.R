@@ -239,15 +239,67 @@ stat_bridge_verify <- function(execute = FALSE) {
       } else {
         list(ok = FALSE, msg = "handler_repl is not a function")
       }
-    } else tryCatch({
-      cmd$handler_repl()
-      list(ok = TRUE, msg = "")
-    }, error = function(e) list(ok = FALSE, msg = conditionMessage(e)))
+    } else {
+      .stat_bridge_run_sample(cmd)
+    }
     rows[[i]] <- data.frame(name = cmd$name, ok = res$ok,
                             message = res$msg, stringsAsFactors = FALSE)
     i <- i + 1L
   }
   do.call(rbind, rows)
+}
+
+#' Sample inputs for stat_bridge_verify(execute = TRUE), by argument name
+#'
+#' Small fixed inputs, so that verify runs each command on real values the way
+#' the Python self-test does, instead of calling it with no arguments.
+#' @noRd
+.stat_bridge_samples <- function() {
+  x <- seq(0.25, 10, length.out = 40)
+  list(
+    p_values = c(0.001, 0.008, 0.012, 0.03, 0.04, 0.2, 0.45, 0.7, 0.9),
+    correlation_matrix = matrix(c(1, 0.5, 0.2, 0.5, 1, 0.3, 0.2, 0.3, 1), 3L),
+    x = x,
+    y = sin(x) + 0.1 * cos(3 * x),
+    x_eval = c(1, 2.5, 5, 7.5),
+    bandwidth = 0.8
+  )
+}
+
+#' Run one command on sample inputs for stat_bridge_verify(execute = TRUE)
+#'
+#' The handler's target function is the one named in the command's usage
+#' string; its required arguments are filled from .stat_bridge_samples(). A
+#' command whose required inputs have no sample is reported as needing input
+#' (ok = NA), not as a failure.
+#' @return list(ok = TRUE / FALSE / NA, msg = character)
+#' @noRd
+.stat_bridge_run_sample <- function(cmd) {
+  fname <- sub("\\(.*$", "", trimws(cmd$usage %||% ""))
+  target <- if (nzchar(fname)) get0(fname, envir = asNamespace("rmorie"), mode = "function") else NULL
+  args <- list()
+  if (is.function(target)) {
+    fm <- formals(target)
+    need <- names(fm)[vapply(fm, function(z) identical(z, quote(expr = )), logical(1))]
+    need <- setdiff(need, "...")
+    samples <- .stat_bridge_samples()
+    missing_in <- setdiff(need, names(samples))
+    if (length(missing_in)) {
+      return(list(ok = NA, msg = paste("needs input:", paste(missing_in, collapse = ", "))))
+    }
+    args <- samples[need]
+  }
+  tryCatch({
+    do.call(cmd$handler_repl, args)
+    list(ok = TRUE, msg = "")
+  }, error = function(e) {
+    m <- conditionMessage(e)
+    if (grepl("is missing, with no default", m, fixed = TRUE)) {
+      list(ok = NA, msg = paste("needs input:", sub('^argument "([^"]+)".*$', "\\1", m)))
+    } else {
+      list(ok = FALSE, msg = m)
+    }
+  })
 }
 
 
@@ -307,7 +359,7 @@ stat_bridge_main <- function(args = NULL) {
       paste(
         apply(df, 1L, function(r) {
           sprintf("  %s  %s%s",
-                  if (r[["ok"]] == "TRUE") "PASS" else "FAIL",
+                  if (is.na(r[["ok"]]) || r[["ok"]] == "NA") "NEEDS INPUT" else if (r[["ok"]] == "TRUE") "PASS" else "FAIL",
                   r[["name"]],
                   if (nzchar(r[["message"]])) sprintf(" -- %s", r[["message"]]) else "")
         }),
