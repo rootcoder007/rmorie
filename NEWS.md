@@ -1,5 +1,11 @@
 # rmorie 1.5.1 - 2026-10-20
 
+* The doubly robust difference in differences for repeated cross-sections (`morie_did_doubly_robust()`
+  with a `post` column, and the group-time ATTs that use it) gave a wrong influence function and so a
+  wrong standard error: the estimation effect of the comparison group's pre-period outcome regression
+  entered with the wrong sign. It now takes the sign of Sant'Anna and Zhao (2020, Appendix B), as
+  DRDID 1.4.0 corrected in its own `drdid_rc()`. Point estimates are unchanged; standard errors,
+  intervals and tests change (the cross-validation against DRDID matches to machine precision again).
 * The binomial and multinomial branches of the elastic-net path in `morie_grid_search_cv()` use separately
   named deviance helpers, which clears the `R CMD check` NOTE "multiple local function definitions
   for dev_fun" reported on every r-universe platform.

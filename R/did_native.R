@@ -294,7 +294,9 @@
   M1_pre <- -colMeans(w_treat_pre * X) / mean(w_treat_pre)
   inf_treat_or_post <- as.numeric(or_c1$lin_rep %*% M1_post)
   inf_treat_or_pre <- as.numeric(or_c0$lin_rep %*% M1_pre)
-  inf_treat_or <- inf_treat_or_post + inf_treat_or_pre
+  # the pre-period regression enters with a minus sign (Sant'Anna and Zhao
+  # 2020, Appendix B; DRDID 1.4.0 corrected the same sign)
+  inf_treat_or <- inf_treat_or_post - inf_treat_or_pre
   inf_treat <- inf_treat_post - inf_treat_pre + inf_treat_or
   # Control components (estimation effects of ps and mu_c)
   inf_cont_pre <- eta_cont_pre - w_cont_pre * att_cont_pre /
@@ -308,7 +310,7 @@
   inf_cont_ps <- as.numeric(psf$lin_rep %*% (M2_post - M2_pre))
   M3_post <- -colMeans(w_cont_post * X) / mean(w_cont_post)
   M3_pre <- -colMeans(w_cont_pre * X) / mean(w_cont_pre)
-  inf_cont_or <- as.numeric(or_c1$lin_rep %*% M3_post) +
+  inf_cont_or <- as.numeric(or_c1$lin_rep %*% M3_post) -
     as.numeric(or_c0$lin_rep %*% M3_pre)
   inf_cont <- inf_cont_post - inf_cont_pre + inf_cont_ps + inf_cont_or
   # Efficiency-adjustment components

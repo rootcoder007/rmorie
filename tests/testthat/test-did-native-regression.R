@@ -64,5 +64,7 @@ test_that("native Sant'Anna-Zhao drdid_rc output is stable (snapshot)", {
   z <- morie_did_doubly_robust(dr, "y", "d", "post",
                                covariates = c("x1", "x2"), n_bootstrap = 0L)
   expect_equal(z$estimate, 1.9960221929, tolerance = 1e-6)
-  expect_equal(z$std_error, 0.1042749708, tolerance = 1e-6)
+  # DRDID 1.4.0 gives the same value; 0.1042749708 before the influence
+  # function's pre-period regression term took its correct (minus) sign
+  expect_equal(z$std_error, 0.1042665422, tolerance = 1e-6)
 })
