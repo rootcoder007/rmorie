@@ -87,7 +87,8 @@ test_that("the concentration measures agree with their definitions", {
   skip_if_not_installed("rmoriebricklayer")
   # and it agrees with bricklayer's, which is the shared backend
   for (x in list(c(1, 2, 3, 4, 5), c(1, 1, 1, 8), c(2, 2, 3, 100))) {
-    expect_equal(rmorie:::.gini_int(x), rmoriebricklayer::ginicoef(x),
-                 tolerance = 1e-12)
+    # bricklayer >= 1.0.3 returns a boxed measure: compare the number
+    bl <- as.numeric(rmoriebricklayer::ginicoef(x))
+    expect_equal(rmorie:::.gini_int(x), bl, tolerance = 1e-12)
   }
 })
