@@ -291,6 +291,27 @@ The assistant (`morie_llm_ask()`) asks the model you bring (a provider's key,
 your own OpenAI-compatible server, or a local Ollama; see *Ask a model and sign
 in*), and falls back to a keyword answer that needs no network.
 
+### Linux — apt / dnf
+
+Debian, Ubuntu and Fedora can install rmorie and its companions (each installs from r-universe and compiles on your machine) from the signed
+[apt-morie](https://github.com/rootcoder007/apt-morie) repository, which also
+covers dnf4, RHEL and yum:
+
+```bash
+# Debian / Ubuntu
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://rootcoder007.github.io/apt-morie/key.gpg \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/rootcoder007.gpg
+echo "deb [signed-by=/etc/apt/keyrings/rootcoder007.gpg] https://rootcoder007.github.io/apt-morie/apt stable main" \
+  | sudo tee /etc/apt/sources.list.d/morie.list
+sudo apt update
+sudo apt install rmorie rmoriedata rmoriebricklayer
+
+# Fedora 41+
+sudo dnf config-manager addrepo --from-repofile=https://rootcoder007.github.io/apt-morie/rpm/morie.repo
+sudo dnf install rmorie rmoriedata rmoriebricklayer
+```
+
 ### Optional packages (the R equivalent of `pip install pkg[extra]`)
 
 The base install is complete for every statistical workflow — the
@@ -556,7 +577,7 @@ CodeQL.
 
 If you use rmorie in your research, please cite the software:
 
-> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* R package version 1.5.1. https://rootcoder007.r-universe.dev/rmorie
+> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* R package version 1.5.2. https://rootcoder007.r-universe.dev/rmorie
 
 BibTeX (or run `citation("rmorie")` after installation for the entry
 stamped with the exact installed version, sourced from `inst/CITATION`):

@@ -1,3 +1,8 @@
+# rmorie 1.5.2 - 2026-10-30
+
+* Version kept in step with morie 1.5.2, which fixes the `morie` command in the
+  .deb and .rpm packages. No R changes.
+
 # rmorie 1.5.1 - 2026-10-20
 
 * The doubly robust difference in differences for repeated cross-sections (`morie_did_doubly_robust()`
