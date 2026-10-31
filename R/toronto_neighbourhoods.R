@@ -86,13 +86,10 @@ NULL
 #' Internal helper: Morie To Ckan Dump Csv
 #' @noRd
 .morie_to_ckan_dump_csv <- function(resource_id, limit = 100000L) {
-  url <- sprintf(paste0(
-    "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/",
-    "datastore_search?resource_id=%s&limit=%d"),
-    resource_id, as.integer(limit))
-  body <- .morie_from_json(.morie_dataset_http_text(url, timeout_s = 60L), simplifyVector = TRUE)
-  recs <- body$result$records
-  if (is.null(recs)) data.frame() else as.data.frame(recs)
+  .morie_ckan_datastore_all(
+    "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/datastore_search",
+    query = list(resource_id = resource_id), limit = limit, what = "Toronto"
+  )
 }
 
 # Default CKAN resource ids for the live mode (current as of 2026-05).

@@ -515,6 +515,52 @@
   as.data.frame(out, stringsAsFactors = FALSE, optional = TRUE)
 }
 
+# A CKAN datastore answers at most its own page cap a request, whatever `limit`
+# asks (1,000 rows on open.canada.ca since late 2026, 32,000 on Toronto's and
+# Montreal's), so read on with `offset` until `limit` rows or the total the
+# datastore reports. One request kept only the first page.
+#' Internal helper: read a CKAN datastore resource across pages
+#' @noRd
+.morie_ckan_datastore_all <- function(url, query = list(), limit = 100L,
+                                      what = "CKAN", timeout_s = 60L) {
+  limit <- as.numeric(limit)
+  pages <- list()
+  got <- 0
+  repeat {
+    q <- query
+    q$limit <- as.integer(min(limit - got, 32000))
+    q$offset <- as.integer(got)
+    r <- .morie_dataset_http_json(url, query = q, timeout_s = timeout_s)
+    if (is.list(r) && !is.null(r$success) && !isTRUE(r$success)) {
+      stop(sprintf("%s CKAN datastore_search failed", what), call. = FALSE)
+    }
+    res <- if (is.list(r) && !is.data.frame(r) && !is.null(r$result)) r$result else r
+    recs <- .morie_dataset_records_to_df(if (is.data.frame(res)) res else res$records)
+    n <- NROW(recs)
+    if (n == 0L) break
+    pages[[length(pages) + 1L]] <- recs
+    got <- got + n
+    if (got >= limit) break
+    total <- if (is.data.frame(res)) NA_real_ else suppressWarnings(as.numeric(res$total %||% NA)[1L])
+    if (!is.na(total)) {
+      if (got >= total) break
+    } else {
+      cap <- if (is.data.frame(res)) NA_real_ else suppressWarnings(as.numeric(res$limit %||% NA)[1L])
+      if (n < (if (is.na(cap)) q$limit else cap)) break
+    }
+  }
+  if (!length(pages)) return(data.frame())
+  if (length(pages) == 1L) return(pages[[1L]])
+  cols <- unique(unlist(lapply(pages, names), use.names = FALSE))
+  pages <- lapply(pages, function(p) {
+    for (cn in setdiff(cols, names(p))) p[[cn]] <- NA
+    p[cols]
+  })
+  out <- do.call(rbind, pages)
+  rownames(out) <- NULL
+  out
+}
+
 # ---------------------------------------------------------------------------
 # TPS -- Toronto Police Service ArcGIS
 # ---------------------------------------------------------------------------
@@ -719,14 +765,11 @@ morie_datasets_cpads <- function(offline = TRUE,
     query <- list(
       resource_id = "d2639429-c304-45a6-90b3-770562f4d46d"
     )
-    if (!is.null(limit)) query$limit <- as.integer(limit)
     if (!is.null(q)) query$q <- as.character(q)
-    body <- .morie_dataset_http_json(
+    .morie_ckan_datastore_all(
       "https://open.canada.ca/data/api/3/action/datastore_search",
-      query = query
+      query = query, limit = if (is.null(limit)) 100L else limit
     )
-    records <- body$result$records %||% body$records %||% body
-    .morie_dataset_records_to_df(records)
   } else {
     morie_fetch(paste0(
       "https://open.canada.ca/data/dataset/",

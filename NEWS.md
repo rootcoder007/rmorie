@@ -1,7 +1,14 @@
 # rmorie 1.5.2 - 2026-10-30
 
+* The CKAN datastore readers (`morie_datasets_cpads(mode = "datastore_search")`,
+  `morie_datasets_toronto_open_ckan_resource()`, `morie_datasets_montreal_ckan_resource()`,
+  `morie_arsau_fetch_sidecar()` and the Toronto neighbourhood fetch) sent one request and kept
+  its rows. A datastore serves at most its own cap a request, whatever `limit` asks (1,000 rows
+  on open.canada.ca since late 2026, 32,000 on Toronto's and Montreal's), so a larger `limit`
+  came back cut to the first page. They now read on with `offset` to `limit` rows or the total
+  the datastore reports.
 * Version kept in step with morie 1.5.2, which fixes the `morie` command in the
-  .deb and .rpm packages. No R changes.
+  .deb and .rpm packages.
 
 # rmorie 1.5.1 - 2026-10-20
 

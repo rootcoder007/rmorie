@@ -202,20 +202,12 @@ morie_datasets_montreal_sim_intervention_types <- function() {
 morie_datasets_montreal_ckan_resource <- function(resource_id,
                                                   limit = 100L,
                                                   filters = NULL) {
-  qs <- list(
-    resource_id = resource_id,
-    limit = as.integer(limit)
-  )
+  qs <- list(resource_id = resource_id)
   if (!is.null(filters)) {
     qs$filters <- .morie_to_json(filters, auto_unbox = TRUE)
   }
-  url <- paste0(.MORIE_MONTREAL_CKAN_BASE, "/action/datastore_search")
-  r <- .morie_dataset_http_json(url, query = qs)
-  if (!isTRUE(r$success)) {
-    stop("MTL CKAN datastore_search failed", call. = FALSE)
-  }
-  if (is.null(r$result$records) || length(r$result$records) == 0L) {
-    return(data.frame())
-  }
-  r$result$records
+  .morie_ckan_datastore_all(
+    paste0(.MORIE_MONTREAL_CKAN_BASE, "/action/datastore_search"),
+    query = qs, limit = limit, what = "MTL"
+  )
 }

@@ -506,11 +506,24 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
   # purposes. timeout_sec preserved verbatim.
   body <- .morie_dataset_http_text(url, timeout_s = as.integer(timeout_sec))
   payload <- .morie_from_json(body, simplifyVector = FALSE)
-  # CKAN wraps the useful content under $result.
+  # CKAN wraps the useful content under $result. A datastore answers at most its
+  # page cap a request whatever `limit` asks, so read on with `offset` to the
+  # total it reports (or `limit` records).
   if (!is.null(payload$result) && is.list(payload$result)) {
+    res <- payload$result
+    records <- res$records %||% list()
+    total <- suppressWarnings(as.numeric(res$total %||% NA)[1L])
+    while (length(records) < limit && !is.na(total) && length(records) < total) {
+      more <- .morie_from_json(.morie_dataset_http_text(
+        sprintf("%s&offset=%d", url, length(records)),
+        timeout_s = as.integer(timeout_sec)
+      ), simplifyVector = FALSE)$result$records
+      if (!length(more)) break
+      records <- c(records, more)
+    }
     return(list(
-      fields  = payload$result$fields %||% list(),
-      records = payload$result$records %||% list()
+      fields  = res$fields %||% list(),
+      records = utils::head(records, limit)
     ))
   }
   list(

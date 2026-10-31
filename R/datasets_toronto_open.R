@@ -185,17 +185,8 @@ morie_datasets_toronto_open_ckan_resource <- function(resource_id,
   if (!is.character(resource_id) || length(resource_id) != 1L || is.na(resource_id) || !nzchar(resource_id)) {
     stop("`resource_id` must be one CKAN resource id (package_show lists them)", call. = FALSE)
   }
-  url <- sprintf(
-    "%s/action/datastore_search?resource_id=%s&limit=%d",
-    .MORIE_TORONTO_CKAN_BASE,
-    resource_id, as.integer(limit)
+  .morie_ckan_datastore_all(
+    paste0(.MORIE_TORONTO_CKAN_BASE, "/action/datastore_search"),
+    query = list(resource_id = resource_id), limit = limit, what = "Toronto"
   )
-  r <- .morie_dataset_http_json(url)
-  if (!isTRUE(r$success)) {
-    stop("Toronto CKAN datastore_search failed", call. = FALSE)
-  }
-  if (is.null(r$result$records) || length(r$result$records) == 0L) {
-    return(data.frame())
-  }
-  r$result$records
 }
