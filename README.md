@@ -300,15 +300,15 @@ covers dnf4, RHEL and yum:
 ```bash
 # Debian / Ubuntu
 sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://rootcoder007.github.io/apt-morie/key.gpg \
+curl -fsSL https://apt.rmorie.com/key.gpg \
   | sudo gpg --dearmor -o /etc/apt/keyrings/rootcoder007.gpg
-echo "deb [signed-by=/etc/apt/keyrings/rootcoder007.gpg] https://rootcoder007.github.io/apt-morie/apt stable main" \
+echo "deb [signed-by=/etc/apt/keyrings/rootcoder007.gpg] https://apt.rmorie.com/apt stable main" \
   | sudo tee /etc/apt/sources.list.d/morie.list
 sudo apt update
 sudo apt install rmorie rmoriedata rmoriebricklayer
 
 # Fedora 41+
-sudo dnf config-manager addrepo --from-repofile=https://rootcoder007.github.io/apt-morie/rpm/morie.repo
+sudo dnf config-manager addrepo --from-repofile=https://apt.rmorie.com/rpm/morie.repo
 sudo dnf install rmorie rmoriedata rmoriebricklayer
 ```
 
