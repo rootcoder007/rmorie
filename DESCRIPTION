@@ -51,7 +51,6 @@ Encoding: UTF-8
 ByteCompile: no
 Language: en-US
 Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "srr::srr_stats_roclet"))
-RoxygenNote: 8.0.0
 Depends:
   R (>= 4.3.0)
 Note: Tested on R 4.3.0, 4.4.x, 4.5.2, 4.5.3 (CRAN). Use CRAN R on Apple
@@ -108,7 +107,6 @@ Suggests:
     dlm,
     DoubleML,
     DRDID,
-    duckdb,
     ebal,
     emmeans,
     EValue,
@@ -273,3 +271,4 @@ Additional_repositories:
 Remotes:
   rmoriebricklayer=rootcoder007/rmorie-bricklayer@v1.0.2,
   rootcoder007/rmoriedata
+Config/roxygen2/version: 8.1.1

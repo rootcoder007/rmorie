@@ -14,7 +14,6 @@
 # ---- 1. SQLite (the default fallback; always available) ------------------
 test_that("DBI/SQLite cache round-trip via db_path", {
   testthat::skip_if_not_installed("RSQLite")
-  testthat::skip_if_not_installed("duckdb")
 
   tmp_db <- tempfile(fileext = ".db")
   withr::defer(if (file.exists(tmp_db)) unlink(tmp_db))
@@ -53,16 +52,16 @@ test_that(".morie_db_handle rejects non-DBI input", {
   )
 })
 
-# ---- 2. DuckDB (default for new caches; columnar, larger data sizes) -----
-test_that("DBI/DuckDB cache round-trip via tempfile", {
+# ---- 2. A connection the caller opens (any DBI backend; SQLite here) ------
+test_that("DBI cache round-trip through a connection the caller opens", {
   skip_if_not_installed("DBI")
-  skip_if_not_installed("duckdb")
+  skip_if_not_installed("RSQLite")
 
-  tmp_db <- tempfile(fileext = ".duckdb")
+  tmp_db <- tempfile(fileext = ".db")
   withr::defer(if (file.exists(tmp_db)) unlink(tmp_db))
 
-  con <- DBI::dbConnect(duckdb::duckdb(), dbdir = tmp_db)
-  withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
+  con <- DBI::dbConnect(RSQLite::SQLite(), dbname = tmp_db)
+  withr::defer(DBI::dbDisconnect(con))
 
   expect_true(DBI::dbIsValid(con))
 
@@ -75,22 +74,27 @@ test_that("DBI/DuckDB cache round-trip via tempfile", {
   expect_equal(out$x, df$x)
 })
 
-test_that("morie_db_connect() default opens DuckDB when available", {
+test_that("morie_db_connect() default opens SQLite, and refuses an old DuckDB cache", {
   skip_if_not_installed("DBI")
-  skip_if_not_installed("duckdb")
+  skip_if_not_installed("RSQLite")
 
   tmp_dir <- tempfile("morie-test-")
   dir.create(tmp_dir)
   withr::defer(unlink(tmp_dir, recursive = TRUE))
-  withr::local_envvar(XDG_CACHE_HOME = tmp_dir)
+  withr::local_envvar(XDG_CACHE_HOME = tmp_dir, MORIE_CACHE_DB = NA)
 
   con <- morie_db_connect()
-  withr::defer(DBI::dbDisconnect(con, shutdown = TRUE))
+  withr::defer(DBI::dbDisconnect(con))
+  expect_s4_class(con, "SQLiteConnection")
 
-  expect_true(inherits(con, "duckdb_connection"))
+  # a cache file made with DuckDB is named, not opened as SQLite
+  expect_error(
+    morie_db_connect(db_path = file.path(tmp_dir, "old.duckdb")),
+    "DuckDB cache files are no longer used"
+  )
 })
 
-test_that("morie_db_connect() falls back to SQLite when duckdb absent", {
+test_that("morie_db_connect() opens the SQLite path it is given", {
   testthat::skip_if_not_installed("RSQLite")
   skip_if_not_installed("DBI")
 
@@ -99,8 +103,6 @@ test_that("morie_db_connect() falls back to SQLite when duckdb absent", {
   withr::defer(unlink(tmp_dir, recursive = TRUE))
   withr::local_envvar(XDG_CACHE_HOME = tmp_dir)
 
-  # Force the SQLite path by passing a *.db extension; this exercises the
-  # fallback even on systems where duckdb is installed.
   sqlite_path <- file.path(tmp_dir, "explicit.db")
   con <- morie_db_connect(db_path = sqlite_path)
   withr::defer(DBI::dbDisconnect(con))

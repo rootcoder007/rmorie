@@ -7,31 +7,29 @@
 morie_db_connect(db_path = NULL)
 }
 \arguments{
-\item{db_path}{Optional path to a DuckDB (\code{*.duckdb}) or SQLite
-(\code{*.db}) file. Defaults to the \code{MORIE_CACHE_DB} env var,
-else \code{morie.duckdb} / \code{morie.db} in the per-user cache
-directory.}
+\item{db_path}{Optional path to a SQLite file (\code{*.db}). Defaults to
+the \code{MORIE_CACHE_DB} env var, else \code{morie.db} in the
+session cache directory.}
 }
 \value{
 A DBI connection object.
 }
 \description{
 Opens (or creates) a per-user \strong{SQL} cache database. This is the
-opt-in SQL backend and requires DuckDB or RSQLite to be installed.
+opt-in SQL backend: a SQLite file, which needs DBI and RSQLite.
 }
 \details{
 Note: the DEFAULT cache used by \code{morie_cache_store()} / \verb{_load()} /
 \verb{_list()} needs \strong{no SQL backend at all} -- it uses a zero/light
 dependency file store: Parquet via \pkg{nanoparquet} (cross-language)
-when available, else base-R \code{.rds}. Install \code{duckdb} (or \code{RSQLite}),
-or set \code{MORIE_CACHE_BACKEND=duckdb}/\code{sqlite}, or pass \verb{db_path=}, to
-use SQL instead -- DuckDB is preferred (vectorised + columnar, handles
-multi-GB PUMFs and out-of-core analytical queries); an existing
-\code{morie.db} / \code{morie.duckdb} cache is reused for back-compat. For the
-multi-user server tier, pass your own PostgreSQL \verb{con=}.
+when available, else base-R \code{.rds}. Install \code{RSQLite}, set
+\code{MORIE_CACHE_BACKEND=sqlite}, or pass \verb{db_path=}, to use SQL instead;
+an existing \code{morie.db} cache is reused. Older caches made with DuckDB
+are no longer opened (the cache fills again as \code{morie.db}). For
+the multi-user server tier, pass your own PostgreSQL \verb{con=}.
 
-For non-default backends (PostgreSQL, MariaDB, MS SQL Server, ...),
-construct your own DBI connection and pass it as \code{con} to the
+For non-default backends (PostgreSQL, MariaDB, MS SQL Server, DuckDB,
+...), construct your own DBI connection and pass it as \code{con} to the
 \verb{morie_cache_*} and \code{morie_load_dataset} functions:
 
 \preformatted{
@@ -43,10 +41,9 @@ morie_load_dataset("ocp21", con = con)
 \examples{
 \donttest{
 if (morie_has("sql")) withAutoprint({
-# DuckDB (default when 'duckdb' is installed); pass a '.db' path for SQLite.
-if (requireNamespace("duckdb", quietly = TRUE) &&
+if (requireNamespace("RSQLite", quietly = TRUE) &&
   requireNamespace("DBI", quietly = TRUE)) {
-  tmp <- tempfile(fileext = ".duckdb")
+  tmp <- tempfile(fileext = ".db")
   con <- morie_db_connect(db_path = tmp)
   DBI::dbListTables(con)
   DBI::dbDisconnect(con)

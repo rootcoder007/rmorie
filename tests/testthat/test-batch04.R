@@ -557,7 +557,6 @@ test_that("morie cache round-trip works against a temp database", {
 test_that("morie_cache_file ingests a CSV into the cache", {
   skip_heavy()
   testthat::skip_if_not_installed("RSQLite")
-  testthat::skip_if_not_installed("duckdb")
   tmp <- tempfile(fileext = ".db")
   csv <- tempfile(fileext = ".csv")
   on.exit(unlink(c(tmp, csv)), add = TRUE)

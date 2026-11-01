@@ -9,7 +9,7 @@ morie_load_dataset(key, db_path = NULL, refresh = FALSE, con = NULL)
 \arguments{
 \item{key}{Dataset catalog key (or fuzzy match).}
 
-\item{db_path}{Optional path to a SQLite/DuckDB file (default backend).}
+\item{db_path}{Optional path to a SQLite file (default backend).}
 
 \item{refresh}{If \code{TRUE}, bypass the built-in database and the
 user cache (and, for remotely-backed datasets, the local file) and

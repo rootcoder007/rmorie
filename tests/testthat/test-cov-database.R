@@ -44,7 +44,6 @@ test_that("morie_db_connect errors clearly without DBI / RSQLite", {
 
 test_that("cache store / load / list round-trip on a temp SQLite db", {
   testthat::skip_if_not_installed("RSQLite")
-  testthat::skip_if_not_installed("duckdb")
   .cdb_have_db()
   db <- tempfile(fileext = ".db")
   on.exit(unlink(db), add = TRUE)
@@ -74,7 +73,6 @@ test_that("morie_cache_list returns an empty frame for an empty db", {
 
 test_that("morie_cache_file ingests csv and rds, errors on other formats", {
   testthat::skip_if_not_installed("RSQLite")
-  testthat::skip_if_not_installed("duckdb")
   .cdb_have_db()
   db <- tempfile(fileext = ".db")
   on.exit(unlink(db), add = TRUE)
@@ -107,7 +105,6 @@ test_that("morie_load_dataset errors on an unknown key", {
 
 test_that("morie_load_dataset loads a seeded table from the user cache", {
   testthat::skip_if_not_installed("RSQLite")
-  testthat::skip_if_not_installed("duckdb")
   .cdb_have_db()
   db <- tempfile(fileext = ".db")
   on.exit(unlink(db), add = TRUE)

@@ -86,7 +86,6 @@ test_that("morie_download_bootstrap validates survey and runs the loop", {
 
 test_that("morie_download_bootstrap ingests a present local bootstrap file", {
   testthat::skip_if_not_installed("RSQLite")
-  testthat::skip_if_not_installed("duckdb")
   .cw21_db()
   wd <- tempfile("bs-")
   dir.create(wd)

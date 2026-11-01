@@ -7,7 +7,7 @@
 morie_list_datasets(db_path = NULL, con = NULL)
 }
 \arguments{
-\item{db_path}{Optional path to a SQLite/DuckDB file (default backend).}
+\item{db_path}{Optional path to a SQLite file (default backend).}
 
 \item{con}{Optional pre-opened DBI connection (overrides \code{db_path}).}
 }

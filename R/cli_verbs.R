@@ -1180,10 +1180,5 @@
 
 # Where the command line keeps what it pulls: the user cache directory (an existing store is reused).
 .morie_cli_cache_db <- function() {
-  root <- morie_cache_dir()
-  duck <- file.path(root, "morie.duckdb")
-  lite <- file.path(root, "morie.db")
-  if (file.exists(duck)) return(duck)
-  if (file.exists(lite)) return(lite)
-  if (requireNamespace("duckdb", quietly = TRUE)) duck else lite
+  file.path(morie_cache_dir(), "morie.db")
 }

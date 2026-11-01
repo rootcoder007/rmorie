@@ -21,7 +21,7 @@ morie_download_bootstrap(
 
 \item{limit}{Max records per CKAN request (default 32000).}
 
-\item{db_path}{Optional path to a SQLite/DuckDB file (default backend).}
+\item{db_path}{Optional path to a SQLite file (default backend).}
 
 \item{con}{Optional pre-opened DBI connection (overrides \code{db_path}).}
 

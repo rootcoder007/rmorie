@@ -10,7 +10,7 @@
 
 .ce_sandbox <- function(env = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = env)
-  withr::local_envvar(XDG_CONFIG_HOME = dir, R_USER_CACHE_DIR = dir, MORIE_CACHE_DB = file.path(dir, "c.duckdb"),
+  withr::local_envvar(XDG_CONFIG_HOME = dir, R_USER_CACHE_DIR = dir, MORIE_CACHE_DB = file.path(dir, "c.db"),
                       .local_envir = env)
   dir
 }

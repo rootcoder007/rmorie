@@ -27,7 +27,7 @@
 # package; DBI stays the opt-in path for SQL and server backends.
 .morie_dbi_available <- function() {
   requireNamespace("DBI", quietly = TRUE) &&
-    (requireNamespace("RSQLite", quietly = TRUE) || requireNamespace("duckdb", quietly = TRUE))
+    requireNamespace("RSQLite", quietly = TRUE)
 }
 
 .morie_cache_note <- new.env(parent = emptyenv())
@@ -46,7 +46,7 @@
     dir <- paste0(tools::file_path_sans_ext(db_path), "_files")
     dir.create(dir, recursive = TRUE, showWarnings = FALSE)
     .morie_cache_note$shown <- TRUE
-    message("cache: DBI with RSQLite or duckdb is not installed; using the file backend in ", dir,
+    message("cache: DBI with RSQLite is not installed; using the file backend in ", dir,
             " (morie_install_extras(c('DBI', 'RSQLite')) enables SQL caches)")
   }
   if (requireNamespace("nanoparquet", quietly = TRUE)) {
@@ -71,11 +71,11 @@
     }
     return(list(type = "dbi", con = con, close = FALSE))
   }
-  # Explicit db_path -> the user wants a SQL (SQLite/DuckDB) file backend.
+  # Explicit db_path -> the user wants a SQL (SQLite) file backend.
   if (!is.null(db_path) && nzchar(db_path)) {
     return(.morie_sql_or_fallback(db_path))
   }
-  # Explicit backend choice via env: rds | parquet | duckdb | sqlite.
+  # Explicit backend choice via env: rds | parquet | sqlite ("duckdb", a former choice, means sqlite).
   be <- Sys.getenv("MORIE_CACHE_BACKEND", "")
   if (be == "rds") {
     return(list(type = "rds", dir = .morie_cache_fs_dir(), close = FALSE))
@@ -89,12 +89,11 @@
   # Back-compat: honour MORIE_CACHE_DB or an existing cache DB file -> SQL.
   cache_dir <- file.path(tempdir(), "morie")
   if (nzchar(Sys.getenv("MORIE_CACHE_DB", "")) ||
-    file.exists(file.path(cache_dir, "morie.duckdb")) ||
     file.exists(file.path(cache_dir, "morie.db"))) {
     return(.morie_sql_or_fallback())
   }
   # Default: zero/light-compile file backend. Parquet (cross-language) when
-  # nanoparquet is available; else base-R RDS. DuckDB/SQLite stay opt-in (see
+  # nanoparquet is available; else base-R RDS. SQLite stays opt-in (see
   # morie_db_connect); PostgreSQL etc. via `con=`.
   if (requireNamespace("nanoparquet", quietly = TRUE)) {
     return(list(type = "parquet", dir = .morie_cache_fs_dir(), close = FALSE))
@@ -106,8 +105,8 @@
 # One file per table under a session-scoped cache dir. Parquet (via nanoparquet,
 # cross-language: Python/DuckDB/Arrow/Rust can read it) is the default when
 # available; RDS (base R) is the zero-dependency fallback. This is what lets
-# morie_cache_* work on a fresh install with no DuckDB/RSQLite. For SQL /
-# out-of-core queries, install duckdb (see morie_db_connect); for the multi-user
+# morie_cache_* work on a fresh install with no RSQLite. For a SQL cache,
+# install DBI and RSQLite (see morie_db_connect); for the multi-user
 # server tier, pass a PostgreSQL `con=`.
 #' Internal helper: Morie Cache Fs Dir
 #' @noRd
@@ -300,20 +299,19 @@ morie_builtin_db <- function() {
 #' Connect to the MORIE cache database
 #'
 #' Opens (or creates) a per-user **SQL** cache database. This is the
-#' opt-in SQL backend and requires DuckDB or RSQLite to be installed.
+#' opt-in SQL backend: a SQLite file, which needs DBI and RSQLite.
 #'
 #' Note: the DEFAULT cache used by `morie_cache_store()` / `_load()` /
 #' `_list()` needs **no SQL backend at all** -- it uses a zero/light
 #' dependency file store: Parquet via \pkg{nanoparquet} (cross-language)
-#' when available, else base-R `.rds`. Install `duckdb` (or `RSQLite`),
-#' or set `MORIE_CACHE_BACKEND=duckdb`/`sqlite`, or pass `db_path=`, to
-#' use SQL instead -- DuckDB is preferred (vectorised + columnar, handles
-#' multi-GB PUMFs and out-of-core analytical queries); an existing
-#' `morie.db` / `morie.duckdb` cache is reused for back-compat. For the
-#' multi-user server tier, pass your own PostgreSQL `con=`.
+#' when available, else base-R `.rds`. Install `RSQLite`, set
+#' `MORIE_CACHE_BACKEND=sqlite`, or pass `db_path=`, to use SQL instead;
+#' an existing `morie.db` cache is reused. Older caches made with DuckDB
+#' are no longer opened (the cache fills again as `morie.db`). For
+#' the multi-user server tier, pass your own PostgreSQL `con=`.
 #'
-#' For non-default backends (PostgreSQL, MariaDB, MS SQL Server, ...),
-#' construct your own DBI connection and pass it as `con` to the
+#' For non-default backends (PostgreSQL, MariaDB, MS SQL Server, DuckDB,
+#' ...), construct your own DBI connection and pass it as `con` to the
 #' `morie_cache_*` and `morie_load_dataset` functions:
 #'
 #' \preformatted{
@@ -322,18 +320,16 @@ morie_builtin_db <- function() {
 #' morie_load_dataset("ocp21", con = con)
 #' }
 #'
-#' @param db_path Optional path to a DuckDB (\code{*.duckdb}) or SQLite
-#'   (\code{*.db}) file. Defaults to the \code{MORIE_CACHE_DB} env var,
-#'   else \code{morie.duckdb} / \code{morie.db} in the per-user cache
-#'   directory.
+#' @param db_path Optional path to a SQLite file (\code{*.db}). Defaults to
+#'   the \code{MORIE_CACHE_DB} env var, else \code{morie.db} in the
+#'   session cache directory.
 #' @return A DBI connection object.
 #' @examples
 #' \donttest{
 #' if (morie_has("sql")) withAutoprint({
-#' # DuckDB (default when 'duckdb' is installed); pass a '.db' path for SQLite.
-#' if (requireNamespace("duckdb", quietly = TRUE) &&
+#' if (requireNamespace("RSQLite", quietly = TRUE) &&
 #'   requireNamespace("DBI", quietly = TRUE)) {
-#'   tmp <- tempfile(fileext = ".duckdb")
+#'   tmp <- tempfile(fileext = ".db")
 #'   con <- morie_db_connect(db_path = tmp)
 #'   DBI::dbListTables(con)
 #'   DBI::dbDisconnect(con)
@@ -348,49 +344,25 @@ morie_db_connect <- function(db_path = NULL) {
   # caller doesn't supply a path and the MORIE_CACHE_DB env var is
   # unset, default to a session-scoped subdirectory of tempdir(). R
   # cleans this up when the session ends. Users opt in to persistent
-  # caching by passing `db_path = morie_cache_dir("morie.duckdb")`
+  # caching by passing `db_path = morie_cache_dir("morie.db")`
   # explicitly (or by setting the MORIE_CACHE_DB env var).
-  cache_dir <- file.path(tempdir(), "morie")
-  duckdb_default <- file.path(cache_dir, "morie.duckdb")
-  sqlite_default <- file.path(cache_dir, "morie.db")
-
   if (is.null(db_path)) {
     db_path <- Sys.getenv("MORIE_CACHE_DB", "")
     if (!nzchar(db_path)) {
-      # Resolution: prefer an existing morie.duckdb; else reuse an
-      # existing morie.db (back-compat with the SQLite era); else
-      # create morie.duckdb if duckdb is available, otherwise morie.db.
-      if (file.exists(duckdb_default)) {
-        db_path <- duckdb_default
-      } else if (file.exists(sqlite_default)) {
-        db_path <- sqlite_default
-      } else if (requireNamespace("duckdb", quietly = TRUE)) {
-        db_path <- duckdb_default
-      } else {
-        db_path <- sqlite_default
-      }
+      db_path <- file.path(tempdir(), "morie", "morie.db")
     }
+  }
+  # older DuckDB caches are not opened: SQLite would read them as corrupt
+  if (grepl("\\.duckdb$", db_path, ignore.case = TRUE)) {
+    stop("DuckDB cache files are no longer used; rmorie keeps its SQL cache in SQLite: ", db_path, "\n",
+      "  pass a path ending in '.db' for a SQLite cache; the cache fills again on the next load.",
+      call. = FALSE
+    )
   }
   dir.create(dirname(db_path), recursive = TRUE, showWarnings = FALSE)
-
-  # Dispatch on extension: .duckdb -> DuckDB; anything else -> SQLite.
-  is_duckdb <- grepl("\\.duckdb$", db_path, ignore.case = TRUE)
-  if (is_duckdb) {
-    if (!requireNamespace("duckdb", quietly = TRUE)) {
-      stop("DuckDB path requested but the 'duckdb' package isn't installed.\n",
-        "  install.packages('duckdb')  -- or pass db_path ending in '.db' ",
-        "for SQLite.",
-        call. = FALSE
-      )
-    }
-    # duckdb prints an 8-line note about its extension directory on first connect; a listing verb is not the place
-    return(suppressMessages(DBI::dbConnect(duckdb::duckdb(), dbdir = db_path)))
-  }
-  # SQLite fallback path.
   if (!requireNamespace("RSQLite", quietly = TRUE)) {
     stop("SQLite path requested but the 'RSQLite' package isn't installed.\n",
-      "  install.packages('RSQLite')  -- or install 'duckdb' and pass a ",
-      "'.duckdb' path.",
+      "  install.packages('RSQLite')",
       call. = FALSE
     )
   }
@@ -612,7 +584,7 @@ morie_cache_file <- function(path, table_name, db_path = NULL, con = NULL) {
 #'   \item CKAN API fetch (requires internet)
 #' }
 #'
-#' @param db_path Optional path to a SQLite/DuckDB file (default backend).
+#' @param db_path Optional path to a SQLite file (default backend).
 #' @param use_ckan Logical; if TRUE and data not found locally or in cache,
 #'   attempt to fetch from the CKAN API.
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
@@ -650,7 +622,7 @@ morie_load_cpads <- function(db_path = NULL, use_ckan = TRUE, con = NULL) {
     }
   }
 
-  # 2. DBI cache (DuckDB by default; SQLite if older cache exists).
+  # 2. DBI cache (SQLite).
   cached <- morie_cache_load("cpads_canonical", db_path = db_path, con = con)
   if (!is.null(cached)) {
     message("Loading CPADS from cache (", nrow(cached), " rows)")
@@ -891,7 +863,7 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' resolves to \code{ocp21}.
 #'
 #' @param key Dataset catalog key (or fuzzy match).
-#' @param db_path Optional path to a SQLite/DuckDB file (default backend).
+#' @param db_path Optional path to a SQLite file (default backend).
 #' @param refresh If \code{TRUE}, bypass the built-in database and the
 #'   user cache (and, for remotely-backed datasets, the local file) and
 #'   re-fetch from the remote source, overwriting the cached copy. Use
@@ -995,7 +967,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       }
     }
 
-    # 2. User cache (DuckDB by default; SQLite if older cache exists).
+    # 2. User cache (SQLite).
     cached <- morie_cache_load(entry$table_name, db_path = db_path, con = con)
     if (!is.null(cached)) {
       message("Loaded ", matched, " from cache (", nrow(cached), " rows)")
@@ -1166,7 +1138,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
 
 #' List all datasets with cache status
 #'
-#' @param db_path Optional path to a SQLite/DuckDB file (default backend).
+#' @param db_path Optional path to a SQLite file (default backend).
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame with columns: key, name, source, survey, year, type,
 #'   cached (logical), rows (integer or NA).
@@ -1258,7 +1230,7 @@ morie_userguide <- function(name = NULL) {
 #'   \code{"csads_2023"}, \code{"csus_2019"}, \code{"csus_2023"}), or
 #'   \code{"all"} (default).
 #' @param limit Max records per CKAN request (default 32000).
-#' @param db_path Optional path to a SQLite/DuckDB file (default backend).
+#' @param db_path Optional path to a SQLite file (default backend).
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @param refresh Download again even when the table is already cached (default
 #'   \code{FALSE}: a cached table is reported and kept).

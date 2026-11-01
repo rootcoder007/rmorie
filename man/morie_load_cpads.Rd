@@ -7,7 +7,7 @@
 morie_load_cpads(db_path = NULL, use_ckan = TRUE, con = NULL)
 }
 \arguments{
-\item{db_path}{Optional path to a SQLite/DuckDB file (default backend).}
+\item{db_path}{Optional path to a SQLite file (default backend).}
 
 \item{use_ckan}{Logical; if TRUE and data not found locally or in cache,
 attempt to fetch from the CKAN API.}

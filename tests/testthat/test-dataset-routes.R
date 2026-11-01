@@ -14,7 +14,7 @@ test_that("the Health Infobase keys carry a portal URL or a hosted copy, the OTI
 
 test_that("a hosted copy is used when the portal fails, and a login is asked for when no key is stored", {
   tmp <- withr::local_tempdir()
-  db <- file.path(tmp, "c.duckdb")
+  db <- file.path(tmp, "c.db")
   testthat::local_mocked_bindings(
     morie_fetch = function(url, ...) stop("portal down"),
     .morie_llm_hosted_key = function() NULL
@@ -43,10 +43,10 @@ test_that("an R object at data.rmorie.com is fetched into the data directory and
     },
     .morie_llm_hosted_key = function() "sk-test"
   )
-  got <- morie_load_dataset("otisexp", db_path = file.path(tmp, "c.duckdb"))
+  got <- morie_load_dataset("otisexp", db_path = file.path(tmp, "c.db"))
   expect_equal(got, obj)
   expect_true(file.exists(file.path(tmp, "data/cache/dt_expanded.rds")))
   # second call reads the saved file without a fetch
   testthat::local_mocked_bindings(.morie_data_get = function(...) stop("must not fetch twice"))
-  expect_equal(morie_load_dataset("otisexp", db_path = file.path(tmp, "c.duckdb")), obj)
+  expect_equal(morie_load_dataset("otisexp", db_path = file.path(tmp, "c.db")), obj)
 })

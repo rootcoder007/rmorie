@@ -33,10 +33,6 @@ test_that("morie_builtin_db returns a path or NULL", {
 test_that("morie_db_connect returns a DBI connection on a temp path", {
   skip_if_not_installed("DBI")
   skip_if_not_installed("RSQLite")
-  skip_if_not_installed("duckdb")
-  skip_if_not(requireNamespace("RSQLite", quietly = TRUE) ||
-                requireNamespace("duckdb", quietly = TRUE),
-              "no SQLite/duckdb backend installed")
   tmp <- tempfile(fileext = ".db")
   on.exit({ if (file.exists(tmp)) unlink(tmp) }, add = TRUE)
   con <- tryCatch(morie_db_connect(db_path = tmp), error = function(e) e)

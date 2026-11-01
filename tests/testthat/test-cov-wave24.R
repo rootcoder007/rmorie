@@ -114,7 +114,6 @@ test_that("morie_userguide accepts a name argument", {
 
 test_that("morie_load_cpads reaches the CKAN branch when local+cache miss", {
   testthat::skip_if_not_installed("RSQLite")
-  testthat::skip_if_not_installed("duckdb")
   testthat::local_mocked_bindings(
     morie_fetch_ckan = function(...) data.frame(seqid = 1:5),
     .package = "rmorie"
