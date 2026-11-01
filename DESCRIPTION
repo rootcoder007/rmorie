@@ -269,6 +269,6 @@ Additional_repositories:
   https://stan-dev.r-universe.dev,
   https://rootcoder007.r-universe.dev
 Remotes:
-  rmoriebricklayer=rootcoder007/rmorie-bricklayer@v1.0.2,
+  rmoriebricklayer=rootcoder007/rmorie-bricklayer@v1.1.0,
   rootcoder007/rmoriedata
 Config/roxygen2/version: 8.1.1
