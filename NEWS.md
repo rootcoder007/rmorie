@@ -1,3 +1,10 @@
+# rmorie 1.5.3 - 2026-11-01
+
+* The SQL cache is SQLite only: rmorie no longer uses 'duckdb' (removed from Suggests). 'duckdb' 2.0.0 has no CRAN binary for Intel Macs, so every check there compiled it from source for over an hour. The default cache (Parquet or .rds files) is unchanged; `morie_db_connect()` and `db_path =` open a SQLite file, and a `.duckdb` path left by an older version is named in an error instead of being opened (the cache fills again as `morie.db`). A DuckDB connection you open yourself can still be passed as `con =`.
+* The README installs the apt and dnf packages from https://apt.rmorie.com/ (the old
+  rootcoder007.github.io/apt-morie address still works).
+* Version kept in step with morie 1.5.3.
+
 # rmorie 1.5.2 - 2026-10-30
 
 * The CKAN datastore readers (`morie_datasets_cpads(mode = "datastore_search")`,
@@ -7,7 +14,6 @@
   on open.canada.ca since late 2026, 32,000 on Toronto's and Montreal's), so a larger `limit`
   came back cut to the first page. They now read on with `offset` to `limit` rows or the total
   the datastore reports.
-* The SQL cache is SQLite only: rmorie no longer uses 'duckdb' (removed from Suggests). 'duckdb' 2.0.0 has no CRAN binary for Intel Macs, so every check there compiled it from source for over an hour. The default cache (Parquet or .rds files) is unchanged; `morie_db_connect()` and `db_path =` open a SQLite file, and a `.duckdb` path left by an older version is named in an error instead of being opened (the cache fills again as `morie.db`). A DuckDB connection you open yourself can still be passed as `con =`.
 * Version kept in step with morie 1.5.2, which fixes the `morie` command in the
   .deb and .rpm packages.
 

@@ -8,8 +8,8 @@ authors:
     affiliation: "Centre for Criminology and Sociolegal Studies, University of Toronto"
     name-particle: "Singh"
     # IPA: /ʋənʃ sɪŋ ɾʊˈɦeːlɑː/
-version: "1.5.2"
-date-released: "2026-10-30"
+version: "1.5.3"
+date-released: "2026-11-01"
 url: "https://rootcoder007.r-universe.dev/rmorie"
 repository-code: "https://github.com/rootcoder007/rmorie"
 license: "AGPL-3.0-or-later"

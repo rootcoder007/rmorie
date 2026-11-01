@@ -294,7 +294,7 @@ in*), and falls back to a keyword answer that needs no network.
 ### Linux — apt / dnf
 
 Debian, Ubuntu and Fedora can install rmorie and its companions (each installs from r-universe and compiles on your machine) from the signed
-[apt-morie](https://github.com/rootcoder007/apt-morie) repository, which also
+[apt.rmorie.com](https://apt.rmorie.com/) repository, which also
 covers dnf4, RHEL and yum:
 
 ```bash
@@ -577,7 +577,7 @@ CodeQL.
 
 If you use rmorie in your research, please cite the software:
 
-> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* R package version 1.5.2. https://rootcoder007.r-universe.dev/rmorie
+> Ruhela, V. S. (2026). *rmorie: Multi-domain Open Research and Inferential Estimation in R.* R package version 1.5.3. https://rootcoder007.r-universe.dev/rmorie
 
 BibTeX (or run `citation("rmorie")` after installation for the entry
 stamped with the exact installed version, sourced from `inst/CITATION`):
