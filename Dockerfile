@@ -16,7 +16,7 @@
 # the image is reproducible across rebuilds.
 
 # ---- Stage 1: builder ----
-FROM rocker/r-ver:4.6.1 AS builder
+FROM rocker/r-ver:4.6.2 AS builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
@@ -79,7 +79,7 @@ RUN R CMD INSTALL --no-test-load --no-help --no-html .
 RUN R -e 'library(rmorie); stopifnot(is.function(morie_tox_calibration))' >/dev/null
 
 # ---- Stage 2: runtime ----
-FROM rocker/r-ver:4.6.1 AS runtime
+FROM rocker/r-ver:4.6.2 AS runtime
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
