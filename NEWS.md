@@ -1,3 +1,8 @@
+# rmorie 1.5.4 - 2026-11-11
+
+* The curated tables at data.rmorie.com need no sign-in: `morie_load_hosted_dataset()`, `morie_hosted_datasets()` and `rmorie pull` work without a key, and a key stored earlier is still sent. ICPSR studies are no longer served there (ICPSR's terms do not allow redistribution); asking for one says where to get it.
+* Version kept in step with morie 1.5.4.
+
 # rmorie 1.5.3 - 2026-11-01
 
 * The SQL cache is SQLite only: rmorie no longer uses 'duckdb' (removed from Suggests). 'duckdb' 2.0.0 has no CRAN binary for Intel Macs, so every check there compiled it from source for over an hour. The default cache (Parquet or .rds files) is unchanged; `morie_db_connect()` and `db_path =` open a SQLite file, and a `.duckdb` path left by an older version is named in an error instead of being opened (the cache fills again as `morie.db`). A DuckDB connection you open yourself can still be passed as `con =`.

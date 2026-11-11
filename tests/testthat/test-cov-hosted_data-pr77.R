@@ -148,3 +148,30 @@ test_that("a refused download names a restricted table's terms, a rejected key, 
   expect_identical(get_("/files/x.rds", dest, size = 5), dest)
   expect_identical(seen[[5]]$size, 5)
 })
+
+test_that("no key is needed: none is sent, a 401 asks for one only from an old service, a 410 names ICPSR", {
+  .hd_sandbox()
+  withr::local_envvar(MORIE_HOSTED_KEY = NA)
+  testthat::local_mocked_bindings(.morie_llm_hosted_key = function() NULL, .package = "rmorie")
+  get_ <- .hd(".morie_data_get")
+  testthat::local_mocked_bindings(svcs = function(offline = TRUE) NULL, .package = "rmoriebricklayer")
+  .hd_write_cache(list(datasets = list(list(key = "db1/t1", bytes_gz = 10L))))
+  hdrs <- NULL
+  fail <- NULL
+  testthat::local_mocked_bindings(
+    .morie_dl = function(url, dest, headers = NULL, label = basename(dest), size = NULL, timeout = 3600, ...) {
+      hdrs <<- headers
+      if (is.null(fail)) return(invisible(dest))
+      stop(fail)
+    }, .package = "rmorie")
+  dest <- withr::local_tempfile()
+  expect_identical(get_("/db1/t1.csv.gz", dest), dest)
+  expect_false("Authorization" %in% names(hdrs))
+  expect_match(hdrs[["User-Agent"]], "^rmorie/1 ")
+  fail <- "HTTP 401 Unauthorized"
+  expect_error(get_("/db1/t1.csv.gz", dest),
+               "data.rmorie.com asked for a key for db1/t1: run `rmorie login` once, or update the package.",
+               fixed = TRUE)
+  fail <- "HTTP 410 Gone"
+  expect_error(get_("/icpsr_9/t.csv.gz", dest), "icpsr_9/t is not served by data.rmorie.com", fixed = TRUE)
+})

@@ -328,7 +328,8 @@ test_that("selftest runs every subsystem", {
 test_that("data.rmorie.com tables: key handling, manifest cache, download cached in the store, pull", {
   withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir(), MORIE_HOSTED_KEY = NA,
                       R_USER_CACHE_DIR = withr::local_tempdir(), MORIE_DATA_URL = "https://data.example.test")
-  expect_error(morie_hosted_manifest(), "rmorie login")
+  # no key: nothing is refused locally, the request goes out (to a .test name that never resolves)
+  expect_error(morie_hosted_manifest(), "data.example.test")
   withr::local_envvar(MORIE_HOSTED_KEY = "sk-good")
   calls <- character()
   # the table as served, and its digest in the manifest (a download is used only when it matches)
