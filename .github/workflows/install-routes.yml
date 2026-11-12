@@ -91,6 +91,6 @@ jobs:
           v <- vapply(c("rmoriebricklayer", "rmoriedata", "rmorie"),
                       function(p) as.character(utils::packageVersion(p)), "")
           print(v)
-          stopifnot(utils::packageVersion("rmoriebricklayer") >= "0.5.10",
+          stopifnot(utils::packageVersion("rmoriebricklayer") >= "1.1.1",
                     utils::packageVersion("rmoriedata") >= "0.3.5")
           library(rmorie)

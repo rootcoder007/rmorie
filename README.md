@@ -228,7 +228,7 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
 ## Install
 
 From r-universe (prebuilt binaries for macOS and Windows, a source build on
-Linux). Its companions, rmoriebricklayer >= 1.0.0 and rmoriedata >= 0.4.0,
+Linux). Its companions, rmoriebricklayer >= 1.1.1 and rmoriedata >= 0.4.0,
 come from r-universe too: CRAN carries older versions. Naming them replaces an
 older copy already installed.
 
