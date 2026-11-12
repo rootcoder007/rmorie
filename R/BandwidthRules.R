@@ -17,7 +17,7 @@
   h <- (length(xs) - 1) * p
   lo <- floor(h)
   hi <- min(lo + 1, length(xs) - 1)
-  xs[lo + 1] + (h - lo) * (xs[hi + 1] - xs[lo + 1])
+  .morie_lerp7(xs[lo + 1], xs[hi + 1], h - lo)
 }
 
 .bwr_moments <- function(x) {

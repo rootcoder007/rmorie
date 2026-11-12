@@ -128,7 +128,7 @@
   hi <- max(1, min(n, ceiling(h) + 1L))
   if (lo == hi) return(x[lo])
   frac <- h - floor(h)
-  x[lo] + frac * (x[hi] - x[lo])
+  .morie_lerp7(x[lo], x[hi], frac)
 }
 
 #' .mfovsm_logreg_fit

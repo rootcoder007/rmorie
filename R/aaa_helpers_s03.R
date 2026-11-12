@@ -557,6 +557,26 @@
   constant * .s03median(abs(v - m))
 }
 
+# The interpolation step of a type-7 quantile, as R's quantile(type = 7) takes it:
+# a + g * (b - a) for the order statistics a <= b at weight g on b, except the lower
+# value alone when g is 0 and the weighted mean when b - a is not finite (an infinite
+# value, or two finite ones whose difference overflows), where the plain form gave
+# NaN (0 * Inf, Inf - Inf) or an infinity. Finite results are the plain form's, bit
+# for bit. The rule rmoriebricklayer 1.1.1 adopted for quantile7_sorted().
+.morie_lerp7 <- function(a, b, g) {
+  out <- a + g * (b - a)
+  n <- length(out)
+  a <- rep_len(a, n)
+  b <- rep_len(b, n)
+  g <- rep_len(g, n)
+  w <- (1 - g) * a + g * b
+  fix <- !is.finite(b - a) & !is.na(w)
+  out[fix] <- w[fix]
+  z <- !is.na(g) & g == 0
+  out[z] <- a[z]
+  out
+}
+
 # Type-7 quantile, the default of R's quantile().
 #' Type-7 quantile, the default of R's quantile()
 #'
@@ -585,7 +605,7 @@
   h <- (n - 1) * p
   lo <- floor(h)
   hi <- if (lo + 1 < n) lo + 1 else n - 1
-  s[lo + 1L] + (h - lo) * (s[hi + 1L] - s[lo + 1L])
+  .morie_lerp7(s[lo + 1L], s[hi + 1L], h - lo)
 }
 
 #' .s03rank

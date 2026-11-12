@@ -56,7 +56,7 @@
   h <- (n - 1) * q
   lo <- floor(h)
   hi <- min(lo + 1, n - 1)
-  sorted_x[lo + 1] + (h - lo) * (sorted_x[hi + 1] - sorted_x[lo + 1])
+  .morie_lerp7(sorted_x[lo + 1], sorted_x[hi + 1], h - lo)
 }
 
 #' .alternating_masks

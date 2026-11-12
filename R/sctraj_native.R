@@ -648,7 +648,7 @@ morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
     pos <- f * (n - 1)
     lo <- floor(pos)
     hi <- min(lo + 1, n - 1)
-    v[lo + 1L] + (pos - lo) * (v[hi + 1L] - v[lo + 1L])
+    .morie_lerp7(v[lo + 1L], v[hi + 1L], pos - lo)
   }
   q1 <- qf(0.25)
   q3 <- qf(0.75)

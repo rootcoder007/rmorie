@@ -62,7 +62,7 @@ cumulative_episodes <- function(histories, states = .STATES) {
   lo <- floor(h)
   hi <- ceiling(h)
   if (lo == hi) return(x[lo + 1L])
-  x[lo + 1L] + (h - lo) * (x[hi + 1L] - x[lo + 1L])
+  .morie_lerp7(x[lo + 1L], x[hi + 1L], h - lo)
 }
 
 #' treatment_weights

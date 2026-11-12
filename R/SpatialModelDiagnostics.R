@@ -183,7 +183,7 @@
   h <- (length(s) - 1) * q
   lo <- floor(h)
   hi <- min(lo + 1, length(s) - 1)
-  s[lo + 1] + (h - lo) * (s[hi + 1] - s[lo + 1])
+  .morie_lerp7(s[lo + 1], s[hi + 1], h - lo)
 }
 
 .sxd_boot <- function(y, X, W, model, B, seed, level, interval = c(-0.999, 0.999)) {

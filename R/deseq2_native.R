@@ -487,7 +487,7 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
   pos <- pr * (length(s) - 1L)
   lo <- floor(pos)
   hi <- min(lo + 1L, length(s) - 1L)
-  s[lo + 1L] + (pos - lo) * (s[hi + 1L] - s[lo + 1L])
+  .morie_lerp7(s[lo + 1L], s[hi + 1L], pos - lo)
 }
 
 #' DESeq2-style differential expression

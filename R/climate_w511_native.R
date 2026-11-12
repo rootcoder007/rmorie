@@ -96,6 +96,7 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
   j <- floor(h)
   if (j >= n - 1L) return(sx[n])
   g <- h - j
+  if (g == 0) return(sx[j + 1L])  # as quantile(type = 7): no NaN beside an infinite value
   sx[j + 1L] * (1 - g) + sx[j + 2L] * g
 }
 

@@ -59,6 +59,7 @@
   j <- as.integer(h)
   if (j >= n - 1L) return(sorted_x[n])
   g <- h - j
+  if (g == 0) return(sorted_x[j + 1L])  # as quantile(type = 7): no NaN beside an infinite value
   sorted_x[j + 1L] * (1 - g) + sorted_x[j + 2L] * g
 }
 

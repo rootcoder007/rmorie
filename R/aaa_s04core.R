@@ -105,7 +105,7 @@ NULL
   h <- (n - 1) * p
   lo <- floor(h)
   hi <- min(lo + 1, n - 1)
-  x[lo + 1L] + (h - lo) * (x[hi + 1L] - x[lo + 1L])
+  .morie_lerp7(x[lo + 1L], x[hi + 1L], h - lo)
 }
 
 ## 0-based order, ties by original position -- matches the Python arm.

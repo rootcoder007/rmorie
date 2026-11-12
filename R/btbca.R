@@ -82,5 +82,5 @@ Btbca <- function(theta_hat, theta_b, x, stat, alpha = 0.05) {
   if (r >= R) return(sv[R])
   lo <- floor(r)
   fr <- r - lo
-  sv[lo] + fr * (sv[lo + 1L] - sv[lo])
+  .morie_lerp7(sv[lo], sv[lo + 1L], fr)
 }

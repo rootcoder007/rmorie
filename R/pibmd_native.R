@@ -66,7 +66,7 @@
   h <- (n - 1L) * u
   lo <- floor(h)
   hi <- min(lo + 1, n - 1)
-  sorted_v[lo + 1L] + (h - lo) * (sorted_v[hi + 1L] - sorted_v[lo + 1L])
+  .morie_lerp7(sorted_v[lo + 1L], sorted_v[hi + 1L], h - lo)
 }
 
 # Silverman's rule of thumb, robustified by the interquartile range.

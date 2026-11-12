@@ -2770,7 +2770,7 @@ Wstnbrg <- function(x, y) {
     h <- (n - 1) * p
     lo <- floor(h)
     hi <- min(lo + 1, n - 1)
-    ys[lo + 1] + (h - lo) * (ys[hi + 1] - ys[lo + 1])
+    .morie_lerp7(ys[lo + 1], ys[hi + 1], h - lo)
   }
   q1 <- qf(0.25)
   q3 <- qf(0.75)
