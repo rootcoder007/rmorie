@@ -99,17 +99,19 @@
     host <- sub("^https?://([^/]+).*$", "\\1", e$download_url)
     return(paste0(host, if (has("hosted_key")) " (or data.rmorie.com)" else ""))
   }
-  if (has("hosted_key")) return("data.rmorie.com (your MORIE key)")
+  if (has("hosted_key")) return("data.rmorie.com (no sign-in)")
   if (has("hosted_file")) return("data.rmorie.com file (an R object: rmorie loads it, morie saves it)")
   if (has("ckan_resource_id")) return(if (identical(e$source, "otis")) "data.ontario.ca" else "open.canada.ca")
   paste0("own file: ", .morie_own_file_target(e$local_path))
 }
 
 .cli_list_datasets <- function(out) {
+  # the curated tables need no key: fetch their list (cached a day) so morie_list_datasets() has it
+  tryCatch(morie_hosted_manifest(), error = function(e) NULL)
   d <- morie_list_datasets()
   cat_df <- morie_dataset_catalog()
   route <- vapply(seq_len(nrow(d)), function(i) {
-    if (identical(d$type[i], "hosted")) return("data.rmorie.com (your MORIE key)")
+    if (identical(d$type[i], "hosted")) return("data.rmorie.com (no sign-in)")
     .cli_dataset_route(cat_df[cat_df$key == d$key[i], , drop = FALSE][1L, ])
   }, character(1L))
   shown <- ifelse(d$cached & !is.na(d$rows), format(d$rows, big.mark = ",", trim = TRUE), "not cached")
@@ -130,9 +132,9 @@
   out(sprintf("%d keys: %d download from their portal, rmoriedata or data.rmorie.com on first use; %d %s your own research file%s, placed at the path%s shown (MORIE_DATA_DIR moves the data directory).\n",
               n_cat, n_cat - n_own, n_own, if (n_own == 1L) "is" else "are", if (n_own == 1L) "" else "s", if (n_own == 1L) "" else "s"))
   if (n_hub) {
-    out(sprintf("%d curated tables at data.rmorie.com (db/table keys), opened by your MORIE key: rmorie pull KEY\n", n_hub))
+    out(sprintf("%d curated tables at data.rmorie.com (db/table keys), no sign-in needed: rmorie pull KEY\n", n_hub))
   } else {
-    out(paste0("Curated tables at data.rmorie.com appear here after `rmorie login` (GitHub) or `rmorie login --email you@example.com` (they need the MORIE key)", .morie_httr2_note(), ".\n"))
+    out(paste0("Curated tables at data.rmorie.com (no sign-in needed) appear here once their list is fetched; it could not be reached just now", .morie_httr2_note(), ".\n"))
   }
   0L
 }
@@ -559,7 +561,7 @@
          c("list-datasets")),
     list("What to do next",
          paste0("  Run any module:        rmorie run-module NAME\n  Pull a dataset:        rmorie pull KEY\n",
-                "  Ask for help:          rmorie ask \"...\"   (rmorie login, GitHub or --email, first)\n",
+                "  Ask for help:          rmorie ask \"...\"   (rmorie config setup, first: bring a model)\n",
                 "  One-page reference:    rmorie cheatsheet\n  Issues:                https://github.com/rootcoder007/rmorie/issues\n\nWelcome aboard."),
          NULL))
   for (i in seq_along(steps)) {

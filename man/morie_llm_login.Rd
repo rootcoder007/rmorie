@@ -2,7 +2,7 @@
 % Please edit documentation in R/llm.R
 \name{morie_llm_login}
 \alias{morie_llm_login}
-\title{Sign in for the curated tables at data.rmorie.com}
+\title{Store a data key for data.rmorie.com}
 \usage{
 morie_llm_login(
   open_browser = interactive(),
@@ -33,8 +33,9 @@ and who is asking, which a new key needs (\code{accept_terms}, \code{name},
 The key, invisibly.
 }
 \description{
-Stores your MORIE data key, the key that opens the curated tables at
-data.rmorie.com (\code{\link{morie_load_hosted_dataset}}). It is never a language
+Stores your MORIE data key for data.rmorie.com. The curated tables
+(\code{\link{morie_load_hosted_dataset}}) open without one; a stored key is
+still sent with each download. It is never a language
 model: those you bring yourself (\code{\link{morie_llm_config}}). With
 \code{token} the key you already hold is checked with the data service and
 stored; with \code{email} a one-time code is sent there; otherwise the GitHub

@@ -1,8 +1,9 @@
-# Curated datasets at data.rmorie.com, opened by the MORIE key.
+# Curated datasets at data.rmorie.com, with no sign-in.
 #
 # The project materialises public BigQuery datasets and serves their tables
 # as CSV from the edge (R2 behind a Worker), reachable whenever the internet
-# is, with the data key morie_llm_login() stores. /manifest.json lists every table
+# is. No key is needed; a key morie_llm_login() stored earlier is still sent, to the
+# services document's address only. /manifest.json lists every table
 # with rows, columns, size, SHA-256 and the BigQuery source; /<db>/<table>.csv.gz
 # is the table. Downloads are cached in the dataset store. Mirrors
 # morie.datahub (Python).
@@ -10,21 +11,40 @@
 .morie_data_url <- function() {
   env <- sub("/+$", "", trimws(Sys.getenv("MORIE_DATA_URL", unset = "")))
   if (nzchar(env)) return(env)
+  .morie_data_doc_url()
+}
+
+# The data service the signed services document names (the default when bricklayer cannot read it).
+.morie_data_doc_url <- function() {
   # the signed services document (through rmoriebricklayer) names the data service;
   # a bricklayer too old to read it leaves the default
   svc <- NULL
   if (requireNamespace("rmoriebricklayer", quietly = TRUE)) {
     ns <- asNamespace("rmoriebricklayer")
     if (exists("svcs", envir = ns, inherits = FALSE)) {
-      svc <- tryCatch(get("svcs", envir = ns)(offline = TRUE)$data, error = function(e) NULL)
+      svc <- tryCatch(get("svcs", envir = ns)(offline = TRUE)[["data"]], error = function(e) NULL)
     }
   }
   if (is.null(svc)) return("https://data.rmorie.com")
-  if (!identical(svc$mode, "key") || !nzchar(svc$base_url %||% "")) {
+  if (!identical(svc[["mode"]], "key") || !nzchar(svc[["base_url"]] %||% "")) {
     stop("the curated-data service is not available right now (see ",
-         svc$request_access %||% "https://rmorie.com/access", ")", call. = FALSE)
+         svc[["request_access"]] %||% "https://rmorie.com/access", ")", call. = FALSE)
   }
-  svc$base_url
+  svc[["base_url"]]
+}
+
+# The stored key, or NULL: sent only to the address of the signed services document, as
+# rmoriebricklayer's dload() does; a key issued by data.rmorie.com does not follow
+# MORIE_DATA_URL to another host.
+.morie_data_key <- function() {
+  key <- .morie_llm_hosted_key()
+  env <- sub("/+$", "", trimws(Sys.getenv("MORIE_DATA_URL", unset = "")))
+  if (is.null(key) || !nzchar(env)) return(key)
+  doc <- tryCatch(sub("/+$", "", .morie_data_doc_url()), error = function(e) "")
+  if (nzchar(doc) && identical(env, doc)) return(key)
+  message("MORIE_DATA_URL=", env, " is not the curated-data address of the services document; ",
+          "the stored key is not sent to it")
+  NULL
 }
 
 # The tables whose source licence asks more than attribution (ICPSR studies, the NCVS 38604
@@ -37,9 +57,9 @@
 .morie_data_check_sha <- function(key, path) {
   digest <- function(refresh) {
     m <- morie_hosted_manifest(refresh = refresh)
-    for (d in m$datasets %||% list()) {
-      if (identical(d$key, key)) {
-        s <- d$sha256
+    for (d in m[["datasets"]] %||% list()) {
+      if (identical(d[["key"]], key)) {
+        s <- d[["sha256"]]
         return(if (is.character(s) && length(s) == 1L && nzchar(s)) tolower(s) else NA_character_)
       }
     }
@@ -74,15 +94,15 @@
 #' Internal helper: GET a path from data.rmorie.com (no sign-in; a stored key is still sent)
 #' @noRd
 .morie_data_get <- function(path, dest, timeout = 600, size = NULL) {
-  key <- .morie_llm_hosted_key()
+  key <- .morie_data_key()
   label <- sub("^/", "", path)
   if (is.null(size) && grepl("\\.csv\\.gz$", path)) {
     # the manifest knows the compressed size: a percent bar instead of a spinner
     label <- sub("\\.csv\\.gz$", "", label)
     m <- tryCatch(morie_hosted_manifest(), error = function(e) NULL)
-    for (d in m$datasets %||% list()) {
-      if (identical(d$key, label)) {
-        size <- d$bytes_gz
+    for (d in m[["datasets"]] %||% list()) {
+      if (identical(d[["key"]], label)) {
+        size <- d[["bytes_gz"]]
         break
       }
     }
@@ -137,7 +157,7 @@
 #'   \code{morie_load_hosted_dataset()}: the table as a data frame.
 #' @examples
 #' \donttest{
-#' # with a stored MORIE key (rmorie login); without one this stops with that advice
+#' # needs the network; no sign-in
 #' try({
 #'   head(morie_hosted_datasets())
 #'   df <- morie_load_hosted_dataset("fec_cm_2020/fec_cm_2020")
@@ -172,17 +192,17 @@ morie_hosted_datasets <- function(refresh = FALSE) {
 }
 
 .morie_data_entries <- function(m) {
-  ds <- if (is.null(m)) list() else m$datasets
+  ds <- if (is.null(m)) list() else m[["datasets"]]
   if (!length(ds)) {
     return(data.frame(key = character(), name = character(), rows = integer(), source = character(),
                       table_name = character(), stringsAsFactors = FALSE))
   }
   data.frame(
-    key = vapply(ds, function(d) d$key, ""),
-    name = vapply(ds, function(d) (d$meta$description %||% d$source %||% d$key)[[1L]], ""),
-    rows = vapply(ds, function(d) as.integer(d$rows %||% NA), 1L),
-    source = vapply(ds, function(d) (d$source %||% "")[[1L]], ""),
-    table_name = vapply(ds, function(d) .morie_data_table_name(d$key), ""),
+    key = vapply(ds, function(d) d[["key"]], ""),
+    name = vapply(ds, function(d) (d[["meta"]][["description"]] %||% d[["source"]] %||% d[["key"]])[[1L]], ""),
+    rows = vapply(ds, function(d) as.integer(d[["rows"]] %||% NA), 1L),
+    source = vapply(ds, function(d) (d[["source"]] %||% "")[[1L]], ""),
+    table_name = vapply(ds, function(d) .morie_data_table_name(d[["key"]]), ""),
     stringsAsFactors = FALSE)
 }
 

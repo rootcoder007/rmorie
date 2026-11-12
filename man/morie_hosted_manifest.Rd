@@ -40,7 +40,7 @@ and \code{rmorie pull} accept the same \code{db/table} keys.
 }
 \examples{
 \donttest{
-# with a stored MORIE key (rmorie login); without one this stops with that advice
+# needs the network; no sign-in
 try({
   head(morie_hosted_datasets())
   df <- morie_load_hosted_dataset("fec_cm_2020/fec_cm_2020")

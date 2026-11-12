@@ -139,15 +139,17 @@ test_that(".cli_analyze_all_failed reads lists, status fields and non-list entri
 test_that("list-datasets routes hosted tables to data.rmorie.com and says how to reach them", {
   base <- data.frame(key = "ocp21", type = "catalog", cached = FALSE, rows = NA_integer_, stringsAsFactors = FALSE)
   hub <- data.frame(key = "hib/demo", type = "hosted", cached = FALSE, rows = NA_integer_, stringsAsFactors = FALSE)
-  testthat::local_mocked_bindings(morie_list_datasets = function(...) rbind(base, hub))
+  # the verb fetches the list of curated tables first; no network here
+  testthat::local_mocked_bindings(morie_list_datasets = function(...) rbind(base, hub),
+                                  morie_hosted_manifest = function(...) list())
   o <- .pc_out()
   expect_equal(.cli_list_datasets(o$out), 0L)
-  expect_match(o$text(), "data.rmorie.com (your MORIE key)", fixed = TRUE)
+  expect_match(o$text(), "data.rmorie.com (no sign-in)", fixed = TRUE)
   expect_match(o$text(), "1 curated tables at data.rmorie.com")
   testthat::local_mocked_bindings(morie_list_datasets = function(...) base)
   o2 <- .pc_out()
   .cli_list_datasets(o2$out)
-  expect_match(o2$text(), "appear here after `rmorie login`", fixed = TRUE)
+  expect_match(o2$text(), "no sign-in needed) appear here once their list is fetched", fixed = TRUE)
 })
 
 test_that("inspect and sample print usage, and inspect names an unknown module", {

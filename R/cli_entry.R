@@ -9,9 +9,9 @@
 #'
 #' Dispatches the verbs of the \code{rmorie} launcher. Verbs:
 #' \describe{
-#'   \item{\code{login [--email ADDRESS] [--code CODE] [--no-browser]}}{sign in for
-#'     the curated tables at data.rmorie.com with GitHub (device flow) or an
-#'     emailed code: the data key, never a language model}
+#'   \item{\code{login [--email ADDRESS] [--code CODE] [--no-browser]}}{store a data
+#'     key for data.rmorie.com, from GitHub (device flow) or an emailed code: optional,
+#'     since the curated tables open without sign-in; never a language model}
 #'   \item{\code{login --token [KEY]}}{store a data key you already have (prompts
 #'     for it when KEY is omitted)}
 #'   \item{\code{logout}}{forget the data key}
@@ -281,7 +281,8 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  rmorie list-datasets\n",
         "  rmorie pull ocp21 --out cpads.csv            # the real CPADS PUMF; cached, then the modules use it\n",
         "  rmorie pull --all --out datasets/            # every dataset the catalog knows\n",
-        "  rmorie pull chicago_crime/incidents          # curated tables at data.rmorie.com (after rmorie login, GitHub or --email)\n\n",
+        "  rmorie pull chicago_crime/incidents          # curated tables at data.rmorie.com (no sign-in)\n",
+        "  rmorie login                                 # optional: store a data key (the tables need none)\n\n",
         "ASK A MODEL\n",
         "  rmorie config setup                          # bring your own model: a provider key, Ollama, or your server\n",
         "  rmorie models                                # what the route offers, the one in use marked *\n",
@@ -351,7 +352,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
   topic <- if (length(rest) && !startsWith(rest[[1L]], "-")) tolower(rest[[1L]]) else ""
   verbs <- paste0(
         "usage: rmorie <verb> [options]\n\n",
-        "  login [--email ADDRESS] [--code CODE] [--no-browser]   sign in for the curated tables (the data key);\n",
+        "  login [--email ADDRESS] [--code CODE] [--no-browser]   store a data key (optional: the tables need none);\n",
         "        asks you to accept the terms, then your name and reason (or --accept-terms --name --reason)\n",
         "  login --token [KEY]                                    store a data key you already have\n",
         "  logout                                                 forget the data key\n",
@@ -416,7 +417,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
     "4. Make a choice stick:\n",
     "     rmorie config set route anthropic\n",
     "     rmorie config set anthropic.model NAME\n",
-    "   The curated tables at data.rmorie.com need a data key: rmorie login (GitHub, or --email ADDRESS)\n",
+    "   The curated tables at data.rmorie.com need no sign-in: rmorie list-datasets, rmorie pull db/table\n",
     "5. Run an analysis (no model needed):\n",
     "     rmorie list-modules\n",
     "     rmorie run-module power-design --output-dir out/\n",

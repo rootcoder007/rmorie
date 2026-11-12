@@ -17,9 +17,9 @@ The exit status, invisibly (0 on success).
 \description{
 Dispatches the verbs of the \code{rmorie} launcher. Verbs:
 \describe{
-\item{\code{login [--email ADDRESS] [--code CODE] [--no-browser]}}{sign in for
-the curated tables at data.rmorie.com with GitHub (device flow) or an
-emailed code: the data key, never a language model}
+\item{\code{login [--email ADDRESS] [--code CODE] [--no-browser]}}{store a data
+key for data.rmorie.com, from GitHub (device flow) or an emailed code: optional,
+since the curated tables open without sign-in; never a language model}
 \item{\code{login --token [KEY]}}{store a data key you already have (prompts
 for it when KEY is omitted)}
 \item{\code{logout}}{forget the data key}

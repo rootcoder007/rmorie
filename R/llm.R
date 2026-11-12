@@ -546,10 +546,11 @@ morie_llm_ask_multi <- function(messages, providers = NULL, model = NULL, timeou
 
 # ---- The data key ------------------------------------------------------------
 
-#' Sign in for the curated tables at data.rmorie.com
+#' Store a data key for data.rmorie.com
 #'
-#' Stores your MORIE data key, the key that opens the curated tables at
-#' data.rmorie.com (\code{\link{morie_load_hosted_dataset}}). It is never a language
+#' Stores your MORIE data key for data.rmorie.com. The curated tables
+#' (\code{\link{morie_load_hosted_dataset}}) open without one; a stored key is
+#' still sent with each download. It is never a language
 #' model: those you bring yourself (\code{\link{morie_llm_config}}). With
 #' \code{token} the key you already hold is checked with the data service and
 #' stored; with \code{email} a one-time code is sent there; otherwise the GitHub

@@ -1,6 +1,7 @@
 # rmorie 1.5.4 - 2026-11-11
 
 * The curated tables at data.rmorie.com need no sign-in: `morie_load_hosted_dataset()`, `morie_hosted_datasets()` and `rmorie pull` work without a key, and a key stored earlier is still sent. ICPSR studies are no longer served there (ICPSR's terms do not allow redistribution); asking for one says where to get it.
+* A catalog dataset whose portal download fails falls back to its data.rmorie.com copy without a stored key (it asked for `rmorie login`); when the copy fails too, both failures are named. `rmorie list-datasets` lists the curated tables without a key (it fetches their list, cached a day); `morie_list_datasets()` itself still makes no request for a user without a key. A stored key goes only to the address of the signed services document, never to another `MORIE_DATA_URL` (as `rmoriebricklayer::dload()`). The route column, the list footer, the cheat sheet, `rmorie help`, `morie_llm_login()`'s help and the README no longer say the tables need a key.
 * Version kept in step with morie 1.5.4.
 
 # rmorie 1.5.3 - 2026-11-01

@@ -916,7 +916,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   on.exit(options(old_timeout), add = TRUE)
   matched <- .fuzzy_match_key(key)
   if (is.null(matched)) {
-    # A curated table at data.rmorie.com (db/table), opened by the MORIE key.
+    # A curated table at data.rmorie.com (db/table), no sign-in needed.
     if (.morie_data_is_key(key)) {
       return(morie_load_hosted_dataset(key, db_path = db_path, refresh = refresh))
     }
@@ -937,7 +937,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       "  - rmoriedata::mdcat()  bundled data SLUGS (e.g. 'chicago_iucr_codes')\n",
       "  - morie_datasets_*()                dedicated fetchers ",
       "(e.g. morie_datasets_chicago_iucr_codes())\n",
-      "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (after rmorie login, GitHub or --email)",
+      "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (no sign-in)",
       call. = FALSE
     )
   }
@@ -1019,11 +1019,13 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   # 3c. The data.rmorie.com copy of a table whose portal file is absent or
   #     fails to download (Health Infobase tables, ...).
   hosted_copy <- function(why) {
-    if (is.null(.morie_llm_hosted_key())) {
-      stop(matched, ": ", why, "; the data.rmorie.com copy (", entry$hosted_key,
-           ") opens with your MORIE key: run `rmorie login` (GitHub) or `rmorie login --email you@example.com` once.", call. = FALSE)
-    }
-    data <- morie_load_hosted_dataset(entry$hosted_key, db_path = db_path, refresh = refresh)
+    # the data.rmorie.com copy opens without sign-in
+    data <- tryCatch(
+      morie_load_hosted_dataset(entry$hosted_key, db_path = db_path, refresh = refresh),
+      error = function(e) {
+        stop(matched, ": ", why, "; the data.rmorie.com copy (", entry$hosted_key, ") failed too: ",
+             conditionMessage(e), call. = FALSE)
+      })
     .morie_cache_store_soft(data, entry$table_name, db_path = db_path, con = con)
     data
   }
@@ -1160,7 +1162,9 @@ morie_list_datasets <- function(db_path = NULL, con = NULL) {
   catalog$cached <- catalog$table_name %in% names(cached_tables)
   catalog$rows <- as.integer(cached_tables[catalog$table_name])
   out <- catalog[, c("key", "name", "source", "survey", "year", "type", "cached", "rows")]
-  # the curated tables at data.rmorie.com: fetched when a key is stored (cached a day), else the last copy
+  # the curated tables at data.rmorie.com (no key needed): fetched when a key is stored (cached a day),
+  # else the copy the last fetch left (`rmorie list-datasets` and morie_hosted_datasets() fetch it), so
+  # this function makes no request of its own for a user without a key
   m <- if (!is.null(.morie_llm_hosted_key())) {
     tryCatch(morie_hosted_manifest(), error = function(e) .morie_data_cached_manifest())
   } else {

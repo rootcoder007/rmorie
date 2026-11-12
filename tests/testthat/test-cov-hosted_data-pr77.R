@@ -175,3 +175,32 @@ test_that("no key is needed: none is sent, a 401 asks for one only from an old s
   fail <- "HTTP 410 Gone"
   expect_error(get_("/icpsr_9/t.csv.gz", dest), "icpsr_9/t is not served by data.rmorie.com", fixed = TRUE)
 })
+
+test_that("a stored key goes only to the services document's address, never to another MORIE_DATA_URL", {
+  .hd_sandbox()
+  get_ <- .hd(".morie_data_get")
+  testthat::local_mocked_bindings(
+    svcs = function(offline = TRUE) list(data = list(mode = "key", base_url = "https://d.example.org")),
+    .package = "rmoriebricklayer")
+  .hd_write_cache(list(datasets = list(list(key = "db1/t1", bytes_gz = 10L))))
+  seen <- NULL
+  testthat::local_mocked_bindings(
+    .morie_dl = function(url, dest, headers = NULL, label = basename(dest), size = NULL, timeout = 3600, ...) {
+      seen <<- list(url = url, headers = headers)
+      invisible(dest)
+    }, .package = "rmorie")
+  dest <- withr::local_tempfile()
+  withr::local_envvar(MORIE_DATA_URL = "https://elsewhere.example.org")
+  expect_message(get_("/db1/t1.csv.gz", dest), "the stored key is not sent to it")
+  expect_identical(seen$url, "https://elsewhere.example.org/db1/t1.csv.gz")
+  expect_false("Authorization" %in% names(seen$headers))
+  # data.rmorie.com serves a keyless table only to a package User-Agent
+  expect_match(seen$headers[["User-Agent"]], "^(rmoriebricklayer|rmoriedata|rmorie|morie)/[0-9]")
+  withr::local_envvar(MORIE_DATA_URL = "https://d.example.org/")
+  get_("/db1/t1.csv.gz", dest)
+  expect_identical(seen$headers[["Authorization"]], "Bearer sk-test")
+  withr::local_envvar(MORIE_DATA_URL = NA)
+  get_("/db1/t1.csv.gz", dest)
+  expect_identical(seen$url, "https://d.example.org/db1/t1.csv.gz")
+  expect_identical(seen$headers[["Authorization"]], "Bearer sk-test")
+})
