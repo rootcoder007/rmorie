@@ -2,10 +2,11 @@
 #
 # Data: United States. Bureau of Justice Statistics. National Crime Victimization Survey,
 # Concatenated File, [United States], 1992-2022. ICPSR [distributor], 2023-09-18.
-# https://doi.org/10.3886/ICPSR38604.v1 -- served as ncvs_38604/{incident, person_1992_2006,
-# person_2007_2022, household_1992_2006, household_2007_2022}
-# at data.rmorie.com (`rmorie pull ncvs_38604/incident`); the ICPSR codebooks, user guide and
-# terms of use sit beside them under files/ncvs_38604/.
+# https://doi.org/10.3886/ICPSR38604.v1 -- read from the user's own copy, as the tables
+# ncvs_38604/csv/{incident, person_1992_2006, person_2007_2022, household_1992_2006,
+# household_2007_2022}.csv.gz under the data directory. The files come from ICPSR, under
+# ICPSR's terms of use; they are not in this repository and data.rmorie.com does not serve
+# them (the terms do not allow redistribution).
 #
 # What it does, in the ledger's terms:
 #   P1  the survey/record pair at last: victimisations the survey counts (v_obs) against the
@@ -28,7 +29,7 @@ args <- commandArgs(trailingOnly = TRUE)
 data_dir <- if (length(args) >= 1) args[[1]] else Sys.getenv("MORIE_DATA_ROOT", "~/data/datasets")
 out_dir <- if (length(args) >= 2) args[[2]] else "research/applications/results"
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
-# the hosted tables: incident whole; person and household in two year ranges each
+# the tables: incident whole; person and household in two year ranges each
 csv <- function(t) file.path(data_dir, "ncvs_38604", "csv", paste0(t, ".csv.gz"))
 read_split <- function(t, select) rbindlist(lapply(c("_1992_2006", "_2007_2022"), function(h) {
   fread(csv(paste0(t, h)), select = select, showProgress = FALSE)
@@ -125,8 +126,8 @@ a14[, width_per_recorded_outside := vapply(rate_A, function(rA) (1 - 0.5 * rA) /
 fmt <- function(x, d = 3) formatC(x, digits = d, format = "f")
 md <- c("# NCVS 1992-2022: the victimisation applications of the ledger", "",
         "Data: ICPSR 38604 (BJS, National Crime Victimization Survey, Concatenated File 1992-2022),",
-        "https://doi.org/10.3886/ICPSR38604.v1, served as `ncvs_38604/{incident,person,household}` at",
-        "data.rmorie.com with the ICPSR codebooks, user guide and terms of use. Weights: WGTVICCY per",
+        "https://doi.org/10.3886/ICPSR38604.v1, obtained from ICPSR under its terms of use and read",
+        "from a local copy (data.rmorie.com does not serve it). Weights: WGTVICCY per",
         "victimisation with the BJS series rule (a series counts its reported incidents, at most 10);",
         "WGTPERCY persons and WGTHHCY households as denominators. Reported = V4399 \"Were the police",
         "informed\" = Yes. Classes: violent = TOC 1-20, property = 31-59, personal theft = 21-23.", "",

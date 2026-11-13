@@ -1,8 +1,8 @@
 # NCVS 1992-2022: the victimisation applications of the ledger
 
 Data: ICPSR 38604 (BJS, National Crime Victimization Survey, Concatenated File 1992-2022),
-https://doi.org/10.3886/ICPSR38604.v1, served as `ncvs_38604/{incident,person,household}` at
-data.rmorie.com with the ICPSR codebooks, user guide and terms of use. Weights: WGTVICCY per
+https://doi.org/10.3886/ICPSR38604.v1, obtained from ICPSR under its terms of use and read
+from a local copy (data.rmorie.com does not serve it). Weights: WGTVICCY per
 victimisation with the BJS series rule (a series counts its reported incidents, at most 10);
 WGTPERCY persons and WGTHHCY households as denominators. Reported = V4399 "Were the police
 informed" = Yes. Classes: violent = TOC 1-20, property = 31-59, personal theft = 21-23.

@@ -87,7 +87,7 @@ assumptions the dark figure is an interval, not a point.
   Open: the small-area application on a real survey/record pair.
 - Progress 2026-10-12 (the survey/record pair, with the NCVS): the NCVS 1992-2022 concatenated
   file (ICPSR 38604, https://doi.org/10.3886/ICPSR38604.v1) is held and served
-  (`ncvs_38604/*` at data.rmorie.com). `research/applications/ncvs_victimisation.R` takes the
+  (from ICPSR, read from a local copy). `research/applications/ncvs_victimisation.R` takes the
   victimisations the survey counts (WGTVICCY with the BJS series rule) against the ones the
   victim says the police learned of (V4399), by year and class, and applies
   `morie_dark_figure_bounds()` with stated misreport bounds (alpha_max 0.05, beta_max 0.25):
