@@ -1162,14 +1162,9 @@ morie_list_datasets <- function(db_path = NULL, con = NULL) {
   catalog$cached <- catalog$table_name %in% names(cached_tables)
   catalog$rows <- as.integer(cached_tables[catalog$table_name])
   out <- catalog[, c("key", "name", "source", "survey", "year", "type", "cached", "rows")]
-  # the curated tables at data.rmorie.com (no key needed): fetched when a key is stored (cached a day),
-  # else the copy the last fetch left (`rmorie list-datasets` and morie_hosted_datasets() fetch it), so
-  # this function makes no request of its own for a user without a key
-  m <- if (!is.null(.morie_llm_hosted_key())) {
-    tryCatch(morie_hosted_manifest(), error = function(e) .morie_data_cached_manifest())
-  } else {
-    .morie_data_cached_manifest()
-  }
+  # the curated tables at data.rmorie.com: the copy the last fetch left (`rmorie list-datasets` and
+  # morie_hosted_datasets() fetch it), so this function makes no request of its own
+  m <- .morie_data_cached_manifest()
   hub <- .morie_data_entries(m)
   if (nrow(hub)) {
     hub_rows <- data.frame(key = hub$key, name = hub$name, source = "data.rmorie.com", survey = hub$source,

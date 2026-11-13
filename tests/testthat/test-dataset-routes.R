@@ -12,19 +12,17 @@ test_that("the Health Infobase keys carry a portal URL or a hosted copy, the OTI
   expect_match(cat$download_url[cat$key == "otisloc"], "data.ontario.ca")
 })
 
-test_that("a hosted copy is used when the portal fails, with or without a stored key", {
+test_that("a hosted copy is used when the portal fails", {
   tmp <- withr::local_tempdir()
   db <- file.path(tmp, "c.db")
   # no key: the copy is still asked for (it needs no sign-in); when it fails too, both failures are named
   testthat::local_mocked_bindings(
     morie_fetch = function(url, ...) stop("portal down"),
-    .morie_llm_hosted_key = function() NULL,
     morie_load_hosted_dataset = function(key, db_path = NULL, refresh = FALSE) stop("hub down")
   )
   expect_error(morie_load_dataset("hibub", db_path = db), "portal down.*hib/csus_cannabis.*failed too: hub down")
   testthat::local_mocked_bindings(
     morie_fetch = function(url, ...) stop("portal down"),
-    .morie_llm_hosted_key = function() "sk-test",
     morie_load_hosted_dataset = function(key, db_path = NULL, refresh = FALSE) data.frame(k = key),
     morie_cache_store = function(data, table_name, db_path = NULL, con = NULL) invisible(TRUE)
   )
@@ -42,8 +40,7 @@ test_that("an R object at data.rmorie.com is fetched into the data directory and
       expect_equal(path, "/files/otis/dt_expanded.rds")
       saveRDS(obj, dest)
       invisible(dest)
-    },
-    .morie_llm_hosted_key = function() "sk-test"
+    }
   )
   got <- morie_load_dataset("otisexp", db_path = file.path(tmp, "c.db"))
   expect_equal(got, obj)

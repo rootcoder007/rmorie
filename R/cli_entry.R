@@ -9,14 +9,8 @@
 #'
 #' Dispatches the verbs of the \code{rmorie} launcher. Verbs:
 #' \describe{
-#'   \item{\code{login [--email ADDRESS] [--code CODE] [--no-browser]}}{store a data
-#'     key for data.rmorie.com, from GitHub (device flow) or an emailed code: optional,
-#'     since the curated tables open without sign-in; never a language model}
-#'   \item{\code{login --token [KEY]}}{store a data key you already have (prompts
-#'     for it when KEY is omitted)}
-#'   \item{\code{logout}}{forget the data key}
-#'   \item{\code{doctor}}{the language-model routes set up on this machine, the one
-#'     \code{ask} will take, and the data key}
+#'   \item{\code{doctor}}{the language-model routes set up on this machine and the one
+#'     \code{ask} will take}
 #'   \item{\code{config [show | help | get KEY | set KEY VALUE | unset KEY | setup | path]}}{show
 #'     or change the language-model settings (\code{\link{morie_llm_config}}): a
 #'     provider's key and model, Ollama, your own server, the route;
@@ -89,8 +83,8 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
   opened <- NULL
   tryCatch(withCallingHandlers({
     switch(verb,
-      # the data key and the language-model verbs are rmoriebricklayer's, under the rmorie name
-      login = , logout = , models = , ask = { status <- .cli_bricklayer(c(verb, rest), out) },
+      # the language-model verbs are rmoriebricklayer's, under the rmorie name
+      models = , ask = { status <- .cli_bricklayer(c(verb, rest), out) },
       doctor = status <- .cli_doctor(out),
       config = status <- .cli_config(rest, out),
       `list-modules` = {
@@ -281,8 +275,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  rmorie list-datasets\n",
         "  rmorie pull ocp21 --out cpads.csv            # the real CPADS PUMF; cached, then the modules use it\n",
         "  rmorie pull --all --out datasets/            # every dataset the catalog knows\n",
-        "  rmorie pull chicago_crime/incidents          # curated tables at data.rmorie.com (no sign-in)\n",
-        "  rmorie login                                 # optional: store a data key (the tables need none)\n\n",
+        "  rmorie pull chicago_crime/incidents          # curated tables at data.rmorie.com (no sign-in)\n\n",
         "ASK A MODEL\n",
         "  rmorie config setup                          # bring your own model: a provider key, Ollama, or your server\n",
         "  rmorie models                                # what the route offers, the one in use marked *\n",
@@ -352,10 +345,6 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
   topic <- if (length(rest) && !startsWith(rest[[1L]], "-")) tolower(rest[[1L]]) else ""
   verbs <- paste0(
         "usage: rmorie <verb> [options]\n\n",
-        "  login [--email ADDRESS] [--code CODE] [--no-browser]   store a data key (optional: the tables need none);\n",
-        "        asks you to accept the terms, then your name and reason (or --accept-terms --name --reason)\n",
-        "  login --token [KEY]                                    store a data key you already have\n",
-        "  logout                                                 forget the data key\n",
         "  doctor                                                 language-model routes set up here, the one ask uses\n",
         "  models [--route ROUTE]                                 the models a route offers\n",
         "  ask [--model NAME] [--route ROUTE] PROMPT...           ask the model you brought (ROUTE: own, ollama, a provider)\n",
@@ -443,7 +432,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
 #' Install the rmorie command-line launcher
 #'
 #' Links the launcher shipped in the package (\code{inst/bin/rmorie}) into a
-#' directory on your PATH so that \code{rmorie login}, \code{rmorie ask ...}
+#' directory on your PATH so that \code{rmorie ask ...}
 #' and the other verbs of \code{\link{morie_cli}} work from any shell. On
 #' Windows a \code{rmorie.cmd} wrapper is written instead of a symlink.
 #' @param dir Target directory (default \code{~/.local/bin}; created if absent).

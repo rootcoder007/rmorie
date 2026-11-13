@@ -173,14 +173,13 @@ Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-rele
   server of your own, or a local Ollama), answering from the packages' help;
   a keyword fallback needs no network. See *Ask a model and sign in* below.
 - **The full command line in R**: `install_cli()` puts `rmorie` on your PATH,
-  with every verb of the Python command line: `login`, `doctor`, `models`,
+  with every verb of the Python command line: `doctor`, `models`,
   `ask`, `analyze`, `list-modules`, `run-module`, `list-datasets`, `pull`,
   `provider`, `cheatsheet`, `selftest`, `pipeline`, `emissions`,
   `verify-pollution`, `crypto`, `ingest`. It runs under R 4.6.
 - **Data**: the curated tables at <https://data.rmorie.com> (175 databases and
   716 tables on 2026-10-13, among them the Health Infobase tables and the OTIS
-  research environments) open without sign-in (a key stored earlier with
-  `rmorie login` is still sent); the terms are at <https://rmorie.com/data-license>,
+  research environments) open without sign-in or a key; the terms are at <https://rmorie.com/data-license>,
   and ICPSR studies are not served there (ICPSR's terms do not allow redistribution);
   built-in datasets come through
   `rmoriedata` (r-universe), fetched with provenance by `rmoriebricklayer`
@@ -349,20 +348,14 @@ hosted for you, and no prompt goes anywhere you did not set up. The model gets
 the help of rmorie, rmoriedata and rmoriebricklayer, with tools to search and
 read it; with no model set up, the answer comes from a keyword index.
 
-The curated tables at data.rmorie.com need no sign-in. A personal data key, which
-the Python package `morie` reads too, can still be stored and is then sent with each
-download; no model uses it.
+The curated tables at data.rmorie.com need no sign-in and no key.
 
 ```r
 morie_llm_config(route = "anthropic")              # with ANTHROPIC_API_KEY set; rmoriebricklayer::llmprvd() lists them
 morie_llm_provider_set("http://localhost:1234/v1", model = "local-model")   # your own server (LM Studio, vLLM, llama.cpp)
 morie_llm_ask("Which design fits a pre/post comparison with a control group?")
-morie_llm_login()                                  # optional data key: GitHub sign-in
-morie_llm_login(email = "you@example.com")         # an emailed code instead
-morie_llm_login(token = "sk-...")                  # a key you were given
 morie_hosted_datasets()                            # curated db/table keys
 df <- morie_load_hosted_dataset("chicago_crime/incidents")
-morie_llm_logout()
 ```
 
 From the shell, after `install_cli()`:
@@ -372,10 +365,6 @@ rmorie config setup                           # pick a provider, paste its key, 
 rmorie models                                 # the models your route offers
 rmorie ask "What does the power-design module compute?"
 rmorie doctor                                 # which route ask takes from this machine
-rmorie login                                  # optional data key: GitHub sign-in
-rmorie login --email you@example.com          # an emailed code instead: type it at the prompt
-rmorie login --no-browser                     # server / SSH: prints a link + code to open on any device
-rmorie login --token                          # paste a key you were given
 ```
 
 ## Outputs-manifest example

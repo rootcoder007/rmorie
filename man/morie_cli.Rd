@@ -17,14 +17,8 @@ The exit status, invisibly (0 on success).
 \description{
 Dispatches the verbs of the \code{rmorie} launcher. Verbs:
 \describe{
-\item{\code{login [--email ADDRESS] [--code CODE] [--no-browser]}}{store a data
-key for data.rmorie.com, from GitHub (device flow) or an emailed code: optional,
-since the curated tables open without sign-in; never a language model}
-\item{\code{login --token [KEY]}}{store a data key you already have (prompts
-for it when KEY is omitted)}
-\item{\code{logout}}{forget the data key}
-\item{\code{doctor}}{the language-model routes set up on this machine, the one
-\code{ask} will take, and the data key}
+\item{\code{doctor}}{the language-model routes set up on this machine and the one
+\code{ask} will take}
 \item{\code{config [show | help | get KEY | set KEY VALUE | unset KEY | setup | path]}}{show
 or change the language-model settings (\code{\link{morie_llm_config}}): a
 provider's key and model, Ollama, your own server, the route;

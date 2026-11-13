@@ -14,13 +14,14 @@ test_that("version, help and unknown verbs behave", {
   expect_equal(v$status, 0L)
   expect_match(v$text, as.character(utils::packageVersion(.pkg)), fixed = TRUE)
   h <- .capture("help")
-  expect_match(h$text, "login \\[--email ADDRESS\\]")
+  expect_false(grepl("\\blog(in|out)\\b", h$text))  # no sign-in: the curated tables need none
+  expect_match(.capture("login")$text, "unknown verb 'login'")
   expect_match(.capture()$text, "usage: rmorie")
   u <- .capture("frobnicate")
   expect_equal(u$status, 2L)  # a usage error, like an unknown option
   expect_match(u$text, "unknown verb 'frobnicate'")
 })
-test_that("login, logout, doctor, config, models and ask are rmoriebricklayer's verbs, named rmorie", {
+test_that("doctor, config, models and ask are rmoriebricklayer's verbs, named rmorie", {
   withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir())
   seen <- NULL
   testthat::local_mocked_bindings(
@@ -30,7 +31,7 @@ test_that("login, logout, doctor, config, models and ask are rmoriebricklayer's 
       0L
     },
     .package = "rmoriebricklayer")
-  for (v in list(c("login", "--email", "vee@example.com", "--no-browser"), c("logout"), c("models", "--route", "groq"),
+  for (v in list(c("models", "--route", "groq"),
                  c("ask", "--route", "anthropic", "what", "is", "MORIE"))) {
     r <- .capture(v)
     expect_equal(r$status, 0L, info = v[[1L]])
@@ -45,7 +46,7 @@ test_that("login, logout, doctor, config, models and ask are rmoriebricklayer's 
   expect_false(nzchar(Sys.getenv("RMBL_PROG")))  # put back afterwards
 })
 
-test_that("doctor names the route ask would take and the data key; ask relays the reply", {
+test_that("doctor names the route ask would take; ask relays the reply", {
   ps <- rmoriebricklayer::llmprvd()
   withr::local_envvar(c(stats::setNames(rep(NA_character_, nrow(ps)), ps$key_env), XDG_CONFIG_HOME = withr::local_tempdir(),
                         OLLAMA_HOST = "off", MORIE_LLM_BASE_URL = NA, MORIE_HOSTED_KEY = NA))
@@ -53,12 +54,6 @@ test_that("doctor names the route ask would take and the data key; ask relays th
   expect_equal(d$status, 0L)
   expect_match(d$text, "local Ollama +disabled")
   expect_match(d$text, "ask has no route yet")
-  # an earlier rmoriebricklayer pointed at the login command here; the
-  # current one says that the curated tables need no key
-  expect_match(
-    d$text,
-    "data key: none \\((`[a-z]+ login`|the curated tables need none)"
-  )
   withr::local_envvar(GROQ_API_KEY = "gsk-x", MORIE_GROQ_MODEL = "llama-x")
   testthat::local_mocked_bindings(.bl_post_json = function(url, payload, ...) {
     list(status = 200L, json = list(choices = list(list(finish_reason = "stop", message = list(content = "echo")))), error = "")
@@ -86,7 +81,7 @@ test_that("list-modules, cheatsheet, pull and run-module verbs work", {
   expect_equal(length(morie_module_names()), 23L)
   cs <- .capture("cheatsheet")
   expect_equal(cs$status, 0L)
-  expect_match(cs$text, "rmorie login")
+  expect_false(grepl("rmorie login", cs$text, fixed = TRUE))
   expect_match(cs$text, "run-module power-design")
   expect_match(.capture("pull")$text, "usage: rmorie pull KEY")
   expect_match(.capture("run-module")$text, "usage: rmorie run-module NAME")
@@ -330,7 +325,7 @@ test_that("selftest runs every subsystem", {
   expect_equal(r$status, 0L, info = r$text)
 })
 
-test_that("data.rmorie.com tables: key handling, manifest cache, download cached in the store, pull", {
+test_that("data.rmorie.com tables: no key, manifest cache, download cached in the store, pull", {
   withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir(), MORIE_HOSTED_KEY = NA,
                       R_USER_CACHE_DIR = withr::local_tempdir(), MORIE_DATA_URL = "https://data.example.test")
   # no key: nothing is refused locally, the request goes out (to a .test name that never resolves)

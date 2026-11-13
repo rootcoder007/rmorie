@@ -2,8 +2,7 @@
 #
 # The project materialises public BigQuery datasets and serves their tables
 # as CSV from the edge (R2 behind a Worker), reachable whenever the internet
-# is. No key is needed; a key morie_llm_login() stored earlier is still sent, to the
-# services document's address only. /manifest.json lists every table
+# is. No key is needed and none is sent. /manifest.json lists every table
 # with rows, columns, size, SHA-256 and the BigQuery source; /<db>/<table>.csv.gz
 # is the table. Downloads are cached in the dataset store. Mirrors
 # morie.datahub (Python).
@@ -32,24 +31,6 @@
   }
   svc[["base_url"]]
 }
-
-# The stored key, or NULL: sent only to the address of the signed services document, as
-# rmoriebricklayer's dload() does; a key issued by data.rmorie.com does not follow
-# MORIE_DATA_URL to another host.
-.morie_data_key <- function() {
-  key <- .morie_llm_hosted_key()
-  env <- sub("/+$", "", trimws(Sys.getenv("MORIE_DATA_URL", unset = "")))
-  if (is.null(key) || !nzchar(env)) return(key)
-  doc <- tryCatch(sub("/+$", "", .morie_data_doc_url()), error = function(e) "")
-  if (nzchar(doc) && identical(env, doc)) return(key)
-  message("MORIE_DATA_URL=", env, " is not the curated-data address of the services document; ",
-          "the stored key is not sent to it")
-  NULL
-}
-
-# The tables whose source licence asks more than attribution (ICPSR studies, the NCVS 38604
-# extract, the a2aj case law): data.rmorie.com opens them once the terms are accepted.
-.morie_data_restricted <- function(key) grepl("^(icpsr_|ncvs_38604|a2aj_)", sub("^(db|files)/", "", key))
 
 # A downloaded table is used only when it matches the manifest's SHA-256: the manifest is fetched
 # again once before a mismatch is final (a table rebuilt upstream has a new digest), and a table
@@ -91,10 +72,9 @@
   file.path(tools::R_user_dir("morie", which = "cache"), "data_rmorie_manifest.json")
 }
 
-#' Internal helper: GET a path from data.rmorie.com (no sign-in; a stored key is still sent)
+#' Internal helper: GET a path from data.rmorie.com (no sign-in, no key sent)
 #' @noRd
 .morie_data_get <- function(path, dest, timeout = 600, size = NULL) {
-  key <- .morie_data_key()
   label <- sub("^/", "", path)
   if (is.null(size) && grepl("\\.csv\\.gz$", path)) {
     # the manifest knows the compressed size: a percent bar instead of a spinner
@@ -109,8 +89,7 @@
   }
   rc <- tryCatch(
     .morie_dl(paste0(.morie_data_url(), path), dest, label = label, size = size, timeout = timeout,
-              headers = c(if (!is.null(key)) c(Authorization = paste("Bearer", key)),
-                          "User-Agent" = "rmorie/1 (+https://rmorie.com)")),
+              headers = c("User-Agent" = "rmorie/1 (+https://rmorie.com)")),
     error = function(e) e, warning = function(w) w)
   if (inherits(rc, "condition")) {
     msg <- conditionMessage(rc)
@@ -118,16 +97,9 @@
       stop(label, " is not served by data.rmorie.com: ICPSR's terms do not allow redistribution; ",
            "download it from ICPSR (https://www.icpsr.umich.edu)", call. = FALSE)
     }
-    if (grepl("401|403|Unauthorized|Forbidden", msg) && is.null(key)) {
-      stop("data.rmorie.com asked for a key for ", label, ": run `rmorie login` once, or update the package.",
-           call. = FALSE)
-    }
-    if (grepl("403|Forbidden", msg) && .morie_data_restricted(label)) {
-      stop(label, " is a restricted table (its source asks more than a citation): read and accept the terms at ",
-           "https://data.rmorie.com/terms, signed in with your key, then ask again.", call. = FALSE)
-    }
     if (grepl("401|403|Unauthorized|Forbidden", msg)) {
-      stop("data.rmorie.com rejected the stored key; run `rmorie login` again.", call. = FALSE)
+      stop("data.rmorie.com refused ", label, ": the tables need no sign-in; update the package, or try ",
+           "again later.", call. = FALSE)
     }
     stop("data.rmorie.com: ", msg, call. = FALSE)
   }
@@ -139,8 +111,7 @@
 #' The MORIE project keeps 160 databases materialised from Google BigQuery public datasets, plus the Health Infobase tables and the OTIS research files,
 #' public datasets (Chicago crime, EPA air quality, US census, FEC, FDA,
 #' NOAA, NHTSA, Hacker News, Ethereum, World Bank, ...) and serves their
-#' tables from the edge, with no sign-in (a key stored earlier with
-#' \code{\link{morie_llm_login}} is still sent); a downloaded table is used
+#' tables from the edge, with no sign-in and no key; a downloaded table is used
 #' only when it matches the SHA-256 the manifest lists for it. ICPSR studies are
 #' not served (ICPSR's terms do not allow redistribution). \code{morie_hosted_manifest()} returns the gateway's manifest
 #' (every table with rows, columns, size, SHA-256 and its BigQuery source),

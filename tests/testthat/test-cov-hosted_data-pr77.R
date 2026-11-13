@@ -1,11 +1,11 @@
 # R/hosted_data.R, the lines PR #77 added that no other test reached: the data service named by the
-# signed services document, the restricted-table rule, the SHA-256 check against the manifest (with its
+# signed services document, the SHA-256 check against the manifest (with its
 # one refetch) and the refusals of data.rmorie.com. No network: the downloader is a recorder that
 # serves a synthetic manifest and table from memory.
 
 .hd <- function(name) get(name, envir = environment(morie_hosted_manifest))
 
-# A sandbox: no MORIE_DATA_URL, a test key, and the manifest cache in a temporary directory
+# A sandbox: no MORIE_DATA_URL, a key in the environment (never read), and the manifest cache in a temporary directory
 .hd_sandbox <- function(env = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = env)
   withr::local_envvar(MORIE_DATA_URL = NA, MORIE_HOSTED_KEY = "sk-test", XDG_CONFIG_HOME = dir,
@@ -46,12 +46,6 @@ test_that("the data service comes from the signed services document, and an unav
   expect_identical(url(), "https://local.test")
 })
 
-test_that("the restricted tables are the ICPSR, NCVS 38604 and a2aj ones, with or without a db/ or files/ prefix", {
-  r <- .hd(".morie_data_restricted")
-  expect_identical(r(c("icpsr_1/t", "db/ncvs_38604/x", "files/a2aj_cases/y", "ncvs_1/t", "fec/icpsr_x", "db/fec/t")),
-                   c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE))
-})
-
 test_that("a table is checked against the manifest's SHA-256, with one refetch before a mismatch is final", {
   skip_if_not_installed("digest")
   .hd_sandbox()
@@ -66,7 +60,7 @@ test_that("a table is checked against the manifest's SHA-256, with one refetch b
     .morie_dl = function(url, dest, headers = NULL, label = basename(dest), size = NULL, timeout = 3600, ...) {
       fetched <<- fetched + 1L
       expect_identical(url, "https://data.rmorie.com/manifest.json")
-      expect_identical(headers[["Authorization"]], "Bearer sk-test")
+      expect_false("Authorization" %in% names(headers))
       writeLines(jsonlite::toJSON(served, auto_unbox = TRUE, null = "null"), dest)
       invisible(dest)
     }, .package = "rmorie")
@@ -115,7 +109,7 @@ test_that("a table is checked against the manifest's SHA-256, with one refetch b
   expect_identical(fetched, n)
 })
 
-test_that("a refused download names a restricted table's terms, a rejected key, or the service's own message", {
+test_that("a refused download says no sign-in is needed, or gives the service's own message", {
   .hd_sandbox()
   get_ <- .hd(".morie_data_get")
   testthat::local_mocked_bindings(svcs = function(offline = TRUE) NULL, .package = "rmoriebricklayer")
@@ -130,17 +124,17 @@ test_that("a refused download names a restricted table's terms, a rejected key, 
     }, .package = "rmorie")
   dest <- withr::local_tempfile()
   expect_error(get_("/icpsr_9/t.csv.gz", dest),
-               paste("icpsr_9/t is a restricted table (its source asks more than a citation): read and accept the",
-                     "terms at https://data.rmorie.com/terms, signed in with your key, then ask again."), fixed = TRUE)
+               paste("data.rmorie.com refused icpsr_9/t: the tables need no sign-in; update the package, or try",
+                     "again later."), fixed = TRUE)
   # the label drops .csv.gz and the manifest's compressed size drives the bar
   expect_identical(seen[[1]]$url, "https://data.rmorie.com/icpsr_9/t.csv.gz")
   expect_identical(seen[[1]]$label, "icpsr_9/t")
   expect_identical(seen[[1]]$size, 1234L)
-  expect_error(get_("/fec/t.csv.gz", dest), "data.rmorie.com rejected the stored key; run `rmorie login` again.",
+  expect_error(get_("/fec/t.csv.gz", dest), "data.rmorie.com refused fec/t: the tables need no sign-in",
                fixed = TRUE)
   expect_null(seen[[2]]$size)   # not in the manifest: no size
   fail <- "HTTP 401 Unauthorized"
-  expect_error(get_("/icpsr_9/t.csv.gz", dest), "rejected the stored key", fixed = TRUE)
+  expect_error(get_("/icpsr_9/t.csv.gz", dest), "refused icpsr_9/t: the tables need no sign-in", fixed = TRUE)
   fail <- "a warning: server closed"
   expect_error(get_("/files/x.rds", dest), "data.rmorie.com: a warning: server closed", fixed = TRUE)
   expect_identical(seen[[4]]$label, "files/x.rds")
@@ -149,10 +143,9 @@ test_that("a refused download names a restricted table's terms, a rejected key, 
   expect_identical(seen[[5]]$size, 5)
 })
 
-test_that("no key is needed: none is sent, a 401 asks for one only from an old service, a 410 names ICPSR", {
+test_that("no key is needed: none is sent, a 401 is the service's refusal, a 410 names ICPSR", {
   .hd_sandbox()
   withr::local_envvar(MORIE_HOSTED_KEY = NA)
-  testthat::local_mocked_bindings(.morie_llm_hosted_key = function() NULL, .package = "rmorie")
   get_ <- .hd(".morie_data_get")
   testthat::local_mocked_bindings(svcs = function(offline = TRUE) NULL, .package = "rmoriebricklayer")
   .hd_write_cache(list(datasets = list(list(key = "db1/t1", bytes_gz = 10L))))
@@ -170,14 +163,16 @@ test_that("no key is needed: none is sent, a 401 asks for one only from an old s
   expect_match(hdrs[["User-Agent"]], "^rmorie/1 ")
   fail <- "HTTP 401 Unauthorized"
   expect_error(get_("/db1/t1.csv.gz", dest),
-               "data.rmorie.com asked for a key for db1/t1: run `rmorie login` once, or update the package.",
+               "data.rmorie.com refused db1/t1: the tables need no sign-in; update the package, or try again later.",
                fixed = TRUE)
   fail <- "HTTP 410 Gone"
   expect_error(get_("/icpsr_9/t.csv.gz", dest), "icpsr_9/t is not served by data.rmorie.com", fixed = TRUE)
 })
 
-test_that("a stored key goes only to the services document's address, never to another MORIE_DATA_URL", {
-  .hd_sandbox()
+test_that("no key is ever sent: not one in the environment, not one stored earlier, to any address", {
+  dir <- .hd_sandbox()
+  dir.create(file.path(dir, "morie"), recursive = TRUE)
+  writeLines('{"hosted_key": "sk-stored"}', file.path(dir, "morie", "credentials.json"))
   get_ <- .hd(".morie_data_get")
   testthat::local_mocked_bindings(
     svcs = function(offline = TRUE) list(data = list(mode = "key", base_url = "https://d.example.org")),
@@ -191,16 +186,17 @@ test_that("a stored key goes only to the services document's address, never to a
     }, .package = "rmorie")
   dest <- withr::local_tempfile()
   withr::local_envvar(MORIE_DATA_URL = "https://elsewhere.example.org")
-  expect_message(get_("/db1/t1.csv.gz", dest), "the stored key is not sent to it")
+  expect_silent(get_("/db1/t1.csv.gz", dest))
   expect_identical(seen$url, "https://elsewhere.example.org/db1/t1.csv.gz")
   expect_false("Authorization" %in% names(seen$headers))
-  # data.rmorie.com serves a keyless table only to a package User-Agent
+  # data.rmorie.com serves a table only to a package User-Agent
   expect_match(seen$headers[["User-Agent"]], "^(rmoriebricklayer|rmoriedata|rmorie|morie)/[0-9]")
-  withr::local_envvar(MORIE_DATA_URL = "https://d.example.org/")
-  get_("/db1/t1.csv.gz", dest)
-  expect_identical(seen$headers[["Authorization"]], "Bearer sk-test")
   withr::local_envvar(MORIE_DATA_URL = NA)
   get_("/db1/t1.csv.gz", dest)
   expect_identical(seen$url, "https://d.example.org/db1/t1.csv.gz")
-  expect_identical(seen$headers[["Authorization"]], "Bearer sk-test")
+  expect_false("Authorization" %in% names(seen$headers))
+  expect_false(any(grepl("sk-", unlist(seen$headers), fixed = TRUE)))
+  ns <- environment(morie_hosted_manifest)
+  expect_false(exists(".morie_llm_hosted_key", ns, inherits = FALSE))
+  expect_false(exists("morie_llm_login", ns, inherits = FALSE))
 })

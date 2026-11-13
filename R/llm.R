@@ -10,8 +10,7 @@
 # rmoriebricklayer's, in the file it shares with rmorie (llm_config.R). The
 # model gets the help of rmorie, rmoriebricklayer and rmoriedata with tools to
 # read it. The Ollama helpers below are rmorie's own, for the modules that
-# check a local server; the key in the shared credentials file is the data key
-# for data.rmorie.com.
+# check a local server.
 
 .morie_llm_cache <- new.env(parent = emptyenv())
 
@@ -307,31 +306,8 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' @noRd
 .morie_httr2_note <- function() ""
 
-#' Internal helper: the credentials file shared with the Python package
-#' @noRd
-.morie_llm_credentials_path <- function() {
-  base <- trimws(Sys.getenv("XDG_CONFIG_HOME", unset = ""))
-  if (!nzchar(base)) base <- file.path(path.expand("~"), ".config")
-  file.path(base, "morie", "credentials.json")
-}
-
-#' Internal helper: read the credentials file (a named list, empty when absent)
-#' @noRd
-.morie_llm_read_credentials <- function() {
-  p <- .morie_llm_credentials_path()
-  if (!file.exists(p)) return(list())
-  out <- tryCatch(.morie_from_json(paste(readLines(p, warn = FALSE), collapse = "\n"),
-                                   simplifyVector = TRUE),
-                  error = function(e) NULL)
-  if (is.list(out)) out else list()
-}
-
-#' Internal helper: write the credentials file with owner-only permissions
-#' @noRd
-.morie_llm_write_credentials <- function(data) .morie_llm_write_private_json(.morie_llm_credentials_path(), data)
-
 #' Internal helper: write a JSON object to a file only its owner can read
-#' (credentials.json, llm.json)
+#' (llm.json)
 #' @noRd
 .morie_llm_write_private_json <- function(p, data) {
   dir.create(dirname(p), recursive = TRUE, showWarnings = FALSE)
@@ -343,15 +319,6 @@ morie_llm_request_completion <- function(base_url, model, messages,
   writeLines(if (length(data)) .morie_to_json(data, auto_unbox = TRUE, pretty = TRUE) else "{}", tmp)
   file.rename(tmp, p)
   invisible(p)
-}
-
-#' Internal helper: the data key for data.rmorie.com -- MORIE_HOSTED_KEY, else the stored credential
-#' @noRd
-.morie_llm_hosted_key <- function() {
-  v <- .morie_llm_env("MORIE_HOSTED_KEY")
-  if (nzchar(v)) return(v)
-  k <- .morie_llm_read_credentials()$hosted_key
-  if (is.character(k) && length(k) == 1L && nzchar(trimws(k))) trimws(k) else NULL
 }
 
 # ---- The route: rmoriebricklayer's -----------------------------------------
@@ -545,63 +512,6 @@ morie_llm_ask_multi <- function(messages, providers = NULL, model = NULL, timeou
 }
 
 # ---- The data key ------------------------------------------------------------
-
-#' Store a data key for data.rmorie.com
-#'
-#' Stores your MORIE data key for data.rmorie.com. The curated tables
-#' (\code{\link{morie_load_hosted_dataset}}) open without one; a stored key is
-#' still sent with each download. It is never a language
-#' model: those you bring yourself (\code{\link{morie_llm_config}}). With
-#' \code{token} the key you already hold is checked with the data service and
-#' stored; with \code{email} a one-time code is sent there; otherwise the GitHub
-#' device flow runs. The key is stored once, privately, for rmorie,
-#' rmoriebricklayer, rmoriedata and morie. This is
-#' \code{rmoriebricklayer::dlogin()}.
-#'
-#' @param open_browser Open the GitHub page in a browser.
-#' @param poll_max_seconds How long to wait for the GitHub approval.
-#' @param email An email address to send a sign-in code to.
-#' @param code The code that was emailed (asked for when not given).
-#' @param token A key you already hold.
-#' @param ... Passed to \code{rmoriebricklayer::dlogin()}: the data access terms
-#'   and who is asking, which a new key needs (\code{accept_terms}, \code{name},
-#'   \code{affiliation}, \code{purpose}, \code{restricted}, \code{supervisor_name},
-#'   \code{supervisor_role}, \code{supervisor_email}); what is not given is asked at the console.
-#' @return The key, invisibly.
-#' @examples
-#' \dontrun{
-#' morie_llm_login()                              # GitHub; asks for the terms, name and reason
-#' morie_llm_login(email = "you@example.org")     # an emailed code
-#' }
-#' @export
-morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600,
-                            email = NULL, code = NULL, token = NULL, ...) {
-  # rmoriebricklayer 1.0.0 takes these under short names; the names documented here are kept
-  args <- list(...)
-  long <- c(accept_terms = "accter", affiliation = "affil", purpose = "purp", restricted = "restr",
-            supervisor_name = "supnm", supervisor_role = "suprole", supervisor_email = "supemail")
-  hit <- names(args) %in% names(long)
-  names(args)[hit] <- long[names(args)[hit]]
-  do.call(rmoriebricklayer::dlogin, c(list(token = token, email = email, code = code,
-                                           openbro = open_browser, pollmaxsec = poll_max_seconds), args))
-}
-
-#' Forget the stored data key
-#' @return TRUE (invisibly) when a key was removed.
-#' @examples
-#' old <- Sys.getenv("XDG_CONFIG_HOME", unset = NA)
-#' Sys.setenv(XDG_CONFIG_HOME = tempfile())
-#' morie_llm_logout()
-#' if (is.na(old)) Sys.unsetenv("XDG_CONFIG_HOME") else Sys.setenv(XDG_CONFIG_HOME = old)
-#' @export
-morie_llm_logout <- function() rmoriebricklayer::dlogout()
-
-#' Internal helper: one line on how to get a data key
-#' @noRd
-.morie_llm_access_hint <- function() {
-  paste("sign in with `rmorie login` (GitHub, or --email ADDRESS for a code), or ask for a key at",
-        "https://rmorie.com/access; store one you hold with `rmorie login --token` (R: morie_llm_login(token = ))")
-}
 
 # ---- Your own endpoint, the older spelling --------------------------------------
 

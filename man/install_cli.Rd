@@ -19,7 +19,7 @@ The path of the installed launcher, invisibly.
 }
 \description{
 Links the launcher shipped in the package (\code{inst/bin/rmorie}) into a
-directory on your PATH so that \code{rmorie login}, \code{rmorie ask ...}
+directory on your PATH so that \code{rmorie ask ...}
 and the other verbs of \code{\link{morie_cli}} work from any shell. On
 Windows a \code{rmorie.cmd} wrapper is written instead of a symlink.
 }

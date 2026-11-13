@@ -55,6 +55,5 @@ jobs:
         run: R CMD INSTALL .
       - name: smoke
         env:
-          MORIE_SMOKE_KEY: ${{ secrets.MORIE_SMOKE_KEY }}
           MORIE_SMOKE_PKG: rmorie
         run: Rscript inst/smoke/smoke.R

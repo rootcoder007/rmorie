@@ -2,7 +2,6 @@
 # Every verb of morie_cli() is run for real in an empty HOME with assertions,
 # no mocks. Usage (package installed, or a source tree via pkgload):
 #   Rscript inst/smoke/smoke.R            # exit status 0 = every case passed
-#   MORIE_SMOKE_KEY=sk-... Rscript ...    # unlocks the data.rmorie.com cases
 # Verb coverage is enforced against the verbs listed by `help`.
 
 pkg <- Sys.getenv("MORIE_SMOKE_PKG", "rmorie")
@@ -18,8 +17,7 @@ setwd(work)
 Sys.setenv(HOME = home, XDG_CONFIG_HOME = file.path(home, "cfg"),
            XDG_CACHE_HOME = Sys.getenv("MORIE_SMOKE_CACHE", file.path(home, "cache")),
            MORIE_EMISSIONS_OFFLINE = "1", R_USER_CACHE_DIR = file.path(home, "rcache"))
-key <- Sys.getenv("MORIE_SMOKE_KEY", "")
-if (nzchar(key)) Sys.setenv(MORIE_HOSTED_KEY = key) else Sys.unsetenv("MORIE_HOSTED_KEY")
+Sys.unsetenv("MORIE_HOSTED_KEY")  # the curated tables need no key, and none is read
 for (v in c("LLM_API_BASE_URL", "LLM_API_KEY", "GEMINI_API_KEY", "OPENAI_API_KEY", "MORIE_DATA_DIR")) Sys.unsetenv(v)
 options(timeout = 3600)
 
@@ -45,7 +43,6 @@ case("version", function() { r <- run("version"); check(r$status == 0 && grepl(p
 case("list-modules", function() { r <- run("list-modules"); check(r$status == 0 && grepl("power-design", r$text), r$text) })
 case("list-datasets", function() {
   r <- run("list-datasets"); check(r$status == 0 && grepl("ocp21", r$text), substr(r$text, 1, 300))
-  if (nzchar(key)) check(grepl("data.rmorie.com", r$text), "hosted rows missing although a key is set")
 })
 case("cheatsheet", function() { r <- run("cheatsheet"); check(r$status == 0 && grepl("provider set", r$text), r$text) })
 case("explain", function() { r <- run("explain", "power_two_proportion_gender.csv"); check(r$status == 0 && grepl("effect size", r$text, fixed = TRUE) && grepl("Cohen's h", r$text, fixed = TRUE), r$text) })
@@ -78,12 +75,6 @@ case("chat", function() {
   r <- run("chat"); check(r$status == 0 && grepl("Bye", r$text), r$text)
 })
 case("tutorial", function() { r <- run("tutorial", "--dry-run"); check(r$status == 0 && grepl("STEP 3", r$text), substr(r$text, 1, 200)) })
-case("login", function() {
-  if (!nzchar(key)) { message("  login: SKIP (MORIE_SMOKE_KEY not set)"); return(invisible()) }
-  r <- run("login", "--token", key); check(r$status == 0, r$text)
-  check(file.exists(file.path(home, "cfg", "morie", "credentials.json")), "credentials file not written")
-})
-case("logout", function() { check(run("logout")$status == 0, "logout") })
 case("generate-template", function() {
   r <- run("generate-template", "--module", "hawkes", "--out", "paper/first.md")
   check(r$status == 0 && any(grepl("hawkes", readLines("paper/first.md"))), r$text)
@@ -110,9 +101,8 @@ case("pull", function() {
   r <- run("run-module", "descriptive-statistics", "--output-dir", "out1")
   check(r$status == 0, r$text)
   check(!grepl("synthetic", r$text, ignore.case = TRUE), "after the pull the module still used the synthetic frame")
-  if (nzchar(key)) {
-    r <- run("pull", "fec_cm_2020/fec_cm_2020", "--out", "fec.csv"); check(r$status == 0 && length(readLines("fec.csv")) > 1000, r$text)
-  } else message("  pull data.rmorie.com: SKIP (MORIE_SMOKE_KEY not set)")
+  # a curated table at data.rmorie.com: no sign-in, no key
+  r <- run("pull", "fec_cm_2020/fec_cm_2020", "--out", "fec.csv"); check(r$status == 0 && length(readLines("fec.csv")) > 1000, r$text)
 })
 case("run-modules", function() { r <- run("run-modules", "--modules", "power-design", "--output-dir", "out2"); check(r$status == 0 && grepl("power-design", r$text), r$text) })
 case("pipeline", function() {
@@ -203,7 +193,6 @@ case("verb-help", function() {
 })
 case("exec", function() { r <- run("exec", "6 * 7"); check(r$status == 0 && grepl("42", r$text), r$text) })
 case("ask-fallback-honest", function() {
-  if (nzchar(key)) return(invisible())
   r <- run("ask", "hello"); check(no_route(r), paste("with no model set up, ask must say how to bring one:", r$text))
 })
 case("selftest", function() { r <- run("selftest"); check(r$status == 0 && grepl("All tests passed", r$text), r$text) })

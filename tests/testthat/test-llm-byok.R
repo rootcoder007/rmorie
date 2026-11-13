@@ -15,16 +15,6 @@
   dir
 }
 
-test_that("the data key is written owner-only into the shared XDG file and forgotten at logout", {
-  dir <- .byok_sandbox()
-  p <- .morie_llm_write_credentials(list(hosted_key = "sk-test"))
-  expect_equal(p, file.path(dir, "morie", "credentials.json"))
-  if (.Platform$OS.type != "windows") expect_equal(as.character(file.info(p)$mode), "600")
-  expect_equal(.morie_llm_hosted_key(), "sk-test")
-  suppressMessages(morie_llm_logout())
-  expect_null(.morie_llm_hosted_key())
-})
-
 test_that("only an https address of a public host is handed to the browser, and server text never carries the key", {
   ok <- function(u) .morie_llm_browsable(u)
   expect_true(ok("https://github.com/login/device"))
@@ -135,18 +125,8 @@ test_that("ask_multi sends the conversation as it is; it falls back like ask", {
   expect_error(morie_llm_ask_multi("hi"))
 })
 
-test_that("login, the settings and your own endpoint are rmoriebricklayer's", {
+test_that("the settings and your own endpoint are rmoriebricklayer's", {
   .byok_sandbox()
-  seen <- NULL
-  testthat::local_mocked_bindings(
-    dlogin = function(token = NULL, email = NULL, code = NULL, openbro = FALSE,
-                                    pollmaxsec = 600) {
-      seen <<- list(token = token, email = email, code = code)
-      invisible("sk-k")
-    },
-    .package = "rmoriebricklayer")
-  expect_identical(morie_llm_login(email = "you@example.org", code = "123456"), "sk-k")
-  expect_identical(seen[c("email", "code")], list(email = "you@example.org", code = "123456"))
   # settings: saved through rmoriebricklayer, read back by rmorie's own helpers
   # the sandbox switches Ollama off in the environment, which wins (and saving under it warns so)
   withr::local_envvar(OLLAMA_HOST = NA)

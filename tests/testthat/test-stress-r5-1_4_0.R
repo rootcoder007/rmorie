@@ -103,13 +103,9 @@ test_that("exec, ask, provider and login: wording and exit codes", {
   expect_match(r$text, "nosuch-file.R: no such file")
   expect_equal(.cap("ask")$status, 2L)
   expect_equal(.cap("provider", "set", "--key", "k")$status, 2L)
-  local_mocked_bindings(.cli_readline = function(prompt) "", .package = utils::packageName(environment(morie_cli)))
   r <- .cap("login", "--token")
   expect_equal(r$status, 2L)
-  expect_match(r$text, "--token needs a (value|key)")   # the login verb is rmoriebricklayer's
-  local_mocked_bindings(.cli_readline = function(prompt) NA_character_, .package = utils::packageName(environment(morie_cli)))
-  expect_equal(.cap("login", "--token")$status, 2L)  # stdin closed
-  expect_error(morie_llm_login(email = "notanemail"), "'notanemail' is not an email address")
+  expect_match(r$text, "unknown verb 'login'")   # no sign-in: the curated tables need none
 })
 
 test_that("a missing file named in a failed write/read is reported by its path, without a leaked warning", {
