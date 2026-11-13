@@ -235,3 +235,22 @@ test_that("no key is ever sent: not one in the environment, not one stored earli
   expect_false(exists(".morie_llm_hosted_key", ns, inherits = FALSE))
   expect_false(exists("morie_llm_login", ns, inherits = FALSE))
 })
+
+test_that("the manifest file is parsed once and read again when its bytes change", {
+  p <- tempfile(fileext = ".json")
+  writeLines('{"datasets":[{"key":"a/b"}]}', p)
+  n <- 0L
+  real <- .morie_from_json
+  testthat::local_mocked_bindings(.morie_from_json = function(...) { n <<- n + 1L; real(...) }, .package = "rmorie")
+  expect_identical(.morie_data_read_manifest(p)$datasets[[1L]]$key, "a/b")
+  expect_identical(.morie_data_read_manifest(p)$datasets[[1L]]$key, "a/b")
+  expect_identical(n, 1L)
+  writeLines('{"datasets":[{"key":"c/d"}]}', p)
+  expect_identical(.morie_data_read_manifest(p)$datasets[[1L]]$key, "c/d")
+  expect_identical(n, 2L)
+  # a damaged file is an error and is not kept as the answer
+  writeLines('{"datasets":[', p)
+  expect_error(.morie_data_read_manifest(p))
+  writeLines('{"datasets":[{"key":"c/d"}]}', p)
+  expect_identical(.morie_data_read_manifest(p)$datasets[[1L]]$key, "c/d")
+})

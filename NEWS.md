@@ -1,5 +1,6 @@
 # rmorie 1.5.4 - 2026-11-11
 
+* The manifest of data.rmorie.com is parsed once per session and read again only when the cached file changes: with some 1,600 tables listed, every `morie_load_hosted_dataset()`, `morie_hosted_datasets()` and `rmorie list-datasets` call spent about 12 seconds parsing it again.
 * `morie_load_hosted_dataset()` checks a table against the manifest's SHA-256 whatever the field is called (`sha256_gz`, `sha256` or `sha`, as rmoriebricklayer and rmoriedata read it): it read `sha256` only, so the 631 tables listed with `sha256_gz` were used unchecked. A table the manifest lists without any digest is used with a warning that it was not checked.
 * A download refused with 429 (data.rmorie.com past its per-address rate) waits a minute before asking again, and 5 seconds after 503; a refusal (403, 404, 410) is no longer asked three times.
 * `morie_llm_login()`, `morie_llm_logout()` and the `rmorie login` and `rmorie logout` commands are gone, and no key is read or sent: every table at data.rmorie.com is open, so the sign-in asked for a name, a reason and an email or GitHub account for nothing. A key that an earlier version stored stays in its file, unread.

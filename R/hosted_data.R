@@ -149,11 +149,25 @@ morie_hosted_manifest <- function(refresh = FALSE) {
   p <- .morie_data_manifest_path()
   fresh <- file.exists(p) && as.numeric(difftime(Sys.time(), file.mtime(p), units = "secs")) < 86400
   if (!refresh && fresh) {
-    return(.morie_from_json(paste(readLines(p, warn = FALSE), collapse = "\n"), simplifyVector = FALSE))
+    return(.morie_data_read_manifest(p))
   }
   dir.create(dirname(p), recursive = TRUE, showWarnings = FALSE)
   .morie_data_get("/manifest.json", p, timeout = 60)
-  .morie_from_json(paste(readLines(p, warn = FALSE), collapse = "\n"), simplifyVector = FALSE)
+  .morie_data_read_manifest(p)
+}
+
+# The manifest file, parsed once and kept until the file's bytes change: parsing some 1,600 tables
+# takes seconds, and every hosted load reads the manifest for the table's SHA-256.
+.morie_data_memo <- new.env(parent = emptyenv())
+
+.morie_data_read_manifest <- function(p) {
+  id <- paste(normalizePath(p, mustWork = FALSE), unname(tools::md5sum(p)))
+  if (!identical(.morie_data_memo$id, id)) {
+    m <- .morie_from_json(paste(readLines(p, warn = FALSE), collapse = "\n"), simplifyVector = FALSE)
+    .morie_data_memo$m <- m
+    .morie_data_memo$id <- id
+  }
+  .morie_data_memo$m
 }
 
 #' Internal helper: the manifest if it was fetched before (no network, no key)
@@ -161,7 +175,7 @@ morie_hosted_manifest <- function(refresh = FALSE) {
 .morie_data_cached_manifest <- function() {
   p <- .morie_data_manifest_path()
   if (!file.exists(p)) return(NULL)
-  tryCatch(.morie_from_json(paste(readLines(p, warn = FALSE), collapse = "\n"), simplifyVector = FALSE),
+  tryCatch(.morie_data_read_manifest(p),
            error = function(e) NULL)
 }
 
