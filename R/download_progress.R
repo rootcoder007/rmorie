@@ -50,7 +50,9 @@
       error = function(e) e
     )
     if (!inherits(res, "error")) return(res)
-    if (attempt == attempts) stop(res)
+    wait <- .morie_dl_wait(conditionMessage(res), attempt)
+    # a refusal (403, 404, 410, ...) is the answer: asking again changes nothing
+    if (attempt == attempts || is.na(wait)) stop(res)
     if (!quiet) {
       # nothing arrived: the server was never reached; some bytes arrived: the transfer dropped
       what <- if (!file.exists(dest) || isTRUE(file.size(dest) == 0)) "could not reach the server" else "the transfer dropped"
@@ -59,8 +61,21 @@
           file = stderr())
     }
     unlink(dest)
-    Sys.sleep(attempt)
+    Sys.sleep(wait)
   }
+}
+
+# Seconds before asking again, from the error text (base R's url() gives the status line, not the
+# headers): a minute after 429, which is what data.rmorie.com's Retry-After asks past its
+# per-address rate; 5 after 503 (many clients fetching one table); NA for any other 4xx, a refusal
+# that is not asked again; else 1, 2, ... as before.
+.morie_dl_wait <- function(msg, attempt) {
+  code <- suppressWarnings(as.integer(sub(".*(HTTP status was '|HTTP error |HTTP )([0-9]{3}).*", "\\2", msg)))
+  if (is.na(code) || !grepl("[0-9]{3}", msg)) return(attempt)
+  if (code == 429L) return(60)
+  if (code == 503L) return(5)
+  if (code >= 400L && code < 500L && code != 408L) return(NA_real_)
+  attempt
 }
 
 .morie_dl_once <- function(url, dest, headers, label, size, timeout, quiet, tty) {

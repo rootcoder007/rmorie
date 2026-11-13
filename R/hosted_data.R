@@ -33,15 +33,20 @@
 }
 
 # A downloaded table is used only when it matches the manifest's SHA-256: the manifest is fetched
-# again once before a mismatch is final (a table rebuilt upstream has a new digest), and a table
-# the manifest lists without a digest is used as it is. A failing file is deleted.
+# again once before a mismatch is final (a table rebuilt upstream has a new digest). The digest is
+# of the compressed file as served, whatever the manifest calls the field (sha256_gz, sha256 or
+# sha, as rmoriebricklayer and rmoriedata read it); a table listed without one is used with a
+# warning that it was not checked. A failing file is deleted.
 .morie_data_check_sha <- function(key, path) {
   digest <- function(refresh) {
     m <- morie_hosted_manifest(refresh = refresh)
     for (d in m[["datasets"]] %||% list()) {
       if (identical(d[["key"]], key)) {
-        s <- d[["sha256"]]
-        return(if (is.character(s) && length(s) == 1L && nzchar(s)) tolower(s) else NA_character_)
+        for (f in c("sha256_gz", "sha256", "sha")) {
+          s <- d[[f]]
+          if (is.character(s) && length(s) == 1L && nzchar(s)) return(sub("^sha256:", "", tolower(s)))
+        }
+        return(NA_character_)
       }
     }
     NULL
@@ -50,14 +55,19 @@
     unlink(path)
     stop(key, " is not listed in the manifest of data.rmorie.com", call. = FALSE)
   }
+  unchecked <- function() {
+    warning(key, " is listed in the manifest of data.rmorie.com without a SHA-256: it is used unverified",
+            call. = FALSE)
+    invisible(TRUE)
+  }
   want <- digest(FALSE)
   if (is.null(want)) unlisted()
-  if (is.na(want)) return(invisible(TRUE))
+  if (is.na(want)) return(unchecked())
   have <- tolower(rmoriebricklayer::sha256file(path))
   if (!identical(have, want)) {
     want <- digest(TRUE)
     if (is.null(want)) unlisted()
-    if (is.na(want)) return(invisible(TRUE))
+    if (is.na(want)) return(unchecked())
   }
   if (!identical(have, want)) {
     unlink(path)

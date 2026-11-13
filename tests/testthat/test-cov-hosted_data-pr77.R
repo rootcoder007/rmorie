@@ -85,11 +85,11 @@ test_that("a table is checked against the manifest's SHA-256, with one refetch b
                sprintf("db1/t1 does not match the manifest's SHA-256 (%s... vs %s...)", substr(good, 1, 12), strrep("0", 12)),
                fixed = TRUE)
   expect_false(file.exists(g))
-  # the refreshed manifest lists the table without a digest: used as it is
+  # the refreshed manifest lists the table without a digest: used, with a warning that it was not checked
   .hd_write_cache(.hd_manifest(bad))
   served <- .hd_manifest("")
   g <- copy()
-  expect_true(chk("db1/t1", g))
+  expect_warning(expect_true(chk("db1/t1", g)), "db1/t1 is listed in the manifest .* without a SHA-256")
   expect_true(file.exists(g))
   # the refreshed manifest no longer lists it: deleted, and the error says so
   .hd_write_cache(.hd_manifest(bad))
@@ -105,8 +105,43 @@ test_that("a table is checked against the manifest's SHA-256, with one refetch b
   expect_false(file.exists(g))
   .hd_write_cache(list(datasets = list(list(key = "db1/t1", sha256 = NULL))))
   g <- copy()
-  expect_true(chk("db1/t1", g))
+  expect_warning(expect_true(chk("db1/t1", g)), "used unverified")
   expect_identical(fetched, n)
+  # the digest is read whatever the manifest calls the field: sha256_gz (631 tables carry only
+  # that one), sha256 or sha, with or without a "sha256:" prefix; a wrong one is refused in each
+  for (fld in c("sha256_gz", "sha256", "sha")) {
+    for (pre in c("", "sha256:")) {
+      .hd_write_cache(list(datasets = list(stats::setNames(list("db1/t1", paste0(pre, toupper(good))), c("key", fld)))))
+      g <- copy()
+      expect_silent(expect_true(chk("db1/t1", g)))
+      .hd_write_cache(list(datasets = list(stats::setNames(list("db1/t1", paste0(pre, bad)), c("key", fld)))))
+      served <- list(datasets = list(stats::setNames(list("db1/t1", paste0(pre, bad)), c("key", fld))))
+      g <- copy()
+      expect_error(chk("db1/t1", g), "does not match the manifest's SHA-256", info = paste(fld, pre))
+      expect_false(file.exists(g))
+    }
+  }
+})
+
+test_that("a busy answer waits as the service asks, a refusal is not asked again", {
+  w <- .hd(".morie_dl_wait")
+  expect_identical(w("cannot open URL 'https://x/y': HTTP status was '429 Too Many Requests'", 1L), 60)
+  expect_identical(w("cannot open URL 'https://x/y': HTTP status was '503 Service Unavailable'", 2L), 5)
+  expect_identical(w("cannot open URL 'https://x/y': HTTP status was '500 Internal Server Error'", 2L), 2L)
+  expect_identical(w("host is down", 1L), 1L)
+  for (code in c("401 Unauthorized", "403 Forbidden", "404 Not Found", "410 Gone")) {
+    expect_true(is.na(w(paste0("cannot open URL 'https://x/y': HTTP status was '", code, "'"), 1L)), info = code)
+  }
+  expect_identical(w("HTTP status was '408 Request Timeout'", 3L), 3L)
+  calls <- 0L
+  dest <- withr::local_tempfile()
+  testthat::local_mocked_bindings(
+    .morie_dl_once = function(...) {
+      calls <<- calls + 1L
+      stop("cannot open URL 'https://x/y': HTTP status was '404 Not Found'")
+    }, .package = "rmorie")
+  expect_error(.hd(".morie_dl")("https://x/y", dest, quiet = TRUE), "404 Not Found")
+  expect_identical(calls, 1L)
 })
 
 test_that("a refused download says no sign-in is needed, or gives the service's own message", {
