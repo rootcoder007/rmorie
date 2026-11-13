@@ -3,6 +3,15 @@
 
 .hwka_pkg <- if (isNamespaceLoaded("rmorie")) "rmorie" else "morie"
 .hwka <- function(name) get(name, envir = environment(morie_tps_hawkes_advanced_fit))
+# The fit warns when the branching ratio sits on its upper bound, as it does on
+# these simulated events with a constant baseline; that warning alone is let through.
+.eta_ok <- function(expr) {
+  withCallingHandlers(expr, warning = function(w) {
+    if (grepl("branching ratio eta sits on its upper bound", conditionMessage(w), fixed = TRUE)) {
+      invokeRestart("muffleWarning")
+    }
+  })
+}
 
 .hwka_events <- function(n = 160, seed = 7, rate = 1 / 1.6) {
   set.seed(seed)
@@ -89,7 +98,7 @@ test_that("time-rescaling residuals equal the C++ residuals of the fitted proces
   td <- .hwka(".tps_hwka_events_to_days")(.hwka_events())
   tr <- .hwka(".tps_hwka_time_rescaling")
   for (kb in list(c("exponential", "constant"), c("gamma", "sinusoidal"))) {
-    f <- .hwka(".tps_hwka_fit_one")(td$t, td$T_, kb[1], kb[2])
+    f <- .eta_ok(.hwka(".tps_hwka_fit_one")(td$t, td$T_, kb[1], kb[2]))
     u <- tr(f$theta, td$t, td$T_, kb[1], kb[2])
     expect_length(u, length(td$t))
     expect_true(all(u > 0 & u < 1))
@@ -183,8 +192,8 @@ test_that("the kernel comparison ranks the fitted combinations by AIC and keeps 
       real_fit(t, T_, kernel_kind, baseline_kind, ...)
     },
     .package = .hwka_pkg)
-  r <- morie_tps_compare_hawkes_kernels(df, ds_name = "sim", kernels = c("exponential", "weibull", "gamma"),
-                                        baselines = "constant")
+  r <- .eta_ok(morie_tps_compare_hawkes_kernels(df, ds_name = "sim", kernels = c("exponential", "weibull", "gamma"),
+                                                baselines = "constant"))
   rows <- r$payload$rows
   expect_length(rows, 3)
   expect_equal(vapply(rows, function(x) x$kernel, ""), c("exponential", "weibull", "gamma"))
@@ -202,7 +211,7 @@ test_that("the kernel comparison ranks the fitted combinations by AIC and keeps 
   expect_true(rows[[1]]$stationary_baseline)
   expect_match(r$title, "Markovian vs non-Markovian Hawkes -- sim")
   # without the Markovian row the delta is NA
-  r2 <- morie_tps_compare_hawkes_kernels(df, kernels = "gamma", baselines = "sinusoidal")
+  r2 <- .eta_ok(morie_tps_compare_hawkes_kernels(df, kernels = "gamma", baselines = "sinusoidal"))
   expect_true(is.na(r2$summary_lines$delta_aic_vs_markovian))
   # every combination failing leaves no best
   testthat::local_mocked_bindings(.tps_hwka_fit_one = function(...) stop("all refused"), .package = .hwka_pkg)

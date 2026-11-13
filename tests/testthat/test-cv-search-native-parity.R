@@ -162,12 +162,16 @@ test_that("native elastic-net path matches glmnet's path and coefficients", {
     expect_equal(pb$lambda, g2$lambda, tolerance = 1e-12)
     expect_equal(pm$lambda, g3$lambda, tolerance = 1e-12)
     # coefficients against a fully converged glmnet on the same lambdas
-    t1 <- glmnet::glmnet(d$x, d$yr, alpha = a, lambda = pg$lambda[-1],
-                         thresh = 1e-20, maxit = 1e7)
-    t2 <- glmnet::glmnet(d$x, factor(d$yb), family = "binomial", alpha = a,
-                         lambda = pb$lambda[-1], thresh = 1e-20, maxit = 1e7)
-    t3 <- glmnet::glmnet(d$x, d$y3, family = "multinomial", alpha = a,
-                         lambda = pm$lambda[-1], thresh = 1e-20, maxit = 1e7)
+    # newer glmnet takes thresh and maxit in control = list(); older ones as arguments
+    tight <- if ("control" %in% names(formals(glmnet::glmnet))) {
+      list(control = list(thresh = 1e-20, maxit = 1e7))
+    } else {
+      list(thresh = 1e-20, maxit = 1e7)
+    }
+    gfit <- function(...) do.call(glmnet::glmnet, c(list(...), tight))
+    t1 <- gfit(d$x, d$yr, alpha = a, lambda = pg$lambda[-1])
+    t2 <- gfit(d$x, factor(d$yb), family = "binomial", alpha = a, lambda = pb$lambda[-1])
+    t3 <- gfit(d$x, d$y3, family = "multinomial", alpha = a, lambda = pm$lambda[-1])
     expect_equal(pg$beta[, -1], unname(as.matrix(t1$beta)), tolerance = 1e-8)
     expect_equal(pg$a0[-1], unname(t1$a0), tolerance = 1e-8)
     expect_equal(pb$beta[, -1], unname(as.matrix(t2$beta)), tolerance = 1e-8)

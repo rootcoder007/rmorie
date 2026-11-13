@@ -7,6 +7,7 @@
 #include <string>
 #include <stdexcept>
 #include <thread>
+#include "morie_nopipe.h"
 
 namespace siu::http {
 namespace {
@@ -40,6 +41,7 @@ std::string perform(CURL* curl, const std::string& url) {
     for (int attempt = 0; attempt <= kMaxRetries; ++attempt) {
         std::string body;
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &body);
+        const MorieNoPipe nopipe_;  // a dropped connection is a transfer error, not SIGPIPE
         const CURLcode rc = curl_easy_perform(curl);
         if (rc != CURLE_OK) {
             throw std::runtime_error(std::string("curl: ") + curl_easy_strerror(rc));

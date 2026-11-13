@@ -15,6 +15,7 @@
 #include <cstddef>
 #include <string>
 #include <vector>
+#include "morie_nopipe.h"
 
 namespace morie {
 namespace http {
@@ -103,6 +104,7 @@ std::string get(const std::string& url,
   curl_easy_setopt(h, CURLOPT_WRITEFUNCTION, write_cb);
   curl_easy_setopt(h, CURLOPT_WRITEDATA, &buf);
 
+  const MorieNoPipe nopipe_;  // a dropped connection is a transfer error, not SIGPIPE
   const CURLcode rc = curl_easy_perform(h);
   curl_easy_cleanup(h);
   if (hdrs != nullptr) curl_slist_free_all(hdrs);
@@ -129,6 +131,7 @@ std::vector<uint8_t> get_bytes(const std::string& url,
   curl_easy_setopt(h, CURLOPT_WRITEFUNCTION, write_cb_bytes);
   curl_easy_setopt(h, CURLOPT_WRITEDATA, &buf);
 
+  const MorieNoPipe nopipe_;  // a dropped connection is a transfer error, not SIGPIPE
   const CURLcode rc = curl_easy_perform(h);
   curl_easy_cleanup(h);
   if (hdrs != nullptr) curl_slist_free_all(hdrs);
@@ -167,6 +170,7 @@ std::string post(const std::string& url,
   curl_easy_setopt(h, CURLOPT_POSTFIELDSIZE_LARGE,
                     static_cast<curl_off_t>(body.size()));
 
+  const MorieNoPipe nopipe_;  // a dropped connection is a transfer error, not SIGPIPE
   const CURLcode rc = curl_easy_perform(h);
   curl_easy_cleanup(h);
   if (hdrs != nullptr) curl_slist_free_all(hdrs);
@@ -190,6 +194,7 @@ Response get_with_status(const std::string& url,
   curl_easy_setopt(h, CURLOPT_WRITEFUNCTION, write_cb);
   curl_easy_setopt(h, CURLOPT_WRITEDATA, &out.body);
 
+  const MorieNoPipe nopipe_;  // a dropped connection is a transfer error, not SIGPIPE
   const CURLcode rc = curl_easy_perform(h);
   if (rc == CURLE_OK) {
     curl_easy_getinfo(h, CURLINFO_RESPONSE_CODE, &out.status_code);
@@ -228,6 +233,7 @@ Response post_with_status(const std::string& url,
   curl_easy_setopt(h, CURLOPT_POSTFIELDSIZE_LARGE,
                     static_cast<curl_off_t>(body.size()));
 
+  const MorieNoPipe nopipe_;  // a dropped connection is a transfer error, not SIGPIPE
   const CURLcode rc = curl_easy_perform(h);
   if (rc == CURLE_OK) {
     curl_easy_getinfo(h, CURLINFO_RESPONSE_CODE, &out.status_code);

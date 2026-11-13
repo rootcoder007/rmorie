@@ -18,6 +18,13 @@
   stats::rnorm(n, mu[s], sd[s])
 }
 
+# The largest absolute difference: the tolerances below are absolute (testthat 3
+# has no `scale` argument; passing one only warned "Unused arguments").
+.adiff <- function(a, b) {
+  stopifnot(length(a) == length(b))
+  max(abs(as.numeric(a) - as.numeric(b)))
+}
+
 test_that("morie_regime_switching reaches MSwM's EM optimum", {
   skip_if_not_installed("MSwM")
   Ptrue <- matrix(c(0.95, 0.05, 0.10, 0.90), 2, byrow = TRUE)
@@ -34,12 +41,11 @@ test_that("morie_regime_switching reaches MSwM's EM optimum", {
       control = list(parallelization = FALSE, maxiter = 2000, tol = 1e-12)
     ))
     o <- order(f@Coef[, 1])
-    expect_equal(r$loglik, -f@Fit@logLikel, tolerance = 1e-4, scale = 1)
-    expect_equal(r$mu, f@Coef[o, 1], tolerance = 1e-5, scale = 1)
-    expect_equal(r$sigma, f@std[o], tolerance = 1e-5, scale = 1)
-    expect_equal(r$transition, f@transMat[o, o], tolerance = 1e-5, scale = 1)
-    expect_equal(r$smoothed_probabilities, f@Fit@smoProb[-1, o],
-                 tolerance = 1e-5, scale = 1)
+    expect_lte(.adiff(r$loglik, -f@Fit@logLikel), 1e-4)
+    expect_lte(.adiff(r$mu, f@Coef[o, 1]), 1e-5)
+    expect_lte(.adiff(r$sigma, f@std[o]), 1e-5)
+    expect_lte(.adiff(r$transition, f@transMat[o, o]), 1e-5)
+    expect_lte(.adiff(r$smoothed_probabilities, f@Fit@smoProb[-1, o]), 1e-5)
   }
 })
 
@@ -55,7 +61,7 @@ test_that("morie_regime_switching matches MSwM's default-control fit", {
   r <- morie_regime_switching(y)
   # MSwM's default tol = 1e-8 is relative, so its log-likelihood is
   # within ~1e-6 of the fixed point the native EM converges to.
-  expect_equal(r$loglik, -f@Fit@logLikel, tolerance = 1e-4, scale = 1)
+  expect_lte(.adiff(r$loglik, -f@Fit@logLikel), 1e-4)
 })
 
 test_that("morie_regime_switching output is well formed without MSwM", {

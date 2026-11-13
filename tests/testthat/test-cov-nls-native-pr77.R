@@ -19,7 +19,8 @@ test_that("the model reader refuses a bad formula, start or length, in words", {
                "unknown control settings: foo", fixed = TRUE)
   expect_error(morie_nls(y ~ a * exp(-b * x), d[1:2, ], c(a = 1, b = 1)), "need more observations than parameters.",
                fixed = TRUE)
-  expect_error(morie_nls(y ~ a * log(x - 1), d, c(a = 1)),
+  # log() of a negative number warns "NaNs produced" before the model is refused
+  expect_error(suppressWarnings(morie_nls(y ~ a * log(x - 1), d, c(a = 1))),
                "missing or infinite values in the model at the starting values.", fixed = TRUE)
   expect_error(morie_nls(y ~ (a * b) * x, d, c(a = 1, b = 1)),
                "singular gradient matrix at initial parameter estimates.", fixed = TRUE)

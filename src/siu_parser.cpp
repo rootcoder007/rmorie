@@ -16,6 +16,7 @@
 #include <regex>
 #include <string>
 #include <vector>
+#include "morie_nopipe.h"
 
 // parser_version stamped into every emitted row.
 #define MORIE_SIU_PARSER_VERSION "1.0.0"
@@ -70,6 +71,7 @@ std::string siu_http_get(std::string url, int timeout_s = 60) {
   curl_easy_setopt(h, CURLOPT_USERAGENT, kUserAgent);
   curl_easy_setopt(h, CURLOPT_ACCEPT_ENCODING, "");  // all supported
   curl_easy_setopt(h, CURLOPT_NOSIGNAL, 1L);
+  const MorieNoPipe nopipe_;  // a dropped connection is a transfer error, not SIGPIPE
   const CURLcode rc = curl_easy_perform(h);
   curl_easy_cleanup(h);
   if (rc != CURLE_OK) return std::string();

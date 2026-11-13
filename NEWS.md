@@ -5,6 +5,7 @@
 * The type-7 quantile helpers behind several methods (bandwidth rules, the Monte Carlo spatial test, the SAR diagnostics, DESeq2 size factors, flow analysis, MFOV smoothing, PIBMD, quantile mapping, the BCa order statistic, the Westenberg test's quartiles and the trajectory outlier range, among others) agree with `quantile(type = 7)` when the data hold an infinite value: they returned `NaN` beside one, and `Inf` when two finite values differed by more than the largest double. The same fix rmoriebricklayer 1.1.1 made to `cqnt()`, `cmed()`, `ciqr()` and `ctkyfnc()`; finite results are unchanged.
 * Needs rmoriebricklayer 1.1.1 or later.
 * Version kept in step with morie 1.5.4.
+* A connection the remote end closes in the middle of a transfer is reported as a failed download that names the address; it used to stop with R's "ignoring SIGPIPE signal", because the handles set libcurl's no-signal option without ignoring that signal themselves.
 
 # rmorie 1.5.3 - 2026-11-01
 

@@ -26,7 +26,8 @@ test_that("perturbations of the data never cost the maximum", {
     set.seed(i)
     d$distance <- d$distance * (1 + 10^-(8 + i %% 5) * stats::rnorm(nrow(d)))
     a <- as.numeric(morie_lmm(distance ~ age + (age | Subject), d)$logLik)
-    b <- as.numeric(stats::logLik(lme4::lmer(distance ~ age + (age | Subject), d)))
+    # lme4 may warn about its own convergence; only its log-likelihood is compared
+    b <- as.numeric(stats::logLik(suppressWarnings(lme4::lmer(distance ~ age + (age | Subject), d))))
     expect_lt(b - a, 1e-5, label = sprintf("perturbation %d", i))
   }
 })
