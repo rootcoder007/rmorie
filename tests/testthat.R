@@ -20,8 +20,48 @@ library(rmorie)
 # developer machines) always runs every file.
 mac_x86 <- identical(Sys.info()[["sysname"]], "Darwin") && identical(R.version$arch, "x86_64")
 slow_runner <- !identical(Sys.getenv("NOT_CRAN"), "true")
-if (!slow_runner) {
+# One R process never gives memory back. The package's own CI runs the suite without
+# parallel workers (TESTTHAT_PARALLEL=FALSE), so every test file ran in a single process
+# whose memory only grew; on 2026-11-13 a hosted runner stopped answering part-way through
+# the check ("lost communication with the server"), which is what a machine out of memory
+# looks like from outside. The full suite therefore runs in batches of test files, each
+# batch in a fresh R process: the peak is the largest batch's, not the whole suite's.
+# Inside a batch testthat runs as it did before (parallel workers where they are on, one
+# process where they are off), and covr still counts every line, because each process that
+# loads the instrumented package writes its own trace file. MORIE_TEST_BATCH sets the
+# number of files in a batch (default 100); MORIE_TEST_BATCH=0 runs the suite in one
+# process, as before.
+batch <- suppressWarnings(as.integer(Sys.getenv("MORIE_TEST_BATCH", "100")))
+if (!slow_runner && (is.na(batch) || batch <= 0L)) {
   test_check("rmorie")
+} else if (!slow_runner) {
+  files <- sort(list.files("testthat", "^test.*\\.[rR]$"))
+  names <- sub("^test[-_]?", "", sub("\\.[rR]$", "", files))
+  groups <- split(names, ceiling(seq_along(names) / batch))
+  rscript <- file.path(R.home("bin"), "Rscript")
+  # a child R must not read R CMD check's startup file (R_TESTS); unset here, not through
+  # system2(env =), which Windows ignores
+  Sys.unsetenv("R_TESTS")
+  child <- tempfile(fileext = ".R")
+  writeLines(c(
+    "testthat::test_dir(",
+    "  'testthat', package = 'rmorie', load_package = 'installed',",
+    "  filter = Sys.getenv('MORIE_TEST_FILTER'),",
+    "  reporter = testthat::check_reporter(), stop_on_failure = TRUE",
+    ")"
+  ), child)
+  failed <- character()
+  for (i in seq_along(groups)) {
+    g <- groups[[i]]
+    # test file names are letters, digits, "_", "-" and "."; only "." is special
+    filter <- paste0("^(", paste(gsub(".", "\\.", g, fixed = TRUE), collapse = "|"), ")$")
+    Sys.setenv(MORIE_TEST_FILTER = filter)
+    cat(sprintf("test batch %d of %d: %d files, from %s\n", i, length(groups), length(g), g[1L]))
+    if (!identical(system2(rscript, shQuote(child)), 0L)) failed <- c(failed, g[1L])
+  }
+  if (length(failed)) {
+    stop("tests failed in the batches starting at: ", toString(failed), call. = FALSE)
+  }
 } else {
   # test_dir() reads Config/testthat/parallel from the DESCRIPTION; the budgeted run is
   # one process, so it starts no workers that could stall
