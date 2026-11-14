@@ -43,3 +43,25 @@ test_that("flat columns still decode after the schema walk change", {
   expect_equal(back$b, c("x", "y", NA))
   expect_equal(back$c, c(1.5, NA, 3))
 })
+
+test_that("a damaged LIST file is refused with a parquet: error, never a base-R one", {
+  set.seed(7)
+  for (fx in c("list_snappy", "list_dict", "list_plain")) {
+    p <- .pq_fixture(fx)
+    bytes <- readBin(p, "raw", file.size(p))
+    for (i in seq_len(150L)) {
+      m <- bytes
+      if (i %% 3L == 0L) {
+        m <- m[seq_len(sample.int(length(m) - 1L, 1L))]
+      } else {
+        j <- sample.int(length(m), 1L)
+        m[j] <- as.raw(sample.int(256L, 1L) - 1L)
+      }
+      f <- tempfile(fileext = ".parquet")
+      writeBin(m, f)
+      res <- tryCatch(morie_read_parquet(f), error = function(e) conditionMessage(e))
+      unlink(f)
+      if (is.character(res)) expect_match(res, "^parquet: ", info = paste(fx, i))
+    }
+  }
+})

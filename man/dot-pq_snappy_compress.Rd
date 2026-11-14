@@ -2,22 +2,23 @@
 % Please edit documentation in R/aaa_parquet.R
 \name{.pq_snappy_compress}
 \alias{.pq_snappy_compress}
-\title{Literal-only stream: fully conformant, just does not shrink}
+\title{Snappy compression in C (src/snappy.c)}
 \usage{
 .pq_snappy_compress(data)
 }
 \arguments{
-\item{data}{A vector; its length is taken and its elements indexed.}
+\item{data}{A raw vector.}
 }
 \value{
-The value of \code{do.call}.
+A raw vector, the snappy stream.
 }
 \description{
-ponytail: no match-finder; add one if written size ever matters.
+The reference greedy compressor: a 4-byte hash per 64 KiB block and
+2-byte-offset copies.
 }
 \examples{
-x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+x <- charToRaw(strrep("abc", 20))
 res <- .pq_snappy_compress(data = x)
-res
+identical(.pq_snappy_decompress(res), x)
 }
 \keyword{internal}

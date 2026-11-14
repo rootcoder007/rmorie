@@ -13,21 +13,23 @@ morie_read_parquet(path, columns = NULL)
 the rest are skipped entirely.}
 }
 \value{
-A \code{data.frame}.
+A \code{data.frame}. Every error the reader raises, a missing or
+damaged file included, starts with \verb{parquet:}; no base-R warning escapes
+it (a value a damaged file makes R warn about is an error instead).
 }
 \description{
 Native Parquet reader: no nanoparquet, no arrow. Handles the v1
-format with PLAIN, RLE and dictionary encodings, Snappy or no
-compression. Flat columns and three-level \code{LIST} columns of a
-primitive type are decoded; a \code{LIST} column comes back as a
-list column (class \code{AsIs}) holding one vector per row,
+format with PLAIN, RLE and dictionary encodings, GZIP, Snappy, Zstandard
+(ZSTD) or no compression. ZSTD pages are read by a decoder in the package
+(RFC 8878, without dictionaries), so no other package is needed for them;
+the writer does not write ZSTD. Flat columns and three-level \code{LIST}
+columns of a primitive type are decoded; a \code{LIST} column comes back
+as a list column (class \code{AsIs}) holding one vector per row,
 \code{NULL} for a null list. Other nesting is refused.
 }
 \examples{
-if (requireNamespace("arrow", quietly = TRUE)) {
-  df <- data.frame(a = 1:3, b = c("x", "y", "z"), stringsAsFactors = FALSE)
-  p <- tempfile(fileext = ".parquet")
-  morie_write_parquet(df, p)
-  morie_read_parquet(p)
-}
+df <- data.frame(a = 1:3, b = c("x", "y", "z"), stringsAsFactors = FALSE)
+p <- tempfile(fileext = ".parquet")
+morie_write_parquet(df, p)
+morie_read_parquet(p)
 }

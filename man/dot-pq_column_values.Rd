@@ -4,7 +4,18 @@
 \alias{.pq_column_values}
 \title{.pq_column_values}
 \usage{
-.pq_column_values(con, cm, num_rows, maxdef, typelen, maxrep = 0L, repdef = 0L)
+.pq_column_values(
+  con,
+  cm,
+  num_rows,
+  maxdef,
+  typelen,
+  stype,
+  fsize,
+  cname,
+  maxrep = 0L,
+  repdef = 0L
+)
 }
 \arguments{
 \item{con}{Passed to \code{seek}.}
@@ -16,6 +27,12 @@
 \item{maxdef}{Largest definition level of the leaf.}
 
 \item{typelen}{Passed to \code{.pq_decode_plain}.}
+
+\item{stype}{The physical type the schema declares for the column.}
+
+\item{fsize}{The size of the file in bytes.}
+
+\item{cname}{The column's name, for error messages.}
 
 \item{maxrep}{Largest repetition level of the leaf (0 for flat).}
 

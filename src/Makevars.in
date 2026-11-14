@@ -18,7 +18,7 @@ PKG_CPPFLAGS = @cflags@
 # header-only inline calls slip past that check and the symbols stay
 # unresolved). Restore --as-needed after for the Fortran runtime so we
 # don't carry libgfortran as a hard dep if it's not actually used.
-PKG_LIBS = @libs@ @as_needed_open@ $(LAPACK_LIBS) $(BLAS_LIBS) @as_needed_close@ $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS)
+PKG_LIBS = @libs@ -lz @as_needed_open@ $(LAPACK_LIBS) $(BLAS_LIBS) @as_needed_close@ $(FLIBS) $(SHLIB_OPENMP_CXXFLAGS)
 
 # Header dependencies. R's default rules rebuild an object when its .cpp
 # changes but not when a header it includes changes; a warm build then

@@ -1,5 +1,15 @@
 # Native Apache Parquet reader and writer for R.
 #
+# VENDORED COPY. The same code as R/aaa_parquet.R in rmoriedata, which
+# is copied into morie/r-package/morie/R by the R-arm sync, with the same
+# C codecs (src/snappy.c, src/gzip.c, src/zstd.c). What differs, on
+# purpose: here every function carries roxygen and the two entry points
+# are exported (rmoriedata keeps them internal: rmorie Imports rmoriedata,
+# and exporting the same names from both would mask on the search path),
+# and this reader also reads three-level LIST columns of a primitive type
+# (the A2AJ citation fields), which rmoriedata's refuses. Fix bugs in all
+# three copies.
+#
 # The R side of the family read and wrote Parquet through nanoparquet::
 # (11 read calls and 5 write calls in rmoriedata alone). This file
 # removes that dependency and is the R arm of the Python
@@ -10,12 +20,14 @@
 # format v1.0, encodings PLAIN / RLE_DICTIONARY / RLE, SNAPPY
 # compression, physical types BYTE_ARRAY / INT32 / INT64 / BOOLEAN /
 # DOUBLE. FLOAT, INT96, FIXED_LEN_BYTE_ARRAY and uncompressed pages are
-# also handled. Nested and repeated columns are refused rather than
+# also handled. GZIP pages are read through zlib, and ZSTD pages
+# (read only) through src/zstd.c, a decoder written from RFC 8878.
+# Other nested and repeated columns are refused rather than
 # guessed at, because decoding a repeated column as flat would return a
 # wrong row count instead of an error.
 #
 # References: parquet-format/parquet.thrift (field ids), the Thrift
-# compact protocol spec, and google/snappy/format_description.txt.
+# compact protocol spec, google/snappy/format_description.txt and RFC 8878.
 #
 # ponytail: pure R, no compiled code. The snappy tag loop and the RLE
 # bit-unpacker are the only hot spots; move those to src/ if a file
@@ -57,7 +69,27 @@
   e <- new.env(parent = emptyenv())
   e$buf <- buf
   e$pos <- pos
+  e$depth <- 0L
   e
+}
+
+# Every read is bounds-checked: subsetting a raw vector past its end yields 00 bytes, not
+# an error, and a reader built on that silently turns a truncated or lying file into wrong
+# data. These are the only ways the decoder touches bytes.
+.pq_need <- function(e, n) {
+  if (!is.finite(n) || n < 0 || e$pos + n - 1 > length(e$buf)) {
+    stop("parquet: truncated or corrupt metadata (", n, " bytes needed at byte ",
+         e$pos, " of ", length(e$buf), ")", call. = FALSE)
+  }
+  invisible()
+}
+
+.pq_slice <- function(buf, pos, n, what = "data") {
+  if (!is.finite(n) || n < 0 || !is.finite(pos) || pos < 1 || pos + n - 1 > length(buf)) {
+    stop("parquet: ", what, " runs past the end of its page or chunk (", n,
+         " bytes at ", pos, " of ", length(buf), ")", call. = FALSE)
+  }
+  if (n == 0) raw(0) else buf[seq.int(pos, length.out = n)]
 }
 
 #' .pq_byte
@@ -71,6 +103,7 @@
 #' @export
 #' @keywords internal
 .pq_byte <- function(e) {
+  .pq_need(e, 1)
   b <- as.integer(e$buf[e$pos])
   e$pos <- e$pos + 1L
   b
@@ -96,6 +129,10 @@
       return(result)
     }
     shift <- shift + 7
+    # a 64-bit value takes at most 10 bytes; anything longer is not a varint
+    if (shift > 63) {
+      stop("parquet: varint longer than 10 bytes at byte ", e$pos, call. = FALSE)
+    }
   }
 }
 
@@ -126,7 +163,8 @@
 #' @keywords internal
 .pq_binary <- function(e) {
   n <- .pq_varint(e)
-  out <- e$buf[seq.int(e$pos, length.out = n)]
+  .pq_need(e, n)
+  out <- if (n == 0) raw(0) else e$buf[seq.int(e$pos, length.out = n)]
   e$pos <- e$pos + n
   out
 }
@@ -141,6 +179,7 @@
 #' @export
 #' @keywords internal
 .pq_double <- function(e) {
+  .pq_need(e, 8)
   v <- readBin(e$buf[seq.int(e$pos, length.out = 8L)], "double",
     n = 1L, size = 8L, endian = "little"
   )
@@ -193,6 +232,13 @@
   )
 }
 
+# A list or map holds values that may be lists, maps or structs again: the same
+# depth cap as .pq_struct, or 5000 nested list headers overflow R's stack.
+.pq_deeper <- function(e) {
+  e$depth <- e$depth + 1L
+  if (e$depth > 64L) stop("parquet: metadata nested deeper than 64 levels", call. = FALSE)
+}
+
 #' .pq_list
 #'
 #' A step of the parquet implementation. Called by \code{.pq_scalar}.
@@ -203,12 +249,19 @@
 #' @export
 #' @keywords internal
 .pq_list <- function(e) {
+  .pq_deeper(e)
+  on.exit(e$depth <- e$depth - 1L)
   h <- .pq_byte(e)
   size <- bitwShiftR(h, 4L)
   etype <- bitwAnd(h, 15L)
   if (size == 15L) size <- .pq_varint(e)
   if (size == 0) {
     return(list())
+  }
+  # every element takes at least one byte, booleans included
+  if (size > length(e$buf) - e$pos + 1) {
+    stop("parquet: list of ", size, " elements in ", length(e$buf) - e$pos + 1,
+         " remaining bytes", call. = FALSE)
   }
   lapply(seq_len(size), function(i) .pq_scalar(e, etype))
 }
@@ -223,9 +276,17 @@
 #' @export
 #' @keywords internal
 .pq_map <- function(e) {
+  .pq_deeper(e)
+  on.exit(e$depth <- e$depth - 1L)
   size <- .pq_varint(e)
   if (size == 0) {
     return(list())
+  }
+  # a map entry is at least a key byte and a value byte; a 21-byte file claiming 2^56
+  # entries used to loop until killed
+  if (size > (length(e$buf) - e$pos) / 2) {
+    stop("parquet: map of ", size, " entries in ", length(e$buf) - e$pos + 1,
+         " remaining bytes", call. = FALSE)
   }
   kv <- .pq_byte(e)
   ktype <- bitwShiftR(kv, 4L)
@@ -249,6 +310,8 @@
 #' @export
 #' @keywords internal
 .pq_struct <- function(e) {
+  .pq_deeper(e)
+  on.exit(e$depth <- e$depth - 1L)
   out <- list()
   fid <- 0L
   repeat {
@@ -355,6 +418,27 @@
   .pq_wvarint(e, if (n < 0) -2 * n - 1 else 2 * n)
 }
 
+# The bytes of a string as UTF-8, which is what a Parquet string is by
+# definition. A string marked latin1 (or UTF-8) is transcoded by
+# enc2utf8(); an unmarked string is written byte for byte when it already
+# is valid UTF-8 (what read.csv() and the store give), because enc2utf8()
+# would translate it from the native encoding, and in a C locale that
+# turns every non-ASCII byte into its "<c3><a9>" display form. Unmarked
+# bytes that are not UTF-8 are refused: written through they make a file
+# no conforming reader opens, escaped they lose the data.
+.pq_utf8 <- function(s, what = "a column") {
+  s <- as.character(s)
+  marked <- !is.na(s) & Encoding(s) != "unknown"
+  if (any(marked)) s[marked] <- enc2utf8(s[marked])
+  bad <- !is.na(s) & !validUTF8(s)
+  if (any(bad)) {
+    stop(what, " holds a string that is not valid UTF-8 (Parquet strings ",
+         "are UTF-8): set its encoding with Encoding()<- or convert it ",
+         "with iconv() before writing.", call. = FALSE)
+  }
+  s
+}
+
 #' .pq_wbinary
 #'
 #' A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wlistbin}.
@@ -366,7 +450,7 @@
 #' @export
 #' @keywords internal
 .pq_wbinary <- function(e, b) {
-  if (is.character(b)) b <- charToRaw(enc2utf8(b))
+  if (is.character(b)) b <- charToRaw(.pq_utf8(b))
   .pq_wvarint(e, length(b))
   .pq_emit(e, b)
 }
@@ -563,131 +647,35 @@
 
 #' .pq_snappy_decompress
 #'
-#' A step of the parquet implementation. Called by \code{.pq_column_values}.
-#' See the file header for the source the module follows.
+#' Snappy decompression in C (src/snappy.c): every snappy tag, literals and
+#' 1-, 2- and 4-byte-offset copies. Called by \code{.pq_column_values}.
 #'
-#' @param data A vector; its length is taken and its elements indexed.
-#' @return The value of \code{out}, as built in the body.
+#' @param data A raw vector, a snappy stream.
+#' @return A raw vector.
 #' @export
 #' @keywords internal
 .pq_snappy_decompress <- function(data) {
-  pos <- 1L
-  n <- 0
-  shift <- 0
-  repeat {
-    b <- as.integer(data[pos])
-    pos <- pos + 1L
-    n <- n + bitwAnd(b, 127L) * 2^shift
-    if (bitwAnd(b, 128L) == 0L) break
-    shift <- shift + 7
-  }
-
-  out <- raw(n)
-  o <- 0L
-  total <- length(data)
-  while (pos <= total) {
-    tag <- as.integer(data[pos])
-    pos <- pos + 1L
-    kind <- bitwAnd(tag, 3L)
-    if (kind == 0L) { # literal
-      ln <- bitwShiftR(tag, 2L)
-      if (ln >= 60L) {
-        extra <- ln - 59L
-        ln <- sum(as.integer(data[seq.int(pos, length.out = extra)]) *
-          256^(seq_len(extra) - 1L))
-        pos <- pos + extra
-      }
-      ln <- ln + 1L
-      out[seq.int(o + 1L, length.out = ln)] <-
-        data[seq.int(pos, length.out = ln)]
-      pos <- pos + ln
-      o <- o + ln
-      next
-    }
-    if (kind == 1L) { # 1-byte offset
-      ln <- 4L + bitwAnd(bitwShiftR(tag, 2L), 7L)
-      off <- bitwShiftL(bitwShiftR(tag, 5L), 8L) + as.integer(data[pos])
-      pos <- pos + 1L
-    } else if (kind == 2L) { # 2-byte offset
-      ln <- bitwShiftR(tag, 2L) + 1L
-      off <- as.integer(data[pos]) + 256L * as.integer(data[pos + 1L])
-      pos <- pos + 2L
-    } else { # 4-byte offset
-      ln <- bitwShiftR(tag, 2L) + 1L
-      off <- sum(as.integer(data[seq.int(pos, length.out = 4L)]) *
-        256^(0:3))
-      pos <- pos + 4L
-    }
-    if (off <= 0 || off > o) {
-      stop("snappy: bad copy offset ", off, call. = FALSE)
-    }
-    start <- o - off
-    if (off >= ln) {
-      # Non-overlapping: one vectorised move.
-      out[seq.int(o + 1L, length.out = ln)] <-
-        out[seq.int(start + 1L, length.out = ln)]
-    } else {
-      # Overlapping copies are how snappy encodes runs, so the source
-      # grows as it is read and this has to go a byte at a time.
-      for (i in seq_len(ln)) out[o + i] <- out[start + i]
-    }
-    o <- o + ln
-  }
-  if (o != n) {
-    stop("snappy: expected ", n, " bytes, decoded ", o, call. = FALSE)
-  }
-  out
+  # src/snappy.c: every snappy tag (literals, 1-, 2- and 4-byte-offset copies)
+  .Call(C_rmd_snappy_decompress, data)
 }
 
-#' Literal-only stream: fully conformant, just does not shrink
+#' Snappy compression in C (src/snappy.c)
 #'
-#' ponytail: no match-finder; add one if written size ever matters.
+#' The reference greedy compressor: a 4-byte hash per 64 KiB block and
+#' 2-byte-offset copies.
 #'
-#' @param data A vector; its length is taken and its elements indexed.
-#' @return The value of \code{do.call}.
+#' @param data A raw vector.
+#' @return A raw vector, the snappy stream.
 #' @export
 #' @examples
-#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' x <- charToRaw(strrep("abc", 20))
 #' res <- .pq_snappy_compress(data = x)
-#' res
+#' identical(.pq_snappy_decompress(res), x)
 #' @keywords internal
 .pq_snappy_compress <- function(data) {
-  # Literal-only stream: fully conformant, just does not shrink.
-  # ponytail: no match-finder; add one if written size ever matters.
-  out <- list()
-  k <- 0L
-  n <- length(data)
-  hdr <- raw(0)
-  m <- n
-  repeat {
-    if (m < 128) {
-      hdr <- c(hdr, as.raw(m))
-      break
-    }
-    hdr <- c(hdr, as.raw(bitwOr(as.integer(m %% 128), 128L)))
-    m <- m %/% 128
-  }
-  k <- k + 1L
-  out[[k]] <- hdr
-
-  pos <- 0L
-  while (pos < n) {
-    chunk <- min(n - pos, 65536L)
-    ln <- chunk - 1L
-    if (ln < 60L) {
-      tag <- as.raw(bitwShiftL(ln, 2L))
-    } else if (ln < 256L) {
-      tag <- c(as.raw(240L), as.raw(ln))
-    } else {
-      tag <- c(as.raw(244L), as.raw(ln %% 256L), as.raw(ln %/% 256L))
-    }
-    k <- k + 1L
-    out[[k]] <- tag
-    k <- k + 1L
-    out[[k]] <- data[seq.int(pos + 1L, length.out = chunk)]
-    pos <- pos + chunk
-  }
-  do.call(base::c, out)
+  # src/snappy.c: the reference greedy compressor (4-byte hash per 64 KiB block,
+  # 2-byte-offset copies)
+  .Call(C_rmd_snappy_compress, data)
 }
 
 # ------------------------------------------------------------- constants
@@ -707,6 +695,8 @@
 .pqERleDict <- 8L
 .pqCUncompressed <- 0L
 .pqCSnappy <- 1L
+.pqCGzip <- 2L
+.pqCZstd <- 6L
 .pqRequired <- 0L
 .pqOptional <- 1L
 .pqRepeated <- 2L
@@ -780,6 +770,8 @@
   if (width == 0L) {
     return(list(values = rep(0L, count), pos = pos))
   }
+  if (width > 32L) stop("parquet: RLE bit width ", width, " above 32", call. = FALSE)
+  end <- min(end, length(buf))
   out <- integer(count)
   o <- 0L
   nbytes <- (width + 7L) %/% 8L
@@ -787,43 +779,47 @@
     header <- 0
     shift <- 0
     repeat {
+      if (pos > end) stop("parquet: RLE run header runs past its data", call. = FALSE)
       b <- as.integer(buf[pos])
       pos <- pos + 1L
       header <- header + bitwAnd(b, 127L) * 2^shift
       if (bitwAnd(b, 128L) == 0L) break
       shift <- shift + 7
+      if (shift > 63) stop("parquet: RLE run header longer than 10 bytes", call. = FALSE)
     }
     if (header %% 2 == 1) { # bit-packed
       groups <- (header - 1) / 2
-      nvals <- groups * 8
       need <- groups * width
-      chunk <- as.integer(buf[seq.int(pos, length.out = need)])
+      if (need > end - pos + 1) stop("parquet: bit-packed run of ", groups,
+                                     " groups runs past its data", call. = FALSE)
+      nvals <- groups * 8
+      chunk <- .pq_slice(buf, pos, need, "bit-packed run")
       pos <- pos + need
       # Unpack LSB-first across byte boundaries.
-      bits <- as.integer(rawToBits(as.raw(chunk)))
-      idx <- seq_len(nvals)
-      vals <- vapply(idx, function(i) {
-        b0 <- (i - 1L) * width
-        sum(bits[(b0 + 1L):(b0 + width)] * 2L^(seq_len(width) - 1L))
-      }, numeric(1))
-      take <- min(length(vals), count - o)
+      bits <- as.integer(rawToBits(chunk))
+      take <- min(nvals, count - o)
       if (take > 0L) {
-        out[seq.int(o + 1L, length.out = take)] <-
-          as.integer(vals[seq_len(take)])
+        vals <- vapply(seq_len(take), function(i) {
+          b0 <- (i - 1L) * width
+          sum(bits[(b0 + 1L):(b0 + width)] * 2^(seq_len(width) - 1L))
+        }, numeric(1))
+        out[seq.int(o + 1L, length.out = take)] <- as.integer(vals)
       }
       o <- o + take
     } else { # RLE run
       run <- header / 2
-      val <- sum(as.integer(buf[seq.int(pos, length.out = nbytes)]) *
+      val <- sum(as.integer(.pq_slice(buf, pos, nbytes, "RLE run value")) *
         256^(seq_len(nbytes) - 1L))
       pos <- pos + nbytes
       take <- min(run, count - o)
       if (take > 0L) {
-        out[seq.int(o + 1L, length.out = take)] <-
-          as.integer(val)
+        out[seq.int(o + 1L, length.out = take)] <- as.integer(val)
       }
       o <- o + take
     }
+  }
+  if (o < count) {
+    stop("parquet: RLE data ran out after ", o, " of ", count, " values", call. = FALSE)
   }
   list(values = out, pos = pos)
 }
@@ -865,68 +861,61 @@
   if (count == 0L) {
     return(list(values = list(), pos = pos))
   }
+  take <- function(n) .pq_slice(buf, pos, n, "a PLAIN value block")
   if (ptype == .pqBoolean) {
     nb <- (count + 7L) %/% 8L
-    bits <- as.integer(rawToBits(buf[seq.int(pos, length.out = nb)]))
+    bits <- as.integer(rawToBits(take(nb)))
     return(list(
       values = as.logical(bits[seq_len(count)]),
       pos = pos + nb
     ))
   }
   if (ptype == .pqInt32) {
-    v <- readBin(buf[seq.int(pos, length.out = count * 4L)], "integer",
-      n = count, size = 4L, endian = "little"
-    )
+    v <- readBin(take(count * 4L), "integer", n = count, size = 4L, endian = "little")
     return(list(values = v, pos = pos + count * 4L))
   }
   if (ptype == .pqInt64) {
-    v <- .pq_read_i64(buf[seq.int(pos, length.out = count * 8L)], count)
+    v <- .pq_read_i64(take(count * 8L), count)
     return(list(values = v, pos = pos + count * 8L))
   }
   if (ptype == .pqFloat) {
-    v <- readBin(buf[seq.int(pos, length.out = count * 4L)], "double",
-      n = count, size = 4L, endian = "little"
-    )
+    v <- readBin(take(count * 4L), "double", n = count, size = 4L, endian = "little")
     return(list(values = v, pos = pos + count * 4L))
   }
   if (ptype == .pqDouble) {
-    v <- readBin(buf[seq.int(pos, length.out = count * 8L)], "double",
-      n = count, size = 8L, endian = "little"
-    )
+    v <- readBin(take(count * 8L), "double", n = count, size = 8L, endian = "little")
     return(list(values = v, pos = pos + count * 8L))
   }
   if (ptype == .pqByteArray) {
     vals <- vector("list", count)
     for (i in seq_len(count)) {
-      n <- .pq_u32(buf[seq.int(pos, length.out = 4L)])
+      n <- .pq_u32(.pq_slice(buf, pos, 4L, "a BYTE_ARRAY length"))
       pos <- pos + 4L
-      vals[[i]] <- if (n == 0L) {
-        raw(0)
-      } else {
-        buf[seq.int(pos, length.out = n)]
-      }
+      vals[[i]] <- .pq_slice(buf, pos, n, "a BYTE_ARRAY value")
       pos <- pos + n
     }
     return(list(values = vals, pos = pos))
   }
   if (ptype == .pqFlba) {
-    if (is.null(type_length)) {
-      stop("FIXED_LEN_BYTE_ARRAY without type_length", call. = FALSE)
+    if (is.null(type_length) || type_length < 1) {
+      stop("FIXED_LEN_BYTE_ARRAY without a positive type_length", call. = FALSE)
     }
+    block <- take(count * type_length)
     vals <- lapply(seq_len(count), function(i) {
-      buf[seq.int(pos + (i - 1L) * type_length, length.out = type_length)]
+      block[seq.int((i - 1L) * type_length + 1L, length.out = type_length)]
     })
     return(list(values = vals, pos = pos + count * type_length))
   }
   if (ptype == .pqInt96) {
+    block <- take(count * 12L)
     vals <- numeric(count)
     for (i in seq_len(count)) {
-      nanos <- .pq_read_i64(buf[seq.int(pos, length.out = 8L)], 1L)
-      jday <- .pq_u32(buf[seq.int(pos + 8L, length.out = 4L)])
-      pos <- pos + 12L
+      o <- (i - 1L) * 12L
+      nanos <- .pq_read_i64(block[o + 1:8], 1L)
+      jday <- .pq_u32(block[o + 9:12])
       vals[i] <- (jday - 2440588) * 86400 * 1e9 + nanos
     }
-    return(list(values = vals, pos = pos))
+    return(list(values = vals, pos = pos + count * 12L))
   }
   stop("unsupported physical type ", ptype, call. = FALSE)
 }
@@ -1005,6 +994,7 @@
 #' @export
 #' @keywords internal
 .pq_read_footer <- function(con, size) {
+  if (size < 12) stop("not a parquet file: ", size, " bytes", call. = FALSE)
   seek(con, 0L)
   if (!identical(readBin(con, "raw", 4L), charToRaw("PAR1"))) {
     stop("not a parquet file: missing leading PAR1", call. = FALSE)
@@ -1015,10 +1005,21 @@
     stop("not a parquet file: missing trailing PAR1", call. = FALSE)
   }
   n <- .pq_u32(tail[1:4])
+  if (n < 2 || n > size - 12) {
+    stop("parquet: footer length ", n, " does not fit a ", size, "-byte file",
+         call. = FALSE)
+  }
   seek(con, size - 8L - n)
   .pq_struct(.pq_reader(readBin(con, "raw", n)))
 }
 
+# The largest page this reader will inflate, and the most rows it will build. A
+# page header or a footer that claims more is refused before anything is allocated.
+.pq_max_page <- function() getOption("rmoriedata.parquet_max_page_bytes", 2^30)
+.pq_max_rows <- function() getOption("rmoriedata.parquet_max_rows", 5e7)
+
+# The repetition or definition levels at the start of a data page (RLE, with
+# their byte length ahead of them), each checked against the column's maximum.
 #' .pq_read_levels
 #'
 #' One RLE level run of a v1 data page: a 4-byte length, then the run.
@@ -1029,21 +1030,28 @@
 #' @param maxlevel Largest level value; sets the bit width.
 #' @param n Number of level slots in the page.
 #' @param encoding Level encoding from the data page header.
+#' @param what \code{"repetition"} or \code{"definition"}.
+#' @param cname The column's name, for error messages.
 #' @return A list with \code{levels} and \code{pos}.
 #' @noRd
-.pq_read_levels <- function(page, p, maxlevel, n, encoding) {
-  if (encoding == .pqEBitPacked) {
-    stop("BIT_PACKED levels not implemented", call. = FALSE)
-  }
+.pq_read_levels <- function(page, p, maxlevel, n, encoding, what, cname) {
   if (encoding != .pqERle) {
-    return(list(levels = rep(as.integer(maxlevel), n), pos = p))
+    stop("BIT_PACKED ", what, " levels not implemented", call. = FALSE)
   }
-  ln <- .pq_u32(page[seq.int(p, length.out = 4L)])
+  ln <- .pq_u32(.pq_slice(page, p, 4L, paste0("a ", what, "-level length")))
   p <- p + 4L
+  .pq_slice(page, p, ln, paste(what, "levels"))
   rr <- .pq_read_rle(page, p, .pq_bit_width(maxlevel), n, p + ln - 1L)
+  if (n > 0L && max(rr$values) > maxlevel) {
+    stop("parquet: column ", cname, " has a ", what, " level above its maximum of ",
+         maxlevel, call. = FALSE)
+  }
   list(levels = rr$values, pos = p + ln)
 }
 
+# The rows of a LIST column from its levels: a slot with repetition level 0 starts
+# a row, one with level 1 adds to it. A row is NULL for a null list, list() for an
+# empty one, and holds NULL for a null element.
 #' .pq_assemble_lists
 #'
 #' Fold level slots into one list per row. A slot whose definition level
@@ -1055,9 +1063,13 @@
 #' @param defs Integer definition levels, one per slot.
 #' @param slot_vals List of decoded values, \code{NULL} where absent.
 #' @param repdef Definition level of the REPEATED node.
+#' @param cname The column's name, for error messages.
 #' @return A list with one entry per row.
 #' @noRd
-.pq_assemble_lists <- function(reps, defs, slot_vals, repdef) {
+.pq_assemble_lists <- function(reps, defs, slot_vals, repdef, cname) {
+  if (length(reps) && reps[[1L]] != 0L) {
+    stop("parquet: column ", cname, " starts in the middle of a list", call. = FALSE)
+  }
   rows <- list()
   for (i in seq_along(reps)) {
     d <- defs[i]
@@ -1072,6 +1084,10 @@
       }
     } else {
       k <- length(rows)
+      if (d < repdef || is.null(rows[[k]])) {
+        stop("parquet: column ", cname, " adds an element to a null or empty list",
+             call. = FALSE)
+      }
       rows[[k]] <- c(rows[[k]], list(slot_vals[[i]]))
     }
   }
@@ -1093,18 +1109,32 @@
 #' @param num_rows A count; the body uses it as \code{seq_len(...)}.
 #' @param maxdef Largest definition level of the leaf.
 #' @param typelen Passed to \code{.pq_decode_plain}.
+#' @param stype The physical type the schema declares for the column.
+#' @param fsize The size of the file in bytes.
+#' @param cname The column's name, for error messages.
 #' @param maxrep Largest repetition level of the leaf (0 for flat).
 #' @param repdef Definition level of the REPEATED node (LIST only).
 #' @return The value of \code{[}.
 #' @export
 #' @keywords internal
-.pq_column_values <- function(con, cm, num_rows, maxdef, typelen,
+.pq_column_values <- function(con, cm, num_rows, maxdef, typelen, stype, fsize, cname,
                               maxrep = 0L, repdef = 0L) {
   ptype <- as.integer(.pq_f(cm, 1))
+  if (!identical(ptype, as.integer(stype))) {
+    stop("parquet: column ", cname, " is declared type ", stype,
+         " in the schema but its chunk says ", ptype, call. = FALSE)
+  }
   codec <- as.integer(.pq_f(cm, 4))
   total_values <- .pq_f(cm, 5)
+  clen <- .pq_f(cm, 7)
   data_off <- .pq_f(cm, 9)
   dict_off <- .pq_f(cm, 11)
+  # a LIST column holds one value per element, at least one per row
+  if (is.null(total_values) || is.null(clen) || is.null(data_off) ||
+      (maxrep == 0L && total_values != num_rows) || total_values < num_rows) {
+    stop("parquet: column ", cname, " chunk holds ", total_values %||% "?",
+         " values; its row group has ", num_rows, call. = FALSE)
+  }
 
   start <- if (!is.null(dict_off) && dict_off > 0 &&
     dict_off < data_off) {
@@ -1112,8 +1142,15 @@
   } else {
     data_off
   }
+  if (start < 4 || clen < 0 || start + clen > fsize - 8) {
+    stop("parquet: column ", cname, " chunk (", clen, " bytes at ", start,
+         ") lies outside the ", fsize, "-byte file", call. = FALSE)
+  }
   seek(con, start)
-  blob <- readBin(con, "raw", .pq_f(cm, 7) + 64)
+  blob <- readBin(con, "raw", clen)
+  if (length(blob) != clen) {
+    stop("parquet: column ", cname, " chunk is truncated", call. = FALSE)
+  }
 
   pos <- 1L
   dictionary <- NULL
@@ -1126,54 +1163,89 @@
     r <- .pq_reader(blob, pos)
     head <- .pq_struct(r)
     pos <- r$pos
+    usize <- .pq_f(head, 2)
     csize <- .pq_f(head, 3)
-    raw_page <- blob[seq.int(pos, length.out = csize)]
+    if (is.null(usize) || is.null(csize) || usize < 0 || usize > .pq_max_page()) {
+      stop("parquet: page of ", usize %||% "?", " bytes in column ", cname,
+           " (cap ", .pq_max_page(), ")", call. = FALSE)
+    }
+    raw_page <- .pq_slice(blob, pos, csize, paste("a page of column", cname))
     pos <- pos + csize
+    crc <- .pq_f(head, 4)
+    if (!is.null(crc)) {
+      have <- .Call(C_rmd_crc32, raw_page)
+      if (have != crc %% 2^32) {
+        stop("parquet: page CRC mismatch in column ", cname, call. = FALSE)
+      }
+    }
+    ptype_page <- as.integer(.pq_f(head, 1))
+    if (ptype_page == .pqPDataV2) {
+      # v2 keeps its levels uncompressed ahead of the values, so
+      # decompressing the whole page would fail with a snappy error
+      # before this message could fire
+      stop("data page v2 not implemented (store is v1)", call. = FALSE)
+    }
     if (codec == .pqCSnappy) {
       page <- .pq_snappy_decompress(raw_page)
+    } else if (codec == .pqCGzip) {
+      page <- .Call(C_rmd_gzip_decompress, raw_page, usize)
+    } else if (codec == .pqCZstd) {
+      # src/zstd.c: never writes past usize and fails unless the frames give
+      # exactly usize bytes
+      page <- .Call(C_rmd_zstd_decompress, raw_page, usize)
     } else if (codec == .pqCUncompressed) {
       page <- raw_page
     } else {
-      stop("compression codec ", codec, " not implemented; the store ",
-        "uses SNAPPY only",
+      stop("compression codec ", codec, " not implemented; the reader ",
+        "takes ZSTD, GZIP, SNAPPY or none",
         call. = FALSE
       )
     }
+    if (length(page) != usize) {
+      stop("parquet: page of column ", cname, " inflates to ", length(page),
+           " bytes; its header says ", usize, call. = FALSE)
+    }
 
-    ptype_page <- as.integer(.pq_f(head, 1))
     if (ptype_page == .pqPDict) {
       dh <- .pq_f(head, 7)
-      dictionary <- .pq_decode_plain(
-        page, 1L, ptype,
-        as.integer(.pq_f(dh, 1))
-      )$values
+      nd <- as.integer(.pq_f(dh, 1))
+      dec <- .pq_decode_plain(page, 1L, ptype, nd, typelen)
+      if (dec$pos != length(page) + 1L) {
+        stop("parquet: dictionary page of column ", cname, " holds ",
+             length(page) - dec$pos + 1L, " bytes beyond its ", nd, " values",
+             call. = FALSE)
+      }
+      dictionary <- dec$values
       next
-    }
-    if (ptype_page == .pqPDataV2) {
-      stop("data page v2 not implemented (store is v1)", call. = FALSE)
     }
     if (ptype_page != .pqPData) next
 
     dph <- .pq_f(head, 5)
     n <- as.integer(.pq_f(dph, 1))
+    if (is.na(n) || n < 0 || got + n > total_values) {
+      stop("parquet: page of column ", cname, " claims ", n, " values with ",
+           total_values - got, " left in the chunk", call. = FALSE)
+    }
     encoding <- as.integer(.pq_f(dph, 2))
     p <- 1L
 
-    # Repetition levels come first and only exist under a REPEATED
-    # node; then definition levels. A flat OPTIONAL column has max
-    # definition level 1; REQUIRED has 0 and writes nothing.
-    reps <- rep(0L, n)
+    # Repetition levels come first and exist only under a REPEATED node; then
+    # definition levels. A flat OPTIONAL column has maximum definition level 1;
+    # REQUIRED has 0 and writes none.
+    reps <- integer(n)
     if (maxrep > 0L) {
-      rl <- .pq_read_levels(page, p, maxrep, n, as.integer(.pq_f(dph, 4)))
+      rl <- .pq_read_levels(page, p, maxrep, n, as.integer(.pq_f(dph, 4)), "repetition",
+                            cname)
       reps <- rl$levels
       p <- rl$pos
     }
     if (maxdef > 0L) {
-      dl <- .pq_read_levels(page, p, maxdef, n, as.integer(.pq_f(dph, 3)))
+      dl <- .pq_read_levels(page, p, maxdef, n, as.integer(.pq_f(dph, 3)), "definition",
+                            cname)
       defs <- dl$levels
       p <- dl$pos
     } else {
-      defs <- rep(0L, n)
+      defs <- integer(n)
     }
 
     present <- sum(defs == maxdef)
@@ -1183,12 +1255,22 @@
           call. = FALSE
         )
       }
-      width <- as.integer(page[p])
+      width <- as.integer(.pq_slice(page, p, 1L, "a dictionary bit width"))
       p <- p + 1L
       idx <- .pq_read_rle(page, p, width, present, length(page))$values
+      if (present && (min(idx) < 0L || max(idx) >= length(dictionary))) {
+        stop("parquet: dictionary index out of range in column ", cname, call. = FALSE)
+      }
       vals <- dictionary[idx + 1L]
     } else if (encoding == .pqEPlain) {
-      vals <- .pq_decode_plain(page, p, ptype, present, typelen)$values
+      dec <- .pq_decode_plain(page, p, ptype, present, typelen)
+      # PLAIN values fill the page exactly: bytes left over (or a shortfall, caught above)
+      # mean the declared type is not the type the page was written with
+      if (dec$pos != length(page) + 1L) {
+        stop("parquet: page of column ", cname, " holds ", length(page) - dec$pos + 1L,
+             " bytes beyond its ", present, " values of the declared type", call. = FALSE)
+      }
+      vals <- dec$values
     } else {
       stop("encoding ", encoding, " not implemented; the store uses ",
         "PLAIN and RLE_DICTIONARY",
@@ -1208,20 +1290,33 @@
       }
     }
     values <- c(values, col)
-    all_reps <- c(all_reps, as.integer(reps))
-    all_defs <- c(all_defs, as.integer(defs))
+    if (maxrep > 0L) {
+      all_reps <- c(all_reps, reps)
+      all_defs <- c(all_defs, defs)
+    }
     got <- got + n
   }
 
   if (maxrep > 0L) {
-    values <- .pq_assemble_lists(all_reps, all_defs, values, repdef)
+    if (got != total_values) {
+      stop("parquet: column ", cname, " decoded ", got, " of its ", total_values,
+           " values", call. = FALSE)
+    }
+    values <- .pq_assemble_lists(all_reps, all_defs, values, repdef, cname)
   }
-  if (length(values) < num_rows) {
-    values <- c(values, vector("list", num_rows - length(values)))
+  # exact, never padded or truncated: a count the data does not bear out is an error
+  if (length(values) != num_rows) {
+    stop("parquet: column ", cname, " decoded ", length(values),
+         " values; its row group has ", num_rows, call. = FALSE)
   }
-  values[seq_len(num_rows)]
+  values
 }
 
+# The leaf columns of the schema, with their maximum definition and repetition
+# levels. A group is read only as a three-level LIST of one primitive (an optional
+# or required group annotated LIST, holding one repeated group, holding the
+# element), which is returned under the LIST's name; any other group, and any
+# other repeated field, is refused.
 #' .pq_schema_leaves
 #'
 #' Walk the flattened schema tree into one entry per leaf column. The
@@ -1235,7 +1330,7 @@
 .pq_schema_leaves <- function(schema) {
   root <- schema[[1L]]
   leaves <- list()
-  # stack rows: children_left, maxdef, maxrep, repdef, list_name
+  # stack rows: children left, maxdef, maxrep, repdef, list name
   stack <- list(list(
     left = .pq_f(root, 5, 0L), maxdef = 0L, maxrep = 0L, repdef = 0L,
     list_name = NULL
@@ -1246,7 +1341,7 @@
       stack[[length(stack)]] <- NULL
     }
     if (!length(stack)) {
-      stop("schema has more elements than the root declares",
+      stop("parquet: the schema has more elements than its root declares",
         call. = FALSE
       )
     }
@@ -1302,6 +1397,7 @@
   leaves
 }
 
+# One leaf's decoded values as an R vector of its type.
 #' .pq_leaf_vector
 #'
 #' Turn one leaf's decoded slots into an R vector of the leaf's type,
@@ -1329,27 +1425,59 @@
 #' Read a Parquet file
 #'
 #' Native Parquet reader: no nanoparquet, no arrow. Handles the v1
-#' format with PLAIN, RLE and dictionary encodings, Snappy or no
-#' compression. Flat columns and three-level \code{LIST} columns of a
-#' primitive type are decoded; a \code{LIST} column comes back as a
-#' list column (class \code{AsIs}) holding one vector per row,
+#' format with PLAIN, RLE and dictionary encodings, GZIP, Snappy, Zstandard
+#' (ZSTD) or no compression. ZSTD pages are read by a decoder in the package
+#' (RFC 8878, without dictionaries), so no other package is needed for them;
+#' the writer does not write ZSTD. Flat columns and three-level \code{LIST}
+#' columns of a primitive type are decoded; a \code{LIST} column comes back
+#' as a list column (class \code{AsIs}) holding one vector per row,
 #' \code{NULL} for a null list. Other nesting is refused.
 #'
 #' @param path Path to a `.parquet` file.
 #' @param columns Optional character vector of column names to decode;
 #'   the rest are skipped entirely.
-#' @return A `data.frame`.
+#' @return A `data.frame`. Every error the reader raises, a missing or
+#'   damaged file included, starts with `parquet:`; no base-R warning escapes
+#'   it (a value a damaged file makes R warn about is an error instead).
 #' @export
 #' @examples
-#' if (requireNamespace("arrow", quietly = TRUE)) {
-#'   df <- data.frame(a = 1:3, b = c("x", "y", "z"), stringsAsFactors = FALSE)
-#'   p <- tempfile(fileext = ".parquet")
-#'   morie_write_parquet(df, p)
-#'   morie_read_parquet(p)
-#' }
+#' df <- data.frame(a = 1:3, b = c("x", "y", "z"), stringsAsFactors = FALSE)
+#' p <- tempfile(fileext = ".parquet")
+#' morie_write_parquet(df, p)
+#' morie_read_parquet(p)
 morie_read_parquet <- function(path, columns = NULL) {
   size <- file.info(path)$size
-  if (is.na(size)) stop("no such file: ", path, call. = FALSE)
+  if (is.na(size)) stop("parquet: no such file: ", path, call. = FALSE)
+  # A check the reader makes says what is wrong, after the `parquet: ` every reader
+  # error starts with; anything else a damaged footer or page trips over (a NULL
+  # field, an index past the end) is said to be damage too. A base-R warning on the
+  # way (a count past the integer range, say) is damage as well, not a stray warning.
+  tryCatch(
+    withCallingHandlers(.pq_read(path, columns, size), warning = function(w) {
+      m <- conditionMessage(w)
+      if (!startsWith(m, "duplicate column names in ")) {
+        stop("parquet: the file is damaged (", m, ")", call. = FALSE)
+      }
+    }),
+    error = function(e) {
+      m <- conditionMessage(e)
+      if (startsWith(m, "parquet: ")) stop(e)
+      if (grepl(.pq_own_re, m) || grepl("^cannot allocate", m)) {
+        stop("parquet: ", m, call. = FALSE)
+      }
+      stop("parquet: the file is damaged (", m, ")", call. = FALSE)
+    }
+  )
+}
+
+# The reader's own error messages, passed on with the `parquet: ` prefix.
+.pq_own_re <- paste0("^(not a parquet file|snappy: |gzip: |zstd: |crc32: ",
+                     "|unknown thrift ",
+                     "|FIXED_LEN_BYTE_ARRAY |unsupported physical |data page v2 ",
+                     "|compression codec |BIT_PACKED |dictionary-encoded |encoding ",
+                     "|nested schema |repeated column |no such column|footer says )")
+
+.pq_read <- function(path, columns, size) {
   con <- file(path, "rb")
   on.exit(close(con), add = TRUE)
 
@@ -1358,6 +1486,16 @@ morie_read_parquet <- function(path, columns = NULL) {
   num_rows <- .pq_f(meta, 3)
   row_groups <- .pq_f(meta, 4)
   if (is.null(row_groups)) row_groups <- list()
+  if (is.null(num_rows) || num_rows < 0 || num_rows > .pq_max_rows()) {
+    stop("parquet: footer claims ", num_rows %||% "?", " rows (cap ",
+         .pq_max_rows(), ", option rmoriedata.parquet_max_rows)", call. = FALSE)
+  }
+  rg_rows <- vapply(row_groups, function(rg) as.numeric(.pq_f(rg, 3) %||% NA), numeric(1))
+  if (anyNA(rg_rows) || any(rg_rows < 0) || sum(rg_rows) != num_rows) {
+    stop("parquet: row groups hold ", sum(rg_rows), " rows; the footer says ",
+         num_rows, call. = FALSE)
+  }
+  if (is.null(schema) || length(schema) < 2L) stop("parquet: empty schema", call. = FALSE)
 
   leaves <- .pq_schema_leaves(schema)
 
@@ -1375,25 +1513,41 @@ morie_read_parquet <- function(path, columns = NULL) {
   }
 
   out <- list()
+  out_names <- character()
   for (i in wanted) {
     leaf <- leaves[[i]]
     col <- list()
     for (rg in row_groups) {
-      chunk <- .pq_f(rg, 1)[[i]]
-      cm <- .pq_f(chunk, 3)
+      chunks <- .pq_f(rg, 1)
+      if (length(chunks) != length(leaves)) {
+        stop("parquet: a row group has ", length(chunks), " column chunks for ",
+             length(leaves), " schema columns", call. = FALSE)
+      }
+      cm <- .pq_f(chunks[[i]], 3)
       col <- c(col, .pq_column_values(
         con, cm, .pq_f(rg, 3),
-        leaf$maxdef, leaf$typelen, leaf$maxrep, leaf$repdef
+        leaf$maxdef, leaf$typelen, leaf$type, size, leaf$name,
+        leaf$maxrep, leaf$repdef
       ))
     }
-    if (leaf$maxrep > 0L) {
-      out[[leaf$name]] <- I(lapply(col, function(row) {
+    v <- if (leaf$maxrep > 0L) {
+      I(lapply(col, function(row) {
         if (is.null(row)) NULL else .pq_leaf_vector(row, leaf)
       }))
     } else {
-      out[[leaf$name]] <- .pq_leaf_vector(col, leaf)
+      .pq_leaf_vector(col, leaf)
     }
+    out[[length(out) + 1L]] <- v
+    out_names <- c(out_names, leaf$name)
   }
+  if (anyDuplicated(out_names)) {
+    warning("duplicate column names in ", basename(path), ": ",
+            paste(sQuote(unique(out_names[duplicated(out_names)])),
+                  collapse = ", "), "; made unique with make.unique()",
+            call. = FALSE)
+    out_names <- make.unique(out_names)
+  }
+  names(out) <- out_names
 
   df <- as.data.frame(out,
     stringsAsFactors = FALSE,
@@ -1416,6 +1570,7 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' other engine, and off by a factor of 1e6 from where it started.
 #'
 #' @param v Numeric; the body checks with \code{is.numeric}.
+#' @param name The column's name, for error messages.
 #' @return A list with \code{type}, \code{converted}.
 #' @export
 #' @examples
@@ -1423,16 +1578,42 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' res <- .pq_infer(v = x)
 #' res
 #' @keywords internal
-.pq_infer <- function(v) {
+.pq_infer <- function(v, name = "a column") {
+  # a matrix column holds several values per row: written flat it had more values
+  # than rows, which other readers cut short without a word
+  if (!is.null(dim(v))) {
+    stop("column ", sQuote(name), " is a ",
+         if (is.data.frame(v)) "data frame" else "matrix or array",
+         " column, with more than one value per row, which Parquet as written here ",
+         "cannot hold; split it into one column per value first.", call. = FALSE)
+  }
   # Date and POSIXct must keep their logical type on the way out.
   # Without this a column read as TIMESTAMP_MICROS was written back as a
   # bare DOUBLE of seconds: readable, but no longer a timestamp to any
   # other engine, and off by a factor of 1e6 from where it started.
   if (inherits(v, "Date")) {
+    if (any(abs(floor(unclass(v))) > .Machine$integer.max, na.rm = TRUE)) {
+      stop("column ", sQuote(name), " has a Date outside the range a Parquet DATE ",
+           "holds (2^31 days either side of 1970-01-01).", call. = FALSE)
+    }
     return(list(type = .pqInt32, converted = .pqCtDate))
   }
   if (inherits(v, "POSIXct")) {
+    if (any(abs(floor(as.numeric(v) * 1000)) >= 2^63, na.rm = TRUE)) {
+      stop("column ", sQuote(name), " has a time that is infinite or outside the ",
+           "range a Parquet TIMESTAMP holds (2^63 milliseconds either side of 1970).",
+           call. = FALSE)
+    }
     return(list(type = .pqInt64, converted = .pqCtTsMillis))
+  }
+  # written as text these would read back as a different type: refused, not converted
+  # an integer64's bits are not a double's value: written as a DOUBLE it read back wrong
+  if (is.list(v) || is.complex(v) || is.raw(v) ||
+        inherits(v, c("difftime", "integer64"))) {
+    stop("column ", sQuote(name), " is of type ",
+         if (is.object(v)) class(v)[[1L]] else typeof(v),
+         ", which Parquet as written here cannot hold; convert it first (for ",
+         "example with as.character() or as.numeric()).", call. = FALSE)
   }
   if (is.logical(v)) {
     return(list(type = .pqBoolean, converted = NULL))
@@ -1446,6 +1627,10 @@ morie_read_parquet <- function(path, columns = NULL) {
   list(type = .pqByteArray, converted = .pqCtUtf8)
 }
 
+# Down to whole days and whole milliseconds, as R prints them: as.integer() cut
+# Date(-0.5), which prints as 1969-12-31, to day 0 (1970-01-01), and rounding moved
+# 23:59:59.9996 to the next day.
+# (.pq_infer() has refused values outside the range of either)
 #' .pq_prep_write
 #'
 #' A step of the parquet implementation. Called by \code{morie_write_parquet}.
@@ -1458,10 +1643,10 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' @keywords internal
 .pq_prep_write <- function(v, inf) {
   if (inherits(v, "Date")) {
-    return(as.integer(unclass(v)))
+    return(as.integer(floor(unclass(v))))
   }
   if (inherits(v, "POSIXct")) {
-    return(round(as.numeric(v) * 1000))
+    return(floor(as.numeric(v) * 1000))
   }
   v
 }
@@ -1498,10 +1683,11 @@ morie_read_parquet <- function(path, columns = NULL) {
 #'
 #' @param values A vector; its length is taken and its elements indexed.
 #' @param ptype Passed to \code{==}.
+#' @param name The column's name, for error messages.
 #' @return Nothing; this branch always raises.
 #' @export
 #' @keywords internal
-.pq_encode_plain <- function(values, ptype) {
+.pq_encode_plain <- function(values, ptype, name = "a column") {
   if (length(values) == 0L) {
     return(raw(0))
   }
@@ -1529,7 +1715,7 @@ morie_read_parquet <- function(path, columns = NULL) {
   if (ptype == .pqByteArray) {
     parts <- vector("list", length(values) * 2L)
     for (i in seq_along(values)) {
-      b <- charToRaw(enc2utf8(as.character(values[[i]])))
+      b <- charToRaw(.pq_utf8(values[[i]], paste0("column ", sQuote(name))))
       parts[[2L * i - 1L]] <- writeBin(length(b), raw(),
         size = 4L,
         endian = "little"
@@ -1581,26 +1767,61 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' Native Parquet writer: single row group, PLAIN encoding, all columns
 #' OPTIONAL. Output is read back unchanged by pyarrow and nanoparquet.
 #'
-#' @param df A `data.frame`.
+#' @param df A `data.frame` with at least one column. Factor columns are
+#'   written as character; list, complex, raw, `difftime`, `integer64`,
+#'   matrix and data frame columns are refused with an error naming the
+#'   column. `NaN` in a numeric column is
+#'   kept as `NaN`. Every string must be valid UTF-8 (marked, or unmarked in
+#'   UTF-8 bytes), and column names must be unique.
 #' @param path Destination path.
-#' @param compression `"snappy"` (default) or `NULL` for uncompressed.
+#' @param compression `"gzip"` (default; zlib level 9), `"snappy"`, or `NULL`
+#'   for uncompressed pages.
+#' @details A `Date` column is written as a Parquet DATE (whole days) and a
+#'   `POSIXct` column as a Parquet TIMESTAMP (whole milliseconds since
+#'   1970-01-01 UTC), each taken down to the whole day or millisecond as R
+#'   prints them, before 1970 too: a fractional `Date` of -0.5 (printed
+#'   1969-12-31) is written as 1969-12-31. The format stores the instant
+#'   but not a time zone, so it reads back as the same instant in UTC: a column in
+#'   `America/Chicago` comes back with `tz = "UTC"`. Set the zone again with
+#'   `attr(x, "tzone") <- "America/Chicago"`, or keep an ISO 8601 text column
+#'   beside it, as `rmoriedata::chiload()`'s `date_iso` does.
 #' @return `path`, invisibly.
 #' @export
 #' @examples
 #' df <- data.frame(a = 1:3, b = c("x", "y", "z"), stringsAsFactors = FALSE)
 #' p <- tempfile(fileext = ".parquet")
 #' morie_write_parquet(df, p)
-morie_write_parquet <- function(df, path, compression = "snappy") {
-  if (!is.null(compression) && !identical(compression, "snappy")) {
-    stop("compression must be \"snappy\" or NULL; got ",
+morie_write_parquet <- function(df, path, compression = "gzip") {
+  if (!is.null(compression) &&
+        !(identical(compression, "gzip") || identical(compression, "snappy"))) {
+    stop("compression must be \"gzip\", \"snappy\" or NULL; got ",
       sQuote(compression),
       call. = FALSE
     )
   }
-  codec <- if (is.null(compression)) .pqCUncompressed else .pqCSnappy
+  codec <- if (is.null(compression)) {
+    .pqCUncompressed
+  } else if (compression == "gzip") {
+    .pqCGzip
+  } else {
+    .pqCSnappy
+  }
 
   nrows <- nrow(df)
   names_ <- names(df)
+  # a file with no columns has a schema with no leaves, which no reader opens
+  if (!length(names_)) {
+    stop("a data frame with no columns cannot be written: a Parquet file needs ",
+         "at least one column.", call. = FALSE)
+  }
+  if (anyDuplicated(names_)) {
+    stop("duplicate column names: ",
+         paste(sQuote(unique(names_[duplicated(names_)])), collapse = ", "),
+         "; a Parquet reader cannot address them, and this one would ",
+         "keep only the last.", call. = FALSE)
+  }
+  # every column's type is settled (or refused) before the file is opened
+  infs <- lapply(seq_along(names_), function(k) .pq_infer(df[[k]], names_[k]))
   con <- file(path, "wb")
   on.exit(close(con), add = TRUE)
   writeBin(charToRaw("PAR1"), con)
@@ -1609,15 +1830,28 @@ morie_write_parquet <- function(df, path, compression = "snappy") {
   chunks <- list()
   for (k in seq_along(names_)) {
     v <- df[[k]]
-    inf <- .pq_infer(v)
-    defs <- as.integer(!is.na(v))
-    present <- .pq_prep_write(v[!is.na(v)], inf)
+    inf <- infs[[k]]
+    # NaN is a value of a DOUBLE column, not a missing one: written as null it read
+    # back as NA
+    miss <- is.na(v)
+    if (inf$type == .pqDouble) miss <- miss & !is.nan(v)
+    defs <- as.integer(!miss)
+    present <- .pq_prep_write(v[!miss], inf)
 
     body <- c(
       .pq_encode_levels(defs, 1L),
-      .pq_encode_plain(present, inf$type)
+      .pq_encode_plain(present, inf$type, names_[k])
     )
-    payload <- if (codec == .pqCSnappy) .pq_snappy_compress(body) else body
+    # page sizes are 32-bit in the page header (and the codecs take no more)
+    if (length(body) > .Machine$integer.max) {
+      stop("column ", sQuote(names_[k]), " needs a page of more than the 2^31 - 1 ",
+           "bytes a Parquet page header can state; write the table in smaller ",
+           "pieces.", call. = FALSE)
+    }
+    payload <- switch(as.character(codec),
+                      "1" = .pq_snappy_compress(body),
+                      "2" = .Call(C_rmd_gzip_compress, body),
+                      body)
 
     dph <- .pq_writer()
     last <- .pq_wi32(dph, 1L, nrows, 0L)
@@ -1630,6 +1864,10 @@ morie_write_parquet <- function(df, path, compression = "snappy") {
     last <- .pq_wi32(ph, 1L, .pqPData, 0L)
     last <- .pq_wi32(ph, 2L, length(body), last)
     last <- .pq_wi32(ph, 3L, length(payload), last)
+    # PageHeader.crc: CRC-32 of the page as stored (after compression), so a reader can
+    # tell a damaged page from data; written as the signed 32-bit value the spec uses
+    crc <- .Call(C_rmd_crc32, payload)
+    last <- .pq_wi32(ph, 4L, if (crc >= 2^31) crc - 2^32 else crc, last)
     last <- .pq_wstruct(ph, 5L, dph_body, last)
     ph_body <- .pq_wstop(ph)
 

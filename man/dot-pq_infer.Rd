@@ -4,10 +4,12 @@
 \alias{.pq_infer}
 \title{Date and POSIXct must keep their logical type on the way out}
 \usage{
-.pq_infer(v)
+.pq_infer(v, name = "a column")
 }
 \arguments{
 \item{v}{Numeric; the body checks with \code{is.numeric}.}
+
+\item{name}{The column's name, for error messages.}
 }
 \value{
 A list with \code{type}, \code{converted}.

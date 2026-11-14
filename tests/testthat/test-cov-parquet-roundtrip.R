@@ -1,5 +1,5 @@
 # R/aaa_parquet.R: every column type the writer infers round-trips through the reader, with
-# and without Snappy; the Snappy codec on literal and repeated runs; the reader's refusals.
+# GZIP, Snappy or neither; the Snappy codec on literal and repeated runs; the reader's refusals.
 
 .pqt <- function(name) get(name, envir = environment(morie_read_parquet))
 
@@ -14,9 +14,9 @@
     stringsAsFactors = FALSE)
 }
 
-test_that("every inferred column type round-trips, Snappy or not", {
+test_that("every inferred column type round-trips, GZIP, Snappy or not", {
   df <- .pqt_frame()
-  for (comp in list("snappy", NULL)) {
+  for (comp in list("gzip", "snappy", NULL)) {
     p <- withr::local_tempfile(fileext = ".parquet")
     morie_write_parquet(df, p, compression = comp)
     back <- morie_read_parquet(p)
@@ -36,7 +36,7 @@ test_that("every inferred column type round-trips, Snappy or not", {
     expect_error(morie_read_parquet(p, columns = c("count", "nope", "zz")), "no such column\\(s\\) in .*: nope, zz")
   }
   expect_error(morie_read_parquet(file.path(tempdir(), "missing.parquet")), "no such file")
-  expect_error(morie_write_parquet(df, tempfile(), compression = "gzip"), "compression must be \"snappy\" or NULL; got .gzip.")
+  expect_error(morie_write_parquet(df, tempfile(), compression = "zstd"), "compression must be \"gzip\", \"snappy\" or NULL; got .zstd.")
   # a frame of one row and one of many rows, all NA
   one <- data.frame(x = 3.5)
   p1 <- withr::local_tempfile(fileext = ".parquet")

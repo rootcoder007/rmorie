@@ -1450,6 +1450,13 @@ BEGIN_RCPP
 END_RCPP
 }
 
+RcppExport SEXP C_rmd_crc32(SEXP);
+RcppExport SEXP C_rmd_gzip_compress(SEXP);
+RcppExport SEXP C_rmd_gzip_decompress(SEXP, SEXP);
+RcppExport SEXP C_rmd_snappy_compress(SEXP);
+RcppExport SEXP C_rmd_snappy_decompress(SEXP);
+RcppExport SEXP C_rmd_zstd_decompress(SEXP, SEXP);
+
 static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_crypto_sha256_native", (DL_FUNC) &_rmorie_morie_crypto_sha256_native, 1},
     {"_rmorie_morie_crypto_sha256_hex_native", (DL_FUNC) &_rmorie_morie_crypto_sha256_hex_native, 1},
@@ -1558,6 +1565,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_siu_http_get_many_with_status", (DL_FUNC) &_rmorie_siu_http_get_many_with_status, 5},
     {"_rmorie_siu_parse_report", (DL_FUNC) &_rmorie_siu_parse_report, 3},
     {"_rmorie_siu_parse_news", (DL_FUNC) &_rmorie_siu_parse_news, 3},
+    {"C_rmd_crc32",                                   (DL_FUNC) &C_rmd_crc32,                                   1},
+    {"C_rmd_gzip_compress",                           (DL_FUNC) &C_rmd_gzip_compress,                           1},
+    {"C_rmd_gzip_decompress",                         (DL_FUNC) &C_rmd_gzip_decompress,                         2},
+    {"C_rmd_snappy_compress",                         (DL_FUNC) &C_rmd_snappy_compress,                         1},
+    {"C_rmd_snappy_decompress",                       (DL_FUNC) &C_rmd_snappy_decompress,                       1},
+    {"C_rmd_zstd_decompress",                         (DL_FUNC) &C_rmd_zstd_decompress,                         2},
     {NULL, NULL, 0}
 };
 

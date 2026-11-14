@@ -4,12 +4,14 @@
 \alias{.pq_encode_plain}
 \title{.pq_encode_plain}
 \usage{
-.pq_encode_plain(values, ptype)
+.pq_encode_plain(values, ptype, name = "a column")
 }
 \arguments{
 \item{values}{A vector; its length is taken and its elements indexed.}
 
 \item{ptype}{Passed to \code{==}.}
+
+\item{name}{The column's name, for error messages.}
 }
 \value{
 Nothing; this branch always raises.

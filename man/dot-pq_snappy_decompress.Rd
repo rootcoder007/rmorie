@@ -7,13 +7,13 @@
 .pq_snappy_decompress(data)
 }
 \arguments{
-\item{data}{A vector; its length is taken and its elements indexed.}
+\item{data}{A raw vector, a snappy stream.}
 }
 \value{
-The value of \code{out}, as built in the body.
+A raw vector.
 }
 \description{
-A step of the parquet implementation. Called by \code{.pq_column_values}.
-See the file header for the source the module follows.
+Snappy decompression in C (src/snappy.c): every snappy tag, literals and
+1-, 2- and 4-byte-offset copies. Called by \code{.pq_column_values}.
 }
 \keyword{internal}
