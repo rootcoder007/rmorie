@@ -30,7 +30,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 R_SCRIPT="${SCRIPT_DIR}/otis_MRP.R"
-DEFAULT_RDATA="/Volumes/VSR/rootcoderfiles/OTIS-RC/correctional_stats_report_environment1b.RData"
+DEFAULT_RDATA="${MORIE_OTIS_RDATA:-correctional_stats_report_environment1b.RData}"
 INPUT_RDATA="${1:-${DEFAULT_RDATA}}"
 
 TIMESTAMP="$(date +%Y%m%d-%H%M%S)"

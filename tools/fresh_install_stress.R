@@ -3,7 +3,7 @@
 #
 # Simulate what a user on a different computer experiences when they
 # install morie from CRAN/r-universe with NO access to the developer's
-# filesystem (no /Volumes/VSR/, no project tree). The user has only:
+# filesystem (no developer drive, no project tree). The user has only:
 #   - internet
 #   - whatever CRAN/r-universe ships in the tarball
 #
@@ -117,4 +117,4 @@ if (fail_count > 0L) {
   quit(status = 1)
 }
 cat("Fresh-install stress test PASSED. The package works on a clean\n")
-cat("machine without /Volumes/VSR/ or any developer-side files.\n")
+cat("machine without the developer drive or any developer-side files.\n")

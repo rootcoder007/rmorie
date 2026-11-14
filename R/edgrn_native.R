@@ -1,5 +1,5 @@
 # morie.fn -- edgrn: edgeR-style NB counts, moderated dispersions, TMM, QL F-test.
-# Native R implementation of /home/rootcoder/work/morie/src/morie/fn/edgrn.py.
+# Native R implementation of src/morie/fn/edgrn.py.
 # All algorithms translated verbatim from the Python spec; no external
 # packages are used.
 

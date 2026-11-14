@@ -5,7 +5,7 @@
 #
 # EVERY numeric anchor below was produced by running the Python module
 # itself from the repo root:
-#   cd /Volumes/VSR/rootcoderfiles/morie && MORIE_NO_UPDATE_CHECK=1 \
+#   cd <morie checkout> && MORIE_NO_UPDATE_CHECK=1 \
 #     PYTHONPATH=src python3 <script>
 # with an assertion that morie.fn.km042.__file__ contains /src/morie/fn/,
 # so a stale site-packages install cannot supply the truth.

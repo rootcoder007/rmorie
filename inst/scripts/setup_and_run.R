@@ -285,7 +285,7 @@ default_candidates <- function() {
   )
   if (OS_KIND == "macos") {
     cands <- c(cands,
-      "/Volumes/VSR/rootcoderfiles/OTIS-RC/correctional_stats_report_environment1b.RData")
+      Sys.getenv("MORIE_OTIS_RDATA"))
   } else if (OS_KIND == "linux") {
     cands <- c(cands,
       "/mnt/OTIS-RC/correctional_stats_report_environment1b.RData",

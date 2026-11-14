@@ -8,7 +8,7 @@
 # Root resolution honours $MORIE_DMT_IMAGING_ROOT and falls back to
 # morie_cache_dir()/DMT_Imaging (the R-side equivalent of the Python
 # _DEFAULT_LOCAL_ROOT constant -- adapted because the Python default
-# was hard-coded to /Volumes/VSR/rootcoderfiles/DMT_Imaging which is
+# was hard-coded to a folder on one disk, which is
 # not portable). dmt_imaging_root() from Python is inlined into
 # load_dmt_imaging's default-arg handling rather than exposed as a
 # standalone callable. If a standalone exported wrapper is wanted in

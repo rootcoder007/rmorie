@@ -30,7 +30,7 @@
 ##              because they're pre-computed in the .RData (see paper §5).
 ##
 ##  DEFAULTS:
-##    Input:   /Volumes/VSR/rootcoderfiles/OTIS-RC/correctional_stats_report_environment1b.RData
+##    Input:   $MORIE_OTIS_RDATA, else ./correctional_stats_report_environment1b.RData
 ##    Output:  ./otis_MRP_results/  (CSVs + manifest.json)
 ##
 ##  Dependencies (CRAN):
@@ -62,7 +62,7 @@ set.seed(CANONICAL_SEED)
 ## CLI: input path + output dir
 args <- commandArgs(trailingOnly = TRUE)
 INPUT_PATH <- if (length(args) >= 1) args[1] else
-  "/Volumes/VSR/rootcoderfiles/OTIS-RC/correctional_stats_report_environment1b.RData"
+  Sys.getenv("MORIE_OTIS_RDATA", "correctional_stats_report_environment1b.RData")
 OUTPUT_DIR  <- if (length(args) >= 2) args[2] else
   file.path(getwd(), "otis_MRP_results")
 

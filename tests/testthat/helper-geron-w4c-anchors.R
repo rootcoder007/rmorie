@@ -3,7 +3,7 @@
 # Anchors for the wave-4c parity tests (57 hm* modules, rw4_c.txt).
 # Generated from the canonical Python via gen_anchors_w4c.py, run from the
 # morie repo root:
-#   cd /Volumes/VSR/rootcoderfiles/morie
+#   cd <morie checkout>
 #   MORIE_NO_UPDATE_CHECK=1 PYTHONPATH=src python \
 #     stage_rw4c/gen_anchors_w4c.py > stage_rw4c/anchors_w4c.json
 # The generator asserts every module's __file__ contains /src/morie/fn/

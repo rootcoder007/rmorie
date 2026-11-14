@@ -9,7 +9,7 @@
 # usual place the method is misread, so both directions are always
 # scored and labelled with the causal statement each supports.
 #
-# This is a native-R translation of /home/rootcoder/work/morie/src/morie/fn/cnvlfc.py.
+# This is a native-R translation of src/morie/fn/cnvlfc.py.
 # No external packages are used; RNG helpers are SplitMix64 (.ghc_rng)
 # which is bit-identical to numpy's default_rng.
 

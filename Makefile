@@ -2,8 +2,7 @@
 #
 # rmorie -- terminal-native development workflow.
 #
-# Use from your isolated user-space checkout (e.g. ~/workspace/rmorie/
-# or /Volumes/VSR/rootcoderfiles/rmorie-staging/), NOT from any
+# Use from your isolated user-space checkout (e.g. ~/workspace/rmorie/), NOT from any
 # system R library directory. This keeps you out of /usr/lib/R/library
 # and ~/R/x86_64-pc-linux-gnu-library territory where Linux policies
 # fight you for control.

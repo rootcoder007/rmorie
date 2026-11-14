@@ -28,7 +28,7 @@ TEST_WRAPPER="${SCRIPT_DIR}/test_morie_otis_mrp.sh"
 
 # Possible default locations to probe for the RData file.
 DEFAULT_RDATA_CANDIDATES=(
-  "/Volumes/VSR/rootcoderfiles/OTIS-RC/correctional_stats_report_environment1b.RData"
+  "${MORIE_OTIS_RDATA:-}"
   "${HOME}/Desktop/OTIS-RC/correctional_stats_report_environment1b.RData"
   "${HOME}/Documents/OTIS-RC/correctional_stats_report_environment1b.RData"
   "${HOME}/OTIS-RC/correctional_stats_report_environment1b.RData"
