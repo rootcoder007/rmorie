@@ -118,7 +118,7 @@ jobs:
           if (bad > 0) stop(bad, " native-tier failures")
         shell: Rscript {0}
       - name: R CMD check (as-cran, no vignettes)
-        # Examples are checked on L14, not here: extracting and running
+        # Examples are checked on the test machine, not here: extracting and running
         # 11k+ Rd pages costs ~2h on a GitHub runner, which is why every
         # gate run so far was cancelled at timeout-minutes: 120. The local
         # sweep (scripts run_examples3.R) runs every page to zero failures.
@@ -126,7 +126,7 @@ jobs:
         # and the network-fetch examples crawl on GitHub runners (cold
         # caches, throttled services) until the job hits its own
         # timeout-minutes — every "cancelled" gate run was exactly that.
-        # donttest execution is gated on the L14 self-hosted environment
+        # donttest execution is gated on the self-hosted test environment
         # instead (blackholed + live runs).
         env:
           _R_CHECK_DONTTEST_EXAMPLES_: false

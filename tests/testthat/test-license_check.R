@@ -22,7 +22,7 @@ test_that("morie_gpl_compatible_licenses includes GPL-3.0 + MIT + Apache-2.0", {
 })
 
 test_that("morie_license_metadata returns the kernel-adjunct GPL-2.0 metadata", {
-  # CLAUDE.md notes: "morie is AGPL-3.0-or-later. See LICENSING.md for
+  # The licensing notes say: "morie is AGPL-3.0-or-later. See LICENSING.md for
   # the full breakdown, including the optional GPL-2.0-only kernel
   # adjuncts." morie_license_metadata() returns the KERNEL-ADJUNCT
   # metadata (spdx = "GPL-2.0-only") so Linux kernel modules built

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # Module 14 benchmark: native DiD family vs reference packages
-# (fixest, did, DRDID, bacondecomp). Run on the L14 test machine:
+# (fixest, did, DRDID, bacondecomp). Run on the test machine:
 #   Rscript inst/benchmarks/bench-did.R
 # Writes inst/benchmarks/results/bench-did.csv when run from the
 # package root. The acceptance bar is <= 2x the reference runtime.

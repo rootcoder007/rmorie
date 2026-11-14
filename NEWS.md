@@ -1413,7 +1413,7 @@ CI keeps its speed through `_R_CHECK_DONTTEST_EXAMPLES_: false` rather
 than through misleading markup -- `--as-cran` executes `\donttest`, and
 on a GitHub runner the network examples crawl against throttled services
 until the job times out. CRAN's own machines decide for themselves; the
-full example sweep runs on L14.
+full example sweep runs on the test machine.
 
 # rmorie 1.2.0 - 2026-09-08
 

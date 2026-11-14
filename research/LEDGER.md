@@ -396,7 +396,7 @@ or of the initial condition?
   by early luck. R: `morie_feedback_loop_urn_law()`. The Azuma drift envelope
   and the a.s. convergence statement landed on 2026-10-12 (below). Still open: the
   unequal-rate urn (a Rubin-type reinforcement theorem; the library has no
-  source for it, see LIBRARY-SCAN-2026-09-21.md C1–C3).
+  source for it).
 - Recorded 2026-10-12: the rate bound x_N − x₀ ≤ ((λA − λB)/4) Σ_{k<N} 1/(c₀ + kλmin) was proved
   on 2026-10-02 (P4Rate.lean: `naiveShare_rate_bound`, `naiveTotal_ge`,
   `not_summable_shifted_harmonic`).
@@ -832,7 +832,7 @@ implementation, C++ network kernels), then P7, P6, P2, P8.
 
 ## Library scan (2026-09-21)
 
-Three readers went through the criminology, statistics and mathematics shelves of the WD library and the full-text corpus index; 74 candidate problems with page citations, and a ten-step priority queue, are in research/LIBRARY-SCAN-2026-09-21.md. First in the queue: the stochastic urn for P4 (martingale share, Friedman contrast, Azuma drift envelope), then the Jensen sharpening of the P7 Poisson null and Cox overdispersion, then the Petersen/Chapman floor and k-list non-identification for P1.
+Three readers went through the criminology, statistics and mathematics shelves of the reference library and the full-text corpus index, and listed 74 candidate problems with page citations and a ten-step priority queue. First in the queue: the stochastic urn for P4 (martingale share, Friedman contrast, Azuma drift envelope), then the Jensen sharpening of the P7 Poisson null and Cox overdispersion, then the Petersen/Chapman floor and k-list non-identification for P1.
 
 
 - Progress 2026-09-21 (comparative statics): `Research.P8.certainty_monotone`,
@@ -849,7 +849,7 @@ Three readers went through the criminology, statistics and mathematics shelves o
   monotonicity, giving Pearl's PN bounds and the excess-risk-ratio
   identity (library scan B13). R: `morie_probability_of_necessity()`.
 
-Scan items closed by problem (2026-10-12; status table in LIBRARY-SCAN-2026-09-21.md): P1: B5, B6,
+Scan items closed by problem (2026-10-12): P1: B5, B6,
 B10, A14, C9; P2: A21, A22, A23, B14, A24; P3: B7, C16, B8, A10, B9, A8, A9, A25, B21, C15; P4: C1,
 C2, C3, C4, C7, C8, C21; P5: A1, A2, A4, A5, A7, B17, C20, C22; P7: B23, C12, B24, A6, B19, C11, C18;
 P8: B12, A18, C24, A19, B11; P9: A12, A15; P10: C5, C6, A17, B20, C17, C23; P11: B1, B2, B4, B18, B25.

@@ -2,9 +2,9 @@
 #
 # Parity harness for R/verification_ports_native.R.
 #
-# Run on l14 (never the Mac), against either R tree:
+# Run on the test machine, against either R tree:
 #
-#   ssh l14 'cd ~/morie-parity && LD_LIBRARY_PATH=/home/rootcoder/liboqs/build/lib \
+#   cd morie-parity && LD_LIBRARY_PATH=<liboqs>/build/lib \
 #     Rscript scripts/audit/verify_ports_parity.R'
 #
 # Deterministic members are checked against values computed directly

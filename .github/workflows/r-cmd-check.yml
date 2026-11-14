@@ -103,7 +103,7 @@ jobs:
       # throttled services until the job times out, which is what killed
       # the Debian leg for weeks. CRAN's own machines decide for
       # themselves; ours skip them, and the full example sweep runs on
-      # L14 instead.
+      # the test machine instead.
       _R_CHECK_DONTTEST_EXAMPLES_: false
       # The heavy numerics files carry skip_on_cran(), so that
       # r-universe's slowest builder stays inside its sixty minute
@@ -302,6 +302,9 @@ jobs:
 
       # Needs R, so it runs after setup-r; before it, Rscript does not
       # exist on the runner and the step died with exit 127.
+      - name: Static guard -- no working notes or tool settings are tracked
+        run: sh scripts/audit/check_private.sh
+
       - name: Static guard -- every morie_* call must be defined
         run: Rscript scripts/audit/check_r_undefined.R .
 

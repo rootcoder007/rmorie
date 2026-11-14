@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Benchmark: native exact + CEM vs MatchIt at 1e3 / 1e4 / 1e5 rows.
-# Release bar: <= 2x the reference at 100k. Run on L14:
+# Release bar: <= 2x the reference at 100k. Run on the test machine:
 #   LD_LIBRARY_PATH=/usr/local/lib64 Rscript inst/benchmarks/bench-cem_exact.R
 suppressMessages(pkgload::load_all(quiet = TRUE))
 stopifnot(requireNamespace("MatchIt", quietly = TRUE))

@@ -3,7 +3,7 @@
 # Consolidated benchmark for modules 12-24 of the native-
 # specializations branch (the earlier modules have dedicated
 # bench-*.R scripts). Native engine vs reference package where one
-# exists; run sequentially on the L14 test machine from the package
+# exists; run sequentially on the test machine from the package
 # root:  Rscript inst/benchmarks/bench-batch-modules.R
 # Writes inst/benchmarks/results/bench-batch-modules.csv.
 

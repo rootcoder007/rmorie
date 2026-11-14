@@ -5,7 +5,7 @@
 # Algorithms are ported at full precision from the corrected Python; no
 # file was copied. Deterministic members (eslsmt, empby, regime_value)
 # match Python bit-for-bit; the Gibbs / noise / fit members are checked
-# by property. See scripts/audit/MISSING_TO_NATIVIZE.md.
+# by property.
 
 #' Smoothing spline via the Reinsch penalty
 #'

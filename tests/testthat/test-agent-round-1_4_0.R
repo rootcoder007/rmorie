@@ -1,4 +1,4 @@
-# The findings of the 1.4.0 fresh-user test agents (l14, 2026-10-03), each with its fix.
+# The findings of the 1.4.0 fresh-user test agents (2026-10-03), each with its fix.
 .pkg <- utils::packageName(environment(morie_cli))
 
 .cap <- function(...) {
