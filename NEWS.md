@@ -1422,7 +1422,8 @@ full example sweep runs on L14.
 This release merges the `feat/native-specializations` line (650 commits).
 Every estimator that previously delegated to a heavy runtime dependency
 now has a native implementation, cross-validated against the package it
-replaces and benchmarked: double-ML runs 40-61x faster than `DoubleML`,
+replaces and benchmarked: double-ML with ridge nuisances runs 24-61x
+faster than `DoubleML` with ranger forests (different learners),
 the R-learner causal forest 2.9x faster than `grf`, optimal matching
 beats `optmatch`'s own optimum, and design-based GLM matches `svyglm` to
 1e-6. The full matrix is green on Windows, macOS, Ubuntu (release,
@@ -1579,7 +1580,8 @@ devel, oldrel-1) and a true Debian bookworm container.
   cross-validated in `tests/cross/` against its reference package and
   benchmarked in `inst/benchmarks/`:
   matching (7 methods; modules 1-7), design-based IPW/svyglm to 1e-6
-  (8-9), double machine learning 40-60x faster than DoubleML (10),
+  (8-9), double machine learning with ridge nuisances 24-61x faster than
+  DoubleML with ranger forests, which are different learners (10),
   R-learner causal forest 1.5-2.9x faster than grf (11), all four
   meta-learners (12), the causal DAG toolkit with Bayes-Ball
   identification and DoWhy-style refutation (13), the complete DiD

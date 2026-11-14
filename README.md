@@ -105,7 +105,7 @@ Packages in `Suggests` play three roles, and no others:
 |---|---|---|
 | Matching (10 methods: nearest, variable ratio, exact, CEM, Mahalanobis, optimal pair, optimal full, subclass, genetic, cardinality) | MatchIt, optmatch, Matching, designmatch | pair-identical (nearest, variable ratio, subclass) or the optimum itself (optimal, full) |
 | IPW / design-based mean + GLM (strata, clusters, fpc) | survey | svymean / svyglm estimates + SEs to 1e-12 |
-| DML (PLR + IRM) | DoubleML/mlr3 | CI-overlap agreement; 40-60x faster |
+| DML (PLR + IRM) | DoubleML/mlr3 | CI-overlap agreement; closed-form ridge nuisances, timed against DoubleML with ranger forests in `inst/benchmarks/` (different learners, so not a like-for-like speed comparison) |
 | Causal forest / meta-learners | grf | CATE agreement; 1.5-2.9x faster |
 | DAG identify/estimate/refute | dagitty, DoWhy | adjustment sets == dagitty on every graph tested |
 | DiD family (TWFE/event/CS/DR/Bacon/DID-M/feTR) | fixest, did, DRDID, bacondecomp, DIDmultiplegt, TwoWayFEWeights | coefficients, SEs, and influence functions to 1e-8-1e-10 |
