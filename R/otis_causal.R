@@ -667,6 +667,7 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
               "Region_MostRecentPlacement",
               "MentalHealth_Alert", "SuicideRisk_Alert",
               "SuicideWatch_Alert")
+  df <- .otis_cols(df, want = needed)
   missing_cols <- setdiff(needed, names(df))
   if (length(missing_cols)) {
     stop("missing required OTIS columns: ",
@@ -783,6 +784,7 @@ morie_otis_make_pair_alert_to_volatility_naive <- function(df) {
               "Region_MostRecentPlacement",
               "MentalHealth_Alert", "SuicideRisk_Alert",
               "SuicideWatch_Alert")
+  df <- .otis_cols(df, need = needed)
   base <- df[, needed, drop = FALSE]
   base <- base[stats::complete.cases(base), , drop = FALSE]
   base$alert_sum_row <- .otis_binarise(base$MentalHealth_Alert) +
@@ -892,6 +894,7 @@ morie_otis_make_pair_a <- function(df) {
               "Age_Category", "Region_AtTimeOfPlacement",
               "Region_MostRecentPlacement", "MentalHealth_Alert",
               "SuicideRisk_Alert")
+  df <- .otis_cols(df, need = needed)
   base <- df[, needed, drop = FALSE]
   base <- base[stats::complete.cases(base), , drop = FALSE]
   base$T_a <- .otis_binarise(base$MentalHealth_Alert)
@@ -927,7 +930,7 @@ morie_otis_make_pair_b <- function(df) {
               "Region_MostRecentPlacement",
               "MentalHealth_Alert", "SuicideRisk_Alert",
               "SuicideWatch_Alert", "Number_Of_Placements")
-  .otis_require_cols(df, needed, "b01")
+  df <- .otis_cols(df, need = needed, table = "b01")
   base <- df[, needed, drop = FALSE]
   base <- base[stats::complete.cases(base), , drop = FALSE]
   a1 <- .otis_binarise(base$MentalHealth_Alert)
@@ -968,6 +971,7 @@ morie_otis_make_pair_c <- function(df) {
               "Region_MostRecentPlacement",
               "MentalHealth_Alert",
               "NumberConsecutiveDays_Segregation")
+  df <- .otis_cols(df, want = needed)
   miss <- setdiff(needed, names(df))
   if (length(miss)) {
     stop("pair (c) needs the column(s) ", paste(miss, collapse = ", "),
@@ -1058,7 +1062,7 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
     if (inherits(pr, "error")) {
       # a pair whose columns the frame lacks is skipped, not fatal (the bundled frame has no segregation days)
       why <- conditionMessage(pr)
-      if (grepl("undefined columns selected|is missing column", why)) {
+      if (grepl("undefined columns selected|missing column", why)) {
         lacking <- setdiff(needed[[label]], names(df))
         why <- sprintf("the frame lacks %s", if (length(lacking)) paste(lacking, collapse = ", ") else "the columns this pair needs")
       }
@@ -1715,6 +1719,7 @@ morie_otis_per_year_irm_dml <- function(df, treatment, outcome, covariates,
   irm <- function(sub, ...) morie_otis_irm_dml(
     sub, treatment, outcome, covariates, cluster_cols = cluster_cols,
     n_folds = n_folds, seed = seed, ...)
+  df <- .otis_cols(df, need = year_col)
   years <- sort(unique(df[[year_col]]))
   out <- lapply(years, function(yr) {
     sub <- df[!is.na(df[[year_col]]) & df[[year_col]] == yr, , drop = FALSE]

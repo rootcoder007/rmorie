@@ -84,14 +84,10 @@ mrm_otis_stock_flow <- function(person_days,
                                 placement_col = "Number_Of_Placements",
                                 totals_col = "NumberIndividuals_Segregation",
                                 t = 365, exposure = NULL, per = 100000) {
-  .need <- function(d, cols, what) {
+  .need <- function(d, cols, what, want = character()) {
     if (!is.data.frame(d))
       stop(sprintf("`%s` must be a data frame", what), call. = FALSE)
-    miss <- setdiff(cols, names(d))
-    if (length(miss))
-      stop(sprintf("`%s` is missing column(s): %s", what,
-                   paste(miss, collapse = ", ")), call. = FALSE)
-    invisible(TRUE)
+    .otis_cols(d, need = cols, want = want, what = sprintf("`%s`", what))
   }
   ## The measures come from rmoriebricklayer, and an installed copy older
   ## than 0.4.8 does not have them. Say so here rather than let a `::`
@@ -105,10 +101,11 @@ mrm_otis_stock_flow <- function(person_days,
            call. = FALSE)
     }
   }
-  .need(person_days, c(year_col, id_col, days_col), "person_days")
+  person_days <- .need(person_days, c(year_col, id_col, days_col), "person_days")
   if (!is.null(placements))
-    .need(placements, c(year_col, id_col, consecutive_col), "placements")
-  if (!is.null(totals)) .need(totals, c(year_col, totals_col), "totals")
+    placements <- .need(placements, c(year_col, id_col, consecutive_col),
+                        "placements", want = placement_col)
+  if (!is.null(totals)) totals <- .need(totals, c(year_col, totals_col), "totals")
 
   yrs <- sort(unique(as.character(person_days[[year_col]])))
   py <- as.character(person_days[[year_col]])

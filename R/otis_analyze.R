@@ -122,7 +122,8 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
 #' CRAN-safe: with \code{out_dir = NULL} (default) no files are written.
 #'
 #' @param df OTIS data.frame.
-#' @param year Integer fiscal year; \code{NULL} (default) takes the latest year in \code{df}.
+#' @param year Integer fiscal year; \code{NULL} (default) takes the latest
+#'   year in \code{df} and says which year it chose and which the data hold.
 #' @param sex Optional gender filter passed to
 #'   \code{morie_otis_rplace}.
 #' @param out_dir Optional output directory. When non-NULL the
@@ -140,10 +141,16 @@ morie_otis_all_analyses <- function(df, year = NULL,
                                      sex = NULL,
                                      out_dir = NULL) {
   stopifnot(is.data.frame(df))
-  df <- .otis_snake_names(df)
+  df <- .otis_snake_names(.otis_cols(df, need = "EndFiscalYear", table = "a01"))
   if (is.null(year)) {
-    # the latest fiscal year in the data
-    year <- suppressWarnings(max(as.integer(sub("^.*?([0-9]{4})$", "\\1", as.character(df$end_fiscal_year))), na.rm = TRUE))
+    # the latest fiscal year in the data, named: a new release moves it
+    yrs <- sort(unique(suppressWarnings(as.integer(
+      sub("^.*?([0-9]{4})$", "\\1", as.character(df$end_fiscal_year))))))
+    if (!length(yrs)) stop("the year column holds no fiscal year", call. = FALSE)
+    year <- max(yrs)
+    message(sprintf(paste("morie_otis_all_analyses: fiscal year %d (the latest;",
+                          "the data hold %s). Pass year = to choose."),
+                    year, paste(yrs, collapse = ", ")))
   }
   fns <- list(
     rplace = function() morie_otis_rplace(df, year = year, sex = sex),

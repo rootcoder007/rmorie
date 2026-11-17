@@ -70,8 +70,11 @@ mrm_otis_mandela_spectrum <- function(
   denominators = c("row", "individual_any", "individual_cumulative"),
   c11_data = NULL
 ) {
-  stopifnot(is.data.frame(data))
-  stopifnot(all(c(duration_col, year_col, id_col) %in% names(data)))
+  data <- .otis_cols(data, need = c(duration_col, year_col, id_col),
+                     want = alert_cols, what = "mrm_otis_mandela_spectrum")
+  if (!is.null(c11_data)) {
+    c11_data <- .otis_cols(c11_data, want = year_col, table = "c11")
+  }
   d <- data
   d[["_dur"]] <- suppressWarnings(as.numeric(d[[duration_col]]))
   d[["_long"]] <- !is.na(d[["_dur"]]) & d[["_dur"]] > threshold_days

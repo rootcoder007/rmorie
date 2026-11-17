@@ -38,6 +38,7 @@ morie_otis_figures <- function(out_dir,
                                          "pareto_region")) {
   stopifnot(is.character(out_dir), length(out_dir) == 1L,
             is.data.frame(df))
+  df <- .otis_cols(df, need = "EndFiscalYear", table = "b01")
   which <- match.arg(which, several.ok = TRUE)
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   written <- character(0)

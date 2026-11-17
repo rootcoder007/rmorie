@@ -153,6 +153,7 @@ morie_otis_repeat_placement_concentration <- function(
   band_col = "NumberPlacements_Segregation",
   count_col = "NumberIndividuals_Segregation"
 ) {
+  df <- .otis_cols(df, want = c(band_col, count_col), table = "b09")
   if (!all(c(band_col, count_col) %in% names(df))) {
     return(.churn_result(title = "Repeat-placement concentration",
                           warnings = "b09 columns missing"))
@@ -234,6 +235,7 @@ morie_otis_repeat_placement_concentration <- function(
 #' res <- try(morie_otis_within_year_placement_count(df))
 #' @export
 morie_otis_within_year_placement_count <- function(df) {
+  df <- .otis_cols(df, table = "b01")
   needed <- c("UniqueIndividual_ID", "EndFiscalYear")
   if (!all(needed %in% names(df))) {
     return(.churn_result(title = "Within-year placement count",
@@ -300,6 +302,7 @@ morie_otis_within_year_placement_count <- function(df) {
 #' res$title
 #' @export
 morie_otis_within_year_region_diversity <- function(df) {
+  df <- .otis_cols(df, table = "b01")
   needed <- c("UniqueIndividual_ID", "Region_AtTimeOfPlacement")
   if (!all(needed %in% names(df))) {
     return(.churn_result(title = "Within-year region diversity",
@@ -365,6 +368,7 @@ morie_otis_within_year_region_diversity <- function(df) {
 #' res$title
 #' @export
 morie_otis_mortification_cooccurrence <- function(df) {
+  df <- .otis_cols(df, table = "b01")
   cols <- c("MentalHealth_Alert", "SuicideRisk_Alert", "SuicideWatch_Alert")
   have <- intersect(cols, names(df))
   if (length(have) < 2L) {
@@ -440,6 +444,7 @@ morie_otis_mortification_cooccurrence <- function(df) {
 #' res$title
 #' @export
 morie_otis_disciplinary_medical_overlap <- function(df) {
+  df <- .otis_cols(df, table = "b01")
   disc_cols <- grep("^SegReason_Disciplinary", names(df), value = TRUE)
   med_cols  <- grep("^SegReason_.*Medical", names(df), value = TRUE)
   if (length(disc_cols) == 0L || length(med_cols) == 0L) {
@@ -502,6 +507,7 @@ morie_otis_disciplinary_medical_overlap <- function(df) {
 #' res$title
 #' @export
 morie_otis_embedding_distribution <- function(df) {
+  df <- .otis_cols(df, table = "b02")
   if (!"TotalAggregatedDays_Segregation" %in% names(df)) {
     return(.churn_result(title = "Embedding distribution",
                           warnings = "b02 missing TotalAggregatedDays"))
@@ -585,6 +591,7 @@ morie_otis_embedding_distribution <- function(df) {
 #' res$title
 #' @export
 morie_otis_intra_year_transition_matrix <- function(df) {
+  df <- .otis_cols(df, table = "a01")
   needed <- c("UniqueIndividual_ID", "EndFiscalYear",
               "Region_AtTimeOfPlacement")
   if (!all(needed %in% names(df))) {
@@ -694,6 +701,7 @@ morie_otis_intra_year_transition_matrix <- function(df) {
 #' res$title
 #' @export
 morie_otis_path_complexity_gini <- function(df) {
+  df <- .otis_cols(df, table = "b01")
   needed <- c("UniqueIndividual_ID", "EndFiscalYear",
               "Region_AtTimeOfPlacement")
   if (!all(needed %in% names(df))) {
@@ -773,6 +781,7 @@ morie_otis_path_complexity_gini <- function(df) {
 #' res$title
 #' @export
 morie_otis_region_alert_state_richness <- function(df) {
+  df <- .otis_cols(df, table = "b01")
   needed <- c("UniqueIndividual_ID", "EndFiscalYear",
               "Region_AtTimeOfPlacement", "MentalHealth_Alert",
               "SuicideRisk_Alert", "SuicideWatch_Alert")
@@ -842,6 +851,7 @@ morie_otis_region_alert_state_richness <- function(df) {
 #' }
 #' @export
 morie_otis_regC_demog_contingency <- function(df) {
+  df <- .otis_cols(df, table = "b01")
   needed <- c("UniqueIndividual_ID", "EndFiscalYear",
               "Region_AtTimeOfPlacement", "Gender", "Age_Category")
   if (!all(needed %in% names(df))) {

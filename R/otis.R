@@ -164,6 +164,7 @@ morie_otis_rplace <- function(df, year,
                                gender_col = "gender") {
   stopifnot(is.data.frame(df))
   needed <- c(id_col, age_col, region_col, year_col)
+  df <- .otis_cols(df, want = c(needed, gender_col))
   if (!all(needed %in% names(df))) {
     return(.otis_result(
       title = sprintf("OTIS regional placement -- FY %s", year),
@@ -258,6 +259,7 @@ morie_otis_astcmb <- function(df,
                                year_col = "end_fiscal_year") {
   stopifnot(is.data.frame(df))
   needed <- c(alert_cols, id_col, year_col)
+  df <- .otis_cols(df, want = needed)
   if (!all(needed %in% names(df))) {
     return(.otis_result(
       title = "OTIS alert-state combinations",
@@ -341,6 +343,7 @@ morie_otis_volat <- function(df,
                               regB_col = "region_most_recent_placement") {
   stopifnot(is.data.frame(df))
   needed <- c(id_col, year_col, regA_col)
+  df <- .otis_cols(df, want = c(needed, regB_col))
   if (!all(needed %in% names(df))) {
     return(.otis_result(
       title = "OTIS regional volatility",
@@ -418,6 +421,7 @@ morie_otis_rctrnd <- function(df,
   .morie_arg(df, "df")
   stopifnot(is.data.frame(df))
   needed <- c(id_col, year_col, region_col)
+  df <- .otis_cols(df, want = needed)
   if (!all(needed %in% names(df))) {
     return(.otis_result(
       title = "OTIS restrictive-confinement trends",
@@ -481,6 +485,8 @@ morie_otis_otdesc <- function(df,
                                id_col = "unique_individual_id",
                                year_col = "end_fiscal_year") {
   stopifnot(is.data.frame(df))
+  df <- .otis_cols(df, want = c(id_col, year_col, "region_at_time_of_placement",
+                                "age_category", "gender"))
   if (!id_col %in% names(df)) {
     return(.otis_result(title = "OTIS descriptives",
                         warnings = sprintf("missing id col '%s'", id_col)))
@@ -575,6 +581,7 @@ morie_otis_otdml <- function(df,
                     "region_most_recent_placement")
   }
   needed <- c(outcome, treatment, covariates)
+  df <- .otis_cols(df, want = needed)
   miss <- setdiff(needed, names(df))
   if (length(miss)) {
     return(.otis_result(title = "OTIS DML PLR",

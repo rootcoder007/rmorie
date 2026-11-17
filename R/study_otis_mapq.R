@@ -29,6 +29,7 @@
 #' res
 #' @keywords internal
 .otis_b01_canonical <- function(df) {
+  df <- .otis_cols(df, table = "b01")
   map <- c(
     EndFiscalYear = "end_fiscal_year",
     UniqueIndividual_ID = "unique_individual_id",

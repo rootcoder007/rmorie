@@ -9,7 +9,8 @@ morie_otis_all_analyses(df, year = NULL, sex = NULL, out_dir = NULL)
 \arguments{
 \item{df}{OTIS data.frame.}
 
-\item{year}{Integer fiscal year; \code{NULL} (default) takes the latest year in \code{df}.}
+\item{year}{Integer fiscal year; \code{NULL} (default) takes the latest
+year in \code{df} and says which year it chose and which the data hold.}
 
 \item{sex}{Optional gender filter passed to
 \code{morie_otis_rplace}.}

@@ -32,6 +32,9 @@
 ##  DEFAULTS:
 ##    Input:   $MORIE_OTIS_RDATA, else ./correctional_stats_report_environment1b.RData
 ##    Output:  ./otis_MRP_results/  (CSVs + manifest.json)
+##    Years:   the paper's fiscal years 2023-2025; a later release holds
+##             more, which are left out with a note. OTIS_ALL_YEARS=1
+##             analyses every year in the file.
 ##
 ##  Dependencies (CRAN):
 ##    data.table, MatchIt, glmmTMB, lme4, DHARMa, Hmisc, jsonlite
@@ -145,6 +148,8 @@ if (INPUT_MODE == "rdata") {
   )
   min_rows <- 70000L
   max_rows <- 90000L
+  ## the fiscal years the paper analysed
+  paper_years <- 2023:2025
 
   if (file.exists(provenance_path)) {
     cat("      Using schema from: ", provenance_path, "\n")
@@ -157,8 +162,35 @@ if (INPUT_MODE == "rdata") {
       min_rows <- prov$schema$structural_invariants$min_data_rows
     if (!is.null(prov$schema$structural_invariants$max_data_rows))
       max_rows <- prov$schema$structural_invariants$max_data_rows
+    if (!is.null(prov$schema$paper_fiscal_years))
+      paper_years <- as.integer(unlist(prov$schema$paper_fiscal_years))
   } else {
     cat("      (data_provenance.json not found; using built-in schema)\n")
+  }
+
+  ## --- The publisher changed this file on 2026-10-30: every column was
+  ## renamed to lower_snake_case (EndFiscalYear became end_fiscal_year) and
+  ## fiscal year 2026 was added to the same file; the rows of the earlier
+  ## years are unchanged. Columns are therefore matched to the recorded
+  ## names without regard to case or underscores, so both spellings read.
+  .nk <- function(x) gsub("[^a-z0-9]", "", tolower(x))
+  ## two columns that read as one recorded name: the first would be taken
+  ## without a word, so the file is refused and both are named
+  .twice <- unique(.nk(colnames(df_raw))[duplicated(.nk(colnames(df_raw)))])
+  .twice <- intersect(.twice, .nk(expected_cols))
+  if (length(.twice)) {
+    stop("CSV has more than one column for: ",
+         paste(vapply(.twice, function(k) paste(
+           colnames(df_raw)[.nk(colnames(df_raw)) == k], collapse = " and "),
+           ""), collapse = "; "),
+         ". Remove or rename the extra column.", call. = FALSE)
+  }
+  .hit <- match(.nk(expected_cols), .nk(colnames(df_raw)))
+  .ren <- !is.na(.hit) & !(expected_cols %in% colnames(df_raw))
+  if (any(.ren)) {
+    setnames(df_raw, colnames(df_raw)[.hit[.ren]], expected_cols[.ren])
+    cat("      Column names are the publisher's later spelling; read as the",
+        "recorded ones.\n")
   }
 
   ## --- Schema validation: hard fail on missing required cols ---
@@ -171,6 +203,34 @@ if (INPUT_MODE == "rdata") {
          "with the schema documented in data_provenance.json. ",
          "If Ontario has changed the column names, update ",
          "data_provenance.json's expected_columns to match.")
+  }
+
+  ## --- A later release of the file holds years the paper did not use.
+  ## They are left out, so the published values are reproduced from either
+  ## release; OTIS_ALL_YEARS=1 analyses them too.
+  .yraw <- as.character(df_raw[["EndFiscalYear"]])
+  .ybad <- unique(.yraw[is.na(.yraw) | !grepl("^[0-9]{4}$", trimws(.yraw))])
+  if (length(.ybad)) {
+    stop("EndFiscalYear holds values that are not a four-digit year: ",
+         paste(utils::head(.ybad, 5L), collapse = ", "), call. = FALSE)
+  }
+  .yrs <- sort(unique(as.integer(df_raw[["EndFiscalYear"]])))
+  if (!any(.yrs %in% paper_years) && !nzchar(Sys.getenv("OTIS_ALL_YEARS"))) {
+    stop("The file has no rows of the paper's fiscal years (",
+         paste(range(paper_years), collapse = "-"), "); it holds ",
+         paste(.yrs, collapse = ", "), ". OTIS_ALL_YEARS=1 analyses those.",
+         call. = FALSE)
+  }
+  .more <- setdiff(.yrs, paper_years)
+  if (length(.more) && !nzchar(Sys.getenv("OTIS_ALL_YEARS"))) {
+    cat("      Fiscal years in the file beyond the paper's (",
+        paste(.more, collapse = ", "), ") are left out; OTIS_ALL_YEARS=1 keeps",
+        " them.\n", sep = "")
+    df_raw <- df_raw[as.integer(df_raw[["EndFiscalYear"]]) %in% paper_years, ]
+  } else if (length(.more)) {
+    cat("      All fiscal years analysed (", paste(.yrs, collapse = ", "),
+        "): the paper's values are for ", paste(range(paper_years),
+        collapse = "-"), " and will differ.\n", sep = "")
   }
 
   ## --- Schema validation: warn on row count out of expected range ---

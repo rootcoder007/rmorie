@@ -28,8 +28,8 @@
 #'     calendar \code{OCC_YEAR} or \code{REPORT_YEAR}. The Pearson r
 #'     here is computed on the year-aligned intersection -- there is
 #'     a small fiscal/calendar misalignment that is documented in the
-#'     interpretation but not corrected. Toronto OTIS data covers only
-#'     2023-2025, so common-year samples are necessarily small.
+#'     interpretation but not corrected. Toronto OTIS data covers a
+#'     handful of fiscal years, so common-year samples are necessarily small.
 #' }
 #'
 #' @name morie_otis_tps_overlay
@@ -43,7 +43,7 @@ NULL
 #' Internal helper: Otis Tps Toronto Seg By Year
 #' @noRd
 .otis_tps_toronto_seg_by_year <- function(df_b01) {
-  stopifnot(is.data.frame(df_b01))
+  df_b01 <- .otis_cols(df_b01, table = "b01")
   if (!("EndFiscalYear" %in% names(df_b01))) {
     return(stats::setNames(integer(0), character(0)))
   }
@@ -195,7 +195,8 @@ morie_otis_tps_yoy_correlation <- function(otis_b01, tps_datasets) {
       "in that category. This is association, NOT causation. OTIS",
       "uses fiscal-year (EndFiscalYear); TPS uses calendar year",
       "(OCC_YEAR / REPORT_YEAR) -- year axes are intersected as-is.",
-      "Toronto OTIS data covers only 2023-2025, so common-year",
+      sprintf("Toronto OTIS data covers %d year(s) here (%s), so common-year",
+              length(seg), paste(names(seg), collapse = ", ")),
       "samples are small and CIs on r are wide."
     ),
     payload = list(seg_by_year = as.list(seg))
@@ -224,7 +225,7 @@ morie_otis_tps_yoy_correlation <- function(otis_b01, tps_datasets) {
 #' @export
 morie_otis_tps_per_region_rollup <- function(otis_b01) {
   .morie_arg(otis_b01, "df")
-  stopifnot(is.data.frame(otis_b01))
+  otis_b01 <- .otis_cols(otis_b01, table = "b01")
   if (!("Region_AtTimeOfPlacement" %in% names(otis_b01))) {
     return(.otis_overlay_wrap(
       title = "OTIS region rollup",

@@ -233,6 +233,9 @@ NULL
 #' class(res)
 #' @export
 morie_otis_analyze_b01 <- function(data) {
+  data <- .otis_cols(data, table = "b01", need = c(
+    "EndFiscalYear", "UniqueIndividual_ID",
+    "NumberConsecutiveDays_Segregation", "Number_Of_Placements"))
   stopifnot(is.data.frame(data))
   s <- .otis_summary_lines(data, "b01",
     description = "Segregation placements (person-level detail)")
@@ -302,6 +305,9 @@ morie_otis_analyze_b01 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b02 <- function(data) {
+  data <- .otis_cols(data, table = "b02", need = c(
+    "EndFiscalYear", "Gender", "Region_MostRecentPlacement",
+    "TotalAggregatedDays_Segregation"))
   s <- .otis_summary_lines(data, "b02",
     description = "Segregation total days per person per fiscal year")
   daycol <- "TotalAggregatedDays_Segregation"
@@ -331,6 +337,9 @@ morie_otis_analyze_b02 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b03 <- function(data) {
+  data <- .otis_cols(data, table = "b03", need = c(
+    "EndFiscalYear", "Region_AtTimeOfPlacement", "Alert_Type",
+    "Alert_Presence", "Number_SegregationPlacements"))
   s <- .otis_summary_lines(data, "b03",
     description = "Placements by alert/hold flag x institution")
   .otis_wrap(
@@ -354,6 +363,9 @@ morie_otis_analyze_b03 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b04 <- function(data) {
+  data <- .otis_cols(data, table = "b04", need = c(
+    "EndFiscalYear", "Region_AtTimeOfPlacement", "Measure",
+    "NumberConsecutiveDays_Segregation"))
   s <- .otis_summary_lines(data, "b04",
     description = "Placement durations (max/median/mode) by region & gender")
   .otis_wrap(
@@ -374,6 +386,9 @@ morie_otis_analyze_b04 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b05 <- function(data) {
+  data <- .otis_cols(data, table = "b05", need = c(
+    "EndFiscalYear", "Consecutive_Duration",
+    "Number_SegregationPlacements"))
   s <- .otis_summary_lines(data, "b05",
     description = "Distribution by binned duration")
   .otis_wrap(
@@ -393,6 +408,8 @@ morie_otis_analyze_b05 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b06 <- function(data) {
+  data <- .otis_cols(data, table = "b06", need = c(
+    "EndFiscalYear", "Gender", "Reason", "Number_SegregationPlacements"))
   s <- .otis_summary_lines(data, "b06",
     description = "Reasons for placement by institution & gender")
   .otis_wrap(
@@ -416,6 +433,10 @@ morie_otis_analyze_b06 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b07 <- function(data) {
+  data <- .otis_cols(data, table = "b07", need = c(
+    "EndFiscalYear", "Alert_Type", "Gender",
+    "Number_Segregation_Placements_Without_Alert",
+    "Number_Segregation_Placements_With_Alert"))
   s <- .otis_summary_lines(data, "b07",
     description = "Placements with/without alert x gender")
   with_col <- "Number_Segregation_Placements_With_Alert"
@@ -454,6 +475,9 @@ morie_otis_analyze_b07 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b08 <- function(data) {
+  data <- .otis_cols(data, table = "b08", need = c(
+    "EndFiscalYear", "Institution_AtTimeOfPlacement", "Measure",
+    "NumberConsecutiveDays_Segregation"))
   s <- .otis_summary_lines(data, "b08",
     description = "Placement durations by institution & gender")
   .otis_wrap(
@@ -474,6 +498,9 @@ morie_otis_analyze_b08 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b09 <- function(data) {
+  data <- .otis_cols(data, table = "b09", need = c(
+    "EndFiscalYear", "NumberPlacements_Segregation", "Gender",
+    "NumberIndividuals_Segregation"))
   s <- .otis_summary_lines(data, "b09",
     description = "Individuals by number of placements x gender")
   .otis_wrap(
@@ -498,6 +525,10 @@ morie_otis_analyze_b09 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c01 <- function(data) {
+  data <- .otis_cols(data, table = "c01", need = c(
+    "EndFiscalYear", "Gender", "NumberIndividuals_InCustody",
+    "NumberIndividuals_RestrictiveConfinement",
+    "NumberIndividuals_Segregation"))
   s <- .otis_summary_lines(data, "c01",
     description = "Total individuals x custody/RC/seg x gender")
   rate_rows <- lapply(seq_len(nrow(data)), function(i) {
@@ -529,6 +560,9 @@ morie_otis_analyze_c01 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c02 <- function(data) {
+  data <- .otis_cols(data, table = "c02", need = c(
+    "EndFiscalYear", "Institution_MostRecentPlacement",
+    "NumberIndividuals_RestrictiveConfinement"))
   s <- .otis_summary_lines(data, "c02",
     description = "Individuals in RC/seg by institution x region x gender")
   .otis_wrap(
@@ -550,6 +584,10 @@ morie_otis_analyze_c02 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c03 <- function(data) {
+  data <- .otis_cols(data, table = "c03", need = c(
+    "EndFiscalYear", "Race", "NumberIndividuals_InCustody",
+    "NumberIndividuals_RestrictiveConfinement",
+    "NumberIndividuals_Segregation"))
   s <- .otis_summary_lines(data, "c03",
     description = "Individuals x race x gender")
   cols <- c("NumberIndividuals_InCustody",
@@ -594,6 +632,8 @@ morie_otis_analyze_c03 <- function(data) {
                             col_col = "Region_MostRecentPlacement",
                             value_col = "NumberIndividuals_RestrictiveConfinement") {
   function(data) {
+    data <- .otis_cols(data, need = c("EndFiscalYear", row_col, col_col,
+                                      value_col), table = ds_id)
     s <- .otis_summary_lines(data, ds_id, description = description)
     .otis_wrap(
       sprintf("%s -- %s", ds_id, description),
@@ -640,6 +680,10 @@ morie_otis_analyze_c06 <- .otis_c_simple(
 #' class(res)
 #' @export
 morie_otis_analyze_c07 <- function(data) {
+  data <- .otis_cols(data, table = "c07", need = c(
+    "EndFiscalYear", "Alert_Type", "Gender",
+    "NumberIndividuals_RestrictiveConfinement",
+    "NumberIndividuals_Segregation"))
   s <- .otis_summary_lines(data, "c07",
     description = "Individuals in custody/RC/seg x alert type x gender")
   .otis_wrap(
@@ -682,6 +726,9 @@ morie_otis_analyze_c09 <- .otis_c_simple(
 #' class(res)
 #' @export
 morie_otis_analyze_c10 <- function(data) {
+  data <- .otis_cols(data, table = "c10", need = c(
+    "EndFiscalYear", "Institution_MostRecentPlacement", "Measure",
+    "TotalAggregatedDays_RestrictiveConfinement"))
   s <- .otis_summary_lines(data, "c10",
     description = "RC/seg aggregate durations by institution")
   .otis_wrap(
@@ -702,6 +749,9 @@ morie_otis_analyze_c10 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c11 <- function(data) {
+  data <- .otis_cols(data, table = "c11", need = c(
+    "EndFiscalYear", "Aggregate_Duration",
+    "NumberIndividuals_RestrictiveConfinement"))
   s <- .otis_summary_lines(data, "c11",
     description = "Individuals by binned aggregate duration")
   .otis_wrap(
@@ -721,6 +771,9 @@ morie_otis_analyze_c11 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c12 <- function(data) {
+  data <- .otis_cols(data, table = "c12", need = c(
+    "EndFiscalYear", "Region_MostRecentPlacement", "Measure",
+    "TotalAggregatedDays_RestrictiveConfinement"))
   s <- .otis_summary_lines(data, "c12",
     description = "RC/seg aggregate durations by region & gender")
   .otis_wrap(
@@ -746,6 +799,8 @@ morie_otis_analyze_c12 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_d01 <- function(data) {
+  data <- .otis_cols(data, table = "d01", need = c(
+    "Year", "Region_AtTimeOfDeath"))
   s <- .otis_summary_lines(data, "d01",
     description = "Custodial deaths (person-level)")
   if ("UniqueIndividual_ID" %in% names(data)) {
@@ -777,6 +832,8 @@ morie_otis_analyze_d01 <- function(data) {
 #' @noRd
 .otis_d_simple <- function(ds_id, description, by) {
   function(data) {
+    data <- .otis_cols(data, need = c("Year", by, "Number_CustodialDeaths"),
+                      table = ds_id)
     s <- .otis_summary_lines(data, ds_id, description = description)
     .otis_wrap(
       sprintf("%s -- %s", ds_id, description),
@@ -833,6 +890,8 @@ morie_otis_analyze_d05 <- .otis_d_simple(
 #' class(res)
 #' @export
 morie_otis_analyze_d06 <- function(data) {
+  data <- .otis_cols(data, table = "d06", need = c(
+    "Year", "Alert_Type", "MedicalCauseOfDeath", "Number_CustodialDeaths"))
   s <- .otis_summary_lines(data, "d06",
     description = "Custodial deaths x alert x medical cause")
   .otis_wrap(
@@ -851,11 +910,13 @@ morie_otis_analyze_d06 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_d07 <- function(data) {
+  data <- .otis_cols(data, table = "d07", need = c(
+    "Year", "Alert_Type", "Housing_Type", "Number_CustodialDeaths"))
   s <- .otis_summary_lines(data, "d07",
     description = "Custodial deaths x alert x housing unit")
   .otis_wrap(
     "d07 -- Custodial deaths x alert x housing unit", s,
-    list(.otis_crosstab(data, "HousingUnit_Type", "Alert_Type",
+    list(.otis_crosstab(data, "Housing_Type", "Alert_Type",
                         "Number_CustodialDeaths"))
   )
 }
@@ -1005,7 +1066,8 @@ print.morie_otis_analysis_result <- function(x, ...) {
 #' @noRd
 .otis_missing_columns <- function(fn_name, data, need) {
   miss <- paste(setdiff(need, names(data)), collapse = ", ")
-  msg <- sprintf("%s: missing required columns: %s", fn_name, miss)
+  msg <- sprintf("%s: missing required columns: %s; the table has: %s",
+                 fn_name, miss, paste(names(data), collapse = ", "))
   .otis_wrap(
     title = sprintf("%s -- missing columns", fn_name),
     summary_lines = list(status = "missing columns", missing = miss),
@@ -1091,7 +1153,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
 #' Internal helper: the caller's OTIS table, or the published one by id
 #' @noRd
 .otis_ruhela_input <- function(data, id) {
-  if (!is.null(data)) return(data)
+  if (!is.null(data)) return(.otis_cols(data, table = id))
   df <- tryCatch(
     if (id == "a01") morie_otis_load() else morie_load_dataset(paste0("otis", id)),
     error = function(e) stop(sprintf(
@@ -1104,7 +1166,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
       "its numbers are not findings. Download the real table with",
       "morie_datasets_otis_a01(offline = FALSE)"), id), call. = FALSE)
   }
-  df
+  .otis_cols(df, table = id)
 }
 
 #' Internal helper: TRUE for synthetic OTIS rows -- the included sample's IDs carry
@@ -1113,17 +1175,6 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
 .otis_is_synthetic <- function(df) {
   ids <- df[["UniqueIndividual_ID"]]
   !is.null(ids) && any(grepl("SYNTH|^syn-", as.character(ids)))
-}
-
-#' Internal helper: stop naming the columns a table lacks
-#' @noRd
-.otis_require_cols <- function(df, cols, id) {
-  miss <- setdiff(cols, names(df))
-  if (length(miss)) {
-    stop(sprintf("the OTIS %s table is missing column(s): %s", id,
-                 paste(miss, collapse = ", ")), call. = FALSE)
-  }
-  invisible(TRUE)
 }
 
 #' Internal helper: the ten-estimator DLRM on one Ruhela formulation
@@ -1141,7 +1192,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
   naive <- NULL
   if (!is.null(treatment)) {
     cols <- c(treatment, outcome, covariates)
-    .otis_require_cols(df, cols, ds_id)
+    df <- .otis_cols(df, need = cols, table = ds_id)
     data <- df[stats::complete.cases(df[, cols, drop = FALSE]), cols, drop = FALSE]
     label <- sprintf("%s: T=%s, Y=%s", ds_id, treatment, outcome)
   } else {
@@ -1420,7 +1471,7 @@ morie_otis_analyze_b02_ruhela_formulations <- function(data = NULL, out_dir = NU
   work <- .otis_ruhela_input(data, "b02")
   need <- c("Gender", "TotalAggregatedDays_Segregation",
             "Region_MostRecentPlacement", "Age_Category", "EndFiscalYear")
-  .otis_require_cols(work, need, "b02")
+  work <- .otis_cols(work, need = need, table = "b02")
   work <- work[stats::complete.cases(work[, need, drop = FALSE]), , drop = FALSE]
   work$T_female <- .otis_female(work$Gender)
   res <- .otis_ruhela_formulations_on(
@@ -1497,7 +1548,8 @@ morie_otis_analyze_ruhela_per_year <- function(data, ds_id,
                                                  year_col = "EndFiscalYear",
                                                  cluster_col = "EndFiscalYear",
                                                  out_dir = NULL) {
-  .otis_require_cols(data, c(treatment, outcome, covariates, year_col), ds_id)
+  data <- .otis_cols(data, need = c(treatment, outcome, covariates, year_col),
+                     table = ds_id)
   by_year <- morie_otis_per_year_irm_dml(
     data, treatment, outcome, covariates, year_col = year_col,
     cluster_cols = cluster_col, full_battery = TRUE)
@@ -1862,6 +1914,7 @@ IRR > 1 ==> treatment increases the count rate; IRR < 1 ",
 #' }
 morie_otis_analyze_b03_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Alert_Presence", "Number_SegregationPlacements")
+  data <- .otis_cols(data, want = need, table = "b03")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("b03_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -1898,6 +1951,7 @@ morie_otis_analyze_b03_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_b04_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_AtTimeOfPlacement", "Gender",
             "Measure", "NumberConsecutiveDays_Segregation")
+  data <- .otis_cols(data, want = need, table = "b04")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("b04_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -1948,6 +2002,7 @@ morie_otis_analyze_b04_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_b05_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Consecutive_Duration",
             "Number_SegregationPlacements")
+  data <- .otis_cols(data, want = need, table = "b05")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("b05_ruhela_aggregate", data, need))
   .otis_emit(
@@ -1983,6 +2038,7 @@ morie_otis_analyze_b06_ruhela_aggregate <- function(data, out_dir = NULL) {
             "Region_AtTimeOfPlacement",
             "Institution_AtTimeOfPlacement",
             "Number_SegregationPlacements")
+  data <- .otis_cols(data, want = need, table = "b06")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("b06_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2018,6 +2074,7 @@ morie_otis_analyze_b07_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Alert_Type", "Gender",
             "Number_Segregation_Placements_With_Alert",
             "Number_Segregation_Placements_Without_Alert")
+  data <- .otis_cols(data, want = need, table = "b07")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("b07_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2068,6 +2125,7 @@ morie_otis_analyze_b08_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_AtTimeOfPlacement",
             "Institution_AtTimeOfPlacement", "Gender",
             "Measure", "NumberConsecutiveDays_Segregation")
+  data <- .otis_cols(data, want = need, table = "b08")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("b08_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2106,6 +2164,7 @@ morie_otis_analyze_b08_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_b09_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "NumberPlacements_Segregation", "Gender",
             "NumberIndividuals_Segregation")
+  data <- .otis_cols(data, want = need, table = "b09")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("b09_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2138,6 +2197,7 @@ morie_otis_analyze_b09_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_c01_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c01")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c01_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2167,6 +2227,7 @@ morie_otis_analyze_c01_ruhela_aggregate_region_cluster <- function(data,
                                                           out_dir = NULL) {
   need <- c("EndFiscalYear", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c01")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c01_ruhela_aggregate_region_cluster", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2200,6 +2261,7 @@ morie_otis_analyze_c02_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_MostRecentPlacement",
             "Institution_MostRecentPlacement", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c02")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c02_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2233,6 +2295,7 @@ morie_otis_analyze_c02_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_c03_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Race", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c03")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c03_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2265,6 +2328,7 @@ morie_otis_analyze_c03_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_c04_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Race", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c04")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c04_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2298,6 +2362,7 @@ morie_otis_analyze_c04_ruhela_aggregate_region_cluster <- function(data,
                                                           out_dir = NULL) {
   need <- c("EndFiscalYear", "Race", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c04")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c04_ruhela_aggregate_region_cluster", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2326,6 +2391,7 @@ morie_otis_analyze_c04_ruhela_aggregate_region_cluster <- function(data,
 morie_otis_analyze_c05_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Religion", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c05")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c05_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2359,6 +2425,7 @@ morie_otis_analyze_c05_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_c06_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Age_Category", "Region_MostRecentPlacement",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c06")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c06_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2388,6 +2455,7 @@ morie_otis_analyze_c06_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_c07_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Alert_Type", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c07")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c07_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2429,6 +2497,7 @@ morie_otis_analyze_c07_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_c08_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Religion", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c08")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c08_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2459,6 +2528,7 @@ morie_otis_analyze_c08_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_c09_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Age_Category", "Gender",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c09")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c09_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2489,6 +2559,7 @@ morie_otis_analyze_c10_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_MostRecentPlacement",
             "Institution_MostRecentPlacement", "Gender", "Measure",
             "TotalAggregatedDays_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c10")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c10_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2524,6 +2595,7 @@ morie_otis_analyze_c10_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_c11_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Aggregate_Duration",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c11")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c11_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2558,6 +2630,7 @@ morie_otis_analyze_c11_ruhela_aggregate <- function(data, out_dir = NULL) {
 morie_otis_analyze_c12_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("EndFiscalYear", "Region_MostRecentPlacement", "Gender",
             "Measure", "TotalAggregatedDays_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c12")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("c12_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2591,6 +2664,7 @@ morie_otis_analyze_c12_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' }
 morie_otis_analyze_d02_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Gender", "Number_CustodialDeaths")
+  data <- .otis_cols(data, want = need, table = "d02")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("d02_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2620,6 +2694,7 @@ morie_otis_analyze_d02_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' }
 morie_otis_analyze_d03_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Race", "Number_CustodialDeaths")
+  data <- .otis_cols(data, want = need, table = "d03")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("d03_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2649,6 +2724,7 @@ morie_otis_analyze_d03_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' }
 morie_otis_analyze_d04_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Religion", "Number_CustodialDeaths")
+  data <- .otis_cols(data, want = need, table = "d04")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("d04_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2676,6 +2752,7 @@ morie_otis_analyze_d04_ruhela_aggregate <- function(data, out_dir = NULL) {
 #' }
 morie_otis_analyze_d05_ruhela_aggregate <- function(data, out_dir = NULL) {
   need <- c("Year", "Age_Category", "Number_CustodialDeaths")
+  data <- .otis_cols(data, want = need, table = "d05")
   if (!all(need %in% names(data)))
     return(.otis_missing_columns("d05_ruhela_aggregate", data, need))
   work <- data[stats::complete.cases(data[, need, drop = FALSE]), ,
@@ -2941,7 +3018,7 @@ morie_otis_analyze_b02_ruhela_alt_region <- function(data = NULL, out_dir = NULL
   work <- .otis_ruhela_input(data, "b02")
   need <- c("Gender", "TotalAggregatedDays_Segregation",
             "Region_MostRecentPlacement", "Age_Category", "EndFiscalYear")
-  .otis_require_cols(work, need, "b02")
+  work <- .otis_cols(work, need = need, table = "b02")
   work <- work[stats::complete.cases(work[, need, drop = FALSE]), , drop = FALSE]
   work$T_toronto <- .otis_toronto(work$Region_MostRecentPlacement)
   res <- .otis_ruhela_formulations_on(
@@ -2983,7 +3060,7 @@ morie_otis_analyze_b02_ruhela_alt_age <- function(data = NULL, out_dir = NULL) {
   work <- .otis_ruhela_input(data, "b02")
   need <- c("Gender", "TotalAggregatedDays_Segregation",
             "Region_MostRecentPlacement", "Age_Category", "EndFiscalYear")
-  .otis_require_cols(work, need, "b02")
+  work <- .otis_cols(work, need = need, table = "b02")
   work <- work[stats::complete.cases(work[, need, drop = FALSE]), , drop = FALSE]
   work$T_50plus <- .otis_age50(work$Age_Category)
   res <- .otis_ruhela_formulations_on(
@@ -3236,6 +3313,7 @@ morie_otis_analyze_b05_mandela_classification <- function(data,
                                                             out_dir = NULL) {
   need <- c("EndFiscalYear", "Consecutive_Duration",
             "Number_SegregationPlacements")
+  data <- .otis_cols(data, want = need, table = "b05")
   if (!all(need %in% names(data))) {
     return(.otis_wrap("b05 Mandela classification", list(),
       warnings = paste("b05 missing required columns:",
@@ -3340,6 +3418,7 @@ morie_otis_analyze_c11_mandela_classification <- function(data,
   need <- c("EndFiscalYear", "Aggregate_Duration",
             "NumberIndividuals_Segregation",
             "NumberIndividuals_RestrictiveConfinement")
+  data <- .otis_cols(data, want = need, table = "c11")
   if (!all(need %in% names(data))) {
     return(.otis_wrap("c11 Mandela classification", list(),
       warnings = paste("c11 missing required columns:",
@@ -3613,6 +3692,7 @@ morie_otis_analyze_c_chi2 <- function(datasets,
   payloads <- list()
   for (sl in slices) {
     df <- datasets[[sl$ds]]
+    if (!is.null(df)) df <- .otis_cols(df, table = sl$ds)
     if (is.null(df)) {
       rows[[length(rows) + 1L]] <- c(sl$ds,
         sprintf("%s x %s", sl$row, sl$col),
@@ -3687,6 +3767,9 @@ morie_otis_analyze_d_chi2 <- function(datasets, out_dir = NULL) {
   d01 <- datasets$d01
   d06 <- datasets$d06
   d07 <- datasets$d07
+  if (!is.null(d01)) d01 <- .otis_cols(d01, table = "d01")
+  if (!is.null(d06)) d06 <- .otis_cols(d06, table = "d06")
+  if (!is.null(d07)) d07 <- .otis_cols(d07, table = "d07")
 
   yearly_rows <- list()
   rr_text <- "n/a"
@@ -4108,7 +4191,8 @@ morie_otis_analyze_ruhela_master <- function(datasets,
 #'
 #' Runs \code{\link{morie_otis_analyze_a01}} (alert complexity -> regional
 #' volatility, MatchIt then IRM-DML) and sets it beside Toronto's Crime
-#' Severity Index for the OTIS years (2023-2025), computed with
+#' Severity Index for the years present in both the a01 table and the TPS
+#' tables, computed with
 #' \code{\link{morie_tps_csi_per_year}} from TPS incident tables. The
 #' question it frames: did the OTIS effect arise while Toronto crime
 #' severity was rising or falling?
@@ -4140,7 +4224,8 @@ morie_otis_analyze_a01_with_csi_context <- function(data = NULL,
                                                      tps_data = NULL,
                                                      out_dir = NULL) {
   variant <- match.arg(variant, c("total", "violent"))
-  otis <- morie_otis_analyze_a01(.otis_ruhela_input(data, "a01"))
+  a01 <- .otis_ruhela_input(data, "a01")
+  otis <- morie_otis_analyze_a01(a01)
   cats <- MORIE_TPS_CSI_CATEGORIES()
   load_errors <- character(0)
   if (is.null(tps_data)) {
@@ -4170,7 +4255,14 @@ morie_otis_analyze_a01_with_csi_context <- function(data = NULL,
   }
   by_year <- morie_tps_csi_per_year(counts, variant = variant,
                                     rebase_to_year = rebase_to_year)
-  overlap <- by_year[by_year$year %in% 2023:2025, , drop = FALSE]
+  # the years both inputs hold, not a fixed list: each OTIS release adds one
+  otis_years <- sort(unique(suppressWarnings(as.integer(a01$EndFiscalYear))))
+  overlap <- by_year[by_year$year %in% otis_years, , drop = FALSE]
+  if (!nrow(overlap)) {
+    load_errors <- c(load_errors, sprintf(
+      "no year in both inputs: OTIS %s, CSI %s",
+      paste(otis_years, collapse = ", "), paste(sort(by_year$year), collapse = ", ")))
+  }
   rows <- lapply(seq_len(nrow(overlap)), function(i) {
     r <- overlap[i, ]
     as.character(c(as.integer(r$year), round(r$raw_weighted_sum), as.integer(r$total_count),
@@ -4182,7 +4274,8 @@ morie_otis_analyze_a01_with_csi_context <- function(data = NULL,
     summary_lines = c(otis$summary_lines, list(
       "-- CSI context (StatsCan), variant" = variant,
       "-- Rebase year" = if (is.null(rebase_to_year)) "none" else rebase_to_year,
-      "-- Years with CSI data" = paste(sort(by_year$year), collapse = ", "))),
+      "-- Years with CSI data" = paste(sort(by_year$year), collapse = ", "),
+      "-- Years in both (shown)" = paste(sort(overlap$year), collapse = ", "))),
     tables = list(list(
       title = sprintf("Toronto CSI by year (variant=%s, rebased to %s=100):", variant,
                       if (is.null(rebase_to_year)) "none" else rebase_to_year),

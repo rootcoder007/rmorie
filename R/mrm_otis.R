@@ -167,8 +167,8 @@ mrm_otis_placement_concentration <- function(
   x_min = 1L,
   top_pct = 0.05
 ) {
-  stopifnot(is.data.frame(data))
-  stopifnot(all(c(year_col, band_col, count_col) %in% names(data)))
+  data <- .otis_cols(data, need = c(year_col, band_col, count_col, gender_col),
+                     what = "mrm_otis_placement_concentration")
 
   band_to_midpoint <- function(band) {
     s <- as.character(band)
@@ -283,8 +283,8 @@ mrm_otis_seg_duration_km <- function(
   probs = c(0.5, 0.25, 0.10, 0.05, 0.01),
   mandela_threshold = 15L
 ) {
-  stopifnot(is.data.frame(data))
-  stopifnot(duration_col %in% names(data))
+  data <- .otis_cols(data, need = c(duration_col, group_cols),
+                     what = "mrm_otis_seg_duration_km")
 
   if (is.null(group_cols)) {
     strata <- list(pooled = rep(TRUE, nrow(data)))
@@ -357,8 +357,8 @@ mrm_otis_mortification_cooccurrence <- function(
   data,
   alert_cols = c("MentalHealth_Alert", "SuicideRisk_Alert", "SuicideWatch_Alert")
 ) {
-  stopifnot(is.data.frame(data))
-  stopifnot(all(alert_cols %in% names(data)))
+  data <- .otis_cols(data, need = alert_cols,
+                     what = "mrm_otis_mortification_cooccurrence")
   bins <- lapply(alert_cols, function(c) as.integer(data[[c]] == "Yes"))
   names(bins) <- alert_cols
   pairs <- utils::combn(alert_cols, 2L, simplify = FALSE)
@@ -413,8 +413,8 @@ mrm_otis_region_locality <- function(
   region_at_col = "Region_AtTimeOfPlacement",
   region_recent_col = "Region_MostRecentPlacement"
 ) {
-  stopifnot(is.data.frame(data))
-  stopifnot(all(c(region_at_col, region_recent_col) %in% names(data)))
+  data <- .otis_cols(data, need = c(region_at_col, region_recent_col),
+                     what = "mrm_otis_region_locality")
   tbl <- table(data[[region_at_col]], data[[region_recent_col]])
   chi <- suppressWarnings(stats::chisq.test(tbl, correct = FALSE))
   diag_sum <- sum(diag(tbl))

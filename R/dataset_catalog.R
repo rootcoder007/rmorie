@@ -330,10 +330,11 @@ morie_dataset_catalog <- function() {
       download_url = "https://data.ontario.ca/dataset/3ca4505b-091c-4b04-89e8-c316ffaa0d9e/resource/97d82317-539c-479d-9479-4dd9b7e9e08c/download/institutional_locations_en.csv"
     ),
     # -- OTIS public release per-table CSVs (used by mrm_otis_*) --
+    # no year label: Ontario adds a fiscal year to these files each release
     # CKAN IDs from data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario
     list(
       key = "otisa01", name = "OTIS a01: Restrictive Confinement - Detailed Dataset",
-      source = "otis", survey = "a01", year = "2023-2025",
+      source = "otis", survey = "a01", year = "",
       format = "csv", type = "correctional", large_file = FALSE,
       local_path = "data/datasets/OTIS/a01_restrictive_confinement_detailed_dataset.csv",
       table_name = "otisa01",
@@ -342,7 +343,7 @@ morie_dataset_catalog <- function() {
     ),
     list(
       key = "otisb01", name = "OTIS b01: Segregation - Detailed Dataset",
-      source = "otis", survey = "b01", year = "2023-2025",
+      source = "otis", survey = "b01", year = "",
       format = "csv", type = "correctional", large_file = FALSE,
       local_path = "data/datasets/OTIS/b01_segregation_detailed_dataset.csv",
       table_name = "otisb01",
@@ -351,7 +352,7 @@ morie_dataset_catalog <- function() {
     ),
     list(
       key = "otisb09", name = "OTIS b09: Individuals in Segregation - Number of Placements",
-      source = "otis", survey = "b09", year = "2023-2025",
+      source = "otis", survey = "b09", year = "",
       format = "csv", type = "correctional", large_file = FALSE,
       local_path = "data/datasets/OTIS/b09_individuals_in_segregation_number_of_times_in_segregation.csv",
       table_name = "otisb09",
@@ -360,7 +361,7 @@ morie_dataset_catalog <- function() {
     ),
     list(
       key = "otisc11", name = "OTIS c11: Individuals in Segregation/RC by Aggregate Length",
-      source = "otis", survey = "c11", year = "2023-2025",
+      source = "otis", survey = "c11", year = "",
       format = "csv", type = "correctional", large_file = FALSE,
       local_path = "data/datasets/OTIS/c11_individuals_in_segregation_and_restrictive_confinement_aggregate_lengths.csv",
       table_name = "otisc11",

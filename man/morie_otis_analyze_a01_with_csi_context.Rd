@@ -34,7 +34,8 @@ listed in the warnings.}
 \description{
 Runs \code{\link{morie_otis_analyze_a01}} (alert complexity -> regional
 volatility, MatchIt then IRM-DML) and sets it beside Toronto's Crime
-Severity Index for the OTIS years (2023-2025), computed with
+Severity Index for the years present in both the a01 table and the TPS
+tables, computed with
 \code{\link{morie_tps_csi_per_year}} from TPS incident tables. The
 question it frames: did the OTIS effect arise while Toronto crime
 severity was rising or falling?

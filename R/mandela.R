@@ -91,12 +91,11 @@ mrm_classify_mandela <- function(
   meaningful_contact_col = NULL
 ) {
   denominator <- match.arg(denominator)
-  stopifnot(is.data.frame(data))
-  stopifnot(duration_col %in% names(data))
-  stopifnot(year_col %in% names(data))
-  if (denominator != "row") {
-    stopifnot(id_col %in% names(data))
-  }
+  data <- .otis_cols(data,
+                     need = c(duration_col, year_col,
+                              if (denominator != "row") id_col),
+                     want = c(alert_cols, meaningful_contact_col),
+                     what = "mrm_classify_mandela")
 
   # Strict per-row Mandela indicator
   dur <- data[[duration_col]]

@@ -32,7 +32,7 @@ joins at the \emph{year} grain, never at the person grain.
 calendar \code{OCC_YEAR} or \code{REPORT_YEAR}. The Pearson r
 here is computed on the year-aligned intersection -- there is
 a small fiscal/calendar misalignment that is documented in the
-interpretation but not corrected. Toronto OTIS data covers only
-2023-2025, so common-year samples are necessarily small.
+interpretation but not corrected. Toronto OTIS data covers a
+handful of fiscal years, so common-year samples are necessarily small.
 }
 }
