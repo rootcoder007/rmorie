@@ -193,7 +193,7 @@ morie_wayback_url <- function(url, timestamp = NULL) {
 #' # default; it runs fine for a user who has one.
 #' \donttest{
 #' morie_download(
-#'   "https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
+#'   "https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario",
 #'   tempfile(fileext = ".html")
 #' )
 #' }

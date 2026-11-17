@@ -24,7 +24,7 @@
 ##    .RData  — author-prepared workspace with df + res_pool + res_by_year
 ##              Reproduces all 36 cross-checks.
 ##    .csv    — raw public OTIS A01RCDD dataset from
-##              https://data.ontario.ca/dataset/data-on-inmates-in-ontario
+##              https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario
 ##              (file: "Restrictive Confinement – Detailed Dataset English")
 ##              Reproduces 28 cross-checks; DML estimates record as INFO
 ##              because they're pre-computed in the .RData (see paper §5).
@@ -167,7 +167,7 @@ if (INPUT_MODE == "rdata") {
     stop("CSV missing expected columns: ",
          paste(missing_cols, collapse = ", "),
          "\nThis script expects the OTIS A01RCDD CSV from ",
-         "https://data.ontario.ca/dataset/data-on-inmates-in-ontario ",
+         "https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario ",
          "with the schema documented in data_provenance.json. ",
          "If Ontario has changed the column names, update ",
          "data_provenance.json's expected_columns to match.")
@@ -525,7 +525,7 @@ if (SYNTHETIC_MODE) {
     "machine. To actually reproduce the paper, please obtain",
     "the real public CSV from:",
     "",
-    "  https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
+    "  https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario",
     "",
     "Run time:    ", format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"),
     "Synthetic CSV: ", INPUT_PATH,

@@ -424,7 +424,7 @@ if (!is.null(RDATA_ARG)) {
     ## --- Main menu ---
     say("")
     say("  The OTIS A01RCDD dataset is openly published by Ontario:")
-    say("    https://data.ontario.ca/dataset/data-on-inmates-in-ontario")
+    say("    https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario")
     say("    File: 'Restrictive Confinement – Detailed Dataset (English)'")
     say("    Licence: Open Government Licence – Ontario")
     say("")
@@ -478,7 +478,7 @@ if (!is.null(RDATA_ARG)) {
       say("")
       say("  Please open this URL in any web browser:")
       say("")
-      say("    https://data.ontario.ca/dataset/data-on-inmates-in-ontario")
+      say("    https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario")
       say("")
       say("  On that page, find the resource named:")
       say("    'Restrictive Confinement – Detailed Dataset (English)'")

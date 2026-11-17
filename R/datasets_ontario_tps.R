@@ -17,7 +17,7 @@
 #
 #   2. OTIS d01 Deaths-in-Custody  -- Ministry of the Solicitor General
 #        Data on Inmates in Ontario
-#        https://data.ontario.ca/dataset/data-on-inmates-in-ontario
+#        https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario
 #        Resource:
 #          89e3b63f-5679-4fa4-b98a-fdd2dc486f29
 #        Direct CSV:
@@ -213,7 +213,7 @@ morie_datasets_arsau_uof_main_records <- function(year = "2024",
 #' @return A `data.frame`.
 #' @references Ontario Open Data Catalogue, "Data on Inmates in
 #'   Ontario"
-#'   (\url{https://data.ontario.ca/dataset/data-on-inmates-in-ontario});
+#'   (\url{https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario});
 #'   Open Government Licence -- Ontario.
 #' @examples
 #' df <- morie_datasets_otis_d01_deaths_in_custody(offline = TRUE)

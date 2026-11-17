@@ -477,7 +477,7 @@
 #' from the dictionary categorical levels (or 0..80 for count
 #' columns); used only for offline-no-fixture fallback in tests and
 #' demos. NOT a substitute for the real OTIS data published at
-#' \url{https://data.ontario.ca/dataset/data-on-inmates-in-ontario}.
+#' \url{https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario}.
 #'
 #' @param id Character; one of \code{"a01"}, \code{"b01"}..\code{"b09"},
 #'   \code{"c01"}..\code{"c12"}, or \code{"d01"}..\code{"d07"}.

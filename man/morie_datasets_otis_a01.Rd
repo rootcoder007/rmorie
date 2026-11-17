@@ -21,7 +21,7 @@ A \code{data.frame}.
 Thin compatibility shim that delegates to
 \code{\link[=morie_datasets_otis_a01_restrictive_confinement]{morie_datasets_otis_a01_restrictive_confinement()}}. The OTIS A01
 dataset is published openly at
-\url{https://data.ontario.ca/dataset/data-on-inmates-in-ontario}
+\url{https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario}
 (Ontario Solicitor General; Open Government Licence -- Ontario,
 CKAN resource id \code{5a0c5804-a055-4031-9743-73f556e43bb4}).
 }

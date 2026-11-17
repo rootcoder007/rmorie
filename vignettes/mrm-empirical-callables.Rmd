@@ -205,7 +205,7 @@ mean.
 
 # References
 
-* OTIS data dictionary -- `data.ontario.ca/dataset/data-on-inmates-in-ontario`.
+* OTIS data dictionary -- `data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario`.
 * Toronto Police Open Data -- `data.torontopolice.on.ca/`.
 * SIU public Director's Reports -- `siu.on.ca/en/case_directors_reports.php`.
 * Software: `citation("rmorie")`.

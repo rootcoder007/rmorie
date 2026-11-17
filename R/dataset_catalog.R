@@ -330,7 +330,7 @@ morie_dataset_catalog <- function() {
       download_url = "https://data.ontario.ca/dataset/3ca4505b-091c-4b04-89e8-c316ffaa0d9e/resource/97d82317-539c-479d-9479-4dd9b7e9e08c/download/institutional_locations_en.csv"
     ),
     # -- OTIS public release per-table CSVs (used by mrm_otis_*) --
-    # CKAN IDs from data.ontario.ca/dataset/data-on-inmates-in-ontario
+    # CKAN IDs from data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario
     list(
       key = "otisa01", name = "OTIS a01: Restrictive Confinement - Detailed Dataset",
       source = "otis", survey = "a01", year = "2023-2025",

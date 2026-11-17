@@ -6,7 +6,7 @@
 #' without any network call. For full datasets, the on-demand fetchers
 #' pull from the original public sources:
 #'
-#' * OTIS: data.ontario.ca CKAN package `data-on-inmates-in-ontario`.
+#' * OTIS: data.ontario.ca CKAN package `jahn-settlement-data-inmates-ontario`.
 #'   Resource IDs are baked into `morie_dataset_catalog()`; use
 #'   `morie_load_dataset("otisb01")` (etc.) which calls the existing
 #'   CKAN fetcher.

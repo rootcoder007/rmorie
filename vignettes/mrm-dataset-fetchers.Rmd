@@ -63,7 +63,7 @@ dim(tps)
 # OTIS via CKAN (`data.ontario.ca`)
 
 The OTIS public release is hosted at
-`data.ontario.ca/dataset/data-on-inmates-in-ontario` (31 resources
+`data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario` (31 resources
 when this vignette was written, 29 of them CSV). The catalogue
 registers these tables with their CKAN resource IDs:
 
@@ -236,7 +236,7 @@ any commercial use, and treat all texts as unofficial copies.
 # References
 
 * OTIS data dictionary --
-  `data.ontario.ca/dataset/data-on-inmates-in-ontario`
+  `data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario`
 * Toronto Police Open Data -- `data.torontopolice.on.ca/`
 * SIU Director's Reports -- `siu.on.ca/en/case_directors_reports.php`
 * Software: `citation("rmorie")`

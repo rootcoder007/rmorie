@@ -38,6 +38,6 @@ table(df$Region_AtTimeOfDeath)
 \references{
 Ontario Open Data Catalogue, "Data on Inmates in
 Ontario"
-(\url{https://data.ontario.ca/dataset/data-on-inmates-in-ontario});
+(\url{https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario});
 Open Government Licence -- Ontario.
 }

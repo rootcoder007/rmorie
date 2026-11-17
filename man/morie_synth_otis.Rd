@@ -27,7 +27,7 @@ Ontario Solicitor General XLSX data dictionary that ships at
 from the dictionary categorical levels (or 0..80 for count
 columns); used only for offline-no-fixture fallback in tests and
 demos. NOT a substitute for the real OTIS data published at
-\url{https://data.ontario.ca/dataset/data-on-inmates-in-ontario}.
+\url{https://data.ontario.ca/dataset/jahn-settlement-data-inmates-ontario}.
 }
 \examples{
 df <- morie_synth_otis("c11", n = 50)

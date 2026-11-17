@@ -17,7 +17,7 @@ pull from the original public sources:
 }
 \details{
 \itemize{
-\item OTIS: data.ontario.ca CKAN package \verb{data-on-inmates-in-ontario}.
+\item OTIS: data.ontario.ca CKAN package \verb{jahn-settlement-data-inmates-ontario}.
 Resource IDs are baked into \code{morie_dataset_catalog()}; use
 \code{morie_load_dataset("otisb01")} (etc.) which calls the existing
 CKAN fetcher.
