@@ -197,7 +197,9 @@ test_that("d01 frequency tables and d02-d07 trends/crosstabs recompute", {
   d6 <- morie_synth_otis("d06", n = 40L, seed = 13L)
   .cov_check_ct(morie_otis_analyze_d06(d6), d6, "MedicalCauseOfDeath", "Alert_Type", "Number_CustodialDeaths")
   d7 <- morie_synth_otis("d07", n = 40L, seed = 14L)
-  .cov_check_ct(morie_otis_analyze_d07(d7), d7, "HousingUnit_Type", "Alert_Type", "Number_CustodialDeaths")
+  # the analyzer reads the column under the name Ontario's file gives it
+  names(d7)[names(d7) == "HousingUnit_Type"] <- "Housing_Type"
+  .cov_check_ct(morie_otis_analyze_d07(d7), d7, "Housing_Type", "Alert_Type", "Number_CustodialDeaths")
 })
 
 # ---- aggregate Ruhela formulations -----------------------------------------

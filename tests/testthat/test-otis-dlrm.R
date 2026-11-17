@@ -134,9 +134,12 @@ test_that("the CSI context is the StatsCan index of the supplied TPS counts", {
     stats::setNames(as.list(5L * seq_along(cats)), cats))
   ref <- morie_tps_csi_per_year(counts, variant = "total", rebase_to_year = 2023L)
   rows <- r$tables[[1L]]$rows
-  expect_identical(vapply(rows, `[`, "", 1L), c("2023", "2024", "2025"))
-  expect_identical(rows[[2L]][4L], as.character(round(ref$csi_per_capita[ref$year == 2024], 2)))
-  expect_identical(rows[[1L]][5L], "100")
+  # the years shown are those the placements and the counts share
+  yrs <- as.character(sort(intersect(unique(a01$EndFiscalYear), 2022:2025)))
+  expect_identical(vapply(rows, `[`, "", 1L), yrs)
+  expect_identical(rows[[which(yrs == "2024")]][4L],
+                   as.character(round(ref$csi_per_capita[ref$year == 2024], 2)))
+  expect_identical(rows[[which(yrs == "2023")]][5L], "100")
   none <- morie_otis_analyze_a01_with_csi_context(a01, tps_data = list())
   expect_match(none$warnings, "CSI context unavailable", all = FALSE)
 })

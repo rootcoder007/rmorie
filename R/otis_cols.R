@@ -33,10 +33,13 @@
 #' @param table Optional table id (\code{"b01"}): adds every name of that
 #'   table to \code{want}.
 #' @param what Label for messages.
+#' @param some If \code{TRUE}, stop only when every name in \code{need}
+#'   is missing; a table with some of them is returned for the caller to
+#'   use what is there.
 #' @return \code{data} with the resolved columns renamed.
 #' @noRd
 .otis_cols <- function(data, need = character(), want = character(),
-                       table = NULL, what = NULL) {
+                       table = NULL, what = NULL, some = FALSE) {
   if (!is.data.frame(data)) stop("data must be a data frame", call. = FALSE)
   map <- .otis_colmap()
   what <- what %||% if (is.null(table)) "the OTIS table" else
@@ -60,6 +63,10 @@
     taken[hit] <- TRUE
     names(data)[hit] <- e
   }
+  # an analyzer that works section by section takes a partial table (it
+  # leaves out the sections whose columns are absent); it stops only when
+  # none of the columns it reads is there
+  if (some && length(miss) < length(unique(need))) miss <- character()
   if (length(miss)) {
     stop(sprintf("%s: missing column(s): %s; the table has: %s",
                  what, paste(miss, collapse = ", "),

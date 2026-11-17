@@ -233,7 +233,7 @@ NULL
 #' class(res)
 #' @export
 morie_otis_analyze_b01 <- function(data) {
-  data <- .otis_cols(data, table = "b01", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "b01", need = c(
     "EndFiscalYear", "UniqueIndividual_ID",
     "NumberConsecutiveDays_Segregation", "Number_Of_Placements"))
   stopifnot(is.data.frame(data))
@@ -305,7 +305,7 @@ morie_otis_analyze_b01 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b02 <- function(data) {
-  data <- .otis_cols(data, table = "b02", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "b02", need = c(
     "EndFiscalYear", "Gender", "Region_MostRecentPlacement",
     "TotalAggregatedDays_Segregation"))
   s <- .otis_summary_lines(data, "b02",
@@ -337,7 +337,7 @@ morie_otis_analyze_b02 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b03 <- function(data) {
-  data <- .otis_cols(data, table = "b03", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "b03", need = c(
     "EndFiscalYear", "Region_AtTimeOfPlacement", "Alert_Type",
     "Alert_Presence", "Number_SegregationPlacements"))
   s <- .otis_summary_lines(data, "b03",
@@ -363,7 +363,7 @@ morie_otis_analyze_b03 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b04 <- function(data) {
-  data <- .otis_cols(data, table = "b04", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "b04", need = c(
     "EndFiscalYear", "Region_AtTimeOfPlacement", "Measure",
     "NumberConsecutiveDays_Segregation"))
   s <- .otis_summary_lines(data, "b04",
@@ -386,7 +386,7 @@ morie_otis_analyze_b04 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b05 <- function(data) {
-  data <- .otis_cols(data, table = "b05", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "b05", need = c(
     "EndFiscalYear", "Consecutive_Duration",
     "Number_SegregationPlacements"))
   s <- .otis_summary_lines(data, "b05",
@@ -408,7 +408,7 @@ morie_otis_analyze_b05 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b06 <- function(data) {
-  data <- .otis_cols(data, table = "b06", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "b06", need = c(
     "EndFiscalYear", "Gender", "Reason", "Number_SegregationPlacements"))
   s <- .otis_summary_lines(data, "b06",
     description = "Reasons for placement by institution & gender")
@@ -433,7 +433,7 @@ morie_otis_analyze_b06 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b07 <- function(data) {
-  data <- .otis_cols(data, table = "b07", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "b07", need = c(
     "EndFiscalYear", "Alert_Type", "Gender",
     "Number_Segregation_Placements_Without_Alert",
     "Number_Segregation_Placements_With_Alert"))
@@ -475,7 +475,7 @@ morie_otis_analyze_b07 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b08 <- function(data) {
-  data <- .otis_cols(data, table = "b08", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "b08", need = c(
     "EndFiscalYear", "Institution_AtTimeOfPlacement", "Measure",
     "NumberConsecutiveDays_Segregation"))
   s <- .otis_summary_lines(data, "b08",
@@ -498,7 +498,7 @@ morie_otis_analyze_b08 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_b09 <- function(data) {
-  data <- .otis_cols(data, table = "b09", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "b09", need = c(
     "EndFiscalYear", "NumberPlacements_Segregation", "Gender",
     "NumberIndividuals_Segregation"))
   s <- .otis_summary_lines(data, "b09",
@@ -525,7 +525,7 @@ morie_otis_analyze_b09 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c01 <- function(data) {
-  data <- .otis_cols(data, table = "c01", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "c01", need = c(
     "EndFiscalYear", "Gender", "NumberIndividuals_InCustody",
     "NumberIndividuals_RestrictiveConfinement",
     "NumberIndividuals_Segregation"))
@@ -560,7 +560,7 @@ morie_otis_analyze_c01 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c02 <- function(data) {
-  data <- .otis_cols(data, table = "c02", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "c02", need = c(
     "EndFiscalYear", "Institution_MostRecentPlacement",
     "NumberIndividuals_RestrictiveConfinement"))
   s <- .otis_summary_lines(data, "c02",
@@ -584,7 +584,7 @@ morie_otis_analyze_c02 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c03 <- function(data) {
-  data <- .otis_cols(data, table = "c03", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "c03", need = c(
     "EndFiscalYear", "Race", "NumberIndividuals_InCustody",
     "NumberIndividuals_RestrictiveConfinement",
     "NumberIndividuals_Segregation"))
@@ -632,7 +632,7 @@ morie_otis_analyze_c03 <- function(data) {
                             col_col = "Region_MostRecentPlacement",
                             value_col = "NumberIndividuals_RestrictiveConfinement") {
   function(data) {
-    data <- .otis_cols(data, need = c("EndFiscalYear", row_col, col_col,
+    data <- .otis_cols(data, some = TRUE, need = c("EndFiscalYear", row_col, col_col,
                                       value_col), table = ds_id)
     s <- .otis_summary_lines(data, ds_id, description = description)
     .otis_wrap(
@@ -680,7 +680,7 @@ morie_otis_analyze_c06 <- .otis_c_simple(
 #' class(res)
 #' @export
 morie_otis_analyze_c07 <- function(data) {
-  data <- .otis_cols(data, table = "c07", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "c07", need = c(
     "EndFiscalYear", "Alert_Type", "Gender",
     "NumberIndividuals_RestrictiveConfinement",
     "NumberIndividuals_Segregation"))
@@ -726,7 +726,7 @@ morie_otis_analyze_c09 <- .otis_c_simple(
 #' class(res)
 #' @export
 morie_otis_analyze_c10 <- function(data) {
-  data <- .otis_cols(data, table = "c10", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "c10", need = c(
     "EndFiscalYear", "Institution_MostRecentPlacement", "Measure",
     "TotalAggregatedDays_RestrictiveConfinement"))
   s <- .otis_summary_lines(data, "c10",
@@ -749,7 +749,7 @@ morie_otis_analyze_c10 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c11 <- function(data) {
-  data <- .otis_cols(data, table = "c11", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "c11", need = c(
     "EndFiscalYear", "Aggregate_Duration",
     "NumberIndividuals_RestrictiveConfinement"))
   s <- .otis_summary_lines(data, "c11",
@@ -771,7 +771,7 @@ morie_otis_analyze_c11 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_c12 <- function(data) {
-  data <- .otis_cols(data, table = "c12", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "c12", need = c(
     "EndFiscalYear", "Region_MostRecentPlacement", "Measure",
     "TotalAggregatedDays_RestrictiveConfinement"))
   s <- .otis_summary_lines(data, "c12",
@@ -799,7 +799,7 @@ morie_otis_analyze_c12 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_d01 <- function(data) {
-  data <- .otis_cols(data, table = "d01", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "d01", need = c(
     "Year", "Region_AtTimeOfDeath"))
   s <- .otis_summary_lines(data, "d01",
     description = "Custodial deaths (person-level)")
@@ -832,7 +832,7 @@ morie_otis_analyze_d01 <- function(data) {
 #' @noRd
 .otis_d_simple <- function(ds_id, description, by) {
   function(data) {
-    data <- .otis_cols(data, need = c("Year", by, "Number_CustodialDeaths"),
+    data <- .otis_cols(data, some = TRUE, need = c("Year", by, "Number_CustodialDeaths"),
                       table = ds_id)
     s <- .otis_summary_lines(data, ds_id, description = description)
     .otis_wrap(
@@ -890,7 +890,7 @@ morie_otis_analyze_d05 <- .otis_d_simple(
 #' class(res)
 #' @export
 morie_otis_analyze_d06 <- function(data) {
-  data <- .otis_cols(data, table = "d06", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "d06", need = c(
     "Year", "Alert_Type", "MedicalCauseOfDeath", "Number_CustodialDeaths"))
   s <- .otis_summary_lines(data, "d06",
     description = "Custodial deaths x alert x medical cause")
@@ -910,7 +910,7 @@ morie_otis_analyze_d06 <- function(data) {
 #' class(res)
 #' @export
 morie_otis_analyze_d07 <- function(data) {
-  data <- .otis_cols(data, table = "d07", need = c(
+  data <- .otis_cols(data, some = TRUE, table = "d07", need = c(
     "Year", "Alert_Type", "Housing_Type", "Number_CustodialDeaths"))
   s <- .otis_summary_lines(data, "d07",
     description = "Custodial deaths x alert x housing unit")
@@ -1066,8 +1066,7 @@ print.morie_otis_analysis_result <- function(x, ...) {
 #' @noRd
 .otis_missing_columns <- function(fn_name, data, need) {
   miss <- paste(setdiff(need, names(data)), collapse = ", ")
-  msg <- sprintf("%s: missing required columns: %s; the table has: %s",
-                 fn_name, miss, paste(names(data), collapse = ", "))
+  msg <- sprintf("%s: missing required columns: %s", fn_name, miss)
   .otis_wrap(
     title = sprintf("%s -- missing columns", fn_name),
     summary_lines = list(status = "missing columns", missing = miss),
